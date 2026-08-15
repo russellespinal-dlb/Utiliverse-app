@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Utiliverse - Free Online Utility Tools & Calculators</title>
+  <meta name="description" content="A curated collection of free, fast, browser-based financial calculators, developer utilities, and productivity tools.">
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <style>
+    .glass-card {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+
+  <!-- Navigation Header -->
+  <header class="sticky top-0 z-50 bg-white/80 backdrop-filter backdrop-blur-lg border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <div class="bg-indigo-600 text-white p-2 rounded-xl">
+          <i data-lucide="layers" class="w-6 h-6"></i>
+        </div>
+        <span class="text-xl font-bold tracking-tight text-slate-900">Utiliverse</span>
+      </div>
+      <div class="text-sm font-medium text-slate-500">
+        100% Free & Browser-Based
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section with Search -->
+  <section class="bg-gradient-to-b from-indigo-50/50 to-slate-50 py-16 px-4">
+    <div class="max-w-4xl mx-auto text-center space-y-6">
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
+        Fast, Free Utilities for Everyday Tasks
+      </h1>
+      <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+        No sign-ups, no software installs. Simple financial calculators, developer tools, and converters running client-side in your browser.
+      </p>
+
+      <!-- Search Box -->
+      <div class="relative max-w-xl mx-auto pt-2">
+        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+          <i data-lucide="search" class="w-5 h-5"></i>
+        </div>
+        <input 
+          type="text" 
+          id="searchInput"
+          onkeyup="filterTools()"
+          placeholder="Search tools (e.g., Mortgage, Churn, JSON)..." 
+          class="w-full pl-11 pr-4 py-3.5 bg-white rounded-2xl border border-slate-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-slate-800 placeholder-slate-400 transition"
+        >
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="flex flex-wrap justify-center gap-2 pt-2" id="categoryFilters">
+        <button onclick="filterCategory('all')" class="cat-btn active bg-slate-900 text-white px-4 py-1.5 rounded-full text-sm font-medium transition">All Tools</button>
+        <button onclick="filterCategory('finance')" class="cat-btn bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 px-4 py-1.5 rounded-full text-sm font-medium transition">Finance</button>
+        <button onclick="filterCategory('developer')" class="cat-btn bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 px-4 py-1.5 rounded-full text-sm font-medium transition">Developer</button>
+        <button onclick="filterCategory('productivity')" class="cat-btn bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 px-4 py-1.5 rounded-full text-sm font-medium transition">Productivity</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Top Banner AdSpace Placeholder -->
+  <div class="max-w-7xl mx-auto px-4 my-6 w-full">
+    <div class="w-full h-24 bg-slate-200/60 rounded-xl border border-dashed border-slate-300 flex items-center justify-center text-slate-400 text-xs tracking-wider uppercase">
+      Advertisement Space (AdSense Leaderboard)
+    </div>
+  </div>
+
+  <!-- Tools Grid Directory -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+    <div id="toolsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- TOOL CARD 1: Mortgage Calculator -->
+      <a href="./mortgage/" class="tool-card group p-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-indigo-300 transition duration-200 flex flex-col justify-between" data-category="finance" data-title="mortgage extra payments early payoff calculator">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <div class="p-3 bg-indigo-50 text-indigo-600 rounded-xl group-hover:bg-indigo-600 group-hover:text-white transition duration-200">
+              <i data-lucide="calculator" class="w-6 h-6"></i>
+            </div>
+            <span class="text-xs font-semibold px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded-full">Finance</span>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition">Mortgage Extra Payment Calculator</h3>
+          <p class="text-slate-500 text-sm mt-2 leading-relaxed">
+            Calculate your monthly principal & interest payments, amortization curves, and total interest saved with extra monthly payments.
+          </p>
+        </div>
+        <div class="mt-6 flex items-center text-sm font-semibold text-indigo-600 group-hover:translate-x-1 transition duration-200">
+          Open Tool <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+        </div>
+      </a>
+
+      <!-- TOOL CARD 2: SaaS Churn Calculator -->
+      <a href="./saas-churn/" class="tool-card group p-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-indigo-300 transition duration-200 flex flex-col justify-between" data-category="finance" data-title="saas churn rate customer lifetime value ltv calculator">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <div class="p-3 bg-emerald-50 text-emerald-600 rounded-xl group-hover:bg-emerald-600 group-hover:text-white transition duration-200">
+              <i data-lucide="trending-up" class="w-6 h-6"></i>
+            </div>
+            <span class="text-xs font-semibold px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full">Finance</span>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 group-hover:text-emerald-600 transition">SaaS Churn & LTV Calculator</h3>
+          <p class="text-slate-500 text-sm mt-2 leading-relaxed">
+            Estimate Customer Lifetime Value (LTV), monthly revenue churn, and net revenue impact for recurring subscription businesses.
+          </p>
+        </div>
+        <div class="mt-6 flex items-center text-sm font-semibold text-emerald-600 group-hover:translate-x-1 transition duration-200">
+          Open Tool <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+        </div>
+      </a>
+
+      <!-- TEMPLATE PLACEHOLDER CARD (Future Tool) -->
+      <div class="p-6 bg-slate-100/70 rounded-2xl border border-dashed border-slate-300 flex flex-col items-center justify-center text-center">
+        <div class="p-3 bg-slate-200 text-slate-500 rounded-xl mb-3">
+          <i data-lucide="plus-circle" class="w-6 h-6"></i>
+        </div>
+        <h3 class="font-semibold text-slate-700">More Utilities Coming Soon</h3>
+        <p class="text-xs text-slate-400 mt-1 max-w-xs">New financial, developer, and productivity tools are added regularly.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-slate-200 mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500">
+      <div>
+        © <script>document.write(new Date().getFullYear())</script> Utiliverse. All calculations are run locally in your browser.
+      </div>
+      <div class="flex gap-6">
+        <a href="#" class="hover:text-slate-800 transition">Privacy Policy</a>
+        <a href="#" class="hover:text-slate-800 transition">Terms of Service</a>
+        <a href="#" class="hover:text-slate-800 transition">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts: Lucide Icons Initialization & Interactive Filter/Search -->
+  <script>
+    lucide.createIcons();
+
+    function filterTools() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const cards = document.querySelectorAll('.tool-card');
+
+      cards.forEach(card => {
+        const titleAndKeywords = card.getAttribute('data-title').toLowerCase();
+        if (titleAndKeywords.includes(query)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function filterCategory(category) {
+      const cards = document.querySelectorAll('.tool-card');
+      const buttons = document.querySelectorAll('.cat-btn');
+
+      buttons.forEach(btn => {
+        btn.classList.remove('bg-slate-900', 'text-white');
+        btn.classList.add('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+      });
+
+      event.target.classList.remove('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+      event.target.classList.add('bg-slate-900', 'text-white');
+
+      cards.forEach(card => {
+        const cardCat = card.getAttribute('data-category');
+        if (category === 'all' || cardCat === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
