@@ -3,8 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PDF Toolkit Pro — Merge, Convert, Extract & Compress PDFs Online Free</title>
+<title>PDF Toolkit Pro — Utiliverse</title>
 <meta name="description" content="Free browser-based PDF toolkit. Merge PDFs, convert images to PDF, extract text from PDFs, and compress PDF file size — 100% private, all processing happens in your browser.">
+<link rel="stylesheet" href="/css/styles.css">
+
+<!-- Google AdSense Script Placeholder (Paste your publisher script here once approved) -->
+<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -75,16 +80,33 @@
     --pine-soft:#E1EEE7;
   }
   *{ box-sizing:border-box; }
-  body{ background:var(--paper); color:var(--ink); font-family:'Inter',ui-sans-serif,system-ui,sans-serif; }
+  body{ background:var(--paper); color:var(--ink); font-family:'Inter',ui-sans-serif,system-ui,sans-serif; margin:0; }
   .font-display{ font-family:'Space Grotesk',ui-sans-serif,sans-serif; }
   .font-mono{ font-family:'IBM Plex Mono',ui-monospace,monospace; }
 
-  .adsense-slot{
-    display:flex; align-items:center; justify-content:center;
+  /* Utiliverse ad-container wrapper */
+  .ad-container{ }
+  .ad-container .ad-placeholder{
     background:repeating-linear-gradient(135deg,#EAE8E1,#EAE8E1 10px,#E2E0D7 10px,#E2E0D7 20px);
-    border:1px dashed #B9B6AC; color:#8B8778; font-size:.7rem; letter-spacing:.14em;
-    text-transform:uppercase; font-family:'IBM Plex Mono',monospace; border-radius:6px;
+    border:1px dashed #B9B6AC;
+    color:#8B8778;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.7rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    border-radius:6px;
+    padding:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
   }
+
+  .back-link{
+    display:inline-flex; align-items:center; gap:.35rem; font-family:'IBM Plex Mono',monospace;
+    font-size:.78rem; color:var(--ink-soft); text-decoration:none;
+  }
+  .back-link:hover{ color:var(--ink); }
+  .back-link svg{ width:14px; height:14px; }
 
   .tab-btn{
     display:flex; align-items:center; gap:.5rem; padding:.7rem 1rem; border-radius:8px;
@@ -165,7 +187,11 @@
 <body class="min-h-screen">
 
 <header class="border-b border-[var(--line)] bg-[var(--panel)]">
-  <div class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
+  <div class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between flex-wrap gap-2">
+    <a href="/" class="back-link">
+      <i data-lucide="arrow-left"></i>
+      Back to Utiliverse
+    </a>
     <div class="flex items-center gap-2">
       <i data-lucide="file-stack" style="color:var(--amber)"></i>
       <span class="font-display text-lg font-semibold tracking-tight">PDF Toolkit Pro</span>
@@ -182,9 +208,16 @@
   </div>
 </div>
 
-<main class="max-w-6xl mx-auto px-5">
+<!-- Top Banner Placement (Leaderboard) -->
+<div class="ad-container ad-top max-w-6xl mx-auto px-5" style="text-align: center; margin: 15px auto;">
+  <div class="ad-placeholder" style="min-width: 300px; min-height: 90px;">
+    <small>Advertisement Space</small>
+  </div>
+</div>
 
-  <section class="py-10">
+<main class="tool-container max-w-6xl mx-auto px-5">
+
+  <section class="py-8 sm:py-10">
     <p class="font-mono text-xs uppercase tracking-[.16em] text-[var(--amber)] mb-3">Browser-based PDF utility suite</p>
     <h1 class="font-display text-3xl sm:text-5xl leading-tight max-w-3xl font-semibold">
       Merge, convert, extract, and compress PDFs — no uploads, no accounts.
@@ -194,9 +227,7 @@
     </p>
   </section>
 
-  <div class="adsense-slot mb-8" style="min-height:90px;">AdSpace — Leaderboard (728×90)</div>
-
-  <section class="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-8">
+  <section class="tool-content grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-8">
     <div>
       <!-- Tabs -->
       <div id="tabBar" class="flex flex-wrap gap-2 mb-5">
@@ -321,12 +352,20 @@
 
       </div>
 
-      <div class="adsense-slot mt-6" style="min-height:100px;">AdSpace — In-content (336×100)</div>
+      <!-- In-Content Banner Placement -->
+      <div class="ad-container ad-mid" style="text-align: center; margin: 20px 0;">
+        <div class="ad-placeholder" style="min-width: 300px; min-height: 250px;">
+          <small>Advertisement Space</small>
+        </div>
+      </div>
     </div>
 
+    <!-- Sidebar Banner Placement -->
     <aside class="hidden lg:block">
-      <div class="lg:sticky lg:top-6">
-        <div class="adsense-slot" style="min-height:600px; width:100%;">AdSpace — Sidebar (300×600)</div>
+      <div class="lg:sticky lg:top-6 ad-container ad-sidebar">
+        <div class="ad-placeholder" style="min-width: 280px; min-height: 600px; width:100%;">
+          <small>Advertisement Space</small>
+        </div>
       </div>
     </aside>
   </section>
@@ -343,7 +382,7 @@
   </section>
 
   <!-- FAQ -->
-  <section class="mt-14 border-t border-[var(--line)] pt-12 max-w-3xl mb-20">
+  <section class="mt-14 border-t border-[var(--line)] pt-12 max-w-3xl mb-14">
     <h2 class="font-display text-2xl sm:text-3xl font-semibold mb-2">Frequently asked questions</h2>
     <div class="mt-4">
       <details class="faq-item" open>
@@ -370,6 +409,13 @@
   </section>
 
 </main>
+
+<!-- Footer Banner Placement -->
+<div class="ad-container ad-bottom max-w-6xl mx-auto px-5" style="text-align: center; margin: 15px auto;">
+  <div class="ad-placeholder" style="min-width: 300px; min-height: 90px;">
+    <small>Advertisement Space</small>
+  </div>
+</div>
 
 <footer class="border-t border-[var(--line)] py-8">
   <div class="max-w-6xl mx-auto px-5 text-xs text-[var(--ink-soft)] font-mono">
@@ -629,7 +675,6 @@ function initPdfToWord(){
     triggerDownload(blob, 'extracted.txt');
   });
 
-  // Minimal valid .docx built manually via JSZip (no external docx library)
   function escapeXml(str){
     return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
@@ -727,7 +772,6 @@ function initCompressPDF(){
         await page.render({ canvasContext: ctx, viewport }).promise;
         const dataUrl = canvas.toDataURL('image/jpeg', quality);
 
-        const wPt = viewport.width * 72 / (96 * scale) * scale; // page point width approximation
         const pageWidthPt = page.getViewport({scale:1}).width;
         const pageHeightPt = page.getViewport({scale:1}).height;
 
