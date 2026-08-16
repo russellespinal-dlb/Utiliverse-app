@@ -1,0 +1,2883 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Auto Lease Calculator | Utiliverse</title>
+
+<meta
+    name="description"
+    content="Estimate your monthly car lease payment, depreciation, finance charge, taxes and total lease cost with the Utiliverse Auto Lease Calculator."
+>
+
+<style>
+
+/* =========================================================
+   UTILIVERSE AUTO LEASE CALCULATOR
+   Modern / Simple / Responsive
+========================================================= */
+
+:root {
+
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-light: #eff6ff;
+
+    --background: #f5f7fb;
+    --card: #ffffff;
+    --soft: #f8fafc;
+
+    --text: #172033;
+    --muted: #64748b;
+    --border: #e2e8f0;
+
+    --success: #15803d;
+    --success-bg: #f0fdf4;
+
+    --radius: 14px;
+
+    --shadow:
+        0 10px 30px rgba(15, 23, 42, 0.07);
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    margin: 0;
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
+    background:
+        var(--background);
+
+    color:
+        var(--text);
+
+    line-height:
+        1.6;
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.topbar {
+
+    background: #ffffff;
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+
+.topbar-inner {
+
+    max-width:
+        1120px;
+
+    margin:
+        auto;
+
+    padding:
+        17px 22px;
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+}
+
+
+.back-link {
+
+    color:
+        var(--primary);
+
+    text-decoration:
+        none;
+
+    font-size:
+        14px;
+
+    font-weight:
+        700;
+}
+
+
+.back-link:hover {
+
+    text-decoration:
+        underline;
+}
+
+
+.brand {
+
+    font-weight:
+        800;
+
+    font-size:
+        17px;
+}
+
+
+.brand span {
+
+    color:
+        var(--primary);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.page-header {
+
+    max-width:
+        1120px;
+
+    margin:
+        auto;
+
+    padding:
+        42px 22px 25px;
+}
+
+
+.eyebrow {
+
+    display:
+        inline-block;
+
+    padding:
+        5px 10px;
+
+    border-radius:
+        999px;
+
+    background:
+        var(--primary-light);
+
+    color:
+        var(--primary);
+
+    font-size:
+        11px;
+
+    font-weight:
+        800;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        .5px;
+
+    margin-bottom:
+        12px;
+}
+
+
+h1 {
+
+    margin:
+        0 0 10px;
+
+    font-size:
+        clamp(30px, 5vw, 44px);
+
+    line-height:
+        1.12;
+
+    letter-spacing:
+        -1px;
+}
+
+
+.subtitle {
+
+    max-width:
+        720px;
+
+    margin:
+        0;
+
+    color:
+        var(--muted);
+
+    font-size:
+        16px;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.container {
+
+    max-width:
+        1120px;
+
+    margin:
+        auto;
+
+    padding:
+        10px 22px 60px;
+}
+
+
+.calculator-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(340px, .85fr);
+
+    gap:
+        24px;
+
+    align-items:
+        start;
+}
+
+
+.card {
+
+    background:
+        var(--card);
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        var(--radius);
+
+    box-shadow:
+        var(--shadow);
+}
+
+
+/* =========================================================
+   INPUT CARD
+========================================================= */
+
+.form-card {
+
+    padding:
+        27px;
+}
+
+
+.section-title {
+
+    margin-bottom:
+        23px;
+}
+
+
+.section-title h2 {
+
+    margin:
+        0 0 4px;
+
+    font-size:
+        20px;
+}
+
+
+.section-title p {
+
+    margin:
+        0;
+
+    color:
+        var(--muted);
+
+    font-size:
+        13px;
+}
+
+
+.form-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:
+        17px;
+}
+
+
+.form-group {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        7px;
+}
+
+
+.form-group.full {
+
+    grid-column:
+        1 / -1;
+}
+
+
+label {
+
+    font-size:
+        13px;
+
+    font-weight:
+        700;
+
+    color:
+        #334155;
+}
+
+
+.input-wrap {
+
+    position:
+        relative;
+}
+
+
+.currency-symbol {
+
+    position:
+        absolute;
+
+    left:
+        13px;
+
+    top:
+        50%;
+
+    transform:
+        translateY(-50%);
+
+    color:
+        var(--muted);
+
+    pointer-events:
+        none;
+}
+
+
+input,
+select {
+
+    width:
+        100%;
+
+    height:
+        46px;
+
+    border:
+        1px solid #cbd5e1;
+
+    border-radius:
+        9px;
+
+    background:
+        #ffffff;
+
+    color:
+        var(--text);
+
+    font-size:
+        15px;
+
+    padding:
+        0 13px;
+
+    outline:
+        none;
+}
+
+
+input.currency {
+
+    padding-left:
+        29px;
+}
+
+
+input:focus,
+select:focus {
+
+    border-color:
+        var(--primary);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(37, 99, 235, .12);
+}
+
+
+.helper {
+
+    font-size:
+        11px;
+
+    color:
+        var(--muted);
+}
+
+
+/* =========================================================
+   RATE SWITCH
+========================================================= */
+
+.rate-options {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:
+        8px;
+
+    margin-bottom:
+        10px;
+}
+
+
+.rate-option {
+
+    position:
+        relative;
+}
+
+
+.rate-option input {
+
+    position:
+        absolute;
+
+    opacity:
+        0;
+}
+
+
+.rate-option label {
+
+    height:
+        40px;
+
+    display:
+        flex;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        8px;
+
+    background:
+        var(--soft);
+
+    cursor:
+        pointer;
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+}
+
+
+.rate-option input:checked + label {
+
+    border-color:
+        var(--primary);
+
+    background:
+        var(--primary-light);
+
+    color:
+        var(--primary);
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.button-row {
+
+    display:
+        flex;
+
+    gap:
+        10px;
+
+    margin-top:
+        25px;
+}
+
+
+.calculate-btn {
+
+    flex:
+        1;
+
+    height:
+        49px;
+
+    border:
+        0;
+
+    border-radius:
+        9px;
+
+    background:
+        var(--primary);
+
+    color:
+        #ffffff;
+
+    font-size:
+        14px;
+
+    font-weight:
+        800;
+
+    cursor:
+        pointer;
+
+    transition:
+        .2s ease;
+}
+
+
+.calculate-btn:hover {
+
+    background:
+        var(--primary-dark);
+
+    transform:
+        translateY(-1px);
+}
+
+
+.reset-btn {
+
+    height:
+        49px;
+
+    padding:
+        0 17px;
+
+    border:
+        0;
+
+    border-radius:
+        9px;
+
+    background:
+        #f1f5f9;
+
+    color:
+        #475569;
+
+    font-weight:
+        700;
+
+    cursor:
+        pointer;
+}
+
+
+/* =========================================================
+   RESULTS
+========================================================= */
+
+.results-card {
+
+    overflow:
+        hidden;
+
+    position:
+        sticky;
+
+    top:
+        20px;
+}
+
+
+.results-header {
+
+    padding:
+        25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eff6ff,
+            #f8fafc
+        );
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+
+.results-header h2 {
+
+    margin:
+        0 0 4px;
+
+    font-size:
+        20px;
+}
+
+
+.results-header p {
+
+    margin:
+        0;
+
+    color:
+        var(--muted);
+
+    font-size:
+        12px;
+}
+
+
+.primary-result {
+
+    padding:
+        27px 25px 22px;
+
+    text-align:
+        center;
+}
+
+
+.result-label {
+
+    color:
+        var(--muted);
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+}
+
+
+.monthly-payment {
+
+    margin:
+        4px 0;
+
+    color:
+        var(--primary);
+
+    font-size:
+        48px;
+
+    font-weight:
+        850;
+
+    letter-spacing:
+        -1.5px;
+
+    line-height:
+        1.1;
+}
+
+
+.result-subtitle {
+
+    color:
+        var(--muted);
+
+    font-size:
+        11px;
+}
+
+
+/* =========================================================
+   RESULT DETAILS
+========================================================= */
+
+.results-body {
+
+    padding:
+        0 25px 25px;
+}
+
+
+.result-row {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    gap:
+        15px;
+
+    padding:
+        12px 0;
+
+    border-bottom:
+        1px solid #eef2f7;
+
+    font-size:
+        13px;
+}
+
+
+.result-row:last-child {
+
+    border-bottom:
+        0;
+}
+
+
+.result-row span:first-child {
+
+    color:
+        var(--muted);
+}
+
+
+.result-row strong {
+
+    text-align:
+        right;
+}
+
+
+/* =========================================================
+   RESULT BOX
+========================================================= */
+
+.result-highlight {
+
+    margin:
+        0 25px 25px;
+
+    padding:
+        16px;
+
+    border-radius:
+        10px;
+
+    background:
+        var(--success-bg);
+
+    border:
+        1px solid #bbf7d0;
+}
+
+
+.result-highlight-title {
+
+    font-size:
+        13px;
+
+    font-weight:
+        800;
+
+    color:
+        var(--success);
+
+    margin-bottom:
+        3px;
+}
+
+
+.result-highlight-text {
+
+    font-size:
+        11px;
+
+    color:
+        var(--muted);
+}
+
+
+/* =========================================================
+   INFORMATION CONTENT
+========================================================= */
+
+.content-card {
+
+    margin-top:
+        25px;
+
+    padding:
+        29px;
+
+    background:
+        #ffffff;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        var(--radius);
+
+    box-shadow:
+        var(--shadow);
+}
+
+
+.content-card h2 {
+
+    margin:
+        0 0 14px;
+
+    font-size:
+        22px;
+
+    line-height:
+        1.3;
+}
+
+
+.content-card h3 {
+
+    margin:
+        25px 0 8px;
+
+    font-size:
+        16px;
+}
+
+
+.content-card p {
+
+    margin:
+        0 0 15px;
+
+    color:
+        #475569;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.75;
+}
+
+
+.content-card ul {
+
+    color:
+        #475569;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.75;
+
+    padding-left:
+        22px;
+}
+
+
+/* =========================================================
+   QUICK FACTS
+========================================================= */
+
+.quick-facts {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:
+        15px;
+
+    margin:
+        22px 0 28px;
+}
+
+
+.fact {
+
+    padding:
+        17px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        10px;
+
+    background:
+        var(--soft);
+}
+
+
+.fact strong {
+
+    display:
+        block;
+
+    font-size:
+        14px;
+
+    margin-bottom:
+        4px;
+}
+
+
+.fact span {
+
+    font-size:
+        11px;
+
+    color:
+        var(--muted);
+}
+
+
+/* =========================================================
+   FAQ
+========================================================= */
+
+.faq-item {
+
+    border:
+        1px solid var(--border);
+
+    border-radius:
+        10px;
+
+    overflow:
+        hidden;
+
+    margin-top:
+        10px;
+}
+
+
+.faq-button {
+
+    width:
+        100%;
+
+    padding:
+        16px 18px;
+
+    border:
+        0;
+
+    background:
+        #ffffff;
+
+    color:
+        var(--text);
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    text-align:
+        left;
+
+    font-size:
+        13px;
+
+    font-weight:
+        750;
+
+    cursor:
+        pointer;
+}
+
+
+.faq-button:hover {
+
+    background:
+        var(--soft);
+}
+
+
+.faq-icon {
+
+    color:
+        var(--primary);
+
+    font-size:
+        20px;
+
+    line-height:
+        1;
+}
+
+
+.faq-answer {
+
+    display:
+        none;
+
+    padding:
+        0 18px 17px;
+
+    color:
+        var(--muted);
+
+    font-size:
+        13px;
+
+    line-height:
+        1.7;
+}
+
+
+.faq-answer.open {
+
+    display:
+        block;
+}
+
+
+/* =========================================================
+   DISCLAIMER
+========================================================= */
+
+.disclaimer {
+
+    margin-top:
+        24px;
+
+    padding:
+        15px;
+
+    background:
+        var(--soft);
+
+    border-radius:
+        9px;
+
+    color:
+        #64748b;
+
+    font-size:
+        11px;
+
+    line-height:
+        1.6;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    margin-top:
+        30px;
+
+    background:
+        #ffffff;
+
+    border-top:
+        1px solid var(--border);
+}
+
+
+.footer-inner {
+
+    max-width:
+        1120px;
+
+    margin:
+        auto;
+
+    padding:
+        23px 22px;
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    color:
+        var(--muted);
+
+    font-size:
+        11px;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .calculator-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .results-card {
+
+        position:
+            static;
+    }
+
+
+    .quick-facts {
+
+        grid-template-columns:
+            1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .page-header {
+
+        padding:
+            30px 18px 20px;
+    }
+
+
+    .container {
+
+        padding:
+            8px 18px 45px;
+    }
+
+
+    .form-card {
+
+        padding:
+            20px;
+    }
+
+
+    .form-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .form-group.full {
+
+        grid-column:
+            auto;
+    }
+
+
+    .button-row {
+
+        flex-direction:
+            column;
+    }
+
+
+    .reset-btn {
+
+        width:
+            100%;
+    }
+
+
+    .content-card {
+
+        padding:
+            21px;
+    }
+
+
+    .footer-inner {
+
+        flex-direction:
+            column;
+
+        gap:
+            7px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     TOP NAVIGATION
+========================================================= -->
+
+<header class="topbar">
+
+    <div class="topbar-inner">
+
+        <a
+            href="/"
+            class="back-link"
+        >
+            &larr; Back to Utiliverse
+        </a>
+
+
+        <div class="brand">
+
+            <span>Utili</span>verse
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================================================
+     PAGE HEADER
+========================================================= -->
+
+<section class="page-header">
+
+    <div class="eyebrow">
+        Auto & Finance
+    </div>
+
+
+    <h1>
+        Auto Lease Calculator
+    </h1>
+
+
+    <p class="subtitle">
+
+        Get a quick estimate of your monthly lease payment,
+        depreciation, finance charge, taxes and overall lease cost.
+
+    </p>
+
+</section>
+
+
+
+<main class="container">
+
+
+<!-- =========================================================
+     CALCULATOR
+========================================================= -->
+
+<div class="calculator-grid">
+
+
+<!-- =========================================================
+     INPUTS
+========================================================= -->
+
+<section class="card form-card">
+
+
+    <div class="section-title">
+
+        <h2>
+            Enter your lease details
+        </h2>
+
+        <p>
+            Use numbers from a dealer quote or your own estimate.
+        </p>
+
+    </div>
+
+
+    <div class="form-grid">
+
+
+        <!-- VEHICLE PRICE -->
+
+        <div class="form-group full">
+
+            <label for="vehiclePrice">
+                Vehicle price
+            </label>
+
+            <div class="input-wrap">
+
+                <span class="currency-symbol">$</span>
+
+                <input
+                    id="vehiclePrice"
+                    class="currency"
+                    type="number"
+                    value="50000"
+                    min="0"
+                    step="500"
+                >
+
+            </div>
+
+            <span class="helper">
+                Use the negotiated selling price rather than the
+                vehicle's sticker price when possible.
+            </span>
+
+        </div>
+
+
+
+        <!-- LEASE TERM -->
+
+        <div class="form-group">
+
+            <label for="leaseTerm">
+                Lease length
+            </label>
+
+            <select id="leaseTerm">
+
+                <option value="24">
+                    24 months
+                </option>
+
+                <option value="30">
+                    30 months
+                </option>
+
+                <option value="36" selected>
+                    36 months
+                </option>
+
+                <option value="39">
+                    39 months
+                </option>
+
+                <option value="48">
+                    48 months
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- RESIDUAL -->
+
+        <div class="form-group">
+
+            <label for="residualValue">
+                Residual value
+            </label>
+
+            <div class="input-wrap">
+
+                <span class="currency-symbol">$</span>
+
+                <input
+                    id="residualValue"
+                    class="currency"
+                    type="number"
+                    value="24000"
+                    min="0"
+                    step="500"
+                >
+
+            </div>
+
+        </div>
+
+
+
+        <!-- DOWN PAYMENT -->
+
+        <div class="form-group">
+
+            <label for="downPayment">
+                Down payment
+            </label>
+
+            <div class="input-wrap">
+
+                <span class="currency-symbol">$</span>
+
+                <input
+                    id="downPayment"
+                    class="currency"
+                    type="number"
+                    value="10000"
+                    min="0"
+                    step="500"
+                >
+
+            </div>
+
+        </div>
+
+
+
+        <!-- TRADE IN -->
+
+        <div class="form-group">
+
+            <label for="tradeIn">
+                Trade-in value
+            </label>
+
+            <div class="input-wrap">
+
+                <span class="currency-symbol">$</span>
+
+                <input
+                    id="tradeIn"
+                    class="currency"
+                    type="number"
+                    value="0"
+                    min="0"
+                    step="500"
+                >
+
+            </div>
+
+        </div>
+
+
+
+        <!-- SALES TAX -->
+
+        <div class="form-group">
+
+            <label for="salesTax">
+                Sales tax
+            </label>
+
+            <div class="input-wrap">
+
+                <input
+                    id="salesTax"
+                    type="number"
+                    value="7"
+                    min="0"
+                    max="20"
+                    step="0.01"
+                >
+
+            </div>
+
+            <span class="helper">
+                Enter your applicable tax rate.
+            </span>
+
+        </div>
+
+
+
+        <!-- RATE TYPE -->
+
+        <div class="form-group">
+
+            <label>
+                Lease rate type
+            </label>
+
+            <div class="rate-options">
+
+                <div class="rate-option">
+
+                    <input
+                        type="radio"
+                        name="rateType"
+                        id="aprOption"
+                        value="apr"
+                    >
+
+                    <label for="aprOption">
+                        APR
+                    </label>
+
+                </div>
+
+
+                <div class="rate-option">
+
+                    <input
+                        type="radio"
+                        name="rateType"
+                        id="moneyFactorOption"
+                        value="moneyfactor"
+                        checked
+                    >
+
+                    <label for="moneyFactorOption">
+                        Money factor
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <div class="input-wrap">
+
+                <input
+                    id="leaseRate"
+                    type="number"
+                    value="0.00208"
+                    min="0"
+                    step="0.00001"
+                >
+
+            </div>
+
+
+            <span
+                class="helper"
+                id="rateHelper"
+            >
+                Example: 0.00208 is approximately 5.00% APR.
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="button-row">
+
+        <button
+            class="calculate-btn"
+            onclick="calculateLease()"
+        >
+            Calculate Lease
+        </button>
+
+
+        <button
+            class="reset-btn"
+            onclick="resetCalculator()"
+        >
+            Reset
+        </button>
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =========================================================
+     RESULTS
+========================================================= -->
+
+<section class="card results-card">
+
+
+    <div class="results-header">
+
+        <h2>
+            Estimated lease payment
+        </h2>
+
+        <p>
+            Your result is based on the numbers entered above.
+        </p>
+
+    </div>
+
+
+
+    <div class="primary-result">
+
+        <div class="result-label">
+            Estimated monthly payment
+        </div>
+
+
+        <div
+            class="monthly-payment"
+            id="monthlyPayment"
+        >
+            $0
+        </div>
+
+
+        <div class="result-subtitle">
+            Before fees or charges not entered into the calculator
+        </div>
+
+    </div>
+
+
+
+    <div class="results-body">
+
+
+        <div class="result-row">
+
+            <span>
+                Monthly depreciation
+            </span>
+
+            <strong id="monthlyDepreciation">
+                $0
+            </strong>
+
+        </div>
+
+
+        <div class="result-row">
+
+            <span>
+                Monthly finance charge
+            </span>
+
+            <strong id="monthlyFinance">
+                $0
+            </strong>
+
+        </div>
+
+
+        <div class="result-row">
+
+            <span>
+                Estimated monthly tax
+            </span>
+
+            <strong id="monthlyTax">
+                $0
+            </strong>
+
+        </div>
+
+
+        <div class="result-row">
+
+            <span>
+                Adjusted lease cost
+            </span>
+
+            <strong id="adjustedCost">
+                $0
+            </strong>
+
+        </div>
+
+
+        <div class="result-row">
+
+            <span>
+                Residual / potential buyout
+            </span>
+
+            <strong id="resultResidual">
+                $0
+            </strong>
+
+        </div>
+
+
+        <div class="result-row">
+
+            <span>
+                Total scheduled lease payments
+            </span>
+
+            <strong id="totalPayments">
+                $0
+            </strong>
+
+        </div>
+
+
+        <div class="result-row">
+
+            <span>
+                Upfront contribution
+            </span>
+
+            <strong id="upfrontContribution">
+                $0
+            </strong>
+
+        </div>
+
+
+        <div class="result-row">
+
+            <span>
+                Approx. total lease cash outlay
+            </span>
+
+            <strong id="totalLeaseCost">
+                $0
+            </strong>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="result-highlight">
+
+        <div class="result-highlight-title">
+            Lease rate conversion
+        </div>
+
+        <div
+            class="result-highlight-text"
+            id="rateConversion"
+        >
+            Money factor and APR are different ways of expressing
+            the financing charge.
+        </div>
+
+    </div>
+
+
+</section>
+
+</div>
+
+
+
+<!-- =========================================================
+     ABOUT / EDUCATIONAL CONTENT
+========================================================= -->
+
+<section class="content-card">
+
+<h2>
+    About the Auto Lease Calculator
+</h2>
+
+
+<p>
+
+Leasing a vehicle can make a new car accessible with a lower
+monthly payment than financing the same vehicle, but the number
+shown on a lease advertisement rarely tells the whole story. An
+auto lease is based on several moving pieces, including the
+negotiated vehicle price, the expected value of the vehicle at
+the end of the lease, the length of the agreement, the financing
+rate, taxes, trade-in value and money paid at signing. This
+calculator brings those variables together to give you a simple
+estimate before you sit down with a dealership.
+
+</p>
+
+
+<p>
+
+The most important concept to understand is depreciation. When
+you lease a vehicle, you are generally paying for the portion
+of the vehicle's value that is expected to disappear during your
+lease term rather than paying for the entire vehicle. For example,
+if a vehicle has an adjusted lease cost of $45,000 and is expected
+to be worth $25,000 at the end of a 36-month lease, approximately
+$20,000 of value is being consumed during the lease. That
+depreciation is spread across the scheduled payments.
+
+</p>
+
+
+<h3>
+How to use this calculator
+</h3>
+
+
+<p>
+
+Start with the vehicle price. Whenever possible, use the negotiated
+selling price rather than simply entering the manufacturer's
+suggested retail price. A lower negotiated price can reduce the
+amount being depreciated and therefore lower the lease payment.
+Next, choose the lease term. Common lease periods are around two
+to four years, although the actual choices available depend on
+the manufacturer and leasing company.
+
+</p>
+
+
+<p>
+
+Enter the residual value supplied by the dealer or leasing company.
+Residual value is the estimated worth of the vehicle when the lease
+ends. A higher residual generally means less depreciation has to be
+paid during the lease. This is one reason two vehicles with similar
+selling prices can have noticeably different lease payments.
+
+</p>
+
+
+<p>
+
+Next, enter your down payment and any trade-in value. These amounts
+can reduce the effective amount being financed through the lease.
+However, a large down payment on a lease deserves careful
+consideration because you generally do not build ownership equity
+in the vehicle simply by making a larger upfront payment. If the
+vehicle is totaled early in the lease, the financial outcome of a
+large upfront payment can also be different from what many shoppers
+expect.
+
+</p>
+
+
+<p>
+
+The calculator also lets you enter either an APR or a money factor.
+Money factor is a decimal commonly used in automobile leasing to
+represent the financing component. A commonly used approximation
+converts money factor to APR by multiplying the factor by 2,400.
+For example, a money factor of 0.00200 corresponds to approximately
+4.80% APR. The exact structure of a lease offer can vary, so always
+compare the actual figures in your contract rather than relying
+only on a converted number.
+
+</p>
+
+
+<p>
+
+Finally, enter your sales tax rate and select
+<strong>Calculate Lease</strong>. The calculator estimates the
+monthly depreciation charge, finance charge and applicable tax,
+then combines those components into an estimated monthly lease
+payment. It also shows the total scheduled payments and an
+approximate cash outlay that includes the upfront contribution you
+entered.
+
+</p>
+
+
+<h3>
+What is residual value?
+</h3>
+
+
+<p>
+
+Residual value is one of the most important numbers in a lease.
+It represents the leasing company's estimate of what the vehicle
+will be worth when the contract ends. A vehicle expected to retain
+more of its value generally has a higher residual percentage.
+Because lease payments are influenced by the difference between
+the adjusted vehicle cost and residual value, strong residual
+values can result in lower payments.
+
+</p>
+
+
+<h3>
+Why the negotiated price matters
+</h3>
+
+
+<p>
+
+Many shoppers concentrate on the advertised monthly payment instead
+of the vehicle's actual transaction price. That can make it harder
+to determine whether the lease is a good deal. A dealer can
+potentially change the payment by altering the amount due at
+signing, the lease term, the mileage allowance, the selling price,
+or other components. Negotiating the vehicle price separately gives
+you a clearer starting point for evaluating the lease.
+
+</p>
+
+
+<h3>
+Mileage limits are important
+</h3>
+
+
+<p>
+
+Most leases include a mileage allowance. Common annual allowances
+are around 10,000 to 15,000 miles, although different programs
+offer different limits. If you expect to drive significantly more
+than the allowance, ask for a higher-mileage lease before signing.
+Excess mileage charges can become expensive when the vehicle is
+returned. It is generally better to choose an allowance that matches
+your expected driving pattern than to assume you will somehow stay
+under a low limit.
+
+</p>
+
+
+<h3>
+Watch the fees beyond the payment
+</h3>
+
+
+<p>
+
+A lease can include costs that are not reflected in the simple
+monthly payment calculation. Depending on the contract, these can
+include an acquisition fee, documentation fees, registration,
+dealer fees, security deposits, taxes, disposition charges and
+other amounts. Some offers also require a significant amount due
+at signing. When comparing offers, look at the entire financial
+picture rather than choosing the lease with the smallest advertised
+monthly number.
+
+</p>
+
+
+<h3>
+Leasing versus buying
+</h3>
+
+
+<p>
+
+Leasing and buying serve different purposes. Buying a vehicle
+allows you to build ownership equity as the loan balance is paid
+down. Once the loan is paid off, you own the vehicle and can keep
+driving it without a monthly loan payment. Leasing generally gives
+you the right to use the vehicle for a specified period while the
+leasing company retains ownership. At the end, you typically return
+the vehicle, purchase it if a buyout option is available, or enter
+another agreement.
+
+</p>
+
+
+<p>
+
+Leasing may appeal to drivers who prefer changing vehicles every
+few years, want a newer vehicle while it is relatively new, or
+place a high value on predictable vehicle ownership cycles.
+Buying may make more sense for drivers who keep vehicles for many
+years, drive significant mileage, or want to eventually eliminate
+the monthly payment. Neither approach is automatically cheaper for
+everyone; the right choice depends on the vehicle, lease terms,
+financing costs, mileage and how long you plan to keep the car.
+
+</p>
+
+
+<h3>
+Before signing a lease
+</h3>
+
+
+<p>
+
+Ask the dealer for the complete lease worksheet or contract
+figures. Review the selling price, residual value, money factor or
+APR, mileage allowance, amount due at signing, acquisition fee,
+taxes, disposition fee and purchase-option price. Make sure you
+understand what happens if you exceed the mileage allowance or
+return the vehicle with damage considered beyond normal wear.
+Also determine whether the advertised payment assumes a particular
+amount of money due at signing.
+
+</p>
+
+
+<p>
+
+The calculator is designed to help you evaluate those numbers before
+making a commitment. It is an educational estimate, not a quote
+from a lender, manufacturer or dealership. Actual lease payments
+can differ because contracts may include additional fees, incentives,
+tax rules, credits, rebates, acquisition charges and other items
+that are not included here.
+
+</p>
+
+
+
+<div class="quick-facts">
+
+    <div class="fact">
+
+        <strong>
+            Lower residual
+        </strong>
+
+        <span>
+            Usually means more depreciation is paid during the lease.
+        </span>
+
+    </div>
+
+
+    <div class="fact">
+
+        <strong>
+            Higher money factor
+        </strong>
+
+        <span>
+            Generally increases the financing portion of the payment.
+        </span>
+
+    </div>
+
+
+    <div class="fact">
+
+        <strong>
+            Larger upfront payment
+        </strong>
+
+        <span>
+            Can reduce the monthly payment but increases cash due at signing.
+        </span>
+
+    </div>
+
+</div>
+
+
+<div class="disclaimer">
+
+    <strong>Important:</strong>
+    This calculator provides an estimate for educational and
+    comparison purposes. Actual lease contracts may include
+    acquisition fees, registration, documentation fees, dealer
+    charges, incentives, rebates, mileage adjustments, security
+    deposits and other costs. Always review the complete lease
+    agreement before signing.
+
+</div>
+
+</section>
+
+
+
+<!-- =========================================================
+     FAQ
+========================================================= -->
+
+<section class="content-card">
+
+<h2>
+    Auto Lease Calculator FAQ
+</h2>
+
+
+<!-- FAQ 1 -->
+
+<div class="faq-item">
+
+    <button
+        class="faq-button"
+        onclick="toggleFAQ(this)"
+        type="button"
+    >
+
+        <span>
+            What is the residual value on a car lease?
+        </span>
+
+        <span class="faq-icon">
+            +
+        </span>
+
+    </button>
+
+
+    <div class="faq-answer">
+
+        Residual value is the leasing company's estimate of what
+        the vehicle will be worth when the lease ends. The higher
+        the residual relative to the vehicle's starting price, the
+        less depreciation you generally pay during the lease.
+
+    </div>
+
+</div>
+
+
+
+<!-- FAQ 2 -->
+
+<div class="faq-item">
+
+    <button
+        class="faq-button"
+        onclick="toggleFAQ(this)"
+        type="button"
+    >
+
+        <span>
+            What is a money factor?
+        </span>
+
+        <span class="faq-icon">
+            +
+        </span>
+
+    </button>
+
+
+    <div class="faq-answer">
+
+        A money factor is a decimal used to calculate the financing
+        portion of an automobile lease. A common approximation is
+        to multiply the money factor by 2,400 to estimate its
+        equivalent APR. For example, 0.00200 is approximately 4.80%
+        APR. The actual lease contract should always be used for
+        the final terms.
+
+    </div>
+
+</div>
+
+
+
+<!-- FAQ 3 -->
+
+<div class="faq-item">
+
+    <button
+        class="faq-button"
+        onclick="toggleFAQ(this)"
+        type="button"
+    >
+
+        <span>
+            Is it better to put a large down payment on a lease?
+        </span>
+
+        <span class="faq-icon">
+            +
+        </span>
+
+    </button>
+
+
+    <div class="faq-answer">
+
+        A larger upfront payment can lower the monthly payment,
+        but it also means committing more cash at the beginning
+        of the lease. Because you generally do not own the vehicle,
+        a large lease down payment should be evaluated carefully.
+        Compare the total cash required and total lease cost rather
+        than focusing only on the monthly payment.
+
+    </div>
+
+</div>
+
+
+
+<!-- FAQ 4 -->
+
+<div class="faq-item">
+
+    <button
+        class="faq-button"
+        onclick="toggleFAQ(this)"
+        type="button"
+    >
+
+        <span>
+            Does mileage affect a lease payment?
+        </span>
+
+        <span class="faq-icon">
+            +
+        </span>
+
+    </button>
+
+
+    <div class="faq-answer">
+
+        Yes. A lease with a higher mileage allowance can have a
+        different payment because the vehicle is expected to have
+        a lower value at the end of the contract. If you regularly
+        drive more than the mileage allowance, selecting a
+        higher-mileage lease at the beginning can be worth comparing
+        against potential excess-mileage charges.
+
+    </div>
+
+</div>
+
+
+
+<!-- FAQ 5 -->
+
+<div class="faq-item">
+
+    <button
+        class="faq-button"
+        onclick="toggleFAQ(this)"
+        type="button"
+    >
+
+        <span>
+            Is leasing cheaper than buying a car?
+        </span>
+
+        <span class="faq-icon">
+            +
+        </span>
+
+    </button>
+
+
+    <div class="faq-answer">
+
+        Not necessarily. Leasing can produce a lower monthly payment
+        because you are generally paying for the vehicle's expected
+        depreciation during the lease rather than purchasing the
+        entire vehicle. Buying can become more economical for people
+        who keep vehicles for many years after the loan is paid off.
+        Compare the total cost over the period you actually expect
+        to keep the vehicle.
+
+    </div>
+
+</div>
+
+
+</section>
+
+
+
+</main>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+    <div class="footer-inner">
+
+        <div>
+            &copy; 2026 Utiliverse
+        </div>
+
+        <div>
+            Simple tools for everyday decisions.
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<script>
+
+/* =========================================================
+   UTILITY FUNCTIONS
+========================================================= */
+
+function getNumber(id) {
+
+    const value =
+        parseFloat(
+            document.getElementById(id).value
+        );
+
+    return isNaN(value)
+        ? 0
+        : value;
+}
+
+
+function money(value) {
+
+    return new Intl.NumberFormat(
+        "en-US",
+        {
+            style: "currency",
+            currency: "USD",
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }
+    ).format(value);
+}
+
+
+/* =========================================================
+   RATE TYPE CHANGE
+========================================================= */
+
+document
+    .querySelectorAll(
+        'input[name="rateType"]'
+    )
+    .forEach(function(radio) {
+
+        radio.addEventListener(
+            "change",
+            function() {
+
+                const rate =
+                    getNumber("leaseRate");
+
+                const helper =
+                    document.getElementById(
+                        "rateHelper"
+                    );
+
+                if (
+                    this.value ===
+                    "moneyfactor"
+                ) {
+
+                    helper.textContent =
+                        "Example: 0.00208 is approximately 5.00% APR.";
+
+                } else {
+
+                    helper.textContent =
+                        "Enter the annual percentage rate, such as 5.00.";
+
+                }
+
+            }
+        );
+
+    });
+
+
+/* =========================================================
+   MAIN CALCULATION
+========================================================= */
+
+function calculateLease() {
+
+
+    /* -----------------------------------------------------
+       INPUTS
+    ----------------------------------------------------- */
+
+    const vehiclePrice =
+        getNumber("vehiclePrice");
+
+    const leaseTerm =
+        getNumber("leaseTerm");
+
+    const residualValue =
+        getNumber("residualValue");
+
+    const downPayment =
+        getNumber("downPayment");
+
+    const tradeIn =
+        getNumber("tradeIn");
+
+    const salesTax =
+        getNumber("salesTax");
+
+    const rate =
+        getNumber("leaseRate");
+
+
+    const rateType =
+        document.querySelector(
+            'input[name="rateType"]:checked'
+        ).value;
+
+
+
+    /* -----------------------------------------------------
+       VALIDATION
+    ----------------------------------------------------- */
+
+    if (vehiclePrice <= 0) {
+
+        alert(
+            "Please enter a valid vehicle price."
+        );
+
+        return;
+
+    }
+
+
+    if (leaseTerm <= 0) {
+
+        alert(
+            "Please enter a valid lease term."
+        );
+
+        return;
+
+    }
+
+
+    if (residualValue < 0) {
+
+        alert(
+            "Please enter a valid residual value."
+        );
+
+        return;
+
+    }
+
+
+
+    /* -----------------------------------------------------
+       ADJUSTED CAPITALIZED COST
+    -----------------------------------------------------
+
+       Vehicle price
+       minus down payment
+       minus trade-in
+
+    ----------------------------------------------------- */
+
+    let adjustedCost =
+        vehiclePrice -
+        downPayment -
+        tradeIn;
+
+
+    if (adjustedCost < 0) {
+
+        adjustedCost = 0;
+
+    }
+
+
+
+    /* -----------------------------------------------------
+       MONEY FACTOR
+    ----------------------------------------------------- */
+
+    let moneyFactor = 0;
+
+    let apr = 0;
+
+
+    if (rateType === "moneyfactor") {
+
+        moneyFactor =
+            rate;
+
+        apr =
+            moneyFactor *
+            2400;
+
+    }
+
+    else {
+
+        apr =
+            rate;
+
+        moneyFactor =
+            apr /
+            2400;
+
+    }
+
+
+
+    /* -----------------------------------------------------
+       DEPRECIATION
+    ----------------------------------------------------- */
+
+    let totalDepreciation =
+        adjustedCost -
+        residualValue;
+
+
+    /*
+       If the residual is greater than the adjusted cost,
+       don't create a negative depreciation charge.
+    */
+
+    if (
+        totalDepreciation < 0
+    ) {
+
+        totalDepreciation = 0;
+
+    }
+
+
+    const monthlyDepreciation =
+        totalDepreciation /
+        leaseTerm;
+
+
+
+    /* -----------------------------------------------------
+       MONTHLY FINANCE CHARGE
+    -----------------------------------------------------
+
+       Common lease calculation:
+
+       (Adjusted Cost + Residual)
+       × Money Factor
+
+    ----------------------------------------------------- */
+
+    const monthlyFinance =
+        (
+            adjustedCost +
+            residualValue
+        )
+        *
+        moneyFactor;
+
+
+
+    /* -----------------------------------------------------
+       MONTHLY TAX
+    ----------------------------------------------------- */
+
+    const monthlyTax =
+        (
+            monthlyDepreciation +
+            monthlyFinance
+        )
+        *
+        (
+            salesTax / 100
+        );
+
+
+
+    /* -----------------------------------------------------
+       MONTHLY PAYMENT
+    ----------------------------------------------------- */
+
+    const monthlyPayment =
+        monthlyDepreciation +
+        monthlyFinance +
+        monthlyTax;
+
+
+
+    /* -----------------------------------------------------
+       TOTALS
+    ----------------------------------------------------- */
+
+    const totalPayments =
+        monthlyPayment *
+        leaseTerm;
+
+
+    const upfrontContribution =
+        downPayment +
+        tradeIn;
+
+
+    const totalLeaseCost =
+        totalPayments +
+        downPayment;
+
+
+
+    /* -----------------------------------------------------
+       UPDATE RESULTS
+    ----------------------------------------------------- */
+
+    document.getElementById(
+        "monthlyPayment"
+    ).textContent =
+        money(monthlyPayment);
+
+
+    document.getElementById(
+        "monthlyDepreciation"
+    ).textContent =
+        money(monthlyDepreciation);
+
+
+    document.getElementById(
+        "monthlyFinance"
+    ).textContent =
+        money(monthlyFinance);
+
+
+    document.getElementById(
+        "monthlyTax"
+    ).textContent =
+        money(monthlyTax);
+
+
+    document.getElementById(
+        "adjustedCost"
+    ).textContent =
+        money(adjustedCost);
+
+
+    document.getElementById(
+        "resultResidual"
+    ).textContent =
+        money(residualValue);
+
+
+    document.getElementById(
+        "totalPayments"
+    ).textContent =
+        money(totalPayments);
+
+
+    document.getElementById(
+        "upfrontContribution"
+    ).textContent =
+        money(upfrontContribution);
+
+
+    document.getElementById(
+        "totalLeaseCost"
+    ).textContent =
+        money(totalLeaseCost);
+
+
+
+    /* -----------------------------------------------------
+       RATE CONVERSION
+    ----------------------------------------------------- */
+
+    document.getElementById(
+        "rateConversion"
+    ).textContent =
+
+        rateType === "moneyfactor"
+
+        ?
+
+        "Money factor "
+        + rate.toFixed(5)
+        + " is approximately "
+        + apr.toFixed(2)
+        + "% APR."
+
+        :
+
+        "APR "
+        + apr.toFixed(2)
+        + "% corresponds to an estimated money factor of "
+        + moneyFactor.toFixed(5)
+        + ".";
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+function resetCalculator() {
+
+
+    document.getElementById(
+        "vehiclePrice"
+    ).value =
+        "50000";
+
+
+    document.getElementById(
+        "leaseTerm"
+    ).value =
+        "36";
+
+
+    document.getElementById(
+        "residualValue"
+    ).value =
+        "24000";
+
+
+    document.getElementById(
+        "downPayment"
+    ).value =
+        "10000";
+
+
+    document.getElementById(
+        "tradeIn"
+    ).value =
+        "0";
+
+
+    document.getElementById(
+        "salesTax"
+    ).value =
+        "7";
+
+
+    document.getElementById(
+        "leaseRate"
+    ).value =
+        "0.00208";
+
+
+    document.getElementById(
+        "moneyFactorOption"
+    ).checked =
+        true;
+
+
+    calculateLease();
+
+}
+
+
+/* =========================================================
+   FAQ ACCORDION
+========================================================= */
+
+function toggleFAQ(button) {
+
+
+    const answer =
+        button.nextElementSibling;
+
+
+    const icon =
+        button.querySelector(
+            ".faq-icon"
+        );
+
+
+    const isOpen =
+        answer.classList.contains(
+            "open"
+        );
+
+
+    document
+        .querySelectorAll(
+            ".faq-answer"
+        )
+        .forEach(function(item) {
+
+            item.classList.remove(
+                "open"
+            );
+
+        });
+
+
+    document
+        .querySelectorAll(
+            ".faq-icon"
+        )
+        .forEach(function(item) {
+
+            item.textContent =
+                "+";
+
+        });
+
+
+    if (!isOpen) {
+
+        answer.classList.add(
+            "open"
+        );
+
+        icon.textContent =
+            "−";
+
+    }
+
+}
+
+
+/* =========================================================
+   INITIAL CALCULATION
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        calculateLease();
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
