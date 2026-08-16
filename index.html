@@ -8,48 +8,351 @@
   
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
   
   <style>
+
+    /* =========================================================
+       GLASS CARD
+    ========================================================= */
+
     .glass-card {
       background: rgba(255, 255, 255, 0.8);
       backdrop-filter: blur(12px);
     }
+
+
+    /* =========================================================
+       DARK MODE
+    ========================================================= */
+
+    body.dark-mode {
+      background-color: #0f172a !important;
+      color: #e2e8f0 !important;
+    }
+
+
+    /* Header */
+
+    body.dark-mode header {
+      background-color: rgba(15, 23, 42, 0.90) !important;
+      border-color: #334155 !important;
+    }
+
+
+    /* Logo */
+
+    body.dark-mode header .text-slate-900 {
+      color: #f8fafc !important;
+    }
+
+    body.dark-mode header .text-slate-500 {
+      color: #94a3b8 !important;
+    }
+
+
+    /* Hero */
+
+    body.dark-mode section {
+      background: linear-gradient(
+        to bottom,
+        rgba(30, 41, 59, 0.8),
+        #0f172a
+      ) !important;
+    }
+
+    body.dark-mode .page-title,
+    body.dark-mode section h1 {
+      color: #f8fafc !important;
+    }
+
+    body.dark-mode section p {
+      color: #cbd5e1 !important;
+    }
+
+
+    /* Search box */
+
+    body.dark-mode #searchInput {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+
+    body.dark-mode #searchInput::placeholder {
+      color: #94a3b8 !important;
+    }
+
+
+    /* Category buttons */
+
+    body.dark-mode .cat-btn:not(.active) {
+      background-color: #1e293b !important;
+      color: #cbd5e1 !important;
+      border-color: #475569 !important;
+    }
+
+    body.dark-mode .cat-btn:not(.active):hover {
+      background-color: #334155 !important;
+    }
+
+
+    /* Tool Cards */
+
+    body.dark-mode .tool-card {
+      background-color: #1e293b !important;
+      border-color: #334155 !important;
+    }
+
+    body.dark-mode .tool-card:hover {
+      border-color: #6366f1 !important;
+    }
+
+    body.dark-mode .tool-card h3 {
+      color: #f8fafc !important;
+    }
+
+    body.dark-mode .tool-card p {
+      color: #94a3b8 !important;
+    }
+
+
+    /* Tool card hover text */
+
+    body.dark-mode .tool-card .group-hover\:text-indigo-600 {
+      color: #818cf8 !important;
+    }
+
+    body.dark-mode .tool-card .group-hover\:text-emerald-600 {
+      color: #34d399 !important;
+    }
+
+    body.dark-mode .tool-card .group-hover\:text-rose-600 {
+      color: #fb7185 !important;
+    }
+
+
+    /* Advertisement */
+
+    body.dark-mode .bg-slate-200\/60 {
+      background-color: rgba(51, 65, 85, 0.6) !important;
+    }
+
+    body.dark-mode .border-slate-300 {
+      border-color: #475569 !important;
+    }
+
+    body.dark-mode .text-slate-400 {
+      color: #64748b !important;
+    }
+
+
+    /* Coming Soon card */
+
+    body.dark-mode .bg-slate-100\/70 {
+      background-color: rgba(30, 41, 59, 0.7) !important;
+    }
+
+    body.dark-mode .text-slate-700 {
+      color: #cbd5e1 !important;
+    }
+
+
+    /* Footer */
+
+    body.dark-mode footer {
+      background-color: #0f172a !important;
+      border-color: #334155 !important;
+    }
+
+    body.dark-mode footer .text-slate-500 {
+      color: #94a3b8 !important;
+    }
+
+    body.dark-mode footer a {
+      color: #94a3b8 !important;
+    }
+
+    body.dark-mode footer a:hover {
+      color: #f8fafc !important;
+    }
+
+
+    /* =========================================================
+       DARK MODE TOGGLE
+    ========================================================= */
+
+    .theme-toggle {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 8px 13px;
+      border-radius: 9999px;
+      border: 1px solid #e2e8f0;
+      background: #ffffff;
+      color: #334155;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      background: #f1f5f9;
+      transform: translateY(-1px);
+    }
+
+    body.dark-mode .theme-toggle {
+      background: #1e293b;
+      border-color: #475569;
+      color: #e2e8f0;
+    }
+
+    body.dark-mode .theme-toggle:hover {
+      background: #334155;
+    }
+
+    .theme-icon {
+      width: 17px;
+      height: 17px;
+    }
+
+
+    /* =========================================================
+       DARK MODE - GLASS CARDS
+    ========================================================= */
+
+    body.dark-mode .glass-card {
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+
+    /* =========================================================
+       SMOOTH TRANSITIONS
+    ========================================================= */
+
+    body,
+    header,
+    section,
+    footer,
+    .tool-card,
+    #searchInput,
+    .cat-btn,
+    .theme-toggle {
+      transition:
+        background-color 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease;
+    }
+
   </style>
 </head>
+
+
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
 
-  <!-- Navigation Header -->
+
+  <!-- =========================================================
+       NAVIGATION HEADER
+  ========================================================= -->
+
   <header class="sticky top-0 z-50 bg-white/80 backdrop-filter backdrop-blur-lg border-b border-slate-200">
+
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+
+      <!-- Logo -->
+
       <div class="flex items-center gap-2">
+
         <div class="bg-indigo-600 text-white p-2 rounded-xl">
           <i data-lucide="layers" class="w-6 h-6"></i>
         </div>
-        <span class="text-xl font-bold tracking-tight text-slate-900">Utiliverse</span>
+
+        <span class="text-xl font-bold tracking-tight text-slate-900">
+          Utiliverse
+        </span>
+
       </div>
-      <div class="text-sm font-medium text-slate-500">
-        100% Free & Browser-Based
+
+
+      <!-- Right Side -->
+
+      <div class="flex items-center gap-4">
+
+        <div class="hidden sm:block text-sm font-medium text-slate-500">
+          100% Free & Browser-Based
+        </div>
+
+
+        <!-- DARK MODE BUTTON -->
+
+        <button
+          id="themeToggle"
+          class="theme-toggle"
+          type="button"
+          aria-label="Toggle dark mode"
+          title="Toggle light/dark mode"
+        >
+
+          <i
+            id="themeIcon"
+            data-lucide="moon"
+            class="theme-icon"
+          ></i>
+
+          <span id="themeText">
+            Dark Mode
+          </span>
+
+        </button>
+
       </div>
+
     </div>
+
   </header>
 
-  <!-- Hero Section with Search -->
+
+
+  <!-- =========================================================
+       HERO SECTION WITH SEARCH
+  ========================================================= -->
+
   <section class="bg-gradient-to-b from-indigo-50/50 to-slate-50 py-16 px-4">
+
     <div class="max-w-4xl mx-auto text-center space-y-6">
+
       <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
+
         Fast, Free Utilities for Everyday Tasks
+
       </h1>
+
+
       <p class="text-lg text-slate-600 max-w-2xl mx-auto">
-        No sign-ups, no software installs. Simple financial calculators, developer tools, and converters running client-side in your browser.
+
+        No sign-ups, no software installs. Simple financial calculators,
+        developer tools, and converters running client-side in your browser.
+
       </p>
 
+
+
       <!-- Search Box -->
+
       <div class="relative max-w-xl mx-auto pt-2">
+
         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+
           <i data-lucide="search" class="w-5 h-5"></i>
+
         </div>
+
+
         <input 
           type="text" 
           id="searchInput"
@@ -57,246 +360,967 @@
           placeholder="Search tools (e.g., Mortgage, Churn, JSON)..." 
           class="w-full pl-11 pr-4 py-3.5 bg-white rounded-2xl border border-slate-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-slate-800 placeholder-slate-400 transition"
         >
+
       </div>
+
+
 
       <!-- Category Filter Pills -->
-      <div class="flex flex-wrap justify-center gap-2 pt-2" id="categoryFilters">
-        <button onclick="filterCategory('all')" class="cat-btn active bg-slate-900 text-white px-4 py-1.5 rounded-full text-sm font-medium transition">All Tools</button>
-        <button onclick="filterCategory('finance')" class="cat-btn bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 px-4 py-1.5 rounded-full text-sm font-medium transition">Finance</button>
-        <button onclick="filterCategory('developer')" class="cat-btn bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 px-4 py-1.5 rounded-full text-sm font-medium transition">Developer</button>
-        <button onclick="filterCategory('productivity')" class="cat-btn bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 px-4 py-1.5 rounded-full text-sm font-medium transition">Productivity</button>
+
+      <div
+        class="flex flex-wrap justify-center gap-2 pt-2"
+        id="categoryFilters"
+      >
+
+        <button
+          onclick="filterCategory('all')"
+          class="cat-btn active bg-slate-900 text-white px-4 py-1.5 rounded-full text-sm font-medium transition"
+        >
+          All Tools
+        </button>
+
+
+        <button
+          onclick="filterCategory('finance')"
+          class="cat-btn bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 px-4 py-1.5 rounded-full text-sm font-medium transition"
+        >
+          Finance
+        </button>
+
+
+        <button
+          onclick="filterCategory('developer')"
+          class="cat-btn bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 px-4 py-1.5 rounded-full text-sm font-medium transition"
+        >
+          Developer
+        </button>
+
+
+        <button
+          onclick="filterCategory('productivity')"
+          class="cat-btn bg-white text-slate-600 border border-slate-200 hover:bg-slate-100 px-4 py-1.5 rounded-full text-sm font-medium transition"
+        >
+          Productivity
+        </button>
+
       </div>
+
     </div>
+
   </section>
 
-  <!-- Top Banner AdSpace Placeholder -->
+
+
+  <!-- =========================================================
+       TOP BANNER AD SPACE
+  ========================================================= -->
+
   <div class="max-w-7xl mx-auto px-4 my-6 w-full">
+
     <div class="w-full h-24 bg-slate-200/60 rounded-xl border border-dashed border-slate-300 flex items-center justify-center text-slate-400 text-xs tracking-wider uppercase">
+
       Advertisement Space (AdSense Leaderboard)
+
     </div>
+
   </div>
 
-  <!-- Tools Grid Directory -->
+
+
+  <!-- =========================================================
+       TOOLS GRID DIRECTORY
+  ========================================================= -->
+
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
-    <div id="toolsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-      <!-- TOOL CARD 1: Mortgage Calculator -->
-      <a href="./mortgage/" class="tool-card group p-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-indigo-300 transition duration-200 flex flex-col justify-between" data-category="finance" data-title="mortgage extra payments early payoff calculator">
+    <div
+      id="toolsGrid"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+    >
+
+
+
+      <!-- =====================================================
+           TOOL CARD 1
+      ===================================================== -->
+
+      <a
+        href="./mortgage/"
+        class="tool-card group p-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-indigo-300 transition duration-200 flex flex-col justify-between"
+        data-category="finance"
+        data-title="mortgage extra payments early payoff calculator"
+      >
+
         <div>
+
           <div class="flex items-center justify-between mb-4">
+
             <div class="p-3 bg-indigo-50 text-indigo-600 rounded-xl group-hover:bg-indigo-600 group-hover:text-white transition duration-200">
+
               <i data-lucide="calculator" class="w-6 h-6"></i>
+
             </div>
-            <span class="text-xs font-semibold px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded-full">Finance</span>
+
+            <span class="text-xs font-semibold px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded-full">
+
+              Finance
+
+            </span>
+
           </div>
-          <h3 class="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition">Mortgage Extra Payment Calculator</h3>
+
+
+          <h3 class="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition">
+
+            Mortgage Extra Payment Calculator
+
+          </h3>
+
+
           <p class="text-slate-500 text-sm mt-2 leading-relaxed">
-            Calculate your monthly principal & interest payments, amortization curves, and total interest saved with extra monthly payments.
+
+            Calculate your monthly principal & interest payments,
+            amortization curves, and total interest saved with extra
+            monthly payments.
+
           </p>
+
         </div>
+
+
         <div class="mt-6 flex items-center text-sm font-semibold text-indigo-600 group-hover:translate-x-1 transition duration-200">
-          Open Tool <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+
+          Open Tool
+
+          <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+
         </div>
+
       </a>
 
-      <!-- TOOL CARD 2: PDF Conversion Toolkit Pro -->
-      <a href="./pdf/" class="tool-card group p-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-indigo-300 transition duration-200 flex flex-col justify-between" data-category="productivity" data-title="pdf conversion toolkit pro">
+
+
+      <!-- =====================================================
+           TOOL CARD 2
+      ===================================================== -->
+
+      <a
+        href="./pdf/"
+        class="tool-card group p-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-indigo-300 transition duration-200 flex flex-col justify-between"
+        data-category="productivity"
+        data-title="pdf conversion toolkit pro"
+      >
+
         <div>
+
           <div class="flex items-center justify-between mb-4">
+
             <div class="p-3 bg-emerald-50 text-emerald-600 rounded-xl group-hover:bg-emerald-600 group-hover:text-white transition duration-200">
+
               <i data-lucide="file-text" class="w-6 h-6"></i>
+
             </div>
-            <span class="text-xs font-semibold px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full">Productivity</span>
+
+
+            <span class="text-xs font-semibold px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full">
+
+              Productivity
+
+            </span>
+
           </div>
-          <h3 class="text-xl font-bold text-slate-900 group-hover:text-emerald-600 transition">PDF Conversion Toolkit Pro</h3>
+
+
+          <h3 class="text-xl font-bold text-slate-900 group-hover:text-emerald-600 transition">
+
+            PDF Conversion Toolkit Pro
+
+          </h3>
+
+
           <p class="text-slate-500 text-sm mt-2 leading-relaxed">
-            Merge, convert, extract, and compress PDFs — no uploads, no accounts.
+
+            Merge, convert, extract, and compress PDFs —
+            no uploads, no accounts.
+
           </p>
+
         </div>
+
+
         <div class="mt-6 flex items-center text-sm font-semibold text-emerald-600 group-hover:translate-x-1 transition duration-200">
-          Open Tool <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+
+          Open Tool
+
+          <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+
         </div>
+
       </a>
 
-      <!-- TOOL CARD 3: Image Resizer & Social Media Format Utility-->
-      <a href="./Image-converter/" class="tool-card group p-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-indigo-300 transition duration-200 flex flex-col justify-between" data-category="productivity" data-title="Image Resizer & Social Media Format Utility">
+
+
+      <!-- =====================================================
+           TOOL CARD 3
+      ===================================================== -->
+
+      <a
+        href="./Image-converter/"
+        class="tool-card group p-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-indigo-300 transition duration-200 flex flex-col justify-between"
+        data-category="productivity"
+        data-title="Image Resizer & Social Media Format Utility"
+      >
+
         <div>
+
           <div class="flex items-center justify-between mb-4">
+
             <div class="p-3 bg-emerald-50 text-emerald-600 rounded-xl group-hover:bg-emerald-600 group-hover:text-white transition duration-200">
+
               <i data-lucide="file-text" class="w-6 h-6"></i>
+
             </div>
-            <span class="text-xs font-semibold px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full">Productivity</span>
+
+
+            <span class="text-xs font-semibold px-2.5 py-1 bg-emerald-50 text-emerald-700 rounded-full">
+
+              Productivity
+
+            </span>
+
           </div>
-          <h3 class="text-xl font-bold text-slate-900 group-hover:text-emerald-600 transition">Image Resizer & Social Media Format Utilit</h3>
+
+
+          <h3 class="text-xl font-bold text-slate-900 group-hover:text-emerald-600 transition">
+
+            Image Resizer & Social Media Format Utilit
+
+          </h3>
+
+
           <p class="text-slate-500 text-sm mt-2 leading-relaxed">
+
             Convert and resize images and preset social media image sizes.
+
           </p>
+
         </div>
+
+
         <div class="mt-6 flex items-center text-sm font-semibold text-emerald-600 group-hover:translate-x-1 transition duration-200">
-          Open Tool <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+
+          Open Tool
+
+          <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+
         </div>
+
       </a>
 
-      <!-- TOOL CARD 4: Home Affordability Calculator -->
-<a href="./Home Affordability Calculator/" class="tool-card group p-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-indigo-300 transition duration-200 flex flex-col justify-between" data-category="finance" data-title="Utiliverse Home Affordability Calculator">
-  <div>
-    <div class="flex items-center justify-between mb-4">
-      <div class="p-3 bg-rose-50 text-rose-600 rounded-xl group-hover:bg-rose-600 group-hover:text-white transition duration-200">
-        <i data-lucide="dollar-sign" class="w-6 h-6"></i> <!-- Lucide icon name -->
-      </div>
-      <span class="text-xs font-semibold px-2.5 py-1 bg-rose-50 text-rose-700 rounded-full">Finance</span>
-    </div>
-    <h3 class="text-xl font-bold text-slate-900 group-hover:text-rose-600 transition">Home Affordability Calculator</h3>
-    <p class="text-slate-500 text-sm mt-2 leading-relaxed">
-      Estimate your home buying budget using income, debts, mortgage rates, taxes, insurance, down payment and loan type..
-    </p>
-  </div>
-  <div class="mt-6 flex items-center text-sm font-semibold text-rose-600 group-hover:translate-x-1 transition duration-200">
-    Open Tool <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-  </div>
-</a>
 
-      <!-- TOOL CARD 5: Auto Lease Calculator -->
-<a href="./Auto_Lease_Calculator/" class="tool-card group p-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-indigo-300 transition duration-200 flex flex-col justify-between" data-category="finance" data-title="Utiliverse Auto Lease Calculator">
-  <div>
-    <div class="flex items-center justify-between mb-4">
-      <div class="p-3 bg-rose-50 text-rose-600 rounded-xl group-hover:bg-rose-600 group-hover:text-white transition duration-200">
-        <i data-lucide="dollar-sign" class="w-6 h-6"></i> <!-- Lucide icon name -->
-      </div>
-      <span class="text-xs font-semibold px-2.5 py-1 bg-rose-50 text-rose-700 rounded-full">Finance</span>
-    </div>
-    <h3 class="text-xl font-bold text-slate-900 group-hover:text-rose-600 transition">Auto Lease Calculator</h3>
-    <p class="text-slate-500 text-sm mt-2 leading-relaxed">
-      Estimate your monthly car lease payment, depreciation, finance charge, taxes and total lease cost with the Utiliverse Auto Lease Calculator.
-    </p>
-  </div>
-  <div class="mt-6 flex items-center text-sm font-semibold text-rose-600 group-hover:translate-x-1 transition duration-200">
-    Open Tool <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-  </div>
-</a>
 
-      <!-- TOOL CARD 6: Retirement Calculator -->
-<a href="./Retirement_Calculator/" class="tool-card group p-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-indigo-300 transition duration-200 flex flex-col justify-between" data-category="finance" data-title="Utiliverse Retirement Calculator">
-  <div>
-    <div class="flex items-center justify-between mb-4">
-      <div class="p-3 bg-rose-50 text-rose-600 rounded-xl group-hover:bg-rose-600 group-hover:text-white transition duration-200">
-        <i data-lucide="dollar-sign" class="w-6 h-6"></i> <!-- Lucide icon name -->
-      </div>
-      <span class="text-xs font-semibold px-2.5 py-1 bg-rose-50 text-rose-700 rounded-full">Finance</span>
-    </div>
-    <h3 class="text-xl font-bold text-slate-900 group-hover:text-rose-600 transition">Retirement Calculator</h3>
-    <p class="text-slate-500 text-sm mt-2 leading-relaxed">
-      Estimate how much you may need for retirement, how much to save, potential retirement income, and how long your savings may last.
-    </p>
-  </div>
-  <div class="mt-6 flex items-center text-sm font-semibold text-rose-600 group-hover:translate-x-1 transition duration-200">
-    Open Tool <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-  </div>
-</a>
+      <!-- =====================================================
+           TOOL CARD 4
+           HOME AFFORDABILITY
+      ===================================================== -->
 
-      <!-- TOOL CARD 7: Rental Peroperty Calculator -->
-<a href="./Rental_Property_Calculator/" class="tool-card group p-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-indigo-300 transition duration-200 flex flex-col justify-between" data-category="finance" data-title="Utiliverse Rental Property Calculator">
-  <div>
-    <div class="flex items-center justify-between mb-4">
-      <div class="p-3 bg-rose-50 text-rose-600 rounded-xl group-hover:bg-rose-600 group-hover:text-white transition duration-200">
-        <i data-lucide="dollar-sign" class="w-6 h-6"></i> <!-- Lucide icon name -->
-      </div>
-      <span class="text-xs font-semibold px-2.5 py-1 bg-rose-50 text-rose-700 rounded-full">Finance</span>
-    </div>
-    <h3 class="text-xl font-bold text-slate-900 group-hover:text-rose-600 transition">Rental Property Calculator</h3>
-    <p class="text-slate-500 text-sm mt-2 leading-relaxed">
-      Analyze a rental property investment with estimated cash flow, cap rate, cash-on-cash return, equity, sale proceeds and projected profit.
-    </p>
-  </div>
-  <div class="mt-6 flex items-center text-sm font-semibold text-rose-600 group-hover:translate-x-1 transition duration-200">
-    Open Tool <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-  </div>
-</a>
+      <a
+        href="./Home Affordability Calculator/"
+        class="tool-card group p-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-indigo-300 transition duration-200 flex flex-col justify-between"
+        data-category="finance"
+        data-title="Utiliverse Home Affordability Calculator"
+      >
 
-      <!-- TOOL CARD 8: Scientific Calculator -->
-<a href="./Scientific_Calculator/" class="tool-card group p-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-indigo-300 transition duration-200 flex flex-col justify-between" data-category="Math" data-title="Utiliverse Scientific Calculator">
-  <div>
-    <div class="flex items-center justify-between mb-4">
-      <div class="p-3 bg-rose-50 text-rose-600 rounded-xl group-hover:bg-rose-600 group-hover:text-white transition duration-200">
-        <i data-lucide="radical" class="w-6 h-6"></i> <!-- Lucide icon name -->
-      </div>
-      <span class="text-xs font-semibold px-2.5 py-1 bg-rose-50 text-rose-700 rounded-full">Math</span>
-    </div>
-    <h3 class="text-xl font-bold text-slate-900 group-hover:text-rose-600 transition">Scientific Calculator</h3>
-    <p class="text-slate-500 text-sm mt-2 leading-relaxed">
-      Free online scientific calculator for arithmetic, trigonometry, powers, roots, logarithms, factorials and more.
-    </p>
-  </div>
-  <div class="mt-6 flex items-center text-sm font-semibold text-rose-600 group-hover:translate-x-1 transition duration-200">
-    Open Tool <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-  </div>
-</a>
-      
-      <!-- TEMPLATE PLACEHOLDER CARD (Future Tool) -->
-      <div class="p-6 bg-slate-100/70 rounded-2xl border border-dashed border-slate-300 flex flex-col items-center justify-center text-center">
-        <div class="p-3 bg-slate-200 text-slate-500 rounded-xl mb-3">
-          <i data-lucide="plus-circle" class="w-6 h-6"></i>
+        <div>
+
+          <div class="flex items-center justify-between mb-4">
+
+            <div class="p-3 bg-rose-50 text-rose-600 rounded-xl group-hover:bg-rose-600 group-hover:text-white transition duration-200">
+
+              <i data-lucide="dollar-sign" class="w-6 h-6"></i>
+
+            </div>
+
+
+            <span class="text-xs font-semibold px-2.5 py-1 bg-rose-50 text-rose-700 rounded-full">
+
+              Finance
+
+            </span>
+
+          </div>
+
+
+          <h3 class="text-xl font-bold text-slate-900 group-hover:text-rose-600 transition">
+
+            Home Affordability Calculator
+
+          </h3>
+
+
+          <p class="text-slate-500 text-sm mt-2 leading-relaxed">
+
+            Estimate your home buying budget using income, debts,
+            mortgage rates, taxes, insurance, down payment and loan type.
+
+          </p>
+
         </div>
-        <h3 class="font-semibold text-slate-700">More Utilities Coming Soon</h3>
-        <p class="text-xs text-slate-400 mt-1 max-w-xs">New financial, developer, and productivity tools are added regularly.</p>
+
+
+        <div class="mt-6 flex items-center text-sm font-semibold text-rose-600 group-hover:translate-x-1 transition duration-200">
+
+          Open Tool
+
+          <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+
+        </div>
+
+      </a>
+
+
+
+      <!-- =====================================================
+           TOOL CARD 5
+           AUTO LEASE
+      ===================================================== -->
+
+      <a
+        href="./Auto_Lease_Calculator/"
+        class="tool-card group p-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-indigo-300 transition duration-200 flex flex-col justify-between"
+        data-category="finance"
+        data-title="Utiliverse Auto Lease Calculator"
+      >
+
+        <div>
+
+          <div class="flex items-center justify-between mb-4">
+
+            <div class="p-3 bg-rose-50 text-rose-600 rounded-xl group-hover:bg-rose-600 group-hover:text-white transition duration-200">
+
+              <i data-lucide="dollar-sign" class="w-6 h-6"></i>
+
+            </div>
+
+
+            <span class="text-xs font-semibold px-2.5 py-1 bg-rose-50 text-rose-700 rounded-full">
+
+              Finance
+
+            </span>
+
+          </div>
+
+
+          <h3 class="text-xl font-bold text-slate-900 group-hover:text-rose-600 transition">
+
+            Auto Lease Calculator
+
+          </h3>
+
+
+          <p class="text-slate-500 text-sm mt-2 leading-relaxed">
+
+            Estimate your monthly car lease payment, depreciation,
+            finance charge, taxes and total lease cost with the
+            Utiliverse Auto Lease Calculator.
+
+          </p>
+
+        </div>
+
+
+        <div class="mt-6 flex items-center text-sm font-semibold text-rose-600 group-hover:translate-x-1 transition duration-200">
+
+          Open Tool
+
+          <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+
+        </div>
+
+      </a>
+
+
+
+      <!-- =====================================================
+           TOOL CARD 6
+           RETIREMENT
+      ===================================================== -->
+
+      <a
+        href="./Retirement_Calculator/"
+        class="tool-card group p-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-indigo-300 transition duration-200 flex flex-col justify-between"
+        data-category="finance"
+        data-title="Utiliverse Retirement Calculator"
+      >
+
+        <div>
+
+          <div class="flex items-center justify-between mb-4">
+
+            <div class="p-3 bg-rose-50 text-rose-600 rounded-xl group-hover:bg-rose-600 group-hover:text-white transition duration-200">
+
+              <i data-lucide="dollar-sign" class="w-6 h-6"></i>
+
+            </div>
+
+
+            <span class="text-xs font-semibold px-2.5 py-1 bg-rose-50 text-rose-700 rounded-full">
+
+              Finance
+
+            </span>
+
+          </div>
+
+
+          <h3 class="text-xl font-bold text-slate-900 group-hover:text-rose-600 transition">
+
+            Retirement Calculator
+
+          </h3>
+
+
+          <p class="text-slate-500 text-sm mt-2 leading-relaxed">
+
+            Estimate how much you may need for retirement,
+            how much to save, potential retirement income,
+            and how long your savings may last.
+
+          </p>
+
+        </div>
+
+
+        <div class="mt-6 flex items-center text-sm font-semibold text-rose-600 group-hover:translate-x-1 transition duration-200">
+
+          Open Tool
+
+          <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+
+        </div>
+
+      </a>
+
+
+
+      <!-- =====================================================
+           TOOL CARD 7
+           RENTAL PROPERTY
+      ===================================================== -->
+
+      <a
+        href="./Rental_Property_Calculator/"
+        class="tool-card group p-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-indigo-300 transition duration-200 flex flex-col justify-between"
+        data-category="finance"
+        data-title="Utiliverse Rental Property Calculator"
+      >
+
+        <div>
+
+          <div class="flex items-center justify-between mb-4">
+
+            <div class="p-3 bg-rose-50 text-rose-600 rounded-xl group-hover:bg-rose-600 group-hover:text-white transition duration-200">
+
+              <i data-lucide="dollar-sign" class="w-6 h-6"></i>
+
+            </div>
+
+
+            <span class="text-xs font-semibold px-2.5 py-1 bg-rose-50 text-rose-700 rounded-full">
+
+              Finance
+
+            </span>
+
+          </div>
+
+
+          <h3 class="text-xl font-bold text-slate-900 group-hover:text-rose-600 transition">
+
+            Rental Property Calculator
+
+          </h3>
+
+
+          <p class="text-slate-500 text-sm mt-2 leading-relaxed">
+
+            Analyze a rental property investment with estimated
+            cash flow, cap rate, cash-on-cash return, equity,
+            sale proceeds and projected profit.
+
+          </p>
+
+        </div>
+
+
+        <div class="mt-6 flex items-center text-sm font-semibold text-rose-600 group-hover:translate-x-1 transition duration-200">
+
+          Open Tool
+
+          <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+
+        </div>
+
+      </a>
+
+
+
+      <!-- =====================================================
+           TOOL CARD 8
+           SCIENTIFIC CALCULATOR
+      ===================================================== -->
+
+      <a
+        href="./Scientific_Calculator/"
+        class="tool-card group p-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-indigo-300 transition duration-200 flex flex-col justify-between"
+        data-category="Math"
+        data-title="Utiliverse Scientific Calculator"
+      >
+
+        <div>
+
+          <div class="flex items-center justify-between mb-4">
+
+            <div class="p-3 bg-rose-50 text-rose-600 rounded-xl group-hover:bg-rose-600 group-hover:text-white transition duration-200">
+
+              <i data-lucide="radical" class="w-6 h-6"></i>
+
+            </div>
+
+
+            <span class="text-xs font-semibold px-2.5 py-1 bg-rose-50 text-rose-700 rounded-full">
+
+              Math
+
+            </span>
+
+          </div>
+
+
+          <h3 class="text-xl font-bold text-slate-900 group-hover:text-rose-600 transition">
+
+            Scientific Calculator
+
+          </h3>
+
+
+          <p class="text-slate-500 text-sm mt-2 leading-relaxed">
+
+            Free online scientific calculator for arithmetic,
+            trigonometry, powers, roots, logarithms, factorials and more.
+
+          </p>
+
+        </div>
+
+
+        <div class="mt-6 flex items-center text-sm font-semibold text-rose-600 group-hover:translate-x-1 transition duration-200">
+
+          Open Tool
+
+          <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+
+        </div>
+
+      </a>
+
+
+
+      <!-- =====================================================
+           FUTURE TOOL PLACEHOLDER
+      ===================================================== -->
+
+      <div class="p-6 bg-slate-100/70 rounded-2xl border border-dashed border-slate-300 flex flex-col items-center justify-center text-center">
+
+        <div class="p-3 bg-slate-200 text-slate-500 rounded-xl mb-3">
+
+          <i data-lucide="plus-circle" class="w-6 h-6"></i>
+
+        </div>
+
+
+        <h3 class="font-semibold text-slate-700">
+
+          More Utilities Coming Soon
+
+        </h3>
+
+
+        <p class="text-xs text-slate-400 mt-1 max-w-xs">
+
+          New financial, developer, and productivity tools are added regularly.
+
+        </p>
+
       </div>
 
+
     </div>
+
   </main>
 
-  <!-- Footer -->
+
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================= -->
+
   <footer class="bg-white border-t border-slate-200 mt-16">
+
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500">
+
       <div>
-        © <script>document.write(new Date().getFullYear())</script> Utiliverse. All calculations are run locally in your browser.
+
+        © <script>document.write(new Date().getFullYear())</script>
+        Utiliverse. All calculations are run locally in your browser.
+
       </div>
+
+
       <div class="flex gap-6">
-        <a href="#" class="hover:text-slate-800 transition">Privacy Policy</a>
-        <a href="#" class="hover:text-slate-800 transition">Terms of Service</a>
-        <a href="#" class="hover:text-slate-800 transition">Contact</a>
+
+        <a
+          href="#"
+          class="hover:text-slate-800 transition"
+        >
+          Privacy Policy
+        </a>
+
+
+        <a
+          href="#"
+          class="hover:text-slate-800 transition"
+        >
+          Terms of Service
+        </a>
+
+
+        <a
+          href="#"
+          class="hover:text-slate-800 transition"
+        >
+          Contact
+        </a>
+
       </div>
+
     </div>
+
   </footer>
 
-  <!-- Scripts: Lucide Icons Initialization & Interactive Filter/Search -->
+
+
+  <!-- =========================================================
+       SCRIPTS
+  ========================================================= -->
+
   <script>
+
+
+    /* =========================================================
+       LUCIDE ICONS
+    ========================================================= */
+
     lucide.createIcons();
 
+
+
+    /* =========================================================
+       DARK / LIGHT MODE
+    ========================================================= */
+
+    const themeToggle =
+      document.getElementById("themeToggle");
+
+    const themeText =
+      document.getElementById("themeText");
+
+    const themeIcon =
+      document.getElementById("themeIcon");
+
+
+    /*
+       Apply the selected theme.
+    */
+
+    function applyTheme(theme) {
+
+      if (theme === "dark") {
+
+        document.body.classList.add("dark-mode");
+
+        themeText.textContent = "Light Mode";
+
+        themeIcon.setAttribute(
+          "data-lucide",
+          "sun"
+        );
+
+      } else {
+
+        document.body.classList.remove("dark-mode");
+
+        themeText.textContent = "Dark Mode";
+
+        themeIcon.setAttribute(
+          "data-lucide",
+          "moon"
+        );
+
+      }
+
+
+      /*
+         Re-render Lucide icon
+      */
+
+      lucide.createIcons();
+
+    }
+
+
+
+    /*
+       Determine initial theme.
+    */
+
+    function initializeTheme() {
+
+      const savedTheme =
+        localStorage.getItem("utiliverse-theme");
+
+
+      /*
+         If the user previously selected
+         a theme, use that preference.
+      */
+
+      if (savedTheme === "dark") {
+
+        applyTheme("dark");
+
+        return;
+
+      }
+
+
+      if (savedTheme === "light") {
+
+        applyTheme("light");
+
+        return;
+
+      }
+
+
+      /*
+         Otherwise follow the computer's
+         operating-system preference.
+      */
+
+      const systemPrefersDark =
+        window.matchMedia &&
+        window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+
+
+      if (systemPrefersDark) {
+
+        applyTheme("dark");
+
+      } else {
+
+        applyTheme("light");
+
+      }
+
+    }
+
+
+
+    /*
+       Toggle between light and dark.
+    */
+
+    themeToggle.addEventListener(
+      "click",
+      function() {
+
+        const isDark =
+          document.body.classList.contains(
+            "dark-mode"
+          );
+
+
+        if (isDark) {
+
+          applyTheme("light");
+
+          localStorage.setItem(
+            "utiliverse-theme",
+            "light"
+          );
+
+        } else {
+
+          applyTheme("dark");
+
+          localStorage.setItem(
+            "utiliverse-theme",
+            "dark"
+          );
+
+        }
+
+      }
+    );
+
+
+
+    /*
+       Initialize theme when page loads.
+    */
+
+    initializeTheme();
+
+
+
+    /* =========================================================
+       SEARCH / FILTER
+    ========================================================= */
+
     function filterTools() {
-      const query = document.getElementById('searchInput').value.toLowerCase();
-      const cards = document.querySelectorAll('.tool-card');
+
+      const query =
+        document
+          .getElementById("searchInput")
+          .value
+          .toLowerCase();
+
+
+      const cards =
+        document.querySelectorAll(
+          ".tool-card"
+        );
+
 
       cards.forEach(card => {
-        const titleAndKeywords = card.getAttribute('data-title').toLowerCase();
-        if (titleAndKeywords.includes(query)) {
-          card.style.display = 'flex';
+
+        const titleAndKeywords =
+          card
+            .getAttribute("data-title")
+            .toLowerCase();
+
+
+        if (
+          titleAndKeywords.includes(query)
+        ) {
+
+          card.style.display = "flex";
+
         } else {
-          card.style.display = 'none';
+
+          card.style.display = "none";
+
         }
+
       });
+
     }
+
+
+
+    /* =========================================================
+       CATEGORY FILTER
+    ========================================================= */
 
     function filterCategory(category) {
-      const cards = document.querySelectorAll('.tool-card');
-      const buttons = document.querySelectorAll('.cat-btn');
+
+      const cards =
+        document.querySelectorAll(
+          ".tool-card"
+        );
+
+
+      const buttons =
+        document.querySelectorAll(
+          ".cat-btn"
+        );
+
+
+      /*
+         Reset category buttons
+      */
 
       buttons.forEach(btn => {
-        btn.classList.remove('bg-slate-900', 'text-white');
-        btn.classList.add('bg-white', 'text-slate-600', 'border', 'border-slate-200');
+
+        btn.classList.remove(
+          "bg-slate-900",
+          "text-white"
+        );
+
+
+        btn.classList.add(
+          "bg-white",
+          "text-slate-600",
+          "border",
+          "border-slate-200"
+        );
+
       });
 
-      event.target.classList.remove('bg-white', 'text-slate-600', 'border', 'border-slate-200');
-      event.target.classList.add('bg-slate-900', 'text-white');
+
+      /*
+         Highlight clicked button
+      */
+
+      event.target.classList.remove(
+        "bg-white",
+        "text-slate-600",
+        "border",
+        "border-slate-200"
+      );
+
+
+      event.target.classList.add(
+        "bg-slate-900",
+        "text-white"
+      );
+
+
+      /*
+         Filter cards
+      */
 
       cards.forEach(card => {
-        const cardCat = card.getAttribute('data-category');
-        if (category === 'all' || cardCat === category) {
-          card.style.display = 'flex';
+
+        const cardCat =
+          card.getAttribute(
+            "data-category"
+          );
+
+
+        if (
+          category === "all" ||
+          cardCat === category
+        ) {
+
+          card.style.display = "flex";
+
         } else {
-          card.style.display = 'none';
+
+          card.style.display = "none";
+
         }
+
       });
+
     }
+
   </script>
+
+
 </body>
 </html>
