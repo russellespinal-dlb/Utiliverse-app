@@ -3,18 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Mortgage Extra Payment Calculator — Utiliverse</title>
-<meta name="description" content="Free mortgage extra payment calculator. Get your base monthly P&I payment, total payment with extra principal, new payoff date, and total interest saved.">
+
+<meta name="description" content="Use the Utiliverse Mortgage Extra Payment Calculator to estimate your monthly mortgage payment, accelerated payoff date, total interest, and interest savings from extra principal payments.">
+
 <link rel="stylesheet" href="/css/styles.css">
 
-<!-- Google AdSense Script Placeholder (Paste your publisher script here once approved) -->
-<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+<!-- Google AdSense Script Placeholder -->
+<!--
+<script async
+src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+crossorigin="anonymous"></script>
+-->
 
+<!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+  rel="stylesheet"
+>
+
+<!-- Tailwind -->
 <script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- FAQ Structured Data -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -22,526 +40,2426 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "How is my base monthly mortgage payment calculated?",
+      "name": "How is my mortgage payment calculated?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Your base principal-and-interest payment is calculated from your loan amount (home price minus down payment), your monthly interest rate, and the total number of payments in your term. The formula spreads the loan into equal payments where the interest portion shrinks and the principal portion grows every month, so the total payment stays level from your first month to your last."
+        "text": "The calculator uses your home price, down payment, interest rate, and loan term to determine the principal-and-interest portion of your monthly mortgage payment."
       }
     },
     {
       "@type": "Question",
-      "name": "Do extra mortgage payments always go toward the principal?",
+      "name": "How do extra mortgage payments help?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Only if your lender applies them that way. Most lenders default extra payments to principal reduction, but some apply them to your next due date instead. Always confirm with your servicer or note 'apply to principal' when you pay."
+        "text": "Extra payments applied toward principal reduce your outstanding loan balance. A lower balance means less interest is charged over time and can shorten the life of the mortgage."
       }
     },
     {
       "@type": "Question",
-      "name": "Will extra payments lower my required monthly payment?",
+      "name": "Does an extra payment reduce my required mortgage payment?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "No. A standard fixed-rate mortgage keeps the same required base payment for the full term. Extra payments shorten the loan term and reduce total interest instead of lowering the bill you owe each month, unless you specifically request re-amortization from your lender."
+        "text": "Normally, extra principal payments do not reduce your scheduled monthly payment. Instead, they can shorten the loan term and reduce total interest."
       }
     },
     {
       "@type": "Question",
-      "name": "Is it better to pay extra monthly or make one lump sum payment a year?",
+      "name": "Is monthly extra payment better than an annual lump sum?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Paying extra every month saves slightly more interest than a single annual lump sum of the same total amount, because the principal is reduced sooner and interest is calculated on a lower balance for more of the year. The difference is usually small, so consistency matters more than timing."
+        "text": "Making additional principal payments earlier generally saves slightly more interest because the balance is reduced sooner."
       }
     },
     {
       "@type": "Question",
-      "name": "Is there a penalty for paying off my mortgage early?",
+      "name": "Can my mortgage have a prepayment penalty?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Most conventional U.S. mortgages originated after 2014 do not carry prepayment penalties, but some loans, especially older, non-QM, or investment property loans, do. Check your loan note or ask your servicer before making large extra payments."
+        "text": "Some loans can have prepayment provisions. Check your mortgage documents or contact your lender before making a large additional payment."
       }
     }
   ]
 }
 </script>
+
 <style>
-  :root{
-    --ink:#182A3A;
-    --ink-soft:#4B5D6E;
-    --paper:#F6F4EF;
-    --panel:#FFFFFF;
-    --line:#DFE0DA;
-    --moss:#2F6F5E;
-    --moss-soft:#E4EEE9;
-    --clay:#B5622E;
-    --clay-soft:#F5E6DB;
-  }
-  *{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; }
-  body{ background:var(--paper); color:var(--ink); font-family:'Inter',ui-sans-serif,system-ui,sans-serif; margin:0; }
-  .font-display{ font-family:'Fraunces',serif; font-optical-sizing:auto; }
-  .font-mono{ font-family:'IBM Plex Mono',ui-monospace,monospace; }
 
-  /* Utiliverse ad-container wrapper (structure kept from site template) */
-  .ad-container{ }
-  .ad-container .ad-placeholder{
-    background:repeating-linear-gradient(135deg, #ECEAE3, #ECEAE3 10px, #E4E2D9 10px, #E4E2D9 20px);
-    border:1px dashed #B9B6AC;
-    color:#8B8778;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:.7rem;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    border-radius:6px;
-    padding:20px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+:root {
+
+  /* Retirement Calculator Theme */
+  --navy: #183B56;
+  --navy-dark: #102D42;
+  --navy-soft: #E8F0F5;
+
+  --teal: #2F7D68;
+  --teal-dark: #246452;
+  --teal-soft: #E3F0EB;
+
+  --gold: #C58B38;
+  --gold-soft: #F5EBD8;
+
+  --ink: #183044;
+  --ink-soft: #5B6B79;
+
+  --paper: #F7F6F1;
+  --panel: #FFFFFF;
+
+  --line: #DEE3E0;
+  --line-dark: #C8D0CC;
+
+  --danger: #A64B45;
+  --danger-soft: #F5E4E2;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: 'Fraunces', serif;
+  font-optical-sizing: auto;
+}
+
+.font-mono {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+/* ---------------------------------
+   HEADER
+---------------------------------- */
+
+header {
+  border-bottom: 1px solid var(--line);
+  background: rgba(255,255,255,.96);
+  padding: 1rem 1.25rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  flex-wrap: wrap;
+  gap: .75rem;
+
+  position: sticky;
+  top: 0;
+  z-index: 40;
+
+  backdrop-filter: blur(12px);
+}
+
+header a {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .78rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+
+  transition: color .15s ease;
+}
+
+header a:hover {
+  color: var(--teal);
+}
+
+header h1 {
+  font-family: 'Fraunces', serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--navy);
+}
+
+/* ---------------------------------
+   ADVERTISEMENT AREAS
+---------------------------------- */
+
+.ad-container {
+  width: 100%;
+}
+
+.ad-container .ad-placeholder {
+
+  background:
+    repeating-linear-gradient(
+      135deg,
+      #ECEAE3,
+      #ECEAE3 10px,
+      #E4E2D9 10px,
+      #E4E2D9 20px
+    );
+
+  border: 1px dashed #B9B6AC;
+
+  color: #8B8778;
+
+  font-family: 'IBM Plex Mono', monospace;
+
+  font-size: .7rem;
+
+  letter-spacing: .14em;
+
+  text-transform: uppercase;
+
+  border-radius: 8px;
+
+  padding: 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+/* ---------------------------------
+   FORM ELEMENTS
+---------------------------------- */
+
+.field-label {
+
+  font-size: .72rem;
+
+  letter-spacing: .08em;
+
+  text-transform: uppercase;
+
+  color: var(--ink-soft);
+
+  font-weight: 600;
+}
+
+.field-input,
+.field-select {
+
+  width: 100%;
+
+  background: var(--panel);
+
+  border: 1px solid var(--line);
+
+  border-radius: 9px;
+
+  padding: .7rem .8rem;
+
+  font-family: 'IBM Plex Mono', monospace;
+
+  font-size: 1rem;
+
+  color: var(--ink);
+
+  transition:
+    border-color .15s,
+    box-shadow .15s,
+    background .15s;
+
+  appearance: none;
+}
+
+.field-input:hover,
+.field-select:hover {
+  border-color: var(--line-dark);
+}
+
+.field-input:focus,
+.field-select:focus {
+
+  outline: none;
+
+  border-color: var(--teal);
+
+  box-shadow:
+    0 0 0 3px var(--teal-soft);
+}
+
+.select-wrap {
+  position: relative;
+}
+
+.select-wrap::after {
+
+  content: "▾";
+
+  position: absolute;
+
+  right: .9rem;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: var(--ink-soft);
+
+  pointer-events: none;
+
+  font-size: .8rem;
+}
+
+/* ---------------------------------
+   TOGGLE BUTTONS
+---------------------------------- */
+
+.toggle-btn {
+
+  font-family: 'IBM Plex Mono', monospace;
+
+  font-size: .78rem;
+
+  padding: .55rem .75rem;
+
+  border: 1px solid var(--line);
+
+  background: var(--panel);
+
+  color: var(--ink-soft);
+
+  cursor: pointer;
+
+  transition: all .15s ease;
+}
+
+.toggle-btn:hover {
+  background: var(--navy-soft);
+}
+
+.toggle-btn.active {
+
+  background: var(--navy);
+
+  color: #fff;
+
+  border-color: var(--navy);
+}
+
+/* ---------------------------------
+   RESULT CARDS
+---------------------------------- */
+
+.result-card {
+
+  background: var(--panel);
+
+  border: 1px solid var(--line);
+
+  border-radius: 12px;
+
+  padding: 1.2rem 1.3rem;
+
+  box-shadow:
+    0 1px 2px rgba(24,48,68,.03);
+}
+
+.result-card .num {
+
+  font-family: 'IBM Plex Mono', monospace;
+
+  font-weight: 600;
+}
+
+/* Main result */
+
+.result-card.primary {
+
+  background: var(--navy);
+
+  border-color: var(--navy);
+
+  box-shadow:
+    0 8px 24px rgba(24,59,86,.12);
+}
+
+.result-card.primary .field-label {
+  color: #C6D3DC;
+}
+
+.result-card.primary .num {
+
+  color: #fff;
+
+  font-size: 1.65rem;
+}
+
+/* Teal result */
+
+.result-card.accent {
+
+  background: var(--teal-soft);
+
+  border-color: #A9CEC1;
+}
+
+.result-card.accent .num {
+  color: var(--teal-dark);
+}
+
+/* ---------------------------------
+   TIMELINE
+---------------------------------- */
+
+.ruler-track {
+
+  position: relative;
+
+  height: 70px;
+
+  background: var(--panel);
+
+  border: 1px solid var(--line);
+
+  border-radius: 10px;
+
+  overflow: hidden;
+}
+
+.ruler-bar-orig {
+
+  position: absolute;
+
+  top: 9px;
+
+  left: 0;
+
+  height: 21px;
+
+  background: #D9DCD8;
+
+  border-radius: 0 5px 5px 0;
+}
+
+.ruler-bar-new {
+
+  position: absolute;
+
+  bottom: 9px;
+
+  left: 0;
+
+  height: 21px;
+
+  background: var(--teal);
+
+  border-radius: 0 5px 5px 0;
+
+  transition: width .4s ease;
+}
+
+.ruler-tick {
+
+  position: absolute;
+
+  top: 0;
+
+  bottom: 0;
+
+  width: 1px;
+
+  background: var(--line);
+}
+
+/* ---------------------------------
+   CALCULATION BREAKDOWN
+---------------------------------- */
+
+.calc-breakdown {
+
+  background: var(--navy-soft);
+
+  border: 1px solid #CAD9E3;
+
+  border-radius: 10px;
+
+  padding: 1.2rem 1.4rem;
+
+  font-family: 'IBM Plex Mono', monospace;
+
+  font-size: .85rem;
+
+  line-height: 2;
+
+  color: var(--navy);
+}
+
+/* ---------------------------------
+   FAQ
+---------------------------------- */
+
+details.faq-item {
+
+  border-bottom: 1px solid var(--line);
+}
+
+details.faq-item summary {
+
+  cursor: pointer;
+
+  list-style: none;
+
+  padding: 1.15rem 0;
+
+  font-weight: 600;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  align-items: center;
+
+  color: var(--navy);
+}
+
+details.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+details.faq-item .faq-icon {
+
+  flex: none;
+
+  width: 24px;
+
+  height: 24px;
+
+  border: 1px solid var(--line);
+
+  border-radius: 50%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-family: 'IBM Plex Mono', monospace;
+
+  color: var(--teal);
+
+  transition: transform .2s;
+}
+
+details.faq-item[open] .faq-icon {
+  transform: rotate(45deg);
+}
+
+details.faq-item .faq-body {
+
+  padding: 0 0 1.25rem;
+
+  color: var(--ink-soft);
+
+  line-height: 1.7;
+}
+
+/* ---------------------------------
+   MAIN CONTENT CARDS
+---------------------------------- */
+
+.content-panel {
+
+  background: var(--panel);
+
+  border: 1px solid var(--line);
+
+  border-radius: 14px;
+
+  box-shadow:
+    0 2px 8px rgba(24,48,68,.025);
+}
+
+/* ---------------------------------
+   FOOTER
+---------------------------------- */
+
+footer {
+
+  border-top: 1px solid var(--line);
+
+  padding: 1.6rem 1.25rem;
+
+  text-align: center;
+
+  font-family: 'IBM Plex Mono', monospace;
+
+  font-size: .72rem;
+
+  color: var(--ink-soft);
+
+  background: #F2F3EF;
+}
+
+/* ---------------------------------
+   RANGE SLIDER
+---------------------------------- */
+
+input[type="range"] {
+
+  appearance: none;
+
+  height: 5px;
+
+  border-radius: 5px;
+
+  background: #D9E2DE;
+
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+
+  appearance: none;
+
+  width: 18px;
+
+  height: 18px;
+
+  border-radius: 50%;
+
+  background: var(--teal);
+
+  border: 3px solid white;
+
+  box-shadow: 0 1px 4px rgba(0,0,0,.2);
+
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+
+  width: 18px;
+
+  height: 18px;
+
+  border-radius: 50%;
+
+  background: var(--teal);
+
+  border: 3px solid white;
+
+  box-shadow: 0 1px 4px rgba(0,0,0,.2);
+
+  cursor: pointer;
+}
+
+/* ---------------------------------
+   RESPONSIVE
+---------------------------------- */
+
+@media (max-width: 640px) {
+
+  header {
+    padding: .9rem 1rem;
   }
 
-  header{
-    border-bottom:1px solid var(--line);
-    background:var(--panel);
-    padding:1.1rem 1.25rem;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:.5rem;
-  }
-  header a{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:.78rem;
-    color:var(--ink-soft);
-    text-decoration:none;
-  }
-  header a:hover{ color:var(--ink); }
-  header h1{
-    font-family:'Fraunces',serif;
-    font-size:1.1rem;
-    font-weight:600;
-    margin:0;
+  header h1 {
+    font-size: 1rem;
   }
 
-  footer{
-    border-top:1px solid var(--line);
-    padding:1.5rem 1.25rem;
-    text-align:center;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:.72rem;
-    color:var(--ink-soft);
+  .result-card.primary .num {
+    font-size: 1.4rem;
   }
 
-  .field-label{ font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); font-weight:600; }
-  .field-input, .field-select{
-    width:100%; background:var(--panel); border:1px solid var(--line); border-radius:8px;
-    padding:.65rem .8rem; font-family:'IBM Plex Mono',monospace; font-size:1rem; color:var(--ink);
-    transition:border-color .15s, box-shadow .15s; appearance:none;
-  }
-  .field-input:focus, .field-select:focus{ outline:none; border-color:var(--moss); box-shadow:0 0 0 3px var(--moss-soft); }
-  .select-wrap{ position:relative; }
-  .select-wrap::after{
-    content:"▾"; position:absolute; right:.9rem; top:50%; transform:translateY(-50%);
-    color:var(--ink-soft); pointer-events:none; font-size:.8rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
   }
 
-  .toggle-btn{
-    font-family:'IBM Plex Mono',monospace; font-size:.78rem; padding:.5rem .7rem; border:1px solid var(--line);
-    background:var(--panel); color:var(--ink-soft); cursor:pointer; transition:.15s;
+  .ruler-bar-new {
+    transition: none;
   }
-  .toggle-btn.active{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
+}
 
-  .result-card{ background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:1.1rem 1.25rem; }
-  .result-card .num{ font-family:'IBM Plex Mono',monospace; font-weight:600; }
-  .result-card.primary{ background:var(--ink); border-color:var(--ink); }
-  .result-card.primary .field-label{ color:#AEB9C4; }
-  .result-card.primary .num{ color:#fff; font-size:1.6rem; }
-  .result-card.accent{ background:var(--moss-soft); border-color:var(--moss); }
-  .result-card.accent .num{ color:var(--moss); }
-
-  .ruler-track{ position:relative; height:64px; background:var(--panel); border:1px solid var(--line); border-radius:8px; overflow:hidden; }
-  .ruler-bar-orig{ position:absolute; top:8px; left:0; height:20px; background:#DCD9CF; border-radius:0 4px 4px 0; }
-  .ruler-bar-new{ position:absolute; bottom:8px; left:0; height:20px; background:var(--moss); border-radius:0 4px 4px 0; transition:width .4s ease; }
-  .ruler-tick{ position:absolute; top:0; bottom:0; width:1px; background:var(--line); }
-
-  details.faq-item{ border-bottom:1px solid var(--line); }
-  details.faq-item summary{ cursor:pointer; list-style:none; padding:1.1rem 0; font-weight:600; display:flex; justify-content:space-between; gap:1rem; align-items:center; }
-  details.faq-item summary::-webkit-details-marker{ display:none; }
-  details.faq-item .faq-icon{ flex:none; width:22px; height:22px; border:1px solid var(--line); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; transition:transform .2s; }
-  details.faq-item[open] .faq-icon{ transform:rotate(45deg); }
-  details.faq-item .faq-body{ padding:0 0 1.2rem; color:var(--ink-soft); line-height:1.6; }
-
-  .calc-breakdown{ background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:1.2rem 1.4rem; font-family:'IBM Plex Mono',monospace; font-size:.85rem; line-height:2; }
-
-  @media (prefers-reduced-motion: reduce){
-    html{ scroll-behavior:auto; }
-    .ruler-bar-new{ transition:none; }
-  }
 </style>
 </head>
+
 <body class="min-h-screen">
 
-<!-- Header Navigation -->
+<!-- =========================================
+     HEADER
+========================================= -->
+
 <header>
-  <a href="/">← Back to Utiliverse</a>
-  <h1>Mortgage Extra Payment Calculator</h1>
+
+  <a href="/">
+    ← Back to Utiliverse
+  </a>
+
+  <h1>
+    Mortgage Extra Payment Calculator
+  </h1>
+
 </header>
 
-<!-- Top Banner Placement (Leaderboard) -->
-<div class="ad-container ad-top max-w-6xl mx-auto px-5" style="text-align: center; margin: 15px auto;">
-  <div class="ad-placeholder" style="min-width: 300px; min-height: 90px;">
-    <small>Advertisement Space</small>
+
+<!-- =========================================
+     TOP ADVERTISEMENT
+========================================= -->
+
+<div
+  class="ad-container max-w-6xl mx-auto px-5"
+  style="text-align:center;margin:15px auto;"
+>
+
+  <div
+    class="ad-placeholder"
+    style="min-width:300px;min-height:90px;"
+  >
+
+    <small>
+      Advertisement Space
+    </small>
+
   </div>
+
 </div>
 
-<main class="tool-container max-w-6xl mx-auto px-5">
 
-  <section class="py-8 sm:py-10 border-b border-[var(--line)]">
-    <p class="font-mono text-xs uppercase tracking-[.16em] text-[var(--moss)] mb-3">Mortgage extra payment calculator</p>
-    <h2 class="font-display text-3xl sm:text-5xl leading-tight max-w-3xl">
-      Your base payment, your total payment, and exactly what extra principal buys you.
-    </h2>
-    <p class="mt-4 text-[var(--ink-soft)] max-w-2xl">
-      Enter your loan, add whatever extra you can send each month, and see your required payment, your new payoff date, and your total interest saved — all in one place.
+<!-- =========================================
+     MAIN
+========================================= -->
+
+<main class="max-w-6xl mx-auto px-5">
+
+
+  <!-- =======================================
+       HERO
+  ======================================== -->
+
+  <section
+    class="py-8 sm:py-12 border-b border-[var(--line)]"
+  >
+
+    <p
+      class="font-mono text-xs uppercase tracking-[.16em] text-[var(--teal)] mb-3"
+    >
+      Mortgage planning tool
     </p>
+
+    <h2
+      class="font-display text-3xl sm:text-5xl leading-tight max-w-3xl text-[var(--navy)]"
+    >
+      See what paying a little extra could do for your mortgage.
+    </h2>
+
+    <p
+      class="mt-4 text-[var(--ink-soft)] max-w-2xl leading-relaxed"
+    >
+      Enter your home price, down payment, interest rate and loan term.
+      Then choose an additional monthly payment to see how much sooner
+      you could pay off your mortgage and how much interest you could save.
+    </p>
+
   </section>
 
-  <section class="tool-content grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-8 mt-8">
+
+  <!-- =======================================
+       CALCULATOR AREA
+  ======================================== -->
+
+  <section
+    class="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-8 mt-8"
+  >
+
+
+    <!-- =====================================
+         LEFT COLUMN
+    ====================================== -->
 
     <div>
-      <!-- Inputs -->
-      <div class="bg-[var(--panel)] border border-[var(--line)] rounded-xl p-5 sm:p-7">
-        <h2 class="font-display text-xl mb-5">Your loan</h2>
+
+
+      <!-- ===================================
+           LOAN INPUTS
+      ==================================== -->
+
+      <div
+        class="content-panel p-5 sm:p-7"
+      >
+
+        <div class="flex items-center justify-between mb-6">
+
+          <div>
+
+            <p
+              class="font-mono text-xs uppercase tracking-[.12em] text-[var(--teal)]"
+            >
+              Step 1
+            </p>
+
+            <h2
+              class="font-display text-2xl text-[var(--navy)] mt-1"
+            >
+              Enter your mortgage details
+            </h2>
+
+          </div>
+
+        </div>
+
 
         <div class="grid sm:grid-cols-2 gap-5">
-          <div>
-            <label class="field-label" for="homePrice">Home price ($)</label>
-            <input id="homePrice" type="number" class="field-input mt-1" value="350000" min="0" step="1000">
-          </div>
+
+
+          <!-- Home Price -->
 
           <div>
-            <label class="field-label">Down payment</label>
+
+            <label
+              class="field-label"
+              for="homePrice"
+            >
+              Home price ($)
+            </label>
+
+            <input
+              id="homePrice"
+              type="number"
+              class="field-input mt-1"
+              value="350000"
+              min="0"
+              step="1000"
+            >
+
+          </div>
+
+
+          <!-- Down Payment -->
+
+          <div>
+
+            <label class="field-label">
+              Down payment
+            </label>
+
             <div class="flex mt-1">
-              <input id="downPayment" type="number" class="field-input rounded-r-none" value="20" min="0" step="1">
-              <button id="dpPercentBtn" class="toggle-btn active rounded-none" type="button">%</button>
-              <button id="dpDollarBtn" class="toggle-btn rounded-l-none" type="button">$</button>
+
+              <input
+                id="downPayment"
+                type="number"
+                class="field-input rounded-r-none"
+                value="20"
+                min="0"
+                step="1"
+              >
+
+              <button
+                id="dpPercentBtn"
+                class="toggle-btn active rounded-none"
+                type="button"
+              >
+                %
+              </button>
+
+              <button
+                id="dpDollarBtn"
+                class="toggle-btn rounded-l-none"
+                type="button"
+              >
+                $
+              </button>
+
             </div>
+
           </div>
 
+
+          <!-- Interest Rate -->
+
           <div>
-            <label class="field-label" for="rate">Interest rate (%)</label>
+
+            <label
+              class="field-label"
+              for="rate"
+            >
+              Interest rate (%)
+            </label>
+
             <div class="relative mt-1">
-              <input id="rate" type="number" class="field-input" value="6.5" min="0" step="0.01">
-              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-[var(--ink-soft)] font-mono">%</span>
+
+              <input
+                id="rate"
+                type="number"
+                class="field-input"
+                value="6.5"
+                min="0"
+                step="0.01"
+              >
+
+              <span
+                class="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-[var(--ink-soft)] font-mono"
+              >
+                %
+              </span>
+
             </div>
+
           </div>
 
+
+          <!-- Loan Term -->
+
           <div>
-            <label class="field-label" for="termSelect">Loan term</label>
+
+            <label
+              class="field-label"
+              for="termSelect"
+            >
+              Loan term
+            </label>
+
             <div class="select-wrap mt-1">
-              <select id="termSelect" class="field-select">
-                <option value="30" selected>30 years</option>
-                <option value="15">15 years</option>
+
+              <select
+                id="termSelect"
+                class="field-select"
+              >
+
+                <option value="30" selected>
+                  30 years
+                </option>
+
+                <option value="15">
+                  15 years
+                </option>
+
               </select>
+
             </div>
+
           </div>
+
+
+          <!-- Extra Payment -->
 
           <div class="sm:col-span-2">
-            <label class="field-label" for="extra">Monthly extra payment ($)</label>
+
+            <label
+              class="field-label"
+              for="extra"
+            >
+              Additional monthly payment
+            </label>
+
             <div class="relative mt-1">
-              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-xs text-[var(--ink-soft)] font-mono">$</span>
-              <input id="extra" type="number" class="field-input pl-6" value="200" min="0" step="10">
+
+              <span
+                class="absolute left-3 top-1/2 -translate-y-1/2 text-xs text-[var(--ink-soft)] font-mono"
+              >
+                $
+              </span>
+
+              <input
+                id="extra"
+                type="number"
+                class="field-input pl-6"
+                value="200"
+                min="0"
+                step="10"
+              >
+
             </div>
-            <input id="extraRange" type="range" min="0" max="2000" step="10" value="200" class="w-full mt-3 accent-[#2F6F5E]">
+
+            <input
+              id="extraRange"
+              type="range"
+              min="0"
+              max="2000"
+              step="10"
+              value="200"
+              class="w-full mt-4"
+            >
+
+            <div
+              class="flex justify-between text-xs text-[var(--ink-soft)] font-mono mt-2"
+            >
+
+              <span>
+                $0
+              </span>
+
+              <span>
+                $2,000+
+              </span>
+
+            </div>
+
           </div>
+
         </div>
+
       </div>
 
-      <!-- Result tiles -->
-      <div class="grid sm:grid-cols-2 gap-4 mt-6">
+
+      <!-- ===================================
+           RESULTS
+      ==================================== -->
+
+      <div
+        class="grid sm:grid-cols-2 gap-4 mt-6"
+      >
+
+
+        <!-- Base Payment -->
+
         <div class="result-card primary">
-          <p class="field-label">Standard monthly payment (P&amp;I)</p>
-          <p id="basePayment" class="num mt-1">—</p>
+
+          <p class="field-label">
+            Standard monthly payment
+          </p>
+
+          <p
+            id="basePayment"
+            class="num mt-1"
+          >
+            —
+          </p>
+
+          <p class="text-xs text-slate-300 mt-2">
+            Principal &amp; interest
+          </p>
+
         </div>
+
+
+        <!-- Total Payment -->
+
         <div class="result-card">
-          <p class="field-label">Total monthly payment (base + extra)</p>
-          <p id="totalPayment" class="num text-lg mt-1">—</p>
+
+          <p class="field-label">
+            New monthly payment
+          </p>
+
+          <p
+            id="totalPayment"
+            class="num text-lg mt-1"
+          >
+            —
+          </p>
+
+          <p class="text-xs text-[var(--ink-soft)] mt-2">
+            Base payment + extra
+          </p>
+
         </div>
+
+
+        <!-- Payoff -->
+
         <div class="result-card">
-          <p class="field-label">Payoff date</p>
-          <p class="num text-sm mt-1"><span id="origDate">—</span> <span class="text-[var(--ink-soft)]">→</span> <span id="newDate" style="color:var(--moss);">—</span></p>
+
+          <p class="field-label">
+            Estimated payoff
+          </p>
+
+          <p class="num text-sm mt-1">
+
+            <span id="origDate">
+              —
+            </span>
+
+            <span class="text-[var(--ink-soft)]">
+              →
+            </span>
+
+            <span
+              id="newDate"
+              style="color:var(--teal);"
+            >
+              —
+            </span>
+
+          </p>
+
         </div>
+
+
+        <!-- Savings -->
+
         <div class="result-card accent">
-          <p class="field-label">Interest saved · time saved</p>
-          <p class="num text-lg mt-1"><span id="interestSaved">—</span> · <span id="yearsSaved">—</span></p>
+
+          <p class="field-label">
+            Estimated interest savings
+          </p>
+
+          <p
+            class="num text-lg mt-1"
+          >
+
+            <span id="interestSaved">
+              —
+            </span>
+
+          </p>
+
+          <p
+            class="text-xs mt-2 text-[var(--teal-dark)]"
+          >
+
+            <span id="yearsSaved">
+              —
+            </span>
+
+            sooner
+
+          </p>
+
         </div>
+
       </div>
 
-      <div class="mt-6">
-        <p class="field-label mb-2">Timeline</p>
-        <div id="rulerTrack" class="ruler-track"></div>
-        <div class="flex justify-between text-[.68rem] font-mono text-[var(--ink-soft)] mt-1">
-          <span>Year 0</span>
-          <span id="rulerEndLabel">Year 30</span>
+
+      <!-- ===================================
+           TIMELINE
+      ==================================== -->
+
+      <div class="mt-7">
+
+        <p class="field-label mb-2">
+          Mortgage payoff timeline
+        </p>
+
+        <div
+          id="rulerTrack"
+          class="ruler-track"
+        ></div>
+
+        <div
+          class="flex justify-between text-[.68rem] font-mono text-[var(--ink-soft)] mt-1"
+        >
+
+          <span>
+            Year 0
+          </span>
+
+          <span id="rulerEndLabel">
+            Year 30
+          </span>
+
         </div>
+
       </div>
 
-      <!-- In-Content Banner Placement -->
-      <div class="ad-container ad-mid" style="text-align: center; margin: 20px 0;">
-        <div class="ad-placeholder" style="min-width: 300px; min-height: 250px;">
-          <small>Advertisement Space</small>
+
+      <!-- ===================================
+           MID AD
+      ==================================== -->
+
+      <div
+        class="ad-container"
+        style="text-align:center;margin:25px 0;"
+      >
+
+        <div
+          class="ad-placeholder"
+          style="min-width:300px;min-height:250px;"
+        >
+
+          <small>
+            Advertisement Space
+          </small>
+
         </div>
+
       </div>
 
-      <div class="bg-[var(--panel)] border border-[var(--line)] rounded-xl p-5 sm:p-7 mt-6">
-        <h2 class="font-display text-xl mb-4">Balance over time</h2>
-        <canvas id="balanceChart" height="260"></canvas>
+
+      <!-- ===================================
+           BALANCE CHART
+      ==================================== -->
+
+      <div
+        class="content-panel p-5 sm:p-7 mt-6"
+      >
+
+        <div class="mb-5">
+
+          <p
+            class="font-mono text-xs uppercase tracking-[.12em] text-[var(--teal)]"
+          >
+            Mortgage balance
+          </p>
+
+          <h2
+            class="font-display text-2xl text-[var(--navy)] mt-1"
+          >
+            Watch your balance decline
+          </h2>
+
+          <p
+            class="text-sm text-[var(--ink-soft)] mt-2"
+          >
+            Compare the standard mortgage schedule with your accelerated
+            payment strategy.
+          </p>
+
+        </div>
+
+        <canvas
+          id="balanceChart"
+          height="260"
+        ></canvas>
+
       </div>
+
     </div>
 
-    <!-- Sidebar Banner Placement -->
+
+    <!-- =====================================
+         SIDEBAR
+    ====================================== -->
+
     <aside class="hidden lg:block">
-      <div class="lg:sticky lg:top-6 ad-container ad-sidebar">
-        <div class="ad-placeholder" style="min-width: 280px; min-height: 600px; width:100%;">
-          <small>Advertisement Space</small>
+
+      <div class="lg:sticky lg:top-24">
+
+        <div
+          class="ad-container"
+        >
+
+          <div
+            class="ad-placeholder"
+            style="min-width:280px;min-height:600px;width:100%;"
+          >
+
+            <small>
+              Advertisement Space
+            </small>
+
+          </div>
+
         </div>
+
       </div>
+
     </aside>
+
   </section>
 
-  <!-- SEO content -->
-  <section class="mt-16 border-t border-[var(--line)] pt-12 max-w-3xl">
-    <h2 class="font-display text-2xl sm:text-3xl mb-4">How base monthly mortgage payments &amp; extra principal payments work</h2>
-    <p class="text-[var(--ink-soft)] leading-relaxed">
-      Your <strong>standard monthly payment</strong> — principal and interest, or "P&amp;I" — is fixed for the life of a fixed-rate loan. It's calculated from three numbers: your loan amount (home price minus down payment), your monthly interest rate (annual rate ÷ 12), and your total number of payments (term in years × 12). The formula spreads the loan into equal payments where, early on, most of each payment covers interest, and over time more of it covers principal — even though the payment itself never changes.
+
+  <!-- =======================================
+       INFORMATION SECTION
+  ======================================== -->
+
+  <section
+    class="mt-16 border-t border-[var(--line)] pt-12 max-w-4xl"
+  >
+
+    <p
+      class="font-mono text-xs uppercase tracking-[.14em] text-[var(--teal)] mb-3"
+    >
+      Understanding your mortgage
     </p>
-    <div class="calc-breakdown mt-5">
-      M&nbsp;=&nbsp;P&nbsp;×&nbsp;[r(1+r)^n]&nbsp;/&nbsp;[(1+r)^n&nbsp;−&nbsp;1]<br>
-      P&nbsp;=&nbsp;loan principal&nbsp;&nbsp;·&nbsp;&nbsp;r&nbsp;=&nbsp;monthly interest rate&nbsp;&nbsp;·&nbsp;&nbsp;n&nbsp;=&nbsp;total number of payments
+
+    <h2
+      class="font-display text-2xl sm:text-3xl text-[var(--navy)] mb-5"
+    >
+      How mortgage payments and extra principal work
+    </h2>
+
+    <p
+      class="text-[var(--ink-soft)] leading-relaxed"
+    >
+      A traditional fixed-rate mortgage is designed around a predictable
+      monthly payment. That payment is primarily divided between principal
+      and interest. Principal reduces the amount you owe, while interest is
+      the cost of borrowing the money. At the beginning of a mortgage, a
+      larger share of each payment generally goes toward interest because
+      your outstanding balance is at its highest level. As the balance
+      decreases, more of each payment goes toward principal.
+    </p>
+
+    <div class="calc-breakdown mt-6">
+
+      M = P × [r(1+r)^n] / [(1+r)^n − 1]
+
+      <br>
+
+      P = original loan principal
+
+      &nbsp; · &nbsp;
+
+      r = monthly interest rate
+
+      &nbsp; · &nbsp;
+
+      n = number of monthly payments
+
     </div>
-    <p class="text-[var(--ink-soft)] leading-relaxed mt-5">
-      Your <strong>total monthly payment</strong> in this calculator is simply that base P&amp;I figure plus whatever extra you choose to send. The extra amount is applied entirely to principal, which lowers the balance interest is calculated on for every remaining month — shortening the loan and reducing total interest paid, without changing the required base payment itself.
+
+    <p
+      class="text-[var(--ink-soft)] leading-relaxed mt-6"
+    >
+      Making an additional principal payment changes the balance on which
+      future interest is calculated. Even a relatively modest recurring
+      payment can therefore have a meaningful effect over a long mortgage
+      term. The earlier the additional money reaches the principal balance,
+      the longer that lower balance can remain in place.
     </p>
-    <h3 class="font-display text-xl mt-8 mb-3">A sample scenario</h3>
-    <p class="text-[var(--ink-soft)] leading-relaxed">
-      A $350,000 home with 20% down and a 30-year loan at 6.5% gives a $280,000 mortgage with a base payment of roughly $1,770/month and about $357,000 in total interest over the full term. Adding $200/month extra brings the total monthly payment to about $1,970, cuts the payoff to roughly 22 years 8 months, and saves an estimated $101,000 in interest. These are the calculator's default values — change them to match your own loan.
+
+    <p
+      class="text-[var(--ink-soft)] leading-relaxed mt-5"
+    >
+      For example, adding $200 to a mortgage payment every month may not feel
+      dramatically different from the original payment. Over many years,
+      however, those additional dollars can reduce the outstanding principal
+      sooner and eliminate a portion of the interest that would otherwise
+      have accumulated.
     </p>
+
+    <h3
+      class="font-display text-xl text-[var(--navy)] mt-9 mb-3"
+    >
+      What this calculator shows
+    </h3>
+
+    <p
+      class="text-[var(--ink-soft)] leading-relaxed"
+    >
+      The calculator compares your original mortgage schedule with an
+      accelerated schedule based on the additional amount you enter. You can
+      see your estimated standard principal-and-interest payment, your new
+      total payment, the projected payoff dates, the estimated interest
+      savings, and the amount of time potentially removed from your mortgage.
+    </p>
+
+    <p
+      class="text-[var(--ink-soft)] leading-relaxed mt-5"
+    >
+      The results are estimates rather than a lender payoff quote. Your actual
+      mortgage may include property taxes, homeowners insurance, mortgage
+      insurance, association fees, escrow adjustments, lender-specific
+      payment rules, or other costs that are not included in the principal
+      and interest calculation.
+    </p>
+
+    <h3
+      class="font-display text-xl text-[var(--navy)] mt-9 mb-3"
+    >
+      A simple example
+    </h3>
+
+    <p
+      class="text-[var(--ink-soft)] leading-relaxed"
+    >
+      Suppose you purchase a $350,000 home and make a 20% down payment.
+      Your resulting mortgage would be approximately $280,000. At a 6.5%
+      fixed interest rate over 30 years, the principal-and-interest payment
+      is roughly $1,770 per month. Adding another $200 each month increases
+      the amount applied to the mortgage while potentially reducing both the
+      payoff period and lifetime interest expense.
+    </p>
+
+    <p
+      class="text-[var(--ink-soft)] leading-relaxed mt-5"
+    >
+      Your own results will depend on the numbers you enter. Try several
+      additional payment amounts to see how a small change in your monthly
+      budget affects the projected mortgage timeline.
+    </p>
+
   </section>
 
-  <!-- FAQ -->
-  <section class="mt-14 border-t border-[var(--line)] pt-12 max-w-3xl mb-14">
-    <h2 class="font-display text-2xl sm:text-3xl mb-2">Frequently asked questions</h2>
-    <div class="mt-4">
-      <details class="faq-item" open>
-        <summary>How is my base monthly mortgage payment calculated?
-          <span class="faq-icon">+</span>
+
+  <!-- =======================================
+       FAQ
+  ======================================== -->
+
+  <section
+    class="mt-14 border-t border-[var(--line)] pt-12 max-w-4xl mb-14"
+  >
+
+    <p
+      class="font-mono text-xs uppercase tracking-[.14em] text-[var(--teal)] mb-3"
+    >
+      Common questions
+    </p>
+
+    <h2
+      class="font-display text-2xl sm:text-3xl text-[var(--navy)] mb-2"
+    >
+      Frequently asked questions
+    </h2>
+
+    <div class="mt-5">
+
+
+      <!-- FAQ 1 -->
+
+      <details
+        class="faq-item"
+        open
+      >
+
+        <summary>
+
+          How is my mortgage payment calculated?
+
+          <span class="faq-icon">
+            +
+          </span>
+
         </summary>
-        <div class="faq-body">Your base principal-and-interest payment is calculated from your loan amount (home price minus down payment), your monthly interest rate, and the total number of payments in your term. The formula spreads the loan into equal payments where the interest portion shrinks and the principal portion grows every month, so the total payment stays level from your first month to your last.</div>
+
+        <div class="faq-body">
+
+          The calculator uses your home price, down payment, interest rate,
+          and loan term to determine the principal-and-interest portion of
+          your monthly mortgage payment. It uses the standard fixed-rate
+          mortgage payment formula.
+
+        </div>
+
       </details>
+
+
+      <!-- FAQ 2 -->
+
       <details class="faq-item">
-        <summary>Do extra mortgage payments always go toward the principal?
-          <span class="faq-icon">+</span>
+
+        <summary>
+
+          How do extra mortgage payments help?
+
+          <span class="faq-icon">
+            +
+          </span>
+
         </summary>
-        <div class="faq-body">Only if your lender applies them that way. Most lenders default extra payments to principal reduction, but some apply them to your next due date instead. Always confirm with your servicer or note "apply to principal" when you pay.</div>
+
+        <div class="faq-body">
+
+          Additional payments that are applied toward principal reduce your
+          outstanding loan balance. A smaller balance means less interest can
+          accumulate over the remaining life of the mortgage, potentially
+          allowing you to pay off the loan sooner.
+
+        </div>
+
       </details>
+
+
+      <!-- FAQ 3 -->
+
       <details class="faq-item">
-        <summary>Will extra payments lower my required monthly payment?
-          <span class="faq-icon">+</span>
+
+        <summary>
+
+          Does an extra payment reduce my required monthly payment?
+
+          <span class="faq-icon">
+            +
+          </span>
+
         </summary>
-        <div class="faq-body">No. A standard fixed-rate mortgage keeps the same required base payment for the full term. Extra payments shorten the loan term and reduce total interest instead of lowering the bill you owe each month, unless you specifically request re-amortization from your lender.</div>
+
+        <div class="faq-body">
+
+          Normally, no. Extra principal payments generally do not change the
+          scheduled payment on a standard fixed-rate mortgage. Instead, they
+          can shorten the payoff period and reduce the amount of interest you
+          ultimately pay.
+
+        </div>
+
       </details>
+
+
+      <!-- FAQ 4 -->
+
       <details class="faq-item">
-        <summary>Is it better to pay extra monthly or make one lump sum payment a year?
-          <span class="faq-icon">+</span>
+
+        <summary>
+
+          Is paying extra every month better than one annual payment?
+
+          <span class="faq-icon">
+            +
+          </span>
+
         </summary>
-        <div class="faq-body">Paying extra every month saves slightly more interest than a single annual lump sum of the same total amount, since the principal is reduced sooner and interest accrues on a lower balance for more of the year. The gap is usually small, so consistency matters more than exact timing.</div>
+
+        <div class="faq-body">
+
+          Making additional principal payments earlier generally provides a
+          slightly greater interest benefit because the mortgage balance is
+          reduced sooner. However, the most important factor is choosing a
+          payment strategy that you can maintain consistently.
+
+        </div>
+
       </details>
+
+
+      <!-- FAQ 5 -->
+
       <details class="faq-item">
-        <summary>Is there a penalty for paying off my mortgage early?
-          <span class="faq-icon">+</span>
+
+        <summary>
+
+          Can my mortgage have a prepayment penalty?
+
+          <span class="faq-icon">
+            +
+          </span>
+
         </summary>
-        <div class="faq-body">Most conventional U.S. mortgages originated after 2014 don't carry prepayment penalties, but some loans — older, non-QM, or investment-property loans — do. Check your note or ask your servicer before making large extra payments.</div>
+
+        <div class="faq-body">
+
+          Some mortgages may contain prepayment provisions. Rules vary based
+          on the loan, lender, property type, and when the mortgage was
+          originated. Review your loan documents or contact your mortgage
+          servicer before making a significant additional payment.
+
+        </div>
+
       </details>
+
     </div>
+
   </section>
 
 </main>
 
-<!-- Footer Banner Placement -->
-<div class="ad-container ad-bottom max-w-6xl mx-auto px-5" style="text-align: center; margin: 15px auto;">
-  <div class="ad-placeholder" style="min-width: 300px; min-height: 90px;">
-    <small>Advertisement Space</small>
+
+<!-- =========================================
+     BOTTOM AD
+========================================= -->
+
+<div
+  class="ad-container max-w-6xl mx-auto px-5"
+  style="text-align:center;margin:15px auto;"
+>
+
+  <div
+    class="ad-placeholder"
+    style="min-width:300px;min-height:90px;"
+  >
+
+    <small>
+      Advertisement Space
+    </small>
+
   </div>
+
 </div>
 
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
 <footer>
-  <p>&copy; Utiliverse. All rights reserved.</p>
+
+  <p>
+    &copy;
+    <script>
+      document.write(new Date().getFullYear());
+    </script>
+    Utiliverse. All rights reserved.
+  </p>
+
+  <p class="mt-2">
+    Mortgage calculations are estimates for informational purposes only.
+  </p>
+
 </footer>
 
+
+<!-- =========================================
+     CALCULATOR JAVASCRIPT
+========================================= -->
+
 <script>
+
 (function(){
+
   const $ = id => document.getElementById(id);
 
+
+  /* -----------------------------------------
+     ELEMENTS
+  ------------------------------------------ */
+
   const homePriceEl = $('homePrice');
+
   const downPaymentEl = $('downPayment');
+
   const rateEl = $('rate');
+
   const extraEl = $('extra');
+
   const extraRangeEl = $('extraRange');
+
   const dpPercentBtn = $('dpPercentBtn');
+
   const dpDollarBtn = $('dpDollarBtn');
+
   const termSelect = $('termSelect');
 
+
   let dpMode = 'percent';
+
   let chart;
 
+
+  /* -----------------------------------------
+     DOWN PAYMENT MODE
+  ------------------------------------------ */
+
   function setDpMode(mode){
+
     dpMode = mode;
-    dpPercentBtn.classList.toggle('active', mode === 'percent');
-    dpDollarBtn.classList.toggle('active', mode === 'dollar');
-    const price = parseFloat(homePriceEl.value) || 0;
-    let val = parseFloat(downPaymentEl.value) || 0;
+
+    dpPercentBtn.classList.toggle(
+      'active',
+      mode === 'percent'
+    );
+
+    dpDollarBtn.classList.toggle(
+      'active',
+      mode === 'dollar'
+    );
+
+    const price =
+      parseFloat(homePriceEl.value) || 0;
+
+    let val =
+      parseFloat(downPaymentEl.value) || 0;
+
+
     if(mode === 'dollar'){
-      downPaymentEl.value = Math.round(price * (val/100));
-    } else {
-      downPaymentEl.value = price > 0 ? +( (val/price) * 100 ).toFixed(1) : 0;
+
+      downPaymentEl.value =
+        Math.round(price * (val / 100));
+
     }
+    else{
+
+      downPaymentEl.value =
+        price > 0
+          ? +((val / price) * 100).toFixed(1)
+          : 0;
+
+    }
+
     calculate();
-  }
-  dpPercentBtn.addEventListener('click', () => setDpMode('percent'));
-  dpDollarBtn.addEventListener('click', () => setDpMode('dollar'));
-  termSelect.addEventListener('change', calculate);
 
-  extraRangeEl.addEventListener('input', () => { extraEl.value = extraRangeEl.value; calculate(); });
-  extraEl.addEventListener('input', () => { extraRangeEl.value = extraEl.value; calculate(); });
-  [homePriceEl, downPaymentEl, rateEl].forEach(el => el.addEventListener('input', calculate));
-
-  function money(n){ return '$' + Math.round(n).toLocaleString('en-US'); }
-  function addMonths(date, months){ const d = new Date(date); d.setMonth(d.getMonth() + months); return d; }
-  function fmtDate(d){ return d.toLocaleDateString('en-US', { month:'short', year:'numeric' }); }
-
-  function basePayment(principal, monthlyRate, nMonths){
-    if(principal <= 0 || nMonths <= 0) return 0;
-    return monthlyRate === 0
-      ? principal / nMonths
-      : principal * monthlyRate / (1 - Math.pow(1+monthlyRate, -nMonths));
   }
 
-  function amortize(principal, monthlyRate, payment, extra){
-    let balance = principal;
-    let month = 0;
-    let totalInterest = 0;
-    const balances = [balance];
-    while(balance > 0 && month < 720){
-      const interest = balance * monthlyRate;
-      let principalPaid = payment - interest + extra;
-      if(principalPaid > balance) principalPaid = balance;
-      balance -= principalPaid;
-      totalInterest += interest;
-      month++;
-      balances.push(Math.max(balance, 0));
-      if(balance <= 0.5) break;
+
+  dpPercentBtn.addEventListener(
+    'click',
+    () => setDpMode('percent')
+  );
+
+
+  dpDollarBtn.addEventListener(
+    'click',
+    () => setDpMode('dollar')
+  );
+
+
+  /* -----------------------------------------
+     EVENT LISTENERS
+  ------------------------------------------ */
+
+  termSelect.addEventListener(
+    'change',
+    calculate
+  );
+
+
+  extraRangeEl.addEventListener(
+    'input',
+    () => {
+
+      extraEl.value =
+        extraRangeEl.value;
+
+      calculate();
+
     }
-    return { months: month, totalInterest, balances };
+  );
+
+
+  extraEl.addEventListener(
+    'input',
+    () => {
+
+      extraRangeEl.value =
+        Math.min(
+          Math.max(
+            parseFloat(extraEl.value) || 0,
+            0
+          ),
+          2000
+        );
+
+      calculate();
+
+    }
+  );
+
+
+  [
+    homePriceEl,
+    downPaymentEl,
+    rateEl
+  ].forEach(el => {
+
+    el.addEventListener(
+      'input',
+      calculate
+    );
+
+  });
+
+
+  /* -----------------------------------------
+     FORMATTING
+  ------------------------------------------ */
+
+  function money(n){
+
+    return '$' +
+      Math.round(n)
+      .toLocaleString('en-US');
+
   }
+
+
+  function addMonths(date, months){
+
+    const d =
+      new Date(date);
+
+    d.setMonth(
+      d.getMonth() + months
+    );
+
+    return d;
+
+  }
+
+
+  function fmtDate(d){
+
+    return d.toLocaleDateString(
+      'en-US',
+      {
+        month: 'short',
+        year: 'numeric'
+      }
+    );
+
+  }
+
+
+  /* -----------------------------------------
+     MONTHLY PAYMENT
+  ------------------------------------------ */
+
+  function basePayment(
+    principal,
+    monthlyRate,
+    nMonths
+  ){
+
+    if(
+      principal <= 0 ||
+      nMonths <= 0
+    ){
+
+      return 0;
+
+    }
+
+
+    if(monthlyRate === 0){
+
+      return principal / nMonths;
+
+    }
+
+
+    return principal *
+      monthlyRate /
+      (
+        1 -
+        Math.pow(
+          1 + monthlyRate,
+          -nMonths
+        )
+      );
+
+  }
+
+
+  /* -----------------------------------------
+     AMORTIZATION
+  ------------------------------------------ */
+
+  function amortize(
+    principal,
+    monthlyRate,
+    payment,
+    extra
+  ){
+
+    let balance = principal;
+
+    let month = 0;
+
+    let totalInterest = 0;
+
+    const balances = [
+      balance
+    ];
+
+
+    while(
+      balance > 0 &&
+      month < 720
+    ){
+
+      const interest =
+        balance * monthlyRate;
+
+
+      let principalPaid =
+        payment -
+        interest +
+        extra;
+
+
+      if(
+        principalPaid > balance
+      ){
+
+        principalPaid =
+          balance;
+
+      }
+
+
+      balance -=
+        principalPaid;
+
+
+      totalInterest +=
+        interest;
+
+
+      month++;
+
+
+      balances.push(
+        Math.max(balance, 0)
+      );
+
+
+      if(
+        balance <= 0.5
+      ){
+
+        break;
+
+      }
+
+    }
+
+
+    return {
+
+      months: month,
+
+      totalInterest,
+
+      balances
+
+    };
+
+  }
+
+
+  /* -----------------------------------------
+     MAIN CALCULATION
+  ------------------------------------------ */
 
   function calculate(){
-    const price = parseFloat(homePriceEl.value) || 0;
-    let dpVal = parseFloat(downPaymentEl.value) || 0;
-    const dpDollars = dpMode === 'percent' ? price * (dpVal/100) : dpVal;
-    const principal = Math.max(price - dpDollars, 0);
-    const annualRate = parseFloat(rateEl.value) || 0;
-    const monthlyRate = annualRate/100/12;
-    const termYears = parseInt(termSelect.value, 10);
-    const nMonths = termYears*12;
-    const extra = parseFloat(extraEl.value) || 0;
 
-    if(principal <= 0 || nMonths <= 0){ return; }
+    const price =
+      parseFloat(homePriceEl.value) || 0;
 
-    const payment = basePayment(principal, monthlyRate, nMonths);
-    const original = amortize(principal, monthlyRate, payment, 0);
-    const accelerated = amortize(principal, monthlyRate, payment, extra);
 
-    const today = new Date();
-    const origPayoff = addMonths(today, original.months);
-    const newPayoff = addMonths(today, accelerated.months);
-    const yearsSaved = (original.months - accelerated.months)/12;
-    const interestSaved = original.totalInterest - accelerated.totalInterest;
+    let dpVal =
+      parseFloat(downPaymentEl.value) || 0;
 
-    $('basePayment').textContent = money(payment) + '/mo';
-    $('totalPayment').textContent = money(payment + extra) + '/mo';
-    $('origDate').textContent = fmtDate(origPayoff);
-    $('newDate').textContent = fmtDate(newPayoff);
-    $('yearsSaved').textContent = yearsSaved > 0 ? yearsSaved.toFixed(1) + ' yrs' : '0 yrs';
-    $('interestSaved').textContent = interestSaved > 0 ? money(interestSaved) : '$0';
 
-    updateRuler(original.months, accelerated.months, termYears);
-    updateChart(original.balances, accelerated.balances);
-  }
+    const dpDollars =
+      dpMode === 'percent'
+        ? price * (dpVal / 100)
+        : dpVal;
 
-  function updateRuler(origMonths, newMonths, termYears){
-    const track = $('rulerTrack');
-    track.innerHTML = '';
-    const origBar = document.createElement('div');
-    origBar.className = 'ruler-bar-orig';
-    origBar.style.width = '100%';
-    const newBar = document.createElement('div');
-    newBar.className = 'ruler-bar-new';
-    newBar.style.width = Math.max((newMonths/origMonths)*100, 2) + '%';
-    track.appendChild(origBar);
-    track.appendChild(newBar);
-    for(let y=1; y*12 < origMonths; y++){
-      const tick = document.createElement('div');
-      tick.className = 'ruler-tick';
-      tick.style.left = ((y*12)/origMonths*100) + '%';
-      track.appendChild(tick);
+
+    const principal =
+      Math.max(
+        price - dpDollars,
+        0
+      );
+
+
+    const annualRate =
+      parseFloat(rateEl.value) || 0;
+
+
+    const monthlyRate =
+      annualRate / 100 / 12;
+
+
+    const termYears =
+      parseInt(
+        termSelect.value,
+        10
+      );
+
+
+    const nMonths =
+      termYears * 12;
+
+
+    const extra =
+      parseFloat(extraEl.value) || 0;
+
+
+    if(
+      principal <= 0 ||
+      nMonths <= 0
+    ){
+
+      return;
+
     }
-    $('rulerEndLabel').textContent = 'Year ' + termYears;
+
+
+    const payment =
+      basePayment(
+        principal,
+        monthlyRate,
+        nMonths
+      );
+
+
+    const original =
+      amortize(
+        principal,
+        monthlyRate,
+        payment,
+        0
+      );
+
+
+    const accelerated =
+      amortize(
+        principal,
+        monthlyRate,
+        payment,
+        extra
+      );
+
+
+    const today =
+      new Date();
+
+
+    const origPayoff =
+      addMonths(
+        today,
+        original.months
+      );
+
+
+    const newPayoff =
+      addMonths(
+        today,
+        accelerated.months
+      );
+
+
+    const yearsSaved =
+      (
+        original.months -
+        accelerated.months
+      ) / 12;
+
+
+    const interestSaved =
+      original.totalInterest -
+      accelerated.totalInterest;
+
+
+    /* ---------------------------------------
+       DISPLAY RESULTS
+    ---------------------------------------- */
+
+    $('basePayment').textContent =
+      money(payment) +
+      '/mo';
+
+
+    $('totalPayment').textContent =
+      money(payment + extra) +
+      '/mo';
+
+
+    $('origDate').textContent =
+      fmtDate(origPayoff);
+
+
+    $('newDate').textContent =
+      fmtDate(newPayoff);
+
+
+    $('yearsSaved').textContent =
+      yearsSaved > 0
+        ? yearsSaved.toFixed(1) + ' yrs'
+        : '0 yrs';
+
+
+    $('interestSaved').textContent =
+      interestSaved > 0
+        ? money(interestSaved)
+        : '$0';
+
+
+    updateRuler(
+      original.months,
+      accelerated.months,
+      termYears
+    );
+
+
+    updateChart(
+      original.balances,
+      accelerated.balances
+    );
+
   }
 
-  function updateChart(origBalances, newBalances){
-    const maxLen = Math.max(origBalances.length, newBalances.length);
-    const labels = Array.from({length:maxLen}, (_,i) => (i/12).toFixed(0));
-    const origData = Array.from({length:maxLen}, (_,i) => origBalances[i] ?? 0);
-    const newData = Array.from({length:maxLen}, (_,i) => newBalances[i] ?? 0);
+
+  /* -----------------------------------------
+     PAYOFF TIMELINE
+  ------------------------------------------ */
+
+  function updateRuler(
+    origMonths,
+    newMonths,
+    termYears
+  ){
+
+    const track =
+      $('rulerTrack');
+
+
+    track.innerHTML = '';
+
+
+    const origBar =
+      document.createElement('div');
+
+
+    origBar.className =
+      'ruler-bar-orig';
+
+
+    origBar.style.width =
+      '100%';
+
+
+    const newBar =
+      document.createElement('div');
+
+
+    newBar.className =
+      'ruler-bar-new';
+
+
+    newBar.style.width =
+      Math.max(
+        (newMonths / origMonths) * 100,
+        2
+      ) + '%';
+
+
+    track.appendChild(
+      origBar
+    );
+
+
+    track.appendChild(
+      newBar
+    );
+
+
+    for(
+      let y = 1;
+      y * 12 < origMonths;
+      y++
+    ){
+
+      const tick =
+        document.createElement('div');
+
+
+      tick.className =
+        'ruler-tick';
+
+
+      tick.style.left =
+        (
+          (y * 12) /
+          origMonths *
+          100
+        ) + '%';
+
+
+      track.appendChild(
+        tick
+      );
+
+    }
+
+
+    $('rulerEndLabel').textContent =
+      'Year ' + termYears;
+
+  }
+
+
+  /* -----------------------------------------
+     BALANCE CHART
+  ------------------------------------------ */
+
+  function updateChart(
+    origBalances,
+    newBalances
+  ){
+
+    const maxLen =
+      Math.max(
+        origBalances.length,
+        newBalances.length
+      );
+
+
+    const labels =
+      Array.from(
+        {
+          length: maxLen
+        },
+        (_, i) =>
+          (i / 12).toFixed(0)
+      );
+
+
+    const origData =
+      Array.from(
+        {
+          length: maxLen
+        },
+        (_, i) =>
+          origBalances[i] ?? 0
+      );
+
+
+    const newData =
+      Array.from(
+        {
+          length: maxLen
+        },
+        (_, i) =>
+          newBalances[i] ?? 0
+      );
+
+
+    /* ---------------------------------------
+       UPDATE EXISTING CHART
+    ---------------------------------------- */
 
     if(chart){
-      chart.data.labels = labels;
-      chart.data.datasets[0].data = origData;
-      chart.data.datasets[1].data = newData;
+
+      chart.data.labels =
+        labels;
+
+
+      chart.data.datasets[0].data =
+        origData;
+
+
+      chart.data.datasets[1].data =
+        newData;
+
+
       chart.update();
+
       return;
+
     }
-    const ctx = $('balanceChart').getContext('2d');
-    chart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels,
-        datasets: [
-          { label: 'Standard payoff schedule', data: origData, borderColor: '#B9B6AC', backgroundColor: 'transparent', borderWidth: 2, pointRadius: 0, tension: 0.15 },
-          { label: 'Accelerated (with extra payments)', data: newData, borderColor: '#2F6F5E', backgroundColor: 'rgba(47,111,94,0.08)', borderWidth: 2, fill: true, pointRadius: 0, tension: 0.15 }
-        ]
-      },
-      options: {
-        responsive: true,
-        interaction: { mode: 'index', intersect: false },
-        plugins: {
-          legend: { position: 'bottom', labels: { font: { family: 'IBM Plex Mono', size: 11 } } },
-          tooltip: {
-            callbacks: {
-              title: items => 'Year ' + items[0].label,
-              label: item => item.dataset.label + ': $' + Math.round(item.raw).toLocaleString('en-US')
+
+
+    /* ---------------------------------------
+       CREATE CHART
+    ---------------------------------------- */
+
+    const ctx =
+      $('balanceChart')
+      .getContext('2d');
+
+
+    chart =
+      new Chart(
+        ctx,
+        {
+
+          type: 'line',
+
+          data: {
+
+            labels,
+
+            datasets: [
+
+              {
+                label:
+                  'Standard mortgage',
+
+                data:
+                  origData,
+
+                borderColor:
+                  '#AEB8B4',
+
+                backgroundColor:
+                  'transparent',
+
+                borderWidth:
+                  2,
+
+                pointRadius:
+                  0,
+
+                tension:
+                  .15
+              },
+
+              {
+
+                label:
+                  'With extra payments',
+
+                data:
+                  newData,
+
+                borderColor:
+                  '#2F7D68',
+
+                backgroundColor:
+                  'rgba(47,125,104,.08)',
+
+                borderWidth:
+                  2,
+
+                fill:
+                  true,
+
+                pointRadius:
+                  0,
+
+                tension:
+                  .15
+
+              }
+
+            ]
+
+          },
+
+
+          options: {
+
+            responsive:
+              true,
+
+            interaction: {
+
+              mode:
+                'index',
+
+              intersect:
+                false
+
+            },
+
+
+            plugins: {
+
+              legend: {
+
+                position:
+                  'bottom',
+
+                labels: {
+
+                  font: {
+
+                    family:
+                      'IBM Plex Mono',
+
+                    size:
+                      11
+
+                  },
+
+                  color:
+                    '#5B6B79'
+
+                }
+
+              },
+
+
+              tooltip: {
+
+                callbacks: {
+
+                  title:
+                    items =>
+                      'Year ' +
+                      items[0].label,
+
+
+                  label:
+                    item =>
+                      item.dataset.label +
+                      ': $' +
+                      Math.round(
+                        item.raw
+                      ).toLocaleString(
+                        'en-US'
+                      )
+
+                }
+
+              }
+
+            },
+
+
+            scales: {
+
+              x: {
+
+                title: {
+
+                  display:
+                    true,
+
+                  text:
+                    'Years',
+
+                  color:
+                    '#5B6B79'
+
+                },
+
+                ticks: {
+
+                  maxTicksLimit:
+                    10,
+
+                  color:
+                    '#5B6B79'
+
+                },
+
+                grid: {
+
+                  color:
+                    '#E3E7E4'
+
+                }
+
+              },
+
+
+              y: {
+
+                title: {
+
+                  display:
+                    true,
+
+                  text:
+                    'Mortgage Balance',
+
+                  color:
+                    '#5B6B79'
+
+                },
+
+                ticks: {
+
+                  color:
+                    '#5B6B79',
+
+                  callback:
+                    v =>
+                      '$' +
+                      (v / 1000) +
+                      'k'
+
+                },
+
+                grid: {
+
+                  color:
+                    '#E3E7E4'
+
+                }
+
+              }
+
             }
+
           }
-        },
-        scales: {
-          x: { title: { display: true, text: 'Years' }, ticks: { maxTicksLimit: 10 } },
-          y: { title: { display: true, text: 'Balance ($)' }, ticks: { callback: v => '$' + (v/1000) + 'k' } }
+
         }
-      }
-    });
+      );
+
   }
 
+
+  /* -----------------------------------------
+     INITIAL CALCULATION
+  ------------------------------------------ */
+
   calculate();
+
 })();
+
 </script>
 
 </body>
