@@ -1,4711 +1,1625 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Utiliverse — Home Affordability Calculator</title>
-
-<meta
-    name="description"
-    content="Estimate your home buying budget using income, debts, mortgage rates, taxes, insurance, down payment and loan type."
->
-
-<style>
-
-/* =========================================================
-   Utiliverse
-   ORIGINAL HOME AFFORDABILITY CALCULATOR
-   No external libraries required
-   ========================================================= */
-
-
-/* ---------------------------------------------------------
-   ROOT VARIABLES
-   --------------------------------------------------------- */
-
-:root {
-
-    --navy: #102a43;
-    --navy-2: #173f5f;
-
-    --blue: #1976d2;
-    --blue-dark: #125ca5;
-    --blue-light: #eaf4ff;
-
-    --green: #159570;
-    --green-light: #eafaf5;
-
-    --orange: #ed8b2f;
-    --orange-light: #fff5e9;
-
-    --red: #d64545;
-    --red-light: #fff0f0;
-
-    --purple: #7657d9;
-    --purple-light: #f3efff;
-
-    --text: #263746;
-    --muted: #718096;
-
-    --background: #f5f7fa;
-    --white: #ffffff;
-
-    --border: #dce4ec;
-    --border-dark: #c5d0da;
-
-    --shadow:
-        0 12px 35px rgba(16,42,67,.08);
-
-    --radius: 16px;
-}
-
-
-/* ---------------------------------------------------------
-   GLOBAL
-   --------------------------------------------------------- */
-
-* {
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-
-    margin: 0;
-
-    background: var(--background);
-
-    color: var(--text);
-
-    font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Arial,
-        sans-serif;
-
-    line-height: 1.5;
-}
-
-button,
-input,
-select {
-    font-family: inherit;
-}
-
-button {
-    cursor: pointer;
-}
-
-
-/* ---------------------------------------------------------
-   HEADER
-   --------------------------------------------------------- */
-
-.topbar {
-
-    background:
-        linear-gradient(
-            135deg,
-            #102a43,
-            #174c73
-        );
-
-    color: white;
-}
-
-.topbar-inner {
-
-    max-width: 1180px;
-
-    margin: auto;
-
-    min-height: 68px;
-
-    padding:
-        0 22px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-}
-
-.logo {
-
-    font-size: 22px;
-
-    font-weight: 800;
-
-    letter-spacing: -.5px;
-}
-
-.logo span {
-    color: #5dd6b2;
-}
-
-.topbar-tag {
-
-    font-size: 13px;
-
-    color: #cfe3f1;
-}
-
-
-/* ---------------------------------------------------------
-   PAGE
-   --------------------------------------------------------- */
-
-.container {
-
-    width: min(1180px, calc(100% - 32px));
-
-    margin: auto;
-
-    padding:
-        28px 0 70px;
-}
-
-
-/* ---------------------------------------------------------
-   HERO
-   --------------------------------------------------------- */
-
-.hero {
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffffff,
-            #eef7ff
-        );
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        var(--radius);
-
-    padding:
-        34px;
-
-    margin-bottom:
-        22px;
-
-    box-shadow:
-        var(--shadow);
-}
-
-.hero-grid {
-
-    display:
-        grid;
-
-    grid-template-columns:
-        1.25fr .75fr;
-
-    gap:
-        35px;
-
-    align-items:
-        center;
-}
-
-.hero h1 {
-
-    margin:
-        0 0 10px;
-
-    color:
-        var(--navy);
-
-    font-size:
-        clamp(30px, 4vw, 46px);
-
-    line-height:
-        1.08;
-
-    letter-spacing:
-        -1.5px;
-}
-
-.hero p {
-
-    margin:
-        0;
-
-    max-width:
-        680px;
-
-    color:
-        #526678;
-
-    font-size:
-        16px;
-}
-
-.hero-badge {
-
-    background:
-        white;
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        14px;
-
-    padding:
-        20px;
-
-    box-shadow:
-        0 6px 20px rgba(16,42,67,.05);
-}
-
-.hero-badge-title {
-
-    font-size:
-        12px;
-
-    font-weight:
-        800;
-
-    color:
-        var(--muted);
-
-    text-transform:
-        uppercase;
-
-    letter-spacing:
-        .8px;
-}
-
-.hero-badge-value {
-
-    font-size:
-        28px;
-
-    font-weight:
-        800;
-
-    color:
-        var(--blue);
-
-    margin-top:
-        5px;
-}
-
-.hero-badge-text {
-
-    font-size:
-        12px;
-
-    color:
-        var(--muted);
-}
-
-
-/* ---------------------------------------------------------
-   CALCULATOR CARD
-   --------------------------------------------------------- */
-
-.card {
-
-    background:
-        var(--white);
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        var(--radius);
-
-    box-shadow:
-        var(--shadow);
-
-    margin-bottom:
-        22px;
-
-    overflow:
-        hidden;
-}
-
-.card-header {
-
-    padding:
-        23px 27px;
-
-    border-bottom:
-        1px solid var(--border);
-
-    display:
-        flex;
-
-    justify-content:
-        space-between;
-
-    align-items:
-        center;
-
-    gap:
-        20px;
-}
-
-.card-header h2 {
-
-    margin:
-        0 0 4px;
-
-    color:
-        var(--navy);
-
-    font-size:
-        21px;
-}
-
-.card-header p {
-
-    margin:
-        0;
-
-    font-size:
-        13px;
-
-    color:
-        var(--muted);
-}
-
-.card-body {
-    padding:
-        27px;
-}
-
-
-/* ---------------------------------------------------------
-   LOAN TYPE TABS
-   --------------------------------------------------------- */
-
-.loan-tabs {
-
-    display:
-        grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap:
-        9px;
-
-    margin-bottom:
-        26px;
-}
-
-.loan-tab {
-
-    border:
-        1px solid var(--border);
-
-    background:
-        #fafbfd;
-
-    border-radius:
-        11px;
-
-    padding:
-        13px 8px;
-
-    text-align:
-        center;
-
-    color:
-        var(--text);
-
-    font-weight:
-        700;
-
-    transition:
-        .18s ease;
-}
-
-.loan-tab:hover {
-
-    border-color:
-        #a9c8e1;
-
-    transform:
-        translateY(-1px);
-}
-
-.loan-tab.active {
-
-    color:
-        white;
-
-    background:
-        var(--blue);
-
-    border-color:
-        var(--blue);
-
-    box-shadow:
-        0 5px 15px rgba(25,118,210,.22);
-}
-
-.loan-tab small {
-
-    display:
-        block;
-
-    font-size:
-        10px;
-
-    margin-top:
-        2px;
-
-    opacity:
-        .75;
-
-    font-weight:
-        500;
-}
-
-
-/* ---------------------------------------------------------
-   FORM
-   --------------------------------------------------------- */
-
-.form-grid {
-
-    display:
-        grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap:
-        20px;
-}
-
-.field {
-
-    display:
-        flex;
-
-    flex-direction:
-        column;
-}
-
-.field.full {
-    grid-column:
-        1 / -1;
-}
-
-.field label {
-
-    font-size:
-        13px;
-
-    font-weight:
-        750;
-
-    margin-bottom:
-        7px;
-
-    color:
-        #34495a;
-}
-
-.field-help {
-
-    margin-top:
-        5px;
-
-    color:
-        var(--muted);
-
-    font-size:
-        11px;
-}
-
-.input-wrap {
-    position:
-        relative;
-}
-
-.input-prefix,
-.input-suffix {
-
-    position:
-        absolute;
-
-    top:
-        50%;
-
-    transform:
-        translateY(-50%);
-
-    color:
-        var(--muted);
-
-    font-size:
-        14px;
-
-    pointer-events:
-        none;
-}
-
-.input-prefix {
-    left:
-        12px;
-}
-
-.input-suffix {
-    right:
-        12px;
-}
-
-.input-prefix + input {
-    padding-left:
-        29px;
-}
-
-.input-suffix-wrap input {
-    padding-right:
-        40px;
-}
-
-input,
-select {
-
-    width:
-        100%;
-
-    height:
-        45px;
-
-    border:
-        1px solid var(--border-dark);
-
-    border-radius:
-        9px;
-
-    background:
-        white;
-
-    padding:
-        10px 12px;
-
-    color:
-        var(--text);
-
-    font-size:
-        14px;
-
-    outline:
-        none;
-
-    transition:
-        .15s;
-}
-
-input:focus,
-select:focus {
-
-    border-color:
-        var(--blue);
-
-    box-shadow:
-        0 0 0 3px rgba(25,118,210,.10);
-}
-
-
-/* ---------------------------------------------------------
-   SLIDER
-   --------------------------------------------------------- */
-
-.slider-line {
-
-    display:
-        grid;
-
-    grid-template-columns:
-        1fr 110px;
-
-    gap:
-        12px;
-
-    align-items:
-        center;
-}
-
-input[type="range"] {
-
-    height:
-        auto;
-
-    padding:
-        0;
-
-    border:
-        0;
-
-    box-shadow:
-        none;
-
-    accent-color:
-        var(--blue);
-}
-
-
-/* ---------------------------------------------------------
-   ADVANCED OPTIONS
-   --------------------------------------------------------- */
-
-.advanced-toggle {
-
-    margin-top:
-        23px;
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        10px;
-
-    overflow:
-        hidden;
-}
-
-.advanced-head {
-
-    padding:
-        14px 16px;
-
-    background:
-        #f8fafc;
-
-    cursor:
-        pointer;
-
-    font-size:
-        13px;
-
-    font-weight:
-        800;
-
-    display:
-        flex;
-
-    justify-content:
-        space-between;
-}
-
-.advanced-content {
-
-    padding:
-        18px;
-
-    display:
-        none;
-}
-
-.advanced-content.open {
-    display:
-        block;
-}
-
-
-/* ---------------------------------------------------------
-   BUTTONS
-   --------------------------------------------------------- */
-
-.actions {
-
-    display:
-        flex;
-
-    gap:
-        10px;
-
-    margin-top:
-        25px;
-
-    flex-wrap:
-        wrap;
-}
-
-.btn {
-
-    border:
-        0;
-
-    border-radius:
-        9px;
-
-    min-height:
-        44px;
-
-    padding:
-        10px 19px;
-
-    font-size:
-        14px;
-
-    font-weight:
-        800;
-
-    transition:
-        .16s;
-}
-
-.btn-primary {
-
-    background:
-        var(--blue);
-
-    color:
-        white;
-}
-
-.btn-primary:hover {
-    background:
-        var(--blue-dark);
-}
-
-.btn-secondary {
-
-    background:
-        #edf1f5;
-
-    color:
-        var(--text);
-}
-
-.btn-secondary:hover {
-    background:
-        #dfe6ed;
-}
-
-.btn-outline {
-
-    background:
-        white;
-
-    color:
-        var(--blue);
-
-    border:
-        1px solid #aac9e4;
-}
-
-
-/* ---------------------------------------------------------
-   RESULT AREA
-   --------------------------------------------------------- */
-
-.results {
-
-    margin-top:
-        28px;
-
-    display:
-        grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap:
-        17px;
-}
-
-.result-hero {
-
-    border-radius:
-        15px;
-
-    padding:
-        25px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #102a43,
-            #1b5279
-        );
-
-    color:
-        white;
-
-    position:
-        relative;
-
-    overflow:
-        hidden;
-}
-
-.result-hero::after {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    width:
-        190px;
-
-    height:
-        190px;
-
-    border-radius:
-        50%;
-
-    border:
-        25px solid rgba(255,255,255,.06);
-
-    right:
-        -70px;
-
-    top:
-        -80px;
-}
-
-.result-kicker {
-
-    font-size:
-        11px;
-
-    text-transform:
-        uppercase;
-
-    letter-spacing:
-        1px;
-
-    color:
-        #b8d8ea;
-
-    font-weight:
-        800;
-}
-
-.result-price {
-
-    font-size:
-        clamp(34px, 5vw, 48px);
-
-    font-weight:
-        900;
-
-    letter-spacing:
-        -1px;
-
-    margin:
-        4px 0 7px;
-}
-
-.result-description {
-
-    color:
-        #d6e8f2;
-
-    font-size:
-        12px;
-
-    max-width:
-        480px;
-}
-
-.result-actions {
-
-    margin-top:
-        20px;
-
-    display:
-        flex;
-
-    gap:
-        8px;
-
-    flex-wrap:
-        wrap;
-}
-
-.result-actions .btn {
-
-    background:
-        rgba(255,255,255,.11);
-
-    color:
-        white;
-
-    border:
-        1px solid rgba(255,255,255,.22);
-}
-
-
-/* ---------------------------------------------------------
-   RESULT STATS
-   --------------------------------------------------------- */
-
-.stat-grid {
-
-    display:
-        grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap:
-        12px;
-}
-
-.stat {
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        12px;
-
-    padding:
-        15px;
-
-    background:
-        #fff;
-}
-
-.stat-label {
-
-    font-size:
-        11px;
-
-    color:
-        var(--muted);
-
-    text-transform:
-        uppercase;
-
-    letter-spacing:
-        .35px;
-}
-
-.stat-value {
-
-    margin-top:
-        3px;
-
-    font-size:
-        20px;
-
-    font-weight:
-        850;
-
-    color:
-        var(--navy);
-}
-
-
-/* ---------------------------------------------------------
-   DTI INDICATOR
-   --------------------------------------------------------- */
-
-.dti-box {
-
-    margin-top:
-        14px;
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        12px;
-
-    padding:
-        15px;
-}
-
-.dti-header {
-
-    display:
-        flex;
-
-    justify-content:
-        space-between;
-
-    align-items:
-        center;
-
-    margin-bottom:
-        9px;
-}
-
-.dti-title {
-
-    font-size:
-        12px;
-
-    font-weight:
-        800;
-}
-
-.dti-value {
-
-    font-size:
-        18px;
-
-    font-weight:
-        900;
-}
-
-.dti-track {
-
-    height:
-        10px;
-
-    background:
-        #edf1f5;
-
-    border-radius:
-        20px;
-
-    overflow:
-        hidden;
-}
-
-.dti-fill {
-
-    height:
-        100%;
-
-    width:
-        0%;
-
-    background:
-        var(--green);
-
-    border-radius:
-        inherit;
-
-    transition:
-        width .5s ease,
-        background .3s ease;
-}
-
-.dti-message {
-
-    margin-top:
-        7px;
-
-    font-size:
-        11px;
-
-    color:
-        var(--muted);
-}
-
-
-/* ---------------------------------------------------------
-   PAYMENT BREAKDOWN
-   --------------------------------------------------------- */
-
-.breakdown {
-
-    margin-top:
-        18px;
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        14px;
-
-    overflow:
-        hidden;
-}
-
-.breakdown-header {
-
-    padding:
-        16px 18px;
-
-    background:
-        #f8fafc;
-
-    border-bottom:
-        1px solid var(--border);
-
-    font-weight:
-        800;
-
-    font-size:
-        14px;
-}
-
-.breakdown-row {
-
-    display:
-        flex;
-
-    justify-content:
-        space-between;
-
-    align-items:
-        center;
-
-    padding:
-        11px 18px;
-
-    border-bottom:
-        1px solid #edf1f4;
-
-    font-size:
-        13px;
-}
-
-.breakdown-row:last-child {
-
-    border-bottom:
-        0;
-
-    background:
-        #fbfcfd;
-
-    font-weight:
-        850;
-}
-
-.breakdown-name {
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    gap:
-        9px;
-}
-
-.dot {
-
-    width:
-        9px;
-
-    height:
-        9px;
-
-    border-radius:
-        50%;
-
-    background:
-        var(--blue);
-}
-
-.dot.green {
-    background:
-        var(--green);
-}
-
-.dot.orange {
-    background:
-        var(--orange);
-}
-
-.dot.purple {
-    background:
-        var(--purple);
-}
-
-.dot.red {
-    background:
-        var(--red);
-}
-
-
-/* ---------------------------------------------------------
-   PAYMENT BAR
-   --------------------------------------------------------- */
-
-.payment-bar {
-
-    display:
-        flex;
-
-    height:
-        14px;
-
-    margin:
-        17px 18px 5px;
-
-    border-radius:
-        20px;
-
-    overflow:
-        hidden;
-
-    background:
-        #edf1f5;
-}
-
-.payment-segment {
-    transition:
-        width .5s ease;
-}
-
-
-/* ---------------------------------------------------------
-   RANGE COMPARISON
-   --------------------------------------------------------- */
-
-.range-card {
-
-    margin-top:
-        18px;
-
-    padding:
-        17px;
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        13px;
-
-    background:
-        #fff;
-}
-
-.range-title {
-
-    font-size:
-        13px;
-
-    font-weight:
-        800;
-
-    margin-bottom:
-        12px;
-}
-
-.range-values {
-
-    display:
-        flex;
-
-    justify-content:
-        space-between;
-
-    gap:
-        15px;
-}
-
-.range-value strong {
-
-    display:
-        block;
-
-    font-size:
-        20px;
-
-    color:
-        var(--navy);
-}
-
-.range-value span {
-
-    font-size:
-        11px;
-
-    color:
-        var(--muted);
-}
-
-
-/* ---------------------------------------------------------
-   MONTHLY BUDGET SECTION
-   --------------------------------------------------------- */
-
-.budget-card {
-
-    background:
-        linear-gradient(
-            145deg,
-            #ffffff,
-            #f3faf8
-        );
-}
-
-
-/* ---------------------------------------------------------
-   INFO SECTION
-   --------------------------------------------------------- */
-
-.info-grid {
-
-    display:
-        grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap:
-        14px;
-}
-
-.info-tile {
-
-    padding:
-        18px;
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        13px;
-
-    background:
-        white;
-}
-
-.info-icon {
-
-    width:
-        35px;
-
-    height:
-        35px;
-
-    border-radius:
-        10px;
-
-    background:
-        var(--blue-light);
-
-    color:
-        var(--blue);
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    font-weight:
-        900;
-
-    margin-bottom:
-        10px;
-}
-
-.info-tile h3 {
-
-    margin:
-        0 0 5px;
-
-    font-size:
-        14px;
-
-    color:
-        var(--navy);
-}
-
-.info-tile p {
-
-    margin:
-        0;
-
-    color:
-        var(--muted);
-
-    font-size:
-        12px;
-}
-
-
-/* ---------------------------------------------------------
-   NOTICE
-   --------------------------------------------------------- */
-
-.notice {
-
-    margin-top:
-        20px;
-
-    padding:
-        15px 17px;
-
-    background:
-        var(--orange-light);
-
-    border:
-        1px solid #f4d39d;
-
-    border-radius:
-        10px;
-
-    font-size:
-        12px;
-
-    color:
-        #755000;
-}
-
-
-/* ---------------------------------------------------------
-   FOOTER
-   --------------------------------------------------------- */
-
-footer {
-
-    max-width:
-        1180px;
-
-    margin:
-        auto;
-
-    padding:
-        0 22px 40px;
-
-    text-align:
-        center;
-
-    color:
-        var(--muted);
-
-    font-size:
-        11px;
-}
-
-
-/* ---------------------------------------------------------
-   PRINT
-   --------------------------------------------------------- */
-
-@media print {
-
-    .topbar,
-    .hero,
-    .actions,
-    .result-actions,
-    .loan-tabs,
-    .advanced-toggle,
-    footer {
-        display:
-            none !important;
-    }
-
-    body {
-        background:
-            white;
-    }
-
-    .container {
-        width:
-            100%;
-    }
-
-    .card {
-        box-shadow:
-            none;
-
-        border:
-            1px solid #bbb;
-    }
-
-}
-
-
-/* ---------------------------------------------------------
-   RESPONSIVE
-   --------------------------------------------------------- */
-
-@media (max-width: 900px) {
-
-    .hero-grid {
-        grid-template-columns:
-            1fr;
-    }
-
-    .form-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-    .results {
-        grid-template-columns:
-            1fr;
-    }
-
-    .info-grid {
-        grid-template-columns:
-            1fr 1fr;
-    }
-
-}
-
-@media (max-width: 620px) {
-
-    .container {
-        width:
-            min(100% - 20px, 1180px);
-    }
-
-    .hero {
-        padding:
-            24px;
-    }
-
-    .card-body {
-        padding:
-            20px;
-    }
-
-    .card-header {
-        padding:
-            19px;
-    }
-
-    .loan-tabs {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-    .form-grid {
-        grid-template-columns:
-            1fr;
-    }
-
-    .field.full {
-        grid-column:
-            auto;
-    }
-
-    .info-grid {
-        grid-template-columns:
-            1fr;
-    }
-
-    .stat-grid {
-        grid-template-columns:
-            1fr 1fr;
-    }
-
-    .topbar-tag {
-        display:
-            none;
-    }
-
-}
-
-@media (max-width: 420px) {
-
-    .stat-grid {
-        grid-template-columns:
-            1fr;
-    }
-
-    .range-values {
-        flex-direction:
-            column;
-    }
-
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Home Affordability Calculator | Utiliverse</title>
+
+    <meta
+        name="description"
+        content="Estimate how much home you may be able to afford based on your income, debts, down payment, interest rate, taxes, insurance and other housing costs."
+    >
+
+    <style>
+        /* =========================================================
+           UTILIVERSE - HOME AFFORDABILITY CALCULATOR
+           Original design
+        ========================================================= */
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #eff6ff;
+
+            --background: #f5f7fb;
+            --surface: #ffffff;
+            --surface-soft: #f8fafc;
+
+            --text: #172033;
+            --muted: #64748b;
+            --border: #e2e8f0;
+
+            --success: #15803d;
+            --success-bg: #f0fdf4;
+
+            --warning: #b45309;
+            --warning-bg: #fffbeb;
+
+            --danger: #b91c1c;
+
+            --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+            --radius: 14px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Helvetica,
+                Arial,
+                sans-serif;
+
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        /* =========================================================
+           TOP NAVIGATION
+        ========================================================= */
+
+        .topbar {
+            width: 100%;
+            background: #ffffff;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .topbar-inner {
+            max-width: 1180px;
+            margin: auto;
+            padding: 18px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .back-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            transition: 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        .brand {
+            font-size: 17px;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+        }
+
+        .brand span {
+            color: var(--primary);
+        }
+
+        /* =========================================================
+           PAGE HEADER
+        ========================================================= */
+
+        .page-header {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 42px 24px 24px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            color: var(--primary);
+            background: var(--primary-light);
+            padding: 6px 11px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            margin: 0 0 10px;
+            font-size: clamp(30px, 4vw, 44px);
+            line-height: 1.1;
+            letter-spacing: -1.2px;
+        }
+
+        .subtitle {
+            max-width: 760px;
+            margin: 0;
+            color: var(--muted);
+            font-size: 17px;
+        }
+
+        /* =========================================================
+           MAIN CONTENT
+        ========================================================= */
+
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 10px 24px 60px;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
+            gap: 24px;
+            align-items: start;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        /* =========================================================
+           INPUT CARD
+        ========================================================= */
+
+        .form-card {
+            padding: 28px;
+        }
+
+        .section-heading {
+            margin-bottom: 22px;
+        }
+
+        .section-heading h2 {
+            margin: 0 0 5px;
+            font-size: 21px;
+        }
+
+        .section-heading p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .form-section {
+            padding-bottom: 25px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .form-section:last-of-type {
+            border-bottom: 0;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .form-section-title {
+            font-size: 15px;
+            font-weight: 750;
+            margin-bottom: 15px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 650;
+            color: #334155;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .prefix {
+            position: absolute;
+            left: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--muted);
+            pointer-events: none;
+            font-size: 14px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            height: 46px;
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
+            background: #ffffff;
+            color: var(--text);
+            font-size: 15px;
+            padding: 0 13px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input.currency {
+            padding-left: 29px;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        .helper {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        /* =========================================================
+           BUTTONS
+        ========================================================= */
+
+        .button-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        button {
+            border: 0;
+            cursor: pointer;
+            font: inherit;
+        }
+
+        .calculate-btn {
+            flex: 1;
+            height: 50px;
+            border-radius: 9px;
+            background: var(--primary);
+            color: white;
+            font-size: 15px;
+            font-weight: 750;
+            transition: 0.2s ease;
+        }
+
+        .calculate-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .reset-btn {
+            height: 50px;
+            padding: 0 18px;
+            border-radius: 9px;
+            background: #f1f5f9;
+            color: #475569;
+            font-weight: 650;
+        }
+
+        .reset-btn:hover {
+            background: #e2e8f0;
+        }
+
+        /* =========================================================
+           RESULTS
+        ========================================================= */
+
+        .results-card {
+            overflow: hidden;
+            position: sticky;
+            top: 20px;
+        }
+
+        .results-header {
+            padding: 28px;
+            background: linear-gradient(
+                135deg,
+                #eff6ff 0%,
+                #f8fafc 100%
+            );
+            border-bottom: 1px solid var(--border);
+        }
+
+        .results-header h2 {
+            margin: 0 0 5px;
+            font-size: 21px;
+        }
+
+        .results-header p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .main-result {
+            padding: 30px 28px 25px;
+            text-align: center;
+        }
+
+        .result-label {
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .result-price {
+            color: var(--primary);
+            font-size: clamp(38px, 5vw, 52px);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+        }
+
+        .result-note {
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        /* =========================================================
+           RESULT BREAKDOWN
+        ========================================================= */
+
+        .breakdown {
+            padding: 0 28px 28px;
+        }
+
+        .breakdown-title {
+            font-size: 14px;
+            font-weight: 750;
+            margin-bottom: 13px;
+        }
+
+        .breakdown-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #eef2f7;
+            font-size: 13px;
+        }
+
+        .breakdown-row:last-child {
+            border-bottom: 0;
+        }
+
+        .breakdown-label {
+            color: #64748b;
+        }
+
+        .breakdown-value {
+            font-weight: 700;
+        }
+
+        /* =========================================================
+           AFFORDABILITY INDICATOR
+        ========================================================= */
+
+        .affordability-box {
+            margin: 0 28px 28px;
+            padding: 17px;
+            border-radius: 10px;
+            background: var(--success-bg);
+            border: 1px solid #bbf7d0;
+        }
+
+        .affordability-box.warning {
+            background: var(--warning-bg);
+            border-color: #fde68a;
+        }
+
+        .affordability-title {
+            font-weight: 750;
+            font-size: 14px;
+            margin-bottom: 3px;
+        }
+
+        .affordability-text {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        /* =========================================================
+           INFORMATION SECTION
+        ========================================================= */
+
+        .info-section {
+            margin-top: 28px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px;
+            box-shadow: var(--shadow);
+        }
+
+        .info-section h2 {
+            margin: 0 0 12px;
+            font-size: 21px;
+        }
+
+        .info-section p {
+            color: #64748b;
+            font-size: 14px;
+            margin: 0 0 14px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-top: 22px;
+        }
+
+        .info-box {
+            padding: 18px;
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+        }
+
+        .info-box h3 {
+            margin: 0 0 7px;
+            font-size: 14px;
+        }
+
+        .info-box p {
+            margin: 0;
+            font-size: 12px;
+        }
+
+        /* =========================================================
+           DISCLAIMER
+        ========================================================= */
+
+        .disclaimer {
+            margin-top: 20px;
+            color: #94a3b8;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            margin-top: 40px;
+            border-top: 1px solid var(--border);
+            background: white;
+        }
+
+        .footer-inner {
+            max-width: 1180px;
+            margin: auto;
+            padding: 25px 24px;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* =========================================================
+           RESPONSIVE DESIGN
+        ========================================================= */
+
+        @media (max-width: 850px) {
+
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .results-card {
+                position: static;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .topbar-inner {
+                padding: 15px 18px;
+            }
+
+            .brand {
+                display: none;
+            }
+
+            .page-header {
+                padding: 30px 18px 18px;
+            }
+
+            .container {
+                padding: 8px 18px 40px;
+            }
+
+            .form-card,
+            .results-header,
+            .main-result,
+            .breakdown {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .affordability-box {
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+
+            .button-row {
+                flex-direction: column;
+            }
+
+            .reset-btn {
+                width: 100%;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
-
 
 <body>
 
+    <!-- =========================================================
+         TOP BAR
+    ========================================================= -->
 
-<!-- =========================================================
-     HEADER
-     ========================================================= -->
+    <header class="topbar">
+        <div class="topbar-inner">
 
-<header class="topbar">
+            <!-- Back to Utiliverse -->
+            <a href="/" class="back-link">
+                &larr; Back to Utiliverse
+            </a>
 
-    <div class="topbar-inner">
-
-        <div class="logo">
-            Home<span>Wise</span>
-        </div>
-
-        <div class="topbar-tag">
-            Smarter home-buying estimates
-        </div>
-
-    </div>
-
-</header>
-
-
-
-<main class="container">
-
-
-<!-- =========================================================
-     HERO
-     ========================================================= -->
-
-<section class="hero">
-
-    <div class="hero-grid">
-
-        <div>
-
-            <h1>
-                Find a home price that fits your numbers.
-            </h1>
-
-            <p>
-                Explore your estimated buying range using your income,
-                existing debt, down payment, mortgage rate and the real
-                monthly costs that come with owning a home.
-            </p>
-
-        </div>
-
-
-        <div class="hero-badge">
-
-            <div class="hero-badge-title">
-                Planning principle
-            </div>
-
-            <div class="hero-badge-value">
-                Payment ≠ Mortgage
-            </div>
-
-            <div class="hero-badge-text">
-                Taxes, insurance, HOA fees and mortgage insurance can
-                materially change the payment you can actually afford.
+            <div class="brand">
+                <span>Utili</span>verse
             </div>
 
         </div>
-
-    </div>
-
-</section>
+    </header>
 
 
+    <!-- =========================================================
+         PAGE INTRO
+    ========================================================= -->
 
-<!-- =========================================================
-     MAIN CALCULATOR
-     ========================================================= -->
+    <section class="page-header">
 
-<section class="card">
-
-    <div class="card-header">
-
-        <div>
-
-            <h2>
-                Home affordability planner
-            </h2>
-
-            <p>
-                Adjust the assumptions below to build your estimated
-                maximum purchase price.
-            </p>
-
+        <div class="eyebrow">
+            Financial Planning Tool
         </div>
 
-    </div>
+        <h1>How Much Home Can You Comfortably Afford?</h1>
+
+        <p class="subtitle">
+            Build a personalized estimate using your income, existing
+            obligations, down payment, mortgage rate and expected
+            homeownership expenses.
+        </p>
+
+    </section>
 
 
-    <div class="card-body">
+    <!-- =========================================================
+         MAIN CALCULATOR
+    ========================================================= -->
 
+    <main class="container">
 
-        <!-- LOAN TYPE -->
+        <div class="calculator-grid">
 
-        <div class="loan-tabs">
+            <!-- =================================================
+                 LEFT: INPUTS
+            ================================================== -->
 
-            <button
-                class="loan-tab active"
-                data-loan="conventional"
-                onclick="setLoanType('conventional')"
-            >
-                Conventional
-                <small>Typical conventional financing</small>
-            </button>
+            <section class="card form-card">
 
-
-            <button
-                class="loan-tab"
-                data-loan="fha"
-                onclick="setLoanType('fha')"
-            >
-                FHA
-                <small>Government-insured option</small>
-            </button>
-
-
-            <button
-                class="loan-tab"
-                data-loan="va"
-                onclick="setLoanType('va')"
-            >
-                VA
-                <small>Eligible borrowers</small>
-            </button>
-
-
-            <button
-                class="loan-tab"
-                data-loan="usda"
-                onclick="setLoanType('usda')"
-            >
-                USDA
-                <small>Eligible rural properties</small>
-            </button>
-
-        </div>
-
-
-
-        <!-- FORM -->
-
-        <div class="form-grid">
-
-
-            <!-- INCOME -->
-
-            <div class="field">
-
-                <label for="income">
-                    Annual gross income
-                </label>
-
-                <div class="input-wrap">
-
-                    <span class="input-prefix">$</span>
-
-                    <input
-                        id="income"
-                        type="number"
-                        min="0"
-                        value="90000"
-                        oninput="syncAndCalculate()"
-                    >
-
+                <div class="section-heading">
+                    <h2>Your financial picture</h2>
+                    <p>
+                        Enter approximate figures. You can change any value
+                        and recalculate whenever you like.
+                    </p>
                 </div>
 
-                <div class="field-help">
-                    Income before taxes and deductions.
-                </div>
 
-            </div>
+                <!-- INCOME -->
 
+                <div class="form-section">
 
-
-            <!-- DEBT -->
-
-            <div class="field">
-
-                <label for="debts">
-                    Monthly recurring debt
-                </label>
-
-                <div class="input-wrap">
-
-                    <span class="input-prefix">$</span>
-
-                    <input
-                        id="debts"
-                        type="number"
-                        min="0"
-                        value="500"
-                        oninput="syncAndCalculate()"
-                    >
-
-                </div>
-
-                <div class="field-help">
-                    Auto loans, student loans, cards and similar debt.
-                </div>
-
-            </div>
-
-
-
-            <!-- DOWN PAYMENT -->
-
-            <div class="field">
-
-                <label>
-                    Down payment
-                </label>
-
-                <div class="slider-line">
-
-                    <input
-                        id="downSlider"
-                        type="range"
-                        min="0"
-                        max="300000"
-                        step="1000"
-                        value="40000"
-                        oninput="syncDownFromSlider()"
-                    >
-
-                    <div class="input-wrap">
-
-                        <span class="input-prefix">$</span>
-
-                        <input
-                            id="downPayment"
-                            type="number"
-                            min="0"
-                            value="40000"
-                            oninput="syncDownFromInput()"
-                        >
-
+                    <div class="form-section-title">
+                        Income & monthly obligations
                     </div>
 
-                </div>
-
-                <div class="field-help">
-                    Cash planned toward the purchase price.
-                </div>
-
-            </div>
-
-
-
-            <!-- RATE -->
-
-            <div class="field">
-
-                <label>
-                    Mortgage rate
-                </label>
-
-                <div class="slider-line">
-
-                    <input
-                        id="rateSlider"
-                        type="range"
-                        min="0"
-                        max="15"
-                        step=".01"
-                        value="6.50"
-                        oninput="syncRateFromSlider()"
-                    >
-
-                    <div class="input-wrap input-suffix-wrap">
-
-                        <input
-                            id="rate"
-                            type="number"
-                            min="0"
-                            max="20"
-                            step=".01"
-                            value="6.50"
-                            oninput="syncRateFromInput()"
-                        >
-
-                        <span class="input-suffix">%</span>
-
-                    </div>
-
-                </div>
-
-                <div class="field-help">
-                    Enter your expected annual interest rate.
-                </div>
-
-            </div>
-
-
-
-            <!-- TERM -->
-
-            <div class="field">
-
-                <label for="term">
-                    Mortgage term
-                </label>
-
-                <select
-                    id="term"
-                    onchange="calculate()"
-                >
-
-                    <option value="10">
-                        10 years
-                    </option>
-
-                    <option value="15">
-                        15 years
-                    </option>
-
-                    <option value="20">
-                        20 years
-                    </option>
-
-                    <option value="25">
-                        25 years
-                    </option>
-
-                    <option value="30" selected>
-                        30 years
-                    </option>
-
-                    <option value="40">
-                        40 years
-                    </option>
-
-                </select>
-
-                <div class="field-help">
-                    Longer terms generally reduce the monthly principal payment.
-                </div>
-
-            </div>
-
-
-
-            <!-- PROPERTY TAX -->
-
-            <div class="field">
-
-                <label for="taxRate">
-                    Property tax
-                </label>
-
-                <div class="input-wrap input-suffix-wrap">
-
-                    <input
-                        id="taxRate"
-                        type="number"
-                        min="0"
-                        step=".05"
-                        value="1.00"
-                        oninput="calculate()"
-                    >
-
-                    <span class="input-suffix">
-                        % / yr
-                    </span>
-
-                </div>
-
-                <div class="field-help">
-                    Approximate annual tax as a percentage of value.
-                </div>
-
-            </div>
-
-
-
-            <!-- INSURANCE -->
-
-            <div class="field">
-
-                <label for="insurance">
-                    Homeowners insurance
-                </label>
-
-                <div class="input-wrap">
-
-                    <span class="input-prefix">$</span>
-
-                    <input
-                        id="insurance"
-                        type="number"
-                        min="0"
-                        value="2400"
-                        oninput="calculate()"
-                    >
-
-                </div>
-
-                <div class="field-help">
-                    Estimated annual premium.
-                </div>
-
-            </div>
-
-
-
-            <!-- HOA -->
-
-            <div class="field">
-
-                <label for="hoa">
-                    HOA / condo dues
-                </label>
-
-                <div class="input-wrap">
-
-                    <span class="input-prefix">$</span>
-
-                    <input
-                        id="hoa"
-                        type="number"
-                        min="0"
-                        value="0"
-                        oninput="calculate()"
-                    >
-
-                </div>
-
-                <div class="field-help">
-                    Monthly community or condominium fee.
-                </div>
-
-            </div>
-
-
-
-            <!-- FRONT END -->
-
-            <div class="field">
-
-                <label for="frontDTI">
-                    Housing ratio
-                </label>
-
-                <div class="input-wrap input-suffix-wrap">
-
-                    <input
-                        id="frontDTI"
-                        type="number"
-                        min="10"
-                        max="50"
-                        value="28"
-                        oninput="calculate()"
-                    >
-
-                    <span class="input-suffix">%</span>
-
-                </div>
-
-                <div class="field-help">
-                    Maximum housing expense as a share of gross income.
-                </div>
-
-            </div>
-
-
-
-            <!-- BACK END -->
-
-            <div class="field">
-
-                <label for="backDTI">
-                    Total debt ratio
-                </label>
-
-                <div class="input-wrap input-suffix-wrap">
-
-                    <input
-                        id="backDTI"
-                        type="number"
-                        min="10"
-                        max="60"
-                        value="36"
-                        oninput="calculate()"
-                    >
-
-                    <span class="input-suffix">%</span>
-
-                </div>
-
-                <div class="field-help">
-                    Housing expense plus recurring monthly debt.
-                </div>
-
-            </div>
-
-
-
-            <!-- CLOSING COST -->
-
-            <div class="field">
-
-                <label for="closingRate">
-                    Closing costs
-                </label>
-
-                <div class="input-wrap input-suffix-wrap">
-
-                    <input
-                        id="closingRate"
-                        type="number"
-                        min="0"
-                        max="15"
-                        step=".1"
-                        value="3"
-                        oninput="calculate()"
-                    >
-
-                    <span class="input-suffix">%</span>
-
-                </div>
-
-                <div class="field-help">
-                    Planning estimate based on purchase price.
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- ADVANCED -->
-
-        <div class="advanced-toggle">
-
-            <div
-                class="advanced-head"
-                onclick="toggleAdvanced()"
-            >
-
-                <span>
-                    Advanced loan assumptions
-                </span>
-
-                <span id="advancedArrow">
-                    +
-                </span>
-
-            </div>
-
-
-            <div
-                class="advanced-content"
-                id="advancedContent"
-            >
-
-                <div class="form-grid">
-
-
-                    <!-- FHA MIP -->
-
-                    <div
-                        class="field"
-                        id="fhaFields"
-                    >
-
-                        <label for="fhaUpfront">
-                            FHA upfront MIP
-                        </label>
-
-                        <div class="input-wrap input-suffix-wrap">
-
-                            <input
-                                id="fhaUpfront"
-                                type="number"
-                                value="1.75"
-                                step=".01"
-                                oninput="calculate()"
-                            >
-
-                            <span class="input-suffix">%</span>
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label for="income">
+                                Gross monthly income
+                            </label>
+
+                            <div class="input-wrapper">
+                                <span class="prefix">$</span>
+
+                                <input
+                                    id="income"
+                                    class="currency"
+                                    type="number"
+                                    value="7000"
+                                    min="0"
+                                    step="100"
+                                >
+                            </div>
+
+                            <span class="helper">
+                                Income before taxes and deductions
+                            </span>
 
                         </div>
 
-                        <div class="field-help">
-                            Planning assumption; verify current program rules.
-                        </div>
 
-                    </div>
+                        <div class="form-group">
 
+                            <label for="debts">
+                                Monthly debt payments
+                            </label>
 
+                            <div class="input-wrapper">
+                                <span class="prefix">$</span>
 
-                    <!-- FHA ANNUAL -->
+                                <input
+                                    id="debts"
+                                    class="currency"
+                                    type="number"
+                                    value="700"
+                                    min="0"
+                                    step="25"
+                                >
+                            </div>
 
-                    <div
-                        class="field"
-                        id="fhaAnnualField"
-                    >
+                            <span class="helper">
+                                Cars, credit cards, loans, etc.
+                            </span>
 
-                        <label for="fhaAnnual">
-                            FHA annual MIP
-                        </label>
-
-                        <div class="input-wrap input-suffix-wrap">
-
-                            <input
-                                id="fhaAnnual"
-                                type="number"
-                                value=".55"
-                                step=".01"
-                                oninput="calculate()"
-                            >
-
-                            <span class="input-suffix">% / yr</span>
-
-                        </div>
-
-                        <div class="field-help">
-                            Estimated annual insurance factor.
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- VA FUNDING -->
-
-                    <div
-                        class="field"
-                        id="vaField"
-                    >
-
-                        <label for="vaFunding">
-                            VA funding fee
-                        </label>
-
-                        <div class="input-wrap input-suffix-wrap">
-
-                            <input
-                                id="vaFunding"
-                                type="number"
-                                value="2.15"
-                                step=".01"
-                                oninput="calculate()"
-                            >
-
-                            <span class="input-suffix">%</span>
-
-                        </div>
-
-                        <div class="field-help">
-                            Planning assumption; exemptions may apply.
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- USDA -->
-
-                    <div
-                        class="field"
-                        id="usdaField"
-                    >
-
-                        <label for="usdaGuarantee">
-                            USDA guarantee fee
-                        </label>
-
-                        <div class="input-wrap input-suffix-wrap">
-
-                            <input
-                                id="usdaGuarantee"
-                                type="number"
-                                value="1.00"
-                                step=".01"
-                                oninput="calculate()"
-                            >
-
-                            <span class="input-suffix">%</span>
-
-                        </div>
-
-                        <div class="field-help">
-                            Planning assumption; verify current program terms.
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- MAINTENANCE -->
-
-                    <div class="field">
-
-                        <label for="maintenanceRate">
-                            Maintenance reserve
-                        </label>
-
-                        <div class="input-wrap input-suffix-wrap">
-
-                            <input
-                                id="maintenanceRate"
-                                type="number"
-                                value="1"
-                                step=".1"
-                                min="0"
-                                oninput="calculate()"
-                            >
-
-                            <span class="input-suffix">% / yr</span>
-
-                        </div>
-
-                        <div class="field-help">
-                            Optional reserve for repairs and upkeep.
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- RESERVES -->
-
-                    <div class="field">
-
-                        <label for="cashReserve">
-                            Extra cash reserve
-                        </label>
-
-                        <div class="input-wrap">
-
-                            <span class="input-prefix">$</span>
-
-                            <input
-                                id="cashReserve"
-                                type="number"
-                                value="10000"
-                                min="0"
-                                oninput="calculate()"
-                            >
-
-                        </div>
-
-                        <div class="field-help">
-                            Cash you want left after closing.
                         </div>
 
                     </div>
 
                 </div>
 
-            </div>
 
-        </div>
+                <!-- DOWN PAYMENT -->
 
+                <div class="form-section">
 
+                    <div class="form-section-title">
+                        Purchase & financing
+                    </div>
 
-        <!-- BUTTONS -->
+                    <div class="form-grid">
 
-        <div class="actions">
+                        <div class="form-group">
 
-            <button
-                class="btn btn-primary"
-                onclick="calculate()"
-            >
-                Recalculate
-            </button>
+                            <label for="downPayment">
+                                Down payment
+                            </label>
 
-            <button
-                class="btn btn-secondary"
-                onclick="resetCalculator()"
-            >
-                Restore Defaults
-            </button>
+                            <div class="input-wrapper">
+                                <span class="prefix">$</span>
 
-        </div>
+                                <input
+                                    id="downPayment"
+                                    class="currency"
+                                    type="number"
+                                    value="50000"
+                                    min="0"
+                                    step="1000"
+                                >
+                            </div>
 
-
-
-        <!-- =================================================
-             RESULTS
-             ================================================= -->
-
-        <div class="results">
+                        </div>
 
 
-            <!-- MAIN RESULT -->
+                        <div class="form-group">
 
-            <div>
+                            <label for="rate">
+                                Estimated interest rate
+                            </label>
 
-                <div class="result-hero">
+                            <div class="input-wrapper">
 
-                    <div class="result-kicker">
+                                <input
+                                    id="rate"
+                                    type="number"
+                                    value="6.50"
+                                    min="0"
+                                    max="20"
+                                    step="0.05"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="term">
+                                Mortgage term
+                            </label>
+
+                            <select id="term">
+
+                                <option value="30" selected>
+                                    30 years
+                                </option>
+
+                                <option value="20">
+                                    20 years
+                                </option>
+
+                                <option value="15">
+                                    15 years
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="propertyTax">
+                                Annual property tax
+                            </label>
+
+                            <div class="input-wrapper">
+                                <span class="prefix">$</span>
+
+                                <input
+                                    id="propertyTax"
+                                    class="currency"
+                                    type="number"
+                                    value="5000"
+                                    min="0"
+                                    step="100"
+                                >
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- HOME EXPENSES -->
+
+                <div class="form-section">
+
+                    <div class="form-section-title">
+                        Other housing costs
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label for="insurance">
+                                Annual homeowners insurance
+                            </label>
+
+                            <div class="input-wrapper">
+                                <span class="prefix">$</span>
+
+                                <input
+                                    id="insurance"
+                                    class="currency"
+                                    type="number"
+                                    value="2400"
+                                    min="0"
+                                    step="100"
+                                >
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="hoa">
+                                Monthly HOA / community fee
+                            </label>
+
+                            <div class="input-wrapper">
+                                <span class="prefix">$</span>
+
+                                <input
+                                    id="hoa"
+                                    class="currency"
+                                    type="number"
+                                    value="100"
+                                    min="0"
+                                    step="25"
+                                >
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group full">
+
+                            <label for="maintenance">
+                                Monthly maintenance reserve
+                            </label>
+
+                            <div class="input-wrapper">
+                                <span class="prefix">$</span>
+
+                                <input
+                                    id="maintenance"
+                                    class="currency"
+                                    type="number"
+                                    value="150"
+                                    min="0"
+                                    step="25"
+                                >
+                            </div>
+
+                            <span class="helper">
+                                Optional amount set aside for repairs and upkeep.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BUTTONS -->
+
+                <div class="button-row">
+
+                    <button
+                        class="calculate-btn"
+                        onclick="calculateAffordability()"
+                    >
+                        Calculate My Home Budget
+                    </button>
+
+                    <button
+                        class="reset-btn"
+                        onclick="resetCalculator()"
+                    >
+                        Reset
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 RIGHT: RESULTS
+            ================================================== -->
+
+            <section class="card results-card">
+
+                <div class="results-header">
+
+                    <h2>Your estimated home budget</h2>
+
+                    <p>
+                        This is an estimate based on the information you entered.
+                    </p>
+
+                </div>
+
+
+                <div class="main-result">
+
+                    <div class="result-label">
                         Estimated maximum purchase price
                     </div>
 
                     <div
                         class="result-price"
-                        id="maxPrice"
+                        id="homePrice"
                     >
                         $0
                     </div>
 
-                    <div
-                        class="result-description"
-                        id="resultDescription"
-                    >
-                        Based on the assumptions you entered.
-                    </div>
-
-
-                    <div class="result-actions">
-
-                        <button
-                            class="btn"
-                            onclick="window.print()"
-                        >
-                            Print Estimate
-                        </button>
-
-                        <button
-                            class="btn"
-                            onclick="scrollToBudget()"
-                        >
-                            Try Monthly Budget
-                        </button>
-
+                    <div class="result-note">
+                        A comfortable target may be lower depending on your
+                        savings and lifestyle.
                     </div>
 
                 </div>
 
 
-                <!-- RANGE -->
-
-                <div class="range-card">
-
-                    <div class="range-title">
-                        Your estimated buying range
-                    </div>
-
-                    <div class="range-values">
-
-                        <div class="range-value">
-
-                            <strong id="comfortablePrice">
-                                $0
-                            </strong>
-
-                            <span>
-                                Conservative target
-                            </span>
-
-                        </div>
-
-
-                        <div class="range-value">
-
-                            <strong id="maxRangePrice">
-                                $0
-                            </strong>
-
-                            <span>
-                                Upper planning limit
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- STATS -->
-
-            <div>
-
-                <div class="stat-grid">
-
-
-                    <div class="stat">
-
-                        <div class="stat-label">
-                            Estimated loan
-                        </div>
-
-                        <div
-                            class="stat-value"
-                            id="loanAmount"
-                        >
-                            $0
-                        </div>
-
-                    </div>
-
-
-                    <div class="stat">
-
-                        <div class="stat-label">
-                            Down payment
-                        </div>
-
-                        <div
-                            class="stat-value"
-                            id="downResult"
-                        >
-                            $0
-                        </div>
-
-                    </div>
-
-
-                    <div class="stat">
-
-                        <div class="stat-label">
-                            Monthly housing
-                        </div>
-
-                        <div
-                            class="stat-value"
-                            id="monthlyHousing"
-                        >
-                            $0
-                        </div>
-
-                    </div>
-
-
-                    <div class="stat">
-
-                        <div class="stat-label">
-                            Cash to close
-                        </div>
-
-                        <div
-                            class="stat-value"
-                            id="cashToClose"
-                        >
-                            $0
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-
-                <!-- DTI -->
-
-                <div class="dti-box">
-
-                    <div class="dti-header">
-
-                        <span class="dti-title">
-                            Estimated total debt ratio
-                        </span>
-
-                        <span
-                            class="dti-value"
-                            id="dtiValue"
-                        >
-                            0%
-                        </span>
-
-                    </div>
-
-
-                    <div class="dti-track">
-
-                        <div
-                            class="dti-fill"
-                            id="dtiFill"
-                        ></div>
-
-                    </div>
-
-
-                    <div
-                        class="dti-message"
-                        id="dtiMessage"
-                    >
-                        Enter your information to see the estimate.
-                    </div>
-
-                </div>
-
-
-                <!-- PAYMENT -->
+                <!-- BREAKDOWN -->
 
                 <div class="breakdown">
 
-                    <div class="breakdown-header">
-                        Estimated monthly ownership cost
+                    <div class="breakdown-title">
+                        Estimated monthly housing budget
                     </div>
-
-
-                    <div class="payment-bar">
-
-                        <div
-                            class="payment-segment"
-                            id="barPI"
-                            style="background:#1976d2"
-                        ></div>
-
-                        <div
-                            class="payment-segment"
-                            id="barTax"
-                            style="background:#159570"
-                        ></div>
-
-                        <div
-                            class="payment-segment"
-                            id="barInsurance"
-                            style="background:#ed8b2f"
-                        ></div>
-
-                        <div
-                            class="payment-segment"
-                            id="barHOA"
-                            style="background:#7657d9"
-                        ></div>
-
-                        <div
-                            class="payment-segment"
-                            id="barMI"
-                            style="background:#d64545"
-                        ></div>
-
-                        <div
-                            class="payment-segment"
-                            id="barMaintenance"
-                            style="background:#8a9aaa"
-                        ></div>
-
-                    </div>
-
 
                     <div class="breakdown-row">
 
-                        <div class="breakdown-name">
-
-                            <span class="dot"></span>
-
+                        <span class="breakdown-label">
                             Principal & interest
-
-                        </div>
-
-                        <strong id="piResult">
-                            $0
-                        </strong>
-
-                    </div>
-
-
-                    <div class="breakdown-row">
-
-                        <div class="breakdown-name">
-
-                            <span class="dot green"></span>
-
-                            Property taxes
-
-                        </div>
-
-                        <strong id="taxResult">
-                            $0
-                        </strong>
-
-                    </div>
-
-
-                    <div class="breakdown-row">
-
-                        <div class="breakdown-name">
-
-                            <span class="dot orange"></span>
-
-                            Homeowners insurance
-
-                        </div>
-
-                        <strong id="insuranceResult">
-                            $0
-                        </strong>
-
-                    </div>
-
-
-                    <div class="breakdown-row">
-
-                        <div class="breakdown-name">
-
-                            <span class="dot purple"></span>
-
-                            HOA / condo
-
-                        </div>
-
-                        <strong id="hoaResult">
-                            $0
-                        </strong>
-
-                    </div>
-
-
-                    <div class="breakdown-row">
-
-                        <div class="breakdown-name">
-
-                            <span class="dot red"></span>
-
-                            Mortgage insurance
-
-                        </div>
-
-                        <strong id="miResult">
-                            $0
-                        </strong>
-
-                    </div>
-
-
-                    <div class="breakdown-row">
-
-                        <div class="breakdown-name">
-
-                            <span
-                                class="dot"
-                                style="background:#8a9aaa"
-                            ></span>
-
-                            Maintenance reserve
-
-                        </div>
-
-                        <strong id="maintenanceResult">
-                            $0
-                        </strong>
-
-                    </div>
-
-
-                    <div class="breakdown-row">
-
-                        <span>
-                            Total monthly housing cost
                         </span>
 
-                        <strong id="totalResult">
+                        <span
+                            class="breakdown-value"
+                            id="principalInterest"
+                        >
                             $0
-                        </strong>
+                        </span>
+
+                    </div>
+
+
+                    <div class="breakdown-row">
+
+                        <span class="breakdown-label">
+                            Property taxes
+                        </span>
+
+                        <span
+                            class="breakdown-value"
+                            id="monthlyTax"
+                        >
+                            $0
+                        </span>
+
+                    </div>
+
+
+                    <div class="breakdown-row">
+
+                        <span class="breakdown-label">
+                            Homeowners insurance
+                        </span>
+
+                        <span
+                            class="breakdown-value"
+                            id="monthlyInsurance"
+                        >
+                            $0
+                        </span>
+
+                    </div>
+
+
+                    <div class="breakdown-row">
+
+                        <span class="breakdown-label">
+                            HOA / community fee
+                        </span>
+
+                        <span
+                            class="breakdown-value"
+                            id="monthlyHoa"
+                        >
+                            $0
+                        </span>
+
+                    </div>
+
+
+                    <div class="breakdown-row">
+
+                        <span class="breakdown-label">
+                            Maintenance reserve
+                        </span>
+
+                        <span
+                            class="breakdown-value"
+                            id="monthlyMaintenance"
+                        >
+                            $0
+                        </span>
+
+                    </div>
+
+
+                    <div class="breakdown-row">
+
+                        <span class="breakdown-label">
+                            Total estimated housing cost
+                        </span>
+
+                        <span
+                            class="breakdown-value"
+                            id="totalHousing"
+                        >
+                            $0
+                        </span>
 
                     </div>
 
                 </div>
 
-            </div>
 
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     MONTHLY BUDGET CALCULATOR
-     ========================================================= -->
-
-<section
-    class="card budget-card"
-    id="monthlyBudget"
->
-
-    <div class="card-header">
-
-        <div>
-
-            <h2>
-                Start with the payment you want
-            </h2>
-
-            <p>
-                Instead of starting with income, enter the monthly housing
-                amount you would actually like to stay within.
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <div class="card-body">
-
-        <div class="form-grid">
-
-
-            <div class="field">
-
-                <label for="budget">
-                    Desired monthly housing budget
-                </label>
-
-                <div class="input-wrap">
-
-                    <span class="input-prefix">$</span>
-
-                    <input
-                        id="budget"
-                        type="number"
-                        value="2500"
-                        min="0"
-                        oninput="calculateBudget()"
-                    >
-
-                </div>
-
-            </div>
-
-
-            <div class="field">
-
-                <label for="budgetDown">
-                    Down payment
-                </label>
-
-                <div class="input-wrap">
-
-                    <span class="input-prefix">$</span>
-
-                    <input
-                        id="budgetDown"
-                        type="number"
-                        value="40000"
-                        min="0"
-                        oninput="calculateBudget()"
-                    >
-
-                </div>
-
-            </div>
-
-
-            <div class="field">
-
-                <label for="budgetRate">
-                    Interest rate
-                </label>
-
-                <div class="input-wrap input-suffix-wrap">
-
-                    <input
-                        id="budgetRate"
-                        type="number"
-                        value="6.50"
-                        step=".01"
-                        oninput="calculateBudget()"
-                    >
-
-                    <span class="input-suffix">%</span>
-
-                </div>
-
-            </div>
-
-
-            <div class="field">
-
-                <label for="budgetTerm">
-                    Loan term
-                </label>
-
-                <select
-                    id="budgetTerm"
-                    onchange="calculateBudget()"
-                >
-
-                    <option value="15">
-                        15 years
-                    </option>
-
-                    <option value="20">
-                        20 years
-                    </option>
-
-                    <option value="25">
-                        25 years
-                    </option>
-
-                    <option value="30" selected>
-                        30 years
-                    </option>
-
-                    <option value="40">
-                        40 years
-                    </option>
-
-                </select>
-
-            </div>
-
-
-            <div class="field">
-
-                <label for="budgetTax">
-                    Property tax
-                </label>
-
-                <div class="input-wrap input-suffix-wrap">
-
-                    <input
-                        id="budgetTax"
-                        type="number"
-                        value="1"
-                        step=".05"
-                        oninput="calculateBudget()"
-                    >
-
-                    <span class="input-suffix">% / yr</span>
-
-                </div>
-
-            </div>
-
-
-            <div class="field">
-
-                <label for="budgetInsurance">
-                    Annual insurance
-                </label>
-
-                <div class="input-wrap">
-
-                    <span class="input-prefix">$</span>
-
-                    <input
-                        id="budgetInsurance"
-                        type="number"
-                        value="2400"
-                        min="0"
-                        oninput="calculateBudget()"
-                    >
-
-                </div>
-
-            </div>
-
-
-            <div class="field">
-
-                <label for="budgetHOA">
-                    Monthly HOA
-                </label>
-
-                <div class="input-wrap">
-
-                    <span class="input-prefix">$</span>
-
-                    <input
-                        id="budgetHOA"
-                        type="number"
-                        value="0"
-                        min="0"
-                        oninput="calculateBudget()"
-                    >
-
-                </div>
-
-            </div>
-
-
-            <div class="field">
-
-                <label for="budgetMaintenance">
-                    Maintenance reserve
-                </label>
-
-                <div class="input-wrap input-suffix-wrap">
-
-                    <input
-                        id="budgetMaintenance"
-                        type="number"
-                        value="1"
-                        step=".1"
-                        oninput="calculateBudget()"
-                    >
-
-                    <span class="input-suffix">% / yr</span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="results">
-
-
-            <div class="result-hero">
-
-                <div class="result-kicker">
-                    Home price supported by this budget
-                </div>
+                <!-- AFFORDABILITY STATUS -->
 
                 <div
-                    class="result-price"
-                    id="budgetPrice"
+                    class="affordability-box"
+                    id="affordabilityBox"
                 >
-                    $0
-                </div>
 
-                <div class="result-description">
-                    This estimate works backward from your desired monthly
-                    ownership cost.
-                </div>
-
-            </div>
-
-
-            <div class="stat-grid">
-
-                <div class="stat">
-
-                    <div class="stat-label">
-                        Estimated mortgage
+                    <div
+                        class="affordability-title"
+                        id="affordabilityTitle"
+                    >
+                        Within the target range
                     </div>
 
                     <div
-                        class="stat-value"
-                        id="budgetLoanResult"
+                        class="affordability-text"
+                        id="affordabilityText"
                     >
-                        $0
+                        Your estimated housing payment is being compared
+                        with your income and existing debt.
                     </div>
 
                 </div>
 
-
-                <div class="stat">
-
-                    <div class="stat-label">
-                        Down payment
-                    </div>
-
-                    <div
-                        class="stat-value"
-                        id="budgetDownResult"
-                    >
-                        $0
-                    </div>
-
-                </div>
-
-
-                <div class="stat">
-
-                    <div class="stat-label">
-                        Monthly budget
-                    </div>
-
-                    <div
-                        class="stat-value"
-                        id="budgetMonthlyResult"
-                    >
-                        $0
-                    </div>
-
-                </div>
-
-
-                <div class="stat">
-
-                    <div class="stat-label">
-                        Mortgage insurance
-                    </div>
-
-                    <div
-                        class="stat-value"
-                        id="budgetMIResult"
-                    >
-                        $0
-                    </div>
-
-                </div>
-
-            </div>
+            </section>
 
         </div>
 
-    </div>
 
-</section>
+        <!-- =====================================================
+             EDUCATIONAL INFORMATION
+        ====================================================== -->
 
+        <section class="info-section">
 
-
-<!-- =========================================================
-     EDUCATIONAL SECTION
-     ========================================================= -->
-
-<section class="card">
-
-    <div class="card-header">
-
-        <div>
-
-            <h2>
-                What affects your buying power?
-            </h2>
+            <h2>Understanding your estimate</h2>
 
             <p>
-                A home price is only one piece of the affordability puzzle.
+                A mortgage payment is only one piece of the cost of owning
+                a home. Property taxes, insurance, association fees,
+                maintenance and your existing financial commitments can
+                significantly change what feels affordable each month.
             </p>
 
-        </div>
+            <div class="info-grid">
 
-    </div>
+                <div class="info-box">
 
+                    <h3>Income matters</h3>
 
-    <div class="card-body">
+                    <p>
+                        Lenders generally compare your housing costs and
+                        other monthly debts against your gross income when
+                        evaluating borrowing capacity.
+                    </p>
 
-        <div class="info-grid">
-
-
-            <div class="info-tile">
-
-                <div class="info-icon">
-                    $
                 </div>
 
-                <h3>
-                    Income
-                </h3>
 
-                <p>
-                    Gross qualifying income provides the starting point
-                    for estimating how much monthly housing expense may
-                    fit within a selected debt ratio.
-                </p>
+                <div class="info-box">
+
+                    <h3>Debt affects borrowing power</h3>
+
+                    <p>
+                        Existing car loans, student loans, credit cards and
+                        other obligations can reduce the amount available
+                        for a new mortgage.
+                    </p>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h3>Leave room in your budget</h3>
+
+                    <p>
+                        Qualifying for a mortgage does not necessarily mean
+                        the resulting payment will be comfortable for your
+                        household.
+                    </p>
+
+                </div>
 
             </div>
 
 
-            <div class="info-tile">
+            <div class="disclaimer">
 
-                <div class="info-icon">
-                    %
-                </div>
-
-                <h3>
-                    Interest rate
-                </h3>
-
-                <p>
-                    A higher rate generally means a larger payment for the
-                    same loan balance, reducing the amount of principal
-                    supported by a fixed budget.
-                </p>
+                This calculator provides an educational estimate and is not
+                a mortgage approval, lending decision or financial recommendation.
+                Actual borrowing limits and monthly payments may vary based on
+                credit history, lender requirements, loan program, insurance,
+                taxes, property location and other factors.
 
             </div>
 
+        </section>
 
-            <div class="info-tile">
+    </main>
 
-                <div class="info-icon">
-                    ↓
-                </div>
 
-                <h3>
-                    Down payment
-                </h3>
+    <!-- =========================================================
+         FOOTER
+    ========================================================= -->
 
-                <p>
-                    More cash upfront can reduce the mortgage balance and,
-                    depending on the loan structure, may reduce mortgage
-                    insurance.
-                </p>
+    <footer>
 
+        <div class="footer-inner">
+
+            <div>
+                © 2026 Utiliverse
             </div>
 
-
-            <div class="info-tile">
-
-                <div class="info-icon">
-                    T
-                </div>
-
-                <h3>
-                    Property taxes
-                </h3>
-
-                <p>
-                    Property taxes vary substantially by location and can
-                    make two similarly priced homes have very different
-                    monthly costs.
-                </p>
-
-            </div>
-
-
-            <div class="info-tile">
-
-                <div class="info-icon">
-                    H
-                </div>
-
-                <h3>
-                    Insurance
-                </h3>
-
-                <p>
-                    Homeowners insurance depends on factors including the
-                    property, location, coverage and deductible.
-                </p>
-
-            </div>
-
-
-            <div class="info-tile">
-
-                <div class="info-icon">
-                    D
-                </div>
-
-                <h3>
-                    Existing debt
-                </h3>
-
-                <p>
-                    Car payments, student loans, credit cards and other
-                    recurring obligations can reduce the housing payment
-                    that fits within a selected total debt ratio.
-                </p>
-
+            <div>
+                Financial tools for everyday decisions.
             </div>
 
         </div>
 
+    </footer>
 
-        <div class="notice">
 
-            <strong>Planning disclaimer:</strong>
-            This calculator provides an educational estimate only. It does
-            not determine mortgage eligibility, guarantee an interest rate,
-            or represent a loan offer. Actual qualification can depend on
-            credit history, income documentation, reserves, property
-            characteristics, lender requirements, loan program rules and
-            other factors.
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================= -->
 
-        </div>
-
-    </div>
-
-</section>
-
-
-</main>
-
-
-<footer>
-
-    HomeWise &copy; 2026 &nbsp; | &nbsp;
-    Home affordability planning tool
-
-</footer>
-
-
-
-<script>
-
-/* =========================================================
-   HOMEWISE CALCULATOR ENGINE
-   ========================================================= */
-
-
-/* ---------------------------------------------------------
-   CURRENT LOAN TYPE
-   --------------------------------------------------------- */
-
-let currentLoan = "conventional";
-
-
-/* ---------------------------------------------------------
-   HELPER: GET NUMBER
-   --------------------------------------------------------- */
-
-function num(id) {
-
-    const el = document.getElementById(id);
-
-    if (!el) {
-        return 0;
-    }
-
-    const value = parseFloat(el.value);
-
-    return Number.isFinite(value)
-        ? value
-        : 0;
-}
-
-
-/* ---------------------------------------------------------
-   MONEY FORMAT
-   --------------------------------------------------------- */
-
-function money(value) {
-
-    if (!Number.isFinite(value)) {
-        value = 0;
-    }
-
-    return value.toLocaleString(
-        "en-US",
-        {
-            style: "currency",
-            currency: "USD",
-            maximumFractionDigits: 0
-        }
-    );
-}
-
-
-/* ---------------------------------------------------------
-   MORTGAGE PAYMENT
-   --------------------------------------------------------- */
-
-function mortgagePayment(
-    principal,
-    annualRate,
-    years
-) {
-
-    if (principal <= 0) {
-        return 0;
-    }
-
-    const months =
-        years * 12;
-
-    const monthlyRate =
-        annualRate / 100 / 12;
-
-
-    if (monthlyRate === 0) {
-
-        return principal / months;
-
-    }
-
-
-    return principal *
-        (
-            monthlyRate *
-            Math.pow(
-                1 + monthlyRate,
-                months
-            )
-        ) /
-        (
-            Math.pow(
-                1 + monthlyRate,
-                months
-            ) - 1
-        );
-}
-
-
-/* ---------------------------------------------------------
-   LOAN-SPECIFIC SETTINGS
-   --------------------------------------------------------- */
-
-function getLoanSettings() {
-
-    if (currentLoan === "conventional") {
-
-        return {
-
-            minDown: .03,
-
-            mortgageInsurance:
-                "conventional"
-
-        };
-
-    }
-
-
-    if (currentLoan === "fha") {
-
-        return {
-
-            minDown: .035,
-
-            mortgageInsurance:
-                "fha"
-
-        };
-
-    }
-
-
-    if (currentLoan === "va") {
-
-        return {
-
-            minDown: 0,
-
-            mortgageInsurance:
-                "none"
-
-        };
-
-    }
-
-
-    if (currentLoan === "usda") {
-
-        return {
-
-            minDown: 0,
-
-            mortgageInsurance:
-                "usda"
-
-        };
-
-    }
-
-}
-
-
-/* ---------------------------------------------------------
-   CALCULATE HOUSING COST
-   --------------------------------------------------------- */
-
-function calculateHousing(
-    homePrice,
-    downPayment,
-    rate,
-    term,
-    taxRate,
-    insurance,
-    hoa,
-    maintenanceRate
-) {
-
-    const settings =
-        getLoanSettings();
-
-
-    /*
-       Base loan
-    */
-
-    let baseLoan =
-        Math.max(
-            homePrice - downPayment,
-            0
-        );
-
-
-    /*
-       Some loan types may finance
-       an upfront insurance/funding charge.
-    */
-
-    let financedFee = 0;
-
-
-    if (currentLoan === "fha") {
-
-        const upfrontRate =
-            num("fhaUpfront") / 100;
-
-        financedFee =
-            baseLoan * upfrontRate;
-
-    }
-
-
-    if (currentLoan === "va") {
-
-        const fundingRate =
-            num("vaFunding") / 100;
-
-        financedFee =
-            baseLoan * fundingRate;
-
-    }
-
-
-    if (currentLoan === "usda") {
-
-        const guaranteeRate =
-            num("usdaGuarantee") / 100;
-
-        financedFee =
-            baseLoan * guaranteeRate;
-
-    }
-
-
-    const totalLoan =
-        baseLoan + financedFee;
-
-
-    /*
-       Principal + interest
-    */
-
-    const principalInterest =
-        mortgagePayment(
-            totalLoan,
-            rate,
-            term
-        );
-
-
-    /*
-       Property taxes
-    */
-
-    const monthlyTax =
-        homePrice *
-        (taxRate / 100) /
-        12;
-
-
-    /*
-       Insurance
-    */
-
-    const monthlyInsurance =
-        insurance / 12;
-
-
-    /*
-       HOA
-    */
-
-    const monthlyHOA =
-        hoa;
-
-
-    /*
-       Maintenance
-    */
-
-    const monthlyMaintenance =
-        homePrice *
-        (maintenanceRate / 100) /
-        12;
-
-
-    /*
-       Mortgage insurance
-    */
-
-    let monthlyMI = 0;
-
-
-    /* Conventional PMI */
-
-    if (
-        currentLoan === "conventional" &&
-        homePrice > 0 &&
-        downPayment < homePrice * .20
-    ) {
-
-        monthlyMI =
-            baseLoan *
-            .005 /
-            12;
-
-    }
-
-
-    /* FHA MIP */
-
-    if (currentLoan === "fha") {
-
-        const annual =
-            num("fhaAnnual") / 100;
-
-        monthlyMI =
-            baseLoan *
-            annual /
-            12;
-
-    }
-
-
-    /* USDA annual fee estimate */
-
-    if (currentLoan === "usda") {
+    <script>
 
         /*
-           USDA guarantee fee is handled
-           as an upfront estimate above.
-
-           This additional factor is a
-           simplified planning assumption.
-        */
-
-        monthlyMI =
-            baseLoan *
-            .0035 /
-            12;
-
-    }
-
-
-    const total =
-        principalInterest +
-        monthlyTax +
-        monthlyInsurance +
-        monthlyHOA +
-        monthlyMI +
-        monthlyMaintenance;
-
-
-    return {
-
-        baseLoan,
-
-        totalLoan,
-
-        financedFee,
-
-        principalInterest,
-
-        monthlyTax,
-
-        monthlyInsurance,
-
-        monthlyHOA,
-
-        monthlyMI,
-
-        monthlyMaintenance,
-
-        total
-
-    };
-
-}
-
-
-/* ---------------------------------------------------------
-   FIND MAX HOME PRICE
-   --------------------------------------------------------- */
-
-function findAffordablePrice() {
-
-    const income =
-        num("income");
-
-    const debts =
-        num("debts");
-
-    const downPayment =
-        num("downPayment");
-
-    const rate =
-        num("rate");
-
-    const term =
-        num("term");
-
-    const taxRate =
-        num("taxRate");
-
-    const insurance =
-        num("insurance");
-
-    const hoa =
-        num("hoa");
-
-    const maintenanceRate =
-        num("maintenanceRate");
-
-
-    if (income <= 0) {
-
-        return {
-
-            price: 0,
-
-            costs: null,
-
-            dti: 0
-
-        };
-
-    }
-
-
-    const monthlyIncome =
-        income / 12;
-
-
-    /*
-       Housing limit
-    */
-
-    const housingLimit =
-        monthlyIncome *
-        (num("frontDTI") / 100);
-
-
-    /*
-       Total-debt limit
-    */
-
-    const totalLimit =
-        monthlyIncome *
-        (num("backDTI") / 100);
-
-
-    const debtLimitedHousing =
-        totalLimit - debts;
-
-
-    /*
-       Use the tighter constraint.
-    */
-
-    const allowedHousing =
-        Math.min(
-            housingLimit,
-            debtLimitedHousing
-        );
-
-
-    if (allowedHousing <= 0) {
-
-        return {
-
-            price: 0,
-
-            costs: null,
-
-            dti: 0
-
-        };
-
-    }
-
-
-    /*
-       Binary search for maximum price.
-    */
-
-    let low = 0;
-
-    let high =
-        Math.max(
-            income * 12,
-            downPayment + 100000
-        );
-
-
-    for (
-        let i = 0;
-        i < 100;
-        i++
-    ) {
-
-        const middle =
-            (low + high) / 2;
-
-
-        const costs =
-            calculateHousing(
-                middle,
-                Math.min(
-                    downPayment,
-                    middle
-                ),
-                rate,
-                term,
-                taxRate,
-                insurance,
-                hoa,
-                maintenanceRate
+         * ========================================================
+         * UTILIVERSE HOME AFFORDABILITY CALCULATOR
+         * ========================================================
+         *
+         * The calculator uses:
+         *
+         * 1. Gross monthly income
+         * 2. Existing monthly debt
+         * 3. A target housing ratio of 28%
+         * 4. Mortgage interest rate
+         * 5. Mortgage term
+         * 6. Property taxes
+         * 7. Homeowners insurance
+         * 8. HOA fees
+         * 9. Maintenance reserve
+         *
+         * The remaining monthly housing budget is converted
+         * into an estimated mortgage principal.
+         *
+         * The down payment is then added to the estimated
+         * loan amount to produce an estimated purchase price.
+         * ========================================================
+         */
+
+
+        function getNumber(id) {
+
+            const value = parseFloat(
+                document.getElementById(id).value
             );
 
+            return isNaN(value) ? 0 : value;
+        }
 
-        if (
-            costs.total <=
-            allowedHousing
-        ) {
 
-            low =
-                middle;
+        function formatCurrency(value) {
 
-        } else {
-
-            high =
-                middle;
+            return new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+                maximumFractionDigits: 0
+            }).format(value);
 
         }
 
-    }
 
+        function calculateAffordability() {
 
-    const price =
-        low;
+            /* ---------------------------------------------
+               GET USER INPUT
+            --------------------------------------------- */
 
+            const income =
+                getNumber("income");
 
-    const actualDown =
-        Math.min(
-            downPayment,
-            price
-        );
+            const debts =
+                getNumber("debts");
 
+            const downPayment =
+                getNumber("downPayment");
 
-    const costs =
-        calculateHousing(
-            price,
-            actualDown,
-            rate,
-            term,
-            taxRate,
-            insurance,
-            hoa,
-            maintenanceRate
-        );
+            const annualRate =
+                getNumber("rate");
 
+            const termYears =
+                getNumber("term");
 
-    const totalDTI =
-        (
-            costs.total +
-            debts
-        ) /
-        monthlyIncome *
-        100;
+            const annualTax =
+                getNumber("propertyTax");
 
+            const annualInsurance =
+                getNumber("insurance");
 
-    return {
+            const hoa =
+                getNumber("hoa");
 
-        price,
+            const maintenance =
+                getNumber("maintenance");
 
-        costs,
 
-        dti:
-            totalDTI
+            /* ---------------------------------------------
+               BASIC VALIDATION
+            --------------------------------------------- */
 
-    };
+            if (income <= 0) {
 
-}
+                alert(
+                    "Please enter a valid monthly income."
+                );
 
+                return;
+            }
 
-/* ---------------------------------------------------------
-   UPDATE DTI DISPLAY
-   --------------------------------------------------------- */
 
-function updateDTI(dti) {
+            /* ---------------------------------------------
+               AFFORDABILITY ASSUMPTION
+               
+               28% of gross income is allocated toward
+               housing costs.
+            --------------------------------------------- */
 
-    const value =
-        document.getElementById(
-            "dtiValue"
-        );
+            const housingTarget =
+                income * 0.28;
 
-    const fill =
-        document.getElementById(
-            "dtiFill"
-        );
 
-    const message =
-        document.getElementById(
-            "dtiMessage"
-        );
+            /* ---------------------------------------------
+               MONTHLY NON-MORTGAGE COSTS
+            --------------------------------------------- */
 
+            const monthlyTax =
+                annualTax / 12;
 
-    value.textContent =
-        dti.toFixed(1) +
-        "%";
+            const monthlyInsurance =
+                annualInsurance / 12;
 
 
-    /*
-       Cap visual width at 60%.
-    */
+            const fixedHousingCosts =
+                monthlyTax +
+                monthlyInsurance +
+                hoa +
+                maintenance;
 
-    const width =
-        Math.min(
-            dti / 60 * 100,
-            100
-        );
 
+            /* ---------------------------------------------
+               AVAILABLE PRINCIPAL + INTEREST PAYMENT
+            --------------------------------------------- */
 
-    fill.style.width =
-        width + "%";
+            let principalInterest =
+                housingTarget -
+                fixedHousingCosts;
 
 
-    if (dti <= 30) {
+            /*
+             * Do not allow a negative mortgage payment.
+             */
 
-        fill.style.background =
-            "#159570";
+            if (principalInterest < 0) {
 
-        message.textContent =
-            "Conservative debt level based on this estimate.";
+                principalInterest = 0;
 
-    }
+            }
 
-    else if (dti <= 36) {
 
-        fill.style.background =
-            "#159570";
+            /* ---------------------------------------------
+               MORTGAGE CALCULATION
+            --------------------------------------------- */
 
-        message.textContent =
-            "Within a commonly used conservative planning range.";
+            const monthlyRate =
+                annualRate / 100 / 12;
 
-    }
+            const numberOfPayments =
+                termYears * 12;
 
-    else if (dti <= 43) {
+            let loanAmount = 0;
 
-        fill.style.background =
-            "#ed8b2f";
 
-        message.textContent =
-            "Higher debt burden. Review your full monthly budget carefully.";
+            /*
+             * Standard amortizing mortgage formula:
+             *
+             * Payment =
+             * P * r * (1+r)^n
+             * -----------------
+             * (1+r)^n - 1
+             *
+             * Rearranged to solve for P.
+             */
 
-    }
+            if (monthlyRate === 0) {
 
-    else {
+                loanAmount =
+                    principalInterest *
+                    numberOfPayments;
 
-        fill.style.background =
-            "#d64545";
+            } else {
 
-        message.textContent =
-            "High debt burden. Actual lender requirements may differ.";
+                loanAmount =
+                    principalInterest *
+                    (
+                        (1 + monthlyRate) **
+                        numberOfPayments - 1
+                    ) /
+                    (
+                        monthlyRate *
+                        (1 + monthlyRate) **
+                        numberOfPayments
+                    );
 
-    }
+            }
 
-}
 
+            /* ---------------------------------------------
+               ESTIMATED HOME PURCHASE PRICE
+            --------------------------------------------- */
 
-/* ---------------------------------------------------------
-   UPDATE PAYMENT BAR
-   --------------------------------------------------------- */
+            const estimatedHomePrice =
+                loanAmount +
+                downPayment;
 
-function updatePaymentBar(costs) {
 
-    if (!costs) {
-        return;
-    }
+            /* ---------------------------------------------
+               TOTAL MONTHLY HOUSING COST
+            --------------------------------------------- */
 
+            const totalHousing =
+                principalInterest +
+                fixedHousingCosts;
 
-    const total =
-        costs.total || 1;
 
+            /* ---------------------------------------------
+               DEBT-TO-INCOME CHECK
+            --------------------------------------------- */
 
-    const items = [
+            const totalDebtRatio =
+                (
+                    debts +
+                    totalHousing
+                ) / income;
 
-        ["barPI", costs.principalInterest],
 
-        ["barTax", costs.monthlyTax],
+            /* ---------------------------------------------
+               UPDATE RESULTS
+            --------------------------------------------- */
 
-        ["barInsurance", costs.monthlyInsurance],
+            document.getElementById("homePrice")
+                .textContent =
+                formatCurrency(
+                    estimatedHomePrice
+                );
 
-        ["barHOA", costs.monthlyHOA],
 
-        ["barMI", costs.monthlyMI],
+            document.getElementById("principalInterest")
+                .textContent =
+                formatCurrency(
+                    principalInterest
+                );
 
-        ["barMaintenance", costs.monthlyMaintenance]
 
-    ];
+            document.getElementById("monthlyTax")
+                .textContent =
+                formatCurrency(
+                    monthlyTax
+                );
 
 
-    items.forEach(
-        function(item) {
+            document.getElementById("monthlyInsurance")
+                .textContent =
+                formatCurrency(
+                    monthlyInsurance
+                );
 
-            const element =
+
+            document.getElementById("monthlyHoa")
+                .textContent =
+                formatCurrency(
+                    hoa
+                );
+
+
+            document.getElementById("monthlyMaintenance")
+                .textContent =
+                formatCurrency(
+                    maintenance
+                );
+
+
+            document.getElementById("totalHousing")
+                .textContent =
+                formatCurrency(
+                    totalHousing
+                );
+
+
+            /* ---------------------------------------------
+               AFFORDABILITY MESSAGE
+            --------------------------------------------- */
+
+            const box =
                 document.getElementById(
-                    item[0]
+                    "affordabilityBox"
                 );
 
-            const amount =
-                item[1];
+            const title =
+                document.getElementById(
+                    "affordabilityTitle"
+                );
+
+            const text =
+                document.getElementById(
+                    "affordabilityText"
+                );
 
 
-            element.style.width =
-                Math.max(
-                    0,
-                    amount / total * 100
-                ) + "%";
+            if (totalDebtRatio <= 0.36) {
+
+                box.classList.remove("warning");
+
+                title.textContent =
+                    "Comfortable target range";
+
+                text.textContent =
+                    "Based on the assumptions entered, your estimated housing cost leaves additional room for your other monthly obligations.";
+
+            }
+
+            else if (totalDebtRatio <= 0.43) {
+
+                box.classList.remove("warning");
+
+                title.textContent =
+                    "Moderate budget range";
+
+                text.textContent =
+                    "Your estimated housing and debt payments are approaching a higher portion of your income. Consider keeping additional cash reserves.";
+
+            }
+
+            else {
+
+                box.classList.add("warning");
+
+                title.textContent =
+                    "Consider a lower target";
+
+                text.textContent =
+                    "Your estimated housing and existing debt payments consume a larger share of monthly income. A lower purchase price may provide more breathing room.";
+
+            }
 
         }
-    );
 
-}
 
+        /* =========================================================
+           RESET CALCULATOR
+        ========================================================= */
 
-/* ---------------------------------------------------------
-   UPDATE MAIN RESULT
-   --------------------------------------------------------- */
+        function resetCalculator() {
 
-function updateMainResult(result) {
+            document.getElementById("income").value =
+                "7000";
 
-    const price =
-        result.price;
+            document.getElementById("debts").value =
+                "700";
 
+            document.getElementById("downPayment").value =
+                "50000";
 
-    if (!result.costs) {
+            document.getElementById("rate").value =
+                "6.50";
 
-        document.getElementById(
-            "maxPrice"
-        ).textContent =
-            "$0";
+            document.getElementById("term").value =
+                "30";
 
-        return;
+            document.getElementById("propertyTax").value =
+                "5000";
 
-    }
+            document.getElementById("insurance").value =
+                "2400";
 
+            document.getElementById("hoa").value =
+                "100";
 
-    const costs =
-        result.costs;
+            document.getElementById("maintenance").value =
+                "150";
 
 
-    const down =
-        Math.min(
-            num("downPayment"),
-            price
-        );
+            calculateAffordability();
 
+        }
 
-    const closingCosts =
-        price *
-        (num("closingRate") / 100);
 
+        /* =========================================================
+           AUTOMATIC INITIAL CALCULATION
+        ========================================================= */
 
-    const cashReserve =
-        num("cashReserve");
+        document.addEventListener(
+            "DOMContentLoaded",
+            function() {
 
-
-    const cashToClose =
-        down +
-        closingCosts +
-        cashReserve;
-
-
-    const comfortable =
-        price * .85;
-
-
-    /*
-       Main numbers
-    */
-
-    document.getElementById(
-        "maxPrice"
-    ).textContent =
-        money(price);
-
-
-    document.getElementById(
-        "comfortablePrice"
-    ).textContent =
-        money(comfortable);
-
-
-    document.getElementById(
-        "maxRangePrice"
-    ).textContent =
-        money(price);
-
-
-    document.getElementById(
-        "loanAmount"
-    ).textContent =
-        money(costs.totalLoan);
-
-
-    document.getElementById(
-        "downResult"
-    ).textContent =
-        money(down);
-
-
-    document.getElementById(
-        "monthlyHousing"
-    ).textContent =
-        money(costs.total);
-
-
-    document.getElementById(
-        "cashToClose"
-    ).textContent =
-        money(cashToClose);
-
-
-    /*
-       Description
-    */
-
-    document.getElementById(
-        "resultDescription"
-    ).textContent =
-        "Estimated from your income, existing debt, loan assumptions and selected housing-cost limits.";
-
-
-    /*
-       DTI
-    */
-
-    updateDTI(
-        result.dti
-    );
-
-
-    /*
-       Payment breakdown
-    */
-
-    document.getElementById(
-        "piResult"
-    ).textContent =
-        money(costs.principalInterest);
-
-
-    document.getElementById(
-        "taxResult"
-    ).textContent =
-        money(costs.monthlyTax);
-
-
-    document.getElementById(
-        "insuranceResult"
-    ).textContent =
-        money(costs.monthlyInsurance);
-
-
-    document.getElementById(
-        "hoaResult"
-    ).textContent =
-        money(costs.monthlyHOA);
-
-
-    document.getElementById(
-        "miResult"
-    ).textContent =
-        money(costs.monthlyMI);
-
-
-    document.getElementById(
-        "maintenanceResult"
-    ).textContent =
-        money(costs.monthlyMaintenance);
-
-
-    document.getElementById(
-        "totalResult"
-    ).textContent =
-        money(costs.total);
-
-
-    updatePaymentBar(
-        costs
-    );
-
-}
-
-
-/* ---------------------------------------------------------
-   MAIN CALCULATION
-   --------------------------------------------------------- */
-
-function calculate() {
-
-    const result =
-        findAffordablePrice();
-
-
-    updateMainResult(
-        result
-    );
-
-}
-
-
-/* ---------------------------------------------------------
-   SLIDER SYNC
-   --------------------------------------------------------- */
-
-function syncDownFromSlider() {
-
-    const value =
-        document.getElementById(
-            "downSlider"
-        ).value;
-
-
-    document.getElementById(
-        "downPayment"
-    ).value =
-        value;
-
-
-    calculate();
-
-}
-
-
-function syncDownFromInput() {
-
-    const value =
-        num("downPayment");
-
-
-    document.getElementById(
-        "downSlider"
-    ).value =
-        Math.min(
-            value,
-            300000
-        );
-
-
-    calculate();
-
-}
-
-
-function syncRateFromSlider() {
-
-    const value =
-        document.getElementById(
-            "rateSlider"
-        ).value;
-
-
-    document.getElementById(
-        "rate"
-    ).value =
-        value;
-
-
-    calculate();
-
-}
-
-
-function syncRateFromInput() {
-
-    const value =
-        num("rate");
-
-
-    document.getElementById(
-        "rateSlider"
-    ).value =
-        Math.min(
-            value,
-            15
-        );
-
-
-    calculate();
-
-}
-
-
-function syncAndCalculate() {
-
-    calculate();
-
-}
-
-
-/* ---------------------------------------------------------
-   LOAN TYPE
-   --------------------------------------------------------- */
-
-function setLoanType(type) {
-
-    currentLoan =
-        type;
-
-
-    document
-        .querySelectorAll(
-            ".loan-tab"
-        )
-        .forEach(
-            function(tab) {
-
-                tab.classList.toggle(
-                    "active",
-                    tab.dataset.loan === type
-                );
+                calculateAffordability();
 
             }
         );
 
 
-    /*
-       Adjust sensible DTI defaults.
-    */
+        /* =========================================================
+           RECALCULATE WHEN USER PRESSES ENTER
+        ========================================================= */
 
-    if (type === "fha") {
+        document.querySelectorAll("input").forEach(
+            function(input) {
 
-        document.getElementById(
-            "frontDTI"
-        ).value = 31;
+                input.addEventListener(
+                    "keydown",
+                    function(event) {
 
-        document.getElementById(
-            "backDTI"
-        ).value = 43;
+                        if (event.key === "Enter") {
 
-    }
+                            calculateAffordability();
 
-    else if (type === "va") {
+                        }
 
-        document.getElementById(
-            "frontDTI"
-        ).value = 30;
-
-        document.getElementById(
-            "backDTI"
-        ).value = 41;
-
-    }
-
-    else if (type === "usda") {
-
-        document.getElementById(
-            "frontDTI"
-        ).value = 29;
-
-        document.getElementById(
-            "backDTI"
-        ).value = 41;
-
-    }
-
-    else {
-
-        document.getElementById(
-            "frontDTI"
-        ).value = 28;
-
-        document.getElementById(
-            "backDTI"
-        ).value = 36;
-
-    }
-
-
-    calculate();
-
-}
-
-
-/* ---------------------------------------------------------
-   ADVANCED TOGGLE
-   --------------------------------------------------------- */
-
-function toggleAdvanced() {
-
-    const content =
-        document.getElementById(
-            "advancedContent"
-        );
-
-    const arrow =
-        document.getElementById(
-            "advancedArrow"
-        );
-
-
-    const open =
-        content.classList.toggle(
-            "open"
-        );
-
-
-    arrow.textContent =
-        open
-            ? "−"
-            : "+";
-
-}
-
-
-/* ---------------------------------------------------------
-   MONTHLY BUDGET CALCULATOR
-   --------------------------------------------------------- */
-
-function calculateBudget() {
-
-    const budget =
-        num("budget");
-
-    const down =
-        num("budgetDown");
-
-    const rate =
-        num("budgetRate");
-
-    const term =
-        num("budgetTerm");
-
-    const taxRate =
-        num("budgetTax");
-
-    const insurance =
-        num("budgetInsurance");
-
-    const hoa =
-        num("budgetHOA");
-
-    const maintenanceRate =
-        num("budgetMaintenance");
-
-
-    if (budget <= 0) {
-
-        return;
-
-    }
-
-
-    let low = 0;
-
-    let high = 2000000;
-
-
-    for (
-        let i = 0;
-        i < 100;
-        i++
-    ) {
-
-        const middle =
-            (low + high) / 2;
-
-
-        const costs =
-            calculateHousing(
-                middle,
-                Math.min(
-                    down,
-                    middle
-                ),
-                rate,
-                term,
-                taxRate,
-                insurance,
-                hoa,
-                maintenanceRate
-            );
-
-
-        if (
-            costs.total <=
-            budget
-        ) {
-
-            low =
-                middle;
-
-        } else {
-
-            high =
-                middle;
-
-        }
-
-    }
-
-
-    const price =
-        low;
-
-
-    const actualDown =
-        Math.min(
-            down,
-            price
-        );
-
-
-    const costs =
-        calculateHousing(
-            price,
-            actualDown,
-            rate,
-            term,
-            taxRate,
-            insurance,
-            hoa,
-            maintenanceRate
-        );
-
-
-    document.getElementById(
-        "budgetPrice"
-    ).textContent =
-        money(price);
-
-
-    document.getElementById(
-        "budgetLoanResult"
-    ).textContent =
-        money(costs.totalLoan);
-
-
-    document.getElementById(
-        "budgetDownResult"
-    ).textContent =
-        money(actualDown);
-
-
-    document.getElementById(
-        "budgetMonthlyResult"
-    ).textContent =
-        money(costs.total);
-
-
-    document.getElementById(
-        "budgetMIResult"
-    ).textContent =
-        money(costs.monthlyMI);
-
-}
-
-
-/* ---------------------------------------------------------
-   RESET
-   --------------------------------------------------------- */
-
-function resetCalculator() {
-
-    document.getElementById(
-        "income"
-    ).value = 90000;
-
-
-    document.getElementById(
-        "debts"
-    ).value = 500;
-
-
-    document.getElementById(
-        "downPayment"
-    ).value = 40000;
-
-
-    document.getElementById(
-        "downSlider"
-    ).value = 40000;
-
-
-    document.getElementById(
-        "rate"
-    ).value = 6.50;
-
-
-    document.getElementById(
-        "rateSlider"
-    ).value = 6.50;
-
-
-    document.getElementById(
-        "term"
-    ).value = 30;
-
-
-    document.getElementById(
-        "taxRate"
-    ).value = 1;
-
-
-    document.getElementById(
-        "insurance"
-    ).value = 2400;
-
-
-    document.getElementById(
-        "hoa"
-    ).value = 0;
-
-
-    document.getElementById(
-        "frontDTI"
-    ).value = 28;
-
-
-    document.getElementById(
-        "backDTI"
-    ).value = 36;
-
-
-    document.getElementById(
-        "closingRate"
-    ).value = 3;
-
-
-    document.getElementById(
-        "maintenanceRate"
-    ).value = 1;
-
-
-    document.getElementById(
-        "cashReserve"
-    ).value = 10000;
-
-
-    currentLoan =
-        "conventional";
-
-
-    document
-        .querySelectorAll(
-            ".loan-tab"
-        )
-        .forEach(
-            function(tab) {
-
-                tab.classList.toggle(
-                    "active",
-                    tab.dataset.loan ===
-                    "conventional"
+                    }
                 );
 
             }
         );
 
-
-    calculate();
-
-}
-
-
-/* ---------------------------------------------------------
-   SCROLL TO BUDGET
-   --------------------------------------------------------- */
-
-function scrollToBudget() {
-
-    document
-        .getElementById(
-            "monthlyBudget"
-        )
-        .scrollIntoView({
-            behavior: "smooth"
-        });
-
-}
-
-
-/* ---------------------------------------------------------
-   INITIALIZE
-   --------------------------------------------------------- */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function() {
-
-        calculate();
-
-        calculateBudget();
-
-    }
-);
-
-</script>
-
+    </script>
 
 </body>
 </html>
