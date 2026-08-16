@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Home Affordability Calculator | Utiliverse</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Home Affordability Calculator | Utiliverse
+    </title>
 
     <meta
         name="description"
-        content="Estimate how much home you may be able to afford based on your income, debts, down payment, interest rate, taxes, insurance and other housing costs."
+        content="Estimate how much home you may be able to afford based on income, debt, down payment, mortgage rate, taxes, insurance and other housing costs."
     >
 
     <style>
+
         /* =========================================================
-           UTILIVERSE - HOME AFFORDABILITY CALCULATOR
-           Original design
+           UTILIVERSE
+           HOME AFFORDABILITY CALCULATOR
         ========================================================= */
 
         :root {
+
             --primary: #2563eb;
             --primary-dark: #1d4ed8;
             --primary-light: #eff6ff;
@@ -36,22 +46,32 @@
             --warning: #b45309;
             --warning-bg: #fffbeb;
 
-            --danger: #b91c1c;
+            --shadow:
+                0 10px 30px rgba(15, 23, 42, 0.08);
 
-            --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
             --radius: 14px;
+
         }
+
 
         * {
+
             box-sizing: border-box;
+
         }
+
 
         html {
+
             scroll-behavior: smooth;
+
         }
 
+
         body {
+
             margin: 0;
+
             font-family:
                 Inter,
                 -apple-system,
@@ -62,464 +82,1351 @@
                 Arial,
                 sans-serif;
 
-            background: var(--background);
-            color: var(--text);
+            background:
+                var(--background);
+
+            color:
+                var(--text);
+
             line-height: 1.5;
+
         }
+
 
         /* =========================================================
            TOP NAVIGATION
         ========================================================= */
 
         .topbar {
+
             width: 100%;
-            background: #ffffff;
-            border-bottom: 1px solid var(--border);
+
+            background:
+                #ffffff;
+
+            border-bottom:
+                1px solid var(--border);
+
         }
+
 
         .topbar-inner {
-            max-width: 1180px;
-            margin: auto;
-            padding: 18px 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+
+            max-width:
+                1180px;
+
+            margin:
+                auto;
+
+            padding:
+                18px 24px;
+
+            display:
+                flex;
+
+            align-items:
+                center;
+
+            justify-content:
+                space-between;
+
         }
+
 
         .back-link {
-            color: var(--primary);
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 600;
-            transition: 0.2s ease;
+
+            color:
+                var(--primary);
+
+            text-decoration:
+                none;
+
+            font-size:
+                15px;
+
+            font-weight:
+                600;
+
+            transition:
+                0.2s ease;
+
         }
+
 
         .back-link:hover {
-            color: var(--primary-dark);
-            text-decoration: underline;
+
+            color:
+                var(--primary-dark);
+
+            text-decoration:
+                underline;
+
         }
+
 
         .brand {
-            font-size: 17px;
-            font-weight: 800;
-            letter-spacing: -0.3px;
+
+            font-size:
+                17px;
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                -0.3px;
+
         }
 
+
         .brand span {
-            color: var(--primary);
+
+            color:
+                var(--primary);
+
         }
+
 
         /* =========================================================
            PAGE HEADER
         ========================================================= */
 
         .page-header {
-            max-width: 1180px;
-            margin: 0 auto;
-            padding: 42px 24px 24px;
+
+            max-width:
+                1180px;
+
+            margin:
+                0 auto;
+
+            padding:
+                42px 24px 24px;
+
         }
+
 
         .eyebrow {
-            display: inline-block;
-            color: var(--primary);
-            background: var(--primary-light);
-            padding: 6px 11px;
-            border-radius: 999px;
-            font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            margin-bottom: 12px;
+
+            display:
+                inline-block;
+
+            color:
+                var(--primary);
+
+            background:
+                var(--primary-light);
+
+            padding:
+                6px 11px;
+
+            border-radius:
+                999px;
+
+            font-size:
+                12px;
+
+            font-weight:
+                700;
+
+            letter-spacing:
+                0.5px;
+
+            text-transform:
+                uppercase;
+
+            margin-bottom:
+                12px;
+
         }
+
 
         h1 {
-            margin: 0 0 10px;
-            font-size: clamp(30px, 4vw, 44px);
-            line-height: 1.1;
-            letter-spacing: -1.2px;
+
+            margin:
+                0 0 10px;
+
+            font-size:
+                clamp(30px, 4vw, 44px);
+
+            line-height:
+                1.1;
+
+            letter-spacing:
+                -1.2px;
+
         }
 
+
         .subtitle {
-            max-width: 760px;
-            margin: 0;
-            color: var(--muted);
-            font-size: 17px;
+
+            max-width:
+                760px;
+
+            margin:
+                0;
+
+            color:
+                var(--muted);
+
+            font-size:
+                17px;
+
         }
+
 
         /* =========================================================
            MAIN CONTENT
         ========================================================= */
 
         .container {
-            max-width: 1180px;
-            margin: 0 auto;
-            padding: 10px 24px 60px;
+
+            max-width:
+                1180px;
+
+            margin:
+                0 auto;
+
+            padding:
+                10px 24px 60px;
+
         }
+
 
         .calculator-grid {
-            display: grid;
-            grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
-            gap: 24px;
-            align-items: start;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                minmax(0, 1.05fr)
+                minmax(360px, 0.95fr);
+
+            gap:
+                24px;
+
+            align-items:
+                start;
+
         }
 
+
         .card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
+
+            background:
+                var(--surface);
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                var(--radius);
+
+            box-shadow:
+                var(--shadow);
+
         }
+
 
         /* =========================================================
            INPUT CARD
         ========================================================= */
 
         .form-card {
-            padding: 28px;
+
+            padding:
+                28px;
+
         }
+
 
         .section-heading {
-            margin-bottom: 22px;
+
+            margin-bottom:
+                22px;
+
         }
+
 
         .section-heading h2 {
-            margin: 0 0 5px;
-            font-size: 21px;
+
+            margin:
+                0 0 5px;
+
+            font-size:
+                21px;
+
         }
+
 
         .section-heading p {
-            margin: 0;
-            color: var(--muted);
-            font-size: 14px;
+
+            margin:
+                0;
+
+            color:
+                var(--muted);
+
+            font-size:
+                14px;
+
         }
+
 
         .form-section {
-            padding-bottom: 25px;
-            margin-bottom: 25px;
-            border-bottom: 1px solid var(--border);
+
+            padding-bottom:
+                25px;
+
+            margin-bottom:
+                25px;
+
+            border-bottom:
+                1px solid var(--border);
+
         }
+
 
         .form-section:last-of-type {
-            border-bottom: 0;
-            margin-bottom: 0;
-            padding-bottom: 0;
+
+            border-bottom:
+                0;
+
+            margin-bottom:
+                0;
+
+            padding-bottom:
+                0;
+
         }
+
 
         .form-section-title {
-            font-size: 15px;
-            font-weight: 750;
-            margin-bottom: 15px;
+
+            font-size:
+                15px;
+
+            font-weight:
+                750;
+
+            margin-bottom:
+                15px;
+
         }
+
 
         .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                16px;
+
         }
+
 
         .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 7px;
+
+            display:
+                flex;
+
+            flex-direction:
+                column;
+
+            gap:
+                7px;
+
         }
+
 
         .form-group.full {
-            grid-column: 1 / -1;
+
+            grid-column:
+                1 / -1;
+
         }
+
 
         label {
-            font-size: 13px;
-            font-weight: 650;
-            color: #334155;
+
+            font-size:
+                13px;
+
+            font-weight:
+                650;
+
+            color:
+                #334155;
+
         }
+
 
         .input-wrapper {
-            position: relative;
+
+            position:
+                relative;
+
         }
 
+
         .prefix {
-            position: absolute;
-            left: 13px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--muted);
-            pointer-events: none;
-            font-size: 14px;
+
+            position:
+                absolute;
+
+            left:
+                13px;
+
+            top:
+                50%;
+
+            transform:
+                translateY(-50%);
+
+            color:
+                var(--muted);
+
+            pointer-events:
+                none;
+
+            font-size:
+                14px;
+
         }
+
 
         input,
         select {
-            width: 100%;
-            height: 46px;
-            border: 1px solid #cbd5e1;
-            border-radius: 9px;
-            background: #ffffff;
-            color: var(--text);
-            font-size: 15px;
-            padding: 0 13px;
-            outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s;
+
+            width:
+                100%;
+
+            height:
+                46px;
+
+            border:
+                1px solid #cbd5e1;
+
+            border-radius:
+                9px;
+
+            background:
+                #ffffff;
+
+            color:
+                var(--text);
+
+            font-size:
+                15px;
+
+            padding:
+                0 13px;
+
+            outline:
+                none;
+
+            transition:
+                border-color 0.2s,
+                box-shadow 0.2s;
+
         }
 
+
         input.currency {
-            padding-left: 29px;
+
+            padding-left:
+                29px;
+
         }
+
 
         input:focus,
         select:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+
+            border-color:
+                var(--primary);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(37, 99, 235, 0.12);
+
         }
 
+
         .helper {
-            color: var(--muted);
-            font-size: 11px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                11px;
+
         }
+
 
         /* =========================================================
            BUTTONS
         ========================================================= */
 
         .button-row {
-            display: flex;
-            gap: 12px;
-            margin-top: 25px;
+
+            display:
+                flex;
+
+            gap:
+                12px;
+
+            margin-top:
+                25px;
+
         }
+
 
         button {
-            border: 0;
-            cursor: pointer;
-            font: inherit;
+
+            border:
+                0;
+
+            cursor:
+                pointer;
+
+            font:
+                inherit;
+
         }
+
 
         .calculate-btn {
-            flex: 1;
-            height: 50px;
-            border-radius: 9px;
-            background: var(--primary);
-            color: white;
-            font-size: 15px;
-            font-weight: 750;
-            transition: 0.2s ease;
+
+            flex:
+                1;
+
+            height:
+                50px;
+
+            border-radius:
+                9px;
+
+            background:
+                var(--primary);
+
+            color:
+                white;
+
+            font-size:
+                15px;
+
+            font-weight:
+                750;
+
+            transition:
+                0.2s ease;
+
         }
+
 
         .calculate-btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-1px);
+
+            background:
+                var(--primary-dark);
+
+            transform:
+                translateY(-1px);
+
         }
+
 
         .reset-btn {
-            height: 50px;
-            padding: 0 18px;
-            border-radius: 9px;
-            background: #f1f5f9;
-            color: #475569;
-            font-weight: 650;
+
+            height:
+                50px;
+
+            padding:
+                0 18px;
+
+            border-radius:
+                9px;
+
+            background:
+                #f1f5f9;
+
+            color:
+                #475569;
+
+            font-weight:
+                650;
+
         }
 
+
         .reset-btn:hover {
-            background: #e2e8f0;
+
+            background:
+                #e2e8f0;
+
         }
+
 
         /* =========================================================
            RESULTS
         ========================================================= */
 
         .results-card {
-            overflow: hidden;
-            position: sticky;
-            top: 20px;
+
+            overflow:
+                hidden;
+
+            position:
+                sticky;
+
+            top:
+                20px;
+
         }
+
 
         .results-header {
-            padding: 28px;
-            background: linear-gradient(
-                135deg,
-                #eff6ff 0%,
-                #f8fafc 100%
-            );
-            border-bottom: 1px solid var(--border);
+
+            padding:
+                28px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eff6ff 0%,
+                    #f8fafc 100%
+                );
+
+            border-bottom:
+                1px solid var(--border);
+
         }
+
 
         .results-header h2 {
-            margin: 0 0 5px;
-            font-size: 21px;
+
+            margin:
+                0 0 5px;
+
+            font-size:
+                21px;
+
         }
+
 
         .results-header p {
-            margin: 0;
-            color: var(--muted);
-            font-size: 13px;
+
+            margin:
+                0;
+
+            color:
+                var(--muted);
+
+            font-size:
+                13px;
+
         }
+
 
         .main-result {
-            padding: 30px 28px 25px;
-            text-align: center;
+
+            padding:
+                30px 28px 25px;
+
+            text-align:
+                center;
+
         }
+
 
         .result-label {
-            color: var(--muted);
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 5px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                13px;
+
+            font-weight:
+                600;
+
+            margin-bottom:
+                5px;
+
         }
+
 
         .result-price {
-            color: var(--primary);
-            font-size: clamp(38px, 5vw, 52px);
-            font-weight: 800;
-            letter-spacing: -1.5px;
-            line-height: 1.1;
+
+            color:
+                var(--primary);
+
+            font-size:
+                clamp(38px, 5vw, 52px);
+
+            font-weight:
+                800;
+
+            letter-spacing:
+                -1.5px;
+
+            line-height:
+                1.1;
+
         }
 
+
         .result-note {
-            color: var(--muted);
-            font-size: 12px;
-            margin-top: 8px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                12px;
+
+            margin-top:
+                8px;
+
         }
+
 
         /* =========================================================
            RESULT BREAKDOWN
         ========================================================= */
 
         .breakdown {
-            padding: 0 28px 28px;
+
+            padding:
+                0 28px 28px;
+
         }
+
 
         .breakdown-title {
-            font-size: 14px;
-            font-weight: 750;
-            margin-bottom: 13px;
+
+            font-size:
+                14px;
+
+            font-weight:
+                750;
+
+            margin-bottom:
+                13px;
+
         }
+
 
         .breakdown-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px solid #eef2f7;
-            font-size: 13px;
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            padding:
+                12px 0;
+
+            border-bottom:
+                1px solid #eef2f7;
+
+            font-size:
+                13px;
+
         }
+
 
         .breakdown-row:last-child {
-            border-bottom: 0;
+
+            border-bottom:
+                0;
+
         }
+
 
         .breakdown-label {
-            color: #64748b;
+
+            color:
+                #64748b;
+
         }
 
+
         .breakdown-value {
-            font-weight: 700;
+
+            font-weight:
+                700;
+
         }
+
 
         /* =========================================================
            AFFORDABILITY INDICATOR
         ========================================================= */
 
         .affordability-box {
-            margin: 0 28px 28px;
-            padding: 17px;
-            border-radius: 10px;
-            background: var(--success-bg);
-            border: 1px solid #bbf7d0;
+
+            margin:
+                0 28px 28px;
+
+            padding:
+                17px;
+
+            border-radius:
+                10px;
+
+            background:
+                var(--success-bg);
+
+            border:
+                1px solid #bbf7d0;
+
         }
+
 
         .affordability-box.warning {
-            background: var(--warning-bg);
-            border-color: #fde68a;
+
+            background:
+                var(--warning-bg);
+
+            border-color:
+                #fde68a;
+
         }
+
 
         .affordability-title {
-            font-weight: 750;
-            font-size: 14px;
-            margin-bottom: 3px;
+
+            font-weight:
+                750;
+
+            font-size:
+                14px;
+
+            margin-bottom:
+                3px;
+
         }
+
 
         .affordability-text {
-            font-size: 12px;
-            color: #64748b;
+
+            font-size:
+                12px;
+
+            color:
+                #64748b;
+
         }
 
+
         /* =========================================================
-           INFORMATION SECTION
+           INFORMATION SECTIONS
         ========================================================= */
 
         .info-section {
-            margin-top: 28px;
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 28px;
-            box-shadow: var(--shadow);
+
+            margin-top:
+                28px;
+
+            background:
+                white;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                var(--radius);
+
+            padding:
+                28px;
+
+            box-shadow:
+                var(--shadow);
+
         }
+
 
         .info-section h2 {
-            margin: 0 0 12px;
-            font-size: 21px;
+
+            margin:
+                0 0 12px;
+
+            font-size:
+                21px;
+
         }
 
-        .info-section p {
-            color: #64748b;
-            font-size: 14px;
-            margin: 0 0 14px;
+
+        .info-section > p {
+
+            color:
+                #64748b;
+
+            font-size:
+                14px;
+
+            margin:
+                0 0 14px;
+
         }
+
 
         .info-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-            margin-top: 22px;
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap:
+                18px;
+
+            margin-top:
+                22px;
+
         }
+
 
         .info-box {
-            padding: 18px;
-            background: var(--surface-soft);
-            border: 1px solid var(--border);
-            border-radius: 10px;
+
+            padding:
+                18px;
+
+            background:
+                var(--surface-soft);
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                10px;
+
         }
+
 
         .info-box h3 {
-            margin: 0 0 7px;
-            font-size: 14px;
+
+            margin:
+                0 0 7px;
+
+            font-size:
+                14px;
+
         }
 
+
         .info-box p {
-            margin: 0;
-            font-size: 12px;
+
+            margin:
+                0;
+
+            font-size:
+                12px;
+
         }
+
 
         /* =========================================================
            DISCLAIMER
         ========================================================= */
 
         .disclaimer {
-            margin-top: 20px;
-            color: #94a3b8;
-            font-size: 11px;
-            line-height: 1.6;
+
+            margin-top:
+                20px;
+
+            color:
+                #94a3b8;
+
+            font-size:
+                11px;
+
+            line-height:
+                1.6;
+
         }
+
+
+        /* =========================================================
+           AMORTIZATION SUMMARY
+        ========================================================= */
+
+        .amortization-summary {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap:
+                12px;
+
+            margin:
+                22px 0;
+
+        }
+
+
+        .amortization-stat {
+
+            background:
+                var(--surface-soft);
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                10px;
+
+            padding:
+                15px;
+
+        }
+
+
+        .amortization-stat span {
+
+            display:
+                block;
+
+            color:
+                var(--muted);
+
+            font-size:
+                11px;
+
+            margin-bottom:
+                5px;
+
+        }
+
+
+        .amortization-stat strong {
+
+            display:
+                block;
+
+            font-size:
+                17px;
+
+            color:
+                var(--text);
+
+        }
+
+
+        /* =========================================================
+           AMORTIZATION TABLE
+        ========================================================= */
+
+        .table-wrapper {
+
+            width:
+                100%;
+
+            overflow-x:
+                auto;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                10px;
+
+        }
+
+
+        .amortization-table {
+
+            width:
+                100%;
+
+            border-collapse:
+                collapse;
+
+            min-width:
+                650px;
+
+            font-size:
+                13px;
+
+        }
+
+
+        .amortization-table th {
+
+            background:
+                var(--surface-soft);
+
+            color:
+                #475569;
+
+            font-size:
+                12px;
+
+            font-weight:
+                750;
+
+            text-align:
+                right;
+
+            padding:
+                13px;
+
+            border-bottom:
+                1px solid var(--border);
+
+        }
+
+
+        .amortization-table th:first-child {
+
+            text-align:
+                center;
+
+        }
+
+
+        .amortization-table td {
+
+            padding:
+                12px 13px;
+
+            text-align:
+                right;
+
+            border-bottom:
+                1px solid #eef2f7;
+
+        }
+
+
+        .amortization-table td:first-child {
+
+            text-align:
+                center;
+
+            font-weight:
+                700;
+
+        }
+
+
+        .amortization-table tbody tr:last-child td {
+
+            border-bottom:
+                0;
+
+        }
+
+
+        .amortization-table tbody tr:hover {
+
+            background:
+                #f8fafc;
+
+        }
+
+
+        /* =========================================================
+           FAQ
+        ========================================================= */
+
+        .faq-section {
+
+            margin-top:
+                28px;
+
+        }
+
+
+        .faq-item {
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                10px;
+
+            margin-top:
+                10px;
+
+            overflow:
+                hidden;
+
+            background:
+                #ffffff;
+
+        }
+
+
+        .faq-question {
+
+            width:
+                100%;
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            align-items:
+                center;
+
+            text-align:
+                left;
+
+            background:
+                #ffffff;
+
+            color:
+                var(--text);
+
+            padding:
+                17px 18px;
+
+            font-size:
+                14px;
+
+            font-weight:
+                700;
+
+            cursor:
+                pointer;
+
+            transition:
+                background 0.2s ease;
+
+        }
+
+
+        .faq-question:hover {
+
+            background:
+                var(--surface-soft);
+
+        }
+
+
+        .faq-question span {
+
+            color:
+                var(--primary);
+
+            font-size:
+                20px;
+
+            line-height:
+                1;
+
+            transition:
+                transform 0.2s ease;
+
+        }
+
+
+        .faq-question.active span {
+
+            transform:
+                rotate(45deg);
+
+        }
+
+
+        .faq-answer {
+
+            display:
+                none;
+
+            padding:
+                0 18px 18px;
+
+            border-top:
+                1px solid var(--border);
+
+        }
+
+
+        .faq-answer.open {
+
+            display:
+                block;
+
+        }
+
+
+        .faq-answer p {
+
+            margin:
+                14px 0 0;
+
+            color:
+                var(--muted);
+
+            font-size:
+                13px;
+
+            line-height:
+                1.7;
+
+        }
+
 
         /* =========================================================
            FOOTER
         ========================================================= */
 
         footer {
-            margin-top: 40px;
-            border-top: 1px solid var(--border);
-            background: white;
+
+            margin-top:
+                40px;
+
+            border-top:
+                1px solid var(--border);
+
+            background:
+                white;
+
         }
 
+
         .footer-inner {
-            max-width: 1180px;
-            margin: auto;
-            padding: 25px 24px;
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-            color: var(--muted);
-            font-size: 12px;
+
+            max-width:
+                1180px;
+
+            margin:
+                auto;
+
+            padding:
+                25px 24px;
+
+            display:
+                flex;
+
+            justify-content:
+                space-between;
+
+            gap:
+                20px;
+
+            color:
+                var(--muted);
+
+            font-size:
+                12px;
+
         }
+
 
         /* =========================================================
            RESPONSIVE DESIGN
@@ -528,156 +1435,289 @@
         @media (max-width: 850px) {
 
             .calculator-grid {
-                grid-template-columns: 1fr;
+
+                grid-template-columns:
+                    1fr;
+
             }
+
 
             .results-card {
-                position: static;
+
+                position:
+                    static;
+
             }
 
+
             .info-grid {
-                grid-template-columns: 1fr;
+
+                grid-template-columns:
+                    1fr;
+
             }
+
+
+            .amortization-summary {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+            }
+
         }
+
 
         @media (max-width: 600px) {
 
             .topbar-inner {
-                padding: 15px 18px;
+
+                padding:
+                    15px 18px;
+
             }
+
 
             .brand {
-                display: none;
+
+                display:
+                    none;
+
             }
+
 
             .page-header {
-                padding: 30px 18px 18px;
+
+                padding:
+                    30px 18px 18px;
+
             }
 
+
             .container {
-                padding: 8px 18px 40px;
+
+                padding:
+                    8px 18px 40px;
+
             }
+
 
             .form-card,
             .results-header,
             .main-result,
             .breakdown {
-                padding-left: 20px;
-                padding-right: 20px;
+
+                padding-left:
+                    20px;
+
+                padding-right:
+                    20px;
+
             }
+
 
             .form-grid {
-                grid-template-columns: 1fr;
+
+                grid-template-columns:
+                    1fr;
+
             }
+
 
             .form-group.full {
-                grid-column: auto;
+
+                grid-column:
+                    auto;
+
             }
+
 
             .affordability-box {
-                margin-left: 20px;
-                margin-right: 20px;
+
+                margin-left:
+                    20px;
+
+                margin-right:
+                    20px;
+
             }
+
 
             .button-row {
-                flex-direction: column;
+
+                flex-direction:
+                    column;
+
             }
+
 
             .reset-btn {
-                width: 100%;
+
+                width:
+                    100%;
+
             }
+
 
             .footer-inner {
-                flex-direction: column;
+
+                flex-direction:
+                    column;
+
             }
+
+
+            .amortization-summary {
+
+                grid-template-columns:
+                    1fr;
+
+            }
+
         }
+
     </style>
+
 </head>
 
+
 <body>
+
 
     <!-- =========================================================
          TOP BAR
     ========================================================= -->
 
     <header class="topbar">
+
         <div class="topbar-inner">
 
-            <!-- Back to Utiliverse -->
-            <a href="/" class="back-link">
+            <a
+                href="/"
+                class="back-link"
+            >
                 &larr; Back to Utiliverse
             </a>
 
+
             <div class="brand">
+
                 <span>Utili</span>verse
+
             </div>
 
         </div>
+
     </header>
 
 
+
     <!-- =========================================================
-         PAGE INTRO
+         PAGE HEADER
     ========================================================= -->
 
     <section class="page-header">
 
         <div class="eyebrow">
+
             Financial Planning Tool
+
         </div>
 
-        <h1>How Much Home Can You Comfortably Afford?</h1>
+
+        <h1>
+
+            How Much Home Can You Comfortably Afford?
+
+        </h1>
+
 
         <p class="subtitle">
-            Build a personalized estimate using your income, existing
-            obligations, down payment, mortgage rate and expected
-            homeownership expenses.
+
+            Build a personalized estimate using your income,
+            existing obligations, down payment, mortgage rate
+            and expected homeownership expenses.
+
         </p>
 
     </section>
 
 
+
     <!-- =========================================================
-         MAIN CALCULATOR
+         MAIN
     ========================================================= -->
 
     <main class="container">
 
+
+        <!-- =====================================================
+             CALCULATOR
+        ====================================================== -->
+
         <div class="calculator-grid">
 
+
             <!-- =================================================
-                 LEFT: INPUTS
+                 INPUTS
             ================================================== -->
 
             <section class="card form-card">
 
+
                 <div class="section-heading">
-                    <h2>Your financial picture</h2>
+
+                    <h2>
+
+                        Your financial picture
+
+                    </h2>
+
+
                     <p>
-                        Enter approximate figures. You can change any value
-                        and recalculate whenever you like.
+
+                        Enter approximate figures. You can change
+                        any value and recalculate whenever you like.
+
                     </p>
+
                 </div>
 
 
-                <!-- INCOME -->
+
+                <!-- =============================================
+                     INCOME
+                ============================================== -->
 
                 <div class="form-section">
 
                     <div class="form-section-title">
+
                         Income & monthly obligations
+
                     </div>
 
+
                     <div class="form-grid">
+
 
                         <div class="form-group">
 
                             <label for="income">
+
                                 Gross monthly income
+
                             </label>
 
+
                             <div class="input-wrapper">
-                                <span class="prefix">$</span>
+
+                                <span class="prefix">
+
+                                    $
+
+                                </span>
+
 
                                 <input
                                     id="income"
@@ -687,23 +1727,37 @@
                                     min="0"
                                     step="100"
                                 >
+
                             </div>
 
+
                             <span class="helper">
+
                                 Income before taxes and deductions
+
                             </span>
 
                         </div>
 
 
+
                         <div class="form-group">
 
                             <label for="debts">
+
                                 Monthly debt payments
+
                             </label>
 
+
                             <div class="input-wrapper">
-                                <span class="prefix">$</span>
+
+                                <span class="prefix">
+
+                                    $
+
+                                </span>
+
 
                                 <input
                                     id="debts"
@@ -713,37 +1767,58 @@
                                     min="0"
                                     step="25"
                                 >
+
                             </div>
 
+
                             <span class="helper">
+
                                 Cars, credit cards, loans, etc.
+
                             </span>
 
                         </div>
+
 
                     </div>
 
                 </div>
 
 
-                <!-- DOWN PAYMENT -->
+
+                <!-- =============================================
+                     PURCHASE & FINANCING
+                ============================================== -->
 
                 <div class="form-section">
 
                     <div class="form-section-title">
+
                         Purchase & financing
+
                     </div>
 
+
                     <div class="form-grid">
+
 
                         <div class="form-group">
 
                             <label for="downPayment">
+
                                 Down payment
+
                             </label>
 
+
                             <div class="input-wrapper">
-                                <span class="prefix">$</span>
+
+                                <span class="prefix">
+
+                                    $
+
+                                </span>
+
 
                                 <input
                                     id="downPayment"
@@ -753,16 +1828,21 @@
                                     min="0"
                                     step="1000"
                                 >
+
                             </div>
 
                         </div>
 
 
+
                         <div class="form-group">
 
                             <label for="rate">
+
                                 Estimated interest rate
+
                             </label>
+
 
                             <div class="input-wrapper">
 
@@ -780,24 +1860,37 @@
                         </div>
 
 
+
                         <div class="form-group">
 
                             <label for="term">
+
                                 Mortgage term
+
                             </label>
+
 
                             <select id="term">
 
-                                <option value="30" selected>
+                                <option
+                                    value="30"
+                                    selected
+                                >
                                     30 years
                                 </option>
 
+
                                 <option value="20">
+
                                     20 years
+
                                 </option>
 
+
                                 <option value="15">
+
                                     15 years
+
                                 </option>
 
                             </select>
@@ -805,14 +1898,24 @@
                         </div>
 
 
+
                         <div class="form-group">
 
                             <label for="propertyTax">
+
                                 Annual property tax
+
                             </label>
 
+
                             <div class="input-wrapper">
-                                <span class="prefix">$</span>
+
+                                <span class="prefix">
+
+                                    $
+
+                                </span>
+
 
                                 <input
                                     id="propertyTax"
@@ -822,33 +1925,51 @@
                                     min="0"
                                     step="100"
                                 >
+
                             </div>
 
                         </div>
+
 
                     </div>
 
                 </div>
 
 
-                <!-- HOME EXPENSES -->
+
+                <!-- =============================================
+                     OTHER HOUSING COSTS
+                ============================================== -->
 
                 <div class="form-section">
 
                     <div class="form-section-title">
+
                         Other housing costs
+
                     </div>
 
+
                     <div class="form-grid">
+
 
                         <div class="form-group">
 
                             <label for="insurance">
+
                                 Annual homeowners insurance
+
                             </label>
 
+
                             <div class="input-wrapper">
-                                <span class="prefix">$</span>
+
+                                <span class="prefix">
+
+                                    $
+
+                                </span>
+
 
                                 <input
                                     id="insurance"
@@ -858,19 +1979,30 @@
                                     min="0"
                                     step="100"
                                 >
+
                             </div>
 
                         </div>
 
 
+
                         <div class="form-group">
 
                             <label for="hoa">
+
                                 Monthly HOA / community fee
+
                             </label>
 
+
                             <div class="input-wrapper">
-                                <span class="prefix">$</span>
+
+                                <span class="prefix">
+
+                                    $
+
+                                </span>
+
 
                                 <input
                                     id="hoa"
@@ -880,19 +2012,30 @@
                                     min="0"
                                     step="25"
                                 >
+
                             </div>
 
                         </div>
 
 
+
                         <div class="form-group full">
 
                             <label for="maintenance">
+
                                 Monthly maintenance reserve
+
                             </label>
 
+
                             <div class="input-wrapper">
-                                <span class="prefix">$</span>
+
+                                <span class="prefix">
+
+                                    $
+
+                                </span>
+
 
                                 <input
                                     id="maintenance"
@@ -902,187 +2045,269 @@
                                     min="0"
                                     step="25"
                                 >
+
                             </div>
 
+
                             <span class="helper">
-                                Optional amount set aside for repairs and upkeep.
+
+                                Optional amount set aside for repairs
+                                and upkeep.
+
                             </span>
 
                         </div>
+
 
                     </div>
 
                 </div>
 
 
-                <!-- BUTTONS -->
+
+                <!-- =============================================
+                     BUTTONS
+                ============================================== -->
 
                 <div class="button-row">
+
 
                     <button
                         class="calculate-btn"
                         onclick="calculateAffordability()"
                     >
+
                         Calculate My Home Budget
+
                     </button>
+
 
                     <button
                         class="reset-btn"
                         onclick="resetCalculator()"
                     >
+
                         Reset
+
                     </button>
 
+
                 </div>
+
 
             </section>
 
 
+
             <!-- =================================================
-                 RIGHT: RESULTS
+                 RESULTS
             ================================================== -->
 
             <section class="card results-card">
 
+
                 <div class="results-header">
 
-                    <h2>Your estimated home budget</h2>
+                    <h2>
+
+                        Your estimated home budget
+
+                    </h2>
+
 
                     <p>
-                        This is an estimate based on the information you entered.
+
+                        This is an estimate based on the information
+                        you entered.
+
                     </p>
 
                 </div>
 
 
+
                 <div class="main-result">
 
                     <div class="result-label">
+
                         Estimated maximum purchase price
+
                     </div>
+
 
                     <div
                         class="result-price"
                         id="homePrice"
                     >
+
                         $0
+
                     </div>
 
+
                     <div class="result-note">
-                        A comfortable target may be lower depending on your
-                        savings and lifestyle.
+
+                        A comfortable target may be lower depending
+                        on your savings and lifestyle.
+
                     </div>
 
                 </div>
 
 
-                <!-- BREAKDOWN -->
+
+                <!-- =============================================
+                     BREAKDOWN
+                ============================================== -->
 
                 <div class="breakdown">
 
+
                     <div class="breakdown-title">
+
                         Estimated monthly housing budget
+
                     </div>
+
 
                     <div class="breakdown-row">
 
                         <span class="breakdown-label">
+
                             Principal & interest
+
                         </span>
+
 
                         <span
                             class="breakdown-value"
                             id="principalInterest"
                         >
+
                             $0
+
                         </span>
 
                     </div>
 
 
+
                     <div class="breakdown-row">
 
                         <span class="breakdown-label">
+
                             Property taxes
+
                         </span>
+
 
                         <span
                             class="breakdown-value"
                             id="monthlyTax"
                         >
+
                             $0
+
                         </span>
 
                     </div>
 
 
+
                     <div class="breakdown-row">
 
                         <span class="breakdown-label">
+
                             Homeowners insurance
+
                         </span>
+
 
                         <span
                             class="breakdown-value"
                             id="monthlyInsurance"
                         >
+
                             $0
+
                         </span>
 
                     </div>
 
 
+
                     <div class="breakdown-row">
 
                         <span class="breakdown-label">
+
                             HOA / community fee
+
                         </span>
+
 
                         <span
                             class="breakdown-value"
                             id="monthlyHoa"
                         >
+
                             $0
+
                         </span>
 
                     </div>
 
 
+
                     <div class="breakdown-row">
 
                         <span class="breakdown-label">
+
                             Maintenance reserve
+
                         </span>
+
 
                         <span
                             class="breakdown-value"
                             id="monthlyMaintenance"
                         >
+
                             $0
+
                         </span>
 
                     </div>
+
 
 
                     <div class="breakdown-row">
 
                         <span class="breakdown-label">
+
                             Total estimated housing cost
+
                         </span>
+
 
                         <span
                             class="breakdown-value"
                             id="totalHousing"
                         >
+
                             $0
+
                         </span>
 
                     </div>
 
+
                 </div>
 
 
-                <!-- AFFORDABILITY STATUS -->
+
+                <!-- =============================================
+                     AFFORDABILITY STATUS
+                ============================================== -->
 
                 <div
                     class="affordability-box"
@@ -1093,95 +2318,686 @@
                         class="affordability-title"
                         id="affordabilityTitle"
                     >
+
                         Within the target range
+
                     </div>
+
 
                     <div
                         class="affordability-text"
                         id="affordabilityText"
                     >
-                        Your estimated housing payment is being compared
-                        with your income and existing debt.
+
+                        Your estimated housing payment is being
+                        compared with your income and existing debt.
+
                     </div>
 
                 </div>
 
+
             </section>
+
 
         </div>
 
 
+
         <!-- =====================================================
-             EDUCATIONAL INFORMATION
+             UNDERSTANDING YOUR ESTIMATE
         ====================================================== -->
 
         <section class="info-section">
 
-            <h2>Understanding your estimate</h2>
+
+            <h2>
+
+                Understanding your estimate
+
+            </h2>
+
 
             <p>
-                A mortgage payment is only one piece of the cost of owning
-                a home. Property taxes, insurance, association fees,
-                maintenance and your existing financial commitments can
-                significantly change what feels affordable each month.
+
+                A mortgage payment is only one piece of the cost
+                of owning a home. Property taxes, insurance,
+                association fees, maintenance and your existing
+                financial commitments can significantly change
+                what feels affordable each month.
+
             </p>
+
 
             <div class="info-grid">
 
+
                 <div class="info-box">
 
-                    <h3>Income matters</h3>
+                    <h3>
+
+                        Income matters
+
+                    </h3>
+
 
                     <p>
-                        Lenders generally compare your housing costs and
-                        other monthly debts against your gross income when
-                        evaluating borrowing capacity.
+
+                        Lenders generally compare your housing
+                        costs and other monthly debts against your
+                        gross income when evaluating borrowing
+                        capacity.
+
                     </p>
 
                 </div>
 
 
+
                 <div class="info-box">
 
-                    <h3>Debt affects borrowing power</h3>
+                    <h3>
+
+                        Debt affects borrowing power
+
+                    </h3>
+
 
                     <p>
-                        Existing car loans, student loans, credit cards and
-                        other obligations can reduce the amount available
-                        for a new mortgage.
+
+                        Existing car loans, student loans,
+                        credit cards and other obligations can
+                        reduce the amount available for a new
+                        mortgage.
+
                     </p>
 
                 </div>
 
 
+
                 <div class="info-box">
 
-                    <h3>Leave room in your budget</h3>
+                    <h3>
+
+                        Leave room in your budget
+
+                    </h3>
+
 
                     <p>
-                        Qualifying for a mortgage does not necessarily mean
-                        the resulting payment will be comfortable for your
-                        household.
+
+                        Qualifying for a mortgage does not
+                        necessarily mean the resulting payment
+                        will be comfortable for your household.
+
                     </p>
 
                 </div>
+
 
             </div>
 
 
             <div class="disclaimer">
 
-                This calculator provides an educational estimate and is not
-                a mortgage approval, lending decision or financial recommendation.
-                Actual borrowing limits and monthly payments may vary based on
-                credit history, lender requirements, loan program, insurance,
-                taxes, property location and other factors.
+                This calculator provides an educational estimate
+                and is not a mortgage approval, lending decision
+                or financial recommendation. Actual borrowing
+                limits and monthly payments may vary based on
+                credit history, lender requirements, loan program,
+                insurance, taxes, property location and other
+                factors.
 
             </div>
 
+
         </section>
 
+
+
+        <!-- =====================================================
+             ABOUT THE CALCULATOR
+        ====================================================== -->
+
+        <section class="info-section">
+
+
+            <h2>
+
+                About This Home Affordability Calculator
+
+            </h2>
+
+
+            <p>
+
+                Buying a home is one of the largest financial
+                decisions most people make, and knowing how much
+                you can realistically afford is an important first
+                step. This home affordability calculator helps you
+                create a personalized estimate by combining your
+                income, existing monthly debt, down payment,
+                mortgage interest rate, loan term, property taxes,
+                homeowners insurance, HOA fees, and an optional
+                maintenance reserve. Instead of focusing only on
+                the purchase price, the calculator looks at the
+                ongoing monthly cost of owning the property so you
+                can better understand how a potential home may fit
+                into your overall budget.
+
+            </p>
+
+
+            <p>
+
+                To use the calculator, begin by entering your gross
+                monthly household income before taxes and deductions.
+                Next, enter your existing monthly debt payments,
+                such as auto loans, student loans, personal loans,
+                or credit card obligations. Enter the amount you
+                expect to use as a down payment and provide an
+                estimated mortgage interest rate and loan term.
+                You can then add estimated annual property taxes
+                and homeowners insurance, along with monthly HOA
+                or community fees if applicable. Finally, consider
+                adding a monthly maintenance reserve to account for
+                repairs, replacements, and routine home upkeep.
+
+            </p>
+
+
+            <p>
+
+                After entering your information, select
+                <strong>Calculate My Home Budget</strong>.
+                The calculator estimates a potential purchase price
+                based on a housing budget equal to approximately
+                28% of gross monthly income. It then separates the
+                estimated payment into principal and interest,
+                property taxes, insurance, HOA costs, and maintenance.
+                Existing debt is also considered when displaying the
+                affordability indicator. You can experiment with
+                different interest rates, down payments,
+                homeownership costs, and loan terms to see how each
+                change affects your estimated purchasing range.
+
+            </p>
+
+
+            <p>
+
+                The results are intended as a planning tool rather
+                than a mortgage approval. A lender may use different
+                debt-to-income requirements, credit qualifications,
+                loan programs, reserve requirements, and
+                property-specific costs when determining how much
+                you can borrow. Your personal comfort level may also
+                be lower than the maximum amount a lender is willing
+                to approve. For that reason, consider the result a
+                starting point for evaluating your home-buying budget
+                rather than a guarantee of what you should spend.
+
+            </p>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             AMORTIZATION SCHEDULE
+        ====================================================== -->
+
+        <section
+            class="info-section"
+            id="amortization"
+        >
+
+
+            <h2>
+
+                Mortgage Amortization Schedule
+
+            </h2>
+
+
+            <p>
+
+                The schedule below shows how your estimated mortgage
+                balance could change over time. It is automatically
+                calculated from the mortgage amount, interest rate,
+                and loan term used by the affordability calculator
+                above.
+
+            </p>
+
+
+
+            <div class="amortization-summary">
+
+
+                <div class="amortization-stat">
+
+                    <span>
+
+                        Estimated Loan
+
+                    </span>
+
+
+                    <strong id="amortLoanAmount">
+
+                        $0
+
+                    </strong>
+
+                </div>
+
+
+
+                <div class="amortization-stat">
+
+                    <span>
+
+                        Interest Rate
+
+                    </span>
+
+
+                    <strong id="amortRate">
+
+                        0%
+
+                    </strong>
+
+                </div>
+
+
+
+                <div class="amortization-stat">
+
+                    <span>
+
+                        Loan Term
+
+                    </span>
+
+
+                    <strong id="amortTerm">
+
+                        0 years
+
+                    </strong>
+
+                </div>
+
+
+
+                <div class="amortization-stat">
+
+                    <span>
+
+                        Monthly Payment
+
+                    </span>
+
+
+                    <strong id="amortPayment">
+
+                        $0
+
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="table-wrapper">
+
+
+                <table class="amortization-table">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+
+                                Year
+
+                            </th>
+
+
+                            <th>
+
+                                Beginning Balance
+
+                            </th>
+
+
+                            <th>
+
+                                Principal Paid
+
+                            </th>
+
+
+                            <th>
+
+                                Interest Paid
+
+                            </th>
+
+
+                            <th>
+
+                                Ending Balance
+
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="amortizationBody">
+
+
+                        <tr>
+
+                            <td colspan="5">
+
+                                Enter your information above to
+                                generate your amortization schedule.
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =====================================================
+             FAQ
+        ====================================================== -->
+
+        <section
+            class="info-section faq-section"
+        >
+
+
+            <h2>
+
+                Home Affordability Calculator FAQ
+
+            </h2>
+
+
+
+            <!-- FAQ 1 -->
+
+            <div class="faq-item">
+
+
+                <button
+                    class="faq-question"
+                    type="button"
+                    onclick="toggleFAQ(this)"
+                >
+
+                    <span>
+
+                        How much house can I afford based on
+                        my income?
+
+                    </span>
+
+
+                    <span>
+
+                        +
+
+                    </span>
+
+                </button>
+
+
+                <div class="faq-answer">
+
+                    <p>
+
+                        Your affordable home price depends on more
+                        than income alone. Existing debts, down
+                        payment, interest rate, property taxes,
+                        insurance, HOA fees and other housing costs
+                        all affect the result. This calculator uses
+                        a housing budget based on approximately 28%
+                        of gross monthly income and then estimates
+                        the mortgage amount that fits within that
+                        budget.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FAQ 2 -->
+
+            <div class="faq-item">
+
+
+                <button
+                    class="faq-question"
+                    type="button"
+                    onclick="toggleFAQ(this)"
+                >
+
+                    <span>
+
+                        Does my down payment change how much
+                        I can afford?
+
+                    </span>
+
+
+                    <span>
+
+                        +
+
+                    </span>
+
+                </button>
+
+
+                <div class="faq-answer">
+
+                    <p>
+
+                        Yes. A larger down payment generally allows
+                        you to purchase a more expensive property
+                        for the same mortgage payment because you
+                        need to borrow less money. A larger down
+                        payment may also reduce the amount of
+                        interest paid over the life of the loan.
+                        Depending on the loan program, it may also
+                        affect mortgage insurance requirements.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FAQ 3 -->
+
+            <div class="faq-item">
+
+
+                <button
+                    class="faq-question"
+                    type="button"
+                    onclick="toggleFAQ(this)"
+                >
+
+                    <span>
+
+                        Why are property taxes and insurance
+                        included?
+
+                    </span>
+
+
+                    <span>
+
+                        +
+
+                    </span>
+
+                </button>
+
+
+                <div class="faq-answer">
+
+                    <p>
+
+                        Your mortgage payment is only part of the
+                        cost of owning a home. Property taxes and
+                        homeowners insurance can represent a
+                        significant monthly expense. Including them
+                        provides a more realistic estimate of the
+                        total housing cost rather than looking only
+                        at principal and interest.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FAQ 4 -->
+
+            <div class="faq-item">
+
+
+                <button
+                    class="faq-question"
+                    type="button"
+                    onclick="toggleFAQ(this)"
+                >
+
+                    <span>
+
+                        What does the amortization schedule show?
+
+                    </span>
+
+
+                    <span>
+
+                        +
+
+                    </span>
+
+                </button>
+
+
+                <div class="faq-answer">
+
+                    <p>
+
+                        An amortization schedule illustrates how
+                        each mortgage payment is divided between
+                        principal and interest. Early payments
+                        generally contain a larger interest component.
+                        As the loan balance decreases, progressively
+                        more of each payment goes toward principal.
+                        The schedule displayed here summarizes those
+                        changes by year.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FAQ 5 -->
+
+            <div class="faq-item">
+
+
+                <button
+                    class="faq-question"
+                    type="button"
+                    onclick="toggleFAQ(this)"
+                >
+
+                    <span>
+
+                        Is this calculator the same as getting
+                        mortgage pre-approval?
+
+                    </span>
+
+
+                    <span>
+
+                        +
+
+                    </span>
+
+                </button>
+
+
+                <div class="faq-answer">
+
+                    <p>
+
+                        No. This calculator is intended for personal
+                        planning and education. A mortgage lender may
+                        consider your credit profile, employment
+                        history, assets, reserves, loan program,
+                        property characteristics, debt-to-income
+                        ratios and other underwriting requirements.
+                        Your actual approved loan amount and payment
+                        may therefore differ from this estimate.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
     </main>
+
 
 
     <!-- =========================================================
@@ -1190,19 +3006,29 @@
 
     <footer>
 
+
         <div class="footer-inner">
 
-            <div>
-                © 2026 Utiliverse
-            </div>
 
             <div>
-                Financial tools for everyday decisions.
+
+                &copy; 2026 Utiliverse
+
             </div>
+
+
+            <div>
+
+                Financial tools for everyday decisions.
+
+            </div>
+
 
         </div>
 
+
     </footer>
+
 
 
     <!-- =========================================================
@@ -1211,54 +3037,52 @@
 
     <script>
 
-        /*
-         * ========================================================
-         * UTILIVERSE HOME AFFORDABILITY CALCULATOR
-         * ========================================================
-         *
-         * The calculator uses:
-         *
-         * 1. Gross monthly income
-         * 2. Existing monthly debt
-         * 3. A target housing ratio of 28%
-         * 4. Mortgage interest rate
-         * 5. Mortgage term
-         * 6. Property taxes
-         * 7. Homeowners insurance
-         * 8. HOA fees
-         * 9. Maintenance reserve
-         *
-         * The remaining monthly housing budget is converted
-         * into an estimated mortgage principal.
-         *
-         * The down payment is then added to the estimated
-         * loan amount to produce an estimated purchase price.
-         * ========================================================
-         */
 
+        /* =========================================================
+           GET NUMBER
+        ========================================================= */
 
         function getNumber(id) {
 
-            const value = parseFloat(
-                document.getElementById(id).value
-            );
+            const value =
+                parseFloat(
+                    document.getElementById(id).value
+                );
 
-            return isNaN(value) ? 0 : value;
+
+            return isNaN(value)
+                ? 0
+                : value;
+
         }
 
+
+
+        /* =========================================================
+           FORMAT CURRENCY
+        ========================================================= */
 
         function formatCurrency(value) {
 
-            return new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "USD",
-                maximumFractionDigits: 0
-            }).format(value);
+            return new Intl.NumberFormat(
+                "en-US",
+                {
+                    style: "currency",
+                    currency: "USD",
+                    maximumFractionDigits: 0
+                }
+            ).format(value);
 
         }
 
 
+
+        /* =========================================================
+           MAIN AFFORDABILITY CALCULATOR
+        ========================================================= */
+
         function calculateAffordability() {
+
 
             /* ---------------------------------------------
                GET USER INPUT
@@ -1267,33 +3091,42 @@
             const income =
                 getNumber("income");
 
+
             const debts =
                 getNumber("debts");
+
 
             const downPayment =
                 getNumber("downPayment");
 
+
             const annualRate =
                 getNumber("rate");
+
 
             const termYears =
                 getNumber("term");
 
+
             const annualTax =
                 getNumber("propertyTax");
+
 
             const annualInsurance =
                 getNumber("insurance");
 
+
             const hoa =
                 getNumber("hoa");
+
 
             const maintenance =
                 getNumber("maintenance");
 
 
+
             /* ---------------------------------------------
-               BASIC VALIDATION
+               VALIDATION
             --------------------------------------------- */
 
             if (income <= 0) {
@@ -1303,18 +3136,18 @@
                 );
 
                 return;
+
             }
 
 
+
             /* ---------------------------------------------
-               AFFORDABILITY ASSUMPTION
-               
-               28% of gross income is allocated toward
-               housing costs.
+               HOUSING BUDGET
             --------------------------------------------- */
 
             const housingTarget =
                 income * 0.28;
+
 
 
             /* ---------------------------------------------
@@ -1323,6 +3156,7 @@
 
             const monthlyTax =
                 annualTax / 12;
+
 
             const monthlyInsurance =
                 annualInsurance / 12;
@@ -1335,8 +3169,9 @@
                 maintenance;
 
 
+
             /* ---------------------------------------------
-               AVAILABLE PRINCIPAL + INTEREST PAYMENT
+               AVAILABLE PRINCIPAL + INTEREST
             --------------------------------------------- */
 
             let principalInterest =
@@ -1344,15 +3179,12 @@
                 fixedHousingCosts;
 
 
-            /*
-             * Do not allow a negative mortgage payment.
-             */
-
             if (principalInterest < 0) {
 
                 principalInterest = 0;
 
             }
+
 
 
             /* ---------------------------------------------
@@ -1362,22 +3194,15 @@
             const monthlyRate =
                 annualRate / 100 / 12;
 
+
             const numberOfPayments =
                 termYears * 12;
 
-            let loanAmount = 0;
+
+            let loanAmount =
+                0;
 
 
-            /*
-             * Standard amortizing mortgage formula:
-             *
-             * Payment =
-             * P * r * (1+r)^n
-             * -----------------
-             * (1+r)^n - 1
-             *
-             * Rearranged to solve for P.
-             */
 
             if (monthlyRate === 0) {
 
@@ -1385,30 +3210,36 @@
                     principalInterest *
                     numberOfPayments;
 
-            } else {
+            }
+
+            else {
 
                 loanAmount =
                     principalInterest *
                     (
-                        (1 + monthlyRate) **
-                        numberOfPayments - 1
-                    ) /
+                        (1 + monthlyRate)
+                        ** numberOfPayments
+                        - 1
+                    )
+                    /
                     (
                         monthlyRate *
-                        (1 + monthlyRate) **
-                        numberOfPayments
+                        (1 + monthlyRate)
+                        ** numberOfPayments
                     );
 
             }
 
 
+
             /* ---------------------------------------------
-               ESTIMATED HOME PURCHASE PRICE
+               ESTIMATED HOME PRICE
             --------------------------------------------- */
 
             const estimatedHomePrice =
                 loanAmount +
                 downPayment;
+
 
 
             /* ---------------------------------------------
@@ -1420,68 +3251,80 @@
                 fixedHousingCosts;
 
 
+
             /* ---------------------------------------------
-               DEBT-TO-INCOME CHECK
+               TOTAL DEBT RATIO
             --------------------------------------------- */
 
             const totalDebtRatio =
                 (
                     debts +
                     totalHousing
-                ) / income;
+                )
+                /
+                income;
+
 
 
             /* ---------------------------------------------
-               UPDATE RESULTS
+               UPDATE MAIN RESULTS
             --------------------------------------------- */
 
-            document.getElementById("homePrice")
-                .textContent =
+            document.getElementById(
+                "homePrice"
+            ).textContent =
                 formatCurrency(
                     estimatedHomePrice
                 );
 
 
-            document.getElementById("principalInterest")
-                .textContent =
+            document.getElementById(
+                "principalInterest"
+            ).textContent =
                 formatCurrency(
                     principalInterest
                 );
 
 
-            document.getElementById("monthlyTax")
-                .textContent =
+            document.getElementById(
+                "monthlyTax"
+            ).textContent =
                 formatCurrency(
                     monthlyTax
                 );
 
 
-            document.getElementById("monthlyInsurance")
-                .textContent =
+            document.getElementById(
+                "monthlyInsurance"
+            ).textContent =
                 formatCurrency(
                     monthlyInsurance
                 );
 
 
-            document.getElementById("monthlyHoa")
-                .textContent =
+            document.getElementById(
+                "monthlyHoa"
+            ).textContent =
                 formatCurrency(
                     hoa
                 );
 
 
-            document.getElementById("monthlyMaintenance")
-                .textContent =
+            document.getElementById(
+                "monthlyMaintenance"
+            ).textContent =
                 formatCurrency(
                     maintenance
                 );
 
 
-            document.getElementById("totalHousing")
-                .textContent =
+            document.getElementById(
+                "totalHousing"
+            ).textContent =
                 formatCurrency(
                     totalHousing
                 );
+
 
 
             /* ---------------------------------------------
@@ -1493,10 +3336,12 @@
                     "affordabilityBox"
                 );
 
+
             const title =
                 document.getElementById(
                     "affordabilityTitle"
                 );
+
 
             const text =
                 document.getElementById(
@@ -1504,43 +3349,362 @@
                 );
 
 
+
             if (totalDebtRatio <= 0.36) {
 
-                box.classList.remove("warning");
+                box.classList.remove(
+                    "warning"
+                );
+
 
                 title.textContent =
                     "Comfortable target range";
+
 
                 text.textContent =
                     "Based on the assumptions entered, your estimated housing cost leaves additional room for your other monthly obligations.";
 
             }
 
+
             else if (totalDebtRatio <= 0.43) {
 
-                box.classList.remove("warning");
+                box.classList.remove(
+                    "warning"
+                );
+
 
                 title.textContent =
                     "Moderate budget range";
+
 
                 text.textContent =
                     "Your estimated housing and debt payments are approaching a higher portion of your income. Consider keeping additional cash reserves.";
 
             }
 
+
             else {
 
-                box.classList.add("warning");
+                box.classList.add(
+                    "warning"
+                );
+
 
                 title.textContent =
                     "Consider a lower target";
+
 
                 text.textContent =
                     "Your estimated housing and existing debt payments consume a larger share of monthly income. A lower purchase price may provide more breathing room.";
 
             }
 
+
+
+            /* ---------------------------------------------
+               UPDATE AMORTIZATION
+            --------------------------------------------- */
+
+            generateAmortizationSchedule(
+                loanAmount,
+                annualRate,
+                termYears,
+                principalInterest
+            );
+
         }
+
+
+
+        /* =========================================================
+           AMORTIZATION SCHEDULE
+        ========================================================= */
+
+        function generateAmortizationSchedule(
+            loanAmount,
+            annualRate,
+            termYears,
+            monthlyPayment
+        ) {
+
+
+            const body =
+                document.getElementById(
+                    "amortizationBody"
+                );
+
+
+            const loanDisplay =
+                document.getElementById(
+                    "amortLoanAmount"
+                );
+
+
+            const rateDisplay =
+                document.getElementById(
+                    "amortRate"
+                );
+
+
+            const termDisplay =
+                document.getElementById(
+                    "amortTerm"
+                );
+
+
+            const paymentDisplay =
+                document.getElementById(
+                    "amortPayment"
+                );
+
+
+
+            /* ---------------------------------------------
+               UPDATE SUMMARY
+            --------------------------------------------- */
+
+            loanDisplay.textContent =
+                formatCurrency(
+                    loanAmount
+                );
+
+
+            rateDisplay.textContent =
+                annualRate.toFixed(2)
+                + "%";
+
+
+            termDisplay.textContent =
+                termYears
+                + " years";
+
+
+            paymentDisplay.textContent =
+                formatCurrency(
+                    monthlyPayment
+                );
+
+
+
+            /* ---------------------------------------------
+               CLEAR OLD SCHEDULE
+            --------------------------------------------- */
+
+            body.innerHTML =
+                "";
+
+
+
+            /* ---------------------------------------------
+               NO LOAN
+            --------------------------------------------- */
+
+            if (loanAmount <= 0) {
+
+                body.innerHTML = `
+
+                    <tr>
+
+                        <td colspan="5">
+
+                            The estimated mortgage amount is too
+                            low to generate an amortization schedule.
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+                return;
+
+            }
+
+
+
+            /* ---------------------------------------------
+               MORTGAGE VARIABLES
+            --------------------------------------------- */
+
+            const monthlyRate =
+                annualRate / 100 / 12;
+
+
+            let balance =
+                loanAmount;
+
+
+
+            /* ---------------------------------------------
+               YEAR-BY-YEAR CALCULATION
+            --------------------------------------------- */
+
+            for (
+                let year = 1;
+                year <= termYears;
+                year++
+            ) {
+
+
+                const beginningBalance =
+                    balance;
+
+
+                let yearlyPrincipal =
+                    0;
+
+
+                let yearlyInterest =
+                    0;
+
+
+
+                /* -----------------------------------------
+                   PROCESS EACH MONTH
+                ----------------------------------------- */
+
+                for (
+                    let month = 1;
+                    month <= 12;
+                    month++
+                ) {
+
+
+                    if (balance <= 0) {
+
+                        break;
+
+                    }
+
+
+                    let interest =
+                        balance *
+                        monthlyRate;
+
+
+                    let principal =
+                        monthlyPayment -
+                        interest;
+
+
+
+                    /*
+                     * Prevent the final payment from
+                     * exceeding the remaining balance.
+                     */
+
+                    if (principal > balance) {
+
+                        principal =
+                            balance;
+
+                    }
+
+
+
+                    balance -=
+                        principal;
+
+
+
+                    if (balance < 0) {
+
+                        balance =
+                            0;
+
+                    }
+
+
+
+                    yearlyPrincipal +=
+                        principal;
+
+
+                    yearlyInterest +=
+                        interest;
+
+                }
+
+
+
+                /* -----------------------------------------
+                   CREATE TABLE ROW
+                ----------------------------------------- */
+
+                const row =
+                    document.createElement(
+                        "tr"
+                    );
+
+
+                row.innerHTML = `
+
+                    <td>
+
+                        ${year}
+
+                    </td>
+
+
+                    <td>
+
+                        ${formatCurrency(
+                            beginningBalance
+                        )}
+
+                    </td>
+
+
+                    <td>
+
+                        ${formatCurrency(
+                            yearlyPrincipal
+                        )}
+
+                    </td>
+
+
+                    <td>
+
+                        ${formatCurrency(
+                            yearlyInterest
+                        )}
+
+                    </td>
+
+
+                    <td>
+
+                        ${formatCurrency(
+                            balance
+                        )}
+
+                    </td>
+
+                `;
+
+
+                body.appendChild(
+                    row
+                );
+
+
+
+                /* -----------------------------------------
+                   STOP WHEN PAID OFF
+                ----------------------------------------- */
+
+                if (balance <= 0) {
+
+                    break;
+
+                }
+
+            }
+
+        }
+
 
 
         /* =========================================================
@@ -1549,31 +3713,58 @@
 
         function resetCalculator() {
 
-            document.getElementById("income").value =
+
+            document.getElementById(
+                "income"
+            ).value =
                 "7000";
 
-            document.getElementById("debts").value =
+
+            document.getElementById(
+                "debts"
+            ).value =
                 "700";
 
-            document.getElementById("downPayment").value =
+
+            document.getElementById(
+                "downPayment"
+            ).value =
                 "50000";
 
-            document.getElementById("rate").value =
+
+            document.getElementById(
+                "rate"
+            ).value =
                 "6.50";
 
-            document.getElementById("term").value =
+
+            document.getElementById(
+                "term"
+            ).value =
                 "30";
 
-            document.getElementById("propertyTax").value =
+
+            document.getElementById(
+                "propertyTax"
+            ).value =
                 "5000";
 
-            document.getElementById("insurance").value =
+
+            document.getElementById(
+                "insurance"
+            ).value =
                 "2400";
 
-            document.getElementById("hoa").value =
+
+            document.getElementById(
+                "hoa"
+            ).value =
                 "100";
 
-            document.getElementById("maintenance").value =
+
+            document.getElementById(
+                "maintenance"
+            ).value =
                 "150";
 
 
@@ -1582,8 +3773,84 @@
         }
 
 
+
         /* =========================================================
-           AUTOMATIC INITIAL CALCULATION
+           FAQ ACCORDION
+        ========================================================= */
+
+        function toggleFAQ(button) {
+
+
+            const answer =
+                button.nextElementSibling;
+
+
+            const isOpen =
+                answer.classList.contains(
+                    "open"
+                );
+
+
+
+            /* ---------------------------------------------
+               CLOSE ALL FAQ ANSWERS
+            --------------------------------------------- */
+
+            document
+                .querySelectorAll(
+                    ".faq-answer"
+                )
+                .forEach(
+                    function(item) {
+
+                        item.classList.remove(
+                            "open"
+                        );
+
+                    }
+                );
+
+
+
+            document
+                .querySelectorAll(
+                    ".faq-question"
+                )
+                .forEach(
+                    function(item) {
+
+                        item.classList.remove(
+                            "active"
+                        );
+
+                    }
+                );
+
+
+
+            /* ---------------------------------------------
+               OPEN SELECTED ANSWER
+            --------------------------------------------- */
+
+            if (!isOpen) {
+
+                answer.classList.add(
+                    "open"
+                );
+
+
+                button.classList.add(
+                    "active"
+                );
+
+            }
+
+        }
+
+
+
+        /* =========================================================
+           INITIAL CALCULATION
         ========================================================= */
 
         document.addEventListener(
@@ -1596,30 +3863,41 @@
         );
 
 
+
         /* =========================================================
-           RECALCULATE WHEN USER PRESSES ENTER
+           ENTER KEY CALCULATION
         ========================================================= */
 
-        document.querySelectorAll("input").forEach(
-            function(input) {
+        document
+            .querySelectorAll(
+                "input"
+            )
+            .forEach(
+                function(input) {
 
-                input.addEventListener(
-                    "keydown",
-                    function(event) {
+                    input.addEventListener(
+                        "keydown",
+                        function(event) {
 
-                        if (event.key === "Enter") {
+                            if (
+                                event.key ===
+                                "Enter"
+                            ) {
 
-                            calculateAffordability();
+                                calculateAffordability();
+
+                            }
 
                         }
+                    );
 
-                    }
-                );
+                }
+            );
 
-            }
-        );
 
     </script>
 
+
 </body>
+
 </html>
