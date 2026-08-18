@@ -1,0 +1,2176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Utiliverse Color Screen — Free Fullscreen Color & Display Tool</title>
+
+<meta name="description" content="Free online fullscreen color screen and color generator. Display black, white, red, green, blue, yellow, orange, pink, purple or any custom color. Preview colors, copy HEX and RGB values, enter fullscreen mode and download high-resolution color images.">
+
+<meta name="keywords" content="color screen, fullscreen color screen, black screen, white screen, red screen, blue screen, green screen, color generator, HEX color picker, RGB color picker, screen test, display test, fullscreen color, color image generator">
+
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#020617">
+
+<link rel="canonical" href="https://utiliverse.app/color-screen/">
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+
+:root {
+    --bg-main: #020617;
+    --bg-secondary: #0f172a;
+    --card: rgba(15, 23, 42, 0.72);
+    --border: #1e293b;
+    --border-light: #334155;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent: #6366f1;
+    --accent-dark: #4f46e5;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background:
+        radial-gradient(circle at top left, rgba(99,102,241,.12), transparent 30%),
+        radial-gradient(circle at top right, rgba(139,92,246,.08), transparent 30%),
+        var(--bg-main);
+    color: var(--text-main);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.glass {
+    background: rgba(15, 23, 42, 0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--border-light);
+}
+
+.glass-soft {
+    background: rgba(30, 41, 59, 0.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(71,85,105,.45);
+}
+
+.gradient-text {
+    background: linear-gradient(90deg,#818cf8,#c084fc,#f472b6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.color-preview {
+    min-height: 390px;
+    transition:
+        background-color .18s ease,
+        color .18s ease;
+}
+
+.spectrum {
+    width: 100%;
+    height: 180px;
+    border-radius: 16px;
+    position: relative;
+    cursor: crosshair;
+    background:
+        linear-gradient(to top, #000, transparent),
+        linear-gradient(to right,
+            #f00 0%,
+            #ff0 16.66%,
+            #0f0 33.33%,
+            #0ff 50%,
+            #00f 66.66%,
+            #f0f 83.33%,
+            #f00 100%
+        );
+    overflow: hidden;
+}
+
+.spectrum-marker {
+    width: 20px;
+    height: 20px;
+    border: 3px solid white;
+    box-shadow: 0 0 0 2px rgba(0,0,0,.5);
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-50%,50%);
+    pointer-events: none;
+}
+
+.hue-slider {
+    width: 100%;
+    height: 18px;
+    border-radius: 999px;
+    appearance: none;
+    background:
+        linear-gradient(
+            to right,
+            #ff0000 0%,
+            #ffff00 16%,
+            #00ff00 33%,
+            #00ffff 50%,
+            #0000ff 66%,
+            #ff00ff 83%,
+            #ff0000 100%
+        );
+    outline: none;
+}
+
+.hue-slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid #0f172a;
+    box-shadow: 0 0 0 2px white;
+    cursor: pointer;
+}
+
+.hue-slider::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid #0f172a;
+    cursor: pointer;
+}
+
+.color-tile {
+    height: 70px;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    transition: .2s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.color-tile:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255,255,255,.6);
+}
+
+.color-tile.active {
+    border-color: white;
+    box-shadow:
+        0 0 0 2px #6366f1,
+        0 8px 30px rgba(99,102,241,.25);
+}
+
+.color-tile span {
+    position: absolute;
+    bottom: 7px;
+    left: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    text-shadow: 0 1px 4px rgba(0,0,0,.8);
+}
+
+.value-box {
+    background: rgba(2,6,23,.75);
+    border: 1px solid #334155;
+    border-radius: 10px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg,#6366f1,#4f46e5);
+    transition: .2s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 30px rgba(99,102,241,.28);
+}
+
+.btn-secondary {
+    background: #1e293b;
+    border: 1px solid #334155;
+    transition: .2s ease;
+}
+
+.btn-secondary:hover {
+    background: #334155;
+}
+
+.ad-slot {
+    min-height: 90px;
+    border: 1px dashed #334155;
+    border-radius: 12px;
+    background: rgba(15,23,42,.35);
+    color: #64748b;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.12em;
+}
+
+.faq-item {
+    border-bottom: 1px solid #1e293b;
+}
+
+.faq-question {
+    cursor:pointer;
+    padding:18px 0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    font-weight:700;
+}
+
+.faq-answer {
+    color:#94a3b8;
+    line-height:1.8;
+    padding-bottom:20px;
+}
+
+.content-area {
+    color:#94a3b8;
+    line-height:1.85;
+}
+
+.content-area h3 {
+    color:#f8fafc;
+    font-size:1.35rem;
+    margin-top:2rem;
+    margin-bottom:.75rem;
+    font-weight:700;
+}
+
+.content-area p {
+    margin-bottom:1.1rem;
+}
+
+.color-badge {
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#1e293b;
+    border:1px solid #334155;
+    font-size:12px;
+    color:#cbd5e1;
+}
+
+.badge-dot {
+    width:9px;
+    height:9px;
+    border-radius:50%;
+}
+
+.timer-display {
+    font-family: "SFMono-Regular", Consolas, monospace;
+    font-size:2rem;
+    font-weight:700;
+}
+
+.range-control {
+    width:100%;
+}
+
+@media(max-width:768px) {
+
+    .color-preview {
+        min-height:280px;
+    }
+
+    .spectrum {
+        height:150px;
+    }
+
+}
+
+</style>
+
+<!-- SEO Structured Data -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Utiliverse Color Screen",
+  "url":"https://utiliverse.app/color-screen/",
+  "applicationCategory":"UtilitiesApplication",
+  "operatingSystem":"Any",
+  "description":"A free browser-based fullscreen color display, color picker, screen testing and image generation utility.",
+  "offers":{
+    "@type":"Offer",
+    "price":"0",
+    "priceCurrency":"USD"
+  }
+}
+</script>
+
+<script type="application/ld+json" id="faqSchema">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[]
+}
+</script>
+
+</head>
+
+<body>
+
+<!-- ========================= HEADER ========================= -->
+
+<header class="sticky top-0 z-50 border-b border-slate-800 bg-slate-950/85 backdrop-blur-xl">
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6">
+
+<div class="h-16 flex items-center justify-between">
+
+<a href="/" class="flex items-center gap-3">
+
+<div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+
+<i data-lucide="layers" class="w-5 h-5 text-white"></i>
+
+</div>
+
+<span class="font-bold text-xl tracking-tight">
+Utiliverse
+</span>
+
+</a>
+
+<div class="flex items-center gap-3">
+
+<span class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">
+
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+
+100% Client-Side & Private
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+</header>
+
+
+<!-- ========================= HERO ========================= -->
+
+<section class="max-w-7xl mx-auto px-4 sm:px-6 pt-12 pb-8">
+
+<div class="max-w-3xl">
+
+<div class="color-badge mb-5">
+
+<span class="badge-dot" id="badgeDot" style="background:#000000"></span>
+
+Fullscreen Color Utility
+
+</div>
+
+<h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-tight">
+
+A cleaner way to
+
+<span class="gradient-text">
+display any color.
+</span>
+
+</h1>
+
+<p class="mt-5 text-lg text-slate-400 leading-relaxed max-w-2xl">
+
+Display a precise color across your entire screen, test a display, create a clean background, preview a HEX value, or download a solid-color image. Everything happens directly in your browser.
+
+</p>
+
+</div>
+
+</section>
+
+
+<!-- ========================= TOP AD ========================= -->
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 mb-8">
+
+<div class="ad-slot">
+
+Advertisement Space
+
+</div>
+
+</div>
+
+
+<!-- ========================= MAIN WORKSPACE ========================= -->
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 pb-16">
+
+<div class="grid lg:grid-cols-[1fr_360px] gap-6">
+
+
+<!-- ========================= PREVIEW ========================= -->
+
+<section class="glass rounded-2xl overflow-hidden">
+
+<div
+id="colorPreview"
+class="color-preview flex flex-col items-center justify-center text-center p-8"
+style="background:#000000;color:#ffffff;"
+>
+
+<div class="mb-5 px-4 py-2 rounded-full bg-black/20 backdrop-blur text-sm font-mono">
+
+<span id="previewHex">#000000</span>
+
+</div>
+
+<h2 class="text-3xl sm:text-4xl font-black tracking-tight">
+
+<span id="previewColorName">
+Black
+</span>
+
+</h2>
+
+<p class="mt-3 text-sm opacity-75 max-w-md">
+
+Your selected color is ready for fullscreen viewing or image export.
+
+</p>
+
+</div>
+
+
+<div class="p-5 border-t border-slate-800">
+
+<div class="grid sm:grid-cols-3 gap-3">
+
+<button
+onclick="enterFullscreen()"
+class="btn-primary rounded-xl px-4 py-3 font-bold flex items-center justify-center gap-2"
+>
+
+<i data-lucide="maximize" class="w-4 h-4"></i>
+
+Fullscreen
+
+</button>
+
+
+<button
+onclick="downloadImage()"
+class="btn-secondary rounded-xl px-4 py-3 font-bold flex items-center justify-center gap-2"
+>
+
+<i data-lucide="download" class="w-4 h-4"></i>
+
+Download PNG
+
+</button>
+
+
+<button
+onclick="copyHex()"
+class="btn-secondary rounded-xl px-4 py-3 font-bold flex items-center justify-center gap-2"
+>
+
+<i data-lucide="copy" class="w-4 h-4"></i>
+
+Copy HEX
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ========================= CONTROLS ========================= -->
+
+<aside class="glass rounded-2xl p-5">
+
+<h2 class="text-xl font-bold">
+Choose a color
+</h2>
+
+<p class="text-sm text-slate-400 mt-1">
+Select a preset or create your own.
+</p>
+
+
+<!-- Presets -->
+
+<div class="grid grid-cols-3 gap-3 mt-5" id="presetGrid">
+</div>
+
+
+<!-- Spectrum -->
+
+<div class="mt-6">
+
+<div class="flex items-center justify-between mb-2">
+
+<label class="text-xs uppercase tracking-wider font-bold text-slate-400">
+Custom color
+</label>
+
+<span
+id="customHex"
+class="font-mono text-xs text-slate-500"
+>
+#000000
+</span>
+
+</div>
+
+<div
+id="spectrum"
+class="spectrum"
+>
+<div
+id="spectrumMarker"
+class="spectrum-marker"
+style="left:0%;bottom:0%;"
+></div>
+</div>
+
+</div>
+
+
+<!-- Hue -->
+
+<div class="mt-5">
+
+<label class="text-xs uppercase tracking-wider font-bold text-slate-400">
+Hue
+</label>
+
+<input
+id="hueSlider"
+type="range"
+min="0"
+max="360"
+value="0"
+class="hue-slider mt-3"
+>
+
+</div>
+
+
+<!-- HEX input -->
+
+<div class="mt-5">
+
+<label class="text-xs uppercase tracking-wider font-bold text-slate-400">
+HEX Color
+</label>
+
+<div class="flex gap-2 mt-2">
+
+<input
+id="hexInput"
+type="text"
+value="#000000"
+maxlength="7"
+class="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 font-mono text-sm text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+>
+
+<button
+onclick="applyHex()"
+class="btn-primary rounded-xl px-4 font-bold"
+>
+Apply
+</button>
+
+</div>
+
+</div>
+
+
+<!-- RGB -->
+
+<div class="mt-5">
+
+<label class="text-xs uppercase tracking-wider font-bold text-slate-400">
+RGB
+</label>
+
+<div class="value-box mt-2 p-3 font-mono text-sm">
+
+<span id="rgbValue">
+rgb(0, 0, 0)
+</span>
+
+</div>
+
+</div>
+
+
+<!-- Image dimensions -->
+
+<div class="mt-5">
+
+<label class="text-xs uppercase tracking-wider font-bold text-slate-400">
+Download dimensions
+</label>
+
+<div class="grid grid-cols-2 gap-2 mt-2">
+
+<input
+id="imageWidth"
+type="number"
+value="1920"
+min="1"
+max="12000"
+class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-sm font-mono text-white"
+>
+
+<input
+id="imageHeight"
+type="number"
+value="1080"
+min="1"
+max="12000"
+class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-sm font-mono text-white"
+>
+
+</div>
+
+</div>
+
+
+<!-- Timer -->
+
+<div class="mt-6 pt-5 border-t border-slate-800">
+
+<div class="flex items-center justify-between">
+
+<div>
+
+<h3 class="font-bold">
+Screen Timer
+</h3>
+
+<p class="text-xs text-slate-500 mt-1">
+Automatically exit fullscreen.
+</p>
+
+</div>
+
+<button
+onclick="toggleTimerPanel()"
+class="btn-secondary px-3 py-2 rounded-lg text-xs"
+>
+Set Timer
+</button>
+
+</div>
+
+
+<div
+id="timerPanel"
+class="hidden mt-4"
+>
+
+<div class="grid grid-cols-2 gap-2">
+
+<input
+id="timerMinutes"
+type="number"
+value="5"
+min="1"
+max="999"
+class="bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-sm font-mono"
+>
+
+<button
+onclick="startTimer()"
+class="btn-primary rounded-xl font-bold"
+>
+Start
+</button>
+
+</div>
+
+<div
+id="timerStatus"
+class="timer-display text-center mt-4 text-indigo-400"
+>
+05:00
+</div>
+
+</div>
+
+</div>
+
+</aside>
+
+</div>
+
+
+<!-- ========================= COLOR INFO ========================= -->
+
+<section class="mt-8 glass rounded-2xl p-6">
+
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+
+<div>
+
+<span class="text-xs uppercase tracking-widest text-indigo-400 font-bold">
+Selected Color
+</span>
+
+<h2
+id="selectedColorHeading"
+class="text-3xl font-black mt-1"
+>
+Black
+</h2>
+
+</div>
+
+<div class="flex gap-2">
+
+<div class="value-box px-4 py-2 font-mono text-sm">
+HEX:
+<strong id="infoHex">#000000</strong>
+</div>
+
+<div class="value-box px-4 py-2 font-mono text-sm">
+RGB:
+<strong id="infoRgb">0, 0, 0</strong>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ========================= MID AD ========================= -->
+
+<div class="grid lg:grid-cols-3 gap-6 mt-8">
+
+<div class="lg:col-span-2">
+
+<div class="ad-slot min-h-[180px]">
+
+Advertisement Space
+
+</div>
+
+</div>
+
+<div>
+
+<div class="ad-slot min-h-[180px]">
+
+Advertisement Space
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ========================= COLOR DIRECTORY ========================= -->
+
+<section class="mt-16">
+
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-5">
+
+<div>
+
+<p class="text-xs uppercase tracking-[.2em] text-indigo-400 font-bold">
+Color Library
+</p>
+
+<h2 class="text-3xl sm:text-4xl font-black mt-2">
+Explore screen colors
+</h2>
+
+<p class="text-slate-400 mt-2 max-w-2xl">
+Choose a predefined shade to instantly update the screen, color information and educational content.
+</p>
+
+</div>
+
+
+<div class="relative w-full md:w-72">
+
+<i
+data-lucide="search"
+class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500"
+></i>
+
+<input
+id="colorSearch"
+type="text"
+placeholder="Search colors..."
+class="w-full bg-slate-900 border border-slate-700 rounded-xl py-3 pl-10 pr-4 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+>
+
+</div>
+
+</div>
+
+
+<div
+id="colorDirectory"
+class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mt-7"
+>
+</div>
+
+</section>
+
+
+<!-- ========================= SEO CONTENT ========================= -->
+
+<section class="mt-20">
+
+<div class="max-w-4xl">
+
+<div class="mb-8">
+
+<p class="text-xs uppercase tracking-[.2em] text-indigo-400 font-bold">
+About Utiliverse Color Screen
+</p>
+
+<h2 class="text-3xl sm:text-4xl font-black mt-2">
+A simple color screen for testing, design, focus and everyday screen tasks
+</h2>
+
+</div>
+
+
+<div
+id="colorContent"
+class="content-area"
+>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ========================= FAQ ========================= -->
+
+<section class="mt-20 max-w-4xl">
+
+<div class="mb-7">
+
+<p class="text-xs uppercase tracking-[.2em] text-indigo-400 font-bold">
+Frequently Asked Questions
+</p>
+
+<h2 class="text-3xl font-black mt-2">
+Questions about <span id="faqColorName">Black</span>
+</h2>
+
+</div>
+
+
+<div id="faqContainer"></div>
+
+</section>
+
+
+<!-- ========================= BOTTOM AD ========================= -->
+
+<div class="mt-16">
+
+<div class="ad-slot min-h-[100px]">
+
+Advertisement Space
+
+</div>
+
+</div>
+
+
+</main>
+
+
+<!-- ========================= FOOTER ========================= -->
+
+<footer class="border-t border-slate-800 bg-slate-950">
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+
+<div class="grid md:grid-cols-3 gap-8">
+
+<div>
+
+<div class="flex items-center gap-3">
+
+<div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center">
+
+<i data-lucide="layers" class="w-5 h-5"></i>
+
+</div>
+
+<span class="font-bold text-lg">
+Utiliverse
+</span>
+
+</div>
+
+<p class="text-sm text-slate-500 mt-4 max-w-sm leading-relaxed">
+
+Simple browser-based utilities designed to help you get everyday tasks done quickly without unnecessary accounts or software installations.
+
+</p>
+
+</div>
+
+
+<div>
+
+<h3 class="font-bold mb-4">
+Color Tools
+</h3>
+
+<div class="space-y-2 text-sm text-slate-500">
+
+<a href="#" class="block hover:text-white">Black Screen</a>
+<a href="#" class="block hover:text-white">White Screen</a>
+<a href="#" class="block hover:text-white">Color Picker</a>
+<a href="#" class="block hover:text-white">Fullscreen Color</a>
+
+</div>
+
+</div>
+
+
+<div>
+
+<h3 class="font-bold mb-4">
+Utiliverse
+</h3>
+
+<div class="space-y-2 text-sm text-slate-500">
+
+<a href="/" class="block hover:text-white">
+Back to Homepage
+</a>
+
+<a href="#" class="block hover:text-white">
+Privacy Policy
+</a>
+
+<a href="#" class="block hover:text-white">
+Terms of Service
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="border-t border-slate-800 mt-8 pt-6 text-xs text-slate-600 flex flex-col sm:flex-row justify-between gap-3">
+
+<span>
+© <span id="year"></span> Utiliverse. All rights reserved.
+</span>
+
+<span>
+Color processing happens locally in your browser.
+</span>
+
+</div>
+
+</div>
+
+</footer>
+
+
+<!-- ========================= JAVASCRIPT ========================= -->
+
+<script>
+
+lucide.createIcons();
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+
+/* ============================================================
+   COLOR DATA
+============================================================ */
+
+const colors = {
+
+Black: {
+    hex:"#000000",
+    rgb:[0,0,0],
+    description:"Black creates maximum visual simplicity and is useful for display testing, OLED-focused workflows, photography, video production, presentations, dark environments and distraction-free viewing."
+},
+
+White: {
+    hex:"#FFFFFF",
+    rgb:[255,255,255],
+    description:"White provides a bright uniform reference surface that can be useful for display inspection, lighting tests, photography, presentations, design work and checking screen uniformity."
+},
+
+Red: {
+    hex:"#FF0000",
+    rgb:[255,0,0],
+    description:"Red provides a strong primary-color reference that can help identify display defects, test color reproduction, create visual effects, build dramatic backgrounds and support creative projects."
+},
+
+Green: {
+    hex:"#00FF00",
+    rgb:[0,255,0],
+    description:"Green is widely recognized as a strong screen-testing color and is also useful for chroma-key workflows, display checks, visual experiments and creative production."
+},
+
+Blue: {
+    hex:"#0000FF",
+    rgb:[0,0,255],
+    description:"Blue provides a saturated primary-color reference suitable for display testing, creative backgrounds, lighting experiments, presentations and digital production."
+},
+
+Yellow: {
+    hex:"#FFFF00",
+    rgb:[255,255,0],
+    description:"Yellow creates a highly visible bright surface useful for visibility testing, presentations, creative work, color comparisons, photography and visual experiments."
+},
+
+Orange: {
+    hex:"#FFA500",
+    rgb:[255,165,0],
+    description:"Orange provides a warm and energetic visual surface useful for creative backgrounds, presentations, photography, design concepts and ambient screen applications."
+},
+
+Pink: {
+    hex:"#FF69B4",
+    rgb:[255,105,180],
+    description:"Pink offers a vibrant decorative color useful for social content, photography, creative backgrounds, digital artwork, events, presentations and visual experimentation."
+},
+
+Purple: {
+    hex:"#800080",
+    rgb:[128,0,128],
+    description:"Purple creates a distinctive saturated background useful for creative work, branding concepts, presentations, digital artwork and ambient visual environments."
+
+}
+
+};
+
+
+let currentColor = "Black";
+
+
+/* ============================================================
+   PRESET COLORS
+============================================================ */
+
+const presetGrid = document.getElementById("presetGrid");
+
+Object.entries(colors).forEach(([name,data]) => {
+
+    const tile = document.createElement("button");
+
+    tile.className = "color-tile";
+
+    tile.dataset.name = name;
+
+    tile.style.background = data.hex;
+
+    tile.innerHTML = `<span>${name}</span>`;
+
+    tile.addEventListener("click", () => {
+
+        selectColor(name);
+
+    });
+
+    presetGrid.appendChild(tile);
+
+});
+
+
+/* ============================================================
+   DIRECTORY
+============================================================ */
+
+function renderDirectory(filter="") {
+
+    const directory = document.getElementById("colorDirectory");
+
+    directory.innerHTML = "";
+
+    Object.entries(colors).forEach(([name,data]) => {
+
+        if(
+            filter &&
+            !name.toLowerCase().includes(filter.toLowerCase())
+        ) {
+            return;
+        }
+
+        const card = document.createElement("button");
+
+        card.className =
+            "glass rounded-2xl overflow-hidden text-left hover:-translate-y-1 transition duration-200";
+
+        card.innerHTML = `
+
+            <div
+                class="h-24"
+                style="background:${data.hex}"
+            ></div>
+
+            <div class="p-4">
+
+                <div class="font-bold">
+                    ${name}
+                </div>
+
+                <div class="text-xs font-mono text-slate-500 mt-1">
+                    ${data.hex}
+                </div>
+
+            </div>
+
+        `;
+
+        card.addEventListener("click", () => selectColor(name));
+
+        directory.appendChild(card);
+
+    });
+
+}
+
+renderDirectory();
+
+
+document
+.getElementById("colorSearch")
+.addEventListener("input", function(){
+
+    renderDirectory(this.value);
+
+});
+
+
+/* ============================================================
+   COLOR SELECTION
+============================================================ */
+
+function selectColor(name) {
+
+    currentColor = name;
+
+    const data = colors[name];
+
+    applyColor(data.hex, name);
+
+}
+
+
+function applyColor(hex,name="Custom") {
+
+    const rgb = hexToRgb(hex);
+
+    if(!rgb) return;
+
+    currentColor = name;
+
+    const preview =
+        document.getElementById("colorPreview");
+
+    preview.style.backgroundColor = hex;
+
+    const brightness =
+        ((rgb.r * 299) +
+        (rgb.g * 587) +
+        (rgb.b * 114)) / 1000;
+
+    const textColor =
+        brightness > 160 ? "#020617" : "#ffffff";
+
+    preview.style.color = textColor;
+
+    document.getElementById("previewHex").textContent =
+        hex.toUpperCase();
+
+    document.getElementById("previewColorName").textContent =
+        name;
+
+    document.getElementById("selectedColorHeading").textContent =
+        name;
+
+    document.getElementById("infoHex").textContent =
+        hex.toUpperCase();
+
+    document.getElementById("customHex").textContent =
+        hex.toUpperCase();
+
+    document.getElementById("hexInput").value =
+        hex.toUpperCase();
+
+    document.getElementById("rgbValue").textContent =
+        `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+
+    document.getElementById("infoRgb").textContent =
+        `${rgb.r}, ${rgb.g}, ${rgb.b}`;
+
+    document.getElementById("badgeDot").style.background =
+        hex;
+
+    document.getElementById("faqColorName").textContent =
+        name;
+
+    document
+        .querySelectorAll(".color-tile")
+        .forEach(tile => {
+
+            tile.classList.toggle(
+                "active",
+                tile.dataset.name === name
+            );
+
+        });
+
+    updateColorContent(name);
+
+    updateFAQ(name);
+
+    updatePickerFromHex(hex);
+
+}
+
+
+/* ============================================================
+   HEX UTILITIES
+============================================================ */
+
+function hexToRgb(hex) {
+
+    hex = hex.replace("#","");
+
+    if(hex.length !== 6) return null;
+
+    const num = parseInt(hex,16);
+
+    return {
+
+        r:(num >> 16) & 255,
+
+        g:(num >> 8) & 255,
+
+        b:num & 255
+
+    };
+
+}
+
+
+function rgbToHex(r,g,b) {
+
+    return "#" +
+
+        [r,g,b]
+        .map(x =>
+            x.toString(16)
+            .padStart(2,"0")
+        )
+        .join("");
+
+}
+
+
+function applyHex() {
+
+    let value =
+        document.getElementById("hexInput").value.trim();
+
+    if(!/^#[0-9A-Fa-f]{6}$/.test(value)) {
+
+        alert("Please enter a valid six-digit HEX color such as #6366F1.");
+
+        return;
+
+    }
+
+    applyColor(value,"Custom");
+
+}
+
+
+function copyHex() {
+
+    const hex =
+        document.getElementById("infoHex").textContent;
+
+    navigator.clipboard.writeText(hex);
+
+}
+
+
+/* ============================================================
+   COLOR PICKER
+============================================================ */
+
+const spectrum =
+    document.getElementById("spectrum");
+
+const marker =
+    document.getElementById("spectrumMarker");
+
+const hueSlider =
+    document.getElementById("hueSlider");
+
+
+let pickerHue = 0;
+let pickerSaturation = 1;
+let pickerLightness = 0.5;
+
+
+function hsvToRgb(h,s,v) {
+
+    let f = (n,k=(n+h/60)%6) =>
+        v - v*s*Math.max(Math.min(k,4-k,1),0);
+
+    return {
+        r:Math.round(f(5)*255),
+        g:Math.round(f(3)*255),
+        b:Math.round(f(1)*255)
+    };
+
+}
+
+
+function updatePickerColor() {
+
+    const rgb =
+        hsvToRgb(
+            pickerHue,
+            pickerSaturation,
+            pickerLightness
+        );
+
+    const hex =
+        rgbToHex(
+            rgb.r,
+            rgb.g,
+            rgb.b
+        );
+
+    applyColor(hex,"Custom");
+
+}
+
+
+spectrum.addEventListener("pointerdown", function(e){
+
+    spectrum.setPointerCapture(e.pointerId);
+
+    updateSpectrumPosition(e);
+
+});
+
+
+spectrum.addEventListener("pointermove", function(e){
+
+    if(e.buttons) {
+
+        updateSpectrumPosition(e);
+
+    }
+
+});
+
+
+function updateSpectrumPosition(e) {
+
+    const rect =
+        spectrum.getBoundingClientRect();
+
+    let x =
+        Math.max(
+            0,
+            Math.min(
+                rect.width,
+                e.clientX - rect.left
+            )
+        );
+
+    let y =
+        Math.max(
+            0,
+            Math.min(
+                rect.height,
+                e.clientY - rect.top
+            )
+        );
+
+    pickerSaturation =
+        x / rect.width;
+
+    pickerLightness =
+        1 - (y / rect.height);
+
+    marker.style.left =
+        (pickerSaturation * 100) + "%";
+
+    marker.style.bottom =
+        (pickerLightness * 100) + "%";
+
+    updatePickerColor();
+
+}
+
+
+hueSlider.addEventListener("input", function(){
+
+    pickerHue =
+        parseFloat(this.value);
+
+    updatePickerColor();
+
+});
+
+
+/* ============================================================
+   PICKER SYNCHRONIZATION
+============================================================ */
+
+function updatePickerFromHex(hex) {
+
+    const rgb = hexToRgb(hex);
+
+    if(!rgb) return;
+
+    const max =
+        Math.max(rgb.r,rgb.g,rgb.b)/255;
+
+    const min =
+        Math.min(rgb.r,rgb.g,rgb.b)/255;
+
+    let h = 0;
+
+    const d = max-min;
+
+    if(d !== 0) {
+
+        if(max === rgb.r/255) {
+
+            h =
+                60 *
+                (((rgb.g-rgb.b)/255/d)%6);
+
+        }
+        else if(max === rgb.g/255) {
+
+            h =
+                60 *
+                (((rgb.b-rgb.r)/255/d)+2);
+
+        }
+        else {
+
+            h =
+                60 *
+                (((rgb.r-rgb.g)/255/d)+4);
+
+        }
+
+    }
+
+    if(h < 0) h += 360;
+
+    pickerHue = h;
+
+    pickerSaturation =
+        max === 0 ? 0 : d/max;
+
+    pickerLightness = max;
+
+    hueSlider.value = h;
+
+    marker.style.left =
+        (pickerSaturation*100)+"%";
+
+    marker.style.bottom =
+        (pickerLightness*100)+"%";
+
+}
+
+
+/* ============================================================
+   FULLSCREEN
+============================================================ */
+
+function enterFullscreen() {
+
+    const preview =
+        document.getElementById("colorPreview");
+
+    if(preview.requestFullscreen) {
+
+        preview.requestFullscreen();
+
+    }
+    else if(preview.webkitRequestFullscreen) {
+
+        preview.webkitRequestFullscreen();
+
+    }
+
+}
+
+
+/* ============================================================
+   DOWNLOAD IMAGE
+============================================================ */
+
+function downloadImage() {
+
+    const width =
+        parseInt(
+            document.getElementById("imageWidth").value
+        ) || 1920;
+
+    const height =
+        parseInt(
+            document.getElementById("imageHeight").value
+        ) || 1080;
+
+    const hex =
+        document.getElementById("infoHex").textContent;
+
+    const canvas =
+        document.createElement("canvas");
+
+    canvas.width = width;
+
+    canvas.height = height;
+
+    const ctx =
+        canvas.getContext("2d");
+
+    ctx.fillStyle = hex;
+
+    ctx.fillRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+    canvas.toBlob(function(blob){
+
+        const url =
+            URL.createObjectURL(blob);
+
+        const a =
+            document.createElement("a");
+
+        a.href = url;
+
+        a.download =
+            `utiliverse-${hex.replace("#","")}-${width}x${height}.png`;
+
+        document.body.appendChild(a);
+
+        a.click();
+
+        a.remove();
+
+        URL.revokeObjectURL(url);
+
+    },"image/png");
+
+}
+
+
+/* ============================================================
+   TIMER
+============================================================ */
+
+let timerInterval = null;
+let timerSeconds = 300;
+
+
+function toggleTimerPanel() {
+
+    document
+        .getElementById("timerPanel")
+        .classList.toggle("hidden");
+
+}
+
+
+function startTimer() {
+
+    clearInterval(timerInterval);
+
+    const minutes =
+        parseInt(
+            document.getElementById("timerMinutes").value
+        ) || 5;
+
+    timerSeconds =
+        minutes * 60;
+
+    updateTimerDisplay();
+
+    timerInterval =
+        setInterval(() => {
+
+            timerSeconds--;
+
+            updateTimerDisplay();
+
+            if(timerSeconds <= 0) {
+
+                clearInterval(timerInterval);
+
+                if(document.fullscreenElement) {
+
+                    document.exitFullscreen();
+
+                }
+
+            }
+
+        },1000);
+
+}
+
+
+function updateTimerDisplay() {
+
+    const mins =
+        Math.floor(timerSeconds / 60)
+        .toString()
+        .padStart(2,"0");
+
+    const secs =
+        (timerSeconds % 60)
+        .toString()
+        .padStart(2,"0");
+
+    document
+        .getElementById("timerStatus")
+        .textContent =
+        `${mins}:${secs}`;
+
+}
+
+
+/* ============================================================
+   LONG-FORM COLOR CONTENT
+============================================================ */
+
+const colorUseCases = {
+
+Black: [
+
+["Display Diagnostics","A pure black screen can be useful when examining a monitor, television, laptop, tablet or phone for visible defects. Because the entire display is presented with a uniform dark surface, areas that behave differently from the surrounding pixels may become easier to notice. This can be helpful when checking for uneven illumination, bright spots, unusual glow, stuck pixels or other visual inconsistencies. A black screen should be treated as a visual inspection aid rather than a definitive hardware diagnostic tool, but it provides a convenient starting point when evaluating a display."],
+
+["OLED and Dark Display Environments","Black is especially relevant to OLED-oriented workflows because individual pixels can be controlled differently from the backlight behavior of traditional LCD displays. A completely dark image can therefore be useful when examining how a device behaves with dark content. Users can also use a black screen as a simple ambient background when they want to reduce the amount of visual information on the display."],
+
+["Photography and Video Production","A solid black background can function as a clean matte surface for photography, video editing, compositing and visual production. It can be used when testing how objects appear against a dark background or when creating simple transition assets. Because the generated image contains one consistent color, it is also easy to incorporate into editing applications."],
+
+["Presentations","Black backgrounds can create a restrained presentation environment, especially when the goal is to place emphasis on photographs, charts or bright typography. A downloadable black image can be used as a slide background or temporary presentation canvas."],
+
+["Focus and Minimalism","A completely dark screen can eliminate visual clutter. Some people use minimal screens while listening to audio, working with external displays or creating a distraction-free environment. The fullscreen feature makes the color useful when the objective is simply to remove everything else from view."],
+
+["Device and Cable Troubleshooting","A uniform black screen can also be useful during basic display troubleshooting. If a monitor behaves differently when showing a known solid color than when displaying normal content, that observation can provide useful information when diagnosing a broader problem. It does not replace manufacturer diagnostics or professional repair, but it can help narrow down whether a problem is visible on the display itself."]
+
+],
+
+White: [
+
+["Display Uniformity","White provides one of the brightest common reference surfaces for visual inspection. Display owners can use a solid white screen to look for uneven brightness, tinting, dark regions, shadows, lines or other inconsistencies. This can be particularly useful when inspecting a recently purchased monitor, laptop, television or phone."],
+
+["Photography Lighting","A white screen can act as a simple temporary light source for close-up photography. At high brightness, a large display can provide a broad illuminated surface that may be useful for product photography, small objects or emergency lighting situations. Results depend heavily on the display's brightness and color characteristics."],
+
+["Design and Color Review","Designers can use white as a neutral visual field when reviewing how nearby colors appear. A surrounding background influences perceived color, so a clean white surface can provide a useful comparison environment when evaluating digital artwork."],
+
+["Presentations and Slides","White is one of the most versatile backgrounds for presentations and documents. Downloading a precisely sized white image allows creators to create clean slide backgrounds, printable layouts or temporary visual placeholders."],
+
+["Screen Brightness Testing","A full white screen places a large amount of content across the display and can therefore be useful when observing brightness behavior. Users can compare different displays or brightness settings while keeping the visual content consistent."],
+
+["Creative Workflows","Artists, photographers and designers can use a white canvas when building compositions, checking contrast or preparing assets. Since the generated image is completely uniform, it can also be used as a baseline when comparing other colors."]
+
+],
+
+Red: [
+
+["Pixel and Display Testing","Red is one of the three primary RGB display channels and can therefore be useful when inspecting how a screen reproduces saturated color. A solid red field can help reveal pixels that do not behave consistently with neighboring areas."],
+
+["Color Channel Inspection","A saturated red screen provides a simple way to observe the red channel of a display. When combined with green and blue screens, it can create a straightforward set of visual references for checking basic RGB reproduction."],
+
+["Creative Backgrounds","Red produces a strong and energetic background that works well for posters, video sequences, social graphics and dramatic presentations. Its visual intensity makes it useful when a design needs a highly noticeable backdrop."],
+
+["Photography","A red screen can be incorporated into creative lighting experiments or used as a colored background source. Photographers can explore reflections, silhouettes and color interactions using a large uniform red surface."],
+
+["Event and Ambient Displays","Red can be used for themed environments, events, decorative displays and digital signage. A fullscreen display can turn a monitor or television into a simple colored ambient surface without requiring additional software."],
+
+["Video Production","Editors can download a solid red image for transitions, backgrounds, placeholders or visual effects. Its uniform nature makes it easy to manipulate in professional editing software."]
+
+],
+
+Green: [
+
+["Display Testing","Green is another highly saturated RGB primary color that can help expose inconsistent pixels or display behavior. Using a uniform green surface provides a straightforward visual reference for screen inspection."],
+
+["Chroma-Key Workflows","Green is commonly associated with chroma-key production. While professional green-screen work generally requires controlled lighting and carefully selected shades, a digital green background can be useful for testing concepts, preparing assets or experimenting with compositing workflows."],
+
+["Video Production","Creators can use solid green images as placeholders, transitions or compositing elements. The downloadable image feature allows a custom resolution to be generated without needing an external graphics application."],
+
+["Display Diagnostics","Green can be combined with red, blue, white and black screens to create a simple sequence for visual inspection. Differences between color fields can help users identify areas that behave unexpectedly."],
+
+["Creative Projects","Bright green is visually distinctive and can be used for gaming-themed graphics, presentations, digital art and energetic backgrounds."],
+
+["Education","Teachers and students can use a solid green display when demonstrating RGB color channels, digital color theory or how screens combine red, green and blue light."]
+
+],
+
+Blue: [
+
+["Display Testing","Blue is one of the three fundamental RGB channels and provides a strong saturated reference for screen inspection. A full blue field can help users visually compare how displays reproduce deep primary colors."],
+
+["Digital Design","Blue backgrounds are widely useful in digital design because they can communicate a cool, technical or calm visual character. A solid blue image can serve as a simple starting canvas for creative work."],
+
+["Presentations","A blue screen can provide a professional background for presentations, title slides or digital signage. Different shades can be created with the custom picker when the preset blue is too intense."],
+
+["Ambient Displays","Blue can be used as an ambient background on televisions, monitors or other large displays. The custom color functionality makes it possible to move from saturated blue toward softer tones."],
+
+["Photography","A blue digital background can be used in creative photography experiments involving reflections, silhouettes and colored illumination."],
+
+["Education and Color Theory","Blue is useful for demonstrating additive RGB color mixing. Students can compare it with red and green to understand how digital displays create a broad range of colors."]
+
+],
+
+Yellow: [
+
+["Visibility Testing","Yellow is a highly noticeable color that can be useful for evaluating perceived brightness, contrast and visibility. It provides a strong visual field that differs significantly from dark colors."],
+
+["Presentations","Bright yellow can be used as an attention-grabbing presentation background when paired with appropriate dark typography."],
+
+["Creative Design","Yellow communicates energy, warmth and attention. Designers can use a solid yellow canvas for mood boards, digital artwork, posters and visual experiments."],
+
+["Photography","A yellow display can provide a warm colored illumination source for creative photography. The effect depends on the display's brightness and surrounding environment."],
+
+["Education","Yellow provides an easy example for discussing additive and subtractive color systems, visual contrast and color perception."],
+
+["Digital Signage","A bright yellow screen can be useful for temporary attention-oriented displays or visual cues where high visibility is important."]
+
+],
+
+Orange: [
+
+["Creative Backgrounds","Orange is a warm, energetic color that works well for digital artwork, social media graphics, presentations and promotional designs."],
+
+["Ambient Displays","A large orange screen can create a warm atmosphere on a television or monitor. Softer custom orange shades can be selected using the color picker."],
+
+["Photography","Orange can be used as a creative lighting or background element. It can create warm reflections and interact dramatically with neutral objects."],
+
+["Presentations","Orange backgrounds can make presentation slides feel energetic and approachable, although designers should choose text colors carefully for readability."],
+
+["Branding Concepts","Orange is often associated with energy, enthusiasm and action. Designers can use the screen tool to experiment with orange tones before selecting more precise brand colors."],
+
+["Digital Art","The downloadable PNG feature makes orange useful as a simple starting canvas for illustrations, compositing and other digital projects."]
+
+],
+
+Pink: [
+
+["Creative Projects","Pink is frequently used in digital artwork, social media graphics, event materials and decorative visual projects. A solid pink canvas provides a clean starting point."],
+
+["Photography","A pink screen can create colorful reflections and illumination effects for photography experiments."],
+
+["Events","Pink can be useful for parties, themed events, digital decorations and ambient television or monitor displays."],
+
+["Presentations","A carefully selected pink shade can create a friendly, modern presentation aesthetic. The custom picker makes it possible to select softer pastel versions."],
+
+["Social Media Content","Creators can download a specific pink resolution and use it as a background for short-form videos, posts, stories or promotional graphics."],
+
+["Design Exploration","Because pink ranges from very light pastel tones to extremely saturated magenta, the custom color controls allow designers to explore many variations quickly."]
+
+],
+
+Purple: [
+
+["Creative Design","Purple is a distinctive color for digital artwork, presentations, social graphics and visual branding experiments."],
+
+["Ambient Displays","A purple fullscreen canvas can create a dramatic atmosphere on a large display. Users can adjust the exact shade with the custom color controls."],
+
+["Photography","Purple backgrounds and screen illumination can produce unusual reflections and color combinations that are useful for creative photography."],
+
+["Presentations","Purple can create a modern presentation aesthetic, particularly when paired with white or light typography."],
+
+["Digital Art","A solid purple image can be used as a background, compositing element, placeholder or starting canvas for digital artwork."],
+
+["Brand Exploration","Designers can use multiple purple shades to explore visual identities before settling on a particular HEX value. The live HEX and RGB values make it easy to record the selected color."]
+
+]
+
+};
+
+
+/* ============================================================
+   LONG-FORM CONTENT GENERATOR
+============================================================ */
+
+function updateColorContent(name) {
+
+    const container =
+        document.getElementById("colorContent");
+
+    const data =
+        colors[name];
+
+    const useCases =
+        colorUseCases[name] || colorUseCases.Black;
+
+    let html = `
+
+        <p>
+        The <strong>${name} screen</strong> on Utiliverse is designed as a simple,
+        browser-based color utility that lets you display a consistent ${name.toLowerCase()}
+        surface across your screen. Instead of opening a graphics editor or searching for
+        a pre-made image, you can select a color, preview its exact HEX and RGB values,
+        enter fullscreen mode, and download a PNG at the dimensions you choose.
+        </p>
+
+        <p>
+        The usefulness of a solid-color screen extends beyond simply looking at a color.
+        A uniform digital surface can become a practical reference for display inspection,
+        creative production, presentations, photography, education, testing and everyday
+        computer use. Because the page generates the color directly in your browser,
+        changing the color is immediate and does not require installing desktop software.
+        </p>
+
+        <h3>
+        Why use a ${name.toLowerCase()} screen?
+        </h3>
+
+        <p>
+        A solid ${name.toLowerCase()} field removes visual distractions and gives you
+        a predictable surface. This makes it easier to concentrate on the behavior of
+        the display or on the visual task you are performing. You can use the fullscreen
+        control when you want the selected color to occupy the available display area,
+        or use the download function when you need an actual image file for another
+        application.
+        </p>
+
+        <h3>
+        ${name} color use cases
+        </h3>
+    `;
+
+    useCases.forEach(([title,text]) => {
+
+        html += `
+
+        <h3>${title}</h3>
+
+        <p>
+        ${text}
+        </p>
+
+        `;
+
+    });
+
+
+    html += `
+
+        <h3>
+        Using the custom color controls
+        </h3>
+
+        <p>
+        The preset ${name.toLowerCase()} screen is only a starting point. If you need a
+        specific shade, use the spectrum area and hue slider to create a custom color.
+        The interface displays the resulting HEX and RGB values so that you can record
+        or reuse the exact color. You can also type a known six-digit HEX value directly
+        into the color field.
+        </p>
+
+        <p>
+        This is particularly useful for designers, developers and content creators who
+        need to preview a color before using it elsewhere. A color such as
+        <strong>${data.hex}</strong> can be copied and referenced in CSS, graphics
+        applications, presentation software or other digital workflows.
+        </p>
+
+        <h3>
+        Downloading a ${name.toLowerCase()} image
+        </h3>
+
+        <p>
+        If you need an actual image rather than a live fullscreen display, enter your
+        desired width and height and select Download PNG. Utiliverse generates the image
+        locally using the browser's canvas capabilities. This makes it convenient to
+        create backgrounds for presentations, videos, websites, social graphics,
+        design projects and other digital content.
+        </p>
+
+        <h3>
+        Fullscreen viewing
+        </h3>
+
+        <p>
+        Fullscreen mode removes the surrounding interface from the visual experience,
+        making the selected ${name.toLowerCase()} color easier to evaluate across the
+        entire display. This can be useful during basic screen inspection, ambient
+        display use, creative work or situations where a clean uninterrupted color field
+        is desirable.
+        </p>
+
+        <h3>
+        A practical, simple color utility
+        </h3>
+
+        <p>
+        The goal of Utiliverse Color Screen is simplicity. There are no complicated
+        graphics controls to learn before displaying a color. Choose a preset, create
+        a custom shade, copy the color value, enter fullscreen mode or download an image.
+        The same workspace supports all of these tasks without requiring a separate
+        application.
+        </p>
+
+        <p>
+        Keep in mind that the appearance of a color can vary between displays because
+        monitors, phones and televisions have different brightness, contrast, color
+        profiles and calibration characteristics. For professional color-critical work,
+        dedicated calibration hardware and properly managed color profiles remain the
+        appropriate tools. Utiliverse Color Screen is intended as a convenient visual
+        utility and general-purpose reference.
+        </p>
+
+        <p>
+        Whether you are checking a new display, preparing a presentation, experimenting
+        with photography, building a digital design, creating a background or simply
+        looking for a distraction-free screen, the ${name.toLowerCase()} color mode gives
+        you an immediate, reusable surface with precise color information.
+        </p>
+    `;
+
+    container.innerHTML = html;
+
+}
+
+
+/* ============================================================
+   FAQ GENERATOR
+============================================================ */
+
+function updateFAQ(name) {
+
+    const container =
+        document.getElementById("faqContainer");
+
+    const faqs = [
+
+        {
+            q:`What can I use a ${name.toLowerCase()} screen for?`,
+            a:`A ${name.toLowerCase()} fullscreen display can be used for basic display inspection, creative projects, presentations, photography experiments, ambient backgrounds, color demonstrations and many other situations where a uniform color surface is useful.`
+        },
+
+        {
+            q:`Can I make the ${name.toLowerCase()} color fullscreen?`,
+            a:`Yes. Select the Fullscreen button in the preview area. Your browser will use its fullscreen capability to display the selected color across the available screen. Press Escape to leave fullscreen mode.`
+        },
+
+        {
+            q:`Can I download the ${name.toLowerCase()} screen as an image?`,
+            a:`Yes. Choose your desired image width and height and select Download PNG. The image is generated locally in your browser using the selected color.`
+        },
+
+        {
+            q:`What HEX and RGB value does the ${name.toLowerCase()} color use?`,
+            a:`The standard ${name.toLowerCase()} preset currently uses ${colors[name].hex}, which corresponds to RGB ${colors[name].rgb.join(", ")}. You can also create a different shade using the custom color picker.`
+        },
+
+        {
+            q:`Can I use this color screen to test my monitor?`,
+            a:`Yes. A solid-color screen can be useful for visual inspection of displays. You may notice differences in brightness, color uniformity or individual pixels more easily against a consistent surface. It should be considered a basic visual testing aid rather than a replacement for professional display calibration or hardware diagnostics.`
+        }
+
+    ];
+
+    container.innerHTML = "";
+
+    faqs.forEach((faq,index) => {
+
+        const item =
+            document.createElement("div");
+
+        item.className = "faq-item";
+
+        item.innerHTML = `
+
+            <div
+                class="faq-question"
+                onclick="toggleFAQ(${index})"
+            >
+
+                <span>
+                    ${faq.q}
+                </span>
+
+                <span
+                    id="faqIcon${index}"
+                    class="text-indigo-400 text-xl"
+                >
+                    +
+                </span>
+
+            </div>
+
+            <div
+                id="faqAnswer${index}"
+                class="faq-answer hidden"
+            >
+                ${faq.a}
+            </div>
+
+        `;
+
+        container.appendChild(item);
+
+    });
+
+
+    const schema =
+        document.getElementById("faqSchema");
+
+    schema.textContent =
+        JSON.stringify({
+
+            "@context":"https://schema.org",
+
+            "@type":"FAQPage",
+
+            "mainEntity":
+
+                faqs.map(f => ({
+
+                    "@type":"Question",
+
+                    "name":f.q,
+
+                    "acceptedAnswer":{
+
+                        "@type":"Answer",
+
+                        "text":f.a
+
+                    }
+
+                }))
+
+        });
+
+}
+
+
+function toggleFAQ(index) {
+
+    const answer =
+        document.getElementById(
+            "faqAnswer"+index
+        );
+
+    const icon =
+        document.getElementById(
+            "faqIcon"+index
+        );
+
+    answer.classList.toggle("hidden");
+
+    icon.textContent =
+        answer.classList.contains("hidden")
+        ? "+"
+        : "−";
+
+}
+
+
+/* ============================================================
+   KEYBOARD SHORTCUTS
+============================================================ */
+
+document.addEventListener("keydown",function(e){
+
+    if(
+        e.target.tagName === "INPUT" ||
+        e.target.tagName === "TEXTAREA"
+    ) {
+        return;
+    }
+
+    if(e.key.toLowerCase() === "f") {
+
+        enterFullscreen();
+
+    }
+
+    if(e.key === "Escape") {
+
+        if(document.fullscreenElement) {
+
+            document.exitFullscreen();
+
+        }
+
+    }
+
+    if(e.code === "Space") {
+
+        e.preventDefault();
+
+        const preview =
+            document.getElementById("colorPreview");
+
+        preview.classList.toggle("opacity-80");
+
+    }
+
+});
+
+
+/* ============================================================
+   INITIALIZE
+============================================================ */
+
+selectColor("Black");
+
+</script>
+
+</body>
+</html>
