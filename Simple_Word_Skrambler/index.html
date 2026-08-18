@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Word Skrambler | Free Online Word & Letter Scrambler | Utiliverse</title>
-    <meta name="description" content="Mix up the characters in any word or phrase and create quick scrambled versions for puzzles, games, and classroom activities. 100% free and private browser-based tool.">
+    <title>Simple Word Unskrambler | Free Online Anagram & Word Solver | Utiliverse</title>
+    <meta name="description" content="Unscramble any string of letters to instantly find hidden words for puzzles, word games, and anagrams. 100% free and private browser-based tool.">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://utiliverse.app/word-scrambler/">
+    <link rel="canonical" href="https://utiliverse.app/word-unskrambler/">
     
     <!-- Open Graph Metadata -->
-    <meta property="og:title" content="Simple Word Skrambler | Free Online Word & Letter Scrambler | Utiliverse">
-    <meta property="og:description" content="Mix up the characters in any word or phrase and create quick scrambled versions for puzzles, games, and classroom activities. 100% free and private.">
-    <meta property="og:url" content="https://utiliverse.app/word-scrambler/">
+    <meta property="og:title" content="Simple Word Unskrambler | Free Online Anagram Solver | Utiliverse">
+    <meta property="og:description" content="Unscramble any string of letters to instantly find hidden words for puzzles and word games. 100% free and private.">
+    <meta property="og:url" content="https://utiliverse.app/word-unskrambler/">
     <meta property="og:type" content="website">
 
     <!-- Tailwind CSS -->
@@ -110,9 +110,9 @@
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Simple Word Skrambler",
-      "url": "https://utiliverse.app/word-scrambler/",
-      "description": "A free, browser-based utility to instantly mix up characters in any word or phrase for puzzles, games, and education.",
+      "name": "Simple Word Unskrambler",
+      "url": "https://utiliverse.app/word-unskrambler/",
+      "description": "A free, browser-based utility to instantly unscramble random letters and find hidden dictionary words.",
       "applicationCategory": "UtilityApplication",
       "operatingSystem": "All",
       "offers": {
@@ -125,73 +125,6 @@
         "name": "Utiliverse",
         "url": "https://utiliverse.app"
       }
-    }
-    </script>
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Utiliverse",
-        "item": "https://utiliverse.app/"
-      },{
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Simple Word Skrambler",
-        "item": "https://utiliverse.app/word-scrambler/"
-      }]
-    }
-    </script>
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is a Simple Word Skrambler?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The Simple Word Skrambler is a free online tool that takes any word, phrase, or character string you input and randomly rearranges the letters. It is highly useful for creating anagrams, educational word puzzles, classroom worksheets, and party games without requiring manual sorting."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I choose how many characters are scrambled?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. Our tool dynamically counts the characters you enter and allows you to adjust a slider. You can choose to scramble the entire string, or select a smaller subset of characters to be randomized into a shorter scrambled output."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Does the scrambler change or remove letters?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No. Unless you specifically choose a shorter scramble length via the slider, the tool uses the exact characters you provided. Duplicate letters will remain duplicated, and no artificial letters are added or removed during the randomization process."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I scramble phrases with spaces and punctuation?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes! The tool supports multiple words and punctuation. You even have the option to 'Keep Spaces In Place' which scrambles the letters around but maintains the original word lengths and space placements, which is excellent for complex puzzle creation."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is my text uploaded to a server?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Absolutely not. The Simple Word Skrambler is built with privacy in mind. All the scrambling logic runs via local JavaScript directly inside your internet browser. Your text never leaves your device and is never uploaded to any external server or database."
-          }
-        }
-      ]
     }
     </script>
 </head>
@@ -209,14 +142,14 @@
             
             <div class="flex items-center gap-2 absolute left-1/2 transform -translate-x-1/2">
                 <div class="bg-indigo-600 text-white p-1.5 rounded-lg">
-                    <i data-lucide="shuffle" class="w-5 h-5"></i>
+                    <i data-lucide="book-open-check" class="w-5 h-5"></i>
                 </div>
-                <span class="text-lg sm:text-xl font-bold tracking-tight hidden sm:block">Simple Word Skrambler</span>
+                <span class="text-lg sm:text-xl font-bold tracking-tight hidden sm:block">Simple Word Unskrambler</span>
             </div>
 
             <div class="flex items-center">
-                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
-                    <i data-lucide="shield-check" class="w-3 h-3 mr-1"></i> 100% Free & Browser-Based
+                <span id="dictionary-status" class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+                    <i data-lucide="loader" class="w-3 h-3 mr-1 animate-spin"></i> Loading Dictionary...
                 </span>
             </div>
         </div>
@@ -226,12 +159,12 @@
 
         <!-- Hero Section -->
         <section class="text-center max-w-3xl mx-auto">
-            <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">Simple Word Skrambler</h1>
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">Simple Word Unskrambler</h1>
             <p class="text-lg text-slate-600 mb-4">
-                Mix up the characters in any word or phrase and create quick scrambled versions for puzzles, games, classroom activities, brainstorming, and more. 
+                Enter any jumbled string of letters and instantly discover all the valid hidden words you can make. Perfect for solving anagrams, decoding puzzles, and dominating word games.
             </p>
             <p class="text-sm font-medium text-indigo-600 bg-indigo-50 inline-block px-4 py-2 rounded-full border border-indigo-100">
-                <i data-lucide="lock" class="w-4 h-4 inline mr-1 -mt-0.5"></i> Private by design — your text stays in your browser. Nothing is uploaded.
+                <i data-lucide="lock" class="w-4 h-4 inline mr-1 -mt-0.5"></i> Private by design — word processing happens in your browser.
             </p>
         </section>
 
@@ -246,7 +179,7 @@
             <!-- Calculator Card (Left/Main Column) -->
             <div class="lg:col-span-8 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">
                 <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-2xl font-bold text-slate-900">Scramble Your Text</h2>
+                    <h2 class="text-2xl font-bold text-slate-900">Unskramble Your Letters</h2>
                     <button id="btn-reset" class="text-slate-400 hover:text-slate-600 transition-colors flex items-center text-sm font-medium" aria-label="Reset Tool">
                         <i data-lucide="rotate-ccw" class="w-4 h-4 mr-1"></i> Reset
                     </button>
@@ -255,68 +188,45 @@
                 <!-- Input Area -->
                 <div class="space-y-3 mb-6">
                     <div class="flex justify-between items-end">
-                        <label for="text-input" class="block text-sm font-semibold text-slate-700">Enter a word or character string</label>
-                        <span id="char-count-badge" class="text-xs font-medium text-slate-500 bg-slate-100 px-2 py-1 rounded-md">0 Characters</span>
+                        <label for="text-input" class="block text-sm font-semibold text-slate-700">Enter your jumbled letters</label>
+                        <span id="char-count-badge" class="text-xs font-medium text-slate-500 bg-slate-100 px-2 py-1 rounded-md">0 Letters</span>
                     </div>
                     <textarea 
                         id="text-input" 
-                        rows="3" 
-                        class="w-full rounded-xl border border-slate-300 p-4 text-slate-900 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow resize-y" 
-                        placeholder="Enter something like: javascript"></textarea>
+                        rows="2" 
+                        class="w-full rounded-xl border border-slate-300 p-4 text-slate-900 font-mono text-lg uppercase focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow resize-y" 
+                        placeholder="e.g. TAC"></textarea>
                     
                     <!-- Example Buttons -->
                     <div class="flex flex-wrap gap-2 pt-2">
-                        <span class="text-xs text-slate-500 font-medium py-1">Examples:</span>
-                        <button class="example-btn text-xs font-medium px-3 py-1 bg-slate-100 text-slate-600 rounded-full hover:bg-slate-200 transition">UTILIVERSE</button>
-                        <button class="example-btn text-xs font-medium px-3 py-1 bg-slate-100 text-slate-600 rounded-full hover:bg-slate-200 transition">JAVASCRIPT</button>
-                        <button class="example-btn text-xs font-medium px-3 py-1 bg-slate-100 text-slate-600 rounded-full hover:bg-slate-200 transition">CALCULATOR</button>
-                        <button class="example-btn text-xs font-medium px-3 py-1 bg-slate-100 text-slate-600 rounded-full hover:bg-slate-200 transition">WORDGAME</button>
-                    </div>
-                </div>
-
-                <!-- Character Info Panel -->
-                <div class="bg-slate-50 rounded-xl p-4 border border-slate-200 grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-                    <div>
-                        <div class="text-xs text-slate-500 font-medium uppercase tracking-wider">Letters</div>
-                        <div id="stat-letters" class="text-lg font-bold text-slate-900">0</div>
-                    </div>
-                    <div>
-                        <div class="text-xs text-slate-500 font-medium uppercase tracking-wider">Numbers</div>
-                        <div id="stat-numbers" class="text-lg font-bold text-slate-900">0</div>
-                    </div>
-                    <div>
-                        <div class="text-xs text-slate-500 font-medium uppercase tracking-wider">Spaces</div>
-                        <div id="stat-spaces" class="text-lg font-bold text-slate-900">0</div>
-                    </div>
-                    <div>
-                        <div class="text-xs text-slate-500 font-medium uppercase tracking-wider">Symbols</div>
-                        <div id="stat-symbols" class="text-lg font-bold text-slate-900">0</div>
+                        <span class="text-xs text-slate-500 font-medium py-1">Try these:</span>
+                        <button class="example-btn text-xs font-medium px-3 py-1 bg-slate-100 text-slate-600 rounded-full hover:bg-slate-200 transition">LISTEN</button>
+                        <button class="example-btn text-xs font-medium px-3 py-1 bg-slate-100 text-slate-600 rounded-full hover:bg-slate-200 transition">ACT</button>
+                        <button class="example-btn text-xs font-medium px-3 py-1 bg-slate-100 text-slate-600 rounded-full hover:bg-slate-200 transition">OARDW</button>
+                        <button class="example-btn text-xs font-medium px-3 py-1 bg-slate-100 text-slate-600 rounded-full hover:bg-slate-200 transition">ENIGMA</button>
                     </div>
                 </div>
 
                 <!-- Action Area -->
-                <button id="btn-scramble" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl shadow-sm transition-colors flex justify-center items-center text-lg">
-                    <i data-lucide="shuffle" class="w-5 h-5 mr-2"></i> Scramble Text
+                <button id="btn-unscramble" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl shadow-sm transition-colors flex justify-center items-center text-lg disabled:opacity-50 disabled:cursor-not-allowed">
+                    <i data-lucide="text-search" class="w-5 h-5 mr-2"></i> Unskramble Now
                 </button>
 
                 <!-- Results Area (Hidden initially) -->
                 <div id="results-container" class="mt-8 hidden border-t border-slate-200 pt-8">
                     <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-xl font-bold text-slate-900">Scrambled Result</h3>
-                        <div class="flex gap-2">
-                            <button id="btn-scramble-again" class="text-sm font-medium text-indigo-600 hover:text-indigo-700 bg-indigo-50 hover:bg-indigo-100 px-3 py-1.5 rounded-lg transition flex items-center">
-                                <i data-lucide="refresh-cw" class="w-4 h-4 mr-1"></i> Scramble Again
-                            </button>
-                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 flex items-center">
+                            Valid Words Found <span id="results-count-badge" class="ml-2 bg-indigo-100 text-indigo-700 text-xs py-0.5 px-2 rounded-full">0</span>
+                        </h3>
                     </div>
                     
-                    <div id="results-list" class="space-y-4">
-                        <!-- Results dynamically injected here -->
+                    <div id="results-list" class="flex flex-wrap gap-2">
+                        <!-- Word tags injected here -->
                     </div>
 
-                    <div class="mt-4 flex justify-end">
-                        <button id="btn-copy-all" class="text-sm font-medium text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-lg transition flex items-center hidden">
-                            <i data-lucide="copy-check" class="w-4 h-4 mr-1"></i> Copy All Results
+                    <div class="mt-6 flex justify-end border-t border-slate-100 pt-4">
+                        <button id="btn-copy-all" class="text-sm font-medium text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-lg transition flex items-center">
+                            <i data-lucide="copy-check" class="w-4 h-4 mr-1"></i> Copy Words to Clipboard
                         </button>
                     </div>
                 </div>
@@ -325,51 +235,42 @@
 
             <!-- Options Sidebar (Right Column) -->
             <div class="lg:col-span-4 space-y-6">
-                <!-- Scramble Options Card -->
+                <!-- Unskramble Options Card -->
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
                     <h3 class="text-lg font-bold text-slate-900 mb-4 flex items-center">
-                        <i data-lucide="settings-2" class="w-5 h-5 mr-2 text-indigo-500"></i> Settings
+                        <i data-lucide="sliders-horizontal" class="w-5 h-5 mr-2 text-indigo-500"></i> Generator Settings
                     </h3>
                     
-                    <!-- Length Selector -->
+                    <!-- Min Length Selector -->
                     <div class="mb-6 pb-6 border-b border-slate-100">
-                        <label class="block text-sm font-semibold text-slate-700 mb-2">Scramble Length</label>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Minimum Word Length</label>
                         <div class="flex justify-between text-xs text-slate-500 mb-2">
-                            <span id="slider-min-label">1</span>
-                            <span id="slider-current-label" class="font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded">All Characters</span>
+                            <span>2 Letters</span>
+                            <span id="slider-current-label" class="font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded">3 Letters</span>
                             <span id="slider-max-label">Max</span>
                         </div>
-                        <input type="range" id="length-slider" min="1" max="100" value="100" class="w-full" disabled>
-                        <p class="text-xs text-slate-500 mt-2" id="length-helper-text">Enter text to select scramble length.</p>
+                        <input type="range" id="length-slider" min="2" max="15" value="3" class="w-full">
+                        <p class="text-xs text-slate-500 mt-2">Filter out very short words.</p>
                     </div>
 
-                    <!-- Toggles -->
+                    <!-- Number of Combinations Dropdown -->
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-1">Generate multiple results</label>
-                            <select id="select-results-count" class="w-full bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block p-2.5">
-                                <option value="1">1 Result</option>
-                                <option value="3">3 Results</option>
-                                <option value="5">5 Results</option>
-                                <option value="10">10 Results</option>
+                            <label class="block text-sm font-semibold text-slate-700 mb-1">Word Combinations to Generate</label>
+                            <select id="select-results-count" class="w-full bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block p-2.5 cursor-pointer">
+                                <option value="5">5 Words</option>
+                                <option value="10">10 Words</option>
+                                <option value="15">15 Words</option>
+                                <option value="20" selected>20 Words</option>
+                                <option value="25">25 Words</option>
+                                <option value="30">30 Words</option>
+                                <option value="35">35 Words</option>
+                                <option value="40">40 Words</option>
+                                <option value="45">45 Words</option>
+                                <option value="50">50 Words</option>
+                                <option value="1000">All Possible Words</option>
                             </select>
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-1">Space Handling</label>
-                            <select id="select-space-handling" class="w-full bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block p-2.5">
-                                <option value="shuffle">Shuffle Spaces</option>
-                                <option value="keep">Keep Spaces in Place</option>
-                            </select>
-                            <p class="text-xs text-slate-500 mt-1">Keeping spaces requires scrambling the 'Entire String'.</p>
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-1">Capitalization</label>
-                            <select id="select-case-handling" class="w-full bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block p-2.5">
-                                <option value="mix">Mix Case Naturally</option>
-                                <option value="preserve">Preserve Case Pattern</option>
-                            </select>
+                            <p class="text-xs text-slate-500 mt-1">Limit the maximum number of results displayed.</p>
                         </div>
                     </div>
                 </div>
@@ -377,10 +278,10 @@
                 <!-- Info Card -->
                 <div class="bg-indigo-50 rounded-2xl border border-indigo-100 p-6">
                     <h4 class="text-sm font-bold text-indigo-900 mb-2 flex items-center">
-                        <i data-lucide="info" class="w-4 h-4 mr-1"></i> Duplicate Characters
+                        <i data-lucide="info" class="w-4 h-4 mr-1"></i> How it works
                     </h4>
                     <p class="text-xs text-indigo-700 leading-relaxed">
-                        Repeated letters remain repeated and are not artificially added or removed. The mathematical permutations are limited to the exact characters you provide in the input string.
+                        The Unskrambler analyzes your letters and checks them against a localized dictionary of common English words. It will only return words that can be legitimately formed using the exact letters provided.
                     </p>
                 </div>
             </div>
@@ -393,79 +294,48 @@
 
         <!-- SEO Content Section -->
         <article class="w-full max-w-4xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 p-8 sm:p-12 prose prose-slate max-w-none">
-            <h2 class="text-3xl font-extrabold text-slate-900 mb-6">About the Simple Word Skrambler</h2>
+            <h2 class="text-3xl font-extrabold text-slate-900 mb-6">About the Simple Word Unskrambler</h2>
             
             <p class="text-slate-600 mb-6 leading-relaxed">
-                A word scrambler is a versatile digital utility designed to take any provided text—whether it is a single word, a complex phrase, or a random string of characters—and instantly randomize the order of its letters. Unlike a solver that tries to unjumble letters into dictionary-valid words, the <strong>Simple Word Skrambler</strong> focuses entirely on the creation side. It gives you the power to instantly mix up characters to create anagrams, puzzles, or randomized strings.
+                Whether you're stuck on a difficult anagram, looking to maximize your points in a competitive word game, or just want to see how many dictionary words are hidden inside your own name, the <strong>Simple Word Unskrambler</strong> is your ultimate companion. This tool reverses the scrambling process: instead of randomizing letters, it meticulously analyzes a random string and returns valid English words.
             </p>
 
             <p class="text-slate-600 mb-6 leading-relaxed">
-                When you use our free word scrambler online, you have complete control over the randomization process. You can choose to scramble a full word to create classic anagram puzzles, or you can select a specific character length. For instance, if you input a 15-character phrase, you can instruct the tool to select and scramble only 5 of those characters. The tool handles duplicate letters accurately, ensures spaces can either be shuffled or locked in their original positions, and even offers capitalization preservation.
+                By allowing you to select exactly how many word combinations you want the unskrambler to generate (in increments of 5), you maintain complete control over the output. You can choose to find just a handful of quick 5-letter options, or expand the search to return all possible permutations available in the dictionary dataset.
             </p>
 
-            <h3 class="text-2xl font-bold text-slate-900 mt-10 mb-4">Why Local Browser Processing Matters</h3>
+            <h3 class="text-2xl font-bold text-slate-900 mt-10 mb-4">Master Your Favorite Word Games</h3>
             
             <p class="text-slate-600 mb-6 leading-relaxed">
-                One of the most important features of the Utiliverse random word scrambler is its commitment to privacy and speed. Traditional web utilities often require you to submit your text to an external server, wait for a database to process the request, and download the result. 
+                Word unskramblers are incredibly popular tools for players of games like Scrabble®, Words with Friends®, Wordscapes®, and daily puzzle challenges. When you find yourself with a tray full of vowels or awkward consonants, dropping them into the unskrambler reveals high-value words you might have completely overlooked. 
             </p>
 
             <p class="text-slate-600 mb-6 leading-relaxed">
-                We have eliminated that step entirely. All character scrambling is handled locally by your device's web browser using client-side JavaScript. This means your text is never transmitted over the internet, stored in a database, or analyzed by third-party scripts. Because there is no server latency, the scrambled letters are generated instantaneously, making it a highly responsive and completely private tool for educational and professional use.
+                To use the tool effectively for gaming, simply enter your available tiles into the text box. The local processing engine will instantly evaluate all letter combinations and present you with valid dictionary hits. Use the "Minimum Word Length" slider to filter out two-letter words if you're specifically hunting for a high-scoring 5 or 6-letter play.
             </p>
 
-            <h2 class="text-3xl font-extrabold text-slate-900 mt-12 mb-6">Creative and Practical Uses for a Word Scrambler</h2>
+            <h2 class="text-3xl font-extrabold text-slate-900 mt-12 mb-6">Creative Uses for an Unskrambler</h2>
             
-            <p class="text-slate-600 mb-8 leading-relaxed">
-                Whether you are a teacher looking to engage students, a game designer creating puzzles, or a developer needing test data, a character scrambler is an incredibly flexible tool. Here are fifteen distinct ways you can utilize the Simple Word Skrambler:
-            </p>
-
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                    <h4 class="text-lg font-bold text-slate-900 mb-2">1. Classroom Vocabulary Activities</h4>
-                    <p class="text-sm text-slate-600 mb-6">Teachers can input weekly vocabulary lists and generate scrambled worksheets to test student recognition and spelling retention in a fun, gamified format.</p>
+                    <h4 class="text-lg font-bold text-slate-900 mb-2">1. Solving Anagrams</h4>
+                    <p class="text-sm text-slate-600 mb-6">Input any word to discover if its letters can be rearranged into completely different, equally valid words (e.g., discovering that LISTEN unskrambles into SILENT).</p>
                     
-                    <h4 class="text-lg font-bold text-slate-900 mb-2">2. Spelling Practice</h4>
-                    <p class="text-sm text-slate-600 mb-6">Parents can use the tool to jumble challenging spelling words, encouraging children to reconstruct the words visually and improve their orthographic memory.</p>
+                    <h4 class="text-lg font-bold text-slate-900 mb-2">2. Crossword Puzzle Assistance</h4>
+                    <p class="text-sm text-slate-600 mb-6">When you have a few known letters of a word and are missing the rest, unskrambling can help generate potential candidates that fit your remaining puzzle squares.</p>
                     
-                    <h4 class="text-lg font-bold text-slate-900 mb-2">3. Foreign-Language Learning</h4>
-                    <p class="text-sm text-slate-600 mb-6">Language tutors can scramble foreign vocabulary words to test students on correct letter placement and accent marks (if included in the input).</p>
-                    
-                    <h4 class="text-lg font-bold text-slate-900 mb-2">4. Children's Word Games</h4>
-                    <p class="text-sm text-slate-600 mb-6">Easily generate scrambled letters to create engaging, printable activities for road trips, rainy days, or homeschool curriculum supplements.</p>
-                    
-                    <h4 class="text-lg font-bold text-slate-900 mb-2">5. Party Games</h4>
-                    <p class="text-sm text-slate-600 mb-6">Create customized party games by scrambling names of guests, pop culture references, or themed phrases for baby showers and birthday events.</p>
-                    
-                    <h4 class="text-lg font-bold text-slate-900 mb-2">6. Puzzle Creation</h4>
-                    <p class="text-sm text-slate-600 mb-6">Crossword and anagram creators can input target words to quickly generate multiple scrambled variations to find the most challenging layout for their publications.</p>
-                    
-                    <h4 class="text-lg font-bold text-slate-900 mb-2">7. Trivia Games</h4>
-                    <p class="text-sm text-slate-600 mb-6">Pub trivia hosts can use the scrambler for visual rounds, displaying scrambled celebrity names, movie titles, or geographic locations on screen for teams to decipher.</p>
-                    
-                    <h4 class="text-lg font-bold text-slate-900 mb-2">8. Escape-Room Activities</h4>
-                    <p class="text-sm text-slate-600 mb-6">Escape room designers frequently use anagrams as clues. The scrambler allows them to test different permutations of a clue phrase to ensure it is solvable but appropriately difficult.</p>
+                    <h4 class="text-lg font-bold text-slate-900 mb-2">3. Educational Vocabulary Building</h4>
+                    <p class="text-sm text-slate-600 mb-6">Teachers can demonstrate how root letters form the basis of multiple smaller words, helping younger students recognize common spelling patterns.</p>
                 </div>
                 <div>
-                    <h4 class="text-lg font-bold text-slate-900 mb-2">9. Brain-Training Exercises</h4>
-                    <p class="text-sm text-slate-600 mb-6">Adults looking to keep their cognitive skills sharp can input paragraphs of text and challenge themselves to mentally unjumble the resulting text daily.</p>
+                    <h4 class="text-lg font-bold text-slate-900 mb-2">4. Cryptogram Decoding</h4>
+                    <p class="text-sm text-slate-600 mb-6">If you are working on a cipher or logic puzzle that involves jumbled text blocks, using an unskrambler helps brute-force potential solutions quickly.</p>
                     
-                    <h4 class="text-lg font-bold text-slate-900 mb-2">10. Writing Prompts</h4>
-                    <p class="text-sm text-slate-600 mb-6">Creative writers experiencing block can scramble a set of unrelated characters to see if the resulting nonsense words spark ideas for fantasy character names or alien locations.</p>
+                    <h4 class="text-lg font-bold text-slate-900 mb-2">5. Name Generators</h4>
+                    <p class="text-sm text-slate-600 mb-6">Enter your first and last name to see what hidden words lie within. This is often used by writers creating clever pseudonyms or character aliases.</p>
                     
-                    <h4 class="text-lg font-bold text-slate-900 mb-2">11. Creative Brainstorming</h4>
-                    <p class="text-sm text-slate-600 mb-6">Marketing and branding teams often use letter scrambling to invent new, catchy, and abstract brand names derived from core mission statements or product features.</p>
-                    
-                    <h4 class="text-lg font-bold text-slate-900 mb-2">12. Coding and Test-Data Generation</h4>
-                    <p class="text-sm text-slate-600 mb-6">Software developers can use the tool to instantly generate randomized string variants to test form validation, search algorithms, and database edge cases.</p>
-                    
-                    <h4 class="text-lg font-bold text-slate-900 mb-2">13. User-Interface Testing</h4>
-                    <p class="text-sm text-slate-600 mb-6">UI/UX designers can input strings of random characters to test how text wrapping, overflow, and hyphenation behave within tight application layouts.</p>
-                    
-                    <h4 class="text-lg font-bold text-slate-900 mb-2">14. Social-Media Games</h4>
-                    <p class="text-sm text-slate-600 mb-6">Content creators can generate interactive "Unscramble this word!" graphics for Instagram stories or Facebook posts to drive audience engagement and comments.</p>
-                    
-                    <h4 class="text-lg font-bold text-slate-900 mb-2">15. Printable Worksheets</h4>
-                    <p class="text-sm text-slate-600 mb-6">By generating multiple results at once, educators can copy and paste bulk randomized text directly into templates for printable word-scramble activity sheets.</p>
+                    <h4 class="text-lg font-bold text-slate-900 mb-2">6. Spelling Verification</h4>
+                    <p class="text-sm text-slate-600 mb-6">If you know the letters a word contains but can't quite remember the correct spelling order, dumping the letters into the unskrambler will quickly reveal the proper spelling.</p>
                 </div>
             </div>
         </article>
@@ -477,65 +347,52 @@
                 <!-- FAQ 1 -->
                 <details class="group bg-white rounded-xl border border-slate-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
                     <summary class="flex items-center justify-between p-6 cursor-pointer bg-white hover:bg-slate-50 transition-colors">
-                        <h3 class="text-base font-bold text-slate-900">What is a Simple Word Skrambler?</h3>
+                        <h3 class="text-base font-bold text-slate-900">What does the Word Unskrambler do?</h3>
                         <span class="transition duration-300 group-open:-rotate-180 text-indigo-600">
                             <i data-lucide="chevron-down" class="w-5 h-5"></i>
                         </span>
                     </summary>
                     <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
-                        The Simple Word Skrambler is a free online tool that takes any word, phrase, or character string you input and randomly rearranges the letters. It is highly useful for creating anagrams, educational word puzzles, classroom worksheets, and party games without requiring manual sorting.
+                        The Word Unskrambler takes any random string of letters you provide and searches for valid English dictionary words that can be constructed using only those specific letters. It is essentially an anagram solver and word generator combined into one simple interface.
                     </div>
                 </details>
 
                 <!-- FAQ 2 -->
                 <details class="group bg-white rounded-xl border border-slate-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
                     <summary class="flex items-center justify-between p-6 cursor-pointer bg-white hover:bg-slate-50 transition-colors">
-                        <h3 class="text-base font-bold text-slate-900">Can I choose how many characters are scrambled?</h3>
+                        <h3 class="text-base font-bold text-slate-900">Can I limit how many word combinations are generated?</h3>
                         <span class="transition duration-300 group-open:-rotate-180 text-indigo-600">
                             <i data-lucide="chevron-down" class="w-5 h-5"></i>
                         </span>
                     </summary>
                     <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
-                        Yes. Our tool dynamically counts the characters you enter and allows you to adjust a slider. You can choose to scramble the entire string, or select a smaller subset of characters to be randomized into a shorter scrambled output.
+                        Yes! Using the settings panel, you can choose exactly how many word combinations you want to generate in increments of 5 (e.g., 5, 10, 15, 20 words). You can also select "All Possible Words" if you want a complete list of every single dictionary match.
                     </div>
                 </details>
 
                 <!-- FAQ 3 -->
                 <details class="group bg-white rounded-xl border border-slate-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
                     <summary class="flex items-center justify-between p-6 cursor-pointer bg-white hover:bg-slate-50 transition-colors">
-                        <h3 class="text-base font-bold text-slate-900">Does the scrambler change or remove letters?</h3>
+                        <h3 class="text-base font-bold text-slate-900">Will it generate words using letters I didn't enter?</h3>
                         <span class="transition duration-300 group-open:-rotate-180 text-indigo-600">
                             <i data-lucide="chevron-down" class="w-5 h-5"></i>
                         </span>
                     </summary>
                     <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
-                        No. Unless you specifically choose a shorter scramble length via the slider, the tool uses the exact characters you provided. Duplicate letters will remain duplicated, and no artificial letters are added or removed during the randomization process.
+                        No. The unskrambler algorithm strictly adheres to the letters provided in your input box. If you enter one "A", it will only return words that contain a maximum of one "A". It will not artificially add letters that you do not possess.
                     </div>
                 </details>
 
                 <!-- FAQ 4 -->
                 <details class="group bg-white rounded-xl border border-slate-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
                     <summary class="flex items-center justify-between p-6 cursor-pointer bg-white hover:bg-slate-50 transition-colors">
-                        <h3 class="text-base font-bold text-slate-900">Can I scramble phrases with spaces and punctuation?</h3>
+                        <h3 class="text-base font-bold text-slate-900">Are proper nouns or slang included?</h3>
                         <span class="transition duration-300 group-open:-rotate-180 text-indigo-600">
                             <i data-lucide="chevron-down" class="w-5 h-5"></i>
                         </span>
                     </summary>
                     <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
-                        Yes! The tool supports multiple words and punctuation. You even have the option to 'Keep Spaces In Place' which scrambles the letters around but maintains the original word lengths and space placements, which is excellent for complex puzzle creation.
-                    </div>
-                </details>
-
-                <!-- FAQ 5 -->
-                <details class="group bg-white rounded-xl border border-slate-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
-                    <summary class="flex items-center justify-between p-6 cursor-pointer bg-white hover:bg-slate-50 transition-colors">
-                        <h3 class="text-base font-bold text-slate-900">Is my text uploaded to a server?</h3>
-                        <span class="transition duration-300 group-open:-rotate-180 text-indigo-600">
-                            <i data-lucide="chevron-down" class="w-5 h-5"></i>
-                        </span>
-                    </summary>
-                    <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
-                        Absolutely not. The Simple Word Skrambler is built with privacy in mind. All the scrambling logic runs via local JavaScript directly inside your internet browser. Your text never leaves your device and is never uploaded to any external server or database.
+                        The tool utilizes a standard list of common English dictionary words. Highly obscure slang, newly invented terms, or specific proper nouns (like character names) may not be recognized, ensuring the output is highly relevant for standard word puzzles and anagrams.
                     </div>
                 </details>
             </div>
@@ -553,7 +410,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-500">
             <div class="text-center md:text-left">
                 &copy; <script>document.write(new Date().getFullYear())</script> Utiliverse. All rights reserved. <br>
-                <span class="text-xs text-slate-400 mt-1 inline-block"><i data-lucide="shield" class="w-3 h-3 inline mr-0.5"></i> All scrambling happens locally in your browser.</span>
+                <span class="text-xs text-slate-400 mt-1 inline-block"><i data-lucide="shield" class="w-3 h-3 inline mr-0.5"></i> All word processing happens locally in your browser.</span>
             </div>
             <nav class="flex flex-wrap justify-center gap-6">
                 <a href="/" class="hover:text-indigo-600 transition">Home</a>
@@ -573,248 +430,177 @@
         const inputEl = document.getElementById('text-input');
         const lengthSlider = document.getElementById('length-slider');
         const sliderCurrentLabel = document.getElementById('slider-current-label');
-        const sliderMaxLabel = document.getElementById('slider-max-label');
         const charCountBadge = document.getElementById('char-count-badge');
-        const lengthHelperText = document.getElementById('length-helper-text');
-        
-        const statLetters = document.getElementById('stat-letters');
-        const statNumbers = document.getElementById('stat-numbers');
-        const statSpaces = document.getElementById('stat-spaces');
-        const statSymbols = document.getElementById('stat-symbols');
         
         const selectResultsCount = document.getElementById('select-results-count');
-        const selectSpaceHandling = document.getElementById('select-space-handling');
-        const selectCaseHandling = document.getElementById('select-case-handling');
-        
-        const btnScramble = document.getElementById('btn-scramble');
+        const btnUnscramble = document.getElementById('btn-unscramble');
         const btnReset = document.getElementById('btn-reset');
-        const btnScrambleAgain = document.getElementById('btn-scramble-again');
         const btnCopyAll = document.getElementById('btn-copy-all');
         const exampleBtns = document.querySelectorAll('.example-btn');
         
         const resultsContainer = document.getElementById('results-container');
         const resultsList = document.getElementById('results-list');
+        const resultsCountBadge = document.getElementById('results-count-badge');
         const toastContainer = document.getElementById('toast-container');
+        const dictionaryStatus = document.getElementById('dictionary-status');
 
-        let currentResults = [];
+        let dictionary = [];
+        let currentValidWords = [];
+
+        // Load Dictionary on Startup
+        // Using a reliable, lightweight static text file of common english words (no-swears)
+        fetch('https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english-no-swears.txt')
+            .then(response => response.text())
+            .then(text => {
+                // Split, trim, and filter out single letters (except a, i if needed, but let's filter > 1)
+                dictionary = text.split('\n').map(w => w.trim().toUpperCase()).filter(w => w.length >= 2);
+                
+                // Update UI status
+                dictionaryStatus.classList.remove('bg-amber-50', 'text-amber-700', 'border-amber-200');
+                dictionaryStatus.classList.add('bg-emerald-50', 'text-emerald-700', 'border-emerald-200');
+                dictionaryStatus.innerHTML = `<i data-lucide="check-circle-2" class="w-3 h-3 mr-1"></i> Dictionary Ready`;
+                lucide.createIcons();
+                
+                // Enable button if text already exists
+                handleInput();
+            })
+            .catch(err => {
+                dictionaryStatus.classList.remove('bg-amber-50', 'text-amber-700', 'border-amber-200');
+                dictionaryStatus.classList.add('bg-red-50', 'text-red-700', 'border-red-200');
+                dictionaryStatus.innerHTML = `<i data-lucide="alert-circle" class="w-3 h-3 mr-1"></i> Dictionary Error`;
+                lucide.createIcons();
+                showToast("Failed to load word dictionary. Check internet connection.", "warning");
+            });
 
         // Core Input Handler
         function handleInput() {
-            const text = inputEl.value;
-            const length = text.length;
+            // Strip non-alphabetic chars and convert to upper
+            let rawText = inputEl.value;
+            let cleanText = rawText.replace(/[^a-zA-Z]/g, '').toUpperCase();
+            
+            if (rawText !== cleanText && rawText.length > 0) {
+                // Optionally auto-format input to remove spaces/numbers
+                // inputEl.value = cleanText;
+            }
+
+            const length = cleanText.length;
             
             // Update Stats
-            charCountBadge.textContent = `${length} Character${length !== 1 ? 's' : ''}`;
+            charCountBadge.textContent = `${length} Letter${length !== 1 ? 's' : ''}`;
             
-            const letters = (text.match(/[a-zA-Z]/g) || []).length;
-            const numbers = (text.match(/[0-9]/g) || []).length;
-            const spaces = (text.match(/ /g) || []).length;
-            const symbols = length - letters - numbers - spaces;
-
-            statLetters.textContent = letters;
-            statNumbers.textContent = numbers;
-            statSpaces.textContent = spaces;
-            statSymbols.textContent = symbols;
-
-            // Handle Slider Logic
-            if (length > 0) {
-                lengthSlider.disabled = false;
-                lengthSlider.max = length;
-                sliderMaxLabel.textContent = length;
-                
-                // If slider value exceeds new max, or was previously set to max
-                if (parseInt(lengthSlider.value) > length || lengthSlider.value === String(length - 1)) {
-                    lengthSlider.value = length;
-                }
-                
-                updateSliderLabel();
-                lengthHelperText.textContent = "Select how many characters to scramble.";
+            if (length > 0 && dictionary.length > 0) {
+                btnUnscramble.disabled = false;
+                lengthSlider.max = Math.max(2, length);
             } else {
-                lengthSlider.disabled = true;
-                lengthSlider.max = 100;
-                lengthSlider.value = 100;
-                sliderMaxLabel.textContent = "Max";
-                sliderCurrentLabel.textContent = "All Characters";
-                lengthHelperText.textContent = "Enter text to select scramble length.";
+                btnUnscramble.disabled = true;
             }
+            updateSliderLabel();
         }
 
         // Slider update
         function updateSliderLabel() {
-            const max = parseInt(lengthSlider.max);
             const val = parseInt(lengthSlider.value);
-            
-            if (val === max) {
-                sliderCurrentLabel.textContent = "All Characters";
-                selectSpaceHandling.disabled = false;
-                selectSpaceHandling.classList.remove('opacity-50');
-            } else {
-                sliderCurrentLabel.textContent = `${val} of ${max}`;
-                // Disable keep spaces if picking a subset
-                selectSpaceHandling.value = "shuffle";
-                selectSpaceHandling.disabled = true;
-                selectSpaceHandling.classList.add('opacity-50');
-            }
+            sliderCurrentLabel.textContent = `${val} Letters`;
         }
 
-        // Scramble Logic
-        function scrambleText() {
-            const text = inputEl.value;
-            if (!text.trim() && text.length === 0) {
-                showToast("Please enter some text to scramble.", "warning");
+        // Check if word can be formed from available letters
+        function canFormWord(word, availableLetters) {
+            let lettersArray = availableLetters.split('');
+            for (let i = 0; i < word.length; i++) {
+                const char = word[i];
+                const index = lettersArray.indexOf(char);
+                if (index !== -1) {
+                    lettersArray.splice(index, 1); // Remove used letter
+                } else {
+                    return false; // Missing a required letter
+                }
+            }
+            return true;
+        }
+
+        // Unscramble Logic
+        function unscrambleLetters() {
+            const cleanText = inputEl.value.replace(/[^a-zA-Z]/g, '').toUpperCase();
+            if (!cleanText) {
+                showToast("Please enter letters to unskramble.", "warning");
                 inputEl.focus();
                 return;
             }
 
-            const targetLength = parseInt(lengthSlider.value);
-            const numResults = parseInt(selectResultsCount.value);
-            const keepSpaces = selectSpaceHandling.value === 'keep' && targetLength === text.length;
-            const preserveCase = selectCaseHandling.value === 'preserve';
+            const minLength = parseInt(lengthSlider.value);
+            const limitVal = selectResultsCount.value;
+            const maxResults = limitVal === '1000' ? 10000 : parseInt(limitVal);
 
-            const generated = new Set();
-            let attempts = 0;
-            const maxAttempts = numResults * 20; // Prevent infinite loops on short strings
-
-            while (generated.size < numResults && attempts < maxAttempts) {
-                generated.add(generateScramble(text, targetLength, keepSpaces, preserveCase));
-                attempts++;
-            }
-
-            currentResults = Array.from(generated);
-            renderResults();
-        }
-
-        function generateScramble(text, length, keepSpaces, preserveCase) {
-            let chars = text.split('');
+            // Filter dictionary
+            let foundWords = [];
             
-            // Handle Subset Selection
-            if (length < chars.length) {
-                let pool = [...chars];
-                let subset = [];
-                for(let i=0; i<length; i++) {
-                    let rndIndex = Math.floor(Math.random() * pool.length);
-                    subset.push(pool.splice(rndIndex, 1)[0]);
+            for (let i = 0; i < dictionary.length; i++) {
+                const word = dictionary[i];
+                if (word.length >= minLength && word.length <= cleanText.length) {
+                    if (canFormWord(word, cleanText)) {
+                        foundWords.push(word);
+                    }
                 }
-                chars = subset;
             }
 
-            let result = [];
+            // Sort words by length (longest first), then alphabetically
+            foundWords.sort((a, b) => {
+                if (b.length !== a.length) {
+                    return b.length - a.length;
+                }
+                return a.localeCompare(b);
+            });
+
+            // Limit results based on dropdown selection
+            currentValidWords = foundWords.slice(0, maxResults);
             
-            // Handle Full String with exact spacing preserved
-            if (keepSpaces && length === text.length) {
-                let nonSpaces = [];
-                let spaceIndices = [];
-                let originalCase = []; // Keep track of boolean (isUpper) for index tracking if preserving case
-                
-                chars.forEach((c, i) => {
-                    if (c === ' ') {
-                        spaceIndices.push(i);
-                    } else {
-                        nonSpaces.push(preserveCase ? c.toLowerCase() : c);
-                    }
-                    if (preserveCase && c !== ' ') {
-                        originalCase.push(c === c.toUpperCase() && c !== c.toLowerCase());
-                    }
-                });
-                
-                // Fisher-Yates Shuffle on non-space chars
-                for (let i = nonSpaces.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [nonSpaces[i], nonSpaces[j]] = [nonSpaces[j], nonSpaces[i]];
-                }
-                
-                // Reconstruct string
-                let nonSpaceIndex = 0;
-                for (let i = 0; i < text.length; i++) {
-                    if (spaceIndices.includes(i)) {
-                        result.push(' ');
-                    } else {
-                        let char = nonSpaces[nonSpaceIndex];
-                        if (preserveCase && originalCase[nonSpaceIndex]) {
-                            char = char.toUpperCase();
-                        }
-                        result.push(char);
-                        nonSpaceIndex++;
-                    }
-                }
-            } else {
-                // Standard Shuffle
-                if (preserveCase) {
-                    chars = chars.map(c => c.toLowerCase());
-                }
-                for (let i = chars.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [chars[i], chars[j]] = [chars[j], chars[i]];
-                }
-                
-                if (preserveCase && length === text.length) {
-                    // Match casing of original positions
-                    result = chars.map((c, i) => {
-                        let origChar = text[i];
-                        if (origChar && origChar === origChar.toUpperCase() && origChar !== origChar.toLowerCase()) {
-                            return c.toUpperCase();
-                        }
-                        return c;
-                    });
-                } else {
-                    result = chars;
-                }
-            }
-            return result.join('');
+            renderResults(foundWords.length);
         }
 
         // Render Results
-        function renderResults() {
+        function renderResults(totalFound) {
             resultsList.innerHTML = '';
             
-            if (currentResults.length === 0) {
-                showToast("Could not generate unique results.", "warning");
-                return;
-            }
-
-            currentResults.forEach((res, index) => {
-                const row = document.createElement('div');
-                row.className = "flex flex-col sm:flex-row gap-4 items-start sm:items-center bg-slate-50 p-4 rounded-xl border border-slate-200";
-                
-                const textDiv = document.createElement('div');
-                textDiv.className = "flex-grow break-all font-mono text-lg text-slate-900 bg-white px-4 py-3 rounded-lg border border-slate-300 w-full";
-                textDiv.textContent = res;
-                
-                const copyBtn = document.createElement('button');
-                copyBtn.className = "flex-shrink-0 w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-4 py-3 rounded-lg transition shadow-sm flex items-center justify-center";
-                copyBtn.innerHTML = `<i data-lucide="copy" class="w-4 h-4 mr-2"></i> Copy`;
-                copyBtn.onclick = () => {
-                    navigator.clipboard.writeText(res).then(() => {
-                        showToast("Copied to clipboard!", "success");
-                    });
-                };
-                
-                row.appendChild(textDiv);
-                row.appendChild(copyBtn);
-                resultsList.appendChild(row);
-            });
-
-            lucide.createIcons();
-            resultsContainer.classList.remove('hidden');
-            
-            if (currentResults.length > 1) {
-                btnCopyAll.classList.remove('hidden');
+            if (currentValidWords.length === 0) {
+                resultsCountBadge.textContent = "0";
+                resultsList.innerHTML = `<p class="text-slate-500 italic text-sm py-4">No valid dictionary words found for these letters given the minimum length of ${lengthSlider.value}. Try lowering the minimum length or adding more letters.</p>`;
             } else {
-                btnCopyAll.classList.add('hidden');
+                resultsCountBadge.textContent = totalFound;
+                
+                currentValidWords.forEach(word => {
+                    const wordTag = document.createElement('div');
+                    wordTag.className = "bg-white border border-slate-200 text-slate-800 font-bold text-lg px-4 py-2 rounded-lg shadow-sm hover:border-indigo-400 hover:shadow-md transition-all cursor-default flex items-center";
+                    
+                    // Small length indicator
+                    const lengthSpan = document.createElement('span');
+                    lengthSpan.className = "text-[10px] text-slate-400 font-normal ml-2 bg-slate-100 px-1.5 py-0.5 rounded";
+                    lengthSpan.textContent = word.length;
+
+                    wordTag.textContent = word;
+                    wordTag.appendChild(lengthSpan);
+                    
+                    resultsList.appendChild(wordTag);
+                });
+
+                if (totalFound > currentValidWords.length) {
+                    const notice = document.createElement('p');
+                    notice.className = "w-full text-xs text-slate-500 mt-4 italic";
+                    notice.textContent = `Showing ${currentValidWords.length} of ${totalFound} possible words. Adjust the 'Combinations to Generate' dropdown to see more.`;
+                    resultsList.appendChild(notice);
+                }
             }
 
-            // Scroll to results
+            resultsContainer.classList.remove('hidden');
             resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
 
         // Reset Tool
         function resetTool() {
             inputEl.value = '';
-            selectResultsCount.value = "1";
-            selectSpaceHandling.value = "shuffle";
-            selectCaseHandling.value = "mix";
+            lengthSlider.value = "3";
+            selectResultsCount.value = "20";
             resultsContainer.classList.add('hidden');
-            currentResults = [];
+            currentValidWords = [];
             handleInput();
             inputEl.focus();
         }
@@ -831,7 +617,6 @@
             toastContainer.appendChild(toast);
             lucide.createIcons();
 
-            // Trigger animation
             requestAnimationFrame(() => {
                 toast.classList.add('toast-enter-active');
             });
@@ -851,14 +636,14 @@
         // Event Listeners
         inputEl.addEventListener('input', handleInput);
         lengthSlider.addEventListener('input', updateSliderLabel);
-        btnScramble.addEventListener('click', scrambleText);
-        btnScrambleAgain.addEventListener('click', scrambleText);
+        btnUnscramble.addEventListener('click', unscrambleLetters);
         btnReset.addEventListener('click', resetTool);
         
         btnCopyAll.addEventListener('click', () => {
-            const allText = currentResults.join('\n');
+            if (currentValidWords.length === 0) return;
+            const allText = currentValidWords.join(', ');
             navigator.clipboard.writeText(allText).then(() => {
-                showToast(`Copied ${currentResults.length} results!`, "success");
+                showToast(`Copied ${currentValidWords.length} words!`, "success");
             });
         });
 
@@ -866,13 +651,12 @@
             btn.addEventListener('click', (e) => {
                 inputEl.value = e.target.textContent;
                 handleInput();
-                // Optional: Auto scramble on example click
-                // scrambleText();
+                unscrambleLetters();
             });
         });
 
-        // Init
-        handleInput();
+        // Initialize UI values
+        updateSliderLabel();
     </script>
 </body>
 </html>
