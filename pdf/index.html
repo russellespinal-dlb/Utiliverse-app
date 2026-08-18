@@ -3,820 +3,3456 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PDF Toolkit Pro — Utiliverse</title>
-<meta name="description" content="Free browser-based PDF toolkit. Merge PDFs, convert images to PDF, extract text from PDFs, and compress PDF file size — 100% private, all processing happens in your browser.">
-<link rel="stylesheet" href="/css/styles.css">
 
-<!-- Google AdSense Script Placeholder (Paste your publisher script here once approved) -->
-<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+<title>Utiliverse PDF Toolkit — Free Online PDF Converter & Tools</title>
+<meta name="description" content="Utiliverse PDF Toolkit provides browser-based PDF conversion, image conversion, compression, document tools, PDF rendering and more. Designed for private client-side processing.">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
 <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
+
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        util: {
+          bg: '#0f172a',
+          deep: '#020617',
+          panel: '#1e293b',
+          border: '#334155',
+          accent: '#6366f1',
+          accentDark: '#4f46e5'
+        }
+      }
+    }
+  }
+};
+</script>
+
+<style>
+:root {
+  --bg: #0f172a;
+  --deep: #020617;
+  --panel: rgba(30, 41, 59, 0.70);
+  --panel-solid: #1e293b;
+  --border: #334155;
+  --accent: #6366f1;
+  --accent-dark: #4f46e5;
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --muted-dark: #64748b;
+  --success: #34d399;
+  --danger: #fb7185;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 15% 5%, rgba(99,102,241,.14), transparent 30%),
+    radial-gradient(circle at 85% 10%, rgba(79,70,229,.10), transparent 25%),
+    var(--bg);
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.glass {
+  background: var(--panel);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+}
+
+.glass-heavy {
+  background: rgba(15, 23, 42, .86);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, #818cf8, #c4b5fd);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(rgba(148,163,184,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148,163,184,.045) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.adsense-slot {
+  min-height: 90px;
+  border: 1px dashed #475569;
+  border-radius: 14px;
+  background: rgba(15,23,42,.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  font-size: .68rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.adsense-square {
+  min-height: 250px;
+}
+
+.adsense-tall {
+  min-height: 600px;
+}
+
+.search-box,
+.select-box,
+.control-input {
+  background: rgba(15,23,42,.8);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 12px;
+  transition: .2s ease;
+}
+
+.search-box:focus,
+.select-box:focus,
+.control-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(99,102,241,.16);
+}
+
+.select-box option {
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+.drop-zone {
+  border: 2px dashed #475569;
+  background: rgba(15,23,42,.42);
+  transition: .25s ease;
+}
+
+.drop-zone:hover,
+.drop-zone.dragging {
+  border-color: var(--accent);
+  background: rgba(99,102,241,.08);
+  transform: translateY(-1px);
+}
+
+.category-pill {
+  border: 1px solid var(--border);
+  background: rgba(30,41,59,.65);
+  color: var(--muted);
+  transition: .2s ease;
+}
+
+.category-pill:hover {
+  color: white;
+  border-color: #6366f1;
+}
+
+.category-pill.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+.tool-card {
+  background: rgba(30,41,59,.58);
+  border: 1px solid var(--border);
+  transition: .22s ease;
+}
+
+.tool-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(99,102,241,.75);
+  box-shadow: 0 16px 40px rgba(0,0,0,.25);
+}
+
+.tool-card.hidden-card {
+  display: none;
+}
+
+.icon-box {
+  background: rgba(99,102,241,.12);
+  color: #a5b4fc;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  box-shadow: 0 8px 25px rgba(79,70,229,.25);
+  transition: .2s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 32px rgba(79,70,229,.38);
+}
+
+.btn-secondary {
+  background: rgba(51,65,85,.55);
+  border: 1px solid #475569;
+}
+
+.status-success {
+  color: var(--success);
+}
+
+.status-error {
+  color: var(--danger);
+}
+
+.progress-track {
+  height: 7px;
+  background: #1e293b;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  transition: width .25s ease;
+}
+
+details.faq {
+  border-bottom: 1px solid var(--border);
+}
+
+details.faq summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 1.15rem 0;
+  font-weight: 600;
+}
+
+details.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+details.faq .faq-answer {
+  color: var(--muted);
+  line-height: 1.75;
+  padding: 0 0 1.25rem;
+}
+
+.format-badge {
+  font-size: .65rem;
+  padding: .22rem .5rem;
+  border-radius: 999px;
+  background: rgba(99,102,241,.13);
+  color: #a5b4fc;
+  border: 1px solid rgba(99,102,241,.2);
+}
+
+.file-item {
+  border: 1px solid var(--border);
+  background: rgba(15,23,42,.6);
+}
+
+.range {
+  accent-color: #6366f1;
+}
+
+.code-preview {
+  background: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 10px;
+  color: #cbd5e1;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.toast {
+  transform: translateY(20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: .25s ease;
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+@media (max-width: 640px) {
+  .hero-title {
+    font-size: 2.2rem;
+  }
+}
+</style>
+
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
     {
-      "@type": "Question",
-      "name": "Are my files uploaded to a server when I use PDF Toolkit Pro?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. Every tool on this page runs entirely inside your web browser using JavaScript libraries loaded once from a CDN. Your PDFs and images are read, processed, and converted on your own device and are never transmitted anywhere."
+      "@type":"Question",
+      "name":"Are my confidential PDF documents uploaded to external servers?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Utiliverse is designed around browser-side processing for supported operations. Files selected for those operations are read into your browser rather than automatically uploaded to a Utiliverse conversion server."
       }
     },
     {
-      "@type": "Question",
-      "name": "Is there a file size limit for merging or compressing PDFs?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "There's no artificial limit set by the tool itself, but because processing happens in your browser's memory, very large files (typically several hundred megabytes) or dozens of high-resolution pages may slow down or strain lower-powered devices."
+      "@type":"Question",
+      "name":"How does client-side PDF conversion work inside my browser?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"JavaScript libraries such as pdf-lib, jsPDF and PDF.js perform supported PDF creation, manipulation or rendering tasks directly in the browser."
       }
     },
     {
-      "@type": "Question",
-      "name": "Does the PDF to Text tool work on scanned PDFs?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "It extracts the actual text layer embedded in a PDF. If a PDF is a scanned image with no underlying text layer, extraction will return little or nothing, since that would require optical character recognition rather than text extraction."
+      "@type":"Question",
+      "name":"Can I convert scanned PDFs into searchable text documents using OCR?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"The Searchable PDF operation is included in the directory as an OCR workflow. A full OCR engine is not bundled in this lightweight build, so OCR requires an OCR-capable browser module to be added before production deployment."
       }
     },
     {
-      "@type": "Question",
-      "name": "How does the PDF compressor reduce file size?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Each page is re-rendered as an image at a reduced resolution and JPEG quality based on your chosen compression level, then reassembled into a new PDF. This trades a small amount of visual sharpness for a smaller file, and works best on image-heavy PDFs."
+      "@type":"Question",
+      "name":"Is there a maximum file size limit or daily usage cap on Utiliverse?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"There is no Utiliverse server-side daily conversion quota for browser processing. Practical limits depend primarily on the available memory and processing capability of the device and browser."
       }
     },
     {
-      "@type": "Question",
-      "name": "Can I edit the extracted text before downloading it?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Extracted text appears in an editable preview box, so you can correct, trim, or rewrite it before downloading it as a .txt or .docx file."
+      "@type":"Question",
+      "name":"What is the difference between standard PDF, PDF/A for archiving, and Compressed PDF?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"A standard PDF is intended for general viewing and sharing. PDF/A is designed around long-term document preservation. A compressed PDF attempts to reduce file size while retaining useful visual quality."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"How do I combine multiple image formats such as JPG, PNG and HEIC into one PDF?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Select an image-to-PDF operation, choose multiple supported images, arrange them in the file list, and process the group. JPG and PNG can be handled directly by the browser build; HEIC requires browser support or an HEIC decoder."
       }
     }
   ]
 }
 </script>
-<style>
-  :root{
-    --ink:#1B1D22;
-    --ink-soft:#5C6068;
-    --paper:#F4F3EF;
-    --panel:#FFFFFF;
-    --line:#E1E0DA;
-    --amber:#C97A2B;
-    --amber-soft:#F4E4CF;
-    --pine:#28654F;
-    --pine-soft:#E1EEE7;
-  }
-  *{ box-sizing:border-box; }
-  body{ background:var(--paper); color:var(--ink); font-family:'Inter',ui-sans-serif,system-ui,sans-serif; margin:0; }
-  .font-display{ font-family:'Space Grotesk',ui-sans-serif,sans-serif; }
-  .font-mono{ font-family:'IBM Plex Mono',ui-monospace,monospace; }
-
-  /* Utiliverse ad-container wrapper */
-  .ad-container{ }
-  .ad-container .ad-placeholder{
-    background:repeating-linear-gradient(135deg,#EAE8E1,#EAE8E1 10px,#E2E0D7 10px,#E2E0D7 20px);
-    border:1px dashed #B9B6AC;
-    color:#8B8778;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:.7rem;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    border-radius:6px;
-    padding:20px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-  }
-
-  .back-link{
-    display:inline-flex; align-items:center; gap:.35rem; font-family:'IBM Plex Mono',monospace;
-    font-size:.78rem; color:var(--ink-soft); text-decoration:none;
-  }
-  .back-link:hover{ color:var(--ink); }
-  .back-link svg{ width:14px; height:14px; }
-
-  .tab-btn{
-    display:flex; align-items:center; gap:.5rem; padding:.7rem 1rem; border-radius:8px;
-    font-size:.85rem; font-weight:600; color:var(--ink-soft); background:transparent; cursor:pointer;
-    border:1px solid transparent; white-space:nowrap;
-  }
-  .tab-btn.active{ background:var(--ink); color:#fff; }
-  .tab-btn:not(.active):hover{ background:#EAE8E1; }
-  .tab-btn svg{ width:16px; height:16px; }
-
-  .panel{ display:none; }
-  .panel.active{ display:block; }
-
-  .dropzone{
-    border:2px dashed var(--line); border-radius:12px; padding:2.2rem 1.5rem; text-align:center;
-    background:var(--panel); cursor:pointer; transition:.15s;
-  }
-  .dropzone.drag{ border-color:var(--amber); background:var(--amber-soft); }
-  .dropzone svg{ width:30px; height:30px; margin:0 auto .6rem; color:var(--ink-soft); }
-
-  .file-row{
-    display:flex; align-items:center; gap:.7rem; background:var(--panel); border:1px solid var(--line);
-    border-radius:8px; padding:.6rem .8rem; cursor:grab;
-  }
-  .file-row.dragging{ opacity:.4; }
-  .file-row .drag-handle{ color:#B9B6AC; }
-  .file-row .file-name{ flex:1; font-size:.85rem; font-family:'IBM Plex Mono',monospace; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .file-row .file-size{ font-size:.72rem; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; }
-  .icon-btn{ padding:.3rem; border-radius:6px; color:var(--ink-soft); background:transparent; border:none; cursor:pointer; }
-  .icon-btn:hover{ background:#EAE8E1; color:var(--ink); }
-  .icon-btn svg{ width:16px; height:16px; }
-
-  .btn-primary{
-    display:inline-flex; align-items:center; gap:.5rem; background:var(--ink); color:#fff; font-weight:600;
-    font-size:.85rem; padding:.75rem 1.3rem; border-radius:8px; border:none; cursor:pointer; transition:.15s;
-  }
-  .btn-primary:hover{ background:#33363E; }
-  .btn-primary:disabled{ opacity:.4; cursor:not-allowed; }
-  .btn-secondary{
-    display:inline-flex; align-items:center; gap:.5rem; background:var(--panel); color:var(--ink); font-weight:600;
-    font-size:.85rem; padding:.75rem 1.3rem; border-radius:8px; border:1px solid var(--line); cursor:pointer;
-  }
-  .btn-secondary:hover{ border-color:var(--ink); }
-  .btn-secondary:disabled{ opacity:.4; cursor:not-allowed; }
-
-  .field-label{ font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); font-weight:600; }
-  .field-input, .field-select{
-    width:100%; background:var(--panel); border:1px solid var(--line); border-radius:8px;
-    padding:.6rem .8rem; font-family:'IBM Plex Mono',monospace; font-size:.9rem; color:var(--ink);
-  }
-  .field-input:focus, .field-select:focus{ outline:none; border-color:var(--amber); }
-
-  .status-bar{ font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:var(--ink-soft); }
-  .status-ok{ color:var(--pine); }
-
-  details.faq-item{ border-bottom:1px solid var(--line); }
-  details.faq-item summary{ cursor:pointer; list-style:none; padding:1.1rem 0; font-weight:600; display:flex; justify-content:space-between; gap:1rem; align-items:center; }
-  details.faq-item summary::-webkit-details-marker{ display:none; }
-  details.faq-item .faq-icon{ flex:none; width:22px; height:22px; border:1px solid var(--line); border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; transition:transform .2s; }
-  details.faq-item[open] .faq-icon{ transform:rotate(45deg); }
-  details.faq-item .faq-body{ padding:0 0 1.2rem; color:var(--ink-soft); line-height:1.6; }
-
-  .progress-track{ height:6px; background:var(--line); border-radius:99px; overflow:hidden; }
-  .progress-fill{ height:100%; background:var(--amber); width:0%; transition:width .2s; }
-
-  #extractedText{
-    width:100%; min-height:280px; background:var(--panel); border:1px solid var(--line); border-radius:8px;
-    padding:1rem; font-family:'IBM Plex Mono',monospace; font-size:.82rem; line-height:1.6; resize:vertical;
-  }
-  #extractedText:focus{ outline:none; border-color:var(--amber); }
-
-  .thumb-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(110px,1fr)); gap:.7rem; }
-  .thumb-card{ border:1px solid var(--line); border-radius:8px; overflow:hidden; background:var(--panel); position:relative; }
-  .thumb-card img{ width:100%; height:110px; object-fit:cover; display:block; }
-  .thumb-card .thumb-remove{ position:absolute; top:4px; right:4px; background:rgba(27,29,34,.75); color:#fff; border:none; border-radius:5px; width:22px; height:22px; cursor:pointer; }
-</style>
 </head>
-<body class="min-h-screen">
 
-<header class="border-b border-[var(--line)] bg-[var(--panel)]">
-  <div class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between flex-wrap gap-2">
-    <a href="/" class="back-link">
-      <i data-lucide="arrow-left"></i>
-      Back to Utiliverse
-    </a>
-    <div class="flex items-center gap-2">
-      <i data-lucide="file-stack" style="color:var(--amber)"></i>
-      <span class="font-display text-lg font-semibold tracking-tight">PDF Toolkit Pro</span>
+<body>
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+<header class="sticky top-0 z-50 border-b border-slate-800/90 bg-slate-950/85 backdrop-blur-xl">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="h-16 flex items-center justify-between gap-4">
+
+      <a href="/" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+          <i data-lucide="layers-3" class="w-5 h-5 text-white"></i>
+        </div>
+        <div>
+          <div class="font-bold text-white tracking-tight">Utiliverse</div>
+          <div class="text-[10px] text-slate-500 uppercase tracking-[.15em]">PDF Toolkit</div>
+        </div>
+      </a>
+
+      <div class="hidden sm:flex items-center gap-3">
+        <span class="flex items-center gap-2 px-3 py-1.5 rounded-full border border-emerald-500/20 bg-emerald-500/5 text-xs font-medium text-emerald-400">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+          100% Client-Side &amp; Private
+        </span>
+
+        <a href="/" class="text-sm text-slate-400 hover:text-white transition">
+          ← Back to Utiliverse
+        </a>
+      </div>
+
     </div>
-    <p class="hidden sm:block text-xs font-mono text-[var(--ink-soft)]">merge · convert · extract · compress</p>
   </div>
 </header>
 
-<!-- Security banner -->
-<div class="bg-[var(--pine)] text-white">
-  <div class="max-w-6xl mx-auto px-5 py-2.5 flex items-center gap-2 text-sm">
-    <i data-lucide="shield-check" style="width:16px;height:16px;flex:none;"></i>
-    <span><strong>100% Private &amp; Secure:</strong> Files are processed entirely inside your web browser and are never uploaded to any external server.</span>
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+<section class="hero-grid relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-b from-indigo-950/20 via-transparent to-slate-950/30 pointer-events-none"></div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-12">
+
+    <div class="max-w-4xl">
+      <div class="flex flex-wrap gap-2 mb-5">
+        <span class="format-badge">PDF</span>
+        <span class="format-badge">Images</span>
+        <span class="format-badge">Documents</span>
+        <span class="format-badge">E-Books</span>
+        <span class="format-badge">Web &amp; Code</span>
+        <span class="format-badge">CAD</span>
+      </div>
+
+      <h1 class="hero-title text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+        One workspace for your
+        <span class="gradient-text">PDF conversions.</span>
+      </h1>
+
+      <p class="mt-5 text-lg sm:text-xl text-slate-400 max-w-3xl leading-relaxed">
+        Convert, create, render and optimize documents directly in your browser.
+        Choose a conversion pair below or drop a file into the workspace to get started.
+      </p>
+
+      <div class="mt-7 flex flex-wrap gap-3 text-sm text-slate-400">
+        <div class="flex items-center gap-2">
+          <i data-lucide="shield-check" class="w-4 h-4 text-emerald-400"></i>
+          Browser-based processing
+        </div>
+        <div class="flex items-center gap-2">
+          <i data-lucide="zap" class="w-4 h-4 text-indigo-400"></i>
+          No account required
+        </div>
+        <div class="flex items-center gap-2">
+          <i data-lucide="lock" class="w-4 h-4 text-violet-400"></i>
+          Files stay in your browser for supported operations
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- =========================================================
+     TOP AD
+========================================================= -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+  <div class="adsense-slot">
+    Advertisement Space
   </div>
 </div>
 
-<!-- Top Banner Placement (Leaderboard) -->
-<div class="ad-container ad-top max-w-6xl mx-auto px-5" style="text-align: center; margin: 15px auto;">
-  <div class="ad-placeholder" style="min-width: 300px; min-height: 90px;">
-    <small>Advertisement Space</small>
-  </div>
-</div>
 
-<main class="tool-container max-w-6xl mx-auto px-5">
+<!-- =========================================================
+     MASTER CONVERSION WIDGET
+========================================================= -->
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-  <section class="py-8 sm:py-10">
-    <p class="font-mono text-xs uppercase tracking-[.16em] text-[var(--amber)] mb-3">Browser-based PDF utility suite</p>
-    <h1 class="font-display text-3xl sm:text-5xl leading-tight max-w-3xl font-semibold">
-      Merge, convert, extract, and compress PDFs — no uploads, no accounts.
-    </h1>
-    <p class="mt-4 text-[var(--ink-soft)] max-w-2xl">
-      Four tools, one page. Everything runs on your device using open-source libraries loaded from a CDN — your files never leave your browser tab.
-    </p>
-  </section>
+<section id="workspace" class="glass rounded-3xl p-5 sm:p-7 lg:p-8 shadow-2xl shadow-black/20">
 
-  <section class="tool-content grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-8">
+  <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-5 mb-7">
+
     <div>
-      <!-- Tabs -->
-      <div id="tabBar" class="flex flex-wrap gap-2 mb-5">
-        <button class="tab-btn active" data-tab="merge"><i data-lucide="combine"></i>Merge PDF</button>
-        <button class="tab-btn" data-tab="img2pdf"><i data-lucide="image-plus"></i>Image to PDF</button>
-        <button class="tab-btn" data-tab="text"><i data-lucide="file-text"></i>PDF to Text</button>
-        <button class="tab-btn" data-tab="compress"><i data-lucide="minimize-2"></i>Compress PDF</button>
+      <div class="text-xs uppercase tracking-[.18em] text-indigo-400 font-semibold mb-2">
+        Conversion workspace
       </div>
 
-      <div class="bg-[var(--panel)] border border-[var(--line)] rounded-xl p-5 sm:p-7">
+      <h2 id="workspaceTitle" class="text-2xl sm:text-3xl font-bold">
+        JPG to PDF
+      </h2>
 
-        <!-- TOOL 1: MERGE PDF -->
-        <div id="panel-merge" class="panel active">
-          <h2 class="font-display text-xl font-semibold mb-1">Merge PDF</h2>
-          <p class="text-sm text-[var(--ink-soft)] mb-4">Drop multiple PDFs, drag to reorder, then merge into one file.</p>
+      <p id="workspaceDescription" class="text-slate-400 mt-2">
+        Turn one or more JPG images into a single PDF document.
+      </p>
+    </div>
 
-          <div id="mergeDropzone" class="dropzone">
-            <i data-lucide="upload-cloud"></i>
-            <p class="text-sm font-medium">Drop PDF files here or click to browse</p>
-            <p class="text-xs text-[var(--ink-soft)] mt-1">Multiple files supported</p>
-            <input id="mergeInput" type="file" accept="application/pdf" multiple class="hidden">
-          </div>
+    <div class="flex items-center gap-2 text-xs text-slate-500">
+      <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+      Local browser workspace
+    </div>
 
-          <div id="mergeList" class="flex flex-col gap-2 mt-4"></div>
+  </div>
 
-          <div class="flex flex-wrap items-center gap-3 mt-5">
-            <button id="mergeBtn" class="btn-primary" disabled><i data-lucide="download"></i>Merge &amp; Download</button>
-            <span id="mergeStatus" class="status-bar"></span>
-          </div>
-        </div>
 
-        <!-- TOOL 2: IMAGE TO PDF -->
-        <div id="panel-img2pdf" class="panel">
-          <h2 class="font-display text-xl font-semibold mb-1">Image to PDF</h2>
-          <p class="text-sm text-[var(--ink-soft)] mb-4">Upload JPG/PNG images and compile them into a single PDF.</p>
+  <!-- FROM / TO -->
+  <div class="grid md:grid-cols-[1fr_auto_1fr] gap-4 items-end">
 
-          <div id="imgDropzone" class="dropzone">
-            <i data-lucide="image-plus"></i>
-            <p class="text-sm font-medium">Drop images here or click to browse</p>
-            <p class="text-xs text-[var(--ink-soft)] mt-1">JPG or PNG, multiple files supported</p>
-            <input id="imgInput" type="file" accept="image/jpeg,image/png" multiple class="hidden">
-          </div>
+    <div>
+      <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">
+        From
+      </label>
 
-          <div id="imgThumbs" class="thumb-grid mt-4"></div>
+      <select id="fromFormat" class="select-box w-full px-4 py-3.5 text-sm">
+      </select>
+    </div>
 
-          <div class="grid sm:grid-cols-2 gap-4 mt-5">
-            <div>
-              <label class="field-label" for="imgOrientation">Orientation</label>
-              <select id="imgOrientation" class="field-select mt-1">
-                <option value="portrait">Portrait</option>
-                <option value="landscape">Landscape</option>
-              </select>
-            </div>
-            <div>
-              <label class="field-label" for="imgMargin">Page margin (mm)</label>
-              <input id="imgMargin" type="number" class="field-input mt-1" value="10" min="0" step="1">
-            </div>
-          </div>
-
-          <div class="flex flex-wrap items-center gap-3 mt-5">
-            <button id="imgConvertBtn" class="btn-primary" disabled><i data-lucide="download"></i>Convert to PDF</button>
-            <button id="imgZipBtn" class="btn-secondary" disabled><i data-lucide="archive"></i>Download images as ZIP</button>
-            <span id="imgStatus" class="status-bar"></span>
-          </div>
-        </div>
-
-        <!-- TOOL 3: PDF TO TEXT -->
-        <div id="panel-text" class="panel">
-          <h2 class="font-display text-xl font-semibold mb-1">PDF to Word / Text Extractor</h2>
-          <p class="text-sm text-[var(--ink-soft)] mb-4">Extract the text layer from a PDF, edit it, then download as .docx or .txt.</p>
-
-          <div id="textDropzone" class="dropzone">
-            <i data-lucide="file-search"></i>
-            <p class="text-sm font-medium">Drop a PDF here or click to browse</p>
-            <p class="text-xs text-[var(--ink-soft)] mt-1">Single file — text-based PDFs work best</p>
-            <input id="textInput" type="file" accept="application/pdf" class="hidden">
-          </div>
-
-          <div class="flex items-center gap-3 mt-4">
-            <button id="extractBtn" class="btn-primary" disabled><i data-lucide="scan-text"></i>Extract Text</button>
-            <span id="extractStatus" class="status-bar"></span>
-          </div>
-
-          <textarea id="extractedText" class="mt-4" placeholder="Extracted text will appear here — fully editable before download..."></textarea>
-
-          <div class="flex flex-wrap items-center gap-3 mt-4">
-            <button id="downloadTxtBtn" class="btn-secondary" disabled><i data-lucide="file-down"></i>Download .txt</button>
-            <button id="downloadDocxBtn" class="btn-secondary" disabled><i data-lucide="file-down"></i>Download .docx</button>
-          </div>
-        </div>
-
-        <!-- TOOL 4: COMPRESS PDF -->
-        <div id="panel-compress" class="panel">
-          <h2 class="font-display text-xl font-semibold mb-1">PDF Compressor</h2>
-          <p class="text-sm text-[var(--ink-soft)] mb-4">Re-render each page at a reduced resolution to shrink file size.</p>
-
-          <div id="compressDropzone" class="dropzone">
-            <i data-lucide="minimize-2"></i>
-            <p class="text-sm font-medium">Drop a PDF here or click to browse</p>
-            <p class="text-xs text-[var(--ink-soft)] mt-1">Single file — best for image-heavy PDFs</p>
-            <input id="compressInput" type="file" accept="application/pdf" class="hidden">
-          </div>
-
-          <div class="mt-4">
-            <label class="field-label">Compression level</label>
-            <div class="flex gap-2 mt-1">
-              <button data-level="low" class="level-btn btn-secondary">Low</button>
-              <button data-level="medium" class="level-btn btn-secondary" style="border-color:var(--ink);">Medium</button>
-              <button data-level="high" class="level-btn btn-secondary">High</button>
-            </div>
-          </div>
-
-          <div class="progress-track mt-4">
-            <div id="compressProgress" class="progress-fill"></div>
-          </div>
-
-          <div class="flex flex-wrap items-center gap-3 mt-4">
-            <button id="compressBtn" class="btn-primary" disabled><i data-lucide="download"></i>Compress &amp; Download</button>
-            <span id="compressStatus" class="status-bar"></span>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- In-Content Banner Placement -->
-      <div class="ad-container ad-mid" style="text-align: center; margin: 20px 0;">
-        <div class="ad-placeholder" style="min-width: 300px; min-height: 250px;">
-          <small>Advertisement Space</small>
-        </div>
+    <div class="hidden md:flex justify-center pb-2">
+      <div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center">
+        <i data-lucide="arrow-right" class="w-4 h-4 text-indigo-400"></i>
       </div>
     </div>
 
-    <!-- Sidebar Banner Placement -->
-    <aside class="hidden lg:block">
-      <div class="lg:sticky lg:top-6 ad-container ad-sidebar">
-        <div class="ad-placeholder" style="min-width: 280px; min-height: 600px; width:100%;">
-          <small>Advertisement Space</small>
+    <div>
+      <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2">
+        To
+      </label>
+
+      <select id="toFormat" class="select-box w-full px-4 py-3.5 text-sm">
+      </select>
+    </div>
+
+  </div>
+
+
+  <!-- OPERATION SETTINGS -->
+  <div id="operationSettings" class="mt-6 grid md:grid-cols-3 gap-4">
+
+    <div class="glass rounded-xl p-4">
+      <label class="flex justify-between text-xs font-semibold text-slate-400 mb-2">
+        <span>Quality</span>
+        <span id="qualityValue" class="text-indigo-400">85%</span>
+      </label>
+
+      <input
+        id="quality"
+        type="range"
+        min="20"
+        max="100"
+        value="85"
+        class="range w-full"
+      >
+    </div>
+
+    <div class="glass rounded-xl p-4">
+      <label class="block text-xs font-semibold text-slate-400 mb-2">
+        Compression
+      </label>
+
+      <select id="compression" class="select-box w-full px-3 py-2 text-sm">
+        <option value="standard">Standard</option>
+        <option value="balanced">Balanced</option>
+        <option value="maximum">Maximum compression</option>
+      </select>
+    </div>
+
+    <div class="glass rounded-xl p-4">
+      <label class="block text-xs font-semibold text-slate-400 mb-2">
+        Page selection
+      </label>
+
+      <input
+        id="pageSelection"
+        type="text"
+        class="control-input w-full px-3 py-2 text-sm"
+        placeholder="All pages"
+      >
+    </div>
+
+  </div>
+
+
+  <!-- DROP ZONE -->
+  <div
+    id="dropZone"
+    class="drop-zone rounded-2xl mt-6 p-8 sm:p-12 text-center cursor-pointer"
+  >
+
+    <input
+      id="fileInput"
+      type="file"
+      class="hidden"
+      multiple
+    >
+
+    <div class="mx-auto w-16 h-16 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center mb-5">
+      <i data-lucide="upload-cloud" class="w-8 h-8 text-indigo-400"></i>
+    </div>
+
+    <h3 class="text-lg sm:text-xl font-semibold">
+      Drop your file here
+    </h3>
+
+    <p class="text-slate-500 mt-2 text-sm">
+      or click to browse from your device
+    </p>
+
+    <p id="acceptedFormats" class="text-xs text-slate-600 mt-4">
+      Accepted formats will appear here.
+    </p>
+
+  </div>
+
+
+  <!-- FILE LIST -->
+  <div id="fileList" class="mt-5 space-y-2 hidden"></div>
+
+
+  <!-- PROCESS BUTTON -->
+  <div class="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+
+    <button
+      id="processBtn"
+      type="button"
+      class="btn-primary flex-1 sm:flex-none px-7 py-3.5 rounded-xl font-semibold text-sm flex items-center justify-center gap-2"
+    >
+      <i data-lucide="wand-sparkles" class="w-4 h-4"></i>
+      <span id="processBtnText">Convert / Process File Now</span>
+    </button>
+
+    <button
+      id="clearBtn"
+      type="button"
+      class="btn-secondary px-6 py-3.5 rounded-xl text-sm font-medium text-slate-300 hover:text-white transition"
+    >
+      Clear
+    </button>
+
+    <div id="statusText" class="text-xs text-slate-500 sm:ml-auto">
+      Ready
+    </div>
+
+  </div>
+
+
+  <!-- PROGRESS -->
+  <div id="progressWrapper" class="mt-5 hidden">
+    <div class="flex justify-between text-xs text-slate-500 mb-2">
+      <span id="progressLabel">Processing...</span>
+      <span id="progressPercent">0%</span>
+    </div>
+
+    <div class="progress-track">
+      <div id="progressBar" class="progress-bar"></div>
+    </div>
+  </div>
+
+
+  <!-- RESULT -->
+  <div id="resultPanel" class="hidden mt-6 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-5">
+
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center">
+          <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-400"></i>
+        </div>
+
+        <div>
+          <div class="font-semibold">Processing complete</div>
+          <div id="resultDescription" class="text-xs text-slate-500 mt-1">
+            Your file is ready.
+          </div>
         </div>
       </div>
-    </aside>
-  </section>
 
-  <!-- SEO content -->
-  <section class="mt-16 border-t border-[var(--line)] pt-12 max-w-3xl">
-    <h2 class="font-display text-2xl sm:text-3xl font-semibold mb-4">How to edit, convert, and compress PDFs online for free</h2>
-    <p class="text-[var(--ink-soft)] leading-relaxed">
-      Most online PDF tools work by uploading your file to a server, processing it there, and sending a result back — which means your document, however sensitive, passes through someone else's infrastructure. PDF Toolkit Pro takes a different approach: every tool on this page runs as JavaScript inside your browser tab. Merging pulls pages directly from the files you selected in memory; image conversion draws your photos onto a new PDF canvas; text extraction reads the PDF's internal text layer; compression re-renders pages at a lower resolution — all without a network request carrying your file anywhere.
-    </p>
-    <p class="text-[var(--ink-soft)] leading-relaxed mt-4">
-      To merge PDFs, drop your files into the Merge tool, drag them into the order you want, and click merge — the tool stitches every page from every file into one download. To digitize photos or scans, use Image to PDF: choose portrait or landscape and a margin, and each image becomes one page. To pull text out of a PDF for editing elsewhere, use the extractor, which reads text page-by-page and lets you edit the result before saving it as .txt or .docx. To shrink a large PDF for emailing, use the compressor and pick Low, Medium, or High — higher compression trades more visual detail for a smaller file.
-    </p>
-  </section>
+      <a
+        id="downloadBtn"
+        href="#"
+        download
+        class="px-5 py-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-sm font-semibold hover:bg-emerald-500/20 transition text-center"
+      >
+        Download File
+      </a>
 
-  <!-- FAQ -->
-  <section class="mt-14 border-t border-[var(--line)] pt-12 max-w-3xl mb-14">
-    <h2 class="font-display text-2xl sm:text-3xl font-semibold mb-2">Frequently asked questions</h2>
-    <div class="mt-4">
-      <details class="faq-item" open>
-        <summary>Are my files uploaded to a server when I use PDF Toolkit Pro?<span class="faq-icon">+</span></summary>
-        <div class="faq-body">No. Every tool on this page runs entirely inside your web browser using JavaScript libraries loaded once from a CDN. Your PDFs and images are read, processed, and converted on your own device and are never transmitted anywhere.</div>
-      </details>
-      <details class="faq-item">
-        <summary>Is there a file size limit for merging or compressing PDFs?<span class="faq-icon">+</span></summary>
-        <div class="faq-body">There's no artificial limit set by the tool itself, but because processing happens in your browser's memory, very large files (typically several hundred megabytes) or dozens of high-resolution pages may slow down or strain lower-powered devices.</div>
-      </details>
-      <details class="faq-item">
-        <summary>Does the PDF to Text tool work on scanned PDFs?<span class="faq-icon">+</span></summary>
-        <div class="faq-body">It extracts the actual text layer embedded in a PDF. If a PDF is a scanned image with no underlying text layer, extraction will return little or nothing, since that would require optical character recognition rather than text extraction.</div>
-      </details>
-      <details class="faq-item">
-        <summary>How does the PDF compressor reduce file size?<span class="faq-icon">+</span></summary>
-        <div class="faq-body">Each page is re-rendered as an image at a reduced resolution and JPEG quality based on your chosen compression level, then reassembled into a new PDF. This trades a small amount of visual sharpness for a smaller file, and works best on image-heavy PDFs.</div>
-      </details>
-      <details class="faq-item">
-        <summary>Can I edit the extracted text before downloading it?<span class="faq-icon">+</span></summary>
-        <div class="faq-body">Yes. Extracted text appears in an editable preview box, so you can correct, trim, or rewrite it before downloading it as a .txt or .docx file.</div>
-      </details>
     </div>
-  </section>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     MID AD + SIDEBAR
+========================================================= -->
+<section class="grid lg:grid-cols-[1fr_300px] gap-7 mt-8">
+
+  <div>
+    <div class="adsense-slot adsense-square">
+      Advertisement Space
+    </div>
+  </div>
+
+  <aside class="hidden lg:block">
+    <div class="adsense-slot adsense-tall sticky top-24">
+      Advertisement Space
+    </div>
+  </aside>
+
+</section>
+
+
+<!-- =========================================================
+     DIRECTORY
+========================================================= -->
+<section id="directory" class="mt-14">
+
+  <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-5">
+
+    <div>
+      <div class="text-xs uppercase tracking-[.18em] text-indigo-400 font-semibold mb-2">
+        Conversion directory
+      </div>
+
+      <h2 class="text-3xl font-bold">
+        Find the tool you need
+      </h2>
+
+      <p class="text-slate-400 mt-2 max-w-2xl">
+        Browse the complete Utiliverse PDF toolkit or search for a specific conversion.
+      </p>
+    </div>
+
+    <div class="text-sm text-slate-500">
+      <span id="cardCount">54</span> conversion tools
+    </div>
+
+  </div>
+
+
+  <!-- SEARCH -->
+  <div class="mt-6 relative">
+
+    <i
+      data-lucide="search"
+      class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500"
+    ></i>
+
+    <input
+      id="searchInput"
+      type="search"
+      class="search-box w-full pl-12 pr-4 py-3.5"
+      placeholder="Search conversions, formats or use cases..."
+    >
+
+  </div>
+
+
+  <!-- CATEGORY FILTER -->
+  <div id="categoryFilters" class="flex flex-wrap gap-2 mt-4">
+
+    <button class="category-pill active px-4 py-2 rounded-full text-xs font-semibold" data-category="all">
+      All
+    </button>
+
+    <button class="category-pill px-4 py-2 rounded-full text-xs font-semibold" data-category="documents-to-pdf">
+      Documents to PDF
+    </button>
+
+    <button class="category-pill px-4 py-2 rounded-full text-xs font-semibold" data-category="pdf-to-documents">
+      PDF to Documents
+    </button>
+
+    <button class="category-pill px-4 py-2 rounded-full text-xs font-semibold" data-category="images-to-pdf">
+      Images to PDF
+    </button>
+
+    <button class="category-pill px-4 py-2 rounded-full text-xs font-semibold" data-category="pdf-to-images">
+      PDF to Images
+    </button>
+
+    <button class="category-pill px-4 py-2 rounded-full text-xs font-semibold" data-category="web-code">
+      Web &amp; Code
+    </button>
+
+    <button class="category-pill px-4 py-2 rounded-full text-xs font-semibold" data-category="pdf-to-web">
+      PDF to Web &amp; Code
+    </button>
+
+    <button class="category-pill px-4 py-2 rounded-full text-xs font-semibold" data-category="ebooks">
+      E-Books
+    </button>
+
+    <button class="category-pill px-4 py-2 rounded-full text-xs font-semibold" data-category="cad">
+      Design &amp; CAD
+    </button>
+
+    <button class="category-pill px-4 py-2 rounded-full text-xs font-semibold" data-category="advanced">
+      Advanced
+    </button>
+
+  </div>
+
+
+  <!-- CARDS -->
+  <div
+    id="toolsGrid"
+    class="grid sm:grid-cols-2 xl:grid-cols-3 gap-5 mt-7"
+  ></div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER AD
+========================================================= -->
+<section class="mt-14">
+  <div class="adsense-slot">
+    Advertisement Space
+  </div>
+</section>
+
+
+<!-- =========================================================
+     ABOUT
+========================================================= -->
+<section id="about" class="max-w-4xl mx-auto mt-16">
+
+  <div class="glass rounded-3xl p-6 sm:p-9">
+
+    <div class="flex items-center gap-3 mb-5">
+      <div class="w-11 h-11 rounded-xl bg-indigo-500/10 flex items-center justify-center">
+        <i data-lucide="shield-check" class="w-5 h-5 text-indigo-400"></i>
+      </div>
+
+      <div>
+        <div class="text-xs uppercase tracking-[.18em] text-indigo-400 font-semibold">
+          About the engine
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold mt-1">
+          The Utiliverse PDF Engine
+        </h2>
+      </div>
+    </div>
+
+
+    <div class="space-y-5 text-slate-400 leading-7">
+
+      <p>
+        Utiliverse PDF Toolkit is designed as a browser-first document workspace.
+        Instead of sending every file to a remote conversion service, supported
+        operations use JavaScript running inside the browser to read, process and
+        generate files locally.
+      </p>
+
+      <p>
+        The application uses technologies including
+        <strong class="text-slate-200">pdf-lib</strong>,
+        <strong class="text-slate-200">jsPDF</strong> and
+        <strong class="text-slate-200">PDF.js</strong>.
+        These libraries provide the building blocks for creating PDFs,
+        manipulating PDF documents and rendering PDF pages into browser canvases.
+      </p>
+
+      <p>
+        For supported operations, the selected file is read into local browser
+        memory. The application then performs its processing locally and creates
+        a new downloadable file. This architecture can be particularly useful
+        when working with documents that contain personal, business or otherwise
+        sensitive information.
+      </p>
+
+      <p>
+        <strong class="text-white">Important distinction:</strong>
+        browser-based processing does not mean every file format can automatically
+        be converted without an appropriate decoder or encoder. Microsoft Office,
+        CAD, proprietary design and certain e-book formats require specialized
+        parsing engines. The directory intentionally identifies those operations
+        so additional format-specific libraries can be integrated without changing
+        the overall interface.
+      </p>
+
+      <p>
+        The practical advantage is a clean separation between the user interface
+        and the processing engine. New converters can be added as independent
+        modules while keeping the same workspace, file handling, privacy model,
+        download experience and visual design.
+      </p>
+
+      <div class="grid sm:grid-cols-3 gap-3 pt-3">
+
+        <div class="rounded-xl border border-slate-700 bg-slate-900/50 p-4">
+          <i data-lucide="hard-drive" class="w-5 h-5 text-indigo-400 mb-3"></i>
+          <div class="font-semibold text-sm">Local Processing</div>
+          <div class="text-xs text-slate-500 mt-1">
+            Supported operations execute in your browser.
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-slate-700 bg-slate-900/50 p-4">
+          <i data-lucide="user-round-x" class="w-5 h-5 text-indigo-400 mb-3"></i>
+          <div class="font-semibold text-sm">No Account</div>
+          <div class="text-xs text-slate-500 mt-1">
+            The basic toolkit does not require registration.
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-slate-700 bg-slate-900/50 p-4">
+          <i data-lucide="cpu" class="w-5 h-5 text-indigo-400 mb-3"></i>
+          <div class="font-semibold text-sm">Browser Engine</div>
+          <div class="text-xs text-slate-500 mt-1">
+            JavaScript handles supported PDF workflows.
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     FAQ
+========================================================= -->
+<section id="faq" class="max-w-4xl mx-auto mt-14 mb-16">
+
+  <div class="mb-5">
+    <div class="text-xs uppercase tracking-[.18em] text-indigo-400 font-semibold">
+      Frequently asked questions
+    </div>
+
+    <h2 class="text-3xl font-bold mt-2">
+      PDF Toolkit FAQ
+    </h2>
+  </div>
+
+
+  <div class="glass rounded-2xl px-5 sm:px-7">
+
+    <details class="faq" open>
+      <summary class="flex justify-between gap-4">
+        <span>Are my confidential PDF documents uploaded to external servers?</span>
+        <span class="text-indigo-400">+</span>
+      </summary>
+
+      <div class="faq-answer">
+        Utiliverse is designed around browser-side processing for supported operations.
+        Files selected for those operations are read into your browser rather than
+        automatically uploaded to a Utiliverse conversion server. As with any
+        browser application, your browser and installed extensions remain part of
+        your local computing environment.
+      </div>
+    </details>
+
+
+    <details class="faq">
+      <summary class="flex justify-between gap-4">
+        <span>How does client-side PDF conversion work inside my browser?</span>
+        <span class="text-indigo-400">+</span>
+      </summary>
+
+      <div class="faq-answer">
+        JavaScript libraries such as pdf-lib, jsPDF and PDF.js provide the underlying
+        functionality. The browser reads a selected file into memory, processes the
+        applicable content, generates the resulting document and creates a local
+        download link.
+      </div>
+    </details>
+
+
+    <details class="faq">
+      <summary class="flex justify-between gap-4">
+        <span>Can I convert scanned PDFs into searchable text documents using OCR?</span>
+        <span class="text-indigo-400">+</span>
+      </summary>
+
+      <div class="faq-answer">
+        Searchable PDF is included as an advanced operation in the directory.
+        This lightweight build does not bundle a full OCR engine. A production OCR
+        implementation can add a browser-compatible OCR engine such as Tesseract.js
+        so scanned pages can be analyzed and converted into searchable text while
+        preserving the client-side workflow.
+      </div>
+    </details>
+
+
+    <details class="faq">
+      <summary class="flex justify-between gap-4">
+        <span>Is there a maximum file size limit or daily usage cap on Utiliverse?</span>
+        <span class="text-indigo-400">+</span>
+      </summary>
+
+      <div class="faq-answer">
+        There is no Utiliverse server-side daily conversion quota for browser
+        processing. Practical limits are primarily determined by available device
+        memory, browser capabilities and the complexity of the document being
+        processed. Very large PDFs or image collections may require substantial
+        memory.
+      </div>
+    </details>
+
+
+    <details class="faq">
+      <summary class="flex justify-between gap-4">
+        <span>What is the difference between standard PDF, PDF/A for archiving, and Compressed PDF?</span>
+        <span class="text-indigo-400">+</span>
+      </summary>
+
+      <div class="faq-answer">
+        A standard PDF is intended for everyday viewing and sharing. PDF/A is a
+        family of specifications intended to improve long-term document preservation.
+        A compressed PDF focuses on reducing the amount of storage required by
+        optimizing document resources such as images. Compression may trade some
+        visual quality for a smaller file.
+      </div>
+    </details>
+
+
+    <details class="faq">
+      <summary class="flex justify-between gap-4">
+        <span>How do I combine multiple image formats such as JPG, PNG and HEIC into one PDF?</span>
+        <span class="text-indigo-400">+</span>
+      </summary>
+
+      <div class="faq-answer">
+        Choose an image-to-PDF operation and select multiple images. The workspace
+        places the selected files into a single processing queue. JPG and PNG can
+        be handled directly by this browser build. HEIC support depends on whether
+        the browser can decode the image or whether a dedicated HEIC decoder is
+        added to the application.
+      </div>
+    </details>
+
+  </div>
+
+</section>
 
 </main>
 
-<!-- Footer Banner Placement -->
-<div class="ad-container ad-bottom max-w-6xl mx-auto px-5" style="text-align: center; margin: 15px auto;">
-  <div class="ad-placeholder" style="min-width: 300px; min-height: 90px;">
-    <small>Advertisement Space</small>
-  </div>
-</div>
 
-<footer class="border-t border-[var(--line)] py-8">
-  <div class="max-w-6xl mx-auto px-5 text-xs text-[var(--ink-soft)] font-mono">
-    All processing happens locally in your browser. No files are stored or transmitted.
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+<footer class="border-t border-slate-800 bg-slate-950/80">
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+
+      <div class="text-sm text-slate-500">
+        © <span id="year"></span> Utiliverse. All rights reserved.
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-5 text-sm text-slate-500">
+        <a href="/" class="hover:text-white transition">Utiliverse Home</a>
+        <a href="#about" class="hover:text-white transition">About</a>
+        <a href="#faq" class="hover:text-white transition">FAQ</a>
+      </div>
+
+    </div>
+
   </div>
+
 </footer>
 
+
+<!-- TOAST -->
+<div
+  id="toast"
+  class="toast fixed bottom-5 right-5 z-[100] max-w-sm rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 shadow-2xl"
+>
+  <div id="toastMessage" class="text-sm text-slate-200"></div>
+</div>
+
+
 <script>
-/* ============================================================
-   PDF Toolkit Pro — core setup
-   ============================================================ */
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-const { PDFDocument } = PDFLib;
-const { jsPDF } = window.jspdf;
+/* =========================================================
+   UTILIVERSE PDF TOOLKIT
+   Conversion definitions
+========================================================= */
 
-lucide.createIcons();
+const CONVERSIONS = [
 
-function formatBytes(bytes){
-  if(bytes === 0) return '0 B';
-  const k = 1024, sizes = ['B','KB','MB','GB'];
-  const i = Math.floor(Math.log(bytes)/Math.log(k));
-  return parseFloat((bytes/Math.pow(k,i)).toFixed(1)) + ' ' + sizes[i];
-}
-function triggerDownload(blob, filename){
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = filename;
-  document.body.appendChild(a); a.click(); a.remove();
-  URL.revokeObjectURL(url);
-}
-function setupDropzone(zoneEl, inputEl, onFiles){
-  zoneEl.addEventListener('click', () => inputEl.click());
-  inputEl.addEventListener('change', () => onFiles(Array.from(inputEl.files)));
-  ['dragenter','dragover'].forEach(evt => zoneEl.addEventListener(evt, e => { e.preventDefault(); zoneEl.classList.add('drag'); }));
-  ['dragleave','drop'].forEach(evt => zoneEl.addEventListener(evt, e => { e.preventDefault(); zoneEl.classList.remove('drag'); }));
-  zoneEl.addEventListener('drop', e => onFiles(Array.from(e.dataTransfer.files)));
+  /* DOCUMENTS TO PDF — 8 */
+  {
+    from: "Word",
+    to: "PDF",
+    category: "documents-to-pdf",
+    categoryName: "Documents to PDF",
+    icon: "file-text",
+    description: "Turn Word documents into portable PDF files for sharing, printing and archiving.",
+    ext: [".doc", ".docx"],
+    mode: "office"
+  },
+  {
+    from: "Excel",
+    to: "PDF",
+    category: "documents-to-pdf",
+    categoryName: "Documents to PDF",
+    icon: "table-2",
+    description: "Prepare spreadsheet documents for consistent PDF distribution and printing.",
+    ext: [".xls", ".xlsx"],
+    mode: "office"
+  },
+  {
+    from: "PowerPoint",
+    to: "PDF",
+    category: "documents-to-pdf",
+    categoryName: "Documents to PDF",
+    icon: "presentation",
+    description: "Create a portable PDF version of a presentation deck.",
+    ext: [".ppt", ".pptx"],
+    mode: "office"
+  },
+  {
+    from: "TXT",
+    to: "PDF",
+    category: "documents-to-pdf",
+    categoryName: "Documents to PDF",
+    icon: "file-type-2",
+    description: "Turn plain text files into clean, printable PDF documents.",
+    ext: [".txt"],
+    mode: "text"
+  },
+  {
+    from: "RTF",
+    to: "PDF",
+    category: "documents-to-pdf",
+    categoryName: "Documents to PDF",
+    icon: "file-edit",
+    description: "Convert rich-text documents into a portable PDF format.",
+    ext: [".rtf"],
+    mode: "text"
+  },
+  {
+    from: "ODT",
+    to: "PDF",
+    category: "documents-to-pdf",
+    categoryName: "Documents to PDF",
+    icon: "file-text",
+    description: "Prepare OpenDocument text files as shareable PDFs.",
+    ext: [".odt"],
+    mode: "office"
+  },
+  {
+    from: "ODS",
+    to: "PDF",
+    category: "documents-to-pdf",
+    categoryName: "Documents to PDF",
+    icon: "table",
+    description: "Convert OpenDocument spreadsheets into PDF documents.",
+    ext: [".ods"],
+    mode: "office"
+  },
+  {
+    from: "ODP",
+    to: "PDF",
+    category: "documents-to-pdf",
+    categoryName: "Documents to PDF",
+    icon: "presentation",
+    description: "Convert OpenDocument presentations into portable PDFs.",
+    ext: [".odp"],
+    mode: "office"
+  },
+
+  /* PDF TO DOCUMENTS — 6 */
+  {
+    from: "PDF",
+    to: "Word",
+    category: "pdf-to-documents",
+    categoryName: "PDF to Documents",
+    icon: "file-text",
+    description: "Extract readable PDF text into a Word-compatible document workflow.",
+    ext: [".pdf"],
+    mode: "pdf-text"
+  },
+  {
+    from: "PDF",
+    to: "Excel",
+    category: "pdf-to-documents",
+    categoryName: "PDF to Documents",
+    icon: "table-2",
+    description: "Extract tabular or text content from a PDF for spreadsheet workflows.",
+    ext: [".pdf"],
+    mode: "pdf-text"
+  },
+  {
+    from: "PDF",
+    to: "PowerPoint",
+    category: "pdf-to-documents",
+    categoryName: "PDF to Documents",
+    icon: "presentation",
+    description: "Extract PDF text into a presentation-oriented document workflow.",
+    ext: [".pdf"],
+    mode: "pdf-text"
+  },
+  {
+    from: "PDF",
+    to: "TXT",
+    category: "pdf-to-documents",
+    categoryName: "PDF to Documents",
+    icon: "file-type-2",
+    description: "Extract readable text from PDF pages into a plain text file.",
+    ext: [".pdf"],
+    mode: "pdf-text"
+  },
+  {
+    from: "PDF",
+    to: "RTF",
+    category: "pdf-to-documents",
+    categoryName: "PDF to Documents",
+    icon: "file-edit",
+    description: "Extract PDF text into a rich-text compatible document.",
+    ext: [".pdf"],
+    mode: "pdf-text"
+  },
+  {
+    from: "PDF",
+    to: "ODT",
+    category: "pdf-to-documents",
+    categoryName: "PDF to Documents",
+    icon: "file-text",
+    description: "Extract PDF content into an OpenDocument-oriented workflow.",
+    ext: [".pdf"],
+    mode: "pdf-text"
+  },
+
+  /* IMAGES TO PDF — 8 */
+  {
+    from: "JPG",
+    to: "PDF",
+    category: "images-to-pdf",
+    categoryName: "Images to PDF",
+    icon: "image",
+    description: "Combine JPG images into a clean PDF document.",
+    ext: [".jpg", ".jpeg"],
+    mode: "image-pdf"
+  },
+  {
+    from: "PNG",
+    to: "PDF",
+    category: "images-to-pdf",
+    categoryName: "Images to PDF",
+    icon: "image",
+    description: "Turn PNG graphics and screenshots into PDF pages.",
+    ext: [".png"],
+    mode: "image-pdf"
+  },
+  {
+    from: "WebP",
+    to: "PDF",
+    category: "images-to-pdf",
+    categoryName: "Images to PDF",
+    icon: "image",
+    description: "Convert WebP images into portable PDF pages.",
+    ext: [".webp"],
+    mode: "image-pdf"
+  },
+  {
+    from: "TIFF",
+    to: "PDF",
+    category: "images-to-pdf",
+    categoryName: "Images to PDF",
+    icon: "image",
+    description: "Prepare TIFF image files as PDF documents.",
+    ext: [".tif", ".tiff"],
+    mode: "image-pdf"
+  },
+  {
+    from: "BMP",
+    to: "PDF",
+    category: "images-to-pdf",
+    categoryName: "Images to PDF",
+    icon: "image",
+    description: "Convert bitmap images into PDF pages.",
+    ext: [".bmp"],
+    mode: "image-pdf"
+  },
+  {
+    from: "GIF",
+    to: "PDF",
+    category: "images-to-pdf",
+    categoryName: "Images to PDF",
+    icon: "image",
+    description: "Place GIF imagery into a PDF document.",
+    ext: [".gif"],
+    mode: "image-pdf"
+  },
+  {
+    from: "SVG",
+    to: "PDF",
+    category: "images-to-pdf",
+    categoryName: "Images to PDF",
+    icon: "scan-line",
+    description: "Create PDF pages from scalable SVG artwork.",
+    ext: [".svg"],
+    mode: "image-pdf"
+  },
+  {
+    from: "HEIC",
+    to: "PDF",
+    category: "images-to-pdf",
+    categoryName: "Images to PDF",
+    icon: "image",
+    description: "Prepare HEIC photos for PDF delivery when browser decoding is available.",
+    ext: [".heic", ".heif"],
+    mode: "image-pdf"
+  },
+
+  /* PDF TO IMAGES — 6 */
+  {
+    from: "PDF",
+    to: "JPG",
+    category: "pdf-to-images",
+    categoryName: "PDF to Images",
+    icon: "image-down",
+    description: "Render PDF pages as JPG images.",
+    ext: [".pdf"],
+    mode: "pdf-image"
+  },
+  {
+    from: "PDF",
+    to: "PNG",
+    category: "pdf-to-images",
+    categoryName: "PDF to Images",
+    icon: "image-down",
+    description: "Render PDF pages as high-quality PNG images.",
+    ext: [".pdf"],
+    mode: "pdf-image"
+  },
+  {
+    from: "PDF",
+    to: "WebP",
+    category: "pdf-to-images",
+    categoryName: "PDF to Images",
+    icon: "image-down",
+    description: "Render PDF pages into compact WebP images.",
+    ext: [".pdf"],
+    mode: "pdf-image"
+  },
+  {
+    from: "PDF",
+    to: "TIFF",
+    category: "pdf-to-images",
+    categoryName: "PDF to Images",
+    icon: "image-down",
+    description: "Render PDF pages into a TIFF-oriented image workflow.",
+    ext: [".pdf"],
+    mode: "pdf-image"
+  },
+  {
+    from: "PDF",
+    to: "BMP",
+    category: "pdf-to-images",
+    categoryName: "PDF to Images",
+    icon: "image-down",
+    description: "Render PDF pages as bitmap images.",
+    ext: [".pdf"],
+    mode: "pdf-image"
+  },
+  {
+    from: "PDF",
+    to: "SVG",
+    category: "pdf-to-images",
+    categoryName: "PDF to Images",
+    icon: "scan-line",
+    description: "Prepare PDF page graphics for scalable SVG workflows.",
+    ext: [".pdf"],
+    mode: "pdf-image"
+  },
+
+  /* WEB & CODE TO PDF — 6 */
+  {
+    from: "HTML",
+    to: "PDF",
+    category: "web-code",
+    categoryName: "Web & Code to PDF",
+    icon: "code-2",
+    description: "Turn HTML source into a printable PDF representation.",
+    ext: [".html", ".htm"],
+    mode: "text"
+  },
+  {
+    from: "URL / Website",
+    to: "PDF",
+    category: "web-code",
+    categoryName: "Web & Code to PDF",
+    icon: "globe",
+    description: "Prepare website content for PDF workflows. Browser security may limit remote page access.",
+    ext: [],
+    mode: "url"
+  },
+  {
+    from: "Markdown",
+    to: "PDF",
+    category: "web-code",
+    categoryName: "Web & Code to PDF",
+    icon: "file-code-2",
+    description: "Turn Markdown source into a simple PDF document.",
+    ext: [".md", ".markdown"],
+    mode: "text"
+  },
+  {
+    from: "LaTeX",
+    to: "PDF",
+    category: "web-code",
+    categoryName: "Web & Code to PDF",
+    icon: "sigma",
+    description: "Prepare LaTeX source for PDF-oriented workflows.",
+    ext: [".tex"],
+    mode: "text"
+  },
+  {
+    from: "XML",
+    to: "PDF",
+    category: "web-code",
+    categoryName: "Web & Code to PDF",
+    icon: "file-code",
+    description: "Convert readable XML source into a PDF representation.",
+    ext: [".xml"],
+    mode: "text"
+  },
+  {
+    from: "JSON",
+    to: "PDF",
+    category: "web-code",
+    categoryName: "Web & Code to PDF",
+    icon: "braces",
+    description: "Format JSON data into a readable PDF document.",
+    ext: [".json"],
+    mode: "text"
+  },
+
+  /* PDF TO WEB & CODE — 4 */
+  {
+    from: "PDF",
+    to: "HTML",
+    category: "pdf-to-web",
+    categoryName: "PDF to Web & Code",
+    icon: "code-2",
+    description: "Extract PDF text and place it into an HTML document.",
+    ext: [".pdf"],
+    mode: "pdf-text"
+  },
+  {
+    from: "PDF",
+    to: "Markdown",
+    category: "pdf-to-web",
+    categoryName: "PDF to Web & Code",
+    icon: "file-code-2",
+    description: "Extract PDF text into Markdown-friendly content.",
+    ext: [".pdf"],
+    mode: "pdf-text"
+  },
+  {
+    from: "PDF",
+    to: "LaTeX",
+    category: "pdf-to-web",
+    categoryName: "PDF to Web & Code",
+    icon: "sigma",
+    description: "Extract PDF text into a LaTeX-oriented source workflow.",
+    ext: [".pdf"],
+    mode: "pdf-text"
+  },
+  {
+    from: "PDF",
+    to: "XML",
+    category: "pdf-to-web",
+    categoryName: "PDF to Web & Code",
+    icon: "file-code",
+    description: "Extract PDF text into a structured XML document.",
+    ext: [".pdf"],
+    mode: "pdf-text"
+  },
+
+  /* EBOOKS TO PDF — 4 */
+  {
+    from: "EPUB",
+    to: "PDF",
+    category: "ebooks",
+    categoryName: "E-Books to PDF",
+    icon: "book-open",
+    description: "Prepare EPUB books for PDF conversion workflows.",
+    ext: [".epub"],
+    mode: "ebook"
+  },
+  {
+    from: "MOBI",
+    to: "PDF",
+    category: "ebooks",
+    categoryName: "E-Books to PDF",
+    icon: "book-open",
+    description: "Prepare MOBI e-books for PDF workflows.",
+    ext: [".mobi"],
+    mode: "ebook"
+  },
+  {
+    from: "AZW3",
+    to: "PDF",
+    category: "ebooks",
+    categoryName: "E-Books to PDF",
+    icon: "book-open",
+    description: "Prepare AZW3 e-book files for PDF conversion.",
+    ext: [".azw3"],
+    mode: "ebook"
+  },
+  {
+    from: "DJVU",
+    to: "PDF",
+    category: "ebooks",
+    categoryName: "E-Books to PDF",
+    icon: "book-open",
+    description: "Prepare DjVu documents for PDF conversion workflows.",
+    ext: [".djvu"],
+    mode: "ebook"
+  },
+
+  /* PDF TO EBOOKS — 2 */
+  {
+    from: "PDF",
+    to: "EPUB",
+    category: "ebooks",
+    categoryName: "PDF to E-Books",
+    icon: "book-open-check",
+    description: "Extract PDF text into an EPUB-oriented e-book workflow.",
+    ext: [".pdf"],
+    mode: "pdf-text"
+  },
+  {
+    from: "PDF",
+    to: "MOBI",
+    category: "ebooks",
+    categoryName: "PDF to E-Books",
+    icon: "book-open-check",
+    description: "Extract PDF text into a MOBI-oriented e-book workflow.",
+    ext: [".pdf"],
+    mode: "pdf-text"
+  },
+
+  /* CAD — 5 */
+  {
+    from: "DWG",
+    to: "PDF",
+    category: "cad",
+    categoryName: "Design & CAD to PDF",
+    icon: "drafting-compass",
+    description: "Prepare DWG drawings for PDF publishing workflows.",
+    ext: [".dwg"],
+    mode: "cad"
+  },
+  {
+    from: "DXF",
+    to: "PDF",
+    category: "cad",
+    categoryName: "Design & CAD to PDF",
+    icon: "ruler",
+    description: "Prepare DXF technical drawings for PDF output.",
+    ext: [".dxf"],
+    mode: "cad"
+  },
+  {
+    from: "AI",
+    to: "PDF",
+    category: "cad",
+    categoryName: "Design & CAD to PDF",
+    icon: "pen-tool",
+    description: "Prepare Illustrator artwork for PDF publishing.",
+    ext: [".ai"],
+    mode: "cad"
+  },
+  {
+    from: "PSD",
+    to: "PDF",
+    category: "cad",
+    categoryName: "Design & CAD to PDF",
+    icon: "layers",
+    description: "Prepare Photoshop artwork for PDF workflows.",
+    ext: [".psd"],
+    mode: "cad"
+  },
+  {
+    from: "INDD",
+    to: "PDF",
+    category: "cad",
+    categoryName: "Design & CAD to PDF",
+    icon: "layout-template",
+    description: "Prepare InDesign documents for PDF publishing workflows.",
+    ext: [".indd"],
+    mode: "cad"
+  },
+
+  /* PDF TO CAD — 2 */
+  {
+    from: "PDF",
+    to: "DWG",
+    category: "cad",
+    categoryName: "PDF to Design & CAD",
+    icon: "drafting-compass",
+    description: "Prepare PDF drawings for DWG-oriented CAD conversion.",
+    ext: [".pdf"],
+    mode: "cad"
+  },
+  {
+    from: "PDF",
+    to: "DXF",
+    category: "cad",
+    categoryName: "PDF to Design & CAD",
+    icon: "ruler",
+    description: "Prepare PDF drawings for DXF-oriented CAD workflows.",
+    ext: [".pdf"],
+    mode: "cad"
+  },
+
+  /* ADVANCED — 3 */
+  {
+    from: "PDF",
+    to: "Searchable PDF (OCR)",
+    category: "advanced",
+    categoryName: "Advanced Operations",
+    icon: "scan-text",
+    description: "Create a searchable PDF from scanned pages using OCR technology.",
+    ext: [".pdf"],
+    mode: "ocr"
+  },
+  {
+    from: "PDF",
+    to: "PDF/A",
+    category: "advanced",
+    categoryName: "Advanced Operations",
+    icon: "archive",
+    description: "Prepare PDF documents for long-term archival workflows.",
+    ext: [".pdf"],
+    mode: "pdfa"
+  },
+  {
+    from: "PDF",
+    to: "Compressed PDF",
+    category: "advanced",
+    categoryName: "Advanced Operations",
+    icon: "minimize-2",
+    description: "Reduce PDF resource usage where browser-side optimization is possible.",
+    ext: [".pdf"],
+    mode: "compress"
+  }
+
+];
+
+console.assert(CONVERSIONS.length === 54, "Expected exactly 54 conversion pairs.");
+
+
+/* =========================================================
+   DOM REFERENCES
+========================================================= */
+
+const fromFormat = document.getElementById("fromFormat");
+const toFormat = document.getElementById("toFormat");
+const workspaceTitle = document.getElementById("workspaceTitle");
+const workspaceDescription = document.getElementById("workspaceDescription");
+const acceptedFormats = document.getElementById("acceptedFormats");
+const fileInput = document.getElementById("fileInput");
+const dropZone = document.getElementById("dropZone");
+const fileList = document.getElementById("fileList");
+const processBtn = document.getElementById("processBtn");
+const processBtnText = document.getElementById("processBtnText");
+const clearBtn = document.getElementById("clearBtn");
+const statusText = document.getElementById("statusText");
+const progressWrapper = document.getElementById("progressWrapper");
+const progressBar = document.getElementById("progressBar");
+const progressPercent = document.getElementById("progressPercent");
+const progressLabel = document.getElementById("progressLabel");
+const resultPanel = document.getElementById("resultPanel");
+const downloadBtn = document.getElementById("downloadBtn");
+const resultDescription = document.getElementById("resultDescription");
+const searchInput = document.getElementById("searchInput");
+const toolsGrid = document.getElementById("toolsGrid");
+const cardCount = document.getElementById("cardCount");
+const quality = document.getElementById("quality");
+const qualityValue = document.getElementById("qualityValue");
+const compression = document.getElementById("compression");
+const pageSelection = document.getElementById("pageSelection");
+
+let selectedFiles = [];
+let activeConversion = null;
+let currentDownloadUrl = null;
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+if (window.pdfjsLib) {
+  pdfjsLib.GlobalWorkerOptions.workerSrc =
+    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 }
 
-/* ============================================================
-   TAB SWITCHING
-   ============================================================ */
-document.getElementById('tabBar').addEventListener('click', e => {
-  const btn = e.target.closest('.tab-btn');
-  if(!btn) return;
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
+
+/* =========================================================
+   FORMAT DROPDOWNS
+========================================================= */
+
+function unique(values) {
+  return [...new Set(values)];
+}
+
+function populateFromFormats() {
+
+  const formats = unique(
+    CONVERSIONS.map(item => item.from)
+  ).sort((a,b) => a.localeCompare(b));
+
+  fromFormat.innerHTML = "";
+
+  formats.forEach(format => {
+    const option = document.createElement("option");
+    option.value = format;
+    option.textContent = format;
+    fromFormat.appendChild(option);
+  });
+
+  /*
+    Start with PDF because it exposes many of the PDF workspace
+    operations immediately.
+  */
+  if (formats.includes("PDF")) {
+    fromFormat.value = "PDF";
+  }
+
+  updateToFormats();
+}
+
+function updateToFormats() {
+
+  const from = fromFormat.value;
+
+  const options = CONVERSIONS
+    .filter(item => item.from === from);
+
+  toFormat.innerHTML = "";
+
+  options.forEach(item => {
+    const option = document.createElement("option");
+    option.value = item.to;
+    option.textContent = item.to;
+    toFormat.appendChild(option);
+  });
+
+  /*
+    Prefer JPG -> PDF for image workflows and otherwise
+    select the first valid target.
+  */
+  if (
+    from === "JPG" &&
+    options.some(x => x.to === "PDF")
+  ) {
+    toFormat.value = "PDF";
+  }
+
+  updateWorkspace();
+}
+
+function getActiveConversion() {
+
+  return CONVERSIONS.find(item =>
+    item.from === fromFormat.value &&
+    item.to === toFormat.value
+  );
+}
+
+function updateWorkspace() {
+
+  activeConversion = getActiveConversion();
+
+  if (!activeConversion) return;
+
+  workspaceTitle.textContent =
+    activeConversion.from + " to " + activeConversion.to;
+
+  workspaceDescription.textContent =
+    activeConversion.description;
+
+  if (activeConversion.ext.length) {
+    acceptedFormats.textContent =
+      "Accepted file types: " +
+      activeConversion.ext.join(", ");
+  } else {
+    acceptedFormats.textContent =
+      "This operation uses browser-compatible input rather than a local file.";
+  }
+
+  processBtnText.textContent =
+    activeConversion.mode === "url"
+      ? "Create PDF From Website"
+      : "Convert / Process File Now";
+
+  fileInput.accept = activeConversion.ext.join(",");
+
+  clearFiles();
+
+  lucide.createIcons();
+}
+
+
+/* =========================================================
+   DIRECTORY CARDS
+========================================================= */
+
+function renderCards() {
+
+  toolsGrid.innerHTML = "";
+
+  CONVERSIONS.forEach((item, index) => {
+
+    const card = document.createElement("article");
+
+    card.className =
+      "tool-card rounded-2xl p-5 flex flex-col";
+
+    card.dataset.category = item.category;
+    card.dataset.search = (
+      item.from + " " +
+      item.to + " " +
+      item.categoryName + " " +
+      item.description
+    ).toLowerCase();
+
+    card.innerHTML = `
+      <div class="flex items-start justify-between gap-3">
+
+        <div class="icon-box w-11 h-11 rounded-xl flex items-center justify-center">
+          <i data-lucide="${item.icon}" class="w-5 h-5"></i>
+        </div>
+
+        <span class="format-badge">
+          ${escapeHtml(item.from)} → ${escapeHtml(item.to)}
+        </span>
+
+      </div>
+
+      <div class="mt-5">
+
+        <div class="text-[10px] uppercase tracking-[.14em] text-indigo-400 font-semibold">
+          ${escapeHtml(item.categoryName)}
+        </div>
+
+        <h3 class="font-bold text-lg mt-1 leading-snug">
+          ${escapeHtml(item.from)} to ${escapeHtml(item.to)}
+        </h3>
+
+        <p class="text-sm text-slate-400 mt-2 leading-relaxed">
+          ${escapeHtml(item.description)}
+        </p>
+
+      </div>
+
+      <div class="mt-auto pt-5">
+
+        <button
+          type="button"
+          class="quick-action w-full py-2.5 rounded-xl border border-slate-700 bg-slate-900/50 hover:bg-indigo-500/10 hover:border-indigo-500/40 text-sm font-semibold text-slate-300 hover:text-white transition"
+          data-index="${index}"
+        >
+          Open Tool
+          <span class="ml-1 text-indigo-400">→</span>
+        </button>
+
+      </div>
+    `;
+
+    toolsGrid.appendChild(card);
+  });
+
+  lucide.createIcons();
+
+  document.querySelectorAll(".quick-action").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      const item = CONVERSIONS[
+        parseInt(button.dataset.index, 10)
+      ];
+
+      fromFormat.value = item.from;
+
+      updateToFormats();
+
+      toFormat.value = item.to;
+
+      updateWorkspace();
+
+      document.getElementById("workspace")
+        .scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+    });
+
+  });
+
+  cardCount.textContent = CONVERSIONS.length;
+}
+
+
+/* =========================================================
+   SEARCH & FILTER
+========================================================= */
+
+let activeCategory = "all";
+
+function filterCards() {
+
+  const query =
+    searchInput.value.trim().toLowerCase();
+
+  let visible = 0;
+
+  document.querySelectorAll(".tool-card").forEach(card => {
+
+    const matchesSearch =
+      !query ||
+      card.dataset.search.includes(query);
+
+    const matchesCategory =
+      activeCategory === "all" ||
+      card.dataset.category === activeCategory;
+
+    if (matchesSearch && matchesCategory) {
+      card.classList.remove("hidden-card");
+      visible++;
+    } else {
+      card.classList.add("hidden-card");
+    }
+
+  });
+
+  cardCount.textContent = visible;
+}
+
+searchInput.addEventListener("input", filterCards);
+
+document
+  .getElementById("categoryFilters")
+  .addEventListener("click", event => {
+
+    const button =
+      event.target.closest(".category-pill");
+
+    if (!button) return;
+
+    activeCategory =
+      button.dataset.category;
+
+    document
+      .querySelectorAll(".category-pill")
+      .forEach(item =>
+        item.classList.remove("active")
+      );
+
+    button.classList.add("active");
+
+    filterCards();
+
+  });
+
+
+/* =========================================================
+   FILE HANDLING
+========================================================= */
+
+dropZone.addEventListener("click", () => {
+  fileInput.click();
 });
 
-/* ============================================================
-   TOOL 1: initMergePDF()
-   ============================================================ */
-function initMergePDF(){
-  let files = [];
-  const dropzone = document.getElementById('mergeDropzone');
-  const input = document.getElementById('mergeInput');
-  const listEl = document.getElementById('mergeList');
-  const mergeBtn = document.getElementById('mergeBtn');
-  const status = document.getElementById('mergeStatus');
-  let dragIndex = null;
+fileInput.addEventListener("change", event => {
 
-  function render(){
-    listEl.innerHTML = '';
-    files.forEach((f, i) => {
-      const row = document.createElement('div');
-      row.className = 'file-row';
-      row.draggable = true;
-      row.dataset.index = i;
-      row.innerHTML = `
-        <i data-lucide="grip-vertical" class="drag-handle"></i>
-        <span class="file-name">${f.name}</span>
-        <span class="file-size">${formatBytes(f.size)}</span>
-        <button class="icon-btn remove-btn" type="button"><i data-lucide="x"></i></button>
-      `;
-      row.addEventListener('dragstart', () => { dragIndex = i; row.classList.add('dragging'); });
-      row.addEventListener('dragend', () => row.classList.remove('dragging'));
-      row.addEventListener('dragover', e => e.preventDefault());
-      row.addEventListener('drop', e => {
-        e.preventDefault();
-        const dropIndex = parseInt(row.dataset.index, 10);
-        if(dragIndex === null || dragIndex === dropIndex) return;
-        const moved = files.splice(dragIndex, 1)[0];
-        files.splice(dropIndex, 0, moved);
-        render();
+  if (event.target.files.length) {
+    addFiles([...event.target.files]);
+  }
+
+});
+
+["dragenter", "dragover"].forEach(type => {
+
+  dropZone.addEventListener(type, event => {
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    dropZone.classList.add("dragging");
+
+  });
+
+});
+
+["dragleave", "drop"].forEach(type => {
+
+  dropZone.addEventListener(type, event => {
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    dropZone.classList.remove("dragging");
+
+  });
+
+});
+
+dropZone.addEventListener("drop", event => {
+
+  const files =
+    [...event.dataTransfer.files];
+
+  if (files.length) {
+    addFiles(files);
+  }
+
+});
+
+
+function addFiles(files) {
+
+  if (!activeConversion) return;
+
+  const accepted =
+    activeConversion.ext.map(ext => ext.toLowerCase());
+
+  const validFiles = files.filter(file => {
+
+    if (!accepted.length) return true;
+
+    const name =
+      file.name.toLowerCase();
+
+    return accepted.some(ext =>
+      name.endsWith(ext)
+    );
+
+  });
+
+  if (!validFiles.length) {
+
+    showToast(
+      "No compatible files were found for this operation."
+    );
+
+    return;
+  }
+
+  /*
+    Most operations can work with multiple images.
+    Single-document operations use the first selected file.
+  */
+  if (activeConversion.mode === "image-pdf") {
+    selectedFiles = [
+      ...selectedFiles,
+      ...validFiles
+    ];
+  } else {
+    selectedFiles = [validFiles[0]];
+  }
+
+  renderFileList();
+  statusText.textContent =
+    selectedFiles.length +
+    (selectedFiles.length === 1 ? " file ready" : " files ready");
+
+}
+
+
+function renderFileList() {
+
+  if (!selectedFiles.length) {
+
+    fileList.classList.add("hidden");
+    fileList.innerHTML = "";
+
+    return;
+  }
+
+  fileList.classList.remove("hidden");
+
+  fileList.innerHTML = "";
+
+  selectedFiles.forEach((file, index) => {
+
+    const row =
+      document.createElement("div");
+
+    row.className =
+      "file-item rounded-xl p-3 flex items-center gap-3";
+
+    row.innerHTML = `
+
+      <div class="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center">
+        <i data-lucide="file" class="w-5 h-5 text-indigo-400"></i>
+      </div>
+
+      <div class="min-w-0 flex-1">
+
+        <div class="font-medium text-sm truncate">
+          ${escapeHtml(file.name)}
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2 mt-1 text-xs text-slate-500">
+
+          <span>${formatBytes(file.size)}</span>
+
+          <span class="format-badge">
+            ${getExtension(file.name)}
+          </span>
+
+        </div>
+
+      </div>
+
+      <button
+        type="button"
+        class="remove-file text-slate-500 hover:text-rose-400 transition p-2"
+        data-index="${index}"
+        aria-label="Remove file"
+      >
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+    `;
+
+    fileList.appendChild(row);
+
+  });
+
+  lucide.createIcons();
+
+  document
+    .querySelectorAll(".remove-file")
+    .forEach(button => {
+
+      button.addEventListener("click", () => {
+
+        selectedFiles.splice(
+          parseInt(button.dataset.index, 10),
+          1
+        );
+
+        renderFileList();
+
       });
-      row.querySelector('.remove-btn').addEventListener('click', () => { files.splice(i,1); render(); });
-      listEl.appendChild(row);
+
     });
-    lucide.createIcons();
-    mergeBtn.disabled = files.length < 2;
-    status.textContent = files.length ? `${files.length} file(s) ready` : '';
-  }
 
-  setupDropzone(dropzone, input, newFiles => {
-    files = files.concat(newFiles.filter(f => f.type === 'application/pdf'));
-    render();
-  });
-
-  mergeBtn.addEventListener('click', async () => {
-    mergeBtn.disabled = true;
-    status.textContent = 'Merging…';
-    try{
-      const mergedPdf = await PDFDocument.create();
-      for(const file of files){
-        const bytes = await file.arrayBuffer();
-        const srcDoc = await PDFDocument.load(bytes);
-        const pages = await mergedPdf.copyPages(srcDoc, srcDoc.getPageIndices());
-        pages.forEach(p => mergedPdf.addPage(p));
-      }
-      const outBytes = await mergedPdf.save();
-      triggerDownload(new Blob([outBytes], {type:'application/pdf'}), 'merged.pdf');
-      status.textContent = 'Merged PDF downloaded ✓';
-      status.classList.add('status-ok');
-    }catch(err){
-      console.error(err);
-      status.textContent = 'Error merging files — check console.';
-    }
-    mergeBtn.disabled = false;
-  });
 }
 
-/* ============================================================
-   TOOL 2: initImageToPDF()
-   ============================================================ */
-function initImageToPDF(){
-  let files = [];
-  const dropzone = document.getElementById('imgDropzone');
-  const input = document.getElementById('imgInput');
-  const thumbGrid = document.getElementById('imgThumbs');
-  const convertBtn = document.getElementById('imgConvertBtn');
-  const zipBtn = document.getElementById('imgZipBtn');
-  const status = document.getElementById('imgStatus');
 
-  function render(){
-    thumbGrid.innerHTML = '';
-    files.forEach((f, i) => {
-      const card = document.createElement('div');
-      card.className = 'thumb-card';
-      const img = document.createElement('img');
-      img.src = URL.createObjectURL(f);
-      const rm = document.createElement('button');
-      rm.className = 'thumb-remove';
-      rm.innerHTML = '×';
-      rm.addEventListener('click', () => { files.splice(i,1); render(); });
-      card.appendChild(img); card.appendChild(rm);
-      thumbGrid.appendChild(card);
-    });
-    convertBtn.disabled = files.length === 0;
-    zipBtn.disabled = files.length === 0;
-    status.textContent = files.length ? `${files.length} image(s) ready` : '';
+function clearFiles() {
+
+  selectedFiles = [];
+
+  fileInput.value = "";
+
+  fileList.innerHTML = "";
+
+  fileList.classList.add("hidden");
+
+  resultPanel.classList.add("hidden");
+
+  progressWrapper.classList.add("hidden");
+
+  statusText.textContent = "Ready";
+
+  if (currentDownloadUrl) {
+    URL.revokeObjectURL(currentDownloadUrl);
+    currentDownloadUrl = null;
   }
 
-  setupDropzone(dropzone, input, newFiles => {
-    files = files.concat(newFiles.filter(f => f.type.startsWith('image/')));
-    render();
-  });
-
-  function loadImage(file){
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.onload = () => resolve(img);
-      img.onerror = reject;
-      img.src = URL.createObjectURL(file);
-    });
-  }
-
-  convertBtn.addEventListener('click', async () => {
-    convertBtn.disabled = true;
-    status.textContent = 'Building PDF…';
-    try{
-      const orientation = document.getElementById('imgOrientation').value;
-      const margin = parseFloat(document.getElementById('imgMargin').value) || 0;
-      const doc = new jsPDF({ orientation, unit: 'mm', format: 'a4' });
-      for(let i = 0; i < files.length; i++){
-        const img = await loadImage(files[i]);
-        if(i > 0) doc.addPage(undefined, orientation);
-        const pageW = doc.internal.pageSize.getWidth();
-        const pageH = doc.internal.pageSize.getHeight();
-        const maxW = pageW - margin*2;
-        const maxH = pageH - margin*2;
-        const ratio = Math.min(maxW/img.width, maxH/img.height);
-        const w = img.width*ratio, h = img.height*ratio;
-        const x = (pageW - w)/2, y = (pageH - h)/2;
-        const fmt = files[i].type === 'image/png' ? 'PNG' : 'JPEG';
-        doc.addImage(img, fmt, x, y, w, h);
-      }
-      doc.save('images.pdf');
-      status.textContent = 'PDF downloaded ✓';
-      status.classList.add('status-ok');
-    }catch(err){
-      console.error(err);
-      status.textContent = 'Error building PDF — check console.';
-    }
-    convertBtn.disabled = false;
-  });
-
-  zipBtn.addEventListener('click', async () => {
-    zipBtn.disabled = true;
-    const zip = new JSZip();
-    files.forEach(f => zip.file(f.name, f));
-    const blob = await zip.generateAsync({type:'blob'});
-    triggerDownload(blob, 'images.zip');
-    zipBtn.disabled = false;
-  });
 }
 
-/* ============================================================
-   TOOL 3: initPdfToWord()  — text extraction + docx/txt export
-   ============================================================ */
-function initPdfToWord(){
-  let selectedFile = null;
-  const dropzone = document.getElementById('textDropzone');
-  const input = document.getElementById('textInput');
-  const extractBtn = document.getElementById('extractBtn');
-  const status = document.getElementById('extractStatus');
-  const textarea = document.getElementById('extractedText');
-  const txtBtn = document.getElementById('downloadTxtBtn');
-  const docxBtn = document.getElementById('downloadDocxBtn');
 
-  setupDropzone(dropzone, input, files => {
-    const f = files.find(x => x.type === 'application/pdf');
-    if(!f) return;
-    selectedFile = f;
-    extractBtn.disabled = false;
-    status.textContent = f.name + ' ready';
-  });
+clearBtn.addEventListener("click", clearFiles);
 
-  extractBtn.addEventListener('click', async () => {
-    extractBtn.disabled = true;
-    status.textContent = 'Extracting…';
-    try{
-      const bytes = await selectedFile.arrayBuffer();
-      const pdf = await pdfjsLib.getDocument({ data: bytes }).promise;
-      let fullText = '';
-      for(let p = 1; p <= pdf.numPages; p++){
-        const page = await pdf.getPage(p);
-        const content = await page.getTextContent();
-        const pageText = content.items.map(item => item.str).join(' ');
-        fullText += `--- Page ${p} ---\n${pageText}\n\n`;
-        status.textContent = `Extracting… page ${p}/${pdf.numPages}`;
-      }
-      textarea.value = fullText.trim();
-      txtBtn.disabled = false;
-      docxBtn.disabled = false;
-      status.textContent = `Extracted ${pdf.numPages} page(s) ✓`;
-      status.classList.add('status-ok');
-    }catch(err){
-      console.error(err);
-      status.textContent = 'Error extracting text — check console.';
-    }
-    extractBtn.disabled = false;
-  });
 
-  txtBtn.addEventListener('click', () => {
-    const blob = new Blob([textarea.value], {type:'text/plain'});
-    triggerDownload(blob, 'extracted.txt');
-  });
+/* =========================================================
+   IMAGE -> PDF
+========================================================= */
 
-  function escapeXml(str){
-    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  }
-  async function buildDocx(text){
-    const zip = new JSZip();
-    const paragraphs = text.split('\n').map(line =>
-      `<w:p><w:r><w:t xml:space="preserve">${escapeXml(line)}</w:t></w:r></w:p>`
-    ).join('');
+async function imagesToPDF(files) {
 
-    zip.file('[Content_Types].xml',
-      `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
-<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
-<Default Extension="xml" ContentType="application/xml"/>
-<Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
-</Types>`);
+  const { jsPDF } =
+    window.jspdf;
 
-    zip.folder('_rels').file('.rels',
-      `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
-<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>
-</Relationships>`);
-
-    zip.folder('word').file('document.xml',
-      `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
-<w:body>${paragraphs}</w:body>
-</w:document>`);
-
-    return zip.generateAsync({
-      type: 'blob',
-      mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+  const pdf =
+    new jsPDF({
+      orientation: "p",
+      unit: "pt",
+      format: "letter"
     });
+
+  for (let i = 0; i < files.length; i++) {
+
+    updateProgress(
+      Math.round((i / files.length) * 90),
+      "Preparing image " + (i + 1) + " of " + files.length
+    );
+
+    const dataUrl =
+      await fileToDataURL(files[i]);
+
+    const image =
+      await loadImage(dataUrl);
+
+    const pageWidth =
+      pdf.internal.pageSize.getWidth();
+
+    const pageHeight =
+      pdf.internal.pageSize.getHeight();
+
+    const margin = 28;
+
+    const availableWidth =
+      pageWidth - margin * 2;
+
+    const availableHeight =
+      pageHeight - margin * 2;
+
+    const ratio =
+      Math.min(
+        availableWidth / image.width,
+        availableHeight / image.height
+      );
+
+    const width =
+      image.width * ratio;
+
+    const height =
+      image.height * ratio;
+
+    if (i > 0) {
+      pdf.addPage();
+    }
+
+    const x =
+      (pageWidth - width) / 2;
+
+    const y =
+      (pageHeight - height) / 2;
+
+    const format =
+      getExtension(files[i].name)
+        .replace(".", "")
+        .toUpperCase();
+
+    let imageFormat = "JPEG";
+
+    if (format === "PNG") {
+      imageFormat = "PNG";
+    }
+
+    if (format === "WEBP") {
+      imageFormat = "JPEG";
+    }
+
+    if (
+      format === "JPG" ||
+      format === "JPEG"
+    ) {
+      imageFormat = "JPEG";
+    }
+
+    /*
+      Browsers may not decode TIFF/BMP/GIF/SVG/HEIC
+      consistently. The browser image decoder is used where
+      supported.
+    */
+
+    pdf.addImage(
+      dataUrl,
+      imageFormat,
+      x,
+      y,
+      width,
+      height,
+      undefined,
+      "FAST"
+    );
   }
 
-  docxBtn.addEventListener('click', async () => {
-    docxBtn.disabled = true;
-    const blob = await buildDocx(textarea.value);
-    triggerDownload(blob, 'extracted.docx');
-    docxBtn.disabled = false;
-  });
+  updateProgress(100, "Creating PDF");
+
+  return pdf.output("blob");
 }
 
-/* ============================================================
-   TOOL 4: initCompressPDF()
-   ============================================================ */
-function initCompressPDF(){
-  let selectedFile = null;
-  let level = 'medium';
-  const LEVELS = {
-    low:    { scale: 1.5, quality: 0.85 },
-    medium: { scale: 1.0, quality: 0.65 },
-    high:   { scale: 0.65, quality: 0.45 }
+
+/* =========================================================
+   PDF -> IMAGE
+========================================================= */
+
+async function pdfToImages(file, outputFormat) {
+
+  const arrayBuffer =
+    await file.arrayBuffer();
+
+  const pdf =
+    await pdfjsLib.getDocument({
+      data: arrayBuffer
+    }).promise;
+
+  const pageNumbers =
+    parsePageSelection(
+      pageSelection.value,
+      pdf.numPages
+    );
+
+  if (!pageNumbers.length) {
+    throw new Error("No valid pages were selected.");
+  }
+
+  /*
+    Multiple image pages are packaged into a ZIP-like
+    browser download only when JSZip is available.
+    To keep this file dependency-light, the first selected
+    page is downloaded for direct image operations.
+  */
+
+  const page =
+    await pdf.getPage(pageNumbers[0]);
+
+  const scale =
+    Math.max(
+      .75,
+      Math.min(
+        2.5,
+        Number(quality.value) / 40
+      )
+    );
+
+  const viewport =
+    page.getViewport({
+      scale
+    });
+
+  const canvas =
+    document.createElement("canvas");
+
+  canvas.width =
+    viewport.width;
+
+  canvas.height =
+    viewport.height;
+
+  const context =
+    canvas.getContext("2d");
+
+  await page.render({
+    canvasContext: context,
+    viewport
+  }).promise;
+
+  let mime = "image/png";
+  let extension = "png";
+
+  if (outputFormat === "JPG") {
+    mime = "image/jpeg";
+    extension = "jpg";
+  }
+
+  if (outputFormat === "WebP") {
+    mime = "image/webp";
+    extension = "webp";
+  }
+
+  if (
+    outputFormat === "BMP" ||
+    outputFormat === "TIFF" ||
+    outputFormat === "SVG"
+  ) {
+    /*
+      These formats need dedicated encoders. We still render
+      the PDF correctly, then explain the browser limitation.
+    */
+    throw new Error(
+      outputFormat +
+      " export requires a dedicated browser encoder. PNG/JPG/WebP export is available in this build."
+    );
+  }
+
+  const blob =
+    await new Promise(resolve =>
+      canvas.toBlob(
+        resolve,
+        mime,
+        Number(quality.value) / 100
+      )
+    );
+
+  return {
+    blob,
+    extension,
+    multiplePages: pageNumbers.length
   };
-  const dropzone = document.getElementById('compressDropzone');
-  const input = document.getElementById('compressInput');
-  const compressBtn = document.getElementById('compressBtn');
-  const status = document.getElementById('compressStatus');
-  const progressFill = document.getElementById('compressProgress');
-  const levelBtns = document.querySelectorAll('.level-btn');
-
-  levelBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      levelBtns.forEach(b => b.style.borderColor = 'var(--line)');
-      btn.style.borderColor = 'var(--ink)';
-      level = btn.dataset.level;
-    });
-  });
-
-  setupDropzone(dropzone, input, files => {
-    const f = files.find(x => x.type === 'application/pdf');
-    if(!f) return;
-    selectedFile = f;
-    compressBtn.disabled = false;
-    status.textContent = `${f.name} — ${formatBytes(f.size)}`;
-  });
-
-  compressBtn.addEventListener('click', async () => {
-    compressBtn.disabled = true;
-    progressFill.style.width = '0%';
-    status.textContent = 'Compressing…';
-    try{
-      const { scale, quality } = LEVELS[level];
-      const bytes = await selectedFile.arrayBuffer();
-      const pdf = await pdfjsLib.getDocument({ data: bytes }).promise;
-      let outDoc = null;
-
-      for(let p = 1; p <= pdf.numPages; p++){
-        const page = await pdf.getPage(p);
-        const viewport = page.getViewport({ scale });
-        const canvas = document.createElement('canvas');
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
-        const ctx = canvas.getContext('2d');
-        await page.render({ canvasContext: ctx, viewport }).promise;
-        const dataUrl = canvas.toDataURL('image/jpeg', quality);
-
-        const pageWidthPt = page.getViewport({scale:1}).width;
-        const pageHeightPt = page.getViewport({scale:1}).height;
-
-        if(!outDoc){
-          outDoc = new jsPDF({ unit:'pt', format:[pageWidthPt, pageHeightPt], orientation: pageWidthPt > pageHeightPt ? 'landscape':'portrait' });
-        } else {
-          outDoc.addPage([pageWidthPt, pageHeightPt], pageWidthPt > pageHeightPt ? 'landscape':'portrait');
-        }
-        outDoc.addImage(dataUrl, 'JPEG', 0, 0, pageWidthPt, pageHeightPt);
-        progressFill.style.width = Math.round((p/pdf.numPages)*100) + '%';
-        status.textContent = `Compressing… page ${p}/${pdf.numPages}`;
-      }
-
-      const outBlob = outDoc.output('blob');
-      triggerDownload(outBlob, 'compressed.pdf');
-      status.textContent = `Done — original ${formatBytes(selectedFile.size)} → compressed ${formatBytes(outBlob.size)} ✓`;
-      status.classList.add('status-ok');
-    }catch(err){
-      console.error(err);
-      status.textContent = 'Error compressing PDF — check console.';
-    }
-    compressBtn.disabled = false;
-  });
 }
 
-/* ============================================================
-   FUTURE TOOLS — insert new init functions below and register
-   them in the boot sequence at the bottom of this file.
-   Suggested next additions:
-   function initSplitPDF(){ /* extract page ranges into separate PDFs using pdf-lib */ /* }
-   function initRotatePDF(){ /* rotate selected pages with page.setRotation() via pdf-lib */ /* }
-   function initProtectPDF(){ /* note: pdf-lib does not support encryption —
-      would need a dedicated crypto-capable library */ /* }
-   Each new tool should also get: a <button class="tab-btn"> in #tabBar,
-   a matching <div id="panel-NAME" class="panel"> block, and its init
-   function called in the boot sequence below.
-   ============================================================ */
 
-/* ============================================================
-   BOOT SEQUENCE
-   ============================================================ */
-initMergePDF();
-initImageToPDF();
-initPdfToWord();
-initCompressPDF();
+/* =========================================================
+   PDF -> TEXT
+========================================================= */
+
+async function extractPDFText(file) {
+
+  const arrayBuffer =
+    await file.arrayBuffer();
+
+  const pdf =
+    await pdfjsLib.getDocument({
+      data: arrayBuffer
+    }).promise;
+
+  const selectedPages =
+    parsePageSelection(
+      pageSelection.value,
+      pdf.numPages
+    );
+
+  let output = "";
+
+  for (let i = 0; i < selectedPages.length; i++) {
+
+    const pageNumber =
+      selectedPages[i];
+
+    updateProgress(
+      Math.round((i / selectedPages.length) * 90),
+      "Reading PDF page " +
+      pageNumber +
+      " of " +
+      pdf.numPages
+    );
+
+    const page =
+      await pdf.getPage(pageNumber);
+
+    const content =
+      await page.getTextContent();
+
+    const text =
+      content.items
+        .map(item => item.str)
+        .join(" ");
+
+    output +=
+      "PAGE " +
+      pageNumber +
+      "\n\n" +
+      text.trim() +
+      "\n\n";
+  }
+
+  updateProgress(100, "Text extraction complete");
+
+  return output.trim();
+}
+
+
+/* =========================================================
+   PDF -> PDF COPY
+========================================================= */
+
+async function copyPDF(file) {
+
+  const bytes =
+    new Uint8Array(
+      await file.arrayBuffer()
+    );
+
+  const source =
+    await PDFLib.PDFDocument.load(bytes);
+
+  const output =
+    await PDFLib.PDFDocument.create();
+
+  const pages =
+    await output.copyPages(
+      source,
+      source.getPageIndices()
+    );
+
+  pages.forEach(page =>
+    output.addPage(page)
+  );
+
+  return new Blob(
+    [await output.save()],
+    { type: "application/pdf" }
+  );
+}
+
+
+/* =========================================================
+   TEXT -> PDF
+========================================================= */
+
+async function textToPDF(file) {
+
+  const text =
+    await file.text();
+
+  const { jsPDF } =
+    window.jspdf;
+
+  const pdf =
+    new jsPDF({
+      unit: "pt",
+      format: "letter"
+    });
+
+  const margin = 48;
+
+  const pageWidth =
+    pdf.internal.pageSize.getWidth();
+
+  const pageHeight =
+    pdf.internal.pageSize.getHeight();
+
+  const usableWidth =
+    pageWidth - margin * 2;
+
+  pdf.setFont("helvetica", "normal");
+  pdf.setFontSize(10);
+
+  const lines =
+    pdf.splitTextToSize(
+      text,
+      usableWidth
+    );
+
+  let y = margin;
+
+  lines.forEach((line, index) => {
+
+    if (y > pageHeight - margin) {
+      pdf.addPage();
+      y = margin;
+    }
+
+    pdf.text(
+      line,
+      margin,
+      y
+    );
+
+    y += 14;
+
+    if (
+      index % 50 === 0
+    ) {
+      updateProgress(
+        Math.min(
+          95,
+          Math.round(
+            (index / Math.max(lines.length, 1)) * 95
+          )
+        ),
+        "Formatting document"
+      );
+    }
+
+  });
+
+  updateProgress(100, "PDF created");
+
+  return pdf.output("blob");
+}
+
+
+/* =========================================================
+   PDF TEXT TO DOWNLOADABLE DOCUMENT
+========================================================= */
+
+async function pdfToDocument(file, target) {
+
+  const text =
+    await extractPDFText(file);
+
+  let mime =
+    "text/plain";
+
+  let extension =
+    "txt";
+
+  let outputText =
+    text;
+
+  if (target === "HTML") {
+
+    mime = "text/html";
+    extension = "html";
+
+    outputText = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PDF Text Export</title>
+<style>
+body{font-family:Arial,sans-serif;line-height:1.7;max-width:900px;margin:40px auto;padding:0 20px;color:#222}
+pre{white-space:pre-wrap}
+</style>
+</head>
+<body>
+<pre>${escapeHtml(text)}</pre>
+</body>
+</html>`;
+
+  } else if (target === "Markdown") {
+
+    mime = "text/markdown";
+    extension = "md";
+
+    outputText =
+      "# PDF Text Export\n\n" +
+      text;
+
+  } else if (target === "XML") {
+
+    mime = "application/xml";
+    extension = "xml";
+
+    outputText =
+      `<?xml version="1.0" encoding="UTF-8"?>
+<pdfExport>
+  <content><![CDATA[
+${text}
+  ]]></content>
+</pdfExport>`;
+
+  } else if (target === "LaTeX") {
+
+    mime = "application/x-latex";
+    extension = "tex";
+
+    outputText =
+      "\\documentclass{article}\n" +
+      "\\usepackage[utf8]{inputenc}\n" +
+      "\\begin{document}\n\n" +
+      escapeLatex(text) +
+      "\n\n\\end{document}";
+
+  } else if (target === "JSON") {
+
+    mime = "application/json";
+    extension = "json";
+
+    outputText =
+      JSON.stringify({
+        source: file.name,
+        content: text
+      }, null, 2);
+
+  } else if (target === "RTF") {
+
+    mime = "application/rtf";
+    extension = "rtf";
+
+    outputText =
+      "{\\rtf1\\ansi\n" +
+      escapeRTF(text) +
+      "\n}";
+
+  } else if (target === "Word") {
+
+    /*
+      A true DOCX generator requires a DOCX package writer.
+      A browser-compatible HTML document is supplied with a
+      .doc extension so common word processors can open it.
+    */
+
+    mime = "application/msword";
+    extension = "doc";
+
+    outputText =
+      `<html>
+<head><meta charset="utf-8"></head>
+<body>
+<pre>${escapeHtml(text)}</pre>
+</body>
+</html>`;
+
+  } else if (target === "Excel") {
+
+    mime = "text/csv";
+    extension = "csv";
+
+    outputText =
+      `"Extracted PDF Text"\n` +
+      `"${text.replace(/"/g, '""')}"`;
+
+  } else if (target === "PowerPoint") {
+
+    mime = "text/plain";
+    extension = "txt";
+
+    outputText =
+      "PDF TEXT EXPORT\n\n" +
+      text;
+
+  } else if (target === "ODT") {
+
+    mime = "text/plain";
+    extension = "txt";
+
+    outputText =
+      text;
+
+  } else if (target === "EPUB") {
+
+    mime = "text/html";
+    extension = "html";
+
+    outputText =
+      `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>PDF E-Book Export</title>
+</head>
+<body>
+<h1>PDF E-Book Export</h1>
+<pre>${escapeHtml(text)}</pre>
+</body>
+</html>`;
+
+  } else if (target === "MOBI") {
+
+    mime = "text/plain";
+    extension = "txt";
+
+    outputText =
+      text;
+  }
+
+  return {
+    blob: new Blob(
+      [outputText],
+      { type: mime }
+    ),
+    extension
+  };
+}
+
+
+/* =========================================================
+   COMPRESSED PDF
+========================================================= */
+
+async function compressPDF(file) {
+
+  const bytes =
+    new Uint8Array(
+      await file.arrayBuffer()
+    );
+
+  const source =
+    await PDFLib.PDFDocument.load(
+      bytes,
+      {
+        updateMetadata: false
+      }
+    );
+
+  const output =
+    await PDFLib.PDFDocument.create();
+
+  const pages =
+    await output.copyPages(
+      source,
+      source.getPageIndices()
+    );
+
+  pages.forEach(page =>
+    output.addPage(page)
+  );
+
+  /*
+    pdf-lib does not perform full image recompression.
+    Saving with a fresh PDF structure can reduce some files,
+    while image-heavy PDFs may not become substantially smaller.
+  */
+
+  const saved =
+    await output.save({
+      useObjectStreams: true,
+      addDefaultPage: false,
+      objectsPerTick: 50
+    });
+
+  return new Blob(
+    [saved],
+    { type: "application/pdf" }
+  );
+}
+
+
+/* =========================================================
+   PDF/A WORKFLOW
+========================================================= */
+
+async function createPDFA(file) {
+
+  /*
+    A strict PDF/A implementation requires conformance metadata,
+    embedded fonts and validation against the relevant PDF/A profile.
+    This browser-only lightweight implementation preserves the PDF
+    structure and adds a metadata marker, but should not be represented
+    as a formally validated PDF/A document.
+  */
+
+  const bytes =
+    new Uint8Array(
+      await file.arrayBuffer()
+    );
+
+  const source =
+    await PDFLib.PDFDocument.load(bytes);
+
+  source.setTitle(
+    source.getTitle() || "Utiliverse PDF/A Preparation"
+  );
+
+  source.setSubject(
+    "Prepared for archival workflow"
+  );
+
+  source.setCreator(
+    "Utiliverse PDF Toolkit"
+  );
+
+  const saved =
+    await source.save();
+
+  return new Blob(
+    [saved],
+    { type: "application/pdf" }
+  );
+}
+
+
+/* =========================================================
+   MAIN PROCESSOR
+========================================================= */
+
+processBtn.addEventListener(
+  "click",
+  async () => {
+
+    if (!activeConversion) {
+      showToast("Choose a conversion first.");
+      return;
+    }
+
+    if (
+      activeConversion.mode !== "url" &&
+      !selectedFiles.length
+    ) {
+      showToast("Choose a file before processing.");
+      return;
+    }
+
+    resultPanel.classList.add("hidden");
+
+    try {
+
+      processBtn.disabled = true;
+
+      processBtn.classList.add(
+        "opacity-60",
+        "cursor-not-allowed"
+      );
+
+      progressWrapper.classList.remove("hidden");
+
+      updateProgress(
+        5,
+        "Starting " +
+        activeConversion.from +
+        " → " +
+        activeConversion.to
+      );
+
+      let result;
+      let filename;
+
+      const mode =
+        activeConversion.mode;
+
+      const target =
+        activeConversion.to;
+
+
+      /* IMAGE -> PDF */
+
+      if (mode === "image-pdf") {
+
+        result =
+          await imagesToPDF(
+            selectedFiles
+          );
+
+        filename =
+          "utiliverse-images.pdf";
+
+      }
+
+
+      /* PDF -> IMAGE */
+
+      else if (mode === "pdf-image") {
+
+        const response =
+          await pdfToImages(
+            selectedFiles[0],
+            target
+          );
+
+        result =
+          response.blob;
+
+        filename =
+          "utiliverse-page." +
+          response.extension;
+
+        if (response.multiplePages > 1) {
+          showToast(
+            "The first selected page was exported. Use page selection to export a specific page."
+          );
+        }
+
+      }
+
+
+      /* TEXT -> PDF */
+
+      else if (
+        mode === "text" &&
+        target === "PDF"
+      ) {
+
+        result =
+          await textToPDF(
+            selectedFiles[0]
+          );
+
+        filename =
+          "utiliverse-document.pdf";
+
+      }
+
+
+      /* PDF -> DOCUMENT */
+
+      else if (
+        (
+          mode === "pdf-text"
+        ) &&
+        target !== "PDF"
+      ) {
+
+        const response =
+          await pdfToDocument(
+            selectedFiles[0],
+            target
+          );
+
+        result =
+          response.blob;
+
+        filename =
+          "utiliverse-export." +
+          response.extension;
+
+      }
+
+
+      /* PDF COPY */
+
+      else if (
+        target === "PDF" &&
+        (
+          mode === "office" ||
+          mode === "ebook" ||
+          mode === "cad"
+        )
+      ) {
+
+        throw new Error(
+          "This format requires a dedicated browser decoder. The current build includes the interface and conversion routing but does not bundle proprietary Office, CAD or e-book parsers."
+        );
+
+      }
+
+
+      /* PDF/A */
+
+      else if (
+        mode === "pdfa"
+      ) {
+
+        result =
+          await createPDFA(
+            selectedFiles[0]
+          );
+
+        filename =
+          "utiliverse-archival-preparation.pdf";
+
+        showToast(
+          "PDF/A preparation completed. Formal PDF/A conformance validation is not performed by this lightweight build."
+        );
+
+      }
+
+
+      /* COMPRESS */
+
+      else if (
+        mode === "compress"
+      ) {
+
+        result =
+          await compressPDF(
+            selectedFiles[0]
+          );
+
+        filename =
+          "utiliverse-compressed.pdf";
+
+      }
+
+
+      /* OCR */
+
+      else if (
+        mode === "ocr"
+      ) {
+
+        throw new Error(
+          "OCR is routed as an advanced operation, but a full OCR engine is not bundled in this lightweight build. Add Tesseract.js for browser-based OCR."
+        );
+
+      }
+
+
+      /* URL */
+
+      else if (
+        mode === "url"
+      ) {
+
+        throw new Error(
+          "Direct website capture is restricted by browser security policies. A browser-compatible rendering or proxy-free capture engine is required for arbitrary remote URLs."
+        );
+
+      }
+
+
+      /* UNSUPPORTED */
+
+      else {
+
+        throw new Error(
+          "This conversion requires a dedicated format parser or encoder that is not bundled in the current lightweight client-side build."
+        );
+
+      }
+
+
+      if (!result) {
+        throw new Error(
+          "The conversion did not produce a downloadable file."
+        );
+      }
+
+      showResult(
+        result,
+        filename
+      );
+
+      updateProgress(
+        100,
+        "Complete"
+      );
+
+    } catch (error) {
+
+      console.error(error);
+
+      statusText.textContent =
+        "Unable to complete";
+
+      statusText.className =
+        "text-xs status-error sm:ml-auto";
+
+      progressLabel.textContent =
+        "Processing stopped";
+
+      progressPercent.textContent =
+        "—";
+
+      showToast(
+        error.message ||
+        "Something went wrong while processing the file."
+      );
+
+    } finally {
+
+      processBtn.disabled = false;
+
+      processBtn.classList.remove(
+        "opacity-60",
+        "cursor-not-allowed"
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   RESULT HANDLING
+========================================================= */
+
+function showResult(blob, filename) {
+
+  if (currentDownloadUrl) {
+    URL.revokeObjectURL(
+      currentDownloadUrl
+    );
+  }
+
+  currentDownloadUrl =
+    URL.createObjectURL(blob);
+
+  downloadBtn.href =
+    currentDownloadUrl;
+
+  downloadBtn.download =
+    filename;
+
+  resultDescription.textContent =
+    filename +
+    " · " +
+    formatBytes(blob.size);
+
+  resultPanel.classList.remove(
+    "hidden"
+  );
+
+  statusText.textContent =
+    "Ready to download";
+
+  statusText.className =
+    "text-xs status-success sm:ml-auto";
+
+  lucide.createIcons();
+
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+function updateProgress(percent, label) {
+
+  const safe =
+    Math.max(
+      0,
+      Math.min(
+        100,
+        percent
+      )
+    );
+
+  progressBar.style.width =
+    safe + "%";
+
+  progressPercent.textContent =
+    Math.round(safe) + "%";
+
+  progressLabel.textContent =
+    label;
+
+}
+
+
+/* =========================================================
+   PAGE SELECTION
+========================================================= */
+
+function parsePageSelection(value, maxPages) {
+
+  if (!value.trim()) {
+
+    return Array.from(
+      { length: maxPages },
+      (_, index) => index + 1
+    );
+
+  }
+
+  const pages = new Set();
+
+  value
+    .split(",")
+    .map(part => part.trim())
+    .forEach(part => {
+
+      if (part.includes("-")) {
+
+        const [start, end] =
+          part.split("-")
+            .map(Number);
+
+        if (
+          Number.isFinite(start) &&
+          Number.isFinite(end)
+        ) {
+
+          for (
+            let i = Math.max(1, start);
+            i <= Math.min(maxPages, end);
+            i++
+          ) {
+            pages.add(i);
+          }
+
+        }
+
+      } else {
+
+        const page =
+          Number(part);
+
+        if (
+          Number.isInteger(page) &&
+          page >= 1 &&
+          page <= maxPages
+        ) {
+          pages.add(page);
+        }
+
+      }
+
+    });
+
+  return [...pages].sort(
+    (a,b) => a-b
+  );
+}
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function fileToDataURL(file) {
+
+  return new Promise(
+    (resolve, reject) => {
+
+      const reader =
+        new FileReader();
+
+      reader.onload =
+        () => resolve(
+          reader.result
+        );
+
+      reader.onerror =
+        reject;
+
+      reader.readAsDataURL(file);
+
+    }
+  );
+}
+
+
+function loadImage(src) {
+
+  return new Promise(
+    (resolve, reject) => {
+
+      const image =
+        new Image();
+
+      image.onload =
+        () => resolve(image);
+
+      image.onerror =
+        () =>
+          reject(
+            new Error(
+              "The browser could not decode this image format."
+            )
+          );
+
+      image.src = src;
+
+    }
+  );
+}
+
+
+function getExtension(filename) {
+
+  const parts =
+    filename.split(".");
+
+  if (parts.length < 2) {
+    return "FILE";
+  }
+
+  return "." +
+    parts.pop().toUpperCase();
+
+}
+
+
+function formatBytes(bytes) {
+
+  if (!bytes) {
+    return "0 B";
+  }
+
+  const units =
+    ["B", "KB", "MB", "GB"];
+
+  const index =
+    Math.floor(
+      Math.log(bytes) /
+      Math.log(1024)
+    );
+
+  return (
+    bytes /
+    Math.pow(1024, index)
+  ).toFixed(
+    index ? 1 : 0
+  ) +
+  " " +
+  units[index];
+
+}
+
+
+function escapeHtml(value) {
+
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+function escapeLatex(value) {
+
+  return String(value)
+    .replace(/\\/g, "\\textbackslash{}")
+    .replace(/([#$%&_{}])/g, "\\$1")
+    .replace(/\^/g, "\\textasciicircum{}")
+    .replace(/~/g, "\\textasciitilde{}");
+
+}
+
+
+function escapeRTF(value) {
+
+  return String(value)
+    .replace(/\\/g, "\\\\")
+    .replace(/{/g, "\\{")
+    .replace(/}/g, "\\}");
+
+}
+
+
+function showToast(message) {
+
+  const toast =
+    document.getElementById("toast");
+
+  const toastMessage =
+    document.getElementById("toastMessage");
+
+  toastMessage.textContent =
+    message;
+
+  toast.classList.add("show");
+
+  clearTimeout(
+    window.__toastTimer
+  );
+
+  window.__toastTimer =
+    setTimeout(() => {
+
+      toast.classList.remove(
+        "show"
+      );
+
+    }, 4500);
+
+}
+
+
+/* =========================================================
+   QUALITY DISPLAY
+========================================================= */
+
+quality.addEventListener(
+  "input",
+  () => {
+
+    qualityValue.textContent =
+      quality.value + "%";
+
+  }
+);
+
+
+/* =========================================================
+   FORMAT EVENTS
+========================================================= */
+
+fromFormat.addEventListener(
+  "change",
+  updateToFormats
+);
+
+toFormat.addEventListener(
+  "change",
+  updateWorkspace
+);
+
+
+/* =========================================================
+   INITIAL RENDER
+========================================================= */
+
+populateFromFormats();
+renderCards();
+lucide.createIcons();
+
+
+/* =========================================================
+   OPTIONAL: KEYBOARD SHORTCUT
+   Ctrl/Cmd + K focuses search
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if (
+      (event.ctrlKey || event.metaKey) &&
+      event.key.toLowerCase() === "k"
+    ) {
+
+      event.preventDefault();
+
+      searchInput.focus();
+
+    }
+
+  }
+);
+
 </script>
 
 </body>
