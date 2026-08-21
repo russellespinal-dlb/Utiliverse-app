@@ -1,1555 +1,1877 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Unit & Currency Converter | Free Online Conversion Tool | Utiliverse</title>
+<title>Unit & Currency Converter — Utiliverse</title>
 
-  <meta name="description" content="Convert currencies, length, weight, temperature and more with the free Utiliverse Unit and Currency Converter. Fast, simple and browser-based.">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://utiliverse.app/unit-converter/">
+<meta name="description" content="Free online unit and currency converter with live exchange rates. Convert USD, DOP, EUR, GBP, CAD and hundreds of international currencies, plus length, weight, temperature and other common units.">
 
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Unit & Currency Converter | Utiliverse">
-  <meta property="og:description" content="Quickly convert currencies, measurements, temperatures and more with the free Utiliverse converter.">
-  <meta property="og:url" content="https://utiliverse.app/unit-converter/">
+<meta name="keywords" content="currency converter, USD to DOP, Dominican peso converter, dollar to peso converter, exchange rate calculator, unit converter, currency exchange calculator, live currency rates">
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
+<link rel="canonical" href="https://utiliverse.app/converter/">
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "Utiliverse Unit and Currency Converter",
-    "url": "https://utiliverse.app/unit-converter/",
-    "applicationCategory": "UtilitiesApplication",
-    "operatingSystem": "Any",
-    "description": "A free online unit and currency converter for converting measurements and currencies.",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    }
-  }
-  </script>
+<meta property="og:title" content="Unit & Currency Converter — Utiliverse">
+<meta property="og:description" content="Convert currencies using live exchange rates and instantly convert common units for everyday calculations.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://utiliverse.app/converter/">
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "How does the currency converter get exchange rates?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "The currency converter requests current exchange-rate data from ExchangeRate-API and uses those rates to calculate the selected conversion."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Are currency exchange rates constantly changing?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. Foreign exchange markets move throughout the day, so a displayed rate should be treated as an informational market rate rather than a guaranteed bank, card, or money-transfer rate."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What units can I convert?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "The converter supports common categories including length, weight, temperature, area, volume, speed, time and data."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Does the unit converter require an internet connection?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Unit conversions are calculated directly in your browser and do not require a live exchange-rate service. Currency conversions require internet access to retrieve exchange-rate data."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I use this converter for business calculations?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. The tool can be useful for estimates involving international pricing, product measurements, shipping, recipes, travel and other everyday calculations. Always verify financial transactions using the rate and fees supplied by your financial institution."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Are currency conversions guaranteed to match my bank?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. Banks, credit cards and money-transfer providers can use their own exchange rates, spreads and fees. The displayed conversion is an informational estimate based on the retrieved market-rate data."
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        util: {
+          bg: '#0f172a',
+          dark: '#020617',
+          card: '#1e293b',
+          border: '#334155',
+          accent: '#6366f1',
+          accentDark: '#4f46e5'
         }
       }
-    ]
+    }
   }
-  </script>
+};
+</script>
 
-  <style>
-    :root {
-      --bg: #f8fafc;
-      --card: #ffffff;
-      --text: #0f172a;
-      --muted: #64748b;
-      --border: #e2e8f0;
-      --accent: #6366f1;
-      --accent-dark: #4f46e5;
-      --soft: #eef2ff;
-    }
+<script src="https://unpkg.com/lucide@latest"></script>
 
-    * {
-      box-sizing: border-box;
-    }
+<style>
+* {
+  box-sizing: border-box;
+}
 
-    html {
-      scroll-behavior: smooth;
-    }
+html {
+  scroll-behavior: smooth;
+}
 
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(99,102,241,.13), transparent 35%),
+    radial-gradient(circle at top right, rgba(124,58,237,.10), transparent 30%),
+    #020617;
+  color: #f8fafc;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
 
-    .glass {
-      background: rgba(255,255,255,.88);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-    }
+.glass {
+  background: rgba(30,41,59,.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid #334155;
+}
 
-    .converter-card {
-      box-shadow:
-        0 20px 50px rgba(15,23,42,.08),
-        0 4px 12px rgba(15,23,42,.04);
-    }
+.glow {
+  box-shadow:
+    0 0 0 1px rgba(99,102,241,.08),
+    0 15px 45px rgba(0,0,0,.25);
+}
 
-    .result-glow {
-      box-shadow: 0 10px 35px rgba(99,102,241,.12);
-    }
+.input-dark {
+  background: rgba(15,23,42,.9);
+  border: 1px solid #475569;
+  color: #f8fafc;
+}
 
-    .search-results {
-      max-height: 230px;
-      overflow-y: auto;
-    }
+.input-dark:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99,102,241,.15);
+}
 
-    .search-results::-webkit-scrollbar {
-      width: 6px;
-    }
+.select-search {
+  background: #0f172a;
+  border: 1px solid #475569;
+  color: #f8fafc;
+}
 
-    .search-results::-webkit-scrollbar-thumb {
-      background: #cbd5e1;
-      border-radius: 999px;
-    }
+.currency-option:hover {
+  background: rgba(99,102,241,.15);
+}
 
-    .tab-button {
-      transition: all .2s ease;
-    }
+.tab-active {
+  background: linear-gradient(135deg,#6366f1,#4f46e5);
+  color: white;
+  box-shadow: 0 5px 20px rgba(79,70,229,.25);
+}
 
-    .tab-button.active {
-      background: #ffffff;
-      color: var(--accent-dark);
-      box-shadow: 0 2px 8px rgba(15,23,42,.08);
-    }
+.result-glow {
+  box-shadow:
+    0 0 35px rgba(99,102,241,.12),
+    inset 0 1px 0 rgba(255,255,255,.04);
+}
 
-    input[type="number"]:focus,
-    input[type="text"]:focus,
-    select:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(99,102,241,.12);
-    }
+.swap-button {
+  transition: transform .2s ease, background .2s ease;
+}
 
-    .article-content h2 {
-      color: #0f172a;
-      font-size: 1.75rem;
-      font-weight: 800;
-      margin-top: 2.5rem;
-      margin-bottom: 1rem;
-      letter-spacing: -.025em;
-    }
+.swap-button:hover {
+  transform: rotate(180deg);
+}
 
-    .article-content h3 {
-      color: #1e293b;
-      font-size: 1.2rem;
-      font-weight: 750;
-      margin-top: 1.75rem;
-      margin-bottom: .65rem;
-    }
+.fade-in {
+  animation: fadeIn .25s ease;
+}
 
-    .article-content p {
-      color: #475569;
-      line-height: 1.85;
-      margin-bottom: 1rem;
-    }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-    .article-content ul {
-      color: #475569;
-      line-height: 1.8;
-      padding-left: 1.5rem;
-      margin-bottom: 1.25rem;
-    }
+::-webkit-scrollbar {
+  width: 9px;
+}
 
-    .article-content li {
-      margin-bottom: .45rem;
-    }
+::-webkit-scrollbar-track {
+  background: #020617;
+}
 
-    .faq-item {
-      border-bottom: 1px solid var(--border);
-    }
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 10px;
+}
 
-    .faq-item summary {
-      cursor: pointer;
-      list-style: none;
-      padding: 1.15rem 0;
-      font-weight: 700;
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      align-items: center;
-    }
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
 
-    .faq-item summary::-webkit-details-marker {
-      display: none;
-    }
+/*
+===========================================================
+GOOGLE ADSENSE PLACEHOLDERS
+===========================================================
 
-    .faq-icon {
-      transition: transform .2s ease;
-      flex-shrink: 0;
-    }
+When your AdSense account is approved, replace the comments
+below with your Google AdSense code.
 
-    details[open] .faq-icon {
-      transform: rotate(45deg);
-    }
+These placeholders intentionally produce NO visible boxes,
+spacing, borders, backgrounds, or advertisement labels.
 
-    .ad-slot {
-      /*
-        GOOGLE ADSENSE PLACEHOLDER
-        Replace this HTML comment with your approved Google AdSense code.
-        No visible advertisement box or reserved ad space is rendered.
-      */
-      display: contents;
-    }
+TOP ADSENSE:
+<!-- ADSENSE_TOP -->
 
-    .hidden-panel {
-      display: none;
-    }
+MID ADSENSE:
+<!-- ADSENSE_MID -->
 
-    @media (max-width: 640px) {
-      .hero-title {
-        font-size: 2.25rem;
+SIDEBAR ADSENSE:
+<!-- ADSENSE_SIDEBAR -->
+
+BOTTOM ADSENSE:
+<!-- ADSENSE_BOTTOM -->
+
+===========================================================
+*/
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Utiliverse Unit & Currency Converter",
+  "url": "https://utiliverse.app/converter/",
+  "applicationCategory": "UtilitiesApplication",
+  "operatingSystem": "Any",
+  "description": "Free online unit and currency converter with live exchange rates and common measurement conversions.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does the currency converter calculate exchange rates?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The currency converter retrieves exchange-rate data from an online rate service and uses the latest available rate to calculate the requested conversion."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I convert US dollars to Dominican pesos?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The converter includes USD and DOP, allowing users to calculate conversions between US dollars and Dominican pesos when live DOP exchange-rate data is available."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are currency exchange rates constantly changing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Foreign exchange markets change throughout the day. The rate displayed by this calculator reflects the latest rate data retrieved by the application and may differ from the rate offered by a bank, card issuer, money-transfer service or exchange office."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the converter support units other than currency?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The Unit Converter includes common measurement categories such as length, weight, temperature, area, volume, speed and digital storage."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this currency converter the same as the rate my bank will charge?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The calculator provides an informational exchange-rate estimate. Banks, credit cards and money-transfer companies may add spreads, fees or other charges."
+      },
+    {
+      "@type": "Question",
+      "name": "Does Utiliverse charge a fee for currency conversions?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Utiliverse provides this online calculator as a free browser-based utility. The calculator does not execute currency transactions."
       }
     }
-  </style>
+  ]
+}
+</script>
+
 </head>
 
 <body>
 
-  <!-- ============================================================
-       HEADER
-       ============================================================ -->
+<!-- =====================================================
+     HEADER
+====================================================== -->
 
-  <header class="border-b border-slate-200 bg-white/90 backdrop-blur-lg sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+<header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur-xl sticky top-0 z-50">
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4">
+
+    <div class="flex items-center justify-between gap-4">
 
       <a
         href="https://utiliverse.app"
-        class="inline-flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-indigo-600 transition"
+        class="text-sm text-slate-400 hover:text-white transition flex items-center gap-2"
       >
         <i data-lucide="arrow-left" class="w-4 h-4"></i>
         Back to Utiliverse
       </a>
 
-      <div class="hidden sm:flex items-center gap-2 text-xs font-semibold text-slate-500">
-        <span class="w-2 h-2 bg-emerald-500 rounded-full"></span>
+      <div class="flex items-center gap-2 text-xs text-slate-400">
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
         Free & Browser-Based
       </div>
 
     </div>
-  </header>
+
+  </div>
+
+</header>
 
 
-  <!-- ============================================================
-       HERO
-       ============================================================ -->
+<!-- =====================================================
+     HERO
+====================================================== -->
 
-  <section class="relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-indigo-50 via-white to-slate-50 pointer-events-none"></div>
+<section class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-8">
 
-    <div class="relative max-w-5xl mx-auto px-4 sm:px-6 pt-14 pb-10 text-center">
+  <div class="max-w-3xl">
 
-      <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-bold uppercase tracking-wider mb-5">
-        <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
-        Instant Conversions
-      </div>
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-semibold mb-5">
 
-      <h1 class="hero-title text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-950">
-        Unit & Currency Converter
-      </h1>
+      <i data-lucide="refresh-cw" class="w-4 h-4"></i>
 
-      <p class="max-w-2xl mx-auto mt-5 text-lg text-slate-600 leading-relaxed">
-        Quickly convert everyday measurements and currencies in one simple,
-        easy-to-use tool. Unit calculations happen directly in your browser,
-        while currency rates are retrieved from a live exchange-rate service.
-      </p>
+      Live Currency Rates + Unit Conversion
 
     </div>
-  </section>
+
+    <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight">
+
+      Unit & Currency Converter
+
+    </h1>
+
+    <p class="mt-4 text-lg text-slate-400 leading-relaxed">
+
+      Convert international currencies and everyday measurements quickly,
+      clearly and without complicated menus. Use live exchange-rate data
+      for supported currencies or switch to the unit converter for
+      instant measurement calculations.
+
+    </p>
+
+  </div>
+
+</section>
 
 
-  <!-- ============================================================
-       TOP ADSENSE INSERTION POINT
-       ============================================================ -->
+<!-- =====================================================
+     MAIN APPLICATION
+====================================================== -->
 
-  <!-- GOOGLE ADSENSE: TOP CONTENT PLACEMENT
-       Paste your approved Google AdSense code here.
-       This placeholder intentionally creates no visible box or reserved space.
-  -->
+<main class="max-w-6xl mx-auto px-4 sm:px-6 pb-16">
+
+  <div class="glass rounded-3xl glow overflow-hidden">
+
+    <!-- TABS -->
+
+    <div class="grid grid-cols-2 border-b border-slate-700">
+
+      <button
+        id="currencyTab"
+        onclick="switchMode('currency')"
+        class="tab-active py-4 font-semibold flex items-center justify-center gap-2"
+      >
+
+        <i data-lucide="banknote" class="w-5 h-5"></i>
+
+        Currency Converter
+
+      </button>
+
+      <button
+        id="unitTab"
+        onclick="switchMode('unit')"
+        class="py-4 font-semibold text-slate-400 hover:text-white transition flex items-center justify-center gap-2"
+      >
+
+        <i data-lucide="ruler" class="w-5 h-5"></i>
+
+        Unit Converter
+
+      </button>
+
+    </div>
 
 
-  <!-- ============================================================
-       MAIN CONVERTER
-       ============================================================ -->
+    <!-- =================================================
+         CURRENCY CONVERTER
+    ================================================== -->
 
-  <main class="max-w-5xl mx-auto px-4 sm:px-6 pb-16">
+    <section id="currencyMode" class="p-5 sm:p-8">
 
-    <section class="converter-card glass border border-slate-200 rounded-3xl overflow-visible">
+      <div class="grid lg:grid-cols-[1fr_auto_1fr] gap-5 items-end">
 
-      <!-- MODE TABS -->
+        <!-- FROM -->
 
-      <div class="p-2 bg-slate-100 rounded-t-3xl border-b border-slate-200">
-        <div class="grid grid-cols-2 gap-2 max-w-md mx-auto">
+        <div>
 
-          <button
-            id="unitTab"
-            class="tab-button active rounded-2xl py-3 px-4 text-sm font-bold text-slate-600"
-            onclick="switchMode('unit')"
-          >
-            <span class="inline-flex items-center justify-center gap-2">
-              <i data-lucide="ruler" class="w-4 h-4"></i>
-              Unit Converter
-            </span>
-          </button>
+          <label class="block text-xs uppercase tracking-wider font-semibold text-slate-400 mb-2">
+            From
+          </label>
 
-          <button
-            id="currencyTab"
-            class="tab-button rounded-2xl py-3 px-4 text-sm font-bold text-slate-600"
-            onclick="switchMode('currency')"
-          >
-            <span class="inline-flex items-center justify-center gap-2">
-              <i data-lucide="banknote" class="w-4 h-4"></i>
-              Currency
-            </span>
-          </button>
+          <div class="relative">
+
+            <input
+              id="fromSearch"
+              type="text"
+              placeholder="Search country or currency..."
+              class="w-full rounded-xl px-4 py-3 input-dark mb-2"
+              oninput="filterCurrencies('from')"
+            >
+
+            <select
+              id="fromCurrency"
+              class="w-full rounded-xl px-4 py-3 select-search"
+              onchange="convertCurrency()"
+            ></select>
+
+          </div>
 
         </div>
+
+
+        <!-- SWAP -->
+
+        <button
+          onclick="swapCurrencies()"
+          class="swap-button w-12 h-12 rounded-full border border-slate-600 bg-slate-800 hover:bg-indigo-600 flex items-center justify-center mx-auto"
+          title="Swap currencies"
+        >
+
+          <i data-lucide="arrow-left-right" class="w-5 h-5"></i>
+
+        </button>
+
+
+        <!-- TO -->
+
+        <div>
+
+          <label class="block text-xs uppercase tracking-wider font-semibold text-slate-400 mb-2">
+            To
+          </label>
+
+          <div class="relative">
+
+            <input
+              id="toSearch"
+              type="text"
+              placeholder="Search country or currency..."
+              class="w-full rounded-xl px-4 py-3 input-dark mb-2"
+              oninput="filterCurrencies('to')"
+            >
+
+            <select
+              id="toCurrency"
+              class="w-full rounded-xl px-4 py-3 select-search"
+              onchange="convertCurrency()"
+            ></select>
+
+          </div>
+
+        </div>
+
       </div>
 
 
-      <!-- ========================================================
-           UNIT PANEL
-           ======================================================== -->
+      <!-- AMOUNT -->
 
-      <div id="unitPanel" class="p-5 sm:p-8">
+      <div class="mt-7">
 
-        <div class="flex items-start justify-between gap-4 mb-7">
+        <label class="block text-xs uppercase tracking-wider font-semibold text-slate-400 mb-2">
+          Amount
+        </label>
 
-          <div>
-            <p class="text-xs font-bold uppercase tracking-widest text-indigo-600">
-              Measurement converter
-            </p>
+        <input
+          id="currencyAmount"
+          type="number"
+          value="1"
+          min="0"
+          step="any"
+          oninput="convertCurrency()"
+          class="w-full text-3xl sm:text-4xl font-semibold rounded-xl px-5 py-5 input-dark"
+        >
 
-            <h2 class="text-2xl font-black text-slate-900 mt-1">
-              Convert units
-            </h2>
+      </div>
 
-            <p class="text-sm text-slate-500 mt-1">
-              Select a category and convert instantly.
-            </p>
-          </div>
 
-          <div class="hidden sm:flex w-11 h-11 rounded-xl bg-indigo-50 text-indigo-600 items-center justify-center">
-            <i data-lucide="ruler" class="w-5 h-5"></i>
-          </div>
+      <!-- RESULT -->
 
+      <div class="result-glow mt-7 rounded-2xl border border-indigo-500/20 bg-indigo-500/5 p-6">
+
+        <p class="text-xs uppercase tracking-widest text-slate-500">
+          Converted Amount
+        </p>
+
+        <div
+          id="currencyResult"
+          class="text-4xl sm:text-5xl font-bold text-white mt-2 break-words"
+        >
+          —
         </div>
 
+        <div
+          id="currencyRate"
+          class="text-sm text-slate-400 mt-3"
+        >
+          Loading exchange rate...
+        </div>
 
-        <!-- Category -->
+        <div
+          id="rateStatus"
+          class="text-xs text-slate-500 mt-2"
+        ></div>
 
-        <div class="mb-6">
-          <label for="unitCategory" class="block text-sm font-bold text-slate-700 mb-2">
+      </div>
+
+
+      <!-- ERROR -->
+
+      <div
+        id="currencyError"
+        class="hidden mt-4 rounded-xl border border-red-500/30 bg-red-500/10 text-red-300 p-4 text-sm"
+      ></div>
+
+    </section>
+
+
+    <!-- =================================================
+         UNIT CONVERTER
+    ================================================== -->
+
+    <section id="unitMode" class="hidden p-5 sm:p-8">
+
+      <div class="grid md:grid-cols-3 gap-5">
+
+        <div>
+
+          <label class="block text-xs uppercase tracking-wider font-semibold text-slate-400 mb-2">
             Category
           </label>
 
           <select
             id="unitCategory"
-            onchange="populateUnitOptions()"
-            class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3.5 text-slate-800 font-medium"
+            onchange="populateUnits()"
+            class="w-full rounded-xl px-4 py-3 select-search"
           >
+
             <option value="length">Length</option>
-            <option value="weight">Weight / Mass</option>
+            <option value="weight">Weight</option>
             <option value="temperature">Temperature</option>
             <option value="area">Area</option>
             <option value="volume">Volume</option>
             <option value="speed">Speed</option>
-            <option value="time">Time</option>
-            <option value="data">Digital Storage</option>
+            <option value="digital">Digital Storage</option>
+
           </select>
+
         </div>
 
 
-        <!-- Amount -->
+        <div>
 
-        <div class="mb-6">
-
-          <label for="unitAmount" class="block text-sm font-bold text-slate-700 mb-2">
-            Amount
+          <label class="block text-xs uppercase tracking-wider font-semibold text-slate-400 mb-2">
+            From
           </label>
 
-          <input
-            id="unitAmount"
-            type="number"
-            value="1"
-            step="any"
-            oninput="convertUnit()"
-            class="w-full border border-slate-200 rounded-xl px-4 py-4 text-2xl font-bold text-slate-900"
-          >
+          <select
+            id="unitFrom"
+            onchange="convertUnit()"
+            class="w-full rounded-xl px-4 py-3 select-search"
+          ></select>
 
         </div>
 
 
-        <!-- From / Swap / To -->
+        <div>
 
-        <div class="grid md:grid-cols-[1fr_auto_1fr] gap-4 items-end">
+          <label class="block text-xs uppercase tracking-wider font-semibold text-slate-400 mb-2">
+            To
+          </label>
 
-          <div>
-            <label for="unitFrom" class="block text-sm font-bold text-slate-700 mb-2">
-              From
-            </label>
-
-            <select
-              id="unitFrom"
-              onchange="convertUnit()"
-              class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3.5 font-medium"
-            ></select>
-          </div>
-
-
-          <button
-            onclick="swapUnits()"
-            aria-label="Swap units"
-            class="w-full md:w-12 h-12 rounded-xl bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 text-slate-600 flex items-center justify-center transition"
-          >
-            <i data-lucide="arrow-left-right" class="w-5 h-5"></i>
-          </button>
-
-
-          <div>
-            <label for="unitTo" class="block text-sm font-bold text-slate-700 mb-2">
-              To
-            </label>
-
-            <select
-              id="unitTo"
-              onchange="convertUnit()"
-              class="w-full bg-white border border-slate-200 rounded-xl px-4 py-3.5 font-medium"
-            ></select>
-          </div>
-
-        </div>
-
-
-        <!-- Unit Result -->
-
-        <div class="result-glow mt-7 rounded-2xl bg-gradient-to-br from-indigo-600 to-indigo-500 text-white p-6">
-
-          <div class="flex items-center justify-between gap-4">
-
-            <div>
-              <p class="text-xs uppercase tracking-widest text-indigo-200 font-bold">
-                Converted result
-              </p>
-
-              <div id="unitResult" class="text-3xl sm:text-4xl font-black mt-2 break-words">
-                3.28084 Feet
-              </div>
-
-              <p id="unitFormula" class="text-sm text-indigo-100 mt-2">
-                1 Meter = 3.28084 Feet
-              </p>
-            </div>
-
-            <button
-              onclick="copyUnitResult()"
-              class="flex-shrink-0 p-3 rounded-xl bg-white/10 hover:bg-white/20 transition"
-              aria-label="Copy conversion result"
-            >
-              <i data-lucide="copy" class="w-5 h-5"></i>
-            </button>
-
-          </div>
+          <select
+            id="unitTo"
+            onchange="convertUnit()"
+            class="w-full rounded-xl px-4 py-3 select-search"
+          ></select>
 
         </div>
 
       </div>
 
 
-      <!-- ========================================================
-           CURRENCY PANEL
-           ======================================================== -->
+      <div class="mt-7">
 
-      <div id="currencyPanel" class="hidden-panel p-5 sm:p-8">
+        <label class="block text-xs uppercase tracking-wider font-semibold text-slate-400 mb-2">
+          Amount
+        </label>
 
-        <div class="flex items-start justify-between gap-4 mb-7">
+        <input
+          id="unitAmount"
+          type="number"
+          value="1"
+          step="any"
+          oninput="convertUnit()"
+          class="w-full text-3xl rounded-xl px-5 py-5 input-dark"
+        >
 
-          <div>
-            <p class="text-xs font-bold uppercase tracking-widest text-indigo-600">
-              Foreign exchange
-            </p>
-
-            <h2 class="text-2xl font-black text-slate-900 mt-1">
-              Convert currencies
-            </h2>
-
-            <p class="text-sm text-slate-500 mt-1">
-              Enter an amount and select the currencies you want to compare.
-            </p>
-          </div>
-
-          <div class="hidden sm:flex w-11 h-11 rounded-xl bg-indigo-50 text-indigo-600 items-center justify-center">
-            <i data-lucide="banknote" class="w-5 h-5"></i>
-          </div>
-
-        </div>
+      </div>
 
 
-        <!-- Currency Amount -->
+      <div class="mt-7 rounded-2xl border border-indigo-500/20 bg-indigo-500/5 p-6">
 
-        <div class="mb-6">
+        <p class="text-xs uppercase tracking-widest text-slate-500">
+          Converted Amount
+        </p>
 
-          <label for="currencyAmount" class="block text-sm font-bold text-slate-700 mb-2">
-            Amount
-          </label>
-
-          <input
-            id="currencyAmount"
-            type="number"
-            value="1"
-            min="0"
-            step="any"
-            oninput="convertCurrency()"
-            class="w-full border border-slate-200 rounded-xl px-4 py-4 text-2xl font-bold text-slate-900"
-          >
-
-        </div>
-
-
-        <!-- Currency Selectors -->
-
-        <div class="grid md:grid-cols-[1fr_auto_1fr] gap-4 items-end">
-
-          <div class="relative">
-
-            <label for="currencyFromSearch" class="block text-sm font-bold text-slate-700 mb-2">
-              From
-            </label>
-
-            <input
-              id="currencyFromSearch"
-              type="text"
-              placeholder="Search currency..."
-              autocomplete="off"
-              oninput="filterCurrency('from')"
-              class="w-full border border-slate-200 rounded-xl px-4 py-3.5"
-            >
-
-            <select
-              id="currencyFrom"
-              onchange="convertCurrency()"
-              class="w-full mt-2 bg-white border border-slate-200 rounded-xl px-4 py-3.5 font-medium"
-            ></select>
-
-          </div>
-
-
-          <button
-            onclick="swapCurrencies()"
-            aria-label="Swap currencies"
-            class="w-full md:w-12 h-12 rounded-xl bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 text-slate-600 flex items-center justify-center transition"
-          >
-            <i data-lucide="arrow-left-right" class="w-5 h-5"></i>
-          </button>
-
-
-          <div>
-
-            <label for="currencyToSearch" class="block text-sm font-bold text-slate-700 mb-2">
-              To
-            </label>
-
-            <input
-              id="currencyToSearch"
-              type="text"
-              placeholder="Search currency..."
-              autocomplete="off"
-              oninput="filterCurrency('to')"
-              class="w-full border border-slate-200 rounded-xl px-4 py-3.5"
-            >
-
-            <select
-              id="currencyTo"
-              onchange="convertCurrency()"
-              class="w-full mt-2 bg-white border border-slate-200 rounded-xl px-4 py-3.5 font-medium"
-            ></select>
-
-          </div>
-
-        </div>
-
-
-        <!-- Currency Result -->
-
-        <div class="result-glow mt-7 rounded-2xl bg-gradient-to-br from-indigo-600 to-indigo-500 text-white p-6">
-
-          <p class="text-xs uppercase tracking-widest text-indigo-200 font-bold">
-            Converted amount
-          </p>
-
-          <div id="currencyResult" class="text-3xl sm:text-4xl font-black mt-2">
-            Loading...
-          </div>
-
-          <div id="currencyRate" class="text-sm text-indigo-100 mt-2">
-            Retrieving exchange rate...
-          </div>
-
-          <div id="currencyUpdated" class="text-xs text-indigo-200 mt-3">
-            Exchange-rate information is provided for informational purposes.
-          </div>
-
-        </div>
-
-
-        <div class="mt-5 p-4 rounded-xl bg-amber-50 border border-amber-100 text-sm text-amber-800">
-          <strong>Rate note:</strong>
-          Currency markets move continuously. Your bank, card issuer or payment provider may use a different rate and may add fees or a currency-conversion spread.
+        <div
+          id="unitResult"
+          class="text-4xl font-bold mt-2"
+        >
+          —
         </div>
 
       </div>
 
     </section>
 
-
-    <!-- ============================================================
-         GOOGLE ADSENSE: MID CONTENT INSERTION POINT
-         ============================================================ -->
-
-    <!-- GOOGLE ADSENSE: MID-CONTENT PLACEMENT
-         Paste your approved Google AdSense code here.
-         This placeholder intentionally creates no visible box or reserved space.
-    -->
+  </div>
 
 
-    <!-- ============================================================
-         ARTICLE
-         ============================================================ -->
+  <!-- =====================================================
+       ABOUT / SEO CONTENT
+  ====================================================== -->
 
-    <article class="article-content max-w-3xl mx-auto mt-16">
+  <section class="max-w-4xl mx-auto mt-16">
 
-      <div class="border-t border-slate-200 pt-12">
+    <h2 class="text-3xl sm:text-4xl font-bold">
+      About the Utiliverse Unit & Currency Converter
+    </h2>
 
-        <p class="text-xs font-bold uppercase tracking-widest text-indigo-600">
-          Utiliverse Guide
+    <div class="mt-6 space-y-5 text-slate-400 leading-8">
+
+      <p>
+        The Utiliverse Unit & Currency Converter is a free online conversion
+        tool designed to make everyday calculations faster and easier.
+        Instead of opening separate websites for currency exchange,
+        measurement conversions, travel calculations, cooking measurements,
+        international shopping or home improvement projects, you can use
+        one simple browser-based utility.
+      </p>
+
+      <p>
+        The currency converter supports a comprehensive directory of
+        internationally recognized currencies and identifies each currency
+        using its country or region, currency name and ISO three-letter code.
+        This includes widely used currencies such as the US Dollar (USD),
+        Euro (EUR), British Pound Sterling (GBP), Canadian Dollar (CAD),
+        Japanese Yen (JPY), Mexican Peso (MXN), and Dominican Peso (DOP).
+      </p>
+
+      <p>
+        The Dominican Peso is particularly useful for travelers, families,
+        international shoppers and businesses dealing with the Dominican
+        Republic. Selecting DOP allows users to compare Dominican pesos
+        against currencies such as USD, EUR, CAD and GBP when live exchange
+        rate data is available.
+      </p>
+
+      <p>
+        Currency exchange rates change over time because foreign exchange
+        markets respond to interest rates, inflation expectations, economic
+        announcements, political developments, trade flows and investor
+        demand. Because of this, an online currency calculator should be
+        viewed as an informational estimate rather than a guaranteed rate
+        for an actual financial transaction.
+      </p>
+
+      <p>
+        The Unit Converter provides a separate solution for common
+        measurement calculations. Length conversions can help with
+        construction, travel and international product specifications.
+        Weight conversions can be useful when comparing pounds and
+        kilograms for shipping, cooking, fitness and international commerce.
+        Temperature conversions make it easy to switch between Celsius and
+        Fahrenheit when traveling or following recipes and weather reports.
+      </p>
+
+      <p>
+        Volume conversions are useful for cooking, manufacturing and
+        household projects, while area conversions can help with flooring,
+        landscaping, painting and real-estate measurements. Digital storage
+        conversions provide another practical option for comparing bytes,
+        kilobytes, megabytes, gigabytes and terabytes.
+      </p>
+
+      <p>
+        For international travelers, the currency converter can provide a
+        quick estimate of how much money a purchase may cost in another
+        currency. A traveler from the United States visiting the Dominican
+        Republic, for example, can compare US dollars with Dominican pesos
+        before budgeting for transportation, restaurants, accommodations,
+        entertainment and shopping.
+      </p>
+
+      <p>
+        International shoppers and e-commerce sellers can also use currency
+        conversion to estimate product costs and selling prices. When a
+        supplier lists a product in one currency and a customer pays in
+        another, converting the amounts can make it easier to evaluate
+        margins, shipping expenses and potential profits. Businesses should
+        still account for payment-processing fees, currency spreads, taxes
+        and other transaction costs that may not appear in a basic exchange
+        rate calculation.
+      </p>
+
+      <p>
+        The calculator is also useful for comparing prices over time.
+        Exchange rates can influence the effective cost of international
+        subscriptions, software, travel bookings, imported products and
+        services. A conversion calculator does not predict future currency
+        prices, but it provides a convenient way to understand the current
+        relationship between currencies.
+      </p>
+
+      <p>
+        Whether you need to convert US dollars to Dominican pesos, euros to
+        pounds, Canadian dollars to US dollars, kilograms to pounds, miles
+        to kilometers or Celsius to Fahrenheit, the Utiliverse converter is
+        designed to keep the process straightforward. Enter an amount,
+        select the appropriate currencies or units and review the result.
+        No account is required to perform a basic conversion.
+      </p>
+
+      <p>
+        Always remember that live exchange-rate calculations are estimates.
+        Banks, credit-card networks, airports, money-transfer services and
+        currency-exchange offices may use different rates and may add fees
+        or spreads. For significant financial transactions, verify the final
+        rate and total cost directly with the provider handling the
+        transaction.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       FAQ
+  ====================================================== -->
+
+  <section class="max-w-4xl mx-auto mt-16 mb-16">
+
+    <h2 class="text-3xl font-bold mb-6">
+      Frequently Asked Questions
+    </h2>
+
+    <div class="space-y-3">
+
+      <details class="glass rounded-xl p-5">
+
+        <summary class="cursor-pointer font-semibold">
+          How does the currency converter calculate exchange rates?
+        </summary>
+
+        <p class="mt-3 text-slate-400 leading-7">
+          The converter retrieves exchange-rate data from an online rate
+          service and uses the latest available rate to calculate the
+          requested conversion. Rates can change throughout the day.
         </p>
 
-        <h2>
-          Practical Uses for a Unit and Currency Converter
-        </h2>
+      </details>
 
-        <p>
-          A reliable unit and currency converter can turn everyday calculations into a much simpler task. Measurements appear in different systems depending on where you live, what you are buying, the industry you work in, or the information you are reading. Currency creates another layer of complexity because exchange rates change over time and different countries use different monetary systems. A single conversion tool brings many of these calculations together without requiring a collection of separate websites or formulas.
+
+      <details class="glass rounded-xl p-5">
+
+        <summary class="cursor-pointer font-semibold">
+          Can I convert US dollars to Dominican pesos?
+        </summary>
+
+        <p class="mt-3 text-slate-400 leading-7">
+          Yes. The converter includes USD and DOP. Select US Dollar as the
+          source currency and Dominican Peso as the destination currency
+          to calculate the conversion.
         </p>
 
-        <h3>International shopping and e-commerce</h3>
+      </details>
 
-        <p>
-          Online sellers and shoppers frequently need to move between currencies and measurement systems. An e-commerce reseller might purchase merchandise from a supplier in another country, compare the supplier's quoted price with a domestic selling price, and estimate a potential margin. Converting the purchase price into a familiar currency makes the comparison easier to understand. Measurements can be equally important when evaluating products. A seller may receive dimensions in centimeters and need inches for a product listing, or receive package weights in kilograms and need pounds for shipping estimates.
+
+      <details class="glass rounded-xl p-5">
+
+        <summary class="cursor-pointer font-semibold">
+          Are currency exchange rates constantly changing?
+        </summary>
+
+        <p class="mt-3 text-slate-400 leading-7">
+          Yes. Foreign exchange markets change continuously. The rate shown
+          by this calculator reflects the latest data successfully retrieved
+          by the application and may differ from the rate offered by your
+          bank or money-transfer provider.
         </p>
 
-        <p>
-          Currency conversion can also help shoppers understand the approximate cost of an international purchase before taxes, shipping charges, duties, and payment-provider fees are considered. Because the actual amount charged can differ from an informational exchange rate, the calculator should be viewed as a planning tool rather than a guarantee of the final transaction amount.
+      </details>
+
+
+      <details class="glass rounded-xl p-5">
+
+        <summary class="cursor-pointer font-semibold">
+          Does the calculator support measurements as well as currencies?
+        </summary>
+
+        <p class="mt-3 text-slate-400 leading-7">
+          Yes. Switch to Unit Converter to calculate length, weight,
+          temperature, area, volume, speed and digital-storage conversions.
         </p>
 
-        <h3>Monitoring currencies and economic trends</h3>
+      </details>
 
-        <p>
-          Currency conversion is useful beyond shopping. Investors, business owners, travelers, and people following international economic developments may regularly compare currencies. Looking at how a domestic currency translates into another currency can provide context when following interest-rate decisions, inflation reports, commodity markets, international trade, or broader macroeconomic trends.
+
+      <details class="glass rounded-xl p-5">
+
+        <summary class="cursor-pointer font-semibold">
+          Will this give me the exact amount my bank will charge?
+        </summary>
+
+        <p class="mt-3 text-slate-400 leading-7">
+          Not necessarily. Banks, card networks and money-transfer companies
+          may add exchange-rate spreads, service fees or other charges.
+          Use the calculator as an informational estimate and confirm the
+          final transaction rate with your provider.
         </p>
 
-        <p>
-          For example, someone monitoring the relationship between the U.S. dollar and euro can enter an amount in one currency and quickly see its approximate value in the other. Repeating the calculation at different times can help someone understand how the exchange relationship has changed. This does not replace professional financial research, but it can make currency information easier to interpret.
+      </details>
+
+
+      <details class="glass rounded-xl p-5">
+
+        <summary class="cursor-pointer font-semibold">
+          Does Utiliverse charge a fee for using the converter?
+        </summary>
+
+        <p class="mt-3 text-slate-400 leading-7">
+          No. Utiliverse provides the online conversion tool as a free
+          browser-based utility. It does not execute currency transactions.
         </p>
 
-        <h3>Cooking and recipe adjustments</h3>
+      </details>
 
-        <p>
-          Unit conversion is especially useful in the kitchen. Recipes may originate in countries that use different measurement systems. A recipe might list temperatures in Celsius, ingredients by weight in grams, or liquid quantities in liters. Someone preparing that recipe in the United States may be more comfortable working with Fahrenheit, ounces, cups, or pounds.
-        </p>
+    </div>
 
-        <p>
-          Temperature conversion is particularly helpful when baking or roasting. Converting a Celsius oven temperature into Fahrenheit can prevent mistakes caused by using the wrong temperature scale. Weight conversions can also help when a recipe provides an ingredient measurement in grams but the cook has a kitchen scale configured for ounces.
-        </p>
+  </section>
 
-        <h3>DIY projects and home improvement</h3>
 
-        <p>
-          Home improvement projects often involve measurements from multiple sources. Building materials may be labeled in feet and inches, product specifications may use millimeters or centimeters, and online plans can use metric measurements. A unit converter makes it easier to translate those dimensions before purchasing materials or beginning a project.
-        </p>
+</main>
 
-        <p>
-          Length conversions can help when measuring rooms, furniture, flooring, shelving, pipes, cables, or other materials. Area conversions are useful for estimating flooring, paint coverage, landscaping projects, and other surfaces. Converting measurements before purchasing materials can also reduce the chance of ordering an incorrect size.
-        </p>
 
-        <h3>Travel planning</h3>
+<!-- =====================================================
+     FOOTER
+====================================================== -->
 
-        <p>
-          Travelers frequently encounter both currency and measurement differences. A visitor may want to estimate how much a meal, hotel, attraction, or transportation expense will cost in their home currency. Currency conversion can provide a quick estimate before making a purchase.
-        </p>
+<footer class="border-t border-slate-800 bg-slate-950">
 
-        <p>
-          Travelers may also encounter kilometers instead of miles, Celsius instead of Fahrenheit, or kilograms instead of pounds. Converting those measurements can make local information easier to understand. For example, a traveler comparing driving distances can convert kilometers to miles, while a traveler checking a weather forecast can translate Celsius temperatures into Fahrenheit.
-        </p>
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
 
-        <h3>Shipping and logistics</h3>
+    <div class="flex flex-col sm:flex-row justify-between gap-4 text-sm text-slate-500">
 
-        <p>
-          Shipping calculations often depend on accurate dimensions and weight. Businesses that source or sell products internationally may receive specifications using different measurement standards. Converting centimeters to inches or kilograms to pounds can help create consistent product records and shipping estimates.
-        </p>
-
-        <p>
-          The same principle applies to personal shipments. Someone sending a package internationally may need to interpret a carrier's weight or dimension requirements. Converting the measurements before entering them into a shipping calculator can make the process easier and reduce avoidable errors.
-        </p>
-
-        <h3>Education and homework</h3>
-
-        <p>
-          Unit conversions are an important part of mathematics and science education. Students may encounter problems involving distance, mass, temperature, speed, area, volume, or time. A converter can provide a quick way to check a result after completing the underlying calculation manually.
-        </p>
-
-        <p>
-          Teachers can also use conversion tools as examples when explaining dimensional analysis, measurement systems, or the relationship between metric and customary units. The important educational distinction is between using a calculator to verify understanding and using one as a replacement for learning the conversion process.
-        </p>
-
-        <h3>Fitness, sports and recreation</h3>
-
-        <p>
-          Fitness and sports provide another practical application. Running routes are commonly presented in miles or kilometers, while cycling computers may use either measurement system. Converting distance can make training plans easier to follow. Speed conversions can also be useful when comparing kilometers per hour with miles per hour.
-        </p>
-
-        <p>
-          Weight conversions can help when workout programs or sporting information are published using different measurement systems. Athletes, coaches, and recreational users can translate measurements into the system they use most comfortably.
-        </p>
-
-        <h3>Technology and digital storage</h3>
-
-        <p>
-          Digital storage introduces another type of unit conversion. Files, storage devices, memory and data-transfer specifications can be expressed using bytes, kilobytes, megabytes, gigabytes and terabytes. A data converter helps users put these values into perspective when comparing storage capacity or file sizes.
-        </p>
-
-        <p>
-          Developers and IT professionals may also encounter different conventions for describing digital quantities. A quick conversion can help when estimating storage requirements, reviewing application output, or explaining technical specifications to nontechnical users.
-        </p>
-
-        <h3>Why accurate conversions matter</h3>
-
-        <p>
-          The purpose of a conversion tool is not simply convenience. Consistent units reduce misunderstandings. Whether someone is purchasing merchandise, preparing food, planning a trip, building furniture, studying science, or reviewing international prices, translating information into a familiar format makes decisions easier.
-        </p>
-
-        <p>
-          For currency, remember that an online conversion is an estimate based on an exchange rate and does not necessarily include bank spreads, card fees, transfer charges, taxes, or other transaction costs. For physical measurements, rounding can also matter when precision is important. In professional, financial, engineering, medical, or safety-critical situations, users should verify calculations against the applicable official specifications.
-        </p>
-
+      <div>
+        © <span id="year"></span> Utiliverse. All rights reserved.
       </div>
 
-    </article>
-
-
-    <!-- ============================================================
-         FAQ
-         ============================================================ -->
-
-    <section class="max-w-3xl mx-auto mt-16 mb-16">
-
-      <div class="border-t border-slate-200 pt-12">
-
-        <p class="text-xs font-bold uppercase tracking-widest text-indigo-600">
-          Help Center
-        </p>
-
-        <h2 class="text-3xl font-black text-slate-900 mt-2">
-          Frequently Asked Questions
-        </h2>
-
-        <p class="text-slate-500 mt-2">
-          Answers to common questions about unit and currency conversions.
-        </p>
-
-
-        <div class="mt-6">
-
-          <details class="faq-item">
-            <summary>
-              How does the currency converter get exchange rates?
-              <i data-lucide="plus" class="faq-icon w-5 h-5 text-slate-400"></i>
-            </summary>
-
-            <div class="pb-5 text-slate-600 leading-relaxed text-sm">
-              The currency converter retrieves exchange-rate data from ExchangeRate-API and uses the returned rates to calculate the selected conversion. Exchange rates can change, so the result should be treated as an informational estimate rather than a guaranteed transaction rate.
-            </div>
-          </details>
-
-
-          <details class="faq-item">
-            <summary>
-              Are currency exchange rates constantly changing?
-              <i data-lucide="plus" class="faq-icon w-5 h-5 text-slate-400"></i>
-            </summary>
-
-            <div class="pb-5 text-slate-600 leading-relaxed text-sm">
-              Yes. Foreign exchange markets move throughout the day. Banks, credit-card companies and money-transfer services may also apply their own rates, spreads and fees. The value shown by this tool may therefore differ from the final amount charged by a financial provider.
-            </div>
-          </details>
-
-
-          <details class="faq-item">
-            <summary>
-              What units can I convert?
-              <i data-lucide="plus" class="faq-icon w-5 h-5 text-slate-400"></i>
-            </summary>
-
-            <div class="pb-5 text-slate-600 leading-relaxed text-sm">
-              The tool includes common conversion categories such as length, weight or mass, temperature, area, volume, speed, time and digital storage. Each category provides units appropriate to that measurement type.
-            </div>
-          </details>
-
-
-          <details class="faq-item">
-            <summary>
-              Does the unit converter require an internet connection?
-              <i data-lucide="plus" class="faq-icon w-5 h-5 text-slate-400"></i>
-            </summary>
-
-            <div class="pb-5 text-slate-600 leading-relaxed text-sm">
-              The actual unit calculations happen locally in your browser, so they do not require an exchange-rate service. Currency conversions require internet access because the application needs to retrieve exchange-rate information.
-            </div>
-          </details>
-
-
-          <details class="faq-item">
-            <summary>
-              Can I use this converter for business calculations?
-              <i data-lucide="plus" class="faq-icon w-5 h-5 text-slate-400"></i>
-            </summary>
-
-            <div class="pb-5 text-slate-600 leading-relaxed text-sm">
-              Yes. It can be useful for preliminary calculations involving international pricing, e-commerce, product measurements, shipping, recipes, travel and other everyday tasks. For financial transactions, always verify the final rate and fees with your financial institution or payment provider.
-            </div>
-          </details>
-
-
-          <details class="faq-item">
-            <summary>
-              Are currency conversions guaranteed to match my bank?
-              <i data-lucide="plus" class="faq-icon w-5 h-5 text-slate-400"></i>
-            </summary>
-
-            <div class="pb-5 text-slate-600 leading-relaxed text-sm">
-              No. Banks, card issuers and money-transfer companies can use different exchange rates and may add transaction fees or currency-conversion spreads. The converter provides an informational estimate based on the exchange-rate data it retrieves.
-            </div>
-          </details>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ============================================================
-         GOOGLE ADSENSE: FOOTER INSERTION POINT
-         ============================================================ -->
-
-    <!-- GOOGLE ADSENSE: PRE-FOOTER PLACEMENT
-         Paste your approved Google AdSense code here.
-         This placeholder intentionally creates no visible box or reserved space.
-    -->
-
-  </main>
-
-
-  <!-- ============================================================
-       FOOTER
-       ============================================================ -->
-
-  <footer class="border-t border-slate-200 bg-white">
-
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
-
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-5">
-
-        <div class="text-sm text-slate-500 text-center sm:text-left">
-          © <span id="currentYear"></span> Utiliverse. All rights reserved.
-          <br>
-          <span class="text-xs">
-            Unit calculations run locally in your browser.
-          </span>
-        </div>
-
-        <div class="flex flex-wrap justify-center gap-5 text-sm text-slate-500">
-
-          <a href="https://utiliverse.app" class="hover:text-indigo-600 transition">
-            Home
-          </a>
-
-          <a href="/privacy/" class="hover:text-indigo-600 transition">
-            Privacy Policy
-          </a>
-
-          <a href="/terms/" class="hover:text-indigo-600 transition">
-            Terms
-          </a>
-
-          <a href="/contact/" class="hover:text-indigo-600 transition">
-            Contact
-          </a>
-
-        </div>
-
+      <div>
+        Currency conversions are estimates and are not financial advice.
       </div>
 
     </div>
 
-  </footer>
+  </div>
+
+</footer>
 
 
-  <!-- ============================================================
-       JAVASCRIPT
-       ============================================================ -->
+<script>
 
-  <script>
+/* =====================================================
+   COMPREHENSIVE CURRENCY DATABASE
+   =====================================================
 
-    /* ============================================================
-       CURRENCY DATA
-       ============================================================ */
+   The directory contains major ISO 4217 currencies and
+   country/region associations.
 
-    const currencies = {
-      USD: "United States Dollar",
-      EUR: "Euro",
-      GBP: "British Pound",
-      JPY: "Japanese Yen",
-      CAD: "Canadian Dollar",
-      AUD: "Australian Dollar",
-      CHF: "Swiss Franc",
-      CNY: "Chinese Yuan",
-      INR: "Indian Rupee",
-      MXN: "Mexican Peso",
-      BRL: "Brazilian Real",
-      NZD: "New Zealand Dollar",
-      SGD: "Singapore Dollar",
-      HKD: "Hong Kong Dollar",
-      SEK: "Swedish Krona",
-      NOK: "Norwegian Krone",
-      DKK: "Danish Krone",
-      PLN: "Polish Zloty",
-      CZK: "Czech Koruna",
-      HUF: "Hungarian Forint",
-      TRY: "Turkish Lira",
-      ZAR: "South African Rand",
-      KRW: "South Korean Won",
-      THB: "Thai Baht",
-      IDR: "Indonesian Rupiah",
-      MYR: "Malaysian Ringgit",
-      PHP: "Philippine Peso",
-      AED: "United Arab Emirates Dirham",
-      SAR: "Saudi Riyal",
-      ILS: "Israeli New Shekel",
-      JOD: "Jordanian Dinar",
-      KWD: "Kuwaiti Dinar",
-      QAR: "Qatari Riyal",
-      EGP: "Egyptian Pound",
-      NGN: "Nigerian Naira",
-      PKR: "Pakistani Rupee",
-      BDT: "Bangladeshi Taka",
-      LKR: "Sri Lankan Rupee",
-      VND: "Vietnamese Dong",
-      RUB: "Russian Ruble",
-      ISK: "Icelandic Krona"
-    };
+   Multiple countries can share one currency.
+===================================================== */
+
+const currencies = [
+
+  {country:"Afghanistan", code:"AFN", name:"Afghani", symbol:"؋"},
+  {country:"Albania", code:"ALL", name:"Albanian Lek", symbol:"Lek"},
+  {country:"Algeria", code:"DZD", name:"Algerian Dinar", symbol:"دج"},
+  {country:"Angola", code:"AOA", name:"Angolan Kwanza", symbol:"Kz"},
+  {country:"Argentina", code:"ARS", name:"Argentine Peso", symbol:"$"},
+  {country:"Armenia", code:"AMD", name:"Armenian Dram", symbol:"֏"},
+  {country:"Aruba", code:"AWG", name:"Aruban Florin", symbol:"ƒ"},
+  {country:"Australia", code:"AUD", name:"Australian Dollar", symbol:"A$"},
+  {country:"Azerbaijan", code:"AZN", name:"Azerbaijani Manat", symbol:"₼"},
+
+  {country:"Bahamas", code:"BSD", name:"Bahamian Dollar", symbol:"B$"},
+  {country:"Bahrain", code:"BHD", name:"Bahraini Dinar", symbol:"BD"},
+  {country:"Bangladesh", code:"BDT", name:"Bangladeshi Taka", symbol:"৳"},
+  {country:"Barbados", code:"BBD", name:"Barbadian Dollar", symbol:"Bds$"},
+  {country:"Belarus", code:"BYN", name:"Belarusian Ruble", symbol:"Br"},
+  {country:"Belize", code:"BZD", name:"Belize Dollar", symbol:"BZ$"},
+  {country:"Bermuda", code:"BMD", name:"Bermudian Dollar", symbol:"BD$"},
+  {country:"Bhutan", code:"BTN", name:"Bhutanese Ngultrum", symbol:"Nu."},
+  {country:"Bolivia", code:"BOB", name:"Bolivian Boliviano", symbol:"Bs."},
+  {country:"Bosnia and Herzegovina", code:"BAM", name:"Convertible Mark", symbol:"KM"},
+  {country:"Botswana", code:"BWP", name:"Botswana Pula", symbol:"P"},
+  {country:"Brazil", code:"BRL", name:"Brazilian Real", symbol:"R$"},
+  {country:"Brunei", code:"BND", name:"Brunei Dollar", symbol:"B$"},
+  {country:"Bulgaria", code:"BGN", name:"Bulgarian Lev", symbol:"лв"},
+
+  {country:"Cambodia", code:"KHR", name:"Cambodian Riel", symbol:"៛"},
+  {country:"Canada", code:"CAD", name:"Canadian Dollar", symbol:"C$"},
+  {country:"Cape Verde", code:"CVE", name:"Cape Verdean Escudo", symbol:"$"},
+  {country:"Cayman Islands", code:"KYD", name:"Cayman Islands Dollar", symbol:"CI$"},
+  {country:"Chile", code:"CLP", name:"Chilean Peso", symbol:"$"},
+  {country:"China", code:"CNY", name:"Chinese Yuan", symbol:"¥"},
+  {country:"Colombia", code:"COP", name:"Colombian Peso", symbol:"$"},
+  {country:"Comoros", code:"KMF", name:"Comorian Franc", symbol:"CF"},
+  {country:"Costa Rica", code:"CRC", name:"Costa Rican Colon", symbol:"₡"},
+  {country:"Croatia", code:"EUR", name:"Euro", symbol:"€"},
+  {country:"Cuba", code:"CUP", name:"Cuban Peso", symbol:"$"},
+  {country:"Curacao", code:"ANG", name:"Netherlands Antillean Guilder", symbol:"ƒ"},
+  {country:"Cyprus", code:"EUR", name:"Euro", symbol:"€"},
+  {country:"Czech Republic", code:"CZK", name:"Czech Koruna", symbol:"Kč"},
+
+  {country:"Denmark", code:"DKK", name:"Danish Krone", symbol:"kr"},
+  {country:"Djibouti", code:"DJF", name:"Djiboutian Franc", symbol:"Fdj"},
+  {country:"Dominica", code:"XCD", name:"East Caribbean Dollar", symbol:"EC$"},
+
+  /* DOMINICAN REPUBLIC */
+  {
+    country:"Dominican Republic",
+    code:"DOP",
+    name:"Dominican Peso",
+    symbol:"RD$"
+  },
+
+  {country:"Ecuador", code:"USD", name:"US Dollar", symbol:"$"},
+  {country:"Egypt", code:"EGP", name:"Egyptian Pound", symbol:"£"},
+  {country:"El Salvador", code:"USD", name:"US Dollar", symbol:"$"},
+  {country:"Eritrea", code:"ERN", name:"Eritrean Nakfa", symbol:"Nfk"},
+  {country:"Estonia", code:"EUR", name:"Euro", symbol:"€"},
+  {country:"Eswatini", code:"SZL", name:"Swazi Lilangeni", symbol:"E"},
+  {country:"Ethiopia", code:"ETB", name:"Ethiopian Birr", symbol:"Br"},
+
+  {country:"Fiji", code:"FJD", name:"Fijian Dollar", symbol:"FJ$"},
+  {country:"Finland", code:"EUR", name:"Euro", symbol:"€"},
+  {country:"France", code:"EUR", name:"Euro", symbol:"€"},
+
+  {country:"Gambia", code:"GMD", name:"Gambian Dalasi", symbol:"D"},
+  {country:"Georgia", code:"GEL", name:"Georgian Lari", symbol:"₾"},
+  {country:"Germany", code:"EUR", name:"Euro", symbol:"€"},
+  {country:"Ghana", code:"GHS", name:"Ghanaian Cedi", symbol:"₵"},
+  {country:"Gibraltar", code:"GIP", name:"Gibraltar Pound", symbol:"£"},
+  {country:"Greece", code:"EUR", name:"Euro", symbol:"€"},
+  {country:"Grenada", code:"XCD", name:"East Caribbean Dollar", symbol:"EC$"},
+  {country:"Guatemala", code:"GTQ", name:"Guatemalan Quetzal", symbol:"Q"},
+  {country:"Guinea", code:"GNF", name:"Guinean Franc", symbol:"FG"},
+  {country:"Guyana", code:"GYD", name:"Guyanese Dollar", symbol:"G$"},
+
+  {country:"Haiti", code:"HTG", name:"Haitian Gourde", symbol:"G"},
+  {country:"Honduras", code:"HNL", name:"Honduran Lempira", symbol:"L"},
+  {country:"Hong Kong", code:"HKD", name:"Hong Kong Dollar", symbol:"HK$"},
+  {country:"Hungary", code:"HUF", name:"Hungarian Forint", symbol:"Ft"},
+
+  {country:"Iceland", code:"ISK", name:"Icelandic Krona", symbol:"kr"},
+  {country:"India", code:"INR", name:"Indian Rupee", symbol:"₹"},
+  {country:"Indonesia", code:"IDR", name:"Indonesian Rupiah", symbol:"Rp"},
+  {country:"Iran", code:"IRR", name:"Iranian Rial", symbol:"﷼"},
+  {country:"Iraq", code:"IQD", name:"Iraqi Dinar", symbol:"ع.د"},
+  {country:"Ireland", code:"EUR", name:"Euro", symbol:"€"},
+  {country:"Israel", code:"ILS", name:"Israeli New Shekel", symbol:"₪"},
+  {country:"Italy", code:"EUR", name:"Euro", symbol:"€"},
+
+  {country:"Jamaica", code:"JMD", name:"Jamaican Dollar", symbol:"J$"},
+  {country:"Japan", code:"JPY", name:"Japanese Yen", symbol:"¥"},
+  {country:"Jordan", code:"JOD", name:"Jordanian Dinar", symbol:"د.ا"},
+
+  {country:"Kazakhstan", code:"KZT", name:"Kazakhstani Tenge", symbol:"₸"},
+  {country:"Kenya", code:"KES", name:"Kenyan Shilling", symbol:"KSh"},
+  {country:"Kuwait", code:"KWD", name:"Kuwaiti Dinar", symbol:"د.ك"},
+  {country:"Kyrgyzstan", code:"KGS", name:"Kyrgyzstani Som", symbol:"с"},
+
+  {country:"Laos", code:"LAK", name:"Lao Kip", symbol:"₭"},
+  {country:"Latvia", code:"EUR", name:"Euro", symbol:"€"},
+  {country:"Lebanon", code:"LBP", name:"Lebanese Pound", symbol:"ل.ل"},
+  {country:"Lesotho", code:"LSL", name:"Lesotho Loti", symbol:"L"},
+  {country:"Liberia", code:"LRD", name:"Liberian Dollar", symbol:"L$"},
+  {country:"Libya", code:"LYD", name:"Libyan Dinar", symbol:"ل.د"},
+  {country:"Lithuania", code:"EUR", name:"Euro", symbol:"€"},
+  {country:"Luxembourg", code:"EUR", name:"Euro", symbol:"€"},
+
+  {country:"Macau", code:"MOP", name:"Macanese Pataca", symbol:"MOP$"},
+  {country:"Madagascar", code:"MGA", name:"Malagasy Ariary", symbol:"Ar"},
+  {country:"Malawi", code:"MWK", name:"Malawian Kwacha", symbol:"MK"},
+  {country:"Malaysia", code:"MYR", name:"Malaysian Ringgit", symbol:"RM"},
+  {country:"Maldives", code:"MVR", name:"Maldivian Rufiyaa", symbol:"Rf"},
+  {country:"Mauritania", code:"MRU", name:"Mauritanian Ouguiya", symbol:"UM"},
+  {country:"Mauritius", code:"MUR", name:"Mauritian Rupee", symbol:"₨"},
+  {country:"Mexico", code:"MXN", name:"Mexican Peso", symbol:"Mex$"},
+  {country:"Moldova", code:"MDL", name:"Moldovan Leu", symbol:"L"},
+  {country:"Mongolia", code:"MNT", name:"Mongolian Tugrik", symbol:"₮"},
+  {country:"Morocco", code:"MAD", name:"Moroccan Dirham", symbol:"د.م."},
+  {country:"Mozambique", code:"MZN", name:"Mozambican Metical", symbol:"MT"},
+
+  {country:"Myanmar", code:"MMK", name:"Myanmar Kyat", symbol:"K"},
+
+  {country:"Namibia", code:"NAD", name:"Namibian Dollar", symbol:"N$"},
+  {country:"Nepal", code:"NPR", name:"Nepalese Rupee", symbol:"₨"},
+  {country:"Netherlands", code:"EUR", name:"Euro", symbol:"€"},
+  {country:"New Zealand", code:"NZD", name:"New Zealand Dollar", symbol:"NZ$"},
+  {country:"Nicaragua", code:"NIO", name:"Nicaraguan Cordoba", symbol:"C$"},
+  {country:"Nigeria", code:"NGN", name:"Nigerian Naira", symbol:"₦"},
+  {country:"North Korea", code:"KPW", name:"North Korean Won", symbol:"₩"},
+  {country:"North Macedonia", code:"MKD", name:"Macedonian Denar", symbol:"ден"},
+  {country:"Norway", code:"NOK", name:"Norwegian Krone", symbol:"kr"},
+
+  {country:"Oman", code:"OMR", name:"Omani Rial", symbol:"ر.ع."},
+
+  {country:"Pakistan", code:"PKR", name:"Pakistani Rupee", symbol:"₨"},
+  {country:"Panama", code:"PAB", name:"Panamanian Balboa", symbol:"B/."},
+  {country:"Papua New Guinea", code:"PGK", name:"Papua New Guinean Kina", symbol:"K"},
+  {country:"Paraguay", code:"PYG", name:"Paraguayan Guarani", symbol:"₲"},
+  {country:"Peru", code:"PEN", name:"Peruvian Sol", symbol:"S/"},
+  {country:"Philippines", code:"PHP", name:"Philippine Peso", symbol:"₱"},
+  {country:"Poland", code:"PLN", name:"Polish Zloty", symbol:"zł"},
+  {country:"Portugal", code:"EUR", name:"Euro", symbol:"€"},
+
+  {country:"Qatar", code:"QAR", name:"Qatari Riyal", symbol:"ر.ق"},
+
+  {country:"Romania", code:"RON", name:"Romanian Leu", symbol:"lei"},
+  {country:"Russia", code:"RUB", name:"Russian Ruble", symbol:"₽"},
+  {country:"Rwanda", code:"RWF", name:"Rwandan Franc", symbol:"FRw"},
+
+  {country:"Saint Kitts and Nevis", code:"XCD", name:"East Caribbean Dollar", symbol:"EC$"},
+  {country:"Saint Lucia", code:"XCD", name:"East Caribbean Dollar", symbol:"EC$"},
+  {country:"Saint Vincent and the Grenadines", code:"XCD", name:"East Caribbean Dollar", symbol:"EC$"},
+  {country:"Samoa", code:"WST", name:"Samoan Tala", symbol:"WS$"},
+  {country:"Saudi Arabia", code:"SAR", name:"Saudi Riyal", symbol:"﷼"},
+  {country:"Serbia", code:"RSD", name:"Serbian Dinar", symbol:"дин"},
+  {country:"Seychelles", code:"SCR", name:"Seychellois Rupee", symbol:"₨"},
+  {country:"Singapore", code:"SGD", name:"Singapore Dollar", symbol:"S$"},
+  {country:"Slovakia", code:"EUR", name:"Euro", symbol:"€"},
+  {country:"Slovenia", code:"EUR", name:"Euro", symbol:"€"},
+  {country:"Solomon Islands", code:"SBD", name:"Solomon Islands Dollar", symbol:"SI$"},
+  {country:"Somalia", code:"SOS", name:"Somali Shilling", symbol:"S"},
+  {country:"South Africa", code:"ZAR", name:"South African Rand", symbol:"R"},
+  {country:"South Korea", code:"KRW", name:"South Korean Won", symbol:"₩"},
+  {country:"South Sudan", code:"SSP", name:"South Sudanese Pound", symbol:"£"},
+  {country:"Spain", code:"EUR", name:"Euro", symbol:"€"},
+  {country:"Sri Lanka", code:"LKR", name:"Sri Lankan Rupee", symbol:"Rs"},
+  {country:"Sudan", code:"SDG", name:"Sudanese Pound", symbol:"ج.س."},
+  {country:"Suriname", code:"SRD", name:"Surinamese Dollar", symbol:"$"},
+  {country:"Sweden", code:"SEK", name:"Swedish Krona", symbol:"kr"},
+  {country:"Switzerland", code:"CHF", name:"Swiss Franc", symbol:"CHF"},
+  {country:"Syria", code:"SYP", name:"Syrian Pound", symbol:"£"},
+
+  {country:"Taiwan", code:"TWD", name:"New Taiwan Dollar", symbol:"NT$"},
+  {country:"Tajikistan", code:"TJS", name:"Tajikistani Somoni", symbol:"SM"},
+  {country:"Tanzania", code:"TZS", name:"Tanzanian Shilling", symbol:"TSh"},
+  {country:"Thailand", code:"THB", name:"Thai Baht", symbol:"฿"},
+  {country:"Tonga", code:"TOP", name:"Tongan Paanga", symbol:"T$"},
+  {country:"Trinidad and Tobago", code:"TTD", name:"Trinidad and Tobago Dollar", symbol:"TT$"},
+  {country:"Tunisia", code:"TND", name:"Tunisian Dinar", symbol:"د.ت"},
+  {country:"Turkey", code:"TRY", name:"Turkish Lira", symbol:"₺"},
+  {country:"Turkmenistan", code:"TMT", name:"Turkmenistan Manat", symbol:"m"},
+  {country:"Uganda", code:"UGX", name:"Ugandan Shilling", symbol:"USh"},
+  {country:"Ukraine", code:"UAH", name:"Ukrainian Hryvnia", symbol:"₴"},
+  {country:"United Arab Emirates", code:"AED", name:"UAE Dirham", symbol:"د.إ"},
+  {country:"United Kingdom", code:"GBP", name:"British Pound Sterling", symbol:"£"},
+  {country:"United States", code:"USD", name:"US Dollar", symbol:"$"},
+  {country:"Uruguay", code:"UYU", name:"Uruguayan Peso", symbol:"$U"},
+  {country:"Uzbekistan", code:"UZS", name:"Uzbekistani Som", symbol:"лв"},
+
+  {country:"Vanuatu", code:"VUV", name:"Vanuatu Vatu", symbol:"VT"},
+  {country:"Venezuela", code:"VES", name:"Venezuelan Bolivar", symbol:"Bs."},
+  {country:"Vietnam", code:"VND", name:"Vietnamese Dong", symbol:"₫"},
+
+  {country:"Yemen", code:"YER", name:"Yemeni Rial", symbol:"﷼"},
+  {country:"Zambia", code:"ZMW", name:"Zambian Kwacha", symbol:"ZK"},
+  {country:"Zimbabwe", code:"ZWG", name:"Zimbabwe Gold", symbol:"ZiG"}
+
+];
 
 
-    let currencyRates = {};
-    let currencyRatesLoaded = false;
+/* =====================================================
+   STATE
+===================================================== */
+
+let currencyMode = true;
+
+let rateCache = {};
+
+let lastRateUpdate = null;
 
 
-    /* ============================================================
-       UNIT DATA
-       ============================================================ */
+/* =====================================================
+   INITIALIZATION
+===================================================== */
 
-    const unitData = {
+document.addEventListener("DOMContentLoaded", () => {
 
-      length: {
-        "Meters": 1,
-        "Kilometers": 1000,
-        "Centimeters": 0.01,
-        "Millimeters": 0.001,
-        "Miles": 1609.344,
-        "Yards": 0.9144,
-        "Feet": 0.3048,
-        "Inches": 0.0254
-      },
+  populateCurrencySelects();
 
-      weight: {
-        "Kilograms": 1,
-        "Grams": 0.001,
-        "Milligrams": 0.000001,
-        "Metric Tons": 1000,
-        "Pounds": 0.45359237,
-        "Ounces": 0.028349523125
-      },
+  populateUnits();
 
-      area: {
-        "Square Meters": 1,
-        "Square Kilometers": 1000000,
-        "Square Feet": 0.09290304,
-        "Square Yards": 0.83612736,
-        "Square Miles": 2589988.110336,
-        "Acres": 4046.8564224,
-        "Hectares": 10000
-      },
+  document.getElementById("year").textContent =
+    new Date().getFullYear();
 
-      volume: {
-        "Liters": 1,
-        "Milliliters": 0.001,
-        "Cubic Meters": 1000,
-        "Gallons (US)": 3.785411784,
-        "Quarts (US)": 0.946352946,
-        "Pints (US)": 0.473176473,
-        "Cups (US)": 0.2365882365,
-        "Fluid Ounces (US)": 0.0295735295625
-      },
+  lucide.createIcons();
 
-      speed: {
-        "Meters per Second": 1,
-        "Kilometers per Hour": 0.2777777778,
-        "Miles per Hour": 0.44704,
-        "Feet per Second": 0.3048,
-        "Knots": 0.5144444444
-      },
+  convertCurrency();
 
-      time: {
-        "Seconds": 1,
-        "Minutes": 60,
-        "Hours": 3600,
-        "Days": 86400,
-        "Weeks": 604800,
-        "Years": 31557600
-      },
-
-      data: {
-        "Bytes": 1,
-        "Kilobytes": 1024,
-        "Megabytes": 1024 ** 2,
-        "Gigabytes": 1024 ** 3,
-        "Terabytes": 1024 ** 4,
-        "Petabytes": 1024 ** 5
-      }
-
-    };
+});
 
 
-    /* ============================================================
-       TEMPERATURE CONVERSION
-       ============================================================ */
+/* =====================================================
+   UNIQUE CURRENCY OPTIONS
+===================================================== */
 
-    const temperatureUnits = [
-      "Celsius",
-      "Fahrenheit",
-      "Kelvin"
-    ];
+function getUniqueCurrencies() {
 
+  const seen = new Set();
 
-    /* ============================================================
-       MODE SWITCHING
-       ============================================================ */
+  return currencies.filter(currency => {
 
-    function switchMode(mode) {
-
-      const unitPanel = document.getElementById("unitPanel");
-      const currencyPanel = document.getElementById("currencyPanel");
-
-      const unitTab = document.getElementById("unitTab");
-      const currencyTab = document.getElementById("currencyTab");
-
-      if (mode === "unit") {
-
-        unitPanel.classList.remove("hidden-panel");
-        currencyPanel.classList.add("hidden-panel");
-
-        unitTab.classList.add("active");
-        currencyTab.classList.remove("active");
-
-      } else {
-
-        unitPanel.classList.add("hidden-panel");
-        currencyPanel.classList.remove("hidden-panel");
-
-        unitTab.classList.remove("active");
-        currencyTab.classList.add("active");
-
-        if (!currencyRatesLoaded) {
-          fetchCurrencyRates();
-        }
-
-      }
-
+    if (seen.has(currency.code)) {
+      return false;
     }
 
+    seen.add(currency.code);
 
-    /* ============================================================
-       UNIT OPTIONS
-       ============================================================ */
+    return true;
 
-    function populateUnitOptions() {
+  }).sort((a,b) => {
 
-      const category = document.getElementById("unitCategory").value;
+    return a.name.localeCompare(b.name);
 
-      const from = document.getElementById("unitFrom");
-      const to = document.getElementById("unitTo");
+  });
 
-      from.innerHTML = "";
-      to.innerHTML = "";
+}
 
-      let units;
 
-      if (category === "temperature") {
-        units = temperatureUnits;
-      } else {
-        units = Object.keys(unitData[category]);
-      }
+/* =====================================================
+   POPULATE CURRENCY DROPDOWNS
+===================================================== */
 
-      units.forEach((unit, index) => {
+function populateCurrencySelects() {
 
-        const option1 = document.createElement("option");
-        option1.value = unit;
-        option1.textContent = unit;
+  const from = document.getElementById("fromCurrency");
+  const to = document.getElementById("toCurrency");
 
-        const option2 = document.createElement("option");
-        option2.value = unit;
-        option2.textContent = unit;
+  const list = getUniqueCurrencies();
 
-        from.appendChild(option1);
-        to.appendChild(option2);
+  from.innerHTML = "";
+  to.innerHTML = "";
 
-      });
+  list.forEach(currency => {
 
-      if (units.length > 1) {
-        to.selectedIndex = 1;
-      }
+    const label =
+      `${currency.country} — ${currency.code} — ${currency.name}`;
 
-      convertUnit();
+    const option1 = new Option(
+      label,
+      currency.code
+    );
+
+    const option2 = new Option(
+      label,
+      currency.code
+    );
+
+    from.appendChild(option1);
+    to.appendChild(option2);
+
+  });
+
+  from.value = "USD";
+  to.value = "DOP";
+
+}
+
+
+/* =====================================================
+   SEARCHABLE CURRENCY FILTER
+===================================================== */
+
+function filterCurrencies(type) {
+
+  const search =
+    document.getElementById(
+      type === "from"
+        ? "fromSearch"
+        : "toSearch"
+    ).value.toLowerCase();
+
+  const select =
+    document.getElementById(
+      type === "from"
+        ? "fromCurrency"
+        : "toCurrency"
+    );
+
+  const currentValue = select.value;
+
+  select.innerHTML = "";
+
+  const filtered = getUniqueCurrencies().filter(currency => {
+
+    const text =
+      `${currency.country} ${currency.code} ${currency.name}`
+      .toLowerCase();
+
+    return text.includes(search);
+
+  });
+
+  filtered.forEach(currency => {
+
+    const label =
+      `${currency.country} — ${currency.code} — ${currency.name}`;
+
+    select.appendChild(
+      new Option(label, currency.code)
+    );
+
+  });
+
+  if (
+    [...select.options].some(
+      option => option.value === currentValue
+    )
+  ) {
+
+    select.value = currentValue;
+
+  }
+
+  convertCurrency();
+
+}
+
+
+/* =====================================================
+   CURRENCY CONVERSION
+===================================================== */
+
+async function convertCurrency() {
+
+  const amount =
+    parseFloat(
+      document.getElementById("currencyAmount").value
+    ) || 0;
+
+  const from =
+    document.getElementById("fromCurrency").value;
+
+  const to =
+    document.getElementById("toCurrency").value;
+
+  const result =
+    document.getElementById("currencyResult");
+
+  const rateText =
+    document.getElementById("currencyRate");
+
+  const status =
+    document.getElementById("rateStatus");
+
+  const error =
+    document.getElementById("currencyError");
+
+  error.classList.add("hidden");
+
+  if (!from || !to) return;
+
+  if (from === to) {
+
+    result.textContent =
+      formatNumber(amount) + " " + to;
+
+    rateText.textContent =
+      `1 ${from} = 1 ${to}`;
+
+    status.textContent =
+      "Same-currency conversion.";
+
+    return;
+
+  }
+
+
+  const cacheKey = `${from}_${to}`;
+
+  if (rateCache[cacheKey]) {
+
+    displayCurrencyResult(
+      amount,
+      from,
+      to,
+      rateCache[cacheKey]
+    );
+
+    return;
+
+  }
+
+
+  result.textContent = "Loading...";
+
+  rateText.textContent =
+    "Retrieving latest available exchange rate...";
+
+  status.textContent = "";
+
+
+  try {
+
+    /*
+      ExchangeRate-API public endpoint.
+
+      We request rates using USD as the base and
+      calculate cross-rates when necessary.
+    */
+
+    const response =
+      await fetch(
+        `https://api.exchangerate-api.com/v4/latest/${encodeURIComponent(from)}`
+      );
+
+    if (!response.ok) {
+      throw new Error("Exchange-rate service unavailable.");
     }
 
+    const data = await response.json();
 
-    /* ============================================================
-       UNIT CONVERSION
-       ============================================================ */
+    if (
+      !data.rates ||
+      typeof data.rates[to] === "undefined"
+    ) {
 
-    function convertUnit() {
-
-      const category = document.getElementById("unitCategory").value;
-      const amount = parseFloat(document.getElementById("unitAmount").value) || 0;
-
-      const from = document.getElementById("unitFrom").value;
-      const to = document.getElementById("unitTo").value;
-
-      let result;
-
-      if (category === "temperature") {
-
-        result = convertTemperature(amount, from, to);
-
-      } else {
-
-        const baseValue = amount * unitData[category][from];
-
-        result = baseValue / unitData[category][to];
-
-      }
-
-      const rounded = formatNumber(result);
-
-      document.getElementById("unitResult").textContent =
-        rounded + " " + to;
-
-      document.getElementById("unitFormula").textContent =
-        formatNumber(amount) + " " + from +
-        " = " + rounded + " " + to;
-
-    }
-
-
-    function convertTemperature(value, from, to) {
-
-      let celsius;
-
-      if (from === "Celsius") {
-        celsius = value;
-      } else if (from === "Fahrenheit") {
-        celsius = (value - 32) * 5 / 9;
-      } else {
-        celsius = value - 273.15;
-      }
-
-      if (to === "Celsius") {
-        return celsius;
-      }
-
-      if (to === "Fahrenheit") {
-        return celsius * 9 / 5 + 32;
-      }
-
-      return celsius + 273.15;
-
-    }
-
-
-    function formatNumber(number) {
-
-      if (!Number.isFinite(number)) {
-        return "0";
-      }
-
-      return Number(number.toFixed(8)).toLocaleString(
-        "en-US",
-        {
-          maximumFractionDigits: 8
-        }
+      throw new Error(
+        `${to} is not currently available from the live rate provider.`
       );
 
     }
 
+    const rate =
+      Number(data.rates[to]);
 
-    /* ============================================================
-       UNIT SWAP
-       ============================================================ */
+    rateCache[cacheKey] = rate;
 
-    function swapUnits() {
+    lastRateUpdate =
+      data.date || new Date().toISOString().slice(0,10);
 
-      const from = document.getElementById("unitFrom");
-      const to = document.getElementById("unitTo");
+    displayCurrencyResult(
+      amount,
+      from,
+      to,
+      rate
+    );
 
-      const temp = from.value;
+  } catch (err) {
 
-      from.value = to.value;
-      to.value = temp;
+    result.textContent = "Unavailable";
 
-      convertUnit();
+    rateText.textContent =
+      "A live exchange rate could not be retrieved.";
+
+    status.textContent =
+      "Please check your internet connection or try again.";
+
+    error.textContent =
+      err.message ||
+      "Unable to retrieve the exchange rate.";
+
+    error.classList.remove("hidden");
+
+  }
+
+}
+
+
+/* =====================================================
+   DISPLAY CURRENCY RESULT
+===================================================== */
+
+function displayCurrencyResult(
+  amount,
+  from,
+  to,
+  rate
+) {
+
+  const converted =
+    amount * rate;
+
+  document.getElementById("currencyResult")
+    .textContent =
+      formatNumber(converted) + " " + to;
+
+  document.getElementById("currencyRate")
+    .textContent =
+      `1 ${from} = ${formatNumber(rate)} ${to}`;
+
+  document.getElementById("rateStatus")
+    .textContent =
+      lastRateUpdate
+        ? `Rate data date: ${lastRateUpdate}.`
+        : "Latest available rate retrieved.";
+
+}
+
+
+/* =====================================================
+   SWAP CURRENCIES
+===================================================== */
+
+function swapCurrencies() {
+
+  const from =
+    document.getElementById("fromCurrency");
+
+  const to =
+    document.getElementById("toCurrency");
+
+  const temp = from.value;
+
+  from.value = to.value;
+
+  to.value = temp;
+
+  document.getElementById("fromSearch").value = "";
+
+  document.getElementById("toSearch").value = "";
+
+  convertCurrency();
+
+}
+
+
+/* =====================================================
+   FORMAT NUMBERS
+===================================================== */
+
+function formatNumber(number) {
+
+  return new Intl.NumberFormat(
+    "en-US",
+    {
+      maximumFractionDigits: 8
+    }
+  ).format(number);
+
+}
+
+
+/* =====================================================
+   UNIT CONVERTER DATABASE
+===================================================== */
+
+const units = {
+
+  length: {
+
+    meter: {
+      name:"Meters",
+      factor:1
+    },
+
+    kilometer: {
+      name:"Kilometers",
+      factor:1000
+    },
+
+    centimeter: {
+      name:"Centimeters",
+      factor:.01
+    },
+
+    millimeter: {
+      name:"Millimeters",
+      factor:.001
+    },
+
+    mile: {
+      name:"Miles",
+      factor:1609.344
+    },
+
+    yard: {
+      name:"Yards",
+      factor:.9144
+    },
+
+    foot: {
+      name:"Feet",
+      factor:.3048
+    },
+
+    inch: {
+      name:"Inches",
+      factor:.0254
+    }
+
+  },
+
+
+  weight: {
+
+    kilogram: {
+      name:"Kilograms",
+      factor:1
+    },
+
+    gram: {
+      name:"Grams",
+      factor:.001
+    },
+
+    milligram: {
+      name:"Milligrams",
+      factor:.000001
+    },
+
+    pound: {
+      name:"Pounds",
+      factor:.45359237
+    },
+
+    ounce: {
+      name:"Ounces",
+      factor:.0283495231
+    },
+
+    stone: {
+      name:"Stone",
+      factor:6.35029318
+    }
+
+  },
+
+
+  temperature: {
+
+    celsius: {
+      name:"Celsius"
+    },
+
+    fahrenheit: {
+      name:"Fahrenheit"
+    },
+
+    kelvin: {
+      name:"Kelvin"
+    }
+
+  },
+
+
+  area: {
+
+    squareMeter: {
+      name:"Square Meters",
+      factor:1
+    },
+
+    squareKilometer: {
+      name:"Square Kilometers",
+      factor:1000000
+    },
+
+    squareFoot: {
+      name:"Square Feet",
+      factor:.092903
+    },
+
+    squareYard: {
+      name:"Square Yards",
+      factor:.836127
+    },
+
+    acre: {
+      name:"Acres",
+      factor:4046.856422
+    },
+
+    hectare: {
+      name:"Hectares",
+      factor:10000
+    }
+
+  },
+
+
+  volume: {
+
+    liter: {
+      name:"Liters",
+      factor:1
+    },
+
+    milliliter: {
+      name:"Milliliters",
+      factor:.001
+    },
+
+    gallonUS: {
+      name:"US Gallons",
+      factor:3.785411784
+    },
+
+    quartUS: {
+      name:"US Quarts",
+      factor:.946352946
+    },
+
+    pintUS: {
+      name:"US Pints",
+      factor:.473176473
+    },
+
+    cupUS: {
+      name:"US Cups",
+      factor:.2365882365
+    },
+
+    fluidOunceUS: {
+      name:"US Fluid Ounces",
+      factor:.0295735296
+    }
+
+  },
+
+
+  speed: {
+
+    meterSecond: {
+      name:"Meters / Second",
+      factor:1
+    },
+
+    kilometerHour: {
+      name:"Kilometers / Hour",
+      factor:.277777778
+    },
+
+    mileHour: {
+      name:"Miles / Hour",
+      factor:.44704
+    },
+
+    knot: {
+      name:"Knots",
+      factor:.514444444
+    }
+
+  },
+
+
+  digital: {
+
+    byte: {
+      name:"Bytes",
+      factor:1
+    },
+
+    kilobyte: {
+      name:"Kilobytes",
+      factor:1024
+    },
+
+    megabyte: {
+      name:"Megabytes",
+      factor:1048576
+    },
+
+    gigabyte: {
+      name:"Gigabytes",
+      factor:1073741824
+    },
+
+    terabyte: {
+      name:"Terabytes",
+      factor:1099511627776
+    }
+
+  }
+
+};
+
+
+/* =====================================================
+   POPULATE UNITS
+===================================================== */
+
+function populateUnits() {
+
+  const category =
+    document.getElementById("unitCategory").value;
+
+  const from =
+    document.getElementById("unitFrom");
+
+  const to =
+    document.getElementById("unitTo");
+
+  from.innerHTML = "";
+  to.innerHTML = "";
+
+  Object.entries(
+    units[category]
+  ).forEach(([key,unit]) => {
+
+    from.appendChild(
+      new Option(unit.name,key)
+    );
+
+    to.appendChild(
+      new Option(unit.name,key)
+    );
+
+  });
+
+  if (category === "length") {
+
+    from.value = "meter";
+    to.value = "foot";
+
+  }
+
+  if (category === "weight") {
+
+    from.value = "kilogram";
+    to.value = "pound";
+
+  }
+
+  if (category === "temperature") {
+
+    from.value = "celsius";
+    to.value = "fahrenheit";
+
+  }
+
+  convertUnit();
+
+}
+
+
+/* =====================================================
+   UNIT CONVERSION
+===================================================== */
+
+function convertUnit() {
+
+  const category =
+    document.getElementById("unitCategory").value;
+
+  const from =
+    document.getElementById("unitFrom").value;
+
+  const to =
+    document.getElementById("unitTo").value;
+
+  const amount =
+    parseFloat(
+      document.getElementById("unitAmount").value
+    ) || 0;
+
+  let result;
+
+
+  /* TEMPERATURE */
+
+  if (category === "temperature") {
+
+    let celsius;
+
+    if (from === "celsius") {
+
+      celsius = amount;
+
+    } else if (from === "fahrenheit") {
+
+      celsius =
+        (amount - 32) * 5/9;
+
+    } else {
+
+      celsius =
+        amount - 273.15;
 
     }
 
 
-    /* ============================================================
-       COPY UNIT RESULT
-       ============================================================ */
+    if (to === "celsius") {
 
-    function copyUnitResult() {
+      result = celsius;
 
-      const result = document.getElementById("unitResult").textContent;
+    } else if (to === "fahrenheit") {
 
-      navigator.clipboard.writeText(result).then(() => {
+      result =
+        celsius * 9/5 + 32;
 
-        const original = document.getElementById("unitResult").textContent;
+    } else {
 
-        document.getElementById("unitResult").textContent = "Copied!";
-
-        setTimeout(() => {
-          document.getElementById("unitResult").textContent = original;
-        }, 900);
-
-      });
+      result =
+        celsius + 273.15;
 
     }
 
+  }
 
-    /* ============================================================
-       CURRENCY DROPDOWNS
-       ============================================================ */
+  else {
 
-    function populateCurrencies() {
+    const fromFactor =
+      units[category][from].factor;
 
-      const from = document.getElementById("currencyFrom");
-      const to = document.getElementById("currencyTo");
+    const toFactor =
+      units[category][to].factor;
 
-      from.innerHTML = "";
-      to.innerHTML = "";
+    result =
+      amount * fromFactor / toFactor;
 
-      Object.entries(currencies).forEach(([code, name]) => {
+  }
 
-        const option1 = document.createElement("option");
 
-        option1.value = code;
-        option1.textContent = `${code} — ${name}`;
+  const targetName =
+    units[category][to].name;
 
-        const option2 = option1.cloneNode(true);
+  document.getElementById("unitResult")
+    .textContent =
+      `${formatNumber(result)} ${targetName}`;
 
-        from.appendChild(option1);
-        to.appendChild(option2);
+}
 
-      });
 
-      from.value = "USD";
-      to.value = "EUR";
+/* =====================================================
+   SWITCH MODES
+===================================================== */
 
-    }
+function switchMode(mode) {
 
+  const currency =
+    document.getElementById("currencyMode");
 
-    /* ============================================================
-       SEARCHABLE CURRENCY FILTER
-       ============================================================ */
+  const unit =
+    document.getElementById("unitMode");
 
-    function filterCurrency(direction) {
+  const currencyTab =
+    document.getElementById("currencyTab");
 
-      const search =
-        document.getElementById(
-          direction === "from"
-            ? "currencyFromSearch"
-            : "currencyToSearch"
-        ).value.toLowerCase().trim();
+  const unitTab =
+    document.getElementById("unitTab");
 
-      const select =
-        document.getElementById(
-          direction === "from"
-            ? "currencyFrom"
-            : "currencyTo"
-        );
 
-      const currentValue = select.value;
+  if (mode === "currency") {
 
-      select.innerHTML = "";
+    currency.classList.remove("hidden");
 
-      Object.entries(currencies)
-        .filter(([code, name]) => {
+    unit.classList.add("hidden");
 
-          return code.toLowerCase().includes(search) ||
-                 name.toLowerCase().includes(search);
+    currencyTab.classList.add("tab-active");
 
-        })
-        .forEach(([code, name]) => {
+    currencyTab.classList.remove("text-slate-400");
 
-          const option = document.createElement("option");
+    unitTab.classList.remove("tab-active");
 
-          option.value = code;
-          option.textContent = `${code} — ${name}`;
+    unitTab.classList.add("text-slate-400");
 
-          select.appendChild(option);
+  }
 
-        });
+  else {
 
-      if (currencies[currentValue] && !search) {
-        select.value = currentValue;
-      }
+    currency.classList.add("hidden");
 
-      convertCurrency();
+    unit.classList.remove("hidden");
 
-    }
+    unitTab.classList.add("tab-active");
 
+    unitTab.classList.remove("text-slate-400");
 
-    /* ============================================================
-       FETCH LIVE CURRENCY RATES
-       ============================================================ */
+    currencyTab.classList.remove("tab-active");
 
-    async function fetchCurrencyRates() {
+    currencyTab.classList.add("text-slate-400");
 
-      const result = document.getElementById("currencyResult");
-      const rateText = document.getElementById("currencyRate");
+  }
 
-      result.textContent = "Loading...";
-      rateText.textContent = "Retrieving current exchange-rate data...";
+}
 
-      try {
-
-        const response = await fetch(
-          "https://api.exchangerate-api.com/v4/latest/USD",
-          {
-            cache: "no-store"
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error("Unable to retrieve exchange rates.");
-        }
-
-        const data = await response.json();
-
-        currencyRates = data.rates || {};
-        currencyRates.USD = 1;
-
-        currencyRatesLoaded = true;
-
-        document.getElementById("currencyUpdated").textContent =
-          data.date
-            ? `Rate data date: ${data.date}. Rates are informational and may differ from provider transaction rates.`
-            : "Exchange-rate data retrieved successfully.";
-
-        convertCurrency();
-
-      } catch (error) {
-
-        currencyRatesLoaded = false;
-
-        result.textContent = "Rates unavailable";
-
-        rateText.textContent =
-          "The live exchange-rate service could not be reached.";
-
-        document.getElementById("currencyUpdated").textContent =
-          "Please check your internet connection and try again.";
-
-      }
-
-    }
-
-
-    /* ============================================================
-       CURRENCY CALCULATION
-       ============================================================ */
-
-    function convertCurrency() {
-
-      const amount =
-        parseFloat(
-          document.getElementById("currencyAmount").value
-        ) || 0;
-
-      const from =
-        document.getElementById("currencyFrom").value;
-
-      const to =
-        document.getElementById("currencyTo").value;
-
-      if (!currencyRatesLoaded) {
-
-        document.getElementById("currencyResult").textContent =
-          "Loading rates...";
-
-        return;
-
-      }
-
-      if (
-        typeof currencyRates[from] !== "number" ||
-        typeof currencyRates[to] !== "number"
-      ) {
-
-        document.getElementById("currencyResult").textContent =
-          "Rate unavailable";
-
-        return;
-
-      }
-
-      const usdValue = amount / currencyRates[from];
-
-      const converted = usdValue * currencyRates[to];
-
-      const rate = currencyRates[to] / currencyRates[from];
-
-      document.getElementById("currencyResult").textContent =
-        `${formatCurrency(converted, to)} ${to}`;
-
-      document.getElementById("currencyRate").textContent =
-        `1 ${from} ≈ ${formatNumber(rate)} ${to}`;
-
-    }
-
-
-    function formatCurrency(value, currencyCode) {
-
-      try {
-
-        return new Intl.NumberFormat(
-          "en-US",
-          {
-            style: "currency",
-            currency: currencyCode,
-            maximumFractionDigits: 6
-          }
-        ).format(value);
-
-      } catch (error) {
-
-        return formatNumber(value);
-
-      }
-
-    }
-
-
-    /* ============================================================
-       CURRENCY SWAP
-       ============================================================ */
-
-    function swapCurrencies() {
-
-      const from = document.getElementById("currencyFrom");
-      const to = document.getElementById("currencyTo");
-
-      const fromSearch =
-        document.getElementById("currencyFromSearch");
-
-      const toSearch =
-        document.getElementById("currencyToSearch");
-
-      const temp = from.value;
-
-      from.value = to.value;
-      to.value = temp;
-
-      fromSearch.value = "";
-      toSearch.value = "";
-
-      convertCurrency();
-
-    }
-
-
-    /* ============================================================
-       INITIALIZATION
-       ============================================================ */
-
-    document.addEventListener("DOMContentLoaded", () => {
-
-      lucide.createIcons();
-
-      document.getElementById("currentYear").textContent =
-        new Date().getFullYear();
-
-      populateUnitOptions();
-
-      populateCurrencies();
-
-    });
-
-  </script>
+</script>
 
 </body>
 </html>
