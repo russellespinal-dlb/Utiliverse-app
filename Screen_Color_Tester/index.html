@@ -81,6 +81,21 @@ body {
         color .18s ease;
 }
 
+/* iOS Fullscreen Fallback */
+.ios-fullscreen {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 99999 !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
 .spectrum {
     width: 100%;
     height: 180px;
@@ -453,8 +468,8 @@ Black
 
 <p class="mt-3 text-sm opacity-75 max-w-md">
 
-Your selected color is ready for fullscreen viewing or image export.
-
+Your selected color is ready for fullscreen viewing or image export. <br>
+<span class="hidden ios-tap-msg mt-2 text-xs font-bold uppercase tracking-wider">Tap anywhere to exit fullscreen</span>
 </p>
 
 </div>
@@ -1530,21 +1545,44 @@ function updatePickerFromHex(hex) {
 ============================================================ */
 
 function enterFullscreen() {
+    const preview = document.getElementById("colorPreview");
 
-    const preview =
-        document.getElementById("colorPreview");
+    // Check for iOS (iPhone/iPad) where standard fullscreen is not supported for DIVs
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
+    if (isIOS) {
+        // Apply CSS Faux Fullscreen
+        preview.classList.add("ios-fullscreen");
+        
+        // Reveal tap instruction
+        const tapMsg = preview.querySelector('.ios-tap-msg');
+        if (tapMsg) tapMsg.classList.remove('hidden');
+
+        // Allow tap anywhere to exit on iOS
+        const exitFaux = function() {
+            preview.classList.remove("ios-fullscreen");
+            if (tapMsg) tapMsg.classList.add('hidden');
+            preview.removeEventListener("click", exitFaux);
+        };
+        
+        // Small timeout prevents immediate trigger if user double-tapped the button
+        setTimeout(() => {
+            preview.addEventListener("click", exitFaux);
+        }, 150);
+        
+        return;
+    }
+
+    // Standard Fullscreen API for Desktop / Android
     if(preview.requestFullscreen) {
-
-        preview.requestFullscreen();
-
+        preview.requestFullscreen().catch(err => {
+            console.log("Error attempting to enable fullscreen:", err.message);
+        });
     }
     else if(preview.webkitRequestFullscreen) {
-
         preview.webkitRequestFullscreen();
-
     }
-
 }
 
 
@@ -1654,10 +1692,17 @@ function startTimer() {
 
                 clearInterval(timerInterval);
 
+                const preview = document.getElementById("colorPreview");
+
+                // Exit native fullscreen
                 if(document.fullscreenElement) {
-
                     document.exitFullscreen();
-
+                } 
+                // Exit iOS fallback fullscreen
+                else if (preview.classList.contains("ios-fullscreen")) {
+                    preview.classList.remove("ios-fullscreen");
+                    const tapMsg = preview.querySelector('.ios-tap-msg');
+                    if (tapMsg) tapMsg.classList.add('hidden');
                 }
 
             }
@@ -2142,10 +2187,15 @@ document.addEventListener("keydown",function(e){
 
     if(e.key === "Escape") {
 
+        const preview = document.getElementById("colorPreview");
+
         if(document.fullscreenElement) {
-
             document.exitFullscreen();
-
+        } else if (preview.classList.contains("ios-fullscreen")) {
+            // Exit iOS fallback if active via keyboard
+            preview.classList.remove("ios-fullscreen");
+            const tapMsg = preview.querySelector('.ios-tap-msg');
+            if (tapMsg) tapMsg.classList.add('hidden');
         }
 
     }
