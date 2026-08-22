@@ -1,10 +1,59 @@
-https://utiliverse.app/mortgage/
-https://utiliverse.app/pdf/
-https://utiliverse.app/Image-converter/
-https://utiliverse.app/Auto_Lease_Calculator/
-https://utiliverse.app/Retirement_Calculator/
-https://utiliverse.app/Rental_Property_Calculator/
-https://utiliverse.app/Scientific_Calculator/
-https://utiliverse.app/Screen_Color_Tester/
-https://utiliverse.app/Simple_Word_Unskrambler/
-https://utiliverse.app/Unit_Currency_Converter/
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://utiliverse.app/</loc>
+  </url>
+
+  <!-- Mortgage Payoff Calculator -->
+  <url>
+    <loc>https://utiliverse.app/mortgage/</loc>
+  </url>
+
+  <!-- PDF Conversion Toolkit Pro -->
+  <url>
+    <loc>hhttps://utiliverse.app/pdf/</loc>
+  </url>
+  
+  <!-- Image Resizer and Social Media Format Utility -->
+  <url>
+    <loc>https://utiliverse.app/Image-converter/</loc>
+  </url>
+  
+  <!-- Auto Lease Calculator -->
+  <url>
+    <loc>hhttps://utiliverse.app/Auto_Lease_Calculator/</loc>
+  </url>
+
+  <!-- Retirement_Calculator -->
+  <url>
+    <loc>https://utiliverse.app/Retirement_Calculator/</loc>
+  </url>
+
+  <!-- RentalProperty Calculator -->
+  <url>
+    <loc>hhttps://utiliverse.app/Rental_Property_Calculator/</loc>
+  </url>
+
+  <!-- Scientific Calculator -->
+  <url>
+    <loc>https://utiliverse.app/Scientific_Calculator/</loc>
+  </url>
+
+  <!-- Screen Color Tester -->
+  <url>
+    <loc>https://utiliverse.app/Screen_Color_Tester/</loc>
+  </url>
+
+  <!-- Word Unskrambler -->
+  <url>
+    <loc>https://utiliverse.app/word-unskrambler/</loc>
+  </url>
+
+  <!-- Unit Currency Converter -->
+  <url>
+    <loc>https://utiliverse.app/Unit_Currency_Converter/</loc>
+  </url>
+
+</urlset>
