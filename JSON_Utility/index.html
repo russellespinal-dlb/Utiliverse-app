@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utiliverse JSON Formatter & Validator - Free Online Tool</title>
+    <meta name="description" content="Free online JSON Formatter and Validator. Prettify, minify, and debug JSON data instantly. Features syntax highlighting, dark mode, and a full-screen code viewer.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbars for code editors */
+        .code-scroll::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .code-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .code-scroll::-webkit-scrollbar-thumb {
+            background-color: #4b5563;
+            border-radius: 4px;
+        }
+        
+        /* AdSense Placeholder Styling */
+        .ad-placeholder {
+            width: 100%;
+            background-color: #f3f4f6;
+            border: 2px dashed #d1d5db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin: 1.5rem 0;
+            border-radius: 0.5rem;
+        }
+        .dark .ad-placeholder {
+            background-color: #1f2937;
+            border-color: #374151;
+            color: #6b7280;
+        }
+
+        /* Syntax Highlighting */
+        .json-key { color: #111827; font-weight: 600; }
+        .dark .json-key { color: #f3f4f6; }
+        .json-string { color: #059669; }
+        .dark .json-string { color: #34d399; }
+        .json-number { color: #2563eb; }
+        .dark .json-number { color: #60a5fa; }
+        .json-boolean { color: #7c3aed; font-weight: 600;}
+        .dark .json-boolean { color: #a78bfa; }
+        .json-null { color: #dc2626; font-weight: 600;}
+        .dark .json-null { color: #f87171; }
+    </style>
+
+    <!-- SEO Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Utiliverse JSON Formatter",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "description": "Format, validate, and minify JSON data directly in your browser with syntax highlighting and a full-screen code popout viewer.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-200">
+
+    <!-- Header -->
+    <header class="border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-950/80 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                <div class="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center text-white">
+                    <i data-lucide="layers" class="w-5 h-5"></i>
+                </div>
+                <span class="font-bold text-xl tracking-tight hidden sm:block">Utiliverse</span>
+                <span class="text-sm font-medium text-gray-500 dark:text-gray-400 ml-2">/ JSON Formatter</span>
+            </a>
+            
+            <div class="flex items-center gap-4">
+                <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" aria-label="Toggle Dark Mode">
+                    <i data-lucide="sun" class="w-5 h-5 hidden dark:block text-yellow-400"></i>
+                    <i data-lucide="moon" class="w-5 h-5 block dark:hidden text-gray-600"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Top AdSense Placeholder -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="ad-placeholder h-24">Google AdSense Placeholder (Leaderboard)</div>
+    </div>
+
+    <!-- Main Workspace -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+        
+        <!-- Controls -->
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+            <div class="flex flex-wrap gap-2">
+                <button onclick="formatJSON()" class="flex items-center gap-2 bg-brand-600 hover:bg-brand-500 text-white px-4 py-2 rounded-lg font-medium transition-colors">
+                    <i data-lucide="align-left" class="w-4 h-4"></i> Format
+                </button>
+                <button onclick="minifyJSON()" class="flex items-center gap-2 bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 px-4 py-2 rounded-lg font-medium transition-colors">
+                    <i data-lucide="minimize" class="w-4 h-4"></i> Minify
+                </button>
+                <button onclick="clearJSON()" class="flex items-center gap-2 bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400 hover:bg-red-200 dark:hover:bg-red-900/50 px-4 py-2 rounded-lg font-medium transition-colors">
+                    <i data-lucide="trash-2" class="w-4 h-4"></i> Clear
+                </button>
+            </div>
+            
+            <div class="flex items-center gap-2 text-sm">
+                <span id="statusIndicator" class="flex items-center gap-1 text-gray-500 font-medium">
+                    <i data-lucide="info" class="w-4 h-4"></i> Ready
+                </span>
+            </div>
+        </div>
+
+        <!-- Editor Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 h-[500px]">
+            <!-- Input Area -->
+            <div class="flex flex-col rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 overflow-hidden shadow-sm">
+                <div class="flex items-center justify-between px-4 py-2 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                    <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Input</span>
+                    <button onclick="pasteFromClipboard()" class="text-xs font-medium text-brand-600 dark:text-brand-400 hover:underline">Paste</button>
+                </div>
+                <textarea id="jsonInput" placeholder="Paste your raw JSON here..." class="flex-1 w-full p-4 resize-none focus:outline-none focus:ring-2 focus:ring-brand-500/50 bg-transparent code-scroll font-mono text-sm leading-relaxed" spellcheck="false"></textarea>
+            </div>
+
+            <!-- Output Area -->
+            <div class="flex flex-col rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 overflow-hidden shadow-sm">
+                <div class="flex items-center justify-between px-4 py-2 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                    <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Output</span>
+                    <div class="flex items-center gap-3">
+                        <button onclick="openPopout()" class="text-xs flex items-center gap-1 font-medium text-gray-600 dark:text-gray-400 hover:text-brand-500 transition-colors" title="View Full Screen">
+                            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i> Popout
+                        </button>
+                        <button onclick="copyOutput()" class="text-xs flex items-center gap-1 font-medium text-brand-600 dark:text-brand-400 hover:underline">
+                            <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy
+                        </button>
+                    </div>
+                </div>
+                <div id="jsonOutput" class="flex-1 w-full p-4 overflow-auto bg-transparent code-scroll font-mono text-sm leading-relaxed whitespace-pre whitespace-pre-wrap word-break"></div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Mid AdSense Placeholder -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="ad-placeholder h-24">Google AdSense Placeholder (Banner)</div>
+    </div>
+
+    <!-- Popout Modal -->
+    <div id="popoutModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-300">
+        <div class="bg-white dark:bg-gray-900 w-full max-w-6xl h-full rounded-2xl shadow-2xl flex flex-col border border-gray-200 dark:border-gray-700 transform scale-95 transition-transform duration-300" id="popoutContent">
+            <div class="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-800">
+                <h3 class="font-bold text-lg">Expanded View</h3>
+                <div class="flex items-center gap-4">
+                    <button onclick="copyOutput()" class="flex items-center gap-2 text-sm font-medium bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 px-3 py-1.5 rounded-md transition-colors">
+                        <i data-lucide="copy" class="w-4 h-4"></i> Copy Code
+                    </button>
+                    <button onclick="closePopout()" class="p-1 text-gray-500 hover:text-red-500 transition-colors">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="flex-1 p-6 overflow-auto code-scroll bg-gray-50 dark:bg-gray-950 rounded-b-2xl">
+                <pre><code id="popoutOutput" class="font-mono text-sm leading-relaxed"></code></pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEO Content Section (800-1000 words) -->
+    <section class="max-w-4xl mx-auto px-4 sm:px-6 py-16">
+        <article class="prose prose-slate dark:prose-invert prose-lg max-w-none font-sans leading-relaxed">
+            <h2 class="text-3xl font-extrabold tracking-tight mb-6">The Comprehensive Guide to JSON Formatting and Parsing</h2>
+            
+            <p>JSON (JavaScript Object Notation) has established itself as the undisputed standard for data exchange on the modern web. From configuring lightweight web applications to transferring massive datasets across enterprise APIs, understanding how to read, write, and format JSON is a mandatory skill for modern developers, data analysts, and system administrators. However, as JSON files grow in complexity, they can quickly become unreadable. This is where a dedicated JSON Formatter and Validator becomes an indispensable utility in your digital toolkit.</p>
+
+            <h3 class="text-2xl font-bold mt-10 mb-4">What Exactly is JSON?</h3>
+            <p>Conceived in the early 2000s by Douglas Crockford, JSON was designed as a lightweight, text-based, language-independent data interchange format. Despite its name, JSON is not strictly bound to JavaScript. Today, virtually every programming language—including Python, Java, C#, Ruby, and Go—has built-in functionality to parse and generate JSON data. </p>
+            
+            <p>The beauty of JSON lies in its simplicity. It relies on a structural format that is incredibly easy for humans to read and write, while remaining highly efficient for machines to parse and generate. JSON is built on two primary structures:</p>
+            <ul class="list-disc pl-6 mb-6 space-y-2">
+                <li><strong>Objects:</strong> A collection of key-value pairs, enclosed in curly braces <code>{}</code>. Keys must be strings enclosed in double quotes.</li>
+                <li><strong>Arrays:</strong> An ordered list of values, enclosed in square brackets <code>[]</code>.</li>
+            </ul>
+            <p>Within these structures, JSON supports a limited but highly effective set of data types: strings, numbers, booleans (true/false), arrays, objects, and null. This strict typing system is what makes JSON so universal, but it is also the reason why a single misplaced character can break an entire application.</p>
+
+            <h3 class="text-2xl font-bold mt-10 mb-4">Why You Need a Dedicated JSON Formatter</h3>
+            <p>When APIs generate data, they typically produce "minified" JSON. Minification removes all unnecessary whitespace, line breaks, and indentation to reduce file size and optimize network transfer speeds. While minified JSON is perfect for computers, it looks like an impenetrable wall of text to human eyes.</p>
+            <p>Attempting to debug a massive minified string is virtually impossible. A JSON formatter solves this by parsing the raw data and reconstructing it with proper indentation, line breaks, and hierarchical structuring (often referred to as "prettifying"). </p>
+            <p>Furthermore, a good formatter serves as a strict validator. Because JSON's syntax rules are unforgiving, human error is common when writing JSON manually. If a configuration file fails to load, finding the exact location of a missing comma among thousands of lines of code can waste hours. An intelligent validator instantly catches these syntax errors, highlights the issue, and allows developers to fix the problem in seconds.</p>
+
+            <h3 class="text-2xl font-bold mt-10 mb-4">Common JSON Syntax Errors to Avoid</h3>
+            <p>Even seasoned developers make mistakes when writing JSON. Because the format is so rigid, a parser will fail completely if the syntax is not perfect. Here are the most frequent errors encountered when working with JSON data:</p>
+            
+            <ul class="list-disc pl-6 mb-6 space-y-3">
+                <li><strong>Trailing Commas:</strong> Unlike standard JavaScript or Python arrays, JSON strictly forbids a comma after the final item in an object or array. E.g., <code>{"name": "John",}</code> will result in a fatal parse error.</li>
+                <li><strong>Single Quotes vs. Double Quotes:</strong> JSON mandates the use of double quotes <code>""</code> for all strings and object keys. Using single quotes <code>''</code> (which is perfectly valid in JavaScript) will immediately invalidate the JSON.</li>
+                <li><strong>Missing Quotes on Keys:</strong> Every key in a JSON object must be wrapped in double quotes. Writing <code>{name: "John"}</code> is invalid; it must be <code>{"name": "John"}</code>.</li>
+                <li><strong>Unescaped Characters:</strong> If your JSON string contains a double quote, a backslash, or a control character (like a newline), it must be properly escaped using a backslash <code>\</code>.</li>
+                <li><strong>Comments:</strong> By design, standard JSON does not support comments (like <code>//</code> or <code>/* */</code>). If you leave comments in your file, standard parsers will throw an error.</li>
+            </ul>
+
+            <h3 class="text-2xl font-bold mt-10 mb-4">JSON vs. XML: The Modern Paradigm</h3>
+            <p>Before JSON, XML (eXtensible Markup Language) was the reigning champion of data transfer. While XML is still heavily used in older enterprise systems and specific industries (like RSS feeds and SOAP APIs), JSON has largely replaced it for modern web development.</p>
+            <p>Why did JSON win? Primarily due to its lightweight nature. XML requires closing tags for every piece of data, leading to "bloated" payloads that take longer to transfer and parse. JSON, utilizing simple brackets and braces, dramatically reduces file sizes. Additionally, JSON maps directly to data structures in object-oriented programming (arrays and dictionaries), making it natively easier for developers to work with in code without needing complex parsing libraries.</p>
+
+            <h3 class="text-2xl font-bold mt-10 mb-4">How to Maximize the Utiliverse JSON Tool</h3>
+            <p>The Utiliverse JSON Formatter was engineered for speed, privacy, and ease of use. It executes entirely within your browser on the client side, meaning your sensitive API keys, configuration data, and proprietary payloads are never transmitted to our servers. Here is how to get the most out of the tool:</p>
+            
+            <ol class="list-decimal pl-6 mb-6 space-y-3">
+                <li><strong>Prettify and Indent:</strong> Paste your raw or minified code into the Input box and click "Format". The tool will instantly restructure the data with clean indentation and inject syntax highlighting, allowing you to easily distinguish strings, numbers, booleans, and null values.</li>
+                <li><strong>Popout Viewer:</strong> Working with deeply nested or massive JSON files can be frustrating within a small browser window. Click the "Popout" button above the output area to launch a full-screen modal view. This allows you to scroll freely through massive datasets without feeling confined.</li>
+                <li><strong>Minify for Production:</strong> If you have formatted a configuration file and are ready to deploy it to production, click "Minify". This strips away the formatting, giving you the smallest possible footprint for maximum performance.</li>
+                <li><strong>Error Debugging:</strong> If you paste invalid code, the tool will instantly alert you in the status bar, preventing you from deploying broken code.</li>
+            </ol>
+            
+            <p>Whether you are configuring a Node.js package, parsing a RESTful API response, or managing cloud infrastructure configurations, mastering JSON formatting is an essential step in modern computing. Bookmark this utility for instant access whenever you need a reliable, secure data formatting environment.</p>
+        </article>
+    </section>
+
+    <!-- Bottom AdSense Placeholder -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 mb-16">
+        <div class="ad-placeholder h-[250px]">Google AdSense Placeholder (Medium Rectangle)</div>
+    </div>
+
+    <!-- FAQ Section -->
+    <section class="max-w-3xl mx-auto px-4 sm:px-6 pb-24 border-t border-gray-200 dark:border-gray-800 pt-16">
+        <h2 class="text-3xl font-extrabold tracking-tight mb-8 text-center">Frequently Asked Questions</h2>
+        
+        <div class="space-y-4" id="faq-container">
+            <!-- FAQs will be injected by JS for structured data integration -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <div class="w-6 h-6 rounded bg-brand-500 flex items-center justify-center text-white">
+                    <i data-lucide="layers" class="w-3 h-3"></i>
+                </div>
+                <span class="font-bold tracking-tight">Utiliverse</span>
+            </div>
+            <p class="text-gray-500 dark:text-gray-400 text-sm">© <script>document.write(new Date().getFullYear())</script> Utiliverse. Client-side tools for modern developers.</p>
+        </div>
+    </footer>
+
+    <!-- Application Script -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // DOM Elements
+        const inputArea = document.getElementById('jsonInput');
+        const outputArea = document.getElementById('jsonOutput');
+        const popoutOutput = document.getElementById('popoutOutput');
+        const statusIndicator = document.getElementById('statusIndicator');
+        const popoutModal = document.getElementById('popoutModal');
+        const popoutContent = document.getElementById('popoutContent');
+        const themeToggle = document.getElementById('themeToggle');
+
+        // State
+        let rawJSON = '';
+        let isDark = document.documentElement.classList.contains('dark');
+
+        // Theme Toggling Logic
+        themeToggle.addEventListener('click', () => {
+            isDark = !isDark;
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        // Syntax Highlighter Function
+        function syntaxHighlight(json) {
+            if (typeof json !== 'string') {
+                json = JSON.stringify(json, undefined, 2);
+            }
+            // Escape HTML characters
+            json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            
+            // Regex to wrap types in spans
+            return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                let cls = 'json-number';
+                if (/^"/.test(match)) {
+                    if (/:$/.test(match)) {
+                        cls = 'json-key';
+                    } else {
+                        cls = 'json-string';
+                    }
+                } else if (/true|false/.test(match)) {
+                    cls = 'json-boolean';
+                } else if (/null/.test(match)) {
+                    cls = 'json-null';
+                }
+                return '<span class="' + cls + '">' + match + '</span>';
+            });
+        }
+
+        // Format Logic
+        function formatJSON() {
+            const input = inputArea.value.trim();
+            if (!input) {
+                setStatus('Warning: Input is empty', 'text-yellow-500', 'alert-triangle');
+                outputArea.innerHTML = '';
+                popoutOutput.innerHTML = '';
+                return;
+            }
+
+            try {
+                // Parse and re-stringify to format
+                const parsed = JSON.parse(input);
+                const formatted = JSON.stringify(parsed, null, 4);
+                
+                // Highlight and apply
+                const highlighted = syntaxHighlight(formatted);
+                outputArea.innerHTML = highlighted;
+                popoutOutput.innerHTML = highlighted;
+                rawJSON = formatted; // store raw for copying
+                
+                setStatus('Valid JSON Formatted Successfully', 'text-green-500', 'check-circle');
+            } catch (e) {
+                setStatus('Error: ' + e.message, 'text-red-500', 'x-circle');
+                outputArea.innerHTML = `<span class="text-red-500 font-medium">Invalid JSON: ${e.message}</span>`;
+                popoutOutput.innerHTML = `<span class="text-red-500 font-medium">Invalid JSON: ${e.message}</span>`;
+            }
+        }
+
+        // Minify Logic
+        function minifyJSON() {
+            const input = inputArea.value.trim();
+            if (!input) return;
+
+            try {
+                const parsed = JSON.parse(input);
+                const minified = JSON.stringify(parsed);
+                
+                // Just display string directly for minified, no syntax highlighting to save resources
+                outputArea.textContent = minified;
+                popoutOutput.textContent = minified;
+                rawJSON = minified;
+                
+                setStatus('JSON Minified Successfully', 'text-green-500', 'check-circle');
+            } catch (e) {
+                setStatus('Error: ' + e.message, 'text-red-500', 'x-circle');
+            }
+        }
+
+        // Utility Functions
+        function clearJSON() {
+            inputArea.value = '';
+            outputArea.innerHTML = '';
+            popoutOutput.innerHTML = '';
+            rawJSON = '';
+            setStatus('Cleared', 'text-gray-500', 'info');
+        }
+
+        async function pasteFromClipboard() {
+            try {
+                const text = await navigator.clipboard.readText();
+                inputArea.value = text;
+                formatJSON(); // Auto format on paste
+            } catch (err) {
+                setStatus('Failed to read clipboard contents', 'text-red-500', 'x-circle');
+            }
+        }
+
+        function copyOutput() {
+            if (!rawJSON) {
+                setStatus('Nothing to copy', 'text-yellow-500', 'alert-triangle');
+                return;
+            }
+            navigator.clipboard.writeText(rawJSON).then(() => {
+                const originalStatus = statusIndicator.innerHTML;
+                setStatus('Copied to clipboard!', 'text-brand-500', 'check');
+                setTimeout(() => {
+                    statusIndicator.innerHTML = originalStatus;
+                }, 2000);
+            });
+        }
+
+        function setStatus(msg, colorClass, iconName) {
+            statusIndicator.className = `flex items-center gap-1 font-medium text-sm transition-colors ${colorClass}`;
+            statusIndicator.innerHTML = `<i data-lucide="${iconName}" class="w-4 h-4"></i> ${msg}`;
+            lucide.createIcons(); // Refresh icons
+        }
+
+        // Popout Modal Logic
+        function openPopout() {
+            popoutModal.classList.remove('hidden');
+            // Small delay to allow display block to apply before transition
+            setTimeout(() => {
+                popoutModal.classList.remove('opacity-0');
+                popoutContent.classList.remove('scale-95');
+                popoutContent.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closePopout() {
+            popoutModal.classList.add('opacity-0');
+            popoutContent.classList.remove('scale-100');
+            popoutContent.classList.add('scale-95');
+            setTimeout(() => {
+                popoutModal.classList.add('hidden');
+            }, 300); // Matches transition duration
+        }
+
+        // Close popout on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !popoutModal.classList.contains('hidden')) {
+                closePopout();
+            }
+        });
+
+        // FAQ Data and Schema Injection
+        const faqs = [
+            {
+                q: "What is JSON?",
+                a: "JSON (JavaScript Object Notation) is a lightweight data-interchange format. It is easy for humans to read and write and easy for machines to parse and generate. It is heavily used in web development for sending data between a server and a web application."
+            },
+            {
+                q: "Is this JSON Formatter secure to use for private data?",
+                a: "Yes. The Utiliverse JSON Formatter operates entirely client-side (in your web browser). Your JSON data is never sent to our servers, logged, or saved, ensuring complete privacy for sensitive API keys and database configurations."
+            },
+            {
+                q: "Why is my JSON showing an error?",
+                a: "JSON has strict syntax rules. The most common errors include using single quotes instead of double quotes, forgetting quotes around keys, or leaving a trailing comma at the end of an array or object. The tool will provide a specific error message to help you locate the issue."
+            },
+            {
+                q: "What is the difference between formatting and minifying?",
+                a: "Formatting (or prettifying) adds whitespace, line breaks, and indentation to make the code readable for humans. Minifying does the exact opposite—it removes all unnecessary spacing to make the file size as small as possible for faster network transfers."
+            },
+            {
+                q: "Can I format large JSON files with this tool?",
+                a: "Yes, this tool can handle very large JSON payloads. If the output becomes difficult to navigate in the standard view, click the 'Popout' button to open a full-screen code viewer, allowing you to scroll through massive datasets effortlessly."
+            },
+            {
+                q: "Does JSON support comments?",
+                a: "By default, the official JSON specification does not support comments (like // or /* */ used in JavaScript). If you try to parse JSON with comments, standard parsers will throw an error. You must remove comments before using the code in production."
+            }
+        ];
+
+        // Render FAQs
+        const faqContainer = document.getElementById('faq-container');
+        faqs.forEach(faq => {
+            const html = `
+                <details class="group bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg open:shadow-md transition-all">
+                    <summary class="flex items-center justify-between cursor-pointer p-5 font-semibold text-gray-900 dark:text-white">
+                        ${faq.q}
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <div class="px-5 pb-5 text-gray-600 dark:text-gray-400 leading-relaxed">
+                        ${faq.a}
+                    </div>
+                </details>
+            `;
+            faqContainer.insertAdjacentHTML('beforeend', html);
+        });
+        
+        // Re-init icons for FAQs
+        lucide.createIcons();
+
+        // Inject FAQ Schema for SEO
+        const faqSchema = {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqs.map(faq => ({
+                "@type": "Question",
+                "name": faq.q,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": faq.a
+                }
+            }))
+        };
+        const scriptTag = document.createElement('script');
+        scriptTag.type = "application/ld+json";
+        scriptTag.text = JSON.stringify(faqSchema);
+        document.head.appendChild(scriptTag);
+
+        // Auto-format if dummy data is put in for visual test on load
+        inputArea.value = '{"example":"Paste your data here to get started","features":["Format","Minify","Popout Viewer"],"secure":true}';
+        formatJSON();
+
+    </script>
+</body>
+</html>
