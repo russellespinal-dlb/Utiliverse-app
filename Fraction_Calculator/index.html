@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fraction Calculator | Add, Subtract, Multiply, Divide Fractions</title>
+    <meta name="description" content="Free online fraction calculator. Easily add, subtract, multiply, and divide fractions and mixed numbers. Includes unit and currency conversion use cases.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            900: '#134e4a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .fraction-input {
+            width: 4rem;
+            text-align: center;
+            font-weight: 600;
+        }
+        /* Hide arrows on number inputs */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+    </style>
+
+    <!-- SEO Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Utiliverse Fraction Calculator",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Any",
+      "description": "Calculate fractions instantly. Add, subtract, multiply, and divide mixed and proper fractions.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-brand-100 selection:text-brand-900">
+
+    <!-- Header -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center">
+            <a href="https://utiliverse.app" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                <div class="w-8 h-8 rounded bg-brand-600 flex items-center justify-center text-white">
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                </div>
+                <span class="font-bold text-lg tracking-tight text-slate-800">Utiliverse.app</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
+        
+        <div class="text-center mb-10">
+            <h1 class="text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">Fraction Calculator</h1>
+            <p class="text-lg text-slate-600">Instantly add, subtract, multiply, or divide fractions and mixed numbers.</p>
+        </div>
+
+        <!-- Calculator UI -->
+        <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-6 md:p-10 max-w-3xl mx-auto mb-16">
+            
+            <form id="fractionForm" class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-6" onsubmit="event.preventDefault(); calculate();">
+                
+                <!-- Fraction 1 -->
+                <div class="flex items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <div class="flex flex-col items-center">
+                        <label class="text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wider">Whole</label>
+                        <input type="number" id="w1" class="fraction-input text-xl border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-brand-500 focus:outline-none" placeholder="0">
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <input type="number" id="n1" class="fraction-input text-lg border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-brand-500 focus:outline-none" placeholder="Num" required>
+                        <hr class="border-slate-400 border-t-2 rounded">
+                        <input type="number" id="d1" class="fraction-input text-lg border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-brand-500 focus:outline-none" placeholder="Den" value="1" required>
+                    </div>
+                </div>
+
+                <!-- Operator -->
+                <div class="flex flex-col items-center">
+                    <select id="operator" class="text-2xl font-bold text-brand-600 bg-brand-50 border-2 border-brand-200 rounded-xl px-4 py-3 cursor-pointer focus:outline-none focus:ring-2 focus:ring-brand-500 appearance-none text-center hover:bg-brand-100 transition-colors">
+                        <option value="+">+</option>
+                        <option value="-">-</option>
+                        <option value="*">×</option>
+                        <option value="/">÷</option>
+                    </select>
+                </div>
+
+                <!-- Fraction 2 -->
+                <div class="flex items-center gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                    <div class="flex flex-col items-center">
+                        <label class="text-xs font-semibold text-slate-500 mb-1 uppercase tracking-wider">Whole</label>
+                        <input type="number" id="w2" class="fraction-input text-xl border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-brand-500 focus:outline-none" placeholder="0">
+                    </div>
+                    <div class="flex flex-col gap-2">
+                        <input type="number" id="n2" class="fraction-input text-lg border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-brand-500 focus:outline-none" placeholder="Num" required>
+                        <hr class="border-slate-400 border-t-2 rounded">
+                        <input type="number" id="d2" class="fraction-input text-lg border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-brand-500 focus:outline-none" placeholder="Den" value="1" required>
+                    </div>
+                </div>
+
+            </form>
+
+            <div class="mt-8 flex justify-center gap-4">
+                <button onclick="calculate()" class="bg-brand-600 hover:bg-brand-500 text-white font-bold py-3 px-8 rounded-xl shadow-lg shadow-brand-500/30 transition-all active:scale-95 flex items-center gap-2">
+                    <i data-lucide="calculator" class="w-5 h-5"></i> Calculate
+                </button>
+                <button onclick="clearFields()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 px-6 rounded-xl transition-all active:scale-95 flex items-center gap-2">
+                    <i data-lucide="rotate-ccw" class="w-5 h-5"></i> Clear
+                </button>
+            </div>
+
+            <!-- Result Area -->
+            <div id="resultArea" class="mt-10 hidden">
+                <div class="bg-slate-900 rounded-xl p-6 text-center shadow-inner relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-brand-500"></div>
+                    <h3 class="text-slate-400 text-sm font-bold uppercase tracking-widest mb-4">Result</h3>
+                    
+                    <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
+                        <!-- Mixed Number -->
+                        <div id="resMixed" class="hidden text-white flex items-center gap-2">
+                            <span id="resMixedW" class="text-4xl font-bold"></span>
+                            <div class="flex flex-col text-2xl font-bold">
+                                <span id="resMixedN"></span>
+                                <hr class="border-slate-500">
+                                <span id="resMixedD"></span>
+                            </div>
+                        </div>
+
+                        <!-- Improper Fraction -->
+                        <div class="text-white flex items-center gap-4">
+                            <span id="equalsSign" class="text-slate-500 text-2xl hidden">=</span>
+                            <div class="flex flex-col text-3xl font-bold">
+                                <span id="resImpN"></span>
+                                <hr class="border-slate-500">
+                                <span id="resImpD"></span>
+                            </div>
+                        </div>
+
+                        <!-- Decimal -->
+                        <div class="text-brand-300 text-2xl font-medium font-mono bg-slate-800/50 py-2 px-4 rounded-lg">
+                            = <span id="resDec"></span>
+                        </div>
+                    </div>
+                    <div id="errorMsg" class="text-red-400 font-bold mt-4 hidden"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEO Article Content (700-800 words) -->
+        <article class="prose prose-slate prose-lg max-w-4xl mx-auto mb-20 bg-white p-8 md:p-12 rounded-2xl shadow-sm border border-slate-100">
+            <h2 class="text-3xl font-extrabold text-slate-900 mb-6">The Real-World Importance of Unit and Currency Conversions</h2>
+            
+            <p>The interconnected nature of our modern world means that data, goods, and people move across borders faster than ever before. This global fluidity brings incredible opportunities, but it also introduces the complex challenge of differing measurement systems and monetary values. Understanding the practical use cases for unit and currency conversions is no longer just a requirement for mathematicians or economists; it is a fundamental skill for anyone participating in the modern economy. Whether you are scaling a recipe, purchasing materials for a construction project, or analyzing foreign exchange markets, accurate conversions dictate the success of your endeavors. Let’s explore the most prominent real-world applications where converting units and currencies is absolutely critical.</p>
+
+            <h3 class="text-2xl font-bold mt-8 mb-4">1. International E-commerce and Retail Logistics</h3>
+            <p>In the era of globalized digital marketplaces, a consumer in the United States can effortlessly purchase a product manufactured in Germany, shipped via a logistics hub in Singapore. This single transaction relies heavily on continuous conversion metrics.</p>
+            <ul class="list-disc pl-6 mb-6 space-y-2">
+                <li><strong>Currency Pricing:</strong> Retailers must dynamically convert base manufacturing costs into local display currencies so buyers understand the exact financial impact. A slight miscalculation in the exchange rate can immediately erase profit margins.</li>
+                <li><strong>Weight and Dimensions:</strong> Shipping providers charge based on volumetric weight. A package's dimensions might be listed in inches by the manufacturer but must be converted to centimeters for international freight calculations. Furthermore, a 50-pound package must be accurately declared as 22.68 kilograms to comply with international aviation weight limits.</li>
+            </ul>
+
+            <h3 class="text-2xl font-bold mt-8 mb-4">2. Culinary Arts and Recipe Scaling</h3>
+            <p>The culinary world is a prime example of where fraction math and unit conversion intersect daily. Professional kitchens and home cooks frequently encounter recipes written in opposing measurement systems.</p>
+            <p>If you discover a traditional French baking recipe, the ingredients will likely be measured by weight in grams (the metric system). For a home cook in the United States equipped only with standard volume measuring cups, converting those grams into cups, tablespoons, and fractional teaspoons is essential. Similarly, scaling a recipe to feed 12 people instead of 4 requires multiplying fractional ingredients. If a recipe calls for 3/4 cup of sugar, tripling it means calculating 9/4, which converts to a mixed number of 2 and 1/4 cups. Without precise conversion, the delicate chemical balance of baking fails.</p>
+
+            <h3 class="text-2xl font-bold mt-8 mb-4">3. Travel and Global Tourism</h3>
+            <p>For international travelers, unit and currency conversions are immediate, on-the-ground necessities for survival and budget management.</p>
+            <ul class="list-disc pl-6 mb-6 space-y-2">
+                <li><strong>Financial Exchange:</strong> When stepping off a plane in Tokyo, a traveler must understand how their home currency translates to the Japanese Yen to accurately gauge the cost of a taxi, a meal, or a hotel room. Fluctuating daily exchange rates mean these conversions must be monitored constantly.</li>
+                <li><strong>Distance and Speed:</strong> Driving in a foreign country often requires adapting to new metrics. A driver from the United Kingdom navigating the highways of Canada must mentally convert speed limits posted in kilometers per hour (km/h) back to miles per hour (mph) to ensure they are driving safely and legally.</li>
+                <li><strong>Temperature:</strong> Packing appropriate clothing requires converting weather forecasts from Celsius to Fahrenheit, or vice versa, depending on your region of origin.</li>
+            </ul>
+
+            <h3 class="text-2xl font-bold mt-8 mb-4">4. Engineering, Construction, and DIY</h3>
+            <p>Precision is the backbone of engineering and construction. However, the global supply chain means that materials sourced from different continents utilize different measurement standards.</p>
+            <p>A mechanic working on a modern automobile will frequently encounter a mix of metric and imperial bolts. An architectural plan drafted in Europe using millimeters must be carefully converted by American contractors using fractional inches (like 5/16 or 7/8). In construction, a rounding error during unit conversion does not just cause a minor inconvenience; it can lead to structural failures, wasted building materials, and significant financial loss. Calculators that can fluidly move between decimal metrics and standard fractions are indispensable tools on any job site.</p>
+
+            <h3 class="text-2xl font-bold mt-8 mb-4">5. Financial Trading and Investment Management</h3>
+            <p>In the financial sector, conversions operate on a microscopic scale where fractions of a cent dictate massive wealth transfers.</p>
+            <p>Historically, the U.S. stock market traded in fractions (like 1/8 or 1/16 of a dollar) before decimalization occurred in 2001. Today, the concept of fractions remains via "fractional shares," allowing retail investors to purchase a percentage of an expensive stock (e.g., buying 0.15 shares of a $3,000 asset). Furthermore, in the Foreign Exchange (Forex) market, currency conversions are executed out to the fourth decimal place (known as a "pip"). Traders utilize automated conversion algorithms to exploit tiny inefficiencies in global currency values, making high-speed, accurate conversions the cornerstone of international banking.</p>
+
+            <p class="mt-8">Ultimately, whether you are dealing with fractional measurements on a tape measure or converting Euros to Dollars for a business invoice, mathematical translation bridges the gap between disparate systems, ensuring accuracy, safety, and efficiency in our daily lives.</p>
+        </article>
+
+        <!-- FAQ Section (5-10 Questions) -->
+        <section class="max-w-3xl mx-auto mb-20" id="faq-section">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
+                <p class="text-slate-600 mt-2">Common questions regarding fractions and mathematical operations.</p>
+            </div>
+            
+            <div class="space-y-4" id="faq-container">
+                <!-- FAQs will be injected via JS for cleaner HTML and structured data synchronization -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-10 border-t border-slate-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2">
+                <div class="w-6 h-6 rounded bg-brand-600 flex items-center justify-center text-white">
+                    <i data-lucide="calculator" class="w-4 h-4"></i>
+                </div>
+                <span class="font-bold text-slate-200">Utiliverse Fraction Tool</span>
+            </div>
+            <p class="text-sm">© <script>document.write(new Date().getFullYear())</script> Utiliverse.app. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Application Logic -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Mathematical Utility Functions
+        function gcd(a, b) {
+            a = Math.abs(a);
+            b = Math.abs(b);
+            return b === 0 ? a : gcd(b, a % b);
+        }
+
+        function parseFractionInput(wId, nId, dId) {
+            const wVal = document.getElementById(wId).value;
+            const nVal = document.getElementById(nId).value;
+            const dVal = document.getElementById(dId).value;
+
+            let w = parseInt(wVal) || 0;
+            let n = parseInt(nVal) || 0;
+            let d = parseInt(dVal);
+
+            if (isNaN(d) || d === 0) {
+                throw new Error("Denominator cannot be zero or empty.");
+            }
+
+            // Convert mixed to improper
+            let impN = (Math.abs(w) * Math.abs(d)) + Math.abs(n);
+            
+            // Determine sign
+            let isNegative = false;
+            if (wVal.includes('-') || nVal.includes('-') || dVal.includes('-')) {
+                // Simplified negative logic: if whole is negative, fraction is negative
+                // Or if just numerator is negative.
+                let negCount = 0;
+                if (w < 0) negCount++;
+                if (n < 0) negCount++;
+                if (d < 0) negCount++;
+                if (negCount % 2 !== 0) isNegative = true;
+            }
+
+            if (isNegative) impN = -impN;
+            d = Math.abs(d);
+
+            return { n: impN, d: d };
+        }
+
+        function simplify(n, d) {
+            let divisor = gcd(n, d);
+            return { n: n / divisor, d: d / divisor };
+        }
+
+        // Main Calculation Function
+        function calculate() {
+            const errorMsg = document.getElementById('errorMsg');
+            const resultArea = document.getElementById('resultArea');
+            
+            try {
+                errorMsg.classList.add('hidden');
+                
+                const f1 = parseFractionInput('w1', 'n1', 'd1');
+                const f2 = parseFractionInput('w2', 'n2', 'd2');
+                const op = document.getElementById('operator').value;
+                
+                let resN, resD;
+
+                switch (op) {
+                    case '+':
+                        resN = (f1.n * f2.d) + (f2.n * f1.d);
+                        resD = f1.d * f2.d;
+                        break;
+                    case '-':
+                        resN = (f1.n * f2.d) - (f2.n * f1.d);
+                        resD = f1.d * f2.d;
+                        break;
+                    case '*':
+                        resN = f1.n * f2.n;
+                        resD = f1.d * f2.d;
+                        break;
+                    case '/':
+                        if (f2.n === 0) throw new Error("Cannot divide by zero.");
+                        resN = f1.n * f2.d;
+                        resD = f1.d * f2.n;
+                        break;
+                }
+
+                // Handle negative denominator from division
+                if (resD < 0) {
+                    resN = -resN;
+                    resD = -resD;
+                }
+
+                const simplified = simplify(resN, resD);
+                displayResult(simplified.n, simplified.d);
+                
+                resultArea.classList.remove('hidden');
+
+            } catch (err) {
+                resultArea.classList.remove('hidden');
+                document.getElementById('resMixed').classList.add('hidden');
+                document.getElementById('resImpN').parentElement.parentElement.classList.add('hidden');
+                document.getElementById('resDec').parentElement.classList.add('hidden');
+                
+                errorMsg.textContent = err.message;
+                errorMsg.classList.remove('hidden');
+            }
+        }
+
+        function displayResult(n, d) {
+            const decimal = n / d;
+            
+            // Decimal Display
+            document.getElementById('resDec').textContent = Number.isInteger(decimal) ? decimal : parseFloat(decimal.toFixed(6));
+            document.getElementById('resDec').parentElement.classList.remove('hidden');
+
+            const absN = Math.abs(n);
+            const w = Math.floor(absN / d);
+            const remN = absN % d;
+            const sign = n < 0 ? "-" : "";
+
+            const impDisplay = document.getElementById('resImpN').parentElement.parentElement;
+            const mixedDisplay = document.getElementById('resMixed');
+            const equalsSign = document.getElementById('equalsSign');
+
+            impDisplay.classList.remove('hidden');
+            
+            // Improper Fraction Output
+            document.getElementById('resImpN').textContent = sign + absN;
+            document.getElementById('resImpD').textContent = d;
+
+            if (d === 1) {
+                // If it's a whole number, hide improper formatting slightly
+                document.getElementById('resImpD').parentElement.classList.add('hidden');
+                document.getElementById('resImpN').style.fontSize = "2.25rem";
+                mixedDisplay.classList.add('hidden');
+                equalsSign.classList.add('hidden');
+            } else {
+                document.getElementById('resImpD').parentElement.classList.remove('hidden');
+                document.getElementById('resImpN').style.fontSize = "";
+                
+                // Show mixed fraction if applicable
+                if (w > 0 && remN > 0) {
+                    mixedDisplay.classList.remove('hidden');
+                    equalsSign.classList.remove('hidden');
+                    document.getElementById('resMixedW').textContent = sign + w;
+                    document.getElementById('resMixedN').textContent = remN;
+                    document.getElementById('resMixedD').textContent = d;
+                } else {
+                    mixedDisplay.classList.add('hidden');
+                    equalsSign.classList.add('hidden');
+                }
+            }
+        }
+
+        function clearFields() {
+            ['w1', 'n1', 'd1', 'w2', 'n2', 'd2'].forEach(id => {
+                document.getElementById(id).value = id.startsWith('d') ? '1' : '';
+            });
+            document.getElementById('resultArea').classList.add('hidden');
+            document.getElementById('operator').value = '+';
+        }
+
+        // FAQ Data and Rendering
+        const faqs = [
+            {
+                q: "How do you add or subtract fractions?",
+                a: "To add or subtract fractions, they must have a common denominator (the bottom number). Once the denominators are the same, you simply add or subtract the numerators (the top numbers) and keep the denominator exactly the same. Finally, simplify the resulting fraction if possible."
+            },
+            {
+                q: "What is a mixed number?",
+                a: "A mixed number is a combination of a whole number and a proper fraction. For example, 2 1/2 is a mixed number. Before performing multiplication or division with a mixed number, it is usually converted into an improper fraction."
+            },
+            {
+                q: "How do you multiply fractions?",
+                a: "Multiplying fractions is straightforward. You do not need a common denominator. Simply multiply the top numerators together to get the new numerator, and multiply the bottom denominators together to get the new denominator."
+            },
+            {
+                q: "How do you divide fractions?",
+                a: "To divide fractions, you use the 'keep, change, flip' method. Keep the first fraction exactly as it is, change the division sign to a multiplication sign, and flip the second fraction (this is called finding the reciprocal). Then, multiply them normally."
+            },
+            {
+                q: "What is an improper fraction?",
+                a: "An improper fraction is a fraction where the numerator (top number) is greater than or equal to the denominator (bottom number). For example, 5/4 is an improper fraction. These can be converted into mixed numbers."
+            },
+            {
+                q: "Can this calculator convert fractions to decimals?",
+                a: "Yes. Whenever you perform an operation using this calculator, the result is automatically converted into its decimal equivalent and displayed alongside the simplified fraction."
+            }
+        ];
+
+        // Render FAQs to DOM
+        const faqContainer = document.getElementById('faq-container');
+        faqs.forEach(faq => {
+            const html = `
+                <details class="group bg-white rounded-xl shadow-sm border border-slate-200 open:ring-2 open:ring-brand-500/20 transition-all duration-200">
+                    <summary class="flex items-center justify-between cursor-pointer p-5 font-semibold text-slate-800 outline-none">
+                        ${faq.q}
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-slate-400 group-open:rotate-180 transition-transform duration-200"></i>
+                    </summary>
+                    <div class="px-5 pb-5 text-slate-600 leading-relaxed border-t border-slate-100 pt-4 mt-1">
+                        ${faq.a}
+                    </div>
+                </details>
+            `;
+            faqContainer.insertAdjacentHTML('beforeend', html);
+        });
+        
+        // Re-init icons for newly added FAQs
+        lucide.createIcons();
+
+        // Inject FAQ Schema for SEO
+        const faqSchema = {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqs.map(faq => ({
+                "@type": "Question",
+                "name": faq.q,
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": faq.a
+                }
+            }))
+        };
+        const scriptTag = document.createElement('script');
+        scriptTag.type = "application/ld+json";
+        scriptTag.text = JSON.stringify(faqSchema);
+        document.head.appendChild(scriptTag);
+    </script>
+</body>
+</html>
