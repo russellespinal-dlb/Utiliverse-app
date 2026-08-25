@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Message Header Analyzer | Diagnostic & Conversion Suite</title>
+    <meta name="description" content="Free online email message header analyzer. Trace hop delays, verify SPF, DKIM, DMARC authentication, and analyze email security and transit performance instantly.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+                        'soft-dark': '0 4px 20px -2px rgba(0, 0, 0, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+
+    <!-- WebApplication Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Utiliverse Email Message Header Analyzer",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "description": "Analyze email internet headers, inspect hop latencies, and check authentication results like SPF, DKIM, and DMARC.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans antialiased selection:bg-brand-500/30">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <a href="https://utiliverse.app" class="flex items-center gap-3 group hover:opacity-80 transition-all duration-300">
+                <div class="w-9 h-9 rounded-xl bg-brand-600 flex items-center justify-center text-white shadow-lg shadow-brand-500/20 group-hover:-translate-x-1 transition-transform">
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                </div>
+                <span class="font-bold text-lg tracking-tight text-slate-800 dark:text-slate-100">Back to Utiliverse</span>
+            </a>
+            
+            <button id="themeToggle" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500" aria-label="Toggle Dark Mode">
+                <i data-lucide="sun" id="sunIcon" class="w-5 h-5 hidden"></i>
+                <i data-lucide="moon" id="moonIcon" class="w-5 h-5 hidden"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-10 md:py-16">
+        
+        <!-- Hero Section -->
+        <div class="text-center mb-10">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
+                Message Header <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-brand-700 dark:from-brand-400 dark:to-brand-600">Analyzer</span>
+            </h1>
+            <p class="text-base md:text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+                Paste raw Internet headers to inspect server hops, routing latency, SPF/DKIM/DMARC status, and essential message metadata.
+            </p>
+        </div>
+
+        <!-- Analyzer Card Container -->
+        <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-soft dark:shadow-soft-dark border border-slate-200/80 dark:border-slate-800 p-6 md:p-8 mb-16 transition-colors">
+            
+            <!-- Input Area -->
+            <div class="mb-6">
+                <label for="rawHeaders" class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">
+                    Paste Raw Email Headers
+                </label>
+                <textarea id="rawHeaders" rows="8" class="w-full font-mono text-xs md:text-sm p-4 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-brand-500 focus:outline-none text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-600 transition-all resize-y" placeholder="Received: from mail.example.com (mail.example.com [192.0.2.1])..."></textarea>
+            </div>
+
+            <!-- Action Controls -->
+            <div class="flex flex-wrap items-center justify-between gap-4 mb-8 pb-6 border-b border-slate-100 dark:border-slate-800">
+                <div class="flex items-center gap-3">
+                    <button onclick="analyzeHeaders()" class="bg-brand-600 hover:bg-brand-500 text-white font-bold py-3 px-6 rounded-xl shadow-lg shadow-brand-500/20 hover:-translate-y-0.5 active:scale-95 transition-all flex items-center gap-2 text-sm">
+                        <i data-lucide="search" class="w-4 h-4"></i> Analyze Headers
+                    </button>
+                    <button onclick="loadSample()" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold py-3 px-5 rounded-xl transition-all text-sm flex items-center gap-2">
+                        <i data-lucide="file-text" class="w-4 h-4"></i> Load Sample
+                    </button>
+                </div>
+                <button onclick="clearHeaders()" class="text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 font-medium text-sm flex items-center gap-1.5 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                    <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Clear
+                </button>
+            </div>
+
+            <!-- Results Display Section -->
+            <div id="analysisOutput" class="hidden">
+                
+                <!-- Tab Navigation Buttons -->
+                <div class="flex flex-wrap gap-2 mb-6 bg-slate-100 dark:bg-slate-800/60 p-1.5 rounded-2xl max-w-fit border border-slate-200/60 dark:border-slate-700/60">
+                    <button onclick="switchTab('summary')" id="tab-btn-summary" class="tab-btn px-5 py-2 rounded-xl text-xs font-bold transition-all bg-white dark:bg-slate-900 shadow-sm text-brand-600 dark:text-brand-400">Summary</button>
+                    <button onclick="switchTab('hops')" id="tab-btn-hops" class="tab-btn px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">Received Hops</button>
+                    <button onclick="switchTab('auth')" id="tab-btn-auth" class="tab-btn px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">Authentication</button>
+                    <button onclick="switchTab('all')" id="tab-btn-all" class="tab-btn px-5 py-2 rounded-xl text-xs font-bold transition-all text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">All Headers</button>
+                </div>
+
+                <!-- TAB 1: Summary -->
+                <div id="tab-summary" class="tab-content active">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Subject</span>
+                            <p id="sumSubject" class="font-semibold text-slate-800 dark:text-slate-200 break-words">-</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Message-ID</span>
+                            <p id="sumMessageId" class="font-mono text-xs text-slate-800 dark:text-slate-200 break-all">-</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">From</span>
+                            <p id="sumFrom" class="text-sm font-medium text-slate-800 dark:text-slate-200 break-words">-</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">To</span>
+                            <p id="sumTo" class="text-sm font-medium text-slate-800 dark:text-slate-200 break-words">-</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Creation Date</span>
+                            <p id="sumDate" class="text-sm font-medium text-slate-800 dark:text-slate-200">-</p>
+                        </div>
+                        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800">
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">Total Delivery Delay</span>
+                            <p id="sumDelay" class="text-sm font-bold text-brand-600 dark:text-brand-400">-</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: Received Hops -->
+                <div id="tab-hops" class="tab-content">
+                    <div class="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800">
+                        <table class="w-full text-left text-xs md:text-sm">
+                            <thead class="bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 font-bold uppercase tracking-wider text-[10px]">
+                                <tr>
+                                    <th class="p-3.5 text-center">Hop</th>
+                                    <th class="p-3.5">From</th>
+                                    <th class="p-3.5">By</th>
+                                    <th class="p-3.5">Protocol / Security</th>
+                                    <th class="p-3.5">Time</th>
+                                    <th class="p-3.5 text-right">Delay</th>
+                                </tr>
+                            </thead>
+                            <tbody id="hopsTableBody" class="divide-y divide-slate-200 dark:divide-slate-800 font-mono text-xs">
+                                <!-- Dynamic Hops -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- TAB 3: Authentication -->
+                <div id="tab-auth" class="tab-content">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800 flex flex-col justify-between">
+                            <div>
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2">SPF Check</span>
+                                <div id="spfStatus" class="text-lg font-bold text-slate-600 dark:text-slate-400">Not Detected</div>
+                            </div>
+                            <p id="spfDetails" class="text-xs text-slate-500 mt-3 font-mono break-words">-</p>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800 flex flex-col justify-between">
+                            <div>
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2">DKIM Check</span>
+                                <div id="dkimStatus" class="text-lg font-bold text-slate-600 dark:text-slate-400">Not Detected</div>
+                            </div>
+                            <p id="dkimDetails" class="text-xs text-slate-500 mt-3 font-mono break-words">-</p>
+                        </div>
+                        <div class="p-5 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200/80 dark:border-slate-800 flex flex-col justify-between">
+                            <div>
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider block mb-2">DMARC Check</span>
+                                <div id="dmarcStatus" class="text-lg font-bold text-slate-600 dark:text-slate-400">Not Detected</div>
+                            </div>
+                            <p id="dmarcDetails" class="text-xs text-slate-500 mt-3 font-mono break-words">-</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 4: All Parsed Headers -->
+                <div id="tab-all" class="tab-content">
+                    <div class="overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800 max-h-96">
+                        <table class="w-full text-left text-xs font-mono">
+                            <thead class="bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 font-bold uppercase tracking-wider text-[10px]">
+                                <tr>
+                                    <th class="p-3 w-1/3">Header Key</th>
+                                    <th class="p-3">Parsed Value</th>
+                                </tr>
+                            </thead>
+                            <tbody id="allHeadersTableBody" class="divide-y divide-slate-200 dark:divide-slate-800">
+                                <!-- Dynamic Parsed Headers -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Comprehensive Educational Article -->
+        <article class="prose prose-slate dark:prose-invert max-w-4xl mx-auto mb-20 bg-white dark:bg-slate-900 p-8 md:p-12 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-sm">
+            <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mb-6">
+                Understanding Messaging Diagnostics, Hop Latencies, and Data Conversion Standards
+            </h2>
+            
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                Analyzing internet email headers provides essential visibility into the path a email message travels across servers, relay agents, and security filters. Behind every delivered message lies a structured log containing timestamps, internet protocol addresses, cryptographic signatures, and transport protocol identifiers. However, modern systems engineering requires dealing with diverse units of measurement—ranging from milliseconds of transfer delay to payload sizes expressed in bytes, kilobytes, or megabytes.
+            </p>
+
+            <strong class="block text-xl font-bold text-slate-800 dark:text-slate-100 mt-8 mb-4">
+                1. System Performance and Storage Unit Conversions
+            </strong>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                In infrastructure diagnostics, message headers frequently report metadata such as attachment boundaries and message body sizes. Message Transfer Agents (MTAs) impose strict limits on data volume per transaction. For instance, an email gateway might enforce a maximum limit of 25 Megabytes (MB). When analyzing raw log metrics or API payloads, system administrators must convert these numbers into Kilobytes (KB) or Bytes (B) to verify quota compliance.
+            </p>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                Understanding unit conversions ensures accurate system configuration:
+            </p>
+            <ul class="list-disc pl-6 space-y-2 text-slate-600 dark:text-slate-300 mb-6">
+                <li><strong>1 Megabyte (MB)</strong> = 1,024 Kilobytes (KB) = 1,048,576 Bytes (B) using binary standards (KiB/MiB).</li>
+                <li><strong>Network Bandwidth vs. Storage:</strong> Data transfer throughput across mail relays is measured in Megabits per second (Mbps), where 8 bits correspond to 1 byte.</li>
+                <li><strong>Latency Measurements:</strong> Hop delays inside email headers are parsed in seconds, but high-performance internal relays log transit in milliseconds (ms) or microseconds (&mu;s).</li>
+            </ul>
+
+            <strong class="block text-xl font-bold text-slate-800 dark:text-slate-100 mt-8 mb-4">
+                2. Cross-Border Operations and Currency Unit Conversions
+            </strong>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-4">
+                Cloud infrastructure deployment for email security, DNS filtering, and message relaying operates on a global scale. Organizations deploy outbound relays across regions such as North America (USD), Europe (EUR), and Asia-Pacific (JPY). Analyzing operational overhead demands converting cloud computing expenses into uniform baseline currencies.
+            </p>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                Consider an enterprise running message inspection software on cloud virtual instances across multiple international data centers:
+            </p>
+
+            <div class="overflow-x-auto mb-6">
+                <table class="w-full text-left border-collapse text-sm">
+                    <thead>
+                        <tr class="border-b border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50">
+                            <th class="p-3 font-bold">Region / Service</th>
+                            <th class="p-3 font-bold">Local Monthly Cost</th>
+                            <th class="p-3 font-bold">Exchange Baseline (USD)</th>
+                            <th class="p-3 font-bold">Converted Total (USD)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+                        <tr>
+                            <td class="p-3">US-East Gateway (MTA)</td>
+                            <td class="p-3 font-mono">$450.00 USD</td>
+                            <td class="p-3 font-mono">1.00 USD / USD</td>
+                            <td class="p-3 font-mono">$450.00</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">EU-Central Relay Node</td>
+                            <td class="p-3 font-mono">&euro;380.00 EUR</td>
+                            <td class="p-3 font-mono">1.08 USD / EUR</td>
+                            <td class="p-3 font-mono">$410.40</td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">APAC Spam Filtering API</td>
+                            <td class="p-3 font-mono">&yen;65,000 JPY</td>
+                            <td class="p-3 font-mono">0.0067 USD / JPY</td>
+                            <td class="p-3 font-mono">$435.50</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                Accurate currency conversion allows system architects to calculate total cost of ownership (TCO) across distributed infrastructure nodes, ensuring cloud security gateways remain budget-compliant while delivering low-latency email processing worldwide.
+            </p>
+
+            <strong class="block text-xl font-bold text-slate-800 dark:text-slate-100 mt-8 mb-4">
+                3. The Role of Diagnostic Header Analysis
+            </strong>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed">
+                By pairing precise unit and currency conversions with automated header analysis, network administrators can pinpoint exact server delay bottlenecks, verify SPF and DKIM authenticity, and maintain secure, reliable communication infrastructure across international boundaries.
+            </p>
+        </article>
+
+        <!-- FAQ Section -->
+        <section class="max-w-4xl mx-auto mb-16">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white">Frequently Asked Questions</h2>
+                <p class="text-slate-600 dark:text-slate-400 mt-2 text-sm">Common queries about email message header diagnostics and unit calculations.</p>
+            </div>
+            <div class="space-y-4" id="faq-container">
+                <!-- Dynamically populated FAQs -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 dark:bg-black text-slate-400 py-10 border-t border-slate-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-7 h-7 rounded-lg bg-brand-600/20 text-brand-500 flex items-center justify-center">
+                    <i data-lucide="shield-check" class="w-4 h-4"></i>
+                </div>
+                <span class="font-bold text-slate-200 text-sm tracking-wide">Utiliverse Header Diagnostics</span>
+            </div>
+            <p class="text-xs font-medium">© <script>document.write(new Date().getFullYear())</script> Utiliverse.app. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Theme Management
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const sunIcon = document.getElementById('sunIcon');
+        const moonIcon = document.getElementById('moonIcon');
+
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            sunIcon.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            moonIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            sunIcon.classList.toggle('hidden');
+            moonIcon.classList.toggle('hidden');
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+            }
+        });
+
+        // Tab Switching Logic
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => {
+                el.classList.remove('bg-white', 'dark:bg-slate-900', 'shadow-sm', 'text-brand-600', 'dark:text-brand-400');
+                el.classList.add('text-slate-600', 'dark:text-slate-400');
+            });
+            
+            document.getElementById(`tab-${tabId}`).classList.add('active');
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            activeBtn.classList.remove('text-slate-600', 'dark:text-slate-400');
+            activeBtn.classList.add('bg-white', 'dark:bg-slate-900', 'shadow-sm', 'text-brand-600', 'dark:text-brand-400');
+        }
+
+        // Header Parsing Engine
+        function analyzeHeaders() {
+            const raw = document.getElementById('rawHeaders').value.trim();
+            if (!raw) return;
+
+            // Unfold folded lines (RFC 5322 CRLF + space/tab continuation)
+            const unfolded = raw.replace(/\r?\n[ \t]+/g, ' ');
+            const lines = unfolded.split(/\r?\n/);
+
+            const headers = [];
+            const receivedHops = [];
+
+            lines.forEach(line => {
+                const match = line.match(/^([A-Za-z0-9\-]+):\s*(.*)$/);
+                if (match) {
+                    const key = match[1];
+                    const val = match[2];
+                    headers.push({ key, val });
+
+                    if (key.toLowerCase() === 'received') {
+                        receivedHops.push(val);
+                    }
+                }
+            });
+
+            // Populate Summary
+            document.getElementById('sumSubject').textContent = getHeaderValue(headers, 'Subject') || '(No Subject)';
+            document.getElementById('sumMessageId').textContent = getHeaderValue(headers, 'Message-ID') || '(Not Found)';
+            document.getElementById('sumFrom').textContent = getHeaderValue(headers, 'From') || '(Not Found)';
+            document.getElementById('sumTo').textContent = getHeaderValue(headers, 'To') || '(Not Found)';
+            document.getElementById('sumDate').textContent = getHeaderValue(headers, 'Date') || '(Not Found)';
+
+            // Process Hops & Delays
+            parseHops(receivedHops);
+
+            // Process Authentication
+            parseAuth(headers);
+
+            // Populate All Headers
+            populateAllHeaders(headers);
+
+            document.getElementById('analysisOutput').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function getHeaderValue(headers, keyName) {
+            const found = headers.find(h => h.key.toLowerCase() === keyName.toLowerCase());
+            return found ? found.val : null;
+        }
+
+        function parseHops(hops) {
+            const tableBody = document.getElementById('hopsTableBody');
+            tableBody.innerHTML = '';
+
+            let prevDate = null;
+            let totalDelay = 0;
+
+            // Reverse hops to show chronological order (first hop to final recipient)
+            const chronological = [...hops].reverse();
+
+            chronological.forEach((hopStr, index) => {
+                // Extract 'from', 'by', 'with', and 'date'
+                const fromMatch = hopStr.match(/from\s+([^\s]+)/i);
+                const byMatch = hopStr.match(/by\s+([^\s]+)/i);
+                const withMatch = hopStr.match(/with\s+([^\s]+)/i);
+                const dateMatch = hopStr.match(/;\s*([A-Za-z0-9,:\s\+\-]+)$/);
+
+                const fromHost = fromMatch ? fromMatch[1] : 'Unknown';
+                const byHost = byMatch ? byMatch[1] : 'Unknown';
+                const proto = withMatch ? withMatch[1] : 'Standard';
+                
+                let hopDate = null;
+                let delayStr = '0s';
+
+                if (dateMatch) {
+                    hopDate = new Date(dateMatch[1]);
+                    if (!isNaN(hopDate) && prevDate && !isNaN(prevDate)) {
+                        const diffSec = Math.max(0, Math.floor((hopDate - prevDate) / 1000));
+                        totalDelay += diffSec;
+                        delayStr = formatSeconds(diffSec);
+                    }
+                    if (!isNaN(hopDate)) prevDate = hopDate;
+                }
+
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors";
+                tr.innerHTML = `
+                    <td class="p-3 text-center font-bold text-slate-400">${index + 1}</td>
+                    <td class="p-3 text-slate-700 dark:text-slate-300 break-all">${escapeHtml(fromHost)}</td>
+                    <td class="p-3 text-slate-700 dark:text-slate-300 break-all">${escapeHtml(byHost)}</td>
+                    <td class="p-3 text-brand-600 dark:text-brand-400 font-semibold">${escapeHtml(proto)}</td>
+                    <td class="p-3 text-slate-500 text-[11px]">${hopDate && !isNaN(hopDate) ? hopDate.toUTCString() : 'N/A'}</td>
+                    <td class="p-3 text-right font-bold ${delayStr !== '0s' ? 'text-amber-500' : 'text-slate-400'}">${delayStr}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+
+            document.getElementById('sumDelay').textContent = formatSeconds(totalDelay);
+        }
+
+        function parseAuth(headers) {
+            const authHeader = getHeaderValue(headers, 'Authentication-Results') || getHeaderValue(headers, 'ARC-Authentication-Results') || '';
+            const receivedSpf = getHeaderValue(headers, 'Received-SPF') || '';
+
+            // SPF Check
+            const spfElem = document.getElementById('spfStatus');
+            const spfDet = document.getElementById('spfDetails');
+            if (authHeader.includes('spf=pass') || receivedSpf.toLowerCase().startsWith('pass')) {
+                spfElem.className = 'text-lg font-bold text-emerald-500';
+                spfElem.textContent = 'PASS';
+                spfDet.textContent = receivedSpf || 'SPF verification passed successfully.';
+            } else if (authHeader.includes('spf=fail') || receivedSpf.toLowerCase().startsWith('fail')) {
+                spfElem.className = 'text-lg font-bold text-rose-500';
+                spfElem.textContent = 'FAIL';
+                spfDet.textContent = receivedSpf || 'SPF validation failed.';
+            } else {
+                spfElem.className = 'text-lg font-bold text-slate-500';
+                spfElem.textContent = 'NONE / UNKNOWN';
+                spfDet.textContent = 'No explicit SPF pass/fail result detected in headers.';
+            }
+
+            // DKIM Check
+            const dkimElem = document.getElementById('dkimStatus');
+            const dkimDet = document.getElementById('dkimDetails');
+            if (authHeader.includes('dkim=pass')) {
+                dkimElem.className = 'text-lg font-bold text-emerald-500';
+                dkimElem.textContent = 'PASS';
+                dkimDet.textContent = 'Cryptographic DKIM signature verified.';
+            } else if (authHeader.includes('dkim=fail')) {
+                dkimElem.className = 'text-lg font-bold text-rose-500';
+                dkimElem.textContent = 'FAIL';
+                dkimDet.textContent = 'DKIM signature present but verification failed.';
+            } else {
+                dkimElem.className = 'text-lg font-bold text-slate-500';
+                dkimElem.textContent = 'NONE';
+                dkimDet.textContent = 'No DKIM authentication result found.';
+            }
+
+            // DMARC Check
+            const dmarcElem = document.getElementById('dmarcStatus');
+            const dmarcDet = document.getElementById('dmarcDetails');
+            if (authHeader.includes('dmarc=pass')) {
+                dmarcElem.className = 'text-lg font-bold text-emerald-500';
+                dmarcElem.textContent = 'PASS';
+                dmarcDet.textContent = 'DMARC alignment verified.';
+            } else if (authHeader.includes('dmarc=fail')) {
+                dmarcElem.className = 'text-lg font-bold text-rose-500';
+                dmarcElem.textContent = 'FAIL';
+                dmarcDet.textContent = 'DMARC alignment policy failed.';
+            } else {
+                dmarcElem.className = 'text-lg font-bold text-slate-500';
+                dmarcElem.textContent = 'NONE';
+                dmarcDet.textContent = 'No DMARC status provided in authentication results.';
+            }
+        }
+
+        function populateAllHeaders(headers) {
+            const tableBody = document.getElementById('allHeadersTableBody');
+            tableBody.innerHTML = '';
+            headers.forEach(h => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors";
+                tr.innerHTML = `
+                    <td class="p-3 font-semibold text-slate-700 dark:text-slate-300 break-all">${escapeHtml(h.key)}</td>
+                    <td class="p-3 text-slate-600 dark:text-slate-400 break-all">${escapeHtml(h.val)}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        function formatSeconds(sec) {
+            if (sec < 60) return `${sec}s`;
+            const min = Math.floor(sec / 60);
+            const remSec = sec % 60;
+            return `${min}m ${remSec}s`;
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+        }
+
+        function loadSample() {
+            const sample = `Received: from mail-ej1-f49.google.com (mail-ej1-f49.google.com [209.85.218.49])
+    by mx.microsoft.com (8.28.0/8.28.0) with ESMTP id v12345678
+    for <recipient@example.com>; Mon, 24 Aug 2026 14:02:10 -0400
+Received: by mail-ej1-f49.google.com with SMTP id abc123xyz
+    for <recipient@example.com>; Mon, 24 Aug 2026 14:02:08 -0400
+Authentication-Results: mx.microsoft.com;
+    spf=pass (sender IP is 209.85.218.49) smtp.mailfrom=example.com;
+    dkim=pass header.i=@example.com;
+    dmarc=pass (p=REJECT sp=REJECT dis=NONE)
+Received-SPF: pass (google.com: domain of sender@example.com designates 209.85.218.49 as permitted sender)
+From: Sender Name <sender@example.com>
+To: Recipient Name <recipient@example.com>
+Subject: System Diagnostic & Header Test
+Date: Mon, 24 Aug 2026 14:02:05 -0400
+Message-ID: <CABvW=1234567890_test@mail.gmail.com>`;
+
+            document.getElementById('rawHeaders').value = sample;
+            analyzeHeaders();
+        }
+
+        function clearHeaders() {
+            document.getElementById('rawHeaders').value = '';
+            document.getElementById('analysisOutput').classList.add('hidden');
+        }
+
+        // FAQ Injection & JSON-LD Generation
+        const faqs = [
+            { q: "What is an email message header?", a: "An email header contains detailed metadata about a message, including sender, recipient, routing servers, security signatures, and transit timestamps." },
+            { q: "How do I locate raw email headers in my mail client?", a: "In Gmail, click the three dots on a message and select 'Show original.' In Outlook, choose 'View message details' or inspect message properties." },
+            { q: "What does SPF stand for and why is it checked?", a: "SPF (Sender Policy Framework) verifies that the sending mail server's IP address is authorized by the domain's DNS record to send email." },
+            { q: "What is the difference between SPF, DKIM, and DMARC?", a: "SPF checks authorized IP addresses, DKIM provides a cryptographic signature verifying body integrity, and DMARC enforces policies based on SPF and DKIM alignment." },
+            { q: "How are hop delays calculated in email headers?", a: "Hop delays are calculated by computing the time difference between consecutive 'Received' header timestamps added by mail transfer agents." },
+            { q: "Why are unit conversions important in cloud email systems?", a: "Unit conversions ensure accurate capacity planning, converting message attachment limits between Megabytes (MB) and Bytes (B) for gateway compliance." },
+            { q: "How do currency conversions affect global mail routing infrastructure?", a: "Global deployments run nodes across various financial regions; converting local expenses into baseline currencies allows precise TCO tracking." }
+        ];
+
+        const faqContainer = document.getElementById('faq-container');
+        faqs.forEach(faq => {
+            const html = `
+                <details class="group bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-800 open:ring-2 open:ring-brand-500/20 transition-all">
+                    <summary class="flex items-center justify-between cursor-pointer p-5 font-semibold text-slate-800 dark:text-slate-200 outline-none select-none text-sm md:text-base">
+                        <span>${faq.q}</span>
+                        <div class="w-7 h-7 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center flex-shrink-0 group-open:bg-brand-50 dark:group-open:bg-brand-900/30 transition-colors">
+                            <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500 group-open:text-brand-600 dark:group-open:text-brand-400 group-open:rotate-180 transition-transform"></i>
+                        </div>
+                    </summary>
+                    <div class="px-5 pb-5 text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-100 dark:border-slate-800 pt-4 text-xs md:text-sm">
+                        ${faq.a}
+                    </div>
+                </details>
+            `;
+            faqContainer.insertAdjacentHTML('beforeend', html);
+        });
+
+        // Generate Valid Schema JSON-LD
+        const faqSchema = {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqs.map(faq => ({
+                "@type": "Question",
+                "name": faq.q,
+                "acceptedAnswer": { "@type": "Answer", "text": faq.a }
+            }))
+        };
+
+        const scriptTag = document.createElement('script');
+        scriptTag.type = "application/ld+json";
+        scriptTag.text = JSON.stringify(faqSchema);
+        document.head.appendChild(scriptTag);
+
+        lucide.createIcons();
+    </script>
+</body>
+</html>
