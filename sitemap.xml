@@ -56,13 +56,18 @@
     <loc>https://utiliverse.app/Unit_Currency_Converter/</loc>
   </url>
 
+  <!-- Fraction Calculator -->
+  <url>
+    <loc>https://utiliverse.app/Fracton_Calculator/</loc>
+  </url>
+
   <!-- JSON Formatting Utility -->
   <url>
     <loc>https://utiliverse.app/JSON_Utility/</loc>
   </url>
 
-  <!-- Fraction Calculator -->
+  <!-- Email Message Header Analyzer -->
   <url>
-    <loc>https://utiliverse.app/Fracton_Calculator/</loc>
+    <loc>https://utiliverse.app/Email_Message_Header_Analyzer/</loc>
   </url>
 </urlset>
