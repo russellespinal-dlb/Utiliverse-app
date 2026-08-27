@@ -70,4 +70,19 @@
   <url>
     <loc>https://utiliverse.app/Email_Message_Header_Analyzer/</loc>
   </url>
+
+  <!-- Compound Interest Calculator -->
+  <url>
+    <loc>https://utiliverse.app/Compound_Interest_Calculator/</loc>
+  </url>
+
+  <!-- Salary Calculator -->
+  <url>
+    <loc>https://utiliverse.app/Salary_Calculator/</loc>
+  </url>
+
+  <!-- IP Subnet Calculator -->
+  <url>
+    <loc>https://utiliverse.app/IP_Subnet_Calculator/</loc>
+  </url>
 </urlset>
