@@ -281,10 +281,17 @@ async function measureDownload(server, bytes = 25000000) {
 
 // Upload Speed Test
 async function measureUpload(server, bytes = 5000000) {
+  const chunkSize = 65536;
+  const chunk = new Uint8Array(chunkSize);
+  if (window.crypto?.getRandomValues) crypto.getRandomValues(chunk);
+  
   const payload = new Uint8Array(bytes);
-  if (window.crypto?.getRandomValues) crypto.getRandomValues(payload);
+  for (let i = 0; i < bytes; i += chunkSize) {
+    payload.set(chunk.subarray(0, Math.min(chunkSize, bytes - i)), i);
+  }
 
   const start = performance.now();
+  
   await fetch(`${server.upUrl}?nocache=${crypto.randomUUID()}`, {
     method: 'POST',
     body: payload,
