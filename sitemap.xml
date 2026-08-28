@@ -85,4 +85,29 @@
   <url>
     <loc>https://utiliverse.app/IP_Subnet_Calculator/</loc>
   </url>
+
+  <!-- Random String Generator -->
+  <url>
+    <loc>https://utiliverse.app/Random_String_Generator/</loc>
+  </url>
+
+  <!-- HAR File Viewer -->
+  <url>
+    <loc>https://utiliverse.app/HAR_File_Viewer/</loc>
+  </url>
+
+  <!-- Hash Generator -->
+  <url>
+    <loc>https://utiliverse.app/Hash_Generator/</loc>
+  </url>
+
+  <!-- Internet Speed Test -->
+  <url>
+    <loc>https://utiliverse.app/Internet_Speed_Test/</loc>
+  </url>
+
+  <!-- HEX to RGB -->
+  <url>
+    <loc>https://utiliverse.app/HEX_to_RGB/</loc>
+  </url>
 </urlset>
