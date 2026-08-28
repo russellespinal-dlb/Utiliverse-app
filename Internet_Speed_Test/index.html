@@ -74,10 +74,11 @@ body{margin:0;background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.14),t
 <div id="progressWrap" class="hidden mt-5"><div class="flex justify-between text-xs text-slate-500 mb-2"><span id="progressLabel">Preparing…</span><span id="progressPct">0%</span></div><div class="progress-track"><div id="progress" class="progress"></div></div></div>
 </div>
 
-<div class="mt-5 grid sm:grid-cols-3 gap-3 text-sm">
+<div class="mt-5 grid sm:grid-cols-4 gap-3 text-sm">
 <div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase">Test server</div><div id="serverName" class="font-semibold mt-1">Auto-Selecting…</div><div id="serverMeta" class="text-xs text-slate-500 mt-1">—</div></div>
 <div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase">Network path</div><div id="networkMode" class="font-semibold mt-1">Multi-server capable</div><div class="text-xs text-slate-500 mt-1">Browser Engine</div></div>
 <div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase">Last test</div><div id="lastTest" class="font-semibold mt-1">—</div><div class="text-xs text-slate-500 mt-1">Browser estimate</div></div>
+<div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase">Duration</div><div id="testDuration" class="font-semibold mt-1">—</div><div class="text-xs text-slate-500 mt-1">Seconds</div></div>
 </div>
 </div>
 
@@ -85,7 +86,6 @@ body{margin:0;background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.14),t
 <div class="glass-soft rounded-2xl p-5">
 <div class="flex items-start justify-between gap-3"><div><h2 class="text-lg font-bold">Test location</h2><p class="text-sm muted mt-1">Pick a public server or find the nearest option.</p></div><button id="geoBtn" onclick="detectClosestServer()" class="btn text-xs px-3 py-2 flex items-center gap-2"><i data-lucide="locate-fixed" class="w-4 h-4"></i> Find Closest</button></div>
 
-<!-- Added Quick Dropdown Selection -->
 <div class="mt-4">
   <label for="serverDropdown" class="text-xs uppercase tracking-wider font-semibold text-slate-400 block mb-1">Quick Dropdown Select</label>
   <select id="serverDropdown" onchange="selectServer(this.value)" class="select w-full rounded-xl px-3 py-2 text-sm">
@@ -255,8 +255,8 @@ async function measurePing(server, samples = 5) {
   return { ping: median, jitter };
 }
 
-// Download Speed Test
-async function measureDownload(server, bytes = 25000000) {
+// Download Speed Test - Increased to 100MB for longer test duration
+async function measureDownload(server, bytes = 100000000) {
   const start = performance.now();
   const response = await fetch(`${server.downUrl}${bytes}&nocache=${crypto.randomUUID()}`, { cache: 'no-store', mode: 'cors' });
   const reader = response.body.getReader();
@@ -279,8 +279,8 @@ async function measureDownload(server, bytes = 25000000) {
   return (receivedBytes * 8) / duration / 1e6;
 }
 
-// Upload Speed Test
-async function measureUpload(server, bytes = 5000000) {
+// Upload Speed Test - Increased to 25MB for longer test duration
+async function measureUpload(server, bytes = 25000000) {
   const chunkSize = 65536;
   const chunk = new Uint8Array(chunkSize);
   if (window.crypto?.getRandomValues) crypto.getRandomValues(chunk);
@@ -306,6 +306,8 @@ async function measureUpload(server, bytes = 5000000) {
 async function startTest() {
   if (state.running) return;
   state.running = true;
+  const globalStart = performance.now(); // Track overall test duration
+  
   el('start').disabled = true;
   el('start').classList.add('opacity-60');
   el('start').innerHTML = '<i data-lucide="loader-circle" class="w-4 h-4 animate-spin"></i> Testing…';
@@ -317,6 +319,7 @@ async function startTest() {
   el('jitter').textContent = '—';
   el('quality').textContent = 'Testing';
   el('lastTest').textContent = 'In progress';
+  el('testDuration').textContent = '—';
 
   const s = state.selected || state.servers[0];
   updateProgress(5, 'Connecting to test endpoint…');
@@ -344,6 +347,11 @@ async function startTest() {
     const quality = latencyMetrics.ping < 35 && downSpeed >= 100 ? 'Excellent' : latencyMetrics.ping < 75 && downSpeed >= 40 ? 'Good' : 'Fair';
     el('quality').textContent = quality;
     el('lastTest').textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    
+    // Calculate and display total duration
+    const totalDuration = (performance.now() - globalStart) / 1000;
+    el('testDuration').textContent = fmt(totalDuration, 1) + 's';
+    
     setStatus('Speed test completed successfully.', 'ok');
   } catch (err) {
     console.error(err);
