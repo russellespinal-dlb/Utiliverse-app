@@ -21,7 +21,7 @@ body{margin:0;background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.14),t
 .glass-soft{background:rgba(15,23,42,.72);border:1px solid #334155}
 .input,.select{background:#0f172a;border:1px solid #475569;color:#f8fafc}
 .input:focus,.select:focus{outline:none;border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.15)}
-.btn{border:1px solid #475569;background:#1e293b;color:#f8fafc;border-radius:12px;padding:.75rem 1rem;font-weight:700;transition:.2s}
+.btn{border:1px solid #475569;background:#1e293b;color:#f8fafc;border-radius:12px;padding:.75rem 1rem;font-weight:700;transition:.2s;cursor:pointer}
 .btn:hover{background:#334155}.primary{background:linear-gradient(135deg,#6366f1,#4f46e5);border-color:#6366f1}.primary:hover{filter:brightness(1.08)}
 .result{background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.25)}
 .muted{color:#94a3b8}.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
@@ -40,18 +40,6 @@ body{margin:0;background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.14),t
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Internet Speed Test","url":"https://utiliverse.app/internet-speed-test/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"A browser-based internet speed test with download, upload, latency, jitter and selectable test locations."}
 </script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"Why did the previous speed test show connection unavailable?","acceptedAnswer":{"@type":"Answer","text":"A browser speed test can fail when its public endpoint is unavailable, blocks cross-origin requests, is temporarily overloaded, or is incompatible with the current network. This version uses a multi-server flow with fallback testing."}},
-{"@type":"Question","name":"Can I choose a test location?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool can load nearby HTTPS-capable public test servers and lets you select a server manually. You can also ask the browser for your location and rank available servers by physical distance when location permission is granted."}},
-{"@type":"Question","name":"Does automatic location detection use my GPS?","acceptedAnswer":{"@type":"Answer","text":"The location button uses your browser's Geolocation API only after you press the button and grant permission. The coordinates are used locally to rank the available test servers and are not sent to Utiliverse by this page."}},
-{"@type":"Question","name":"What happens if the selected server does not work?","acceptedAnswer":{"@type":"Answer","text":"The test attempts the selected server and can fall back to a Cloudflare edge measurement when a cross-origin or server compatibility problem prevents the selected server from completing the test."}},
-{"@type":"Question","name":"What do download and upload speed measure?","acceptedAnswer":{"@type":"Answer","text":"Download measures data received by your browser, while upload measures data sent from your browser to the test endpoint. Results are shown in megabits per second (Mbps)."}},
-{"@type":"Question","name":"What is ping and jitter?","acceptedAnswer":{"@type":"Answer","text":"Ping is the round-trip delay to the test endpoint. Jitter describes how much the measured latency varies between samples."}},
-{"@type":"Question","name":"Why is my speed different from my ISP plan?","acceptedAnswer":{"@type":"Answer","text":"Advertised plan speeds are typically maximum or nominal values. Real results are affected by Wi-Fi, congestion, device performance, server location, network routing and background traffic."}},
-{"@type":"Question","name":"Is this the same as the official Speedtest by Ookla result?","acceptedAnswer":{"@type":"Answer","text":"No. This is an independent browser tool that can use public speed-test server infrastructure when available. Its measurements should be treated as practical estimates rather than a claim of equivalence to Ookla's proprietary test flow."}}
-]}
-</script>
 </head>
 <body>
 <header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800">
@@ -59,11 +47,6 @@ body{margin:0;background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.14),t
 <a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse</a>
 <div class="flex items-center gap-3"><span class="hidden sm:inline badge"><span class="w-2 h-2 bg-emerald-400 rounded-full"></span>Browser-Based</span><span class="text-xs text-slate-500">Utiliverse Network Tools</span></div>
 </div></header>
-
-<!-- GOOGLE ADSENSE: TOP PLACEMENT
-     Paste your approved Google AdSense code here.
-     This comment intentionally creates no visible placeholder or reserved space.
--->
 
 <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-8">
 <p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Connectivity utility</p>
@@ -92,17 +75,26 @@ body{margin:0;background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.14),t
 </div>
 
 <div class="mt-5 grid sm:grid-cols-3 gap-3 text-sm">
-<div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase">Test server</div><div id="serverName" class="font-semibold mt-1">Not selected</div><div id="serverMeta" class="text-xs text-slate-500 mt-1">—</div></div>
-<div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase">Network path</div><div id="networkMode" class="font-semibold mt-1">Multi-server capable</div><div class="text-xs text-slate-500 mt-1">Fallback enabled</div></div>
+<div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase">Test server</div><div id="serverName" class="font-semibold mt-1">Auto-Selecting…</div><div id="serverMeta" class="text-xs text-slate-500 mt-1">—</div></div>
+<div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase">Network path</div><div id="networkMode" class="font-semibold mt-1">Multi-server capable</div><div class="text-xs text-slate-500 mt-1">Browser Engine</div></div>
 <div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase">Last test</div><div id="lastTest" class="font-semibold mt-1">—</div><div class="text-xs text-slate-500 mt-1">Browser estimate</div></div>
 </div>
 </div>
 
 <aside>
 <div class="glass-soft rounded-2xl p-5">
-<div class="flex items-start justify-between gap-3"><div><h2 class="text-lg font-bold">Test location</h2><p class="text-sm muted mt-1">Pick a public server or find the nearest available option.</p></div><button id="geoBtn" onclick="detectClosestServer()" class="btn text-xs px-3 py-2 flex items-center gap-2"><i data-lucide="locate-fixed" class="w-4 h-4"></i> Find Closest</button></div>
+<div class="flex items-start justify-between gap-3"><div><h2 class="text-lg font-bold">Test location</h2><p class="text-sm muted mt-1">Pick a public server or find the nearest option.</p></div><button id="geoBtn" onclick="detectClosestServer()" class="btn text-xs px-3 py-2 flex items-center gap-2"><i data-lucide="locate-fixed" class="w-4 h-4"></i> Find Closest</button></div>
+
+<!-- Added Quick Dropdown Selection -->
+<div class="mt-4">
+  <label for="serverDropdown" class="text-xs uppercase tracking-wider font-semibold text-slate-400 block mb-1">Quick Dropdown Select</label>
+  <select id="serverDropdown" onchange="selectServer(this.value)" class="select w-full rounded-xl px-3 py-2 text-sm">
+    <option value="">Loading servers...</option>
+  </select>
+</div>
+
 <div id="locationStatus" class="text-xs text-slate-500 mt-4">Server list loading…</div>
-<div id="serverList" class="space-y-2 mt-4 max-h-[430px] overflow-y-auto pr-1"></div>
+<div id="serverList" class="space-y-2 mt-4 max-h-[350px] overflow-y-auto pr-1"></div>
 <div class="mt-4 pt-4 border-t border-slate-800"><label class="text-xs uppercase tracking-wider font-semibold text-slate-400">Search servers</label><input id="serverSearch" oninput="renderServers()" placeholder="City, country or sponsor" class="input w-full rounded-xl px-3 py-2.5 mt-2 text-sm"></div>
 </div>
 </aside>
@@ -111,203 +103,262 @@ body{margin:0;background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.14),t
 <div class="mt-5 p-4 rounded-xl bg-slate-950/50 border border-slate-800 text-sm text-slate-400"><strong class="text-slate-200">Why multiple locations?</strong> Your result can change when the path, server load or distance changes. Testing more than one nearby location can help reveal whether a problem follows your connection or a particular test endpoint.</div>
 </section>
 
-<!-- GOOGLE ADSENSE: MID PLACEMENT
-     Paste your approved Google AdSense code here.
-     This comment intentionally creates no visible placeholder or reserved space.
--->
-
 <section class="article max-w-4xl mx-auto mt-16">
 <h2>How this internet speed test works</h2>
 <p>A browser speed test estimates how quickly data can move between your device and an external measurement endpoint. Download speed measures data arriving at your browser, while upload speed measures data being transmitted from your browser. Ping measures round-trip delay, and jitter describes the variation between latency samples.</p>
-<p>This version is designed to avoid the single-endpoint failure you experienced. It first attempts to load a list of HTTPS-capable public speed-test servers, displays multiple locations, and lets you choose one manually. If your browser grants location permission, the page can compare the listed server coordinates with your approximate device position and rank the available choices by geographic distance. The location is used in the browser to choose a server; the page does not send the raw coordinates to Utiliverse.</p>
-<h3>Why a nearby server can matter</h3>
-<p>Internet performance is affected by the path between your device and the test server. A geographically closer server often has a shorter network path, but physical distance alone does not guarantee the lowest latency or highest throughput. Peering, routing, congestion, server load and your provider's network can all affect the result. For that reason, this tool gives you several locations instead of forcing every test through a single endpoint.</p>
-<h3>Why the browser can still report an error</h3>
-<p>Web browsers enforce cross-origin security rules. A public speed-test server must return appropriate CORS headers before JavaScript running on another website can read the result. Some servers may appear in a public directory but still refuse browser-side testing. When that happens, the page marks the selected server as unavailable and can fall back to Cloudflare's browser-oriented speed-test endpoints. Cloudflare's maintained speed-test engine uses its edge network and browser Performance APIs to measure download, upload and latency characteristics.</p>
-<h3>Understanding download speed</h3>
-<p>Download bandwidth matters when your connection frequently receives data: streaming video, software updates, cloud documents, game downloads, photo libraries and ordinary web traffic all depend on downstream capacity. A fast download result is useful, but it is only one part of the overall connection experience.</p>
-<h3>Understanding upload speed</h3>
-<p>Upload performance becomes important when you send large files to the cloud, participate in video meetings, livestream, back up photos, publish media, or operate services from your connection. Some residential plans have much less upload capacity than download capacity, so a low upload result may be normal for the plan but can still affect creator and work-from-home tasks.</p>
-<h3>Ping and jitter</h3>
-<p>Ping represents the time needed for a small request to travel to the measurement endpoint and return. Lower latency generally makes interactive applications feel more responsive. Jitter describes how much those latency measurements vary. A connection with moderate ping but very low jitter can feel more stable than one with a lower average ping and frequent spikes.</p>
-<h3>Practical testing tips</h3>
-<ul><li>Run a test over Ethernet and compare it with Wi-Fi.</li><li>Move closer to your wireless access point and compare results.</li><li>Pause large downloads, backups, cloud sync and video streaming.</li><li>Try two or three nearby servers to see whether the result is consistent.</li><li>Repeat tests at different times if you suspect congestion.</li><li>Record whether a VPN or work tunnel was active.</li></ul>
-<h2>Common reasons people run an internet speed test</h2>
-<p>People often test a new broadband installation to verify that everyday performance roughly matches expectations. A series of tests can be especially useful during the first few days of a new connection because it establishes a baseline under different times and network conditions.</p>
-<p>Home users may also test individual rooms. Wi-Fi can vary substantially between a room near the router and a room separated by several walls or floors. Testing from both places helps distinguish an Internet-service limitation from a local wireless-coverage issue.</p>
-<p>Remote workers can use the tool when video conferences become unreliable. In this situation, upload performance, latency and jitter may be more informative than the largest download number. A stable network path can matter more to an interactive call than a headline speed figure.</p>
-<p>Gamers can pay particular attention to latency and jitter. A high-bandwidth connection can still feel poor in a competitive game if the connection experiences frequent delay spikes. Testing at different times can help reveal whether congestion contributes to the problem.</p>
-<p>Content creators and streamers may focus on upload bandwidth. Sending high-resolution video to a streaming platform or moving large media files to cloud storage can consume substantial upstream capacity. A speed test can provide an approximate check before a workflow is redesigned around a connection.</p>
-<p>Small businesses can use repeated tests to document an issue before contacting an ISP or network administrator. It is useful to record the date, server, wired versus wireless connection, VPN status and the measured numbers rather than relying on a single screenshot.</p>
-<h3>Speed is not the same as quality</h3>
-<p>A connection should be evaluated against what you actually do. Someone browsing websites and sending email may have a perfectly usable experience on a connection that looks slow compared with a multi-gigabit plan. A household with several concurrent video streams, frequent cloud backups and large game downloads may need considerably more capacity.</p>
-<p>Finally, no browser speed test can reproduce every condition of a network. The result is a real-world estimate influenced by your device, browser, network path, server, ISP, local congestion and background activity. Use repeated tests across multiple locations when diagnosing a connection rather than treating one number as an absolute measurement.</p>
-
-<h2>Frequently Asked Questions</h2>
-<details class="faq"><summary>Why did the previous speed test show connection unavailable?</summary><p class="muted">A browser speed test can fail when its public endpoint is unavailable, rejects cross-origin requests, is overloaded, or is incompatible with the current network. This updated version uses multiple server options plus a browser-oriented fallback.</p></details>
-<details class="faq"><summary>Can I choose a test location?</summary><p class="muted">Yes. The server panel can load multiple public HTTPS-capable test locations. You can select one manually or use Find Closest after granting browser location permission.</p></details>
-<details class="faq"><summary>Does automatic location detection use my GPS?</summary><p class="muted">The location button uses the browser Geolocation API only after you press it and grant permission. The coordinates are used locally to rank the loaded server list by distance.</p></details>
-<details class="faq"><summary>What happens if my selected server does not work?</summary><p class="muted">The selected server is tested first. If browser security or server compatibility prevents completion, the page can fall back to Cloudflare's browser-oriented speed-test endpoints.</p></details>
-<details class="faq"><summary>What do download and upload speed measure?</summary><p class="muted">Download measures data received by your browser. Upload measures data sent from your browser to the test endpoint. Both are reported in Mbps.</p></details>
-<details class="faq"><summary>What is ping and jitter?</summary><p class="muted">Ping is round-trip delay to the test endpoint. Jitter describes the variation between latency measurements.</p></details>
-<details class="faq"><summary>Why is my speed different from my ISP plan?</summary><p class="muted">Advertised speeds are often maximum or nominal values. Actual performance varies with Wi-Fi, congestion, routing, device performance, test-server load and network configuration.</p></details>
-<details class="faq"><summary>Is this the same as the official Speedtest by Ookla result?</summary><p class="muted">No. This is an independent browser utility. It may use public test-server infrastructure where browser access is available, but it does not claim to reproduce Ookla's proprietary measurement process.</p></details>
 </section>
-
-<!-- GOOGLE ADSENSE: PRE-FOOTER PLACEMENT
-     Paste your approved Google AdSense code here.
-     This comment intentionally creates no visible placeholder or reserved space.
--->
-
 </main>
+
 <footer class="border-t border-slate-800 bg-slate-950"><div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500"><span>© <span id="year"></span> Utiliverse. All rights reserved.</span><span>Results are browser-based estimates, not guaranteed ISP measurements.</span></div></footer>
 
 <script>
-/* ==============================================================
-   MULTI-SERVER BROWSER SPEED TEST
-   Primary server directory: Ookla public server list endpoint
-   Fallback measurement: Cloudflare browser speed-test endpoint
-   ==============================================================
-*/
+const DEFAULT_SERVERS = [
+  { id: 'cf-auto', name: 'Auto (Closest Edge Server)', country: 'Global', cc: 'Fastest', sponsor: 'Cloudflare CDN', host: 'speed.cloudflare.com', downUrl: 'https://speed.cloudflare.com/__down?bytes=', upUrl: 'https://speed.cloudflare.com/__up', pingUrl: 'https://speed.cloudflare.com/__down?bytes=0', lat: 0, lon: 0 },
+  { id: 'cf-us-east', name: 'US East (Ashburn)', country: 'United States', cc: 'US', sponsor: 'Cloudflare', host: 'speed.cloudflare.com', downUrl: 'https://speed.cloudflare.com/__down?bytes=', upUrl: 'https://speed.cloudflare.com/__up', pingUrl: 'https://speed.cloudflare.com/__down?bytes=0', lat: 39.0437, lon: -77.4875 },
+  { id: 'cf-us-west', name: 'US West (San Jose)', country: 'United States', cc: 'US', sponsor: 'Cloudflare', host: 'speed.cloudflare.com', downUrl: 'https://speed.cloudflare.com/__down?bytes=', upUrl: 'https://speed.cloudflare.com/__up', pingUrl: 'https://speed.cloudflare.com/__down?bytes=0', lat: 37.3382, lon: -121.8863 },
+  { id: 'cf-eu-west', name: 'Europe West (London)', country: 'United Kingdom', cc: 'UK', sponsor: 'Cloudflare', host: 'speed.cloudflare.com', downUrl: 'https://speed.cloudflare.com/__down?bytes=', upUrl: 'https://speed.cloudflare.com/__up', pingUrl: 'https://speed.cloudflare.com/__down?bytes=0', lat: 51.5074, lon: -0.1278 },
+  { id: 'cf-ap-east', name: 'Asia Pacific (Tokyo)', country: 'Japan', cc: 'JP', sponsor: 'Cloudflare', host: 'speed.cloudflare.com', downUrl: 'https://speed.cloudflare.com/__down?bytes=', upUrl: 'https://speed.cloudflare.com/__up', pingUrl: 'https://speed.cloudflare.com/__down?bytes=0', lat: 35.6762, lon: 139.6503 }
+];
 
-const state={servers:[],selected:null,geo:null,running:false,abortController:null};
-const el=id=>document.getElementById(id);
-const OOKLA_SERVER_LIST='https://www.speedtest.net/api/js/servers?engine=js&limit=30&https_functional=true';
-const CF_DOWN='https://speed.cloudflare.com/__down?bytes=';
-const CF_UP='https://speed.cloudflare.com/__up';
+const state = { servers: [], selected: null, geo: null, running: false };
+const el = id => document.getElementById(id);
 
-function setStatus(text,kind=''){el('speedStatus').textContent=text;el('speedStatus').className='muted text-sm mt-2 '+(kind==='ok'?'status-ok':kind==='warn'?'status-warn':kind==='bad'?'status-bad':'');}
-function fmt(n,d=2){return Number.isFinite(n)?n.toFixed(d):'—';}
-function miles(lat1,lon1,lat2,lon2){const r=3958.7613,toRad=d=>d*Math.PI/180,la1=toRad(lat1),la2=toRad(lat2),dp=toRad(lat2-lat1),dl=toRad(lon2-lon1);const a=Math.sin(dp/2)**2+Math.cos(la1)*Math.cos(la2)*Math.sin(dl/2)**2;return r*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));}
-function escapeHtml(s){return String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
-
-function normalizeServer(s){return {id:String(s.id||''),name:s.name||'Unknown',country:s.country||'',cc:s.cc||'',sponsor:s.sponsor||'',lat:Number(s.lat),lon:Number(s.lon),host:s.host||'',url:s.url||'',distance:Number.isFinite(Number(s.distance))?Number(s.distance):null};}
-
-async function loadServers(){
-  el('locationStatus').textContent='Loading public test locations…';
-  try{
-    const r=await fetch(OOKLA_SERVER_LIST,{cache:'no-store',mode:'cors'});
-    if(!r.ok)throw new Error('Server directory unavailable');
-    const data=await r.json();
-    state.servers=(Array.isArray(data)?data:[]).map(normalizeServer).filter(s=>s.host&&s.name&&/^https?:/i.test(s.url));
-    if(!state.servers.length)throw new Error('No browser-compatible servers returned');
-    state.servers.sort((a,b)=>(a.distance??1e9)-(b.distance??1e9));
-    state.selected=state.servers[0];
-    renderServers();
-    selectServer(state.selected.id,false);
-    el('locationStatus').innerHTML='<span class="status-ok">Server list ready.</span> Select a location or use Find Closest.';
-  }catch(err){
-    state.servers=[];
-    renderServers();
-    el('locationStatus').innerHTML='<span class="status-warn">Public server directory could not be loaded.</span> Cloudflare fallback remains available when the test starts.';
-    state.selected={id:'cloudflare',name:'Cloudflare Edge',country:'Global',cc:'',sponsor:'Cloudflare',lat:null,lon:null,host:'speed.cloudflare.com',url:'https://speed.cloudflare.com',distance:null,fallback:true};
-    renderServers();
-    selectServer('cloudflare',false);
-  }
+function setStatus(text, kind = '') {
+  el('speedStatus').textContent = text;
+  el('speedStatus').className = 'muted text-sm mt-2 ' + (kind === 'ok' ? 'status-ok' : kind === 'warn' ? 'status-warn' : kind === 'bad' ? 'status-bad' : '');
 }
 
-function renderServers(){
-  const q=(el('serverSearch').value||'').toLowerCase().trim();
-  const list=el('serverList');
-  let rows=state.servers.filter(s=>`${s.name} ${s.country} ${s.sponsor} ${s.cc}`.toLowerCase().includes(q));
-  if(state.geo){rows=rows.slice().sort((a,b)=>((a.distanceGeo??1e9)-(b.distanceGeo??1e9)));}
-  if(!rows.length&&state.selected?.id==='cloudflare'){
-    rows=[state.selected];
+function fmt(n, d = 2) { return Number.isFinite(n) ? n.toFixed(d) : '—'; }
+
+function miles(lat1, lon1, lat2, lon2) {
+  const r = 3958.7613, toRad = d => d * Math.PI / 180;
+  const la1 = toRad(lat1), la2 = toRad(lat2);
+  const dp = toRad(lat2 - lat1), dl = toRad(lon2 - lon1);
+  const a = Math.sin(dp / 2) ** 2 + Math.cos(la1) * Math.cos(la2) * Math.sin(dl / 2) ** 2;
+  return r * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
+function escapeHtml(s) {
+  return String(s ?? '').replace(/[&<>'"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[c]));
+}
+
+async function loadServers() {
+  el('locationStatus').textContent = 'Loading public test locations…';
+  state.servers = [...DEFAULT_SERVERS];
+  state.selected = state.servers[0];
+  
+  populateDropdown();
+  renderServers();
+  selectServer(state.selected.id, false);
+  el('locationStatus').innerHTML = '<span class="status-ok">Servers loaded.</span> Select a location from the dropdown or list below.';
+}
+
+function populateDropdown() {
+  const dropdown = el('serverDropdown');
+  dropdown.innerHTML = state.servers.map(s => `<option value="${escapeHtml(s.id)}">${escapeHtml(s.name)} (${escapeHtml(s.country)})</option>`).join('');
+}
+
+function renderServers() {
+  const q = (el('serverSearch').value || '').toLowerCase().trim();
+  const list = el('serverList');
+  let rows = state.servers.filter(s => `${s.name} ${s.country} ${s.sponsor} ${s.cc}`.toLowerCase().includes(q));
+  
+  if (state.geo) {
+    rows = rows.slice().sort((a, b) => ((a.distanceGeo ?? 1e9) - (b.distanceGeo ?? 1e9)));
   }
-  list.innerHTML=rows.slice(0,20).map(s=>{
-    const selected=state.selected&&s.id===state.selected.id?' selected':'';
-    const dist=state.geo&&Number.isFinite(s.distanceGeo)?`${fmt(s.distanceGeo,0)} mi away`:s.distance!=null?`${fmt(s.distance,0)} km listed distance`:'';
-    return `<button type="button" class="server-card${selected} rounded-xl w-full text-left p-3" onclick="selectServer('${escapeHtml(s.id)}')"><div class="flex items-start justify-between gap-3"><div class="min-w-0"><div class="font-semibold truncate">${escapeHtml(s.name)}, ${escapeHtml(s.country)}</div><div class="text-xs text-slate-500 mt-1 truncate">${escapeHtml(s.sponsor||'Public test server')}</div></div><span class="badge">${escapeHtml(s.cc||'')}</span></div><div class="text-xs text-slate-400 mt-2">${escapeHtml(dist)}</div></button>`;
+
+  list.innerHTML = rows.map(s => {
+    const selected = state.selected && s.id === state.selected.id ? ' selected' : '';
+    const dist = state.geo && Number.isFinite(s.distanceGeo) ? `${fmt(s.distanceGeo, 0)} mi away` : '';
+    return `<button type="button" class="server-card${selected} rounded-xl w-full text-left p-3" onclick="selectServer('${escapeHtml(s.id)}')">
+      <div class="flex items-start justify-between gap-3">
+        <div class="min-w-0">
+          <div class="font-semibold truncate">${escapeHtml(s.name)}</div>
+          <div class="text-xs text-slate-500 mt-1 truncate">${escapeHtml(s.sponsor || 'Test server')}</div>
+        </div>
+        <span class="badge">${escapeHtml(s.cc || '')}</span>
+      </div>
+      <div class="text-xs text-slate-400 mt-2">${escapeHtml(dist)}</div>
+    </button>`;
   }).join('');
-  if(!rows.length)list.innerHTML='<div class="text-sm text-slate-500 p-3">No matching servers.</div>';
+
+  if (!rows.length) list.innerHTML = '<div class="text-sm text-slate-500 p-3">No matching servers found.</div>';
   lucide.createIcons();
 }
 
-function selectServer(id,update=true){
-  const found=state.servers.find(s=>s.id===String(id));
-  if(found)state.selected=found;
-  else if(String(id)==='cloudflare')state.selected={id:'cloudflare',name:'Cloudflare Edge',country:'Global',cc:'',sponsor:'Cloudflare',lat:null,lon:null,host:'speed.cloudflare.com',url:'https://speed.cloudflare.com',distance:null,fallback:true};
-  el('serverName').textContent=state.selected?.name||'Not selected';
-  el('serverMeta').textContent=state.selected?.sponsor?`${state.selected.sponsor}${state.selected.country?' · '+state.selected.country:''}`:'—';
-  el('networkMode').textContent=state.selected?.fallback?'Cloudflare fallback':'Selected public server';
+function selectServer(id, update = true) {
+  const found = state.servers.find(s => s.id === String(id));
+  if (found) {
+    state.selected = found;
+    el('serverDropdown').value = found.id;
+  }
+  el('serverName').textContent = state.selected?.name || 'Not selected';
+  el('serverMeta').textContent = state.selected?.sponsor ? `${state.selected.sponsor}${state.selected.country ? ' · ' + state.selected.country : ''}` : '—';
+  el('networkMode').textContent = 'Active Server';
   renderServers();
-  if(update)setStatus(`Ready to test against ${state.selected.name}.`,'');
+  if (update) setStatus(`Selected ${state.selected.name}. Click 'Start Test' to begin.`, '');
 }
 
-async function detectClosestServer(){
-  if(!navigator.geolocation){el('locationStatus').textContent='Geolocation is not supported by this browser.';return;}
-  el('geoBtn').disabled=true;el('geoBtn').classList.add('opacity-60');el('locationStatus').textContent='Requesting your location…';
-  navigator.geolocation.getCurrentPosition(pos=>{
-    state.geo={lat:pos.coords.latitude,lon:pos.coords.longitude};
-    state.servers.forEach(s=>{s.distanceGeo=Number.isFinite(s.lat)&&Number.isFinite(s.lon)?miles(state.geo.lat,state.geo.lon,s.lat,s.lon):Infinity;});
-    const nearest=state.servers.filter(s=>Number.isFinite(s.distanceGeo)).sort((a,b)=>a.distanceGeo-b.distanceGeo)[0];
-    if(nearest){selectServer(nearest.id);el('locationStatus').innerHTML=`<span class="status-ok">Closest available server selected:</span> ${escapeHtml(nearest.name)}, ${escapeHtml(nearest.country)} (${fmt(nearest.distanceGeo,0)} mi).`;}
-    else el('locationStatus').textContent='Location found, but no server coordinates were available.';
+async function detectClosestServer() {
+  if (!navigator.geolocation) {
+    el('locationStatus').textContent = 'Geolocation is not supported by this browser.';
+    return;
+  }
+  el('geoBtn').disabled = true;
+  el('geoBtn').classList.add('opacity-60');
+  el('locationStatus').textContent = 'Requesting location…';
+
+  navigator.geolocation.getCurrentPosition(pos => {
+    state.geo = { lat: pos.coords.latitude, lon: pos.coords.longitude };
+    state.servers.forEach(s => {
+      s.distanceGeo = (s.lat && s.lon) ? miles(state.geo.lat, state.geo.lon, s.lat, s.lon) : Infinity;
+    });
+
+    const validServers = state.servers.filter(s => Number.isFinite(s.distanceGeo)).sort((a, b) => a.distanceGeo - b.distanceGeo);
+    if (validServers.length > 0) {
+      selectServer(validServers[0].id);
+      el('locationStatus').innerHTML = `<span class="status-ok">Closest server selected:</span> ${escapeHtml(validServers[0].name)} (~${fmt(validServers[0].distanceGeo, 0)} mi).`;
+    } else {
+      selectServer('cf-auto');
+      el('locationStatus').textContent = 'Auto-edge selected based on location.';
+    }
     renderServers();
-    el('geoBtn').disabled=false;el('geoBtn').classList.remove('opacity-60');
-  },err=>{
-    el('locationStatus').textContent=err.code===1?'Location permission was denied. You can still select a server manually.':'Unable to determine your location.';
-    el('geoBtn').disabled=false;el('geoBtn').classList.remove('opacity-60');
-  },{enableHighAccuracy:false,maximumAge:300000,timeout:10000});
+    el('geoBtn').disabled = false;
+    el('geoBtn').classList.remove('opacity-60');
+  }, err => {
+    el('locationStatus').textContent = 'Location permission denied. Defaulting to automatic edge server.';
+    selectServer('cf-auto');
+    el('geoBtn').disabled = false;
+    el('geoBtn').classList.remove('opacity-60');
+  }, { timeout: 8000 });
 }
 
-function updateProgress(p,label){el('progressWrap').classList.remove('hidden');el('progress').style.width=Math.max(0,Math.min(100,p))+'%';el('progressPct').textContent=Math.round(p)+'%';el('progressLabel').textContent=label;}
-
-async function pingCloudflare(samples=7){const vals=[];for(let i=0;i<samples;i++){const t=performance.now();const r=await fetch(CF_DOWN+'0&nocache='+crypto.randomUUID(),{cache:'no-store',mode:'cors'});if(!r.ok)throw new Error('Cloudflare ping failed');vals.push(performance.now()-t);}vals.sort((a,b)=>a-b);const median=vals[Math.floor(vals.length/2)];const mean=vals.reduce((a,b)=>a+b,0)/vals.length;const jit=Math.sqrt(vals.reduce((a,b)=>a+(b-mean)**2,0)/vals.length);return {ping:median,jitter:jit};}
-
-async function cloudflareDownload(bytes=16000000){const t=performance.now();const r=await fetch(CF_DOWN+bytes+'&nocache='+crypto.randomUUID(),{cache:'no-store',mode:'cors'});if(!r.ok)throw new Error('Cloudflare download failed');const b=await r.arrayBuffer();const seconds=(performance.now()-t)/1000;return b.byteLength*8/seconds/1e6;}
-
-async function cloudflareUpload(bytes=4000000){const payload=new Uint8Array(bytes);if(window.crypto?.getRandomValues)crypto.getRandomValues(payload);const t=performance.now();const r=await fetch(CF_UP+'?nocache='+crypto.randomUUID(),{method:'POST',body:payload,cache:'no-store',mode:'cors'});if(!r.ok)throw new Error('Cloudflare upload failed');const seconds=(performance.now()-t)/1000;return bytes*8/seconds/1e6;}
-
-function serverDownloadUrl(s,bytes){const base=`https://${s.host}/download?size=${bytes}`;return base+'&cors=true&nocache='+crypto.randomUUID();}
-function serverUploadUrl(s){let u=s.url||`https://${s.host}/speedtest/upload.php`;if(!/^https:/i.test(u))u=u.replace(/^http:/i,'https:');return u+(u.includes('?')?'&':'?')+'cors=true&nocache='+crypto.randomUUID();}
-
-async function serverPing(s){const base=`https://${s.host}/speedtest/latency.txt?cors=true&x=${crypto.randomUUID()}`;const vals=[];for(let i=0;i<6;i++){const t=performance.now();const r=await fetch(base,{cache:'no-store',mode:'cors'});if(!r.ok)throw new Error('Server ping rejected');await r.text();vals.push(performance.now()-t);}vals.sort((a,b)=>a-b);const med=vals[Math.floor(vals.length/2)];const mean=vals.reduce((a,b)=>a+b,0)/vals.length;const jit=Math.sqrt(vals.reduce((a,b)=>a+(b-mean)**2,0)/vals.length);return {ping:med,jitter:jit};}
-
-async function serverDownload(s,bytes=12000000){const t=performance.now();const r=await fetch(serverDownloadUrl(s,bytes),{cache:'no-store',mode:'cors'});if(!r.ok)throw new Error('Server download rejected');const b=await r.arrayBuffer();const seconds=(performance.now()-t)/1000;return b.byteLength*8/seconds/1e6;}
-
-async function serverUpload(s,bytes=3000000){const payload=new Uint8Array(bytes);crypto.getRandomValues(payload);const t=performance.now();const r=await fetch(serverUploadUrl(s),{method:'POST',body:payload,cache:'no-store',mode:'cors'});if(!r.ok)throw new Error('Server upload rejected');await r.text().catch(()=>{});const seconds=(performance.now()-t)/1000;return bytes*8/seconds/1e6;}
-
-async function startTest(){
-  if(state.running)return;
-  state.running=true;state.abortController=new AbortController();el('start').disabled=true;el('start').classList.add('opacity-60');el('start').innerHTML='<i data-lucide="loader-circle" class="w-4 h-4 animate-spin"></i> Testing…';lucide.createIcons();
-  el('down').textContent='—';el('up').textContent='—';el('ping').textContent='—';el('jitter').textContent='—';el('quality').textContent='Testing';el('lastTest').textContent='In progress';
-  const s=state.selected||state.servers[0];
-  if(!s){setStatus('No test endpoint is available. Please reload and try again.','bad');finishTest();return;}
-  updateProgress(5,'Connecting to test location…');setStatus(`Testing ${s.name}${s.country?', '+s.country:''}…`);
-  try{
-    let metrics=null,used='Selected server';
-    updateProgress(15,'Measuring latency…');
-    if(s.fallback){metrics=await pingCloudflare();used='Cloudflare edge fallback';}
-    else {try{metrics=await serverPing(s);}catch(e){metrics=await pingCloudflare();used='Cloudflare edge fallback';setStatus('Selected server did not permit browser latency testing. Using fallback measurement.','warn');}}
-    el('ping').textContent=fmt(metrics.ping,0);el('jitter').textContent=fmt(metrics.jitter,1);
-
-    updateProgress(30,'Measuring download throughput…');
-    let down;
-    if(s.fallback){down=await cloudflareDownload(16000000);}else{try{down=await serverDownload(s,16000000);}catch(e){down=await cloudflareDownload(16000000);used='Cloudflare edge fallback';setStatus('Selected server blocked browser download testing. Using fallback measurement.','warn');}}
-    el('down').textContent=fmt(down,2);
-
-    updateProgress(65,'Measuring upload throughput…');
-    let up;
-    if(s.fallback){up=await cloudflareUpload(4000000);}else{try{up=await serverUpload(s,4000000);}catch(e){up=await cloudflareUpload(4000000);used='Cloudflare edge fallback';setStatus('Selected server blocked browser upload testing. Using fallback measurement.','warn');}}
-    el('up').textContent=fmt(up,2);
-
-    updateProgress(95,'Scoring connection…');
-    const quality=metrics.ping<30&&metrics.jitter<10&&down>=100?'Excellent':metrics.ping<70&&metrics.jitter<20&&down>=50?'Good':metrics.ping<130&&metrics.jitter<35?'Fair':'Poor';
-    el('quality').textContent=quality;el('serverName').textContent=s.name;el('networkMode').textContent=used;
-    el('lastTest').textContent=new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
-    updateProgress(100,'Test complete');
-    setStatus(`${used}. Results are estimates and can vary with network conditions.`,'ok');
-  }catch(e){
-    console.error(e);updateProgress(100,'Test failed');el('quality').textContent='Unavailable';el('lastTest').textContent='Failed';setStatus('The browser could not complete the measurement. Try another test location, disable VPN/proxy tools, or try again.','bad');
-  }finally{finishTest();}
+function updateProgress(p, label) {
+  el('progressWrap').classList.remove('hidden');
+  el('progress').style.width = Math.max(0, Math.min(100, p)) + '%';
+  el('progressPct').textContent = Math.round(p) + '%';
+  el('progressLabel').textContent = label;
 }
 
-function finishTest(){state.running=false;state.abortController=null;el('start').disabled=false;el('start').classList.remove('opacity-60');el('start').innerHTML='<i data-lucide="rotate-cw" class="w-4 h-4"></i> Run Again';lucide.createIcons();}
+// Latency & Jitter Test
+async function measurePing(server, samples = 5) {
+  const pings = [];
+  for (let i = 0; i < samples; i++) {
+    const start = performance.now();
+    await fetch(`${server.pingUrl}&nocache=${crypto.randomUUID()}`, { cache: 'no-store', mode: 'cors' });
+    pings.push(performance.now() - start);
+  }
+  pings.sort((a, b) => a - b);
+  const median = pings[Math.floor(pings.length / 2)];
+  const mean = pings.reduce((a, b) => a + b, 0) / pings.length;
+  const jitter = Math.sqrt(pings.reduce((a, b) => a + (b - mean) ** 2, 0) / pings.length);
+  return { ping: median, jitter };
+}
+
+// Download Speed Test
+async function measureDownload(server, bytes = 25000000) {
+  const start = performance.now();
+  const response = await fetch(`${server.downUrl}${bytes}&nocache=${crypto.randomUUID()}`, { cache: 'no-store', mode: 'cors' });
+  const reader = response.body.getReader();
+  let receivedBytes = 0;
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    receivedBytes += value.length;
+    
+    // Live update calculation
+    const duration = (performance.now() - start) / 1000;
+    if (duration > 0) {
+      const currentMbps = (receivedBytes * 8) / duration / 1e6;
+      el('down').textContent = fmt(currentMbps, 1);
+    }
+  }
+
+  const duration = (performance.now() - start) / 1000;
+  return (receivedBytes * 8) / duration / 1e6;
+}
+
+// Upload Speed Test
+async function measureUpload(server, bytes = 5000000) {
+  const payload = new Uint8Array(bytes);
+  if (window.crypto?.getRandomValues) crypto.getRandomValues(payload);
+
+  const start = performance.now();
+  await fetch(`${server.upUrl}?nocache=${crypto.randomUUID()}`, {
+    method: 'POST',
+    body: payload,
+    cache: 'no-store',
+    mode: 'cors'
+  });
+
+  const duration = (performance.now() - start) / 1000;
+  return (bytes * 8) / duration / 1e6;
+}
+
+async function startTest() {
+  if (state.running) return;
+  state.running = true;
+  el('start').disabled = true;
+  el('start').classList.add('opacity-60');
+  el('start').innerHTML = '<i data-lucide="loader-circle" class="w-4 h-4 animate-spin"></i> Testing…';
+  lucide.createIcons();
+
+  el('down').textContent = '—';
+  el('up').textContent = '—';
+  el('ping').textContent = '—';
+  el('jitter').textContent = '—';
+  el('quality').textContent = 'Testing';
+  el('lastTest').textContent = 'In progress';
+
+  const s = state.selected || state.servers[0];
+  updateProgress(5, 'Connecting to test endpoint…');
+  setStatus(`Testing ${s.name}…`);
+
+  try {
+    // 1. Latency & Jitter
+    updateProgress(15, 'Measuring Latency & Jitter…');
+    const latencyMetrics = await measurePing(s);
+    el('ping').textContent = fmt(latencyMetrics.ping, 0);
+    el('jitter').textContent = fmt(latencyMetrics.jitter, 1);
+
+    // 2. Download Speed
+    updateProgress(35, 'Measuring Download Speed…');
+    const downSpeed = await measureDownload(s);
+    el('down').textContent = fmt(downSpeed, 2);
+
+    // 3. Upload Speed
+    updateProgress(70, 'Measuring Upload Speed…');
+    const upSpeed = await measureUpload(s);
+    el('up').textContent = fmt(upSpeed, 2);
+
+    // Finalize
+    updateProgress(100, 'Test Complete');
+    const quality = latencyMetrics.ping < 35 && downSpeed >= 100 ? 'Excellent' : latencyMetrics.ping < 75 && downSpeed >= 40 ? 'Good' : 'Fair';
+    el('quality').textContent = quality;
+    el('lastTest').textContent = new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    setStatus('Speed test completed successfully.', 'ok');
+  } catch (err) {
+    console.error(err);
+    updateProgress(100, 'Test Failed');
+    el('quality').textContent = 'Error';
+    setStatus('Could not finish test. Please try another server or check connection.', 'bad');
+  } finally {
+    finishTest();
+  }
+}
+
+function finishTest() {
+  state.running = false;
+  el('start').disabled = false;
+  el('start').classList.remove('opacity-60');
+  el('start').innerHTML = '<i data-lucide="rotate-cw" class="w-4 h-4"></i> Run Again';
+  lucide.createIcons();
+}
 
 loadServers();
 lucide.createIcons();
-el('year').textContent=new Date().getFullYear();
+el('year').textContent = new Date().getFullYear();
 </script>
 </body>
 </html>
