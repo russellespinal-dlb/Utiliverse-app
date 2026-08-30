@@ -109,7 +109,7 @@ body.light-mode .progress-track{background:#e2e8f0}
 <aside>
 <div class="glass-soft rounded-2xl p-5 h-full flex flex-col">
   
-<!-- ISP & Location Locator -->
+<!-- Global ISP & Location Locator -->
 <div class="isp-block flex items-center gap-4 mb-6">
   <div class="isp-icon">
     <i data-lucide="globe" class="w-5 h-5 text-slate-400"></i>
@@ -125,7 +125,7 @@ body.light-mode .progress-track{background:#e2e8f0}
 </button>
 
 <div class="relative mb-2">
-  <input id="serverSearch" oninput="renderServers()" placeholder="Search servers..." class="w-full bg-slate-900 border border-slate-700 text-slate-200 rounded-full pl-4 pr-10 py-2.5 text-sm focus:outline-none focus:border-indigo-500 transition-colors">
+  <input id="serverSearch" oninput="renderServers()" placeholder="Search test nodes..." class="w-full bg-slate-900 border border-slate-700 text-slate-200 rounded-full pl-4 pr-10 py-2.5 text-sm focus:outline-none focus:border-indigo-500 transition-colors">
   <button onclick="clearSearch()" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300">
     <i data-lucide="x" class="w-4 h-4"></i>
   </button>
@@ -199,18 +199,13 @@ body.light-mode .progress-track{background:#e2e8f0}
 <footer><div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm muted"><span>© <span id="year"></span> Utiliverse. All rights reserved.</span><span>Results are browser-based estimates, not guaranteed ISP measurements.</span></div></footer>
 
 <script>
+// Restored Cloudflare global nodes for stable, CORS-compliant testing.
 const DEFAULT_SERVERS = [
-  { id: 'cf-auto', name: 'Auto Edge Server', location: 'Closest Node', sponsor: 'Cloudflare CDN', host: 'speed.cloudflare.com', downUrl: 'https://speed.cloudflare.com/__down?bytes=', upUrl: 'https://speed.cloudflare.com/__up', pingUrl: 'https://speed.cloudflare.com/__down?bytes=0', lat: 0, lon: 0 },
-  { id: 'ash-fdc', name: 'fdcservers.net', location: 'Ashburn, VA', sponsor: 'FDC', host: 'speed.cloudflare.com', downUrl: 'https://speed.cloudflare.com/__down?bytes=', upUrl: 'https://speed.cloudflare.com/__up', pingUrl: 'https://speed.cloudflare.com/__down?bytes=0', lat: 39.0437, lon: -77.4875 },
-  { id: 'ash-vts', name: 'Virtual Technologies and Solutions', location: 'Ashburn, VA', sponsor: 'VTS', host: 'speed.cloudflare.com', downUrl: 'https://speed.cloudflare.com/__down?bytes=', upUrl: 'https://speed.cloudflare.com/__up', pingUrl: 'https://speed.cloudflare.com/__down?bytes=0', lat: 39.0437, lon: -77.4875 },
-  { id: 'ash-tata', name: 'Tata Communications', location: 'Ashburn, VA', sponsor: 'Tata', host: 'speed.cloudflare.com', downUrl: 'https://speed.cloudflare.com/__down?bytes=', upUrl: 'https://speed.cloudflare.com/__up', pingUrl: 'https://speed.cloudflare.com/__down?bytes=0', lat: 39.0437, lon: -77.4875 },
-  { id: 'ash-frontier', name: 'Frontier', location: 'Ashburn, VA', sponsor: 'Frontier', host: 'speed.cloudflare.com', downUrl: 'https://speed.cloudflare.com/__down?bytes=', upUrl: 'https://speed.cloudflare.com/__up', pingUrl: 'https://speed.cloudflare.com/__down?bytes=0', lat: 39.0437, lon: -77.4875 },
-  { id: 'ash-lumos', name: 'Lumos Fiber', location: 'Ashburn, VA', sponsor: 'Lumos', host: 'speed.cloudflare.com', downUrl: 'https://speed.cloudflare.com/__down?bytes=', upUrl: 'https://speed.cloudflare.com/__up', pingUrl: 'https://speed.cloudflare.com/__down?bytes=0', lat: 39.0437, lon: -77.4875 },
-  { id: 'ash-optimum', name: 'Optimum Online', location: 'Ashburn, VA', sponsor: 'Optimum', host: 'speed.cloudflare.com', downUrl: 'https://speed.cloudflare.com/__down?bytes=', upUrl: 'https://speed.cloudflare.com/__up', pingUrl: 'https://speed.cloudflare.com/__down?bytes=0', lat: 39.0437, lon: -77.4875 },
-  { id: 'ash-starry', name: 'Starry, Inc.', location: 'Ashburn, VA', sponsor: 'Starry', host: 'speed.cloudflare.com', downUrl: 'https://speed.cloudflare.com/__down?bytes=', upUrl: 'https://speed.cloudflare.com/__up', pingUrl: 'https://speed.cloudflare.com/__down?bytes=0', lat: 39.0437, lon: -77.4875 },
-  { id: 'ash-uniti', name: 'Uniti', location: 'Ashburn, VA', sponsor: 'Uniti', host: 'speed.cloudflare.com', downUrl: 'https://speed.cloudflare.com/__down?bytes=', upUrl: 'https://speed.cloudflare.com/__up', pingUrl: 'https://speed.cloudflare.com/__down?bytes=0', lat: 39.0437, lon: -77.4875 },
+  { id: 'cf-auto', name: 'Auto Edge Server', location: 'Global Routing', sponsor: 'Cloudflare CDN', host: 'speed.cloudflare.com', downUrl: 'https://speed.cloudflare.com/__down?bytes=', upUrl: 'https://speed.cloudflare.com/__up', pingUrl: 'https://speed.cloudflare.com/__down?bytes=0', lat: 0, lon: 0 },
+  { id: 'cf-us-east', name: 'US East Node', location: 'Ashburn, VA', sponsor: 'Cloudflare', host: 'speed.cloudflare.com', downUrl: 'https://speed.cloudflare.com/__down?bytes=', upUrl: 'https://speed.cloudflare.com/__up', pingUrl: 'https://speed.cloudflare.com/__down?bytes=0', lat: 39.0437, lon: -77.4875 },
   { id: 'cf-us-west', name: 'US West Node', location: 'San Jose, CA', sponsor: 'Cloudflare', host: 'speed.cloudflare.com', downUrl: 'https://speed.cloudflare.com/__down?bytes=', upUrl: 'https://speed.cloudflare.com/__up', pingUrl: 'https://speed.cloudflare.com/__down?bytes=0', lat: 37.3382, lon: -121.8863 },
-  { id: 'cf-eu-west', name: 'Europe West Node', location: 'London, UK', sponsor: 'Cloudflare', host: 'speed.cloudflare.com', downUrl: 'https://speed.cloudflare.com/__down?bytes=', upUrl: 'https://speed.cloudflare.com/__up', pingUrl: 'https://speed.cloudflare.com/__down?bytes=0', lat: 51.5074, lon: -0.1278 }
+  { id: 'cf-eu-west', name: 'Europe West Node', location: 'London, UK', sponsor: 'Cloudflare', host: 'speed.cloudflare.com', downUrl: 'https://speed.cloudflare.com/__down?bytes=', upUrl: 'https://speed.cloudflare.com/__up', pingUrl: 'https://speed.cloudflare.com/__down?bytes=0', lat: 51.5074, lon: -0.1278 },
+  { id: 'cf-ap-east', name: 'Asia Pacific Node', location: 'Tokyo, JP', sponsor: 'Cloudflare', host: 'speed.cloudflare.com', downUrl: 'https://speed.cloudflare.com/__down?bytes=', upUrl: 'https://speed.cloudflare.com/__up', pingUrl: 'https://speed.cloudflare.com/__down?bytes=0', lat: 35.6762, lon: 139.6503 }
 ];
 
 const state = { servers: [], selected: null, geo: null, running: false, theme: 'dark' };
