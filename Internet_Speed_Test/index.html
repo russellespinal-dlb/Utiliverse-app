@@ -4,25 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Internet Speed Test — Download, Upload, Ping & Jitter | Utiliverse</title>
-<meta name="description" content="Run a browser-based internet speed test with selectable nearby test servers, automatic location detection, download and upload measurements, ping, jitter, ISP details and connection quality. Built for Utiliverse.">
-<meta name="robots" content="index,follow">
-<meta name="theme-color" content="#020617">
-<link rel="canonical" href="https://utiliverse.app/internet-speed-test/">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Internet Speed Test — Utiliverse">
-<meta property="og:description" content="Measure download, upload, latency and jitter with nearby test servers and automatic server selection.">
-<meta property="og:url" content="https://utiliverse.app/internet-speed-test/">
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
+<meta name="description" content="Run a browser-based internet speed test with selectable nearby test servers, automatic location detection, download and upload measurements, ping, jitter, ISP details and connection quality.">
 <style>
 *{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.14),transparent 32%),radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;color:#f8fafc;font-family:Inter,system-ui,sans-serif}
-.glass{background:rgba(30,41,59,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid #334155}
-.glass-soft{background:rgba(15,23,42,.72);border:1px solid #334155}
+body{margin:0;background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.14),transparent 32%),radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;color:#f8fafc;font-family:Inter,system-ui,sans-serif;transition:background 0.3s, color 0.3s}
+.glass{background:rgba(30,41,59,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid #334155;transition:all 0.3s}
+.glass-soft{background:rgba(15,23,42,.72);border:1px solid #334155;transition:all 0.3s}
 .input,.select{background:#0f172a;border:1px solid #475569;color:#f8fafc}
 .input:focus,.select:focus{outline:none;border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.15)}
 .btn{border:1px solid #475569;background:#1e293b;color:#f8fafc;border-radius:12px;padding:.75rem 1rem;font-weight:700;transition:.2s;cursor:pointer}
-.btn:hover{background:#334155}.primary{background:linear-gradient(135deg,#6366f1,#4f46e5);border-color:#6366f1}.primary:hover{filter:brightness(1.08)}
+.btn:hover{background:#334155}.primary{background:linear-gradient(135deg,#6366f1,#4f46e5);border-color:#6366f1;color:#fff}.primary:hover{filter:brightness(1.08)}
 .result{background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.25)}
 .muted{color:#94a3b8}.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
 .server-card{background:rgba(15,23,42,.62);border:1px solid #334155;transition:.18s ease;cursor:pointer}
@@ -31,25 +22,55 @@ body{margin:0;background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.14),t
 .pulse-dot{animation:pulse 1.5s ease-in-out infinite}@keyframes pulse{0%,100%{opacity:.45;transform:scale(.9)}50%{opacity:1;transform:scale(1)}}
 .progress-track{height:7px;background:#1e293b;border-radius:999px;overflow:hidden}.progress{height:100%;background:linear-gradient(90deg,#6366f1,#8b5cf6);width:0%;transition:width .2s}
 .metric-number{font-variant-numeric:tabular-nums}
-.article h2{font-size:1.9rem;font-weight:800;color:#fff;margin:2.2rem 0 .9rem}.article h3{font-size:1.2rem;font-weight:750;color:#e2e8f0;margin:1.7rem 0 .65rem}.article p,.article li{color:#94a3b8;line-height:1.85}.article ul{padding-left:1.3rem}.faq{border-bottom:1px solid #334155}.faq summary{list-style:none;cursor:pointer;padding:1rem 0;font-weight:700}.faq summary::-webkit-details-marker{display:none}
-.badge{display:inline-flex;align-items:center;gap:.4rem;border:1px solid #334155;background:#0f172a;border-radius:999px;padding:.35rem .65rem;font-size:.72rem;color:#cbd5e1}
+.article h2{font-size:1.9rem;font-weight:800;color:#fff;margin:2.5rem 0 1rem}.article h3{font-size:1.3rem;font-weight:750;color:#e2e8f0;margin:1.8rem 0 .7rem}.article p,.article li{color:#94a3b8;line-height:1.85;margin-bottom:1rem}.article ul{padding-left:1.3rem;margin-bottom:1rem}
+.faq{border-bottom:1px solid #334155}.faq summary{list-style:none;cursor:pointer;padding:1.2rem 0;font-weight:700;color:#f8fafc;display:flex;justify-content:space-between;align-items:center}.faq summary::-webkit-details-marker{display:none}.faq p{padding-bottom:1rem;margin:0}
+.badge{display:inline-flex;align-items:center;gap:.4rem;border:1px solid #334155;background:#0f172a;border-radius:999px;padding:.35rem .65rem;font-size:.72rem;color:#cbd5e1;transition:all 0.3s}
 .status-ok{color:#34d399}.status-warn{color:#fbbf24}.status-bad{color:#fb7185}
 .ad-slot{display:contents}
+header{background:rgba(2,6,23,0.8);border-bottom:1px solid #1e293b;backdrop-filter:blur(12px)}
+footer{background:#020617;border-top:1px solid #1e293b}
+
+/* Light Mode Overrides */
+body.light-mode{background:#f8fafc;color:#0f172a}
+body.light-mode header{background:rgba(255,255,255,0.9);border-bottom:1px solid #e2e8f0}
+body.light-mode footer{background:#f1f5f9;border-top:1px solid #e2e8f0}
+body.light-mode .glass{background:rgba(255,255,255,0.8);border-color:#cbd5e1}
+body.light-mode .glass-soft{background:rgba(241,245,249,0.8);border-color:#cbd5e1}
+body.light-mode .input, body.light-mode .select{background:#fff;border-color:#94a3b8;color:#0f172a}
+body.light-mode .btn:not(.primary){background:#e2e8f0;color:#0f172a;border-color:#cbd5e1}
+body.light-mode .btn:not(.primary):hover{background:#cbd5e1}
+body.light-mode .muted{color:#64748b}
+body.light-mode .server-card{background:#fff;border-color:#e2e8f0}
+body.light-mode .server-card:hover{border-color:#6366f1}
+body.light-mode .server-card.selected{background:#eef2ff;border-color:#818cf8}
+body.light-mode .article h2{color:#0f172a}
+body.light-mode .article h3{color:#1e293b}
+body.light-mode .article p, body.light-mode .article li{color:#475569}
+body.light-mode .faq{border-bottom-color:#e2e8f0}
+body.light-mode .faq summary{color:#0f172a}
+body.light-mode .badge{background:#f1f5f9;border-color:#cbd5e1;color:#475569}
+body.light-mode .progress-track{background:#e2e8f0}
+
 @media(max-width:640px){.hero-title{font-size:2.25rem}}
 </style>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Internet Speed Test","url":"https://utiliverse.app/internet-speed-test/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"A browser-based internet speed test with download, upload, latency, jitter and selectable test locations."}
-</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-<header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800">
+<header class="sticky top-0 z-50">
 <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-<a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse</a>
-<div class="flex items-center gap-3"><span class="hidden sm:inline badge"><span class="w-2 h-2 bg-emerald-400 rounded-full"></span>Browser-Based</span><span class="text-xs text-slate-500">Utiliverse Network Tools</span></div>
-</div></header>
+<a href="https://utiliverse.app" class="text-sm font-semibold muted hover:opacity-75 flex items-center gap-2"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse</a>
+<div class="flex items-center gap-4">
+  <span class="hidden sm:inline badge"><span class="w-2 h-2 bg-emerald-400 rounded-full"></span>Browser-Based</span>
+  <button onclick="toggleTheme()" class="btn p-2 text-sm flex items-center justify-center rounded-full" title="Toggle Theme" aria-label="Toggle Theme">
+    <i data-lucide="sun" id="themeIcon" class="w-4 h-4"></i>
+  </button>
+</div>
+</div>
+</header>
 
 <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-8">
-<p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Connectivity utility</p>
+<p class="text-xs uppercase tracking-widest text-indigo-500 font-bold">Connectivity utility</p>
 <h1 class="hero-title text-4xl sm:text-5xl font-black mt-2">Internet Speed Test</h1>
 <p class="mt-4 text-lg muted max-w-3xl leading-relaxed">Measure download speed, upload speed, latency and jitter using a selectable test location, with an automatic nearby-server option when your browser can provide location data.</p>
 <div class="mt-5 flex flex-wrap gap-2"><span class="badge">Download</span><span class="badge">Upload</span><span class="badge">Ping</span><span class="badge">Jitter</span><span class="badge">Multiple Servers</span></div>
@@ -60,56 +81,106 @@ body{margin:0;background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.14),t
 <div class="grid lg:grid-cols-[1fr_340px] gap-8">
 <div>
 <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-<div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase tracking-wider">Download</div><div id="down" class="metric-number text-3xl font-black mt-2">—</div><div class="text-xs text-slate-500 mt-1">Mbps</div></div>
-<div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase tracking-wider">Upload</div><div id="up" class="metric-number text-3xl font-black mt-2">—</div><div class="text-xs text-slate-500 mt-1">Mbps</div></div>
-<div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase tracking-wider">Ping</div><div id="ping" class="metric-number text-3xl font-black mt-2">—</div><div class="text-xs text-slate-500 mt-1">ms</div></div>
-<div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase tracking-wider">Jitter</div><div id="jitter" class="metric-number text-3xl font-black mt-2">—</div><div class="text-xs text-slate-500 mt-1">ms</div></div>
+<div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase tracking-wider">Download</div><div id="down" class="metric-number text-3xl font-black mt-2">—</div><div class="text-xs muted mt-1">Mbps</div></div>
+<div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase tracking-wider">Upload</div><div id="up" class="metric-number text-3xl font-black mt-2">—</div><div class="text-xs muted mt-1">Mbps</div></div>
+<div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase tracking-wider">Ping</div><div id="ping" class="metric-number text-3xl font-black mt-2">—</div><div class="text-xs muted mt-1">ms</div></div>
+<div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase tracking-wider">Jitter</div><div id="jitter" class="metric-number text-3xl font-black mt-2">—</div><div class="text-xs muted mt-1">ms</div></div>
 </div>
 
 <div class="result rounded-2xl p-5 mt-5">
 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-<div><div class="text-xs uppercase tracking-widest text-indigo-300 font-bold">Connection quality</div><div id="quality" class="text-2xl font-black mt-1">Ready</div><div id="speedStatus" class="muted text-sm mt-2">Choose a server or let Utiliverse find a nearby test location.</div></div>
+<div><div class="text-xs uppercase tracking-widest text-indigo-500 font-bold">Connection quality</div><div id="quality" class="text-2xl font-black mt-1">Ready</div><div id="speedStatus" class="muted text-sm mt-2">Choose a server or let Utiliverse find a nearby test location.</div></div>
 <button id="start" onclick="startTest()" class="btn primary px-8 flex items-center justify-center gap-2"><i data-lucide="play" class="w-4 h-4"></i> Start Test</button>
 </div>
-<div id="progressWrap" class="hidden mt-5"><div class="flex justify-between text-xs text-slate-500 mb-2"><span id="progressLabel">Preparing…</span><span id="progressPct">0%</span></div><div class="progress-track"><div id="progress" class="progress"></div></div></div>
+<div id="progressWrap" class="hidden mt-5"><div class="flex justify-between text-xs muted mb-2"><span id="progressLabel">Preparing…</span><span id="progressPct">0%</span></div><div class="progress-track"><div id="progress" class="progress"></div></div></div>
 </div>
 
 <div class="mt-5 grid sm:grid-cols-4 gap-3 text-sm">
-<div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase">Test server</div><div id="serverName" class="font-semibold mt-1">Auto-Selecting…</div><div id="serverMeta" class="text-xs text-slate-500 mt-1">—</div></div>
-<div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase">Network path</div><div id="networkMode" class="font-semibold mt-1">Multi-server capable</div><div class="text-xs text-slate-500 mt-1">Browser Engine</div></div>
-<div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase">Last test</div><div id="lastTest" class="font-semibold mt-1">—</div><div class="text-xs text-slate-500 mt-1">Browser estimate</div></div>
-<div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase">Duration</div><div id="testDuration" class="font-semibold mt-1">—</div><div class="text-xs text-slate-500 mt-1">Seconds</div></div>
+<div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase">Test server</div><div id="serverName" class="font-semibold mt-1">Auto-Selecting…</div><div id="serverMeta" class="text-xs muted mt-1">—</div></div>
+<div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase">Network path</div><div id="networkMode" class="font-semibold mt-1">Multi-server</div><div class="text-xs muted mt-1">Browser Engine</div></div>
+<div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase">Last test</div><div id="lastTest" class="font-semibold mt-1">—</div><div class="text-xs muted mt-1">Browser estimate</div></div>
+<div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase">Duration</div><div id="testDuration" class="font-semibold mt-1">—</div><div class="text-xs muted mt-1">Seconds</div></div>
 </div>
 </div>
 
 <aside>
-<div class="glass-soft rounded-2xl p-5">
-<div class="flex items-start justify-between gap-3"><div><h2 class="text-lg font-bold">Test location</h2><p class="text-sm muted mt-1">Pick a public server or find the nearest option.</p></div><button id="geoBtn" onclick="detectClosestServer()" class="btn text-xs px-3 py-2 flex items-center gap-2"><i data-lucide="locate-fixed" class="w-4 h-4"></i> Find Closest</button></div>
+<div class="glass-soft rounded-2xl p-5 h-full flex flex-col">
+<div class="flex items-start justify-between gap-3"><div><h2 class="text-lg font-bold">Test location</h2><p class="text-sm muted mt-1">Pick a public server or find nearest.</p></div><button id="geoBtn" onclick="detectClosestServer()" class="btn text-xs px-3 py-2 flex items-center gap-2"><i data-lucide="locate-fixed" class="w-4 h-4"></i> Closest</button></div>
 
 <div class="mt-4">
-  <label for="serverDropdown" class="text-xs uppercase tracking-wider font-semibold text-slate-400 block mb-1">Quick Dropdown Select</label>
+  <label for="serverDropdown" class="text-xs uppercase tracking-wider font-semibold muted block mb-1">Select Endpoint</label>
   <select id="serverDropdown" onchange="selectServer(this.value)" class="select w-full rounded-xl px-3 py-2 text-sm">
     <option value="">Loading servers...</option>
   </select>
 </div>
 
-<div id="locationStatus" class="text-xs text-slate-500 mt-4">Server list loading…</div>
-<div id="serverList" class="space-y-2 mt-4 max-h-[350px] overflow-y-auto pr-1"></div>
-<div class="mt-4 pt-4 border-t border-slate-800"><label class="text-xs uppercase tracking-wider font-semibold text-slate-400">Search servers</label><input id="serverSearch" oninput="renderServers()" placeholder="City, country or sponsor" class="input w-full rounded-xl px-3 py-2.5 mt-2 text-sm"></div>
+<div id="locationStatus" class="text-xs muted mt-4">Server list loading…</div>
+<div id="serverList" class="space-y-2 mt-4 flex-grow overflow-y-auto pr-1" style="max-height: 300px;"></div>
 </div>
 </aside>
 </div>
-
-<div class="mt-5 p-4 rounded-xl bg-slate-950/50 border border-slate-800 text-sm text-slate-400"><strong class="text-slate-200">Why multiple locations?</strong> Your result can change when the path, server load or distance changes. Testing more than one nearby location can help reveal whether a problem follows your connection or a particular test endpoint.</div>
 </section>
 
-<section class="article max-w-4xl mx-auto mt-16">
+<section class="article max-w-4xl mx-auto mt-16 px-4">
 <h2>How this internet speed test works</h2>
-<p>A browser speed test estimates how quickly data can move between your device and an external measurement endpoint. Download speed measures data arriving at your browser, while upload speed measures data being transmitted from your browser. Ping measures round-trip delay, and jitter describes the variation between latency samples.</p>
+<p>Understanding your internet connection's performance is critical in today's digital landscape. Our browser-based internet speed test provides a highly accurate, real-time assessment of your network's capabilities by measuring four primary metrics: download speed, upload speed, latency (ping), and jitter.</p>
+
+<p>When you initiate the test, your browser establishes a secure connection to a selected test server—ideally one located geographically close to you to minimize baseline routing delays. To measure latency and jitter, the tool sends a series of small, instantaneous requests to the server. The time it takes for these requests to reach the server and return to your device is recorded as your ping, measured in milliseconds (ms). By sending multiple requests back-to-back, we can also calculate jitter, which represents the variance or instability in those ping times.</p>
+
+<p>Next, the tool assesses your download speed. It does this by requesting large, incompressible data payloads from the server. As your browser downloads this data, the tool continuously monitors the transfer rate, calculating how many megabits per second (Mbps) your connection can handle. We utilize a sustained payload transfer—specifically up to 100 megabytes—to ensure the connection reaches its maximum throughput, allowing us to bypass initial burst speeds and measure your true sustained download capacity.</p>
+
+<p>Finally, the upload speed test reverses this process. Your browser generates a randomized block of data and transmits it back to the test server. By measuring the time it takes to push a 25-megabyte payload to the endpoint, the tool calculates your network's upload capacity. The entire process relies on native browser APIs, meaning no additional software or plugins are required. Because it operates within the browser, it accurately reflects the real-world performance you experience when browsing the web, streaming videos, or using web-based applications.</p>
+
+<h2>Common Use Cases</h2>
+<p>There are numerous scenarios where running an internet speed test is not just helpful, but necessary for optimizing your digital experience.</p>
+
+<p><strong>Remote Work and Video Conferencing:</strong> For professionals working from home, a stable internet connection is the backbone of productivity. Video conferencing applications like Zoom, Microsoft Teams, and Google Meet require consistent upload and download speeds to maintain high-definition video and crisp audio. If you are experiencing lagging video or dropped calls, running this test can help you determine if your network is failing to meet the minimum bandwidth requirements.</p>
+
+<p><strong>Online Gaming:</strong> Gamers rely heavily on low latency and minimal jitter. While massive download speeds are great for installing games, competitive online gaming requires data to travel back and forth between your console or PC and the game server as quickly as possible. If your ping is exceptionally high or your jitter is erratic, you will experience "lag," which can severely impact gameplay.</p>
+
+<p><strong>Streaming High-Definition Content:</strong> Streaming platforms like Netflix, Hulu, and YouTube adjust video quality based on your available bandwidth. To stream seamlessly in 4K resolution without buffering, you generally need a sustained download speed of at least 25 Mbps. Testing your connection ensures you are getting the speed you pay for from your Internet Service Provider (ISP) and can handle multiple devices streaming simultaneously.</p>
+
+<p><strong>Diagnosing Network Hardware Issues:</strong> If you recently upgraded your router, installed a mesh Wi-Fi system, or switched ISPs, running a speed test is the best way to validate those changes. By testing your speed while connected via an Ethernet cable versus a wireless connection, you can pinpoint whether a performance bottleneck is caused by your ISP or your local Wi-Fi environment.</p>
+
+<h2>Frequently Asked Questions</h2>
+<div class="mt-6 border-t border-slate-700/50 pt-4">
+  <details class="faq">
+    <summary>1. What is considered a "good" download speed? <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i></summary>
+    <p>A good download speed depends entirely on your usage habits. For basic web browsing and checking email, 10 to 25 Mbps is sufficient. If you regularly stream 4K video, engage in competitive online gaming, or have multiple users connected simultaneously, speeds between 100 Mbps and 200 Mbps are recommended. For households with heavy smart-home integration and multiple simultaneous heavy downloaders, Gigabit (1000 Mbps) connections are becoming increasingly popular.</p>
+  </details>
+  <details class="faq">
+    <summary>2. Why is my upload speed significantly slower than my download speed? <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i></summary>
+    <p>Most residential internet plans are "asymmetrical," meaning the ISP allocates much more bandwidth to downloading than uploading. This is because the average user consumes far more data (streaming movies, downloading files) than they create (uploading videos, sending large attachments). However, fiber-optic internet plans often offer symmetrical speeds, where download and upload rates are identical.</p>
+  </details>
+  <details class="faq">
+    <summary>3. What exactly is latency or ping? <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i></summary>
+    <p>Latency, commonly referred to as ping, is the reaction time of your connection. It measures how quickly your device receives a response after sending out a request. A ping of under 20 milliseconds (ms) is considered excellent and is ideal for gaming and real-time voice calls. Anything above 100 ms may result in noticeable delay during interactive online activities.</p>
+  </details>
+  <details class="faq">
+    <summary>4. How does jitter affect my internet experience? <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i></summary>
+    <p>Jitter is the measure of the variability in your ping over time. If your ping constantly fluctuates (e.g., jumping from 20 ms to 90 ms and back), you have high jitter. This instability can cause packet loss, leading to glitchy voice calls, robotic-sounding audio, and stuttering video streams. A lower jitter value indicates a more stable and reliable connection.</p>
+  </details>
+  <details class="faq">
+    <summary>5. Why do my speed test results vary if I run the test multiple times? <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i></summary>
+    <p>Internet speeds are dynamic and can fluctuate based on numerous factors. Network congestion in your neighborhood, the number of devices connected to your local Wi-Fi, background updates running on your device, and even the physical distance to the selected test server can all impact your results. For the most accurate baseline, run the test multiple times at different times of the day.</p>
+  </details>
+  <details class="faq">
+    <summary>6. Should I test my speed over a Wi-Fi or Ethernet connection? <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i></summary>
+    <p>For the most accurate measurement of the speed your ISP is providing, you should connect your computer directly to your router or modem using an Ethernet cable. Wi-Fi signals are subject to interference from walls, furniture, other electronic devices, and distance, which can artificially lower your test results.</p>
+  </details>
+  <details class="faq">
+    <summary>7. Why does the test let me choose different server locations? <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i></summary>
+    <p>The distance between your device and the test server naturally adds latency and can slow down transfer rates. By selecting a server geographically close to you, you minimize these routing delays to get a pure measurement of your local network's capacity. However, testing against a distant server can simulate how fast you can access international websites or services.</p>
+  </details>
+  <details class="faq">
+    <summary>8. Does this speed test work accurately on mobile devices like smartphones and tablets? <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i></summary>
+    <p>Yes, this browser-based tool is fully responsive and will measure the internet speed of your mobile device. If you are connected to Wi-Fi, it will test your local network. If you disconnect from Wi-Fi, it will measure the speed of your cellular network (4G LTE or 5G). Keep in mind that cellular speeds are highly dependent on signal strength and tower congestion.</p>
+  </details>
+</div>
 </section>
 </main>
 
-<footer class="border-t border-slate-800 bg-slate-950"><div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500"><span>© <span id="year"></span> Utiliverse. All rights reserved.</span><span>Results are browser-based estimates, not guaranteed ISP measurements.</span></div></footer>
+<footer><div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm muted"><span>© <span id="year"></span> Utiliverse. All rights reserved.</span><span>Results are browser-based estimates, not guaranteed ISP measurements.</span></div></footer>
 
 <script>
 const DEFAULT_SERVERS = [
@@ -120,12 +191,26 @@ const DEFAULT_SERVERS = [
   { id: 'cf-ap-east', name: 'Asia Pacific (Tokyo)', country: 'Japan', cc: 'JP', sponsor: 'Cloudflare', host: 'speed.cloudflare.com', downUrl: 'https://speed.cloudflare.com/__down?bytes=', upUrl: 'https://speed.cloudflare.com/__up', pingUrl: 'https://speed.cloudflare.com/__down?bytes=0', lat: 35.6762, lon: 139.6503 }
 ];
 
-const state = { servers: [], selected: null, geo: null, running: false };
+const state = { servers: [], selected: null, geo: null, running: false, theme: 'dark' };
 const el = id => document.getElementById(id);
+
+function toggleTheme() {
+  const body = document.body;
+  if (state.theme === 'dark') {
+    body.classList.add('light-mode');
+    state.theme = 'light';
+    el('themeIcon').setAttribute('data-lucide', 'moon');
+  } else {
+    body.classList.remove('light-mode');
+    state.theme = 'dark';
+    el('themeIcon').setAttribute('data-lucide', 'sun');
+  }
+  lucide.createIcons();
+}
 
 function setStatus(text, kind = '') {
   el('speedStatus').textContent = text;
-  el('speedStatus').className = 'muted text-sm mt-2 ' + (kind === 'ok' ? 'status-ok' : kind === 'warn' ? 'status-warn' : kind === 'bad' ? 'status-bad' : '');
+  el('speedStatus').className = 'text-sm mt-2 ' + (kind === 'ok' ? 'status-ok' : kind === 'warn' ? 'status-warn' : kind === 'bad' ? 'status-bad' : 'muted');
 }
 
 function fmt(n, d = 2) { return Number.isFinite(n) ? n.toFixed(d) : '—'; }
@@ -159,9 +244,8 @@ function populateDropdown() {
 }
 
 function renderServers() {
-  const q = (el('serverSearch').value || '').toLowerCase().trim();
   const list = el('serverList');
-  let rows = state.servers.filter(s => `${s.name} ${s.country} ${s.sponsor} ${s.cc}`.toLowerCase().includes(q));
+  let rows = state.servers;
   
   if (state.geo) {
     rows = rows.slice().sort((a, b) => ((a.distanceGeo ?? 1e9) - (b.distanceGeo ?? 1e9)));
@@ -174,16 +258,13 @@ function renderServers() {
       <div class="flex items-start justify-between gap-3">
         <div class="min-w-0">
           <div class="font-semibold truncate">${escapeHtml(s.name)}</div>
-          <div class="text-xs text-slate-500 mt-1 truncate">${escapeHtml(s.sponsor || 'Test server')}</div>
+          <div class="text-xs muted mt-1 truncate">${escapeHtml(s.sponsor || 'Test server')}</div>
         </div>
         <span class="badge">${escapeHtml(s.cc || '')}</span>
       </div>
-      <div class="text-xs text-slate-400 mt-2">${escapeHtml(dist)}</div>
+      <div class="text-xs muted mt-2">${escapeHtml(dist)}</div>
     </button>`;
   }).join('');
-
-  if (!rows.length) list.innerHTML = '<div class="text-sm text-slate-500 p-3">No matching servers found.</div>';
-  lucide.createIcons();
 }
 
 function selectServer(id, update = true) {
@@ -255,7 +336,7 @@ async function measurePing(server, samples = 5) {
   return { ping: median, jitter };
 }
 
-// Download Speed Test - Increased to 100MB for longer test duration
+// Download Speed Test (100MB)
 async function measureDownload(server, bytes = 100000000) {
   const start = performance.now();
   const response = await fetch(`${server.downUrl}${bytes}&nocache=${crypto.randomUUID()}`, { cache: 'no-store', mode: 'cors' });
@@ -279,7 +360,7 @@ async function measureDownload(server, bytes = 100000000) {
   return (receivedBytes * 8) / duration / 1e6;
 }
 
-// Upload Speed Test - Increased to 25MB for longer test duration
+// Upload Speed Test (25MB)
 async function measureUpload(server, bytes = 25000000) {
   const chunkSize = 65536;
   const chunk = new Uint8Array(chunkSize);
@@ -306,7 +387,7 @@ async function measureUpload(server, bytes = 25000000) {
 async function startTest() {
   if (state.running) return;
   state.running = true;
-  const globalStart = performance.now(); // Track overall test duration
+  const globalStart = performance.now();
   
   el('start').disabled = true;
   el('start').classList.add('opacity-60');
@@ -371,9 +452,25 @@ function finishTest() {
   lucide.createIcons();
 }
 
-loadServers();
-lucide.createIcons();
-el('year').textContent = new Date().getFullYear();
+// Initial script execution
+document.addEventListener('DOMContentLoaded', () => {
+  loadServers();
+  lucide.createIcons();
+  el('year').textContent = new Date().getFullYear();
+  
+  // Add accordion icon toggling logic
+  document.querySelectorAll('.faq').forEach(details => {
+    details.addEventListener('toggle', (e) => {
+      const icon = e.target.querySelector('i');
+      if (e.target.open) {
+        icon.setAttribute('data-lucide', 'chevron-up');
+      } else {
+        icon.setAttribute('data-lucide', 'chevron-down');
+      }
+      lucide.createIcons();
+    });
+  });
+});
 </script>
 </body>
 </html>
