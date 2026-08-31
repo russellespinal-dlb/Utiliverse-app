@@ -12,15 +12,91 @@
 <script src="https://unpkg.com/lucide@latest"></script>
 <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
 <style>
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;color:#f8fafc;font-family:Inter,system-ui,sans-serif}.glass{background:rgba(30,41,59,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid #334155}.input{background:#0f172a;border:1px solid #475569;color:#f8fafc}.input:focus{outline:none;border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.15)}.btn{border:1px solid #475569;background:#1e293b;color:#f8fafc;border-radius:12px;padding:.75rem 1rem;font-weight:700;transition:.2s}.btn:hover{background:#334155}.primary{background:linear-gradient(135deg,#6366f1,#4f46e5);border-color:#6366f1}.primary:hover{filter:brightness(1.08)}.result{background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.25)}.muted{color:#94a3b8}.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.ad-slot{display:contents}.article h2{font-size:1.9rem;font-weight:800;color:#fff;margin:2.2rem 0 .9rem}.article h3{font-size:1.2rem;font-weight:750;color:#e2e8f0;margin:1.7rem 0 .65rem}.article p,.article li{color:#94a3b8;line-height:1.85}.article ul{padding-left:1.3rem}.faq{border-bottom:1px solid #334155}.faq summary{list-style:none;cursor:pointer;padding:1rem 0;font-weight:700}.faq summary::-webkit-details-marker{display:none}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;
+  color:#f8fafc;
+  font-family:Inter,system-ui,sans-serif;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.glass{background:rgba(30,41,59,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid #334155; transition: all 0.3s ease;}
+.input{background:#0f172a;border:1px solid #475569;color:#f8fafc; transition: all 0.3s ease;}
+.input:focus{outline:none;border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.15)}
+.btn{border:1px solid #475569;background:#1e293b;color:#f8fafc;border-radius:12px;padding:.75rem 1rem;font-weight:700;transition:.2s}
+.btn:hover{background:#334155}
+.primary{background:linear-gradient(135deg,#6366f1,#4f46e5);border-color:#6366f1; color: #fff;}
+.primary:hover{filter:brightness(1.08)}
+.result{background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.25)}
+.muted{color:#94a3b8; transition: color 0.3s ease;}
+.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.ad-slot{display:contents}
+.article h2{font-size:1.9rem;font-weight:800;color:#fff;margin:2.2rem 0 .9rem; transition: color 0.3s ease;}
+.article h3{font-size:1.2rem;font-weight:750;color:#e2e8f0;margin:1.7rem 0 .65rem; transition: color 0.3s ease;}
+.article p,.article li{color:#94a3b8;line-height:1.85; transition: color 0.3s ease;}
+.article ul{padding-left:1.3rem}
+.faq{border-bottom:1px solid #334155}
+.faq summary{list-style:none;cursor:pointer;padding:1rem 0;font-weight:700}
+.faq summary::-webkit-details-marker{display:none}
+
+/* Light Mode Overrides */
+body.light-mode {
+  background: #f8fafc;
+  color: #0f172a;
+}
+body.light-mode .glass {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: #e2e8f0;
+}
+body.light-mode .input {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+body.light-mode .btn {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #334155;
+}
+body.light-mode .btn:hover {
+  background: #e2e8f0;
+}
+body.light-mode .primary {
+  background: linear-gradient(135deg,#6366f1,#4f46e5);
+  border-color: #6366f1;
+  color: #ffffff;
+}
+body.light-mode .muted { color: #64748b; }
+body.light-mode .article h2 { color: #0f172a; }
+body.light-mode .article h3 { color: #1e293b; }
+body.light-mode .article p, body.light-mode .article li { color: #475569; }
+body.light-mode header {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: #e2e8f0;
+}
+body.light-mode header a, body.light-mode header button { color: #475569; }
+body.light-mode header a:hover, body.light-mode header button:hover { color: #0f172a; }
+body.light-mode footer {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+body.light-mode footer span { color: #64748b; }
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Yaml To Json","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 </head>
 <body>
-<header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800">
+<header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800 transition-all duration-300">
 <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-<a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse</a>
-<span class="text-xs text-slate-500">Free & Browser-Based</span>
+<a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2 transition-colors">
+  <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse
+</a>
+<div class="flex items-center gap-4">
+  <span class="text-xs text-slate-500 hidden sm:inline-block">Free & Browser-Based</span>
+  <button id="theme-toggle" class="text-slate-400 hover:text-white transition-colors cursor-pointer" aria-label="Toggle light/dark mode">
+    <i data-lucide="sun" id="theme-icon" class="w-5 h-5"></i>
+  </button>
+</div>
 </div>
 </header>
 <!-- GOOGLE ADSENSE: TOP PLACEMENT
@@ -111,43 +187,61 @@
 </main>
 <script>
 function convert() {
-    const s = document.getElementById('yaml').value;
-    
-    // Clear output if the input box is empty
-    if (!s.trim()) {
-        document.getElementById('json').value = '';
-        document.getElementById('status').textContent = 'Ready';
-        return;
-    }
+  const s = document.getElementById('yaml').value;
+  
+  // Guard clause to handle empty text fields smoothly
+  if (!s.trim()) {
+    document.getElementById('json').value = '';
+    document.getElementById('status').textContent = 'Ready';
+    return;
+  }
 
-    try {
-        const obj = jsyaml.load(s);
-        document.getElementById('json').value = JSON.stringify(obj, null, 2);
-        document.getElementById('status').textContent = 'Conversion complete';
-    } catch(e) {
-        document.getElementById('status').textContent = 'Error: ' + e.message;
-    }
+  try {
+    const obj = jsyaml.load(s);
+    document.getElementById('json').value = JSON.stringify(obj, null, 2);
+    document.getElementById('status').textContent = 'Conversion complete';
+  } catch(e) {
+    document.getElementById('status').textContent = 'Error: ' + e.message;
+  }
 }
 
 function loadYaml() {
-    // A single-line string with \n prevents minifier and editor formatting breaks
-    document.getElementById('yaml').value = 'name: Utiliverse\ncategory: utilities\nfree: true\nfeatures:\n  - calculators\n  - converters\nsettings:\n  theme: midnight\n  version: 1';
-    convert();
+  // Converted to a single-line string with \n to prevent parser/syntax errors
+  document.getElementById('yaml').value = 'name: Utiliverse\ncategory: utilities\nfree: true\nfeatures:\n  - calculators\n  - converters\nsettings:\n  theme: midnight\n  version: 1';
+  convert();
 }
 
 function copyOut() {
-    navigator.clipboard.writeText(document.getElementById('json').value);
+  navigator.clipboard.writeText(document.getElementById('json').value);
 }
 
 function clearAll() {
-    document.getElementById('yaml').value = '';
-    document.getElementById('json').value = '';
-    document.getElementById('status').textContent = 'Ready';
+  document.getElementById('yaml').value = '';
+  document.getElementById('json').value = '';
+  document.getElementById('status').textContent = 'Ready';
 }
 
+function toggleTheme() {
+  const body = document.body;
+  const icon = document.getElementById('theme-icon');
+  
+  body.classList.toggle('light-mode');
+  
+  if (body.classList.contains('light-mode')) {
+    icon.setAttribute('data-lucide', 'moon');
+  } else {
+    icon.setAttribute('data-lucide', 'sun');
+  }
+  
+  // Re-initialize the specific icon to render the change
+  lucide.createIcons();
+}
+
+// Event Listeners
 document.getElementById('yaml').addEventListener('input', convert);
+document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
 </script>
-<footer class="border-t border-slate-800 bg-slate-950">
+<footer class="border-t border-slate-800 bg-slate-950 transition-colors duration-300">
 <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500">
 <span>© <span id="year"></span> Utiliverse. All rights reserved.</span>
 <span>Tools are designed for browser-based use.</span>
