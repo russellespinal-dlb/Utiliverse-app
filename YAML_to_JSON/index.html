@@ -1,6 +1,14 @@
 <script>
 function convert() {
     const s = document.getElementById('yaml').value;
+    
+    // Clear output if the input box is empty
+    if (!s.trim()) {
+        document.getElementById('json').value = '';
+        document.getElementById('status').textContent = 'Ready';
+        return;
+    }
+
     try {
         const obj = jsyaml.load(s);
         document.getElementById('json').value = JSON.stringify(obj, null, 2);
@@ -11,15 +19,8 @@ function convert() {
 }
 
 function loadYaml() {
-    document.getElementById('yaml').value = `name: Utiliverse
-category: utilities
-free: true
-features:
-  - calculators
-  - converters
-settings:
-  theme: midnight
-  version: 1`;
+    // A single-line string with \n prevents minifier and editor formatting breaks
+    document.getElementById('yaml').value = 'name: Utiliverse\ncategory: utilities\nfree: true\nfeatures:\n  - calculators\n  - converters\nsettings:\n  theme: midnight\n  version: 1';
     convert();
 }
 
