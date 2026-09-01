@@ -123,7 +123,7 @@ body.light-mode footer span { color: #64748b; }
 <div class="glass rounded-xl p-4"><span class="muted text-xs">Characters</span><div id="chars" class="text-2xl font-black mt-1">0</div></div>
 </div>
 <div id="prompt" class="rounded-2xl bg-slate-950 border border-slate-800 p-4 sm:p-5 text-lg sm:text-xl leading-relaxed select-none transition-colors duration-300"></div>
-<input id="typing" autofocus autocomplete="off" spellcheck="false" class="input w-full rounded-2xl p-4 mt-5 text-xl disabled:opacity-50 disabled:cursor-not-allowed" placeholder="Click here and start typing…">
+<textarea id="typing" rows="4" autofocus autocomplete="off" spellcheck="false" class="input w-full rounded-2xl p-4 mt-5 text-xl disabled:opacity-50 disabled:cursor-not-allowed resize-none" placeholder="Click here and start typing…"></textarea>
 <div class="flex flex-wrap gap-3 mt-5">
 <button class="btn primary" onclick="restart()">Restart</button>
 <button class="btn" onclick="toggleSentences()">Sentences: <span id="sents">Off</span></button>
@@ -187,7 +187,7 @@ const sentencesList = [
   "Reading documentation can save hours of debugging time."
 ];
 
-let duration=15, started=false, endTime=0, timer=null;
+let duration=15, started=false, endTime=0, startTime=0, timer=null;
 let withPunct=false, withNums=false, withSentences=false;
 let currentText="";
 
@@ -203,12 +203,12 @@ function shuffle(arr) {
 function generateText() {
   if (withSentences) {
     let pool = [];
-    while (pool.length < 30) pool = pool.concat(shuffle(sentencesList));
-    currentText = pool.slice(0, 18).join(' ');
+    while (pool.length < 20) pool = pool.concat(shuffle(sentencesList));
+    currentText = pool.slice(0, 12).join(' ');
   } else {
     let pool = [];
-    while (pool.length < 120) pool = pool.concat(shuffle(wordsList));
-    let a = pool.slice(0, 120);
+    while (pool.length < 100) pool = pool.concat(shuffle(wordsList));
+    let a = pool.slice(0, 80);
     
     if(withNums) {
       a = a.map((x,i) => i % 7 === 0 ? x + Math.floor(Math.random()*10) : x);
@@ -245,6 +245,7 @@ function paint(){
 function restart(){
   clearInterval(timer);
   started=false;
+  startTime=0;
   
   generateText();
   
@@ -263,7 +264,8 @@ function restart(){
 
 function startTimer(){
   started=true;
-  endTime=Date.now()+duration*1000;
+  startTime=Date.now();
+  endTime=startTime+duration*1000;
   timer=setInterval(update,100);
   function update(){
     const left=Math.max(0,(endTime-Date.now())/1000);
@@ -281,7 +283,14 @@ function finish(){
   const text=currentText;
   let correct=0;
   for(let i=0;i<inp.length;i++)if(inp[i]===text[i])correct++;
-  const elapsed=duration;
+  
+  // Calculate true elapsed time in case the user completes the prompt early
+  let elapsed = duration;
+  if(startTime > 0) {
+    elapsed = Math.min(duration, (Date.now() - startTime) / 1000);
+  }
+  if(elapsed < 1) elapsed = 1; // Prevent division by zero
+  
   const wpm=Math.round((correct/5)/(elapsed/60));
   const acc=inp.length?Math.round(correct/inp.length*100):0;
   
@@ -297,6 +306,11 @@ document.getElementById('typing').addEventListener('input',e=>{
   updateColors(val);
   document.getElementById('chars').textContent=val.length;
   if(val.length>=currentText.length)finish();
+});
+
+// Prevent the Enter key from adding newlines to the textarea
+document.getElementById('typing').addEventListener('keydown', e => {
+  if(e.key === 'Enter') e.preventDefault();
 });
 
 document.querySelectorAll('.mode').forEach(b=>b.onclick=()=>{
