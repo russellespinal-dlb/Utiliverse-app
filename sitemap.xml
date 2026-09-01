@@ -111,8 +111,13 @@
     <loc>https://utiliverse.app/HEX_to_RGB/</loc>
   </url>
 
-  <!-- HEX to RGB -->
+  <!-- YAML to JSON -->
   <url>
     <loc>https://utiliverse.app/YAML_to_JSON/</loc>
+  </url>
+
+  <!-- Typing Lab -->
+  <url>
+    <loc>https://utiliverse.app/Typing_Lab/</loc>
   </url>
 </urlset>
