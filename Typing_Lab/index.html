@@ -11,15 +11,89 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;color:#f8fafc;font-family:Inter,system-ui,sans-serif}.glass{background:rgba(30,41,59,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid #334155}.input{background:#0f172a;border:1px solid #475569;color:#f8fafc}.input:focus{outline:none;border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.15)}.btn{border:1px solid #475569;background:#1e293b;color:#f8fafc;border-radius:12px;padding:.75rem 1rem;font-weight:700;transition:.2s}.btn:hover{background:#334155}.primary{background:linear-gradient(135deg,#6366f1,#4f46e5);border-color:#6366f1}.primary:hover{filter:brightness(1.08)}.result{background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.25)}.muted{color:#94a3b8}.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.ad-slot{display:contents}.article h2{font-size:1.9rem;font-weight:800;color:#fff;margin:2.2rem 0 .9rem}.article h3{font-size:1.2rem;font-weight:750;color:#e2e8f0;margin:1.7rem 0 .65rem}.article p,.article li{color:#94a3b8;line-height:1.85}.article ul{padding-left:1.3rem}.faq{border-bottom:1px solid #334155}.faq summary{list-style:none;cursor:pointer;padding:1rem 0;font-weight:700}.faq summary::-webkit-details-marker{display:none}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;
+  color:#f8fafc;
+  font-family:Inter,system-ui,sans-serif;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.glass{background:rgba(30,41,59,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid #334155; transition: all 0.3s ease;}
+.input{background:#0f172a;border:1px solid #475569;color:#f8fafc; transition: all 0.3s ease;}
+.input:focus{outline:none;border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.15)}
+.btn{border:1px solid #475569;background:#1e293b;color:#f8fafc;border-radius:12px;padding:.75rem 1rem;font-weight:700;transition:.2s}
+.btn:hover:not(:disabled){background:#334155}
+.primary{background:linear-gradient(135deg,#6366f1,#4f46e5);border-color:#6366f1; color: #fff;}
+.primary:hover:not(:disabled){filter:brightness(1.08)}
+.result{background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.25)}
+.muted{color:#94a3b8; transition: color 0.3s ease;}
+.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.ad-slot{display:contents}
+.article h2{font-size:1.9rem;font-weight:800;color:#fff;margin:2.2rem 0 .9rem; transition: color 0.3s ease;}
+.article h3{font-size:1.2rem;font-weight:750;color:#e2e8f0;margin:1.7rem 0 .65rem; transition: color 0.3s ease;}
+.article p,.article li{color:#94a3b8;line-height:1.85; transition: color 0.3s ease;}
+.article ul{padding-left:1.3rem}
+.faq{border-bottom:1px solid #334155}
+.faq summary{list-style:none;cursor:pointer;padding:1rem 0;font-weight:700}
+.faq summary::-webkit-details-marker{display:none}
+
+/* Light Mode Overrides */
+body.light-mode {
+  background: #f8fafc;
+  color: #0f172a;
+}
+body.light-mode .glass {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: #e2e8f0;
+}
+body.light-mode .input {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  color: #0f172a;
+}
+body.light-mode .btn {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #334155;
+}
+body.light-mode .btn:hover:not(:disabled) {
+  background: #e2e8f0;
+}
+body.light-mode .primary {
+  background: linear-gradient(135deg,#6366f1,#4f46e5);
+  border-color: #6366f1;
+  color: #ffffff;
+}
+body.light-mode .muted { color: #64748b; }
+body.light-mode .article h2 { color: #0f172a; }
+body.light-mode .article h3 { color: #1e293b; }
+body.light-mode .article p, body.light-mode .article li { color: #475569; }
+body.light-mode header {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: #e2e8f0;
+}
+body.light-mode header a, body.light-mode header button { color: #475569; }
+body.light-mode header a:hover, body.light-mode header button:hover { color: #0f172a; }
+body.light-mode footer {
+  background: #f8fafc;
+  border-color: #e2e8f0;
+}
+body.light-mode footer span { color: #64748b; }
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Typing Lab","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
 </head>
 <body>
-<header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800">
+<header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800 transition-all duration-300">
 <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-<a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse</a>
-<span class="text-xs text-slate-500">Free & Browser-Based</span>
+<a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2 transition-colors"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse</a>
+<div class="flex items-center gap-4">
+  <span class="text-xs text-slate-500 hidden sm:inline-block">Free & Browser-Based</span>
+  <button id="theme-toggle" class="text-slate-400 hover:text-white transition-colors cursor-pointer" aria-label="Toggle light/dark mode">
+    <i data-lucide="sun" id="theme-icon" class="w-5 h-5"></i>
+  </button>
+</div>
 </div>
 </header>
 <!-- GOOGLE ADSENSE: TOP PLACEMENT
@@ -46,10 +120,11 @@
 </div>
 <div id="prompt" class="rounded-2xl bg-slate-950 border border-slate-800 p-6 text-2xl leading-relaxed select-none"></div>
 <input id="typing" autofocus autocomplete="off" spellcheck="false" class="input w-full rounded-2xl p-4 mt-5 text-xl disabled:opacity-50 disabled:cursor-not-allowed" placeholder="Click here and start typing…">
-<div class="flex gap-3 mt-5">
+<div class="flex flex-wrap gap-3 mt-5">
 <button class="btn primary" onclick="restart()">Restart</button>
-<button class="btn" onclick="togglePunctuation()">Punctuation: <span id="punct">Off</span></button>
-<button class="btn" onclick="toggleNumbers()">Numbers: <span id="nums">Off</span></button>
+<button class="btn" onclick="toggleSentences()">Sentences: <span id="sents">Off</span></button>
+<button class="btn" onclick="togglePunctuation()" id="btn-punct">Punctuation: <span id="punct">Off</span></button>
+<button class="btn" onclick="toggleNumbers()" id="btn-nums">Numbers: <span id="nums">Off</span></button>
 </div>
 <p id="result" class="muted text-sm mt-4">Type the displayed text to begin.</p>
 </section>
@@ -90,28 +165,76 @@
 </section>
 </main>
 <script>
-const words=['the','quick','brown','fox','jumps','over','the','lazy','dog','while','developers','build','useful','tools','that','help','people','work','faster','with','clear','focused','interfaces','good','practice','turns','small','improvements','into','stronger','habits'];
-let duration=15,started=false,endTime=0,timer=null,withPunct=false,withNums=false;
+const wordsList = ['the','quick','brown','fox','jumps','over','lazy','dog','while','developers','build','useful','tools','that','help','people','work','faster','with','clear','focused','interfaces','good','practice','turns','small','improvements','into','stronger','habits','water','cloud','keyboard','monitor','mouse','laptop','screen','table','chair','window','music','sound','voice','paper','pencil'];
+const sentencesList = [
+  "The quick brown fox jumps over the lazy dog.",
+  "Developers build useful tools that help people work faster.",
+  "Good practice turns small improvements into stronger habits.",
+  "A clean and focused interface removes unnecessary distractions.",
+  "Typing tests measure both speed and overall accuracy.",
+  "Consistent practice is the key to building muscle memory.",
+  "Many programmers prefer mechanical keyboards for daily work.",
+  "Learning to type without looking at the keys saves time.",
+  "Short sprints are excellent for warming up your hands.",
+  "Always review your mistakes to improve your weak points.",
+  "A steady rhythm is more efficient than sudden bursts of speed.",
+  "The internet connects millions of computers across the world.",
+  "Writing clean code requires patience and careful planning.",
+  "Reading documentation can save hours of debugging time."
+];
 
-function makeText(){
-  let a=[...words,...words,...words,...words];
-  if(withNums)a=a.map((x,i)=>i%7===0?x+(i%10):x);
-  let s=a.join(' ');
-  if(withPunct)s=s.replace(/\b(the|tools|habits)\b/g,'$1,');
-  return s;
+let duration=15, started=false, endTime=0, timer=null;
+let withPunct=false, withNums=false, withSentences=false;
+let currentText="";
+
+function shuffle(arr) {
+  let a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function generateText() {
+  if (withSentences) {
+    let pool = [];
+    while (pool.length < 50) pool = pool.concat(shuffle(sentencesList));
+    currentText = pool.slice(0, 30).join(' ');
+  } else {
+    let pool = [];
+    while (pool.length < 200) pool = pool.concat(shuffle(wordsList));
+    let a = pool.slice(0, 200);
+    
+    if(withNums) {
+      a = a.map((x,i) => i % 7 === 0 ? x + Math.floor(Math.random()*10) : x);
+    }
+    let s = a.join(' ');
+    
+    if(withPunct) {
+      let arr = s.split(' ');
+      arr = arr.map(w => Math.random() < 0.15 ? w + ',' : (Math.random() < 0.05 ? w + '.' : w));
+      s = arr.join(' ');
+    }
+    currentText = s;
+  }
 }
 
 function paint(){
-  document.getElementById('prompt').innerHTML=makeText().split('').map((c,i)=>`<span data-i="${i}">${c}</span>`).join('');
+  document.getElementById('prompt').innerHTML = currentText.split('').map((c,i)=>`<span data-i="${i}">${c}</span>`).join('');
 }
 
 function restart(){
   clearInterval(timer);
   started=false;
+  
+  generateText(); // Generate a fresh batch of random text
+  
   const inputEl = document.getElementById('typing');
-  inputEl.disabled = false; // Re-enable input
+  inputEl.disabled = false;
   inputEl.value='';
   inputEl.focus();
+  
   document.getElementById('wpm').textContent='0';
   document.getElementById('acc').textContent='100%';
   document.getElementById('time').textContent=duration;
@@ -134,10 +257,10 @@ function startTimer(){
 function finish(){
   clearInterval(timer);
   started=false;
-  document.getElementById('typing').disabled = true; // Stop taking input when test is over
+  document.getElementById('typing').disabled = true;
   
   const inp=document.getElementById('typing').value;
-  const text=makeText();
+  const text=currentText;
   let correct=0;
   for(let i=0;i<inp.length;i++)if(inp[i]===text[i])correct++;
   const elapsed=duration;
@@ -151,7 +274,7 @@ function finish(){
 }
 
 document.getElementById('typing').addEventListener('input',e=>{
-  const val=e.target.value,text=makeText();
+  const val=e.target.value, text=currentText;
   if(!started&&val.length>0)startTimer();
   document.querySelectorAll('#prompt span').forEach((s,i)=>{
     s.style.color=i<val.length?(val[i]===text[i]?'#34d399':'#fb7185'):'#64748b'
@@ -167,21 +290,58 @@ document.querySelectorAll('.mode').forEach(b=>b.onclick=()=>{
   restart();
 });
 
+function toggleSentences(){
+  withSentences=!withSentences;
+  document.getElementById('sents').textContent=withSentences?'On':'Off';
+  
+  const btnPunct = document.getElementById('btn-punct');
+  const btnNums = document.getElementById('btn-nums');
+  
+  btnPunct.disabled = withSentences;
+  btnNums.disabled = withSentences;
+  
+  if (withSentences) {
+    btnPunct.classList.add('opacity-50', 'cursor-not-allowed');
+    btnNums.classList.add('opacity-50', 'cursor-not-allowed');
+  } else {
+    btnPunct.classList.remove('opacity-50', 'cursor-not-allowed');
+    btnNums.classList.remove('opacity-50', 'cursor-not-allowed');
+  }
+  restart();
+}
+
 function togglePunctuation(){
+  if(withSentences) return;
   withPunct=!withPunct;
   document.getElementById('punct').textContent=withPunct?'On':'Off';
   restart();
 }
 
 function toggleNumbers(){
+  if(withSentences) return;
   withNums=!withNums;
   document.getElementById('nums').textContent=withNums?'On':'Off';
   restart();
 }
 
+function toggleTheme() {
+  const body = document.body;
+  const icon = document.getElementById('theme-icon');
+  
+  body.classList.toggle('light-mode');
+  
+  if (body.classList.contains('light-mode')) {
+    icon.setAttribute('data-lucide', 'moon');
+  } else {
+    icon.setAttribute('data-lucide', 'sun');
+  }
+  lucide.createIcons();
+}
+
+document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
 restart();
 </script>
-<footer class="border-t border-slate-800 bg-slate-950">
+<footer class="border-t border-slate-800 bg-slate-950 transition-colors duration-300">
 <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500">
 <span>© <span id="year"></span> Utiliverse. All rights reserved.</span>
 <span>Tools are designed for browser-based use.</span>
