@@ -53,6 +53,10 @@ body.light-mode .input {
   border-color: #cbd5e1;
   color: #0f172a;
 }
+body.light-mode #prompt {
+  background: #ffffff;
+  border-color: #cbd5e1;
+}
 body.light-mode .btn {
   background: #f1f5f9;
   border-color: #cbd5e1;
@@ -118,7 +122,7 @@ body.light-mode footer span { color: #64748b; }
 <div class="glass rounded-xl p-4"><span class="muted text-xs">Time</span><div id="time" class="text-2xl font-black mt-1">15</div></div>
 <div class="glass rounded-xl p-4"><span class="muted text-xs">Characters</span><div id="chars" class="text-2xl font-black mt-1">0</div></div>
 </div>
-<div id="prompt" class="rounded-2xl bg-slate-950 border border-slate-800 p-6 text-2xl leading-relaxed select-none"></div>
+<div id="prompt" class="rounded-2xl bg-slate-950 border border-slate-800 p-4 sm:p-5 text-lg sm:text-xl leading-relaxed select-none max-h-40 overflow-y-auto transition-colors duration-300"></div>
 <input id="typing" autofocus autocomplete="off" spellcheck="false" class="input w-full rounded-2xl p-4 mt-5 text-xl disabled:opacity-50 disabled:cursor-not-allowed" placeholder="Click here and start typing…">
 <div class="flex flex-wrap gap-3 mt-5">
 <button class="btn primary" onclick="restart()">Restart</button>
@@ -199,12 +203,12 @@ function shuffle(arr) {
 function generateText() {
   if (withSentences) {
     let pool = [];
-    while (pool.length < 50) pool = pool.concat(shuffle(sentencesList));
-    currentText = pool.slice(0, 30).join(' ');
+    while (pool.length < 30) pool = pool.concat(shuffle(sentencesList));
+    currentText = pool.slice(0, 18).join(' ');
   } else {
     let pool = [];
-    while (pool.length < 200) pool = pool.concat(shuffle(wordsList));
-    let a = pool.slice(0, 200);
+    while (pool.length < 120) pool = pool.concat(shuffle(wordsList));
+    let a = pool.slice(0, 120);
     
     if(withNums) {
       a = a.map((x,i) => i % 7 === 0 ? x + Math.floor(Math.random()*10) : x);
@@ -220,15 +224,29 @@ function generateText() {
   }
 }
 
+function updateColors(typedVal) {
+  const isLight = document.body.classList.contains('light-mode');
+  const untypedColor = isLight ? '#94a3b8' : '#64748b';
+  
+  document.querySelectorAll('#prompt span').forEach((s, i) => {
+    if (i < typedVal.length) {
+      s.style.color = typedVal[i] === currentText[i] ? '#34d399' : '#fb7185';
+    } else {
+      s.style.color = untypedColor;
+    }
+  });
+}
+
 function paint(){
   document.getElementById('prompt').innerHTML = currentText.split('').map((c,i)=>`<span data-i="${i}">${c}</span>`).join('');
+  updateColors('');
 }
 
 function restart(){
   clearInterval(timer);
   started=false;
   
-  generateText(); // Generate a fresh batch of random text
+  generateText();
   
   const inputEl = document.getElementById('typing');
   inputEl.disabled = false;
@@ -274,13 +292,11 @@ function finish(){
 }
 
 document.getElementById('typing').addEventListener('input',e=>{
-  const val=e.target.value, text=currentText;
+  const val=e.target.value;
   if(!started&&val.length>0)startTimer();
-  document.querySelectorAll('#prompt span').forEach((s,i)=>{
-    s.style.color=i<val.length?(val[i]===text[i]?'#34d399':'#fb7185'):'#64748b'
-  });
+  updateColors(val);
   document.getElementById('chars').textContent=val.length;
-  if(val.length>=text.length)finish();
+  if(val.length>=currentText.length)finish();
 });
 
 document.querySelectorAll('.mode').forEach(b=>b.onclick=()=>{
@@ -336,6 +352,7 @@ function toggleTheme() {
     icon.setAttribute('data-lucide', 'sun');
   }
   lucide.createIcons();
+  updateColors(document.getElementById('typing').value);
 }
 
 document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
