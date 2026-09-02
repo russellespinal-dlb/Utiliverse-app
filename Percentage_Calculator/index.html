@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Percent Calculator | Utiliverse</title>
+<meta name="description" content="Calculate percentages instantly. Find percent increases, decreases, and ratios with our free browser-based percent calculator.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/percent-calculator">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;
+  color:#f8fafc;font-family:Inter,system-ui,sans-serif;transition:background 0.3s ease,color 0.3s ease;
+}
+.glass{background:rgba(30,41,59,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid #334155;transition:all 0.3s ease;}
+.input{background:#0f172a;border:1px solid #475569;color:#f8fafc;transition:all 0.3s ease;}
+.input:focus{outline:none;border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.15)}
+.btn{border:1px solid #475569;background:#1e293b;color:#f8fafc;border-radius:12px;padding:.75rem 1rem;font-weight:700;transition:.2s;cursor:pointer}
+.btn:hover:not(:disabled){background:#334155}
+.primary{background:linear-gradient(135deg,#6366f1,#4f46e5);border-color:#6366f1;color:#fff;}
+.primary:hover:not(:disabled){filter:brightness(1.08)}
+.muted{color:#94a3b8;transition:color 0.3s ease;}
+.article h2{font-size:1.9rem;font-weight:800;color:#fff;margin:2.2rem 0 .9rem;transition:color 0.3s ease;}
+.article h3{font-size:1.2rem;font-weight:750;color:#e2e8f0;margin:1.7rem 0 .65rem;transition:color 0.3s ease;}
+.article p,.article li{color:#94a3b8;line-height:1.85;transition:color 0.3s ease;margin-bottom:1rem;}
+.article ul{padding-left:1.3rem;margin-bottom:1rem;}
+.faq{border-bottom:1px solid #334155}
+.faq summary{list-style:none;cursor:pointer;padding:1rem 0;font-weight:700}
+.faq summary::-webkit-details-marker{display:none}
+/* Light Mode */
+body.light-mode{background:#f8fafc;color:#0f172a;}
+body.light-mode .glass{background:rgba(255,255,255,0.8);border-color:#e2e8f0;}
+body.light-mode .input{background:#ffffff;border-color:#cbd5e1;color:#0f172a;}
+body.light-mode .btn{background:#f1f5f9;border-color:#cbd5e1;color:#334155;}
+body.light-mode .btn:hover:not(:disabled){background:#e2e8f0;}
+body.light-mode .primary{background:linear-gradient(135deg,#6366f1,#4f46e5);color:#ffffff;}
+body.light-mode .muted{color:#64748b;}
+body.light-mode .article h2{color:#0f172a;}
+body.light-mode .article h3{color:#1e293b;}
+body.light-mode .article p,body.light-mode .article li{color:#475569;}
+body.light-mode header{background:rgba(255,255,255,0.9);border-color:#e2e8f0;}
+body.light-mode header a,body.light-mode header button{color:#475569;}
+body.light-mode header a:hover,body.light-mode header button:hover{color:#0f172a;}
+body.light-mode footer{background:#f8fafc;border-color:#e2e8f0;}
+</style>
+</head>
+<body>
+<header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800 transition-all duration-300">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+<a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2 transition-colors"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse</a>
+<button id="theme-toggle" class="text-slate-400 hover:text-white transition-colors cursor-pointer"><i data-lucide="sun" id="theme-icon" class="w-5 h-5"></i></button>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+<div class="max-w-3xl">
+<p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Mathematics</p>
+<h1 class="text-4xl sm:text-5xl font-black mt-2">Percent Calculator</h1>
+<p class="mt-4 text-lg muted">Instantly calculate percentage values, ratios, and percentage changes.</p>
+</div>
+
+<section class="grid md:grid-cols-3 gap-6 mt-8">
+  <div class="glass p-6 rounded-2xl flex flex-col gap-4">
+    <h3 class="font-bold text-lg">What is X% of Y?</h3>
+    <div class="flex items-center gap-2">
+      <input type="number" id="v1_x" class="input p-2 rounded-lg w-full" placeholder="X">
+      <span>% of</span>
+      <input type="number" id="v1_y" class="input p-2 rounded-lg w-full" placeholder="Y">
+    </div>
+    <button class="btn primary" onclick="calc1()">Calculate</button>
+    <div class="mt-2 text-xl font-bold text-indigo-400" id="res1">--</div>
+  </div>
+
+  <div class="glass p-6 rounded-2xl flex flex-col gap-4">
+    <h3 class="font-bold text-lg">X is what % of Y?</h3>
+    <div class="flex items-center gap-2">
+      <input type="number" id="v2_x" class="input p-2 rounded-lg w-full" placeholder="X">
+      <span>is % of</span>
+      <input type="number" id="v2_y" class="input p-2 rounded-lg w-full" placeholder="Y">
+    </div>
+    <button class="btn primary" onclick="calc2()">Calculate</button>
+    <div class="mt-2 text-xl font-bold text-indigo-400" id="res2">--</div>
+  </div>
+
+  <div class="glass p-6 rounded-2xl flex flex-col gap-4">
+    <h3 class="font-bold text-lg">% Change from X to Y</h3>
+    <div class="flex items-center gap-2">
+      <input type="number" id="v3_x" class="input p-2 rounded-lg w-full" placeholder="X">
+      <span>to</span>
+      <input type="number" id="v3_y" class="input p-2 rounded-lg w-full" placeholder="Y">
+    </div>
+    <button class="btn primary" onclick="calc3()">Calculate</button>
+    <div class="mt-2 text-xl font-bold text-indigo-400" id="res3">--</div>
+  </div>
+</section>
+
+<section class="article max-w-4xl mt-16">
+<h2>Why Digital Calculators Matter: Unit and Currency Conversions in Daily Life</h2>
+<p>In our increasingly interconnected and fast-paced digital world, the need for precise mathematical transformations is more prevalent than ever. Whether you are navigating the complexities of international finance, scaling a recipe in your kitchen, or developing architectural blueprints, utility tools—ranging from percent calculators to advanced unit and currency converters—serve as the foundation for accuracy. This article explores the extensive use cases for unit and currency conversions, demonstrating why having access to reliable, browser-based utilities is essential for both professionals and everyday users.</p>
+
+<h3>The Critical Role of Currency Conversion</h3>
+<p>Currency conversion is perhaps the most frequent mathematical operation performed by internet users globally. The dynamic nature of foreign exchange (Forex) markets means that values fluctuate by the second. For international travelers, currency calculators are indispensable for budgeting. Knowing the exact exchange rate ensures that individuals do not overpay for lodging, food, or souvenirs, and helps them avoid hidden fees often applied by credit card companies and airport kiosks.</p>
+<p>Beyond tourism, the boom in global e-commerce has made currency conversion a daily necessity for consumers and business owners alike. An online shopper in the United States purchasing a custom leather good from Italy needs to convert Euros to US Dollars to understand the true cost. Conversely, the Italian merchant must price their goods competitively while accounting for conversion rates and international shipping costs. For businesses engaged in import and export, even a minor percentage change in the exchange rate—which is where a percentage calculator comes in handy—can dictate whether a quarterly earnings report shows a profit or a loss. Automated currency conversion tools embedded in financial software rely on these same basic algorithmic principles to manage payroll for remote, globally distributed teams.</p>
+
+<h3>Unit Conversions in Professional and Personal Settings</h3>
+<p>While currency focuses on finance, unit conversions dictate the physical world. The global divide between the metric system and the imperial system necessitates constant conversion for engineering, science, construction, and culinary arts.</p>
+<p>In the culinary world, recipes are frequently shared across borders. A baker in London using a recipe developed in New York must convert cups and fluid ounces into milliliters and grams. Precision here is not just a matter of preference; it is chemical necessity. Baking requires exact ratios, and a failure to convert volume to mass correctly can result in a culinary disaster. Volume calculators become vital tools for determining the exact capacity of baking tins or liquid containers.</p>
+<p>In engineering and construction, the stakes are significantly higher. Materials must be ordered using precise measurements. If an architectural plan drafted in metric units (meters, centimeters) is executed by a contractor accustomed to imperial units (feet, inches), a unit converter ensures structural integrity. Consider a civil engineer calculating the volume of concrete needed for a cylindrical pillar; they must convert dimensions accurately before using a volume calculator to find the cubic yardage required. A minor decimal error during conversion could lead to thousands of dollars in wasted materials or, worse, safety hazards.</p>
+
+<h3>Intersections of Percentages, Units, and Currency</h3>
+<p>The beauty of digital utility tools is how frequently they intersect. Consider a common use case: international real estate investment. An investor needs to calculate the square footage (unit conversion) of a property listed in square meters. They must then evaluate the asking price from a foreign currency to their local currency (currency conversion). Finally, they must determine the potential return on investment (ROI) or the interest rate of a mortgage (percentage calculation).</p>
+<p>Percentage calculators are the backbone of financial literacy. They are used to figure out sales tax on a purchase, determine a gratuity at a restaurant, calculate the discount during a holiday sale, or track the percentage increase of an asset's value over time. When dealing with currency conversions, percentages are used to calculate markup fees charged by exchange bureaus. A traveler might convert $1,000 to another currency and realize the exchange service took a 3% fee. Without a percent calculator, understanding the true cost of that transaction becomes a tedious manual exercise.</p>
+
+<h3>Conclusion</h3>
+<p>The digitization of mathematical utilities has democratized access to precision. You no longer need to be a mathematician or carry a specialized scientific device to navigate a world of shifting currencies and varying measurement systems. Browser-based tools provide instant, accessible, and accurate answers, empowering users to make informed financial decisions, execute complex projects safely, and interact seamlessly in a globalized economy. Whether you are measuring the volume of a shipping container, converting Yen to Pounds, or finding a 15% discount, these utilities are the silent engines of daily problem-solving.</p>
+
+<h2>Frequently Asked Questions</h2>
+<details class="faq"><summary>What is a percentage?</summary><p class="muted">A percentage is a number or ratio expressed as a fraction of 100. It is widely used to denote a portion of a whole.</p></details>
+<details class="faq"><summary>How do I calculate a percentage increase?</summary><p class="muted">Subtract the original value from the new value, divide the result by the original value, and multiply by 100.</p></details>
+<details class="faq"><summary>Can I use this tool on my mobile device?</summary><p class="muted">Yes, our utility is fully responsive and works perfectly on smartphones, tablets, and desktops.</p></details>
+<details class="faq"><summary>Does this tool store my calculations?</summary><p class="muted">No. All calculations are performed instantly in your browser and are not saved or sent to any server.</p></details>
+<details class="faq"><summary>How is percentage different from percentile?</summary><p class="muted">Percentage is a rate per hundred, while percentile indicates the value below which a given percentage of observations in a group fall.</p></details>
+<details class="faq"><summary>Why would I need to find what percent X is of Y?</summary><p class="muted">This is useful for finding test scores (e.g., 45 out of 50), calculating profit margins, or determining completion rates.</p></details>
+</section>
+</main>
+<footer class="border-t border-slate-800 bg-slate-950 transition-colors duration-300 mt-12">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500">
+<span>© <span id="year"></span> Utiliverse. All rights reserved.</span>
+</div>
+</footer>
+<script>
+lucide.createIcons();
+document.getElementById('year').textContent=new Date().getFullYear();
+document.getElementById('theme-toggle').addEventListener('click', () => {
+  document.body.classList.toggle('light-mode');
+  const icon = document.getElementById('theme-icon');
+  if(document.body.classList.contains('light-mode')) icon.setAttribute('data-lucide', 'moon');
+  else icon.setAttribute('data-lucide', 'sun');
+  lucide.createIcons();
+});
+
+function calc1() {
+  const x = parseFloat(document.getElementById('v1_x').value);
+  const y = parseFloat(document.getElementById('v1_y').value);
+  const res = document.getElementById('res1');
+  if(isNaN(x) || isNaN(y)) { res.innerText = "Invalid input"; return; }
+  res.innerText = ((x / 100) * y).toLocaleString('en-US', {maximumFractionDigits:4});
+}
+
+function calc2() {
+  const x = parseFloat(document.getElementById('v2_x').value);
+  const y = parseFloat(document.getElementById('v2_y').value);
+  const res = document.getElementById('res2');
+  if(isNaN(x) || isNaN(y) || y === 0) { res.innerText = "Invalid input"; return; }
+  res.innerText = ((x / y) * 100).toLocaleString('en-US', {maximumFractionDigits:4}) + '%';
+}
+
+function calc3() {
+  const x = parseFloat(document.getElementById('v3_x').value);
+  const y = parseFloat(document.getElementById('v3_y').value);
+  const res = document.getElementById('res3');
+  if(isNaN(x) || isNaN(y) || x === 0) { res.innerText = "Invalid input"; return; }
+  const change = ((y - x) / Math.abs(x)) * 100;
+  res.innerText = change > 0 ? `+${change.toLocaleString('en-US', {maximumFractionDigits:4})}%` : `${change.toLocaleString('en-US', {maximumFractionDigits:4})}%`;
+}
+</script>
+</body>
+</html>
