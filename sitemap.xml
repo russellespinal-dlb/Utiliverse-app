@@ -120,4 +120,24 @@
   <url>
     <loc>https://utiliverse.app/Typing_Lab/</loc>
   </url>
+
+  <!-- HTML Viewer -->
+  <url>
+    <loc>https://utiliverse.app/HTML_Viewer/</loc>
+  </url>
+
+  <!-- Percentage Calculator -->
+  <url>
+    <loc>https://utiliverse.app/Percentage_Calculator/</loc>
+  </url>
+
+  <!-- Volume Calculator -->
+  <url>
+    <loc>https://utiliverse.app/Volume Calculator/</loc>
+  </url>
+
+  <!-- Word Counter -->
+  <url>
+    <loc>https://utiliverse.app/Word_Counter/</loc>
+  </url>
 </urlset>
