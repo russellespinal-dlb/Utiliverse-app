@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Word & Character Count | Utiliverse</title>
+<meta name="description" content="Count words, characters, and sentences instantly with our free browser-based text analyzer tool.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/text-analyzer">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;color:#f8fafc;font-family:Inter,system-ui,sans-serif;transition:background 0.3s ease,color 0.3s ease;}
+.glass{background:rgba(30,41,59,.72);backdrop-filter:blur(14px);border:1px solid #334155;}
+.input{background:#0f172a;border:1px solid #475569;color:#f8fafc;}
+.input:focus{outline:none;border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.15)}
+.btn{border:1px solid #475569;background:#1e293b;color:#f8fafc;border-radius:12px;padding:.75rem 1rem;font-weight:700;cursor:pointer}
+.btn:hover{background:#334155}
+.muted{color:#94a3b8;}
+.article h2{font-size:1.9rem;font-weight:800;color:#fff;margin:2.2rem 0 .9rem;}
+.article h3{font-size:1.2rem;font-weight:750;color:#e2e8f0;margin:1.7rem 0 .65rem;}
+.article p,.article li{color:#94a3b8;line-height:1.85;margin-bottom:1rem;}
+.faq{border-bottom:1px solid #334155}
+.faq summary{list-style:none;cursor:pointer;padding:1rem 0;font-weight:700}
+.faq summary::-webkit-details-marker{display:none}
+body.light-mode{background:#f8fafc;color:#0f172a;}
+body.light-mode .glass{background:rgba(255,255,255,0.8);border-color:#e2e8f0;}
+body.light-mode .input{background:#ffffff;border-color:#cbd5e1;color:#0f172a;}
+body.light-mode .btn{background:#f1f5f9;border-color:#cbd5e1;color:#334155;}
+body.light-mode .muted{color:#64748b;}
+body.light-mode .article h2{color:#0f172a;}
+body.light-mode .article h3{color:#1e293b;}
+body.light-mode .article p{color:#475569;}
+body.light-mode header{background:rgba(255,255,255,0.9);border-color:#e2e8f0;}
+</style>
+</head>
+<body>
+<header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800 transition-all duration-300">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+<a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2 transition-colors"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse</a>
+<button id="theme-toggle" class="text-slate-400 hover:text-white transition-colors cursor-pointer"><i data-lucide="sun" id="theme-icon" class="w-5 h-5"></i></button>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+<div class="max-w-3xl">
+<p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Text Tools</p>
+<h1 class="text-4xl sm:text-5xl font-black mt-2">Word & Character Count</h1>
+<p class="mt-4 text-lg muted">Analyze your text length for essays, social media posts, and SEO.</p>
+</div>
+
+<section class="mt-8">
+  <div class="grid sm:grid-cols-4 gap-3 mb-6">
+    <div class="glass rounded-xl p-4"><span class="muted text-xs uppercase font-bold">Words</span><div id="c_words" class="text-3xl font-black mt-1 text-indigo-400">0</div></div>
+    <div class="glass rounded-xl p-4"><span class="muted text-xs uppercase font-bold">Chars (No Spaces)</span><div id="c_chars_ns" class="text-3xl font-black mt-1 text-indigo-400">0</div></div>
+    <div class="glass rounded-xl p-4"><span class="muted text-xs uppercase font-bold">Chars (With Spaces)</span><div id="c_chars_s" class="text-3xl font-black mt-1 text-indigo-400">0</div></div>
+    <div class="glass rounded-xl p-4"><span class="muted text-xs uppercase font-bold">Sentences</span><div id="c_sent" class="text-3xl font-black mt-1 text-indigo-400">0</div></div>
+  </div>
+  
+  <textarea id="text_input" rows="12" class="input w-full rounded-2xl p-4 text-lg resize-y" placeholder="Type or paste your text here to begin analyzing..."></textarea>
+  <button class="btn mt-4" onclick="document.getElementById('text_input').value=''; analyzeText();">Clear Text</button>
+</section>
+
+<section class="article max-w-4xl mt-16">
+<h2>Why Digital Calculators Matter: Unit and Currency Conversions in Daily Life</h2>
+<p>In our increasingly interconnected and fast-paced digital world, the need for precise mathematical transformations is more prevalent than ever. Whether you are navigating the complexities of international finance, scaling a recipe in your kitchen, or developing architectural blueprints, utility tools—ranging from percent calculators to advanced unit and currency converters—serve as the foundation for accuracy. This article explores the extensive use cases for unit and currency conversions, demonstrating why having access to reliable, browser-based utilities is essential for both professionals and everyday users.</p>
+<h3>The Critical Role of Currency Conversion</h3>
+<p>Currency conversion is perhaps the most frequent mathematical operation performed by internet users globally. The dynamic nature of foreign exchange (Forex) markets means that values fluctuate by the second. For international travelers, currency calculators are indispensable for budgeting. Knowing the exact exchange rate ensures that individuals do not overpay for lodging, food, or souvenirs, and helps them avoid hidden fees often applied by credit card companies and airport kiosks.</p>
+<p>Beyond tourism, the boom in global e-commerce has made currency conversion a daily necessity for consumers and business owners alike. An online shopper in the United States purchasing a custom leather good from Italy needs to convert Euros to US Dollars to understand the true cost. Conversely, the Italian merchant must price their goods competitively while accounting for conversion rates and international shipping costs.</p>
+<h3>Unit Conversions in Professional and Personal Settings</h3>
+<p>While currency focuses on finance, unit conversions dictate the physical world. The global divide between the metric system and the imperial system necessitates constant conversion for engineering, science, construction, and culinary arts.</p>
+<p>In the culinary world, recipes are frequently shared across borders. A baker in London using a recipe developed in New York must convert cups and fluid ounces into milliliters and grams. Precision here is not just a matter of preference; it is chemical necessity. Baking requires exact ratios, and a failure to convert volume to mass correctly can result in a culinary disaster. Volume calculators become vital tools for determining the exact capacity of baking tins or liquid containers.</p>
+<p>In engineering and construction, the stakes are significantly higher. Materials must be ordered using precise measurements. If an architectural plan drafted in metric units (meters, centimeters) is executed by a contractor accustomed to imperial units (feet, inches), a unit converter ensures structural integrity. Consider a civil engineer calculating the volume of concrete needed for a cylindrical pillar; they must convert dimensions accurately before using a volume calculator to find the cubic yardage required. A minor decimal error during conversion could lead to thousands of dollars in wasted materials or, worse, safety hazards.</p>
+<h3>Conclusion</h3>
+<p>The digitization of mathematical utilities has democratized access to precision. You no longer need to be a mathematician or carry a specialized scientific device to navigate a world of shifting currencies and varying measurement systems. Browser-based tools provide instant, accessible, and accurate answers, empowering users to make informed decisions and execute complex projects safely.</p>
+
+<h2>Frequently Asked Questions</h2>
+<details class="faq"><summary>How are words counted?</summary><p class="muted">Words are calculated by splitting the text by spaces and line breaks, ignoring empty gaps.</p></details>
+<details class="faq"><summary>Why is character count without spaces important?</summary><p class="muted">Many academic and professional assignments, as well as specific software limitations, require a strict character limit that excludes whitespace.</p></details>
+<details class="faq"><summary>How does it count sentences?</summary><p class="muted">The tool looks for standard punctuation marks like periods, exclamation points, and question marks to determine where a sentence ends.</p></details>
+<details class="faq"><summary>Is there a limit to how much text I can paste?</summary><p class="muted">No, because processing happens directly in your browser, you can analyze thousands of words instantly without server limitations.</p></details>
+<details class="faq"><summary>Does it count punctuation as characters?</summary><p class="muted">Yes, punctuation marks are counted as characters in both the 'with spaces' and 'without spaces' metrics.</p></details>
+</section>
+</main>
+<footer class="border-t border-slate-800 bg-slate-950 mt-12">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 text-sm text-slate-500">© <span id="year"></span> Utiliverse. All rights reserved.</div>
+</footer>
+<script>
+lucide.createIcons();
+document.getElementById('year').textContent=new Date().getFullYear();
+document.getElementById('theme-toggle').addEventListener('click', () => {
+  document.body.classList.toggle('light-mode');
+  const icon = document.getElementById('theme-icon');
+  icon.setAttribute('data-lucide', document.body.classList.contains('light-mode') ? 'moon' : 'sun');
+  lucide.createIcons();
+});
+
+const textEl = document.getElementById('text_input');
+function analyzeText() {
+  const text = textEl.value;
+  
+  // Chars with spaces
+  document.getElementById('c_chars_s').innerText = text.length.toLocaleString();
+  
+  // Chars without spaces
+  document.getElementById('c_chars_ns').innerText = text.replace(/\s/g, '').length.toLocaleString();
+  
+  // Words
+  const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+  document.getElementById('c_words').innerText = words.toLocaleString();
+  
+  // Sentences
+  const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0).length;
+  document.getElementById('c_sent').innerText = text.trim() ? sentences.toLocaleString() : 0;
+}
+
+textEl.addEventListener('input', analyzeText);
+</script>
+</body>
+</html>
