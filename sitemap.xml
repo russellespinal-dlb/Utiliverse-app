@@ -140,4 +140,24 @@
   <url>
     <loc>https://utiliverse.app/Word_Counter/</loc>
   </url>
+
+  <!-- Privacy Policy -->
+  <url>
+    <loc>https://utiliverse.app/Privacy_Policy.html/</loc>
+  </url>
+
+  <!-- Terms of Service -->
+  <url>
+    <loc>https://utiliverse.app/Terms_of_Service.html/</loc>
+  </url>
+
+  <!-- Contact Info -->
+  <url>
+    <loc>https://utiliverse.app/Contact_Info.html/</loc>
+  </url>
+
+  <!-- About -->
+  <url>
+    <loc>https://utiliverse.app/About.html/</loc>
+  </url>
 </urlset>
