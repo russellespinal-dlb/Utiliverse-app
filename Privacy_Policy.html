@@ -12,12 +12,30 @@
   .article h2 { font-size: 1.5rem; font-weight: 700; color: #fff; margin: 2rem 0 1rem; }
   .article p, .article li { color: #94a3b8; line-height: 1.75; margin-bottom: 1rem; }
   .article ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
+
+  .theme-toggle{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .75rem;border:1px solid #334155;border-radius:.75rem;background:#0f172a;color:#e2e8f0;cursor:pointer;font:inherit;font-size:.875rem;font-weight:600}
+  .theme-toggle:hover{background:#1e293b}
+  .theme-toggle svg{width:1rem;height:1rem}
+  body.light-mode{background:#f8fafc;color:#0f172a}
+  body.light-mode header{background:rgba(255,255,255,.9);border-color:#e2e8f0}
+  body.light-mode footer{background:#fff;border-color:#e2e8f0}
+  body.light-mode .article h1{color:#0f172a}
+  body.light-mode .article h2{color:#1e293b}
+  body.light-mode .article p,body.light-mode .article li{color:#475569}
+  body.light-mode .article a{color:#4f46e5}
+  body.light-mode .theme-toggle{background:#fff;border-color:#cbd5e1;color:#334155}
+  body.light-mode .theme-toggle:hover{background:#f1f5f9}
 </style>
 </head>
 <body>
 <header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-    <a href="/" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse</a>
+    <div class="flex items-center justify-between w-full gap-4">
+      <a href="/" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse</a>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to light mode">
+        <i id="themeIcon" data-lucide="sun"></i><span id="themeText">Light Mode</span>
+      </button>
+    </div>
   </div>
 </header>
 <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12 article">
@@ -36,7 +54,7 @@
   <p>These third-party providers may collect connection data in accordance with their own respective privacy policies.</p>
 
   <h2>3. Advertising and Cookies</h2>
-  <p>Utiliverse may use third-party advertising services, including Google AdSense, if and when advertising is enabled."</p>
+  <p>Utiliverse uses third-party advertising companies, such as Google AdSense, to serve ads when you visit our website. These companies may use cookies (such as the DoubleClick cookie) to serve ads based on your prior visits to our website or other websites on the internet.</p>
   <ul>
     <li>Users may opt out of personalized advertising by visiting Google's <a href="https://myadcenter.google.com/" class="text-indigo-400 hover:underline" target="_blank">Ads Settings</a>.</li>
     <li>Alternatively, you can opt out of some third-party vendors' uses of cookies for personalized advertising by visiting <a href="https://www.aboutads.info/choices/" class="text-indigo-400 hover:underline" target="_blank">www.aboutads.info</a>.</li>
@@ -54,8 +72,32 @@
   </div>
 </footer>
 <script>
+  const themeToggle = document.getElementById('themeToggle');
+  const themeText = document.getElementById('themeText');
+  const themeIcon = document.getElementById('themeIcon');
+
+  function applyTheme(theme) {
+    const isLight = theme === 'light';
+    document.body.classList.toggle('light-mode', isLight);
+    themeText.textContent = isLight ? 'Dark Mode' : 'Light Mode';
+    themeIcon.setAttribute('data-lucide', isLight ? 'moon' : 'sun');
+    themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+    lucide.createIcons();
+  }
+
+  const savedTheme = localStorage.getItem('utiliverse-theme');
+  const initialTheme = savedTheme ||
+    (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+
+  applyTheme(initialTheme);
+
+  themeToggle.addEventListener('click', () => {
+    const nextTheme = document.body.classList.contains('light-mode') ? 'dark' : 'light';
+    localStorage.setItem('utiliverse-theme', nextTheme);
+    applyTheme(nextTheme);
+  });
+
   document.getElementById('year').textContent = new Date().getFullYear();
-  lucide.createIcons();
 </script>
 </body>
 </html>
