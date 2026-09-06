@@ -167,8 +167,8 @@
               <span class="muted text-sm mt-1 block">or click to browse your device</span>
             </div>
             <button type="button" class="btn max-w-[150px] mt-2" id="browseBtn">Choose File</button>
-            <input type="file" id="fileInput" accept="image/png, image/jpeg, image/webp, image/gif, image/svg+xml, image/bmp">
-            <div class="font-mono text-xs text-slate-500 mt-2">PNG · JPG · WEBP · GIF · SVG · BMP</div>
+            <input type="file" id="fileInput" accept="image/png, image/jpeg, image/webp, image/gif, image/svg+xml, image/bmp, image/x-icon, image/vnd.microsoft.icon">
+            <div class="font-mono text-xs text-slate-500 mt-2">PNG · JPG · WEBP · GIF · SVG · BMP · ICO · ICO</div>
           </div>
 
           <div class="preview-area" id="previewArea">
@@ -373,19 +373,38 @@
   <div class="toast" id="toast"></div>
 
   <script>
-    lucide.createIcons();
-    document.getElementById('year').textContent = new Date().getFullYear();
-    
-    document.getElementById('theme-toggle').addEventListener('click', () => {
-      document.body.classList.toggle('light-mode');
-      const icon = document.getElementById('theme-icon');
-      icon.setAttribute('data-lucide', document.body.classList.contains('light-mode') ? 'moon' : 'sun');
-      lucide.createIcons();
-    });
-    
-    (function(){
+    /*
+      Utiliverse Image Resizer & Formatter
+      Robust local image decoding + conversion engine.
+      No image data is uploaded to a server.
+    */
+    (function () {
       "use strict";
-    
+
+      lucide.createIcons();
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      /* ---------------- Theme ---------------- */
+      var themeToggle = document.getElementById("theme-toggle");
+      var themeIcon = document.getElementById("theme-icon");
+
+      function applyTheme(theme) {
+        var light = theme === "light";
+        document.body.classList.toggle("light-mode", light);
+        themeIcon.setAttribute("data-lucide", light ? "moon" : "sun");
+        lucide.createIcons();
+      }
+
+      var savedTheme = localStorage.getItem("utiliverse-theme");
+      applyTheme(savedTheme || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"));
+
+      themeToggle.addEventListener("click", function () {
+        var next = document.body.classList.contains("light-mode") ? "dark" : "light";
+        localStorage.setItem("utiliverse-theme", next);
+        applyTheme(next);
+      });
+
+      /* ---------------- Presets ---------------- */
       var PRESETS = {
         "Instagram": [
           {label:"Feed Portrait", w:1080, h:1350},
@@ -412,480 +431,822 @@
           {label:"Profile Picture", w:400, h:400}
         ]
       };
-    
-      var dropzone = document.getElementById('dropzone');
-      var fileInput = document.getElementById('fileInput');
-      var browseBtn = document.getElementById('browseBtn');
-      var previewArea = document.getElementById('previewArea');
-      var origImg = document.getElementById('origImg');
-      var cropOverlay = document.getElementById('cropOverlay');
-      var cropTag = document.getElementById('cropTag');
-      var modeNote = document.getElementById('modeNote');
-      var metaTags = document.getElementById('metaTags');
-      var resultCanvas = document.getElementById('resultCanvas');
-    
-      var formatSelect = document.getElementById('formatSelect');
-      var qualityField = document.getElementById('qualityField');
-      var qualitySlider = document.getElementById('qualitySlider');
-      var qualityVal = document.getElementById('qualityVal');
-    
-      var widthInput = document.getElementById('widthInput');
-      var heightInput = document.getElementById('heightInput');
-      var lockBtn = document.getElementById('lockBtn');
-      var modeOptions = document.getElementById('modeOptions');
-    
-      var platformSelect = document.getElementById('platformSelect');
-      var presetSelect = document.getElementById('presetSelect');
-    
-      var downloadBtn = document.getElementById('downloadBtn');
-      var resetBtn = document.getElementById('resetBtn');
-      var outputBox = document.getElementById('outputBox');
-      var outputFileName = document.getElementById('outputFileName');
-      var outputFileSize = document.getElementById('outputFileSize');
-      var toast = document.getElementById('toast');
-    
+
+      /* ---------------- Elements ---------------- */
+      var dropzone = document.getElementById("dropzone");
+      var fileInput = document.getElementById("fileInput");
+      var browseBtn = document.getElementById("browseBtn");
+      var previewArea = document.getElementById("previewArea");
+      var origImg = document.getElementById("origImg");
+      var cropOverlay = document.getElementById("cropOverlay");
+      var cropTag = document.getElementById("cropTag");
+      var modeNote = document.getElementById("modeNote");
+      var metaTags = document.getElementById("metaTags");
+      var resultCanvas = document.getElementById("resultCanvas");
+
+      var formatSelect = document.getElementById("formatSelect");
+      var qualityField = document.getElementById("qualityField");
+      var qualitySlider = document.getElementById("qualitySlider");
+      var qualityVal = document.getElementById("qualityVal");
+
+      var widthInput = document.getElementById("widthInput");
+      var heightInput = document.getElementById("heightInput");
+      var lockBtn = document.getElementById("lockBtn");
+      var modeOptions = document.getElementById("modeOptions");
+
+      var platformSelect = document.getElementById("platformSelect");
+      var presetSelect = document.getElementById("presetSelect");
+
+      var downloadBtn = document.getElementById("downloadBtn");
+      var resetBtn = document.getElementById("resetBtn");
+      var outputBox = document.getElementById("outputBox");
+      var outputFileName = document.getElementById("outputFileName");
+      var outputFileSize = document.getElementById("outputFileSize");
+      var toast = document.getElementById("toast");
+
       var state = {
         file: null,
         img: null,
         naturalW: 0,
         naturalH: 0,
         lockAspect: true,
-        resizeMode: 'fit',
+        resizeMode: "fit",
         selectedPreset: null,
         objectUrl: null,
-        updateTimer: null
+        updateTimer: null,
+        decoder: null
       };
-    
-      function showToast(msg){
+
+      function showToast(msg) {
         toast.textContent = msg;
-        toast.classList.add('show');
-        setTimeout(function(){ toast.classList.remove('show'); }, 2200);
+        toast.classList.add("show");
+        clearTimeout(showToast.timer);
+        showToast.timer = setTimeout(function () {
+          toast.classList.remove("show");
+        }, 2800);
       }
-    
-      function formatBytes(bytes){
-        if(bytes < 1024) return bytes + ' B';
-        if(bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
-        return (bytes/(1024*1024)).toFixed(2) + ' MB';
+
+      function formatBytes(bytes) {
+        if (bytes < 1024) return bytes + " B";
+        if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+        return (bytes / (1024 * 1024)).toFixed(2) + " MB";
       }
-    
-      function slugify(str){
-        return str.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+
+      function slugify(str) {
+        return str.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
       }
-    
-      function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
-    
-      Object.keys(PRESETS).forEach(function(platform){
-        var opt = document.createElement('option');
+
+      function clamp(n, min, max) {
+        return Math.max(min, Math.min(max, n));
+      }
+
+      function mimeFromName(name) {
+        var ext = (name.split(".").pop() || "").toLowerCase();
+        return {
+          jpg:"image/jpeg", jpeg:"image/jpeg", png:"image/png",
+          webp:"image/webp", gif:"image/gif", svg:"image/svg+xml",
+          bmp:"image/bmp", dib:"image/bmp", ico:"image/x-icon"
+        }[ext] || "";
+      }
+
+      function normalizeType(file) {
+        return (file.type || mimeFromName(file.name) || "").toLowerCase();
+      }
+
+      function isSupportedFile(file) {
+        var type = normalizeType(file);
+        var ext = (file.name.split(".").pop() || "").toLowerCase();
+        return ["image/png","image/jpeg","image/webp","image/gif","image/svg+xml",
+                "image/bmp","image/x-ms-bmp","image/x-icon","image/vnd.microsoft.icon",
+                "image/ico"].indexOf(type) !== -1 ||
+               ["png","jpg","jpeg","webp","gif","svg","bmp","dib","ico"].indexOf(ext) !== -1;
+      }
+
+      /* ---------------- Populate presets/table ---------------- */
+      Object.keys(PRESETS).forEach(function(platform) {
+        var opt = document.createElement("option");
         opt.value = platform;
         opt.textContent = platform;
         platformSelect.appendChild(opt);
       });
-    
-      platformSelect.addEventListener('change', function(){
-        var platform = platformSelect.value;
-        presetSelect.innerHTML = '';
-        if(!platform){
-          presetSelect.disabled = true;
-          var o = document.createElement('option');
-          o.textContent = 'Select platform first…';
-          presetSelect.appendChild(o);
-          return;
-        }
-        presetSelect.disabled = false;
-        var placeholder = document.createElement('option');
-        placeholder.value = '';
-        placeholder.textContent = 'Select a preset…';
-        presetSelect.appendChild(placeholder);
-        PRESETS[platform].forEach(function(p, i){
-          var opt = document.createElement('option');
-          opt.value = i;
-          opt.textContent = p.label + ' (' + p.w + '×' + p.h + ')';
-          presetSelect.appendChild(opt);
-        });
-      });
-    
-      presetSelect.addEventListener('change', function(){
-        var platform = platformSelect.value;
-        var idx = presetSelect.value;
-        if(idx === '' || !platform){ state.selectedPreset = null; return; }
-        var p = PRESETS[platform][idx];
-        state.selectedPreset = {platform: platform, label: p.label};
-        widthInput.value = p.w;
-        heightInput.value = p.h;
-        setMode('cover');
-        scheduleUpdate();
-      });
-    
-      (function buildDimTable(){
-        var tbody = document.querySelector('#dimTable tbody');
-        Object.keys(PRESETS).forEach(function(platform){
-          PRESETS[platform].forEach(function(p){
-            var tr = document.createElement('tr');
-            tr.innerHTML = '<td>' + platform + '</td><td>' + p.label + '</td><td class="dims">' + p.w + ' × ' + p.h + '</td>';
+
+      (function buildDimTable() {
+        var tbody = document.querySelector("#dimTable tbody");
+        Object.keys(PRESETS).forEach(function(platform) {
+          PRESETS[platform].forEach(function(p) {
+            var tr = document.createElement("tr");
+            tr.innerHTML = "<td>" + platform + "</td><td>" + p.label +
+              "</td><td class=\"dims\">" + p.w + " × " + p.h + "</td>";
             tbody.appendChild(tr);
           });
         });
       })();
-    
-      browseBtn.addEventListener('click', function(){ fileInput.click(); });
-      dropzone.addEventListener('click', function(e){
-        if(e.target !== browseBtn) fileInput.click();
-      });
-    
-      ['dragenter','dragover'].forEach(function(evt){
-        dropzone.addEventListener(evt, function(e){
-          e.preventDefault(); e.stopPropagation();
-          dropzone.classList.add('dragover');
+
+      platformSelect.addEventListener("change", function() {
+        var platform = platformSelect.value;
+        presetSelect.innerHTML = "";
+        if (!platform) {
+          presetSelect.disabled = true;
+          var o = document.createElement("option");
+          o.textContent = "Select platform first…";
+          presetSelect.appendChild(o);
+          return;
+        }
+        presetSelect.disabled = false;
+        var placeholder = document.createElement("option");
+        placeholder.value = "";
+        placeholder.textContent = "Select a preset…";
+        presetSelect.appendChild(placeholder);
+
+        PRESETS[platform].forEach(function(p, i) {
+          var opt = document.createElement("option");
+          opt.value = i;
+          opt.textContent = p.label + " (" + p.w + "×" + p.h + ")";
+          presetSelect.appendChild(opt);
         });
       });
-      ['dragleave','drop'].forEach(function(evt){
-        dropzone.addEventListener(evt, function(e){
-          e.preventDefault(); e.stopPropagation();
-          dropzone.classList.remove('dragover');
+
+      presetSelect.addEventListener("change", function() {
+        var platform = platformSelect.value;
+        var idx = presetSelect.value;
+        if (idx === "" || !platform) {
+          state.selectedPreset = null;
+          return;
+        }
+        var p = PRESETS[platform][idx];
+        state.selectedPreset = {platform:platform, label:p.label};
+        widthInput.value = p.w;
+        heightInput.value = p.h;
+        setMode("cover");
+        scheduleUpdate();
+      });
+
+      /* ---------------- Upload/drop handling ---------------- */
+      browseBtn.addEventListener("click", function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        fileInput.click();
+      });
+
+      dropzone.addEventListener("click", function(e) {
+        if (e.target === browseBtn) return;
+        fileInput.click();
+      });
+
+      dropzone.addEventListener("keydown", function(e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          fileInput.click();
+        }
+      });
+
+      ["dragenter","dragover"].forEach(function(evt) {
+        dropzone.addEventListener(evt, function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          dropzone.classList.add("dragover");
         });
       });
-      dropzone.addEventListener('drop', function(e){
-        var files = e.dataTransfer.files;
-        if(files && files.length) handleFile(files[0]);
+
+      ["dragleave","drop"].forEach(function(evt) {
+        dropzone.addEventListener(evt, function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          dropzone.classList.remove("dragover");
+        });
       });
-    
-      fileInput.addEventListener('change', function(e){
-        if(e.target.files && e.target.files.length) handleFile(e.target.files[0]);
+
+      dropzone.addEventListener("drop", function(e) {
+        var files = e.dataTransfer && e.dataTransfer.files;
+        if (files && files.length) handleFile(files[0]);
       });
-    
-      function handleFile(file){
-        if(state.objectUrl) URL.revokeObjectURL(state.objectUrl);
-        state.file = file;
-        
-        var reader = new FileReader();
-        reader.onload = function(event) {
-          var url = event.target.result;
+
+      fileInput.addEventListener("change", function(e) {
+        if (e.target.files && e.target.files.length) handleFile(e.target.files[0]);
+      });
+
+      /*
+       * Decode using the browser's native image stack.
+       *
+       * Important: there is NO artificial "dedicated decoder" limitation here.
+       * We first use createImageBitmap where possible, then fall back to an
+       * object-URL <img>. SVG is loaded through an object URL so browsers can
+       * rasterize it for canvas export. BMP/ICO receive custom fallbacks below.
+       */
+      function decodeWithImageElement(file) {
+        return new Promise(function(resolve, reject) {
+          var url = URL.createObjectURL(file);
           var img = new Image();
-          img.onload = function(){
-            state.img = img;
-            state.naturalW = img.naturalWidth || img.width;
-            state.naturalH = img.naturalHeight || img.height;
-      
-            origImg.src = url;
-            previewArea.classList.add('active');
-      
-            widthInput.value = state.naturalW;
-            heightInput.value = state.naturalH;
-      
-            renderMeta();
-            downloadBtn.disabled = false;
-            scheduleUpdate();
+          var finished = false;
+
+          function cleanup() {
+            if (finished) return;
+            finished = true;
+            img.onload = null;
+            img.onerror = null;
+            URL.revokeObjectURL(url);
+          }
+
+          img.onload = function() {
+            var w = img.naturalWidth || img.width;
+            var h = img.naturalHeight || img.height;
+            if (!w || !h) {
+              cleanup();
+              reject(new Error("The browser returned an invalid image size."));
+              return;
+            }
+            if (state.objectUrl) URL.revokeObjectURL(state.objectUrl);
+            state.objectUrl = url;
+            state.decoder = img;
+            resolve({source:img, width:w, height:h});
           };
-          img.onerror = function(){
-            showToast('Could not load this image. Ensure it is a valid web format.');
+
+          img.onerror = function() {
+            cleanup();
+            reject(new Error("Native browser image decoding failed."));
           };
+
           img.src = url;
-        };
-        reader.readAsDataURL(file);
+        });
       }
-    
-      function renderMeta(){
-        metaTags.innerHTML = '';
+
+      function decodeWithBitmap(file) {
+        if (typeof createImageBitmap !== "function") {
+          return Promise.reject(new Error("createImageBitmap is unavailable."));
+        }
+
+        return createImageBitmap(file).then(function(bitmap) {
+          var w = bitmap.width, h = bitmap.height;
+          if (!w || !h) {
+            bitmap.close();
+            throw new Error("Invalid bitmap dimensions.");
+          }
+          state.decoder = bitmap;
+          return {source:bitmap, width:w, height:h};
+        });
+      }
+
+      /*
+       * Minimal BMP decoder fallback.
+       * Supports uncompressed Windows BMP/DIB files at 1/4/8/16/24/32 bpp
+       * where practical, including the common 24/32-bit files produced by
+       * desktop screenshot/image applications.
+       */
+      function decodeBMP(arrayBuffer) {
+        var dv = new DataView(arrayBuffer);
+        if (dv.byteLength < 54 || dv.getUint16(0, true) !== 0x4D42) {
+          throw new Error("Not a BMP file.");
+        }
+
+        var pixelOffset = dv.getUint32(10, true);
+        var dibSize = dv.getUint32(14, true);
+        if (dibSize < 40 || dv.byteLength < 14 + dibSize) {
+          throw new Error("Unsupported BMP header.");
+        }
+
+        var width = dv.getInt32(18, true);
+        var rawHeight = dv.getInt32(22, true);
+        var planes = dv.getUint16(26, true);
+        var bpp = dv.getUint16(28, true);
+        var compression = dv.getUint32(30, true);
+
+        if (!width || !rawHeight || planes !== 1) throw new Error("Invalid BMP dimensions.");
+        if (compression !== 0 && compression !== 3) throw new Error("Compressed BMP is not supported.");
+
+        var height = Math.abs(rawHeight);
+        var topDown = rawHeight < 0;
+        var palette = null;
+
+        if (bpp <= 8) {
+          var colorsUsed = dv.getUint32(46, true) || (1 << bpp);
+          var paletteOffset = 14 + dibSize;
+          palette = [];
+          for (var p = 0; p < colorsUsed; p++) {
+            var po = paletteOffset + p * 4;
+            if (po + 4 > dv.byteLength) throw new Error("Invalid BMP palette.");
+            palette.push([dv.getUint8(po+2), dv.getUint8(po+1), dv.getUint8(po), 255]);
+          }
+        }
+
+        var canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        var ctx = canvas.getContext("2d", {willReadFrequently:true});
+        var imageData = ctx.createImageData(width, height);
+        var data = imageData.data;
+        var rowSize = Math.floor((bpp * width + 31) / 32) * 4;
+
+        for (var y = 0; y < height; y++) {
+          var srcY = topDown ? y : (height - 1 - y);
+          var row = pixelOffset + srcY * rowSize;
+
+          for (var x = 0; x < width; x++) {
+            var r=0,g=0,b=0,a=255;
+
+            if (bpp === 24) {
+              var o = row + x * 3;
+              b=dv.getUint8(o); g=dv.getUint8(o+1); r=dv.getUint8(o+2);
+            } else if (bpp === 32) {
+              var o32 = row + x * 4;
+              b=dv.getUint8(o32); g=dv.getUint8(o32+1); r=dv.getUint8(o32+2);
+              a=dv.getUint8(o32+3);
+            } else if (bpp === 16) {
+              var v=dv.getUint16(row + x*2, true);
+              if (compression === 3) {
+                var rMask=dv.getUint32(54,true), gMask=dv.getUint32(58,true), bMask=dv.getUint32(62,true);
+                r = rMask ? Math.round(((v & rMask) / rMask) * 255) : ((v >> 10) & 31) * 255/31;
+                g = gMask ? Math.round(((v & gMask) / gMask) * 255) : ((v >> 5) & 31) * 255/31;
+                b = bMask ? Math.round(((v & bMask) / bMask) * 255) : (v & 31) * 255/31;
+              } else {
+                r=((v >> 10) & 31)*255/31;
+                g=((v >> 5) & 31)*255/31;
+                b=(v & 31)*255/31;
+              }
+            } else if (bpp === 8) {
+              var idx8=dv.getUint8(row+x);
+              if (!palette || !palette[idx8]) throw new Error("Invalid BMP palette index.");
+              r=palette[idx8][0]; g=palette[idx8][1]; b=palette[idx8][2];
+            } else if (bpp === 4) {
+              var packed=dv.getUint8(row + Math.floor(x/2));
+              var idx4=(x % 2 === 0) ? (packed >> 4) : (packed & 15);
+              if (!palette || !palette[idx4]) throw new Error("Invalid BMP palette index.");
+              r=palette[idx4][0]; g=palette[idx4][1]; b=palette[idx4][2];
+            } else if (bpp === 1) {
+              var packed1=dv.getUint8(row + Math.floor(x/8));
+              var idx1=(packed1 >> (7-(x%8))) & 1;
+              if (!palette || !palette[idx1]) throw new Error("Invalid BMP palette index.");
+              r=palette[idx1][0]; g=palette[idx1][1]; b=palette[idx1][2];
+            } else {
+              throw new Error("Unsupported BMP bit depth.");
+            }
+
+            var di=(y*width+x)*4;
+            data[di]=r; data[di+1]=g; data[di+2]=b; data[di+3]=a;
+          }
+        }
+
+        ctx.putImageData(imageData,0,0);
+        return {source:canvas,width:width,height:height};
+      }
+
+      /*
+       * ICO fallback: extracts the largest embedded PNG, or the largest
+       * uncompressed BMP image from the icon container.
+       */
+      function decodeICO(arrayBuffer) {
+        var dv = new DataView(arrayBuffer);
+        if (dv.byteLength < 6 || dv.getUint16(0,true) !== 0 || dv.getUint16(2,true) !== 1) {
+          throw new Error("Not an ICO file.");
+        }
+
+        var count = dv.getUint16(4,true);
+        if (!count) throw new Error("ICO contains no images.");
+
+        var best = null;
+        for (var i=0;i<count;i++) {
+          var off=6+i*16;
+          if (off+16>dv.byteLength) continue;
+          var w=dv.getUint8(off) || 256;
+          var h=dv.getUint8(off+1) || 256;
+          var bytes=dv.getUint32(off+8,true);
+          var dataOff=dv.getUint32(off+12,true);
+          if (dataOff+bytes>dv.byteLength) continue;
+          var score=w*h;
+          if (!best || score>best.score) best={score:score,offset:dataOff,size:bytes,w:w,h:h};
+        }
+        if (!best) throw new Error("ICO contains no readable image.");
+
+        var embedded = arrayBuffer.slice(best.offset,best.offset+best.size);
+        var head = new Uint8Array(embedded.slice(0,8));
+        var isPNG = head[0]===137 && head[1]===80 && head[2]===78 && head[3]===71;
+
+        if (isPNG) {
+          var blob = new Blob([embedded],{type:"image/png"});
+          return decodeWithImageElement(blob);
+        }
+
+        return decodeBMP(embedded);
+      }
+
+      async function decodeFile(file) {
+        var type = normalizeType(file);
+        var ext = (file.name.split(".").pop() || "").toLowerCase();
+
+        /* ICO gets its own fallback because browser ICO support varies. */
+        if (type.indexOf("icon") !== -1 || ext === "ico") {
+          try {
+            return await decodeWithImageElement(file);
+          } catch (e) {
+            return decodeICO(await file.arrayBuffer());
+          }
+        }
+
+        /* BMP gets a native attempt followed by a guaranteed local decoder. */
+        if (type === "image/bmp" || type === "image/x-ms-bmp" || ext === "bmp" || ext === "dib") {
+          try {
+            return await decodeWithBitmap(file);
+          } catch (e1) {
+            try {
+              return await decodeWithImageElement(file);
+            } catch (e2) {
+              return decodeBMP(await file.arrayBuffer());
+            }
+          }
+        }
+
+        /* SVG should be rasterized by the browser through an object URL. */
+        if (type === "image/svg+xml" || ext === "svg") {
+          return decodeWithImageElement(file);
+        }
+
+        /* PNG/JPEG/WEBP/GIF: native browser decoding with robust fallback. */
+        try {
+          return await decodeWithBitmap(file);
+        } catch (e1) {
+          return decodeWithImageElement(file);
+        }
+      }
+
+      async function handleFile(file) {
+        if (!file) return;
+
+        if (!isSupportedFile(file)) {
+          showToast("Unsupported image format. Please choose PNG, JPG, WEBP, GIF, SVG, BMP or ICO.");
+          return;
+        }
+
+        if (state.decoder && typeof state.decoder.close === "function") {
+          try { state.decoder.close(); } catch (e) {}
+        }
+        if (state.objectUrl) {
+          URL.revokeObjectURL(state.objectUrl);
+          state.objectUrl = null;
+        }
+
+        state.file = file;
+        state.img = null;
+        state.decoder = null;
+        downloadBtn.disabled = true;
+        outputBox.classList.remove("show");
+        showToast("Reading image…");
+
+        try {
+          var decoded = await decodeFile(file);
+          state.img = decoded.source;
+          state.naturalW = decoded.width;
+          state.naturalH = decoded.height;
+
+          /* Preview uses the same decoded source; no second conversion step. */
+          if (decoded.source instanceof HTMLImageElement) {
+            origImg.src = decoded.source.src;
+          } else {
+            var previewCanvas = document.createElement("canvas");
+            previewCanvas.width = decoded.width;
+            previewCanvas.height = decoded.height;
+            previewCanvas.getContext("2d").drawImage(decoded.source,0,0);
+            if (state.previewUrl) URL.revokeObjectURL(state.previewUrl);
+            state.previewUrl = previewCanvas.toDataURL("image/png");
+            origImg.src = state.previewUrl;
+          }
+
+          previewArea.classList.add("active");
+          widthInput.value = state.naturalW;
+          heightInput.value = state.naturalH;
+          renderMeta();
+          downloadBtn.disabled = false;
+          scheduleUpdate();
+          showToast("Image loaded successfully.");
+        } catch (err) {
+          console.error("Image decode error:", err);
+          state.file = null;
+          state.img = null;
+          downloadBtn.disabled = true;
+          showToast("This image could not be decoded by the browser. Try another copy of the file.");
+        }
+      }
+
+      function renderMeta() {
+        metaTags.innerHTML = "";
         var items = [
-          'Name: <b>' + state.file.name + '</b>',
-          'Dimensions: <b>' + state.naturalW + ' × ' + state.naturalH + ' px</b>',
-          'Size: <b>' + formatBytes(state.file.size) + '</b>',
-          'Type: <b>' + (state.file.type || 'unknown') + '</b>'
+          "Name: <b>" + state.file.name + "</b>",
+          "Dimensions: <b>" + state.naturalW + " × " + state.naturalH + " px</b>",
+          "Size: <b>" + formatBytes(state.file.size) + "</b>",
+          "Type: <b>" + (normalizeType(state.file) || "unknown") + "</b>"
         ];
-        items.forEach(function(html){
-          var span = document.createElement('span');
-          span.className = 'text-xs font-mono bg-slate-900/50 border border-slate-700 text-slate-300 px-3 py-1 rounded-full';
-          span.innerHTML = html;
+        items.forEach(function(html) {
+          var span=document.createElement("span");
+          span.className="text-xs font-mono bg-slate-900/50 border border-slate-700 text-slate-300 px-3 py-1 rounded-full";
+          span.innerHTML=html;
           metaTags.appendChild(span);
         });
       }
-    
-      function syncQualityVisibility(){
-        var fmt = formatSelect.value;
-        if(fmt === 'jpg' || fmt === 'webp'){
-          qualityField.classList.add('active');
-        } else {
-          qualityField.classList.remove('active');
-        }
+
+      /* ---------------- Editor controls ---------------- */
+      function syncQualityVisibility() {
+        var fmt=formatSelect.value;
+        if (fmt==="jpg" || fmt==="webp") qualityField.classList.add("active");
+        else qualityField.classList.remove("active");
       }
-      formatSelect.addEventListener('change', function(){
-        syncQualityVisibility();
-        scheduleUpdate();
-      });
-      qualitySlider.addEventListener('input', function(){
-        qualityVal.textContent = qualitySlider.value + '%';
+
+      formatSelect.addEventListener("change",function(){syncQualityVisibility();scheduleUpdate();});
+      qualitySlider.addEventListener("input",function(){
+        qualityVal.textContent=qualitySlider.value+"%";
         scheduleUpdate();
       });
       syncQualityVisibility();
-    
-      lockBtn.addEventListener('click', function(){
-        state.lockAspect = !state.lockAspect;
-        if(state.lockAspect) {
-          lockBtn.classList.remove('opacity-50');
-          lockBtn.textContent = '🔒';
-        } else {
-          lockBtn.classList.add('opacity-50');
-          lockBtn.textContent = '🔓';
-        }
+
+      lockBtn.addEventListener("click",function(){
+        state.lockAspect=!state.lockAspect;
+        lockBtn.classList.toggle("opacity-50",!state.lockAspect);
+        lockBtn.textContent=state.lockAspect?"🔒":"🔓";
       });
-    
-      widthInput.addEventListener('input', function(){
-        var w = parseInt(widthInput.value, 10);
-        if(!w || w < 1) return;
-        w = clamp(w, 1, 8000);
-        if(state.lockAspect && state.naturalW && state.naturalH){
-          var h = Math.round(w * (state.naturalH / state.naturalW));
-          heightInput.value = h;
-        }
-        state.selectedPreset = null;
+
+      widthInput.addEventListener("input",function(){
+        var w=parseInt(widthInput.value,10);
+        if(!w || w<1)return;
+        w=clamp(w,1,8000);
+        if(state.lockAspect && state.naturalW && state.naturalH)
+          heightInput.value=Math.round(w*(state.naturalH/state.naturalW));
+        state.selectedPreset=null;
         scheduleUpdate();
       });
-    
-      heightInput.addEventListener('input', function(){
-        var h = parseInt(heightInput.value, 10);
-        if(!h || h < 1) return;
-        h = clamp(h, 1, 8000);
-        if(state.lockAspect && state.naturalW && state.naturalH){
-          var w = Math.round(h * (state.naturalW / state.naturalH));
-          widthInput.value = w;
-        }
-        state.selectedPreset = null;
+
+      heightInput.addEventListener("input",function(){
+        var h=parseInt(heightInput.value,10);
+        if(!h || h<1)return;
+        h=clamp(h,1,8000);
+        if(state.lockAspect && state.naturalW && state.naturalH)
+          widthInput.value=Math.round(h*(state.naturalW/state.naturalH));
+        state.selectedPreset=null;
         scheduleUpdate();
       });
-    
-      function setMode(mode){
-        state.resizeMode = mode;
-        Array.prototype.forEach.call(modeOptions.children, function(el){
-          el.classList.toggle('active', el.getAttribute('data-mode') === mode);
+
+      function setMode(mode) {
+        state.resizeMode=mode;
+        Array.prototype.forEach.call(modeOptions.children,function(el){
+          el.classList.toggle("active",el.getAttribute("data-mode")===mode);
         });
       }
-      modeOptions.addEventListener('click', function(e){
-        var el = e.target.closest('.mode-opt');
-        if(!el) return;
-        setMode(el.getAttribute('data-mode'));
+
+      modeOptions.addEventListener("click",function(e){
+        var el=e.target.closest(".mode-opt");
+        if(!el)return;
+        setMode(el.getAttribute("data-mode"));
         scheduleUpdate();
       });
-    
-      function scheduleUpdate(){
+
+      function getTargetDims() {
+        return {
+          w:clamp(parseInt(widthInput.value,10)||state.naturalW||1,1,8000),
+          h:clamp(parseInt(heightInput.value,10)||state.naturalH||1,1,8000)
+        };
+      }
+
+      function scheduleUpdate() {
         clearTimeout(state.updateTimer);
-        state.updateTimer = setTimeout(function(){
+        state.updateTimer=setTimeout(function(){
           updateOverlay();
           renderResult(resultCanvas);
-        }, 90);
+        },90);
       }
-    
-      function getTargetDims(){
-        var w = clamp(parseInt(widthInput.value,10) || state.naturalW || 1, 1, 8000);
-        var h = clamp(parseInt(heightInput.value,10) || state.naturalH || 1, 1, 8000);
-        return {w:w, h:h};
-      }
-    
-      function updateOverlay(){
-        if(!state.img) return;
-        var t = getTargetDims();
-        var renderedW = origImg.clientWidth;
-        var renderedH = origImg.clientHeight;
-        if(!renderedW || !renderedH){ return; }
-        var scaleFactor = renderedW / state.naturalW;
-    
-        if(state.resizeMode === 'cover'){
-          var scale = Math.max(t.w / state.naturalW, t.h / state.naturalH);
-          var sWidth = t.w / scale;
-          var sHeight = t.h / scale;
-          var sx = (state.naturalW - sWidth) / 2;
-          var sy = (state.naturalH - sHeight) / 2;
-    
-          cropOverlay.style.left = (sx * scaleFactor) + 'px';
-          cropOverlay.style.top = (sy * scaleFactor) + 'px';
-          cropOverlay.style.width = (sWidth * scaleFactor) + 'px';
-          cropOverlay.style.height = (sHeight * scaleFactor) + 'px';
-          cropOverlay.classList.add('show');
-          cropTag.textContent = 'Kept area — ' + t.w + '×' + t.h;
-          modeNote.textContent = 'Cover / Crop: the highlighted region will fill the full ' + t.w + '×' + t.h + ' canvas; everything outside it is cropped away.';
-        } else if(state.resizeMode === 'fit'){
-          cropOverlay.classList.remove('show');
-          modeNote.textContent = 'Fit (Pad): the entire image is kept and scaled to fit within ' + t.w + '×' + t.h + ', with padding added on the shorter side.';
+
+      function updateOverlay() {
+        if(!state.img)return;
+        var t=getTargetDims();
+        var renderedW=origImg.clientWidth, renderedH=origImg.clientHeight;
+        if(!renderedW || !renderedH)return;
+        var scaleFactor=renderedW/state.naturalW;
+
+        if(state.resizeMode==="cover"){
+          var scale=Math.max(t.w/state.naturalW,t.h/state.naturalH);
+          var sWidth=t.w/scale, sHeight=t.h/scale;
+          var sx=(state.naturalW-sWidth)/2, sy=(state.naturalH-sHeight)/2;
+          cropOverlay.style.left=(sx*scaleFactor)+"px";
+          cropOverlay.style.top=(sy*scaleFactor)+"px";
+          cropOverlay.style.width=(sWidth*scaleFactor)+"px";
+          cropOverlay.style.height=(sHeight*scaleFactor)+"px";
+          cropOverlay.classList.add("show");
+          cropTag.textContent="Kept area — "+t.w+"×"+t.h;
+          modeNote.textContent="Cover / Crop: the highlighted region will fill the full "+t.w+"×"+t.h+" canvas; everything outside it is cropped away.";
+        } else if(state.resizeMode==="fit"){
+          cropOverlay.classList.remove("show");
+          modeNote.textContent="Fit (Pad): the entire image is kept and scaled to fit within "+t.w+"×"+t.h+", with padding added on the shorter side.";
         } else {
-          cropOverlay.classList.remove('show');
-          modeNote.textContent = 'Stretch: the image will be stretched to exactly ' + t.w + '×' + t.h + ', which may distort its proportions.';
+          cropOverlay.classList.remove("show");
+          modeNote.textContent="Stretch: the image will be stretched to exactly "+t.w+"×"+t.h+", which may distort its proportions.";
         }
       }
-    
-      function renderResult(canvas){
-        if(!state.img) return;
-        var t = getTargetDims();
-        var fmt = formatSelect.value;
-        canvas.width = t.w;
-        canvas.height = t.h;
-        var ctx = canvas.getContext('2d');
+
+      function drawSource(ctx,img,nw,nh,t) {
+        if(state.resizeMode==="stretch") {
+          ctx.drawImage(img,0,0,t.w,t.h);
+        } else if(state.resizeMode==="fit") {
+          var scale=Math.min(t.w/nw,t.h/nh);
+          var dw=nw*scale, dh=nh*scale;
+          ctx.drawImage(img,(t.w-dw)/2,(t.h-dh)/2,dw,dh);
+        } else {
+          var scale2=Math.max(t.w/nw,t.h/nh);
+          var sWidth=nw/scale2,sHeight=nh/scale2;
+          var sx=(nw-sWidth)/2,sy=(nh-sHeight)/2;
+          ctx.drawImage(img,sx,sy,sWidth,sHeight,0,0,t.w,t.h);
+        }
+      }
+
+      function renderResult(canvas) {
+        if(!state.img)return;
+        var t=getTargetDims(),fmt=formatSelect.value;
+        canvas.width=t.w; canvas.height=t.h;
+        var ctx=canvas.getContext("2d");
         ctx.clearRect(0,0,t.w,t.h);
-        if(fmt === 'jpg' || fmt === 'bmp'){
-          ctx.fillStyle = '#ffffff';
+        if(fmt==="jpg" || fmt==="bmp"){
+          ctx.fillStyle="#ffffff";
           ctx.fillRect(0,0,t.w,t.h);
         }
-        var img = state.img, nw = state.naturalW, nh = state.naturalH;
-    
-        if(state.resizeMode === 'stretch'){
-          ctx.drawImage(img, 0, 0, t.w, t.h);
-        } else if(state.resizeMode === 'fit'){
-          var scale = Math.min(t.w / nw, t.h / nh);
-          var dw = nw * scale, dh = nh * scale;
-          var dx = (t.w - dw) / 2, dy = (t.h - dh) / 2;
-          ctx.drawImage(img, dx, dy, dw, dh);
-        } else {
-          var scale2 = Math.max(t.w / nw, t.h / nh);
-          var sWidth = t.w / scale2, sHeight = t.h / scale2;
-          var sx = (nw - sWidth) / 2, sy = (nh - sHeight) / 2;
-          ctx.drawImage(img, sx, sy, sWidth, sHeight, 0, 0, t.w, t.h);
-        }
-        return canvas;
+        drawSource(ctx,state.img,state.naturalW,state.naturalH,t);
       }
-    
-      window.addEventListener('resize', function(){ if(state.img) updateOverlay(); });
-    
-      function canvasToBMPBlob(canvas){
-        var w = canvas.width, h = canvas.height;
-        var ctx = canvas.getContext('2d');
-        var data = ctx.getImageData(0, 0, w, h).data;
-        var rowSize = Math.floor((24 * w + 31) / 32) * 4;
-        var pixelArraySize = rowSize * h;
-        var fileSize = 54 + pixelArraySize;
-        var buffer = new ArrayBuffer(fileSize);
-        var view = new DataView(buffer);
-    
-        view.setUint8(0, 0x42); view.setUint8(1, 0x4D);
-        view.setUint32(2, fileSize, true);
-        view.setUint32(6, 0, true);
-        view.setUint32(10, 54, true);
-        view.setUint32(14, 40, true);
-        view.setInt32(18, w, true);
-        view.setInt32(22, h, true);
-        view.setUint16(26, 1, true);
-        view.setUint16(28, 24, true);
-        view.setUint32(30, 0, true);
-        view.setUint32(34, pixelArraySize, true);
-        view.setInt32(38, 2835, true);
-        view.setInt32(42, 2835, true);
-        view.setUint32(46, 0, true);
-        view.setUint32(50, 0, true);
-    
-        var offset = 54;
-        for(var y = h - 1; y >= 0; y--){
-          for(var x = 0; x < w; x++){
-            var i = (y * w + x) * 4;
-            view.setUint8(offset++, data[i+2]);
-            view.setUint8(offset++, data[i+1]);
-            view.setUint8(offset++, data[i]);
+
+      window.addEventListener("resize",function(){if(state.img)updateOverlay();});
+
+      /* ---------------- BMP export ---------------- */
+      function canvasToBMPBlob(canvas) {
+        var w=canvas.width,h=canvas.height;
+        var data=canvas.getContext("2d").getImageData(0,0,w,h).data;
+        var rowSize=Math.floor((24*w+31)/32)*4;
+        var pixelArraySize=rowSize*h;
+        var fileSize=54+pixelArraySize;
+        var buffer=new ArrayBuffer(fileSize),view=new DataView(buffer);
+
+        view.setUint8(0,0x42);view.setUint8(1,0x4D);
+        view.setUint32(2,fileSize,true);
+        view.setUint32(10,54,true);
+        view.setUint32(14,40,true);
+        view.setInt32(18,w,true);
+        view.setInt32(22,h,true);
+        view.setUint16(26,1,true);
+        view.setUint16(28,24,true);
+        view.setUint32(34,pixelArraySize,true);
+        view.setInt32(38,2835,true);
+        view.setInt32(42,2835,true);
+
+        var offset=54;
+        for(var y=h-1;y>=0;y--){
+          for(var x=0;x<w;x++){
+            var i=(y*w+x)*4;
+            view.setUint8(offset++,data[i+2]);
+            view.setUint8(offset++,data[i+1]);
+            view.setUint8(offset++,data[i]);
           }
-          var pad = rowSize - w * 3;
-          for(var p = 0; p < pad; p++) view.setUint8(offset++, 0);
+          var pad=rowSize-w*3;
+          for(var p=0;p<pad;p++)view.setUint8(offset++,0);
         }
-        return new Blob([buffer], {type:'image/bmp'});
+        return new Blob([buffer],{type:"image/bmp"});
       }
-    
-      downloadBtn.addEventListener('click', function(){
-        if(!state.img){ showToast('Please upload an image first.'); return; }
-        var t = getTargetDims();
-        var fmt = formatSelect.value;
-    
-        var procCanvas = document.createElement('canvas');
-        procCanvas.width = t.w; procCanvas.height = t.h;
-        var ctx = procCanvas.getContext('2d');
-        ctx.clearRect(0,0,t.w,t.h);
-        if(fmt === 'jpg' || fmt === 'bmp'){
-          ctx.fillStyle = '#ffffff';
+
+      function canvasToBlob(canvas,mime,quality) {
+        return new Promise(function(resolve,reject){
+          try {
+            canvas.toBlob(function(blob){
+              if(blob) resolve(blob);
+              else reject(new Error("Browser could not encode "+mime));
+            },mime,quality);
+          } catch(e) {
+            reject(e);
+          }
+        });
+      }
+
+      /* ---------------- Export ---------------- */
+      downloadBtn.addEventListener("click",async function(){
+        if(!state.img){showToast("Please upload an image first.");return;}
+
+        var t=getTargetDims(),fmt=formatSelect.value;
+        var procCanvas=document.createElement("canvas");
+        procCanvas.width=t.w;procCanvas.height=t.h;
+        var ctx=procCanvas.getContext("2d");
+
+        if(fmt==="jpg" || fmt==="bmp"){
+          ctx.fillStyle="#ffffff";
           ctx.fillRect(0,0,t.w,t.h);
         }
-        var img = state.img, nw = state.naturalW, nh = state.naturalH;
-        if(state.resizeMode === 'stretch'){
-          ctx.drawImage(img, 0, 0, t.w, t.h);
-        } else if(state.resizeMode === 'fit'){
-          var scale = Math.min(t.w / nw, t.h / nh);
-          var dw = nw * scale, dh = nh * scale;
-          ctx.drawImage(img, (t.w-dw)/2, (t.h-dh)/2, dw, dh);
-        } else {
-          var scale2 = Math.max(t.w / nw, t.h / nh);
-          var sWidth = t.w / scale2, sHeight = t.h / scale2;
-          var sx = (nw - sWidth)/2, sy = (nh - sHeight)/2;
-          ctx.drawImage(img, sx, sy, sWidth, sHeight, 0, 0, t.w, t.h);
-        }
-    
-        var ext, mime, quality = parseInt(qualitySlider.value,10)/100;
-        if(fmt === 'jpg'){ ext='jpg'; mime='image/jpeg'; }
-        else if(fmt === 'png'){ ext='png'; mime='image/png'; }
-        else if(fmt === 'webp'){ ext='webp'; mime='image/webp'; }
-        else { ext='bmp'; mime='image/bmp'; }
-    
-        var contextSlug = state.selectedPreset
-          ? slugify(state.selectedPreset.platform) + '-' + slugify(state.selectedPreset.label)
-          : 'custom';
-        var filename = 'utiliverse-' + contextSlug + '-' + t.w + 'x' + t.h + '.' + ext;
-    
-        function finish(blob){
-          if(!blob){ showToast('Could not generate file. Try a different format.'); return; }
-          var url = URL.createObjectURL(blob);
-          var a = document.createElement('a');
-          a.href = url; a.download = filename;
+
+        drawSource(ctx,state.img,state.naturalW,state.naturalH,t);
+
+        var ext,mime,quality=parseInt(qualitySlider.value,10)/100;
+        if(fmt==="jpg"){ext="jpg";mime="image/jpeg";}
+        else if(fmt==="png"){ext="png";mime="image/png";}
+        else if(fmt==="webp"){ext="webp";mime="image/webp";}
+        else {ext="bmp";mime="image/bmp";}
+
+        var contextSlug=state.selectedPreset
+          ?slugify(state.selectedPreset.platform)+"-"+slugify(state.selectedPreset.label)
+          :"custom";
+        var filename="utiliverse-"+contextSlug+"-"+t.w+"x"+t.h+"."+ext;
+
+        downloadBtn.disabled=true;
+        showToast("Converting…");
+
+        try {
+          var blob;
+          if(fmt==="bmp") {
+            blob=canvasToBMPBlob(procCanvas);
+          } else {
+            blob=await canvasToBlob(procCanvas,mime,quality);
+          }
+
+          if(!blob) throw new Error("No output was generated.");
+
+          var url=URL.createObjectURL(blob);
+          var a=document.createElement("a");
+          a.href=url;
+          a.download=filename;
+          a.style.display="none";
           document.body.appendChild(a);
           a.click();
-          document.body.removeChild(a);
-    
-          outputFileName.textContent = filename;
-          outputFileSize.textContent = 'Output size: ' + formatBytes(blob.size);
-          outputBox.classList.add('show');
-          showToast('Download started.');
-          setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
-        }
-    
-        if(fmt === 'bmp'){
-          try{ finish(canvasToBMPBlob(procCanvas)); }
-          catch(err){ showToast('BMP export failed in this browser.'); }
-        } else {
+          a.remove();
+
+          outputFileName.textContent=filename;
+          outputFileSize.textContent="Output size: "+formatBytes(blob.size);
+          outputBox.classList.add("show");
+          showToast("Conversion successful.");
+          setTimeout(function(){URL.revokeObjectURL(url);},5000);
+        } catch(err) {
+          console.error("Export error:",err);
+
+          /* Some browsers expose an encoder under toDataURL but not toBlob. */
           try {
-            procCanvas.toBlob(function(blob){ 
-              if(blob) finish(blob); 
-              else {
-                var dataUrl = procCanvas.toDataURL(mime, quality);
-                fetch(dataUrl).then(res => res.blob()).then(finish);
+            if(fmt!=="bmp") {
+              var dataURL=procCanvas.toDataURL(mime,quality);
+              if(dataURL && dataURL.indexOf("data:")===0) {
+                var fallbackResponse=await fetch(dataURL);
+                var fallbackBlob=await fallbackResponse.blob();
+                if(fallbackBlob.size) {
+                  var fallbackURL=URL.createObjectURL(fallbackBlob);
+                  var link=document.createElement("a");
+                  link.href=fallbackURL;
+                  link.download=filename;
+                  link.style.display="none";
+                  document.body.appendChild(link);
+                  link.click();
+                  link.remove();
+
+                  outputFileName.textContent=filename;
+                  outputFileSize.textContent="Output size: "+formatBytes(fallbackBlob.size);
+                  outputBox.classList.add("show");
+                  showToast("Conversion successful.");
+                  setTimeout(function(){URL.revokeObjectURL(fallbackURL);},5000);
+                  downloadBtn.disabled=false;
+                  return;
+                }
               }
-            }, mime, quality);
-          } catch(e) {
-            var dataUrl = procCanvas.toDataURL(mime, quality);
-            fetch(dataUrl).then(res => res.blob()).then(finish);
+            }
+          } catch(fallbackErr) {
+            console.error("Encoder fallback error:",fallbackErr);
           }
+
+          showToast("Conversion failed. Your browser does not support this output format.");
+        } finally {
+          downloadBtn.disabled=false;
         }
       });
-    
-      resetBtn.addEventListener('click', function(){
-        if(state.objectUrl) URL.revokeObjectURL(state.objectUrl);
-        state = {
-          file:null, img:null, naturalW:0, naturalH:0,
-          lockAspect:true, resizeMode:'fit', selectedPreset:null,
-          objectUrl:null, updateTimer:null
+
+      /* ---------------- Reset ---------------- */
+      resetBtn.addEventListener("click",function(){
+        if(state.decoder && typeof state.decoder.close==="function"){
+          try{state.decoder.close();}catch(e){}
+        }
+        if(state.objectUrl)URL.revokeObjectURL(state.objectUrl);
+        if(state.previewUrl)URL.revokeObjectURL(state.previewUrl);
+
+        state={
+          file:null,img:null,naturalW:0,naturalH:0,
+          lockAspect:true,resizeMode:"fit",selectedPreset:null,
+          objectUrl:null,updateTimer:null,decoder:null,previewUrl:null
         };
-        fileInput.value = '';
-        origImg.src = '';
-        previewArea.classList.remove('active');
-        cropOverlay.classList.remove('show');
-        metaTags.innerHTML = '';
-        widthInput.value = '';
-        heightInput.value = '';
-        lockBtn.classList.remove('opacity-50');
-        lockBtn.textContent = '🔒';
-        setMode('fit');
-        platformSelect.value = '';
-        presetSelect.innerHTML = '<option>Select platform first…</option>';
-        presetSelect.disabled = true;
-        formatSelect.value = 'png';
+
+        fileInput.value="";
+        origImg.removeAttribute("src");
+        previewArea.classList.remove("active");
+        cropOverlay.classList.remove("show");
+        metaTags.innerHTML="";
+        widthInput.value="";
+        heightInput.value="";
+        lockBtn.classList.remove("opacity-50");
+        lockBtn.textContent="🔒";
+        setMode("fit");
+        platformSelect.value="";
+        presetSelect.innerHTML="<option>Select platform first…</option>";
+        presetSelect.disabled=true;
+        formatSelect.value="png";
         syncQualityVisibility();
-        downloadBtn.disabled = true;
-        outputBox.classList.remove('show');
-        var ctx = resultCanvas.getContext('2d');
+        downloadBtn.disabled=true;
+        outputBox.classList.remove("show");
+
+        var ctx=resultCanvas.getContext("2d");
         ctx.clearRect(0,0,resultCanvas.width,resultCanvas.height);
-        resultCanvas.width = 10; resultCanvas.height = 10;
-        showToast('Reset complete.');
+        resultCanvas.width=10;resultCanvas.height=10;
+        showToast("Reset complete.");
       });
-    
+
     })();
   </script>
 </body>
