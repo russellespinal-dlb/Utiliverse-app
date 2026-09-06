@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Mortgage Payoff Calculator | Utiliverse</title>
+<meta name="description" content="Use the free Utiliverse Mortgage Payoff Calculator to see how extra monthly, annual, one-time, or biweekly payments could shorten your mortgage and reduce total interest.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/Mortgage_Calculator/">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- FAQ Structured Data -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"How does the Mortgage Payoff Calculator work?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"The calculator compares your existing mortgage payment schedule with an accelerated schedule based on the additional payments you choose. It estimates your new payoff time, interest savings and remaining balance over time."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Does paying extra on my mortgage really save interest?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Yes. Additional principal payments reduce the balance used to calculate future interest. The earlier the principal is reduced, the more potential interest savings can accumulate over the remaining life of the loan."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Is paying every two weeks better than paying monthly?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"A true biweekly payment schedule can result in 26 half-payments each year, which equals 13 full monthly payments instead of 12. That additional payment can help reduce the mortgage balance sooner, although the exact effect depends on how your lender processes payments."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Should I pay off my mortgage early or invest the extra money?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"There is no universal answer. Paying down a mortgage provides a predictable interest savings benefit, while investing may provide higher potential returns but also carries market risk. Emergency savings, high-interest debt, retirement contributions, taxes and your mortgage rate should all be considered."
+      }
+    },
+    {
+      "@type":"Question",
+      "name":"Can my mortgage have a prepayment penalty?",
+      "acceptedAnswer":{
+        "@type":"Answer",
+        "text":"Some mortgages may have restrictions or penalties associated with early repayment. Check your mortgage documents or contact your lender before making a large additional payment or paying the loan off completely."
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;
+  color:#f8fafc;
+  font-family:Inter,system-ui,sans-serif;
+  transition:background 0.3s ease,color 0.3s ease;
+}
+.glass{background:rgba(30,41,59,.72);backdrop-filter:blur(14px);border:1px solid #334155;}
+.input{background:#0f172a;border:1px solid #475569;color:#f8fafc;width:100%;padding:0.6rem 0.8rem;border-radius:0.5rem;transition:all 0.2s ease;}
+.input:focus{outline:none;border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.15)}
+.btn{border:1px solid #475569;background:#1e293b;color:#f8fafc;padding:.6rem 1rem;font-weight:600;cursor:pointer;transition:all 0.2s ease;}
+.btn:hover{background:#334155}
+.btn:active{transform:scale(0.98)}
+.primary{background:linear-gradient(135deg,#6366f1,#4f46e5);border-color:#6366f1;color:#fff;}
+.primary:hover{filter:brightness(1.08)}
+.muted{color:#94a3b8;}
+
+.article h2{font-size:1.9rem;font-weight:800;color:#fff;margin:2.2rem 0 .9rem;}
+.article h3{font-size:1.2rem;font-weight:750;color:#e2e8f0;margin:1.7rem 0 .65rem;}
+.article p,.article li{color:#94a3b8;line-height:1.85;margin-bottom:1rem;}
+.faq{border-bottom:1px solid #334155}
+.faq summary{list-style:none;cursor:pointer;padding:1.2rem 0;font-weight:700;display:flex;justify-content:space-between;align-items:center;}
+.faq summary::-webkit-details-marker{display:none}
+
+/* Custom Table Styles */
+.data-table{width:100%;border-collapse:collapse;font-size:0.875rem;}
+.data-table th, .data-table td{padding:0.75rem 1rem;border-bottom:1px solid #334155;text-align:right;}
+.data-table th{color:#94a3b8;font-weight:600;text-transform:uppercase;font-size:0.75rem;letter-spacing:0.05em;background:rgba(15,23,42,0.5);position:sticky;top:0;}
+.data-table th:first-child, .data-table td:first-child{text-align:left;}
+
+/* Timeline Ruler */
+.ruler-track{position:relative;height:60px;background:#0f172a;border:1px solid #334155;border-radius:8px;overflow:hidden;}
+.ruler-original{position:absolute;top:10px;left:0;height:16px;background:#475569;border-radius:0 4px 4px 0;}
+.ruler-accelerated{position:absolute;bottom:10px;left:0;height:16px;background:#6366f1;border-radius:0 4px 4px 0;transition:width 0.4s ease;}
+.ruler-tick{position:absolute;top:0;bottom:0;width:1px;background:#334155;}
+
+/* Amortization Scroll */
+.amortization-wrapper{max-height:400px;overflow-y:auto;border:1px solid #334155;border-radius:0.75rem;}
+.amortization-wrapper::-webkit-scrollbar{width:6px;}
+.amortization-wrapper::-webkit-scrollbar-track{background:transparent;}
+.amortization-wrapper::-webkit-scrollbar-thumb{background:#475569;border-radius:10px;}
+
+/* Light Mode Overrides */
+body.light-mode{background:#f8fafc;color:#0f172a;}
+body.light-mode .glass{background:rgba(255,255,255,0.8);border-color:#e2e8f0;}
+body.light-mode .input{background:#ffffff;border-color:#cbd5e1;color:#0f172a;}
+body.light-mode .btn{background:#f1f5f9;border-color:#cbd5e1;color:#334155;}
+body.light-mode .btn:hover{background:#e2e8f0;}
+body.light-mode .primary{background:linear-gradient(135deg,#6366f1,#4f46e5);color:#ffffff;border-color:#6366f1;}
+body.light-mode .muted{color:#64748b;}
+body.light-mode .article h2{color:#0f172a;}
+body.light-mode .article h3{color:#1e293b;}
+body.light-mode .article p,body.light-mode .article li{color:#475569;}
+body.light-mode header{background:rgba(255,255,255,0.9);border-color:#e2e8f0;}
+body.light-mode .ruler-track{background:#f1f5f9;border-color:#e2e8f0;}
+body.light-mode .ruler-original{background:#cbd5e1;}
+body.light-mode .ruler-tick{background:#e2e8f0;}
+body.light-mode .data-table th, body.light-mode .data-table td{border-bottom-color:#e2e8f0;}
+body.light-mode .data-table th{background:#f1f5f9;color:#64748b;}
+body.light-mode .faq{border-bottom-color:#e2e8f0;}
+body.light-mode .amortization-wrapper{border-color:#e2e8f0;}
+</style>
+</head>
+<body>
+
+<header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800 transition-all duration-300">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+    <a href="/" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2 transition-colors">
+      <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse
+    </a>
+    <button id="theme-toggle" class="text-slate-400 hover:text-white transition-colors cursor-pointer">
+      <i data-lucide="sun" id="theme-icon" class="w-5 h-5"></i>
+    </button>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+  
+  <!-- AdSense Top (Hidden until approved) -->
+  <div class="hidden max-w-3xl mx-auto mb-12 flex justify-center w-full">
+    <!-- Replace this comment with Google AdSense Code -->
+  </div>
+
+  <div class="max-w-3xl">
+    <p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Mortgage Payoff Calculator</p>
+    <h1 class="text-4xl sm:text-5xl font-black mt-2">See how much sooner you could own your home — and how much interest you could avoid.</h1>
+    <p class="mt-4 text-lg muted leading-relaxed">
+      Enter your current mortgage information and experiment with additional monthly, yearly, one-time or biweekly payments. Utiliverse compares your regular payoff schedule with an accelerated strategy so you can see the potential difference in time and interest.
+    </p>
+  </div>
+
+  <section class="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8 mt-12">
+    
+    <div>
+      <!-- Current Mortgage Input -->
+      <div class="glass p-6 sm:p-8 rounded-2xl mb-8">
+        <h2 class="text-2xl font-bold mb-1">Your current mortgage</h2>
+        <p class="text-sm muted mb-6">Enter the information from your latest mortgage statement.</p>
+
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-2" for="balance">Remaining balance ($)</label>
+            <input id="balance" type="number" class="input font-mono" value="350000" min="0" step="1000">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-2" for="rate">Interest rate (%)</label>
+            <div class="relative">
+              <input id="rate" type="number" class="input font-mono pr-8" value="6.5" min="0" step="0.01">
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-slate-400 font-mono">%</span>
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-2" for="payment">Current monthly payment ($)</label>
+            <input id="payment" type="number" class="input font-mono" value="2212" min="0" step="10">
+            <p class="text-xs muted mt-2">Enter principal and interest if possible.</p>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">Remaining loan term</label>
+            <div class="grid grid-cols-2 gap-2">
+              <input id="years" type="number" class="input font-mono" value="25" min="0" step="1" placeholder="Years">
+              <input id="months" type="number" class="input font-mono" value="0" min="0" max="11" step="1" placeholder="Months">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Accelerate Payoff Input -->
+      <div class="glass p-6 sm:p-8 rounded-2xl mb-8">
+        <h2 class="text-2xl font-bold mb-1">Accelerate your payoff</h2>
+        <p class="text-sm muted mb-6">Try different strategies and see how they change your projected payoff.</p>
+
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-2" for="extraMonthly">Extra each month ($)</label>
+            <input id="extraMonthly" type="number" class="input font-mono mb-3" value="300" min="0" step="10">
+            <input id="extraMonthlyRange" type="range" min="0" max="3000" step="10" value="300" class="w-full accent-indigo-500">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-2" for="extraAnnual">Extra each year ($)</label>
+            <input id="extraAnnual" type="number" class="input font-mono" value="0" min="0" step="100">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-2" for="oneTime">One-time additional payment ($)</label>
+            <input id="oneTime" type="number" class="input font-mono" value="0" min="0" step="100">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">Payment strategy</label>
+            <div class="flex w-full">
+              <button id="monthlyBtn" class="btn primary rounded-l-lg rounded-r-none flex-1 border-r-0" type="button">Monthly</button>
+              <button id="biweeklyBtn" class="btn rounded-r-lg rounded-l-none flex-1" type="button">Biweekly</button>
+            </div>
+            <p class="text-xs muted mt-2">Biweekly mode uses 26 half-payments per year.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="glass p-4 rounded-xl">
+          <p class="text-xs uppercase tracking-wide muted font-semibold mb-1">Current payment</p>
+          <p id="currentPaymentResult" class="text-lg font-mono font-bold text-white">—</p>
+        </div>
+        <div class="glass p-4 rounded-xl border-indigo-500/30 bg-indigo-500/5">
+          <p class="text-xs uppercase tracking-wide text-indigo-300 font-semibold mb-1">New payment</p>
+          <p id="acceleratedPayment" class="text-lg font-mono font-bold text-indigo-400">—</p>
+        </div>
+        <div class="glass p-4 rounded-xl">
+          <p class="text-xs uppercase tracking-wide muted font-semibold mb-1">Current payoff</p>
+          <p id="originalPayoff" class="text-lg font-mono font-bold text-white">—</p>
+        </div>
+        <div class="glass p-4 rounded-xl border-indigo-500/30 bg-indigo-500/5">
+          <p class="text-xs uppercase tracking-wide text-indigo-300 font-semibold mb-1">New payoff</p>
+          <p id="newPayoff" class="text-lg font-mono font-bold text-indigo-400">—</p>
+        </div>
+        <div class="glass p-4 rounded-xl">
+          <p class="text-xs uppercase tracking-wide muted font-semibold mb-1">Original interest</p>
+          <p id="originalInterest" class="text-lg font-mono font-bold text-white">—</p>
+        </div>
+        <div class="glass p-4 rounded-xl border-indigo-500/30 bg-indigo-500/5">
+          <p class="text-xs uppercase tracking-wide text-indigo-300 font-semibold mb-1">Interest saved</p>
+          <p id="interestSaved" class="text-lg font-mono font-bold text-indigo-400">—</p>
+        </div>
+        <div class="glass p-4 rounded-xl">
+          <p class="text-xs uppercase tracking-wide muted font-semibold mb-1">Time remaining</p>
+          <p id="originalTime" class="text-lg font-mono font-bold text-white">—</p>
+        </div>
+        <div class="glass p-4 rounded-xl border-indigo-500/30 bg-indigo-500/5">
+          <p class="text-xs uppercase tracking-wide text-indigo-300 font-semibold mb-1">Time saved</p>
+          <p id="timeSaved" class="text-lg font-mono font-bold text-indigo-400">—</p>
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <div class="mb-10">
+        <p class="text-xs uppercase tracking-wide muted font-bold mb-2">Mortgage payoff timeline</p>
+        <div id="ruler" class="ruler-track"></div>
+        <div class="flex justify-between text-xs font-mono muted mt-2">
+          <span>Today</span>
+          <span id="timelineEnd">—</span>
+        </div>
+      </div>
+
+      <!-- AdSense Middle (Hidden until approved) -->
+      <div class="hidden mb-10 flex justify-center w-full">
+        <!-- Replace this comment with Google AdSense Code -->
+      </div>
+
+      <!-- Chart -->
+      <div class="glass p-6 rounded-2xl mb-8">
+        <h2 class="text-xl font-bold mb-1">Mortgage balance over time</h2>
+        <p class="text-sm muted mb-5">Compare your projected balance with and without the additional payments.</p>
+        <canvas id="balanceChart" height="270"></canvas>
+      </div>
+
+      <!-- Comparison Table -->
+      <div class="glass p-6 rounded-2xl mb-8 overflow-hidden">
+        <h2 class="text-xl font-bold mb-4">Payoff comparison</h2>
+        <div class="overflow-x-auto">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>Current Plan</th>
+                <th>Accelerated</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="font-semibold text-white">Payoff time</td>
+                <td id="tableOriginalTime" class="font-mono">—</td>
+                <td id="tableNewTime" class="font-mono text-indigo-400 font-bold">—</td>
+              </tr>
+              <tr>
+                <td class="font-semibold text-white">Total interest</td>
+                <td id="tableOriginalInterest" class="font-mono">—</td>
+                <td id="tableNewInterest" class="font-mono text-indigo-400 font-bold">—</td>
+              </tr>
+              <tr>
+                <td class="font-semibold text-white">Total payments</td>
+                <td id="tableOriginalPayments" class="font-mono">—</td>
+                <td id="tableNewPayments" class="font-mono text-indigo-400 font-bold">—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Amortization Table -->
+      <div class="glass p-6 rounded-2xl mb-8">
+        <div class="mb-5">
+          <h2 class="text-xl font-bold">Amortization schedule</h2>
+          <p class="text-sm muted mt-1">A month-by-month view of your accelerated mortgage payoff.</p>
+        </div>
+        <div class="amortization-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Payment</th>
+                <th>Interest</th>
+                <th>Principal</th>
+                <th>Extra</th>
+                <th>Balance</th>
+              </tr>
+            </thead>
+            <tbody id="amortizationBody" class="font-mono text-sm">
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Sidebar AdSense (Hidden until approved) -->
+    <aside class="hidden lg:block">
+      <div class="sticky top-24 flex justify-center w-full">
+        <!-- Replace this comment with Google AdSense Code -->
+      </div>
+    </aside>
+
+  </section>
+
+  <!-- About Section -->
+  <section class="article max-w-4xl mt-16 pt-12 border-t border-slate-800">
+    <p class="text-xs uppercase tracking-widest text-indigo-400 font-bold mb-3">Understanding mortgage payoff</p>
+    <h2>What is a Mortgage Payoff Calculator?</h2>
+    
+    <p>A Mortgage Payoff Calculator helps homeowners understand what could happen if they pay more than their required mortgage payment. Instead of simply showing the amount due each month, it focuses on the bigger picture: how quickly the remaining loan balance could disappear, how much interest may be avoided, and how different payment strategies can change the life of the loan.</p>
+    
+    <p>A mortgage payment generally consists of principal and interest, with taxes and homeowners insurance sometimes included in the amount sent to the mortgage servicer. Principal reduces what you owe. Interest is the cost of borrowing the money. As your mortgage balance falls, the interest portion of future payments generally becomes smaller, allowing more of each regular payment to reduce principal.</p>
+    
+    <p>The key advantage of making additional principal payments is that the extra money reduces the balance used to calculate future interest. Suppose your mortgage balance is $300,000 and you send an additional $300 toward principal. Your balance immediately falls to approximately $299,700. Future interest is then calculated against a slightly smaller balance. Repeating that process over many years can produce substantial interest savings.</p>
+    
+    <p>This calculator allows you to test several common strategies. The simplest is an additional monthly payment. For example, if your normal principal-and-interest payment is $2,000 and you choose an extra $200, the modeled payment becomes $2,200. The additional amount is treated as principal reduction. You can increase or decrease that amount to find a payment level that fits your budget.</p>
+    
+    <p>You can also model an additional annual payment. This can be useful if you receive a tax refund, work bonus, commission, annual dividend or another periodic amount. Rather than committing to a larger payment every month, you can see what happens when an extra amount is applied once each year.</p>
+    
+    <p>A one-time payment is another option. A large principal reduction made early in the mortgage can have a greater effect than the same amount paid much later because the lower balance has more time to reduce future interest charges. Homeowners sometimes use this approach after receiving an inheritance, selling an asset, receiving a large bonus or otherwise accumulating excess cash.</p>
+    
+    <p>The calculator also includes a biweekly strategy. Instead of making one mortgage payment every month, a homeowner can divide the payment in half and make a payment every two weeks. There are 52 weeks in a year, resulting in 26 half-payments. That is equivalent to 13 full monthly payments rather than 12. However, borrowers should confirm that their lender accepts and applies biweekly payments in a way that produces the intended principal reduction.</p>
+    
+    <p>Paying off a mortgage early can provide a meaningful financial benefit, but it is not automatically the best choice for everyone. A homeowner should consider the mortgage interest rate, emergency savings, retirement contributions, other debts, taxes and alternative investment opportunities before deciding how to use extra cash.</p>
+    
+    <p>For example, someone with credit card debt carrying a very high interest rate may benefit from paying that debt before making substantial additional mortgage payments. Likewise, a person without an adequate emergency fund may want to build cash reserves before directing extra money toward the mortgage. On the other hand, someone with a strong emergency fund, little other debt and a relatively conservative financial strategy may value the certainty of reducing mortgage interest and owning their home sooner.</p>
+    
+    <p>Investment opportunity cost is another consideration. Paying down a mortgage effectively produces a benefit related to the interest you avoid, but investing the same money could potentially produce a higher return. Investment returns are not guaranteed, however, and market values fluctuate. Your personal risk tolerance and financial objectives should therefore be considered alongside the mortgage calculation.</p>
+    
+    <p>When using this calculator, start with the balance shown on your latest mortgage statement. Enter your current interest rate and your normal principal-and-interest payment. If you know the remaining term, enter the number of years and months left. Then experiment with different additional payment amounts.</p>
+    
+    <p>The results are estimates rather than a lender payoff quote. Actual mortgage servicing can involve escrow, payment-processing rules, rounding, interest accrual conventions, fees and other factors that may change the exact payoff amount. If you are preparing to completely pay off your mortgage, request an official payoff statement from your mortgage servicer.</p>
+    
+    <div class="glass p-6 rounded-xl font-mono text-sm leading-loose mt-8">
+      Monthly interest rate = annual interest rate ÷ 12<br>
+      Interest charged = current balance × monthly interest rate<br>
+      Principal reduction = payment − interest<br>
+      Accelerated payoff = regular payment + additional principal
+    </div>
+  </section>
+
+  <!-- Strategies Section -->
+  <section class="mt-16 pt-12 border-t border-slate-800 max-w-4xl">
+    <h2 class="text-3xl font-black mb-8">Common ways homeowners accelerate a mortgage</h2>
+    
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="glass p-6 rounded-xl">
+        <div class="text-indigo-400 font-mono text-sm font-bold mb-3">01</div>
+        <h3 class="font-bold text-xl mb-2">Add money monthly</h3>
+        <p class="text-sm muted leading-relaxed">Add a manageable amount to every mortgage payment. This approach is simple and predictable and can gradually reduce the loan term.</p>
+      </div>
+      <div class="glass p-6 rounded-xl">
+        <div class="text-indigo-400 font-mono text-sm font-bold mb-3">02</div>
+        <h3 class="font-bold text-xl mb-2">Make annual lump sums</h3>
+        <p class="text-sm muted leading-relaxed">Use occasional extra income to make principal reductions without permanently increasing your monthly obligation.</p>
+      </div>
+      <div class="glass p-6 rounded-xl">
+        <div class="text-indigo-400 font-mono text-sm font-bold mb-3">03</div>
+        <h3 class="font-bold text-xl mb-2">Consider biweekly payments</h3>
+        <p class="text-sm muted leading-relaxed">A properly structured biweekly schedule can result in an additional full payment each year.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="article max-w-4xl mt-16 pt-12 border-t border-slate-800 mb-16">
+    <h2>Frequently asked questions</h2>
+    <p class="mb-8">Common questions about paying off a mortgage early.</p>
+    
+    <details class="faq" open>
+      <summary>How does the Mortgage Payoff Calculator work? <i data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-200"></i></summary>
+      <p class="mt-2">The calculator uses your remaining mortgage balance, interest rate, current payment and estimated remaining term to model your existing payoff schedule. It then applies the additional payment strategy you select and compares the two schedules. The results estimate your new payoff date, total interest and potential interest savings.</p>
+    </details>
+    <details class="faq">
+      <summary>Does paying extra on my mortgage really save interest? <i data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-200"></i></summary>
+      <p class="mt-2">Generally, yes. An additional principal payment reduces the balance used to calculate future interest. Because mortgage interest is generally calculated based on the outstanding balance, reducing that balance earlier can reduce the amount of interest paid over the remaining life of the loan.</p>
+    </details>
+    <details class="faq">
+      <summary>Is paying every two weeks better than paying monthly? <i data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-200"></i></summary>
+      <p class="mt-2">A true biweekly schedule can produce 26 half-payments per year, equivalent to 13 full monthly payments. That extra payment can help reduce principal faster. However, lenders handle partial and biweekly payments differently, so check with your servicer before changing your payment schedule.</p>
+    </details>
+    <details class="faq">
+      <summary>Should I pay off my mortgage or invest the extra money? <i data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-200"></i></summary>
+      <p class="mt-2">It depends on your overall financial situation. Paying down the mortgage provides a relatively predictable benefit based on the interest you avoid. Investing may offer greater potential returns, but investment returns are uncertain. Consider emergency savings, high-interest debt, retirement contributions, taxes, investment risk and your mortgage rate before making the decision.</p>
+    </details>
+    <details class="faq">
+      <summary>Can my mortgage have a prepayment penalty? <i data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-200"></i></summary>
+      <p class="mt-2">Some mortgages can contain restrictions or fees associated with early repayment. Rules vary based on the loan, lender and circumstances. Review your mortgage documents or contact your loan servicer before making a large lump-sum payment or requesting a complete payoff.</p>
+    </details>
+  </section>
+
+</main>
+
+<!-- AdSense Bottom (Hidden until approved) -->
+<div class="hidden max-w-6xl mx-auto px-5 mb-12 flex justify-center w-full">
+  <!-- Replace this comment with Google AdSense Code -->
+</div>
+
+<footer class="border-t border-slate-800 bg-slate-950">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 text-sm text-slate-500 text-center font-mono">
+    © <span id="currentYear"></span> Utiliverse. All rights reserved.
+  </div>
+</footer>
+
+<script>
+(function(){
+  // --- Initialization & Theme ---
+  lucide.createIcons();
+  document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+  // FAQ Icon Rotation Logic
+  document.querySelectorAll('.faq').forEach(details => {
+    details.addEventListener('toggle', (e) => {
+      const icon = details.querySelector('i');
+      if (details.open) {
+        icon.style.transform = 'rotate(180deg)';
+      } else {
+        icon.style.transform = 'rotate(0deg)';
+      }
+    });
+  });
+
+  // Chart defaults to match theme
+  Chart.defaults.color = '#94a3b8';
+  Chart.defaults.font.family = 'Inter, system-ui, sans-serif';
+
+  document.getElementById('theme-toggle').addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+    const icon = document.getElementById('theme-icon');
+    const isLight = document.body.classList.contains('light-mode');
+    icon.setAttribute('data-lucide', isLight ? 'moon' : 'sun');
+    lucide.createIcons();
+    
+    // Update chart grid lines based on theme
+    if(chart) {
+      chart.options.scales.x.grid.color = isLight ? '#e2e8f0' : 'rgba(51, 65, 85, 0.5)';
+      chart.options.scales.y.grid.color = isLight ? '#e2e8f0' : 'rgba(51, 65, 85, 0.5)';
+      chart.update();
+    }
+  });
+
+  const $ = id => document.getElementById(id);
+
+  /* ---------------------------------------------
+     INPUTS
+  --------------------------------------------- */
+  const balanceEl = $('balance');
+  const rateEl = $('rate');
+  const paymentEl = $('payment');
+  const yearsEl = $('years');
+  const monthsEl = $('months');
+  const extraMonthlyEl = $('extraMonthly');
+  const extraMonthlyRangeEl = $('extraMonthlyRange');
+  const extraAnnualEl = $('extraAnnual');
+  const oneTimeEl = $('oneTime');
+  const monthlyBtn = $('monthlyBtn');
+  const biweeklyBtn = $('biweeklyBtn');
+
+  let paymentMode = 'monthly';
+  let chart = null;
+
+  /* ---------------------------------------------
+     FORMATTERS
+  --------------------------------------------- */
+  function money(value){
+    if(!isFinite(value)) return '$0';
+    return '$' + Math.round(value).toLocaleString('en-US');
+  }
+
+  function moneyPrecise(value){
+    if(!isFinite(value)) return '$0.00';
+    return '$' + value.toLocaleString('en-US',{minimumFractionDigits:2, maximumFractionDigits:2});
+  }
+
+  function formatDuration(totalMonths){
+    totalMonths = Math.max(0, Math.round(totalMonths));
+    const years = Math.floor(totalMonths / 12);
+    const months = totalMonths % 12;
+    let result = '';
+    if(years > 0) result += years + (years === 1 ? ' year' : ' years');
+    if(months > 0) {
+      if(result) result += ' ';
+      result += months + (months === 1 ? ' month' : ' months');
+    }
+    return result || '0 months';
+  }
+
+  function payoffDate(months){
+    const date = new Date();
+    date.setMonth(date.getMonth() + months);
+    return date.toLocaleDateString('en-US', {month:'short', year:'numeric'});
+  }
+
+  /* ---------------------------------------------
+     CALCULATE SCHEDULE
+  --------------------------------------------- */
+  function createSchedule(startingBalance, annualRate, regularPayment, extraMonthly, extraAnnual, oneTime, biweekly){
+    let balance = startingBalance;
+    const monthlyRate = annualRate / 100 / 12;
+    let month = 0;
+    let totalInterest = 0;
+    let totalPayments = 0;
+    const rows = [];
+
+    while(balance > 0.01 && month < 1200){
+      month++;
+      let interest = balance * monthlyRate;
+      let regularPrincipal = regularPayment - interest;
+      if(regularPrincipal < 0) regularPrincipal = 0;
+      
+      let extra = extraMonthly;
+      
+      if(extraAnnual > 0 && month % 12 === 0) extra += extraAnnual;
+      if(month === 1) extra += oneTime;
+      if(biweekly && month % 12 === 12) extra += regularPayment;
+
+      let principal = regularPrincipal;
+      let totalPrincipal = principal + extra;
+
+      if(totalPrincipal > balance){
+        totalPrincipal = balance;
+        extra = Math.max(0, totalPrincipal - principal);
+      }
+
+      balance -= totalPrincipal;
+      totalInterest += interest;
+      totalPayments += interest + totalPrincipal;
+
+      rows.push({
+        month: month,
+        payment: interest + totalPrincipal,
+        interest: interest,
+        principal: principal,
+        extra: extra,
+        balance: Math.max(balance,0)
+      });
+
+      if(balance <= 0.01) break;
+    }
+    return { months: month, totalInterest: totalInterest, totalPayments: totalPayments, rows: rows };
+  }
+
+  /* ---------------------------------------------
+     MAIN CALCULATION
+  --------------------------------------------- */
+  function calculate(){
+    const balance = parseFloat(balanceEl.value) || 0;
+    const annualRate = parseFloat(rateEl.value) || 0;
+    const monthlyPayment = parseFloat(paymentEl.value) || 0;
+    const extraMonthly = parseFloat(extraMonthlyEl.value) || 0;
+    const extraAnnual = parseFloat(extraAnnualEl.value) || 0;
+    const oneTime = parseFloat(oneTimeEl.value) || 0;
+
+    if(balance <= 0) return;
+
+    const original = createSchedule(balance, annualRate, monthlyPayment, 0, 0, 0, false);
+    let acceleratedPayment = monthlyPayment + extraMonthly;
+    let accelerated = createSchedule(balance, annualRate, monthlyPayment, extraMonthly, extraAnnual, oneTime, paymentMode === 'biweekly');
+
+    const interestSaved = Math.max(0, original.totalInterest - accelerated.totalInterest);
+    const monthsSaved = Math.max(0, original.months - accelerated.months);
+
+    // Update Result Cards
+    $('currentPaymentResult').textContent = moneyPrecise(monthlyPayment) + '/mo';
+    $('acceleratedPayment').textContent = moneyPrecise(acceleratedPayment) + '/mo';
+    $('originalPayoff').textContent = payoffDate(original.months);
+    $('newPayoff').textContent = payoffDate(accelerated.months);
+    $('originalInterest').textContent = money(original.totalInterest);
+    $('interestSaved').textContent = money(interestSaved);
+    $('originalTime').textContent = formatDuration(original.months);
+    $('timeSaved').textContent = formatDuration(monthsSaved);
+    $('timelineEnd').textContent = formatDuration(original.months);
+
+    // Update Comparison Table
+    $('tableOriginalTime').textContent = formatDuration(original.months);
+    $('tableNewTime').textContent = formatDuration(accelerated.months);
+    $('tableOriginalInterest').textContent = money(original.totalInterest);
+    $('tableNewInterest').textContent = money(accelerated.totalInterest);
+    $('tableOriginalPayments').textContent = money(original.totalPayments);
+    $('tableNewPayments').textContent = money(accelerated.totalPayments);
+
+    updateRuler(original.months, accelerated.months);
+    updateChart(original.rows, accelerated.rows);
+    updateAmortization(accelerated.rows);
+  }
+
+  /* ---------------------------------------------
+     UI UPDATERS
+  --------------------------------------------- */
+  function updateRuler(originalMonths, acceleratedMonths){
+    const ruler = $('ruler');
+    ruler.innerHTML = '';
+
+    const originalBar = document.createElement('div');
+    originalBar.className = 'ruler-original';
+    originalBar.style.width = '100%';
+
+    const acceleratedBar = document.createElement('div');
+    acceleratedBar.className = 'ruler-accelerated';
+    
+    const percentage = originalMonths > 0 ? (acceleratedMonths / originalMonths) * 100 : 100;
+    acceleratedBar.style.width = Math.max(percentage, 2) + '%';
+
+    ruler.appendChild(originalBar);
+    ruler.appendChild(acceleratedBar);
+
+    for(let year = 1; year * 12 < originalMonths; year++){
+      const tick = document.createElement('div');
+      tick.className = 'ruler-tick';
+      tick.style.left = (year * 12 / originalMonths * 100) + '%';
+      ruler.appendChild(tick);
+    }
+  }
+
+  function updateChart(originalRows, acceleratedRows){
+    const maxMonths = Math.max(originalRows.length, acceleratedRows.length);
+    const labels = [];
+    const originalData = [];
+    const acceleratedData = [];
+
+    for(let i = 0; i <= maxMonths; i++){
+      labels.push((i / 12).toFixed(1));
+      const originalBalance = i === 0 ? (parseFloat(balanceEl.value) || 0) : (originalRows[i - 1] ? originalRows[i - 1].balance : 0);
+      const acceleratedBalance = i === 0 ? (parseFloat(balanceEl.value) || 0) : (acceleratedRows[i - 1] ? acceleratedRows[i - 1].balance : 0);
+      originalData.push(originalBalance);
+      acceleratedData.push(acceleratedBalance);
+    }
+
+    if(chart){
+      chart.data.labels = labels;
+      chart.data.datasets[0].data = originalData;
+      chart.data.datasets[1].data = acceleratedData;
+      chart.update();
+      return;
+    }
+
+    const ctx = $('balanceChart').getContext('2d');
+    const isLight = document.body.classList.contains('light-mode');
+
+    chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'Current payment plan',
+            data: originalData,
+            borderColor: '#475569',
+            backgroundColor: 'transparent',
+            borderWidth: 2,
+            pointRadius: 0,
+            tension: 0.15
+          },
+          {
+            label: 'Accelerated payoff',
+            data: acceleratedData,
+            borderColor: '#6366f1',
+            backgroundColor: 'rgba(99,102,241,0.15)',
+            borderWidth: 2,
+            fill: true,
+            pointRadius: 0,
+            tension: 0.15
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { 
+            position: 'bottom',
+            labels: { font: { family: 'Inter', size: 12 } }
+          },
+          tooltip: {
+            callbacks: {
+              title: items => 'Year ' + items[0].label,
+              label: item => item.dataset.label + ': ' + money(item.raw)
+            }
+          }
+        },
+        scales: {
+          x: {
+            title: { display: true, text: 'Years' },
+            ticks: { maxTicksLimit: 10 },
+            grid: { color: isLight ? '#e2e8f0' : 'rgba(51, 65, 85, 0.5)' }
+          },
+          y: {
+            title: { display: true, text: 'Mortgage balance' },
+            ticks: { callback: value => '$' + Math.round(value / 1000) + 'k' },
+            grid: { color: isLight ? '#e2e8f0' : 'rgba(51, 65, 85, 0.5)' }
+          }
+        }
+      }
+    });
+  }
+
+  function updateAmortization(rows){
+    const tbody = $('amortizationBody');
+    tbody.innerHTML = '';
+    rows.forEach(row => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="text-left">${row.month}</td>
+        <td>${moneyPrecise(row.payment)}</td>
+        <td>${moneyPrecise(row.interest)}</td>
+        <td>${moneyPrecise(row.principal)}</td>
+        <td class="text-indigo-400">${moneyPrecise(row.extra)}</td>
+        <td class="font-bold text-white">${moneyPrecise(row.balance)}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  /* ---------------------------------------------
+     EVENT LISTENERS
+  --------------------------------------------- */
+  monthlyBtn.addEventListener('click', () => {
+    paymentMode = 'monthly';
+    monthlyBtn.classList.add('primary');
+    biweeklyBtn.classList.remove('primary');
+    calculate();
+  });
+
+  biweeklyBtn.addEventListener('click', () => {
+    paymentMode = 'biweekly';
+    biweeklyBtn.classList.add('primary');
+    monthlyBtn.classList.remove('primary');
+    calculate();
+  });
+
+  extraMonthlyRangeEl.addEventListener('input', () => {
+    extraMonthlyEl.value = extraMonthlyRangeEl.value;
+    calculate();
+  });
+
+  extraMonthlyEl.addEventListener('input', () => {
+    extraMonthlyRangeEl.value = extraMonthlyEl.value;
+    calculate();
+  });
+
+  [balanceEl, rateEl, paymentEl, yearsEl, monthsEl, extraAnnualEl, oneTimeEl].forEach(el => {
+    el.addEventListener('input', calculate);
+  });
+
+  calculate();
+
+})();
+</script>
+
+</body>
+</html>
