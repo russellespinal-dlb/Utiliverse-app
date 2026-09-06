@@ -1,981 +1,893 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Image Resizer & Format Utility | Utiliverse</title>
-<meta name="description" content="Free browser-based image resizer and social media format converter. Resize, crop, and convert PNG, JPG, WEBP, GIF, SVG, BMP and ICO images to exact social media dimensions — 100% client-side, nothing uploaded.">
-<meta name="robots" content="index,follow">
-<meta name="theme-color" content="#020617">
-<link rel="canonical" href="https://utiliverse.app/Image_Converter/">
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Image Resizer & Format Utility | Utiliverse</title>
+  <meta name="description" content="Free browser-based image resizer and social media format converter. Resize, crop, and convert PNG, JPG, WEBP, GIF, SVG, BMP and ICO images to exact social media dimensions — 100% client-side, nothing uploaded.">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#020617">
+  <link rel="canonical" href="https://utiliverse.app/Image_Converter/">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
 
-<!-- Google AdSense Script (Uncomment and paste your publisher ID here once approved) -->
-<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+  <!-- Google AdSense Script -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
 
-<style>
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;color:#f8fafc;font-family:Inter,system-ui,sans-serif;transition:background 0.3s ease,color 0.3s ease;}
-.glass{background:rgba(30,41,59,.72);backdrop-filter:blur(14px);border:1px solid #334155;}
-.input{background:#0f172a;border:1px solid #475569;color:#f8fafc;width:100%;padding:.75rem 1rem;border-radius:.75rem;transition:all 0.2s ease;}
-.input:focus{outline:none;border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.15)}
-.btn{border:1px solid #475569;background:#1e293b;color:#f8fafc;border-radius:12px;padding:.75rem 1rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;text-align:center;width:100%;}
-.btn:hover{background:#334155}
-.btn:active{transform:scale(0.97)}
-.btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
-.primary{background:linear-gradient(135deg,#6366f1,#4f46e5);border-color:#6366f1;color:#fff;}
-.primary:hover:not(:disabled){filter:brightness(1.1)}
-.muted{color:#94a3b8;}
-.article h2{font-size:1.9rem;font-weight:800;color:#fff;margin:2.2rem 0 .9rem;}
-.article h3{font-size:1.2rem;font-weight:750;color:#e2e8f0;margin:1.7rem 0 .65rem;}
-.article p,.article li{color:#94a3b8;line-height:1.85;margin-bottom:1rem;}
-.article dt{font-weight:700;color:#818cf8;margin-top:1rem;}
-.article dd{color:#94a3b8;margin-bottom:.5rem;margin-left:1rem;}
-
-/* FAQ Styles */
-details > summary { list-style: none; }
-details > summary::-webkit-details-marker { display: none; }
-.faq-question { color: #e2e8f0; }
-.faq-answer { color: #94a3b8; }
-
-/* Light Mode Styles */
-body.light-mode{background:#f8fafc;color:#0f172a;}
-body.light-mode .glass{background:rgba(255,255,255,0.8);border-color:#e2e8f0;}
-body.light-mode .input{background:#ffffff;border-color:#cbd5e1;color:#0f172a;}
-body.light-mode .btn{background:#f1f5f9;border-color:#cbd5e1;color:#334155;}
-body.light-mode .primary{background:linear-gradient(135deg,#6366f1,#4f46e5);color:#ffffff;}
-body.light-mode .muted{color:#64748b;}
-body.light-mode .article h2{color:#0f172a;}
-body.light-mode .article h3{color:#1e293b;}
-body.light-mode .article p,body.light-mode .article li,body.light-mode .article dd{color:#475569;}
-body.light-mode header{background:rgba(255,255,255,0.9);border-color:#e2e8f0;}
-body.light-mode .dropzone{border-color:#cbd5e1;background:rgba(241,245,249,0.5);}
-body.light-mode .dropzone:hover{border-color:#6366f1;}
-body.light-mode .dropzone.dragover{background:rgba(99,102,241,0.1);border-color:#6366f1;}
-body.light-mode .preview-frame{background:#f1f5f9;border-color:#cbd5e1;}
-body.light-mode .mode-opt{background:#f1f5f9;border-color:#cbd5e1;color:#475569;}
-body.light-mode .mode-opt.active{background:rgba(99,102,241,0.1);border-color:#6366f1;color:#4f46e5;}
-body.light-mode table.dim-table th{background:#f1f5f9;color:#475569;}
-body.light-mode table.dim-table td{border-color:#e2e8f0;}
-body.light-mode table.dim-table tr:hover td{background:#f8fafc;}
-body.light-mode .faq-question{color:#1e293b;}
-body.light-mode .faq-answer{color:#475569;}
-body.light-mode .faq-divider{border-color:#e2e8f0;}
-
-/* Tool Specific Layouts */
-.dropzone{
-  border:2px dashed #475569;
-  border-radius:12px;
-  min-height:180px;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:12px;padding:32px 16px;cursor:pointer;text-align:center;
-  background:rgba(15,23,42,0.4);
-  transition:all .2s ease;
-}
-.dropzone:hover{border-color:#6366f1;}
-.dropzone.dragover{border-color:#4f46e5;background:rgba(99,102,241,0.1);transform:scale(0.99);}
-input[type="file"]{display:none;}
-
-.preview-area{display:none;margin-top:1.5rem;}
-.preview-area.active{display:block;}
-.preview-frame{
-  position:relative;border-radius:12px;overflow:hidden;
-  background:#0f172a;border:1px solid #334155;
-  background-image:radial-gradient(#334155 1px,transparent 1px);
-  background-size:20px 20px;
-}
-.preview-img-wrap{position:relative;line-height:0;}
-#origImg{width:100%;height:auto;display:block;}
-.crop-overlay{
-  position:absolute;border:2px dashed #34d399;background:rgba(52,211,153,0.15);
-  box-shadow:0 0 0 2000px rgba(2,6,23,.65);
-  display:none;pointer-events:none;transition:all .12s ease;
-}
-.crop-overlay.show{display:block;}
-.crop-overlay .co-tag{
-  position:absolute;top:-28px;left:0;background:#34d399;color:#020617;
-  font-family:ui-monospace,monospace;font-size:11px;font-weight:700;
-  padding:4px 8px;border-radius:6px;white-space:nowrap;
-}
-#resultCanvas{width:100%;height:auto;border-radius:12px;border:1px solid #334155;background:#0f172a;}
-
-.mode-options{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
-.mode-opt{
-  border:1px solid #475569;background:#1e293b;border-radius:8px;
-  padding:10px 8px;text-align:center;font-size:13px;font-weight:600;
-  color:#94a3b8;cursor:pointer;transition:all .2s ease;
-}
-.mode-opt:hover{border-color:#6366f1;}
-.mode-opt.active{border-color:#6366f1;color:#f8fafc;background:rgba(99,102,241,0.15);}
-
-input[type="range"]{width:100%;accent-color:#6366f1;height:6px;background:transparent;cursor:pointer;}
-#qualityField{display:none;}
-#qualityField.active{display:block;}
-
-.output-box{
-  margin-top:1rem;padding:1rem;border-radius:12px;
-  background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.3);
-  display:none;
-}
-.output-box.show{display:block;}
-
-/* SEO Table */
-.dim-table-wrap{overflow-x:auto;border:1px solid #334155;border-radius:12px;margin-top:1rem;}
-table.dim-table{width:100%;border-collapse:collapse;font-size:14px;min-width:600px;}
-table.dim-table th{text-align:left;padding:12px 16px;background:#1e293b;color:#94a3b8;font-weight:600;}
-table.dim-table td{padding:12px 16px;border-top:1px solid #334155;color:#cbd5e1;}
-table.dim-table td.dims{font-family:ui-monospace,monospace;color:#818cf8;}
-
-.toast{
-  position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);
-  background:#1e293b;border:1px solid #475569;color:#f8fafc;
-  padding:12px 24px;border-radius:999px;font-size:14px;font-weight:600;
-  box-shadow:0 10px 25px -5px rgba(0,0,0,0.5);opacity:0;pointer-events:none;
-  transition:all .3s cubic-bezier(0.4,0,0.2,1);z-index:100;
-}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-</style>
+  <style>
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;color:#f8fafc;font-family:Inter,system-ui,sans-serif;transition:background 0.3s ease,color 0.3s ease;}
+    .glass{background:rgba(30,41,59,.72);backdrop-filter:blur(14px);border:1px solid #334155;}
+    .input{background:#0f172a;border:1px solid #475569;color:#f8fafc;width:100%;padding:.75rem 1rem;border-radius:.75rem;transition:all 0.2s ease;}
+    .input:focus{outline:none;border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.15)}
+    .btn{border:1px solid #475569;background:#1e293b;color:#f8fafc;border-radius:12px;padding:.75rem 1rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;text-align:center;width:100%;}
+    .btn:hover{background:#334155}
+    .btn:active{transform:scale(0.97)}
+    .btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+    .primary{background:linear-gradient(135deg,#6366f1,#4f46e5);border-color:#6366f1;color:#fff;}
+    .primary:hover:not(:disabled){filter:brightness(1.1)}
+    .muted{color:#94a3b8;}
+    .article h2{font-size:1.9rem;font-weight:800;color:#fff;margin:2.2rem 0 .9rem;}
+    .article h3{font-size:1.2rem;font-weight:750;color:#e2e8f0;margin:1.7rem 0 .65rem;}
+    .article p,.article li{color:#94a3b8;line-height:1.85;margin-bottom:1rem;}
+    .article dt{font-weight:700;color:#818cf8;margin-top:1rem;}
+    .article dd{color:#94a3b8;margin-bottom:.5rem;margin-left:1rem;}
+    
+    details > summary { list-style: none; }
+    details > summary::-webkit-details-marker { display: none; }
+    .faq-question { color: #e2e8f0; }
+    .faq-answer { color: #94a3b8; }
+    
+    body.light-mode{background:#f8fafc;color:#0f172a;}
+    body.light-mode .glass{background:rgba(255,255,255,0.8);border-color:#e2e8f0;}
+    body.light-mode .input{background:#ffffff;border-color:#cbd5e1;color:#0f172a;}
+    body.light-mode .btn{background:#f1f5f9;border-color:#cbd5e1;color:#334155;}
+    body.light-mode .primary{background:linear-gradient(135deg,#6366f1,#4f46e5);color:#ffffff;}
+    body.light-mode .muted{color:#64748b;}
+    body.light-mode .article h2{color:#0f172a;}
+    body.light-mode .article h3{color:#1e293b;}
+    body.light-mode .article p,body.light-mode .article li,body.light-mode .article dd{color:#475569;}
+    body.light-mode header{background:rgba(255,255,255,0.9);border-color:#e2e8f0;}
+    body.light-mode .dropzone{border-color:#cbd5e1;background:rgba(241,245,249,0.5);}
+    body.light-mode .dropzone:hover{border-color:#6366f1;}
+    body.light-mode .dropzone.dragover{background:rgba(99,102,241,0.1);border-color:#6366f1;}
+    body.light-mode .preview-frame{background:#f1f5f9;border-color:#cbd5e1;}
+    body.light-mode .mode-opt{background:#f1f5f9;border-color:#cbd5e1;color:#475569;}
+    body.light-mode .mode-opt.active{background:rgba(99,102,241,0.1);border-color:#6366f1;color:#4f46e5;}
+    body.light-mode table.dim-table th{background:#f1f5f9;color:#475569;}
+    body.light-mode table.dim-table td{border-color:#e2e8f0;}
+    body.light-mode table.dim-table tr:hover td{background:#f8fafc;}
+    body.light-mode .faq-question{color:#1e293b;}
+    body.light-mode .faq-answer{color:#475569;}
+    body.light-mode .faq-divider{border-color:#e2e8f0;}
+    
+    .dropzone{
+      border:2px dashed #475569;
+      border-radius:12px;
+      min-height:180px;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      gap:12px;padding:32px 16px;cursor:pointer;text-align:center;
+      background:rgba(15,23,42,0.4);
+      transition:all .2s ease;
+    }
+    .dropzone:hover{border-color:#6366f1;}
+    .dropzone.dragover{border-color:#4f46e5;background:rgba(99,102,241,0.1);transform:scale(0.99);}
+    input[type="file"]{display:none;}
+    
+    .preview-area{display:none;margin-top:1.5rem;}
+    .preview-area.active{display:block;}
+    .preview-frame{
+      position:relative;border-radius:12px;overflow:hidden;
+      background:#0f172a;border:1px solid #334155;
+      background-image:radial-gradient(#334155 1px,transparent 1px);
+      background-size:20px 20px;
+    }
+    .preview-img-wrap{position:relative;line-height:0;}
+    #origImg{width:100%;height:auto;display:block;}
+    .crop-overlay{
+      position:absolute;border:2px dashed #34d399;background:rgba(52,211,153,0.15);
+      box-shadow:0 0 0 2000px rgba(2,6,23,.65);
+      display:none;pointer-events:none;transition:all .12s ease;
+    }
+    .crop-overlay.show{display:block;}
+    .crop-overlay .co-tag{
+      position:absolute;top:-28px;left:0;background:#34d399;color:#020617;
+      font-family:ui-monospace,monospace;font-size:11px;font-weight:700;
+      padding:4px 8px;border-radius:6px;white-space:nowrap;
+    }
+    #resultCanvas{width:100%;height:auto;border-radius:12px;border:1px solid #334155;background:#0f172a;}
+    
+    .mode-options{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+    .mode-opt{
+      border:1px solid #475569;background:#1e293b;border-radius:8px;
+      padding:10px 8px;text-align:center;font-size:13px;font-weight:600;
+      color:#94a3b8;cursor:pointer;transition:all .2s ease;
+    }
+    .mode-opt:hover{border-color:#6366f1;}
+    .mode-opt.active{border-color:#6366f1;color:#f8fafc;background:rgba(99,102,241,0.15);}
+    
+    input[type="range"]{width:100%;accent-color:#6366f1;height:6px;background:transparent;cursor:pointer;}
+    #qualityField{display:none;}
+    #qualityField.active{display:block;}
+    
+    .output-box{
+      margin-top:1rem;padding:1rem;border-radius:12px;
+      background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.3);
+      display:none;
+    }
+    .output-box.show{display:block;}
+    
+    .dim-table-wrap{overflow-x:auto;border:1px solid #334155;border-radius:12px;margin-top:1rem;}
+    table.dim-table{width:100%;border-collapse:collapse;font-size:14px;min-width:600px;}
+    table.dim-table th{text-align:left;padding:12px 16px;background:#1e293b;color:#94a3b8;font-weight:600;}
+    table.dim-table td{padding:12px 16px;border-top:1px solid #334155;color:#cbd5e1;}
+    table.dim-table td.dims{font-family:ui-monospace,monospace;color:#818cf8;}
+    
+    .toast{
+      position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);
+      background:#1e293b;border:1px solid #475569;color:#f8fafc;
+      padding:12px 24px;border-radius:999px;font-size:14px;font-weight:600;
+      box-shadow:0 10px 25px -5px rgba(0,0,0,0.5);opacity:0;pointer-events:none;
+      transition:all .3s cubic-bezier(0.4,0,0.2,1);z-index:100;
+    }
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+  </style>
 </head>
+
 <body>
 
-<header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800 transition-all duration-300">
-<div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-<a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2 transition-colors"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse</a>
-<button id="theme-toggle" class="text-slate-400 hover:text-white transition-colors cursor-pointer"><i data-lucide="sun" id="theme-icon" class="w-5 h-5"></i></button>
-</div>
-</header>
+  <header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800 transition-all duration-300">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+      <a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2 transition-colors"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse</a>
+      <button id="theme-toggle" class="text-slate-400 hover:text-white transition-colors cursor-pointer"><i data-lucide="sun" id="theme-icon" class="w-5 h-5"></i></button>
+    </div>
+  </header>
 
-<!-- AdSense: Top Leaderboard (Hidden until approved) -->
-<!-- 
-<div class="max-w-6xl mx-auto px-4 sm:px-6 mt-6">
-  <div class="glass rounded-xl p-4 flex items-center justify-center text-xs muted font-mono border-dashed min-h-[90px]">
-    <ins class="adsbygoogle"
-         style="display:block;width:100%;"
-         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-         data-ad-slot="XXXXXXXXXX"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  </div>
-</div>
--->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+    <div class="max-w-3xl">
+      <p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Media Utility</p>
+      <h1 class="text-4xl sm:text-5xl font-black mt-2">Image Resizer & Formatter</h1>
+      <p class="mt-4 text-lg muted">Resize, crop, and convert graphics to exact social media dimensions — 100% locally in your browser.</p>
+    </div>
 
-<main class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-<div class="max-w-3xl">
-<p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Media Utility</p>
-<h1 class="text-4xl sm:text-5xl font-black mt-2">Image Resizer & Formatter</h1>
-<p class="mt-4 text-lg muted">Resize, crop, and convert graphics to exact social media dimensions — 100% locally in your browser.</p>
-</div>
+    <section class="grid lg:grid-cols-5 gap-6 mt-8">
+      <div class="lg:col-span-3 flex flex-col gap-6">
+        <div class="glass p-6 rounded-2xl">
+          <div class="flex items-center gap-2 mb-4">
+            <i data-lucide="image-up" class="w-5 h-5 text-indigo-400"></i>
+            <h3 class="font-bold text-lg m-0">Upload Image</h3>
+          </div>
 
-<section class="grid lg:grid-cols-5 gap-6 mt-8">
-  <!-- LEFT: Upload / Preview -->
-  <div class="lg:col-span-3 flex flex-col gap-6">
-    <div class="glass p-6 rounded-2xl">
-      <div class="flex items-center gap-2 mb-4">
-        <i data-lucide="image-up" class="w-5 h-5 text-indigo-400"></i>
-        <h3 class="font-bold text-lg m-0">Upload Image</h3>
-      </div>
-      
-      <div class="dropzone" id="dropzone" tabindex="0">
-        <i data-lucide="upload-cloud" class="w-10 h-10 text-indigo-400"></i>
-        <div>
-          <strong class="block text-lg">Drag & drop an image here</strong>
-          <span class="muted text-sm mt-1 block">or click to browse your device</span>
-        </div>
-        <button type="button" class="btn max-w-[150px] mt-2" id="browseBtn">Choose File</button>
-        <input type="file" id="fileInput" accept=".png,.jpg,.jpeg,.webp,.gif,.svg,.bmp,.ico,image/png,image/jpeg,image/webp,image/gif,image/svg+xml,image/bmp,image/x-icon,image/vnd.microsoft.icon">
-        <div class="font-mono text-xs text-slate-500 mt-2">PNG · JPG · WEBP · GIF · SVG · BMP</div>
-      </div>
+          <div class="dropzone" id="dropzone" tabindex="0">
+            <i data-lucide="upload-cloud" class="w-10 h-10 text-indigo-400"></i>
+            <div>
+              <strong class="block text-lg">Drag & drop an image here</strong>
+              <span class="muted text-sm mt-1 block">or click to browse your device</span>
+            </div>
+            <button type="button" class="btn max-w-[150px] mt-2" id="browseBtn">Choose File</button>
+            <input type="file" id="fileInput" accept="image/png, image/jpeg, image/webp, image/gif, image/svg+xml, image/bmp">
+            <div class="font-mono text-xs text-slate-500 mt-2">PNG · JPG · WEBP · GIF · SVG · BMP</div>
+          </div>
 
-      <div class="preview-area" id="previewArea">
-        <div class="text-xs font-mono text-slate-500 uppercase tracking-widest mb-2 mt-6">Original Crop Preview</div>
-        <div class="preview-frame">
-          <div class="preview-img-wrap" id="imgWrap">
-            <img id="origImg" alt="Uploaded image preview">
-            <div class="crop-overlay" id="cropOverlay"><span class="co-tag" id="cropTag">Kept area</span></div>
+          <div class="preview-area" id="previewArea">
+            <div class="text-xs font-mono text-slate-500 uppercase tracking-widest mb-2 mt-6">Original Crop Preview</div>
+            <div class="preview-frame">
+              <div class="preview-img-wrap" id="imgWrap">
+                <img id="origImg" alt="Uploaded image preview">
+                <div class="crop-overlay" id="cropOverlay"><span class="co-tag" id="cropTag">Kept area</span></div>
+              </div>
+            </div>
+            <div class="text-sm muted mt-3 p-3 bg-slate-900/50 rounded-lg border border-slate-800" id="modeNote">Set dimensions to preview how your image will be resized.</div>
+
+            <div class="flex flex-wrap gap-2 mt-4" id="metaTags"></div>
+
+            <div class="text-xs font-mono text-slate-500 uppercase tracking-widest mb-2 mt-8">Live Result Render</div>
+            <canvas id="resultCanvas" width="10" height="10"></canvas>
           </div>
         </div>
-        <div class="text-sm muted mt-3 p-3 bg-slate-900/50 rounded-lg border border-slate-800" id="modeNote">Set dimensions to preview how your image will be resized.</div>
-
-        <div class="flex flex-wrap gap-2 mt-4" id="metaTags"></div>
-
-        <div class="text-xs font-mono text-slate-500 uppercase tracking-widest mb-2 mt-8">Live Result Render</div>
-        <canvas id="resultCanvas" width="10" height="10"></canvas>
       </div>
-    </div>
-  </div>
 
-  <!-- RIGHT: Controls -->
-  <div class="lg:col-span-2 flex flex-col gap-6">
-    
-    <div class="glass p-6 rounded-2xl" id="converterCard">
-      <div class="flex items-center gap-2 mb-4">
-        <i data-lucide="settings-2" class="w-5 h-5 text-indigo-400"></i>
-        <h3 class="font-bold text-lg m-0">Format Output</h3>
-      </div>
-      <div class="flex flex-col gap-1 mb-4">
-        <label class="text-sm font-semibold muted" for="formatSelect">Convert to</label>
-        <select id="formatSelect" class="input">
-          <option value="jpg">JPG</option>
-          <option value="png" selected>PNG</option>
-          <option value="webp">WEBP</option>
-          <option value="bmp">BMP</option>
-        </select>
-      </div>
-      <div class="flex flex-col gap-1" id="qualityField">
-        <div class="flex justify-between items-center text-sm font-semibold muted">
-          <span>Compression Quality</span>
-          <b id="qualityVal" class="text-indigo-400 font-mono">85%</b>
+      <div class="lg:col-span-2 flex flex-col gap-6">
+
+        <div class="glass p-6 rounded-2xl" id="converterCard">
+          <div class="flex items-center gap-2 mb-4">
+            <i data-lucide="settings-2" class="w-5 h-5 text-indigo-400"></i>
+            <h3 class="font-bold text-lg m-0">Format Output</h3>
+          </div>
+          <div class="flex flex-col gap-1 mb-4">
+            <label class="text-sm font-semibold muted" for="formatSelect">Convert to</label>
+            <select id="formatSelect" class="input">
+              <option value="jpg">JPG</option>
+              <option value="png" selected>PNG</option>
+              <option value="webp">WEBP</option>
+              <option value="bmp">BMP</option>
+            </select>
+          </div>
+          <div class="flex flex-col gap-1" id="qualityField">
+            <div class="flex justify-between items-center text-sm font-semibold muted">
+              <span>Compression Quality</span>
+              <b id="qualityVal" class="text-indigo-400 font-mono">85%</b>
+            </div>
+            <input type="range" id="qualitySlider" min="1" max="100" value="85" class="mt-2">
+          </div>
         </div>
-        <input type="range" id="qualitySlider" min="1" max="100" value="85" class="mt-2">
+
+        <div class="glass p-6 rounded-2xl" id="resizerCard">
+          <div class="flex items-center gap-2 mb-4">
+            <i data-lucide="scaling" class="w-5 h-5 text-indigo-400"></i>
+            <h3 class="font-bold text-lg m-0">Manual Size</h3>
+          </div>
+          <label class="text-sm font-semibold muted block mb-2">Width × Height (px)</label>
+          <div class="flex items-center gap-3 mb-5">
+            <input type="number" class="input font-mono text-center px-2" id="widthInput" min="1" max="8000" placeholder="W">
+            <span class="text-slate-500 font-mono">×</span>
+            <input type="number" class="input font-mono text-center px-2" id="heightInput" min="1" max="8000" placeholder="H">
+            <button type="button" class="btn !w-12 !px-0 flex-shrink-0" id="lockBtn" title="Lock aspect ratio">🔒</button>
+          </div>
+
+          <label class="text-sm font-semibold muted block mb-2">Resize Mode</label>
+          <div class="mode-options" id="modeOptions">
+            <div class="mode-opt" data-mode="stretch">Stretch</div>
+            <div class="mode-opt active" data-mode="fit">Fit (Pad)</div>
+            <div class="mode-opt" data-mode="cover">Cover (Crop)</div>
+          </div>
+        </div>
+
+        <div class="glass p-6 rounded-2xl" id="presetCard">
+          <div class="flex items-center gap-2 mb-4">
+            <i data-lucide="layout-template" class="w-5 h-5 text-indigo-400"></i>
+            <h3 class="font-bold text-lg m-0">Social Presets</h3>
+          </div>
+          <div class="flex flex-col gap-1 mb-4">
+            <label class="text-sm font-semibold muted" for="platformSelect">Platform</label>
+            <select id="platformSelect" class="input">
+              <option value="">Select platform…</option>
+            </select>
+          </div>
+          <div class="flex flex-col gap-1">
+            <label class="text-sm font-semibold muted" for="presetSelect">Dimensions</label>
+            <select id="presetSelect" class="input" disabled>
+              <option value="">Select platform first…</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="glass p-6 rounded-2xl" id="processCard">
+          <div class="flex items-center gap-2 mb-4">
+            <i data-lucide="download-cloud" class="w-5 h-5 text-indigo-400"></i>
+            <h3 class="font-bold text-lg m-0">Export</h3>
+          </div>
+          <button type="button" class="btn primary mb-3" id="downloadBtn" disabled>Convert & Download</button>
+          <button type="button" class="btn" id="resetBtn">Reset Editor</button>
+
+          <div class="output-box" id="outputBox">
+            <div class="text-emerald-400 font-bold text-sm mb-1 flex items-center gap-1"><i data-lucide="check-circle" class="w-4 h-4"></i> File Ready</div>
+            <div class="font-mono text-xs text-slate-400 break-all" id="outputFileName"></div>
+            <div class="font-mono text-xs text-slate-400 mt-1" id="outputFileSize"></div>
+          </div>
+        </div>
       </div>
+    </section>
+
+    <section class="article max-w-4xl mx-auto mt-16 px-4">
+      <h2>How to Use the Image Resizer</h2>
+      <div class="glass p-6 rounded-2xl mt-6">
+        <ol class="list-decimal pl-5 space-y-3">
+          <li>Drag and drop an image into the upload zone, or click <strong>Choose File</strong> to browse your device. PNG, JPG, WEBP, GIF, SVG, BMP and ICO are all supported.</li>
+          <li>Pick an output format in the <strong>Format Output</strong> panel. For JPG or WEBP, use the quality slider to balance sharpness against file size.</li>
+          <li>Either type an exact <strong>Width × Height</strong> with the lock toggle to keep proportions, or choose a <strong>Social Presets</strong> option to auto-fill the correct dimensions for a platform.</li>
+          <li>Choose a resize mode: <strong>Stretch</strong> forces the exact size, <strong>Fit</strong> scales the whole image in with padding, and <strong>Cover</strong> scales up and crops the center to fill the frame edge-to-edge.</li>
+          <li>Check the crop overlay and live result preview, then click <strong>Convert & Download</strong> to save the finished file — everything happens locally in your browser.</li>
+        </ol>
+      </div>
+
+      <h2 class="mt-12">Supported Image Formats Explained</h2>
+      <div class="grid md:grid-cols-2 gap-6 mt-6">
+        <div class="glass p-6 rounded-2xl">
+          <h3>Input Formats</h3>
+          <dl>
+            <dt>PNG</dt>
+            <dd>Lossless, supports transparency. Best for graphics, logos, and screenshots.</dd>
+            <dt>JPG / JPEG</dt>
+            <dd>Lossy compression, no transparency. Best for photographs.</dd>
+            <dt>WEBP</dt>
+            <dd>Modern format with strong compression; supports transparency and animation.</dd>
+            <dt>GIF</dt>
+            <dd>Supports simple animation and transparency; processing captures a single static frame.</dd>
+            <dt>SVG</dt>
+            <dd>Vector format, rasterized to pixels when loaded onto the canvas.</dd>
+            <dt>BMP / ICO</dt>
+            <dd>Uncompressed bitmap and icon formats, read directly by the browser.</dd>
+          </dl>
+        </div>
+        <div class="glass p-6 rounded-2xl">
+          <h3>Output Formats</h3>
+          <dl>
+            <dt>JPG</dt>
+            <dd>Smallest files for photos. No transparency — a white background is added automatically.</dd>
+            <dt>PNG</dt>
+            <dd>Lossless with full transparency support. Larger file sizes than JPG or WEBP.</dd>
+            <dt>WEBP</dt>
+            <dd>Great balance of small size and quality, with transparency support.</dd>
+            <dt>BMP</dt>
+            <dd>Uncompressed, fully compatible bitmap — largest file size, no quality loss.</dd>
+          </dl>
+        </div>
+      </div>
+
+      <h2 class="mt-12">Social Media Dimensions Reference</h2>
+      <p>Use the preset dropdowns in the tool, or reference the master table below to manually target the correct dimensions.</p>
+      <div class="dim-table-wrap">
+        <table class="dim-table" id="dimTable">
+          <thead>
+            <tr>
+              <th>Platform</th>
+              <th>Placement</th>
+              <th>Dimensions (px)</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <h2 class="mt-16">Frequently Asked Questions</h2>
+      <div class="glass p-6 rounded-2xl mt-6 space-y-4">
+        <details class="group cursor-pointer py-2">
+          <summary class="faq-question font-bold text-lg hover:text-indigo-400 transition-colors flex justify-between items-center outline-none">
+            Does this tool upload my images to a server?
+            <i data-lucide="chevron-down" class="w-5 h-5 transition-transform group-open:rotate-180 text-slate-400"></i>
+          </summary>
+          <p class="faq-answer mt-3 leading-relaxed m-0">No. All image resizing, cropping, and formatting happens entirely within your web browser. Your files never leave your device, ensuring complete privacy and faster processing.</p>
+        </details>
+        <hr class="faq-divider border-slate-800">
+
+        <details class="group cursor-pointer py-2">
+          <summary class="faq-question font-bold text-lg hover:text-indigo-400 transition-colors flex justify-between items-center outline-none">
+            Why did my PNG's transparent background turn white?
+            <i data-lucide="chevron-down" class="w-5 h-5 transition-transform group-open:rotate-180 text-slate-400"></i>
+          </summary>
+          <p class="faq-answer mt-3 leading-relaxed m-0">If you convert an image with a transparent background to the JPG format, the transparent areas will automatically be filled with white because JPGs do not support transparency. To keep the background transparent, select PNG or WEBP as your output format.</p>
+        </details>
+        <hr class="faq-divider border-slate-800">
+
+        <details class="group cursor-pointer py-2">
+          <summary class="faq-question font-bold text-lg hover:text-indigo-400 transition-colors flex justify-between items-center outline-none">
+            What is the difference between 'Fit' and 'Cover' resize modes?
+            <i data-lucide="chevron-down" class="w-5 h-5 transition-transform group-open:rotate-180 text-slate-400"></i>
+          </summary>
+          <p class="faq-answer mt-3 leading-relaxed m-0"><strong>Fit (Pad)</strong> scales your entire image to fit inside the target dimensions, adding padding (transparent or white, depending on the format) to any extra space. <strong>Cover (Crop)</strong> scales your image up so it completely fills the target dimensions, cutting off the overlapping edges to guarantee a perfect fit without distortion.</p>
+        </details>
+        <hr class="faq-divider border-slate-800">
+      </div>
+    </section>
+
+  </main>
+  <footer class="border-t border-slate-800 bg-slate-950 mt-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 text-sm text-slate-500 text-center">
+      © <span id="year"></span> Utiliverse. All processing happens locally in your browser. No images are uploaded to any server.
     </div>
+  </footer>
 
-    <div class="glass p-6 rounded-2xl" id="resizerCard">
-      <div class="flex items-center gap-2 mb-4">
-        <i data-lucide="scaling" class="w-5 h-5 text-indigo-400"></i>
-        <h3 class="font-bold text-lg m-0">Manual Size</h3>
-      </div>
-      <label class="text-sm font-semibold muted block mb-2">Width × Height (px)</label>
-      <div class="flex items-center gap-3 mb-5">
-        <input type="number" class="input font-mono text-center px-2" id="widthInput" min="1" max="8000" placeholder="W">
-        <span class="text-slate-500 font-mono">×</span>
-        <input type="number" class="input font-mono text-center px-2" id="heightInput" min="1" max="8000" placeholder="H">
-        <button type="button" class="btn !w-12 !px-0 flex-shrink-0" id="lockBtn" title="Lock aspect ratio">🔒</button>
-      </div>
-      
-      <label class="text-sm font-semibold muted block mb-2">Resize Mode</label>
-      <div class="mode-options" id="modeOptions">
-        <div class="mode-opt" data-mode="stretch">Stretch</div>
-        <div class="mode-opt active" data-mode="fit">Fit (Pad)</div>
-        <div class="mode-opt" data-mode="cover">Cover (Crop)</div>
-      </div>
-    </div>
+  <div class="toast" id="toast"></div>
 
-    <div class="glass p-6 rounded-2xl" id="presetCard">
-      <div class="flex items-center gap-2 mb-4">
-        <i data-lucide="layout-template" class="w-5 h-5 text-indigo-400"></i>
-        <h3 class="font-bold text-lg m-0">Social Presets</h3>
-      </div>
-      <div class="flex flex-col gap-1 mb-4">
-        <label class="text-sm font-semibold muted" for="platformSelect">Platform</label>
-        <select id="platformSelect" class="input">
-          <option value="">Select platform…</option>
-        </select>
-      </div>
-      <div class="flex flex-col gap-1">
-        <label class="text-sm font-semibold muted" for="presetSelect">Dimensions</label>
-        <select id="presetSelect" class="input" disabled>
-          <option value="">Select platform first…</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="glass p-6 rounded-2xl" id="processCard">
-      <div class="flex items-center gap-2 mb-4">
-        <i data-lucide="download-cloud" class="w-5 h-5 text-indigo-400"></i>
-        <h3 class="font-bold text-lg m-0">Export</h3>
-      </div>
-      <button type="button" class="btn primary mb-3" id="downloadBtn" disabled>Convert & Download</button>
-      <button type="button" class="btn" id="resetBtn">Reset Editor</button>
-      
-      <div class="output-box" id="outputBox">
-        <div class="text-emerald-400 font-bold text-sm mb-1 flex items-center gap-1"><i data-lucide="check-circle" class="w-4 h-4"></i> File Ready</div>
-        <div class="font-mono text-xs text-slate-400 break-all" id="outputFileName"></div>
-        <div class="font-mono text-xs text-slate-400 mt-1" id="outputFileSize"></div>
-      </div>
-    </div>
-
-    <!-- AdSense: Mid-Sidebar (Hidden until approved) -->
-    <!-- 
-    <div class="glass rounded-xl p-4 flex items-center justify-center text-xs muted font-mono border-dashed min-h-[250px]">
-      <ins class="adsbygoogle"
-           style="display:block;width:100%;"
-           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-           data-ad-slot="XXXXXXXXXX"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-    -->
-
-  </div>
-</section>
-
-<section class="article max-w-4xl mx-auto mt-16 px-4">
-<h2>How to Use the Image Resizer</h2>
-<div class="glass p-6 rounded-2xl mt-6">
-  <ol class="list-decimal pl-5 space-y-3">
-    <li>Drag and drop an image into the upload zone, or click <strong>Choose File</strong> to browse your device. PNG, JPG, WEBP, GIF, SVG, BMP and ICO are all supported.</li>
-    <li>Pick an output format in the <strong>Format Output</strong> panel. For JPG or WEBP, use the quality slider to balance sharpness against file size.</li>
-    <li>Either type an exact <strong>Width × Height</strong> with the lock toggle to keep proportions, or choose a <strong>Social Presets</strong> option to auto-fill the correct dimensions for a platform.</li>
-    <li>Choose a resize mode: <strong>Stretch</strong> forces the exact size, <strong>Fit</strong> scales the whole image in with padding, and <strong>Cover</strong> scales up and crops the center to fill the frame edge-to-edge.</li>
-    <li>Check the crop overlay and live result preview, then click <strong>Convert & Download</strong> to save the finished file — everything happens locally in your browser.</li>
-  </ol>
-</div>
-
-<h2 class="mt-12">Supported Image Formats Explained</h2>
-<div class="grid md:grid-cols-2 gap-6 mt-6">
-  <div class="glass p-6 rounded-2xl">
-    <h3>Input Formats</h3>
-    <dl>
-      <dt>PNG</dt><dd>Lossless, supports transparency. Best for graphics, logos, and screenshots.</dd>
-      <dt>JPG / JPEG</dt><dd>Lossy compression, no transparency. Best for photographs.</dd>
-      <dt>WEBP</dt><dd>Modern format with strong compression; supports transparency and animation.</dd>
-      <dt>GIF</dt><dd>Supports simple animation and transparency; processing captures a single static frame.</dd>
-      <dt>SVG</dt><dd>Vector format, rasterized to pixels when loaded onto the canvas.</dd>
-      <dt>BMP / ICO</dt><dd>Uncompressed bitmap and icon formats, read directly by the browser.</dd>
-    </dl>
-  </div>
-  <div class="glass p-6 rounded-2xl">
-    <h3>Output Formats</h3>
-    <dl>
-      <dt>JPG</dt><dd>Smallest files for photos. No transparency — a white background is added automatically.</dd>
-      <dt>PNG</dt><dd>Lossless with full transparency support. Larger file sizes than JPG or WEBP.</dd>
-      <dt>WEBP</dt><dd>Great balance of small size and quality, with transparency support.</dd>
-      <dt>BMP</dt><dd>Uncompressed, fully compatible bitmap — largest file size, no quality loss.</dd>
-    </dl>
-  </div>
-</div>
-
-<h2 class="mt-12">Social Media Dimensions Reference</h2>
-<p>Use the preset dropdowns in the tool, or reference the master table below to manually target the correct dimensions.</p>
-<div class="dim-table-wrap">
-  <table class="dim-table" id="dimTable">
-    <thead><tr><th>Platform</th><th>Placement</th><th>Dimensions (px)</th></tr></thead>
-    <tbody></tbody>
-  </table>
-</div>
-
-<!-- FAQ Section -->
-<h2 class="mt-16">Frequently Asked Questions</h2>
-<div class="glass p-6 rounded-2xl mt-6 space-y-4">
-  
-  <details class="group cursor-pointer py-2">
-    <summary class="faq-question font-bold text-lg hover:text-indigo-400 transition-colors flex justify-between items-center outline-none">
-      Does this tool upload my images to a server?
-      <i data-lucide="chevron-down" class="w-5 h-5 transition-transform group-open:rotate-180 text-slate-400"></i>
-    </summary>
-    <p class="faq-answer mt-3 leading-relaxed m-0">No. All image resizing, cropping, and formatting happens entirely within your web browser. Your files never leave your device, ensuring complete privacy and faster processing.</p>
-  </details>
-  <hr class="faq-divider border-slate-800">
-  
-  <details class="group cursor-pointer py-2">
-    <summary class="faq-question font-bold text-lg hover:text-indigo-400 transition-colors flex justify-between items-center outline-none">
-      Why did my PNG's transparent background turn white?
-      <i data-lucide="chevron-down" class="w-5 h-5 transition-transform group-open:rotate-180 text-slate-400"></i>
-    </summary>
-    <p class="faq-answer mt-3 leading-relaxed m-0">If you convert an image with a transparent background to the JPG format, the transparent areas will automatically be filled with white because JPGs do not support transparency. To keep the background transparent, select PNG or WEBP as your output format.</p>
-  </details>
-  <hr class="faq-divider border-slate-800">
-  
-  <details class="group cursor-pointer py-2">
-    <summary class="faq-question font-bold text-lg hover:text-indigo-400 transition-colors flex justify-between items-center outline-none">
-      What is the difference between 'Fit' and 'Cover' resize modes?
-      <i data-lucide="chevron-down" class="w-5 h-5 transition-transform group-open:rotate-180 text-slate-400"></i>
-    </summary>
-    <p class="faq-answer mt-3 leading-relaxed m-0"><strong>Fit (Pad)</strong> scales your entire image to fit inside the target dimensions, adding padding (transparent or white, depending on the format) to any extra space. <strong>Cover (Crop)</strong> scales your image up so it completely fills the target dimensions, cutting off the overlapping edges to guarantee a perfect fit without distortion.</p>
-  </details>
-  <hr class="faq-divider border-slate-800">
-  
-  <details class="group cursor-pointer py-2">
-    <summary class="faq-question font-bold text-lg hover:text-indigo-400 transition-colors flex justify-between items-center outline-none">
-      Is there a file size limit for uploads?
-      <i data-lucide="chevron-down" class="w-5 h-5 transition-transform group-open:rotate-180 text-slate-400"></i>
-    </summary>
-    <p class="faq-answer mt-3 leading-relaxed m-0">Because the tool uses your device's local memory to process the image, there is no strict file size limit imposed by a server. However, exceptionally massive files (e.g., 50MB+ RAW exports) might cause older mobile devices or low-RAM browsers to lag or crash.</p>
-  </details>
-  <hr class="faq-divider border-slate-800">
-  
-  <details class="group cursor-pointer py-2">
-    <summary class="faq-question font-bold text-lg hover:text-indigo-400 transition-colors flex justify-between items-center outline-none">
-      Which image formats are supported?
-      <i data-lucide="chevron-down" class="w-5 h-5 transition-transform group-open:rotate-180 text-slate-400"></i>
-    </summary>
-    <p class="faq-answer mt-3 leading-relaxed m-0">You can upload PNG, JPG/JPEG, WEBP, GIF, SVG, BMP, and ICO files. Note that while you can upload animated GIFs, the output will be processed and saved as a single static frame.</p>
-  </details>
-  <hr class="faq-divider border-slate-800">
-  
-  <details class="group cursor-pointer py-2">
-    <summary class="faq-question font-bold text-lg hover:text-indigo-400 transition-colors flex justify-between items-center outline-none">
-      Can I batch-process multiple images at once?
-      <i data-lucide="chevron-down" class="w-5 h-5 transition-transform group-open:rotate-180 text-slate-400"></i>
-    </summary>
-    <p class="faq-answer mt-3 leading-relaxed m-0">Currently, this tool is designed for precise, single-image cropping and formatting. You can quickly process multiple images one after another by dragging a new image into the upload box immediately after downloading the previous one.</p>
-  </details>
-
-</div>
-
-</section>
-
-<!-- AdSense: Footer Banner (Hidden until approved) -->
-<!-- 
-<div class="max-w-6xl mx-auto px-4 sm:px-6 mt-16 mb-8">
-  <div class="glass rounded-xl p-4 flex items-center justify-center text-xs muted font-mono border-dashed min-h-[90px]">
-    <ins class="adsbygoogle"
-         style="display:block;width:100%;"
-         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-         data-ad-slot="XXXXXXXXXX"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  </div>
-</div>
--->
-
-</main>
-<footer class="border-t border-slate-800 bg-slate-950 mt-12">
-<div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 text-sm text-slate-500 text-center">
-  © <span id="year"></span> Utiliverse. All processing happens locally in your browser. No images are uploaded to any server.
-</div>
-</footer>
-
-<div class="toast" id="toast"></div>
-
-<script>
-// --- Initialization & Theme ---
-lucide.createIcons();
-document.getElementById('year').textContent = new Date().getFullYear();
-
-document.getElementById('theme-toggle').addEventListener('click', () => {
-  document.body.classList.toggle('light-mode');
-  const icon = document.getElementById('theme-icon');
-  icon.setAttribute('data-lucide', document.body.classList.contains('light-mode') ? 'moon' : 'sun');
-  lucide.createIcons();
-});
-
-(function(){
-  "use strict";
-
-  /* ============ Preset data ============ */
-  var PRESETS = {
-    "Instagram": [
-      {label:"Feed Portrait", w:1080, h:1350},
-      {label:"Feed Square", w:1080, h:1080},
-      {label:"Story/Reel", w:1080, h:1920},
-      {label:"Landscape", w:1080, h:566},
-      {label:"Profile Picture", w:320, h:320}
-    ],
-    "Facebook": [
-      {label:"Feed Post", w:1080, h:1350},
-      {label:"Landscape Post", w:1200, h:630},
-      {label:"Profile Picture", w:320, h:320},
-      {label:"Page/Profile Cover", w:851, h:315},
-      {label:"Story", w:1080, h:1920}
-    ],
-    "YouTube": [
-      {label:"Video Thumbnail", w:1280, h:720},
-      {label:"Channel Banner", w:2560, h:1440},
-      {label:"Profile Picture", w:800, h:800}
-    ],
-    "X / Twitter": [
-      {label:"In-Stream Post", w:1200, h:675},
-      {label:"Header Banner", w:1500, h:500},
-      {label:"Profile Picture", w:400, h:400}
-    ],
-    "LinkedIn": [
-      {label:"Square Post", w:1200, h:1200},
-      {label:"Landscape Post", w:1200, h:627},
-      {label:"Personal Banner", w:1584, h:396},
-      {label:"Profile Picture", w:400, h:400}
-    ],
-    "TikTok": [
-      {label:"Vertical Video/Post", w:1080, h:1920},
-      {label:"Profile Picture", w:200, h:200}
-    ],
-    "Pinterest": [
-      {label:"Standard Pin", w:1000, h:1500},
-      {label:"Square Pin", w:1000, h:1000},
-      {label:"Profile Picture", w:165, h:165}
-    ]
-  };
-
-  /* ============ Elements ============ */
-  var dropzone = document.getElementById('dropzone');
-  var fileInput = document.getElementById('fileInput');
-  var browseBtn = document.getElementById('browseBtn');
-  var previewArea = document.getElementById('previewArea');
-  var origImg = document.getElementById('origImg');
-  var imgWrap = document.getElementById('imgWrap');
-  var cropOverlay = document.getElementById('cropOverlay');
-  var cropTag = document.getElementById('cropTag');
-  var modeNote = document.getElementById('modeNote');
-  var metaTags = document.getElementById('metaTags');
-  var resultCanvas = document.getElementById('resultCanvas');
-
-  var formatSelect = document.getElementById('formatSelect');
-  var qualityField = document.getElementById('qualityField');
-  var qualitySlider = document.getElementById('qualitySlider');
-  var qualityVal = document.getElementById('qualityVal');
-
-  var widthInput = document.getElementById('widthInput');
-  var heightInput = document.getElementById('heightInput');
-  var lockBtn = document.getElementById('lockBtn');
-  var modeOptions = document.getElementById('modeOptions');
-
-  var platformSelect = document.getElementById('platformSelect');
-  var presetSelect = document.getElementById('presetSelect');
-
-  var downloadBtn = document.getElementById('downloadBtn');
-  var resetBtn = document.getElementById('resetBtn');
-  var outputBox = document.getElementById('outputBox');
-  var outputFileName = document.getElementById('outputFileName');
-  var outputFileSize = document.getElementById('outputFileSize');
-  var toast = document.getElementById('toast');
-
-  /* ============ State ============ */
-  var state = {
-    file: null,
-    img: null,
-    naturalW: 0,
-    naturalH: 0,
-    lockAspect: true,
-    resizeMode: 'fit',
-    selectedPreset: null,
-    objectUrl: null,
-    updateTimer: null
-  };
-
-  var ACCEPTED_TYPES = ["image/png","image/jpeg","image/jpg","image/webp","image/gif","image/svg+xml","image/bmp","image/x-icon","image/vnd.microsoft.icon"];
-
-  /* ============ Helpers ============ */
-  function showToast(msg){
-    toast.textContent = msg;
-    toast.classList.add('show');
-    setTimeout(function(){ toast.classList.remove('show'); }, 2200);
-  }
-
-  function formatBytes(bytes){
-    if(bytes < 1024) return bytes + ' B';
-    if(bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
-    return (bytes/(1024*1024)).toFixed(2) + ' MB';
-  }
-
-  function slugify(str){
-    return str.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
-  }
-
-  function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
-
-  /* ============ Populate platform/preset dropdowns ============ */
-  Object.keys(PRESETS).forEach(function(platform){
-    var opt = document.createElement('option');
-    opt.value = platform;
-    opt.textContent = platform;
-    platformSelect.appendChild(opt);
-  });
-
-  platformSelect.addEventListener('change', function(){
-    var platform = platformSelect.value;
-    presetSelect.innerHTML = '';
-    if(!platform){
-      presetSelect.disabled = true;
-      var o = document.createElement('option');
-      o.textContent = 'Select platform first…';
-      presetSelect.appendChild(o);
-      return;
-    }
-    presetSelect.disabled = false;
-    var placeholder = document.createElement('option');
-    placeholder.value = '';
-    placeholder.textContent = 'Select a preset…';
-    presetSelect.appendChild(placeholder);
-    PRESETS[platform].forEach(function(p, i){
-      var opt = document.createElement('option');
-      opt.value = i;
-      opt.textContent = p.label + ' (' + p.w + '×' + p.h + ')';
-      presetSelect.appendChild(opt);
+  <script>
+    lucide.createIcons();
+    document.getElementById('year').textContent = new Date().getFullYear();
+    
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      const icon = document.getElementById('theme-icon');
+      icon.setAttribute('data-lucide', document.body.classList.contains('light-mode') ? 'moon' : 'sun');
+      lucide.createIcons();
     });
-  });
-
-  presetSelect.addEventListener('change', function(){
-    var platform = platformSelect.value;
-    var idx = presetSelect.value;
-    if(idx === '' || !platform){ state.selectedPreset = null; return; }
-    var p = PRESETS[platform][idx];
-    state.selectedPreset = {platform: platform, label: p.label};
-    widthInput.value = p.w;
-    heightInput.value = p.h;
-    setMode('cover');
-    scheduleUpdate();
-  });
-
-  /* Build the reference dimensions table */
-  (function buildDimTable(){
-    var tbody = document.querySelector('#dimTable tbody');
-    Object.keys(PRESETS).forEach(function(platform){
-      PRESETS[platform].forEach(function(p){
-        var tr = document.createElement('tr');
-        tr.innerHTML = '<td>' + platform + '</td><td>' + p.label + '</td><td class="dims">' + p.w + ' × ' + p.h + '</td>';
-        tbody.appendChild(tr);
-      });
-    });
-  })();
-
-  /* ============ File handling ============ */
-  browseBtn.addEventListener('click', function(){ fileInput.click(); });
-  dropzone.addEventListener('click', function(e){
-    if(e.target !== browseBtn) fileInput.click();
-  });
-  dropzone.addEventListener('keydown', function(e){
-    if(e.key === 'Enter' || e.key === ' '){ fileInput.click(); }
-  });
-
-  ['dragenter','dragover'].forEach(function(evt){
-    dropzone.addEventListener(evt, function(e){
-      e.preventDefault(); e.stopPropagation();
-      dropzone.classList.add('dragover');
-    });
-  });
-  ['dragleave','drop'].forEach(function(evt){
-    dropzone.addEventListener(evt, function(e){
-      e.preventDefault(); e.stopPropagation();
-      dropzone.classList.remove('dragover');
-    });
-  });
-  dropzone.addEventListener('drop', function(e){
-    var files = e.dataTransfer.files;
-    if(files && files.length) handleFile(files[0]);
-  });
-
-  fileInput.addEventListener('change', function(e){
-    if(e.target.files && e.target.files.length) handleFile(e.target.files[0]);
-  });
-
-  function handleFile(file){
-    var typeOk = ACCEPTED_TYPES.indexOf(file.type) !== -1 || /\.(png|jpe?g|webp|gif|svg|bmp|ico)$/i.test(file.name);
-    if(!typeOk){
-      showToast('Unsupported file type.');
-      return;
-    }
-    if(state.objectUrl) URL.revokeObjectURL(state.objectUrl);
-    state.file = file;
-    var url = URL.createObjectURL(file);
-    state.objectUrl = url;
-
-    var img = new Image();
-    img.onload = function(){
-      state.img = img;
-      state.naturalW = img.naturalWidth || img.width;
-      state.naturalH = img.naturalHeight || img.height;
-
-      origImg.src = url;
-      previewArea.classList.add('active');
-
-      widthInput.value = state.naturalW;
-      heightInput.value = state.naturalH;
-
-      renderMeta();
-      downloadBtn.disabled = false;
-      scheduleUpdate();
-    };
-    img.onerror = function(){
-      showToast('Could not load this image. Try a different file.');
-    };
-    img.src = url;
-  }
-
-  function renderMeta(){
-    metaTags.innerHTML = '';
-    var items = [
-      'Name: <b>' + state.file.name + '</b>',
-      'Dimensions: <b>' + state.naturalW + ' × ' + state.naturalH + ' px</b>',
-      'Size: <b>' + formatBytes(state.file.size) + '</b>',
-      'Type: <b>' + (state.file.type || 'unknown') + '</b>'
-    ];
-    items.forEach(function(html){
-      var span = document.createElement('span');
-      span.className = 'text-xs font-mono bg-slate-900/50 border border-slate-700 text-slate-300 px-3 py-1 rounded-full';
-      span.innerHTML = html;
-      metaTags.appendChild(span);
-    });
-  }
-
-  /* ============ Format / quality controls ============ */
-  function syncQualityVisibility(){
-    var fmt = formatSelect.value;
-    if(fmt === 'jpg' || fmt === 'webp'){
-      qualityField.classList.add('active');
-    } else {
-      qualityField.classList.remove('active');
-    }
-  }
-  formatSelect.addEventListener('change', function(){
-    syncQualityVisibility();
-    scheduleUpdate();
-  });
-  qualitySlider.addEventListener('input', function(){
-    qualityVal.textContent = qualitySlider.value + '%';
-    scheduleUpdate();
-  });
-  syncQualityVisibility();
-
-  /* ============ Width/Height + aspect lock ============ */
-  lockBtn.addEventListener('click', function(){
-    state.lockAspect = !state.lockAspect;
-    if(state.lockAspect) {
-      lockBtn.classList.remove('opacity-50');
-      lockBtn.textContent = '🔒';
-    } else {
-      lockBtn.classList.add('opacity-50');
-      lockBtn.textContent = '🔓';
-    }
-  });
-
-  widthInput.addEventListener('input', function(){
-    var w = parseInt(widthInput.value, 10);
-    if(!w || w < 1) return;
-    w = clamp(w, 1, 8000);
-    if(state.lockAspect && state.naturalW && state.naturalH){
-      var h = Math.round(w * (state.naturalH / state.naturalW));
-      heightInput.value = h;
-    }
-    state.selectedPreset = null;
-    scheduleUpdate();
-  });
-
-  heightInput.addEventListener('input', function(){
-    var h = parseInt(heightInput.value, 10);
-    if(!h || h < 1) return;
-    h = clamp(h, 1, 8000);
-    if(state.lockAspect && state.naturalW && state.naturalH){
-      var w = Math.round(h * (state.naturalW / state.naturalH));
-      widthInput.value = w;
-    }
-    state.selectedPreset = null;
-    scheduleUpdate();
-  });
-
-  /* ============ Resize mode ============ */
-  function setMode(mode){
-    state.resizeMode = mode;
-    Array.prototype.forEach.call(modeOptions.children, function(el){
-      el.classList.toggle('active', el.getAttribute('data-mode') === mode);
-    });
-  }
-  modeOptions.addEventListener('click', function(e){
-    var el = e.target.closest('.mode-opt');
-    if(!el) return;
-    setMode(el.getAttribute('data-mode'));
-    scheduleUpdate();
-  });
-
-  /* ============ Live preview: crop overlay + result canvas ============ */
-  function scheduleUpdate(){
-    clearTimeout(state.updateTimer);
-    state.updateTimer = setTimeout(function(){
-      updateOverlay();
-      renderResult(resultCanvas);
-    }, 90);
-  }
-
-  function getTargetDims(){
-    var w = clamp(parseInt(widthInput.value,10) || state.naturalW || 1, 1, 8000);
-    var h = clamp(parseInt(heightInput.value,10) || state.naturalH || 1, 1, 8000);
-    return {w:w, h:h};
-  }
-
-  function updateOverlay(){
-    if(!state.img) return;
-    var t = getTargetDims();
-    var renderedW = origImg.clientWidth;
-    var renderedH = origImg.clientHeight;
-    if(!renderedW || !renderedH){ return; }
-    var scaleFactor = renderedW / state.naturalW;
-
-    if(state.resizeMode === 'cover'){
-      var scale = Math.max(t.w / state.naturalW, t.h / state.naturalH);
-      var sWidth = t.w / scale;
-      var sHeight = t.h / scale;
-      var sx = (state.naturalW - sWidth) / 2;
-      var sy = (state.naturalH - sHeight) / 2;
-
-      cropOverlay.style.left = (sx * scaleFactor) + 'px';
-      cropOverlay.style.top = (sy * scaleFactor) + 'px';
-      cropOverlay.style.width = (sWidth * scaleFactor) + 'px';
-      cropOverlay.style.height = (sHeight * scaleFactor) + 'px';
-      cropOverlay.classList.add('show');
-      cropTag.textContent = 'Kept area — ' + t.w + '×' + t.h;
-      modeNote.textContent = 'Cover / Crop: the highlighted region will fill the full ' + t.w + '×' + t.h + ' canvas; everything outside it is cropped away.';
-    } else if(state.resizeMode === 'fit'){
-      cropOverlay.classList.remove('show');
-      modeNote.textContent = 'Fit (Pad): the entire image is kept and scaled to fit within ' + t.w + '×' + t.h + ', with padding added on the shorter side.';
-    } else {
-      cropOverlay.classList.remove('show');
-      modeNote.textContent = 'Stretch: the image will be stretched to exactly ' + t.w + '×' + t.h + ', which may distort its proportions.';
-    }
-  }
-
-  function renderResult(canvas){
-    if(!state.img) return;
-    var t = getTargetDims();
-    var fmt = formatSelect.value;
-    canvas.width = t.w;
-    canvas.height = t.h;
-    var ctx = canvas.getContext('2d');
-    ctx.clearRect(0,0,t.w,t.h);
-    if(fmt === 'jpg' || fmt === 'bmp'){
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(0,0,t.w,t.h);
-    }
-    var img = state.img, nw = state.naturalW, nh = state.naturalH;
-
-    if(state.resizeMode === 'stretch'){
-      ctx.drawImage(img, 0, 0, t.w, t.h);
-    } else if(state.resizeMode === 'fit'){
-      var scale = Math.min(t.w / nw, t.h / nh);
-      var dw = nw * scale, dh = nh * scale;
-      var dx = (t.w - dw) / 2, dy = (t.h - dh) / 2;
-      ctx.drawImage(img, dx, dy, dw, dh);
-    } else { // cover
-      var scale2 = Math.max(t.w / nw, t.h / nh);
-      var sWidth = t.w / scale2, sHeight = t.h / scale2;
-      var sx = (nw - sWidth) / 2, sy = (nh - sHeight) / 2;
-      ctx.drawImage(img, sx, sy, sWidth, sHeight, 0, 0, t.w, t.h);
-    }
-    return canvas;
-  }
-
-  window.addEventListener('resize', function(){ if(state.img) updateOverlay(); });
-
-  /* ============ BMP encoder (24-bit, uncompressed) ============ */
-  function canvasToBMPBlob(canvas){
-    var w = canvas.width, h = canvas.height;
-    var ctx = canvas.getContext('2d');
-    var data = ctx.getImageData(0, 0, w, h).data;
-    var rowSize = Math.floor((24 * w + 31) / 32) * 4;
-    var pixelArraySize = rowSize * h;
-    var fileSize = 54 + pixelArraySize;
-    var buffer = new ArrayBuffer(fileSize);
-    var view = new DataView(buffer);
-
-    view.setUint8(0, 0x42); view.setUint8(1, 0x4D); // 'BM'
-    view.setUint32(2, fileSize, true);
-    view.setUint32(6, 0, true);
-    view.setUint32(10, 54, true);
-    view.setUint32(14, 40, true);
-    view.setInt32(18, w, true);
-    view.setInt32(22, h, true);
-    view.setUint16(26, 1, true);
-    view.setUint16(28, 24, true);
-    view.setUint32(30, 0, true);
-    view.setUint32(34, pixelArraySize, true);
-    view.setInt32(38, 2835, true);
-    view.setInt32(42, 2835, true);
-    view.setUint32(46, 0, true);
-    view.setUint32(50, 0, true);
-
-    var offset = 54;
-    for(var y = h - 1; y >= 0; y--){
-      for(var x = 0; x < w; x++){
-        var i = (y * w + x) * 4;
-        view.setUint8(offset++, data[i+2]); // B
-        view.setUint8(offset++, data[i+1]); // G
-        view.setUint8(offset++, data[i]);   // R
+    
+    (function(){
+      "use strict";
+    
+      var PRESETS = {
+        "Instagram": [
+          {label:"Feed Portrait", w:1080, h:1350},
+          {label:"Feed Square", w:1080, h:1080},
+          {label:"Story/Reel", w:1080, h:1920},
+          {label:"Landscape", w:1080, h:566},
+          {label:"Profile Picture", w:320, h:320}
+        ],
+        "Facebook": [
+          {label:"Feed Post", w:1080, h:1350},
+          {label:"Landscape Post", w:1200, h:630},
+          {label:"Profile Picture", w:320, h:320},
+          {label:"Page/Profile Cover", w:851, h:315},
+          {label:"Story", w:1080, h:1920}
+        ],
+        "YouTube": [
+          {label:"Video Thumbnail", w:1280, h:720},
+          {label:"Channel Banner", w:2560, h:1440},
+          {label:"Profile Picture", w:800, h:800}
+        ],
+        "X / Twitter": [
+          {label:"In-Stream Post", w:1200, h:675},
+          {label:"Header Banner", w:1500, h:500},
+          {label:"Profile Picture", w:400, h:400}
+        ]
+      };
+    
+      var dropzone = document.getElementById('dropzone');
+      var fileInput = document.getElementById('fileInput');
+      var browseBtn = document.getElementById('browseBtn');
+      var previewArea = document.getElementById('previewArea');
+      var origImg = document.getElementById('origImg');
+      var cropOverlay = document.getElementById('cropOverlay');
+      var cropTag = document.getElementById('cropTag');
+      var modeNote = document.getElementById('modeNote');
+      var metaTags = document.getElementById('metaTags');
+      var resultCanvas = document.getElementById('resultCanvas');
+    
+      var formatSelect = document.getElementById('formatSelect');
+      var qualityField = document.getElementById('qualityField');
+      var qualitySlider = document.getElementById('qualitySlider');
+      var qualityVal = document.getElementById('qualityVal');
+    
+      var widthInput = document.getElementById('widthInput');
+      var heightInput = document.getElementById('heightInput');
+      var lockBtn = document.getElementById('lockBtn');
+      var modeOptions = document.getElementById('modeOptions');
+    
+      var platformSelect = document.getElementById('platformSelect');
+      var presetSelect = document.getElementById('presetSelect');
+    
+      var downloadBtn = document.getElementById('downloadBtn');
+      var resetBtn = document.getElementById('resetBtn');
+      var outputBox = document.getElementById('outputBox');
+      var outputFileName = document.getElementById('outputFileName');
+      var outputFileSize = document.getElementById('outputFileSize');
+      var toast = document.getElementById('toast');
+    
+      var state = {
+        file: null,
+        img: null,
+        naturalW: 0,
+        naturalH: 0,
+        lockAspect: true,
+        resizeMode: 'fit',
+        selectedPreset: null,
+        objectUrl: null,
+        updateTimer: null
+      };
+    
+      function showToast(msg){
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(function(){ toast.classList.remove('show'); }, 2200);
       }
-      var pad = rowSize - w * 3;
-      for(var p = 0; p < pad; p++) view.setUint8(offset++, 0);
-    }
-    return new Blob([buffer], {type:'image/bmp'});
-  }
-
-  /* ============ Download ============ */
-  downloadBtn.addEventListener('click', function(){
-    if(!state.img){ showToast('Please upload an image first.'); return; }
-    var t = getTargetDims();
-    var fmt = formatSelect.value;
-
-    var procCanvas = document.createElement('canvas');
-    procCanvas.width = t.w; procCanvas.height = t.h;
-    var ctx = procCanvas.getContext('2d');
-    ctx.clearRect(0,0,t.w,t.h);
-    if(fmt === 'jpg' || fmt === 'bmp'){
-      ctx.fillStyle = '#ffffff';
-      ctx.fillRect(0,0,t.w,t.h);
-    }
-    var img = state.img, nw = state.naturalW, nh = state.naturalH;
-    if(state.resizeMode === 'stretch'){
-      ctx.drawImage(img, 0, 0, t.w, t.h);
-    } else if(state.resizeMode === 'fit'){
-      var scale = Math.min(t.w / nw, t.h / nh);
-      var dw = nw * scale, dh = nh * scale;
-      ctx.drawImage(img, (t.w-dw)/2, (t.h-dh)/2, dw, dh);
-    } else {
-      var scale2 = Math.max(t.w / nw, t.h / nh);
-      var sWidth = t.w / scale2, sHeight = t.h / scale2;
-      var sx = (nw - sWidth)/2, sy = (nh - sHeight)/2;
-      ctx.drawImage(img, sx, sy, sWidth, sHeight, 0, 0, t.w, t.h);
-    }
-
-    var ext, mime, quality = parseInt(qualitySlider.value,10)/100;
-    if(fmt === 'jpg'){ ext='jpg'; mime='image/jpeg'; }
-    else if(fmt === 'png'){ ext='png'; mime='image/png'; }
-    else if(fmt === 'webp'){ ext='webp'; mime='image/webp'; }
-    else { ext='bmp'; mime='image/bmp'; }
-
-    var contextSlug = state.selectedPreset
-      ? slugify(state.selectedPreset.platform) + '-' + slugify(state.selectedPreset.label)
-      : 'custom';
-    var filename = 'utiliverse-' + contextSlug + '-' + t.w + 'x' + t.h + '.' + ext;
-
-    function finish(blob){
-      if(!blob){ showToast('Could not generate file. Try a different format.'); return; }
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement('a');
-      a.href = url; a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-
-      outputFileName.textContent = filename;
-      outputFileSize.textContent = 'Output size: ' + formatBytes(blob.size);
-      outputBox.classList.add('show');
-      showToast('Download started.');
-      setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
-    }
-
-    if(fmt === 'bmp'){
-      try{ finish(canvasToBMPBlob(procCanvas)); }
-      catch(err){ showToast('BMP export failed in this browser.'); }
-    } else {
-      procCanvas.toBlob(function(blob){ finish(blob); }, mime, quality);
-    }
-  });
-
-  /* ============ Reset ============ */
-  resetBtn.addEventListener('click', function(){
-    if(state.objectUrl) URL.revokeObjectURL(state.objectUrl);
-    state = {
-      file:null, img:null, naturalW:0, naturalH:0,
-      lockAspect:true, resizeMode:'fit', selectedPreset:null,
-      objectUrl:null, updateTimer:null
-    };
-    fileInput.value = '';
-    origImg.src = '';
-    previewArea.classList.remove('active');
-    cropOverlay.classList.remove('show');
-    metaTags.innerHTML = '';
-    widthInput.value = '';
-    heightInput.value = '';
-    lockBtn.classList.remove('opacity-50');
-    lockBtn.textContent = '🔒';
-    setMode('fit');
-    platformSelect.value = '';
-    presetSelect.innerHTML = '<option>Select platform first…</option>';
-    presetSelect.disabled = true;
-    formatSelect.value = 'png';
-    syncQualityVisibility();
-    downloadBtn.disabled = true;
-    outputBox.classList.remove('show');
-    var ctx = resultCanvas.getContext('2d');
-    ctx.clearRect(0,0,resultCanvas.width,resultCanvas.height);
-    resultCanvas.width = 10; resultCanvas.height = 10;
-    showToast('Reset complete.');
-  });
-
-})();
-</script>
+    
+      function formatBytes(bytes){
+        if(bytes < 1024) return bytes + ' B';
+        if(bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
+        return (bytes/(1024*1024)).toFixed(2) + ' MB';
+      }
+    
+      function slugify(str){
+        return str.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+      }
+    
+      function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
+    
+      Object.keys(PRESETS).forEach(function(platform){
+        var opt = document.createElement('option');
+        opt.value = platform;
+        opt.textContent = platform;
+        platformSelect.appendChild(opt);
+      });
+    
+      platformSelect.addEventListener('change', function(){
+        var platform = platformSelect.value;
+        presetSelect.innerHTML = '';
+        if(!platform){
+          presetSelect.disabled = true;
+          var o = document.createElement('option');
+          o.textContent = 'Select platform first…';
+          presetSelect.appendChild(o);
+          return;
+        }
+        presetSelect.disabled = false;
+        var placeholder = document.createElement('option');
+        placeholder.value = '';
+        placeholder.textContent = 'Select a preset…';
+        presetSelect.appendChild(placeholder);
+        PRESETS[platform].forEach(function(p, i){
+          var opt = document.createElement('option');
+          opt.value = i;
+          opt.textContent = p.label + ' (' + p.w + '×' + p.h + ')';
+          presetSelect.appendChild(opt);
+        });
+      });
+    
+      presetSelect.addEventListener('change', function(){
+        var platform = platformSelect.value;
+        var idx = presetSelect.value;
+        if(idx === '' || !platform){ state.selectedPreset = null; return; }
+        var p = PRESETS[platform][idx];
+        state.selectedPreset = {platform: platform, label: p.label};
+        widthInput.value = p.w;
+        heightInput.value = p.h;
+        setMode('cover');
+        scheduleUpdate();
+      });
+    
+      (function buildDimTable(){
+        var tbody = document.querySelector('#dimTable tbody');
+        Object.keys(PRESETS).forEach(function(platform){
+          PRESETS[platform].forEach(function(p){
+            var tr = document.createElement('tr');
+            tr.innerHTML = '<td>' + platform + '</td><td>' + p.label + '</td><td class="dims">' + p.w + ' × ' + p.h + '</td>';
+            tbody.appendChild(tr);
+          });
+        });
+      })();
+    
+      browseBtn.addEventListener('click', function(){ fileInput.click(); });
+      dropzone.addEventListener('click', function(e){
+        if(e.target !== browseBtn) fileInput.click();
+      });
+    
+      ['dragenter','dragover'].forEach(function(evt){
+        dropzone.addEventListener(evt, function(e){
+          e.preventDefault(); e.stopPropagation();
+          dropzone.classList.add('dragover');
+        });
+      });
+      ['dragleave','drop'].forEach(function(evt){
+        dropzone.addEventListener(evt, function(e){
+          e.preventDefault(); e.stopPropagation();
+          dropzone.classList.remove('dragover');
+        });
+      });
+      dropzone.addEventListener('drop', function(e){
+        var files = e.dataTransfer.files;
+        if(files && files.length) handleFile(files[0]);
+      });
+    
+      fileInput.addEventListener('change', function(e){
+        if(e.target.files && e.target.files.length) handleFile(e.target.files[0]);
+      });
+    
+      function handleFile(file){
+        if(state.objectUrl) URL.revokeObjectURL(state.objectUrl);
+        state.file = file;
+        
+        var reader = new FileReader();
+        reader.onload = function(event) {
+          var url = event.target.result;
+          var img = new Image();
+          img.onload = function(){
+            state.img = img;
+            state.naturalW = img.naturalWidth || img.width;
+            state.naturalH = img.naturalHeight || img.height;
+      
+            origImg.src = url;
+            previewArea.classList.add('active');
+      
+            widthInput.value = state.naturalW;
+            heightInput.value = state.naturalH;
+      
+            renderMeta();
+            downloadBtn.disabled = false;
+            scheduleUpdate();
+          };
+          img.onerror = function(){
+            showToast('Could not load this image. Ensure it is a valid web format.');
+          };
+          img.src = url;
+        };
+        reader.readAsDataURL(file);
+      }
+    
+      function renderMeta(){
+        metaTags.innerHTML = '';
+        var items = [
+          'Name: <b>' + state.file.name + '</b>',
+          'Dimensions: <b>' + state.naturalW + ' × ' + state.naturalH + ' px</b>',
+          'Size: <b>' + formatBytes(state.file.size) + '</b>',
+          'Type: <b>' + (state.file.type || 'unknown') + '</b>'
+        ];
+        items.forEach(function(html){
+          var span = document.createElement('span');
+          span.className = 'text-xs font-mono bg-slate-900/50 border border-slate-700 text-slate-300 px-3 py-1 rounded-full';
+          span.innerHTML = html;
+          metaTags.appendChild(span);
+        });
+      }
+    
+      function syncQualityVisibility(){
+        var fmt = formatSelect.value;
+        if(fmt === 'jpg' || fmt === 'webp'){
+          qualityField.classList.add('active');
+        } else {
+          qualityField.classList.remove('active');
+        }
+      }
+      formatSelect.addEventListener('change', function(){
+        syncQualityVisibility();
+        scheduleUpdate();
+      });
+      qualitySlider.addEventListener('input', function(){
+        qualityVal.textContent = qualitySlider.value + '%';
+        scheduleUpdate();
+      });
+      syncQualityVisibility();
+    
+      lockBtn.addEventListener('click', function(){
+        state.lockAspect = !state.lockAspect;
+        if(state.lockAspect) {
+          lockBtn.classList.remove('opacity-50');
+          lockBtn.textContent = '🔒';
+        } else {
+          lockBtn.classList.add('opacity-50');
+          lockBtn.textContent = '🔓';
+        }
+      });
+    
+      widthInput.addEventListener('input', function(){
+        var w = parseInt(widthInput.value, 10);
+        if(!w || w < 1) return;
+        w = clamp(w, 1, 8000);
+        if(state.lockAspect && state.naturalW && state.naturalH){
+          var h = Math.round(w * (state.naturalH / state.naturalW));
+          heightInput.value = h;
+        }
+        state.selectedPreset = null;
+        scheduleUpdate();
+      });
+    
+      heightInput.addEventListener('input', function(){
+        var h = parseInt(heightInput.value, 10);
+        if(!h || h < 1) return;
+        h = clamp(h, 1, 8000);
+        if(state.lockAspect && state.naturalW && state.naturalH){
+          var w = Math.round(h * (state.naturalW / state.naturalH));
+          widthInput.value = w;
+        }
+        state.selectedPreset = null;
+        scheduleUpdate();
+      });
+    
+      function setMode(mode){
+        state.resizeMode = mode;
+        Array.prototype.forEach.call(modeOptions.children, function(el){
+          el.classList.toggle('active', el.getAttribute('data-mode') === mode);
+        });
+      }
+      modeOptions.addEventListener('click', function(e){
+        var el = e.target.closest('.mode-opt');
+        if(!el) return;
+        setMode(el.getAttribute('data-mode'));
+        scheduleUpdate();
+      });
+    
+      function scheduleUpdate(){
+        clearTimeout(state.updateTimer);
+        state.updateTimer = setTimeout(function(){
+          updateOverlay();
+          renderResult(resultCanvas);
+        }, 90);
+      }
+    
+      function getTargetDims(){
+        var w = clamp(parseInt(widthInput.value,10) || state.naturalW || 1, 1, 8000);
+        var h = clamp(parseInt(heightInput.value,10) || state.naturalH || 1, 1, 8000);
+        return {w:w, h:h};
+      }
+    
+      function updateOverlay(){
+        if(!state.img) return;
+        var t = getTargetDims();
+        var renderedW = origImg.clientWidth;
+        var renderedH = origImg.clientHeight;
+        if(!renderedW || !renderedH){ return; }
+        var scaleFactor = renderedW / state.naturalW;
+    
+        if(state.resizeMode === 'cover'){
+          var scale = Math.max(t.w / state.naturalW, t.h / state.naturalH);
+          var sWidth = t.w / scale;
+          var sHeight = t.h / scale;
+          var sx = (state.naturalW - sWidth) / 2;
+          var sy = (state.naturalH - sHeight) / 2;
+    
+          cropOverlay.style.left = (sx * scaleFactor) + 'px';
+          cropOverlay.style.top = (sy * scaleFactor) + 'px';
+          cropOverlay.style.width = (sWidth * scaleFactor) + 'px';
+          cropOverlay.style.height = (sHeight * scaleFactor) + 'px';
+          cropOverlay.classList.add('show');
+          cropTag.textContent = 'Kept area — ' + t.w + '×' + t.h;
+          modeNote.textContent = 'Cover / Crop: the highlighted region will fill the full ' + t.w + '×' + t.h + ' canvas; everything outside it is cropped away.';
+        } else if(state.resizeMode === 'fit'){
+          cropOverlay.classList.remove('show');
+          modeNote.textContent = 'Fit (Pad): the entire image is kept and scaled to fit within ' + t.w + '×' + t.h + ', with padding added on the shorter side.';
+        } else {
+          cropOverlay.classList.remove('show');
+          modeNote.textContent = 'Stretch: the image will be stretched to exactly ' + t.w + '×' + t.h + ', which may distort its proportions.';
+        }
+      }
+    
+      function renderResult(canvas){
+        if(!state.img) return;
+        var t = getTargetDims();
+        var fmt = formatSelect.value;
+        canvas.width = t.w;
+        canvas.height = t.h;
+        var ctx = canvas.getContext('2d');
+        ctx.clearRect(0,0,t.w,t.h);
+        if(fmt === 'jpg' || fmt === 'bmp'){
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0,0,t.w,t.h);
+        }
+        var img = state.img, nw = state.naturalW, nh = state.naturalH;
+    
+        if(state.resizeMode === 'stretch'){
+          ctx.drawImage(img, 0, 0, t.w, t.h);
+        } else if(state.resizeMode === 'fit'){
+          var scale = Math.min(t.w / nw, t.h / nh);
+          var dw = nw * scale, dh = nh * scale;
+          var dx = (t.w - dw) / 2, dy = (t.h - dh) / 2;
+          ctx.drawImage(img, dx, dy, dw, dh);
+        } else {
+          var scale2 = Math.max(t.w / nw, t.h / nh);
+          var sWidth = t.w / scale2, sHeight = t.h / scale2;
+          var sx = (nw - sWidth) / 2, sy = (nh - sHeight) / 2;
+          ctx.drawImage(img, sx, sy, sWidth, sHeight, 0, 0, t.w, t.h);
+        }
+        return canvas;
+      }
+    
+      window.addEventListener('resize', function(){ if(state.img) updateOverlay(); });
+    
+      function canvasToBMPBlob(canvas){
+        var w = canvas.width, h = canvas.height;
+        var ctx = canvas.getContext('2d');
+        var data = ctx.getImageData(0, 0, w, h).data;
+        var rowSize = Math.floor((24 * w + 31) / 32) * 4;
+        var pixelArraySize = rowSize * h;
+        var fileSize = 54 + pixelArraySize;
+        var buffer = new ArrayBuffer(fileSize);
+        var view = new DataView(buffer);
+    
+        view.setUint8(0, 0x42); view.setUint8(1, 0x4D);
+        view.setUint32(2, fileSize, true);
+        view.setUint32(6, 0, true);
+        view.setUint32(10, 54, true);
+        view.setUint32(14, 40, true);
+        view.setInt32(18, w, true);
+        view.setInt32(22, h, true);
+        view.setUint16(26, 1, true);
+        view.setUint16(28, 24, true);
+        view.setUint32(30, 0, true);
+        view.setUint32(34, pixelArraySize, true);
+        view.setInt32(38, 2835, true);
+        view.setInt32(42, 2835, true);
+        view.setUint32(46, 0, true);
+        view.setUint32(50, 0, true);
+    
+        var offset = 54;
+        for(var y = h - 1; y >= 0; y--){
+          for(var x = 0; x < w; x++){
+            var i = (y * w + x) * 4;
+            view.setUint8(offset++, data[i+2]);
+            view.setUint8(offset++, data[i+1]);
+            view.setUint8(offset++, data[i]);
+          }
+          var pad = rowSize - w * 3;
+          for(var p = 0; p < pad; p++) view.setUint8(offset++, 0);
+        }
+        return new Blob([buffer], {type:'image/bmp'});
+      }
+    
+      downloadBtn.addEventListener('click', function(){
+        if(!state.img){ showToast('Please upload an image first.'); return; }
+        var t = getTargetDims();
+        var fmt = formatSelect.value;
+    
+        var procCanvas = document.createElement('canvas');
+        procCanvas.width = t.w; procCanvas.height = t.h;
+        var ctx = procCanvas.getContext('2d');
+        ctx.clearRect(0,0,t.w,t.h);
+        if(fmt === 'jpg' || fmt === 'bmp'){
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0,0,t.w,t.h);
+        }
+        var img = state.img, nw = state.naturalW, nh = state.naturalH;
+        if(state.resizeMode === 'stretch'){
+          ctx.drawImage(img, 0, 0, t.w, t.h);
+        } else if(state.resizeMode === 'fit'){
+          var scale = Math.min(t.w / nw, t.h / nh);
+          var dw = nw * scale, dh = nh * scale;
+          ctx.drawImage(img, (t.w-dw)/2, (t.h-dh)/2, dw, dh);
+        } else {
+          var scale2 = Math.max(t.w / nw, t.h / nh);
+          var sWidth = t.w / scale2, sHeight = t.h / scale2;
+          var sx = (nw - sWidth)/2, sy = (nh - sHeight)/2;
+          ctx.drawImage(img, sx, sy, sWidth, sHeight, 0, 0, t.w, t.h);
+        }
+    
+        var ext, mime, quality = parseInt(qualitySlider.value,10)/100;
+        if(fmt === 'jpg'){ ext='jpg'; mime='image/jpeg'; }
+        else if(fmt === 'png'){ ext='png'; mime='image/png'; }
+        else if(fmt === 'webp'){ ext='webp'; mime='image/webp'; }
+        else { ext='bmp'; mime='image/bmp'; }
+    
+        var contextSlug = state.selectedPreset
+          ? slugify(state.selectedPreset.platform) + '-' + slugify(state.selectedPreset.label)
+          : 'custom';
+        var filename = 'utiliverse-' + contextSlug + '-' + t.w + 'x' + t.h + '.' + ext;
+    
+        function finish(blob){
+          if(!blob){ showToast('Could not generate file. Try a different format.'); return; }
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement('a');
+          a.href = url; a.download = filename;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+    
+          outputFileName.textContent = filename;
+          outputFileSize.textContent = 'Output size: ' + formatBytes(blob.size);
+          outputBox.classList.add('show');
+          showToast('Download started.');
+          setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+        }
+    
+        if(fmt === 'bmp'){
+          try{ finish(canvasToBMPBlob(procCanvas)); }
+          catch(err){ showToast('BMP export failed in this browser.'); }
+        } else {
+          try {
+            procCanvas.toBlob(function(blob){ 
+              if(blob) finish(blob); 
+              else {
+                var dataUrl = procCanvas.toDataURL(mime, quality);
+                fetch(dataUrl).then(res => res.blob()).then(finish);
+              }
+            }, mime, quality);
+          } catch(e) {
+            var dataUrl = procCanvas.toDataURL(mime, quality);
+            fetch(dataUrl).then(res => res.blob()).then(finish);
+          }
+        }
+      });
+    
+      resetBtn.addEventListener('click', function(){
+        if(state.objectUrl) URL.revokeObjectURL(state.objectUrl);
+        state = {
+          file:null, img:null, naturalW:0, naturalH:0,
+          lockAspect:true, resizeMode:'fit', selectedPreset:null,
+          objectUrl:null, updateTimer:null
+        };
+        fileInput.value = '';
+        origImg.src = '';
+        previewArea.classList.remove('active');
+        cropOverlay.classList.remove('show');
+        metaTags.innerHTML = '';
+        widthInput.value = '';
+        heightInput.value = '';
+        lockBtn.classList.remove('opacity-50');
+        lockBtn.textContent = '🔒';
+        setMode('fit');
+        platformSelect.value = '';
+        presetSelect.innerHTML = '<option>Select platform first…</option>';
+        presetSelect.disabled = true;
+        formatSelect.value = 'png';
+        syncQualityVisibility();
+        downloadBtn.disabled = true;
+        outputBox.classList.remove('show');
+        var ctx = resultCanvas.getContext('2d');
+        ctx.clearRect(0,0,resultCanvas.width,resultCanvas.height);
+        resultCanvas.width = 10; resultCanvas.height = 10;
+        showToast('Reset complete.');
+      });
+    
+    })();
+  </script>
 </body>
+
 </html>
