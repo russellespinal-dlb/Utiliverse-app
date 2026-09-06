@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Time Tracking Suite | Utiliverse</title>
+<meta name="description" content="Free online stopwatch, countdown timer, and Pomodoro tracker to boost your productivity.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/Time_Tools/">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;color:#f8fafc;font-family:Inter,system-ui,sans-serif;transition:background 0.3s ease,color 0.3s ease;}
+.glass{background:rgba(30,41,59,.72);backdrop-filter:blur(14px);border:1px solid #334155;}
+.input{background:#0f172a;border:1px solid #475569;color:#f8fafc;}
+.input:focus{outline:none;border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.15)}
+.btn{border:1px solid #475569;background:#1e293b;color:#f8fafc;border-radius:12px;padding:.75rem 1rem;font-weight:700;cursor:pointer;transition:all 0.2s ease;}
+.btn:hover{background:#334155}
+.btn:active{transform:scale(0.97)}
+.primary{background:linear-gradient(135deg,#6366f1,#4f46e5);border-color:#6366f1;color:#fff;}
+.primary:hover{filter:brightness(1.08)}
+.muted{color:#94a3b8;}
+.article h2{font-size:1.9rem;font-weight:800;color:#fff;margin:2.2rem 0 .9rem;}
+.article h3{font-size:1.2rem;font-weight:750;color:#e2e8f0;margin:1.7rem 0 .65rem;}
+.article p,.article li{color:#94a3b8;line-height:1.85;margin-bottom:1rem;}
+.faq{border-bottom:1px solid #334155}
+.faq summary{list-style:none;cursor:pointer;padding:1rem 0;font-weight:700}
+.faq summary::-webkit-details-marker{display:none}
+.time-display{font-variant-numeric: tabular-nums;}
+/* Light Mode Styles */
+body.light-mode{background:#f8fafc;color:#0f172a;}
+body.light-mode .glass{background:rgba(255,255,255,0.8);border-color:#e2e8f0;}
+body.light-mode .input{background:#ffffff;border-color:#cbd5e1;color:#0f172a;}
+body.light-mode .btn{background:#f1f5f9;border-color:#cbd5e1;color:#334155;}
+body.light-mode .primary{background:linear-gradient(135deg,#6366f1,#4f46e5);color:#ffffff;}
+body.light-mode .muted{color:#64748b;}
+body.light-mode .article h2{color:#0f172a;}
+body.light-mode .article h3{color:#1e293b;}
+body.light-mode .article p,body.light-mode .article li{color:#475569;}
+body.light-mode header{background:rgba(255,255,255,0.9);border-color:#e2e8f0;}
+/* Custom Scrollbar for Lap List */
+.lap-list::-webkit-scrollbar {width:6px;}
+.lap-list::-webkit-scrollbar-track {background:transparent;}
+.lap-list::-webkit-scrollbar-thumb {background:#475569;border-radius:10px;}
+</style>
+</head>
+<body>
+<header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800 transition-all duration-300">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+<a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2 transition-colors"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse</a>
+<button id="theme-toggle" class="text-slate-400 hover:text-white transition-colors cursor-pointer"><i data-lucide="sun" id="theme-icon" class="w-5 h-5"></i></button>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
+<div class="max-w-3xl">
+<p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Productivity</p>
+<h1 class="text-4xl sm:text-5xl font-black mt-2">Time Tracking Suite</h1>
+<p class="mt-4 text-lg muted">Manage your workflow with a precision stopwatch, countdown timer, and Pomodoro tracker.</p>
+</div>
+
+<section class="grid lg:grid-cols-3 md:grid-cols-2 gap-6 mt-8">
+  <!-- Stopwatch Card -->
+  <div class="glass p-6 rounded-2xl flex flex-col gap-4">
+    <div class="flex items-center gap-2 mb-2">
+      <i data-lucide="timer" class="w-5 h-5 text-indigo-400"></i>
+      <h3 class="font-bold text-lg m-0">Stopwatch</h3>
+    </div>
+    <div id="sw-display" class="text-5xl font-bold time-display text-center py-4 text-indigo-400">00:00:00.00</div>
+    <div class="grid grid-cols-2 gap-2 mt-auto">
+      <button id="sw-start-btn" class="btn primary" onclick="swToggle()">Start</button>
+      <button class="btn" onclick="swLapReset()" id="sw-lap-btn">Lap</button>
+    </div>
+    <ul id="sw-laps" class="lap-list max-h-32 overflow-y-auto mt-2 text-sm text-slate-400 space-y-1 pr-2"></ul>
+  </div>
+
+  <!-- Countdown Timer Card -->
+  <div class="glass p-6 rounded-2xl flex flex-col gap-4">
+    <div class="flex items-center gap-2 mb-2">
+      <i data-lucide="hourglass" class="w-5 h-5 text-indigo-400"></i>
+      <h3 class="font-bold text-lg m-0">Countdown Timer</h3>
+    </div>
+    <div id="tm-display" class="text-5xl font-bold time-display text-center py-4 text-indigo-400">00:00:00</div>
+    
+    <div class="grid grid-cols-3 gap-2" id="tm-inputs">
+      <div class="flex flex-col">
+        <label class="text-xs muted mb-1">Hours</label>
+        <input type="number" id="tm-h" min="0" max="99" class="input p-2 rounded-lg text-center" placeholder="0">
+      </div>
+      <div class="flex flex-col">
+        <label class="text-xs muted mb-1">Minutes</label>
+        <input type="number" id="tm-m" min="0" max="59" class="input p-2 rounded-lg text-center" placeholder="0">
+      </div>
+      <div class="flex flex-col">
+        <label class="text-xs muted mb-1">Seconds</label>
+        <input type="number" id="tm-s" min="0" max="59" class="input p-2 rounded-lg text-center" placeholder="0">
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-2 mt-auto">
+      <button id="tm-start-btn" class="btn primary" onclick="tmToggle()">Start</button>
+      <button class="btn" onclick="tmReset()">Reset</button>
+    </div>
+  </div>
+
+  <!-- Pomodoro Card -->
+  <div class="glass p-6 rounded-2xl flex flex-col gap-4">
+    <div class="flex items-center gap-2 mb-2">
+      <i data-lucide="brain-circuit" class="w-5 h-5 text-indigo-400"></i>
+      <h3 class="font-bold text-lg m-0">Pomodoro</h3>
+    </div>
+    <div class="flex justify-center gap-2 text-sm font-semibold">
+      <button class="text-indigo-400 hover:text-indigo-300" onclick="pmSetMode('work')">Work (25m)</button>
+      <span class="muted">|</span>
+      <button class="text-indigo-400 hover:text-indigo-300" onclick="pmSetMode('break')">Break (5m)</button>
+    </div>
+    <div id="pm-display" class="text-5xl font-bold time-display text-center py-2 text-indigo-400">25:00</div>
+    
+    <div class="grid grid-cols-2 gap-2 mt-auto">
+      <button id="pm-start-btn" class="btn primary" onclick="pmToggle()">Start</button>
+      <button class="btn" onclick="pmReset()">Reset</button>
+    </div>
+  </div>
+</section>
+
+<section class="article max-w-4xl mt-16">
+<h2>Mastering Productivity: The Power of Digital Time Tracking</h2>
+<p>Time is the only non-renewable resource, making efficient time management a cornerstone of professional success and personal growth. Whether you are executing high-frequency trades on Nasdaq futures, practicing guitar chord transitions, or managing a diverse web development project, digital time tracking tools provide the strict boundaries necessary to maintain deep focus and measure objective progress.</p>
+<h3>The Pomodoro Technique: Maximizing Cognitive Endurance</h3>
+<p>Developed in the late 1980s, the Pomodoro Technique involves breaking work into highly focused intervals (traditionally 25 minutes), separated by short breaks. This prevents cognitive fatigue and forces prioritization. A dedicated browser-based Pomodoro timer removes the temptation to check a smartphone, keeping your eyes on your desktop environment where the actual work happens. The strict cadence of "Work" and "Break" modes trains the brain to execute tasks in sprints rather than marathons, highly suitable for coding sessions or intense market analysis.</p>
+<h3>Precision Measurement with Stopwatches and Countdowns</h3>
+<p>While the Pomodoro technique structures workflow, count-up stopwatches and countdown timers serve distinct, vital roles. A stopwatch with lap functionality allows for the granular measurement of repetitive tasks—such as timing website load speeds after deploying new code or tracking the duration of specific daily practice routines. Conversely, a custom countdown timer creates a hard deadline for open-ended tasks, instilling a sense of urgency that effectively combats Parkinson’s Law (the adage that work expands to fill the time allotted for its completion).</p>
+</section>
+
+<section class="article max-w-4xl mt-8">
+<h2>Frequently Asked Questions</h2>
+<details class="faq"><summary>Does the timer run if I switch browser tabs?</summary><p class="muted">Yes, the time calculation is based on your system clock, meaning it will accurately track time even if the browser tab is minimized or inactive.</p></details>
+<details class="faq"><summary>What happens when the countdown hits zero?</summary><p class="muted">The timer will automatically stop at zero. In future updates, auditory alerts can be enabled in your browser settings.</p></details>
+<details class="faq"><summary>How many laps can I record on the stopwatch?</summary><p class="muted">You can record an unlimited number of laps. The lap list becomes scrollable after the first few entries, displaying the time elapsed between each lap press.</p></details>
+</section>
+</main>
+<footer class="border-t border-slate-800 bg-slate-950 mt-12">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 text-sm text-slate-500">© <span id="year"></span> Utiliverse. All rights reserved.</div>
+</footer>
+
+<script>
+// --- Initialization & Theme ---
+lucide.createIcons();
+document.getElementById('year').textContent = new Date().getFullYear();
+
+document.getElementById('theme-toggle').addEventListener('click', () => {
+  document.body.classList.toggle('light-mode');
+  const icon = document.getElementById('theme-icon');
+  icon.setAttribute('data-lucide', document.body.classList.contains('light-mode') ? 'moon' : 'sun');
+  lucide.createIcons();
+});
+
+// Utility formatting function
+const pad = (num, size = 2) => num.toString().padStart(size, '0');
+
+// --- STOPWATCH LOGIC ---
+let swStartTime = 0;
+let swElapsedTime = 0;
+let swInterval;
+let swRunning = false;
+let swLapCount = 0;
+
+function swFormat(time) {
+  const date = new Date(time);
+  const h = pad(date.getUTCHours());
+  const m = pad(date.getUTCMinutes());
+  const s = pad(date.getUTCSeconds());
+  const ms = pad(Math.floor(date.getUTCMilliseconds() / 10));
+  return `${h}:${m}:${s}.${ms}`;
+}
+
+function swUpdate() {
+  const now = Date.now();
+  const currentElapsed = swElapsedTime + (now - swStartTime);
+  document.getElementById('sw-display').innerText = swFormat(currentElapsed);
+}
+
+function swToggle() {
+  const btn = document.getElementById('sw-start-btn');
+  const lapBtn = document.getElementById('sw-lap-btn');
+  if (swRunning) {
+    clearInterval(swInterval);
+    swElapsedTime += Date.now() - swStartTime;
+    swRunning = false;
+    btn.innerText = 'Start';
+    lapBtn.innerText = 'Reset';
+  } else {
+    swStartTime = Date.now();
+    swInterval = setInterval(swUpdate, 10);
+    swRunning = true;
+    btn.innerText = 'Pause';
+    lapBtn.innerText = 'Lap';
+  }
+}
+
+function swLapReset() {
+  const lapBtn = document.getElementById('sw-lap-btn');
+  const lapList = document.getElementById('sw-laps');
+  
+  if (!swRunning) {
+    // Reset Mode
+    swElapsedTime = 0;
+    swLapCount = 0;
+    document.getElementById('sw-display').innerText = '00:00:00.00';
+    lapList.innerHTML = '';
+    lapBtn.innerText = 'Lap';
+  } else {
+    // Lap Mode
+    swLapCount++;
+    const currentTotal = swElapsedTime + (Date.now() - swStartTime);
+    const li = document.createElement('li');
+    li.className = 'flex justify-between border-b border-slate-800 pb-1';
+    li.innerHTML = `<span>Lap ${swLapCount}</span> <span class="font-mono">${swFormat(currentTotal)}</span>`;
+    lapList.prepend(li);
+  }
+}
+
+
+// --- COUNTDOWN TIMER LOGIC ---
+let tmTargetTime = 0;
+let tmInterval;
+let tmRunning = false;
+let tmTotalMs = 0;
+
+function tmFormat(ms) {
+  if(ms < 0) ms = 0;
+  const totalSeconds = Math.floor(ms / 1000);
+  const h = pad(Math.floor(totalSeconds / 3600));
+  const m = pad(Math.floor((totalSeconds % 3600) / 60));
+  const s = pad(totalSeconds % 60);
+  return `${h}:${m}:${s}`;
+}
+
+function tmUpdate() {
+  const remaining = tmTargetTime - Date.now();
+  if (remaining <= 0) {
+    clearInterval(tmInterval);
+    document.getElementById('tm-display').innerText = '00:00:00';
+    document.getElementById('tm-start-btn').innerText = 'Start';
+    tmRunning = false;
+    tmTotalMs = 0;
+    return;
+  }
+  document.getElementById('tm-display').innerText = tmFormat(remaining);
+}
+
+function tmToggle() {
+  const btn = document.getElementById('tm-start-btn');
+  const h = parseInt(document.getElementById('tm-h').value) || 0;
+  const m = parseInt(document.getElementById('tm-m').value) || 0;
+  const s = parseInt(document.getElementById('tm-s').value) || 0;
+
+  if (tmRunning) {
+    clearInterval(tmInterval);
+    tmTotalMs = Math.max(0, tmTargetTime - Date.now());
+    tmRunning = false;
+    btn.innerText = 'Resume';
+  } else {
+    if (tmTotalMs === 0) {
+      tmTotalMs = ((h * 3600) + (m * 60) + s) * 1000;
+    }
+    if (tmTotalMs <= 0) return;
+    
+    tmTargetTime = Date.now() + tmTotalMs;
+    tmInterval = setInterval(tmUpdate, 100);
+    tmRunning = true;
+    btn.innerText = 'Pause';
+    // Clear inputs once started visually
+    document.getElementById('tm-h').value = '';
+    document.getElementById('tm-m').value = '';
+    document.getElementById('tm-s').value = '';
+    tmUpdate();
+  }
+}
+
+function tmReset() {
+  clearInterval(tmInterval);
+  tmRunning = false;
+  tmTotalMs = 0;
+  document.getElementById('tm-display').innerText = '00:00:00';
+  document.getElementById('tm-start-btn').innerText = 'Start';
+  document.getElementById('tm-h').value = '';
+  document.getElementById('tm-m').value = '';
+  document.getElementById('tm-s').value = '';
+}
+
+
+// --- POMODORO LOGIC ---
+let pmMode = 'work'; // 'work' or 'break'
+let pmTargetTime = 0;
+let pmInterval;
+let pmRunning = false;
+let pmRemainingMs = 25 * 60 * 1000;
+
+function pmFormat(ms) {
+  if(ms < 0) ms = 0;
+  const totalSeconds = Math.floor(ms / 1000);
+  const m = pad(Math.floor(totalSeconds / 60));
+  const s = pad(totalSeconds % 60);
+  return `${m}:${s}`;
+}
+
+function pmUpdate() {
+  const remaining = pmTargetTime - Date.now();
+  if (remaining <= 0) {
+    clearInterval(pmInterval);
+    document.getElementById('pm-display').innerText = '00:00';
+    document.getElementById('pm-start-btn').innerText = 'Start';
+    pmRunning = false;
+    // Auto toggle mode
+    pmSetMode(pmMode === 'work' ? 'break' : 'work');
+    return;
+  }
+  document.getElementById('pm-display').innerText = pmFormat(remaining);
+}
+
+function pmToggle() {
+  const btn = document.getElementById('pm-start-btn');
+  if (pmRunning) {
+    clearInterval(pmInterval);
+    pmRemainingMs = Math.max(0, pmTargetTime - Date.now());
+    pmRunning = false;
+    btn.innerText = 'Resume';
+  } else {
+    pmTargetTime = Date.now() + pmRemainingMs;
+    pmInterval = setInterval(pmUpdate, 100);
+    pmRunning = true;
+    btn.innerText = 'Pause';
+    pmUpdate();
+  }
+}
+
+function pmReset() {
+  clearInterval(pmInterval);
+  pmRunning = false;
+  pmSetMode(pmMode); 
+  document.getElementById('pm-start-btn').innerText = 'Start';
+}
+
+function pmSetMode(mode) {
+  if (pmRunning) return; // Don't allow mode switch while running
+  pmMode = mode;
+  pmRemainingMs = (mode === 'work' ? 25 : 5) * 60 * 1000;
+  document.getElementById('pm-display').innerText = pmFormat(pmRemainingMs);
+}
+</script>
+</body>
+</html>
