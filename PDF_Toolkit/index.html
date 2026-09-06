@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PDF Toolkit - utiliverse.app</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Ensure you have your necessary processing libraries included here (e.g., pdf-lib) -->
+  <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <style>
+    .category-pill { transition: all 0.2s ease; cursor: pointer; border: 1px solid #e2e8f0; }
+    .category-pill.active { background-color: #3b82f6; color: white; border-color: #3b82f6; }
+    .conversion-card { transition: all 0.2s ease; cursor: pointer; }
+    .conversion-card.active { border-color: #3b82f6; background-color: #eff6ff; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans p-6">
+
+  <div class="max-w-5xl mx-auto space-y-6">
+    <header class="mb-8">
+      <h1 class="text-3xl font-bold text-gray-900">PDF Toolkit</h1>
+      <p class="text-sm text-gray-500 mt-2">Browser-native PDF conversions and utilities.</p>
+    </header>
+
+    <!-- CATEGORY FILTER -->
+    <div id="categoryFilters" class="flex flex-wrap gap-2 mt-4">
+      <button class="category-pill active px-4 py-2 rounded-full text-xs font-semibold" data-category="all">All</button>
+      <button class="category-pill px-4 py-2 rounded-full text-xs font-semibold" data-category="documents-to-pdf">Documents to PDF</button>
+      <button class="category-pill px-4 py-2 rounded-full text-xs font-semibold" data-category="pdf-to-documents">PDF to Documents</button>
+      <button class="category-pill px-4 py-2 rounded-full text-xs font-semibold" data-category="images-to-pdf">Images to PDF</button>
+      <button class="category-pill px-4 py-2 rounded-full text-xs font-semibold" data-category="pdf-to-images">PDF to Images</button>
+      <button class="category-pill px-4 py-2 rounded-full text-xs font-semibold" data-category="web-code">Web &amp; Code</button>
+      <button class="category-pill px-4 py-2 rounded-full text-xs font-semibold" data-category="pdf-to-web">PDF to Web &amp; Code</button>
+      <button class="category-pill px-4 py-2 rounded-full text-xs font-semibold" data-category="advanced">Advanced</button>
+    </div>
+
+    <!-- CONVERSIONS GRID -->
+    <div id="conversionsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-6">
+      <!-- Cards injected by JS -->
+    </div>
+
+    <!-- FILE UPLOAD ZONE -->
+    <div class="mt-8 bg-white p-6 rounded-lg border-2 border-dashed border-gray-300 flex flex-col items-center justify-center">
+      <input type="file" id="fileInput" class="hidden" multiple>
+      <button id="selectFileBtn" class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded border border-gray-300">
+        Select File(s)
+      </button>
+      <p id="fileStatus" class="text-sm text-gray-500 mt-3">No files selected</p>
+    </div>
+
+    <!-- PROGRESS & CONTROLS -->
+    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+      
+      <div id="progressWrapper" class="hidden flex-1 w-full flex items-center gap-4">
+        <div class="w-full bg-gray-200 rounded-full h-2.5">
+          <div id="progressBar" class="bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
+        </div>
+        <div class="flex flex-col">
+          <span id="progressLabel" class="text-xs font-medium">Ready</span>
+          <span id="progressPercent" class="text-xs text-gray-500">0%</span>
+        </div>
+      </div>
+      
+      <div class="flex items-center gap-4 w-full sm:w-auto">
+        <span id="statusText" class="text-xs text-gray-500 hidden sm:block">Ready to process</span>
+        <button id="processBtn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg shadow w-full sm:w-auto">
+          Process File
+        </button>
+      </div>
+    </div>
+
+    <!-- RESULT PANEL -->
+    <div id="resultPanel" class="hidden bg-green-50 p-6 rounded-lg border border-green-200 flex items-center justify-between mt-4">
+      <div>
+        <h3 class="text-green-800 font-bold">Conversion Complete</h3>
+        <p id="resultFilename" class="text-sm text-green-700">file.pdf</p>
+      </div>
+      <a id="downloadBtn" href="#" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded shadow">Download</a>
+    </div>
+
+  </div>
+
+  <script>
+    /* =========================================================
+       DATA CONFIGURATION
+    ========================================================= */
+    const CONVERSIONS = [
+      /* DOCUMENTS TO PDF */
+      { from: "TXT", to: "PDF", category: "documents-to-pdf", categoryName: "Documents to PDF", icon: "file-type-2", description: "Turn plain text files into clean, printable PDF documents.", ext: [".txt"], mode: "text" },
+      { from: "RTF", to: "PDF", category: "documents-to-pdf", categoryName: "Documents to PDF", icon: "file-edit", description: "Convert rich-text documents into a portable PDF format.", ext: [".rtf"], mode: "text" },
+
+      /* PDF TO DOCUMENTS */
+      { from: "PDF", to: "TXT", category: "pdf-to-documents", categoryName: "PDF to Documents", icon: "file-type-2", description: "Extract readable text from PDF pages into a plain text file.", ext: [".pdf"], mode: "pdf-text" },
+      { from: "PDF", to: "RTF", category: "pdf-to-documents", categoryName: "PDF to Documents", icon: "file-edit", description: "Extract PDF text into a rich-text compatible document.", ext: [".pdf"], mode: "pdf-text" },
+
+      /* IMAGES TO PDF */
+      { from: "JPG", to: "PDF", category: "images-to-pdf", categoryName: "Images to PDF", icon: "image", description: "Combine JPG images into a clean PDF document.", ext: [".jpg", ".jpeg"], mode: "image-pdf" },
+      { from: "PNG", to: "PDF", category: "images-to-pdf", categoryName: "Images to PDF", icon: "image", description: "Turn PNG graphics and screenshots into PDF pages.", ext: [".png"], mode: "image-pdf" },
+      { from: "WebP", to: "PDF", category: "images-to-pdf", categoryName: "Images to PDF", icon: "image", description: "Convert WebP images into portable PDF pages.", ext: [".webp"], mode: "image-pdf" },
+
+      /* PDF TO IMAGES */
+      { from: "PDF", to: "JPG", category: "pdf-to-images", categoryName: "PDF to Images", icon: "image-down", description: "Render PDF pages as JPG images.", ext: [".pdf"], mode: "pdf-image" },
+      { from: "PDF", to: "PNG", category: "pdf-to-images", categoryName: "PDF to Images", icon: "image-down", description: "Render PDF pages as high-quality PNG images.", ext: [".pdf"], mode: "pdf-image" },
+      { from: "PDF", to: "WebP", category: "pdf-to-images", categoryName: "PDF to Images", icon: "image-down", description: "Render PDF pages into compact WebP images.", ext: [".pdf"], mode: "pdf-image" },
+
+      /* WEB & CODE TO PDF */
+      { from: "HTML", to: "PDF", category: "web-code", categoryName: "Web & Code to PDF", icon: "code-2", description: "Turn HTML source into a printable PDF representation.", ext: [".html", ".htm"], mode: "text" },
+      { from: "Markdown", to: "PDF", category: "web-code", categoryName: "Web & Code to PDF", icon: "file-code-2", description: "Turn Markdown source into a simple PDF document.", ext: [".md", ".markdown"], mode: "text" },
+      { from: "LaTeX", to: "PDF", category: "web-code", categoryName: "Web & Code to PDF", icon: "sigma", description: "Prepare LaTeX source for PDF-oriented workflows.", ext: [".tex"], mode: "text" },
+      { from: "XML", to: "PDF", category: "web-code", categoryName: "Web & Code to PDF", icon: "file-code", description: "Convert readable XML source into a PDF representation.", ext: [".xml"], mode: "text" },
+      { from: "JSON", to: "PDF", category: "web-code", categoryName: "Web & Code to PDF", icon: "braces", description: "Format JSON data into a readable PDF document.", ext: [".json"], mode: "text" },
+
+      /* PDF TO WEB & CODE */
+      { from: "PDF", to: "HTML", category: "pdf-to-web", categoryName: "PDF to Web & Code", icon: "code-2", description: "Extract PDF text and place it into an HTML document.", ext: [".pdf"], mode: "pdf-text" },
+      { from: "PDF", to: "Markdown", category: "pdf-to-web", categoryName: "PDF to Web & Code", icon: "file-code-2", description: "Extract PDF text into Markdown-friendly content.", ext: [".pdf"], mode: "pdf-text" },
+      { from: "PDF", to: "LaTeX", category: "pdf-to-web", categoryName: "PDF to Web & Code", icon: "sigma", description: "Extract PDF text into a LaTeX-oriented source workflow.", ext: [".pdf"], mode: "pdf-text" },
+      { from: "PDF", to: "XML", category: "pdf-to-web", categoryName: "PDF to Web & Code", icon: "file-code", description: "Extract PDF text into a structured XML document.", ext: [".pdf"], mode: "pdf-text" },
+
+      /* ADVANCED */
+      { from: "PDF", to: "PDF/A", category: "advanced", categoryName: "Advanced Operations", icon: "archive", description: "Prepare PDF documents for long-term archival workflows.", ext: [".pdf"], mode: "pdfa" },
+      { from: "PDF", to: "Compressed PDF", category: "advanced", categoryName: "Advanced Operations", icon: "minimize-2", description: "Reduce PDF resource usage where browser-side optimization is possible.", ext: [".pdf"], mode: "compress" }
+    ];
+
+    /* =========================================================
+       STATE & DOM ELEMENTS
+    ========================================================= */
+    let activeConversion = null;
+    let selectedFiles = [];
+
+    const grid = document.getElementById("conversionsGrid");
+    const filters = document.querySelectorAll(".category-pill");
+    const fileInput = document.getElementById("fileInput");
+    const selectFileBtn = document.getElementById("selectFileBtn");
+    const fileStatus = document.getElementById("fileStatus");
+    const processBtn = document.getElementById("processBtn");
+    
+    const progressWrapper = document.getElementById("progressWrapper");
+    const progressBar = document.getElementById("progressBar");
+    const progressLabel = document.getElementById("progressLabel");
+    const progressPercent = document.getElementById("progressPercent");
+    const statusText = document.getElementById("statusText");
+
+    const resultPanel = document.getElementById("resultPanel");
+    const resultFilename = document.getElementById("resultFilename");
+    const downloadBtn = document.getElementById("downloadBtn");
+
+    /* =========================================================
+       UI RENDERING & EVENTS
+    ========================================================= */
+    function renderGrid(filterCategory = "all") {
+      grid.innerHTML = "";
+      const filtered = filterCategory === "all" 
+        ? CONVERSIONS 
+        : CONVERSIONS.filter(c => c.category === filterCategory);
+
+      filtered.forEach((conv, index) => {
+        const card = document.createElement("div");
+        card.className = "conversion-card bg-white p-4 rounded-lg shadow-sm border border-gray-200 flex flex-col";
+        card.dataset.index = CONVERSIONS.indexOf(conv);
+        
+        card.innerHTML = `
+          <div class="font-bold text-lg text-gray-800 mb-1">${conv.from} to ${conv.to}</div>
+          <div class="text-xs text-blue-600 font-semibold mb-2">${conv.categoryName}</div>
+          <p class="text-sm text-gray-500 flex-grow">${conv.description}</p>
+        `;
+
+        card.addEventListener("click", () => {
+          document.querySelectorAll(".conversion-card").forEach(c => c.classList.remove("active"));
+          card.classList.add("active");
+          activeConversion = conv;
+          fileInput.accept = conv.ext.join(",");
+        });
+
+        grid.appendChild(card);
+      });
+    }
+
+    filters.forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        filters.forEach(f => f.classList.remove("active"));
+        e.target.classList.add("active");
+        renderGrid(e.target.dataset.category);
+      });
+    });
+
+    selectFileBtn.addEventListener("click", () => fileInput.click());
+
+    fileInput.addEventListener("change", (e) => {
+      selectedFiles = Array.from(e.target.files);
+      if (selectedFiles.length > 0) {
+        fileStatus.textContent = `${selectedFiles.length} file(s) selected: ${selectedFiles[0].name}${selectedFiles.length > 1 ? '...' : ''}`;
+      } else {
+        fileStatus.textContent = "No files selected";
+      }
+    });
+
+    function updateProgress(percent, label) {
+      progressBar.style.width = percent + "%";
+      progressPercent.textContent = percent + "%";
+      progressLabel.textContent = label;
+    }
+
+    function showToast(message) {
+      alert(message); // Replace with your existing toast notification implementation
+    }
+
+    function showResult(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      resultPanel.classList.remove("hidden");
+      resultFilename.textContent = filename;
+      downloadBtn.href = url;
+      downloadBtn.download = filename;
+    }
+
+    /* =========================================================
+       PLACEHOLDER PROCESSING FUNCTIONS 
+       (Replace these with your actual implementation logic)
+    ========================================================= */
+    async function imagesToPDF(files) { return new Blob(["Dummy PDF Content for " + files.length + " images"], {type: "application/pdf"}); }
+    async function pdfToImages(file, target) { return { blob: new Blob(["Dummy Image Content"], {type: "image/" + target.toLowerCase()}), extension: target.toLowerCase(), multiplePages: 1 }; }
+    async function textToPDF(file) { return new Blob(["Dummy PDF Content for " + file.name], {type: "application/pdf"}); }
+    async function pdfToDocument(file, target) { return { blob: new Blob(["Dummy Text Content"], {type: "text/plain"}), extension: target.toLowerCase() }; }
+    async function createPDFA(file) { return new Blob(["Dummy PDF/A Content"], {type: "application/pdf"}); }
+    async function compressPDF(file) { return new Blob(["Dummy Compressed PDF"], {type: "application/pdf"}); }
+
+    /* =========================================================
+       MAIN PROCESSOR
+    ========================================================= */
+    processBtn.addEventListener("click", async () => {
+      if (!activeConversion) {
+        showToast("Choose a conversion first.");
+        return;
+      }
+
+      if (activeConversion.mode !== "url" && !selectedFiles.length) {
+        showToast("Choose a file before processing.");
+        return;
+      }
+
+      resultPanel.classList.add("hidden");
+
+      try {
+        processBtn.disabled = true;
+        processBtn.classList.add("opacity-60", "cursor-not-allowed");
+        progressWrapper.classList.remove("hidden");
+        statusText.classList.remove("hidden");
+
+        updateProgress(5, "Starting " + activeConversion.from + " → " + activeConversion.to);
+
+        let result;
+        let filename;
+        const mode = activeConversion.mode;
+        const target = activeConversion.to;
+
+        /* IMAGE -> PDF */
+        if (mode === "image-pdf") {
+          result = await imagesToPDF(selectedFiles);
+          filename = "utiliverse-images.pdf";
+        }
+        /* PDF -> IMAGE */
+        else if (mode === "pdf-image") {
+          const response = await pdfToImages(selectedFiles[0], target);
+          result = response.blob;
+          filename = "utiliverse-page." + response.extension;
+
+          if (response.multiplePages > 1) {
+            showToast("The first selected page was exported. Use page selection to export a specific page.");
+          }
+        }
+        /* TEXT -> PDF */
+        else if (mode === "text" && target === "PDF") {
+          result = await textToPDF(selectedFiles[0]);
+          filename = "utiliverse-document.pdf";
+        }
+        /* PDF -> DOCUMENT */
+        else if (mode === "pdf-text" && target !== "PDF") {
+          const response = await pdfToDocument(selectedFiles[0], target);
+          result = response.blob;
+          filename = "utiliverse-export." + response.extension;
+        }
+        /* PDF/A */
+        else if (mode === "pdfa") {
+          result = await createPDFA(selectedFiles[0]);
+          filename = "utiliverse-archival-preparation.pdf";
+          showToast("PDF/A preparation completed. Formal PDF/A conformance validation is not performed by this lightweight build.");
+        }
+        /* COMPRESS */
+        else if (mode === "compress") {
+          result = await compressPDF(selectedFiles[0]);
+          filename = "utiliverse-compressed.pdf";
+        }
+        else {
+          throw new Error("Conversion mode not recognized.");
+        }
+
+        if (!result) {
+          throw new Error("The conversion did not produce a downloadable file.");
+        }
+
+        showResult(result, filename);
+        updateProgress(100, "Complete");
+        statusText.textContent = "Success";
+        statusText.className = "text-xs text-green-600 sm:block";
+
+      } catch (error) {
+        console.error(error);
+        statusText.textContent = "Unable to complete";
+        statusText.className = "text-xs text-red-600 sm:block";
+        progressLabel.textContent = "Processing stopped";
+        progressPercent.textContent = "—";
+        showToast(error.message || "Something went wrong while processing the file.");
+      } finally {
+        processBtn.disabled = false;
+        processBtn.classList.remove("opacity-60", "cursor-not-allowed");
+      }
+    });
+
+    // Initialize
+    renderGrid();
+  </script>
+</body>
+</html>
