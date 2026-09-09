@@ -11,6 +11,7 @@
 >
 
 <title>Auto Lease Calculator | Utiliverse</title>
+<script src="https://unpkg.com/lucide@latest"></script>
 
 <meta
     name="description"
@@ -1270,6 +1271,76 @@ footer {
 
 }
 
+
+
+/* =========================================================
+   WORD COUNTER DESIGN SYSTEM — AUTO LEASE
+========================================================= */
+html{scroll-behavior:smooth}
+body{background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;color:#f8fafc;transition:background .3s ease,color .3s ease}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(2,6,23,.82);backdrop-filter:blur(16px);border-bottom:1px solid #1e293b}
+.topbar-inner{max-width:1152px;padding:16px 24px}
+.back-link{color:#cbd5e1}.back-link:hover{color:#fff;text-decoration:none}
+.brand{color:#f8fafc}.brand span{color:#818cf8}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid #334155;border-radius:12px;background:rgba(15,23,42,.72);color:#94a3b8;cursor:pointer;transition:.2s ease}
+.theme-toggle:hover{color:#fff;background:#1e293b;border-color:#475569}
+.theme-toggle svg{width:18px;height:18px}
+.page-header{max-width:1152px;padding:48px 24px 22px}
+.eyebrow{color:#a5b4fc;background:rgba(99,102,241,.13);border:1px solid rgba(99,102,241,.25);padding:6px 11px;letter-spacing:1px}
+h1{color:#f8fafc;font-size:clamp(32px,4vw,48px);letter-spacing:-1.5px}
+.subtitle{color:#94a3b8;font-size:17px;line-height:1.7}
+.container{max-width:1152px;padding:12px 24px 64px}
+.calculator-grid{grid-template-columns:minmax(0,1.05fr) minmax(360px,.95fr);gap:18px}
+.card,.content-card{background:rgba(30,41,59,.72);backdrop-filter:blur(14px);border:1px solid #334155;border-radius:16px;box-shadow:0 18px 50px rgba(0,0,0,.18)}
+.form-card{padding:28px}
+.section-title h2,.results-header h2,.content-card h2,.content-card h3{color:#f8fafc}
+.section-title p,.helper,.results-header p,.result-subtitle,.result-row span:first-child,.content-card p,.content-card ul,.faq-answer,.fact span,.disclaimer{color:#94a3b8}
+.form-section{border-color:#334155}
+label{color:#cbd5e1}
+input,select{background:#0f172a;border-color:#475569;color:#f8fafc;border-radius:12px}
+input:focus,select:focus{border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.15)}
+.rate-option label{background:#0f172a;border-color:#334155;color:#cbd5e1;border-radius:12px}
+.rate-option input:checked+label{border-color:#6366f1;background:rgba(99,102,241,.14);color:#a5b4fc}
+.calculate-btn{background:#6366f1;border-radius:12px}.calculate-btn:hover{background:#4f46e5}
+.reset-btn{background:#1e293b;color:#e2e8f0;border:1px solid #475569;border-radius:12px}.reset-btn:hover{background:#334155}
+.results-card{top:82px}
+.results-header{background:linear-gradient(135deg,rgba(79,70,229,.18),rgba(30,41,59,.35));border-color:#334155}
+.monthly-payment{color:#818cf8}
+.result-row{border-color:rgba(71,85,105,.55)}
+.result-row strong{color:#f8fafc}
+.result-highlight{background:rgba(34,197,94,.10);border-color:rgba(34,197,94,.28)}
+.result-highlight-title{color:#34d399}
+.quick-facts{gap:14px}.fact{background:rgba(15,23,42,.55);border-color:#334155;border-radius:12px}.fact strong{color:#e2e8f0}
+.content-card{margin-top:20px;padding:28px}
+.content-card h2{font-size:1.9rem;font-weight:800}.content-card h3{font-size:1.2rem;font-weight:750}
+.faq-item{border-color:#334155;background:rgba(15,23,42,.45);border-radius:12px}.faq-button{background:transparent;color:#f8fafc}.faq-button:hover{background:rgba(51,65,85,.28)}.faq-icon{color:#818cf8}
+.disclaimer{background:rgba(15,23,42,.45);border-radius:12px}
+footer{background:rgba(2,6,23,.72);border-color:#1e293b}.footer-inner{max-width:1152px}
+body.light-mode{background:#f8fafc;color:#0f172a}
+body.light-mode .topbar{background:rgba(255,255,255,.9);border-color:#e2e8f0}
+body.light-mode .back-link{color:#475569}.light-mode .back-link:hover{color:#0f172a}
+body.light-mode .brand{color:#0f172a}.light-mode .brand span{color:#4f46e5}
+body.light-mode .theme-toggle{background:#fff;border-color:#cbd5e1;color:#475569}
+body.light-mode .theme-toggle:hover{background:#f1f5f9;color:#0f172a}
+body.light-mode .eyebrow{color:#4f46e5;background:#eef2ff;border-color:#c7d2fe}
+body.light-mode h1{color:#0f172a}.light-mode .subtitle{color:#64748b}
+body.light-mode .card,body.light-mode .content-card{background:rgba(255,255,255,.84);border-color:#e2e8f0;box-shadow:0 12px 35px rgba(15,23,42,.07)}
+body.light-mode .section-title h2,body.light-mode .results-header h2,body.light-mode .content-card h2,body.light-mode .content-card h3{color:#0f172a}
+body.light-mode .section-title p,body.light-mode .helper,body.light-mode .results-header p,body.light-mode .result-subtitle,body.light-mode .content-card p,body.light-mode .content-card ul,body.light-mode .faq-answer{color:#475569}
+body.light-mode .form-section{border-color:#e2e8f0}body.light-mode label{color:#334155}
+body.light-mode input,body.light-mode select{background:#fff;border-color:#cbd5e1;color:#0f172a}
+body.light-mode .rate-option label{background:#f8fafc;border-color:#e2e8f0;color:#334155}
+body.light-mode .rate-option input:checked+label{background:#eef2ff;border-color:#6366f1;color:#4f46e5}
+body.light-mode .reset-btn{background:#f1f5f9;border-color:#cbd5e1;color:#334155}.light-mode .reset-btn:hover{background:#e2e8f0}
+body.light-mode .results-header{background:linear-gradient(135deg,#eef2ff,#f8fafc);border-color:#e2e8f0}
+body.light-mode .result-row{border-color:#eef2f7}body.light-mode .result-row strong{color:#1e293b}
+body.light-mode .result-highlight{background:#f0fdf4;border-color:#bbf7d0}
+body.light-mode .fact{background:#f8fafc;border-color:#e2e8f0}body.light-mode .fact strong{color:#1e293b}
+body.light-mode .faq-item{background:#fff;border-color:#e2e8f0}body.light-mode .faq-button{color:#1e293b}body.light-mode .faq-button:hover{background:#f8fafc}
+body.light-mode .disclaimer{background:#f8fafc;color:#64748b}
+body.light-mode footer{background:#fff;border-color:#e2e8f0}
+@media(max-width:850px){.calculator-grid{grid-template-columns:1fr}.results-card{position:static}}
+
 </style>
 
 </head>
@@ -1293,12 +1364,9 @@ footer {
             &larr; Back to Utiliverse
         </a>
 
-
-        <div class="brand">
-
-            <span>Utili</span>verse
-
-        </div>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to light mode" title="Toggle light/dark mode">
+            <span id="theme-icon" aria-hidden="true">☀</span>
+        </button>
 
     </div>
 
@@ -2331,7 +2399,7 @@ that are not included here.
     <div class="footer-inner">
 
         <div>
-            &copy; 2026 Utiliverse
+            &copy; <span id="currentYear"></span> Utiliverse
         </div>
 
         <div>
@@ -2343,6 +2411,32 @@ that are not included here.
 </footer>
 
 
+
+<script>
+/* =========================================================
+   LIGHT / DARK MODE — WORD COUNTER STYLE
+========================================================= */
+(function(){
+  const toggle=document.getElementById('theme-toggle');
+  const icon=document.getElementById('theme-icon');
+  function apply(theme){
+    const light=theme==='light';
+    document.body.classList.toggle('light-mode',light);
+    icon.textContent=light?'☾':'☀';
+    toggle.setAttribute('aria-label',light?'Switch to dark mode':'Switch to light mode');
+    toggle.title=light?'Switch to dark mode':'Switch to light mode';
+  }
+  const saved=localStorage.getItem('utiliverse-theme');
+  const initial=saved||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
+  apply(initial);
+  toggle.addEventListener('click',function(){
+    const next=document.body.classList.contains('light-mode')?'dark':'light';
+    localStorage.setItem('utiliverse-theme',next);
+    apply(next);
+  });
+})();
+
+</script>
 
 <script>
 
@@ -2878,6 +2972,7 @@ document.addEventListener(
 </script>
 
 
+<script>document.getElementById("currentYear").textContent=new Date().getFullYear();</script>
 </body>
 
 </html>
