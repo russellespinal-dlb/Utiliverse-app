@@ -20,1563 +20,33 @@
     >
 
     <style>
-
-        /* =========================================================
-           UTILIVERSE
-           HOME AFFORDABILITY CALCULATOR
-        ========================================================= */
-
-        :root {
-
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --primary-light: #eff6ff;
-
-            --background: #f5f7fb;
-            --surface: #ffffff;
-            --surface-soft: #f8fafc;
-
-            --text: #172033;
-            --muted: #64748b;
-            --border: #e2e8f0;
-
-            --success: #15803d;
-            --success-bg: #f0fdf4;
-
-            --warning: #b45309;
-            --warning-bg: #fffbeb;
-
-            --shadow:
-                0 10px 30px rgba(15, 23, 42, 0.08);
-
-            --radius: 14px;
-
-        }
-
-
-        * {
-
-            box-sizing: border-box;
-
-        }
-
-
-        html {
-
-            scroll-behavior: smooth;
-
-        }
-
-
-        body {
-
-            margin: 0;
-
-            font-family:
-                Inter,
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                Roboto,
-                Helvetica,
-                Arial,
-                sans-serif;
-
-            background:
-                var(--background);
-
-            color:
-                var(--text);
-
-            line-height: 1.5;
-
-        }
-
-
-        /* =========================================================
-           TOP NAVIGATION
-        ========================================================= */
-
-        .topbar {
-
-            width: 100%;
-
-            background:
-                #ffffff;
-
-            border-bottom:
-                1px solid var(--border);
-
-        }
-
-
-        .topbar-inner {
-
-            max-width:
-                1180px;
-
-            margin:
-                auto;
-
-            padding:
-                18px 24px;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                space-between;
-
-        }
-
-
-        .back-link {
-
-            color:
-                var(--primary);
-
-            text-decoration:
-                none;
-
-            font-size:
-                15px;
-
-            font-weight:
-                600;
-
-            transition:
-                0.2s ease;
-
-        }
-
-
-        .back-link:hover {
-
-            color:
-                var(--primary-dark);
-
-            text-decoration:
-                underline;
-
-        }
-
-
-        .brand {
-
-            font-size:
-                17px;
-
-            font-weight:
-                800;
-
-            letter-spacing:
-                -0.3px;
-
-        }
-
-
-        .brand span {
-
-            color:
-                var(--primary);
-
-        }
-
-
-        /* =========================================================
-           PAGE HEADER
-        ========================================================= */
-
-        .page-header {
-
-            max-width:
-                1180px;
-
-            margin:
-                0 auto;
-
-            padding:
-                42px 24px 24px;
-
-        }
-
-
-        .eyebrow {
-
-            display:
-                inline-block;
-
-            color:
-                var(--primary);
-
-            background:
-                var(--primary-light);
-
-            padding:
-                6px 11px;
-
-            border-radius:
-                999px;
-
-            font-size:
-                12px;
-
-            font-weight:
-                700;
-
-            letter-spacing:
-                0.5px;
-
-            text-transform:
-                uppercase;
-
-            margin-bottom:
-                12px;
-
-        }
-
-
-        h1 {
-
-            margin:
-                0 0 10px;
-
-            font-size:
-                clamp(30px, 4vw, 44px);
-
-            line-height:
-                1.1;
-
-            letter-spacing:
-                -1.2px;
-
-        }
-
-
-        .subtitle {
-
-            max-width:
-                760px;
-
-            margin:
-                0;
-
-            color:
-                var(--muted);
-
-            font-size:
-                17px;
-
-        }
-
-
-        /* =========================================================
-           MAIN CONTENT
-        ========================================================= */
-
-        .container {
-
-            max-width:
-                1180px;
-
-            margin:
-                0 auto;
-
-            padding:
-                10px 24px 60px;
-
-        }
-
-
-        .calculator-grid {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                minmax(0, 1.05fr)
-                minmax(360px, 0.95fr);
-
-            gap:
-                24px;
-
-            align-items:
-                start;
-
-        }
-
-
-        .card {
-
-            background:
-                var(--surface);
-
-            border:
-                1px solid var(--border);
-
-            border-radius:
-                var(--radius);
-
-            box-shadow:
-                var(--shadow);
-
-        }
-
-
-        /* =========================================================
-           INPUT CARD
-        ========================================================= */
-
-        .form-card {
-
-            padding:
-                28px;
-
-        }
-
-
-        .section-heading {
-
-            margin-bottom:
-                22px;
-
-        }
-
-
-        .section-heading h2 {
-
-            margin:
-                0 0 5px;
-
-            font-size:
-                21px;
-
-        }
-
-
-        .section-heading p {
-
-            margin:
-                0;
-
-            color:
-                var(--muted);
-
-            font-size:
-                14px;
-
-        }
-
-
-        .form-section {
-
-            padding-bottom:
-                25px;
-
-            margin-bottom:
-                25px;
-
-            border-bottom:
-                1px solid var(--border);
-
-        }
-
-
-        .form-section:last-of-type {
-
-            border-bottom:
-                0;
-
-            margin-bottom:
-                0;
-
-            padding-bottom:
-                0;
-
-        }
-
-
-        .form-section-title {
-
-            font-size:
-                15px;
-
-            font-weight:
-                750;
-
-            margin-bottom:
-                15px;
-
-        }
-
-
-        .form-grid {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                1fr 1fr;
-
-            gap:
-                16px;
-
-        }
-
-
-        .form-group {
-
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            gap:
-                7px;
-
-        }
-
-
-        .form-group.full {
-
-            grid-column:
-                1 / -1;
-
-        }
-
-
-        label {
-
-            font-size:
-                13px;
-
-            font-weight:
-                650;
-
-            color:
-                #334155;
-
-        }
-
-
-        .input-wrapper {
-
-            position:
-                relative;
-
-        }
-
-
-        .prefix {
-
-            position:
-                absolute;
-
-            left:
-                13px;
-
-            top:
-                50%;
-
-            transform:
-                translateY(-50%);
-
-            color:
-                var(--muted);
-
-            pointer-events:
-                none;
-
-            font-size:
-                14px;
-
-        }
-
-
-        input,
-        select {
-
-            width:
-                100%;
-
-            height:
-                46px;
-
-            border:
-                1px solid #cbd5e1;
-
-            border-radius:
-                9px;
-
-            background:
-                #ffffff;
-
-            color:
-                var(--text);
-
-            font-size:
-                15px;
-
-            padding:
-                0 13px;
-
-            outline:
-                none;
-
-            transition:
-                border-color 0.2s,
-                box-shadow 0.2s;
-
-        }
-
-
-        input.currency {
-
-            padding-left:
-                29px;
-
-        }
-
-
-        input:focus,
-        select:focus {
-
-            border-color:
-                var(--primary);
-
-            box-shadow:
-                0 0 0 3px
-                rgba(37, 99, 235, 0.12);
-
-        }
-
-
-        .helper {
-
-            color:
-                var(--muted);
-
-            font-size:
-                11px;
-
-        }
-
-
-        /* =========================================================
-           BUTTONS
-        ========================================================= */
-
-        .button-row {
-
-            display:
-                flex;
-
-            gap:
-                12px;
-
-            margin-top:
-                25px;
-
-        }
-
-
-        button {
-
-            border:
-                0;
-
-            cursor:
-                pointer;
-
-            font:
-                inherit;
-
-        }
-
-
-        .calculate-btn {
-
-            flex:
-                1;
-
-            height:
-                50px;
-
-            border-radius:
-                9px;
-
-            background:
-                var(--primary);
-
-            color:
-                white;
-
-            font-size:
-                15px;
-
-            font-weight:
-                750;
-
-            transition:
-                0.2s ease;
-
-        }
-
-
-        .calculate-btn:hover {
-
-            background:
-                var(--primary-dark);
-
-            transform:
-                translateY(-1px);
-
-        }
-
-
-        .reset-btn {
-
-            height:
-                50px;
-
-            padding:
-                0 18px;
-
-            border-radius:
-                9px;
-
-            background:
-                #f1f5f9;
-
-            color:
-                #475569;
-
-            font-weight:
-                650;
-
-        }
-
-
-        .reset-btn:hover {
-
-            background:
-                #e2e8f0;
-
-        }
-
-
-        /* =========================================================
-           RESULTS
-        ========================================================= */
-
-        .results-card {
-
-            overflow:
-                hidden;
-
-            position:
-                sticky;
-
-            top:
-                20px;
-
-        }
-
-
-        .results-header {
-
-            padding:
-                28px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #eff6ff 0%,
-                    #f8fafc 100%
-                );
-
-            border-bottom:
-                1px solid var(--border);
-
-        }
-
-
-        .results-header h2 {
-
-            margin:
-                0 0 5px;
-
-            font-size:
-                21px;
-
-        }
-
-
-        .results-header p {
-
-            margin:
-                0;
-
-            color:
-                var(--muted);
-
-            font-size:
-                13px;
-
-        }
-
-
-        .main-result {
-
-            padding:
-                30px 28px 25px;
-
-            text-align:
-                center;
-
-        }
-
-
-        .result-label {
-
-            color:
-                var(--muted);
-
-            font-size:
-                13px;
-
-            font-weight:
-                600;
-
-            margin-bottom:
-                5px;
-
-        }
-
-
-        .result-price {
-
-            color:
-                var(--primary);
-
-            font-size:
-                clamp(38px, 5vw, 52px);
-
-            font-weight:
-                800;
-
-            letter-spacing:
-                -1.5px;
-
-            line-height:
-                1.1;
-
-        }
-
-
-        .result-note {
-
-            color:
-                var(--muted);
-
-            font-size:
-                12px;
-
-            margin-top:
-                8px;
-
-        }
-
-
-        /* =========================================================
-           RESULT BREAKDOWN
-        ========================================================= */
-
-        .breakdown {
-
-            padding:
-                0 28px 28px;
-
-        }
-
-
-        .breakdown-title {
-
-            font-size:
-                14px;
-
-            font-weight:
-                750;
-
-            margin-bottom:
-                13px;
-
-        }
-
-
-        .breakdown-row {
-
-            display:
-                flex;
-
-            justify-content:
-                space-between;
-
-            align-items:
-                center;
-
-            padding:
-                12px 0;
-
-            border-bottom:
-                1px solid #eef2f7;
-
-            font-size:
-                13px;
-
-        }
-
-
-        .breakdown-row:last-child {
-
-            border-bottom:
-                0;
-
-        }
-
-
-        .breakdown-label {
-
-            color:
-                #64748b;
-
-        }
-
-
-        .breakdown-value {
-
-            font-weight:
-                700;
-
-        }
-
-
-        /* =========================================================
-           AFFORDABILITY INDICATOR
-        ========================================================= */
-
-        .affordability-box {
-
-            margin:
-                0 28px 28px;
-
-            padding:
-                17px;
-
-            border-radius:
-                10px;
-
-            background:
-                var(--success-bg);
-
-            border:
-                1px solid #bbf7d0;
-
-        }
-
-
-        .affordability-box.warning {
-
-            background:
-                var(--warning-bg);
-
-            border-color:
-                #fde68a;
-
-        }
-
-
-        .affordability-title {
-
-            font-weight:
-                750;
-
-            font-size:
-                14px;
-
-            margin-bottom:
-                3px;
-
-        }
-
-
-        .affordability-text {
-
-            font-size:
-                12px;
-
-            color:
-                #64748b;
-
-        }
-
-
-        /* =========================================================
-           INFORMATION SECTIONS
-        ========================================================= */
-
-        .info-section {
-
-            margin-top:
-                28px;
-
-            background:
-                white;
-
-            border:
-                1px solid var(--border);
-
-            border-radius:
-                var(--radius);
-
-            padding:
-                28px;
-
-            box-shadow:
-                var(--shadow);
-
-        }
-
-
-        .info-section h2 {
-
-            margin:
-                0 0 12px;
-
-            font-size:
-                21px;
-
-        }
-
-
-        .info-section > p {
-
-            color:
-                #64748b;
-
-            font-size:
-                14px;
-
-            margin:
-                0 0 14px;
-
-        }
-
-
-        .info-grid {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
-            gap:
-                18px;
-
-            margin-top:
-                22px;
-
-        }
-
-
-        .info-box {
-
-            padding:
-                18px;
-
-            background:
-                var(--surface-soft);
-
-            border:
-                1px solid var(--border);
-
-            border-radius:
-                10px;
-
-        }
-
-
-        .info-box h3 {
-
-            margin:
-                0 0 7px;
-
-            font-size:
-                14px;
-
-        }
-
-
-        .info-box p {
-
-            margin:
-                0;
-
-            font-size:
-                12px;
-
-        }
-
-
-        /* =========================================================
-           DISCLAIMER
-        ========================================================= */
-
-        .disclaimer {
-
-            margin-top:
-                20px;
-
-            color:
-                #94a3b8;
-
-            font-size:
-                11px;
-
-            line-height:
-                1.6;
-
-        }
-
-
-        /* =========================================================
-           AMORTIZATION SUMMARY
-        ========================================================= */
-
-        .amortization-summary {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                repeat(4, 1fr);
-
-            gap:
-                12px;
-
-            margin:
-                22px 0;
-
-        }
-
-
-        .amortization-stat {
-
-            background:
-                var(--surface-soft);
-
-            border:
-                1px solid var(--border);
-
-            border-radius:
-                10px;
-
-            padding:
-                15px;
-
-        }
-
-
-        .amortization-stat span {
-
-            display:
-                block;
-
-            color:
-                var(--muted);
-
-            font-size:
-                11px;
-
-            margin-bottom:
-                5px;
-
-        }
-
-
-        .amortization-stat strong {
-
-            display:
-                block;
-
-            font-size:
-                17px;
-
-            color:
-                var(--text);
-
-        }
-
-
-        /* =========================================================
-           AMORTIZATION TABLE
-        ========================================================= */
-
-        .table-wrapper {
-
-            width:
-                100%;
-
-            overflow-x:
-                auto;
-
-            border:
-                1px solid var(--border);
-
-            border-radius:
-                10px;
-
-        }
-
-
-        .amortization-table {
-
-            width:
-                100%;
-
-            border-collapse:
-                collapse;
-
-            min-width:
-                650px;
-
-            font-size:
-                13px;
-
-        }
-
-
-        .amortization-table th {
-
-            background:
-                var(--surface-soft);
-
-            color:
-                #475569;
-
-            font-size:
-                12px;
-
-            font-weight:
-                750;
-
-            text-align:
-                right;
-
-            padding:
-                13px;
-
-            border-bottom:
-                1px solid var(--border);
-
-        }
-
-
-        .amortization-table th:first-child {
-
-            text-align:
-                center;
-
-        }
-
-
-        .amortization-table td {
-
-            padding:
-                12px 13px;
-
-            text-align:
-                right;
-
-            border-bottom:
-                1px solid #eef2f7;
-
-        }
-
-
-        .amortization-table td:first-child {
-
-            text-align:
-                center;
-
-            font-weight:
-                700;
-
-        }
-
-
-        .amortization-table tbody tr:last-child td {
-
-            border-bottom:
-                0;
-
-        }
-
-
-        .amortization-table tbody tr:hover {
-
-            background:
-                #f8fafc;
-
-        }
-
-
-        /* =========================================================
-           FAQ
-        ========================================================= */
-
-        .faq-section {
-
-            margin-top:
-                28px;
-
-        }
-
-
-        .faq-item {
-
-            border:
-                1px solid var(--border);
-
-            border-radius:
-                10px;
-
-            margin-top:
-                10px;
-
-            overflow:
-                hidden;
-
-            background:
-                #ffffff;
-
-        }
-
-
-        .faq-question {
-
-            width:
-                100%;
-
-            display:
-                flex;
-
-            justify-content:
-                space-between;
-
-            align-items:
-                center;
-
-            text-align:
-                left;
-
-            background:
-                #ffffff;
-
-            color:
-                var(--text);
-
-            padding:
-                17px 18px;
-
-            font-size:
-                14px;
-
-            font-weight:
-                700;
-
-            cursor:
-                pointer;
-
-            transition:
-                background 0.2s ease;
-
-        }
-
-
-        .faq-question:hover {
-
-            background:
-                var(--surface-soft);
-
-        }
-
-
-        .faq-question span {
-
-            color:
-                var(--primary);
-
-            font-size:
-                20px;
-
-            line-height:
-                1;
-
-            transition:
-                transform 0.2s ease;
-
-        }
-
-
-        .faq-question.active span {
-
-            transform:
-                rotate(45deg);
-
-        }
-
-
-        .faq-answer {
-
-            display:
-                none;
-
-            padding:
-                0 18px 18px;
-
-            border-top:
-                1px solid var(--border);
-
-        }
-
-
-        .faq-answer.open {
-
-            display:
-                block;
-
-        }
-
-
-        .faq-answer p {
-
-            margin:
-                14px 0 0;
-
-            color:
-                var(--muted);
-
-            font-size:
-                13px;
-
-            line-height:
-                1.7;
-
-        }
-
-
-        /* =========================================================
-           FOOTER
-        ========================================================= */
-
-        footer {
-
-            margin-top:
-                40px;
-
-            border-top:
-                1px solid var(--border);
-
-            background:
-                white;
-
-        }
-
-
-        .footer-inner {
-
-            max-width:
-                1180px;
-
-            margin:
-                auto;
-
-            padding:
-                25px 24px;
-
-            display:
-                flex;
-
-            justify-content:
-                space-between;
-
-            gap:
-                20px;
-
-            color:
-                var(--muted);
-
-            font-size:
-                12px;
-
-        }
-
-
-        /* =========================================================
-           RESPONSIVE DESIGN
-        ========================================================= */
-
-        @media (max-width: 850px) {
-
-            .calculator-grid {
-
-                grid-template-columns:
-                    1fr;
-
-            }
-
-
-            .results-card {
-
-                position:
-                    static;
-
-            }
-
-
-            .info-grid {
-
-                grid-template-columns:
-                    1fr;
-
-            }
-
-
-            .amortization-summary {
-
-                grid-template-columns:
-                    1fr 1fr;
-
-            }
-
-        }
-
-
-        @media (max-width: 600px) {
-
-            .topbar-inner {
-
-                padding:
-                    15px 18px;
-
-            }
-
-
-            .brand {
-
-                display:
-                    none;
-
-            }
-
-
-            .page-header {
-
-                padding:
-                    30px 18px 18px;
-
-            }
-
-
-            .container {
-
-                padding:
-                    8px 18px 40px;
-
-            }
-
-
-            .form-card,
-            .results-header,
-            .main-result,
-            .breakdown {
-
-                padding-left:
-                    20px;
-
-                padding-right:
-                    20px;
-
-            }
-
-
-            .form-grid {
-
-                grid-template-columns:
-                    1fr;
-
-            }
-
-
-            .form-group.full {
-
-                grid-column:
-                    auto;
-
-            }
-
-
-            .affordability-box {
-
-                margin-left:
-                    20px;
-
-                margin-right:
-                    20px;
-
-            }
-
-
-            .button-row {
-
-                flex-direction:
-                    column;
-
-            }
-
-
-            .reset-btn {
-
-                width:
-                    100%;
-
-            }
-
-
-            .footer-inner {
-
-                flex-direction:
-                    column;
-
-            }
-
-
-            .amortization-summary {
-
-                grid-template-columns:
-                    1fr;
-
-            }
-
-        }
-
-    </style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;color:#f8fafc;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.5;transition:background .3s ease,color .3s ease}
+button,input,select{font:inherit}button{border:0}
+.topbar{width:100%;position:sticky;top:0;z-index:50;background:rgba(2,6,23,.82);backdrop-filter:blur(16px);border-bottom:1px solid #1e293b}
+.topbar-inner{max-width:1152px;margin:auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.back-link{color:#cbd5e1;text-decoration:none;font-size:14px;font-weight:700;transition:.2s}.back-link:hover{color:#fff}
+.brand{color:#f8fafc;font-size:17px;font-weight:800;letter-spacing:-.3px}.brand span{color:#818cf8}
+.theme-toggle{width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;border:1px solid #334155;border-radius:12px;background:rgba(15,23,42,.72);color:#94a3b8;cursor:pointer;transition:.2s}.theme-toggle:hover{color:#fff;background:#1e293b;border-color:#475569}.theme-toggle svg{width:19px;height:19px}.theme-toggle #theme-icon{font-size:19px;line-height:1;display:inline-flex;align-items:center;justify-content:center}
+.page-header{max-width:1152px;margin:auto;padding:48px 24px 22px}.eyebrow{display:inline-block;color:#a5b4fc;background:rgba(99,102,241,.13);border:1px solid rgba(99,102,241,.25);padding:6px 11px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:13px}
+h1{margin:0 0 12px;color:#f8fafc;font-size:clamp(32px,4vw,48px);line-height:1.08;letter-spacing:-1.5px}.subtitle{max-width:760px;margin:0;color:#94a3b8;font-size:17px;line-height:1.7}
+.container{max-width:1152px;margin:auto;padding:12px 24px 64px}.calculator-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(360px,.95fr);gap:18px;align-items:start}
+.card,.info-section{background:rgba(30,41,59,.72);backdrop-filter:blur(14px);border:1px solid #334155;border-radius:16px;box-shadow:0 18px 50px rgba(0,0,0,.18)}
+.form-card{padding:28px}.section-heading{margin-bottom:22px}.section-heading h2,.results-header h2,.info-section h2{color:#f8fafc}.section-heading h2{margin:0 0 6px;font-size:21px}.section-heading p{margin:0;color:#94a3b8;font-size:14px}
+.form-section{padding-bottom:25px;margin-bottom:25px;border-bottom:1px solid #334155}.form-section:last-of-type{border:0;margin-bottom:0;padding-bottom:0}.form-section-title{color:#e2e8f0;font-size:14px;font-weight:800;margin-bottom:15px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.form-group{display:flex;flex-direction:column;gap:7px}.form-group.full{grid-column:1/-1}
+label{font-size:13px;font-weight:700;color:#cbd5e1}.input-wrapper{position:relative}.prefix{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#94a3b8;pointer-events:none;font-size:14px}
+input,select{width:100%;height:46px;border:1px solid #475569;border-radius:12px;background:#0f172a;color:#f8fafc;font-size:15px;padding:0 13px;outline:none;transition:.2s}input.currency{padding-left:29px}input:focus,select:focus{border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.15)}.helper{color:#64748b;font-size:11px}
+.button-row{display:flex;gap:10px;margin-top:25px}.calculate-btn{flex:1;min-height:50px;border-radius:12px;background:#6366f1;color:#fff;font-size:15px;font-weight:800;cursor:pointer;transition:.2s}.calculate-btn:hover{background:#4f46e5;transform:translateY(-1px)}.reset-btn{min-height:50px;padding:0 18px;border-radius:12px;background:#1e293b;color:#e2e8f0;font-weight:700;cursor:pointer;border:1px solid #475569}.reset-btn:hover{background:#334155}
+.results-card{overflow:hidden;position:sticky;top:82px}.results-header{padding:26px 28px;background:linear-gradient(135deg,rgba(79,70,229,.18),rgba(30,41,59,.35));border-bottom:1px solid #334155}.results-header h2{margin:0 0 6px;font-size:21px}.results-header p{margin:0;color:#94a3b8;font-size:13px}.main-result{padding:30px 28px 25px;text-align:center}.result-label{color:#94a3b8;font-size:13px;font-weight:600;margin-bottom:5px}.result-price{color:#818cf8;font-size:clamp(40px,5vw,54px);font-weight:900;letter-spacing:-1.7px;line-height:1.1}.result-note{color:#64748b;font-size:12px;margin-top:9px}
+.breakdown{padding:0 28px 28px}.breakdown-title{color:#e2e8f0;font-size:14px;font-weight:800;margin-bottom:13px}.breakdown-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(71,85,105,.55);font-size:13px}.breakdown-row:last-child{border:0}.breakdown-label{color:#94a3b8}.breakdown-value{color:#f8fafc;font-weight:750}
+.affordability-box{margin:0 28px 28px;padding:17px;border-radius:12px;background:rgba(34,197,94,.10);border:1px solid rgba(34,197,94,.28)}.affordability-box.warning{background:rgba(245,158,11,.10);border-color:rgba(245,158,11,.3)}.affordability-title{color:#f8fafc;font-weight:800;font-size:14px;margin-bottom:4px}.affordability-text{font-size:12px;color:#94a3b8}
+.info-section{margin-top:20px;padding:28px}.info-section h2{margin:0 0 12px;font-size:21px}.info-section>p{color:#94a3b8;font-size:14px;margin:0 0 14px;line-height:1.8}.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}.info-box{padding:18px;background:rgba(15,23,42,.55);border:1px solid #334155;border-radius:12px}.info-box h3{margin:0 0 7px;color:#e2e8f0;font-size:14px}.info-box p{margin:0;color:#94a3b8;font-size:12px;line-height:1.7}.disclaimer{margin-top:20px;color:#64748b;font-size:11px;line-height:1.7}
+.amortization-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0}.amortization-stat{background:rgba(15,23,42,.55);border:1px solid #334155;border-radius:12px;padding:15px}.amortization-stat span{display:block;color:#64748b;font-size:11px;margin-bottom:5px}.amortization-stat strong{display:block;font-size:17px;color:#f8fafc}.table-wrapper{width:100%;overflow-x:auto;border:1px solid #334155;border-radius:12px}.amortization-table{width:100%;border-collapse:collapse;min-width:650px;font-size:13px}.amortization-table th{background:#0f172a;color:#cbd5e1;font-size:12px;font-weight:800;text-align:right;padding:13px;border-bottom:1px solid #334155}.amortization-table th:first-child{text-align:center}.amortization-table td{color:#cbd5e1;padding:12px 13px;text-align:right;border-bottom:1px solid rgba(71,85,105,.45)}.amortization-table td:first-child{text-align:center;font-weight:800;color:#f8fafc}.amortization-table tbody tr:last-child td{border:0}.amortization-table tbody tr:hover{background:rgba(51,65,85,.25)}
+.faq-section{margin-top:20px}.faq-item{border:1px solid #334155;border-radius:12px;margin-top:10px;overflow:hidden;background:rgba(15,23,42,.45)}.faq-question{width:100%;display:flex;justify-content:space-between;align-items:center;text-align:left;background:transparent;color:#f8fafc;padding:17px 18px;font-size:14px;font-weight:800;cursor:pointer;transition:.2s}.faq-question:hover{background:rgba(51,65,85,.28)}.faq-question span:last-child{color:#818cf8;font-size:20px;line-height:1;transition:.2s}.faq-question.active span:last-child{transform:rotate(45deg)}.faq-answer{display:none;padding:0 18px 18px;border-top:1px solid #334155}.faq-answer.open{display:block}.faq-answer p{margin:14px 0 0;color:#94a3b8;font-size:13px;line-height:1.75}
+footer{margin-top:28px;border-top:1px solid #1e293b;background:rgba(2,6,23,.72)}.footer-inner{max-width:1152px;margin:auto;padding:25px 24px;display:flex;justify-content:space-between;gap:20px;color:#64748b;font-size:12px}
+body.light-mode{background:#f8fafc;color:#0f172a}body.light-mode .topbar{background:rgba(255,255,255,.9);border-color:#e2e8f0}body.light-mode .back-link{color:#475569}body.light-mode .back-link:hover{color:#0f172a}body.light-mode .brand{color:#0f172a}body.light-mode .theme-toggle{background:#fff;border-color:#cbd5e1;color:#475569}body.light-mode .theme-toggle:hover{background:#f1f5f9;color:#0f172a}body.light-mode h1{color:#0f172a}body.light-mode .subtitle{color:#64748b}body.light-mode .eyebrow{color:#4f46e5;background:#eef2ff;border-color:#c7d2fe}body.light-mode .card,body.light-mode .info-section{background:rgba(255,255,255,.84);border-color:#e2e8f0;box-shadow:0 12px 35px rgba(15,23,42,.07)}body.light-mode .section-heading h2,body.light-mode .results-header h2,body.light-mode .info-section h2{color:#0f172a}body.light-mode .section-heading p,body.light-mode .results-header p,body.light-mode .info-section>p{color:#64748b}body.light-mode .form-section{border-color:#e2e8f0}body.light-mode .form-section-title,body.light-mode .breakdown-title,body.light-mode .info-box h3{color:#1e293b}body.light-mode label{color:#334155}body.light-mode input,body.light-mode select{background:#fff;border-color:#cbd5e1;color:#0f172a}body.light-mode .helper{color:#64748b}body.light-mode .reset-btn{background:#f1f5f9;border-color:#cbd5e1;color:#334155}body.light-mode .reset-btn:hover{background:#e2e8f0}body.light-mode .results-header{background:linear-gradient(135deg,#eef2ff,#f8fafc);border-color:#e2e8f0}body.light-mode .result-label,body.light-mode .result-note{color:#64748b}body.light-mode .breakdown-row{border-color:#eef2f7}body.light-mode .breakdown-label{color:#64748b}body.light-mode .breakdown-value{color:#1e293b}body.light-mode .info-box,body.light-mode .amortization-stat{background:#f8fafc;border-color:#e2e8f0}body.light-mode .info-box p{color:#64748b}body.light-mode .disclaimer{color:#64748b}body.light-mode .table-wrapper{border-color:#e2e8f0}body.light-mode .amortization-table th{background:#f8fafc;color:#475569;border-color:#e2e8f0}body.light-mode .amortization-table td{color:#334155;border-color:#eef2f7}body.light-mode .amortization-table td:first-child{color:#0f172a}body.light-mode .faq-item{background:#fff;border-color:#e2e8f0}body.light-mode .faq-question{color:#1e293b}body.light-mode .faq-question:hover{background:#f8fafc}body.light-mode .faq-answer{border-color:#e2e8f0}body.light-mode .faq-answer p{color:#64748b}body.light-mode footer{background:#fff;border-color:#e2e8f0}
+@media(max-width:850px){.calculator-grid{grid-template-columns:1fr}.results-card{position:static}.info-grid{grid-template-columns:1fr}.amortization-summary{grid-template-columns:1fr 1fr}}@media(max-width:600px){.topbar-inner{padding:14px 18px}.brand{display:none}.page-header{padding:34px 18px 20px}.container{padding:8px 18px 45px}.form-card,.results-header,.main-result,.breakdown{padding-left:20px;padding-right:20px}.form-grid{grid-template-columns:1fr}.form-group.full{grid-column:auto}.affordability-box{margin-left:20px;margin-right:20px}.button-row{flex-direction:column}.reset-btn{width:100%}.footer-inner{flex-direction:column}.amortization-summary{grid-template-columns:1fr}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
 
 </head>
 
@@ -1587,27 +57,15 @@
     <!-- =========================================================
          TOP BAR
     ========================================================= -->
-
+    <!-- HEADER -->
     <header class="topbar">
-
         <div class="topbar-inner">
-
-            <a
-                href="/"
-                class="back-link"
-            >
-                &larr; Back to Utiliverse
-            </a>
-
-
-            <div class="brand">
-
-                <span>Utili</span>verse
-
-            </div>
-
+            <a href="https://utiliverse.app" class="back-link">&larr; Back to Utiliverse</a>
+            <div class="brand"><span>Utili</span>verse</div>
+            <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to light mode" title="Toggle light/dark mode">
+                <span id="theme-icon" aria-hidden="true">☀</span>
+            </button>
         </div>
-
     </header>
 
 
@@ -1647,6 +105,11 @@
     <!-- =========================================================
          MAIN
     ========================================================= -->
+
+    <!-- GOOGLE ADSENSE: TOP PLACEMENT
+         Paste approved Google AdSense code here after approval.
+         This placeholder is intentionally invisible and reserves no physical space.
+    -->
 
     <main class="container">
 
@@ -2345,6 +808,196 @@
 
 
         <!-- =====================================================
+             AMORTIZATION SCHEDULE
+        ====================================================== -->
+
+        <section
+            class="info-section"
+            id="amortization"
+        >
+
+
+            <h2>
+
+                Mortgage Amortization Schedule
+
+            </h2>
+
+
+            <p>
+
+                The schedule below shows how your estimated mortgage
+                balance could change over time. It is automatically
+                calculated from the mortgage amount, interest rate,
+                and loan term used by the affordability calculator
+                above.
+
+            </p>
+
+
+
+            <div class="amortization-summary">
+
+
+                <div class="amortization-stat">
+
+                    <span>
+
+                        Estimated Loan
+
+                    </span>
+
+
+                    <strong id="amortLoanAmount">
+
+                        $0
+
+                    </strong>
+
+                </div>
+
+
+
+                <div class="amortization-stat">
+
+                    <span>
+
+                        Interest Rate
+
+                    </span>
+
+
+                    <strong id="amortRate">
+
+                        0%
+
+                    </strong>
+
+                </div>
+
+
+
+                <div class="amortization-stat">
+
+                    <span>
+
+                        Loan Term
+
+                    </span>
+
+
+                    <strong id="amortTerm">
+
+                        0 years
+
+                    </strong>
+
+                </div>
+
+
+
+                <div class="amortization-stat">
+
+                    <span>
+
+                        Monthly Payment
+
+                    </span>
+
+
+                    <strong id="amortPayment">
+
+                        $0
+
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="table-wrapper">
+
+
+                <table class="amortization-table">
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+
+                                Year
+
+                            </th>
+
+
+                            <th>
+
+                                Beginning Balance
+
+                            </th>
+
+
+                            <th>
+
+                                Principal Paid
+
+                            </th>
+
+
+                            <th>
+
+                                Interest Paid
+
+                            </th>
+
+
+                            <th>
+
+                                Ending Balance
+
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="amortizationBody">
+
+
+                        <tr>
+
+                            <td colspan="5">
+
+                                Enter your information above to
+                                generate your amortization schedule.
+
+                            </td>
+
+                        </tr>
+
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        
+
+        <!-- =====================================================
              UNDERSTANDING YOUR ESTIMATE
         ====================================================== -->
 
@@ -2539,194 +1192,6 @@
                 rather than a guarantee of what you should spend.
 
             </p>
-
-
-        </section>
-
-
-
-        <!-- =====================================================
-             AMORTIZATION SCHEDULE
-        ====================================================== -->
-
-        <section
-            class="info-section"
-            id="amortization"
-        >
-
-
-            <h2>
-
-                Mortgage Amortization Schedule
-
-            </h2>
-
-
-            <p>
-
-                The schedule below shows how your estimated mortgage
-                balance could change over time. It is automatically
-                calculated from the mortgage amount, interest rate,
-                and loan term used by the affordability calculator
-                above.
-
-            </p>
-
-
-
-            <div class="amortization-summary">
-
-
-                <div class="amortization-stat">
-
-                    <span>
-
-                        Estimated Loan
-
-                    </span>
-
-
-                    <strong id="amortLoanAmount">
-
-                        $0
-
-                    </strong>
-
-                </div>
-
-
-
-                <div class="amortization-stat">
-
-                    <span>
-
-                        Interest Rate
-
-                    </span>
-
-
-                    <strong id="amortRate">
-
-                        0%
-
-                    </strong>
-
-                </div>
-
-
-
-                <div class="amortization-stat">
-
-                    <span>
-
-                        Loan Term
-
-                    </span>
-
-
-                    <strong id="amortTerm">
-
-                        0 years
-
-                    </strong>
-
-                </div>
-
-
-
-                <div class="amortization-stat">
-
-                    <span>
-
-                        Monthly Payment
-
-                    </span>
-
-
-                    <strong id="amortPayment">
-
-                        $0
-
-                    </strong>
-
-                </div>
-
-
-            </div>
-
-
-
-            <div class="table-wrapper">
-
-
-                <table class="amortization-table">
-
-
-                    <thead>
-
-                        <tr>
-
-                            <th>
-
-                                Year
-
-                            </th>
-
-
-                            <th>
-
-                                Beginning Balance
-
-                            </th>
-
-
-                            <th>
-
-                                Principal Paid
-
-                            </th>
-
-
-                            <th>
-
-                                Interest Paid
-
-                            </th>
-
-
-                            <th>
-
-                                Ending Balance
-
-                            </th>
-
-                        </tr>
-
-                    </thead>
-
-
-                    <tbody id="amortizationBody">
-
-
-                        <tr>
-
-                            <td colspan="5">
-
-                                Enter your information above to
-                                generate your amortization schedule.
-
-                            </td>
-
-                        </tr>
-
-
-                    </tbody>
-
-
-                </table>
-
-
-            </div>
 
 
         </section>
@@ -3012,7 +1477,7 @@
 
             <div>
 
-                &copy; 2026 Utiliverse
+                &copy; <span id="year"></span> Utiliverse
 
             </div>
 
@@ -3036,6 +1501,35 @@
     ========================================================= -->
 
     <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        /* =========================================================
+           LIGHT / DARK MODE
+        ========================================================= */
+        (function () {
+            const themeToggle = document.getElementById("theme-toggle");
+            const themeIcon = document.getElementById("theme-icon");
+
+            function applyTheme(theme) {
+                const isLight = theme === "light";
+                document.body.classList.toggle("light-mode", isLight);
+                themeIcon.textContent = isLight ? "☾" : "☀";
+                themeToggle.setAttribute("aria-label", isLight ? "Switch to dark mode" : "Switch to light mode");
+                themeToggle.setAttribute("title", isLight ? "Switch to dark mode" : "Switch to light mode");
+            }
+
+            const savedTheme = localStorage.getItem("utiliverse-theme");
+            const initialTheme = savedTheme ||
+                (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+
+            applyTheme(initialTheme);
+
+            themeToggle.addEventListener("click", function () {
+                const nextTheme = document.body.classList.contains("light-mode") ? "dark" : "light";
+                localStorage.setItem("utiliverse-theme", nextTheme);
+                applyTheme(nextTheme);
+            });
+        })();
 
 
         /* =========================================================
