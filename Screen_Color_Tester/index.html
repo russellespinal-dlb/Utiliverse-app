@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <title>Utiliverse Color Screen — Free Fullscreen Color & Display Tool</title>
 
@@ -314,6 +314,360 @@ body {
 
 }
 
+
+
+/* ============================================================
+   UTILIVERSE ENHANCEMENTS
+   Theme toggle, invisible ad placeholders, mobile compatibility,
+   and robust fullscreen behavior. Original tool styles remain intact.
+============================================================ */
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+}
+
+/* Hide all advertisement placeholders and their layout wrappers.
+   Approved AdSense code can still be inserted later without visible
+   placeholder boxes being shown beforehand. */
+.ad-slot,
+.ad-container {
+    display: none !important;
+    min-height: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+}
+
+/* Header theme button */
+.theme-toggle {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    border: 1px solid #334155;
+    background: rgba(30, 41, 59, .8);
+    color: #e2e8f0;
+    cursor: pointer;
+    transition: background-color .2s ease, border-color .2s ease, transform .2s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.theme-toggle:hover {
+    background: #334155;
+    transform: translateY(-1px);
+}
+
+.theme-toggle:focus-visible {
+    outline: 2px solid #818cf8;
+    outline-offset: 2px;
+}
+
+.theme-toggle svg {
+    width: 19px;
+    height: 19px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.theme-icon-sun {
+    display: none;
+}
+
+/* Light mode */
+body.light-mode {
+    --bg-main: #f8fafc;
+    --bg-secondary: #ffffff;
+    --card: rgba(255, 255, 255, .88);
+    --border: #e2e8f0;
+    --border-light: #cbd5e1;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    background:
+        radial-gradient(circle at top left, rgba(99,102,241,.08), transparent 30%),
+        radial-gradient(circle at top right, rgba(139,92,246,.05), transparent 30%),
+        #f8fafc;
+    color: #0f172a;
+}
+
+body.light-mode header.sticky {
+    background: rgba(255, 255, 255, .90) !important;
+    border-color: #e2e8f0 !important;
+}
+
+body.light-mode .glass {
+    background: rgba(255, 255, 255, .88);
+    border-color: #dbe3ee;
+}
+
+body.light-mode .glass-soft {
+    background: rgba(248, 250, 252, .92);
+    border-color: #dbe3ee;
+}
+
+body.light-mode .value-box {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+    color: #0f172a;
+}
+
+body.light-mode .btn-secondary {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+    color: #0f172a;
+}
+
+body.light-mode .btn-secondary:hover {
+    background: #e2e8f0;
+}
+
+body.light-mode .color-badge {
+    background: #eef2ff;
+    border-color: #c7d2fe;
+    color: #3730a3;
+}
+
+body.light-mode .faq-item {
+    border-color: #e2e8f0;
+}
+
+body.light-mode .faq-answer,
+body.light-mode .content-area {
+    color: #475569;
+}
+
+body.light-mode .content-area h3 {
+    color: #0f172a;
+}
+
+body.light-mode .text-slate-400,
+body.light-mode .text-slate-500,
+body.light-mode .text-slate-600 {
+    color: #64748b !important;
+}
+
+body.light-mode .text-indigo-400 {
+    color: #4f46e5 !important;
+}
+
+body.light-mode .border-slate-800,
+body.light-mode .border-slate-700 {
+    border-color: #dbe3ee !important;
+}
+
+body.light-mode input[type="text"],
+body.light-mode input[type="number"] {
+    background-color: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    color: #0f172a !important;
+}
+
+body.light-mode input::placeholder {
+    color: #94a3b8;
+}
+
+body.light-mode footer {
+    background: #ffffff !important;
+    border-color: #e2e8f0 !important;
+}
+
+body.light-mode footer a:hover {
+    color: #0f172a !important;
+}
+
+body.light-mode .theme-toggle {
+    background: #ffffff;
+    border-color: #cbd5e1;
+    color: #334155;
+}
+
+body.light-mode .theme-toggle:hover {
+    background: #f1f5f9;
+}
+
+body.light-mode .theme-icon-moon {
+    display: none;
+}
+
+body.light-mode .theme-icon-sun {
+    display: block;
+}
+
+/* Keep the color picker touch-responsive instead of allowing the page
+   to scroll while the user drags inside the spectrum. */
+.spectrum,
+.hue-slider {
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Dedicated fullscreen layer is appended directly to BODY, avoiding
+   the backdrop-filter containing-block issue that can constrain a
+   fixed child to the preview card on mobile WebKit browsers. */
+.fullscreen-color-overlay {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    width: 100dvw;
+    height: 100dvh;
+    z-index: 2147483647;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding:
+        max(24px, env(safe-area-inset-top))
+        max(24px, env(safe-area-inset-right))
+        max(24px, env(safe-area-inset-bottom))
+        max(24px, env(safe-area-inset-left));
+    border: 0;
+    border-radius: 0;
+    margin: 0;
+    overflow: hidden;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    overscroll-behavior: none;
+    touch-action: manipulation;
+}
+
+.fullscreen-color-overlay.active {
+    display: flex;
+}
+
+.fullscreen-color-overlay:fullscreen,
+.fullscreen-color-overlay:-webkit-full-screen {
+    width: 100%;
+    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: none;
+    max-height: none;
+    border-radius: 0;
+}
+
+.fullscreen-overlay-content {
+    pointer-events: none;
+    max-width: 92vw;
+}
+
+.fullscreen-overlay-hex {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(0,0,0,.16);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    font: 700 14px/1.2 "SFMono-Regular", Consolas, monospace;
+}
+
+.fullscreen-overlay-name {
+    margin-top: 16px;
+    font-size: clamp(30px, 8vw, 64px);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -.03em;
+}
+
+.fullscreen-overlay-hint {
+    margin-top: 14px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    opacity: .72;
+}
+
+body.color-fullscreen-fallback {
+    overflow: hidden !important;
+    overscroll-behavior: none;
+}
+
+/* Native fullscreen fallback sizing if the browser fullscreen API is
+   applied directly to the original preview by older engines. */
+.color-preview:fullscreen,
+.color-preview:-webkit-full-screen {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    border-radius: 0 !important;
+}
+
+.color-info-values {
+    flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+    button,
+    input,
+    select {
+        min-height: 44px;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+        font-size: 16px !important;
+    }
+
+    .theme-toggle {
+        width: 44px;
+        height: 44px;
+        flex-basis: 44px;
+    }
+
+    .color-preview {
+        min-height: clamp(260px, 58vh, 440px);
+        padding: 24px 18px !important;
+    }
+
+    .spectrum {
+        height: 180px;
+    }
+
+    .color-tile {
+        min-height: 70px;
+    }
+
+    .color-info-values > div {
+        flex: 1 1 145px;
+        min-width: 0;
+    }
+
+    .content-area,
+    .faq-answer {
+        overflow-wrap: anywhere;
+    }
+}
+
+@media (max-width: 420px) {
+    .color-preview {
+        min-height: 250px;
+    }
+
+    .spectrum {
+        height: 165px;
+    }
+
+    .color-info-values {
+        width: 100%;
+    }
+
+    .color-info-values > div {
+        flex-basis: 100%;
+    }
+}
+
 </style>
 
 <!-- SEO Structured Data -->
@@ -378,6 +732,22 @@ Utiliverse
 
 </span>
 
+<button
+id="themeToggle"
+class="theme-toggle"
+type="button"
+aria-label="Switch to light mode"
+title="Switch light/dark mode"
+>
+<svg class="theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path>
+</svg>
+<svg class="theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+<circle cx="12" cy="12" r="4"></circle>
+<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+</svg>
+</button>
+
 </div>
 
 </div>
@@ -424,7 +794,7 @@ Display a precise color across your entire screen, test a display, create a clea
 
 <!-- ========================= TOP AD ========================= -->
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 mb-8">
+<div class="ad-container max-w-7xl mx-auto px-4 sm:px-6 mb-8">
 
 <div class="ad-slot">
 
@@ -765,7 +1135,7 @@ Black
 
 </div>
 
-<div class="flex gap-2">
+<div class="color-info-values flex gap-2">
 
 <div class="value-box px-4 py-2 font-mono text-sm">
 HEX:
@@ -786,7 +1156,7 @@ RGB:
 
 <!-- ========================= MID AD ========================= -->
 
-<div class="grid lg:grid-cols-3 gap-6 mt-8">
+<div class="ad-container grid lg:grid-cols-3 gap-6 mt-8">
 
 <div class="lg:col-span-2">
 
@@ -914,111 +1284,18 @@ Questions about <span id="faqColorName">Black</span>
 </section>
 
 
-<!-- ========================= BOTTOM AD ========================= -->
-
-<div class="mt-16">
-
-<div class="ad-slot min-h-[100px]">
-
-Advertisement Space
-
-</div>
-
-</div>
-
-
 </main>
 
 
-<!-- ========================= FOOTER ========================= -->
+<!-- ========================= SIMPLE FOOTER ========================= -->
 
 <footer class="border-t border-slate-800 bg-slate-950">
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6">
 
-<div class="grid md:grid-cols-3 gap-8">
-
-<div>
-
-<div class="flex items-center gap-3">
-
-<div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center">
-
-<i data-lucide="layers" class="w-5 h-5"></i>
-
-</div>
-
-<span class="font-bold text-lg">
-Utiliverse
-</span>
-
-</div>
-
-<p class="text-sm text-slate-500 mt-4 max-w-sm leading-relaxed">
-
-Simple browser-based utilities designed to help you get everyday tasks done quickly without unnecessary accounts or software installations.
-
-</p>
-
-</div>
-
-
-<div>
-
-<h3 class="font-bold mb-4">
-Color Tools
-</h3>
-
-<div class="space-y-2 text-sm text-slate-500">
-
-<a href="#" class="block hover:text-white">Black Screen</a>
-<a href="#" class="block hover:text-white">White Screen</a>
-<a href="#" class="block hover:text-white">Color Picker</a>
-<a href="#" class="block hover:text-white">Fullscreen Color</a>
-
-</div>
-
-</div>
-
-
-<div>
-
-<h3 class="font-bold mb-4">
-Utiliverse
-</h3>
-
-<div class="space-y-2 text-sm text-slate-500">
-
-<a href="/" class="block hover:text-white">
-Back to Homepage
-</a>
-
-<a href="#" class="block hover:text-white">
-Privacy Policy
-</a>
-
-<a href="#" class="block hover:text-white">
-Terms of Service
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-
-<div class="border-t border-slate-800 mt-8 pt-6 text-xs text-slate-600 flex flex-col sm:flex-row justify-between gap-3">
-
-<span>
+<p class="text-left text-xs text-slate-600 m-0">
 © <span id="year"></span> Utiliverse. All rights reserved.
-</span>
-
-<span>
-Color processing happens locally in your browser.
-</span>
-
-</div>
+</p>
 
 </div>
 
@@ -1032,6 +1309,70 @@ Color processing happens locally in your browser.
 lucide.createIcons();
 
 document.getElementById("year").textContent = new Date().getFullYear();
+
+
+/* ============================================================
+   LIGHT / DARK MODE
+============================================================ */
+
+const themeToggle = document.getElementById("themeToggle");
+const themeMeta = document.querySelector('meta[name="theme-color"]');
+
+function applySiteTheme(theme) {
+    const isLight = theme === "light";
+
+    document.body.classList.toggle("light-mode", isLight);
+
+    if (themeToggle) {
+        themeToggle.setAttribute(
+            "aria-label",
+            isLight ? "Switch to dark mode" : "Switch to light mode"
+        );
+    }
+
+    if (themeMeta) {
+        themeMeta.setAttribute("content", isLight ? "#f8fafc" : "#020617");
+    }
+}
+
+function initializeSiteTheme() {
+    let savedTheme = null;
+
+    try {
+        savedTheme = localStorage.getItem("utiliverse-theme");
+    } catch (error) {
+        savedTheme = null;
+    }
+
+    if (savedTheme === "light" || savedTheme === "dark") {
+        applySiteTheme(savedTheme);
+        return;
+    }
+
+    const prefersLight =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: light)").matches;
+
+    applySiteTheme(prefersLight ? "light" : "dark");
+}
+
+if (themeToggle) {
+    themeToggle.addEventListener("click", function() {
+        const nextTheme = document.body.classList.contains("light-mode")
+            ? "dark"
+            : "light";
+
+        applySiteTheme(nextTheme);
+
+        try {
+            localStorage.setItem("utiliverse-theme", nextTheme);
+        } catch (error) {
+            /* Theme still works when storage is unavailable. */
+        }
+    });
+}
+
+initializeSiteTheme();
 
 
 /* ============================================================
@@ -1233,6 +1574,19 @@ function applyColor(hex,name="Custom") {
 
     preview.style.color = textColor;
 
+    const fullscreenOverlay = document.getElementById("fullscreenColorOverlay");
+
+    if (fullscreenOverlay) {
+        fullscreenOverlay.style.backgroundColor = hex;
+        fullscreenOverlay.style.color = textColor;
+
+        const overlayHex = fullscreenOverlay.querySelector(".fullscreen-overlay-hex");
+        const overlayName = fullscreenOverlay.querySelector(".fullscreen-overlay-name");
+
+        if (overlayHex) overlayHex.textContent = hex.toUpperCase();
+        if (overlayName) overlayName.textContent = name;
+    }
+
     document.getElementById("previewHex").textContent =
         hex.toUpperCase();
 
@@ -1404,9 +1758,15 @@ function updatePickerColor() {
 }
 
 
+let spectrumDragging = false;
+
 spectrum.addEventListener("pointerdown", function(e){
 
-    spectrum.setPointerCapture(e.pointerId);
+    spectrumDragging = true;
+
+    if (spectrum.setPointerCapture) {
+        spectrum.setPointerCapture(e.pointerId);
+    }
 
     updateSpectrumPosition(e);
 
@@ -1415,12 +1775,24 @@ spectrum.addEventListener("pointerdown", function(e){
 
 spectrum.addEventListener("pointermove", function(e){
 
-    if(e.buttons) {
+    if(spectrumDragging) {
 
         updateSpectrumPosition(e);
 
     }
 
+});
+
+
+spectrum.addEventListener("pointerup", function(e){
+    spectrumDragging = false;
+    if (spectrum.hasPointerCapture && spectrum.hasPointerCapture(e.pointerId)) {
+        spectrum.releasePointerCapture(e.pointerId);
+    }
+});
+
+spectrum.addEventListener("pointercancel", function(){
+    spectrumDragging = false;
 });
 
 
@@ -1544,46 +1916,131 @@ function updatePickerFromHex(hex) {
    FULLSCREEN
 ============================================================ */
 
-function enterFullscreen() {
+let fullscreenOverlay = null;
+
+function getFullscreenElement() {
+    return document.fullscreenElement || document.webkitFullscreenElement || null;
+}
+
+function buildFullscreenOverlay() {
+    if (fullscreenOverlay && document.body.contains(fullscreenOverlay)) {
+        return fullscreenOverlay;
+    }
+
+    fullscreenOverlay = document.createElement("div");
+    fullscreenOverlay.id = "fullscreenColorOverlay";
+    fullscreenOverlay.className = "fullscreen-color-overlay";
+    fullscreenOverlay.setAttribute("role", "button");
+    fullscreenOverlay.setAttribute("aria-label", "Exit fullscreen color view");
+    fullscreenOverlay.setAttribute("tabindex", "0");
+
+    fullscreenOverlay.innerHTML = `
+        <div class="fullscreen-overlay-content">
+            <div class="fullscreen-overlay-hex">#000000</div>
+            <div class="fullscreen-overlay-name">Black</div>
+            <div class="fullscreen-overlay-hint">Tap anywhere to exit</div>
+        </div>
+    `;
+
+    fullscreenOverlay.addEventListener("click", exitColorFullscreen);
+    fullscreenOverlay.addEventListener("keydown", function(event) {
+        if (event.key === "Enter" || event.key === " " || event.key === "Escape") {
+            event.preventDefault();
+            exitColorFullscreen();
+        }
+    });
+
+    document.body.appendChild(fullscreenOverlay);
+
+    return fullscreenOverlay;
+}
+
+function prepareFullscreenOverlay() {
+    const overlay = buildFullscreenOverlay();
     const preview = document.getElementById("colorPreview");
+    const hex = document.getElementById("infoHex").textContent || "#000000";
+    const name = document.getElementById("previewColorName").textContent || currentColor || "Custom";
 
-    // Check for iOS (iPhone/iPad) where standard fullscreen is not supported for DIVs
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
-                  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    overlay.style.backgroundColor = hex;
+    overlay.style.color = preview.style.color || "#ffffff";
 
-    if (isIOS) {
-        // Apply CSS Faux Fullscreen
-        preview.classList.add("ios-fullscreen");
-        
-        // Reveal tap instruction
-        const tapMsg = preview.querySelector('.ios-tap-msg');
-        if (tapMsg) tapMsg.classList.remove('hidden');
+    const overlayHex = overlay.querySelector(".fullscreen-overlay-hex");
+    const overlayName = overlay.querySelector(".fullscreen-overlay-name");
 
-        // Allow tap anywhere to exit on iOS
-        const exitFaux = function() {
-            preview.classList.remove("ios-fullscreen");
-            if (tapMsg) tapMsg.classList.add('hidden');
-            preview.removeEventListener("click", exitFaux);
-        };
-        
-        // Small timeout prevents immediate trigger if user double-tapped the button
-        setTimeout(() => {
-            preview.addEventListener("click", exitFaux);
-        }, 150);
-        
+    if (overlayHex) overlayHex.textContent = hex.toUpperCase();
+    if (overlayName) overlayName.textContent = name;
+
+    overlay.classList.add("active");
+    document.body.classList.add("color-fullscreen-fallback");
+
+    return overlay;
+}
+
+async function enterFullscreen() {
+    if (getFullscreenElement() ||
+        (fullscreenOverlay && fullscreenOverlay.classList.contains("active"))) {
+        exitColorFullscreen();
         return;
     }
 
-    // Standard Fullscreen API for Desktop / Android
-    if(preview.requestFullscreen) {
-        preview.requestFullscreen().catch(err => {
-            console.log("Error attempting to enable fullscreen:", err.message);
-        });
-    }
-    else if(preview.webkitRequestFullscreen) {
-        preview.webkitRequestFullscreen();
+    const overlay = prepareFullscreenOverlay();
+
+    /*
+       Android Chrome/Edge and compatible desktop browsers use the
+       native Fullscreen API. iPhone/iPad browsers that do not expose
+       fullscreen for normal elements automatically keep the body-level
+       fixed overlay active as a viewport-filling fallback.
+    */
+    try {
+        if (overlay.requestFullscreen) {
+            await overlay.requestFullscreen();
+            return;
+        }
+
+        if (overlay.webkitRequestFullscreen) {
+            overlay.webkitRequestFullscreen();
+            return;
+        }
+    } catch (error) {
+        /* The CSS overlay is already active and becomes the fallback. */
     }
 }
+
+function exitColorFullscreen() {
+    const activeFullscreen = getFullscreenElement();
+
+    if (activeFullscreen) {
+        try {
+            const exitPromise = document.exitFullscreen
+                ? document.exitFullscreen()
+                : (document.webkitExitFullscreen ? document.webkitExitFullscreen() : null);
+
+            if (exitPromise && typeof exitPromise.catch === "function") {
+                exitPromise.catch(function() {});
+            }
+        } catch (error) {
+            /* Continue cleanup below. */
+        }
+    }
+
+    if (fullscreenOverlay) {
+        fullscreenOverlay.classList.remove("active");
+    }
+
+    document.body.classList.remove("color-fullscreen-fallback");
+}
+
+function handleNativeFullscreenChange() {
+    if (!getFullscreenElement()) {
+        if (fullscreenOverlay) {
+            fullscreenOverlay.classList.remove("active");
+        }
+        document.body.classList.remove("color-fullscreen-fallback");
+    }
+}
+
+document.addEventListener("fullscreenchange", handleNativeFullscreenChange);
+document.addEventListener("webkitfullscreenchange", handleNativeFullscreenChange);
 
 
 /* ============================================================
@@ -1692,18 +2149,7 @@ function startTimer() {
 
                 clearInterval(timerInterval);
 
-                const preview = document.getElementById("colorPreview");
-
-                // Exit native fullscreen
-                if(document.fullscreenElement) {
-                    document.exitFullscreen();
-                } 
-                // Exit iOS fallback fullscreen
-                else if (preview.classList.contains("ios-fullscreen")) {
-                    preview.classList.remove("ios-fullscreen");
-                    const tapMsg = preview.querySelector('.ios-tap-msg');
-                    if (tapMsg) tapMsg.classList.add('hidden');
-                }
+                exitColorFullscreen();
 
             }
 
@@ -2187,16 +2633,7 @@ document.addEventListener("keydown",function(e){
 
     if(e.key === "Escape") {
 
-        const preview = document.getElementById("colorPreview");
-
-        if(document.fullscreenElement) {
-            document.exitFullscreen();
-        } else if (preview.classList.contains("ios-fullscreen")) {
-            // Exit iOS fallback if active via keyboard
-            preview.classList.remove("ios-fullscreen");
-            const tapMsg = preview.querySelector('.ios-tap-msg');
-            if (tapMsg) tapMsg.classList.add('hidden');
-        }
+        exitColorFullscreen();
 
     }
 
