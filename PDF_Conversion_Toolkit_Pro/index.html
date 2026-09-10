@@ -164,6 +164,35 @@ body{
   z-index:-1;
 }
 
+
+.faq{
+  border-bottom:1px solid #334155;
+}
+.faq summary{
+  list-style:none;
+  cursor:pointer;
+  padding:1.05rem 0;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"+";
+  color:#818cf8;
+  font-size:1.25rem;
+  font-weight:700;
+  flex:0 0 auto;
+}
+.faq[open] summary::after{content:"−"}
+.faq p{
+  margin-top:0;
+  padding-bottom:.35rem;
+}
+body.light-mode .faq{border-bottom-color:#e2e8f0}
+
 /* Light mode */
 body.light-mode{
   background:
@@ -384,6 +413,47 @@ body.light-mode .result-panel p{color:#047857}
 
     <p>Browser-based conversion is most useful for quick local tasks, but it still operates within browser memory and security limits. Very large files, password-protected PDFs, damaged documents, unusual fonts, or complicated layouts may require specialized software. This toolkit is intended for supported everyday conversions rather than professional prepress, OCR, archival validation, or document repair.</p>
   </section>
+
+  <section class="article max-w-4xl mt-16 mb-16">
+    <h2>Frequently Asked Questions</h2>
+    <p>These answers describe the actual capabilities and limitations of this browser-based PDF Toolkit.</p>
+
+    <details class="faq">
+      <summary>Are my files uploaded to Utiliverse when I use this PDF Toolkit?</summary>
+      <p>The core conversion and PDF-processing work in this page runs in your browser. The selected file is not sent to a Utiliverse conversion server by the toolkit code. The page does load processing libraries from public content-delivery networks, and an HTML file you convert may reference remote images, fonts, or stylesheets that your browser can request separately.</p>
+    </details>
+
+    <details class="faq">
+      <summary>What image formats can I export from a PDF?</summary>
+      <p>The toolkit can render PDF pages as JPG, PNG, or WebP images. A single-page PDF produces one image file. When a PDF contains multiple pages, the toolkit creates one image per page and packages the images into a ZIP archive so the complete set can be downloaded together.</p>
+    </details>
+
+    <details class="faq">
+      <summary>Can this tool extract text from scanned PDFs?</summary>
+      <p>Only when the PDF already contains a selectable text layer. A scanned PDF that consists only of page images normally has no text for PDF.js to extract. This version of the toolkit does not perform optical character recognition (OCR), so image-only scans generally require a separate OCR tool before meaningful text extraction is possible.</p>
+    </details>
+
+    <details class="faq">
+      <summary>Which image types can be converted into PDF files?</summary>
+      <p>JPG/JPEG, PNG, and WebP images are supported. Multiple images can be selected and combined into one multi-page PDF. JPEG and PNG data are embedded directly with pdf-lib, while WebP images are decoded by the browser and converted to PNG image data before being placed into the PDF.</p>
+    </details>
+
+    <details class="faq">
+      <summary>Can I merge, split, and rotate PDF files?</summary>
+      <p>Yes. Merge PDF combines two or more selected PDFs into one document. Split PDF creates one valid PDF per source page and packages those files in a ZIP archive. Rotate PDF turns every page in the selected PDF 90 degrees clockwise and saves the result as a new PDF.</p>
+    </details>
+
+    <details class="faq">
+      <summary>Will password-protected, encrypted, or damaged PDFs always work?</summary>
+      <p>No. The toolkit can reject PDFs that the browser libraries cannot open, including some password-protected, encrypted, malformed, or damaged files. When that happens, a dedicated desktop PDF application or document-repair tool may be required.</p>
+    </details>
+
+    <details class="faq">
+      <summary>Does this toolkit create PDF/A files or perform professional PDF compression?</summary>
+      <p>No. Formal PDF/A conformance requires specific archival rules and validation, and professional PDF compression may involve image recompression, font handling, object optimization, and other specialized processing. Those options are intentionally not presented as supported conversions in this version of the toolkit.</p>
+    </details>
+  </section>
+
 </main>
 
 <!-- GOOGLE ADSENSE: PRE-FOOTER PLACEMENT
