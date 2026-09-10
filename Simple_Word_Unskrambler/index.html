@@ -103,6 +103,299 @@
             transform: translateY(-1rem);
             transition: opacity 300ms, transform 300ms;
         }
+
+
+        /* =========================================================
+           UTILIVERSE LIGHT / DARK MODE + MOBILE ENHANCEMENTS
+           Added without changing the original unskrambler logic.
+        ========================================================= */
+        html {
+            color-scheme: light;
+        }
+
+        body,
+        header,
+        footer,
+        main,
+        section,
+        article,
+        aside,
+        details,
+        summary,
+        input,
+        textarea,
+        select,
+        button {
+            transition: background-color .22s ease, color .22s ease, border-color .22s ease, box-shadow .22s ease;
+        }
+
+        .theme-toggle {
+            width: 40px;
+            height: 40px;
+            flex: 0 0 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            background: #ffffff;
+            color: #475569;
+            font-size: 20px;
+            line-height: 1;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .theme-toggle:hover {
+            background: #f1f5f9;
+            color: #4f46e5;
+        }
+
+        .theme-toggle:focus-visible {
+            outline: 2px solid #6366f1;
+            outline-offset: 2px;
+        }
+
+        /* Dark mode */
+        body.dark-mode {
+            background:
+                radial-gradient(circle at 10% 0%, rgba(99,102,241,.12), transparent 32%),
+                radial-gradient(circle at 90% 15%, rgba(124,58,237,.10), transparent 28%),
+                #020617 !important;
+            color: #f8fafc !important;
+        }
+
+        body.dark-mode header,
+        body.dark-mode footer {
+            background: rgba(2,6,23,.88) !important;
+            border-color: #1e293b !important;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        body.dark-mode .bg-white {
+            background-color: rgba(30,41,59,.72) !important;
+        }
+
+        body.dark-mode .bg-slate-50 {
+            background-color: #0f172a !important;
+        }
+
+        body.dark-mode .bg-slate-100,
+        body.dark-mode .hover\:bg-slate-100:hover,
+        body.dark-mode .hover\:bg-slate-200:hover {
+            background-color: #1e293b !important;
+        }
+
+        body.dark-mode .hover\:bg-slate-50:hover {
+            background-color: rgba(51,65,85,.65) !important;
+        }
+
+        body.dark-mode .bg-indigo-50 {
+            background-color: rgba(99,102,241,.12) !important;
+        }
+
+        body.dark-mode .bg-indigo-100 {
+            background-color: rgba(99,102,241,.20) !important;
+        }
+
+        body.dark-mode .bg-amber-50 {
+            background-color: rgba(245,158,11,.12) !important;
+        }
+
+        body.dark-mode .bg-emerald-50 {
+            background-color: rgba(16,185,129,.12) !important;
+        }
+
+        body.dark-mode .bg-red-50 {
+            background-color: rgba(239,68,68,.12) !important;
+        }
+
+        body.dark-mode .border-slate-100,
+        body.dark-mode .border-slate-200,
+        body.dark-mode .border-slate-300 {
+            border-color: #334155 !important;
+        }
+
+        body.dark-mode .border-indigo-100 {
+            border-color: rgba(99,102,241,.35) !important;
+        }
+
+        body.dark-mode .border-amber-200 {
+            border-color: rgba(245,158,11,.35) !important;
+        }
+
+        body.dark-mode .border-emerald-200 {
+            border-color: rgba(16,185,129,.35) !important;
+        }
+
+        body.dark-mode .border-red-200 {
+            border-color: rgba(239,68,68,.35) !important;
+        }
+
+        body.dark-mode .text-slate-900,
+        body.dark-mode .text-slate-800,
+        body.dark-mode .text-slate-700 {
+            color: #f8fafc !important;
+        }
+
+        body.dark-mode .text-slate-600 {
+            color: #cbd5e1 !important;
+        }
+
+        body.dark-mode .text-slate-500,
+        body.dark-mode .text-slate-400 {
+            color: #94a3b8 !important;
+        }
+
+        body.dark-mode .text-indigo-900 {
+            color: #e0e7ff !important;
+        }
+
+        body.dark-mode .text-indigo-700,
+        body.dark-mode .text-indigo-600 {
+            color: #a5b4fc !important;
+        }
+
+        body.dark-mode .text-amber-700,
+        body.dark-mode .text-amber-800 {
+            color: #fbbf24 !important;
+        }
+
+        body.dark-mode .text-emerald-700,
+        body.dark-mode .text-emerald-800 {
+            color: #6ee7b7 !important;
+        }
+
+        body.dark-mode .text-red-700 {
+            color: #fca5a5 !important;
+        }
+
+        body.dark-mode textarea,
+        body.dark-mode select,
+        body.dark-mode input[type="text"],
+        body.dark-mode input[type="number"] {
+            background: #0f172a !important;
+            border-color: #475569 !important;
+            color: #f8fafc !important;
+        }
+
+        body.dark-mode textarea::placeholder,
+        body.dark-mode input::placeholder {
+            color: #64748b !important;
+        }
+
+        body.dark-mode select option {
+            background: #0f172a;
+            color: #f8fafc;
+        }
+
+        body.dark-mode input[type=range]::-webkit-slider-runnable-track {
+            background: #475569;
+        }
+
+        body.dark-mode input[type=range]::-moz-range-track {
+            background: #475569;
+        }
+
+        body.dark-mode .theme-toggle {
+            background: transparent;
+            border-color: #334155;
+            color: #cbd5e1;
+        }
+
+        body.dark-mode .theme-toggle:hover {
+            background: #1e293b;
+            color: #ffffff;
+        }
+
+        body.dark-mode article,
+        body.dark-mode details,
+        body.dark-mode summary {
+            border-color: #334155 !important;
+        }
+
+        body.dark-mode .shadow-sm,
+        body.dark-mode .shadow-md,
+        body.dark-mode .shadow-lg {
+            box-shadow: 0 14px 38px rgba(0,0,0,.22) !important;
+        }
+
+        /* Result chips are created dynamically by the original JavaScript. */
+        body.dark-mode #results-list > div {
+            background: #0f172a !important;
+            border-color: #334155 !important;
+            color: #f8fafc !important;
+        }
+
+        body.dark-mode #results-list > div span {
+            background: #1e293b !important;
+            color: #94a3b8 !important;
+        }
+
+        /* Toasts are created dynamically by the original JavaScript. */
+        body.dark-mode #toast-container > div {
+            background: #0f172a !important;
+            border-color: #334155 !important;
+        }
+
+        /* Mobile layout refinements */
+        @media (max-width: 640px) {
+            header > div > div {
+                min-height: 64px;
+                height: auto !important;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+            main {
+                padding-top: 1.5rem !important;
+                padding-bottom: 2rem !important;
+                row-gap: 2rem !important;
+            }
+
+            #text-input {
+                font-size: 16px !important; /* prevents iOS input zoom */
+                min-height: 92px;
+            }
+
+            #btn-unscramble,
+            #btn-reset,
+            .example-btn,
+            .theme-toggle,
+            select,
+            input[type="range"] {
+                touch-action: manipulation;
+            }
+
+            article,
+            .lg\:col-span-8,
+            .lg\:col-span-4 {
+                min-width: 0;
+            }
+
+            #results-list {
+                overflow-wrap: anywhere;
+            }
+
+            footer > div {
+                padding-top: 1.25rem !important;
+                padding-bottom: 1.25rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #dictionary-status {
+                display: none !important;
+            }
+
+            .theme-toggle {
+                width: 38px;
+                height: 38px;
+                flex-basis: 38px;
+            }
+        }
+
     </style>
 
     <!-- Structured Data -->
@@ -139,18 +432,17 @@
             <a href="/" class="flex items-center text-sm font-medium text-slate-500 hover:text-indigo-600 transition-colors" aria-label="Back to Utiliverse">
                 <i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i> Back to Utiliverse
             </a>
-            
-            <div class="flex items-center gap-2 absolute left-1/2 transform -translate-x-1/2">
-                <div class="bg-indigo-600 text-white p-1.5 rounded-lg">
-                    <i data-lucide="book-open-check" class="w-5 h-5"></i>
-                </div>
-                <span class="text-lg sm:text-xl font-bold tracking-tight hidden sm:block">Simple Word Unskrambler</span>
-            </div>
-
-            <div class="flex items-center">
+            <div class="flex items-center gap-2 sm:gap-3">
                 <span id="dictionary-status" class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
                     <i data-lucide="loader" class="w-3 h-3 mr-1 animate-spin"></i> Loading Dictionary...
                 </span>
+                <button
+                    id="theme-toggle"
+                    type="button"
+                    class="theme-toggle"
+                    aria-label="Switch to dark mode"
+                    title="Switch to dark mode"
+                ><span id="theme-icon" aria-hidden="true">☾</span></button>
             </div>
         </div>
     </header>
@@ -168,10 +460,10 @@
             </p>
         </section>
 
-        <!-- Top Ad Placeholder -->
-        <div class="w-full max-w-4xl mx-auto bg-slate-100 border-2 border-dashed border-slate-300 rounded-xl flex items-center justify-center p-4 min-h-[100px] text-slate-400 text-sm font-medium">
-            Advertisement Space (Top Banner)
-        </div>
+        <!-- GOOGLE ADSENSE: TOP PLACEMENT
+             Paste approved Google AdSense code here after approval.
+             This placeholder is intentionally invisible and reserves no physical space.
+        -->
 
         <!-- Main Tool Area -->
         <div class="w-full max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -287,10 +579,10 @@
             </div>
         </div>
 
-        <!-- Middle Ad Placeholder -->
-        <div class="w-full max-w-4xl mx-auto bg-slate-100 border-2 border-dashed border-slate-300 rounded-xl flex items-center justify-center p-4 min-h-[250px] text-slate-400 text-sm font-medium my-8">
-            Advertisement Space (In-Content Banner)
-        </div>
+        <!-- GOOGLE ADSENSE: IN-CONTENT PLACEMENT
+             Paste approved Google AdSense code here after approval.
+             This placeholder is intentionally invisible and reserves no physical space.
+        -->
 
         <!-- SEO Content Section -->
         <article class="w-full max-w-4xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 p-8 sm:p-12 prose prose-slate max-w-none">
@@ -304,6 +596,10 @@
                 By allowing you to select exactly how many word combinations you want the unskrambler to generate (in increments of 5), you maintain complete control over the output. You can choose to find just a handful of quick 5-letter options, or expand the search to return all possible permutations available in the dictionary dataset.
             </p>
 
+            <p class="text-slate-600 mb-6 leading-relaxed">
+                The tool is also useful when you want to explore the structure of a set of letters rather than solve one specific puzzle. Because results are sorted with longer words first, you can quickly spot the most complete matches before scanning shorter alternatives. That makes the Unskrambler helpful for vocabulary practice, classroom activities, brainstorming, spelling exercises, and anyone curious about how many recognizable English words can be formed from a single collection of letters.
+            </p>
+
             <h3 class="text-2xl font-bold text-slate-900 mt-10 mb-4">Master Your Favorite Word Games</h3>
             
             <p class="text-slate-600 mb-6 leading-relaxed">
@@ -312,6 +608,10 @@
 
             <p class="text-slate-600 mb-6 leading-relaxed">
                 To use the tool effectively for gaming, simply enter your available tiles into the text box. The local processing engine will instantly evaluate all letter combinations and present you with valid dictionary hits. Use the "Minimum Word Length" slider to filter out two-letter words if you're specifically hunting for a high-scoring 5 or 6-letter play.
+            </p>
+
+            <p class="text-slate-600 mb-6 leading-relaxed">
+                A useful strategy is to run the same rack more than once with different minimum lengths. Start with longer words to identify potential high-value plays, then lower the minimum length to uncover flexible backup options that may fit tighter board spaces. The results can help you notice letter patterns, common prefixes and suffixes, and combinations that are easy to miss when you are under time pressure. Always compare suggestions with the rules and accepted dictionary for the specific game you are playing.
             </p>
 
             <h2 class="text-3xl font-extrabold text-slate-900 mt-12 mb-6">Creative Uses for an Unskrambler</h2>
@@ -395,13 +695,52 @@
                         The tool utilizes a standard list of common English dictionary words. Highly obscure slang, newly invented terms, or specific proper nouns (like character names) may not be recognized, ensuring the output is highly relevant for standard word puzzles and anagrams.
                     </div>
                 </details>
+
+                <!-- FAQ 5 -->
+                <details class="group bg-white rounded-xl border border-slate-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+                    <summary class="flex items-center justify-between p-6 cursor-pointer bg-white hover:bg-slate-50 transition-colors">
+                        <h3 class="text-base font-bold text-slate-900">Why am I getting shorter words than the letters I entered?</h3>
+                        <span class="transition duration-300 group-open:-rotate-180 text-indigo-600">
+                            <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
+                        The Unskrambler looks for any valid word that can be formed from the letters you supplied, so a result does not have to use every letter. If you enter six letters, the list may contain valid three-, four-, five-, and six-letter words depending on your minimum-length setting and the words available in the dictionary.
+                    </div>
+                </details>
+
+                <!-- FAQ 6 -->
+                <details class="group bg-white rounded-xl border border-slate-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+                    <summary class="flex items-center justify-between p-6 cursor-pointer bg-white hover:bg-slate-50 transition-colors">
+                        <h3 class="text-base font-bold text-slate-900">Can I use the Unskrambler to improve my vocabulary?</h3>
+                        <span class="transition duration-300 group-open:-rotate-180 text-indigo-600">
+                            <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
+                        Yes. Entering familiar letter groups and reviewing the returned words can expose you to combinations you may not notice on your own. It can be especially useful for spelling practice, anagram exercises, classroom activities, and learning how common prefixes, suffixes, and letter patterns form different English words.
+                    </div>
+                </details>
+
+                <!-- FAQ 7 -->
+                <details class="group bg-white rounded-xl border border-slate-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+                    <summary class="flex items-center justify-between p-6 cursor-pointer bg-white hover:bg-slate-50 transition-colors">
+                        <h3 class="text-base font-bold text-slate-900">Why might a word I know be missing from the results?</h3>
+                        <span class="transition duration-300 group-open:-rotate-180 text-indigo-600">
+                            <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
+                        Results depend on the English word list used by the tool. A legitimate word may be absent if it is uncommon, specialized, regional, newly coined, a proper noun, or simply not included in that dictionary source. Different word games can also use different official dictionaries, so acceptance may vary from one game to another.
+                    </div>
+                </details>
             </div>
         </section>
 
-        <!-- Bottom Ad Placeholder -->
-        <div class="w-full max-w-4xl mx-auto bg-slate-100 border-2 border-dashed border-slate-300 rounded-xl flex items-center justify-center p-4 min-h-[100px] text-slate-400 text-sm font-medium mb-12">
-            Advertisement Space (Bottom Banner)
-        </div>
+        <!-- GOOGLE ADSENSE: BOTTOM PLACEMENT
+             Paste approved Google AdSense code here after approval.
+             This placeholder is intentionally invisible and reserves no physical space.
+        -->
 
     </main>
 
@@ -658,5 +997,36 @@
         // Initialize UI values
         updateSliderLabel();
     </script>
+
+
+    <!-- Light / Dark Mode -->
+    <script>
+    (function () {
+        const toggle = document.getElementById('theme-toggle');
+        const icon = document.getElementById('theme-icon');
+        if (!toggle || !icon) return;
+
+        function applyTheme(theme) {
+            const isDark = theme === 'dark';
+            document.body.classList.toggle('dark-mode', isDark);
+            document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+            icon.textContent = isDark ? '☀' : '☾';
+            const label = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+            toggle.setAttribute('aria-label', label);
+            toggle.title = label;
+        }
+
+        const savedTheme = localStorage.getItem('utiliverse-theme');
+        const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyTheme(savedTheme === 'dark' || savedTheme === 'light' ? savedTheme : (systemDark ? 'dark' : 'light'));
+
+        toggle.addEventListener('click', function () {
+            const nextTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+            localStorage.setItem('utiliverse-theme', nextTheme);
+            applyTheme(nextTheme);
+        });
+    })();
+    </script>
+
 </body>
 </html>
