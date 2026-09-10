@@ -127,6 +127,24 @@ body.light-mode .data-table th, body.light-mode .data-table td{border-bottom-col
 body.light-mode .data-table th{background:#f1f5f9;color:#64748b;}
 body.light-mode .faq{border-bottom-color:#e2e8f0;}
 body.light-mode .amortization-wrapper{border-color:#e2e8f0;}
+
+body.light-mode header a{
+  color:#334155 !important;
+}
+body.light-mode header a:hover{
+  color:#0f172a !important;
+}
+
+
+body.light-mode footer{
+  background:#f8fafc !important;
+  border-color:#e2e8f0 !important;
+}
+body.light-mode footer,
+body.light-mode footer span{
+  color:#64748b !important;
+}
+
 </style>
 </head>
 <body>
@@ -136,9 +154,12 @@ body.light-mode .amortization-wrapper{border-color:#e2e8f0;}
     <a href="/" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2 transition-colors">
       <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse
     </a>
-    <button id="theme-toggle" class="text-slate-400 hover:text-white transition-colors cursor-pointer">
-      <i data-lucide="sun" id="theme-icon" class="w-5 h-5"></i>
-    </button>
+    <div class="flex items-center gap-3">
+      <span class="text-xs sm:text-sm font-medium text-slate-500 whitespace-nowrap">100% Free and Browser Based</span>
+      <button id="theme-toggle" class="text-slate-400 hover:text-white transition-colors cursor-pointer" type="button" aria-label="Toggle light and dark mode" title="Toggle light and dark mode">
+        <i data-lucide="sun" id="theme-icon" class="w-5 h-5"></i>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -443,8 +464,9 @@ body.light-mode .amortization-wrapper{border-color:#e2e8f0;}
 </div>
 
 <footer class="border-t border-slate-800 bg-slate-950">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 text-sm text-slate-500 text-center font-mono">
-    © <span id="currentYear"></span> Utiliverse. All rights reserved.
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500 font-mono">
+    <span>© <span id="currentYear"></span> Utiliverse. All rights reserved.</span>
+    <span>100% Free and Browser Based</span>
   </div>
 </footer>
 
