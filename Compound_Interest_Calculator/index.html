@@ -299,6 +299,14 @@ body.light-mode .growth-page-number.active{
     flex:1 1 auto;
   }
 }
+
+/* Calculation clarification */
+#note{
+  line-height:1.55;
+}
+body.light-mode #note{
+  color:#475569!important;
+}
 </style><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Compound Interest Calculator","url":"https://utiliverse.app/compound-interest/","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is compound interest?","acceptedAnswer":{"@type":"Answer","text":"Compound interest is interest calculated on the original balance plus previously accumulated interest."}},{"@type":"Question","name":"How does compounding frequency affect growth?","acceptedAnswer":{"@type":"Answer","text":"More frequent compounding generally produces a slightly higher effective annual return when the nominal rate is positive."}},{"@type":"Question","name":"What is an effective annual rate?","acceptedAnswer":{"@type":"Answer","text":"It is the annualized rate after the impact of the selected compounding frequency is included."}},{"@type":"Question","name":"Can I add recurring contributions?","acceptedAnswer":{"@type":"Answer","text":"Yes. You can include a repeating contribution and choose its frequency."}},{"@type":"Question","name":"Does the result guarantee investment returns?","acceptedAnswer":{"@type":"Answer","text":"No. The result is a mathematical projection based on the assumptions you enter."}},{"@type":"Question","name":"What is continuous compounding?","acceptedAnswer":{"@type":"Answer","text":"Continuous compounding models interest as being applied infinitely often and uses the constant e."}}]}</script></head><body><header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800"><div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between"><a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2"><i data-lucide="arrow-left" class="w-4 h-4"></i>Back to Utiliverse</a><div class="flex items-center gap-3">
 <span class="text-xs text-slate-500 hidden sm:inline">Free & Browser-Based</span>
 <button id="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode"><span id="theme-icon" aria-hidden="true">☀</span></button>
@@ -417,7 +425,168 @@ A hypothetical $300 monthly contribution earning 7% annually with monthly compou
      Replace THIS ENTIRE COMMENT with your approved responsive AdSense unit.
 
      This placeholder is intentionally invisible and reserves no space.
-========================================================= --></main><footer class="border-t border-slate-800 bg-slate-950"><div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 text-sm text-slate-500 flex justify-between"><span>© <span id="yr"></span> Utiliverse</span><span>Informational projection only.</span></div></footer><script>lucide.createIcons();yr.textContent=new Date().getFullYear();const $=id=>document.getElementById(id);function money(n){return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(n)}function calc(){let P=+p.value||0,r=(+r0.value||0)/100,y=+years.value||0,n=+c.value||0,d0=+d.value||0,cf=+f.value||12;let bal=P,total=P;let months=Math.max(0,Math.round(y*12));for(let m=1;m<=months;m++){let rate=n?Math.pow(1+r/n,n/12)-1:Math.exp(r/12)-1;bal*=1+rate;if(d0&&m%(12/cf)<1e-9){bal+=d0;total+=d0}}let ear=n?Math.pow(1+r/n,n)-1:Math.exp(r)-1;end.textContent=money(bal);contrib.textContent=money(total);int.textContent=money(Math.max(0,bal-total));earEl=ear;earPct=(ear*100).toFixed(3)+'%';document.getElementById('ear').textContent=earPct;mult.textContent=(total?bal/total:0).toFixed(2)+'×';note.textContent=`Estimated result after ${y} years at ${(r*100).toFixed(2)}% with ${$('c').selectedOptions[0].text.toLowerCase()} compounding.`}const r0=$('r'),years=$('y'),end=$('end'),contrib=$('contrib'),int=$('int'),mult=$('mult'),p=$('p'),r=$('r'),c=$('c'),d=$('d'),f=$('f');['p','r','y','c','d','f'].forEach(id=>$(id).addEventListener('input',calc));calc();
+========================================================= --></main><footer class="border-t border-slate-800 bg-slate-950"><div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 text-sm text-slate-500 flex justify-between"><span>© <span id="yr"></span> Utiliverse</span><span>Informational projection only.</span></div></footer><script>lucide.createIcons();
+document.getElementById("yr").textContent = new Date().getFullYear();
+
+const $ = id => document.getElementById(id);
+
+function money(n){
+  return new Intl.NumberFormat("en-US",{
+    style:"currency",
+    currency:"USD",
+    minimumFractionDigits:2,
+    maximumFractionDigits:2
+  }).format(Number.isFinite(n) ? n : 0);
+}
+
+function readNumber(id){
+  const el = $(id);
+  if(!el || el.value.trim() === "") return 0;
+  const value = Number(el.value);
+  return Number.isFinite(value) ? value : 0;
+}
+
+/*
+  Accumulation factor for a fraction of a year.
+
+  n > 0  : nominal annual rate compounded n times per year
+  n === 0: continuous compounding
+*/
+function accumulationFactor(rate, compoundsPerYear, years){
+  if(years <= 0 || rate === 0) return 1;
+
+  if(compoundsPerYear === 0){
+    return Math.exp(rate * years);
+  }
+
+  return Math.pow(
+    1 + rate / compoundsPerYear,
+    compoundsPerYear * years
+  );
+}
+
+/*
+  Project a starting balance plus recurring end-of-period deposits.
+
+  Contributions are treated as separate cash flows, so a $0 starting
+  balance can still grow when recurring contributions are entered.
+*/
+function calculateProjectionData(){
+  const principal = Math.max(0, readNumber("p"));
+  const annualRate = Math.max(0, readNumber("r")) / 100;
+  const yearsValue = Math.max(0, readNumber("y"));
+  const compoundsPerYear = Math.max(0, readNumber("c"));
+  const recurringDeposit = Math.max(0, readNumber("d"));
+  const contributionFrequency = Math.max(1, readNumber("f") || 12);
+
+  let balance =
+    principal *
+    accumulationFactor(
+      annualRate,
+      compoundsPerYear,
+      yearsValue
+    );
+
+  const numberOfDeposits =
+    Math.max(
+      0,
+      Math.floor(yearsValue * contributionFrequency + 1e-10)
+    );
+
+  for(let k = 1; k <= numberOfDeposits; k++){
+    const contributionTime = k / contributionFrequency;
+    const remainingYears = Math.max(0, yearsValue - contributionTime);
+
+    balance +=
+      recurringDeposit *
+      accumulationFactor(
+        annualRate,
+        compoundsPerYear,
+        remainingYears
+      );
+  }
+
+  const totalDeposited =
+    principal + recurringDeposit * numberOfDeposits;
+
+  let interestEarned = balance - totalDeposited;
+  if(Math.abs(interestEarned) < 1e-9) interestEarned = 0;
+
+  const effectiveAnnualRate =
+    accumulationFactor(
+      annualRate,
+      compoundsPerYear,
+      1
+    ) - 1;
+
+  return {
+    principal,
+    annualRate,
+    yearsValue,
+    compoundsPerYear,
+    recurringDeposit,
+    contributionFrequency,
+    numberOfDeposits,
+    balance,
+    totalDeposited,
+    interestEarned,
+    effectiveAnnualRate
+  };
+}
+
+function contributionFrequencyLabel(value){
+  const select = $("f");
+  if(select && select.selectedOptions.length){
+    return select.selectedOptions[0].text.toLowerCase();
+  }
+  return value === 12 ? "monthly" : "recurring";
+}
+
+function calc(){
+  const data = calculateProjectionData();
+
+  $("end").textContent = money(data.balance);
+  $("contrib").textContent = money(data.totalDeposited);
+  $("int").textContent = money(data.interestEarned);
+  $("ear").textContent =
+    (data.effectiveAnnualRate * 100).toFixed(3) + "%";
+  $("mult").textContent =
+    (data.totalDeposited > 0
+      ? data.balance / data.totalDeposited
+      : 0
+    ).toFixed(2) + "×";
+
+  const compoundingLabel =
+    $("c").selectedOptions[0].text.toLowerCase();
+
+  if(data.yearsValue <= 0){
+    $("note").textContent =
+      "Enter a time period greater than 0 years to create a projection.";
+  }
+  else if(data.principal === 0 && data.recurringDeposit === 0){
+    $("note").textContent =
+      "No starting balance or recurring contribution is entered, so the projected balance is $0.00.";
+  }
+  else if(data.principal === 0 && data.recurringDeposit > 0){
+    $("note").textContent =
+      `Starting balance is $0.00. This projection comes from ${data.numberOfDeposits.toLocaleString("en-US")} ${contributionFrequencyLabel(data.contributionFrequency)} contributions of ${money(data.recurringDeposit)} plus compound growth.`;
+  }
+  else if(data.recurringDeposit === 0){
+    $("note").textContent =
+      `Estimated growth of the ${money(data.principal)} starting balance over ${data.yearsValue} years at ${(data.annualRate * 100).toFixed(2)}% with ${compoundingLabel} compounding.`;
+  }
+  else{
+    $("note").textContent =
+      `Estimated result after ${data.yearsValue} years at ${(data.annualRate * 100).toFixed(2)}% with ${compoundingLabel} compounding, including ${contributionFrequencyLabel(data.contributionFrequency)} contributions of ${money(data.recurringDeposit)}.`;
+  }
+}
+
+["p","r","y","c","d","f"].forEach(id => {
+  $(id).addEventListener("input", calc);
+  $(id).addEventListener("change", calc);
+});
+
+calc();
 /* =========================================================
    LIGHT / DARK THEME
 ========================================================= */
@@ -470,37 +639,86 @@ A hypothetical $300 monthly contribution earning 7% annually with monthly compou
   let currentDisplayRows = [];
 
   function buildMonthlySchedule(){
-    const principal = Number(document.getElementById("p").value) || 0;
-    const annualRate = (Number(document.getElementById("r").value) || 0) / 100;
-    const yearsValue = Number(document.getElementById("y").value) || 0;
-    const compoundFrequency = Number(document.getElementById("c").value) || 0;
-    const deposit = Number(document.getElementById("d").value) || 0;
-    const contributionFrequency = Number(document.getElementById("f").value) || 12;
-    const totalMonths = Math.max(0, Math.round(yearsValue * 12));
-
-    const monthlyRate = compoundFrequency
-      ? Math.pow(1 + annualRate / compoundFrequency, compoundFrequency / 12) - 1
-      : Math.exp(annualRate / 12) - 1;
+    const data = calculateProjectionData();
+    const {
+      principal,
+      annualRate,
+      yearsValue,
+      compoundsPerYear,
+      recurringDeposit,
+      contributionFrequency
+    } = data;
 
     const rows = [];
+    if(yearsValue <= 0) return rows;
+
     let balance = principal;
+    let lastTime = 0;
+    let contributionIndex = 1;
+    let nextContributionTime =
+      contributionIndex / contributionFrequency;
 
-    for(let month = 1; month <= totalMonths; month++){
-      const start = balance;
-      const interest = start * monthlyRate;
-      balance += interest;
+    const totalRows =
+      Math.max(0, Math.ceil(yearsValue * 12 - 1e-10));
 
-      let contribution = 0;
-      if(deposit && month % (12 / contributionFrequency) < 1e-9){
-        contribution = deposit;
-        balance += deposit;
+    for(let month = 1; month <= totalRows; month++){
+      const rowStartTime = (month - 1) / 12;
+      const rowEndTime = Math.min(month / 12, yearsValue);
+      const startingBalance = balance;
+      let contributionsThisRow = 0;
+
+      /*
+        Process any recurring deposits that occur during this row.
+        This correctly handles monthly, quarterly, annual, bi-weekly
+        and weekly contribution frequencies.
+      */
+      while(
+        recurringDeposit > 0 &&
+        nextContributionTime <= rowEndTime + 1e-10 &&
+        nextContributionTime <= yearsValue + 1e-10
+      ){
+        const growthTime =
+          Math.max(0, nextContributionTime - lastTime);
+
+        balance *= accumulationFactor(
+          annualRate,
+          compoundsPerYear,
+          growthTime
+        );
+
+        balance += recurringDeposit;
+        contributionsThisRow += recurringDeposit;
+
+        lastTime = nextContributionTime;
+        contributionIndex++;
+        nextContributionTime =
+          contributionIndex / contributionFrequency;
       }
 
+      if(lastTime < rowEndTime - 1e-12){
+        balance *= accumulationFactor(
+          annualRate,
+          compoundsPerYear,
+          rowEndTime - lastTime
+        );
+        lastTime = rowEndTime;
+      }
+
+      let interestThisRow =
+        balance - startingBalance - contributionsThisRow;
+
+      if(Math.abs(interestThisRow) < 1e-9){
+        interestThisRow = 0;
+      }
+
+      const isPartial =
+        rowEndTime < month / 12 - 1e-10;
+
       rows.push({
-        label: `Month ${month}`,
-        start,
-        contribution,
-        interest,
+        label: `Month ${month}${isPartial ? " (partial)" : ""}`,
+        start: startingBalance,
+        contribution: contributionsThisRow,
+        interest: interestThisRow,
         end: balance
       });
     }
@@ -714,7 +932,10 @@ A hypothetical $300 monthly contribution earning 7% annually with monthly compou
 
   ["p","r","y","c","d","f"].forEach(id => {
     const el = document.getElementById(id);
-    if(el) el.addEventListener("input", renderGrowthTable);
+    if(el){
+      el.addEventListener("input", renderGrowthTable);
+      el.addEventListener("change", renderGrowthTable);
+    }
   });
 
   renderGrowthTable();
