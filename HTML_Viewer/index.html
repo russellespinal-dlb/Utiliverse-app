@@ -85,8 +85,8 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      padding: 8px 13px;
+      gap: 0;
+      padding: 9px;
       border-radius: 9999px;
       border: 1px solid #e2e8f0;
       background: #ffffff;
@@ -136,6 +136,143 @@
     body.dark-mode textarea::-webkit-scrollbar-thumb {
       background-color: #475569;
     }
+
+    /* =========================================================
+       INFORMATION SECTIONS
+    ========================================================= */
+    .info-wrap {
+      width: 100%;
+      max-width: 72rem;
+      margin: 3.5rem auto 0;
+    }
+
+    .info-section {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 1px 2px rgba(15,23,42,.04);
+    }
+
+    .info-section + .info-section {
+      margin-top: 1.5rem;
+    }
+
+    .info-section h2 {
+      font-size: 1.65rem;
+      line-height: 1.25;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 0 0 .9rem;
+      letter-spacing: -.02em;
+    }
+
+    .info-section h3 {
+      font-size: 1.05rem;
+      line-height: 1.4;
+      font-weight: 750;
+      color: #1e293b;
+      margin: 1.35rem 0 .45rem;
+    }
+
+    .info-section p,
+    .info-section li {
+      color: #475569;
+      line-height: 1.82;
+      font-size: .98rem;
+    }
+
+    .info-section p {
+      margin: .8rem 0;
+    }
+
+    .info-section ul {
+      padding-left: 1.25rem;
+      margin: .75rem 0;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .faq-item:last-child {
+      border-bottom: 0;
+    }
+
+    .faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 1rem 0;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::after {
+      content: "+";
+      font-size: 1.2rem;
+      color: #64748b;
+      flex: 0 0 auto;
+    }
+
+    .faq-item[open] summary::after {
+      content: "−";
+    }
+
+    .faq-item p {
+      margin: 0;
+      padding: 0 0 1rem;
+    }
+
+    body.dark-mode .info-section {
+      background-color: #1e293b !important;
+      border-color: #334155 !important;
+    }
+
+    body.dark-mode .info-section h2 {
+      color: #f8fafc !important;
+    }
+
+    body.dark-mode .info-section h3,
+    body.dark-mode .faq-item summary {
+      color: #e2e8f0 !important;
+    }
+
+    body.dark-mode .info-section p,
+    body.dark-mode .info-section li {
+      color: #94a3b8 !important;
+    }
+
+    body.dark-mode .faq-item {
+      border-color: #334155 !important;
+    }
+
+    body.dark-mode .faq-item summary::after {
+      color: #94a3b8;
+    }
+
+    @media (min-width: 640px) {
+      .info-section {
+        padding: 2rem;
+      }
+    }
+
+
+    body.dark-mode header a {
+      color: #cbd5e1 !important;
+    }
+
+    body.dark-mode header a:hover {
+      color: #ffffff !important;
+    }
+
   </style>
 </head>
 
@@ -146,14 +283,10 @@
   ========================================================= -->
   <header class="sticky top-0 z-50 bg-white/80 backdrop-filter backdrop-blur-lg border-b border-slate-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <!-- Logo -->
-      <a href="/" class="flex items-center gap-2 hover:opacity-90 transition">
-        <div class="bg-indigo-600 text-white p-2 rounded-xl">
-          <i data-lucide="layers" class="w-6 h-6"></i>
-        </div>
-        <span class="text-xl font-bold tracking-tight text-slate-900">
-          Utiliverse
-        </span>
+      <!-- Back to Utiliverse -->
+      <a href="https://utiliverse.app" class="flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-slate-900 transition">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        <span>Back to Utiliverse</span>
       </a>
 
       <!-- Right Side -->
@@ -162,9 +295,8 @@
           100% Free & Browser-Based
         </div>
         <!-- DARK MODE BUTTON -->
-        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle light/dark mode">
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
           <i id="themeIcon" data-lucide="moon" class="theme-icon"></i>
-          <span id="themeText">Dark Mode</span>
         </button>
       </div>
     </div>
@@ -233,6 +365,99 @@
       </div>
 
     </div>
+
+    <!-- =========================================================
+         ABOUT / USE CASES / FAQ
+    ========================================================= -->
+    <div class="info-wrap">
+
+      <section class="info-section" aria-labelledby="about-html-viewer">
+        <h2 id="about-html-viewer">About the Utiliverse HTML Viewer & Formatter</h2>
+
+        <p>The Utiliverse HTML Viewer & Formatter is a browser-based workspace for writing, inspecting, formatting, minifying, copying, and previewing HTML. The editor on the left accepts ordinary HTML markup, while the preview pane on the right renders that markup so you can immediately compare source code with browser output. This makes the tool useful for quick experiments, code cleanup, learning, documentation, troubleshooting, and small front-end tasks where opening a full development environment would be unnecessary.</p>
+
+        <p>The live preview uses an iframe with the <code>srcdoc</code> property. That lets the browser render the HTML you enter as its own document instead of inserting it directly into the surrounding Utiliverse page. The iframe is sandboxed and currently allows scripts and modal dialogs, so small JavaScript examples can run while remaining more restricted than a normal top-level browser tab. Because browser and sandbox behavior can differ from a production site, the preview should be treated as a development aid rather than a complete substitute for testing a deployed page.</p>
+
+        <p>The Beautify action uses JS Beautify to reformat HTML with consistent indentation and line breaks, making nested elements easier to inspect. The Minify action takes the opposite approach by removing comments, line breaks, spacing between tags, and repeated whitespace. This is useful for compact examples, but it is intentionally a lightweight browser-side minifier rather than a full production build tool. Complex projects may require specialized tooling that understands framework templates, inline JavaScript, CSS, and whitespace-sensitive content.</p>
+
+        <p>The tool also helps demonstrate the difference between source structure and rendered presentation. HTML describes elements and document structure, while CSS, browser defaults, fonts, viewport size, scripts, and external resources influence the final appearance. Editing the markup and watching the preview update makes it easier to understand how those pieces work together.</p>
+
+        <p>The core editor and preview operate in the browser. However, HTML can reference external images, fonts, stylesheets, scripts, videos, APIs, and other resources. If the code you preview contains an external URL, your browser may contact that service while rendering the preview. Avoid placing secrets, private tokens, confidential URLs, or sensitive production data inside test markup.</p>
+      </section>
+
+      <section class="info-section" aria-labelledby="html-viewer-use-cases">
+        <h2 id="html-viewer-use-cases">Practical Use Cases for an HTML Viewer</h2>
+
+        <h3>Learning and experimenting with HTML</h3>
+        <p>Students and beginners can use the viewer to understand how tags behave without setting up a project folder or development server. You can enter headings, paragraphs, links, lists, tables, forms, buttons, and semantic elements, then immediately see the rendered result. Changing one element at a time makes it easier to connect the source with what appears on screen and learn nesting, attributes, document structure, and basic browser behavior.</p>
+
+        <h3>Cleaning up copied or generated markup</h3>
+        <p>HTML copied from an email template, CMS, documentation page, AI-generated draft, or legacy project can be difficult to read when compressed into long lines. Beautifying adds indentation and line breaks so opening and closing tags are easier to match. The lightweight Minify option can then produce a more compact version when whitespace is not important. Review minified output when working with whitespace-sensitive elements such as <code>pre</code> or <code>textarea</code>.</p>
+
+        <h3>Previewing small interface components</h3>
+        <p>Developers and designers can paste a self-contained component into the editor to test a notice, pricing card, navigation menu, table, button group, or form layout. Inline CSS and embedded style blocks can be included, making the viewer convenient for isolated prototypes. Components that depend on application state, a build system, server rendering, or imported modules are better tested in their normal development environment.</p>
+
+        <h3>Checking documentation and support examples</h3>
+        <p>Technical writers, support engineers, and QA teams can verify that an HTML example renders as expected before publishing or sharing it. The viewer can also help reproduce a small fragment supplied during troubleshooting. Formatting the markup first makes structural problems easier to spot and gives another team member a cleaner example to review.</p>
+
+        <h3>Testing links, images, and external resources</h3>
+        <p>The preview can help confirm basic markup for hyperlinks, images, stylesheets, and other resources. This may expose mistakes such as malformed URLs, incorrect nesting, or missing quotation marks. External content is still subject to normal browser restrictions such as CORS, Content Security Policy, mixed-content blocking, authentication, and server availability, so a failed resource does not automatically mean the HTML syntax is wrong.</p>
+
+        <h3>Comparing readable and compact HTML</h3>
+        <p>For static snippets, it can be useful to keep a readable source version for people and a compact version for delivery. Beautify and Minify demonstrate that workflow quickly. In a professional build pipeline, minification is usually automated and may include CSS processing, JavaScript bundling, caching, compression, and additional HTML-aware optimizations. This tool is intended for quick manual work rather than replacing that pipeline.</p>
+
+        <h3>Reviewing semantic structure</h3>
+        <p>Writers and developers can inspect whether content uses meaningful elements such as headings, paragraphs, lists, sections, navigation, buttons, and form labels. Semantic HTML can improve maintainability and support accessibility and search-engine understanding, but it does not guarantee either by itself. Important pages should still be checked with accessibility tools, validators, real devices, and production browser testing.</p>
+
+        <h3>Trying simple JavaScript examples</h3>
+        <p>The preview sandbox allows scripts, so small interactive examples can be tested directly. A button can update text, toggle a class, or display a modal alert. This is useful for demonstrations and troubleshooting, but sandbox restrictions mean some APIs may behave differently than they do on a normal site. A successful preview also does not prove that a script is secure, production-ready, or compatible with every browser.</p>
+
+        <h3>Preparing code for sharing or review</h3>
+        <p>Before sending a fragment to a teammate, ticket, forum, or code review, you can beautify the markup and use the Copy button to capture the cleaned version. Readable formatting makes structural mistakes easier to identify and reduces the effort needed for someone else to understand the example. Remove credentials, internal hostnames, customer information, private URLs, and tokens before sharing code publicly.</p>
+
+        <p>Used this way, an HTML viewer is a practical bridge between raw markup and browser output. It works best for small, self-contained examples where immediate feedback is valuable. For larger projects, use it alongside source control, browser DevTools, automated tests, accessibility checks, validation, and a normal development environment.</p>
+      </section>
+
+      <section class="info-section" aria-labelledby="html-viewer-faq">
+        <h2 id="html-viewer-faq">Frequently Asked Questions</h2>
+
+        <details class="faq-item">
+          <summary>1. What does the HTML Viewer & Formatter do?</summary>
+          <p>It lets you enter HTML, see a live browser preview, beautify the markup for readability, minify it for a more compact representation, clear the editor, and copy the current code to your clipboard.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>2. Does the preview run JavaScript?</summary>
+          <p>Yes. The preview iframe currently uses a sandbox that allows scripts and modal dialogs. Small JavaScript examples can therefore run, although sandbox restrictions can make some browser features behave differently from a normal deployed page.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>3. Is the HTML I enter uploaded to Utiliverse?</summary>
+          <p>The editor and preview operate in the browser and the entered HTML is assigned to the iframe through <code>srcdoc</code>. However, if your HTML references external images, scripts, stylesheets, fonts, APIs, or other URLs, the browser may contact those external services while rendering the preview.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>4. What is the difference between Beautify and Minify?</summary>
+          <p>Beautify adds indentation and line breaks to make markup easier for people to read. Minify removes comments, line breaks, spacing between tags, and repeated whitespace to make the source more compact. The minifier in this tool is intentionally lightweight and is not a replacement for a production build pipeline.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>5. Can this tool validate whether my HTML is standards-compliant?</summary>
+          <p>No. The preview can reveal obvious rendering problems, but it is not a formal HTML validator. For standards validation, use a dedicated validator and also test the page in the browsers and devices your audience uses.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>6. Why might external content fail inside the preview?</summary>
+          <p>External resources can be blocked by CORS rules, Content Security Policy, mixed-content restrictions, authentication requirements, network failures, or the iframe sandbox. A resource failing to load does not automatically mean the HTML markup is invalid.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>7. Can I use this instead of a full code editor or browser DevTools?</summary>
+          <p>It is best for quick HTML experiments, formatting, and small previews. Larger projects still benefit from a full editor, source control, a local development environment, browser DevTools, automated tests, accessibility checks, and production testing.</p>
+        </details>
+      </section>
+    </div>
+
   </main>
 
   <script>
@@ -317,7 +542,6 @@
     ========================================================= */
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = document.getElementById('themeIcon');
-    const themeText = document.getElementById('themeText');
 
     function initTheme() {
       // Check localStorage or system preference
@@ -337,10 +561,12 @@
     function updateThemeUI(isDark) {
       if (isDark) {
         themeIcon.setAttribute('data-lucide', 'sun');
-        themeText.textContent = 'Light Mode';
+        themeToggle.setAttribute('aria-label', 'Switch to light mode');
+        themeToggle.setAttribute('title', 'Switch to light mode');
       } else {
         themeIcon.setAttribute('data-lucide', 'moon');
-        themeText.textContent = 'Dark Mode';
+        themeToggle.setAttribute('aria-label', 'Switch to dark mode');
+        themeToggle.setAttribute('title', 'Switch to dark mode');
       }
       lucide.createIcons();
     }
