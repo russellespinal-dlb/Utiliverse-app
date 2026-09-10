@@ -55,6 +55,34 @@ body.light-mode .faq summary{color:#0f172a}
 body.light-mode .badge{background:#f1f5f9;border-color:#cbd5e1;color:#475569}
 body.light-mode .progress-track{background:#e2e8f0}
 
+
+/* Right-side server / ISP pane — light mode readability */
+body.light-mode aside .text-slate-100,
+body.light-mode aside .text-slate-200{
+  color:#0f172a!important;
+}
+body.light-mode aside .text-slate-300,
+body.light-mode aside .text-slate-400{
+  color:#475569!important;
+}
+body.light-mode #serverSearch{
+  background:#fff!important;
+  border-color:#cbd5e1!important;
+  color:#0f172a!important;
+}
+body.light-mode #serverSearch::placeholder{
+  color:#94a3b8!important;
+}
+body.light-mode #geoBtn{
+  color:#4f46e5!important;
+}
+body.light-mode #geoBtn:hover{
+  color:#4338ca!important;
+}
+body.light-mode #serverList .server-card{
+  color:#334155;
+}
+
 @media(max-width:640px){.hero-title{font-size:2.25rem}}
 </style>
 <script src="https://cdn.tailwindcss.com"></script>
@@ -146,6 +174,9 @@ body.light-mode .progress-track{background:#e2e8f0}
 <p>Next, the tool assesses your download speed. It does this by requesting large, incompressible data payloads from the server. As your browser downloads this data, the tool continuously monitors the transfer rate, calculating how many megabits per second (Mbps) your connection can handle. We utilize a sustained payload transfer—specifically up to 100 megabytes—to ensure the connection reaches its maximum throughput, allowing us to bypass initial burst speeds and measure your true sustained download capacity.</p>
 
 <p>Finally, the upload speed test reverses this process. Your browser generates a randomized block of data and transmits it back to the test server. By measuring the time it takes to push a 25-megabyte payload to the endpoint, the tool calculates your network's upload capacity. The entire process relies on native browser APIs, meaning no additional software or plugins are required. Because it operates within the browser, it accurately reflects the real-world performance you experience when browsing the web, streaming videos, or using web-based applications.</p>
+<p>Speed-test results can vary even when your internet plan has not changed. Wi-Fi signal strength, router load, other devices using bandwidth, browser activity, VPNs, security software, and the network path to the test endpoint can all influence a measurement. For a cleaner comparison, close large downloads or cloud backups, test from the same device and location, and run several tests rather than relying on a single result.</p>
+
+<p>The four measurements describe different parts of connection quality. Download speed reflects how quickly data reaches your device, upload speed measures how quickly your device can send data, ping measures round-trip response time, and jitter measures how consistent that response time is across repeated samples. A connection can therefore have high throughput but still feel poor for gaming or video calls if latency or jitter is excessive.</p>
 
 <h2>Common Use Cases</h2>
 <p>There are numerous scenarios where running an internet speed test is not just helpful, but necessary for optimizing your digital experience.</p>
@@ -157,6 +188,22 @@ body.light-mode .progress-track{background:#e2e8f0}
 <p><strong>Streaming High-Definition Content:</strong> Streaming platforms like Netflix, Hulu, and YouTube adjust video quality based on your available bandwidth. To stream seamlessly in 4K resolution without buffering, you generally need a sustained download speed of at least 25 Mbps. Testing your connection ensures you are getting the speed you pay for from your Internet Service Provider (ISP) and can handle multiple devices streaming simultaneously.</p>
 
 <p><strong>Diagnosing Network Hardware Issues:</strong> If you recently upgraded your router, installed a mesh Wi-Fi system, or switched ISPs, running a speed test is the best way to validate those changes. By testing your speed while connected via an Ethernet cable versus a wireless connection, you can pinpoint whether a performance bottleneck is caused by your ISP or your local Wi-Fi environment.</p>
+<p><strong>Large Uploads, Cloud Backups, and Content Creation:</strong> Upload performance matters when sending large work files, backing up photos and videos, livestreaming, or publishing media to cloud services. If these tasks take much longer than expected, compare the measured upload speed with the upload rate included in your internet plan and test again over Ethernet when possible. This can help separate a Wi-Fi limitation from a broader connection issue.</p>
+
+<p><strong>Verifying Service Changes and Troubleshooting Over Time:</strong> After an ISP upgrade, modem replacement, router firmware change, or Wi-Fi adjustment, run the test under similar conditions and record the results. Comparing several measurements over time can reveal whether a change actually improved performance or whether slowdowns occur only during particular hours. For troubleshooting, it is often useful to compare wired versus wireless tests, different rooms, and multiple times of day.</p>
+
+
+<h2>Internet Speed Test Summary</h2>
+<div class="glass-soft rounded-2xl p-5 sm:p-6 mb-8">
+  <p class="mb-4">Use the results together rather than judging the connection from download speed alone. A balanced connection combines enough throughput for your workload with responsive and consistent latency.</p>
+  <ul class="space-y-2">
+    <li><strong>Download:</strong> Higher values generally help with streaming, downloads, web content, software updates, and households using several devices at once.</li>
+    <li><strong>Upload:</strong> Higher values are especially useful for video calls, cloud backups, livestreaming, remote-work file transfers, and uploading large media.</li>
+    <li><strong>Ping:</strong> Lower latency usually provides faster response for gaming, remote desktops, voice calls, and other interactive applications.</li>
+    <li><strong>Jitter:</strong> Lower and more consistent jitter helps real-time audio and video remain smooth because packet timing varies less from one request to the next.</li>
+  </ul>
+  <p class="mt-4 mb-0">For the most useful diagnosis, repeat the test under comparable conditions and consider both wired and Wi-Fi results. Browser-based measurements are practical estimates and can differ from ISP-side or dedicated testing equipment.</p>
+</div>
 
 <h2>Frequently Asked Questions</h2>
 <div class="mt-6 border-t border-slate-700/50 pt-4">
