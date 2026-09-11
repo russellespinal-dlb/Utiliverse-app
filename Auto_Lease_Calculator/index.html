@@ -10,13 +10,46 @@
     content="width=device-width, initial-scale=1.0"
 >
 
-<title>Auto Lease Calculator | Utiliverse</title>
+<title>Auto Lease Calculator – Monthly Car Lease Payment | Utiliverse</title>
 <script src="https://unpkg.com/lucide@latest"></script>
 
 <meta
     name="description"
-    content="Estimate your monthly car lease payment, depreciation, finance charge, taxes and total lease cost with the Utiliverse Auto Lease Calculator."
+    content="Free auto lease calculator to estimate monthly car lease payments, depreciation, money factor or APR, taxes, residual value and total lease cost."
 >
+
+<link rel="canonical" href="https://utiliverse.app/Auto_Lease_Calculator/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Auto Lease Calculator – Estimate Monthly Car Lease Payment">
+<meta property="og:description" content="Estimate a car lease payment using vehicle price, residual value, lease term, down payment, trade-in, sales tax, money factor or APR.">
+<meta property="og:url" content="https://utiliverse.app/Auto_Lease_Calculator/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Auto Lease Calculator – Monthly Car Lease Payment Estimator">
+<meta name="twitter:description" content="Free online car lease calculator for monthly payment, residual value, money factor, depreciation, taxes and total lease cost.">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Auto Lease Calculator",
+  "url": "https://utiliverse.app/Auto_Lease_Calculator/",
+  "applicationCategory": "FinanceApplication",
+  "operatingSystem": "Any",
+  "description": "Free online auto lease calculator that estimates monthly car lease payments, depreciation, finance charges, taxes, residual value and total lease cost using a money factor or APR.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Utiliverse",
+    "url": "https://utiliverse.app/"
+  }
+}
+</script>
 
 <style>
 
@@ -1282,6 +1315,8 @@ body{background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparen
 .topbar-inner{max-width:1152px;padding:16px 24px}
 .back-link{color:#cbd5e1}.back-link:hover{color:#fff;text-decoration:none}
 .brand{color:#f8fafc}.brand span{color:#818cf8}
+.topbar-actions{display:flex;align-items:center;gap:12px}
+.free-browser-note{color:#94a3b8;font-size:12px;font-weight:700;white-space:nowrap;letter-spacing:.1px}
 .theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid #334155;border-radius:12px;background:rgba(15,23,42,.72);color:#94a3b8;cursor:pointer;transition:.2s ease}
 .theme-toggle:hover{color:#fff;background:#1e293b;border-color:#475569}
 .theme-toggle svg{width:18px;height:18px}
@@ -1320,6 +1355,7 @@ body.light-mode{background:#f8fafc;color:#0f172a}
 body.light-mode .topbar{background:rgba(255,255,255,.9);border-color:#e2e8f0}
 body.light-mode .back-link{color:#475569}.light-mode .back-link:hover{color:#0f172a}
 body.light-mode .brand{color:#0f172a}.light-mode .brand span{color:#4f46e5}
+body.light-mode .free-browser-note{color:#64748b}
 body.light-mode .theme-toggle{background:#fff;border-color:#cbd5e1;color:#475569}
 body.light-mode .theme-toggle:hover{background:#f1f5f9;color:#0f172a}
 body.light-mode .eyebrow{color:#4f46e5;background:#eef2ff;border-color:#c7d2fe}
@@ -1340,6 +1376,7 @@ body.light-mode .faq-item{background:#fff;border-color:#e2e8f0}body.light-mode .
 body.light-mode .disclaimer{background:#f8fafc;color:#64748b}
 body.light-mode footer{background:#fff;border-color:#e2e8f0}
 @media(max-width:850px){.calculator-grid{grid-template-columns:1fr}.results-card{position:static}}
+@media(max-width:600px){.topbar-inner{padding:14px 18px}.topbar-actions{gap:8px}.free-browser-note{font-size:10px;white-space:normal;text-align:right;max-width:115px;line-height:1.2}.theme-toggle{width:38px;height:38px;flex:0 0 auto}}
 
 </style>
 
@@ -1364,9 +1401,12 @@ body.light-mode footer{background:#fff;border-color:#e2e8f0}
             &larr; Back to Utiliverse
         </a>
 
-        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to light mode" title="Toggle light/dark mode">
-            <span id="theme-icon" aria-hidden="true">☀</span>
-        </button>
+        <div class="topbar-actions">
+            <span class="free-browser-note">100% Free and Browser Based</span>
+            <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to light mode" title="Toggle light/dark mode">
+                <span id="theme-icon" aria-hidden="true">☀</span>
+            </button>
+        </div>
 
     </div>
 
@@ -1386,14 +1426,14 @@ body.light-mode footer{background:#fff;border-color:#e2e8f0}
 
 
     <h1>
-        Auto Lease Calculator
+        Auto Lease Calculator – Estimate Your Monthly Car Lease Payment
     </h1>
 
 
     <p class="subtitle">
 
-        Get a quick estimate of your monthly lease payment,
-        depreciation, finance charge, taxes and overall lease cost.
+        Use this free online car lease calculator to estimate your monthly lease payment,
+        depreciation, finance charge, taxes, residual value and overall lease cost.
 
     </p>
 
@@ -1421,7 +1461,7 @@ body.light-mode footer{background:#fff;border-color:#e2e8f0}
     <div class="section-title">
 
         <h2>
-            Enter your lease details
+            Enter your car lease details
         </h2>
 
         <p>
@@ -1718,7 +1758,7 @@ body.light-mode footer{background:#fff;border-color:#e2e8f0}
     <div class="results-header">
 
         <h2>
-            Estimated lease payment
+            Estimated monthly car lease payment
         </h2>
 
         <p>
@@ -1885,6 +1925,9 @@ body.light-mode footer{background:#fff;border-color:#e2e8f0}
 
 
 
+<!-- ADSENSE: IN-CONTENT INSERTION POINT -->
+<!-- Paste approved Google AdSense unit code here -->
+
 <!-- =========================================================
      ABOUT / EDUCATIONAL CONTENT
 ========================================================= -->
@@ -1892,21 +1935,21 @@ body.light-mode footer{background:#fff;border-color:#e2e8f0}
 <section class="content-card">
 
 <h2>
-    About the Auto Lease Calculator
+    Free Online Auto Lease Calculator
 </h2>
 
 
 <p>
 
+This free online auto lease calculator helps you estimate a monthly car lease payment before visiting a dealership.
 Leasing a vehicle can make a new car accessible with a lower
 monthly payment than financing the same vehicle, but the number
-shown on a lease advertisement rarely tells the whole story. An
-auto lease is based on several moving pieces, including the
-negotiated vehicle price, the expected value of the vehicle at
-the end of the lease, the length of the agreement, the financing
-rate, taxes, trade-in value and money paid at signing. This
-calculator brings those variables together to give you a simple
-estimate before you sit down with a dealership.
+shown on a lease advertisement rarely tells the whole story. A
+car lease payment depends on several moving pieces, including the
+negotiated vehicle price, residual value, lease term, money factor
+or APR, taxes, trade-in value and money paid at signing. This
+monthly lease payment calculator brings those variables together
+to give you a simple estimate you can use when comparing lease offers.
 
 </p>
 
@@ -1926,7 +1969,7 @@ depreciation is spread across the scheduled payments.
 
 
 <h3>
-How to use this calculator
+How to use the car lease calculator
 </h3>
 
 
@@ -1996,7 +2039,19 @@ entered.
 
 
 <h3>
-What is residual value?
+Auto lease payment formula
+</h3>
+
+<p>
+A simplified car lease calculation combines three main parts: monthly depreciation, the monthly finance or rent charge, and sales tax. Monthly depreciation is generally calculated as the adjusted capitalized cost minus the residual value, divided by the lease term. The finance charge is commonly estimated by multiplying the adjusted capitalized cost plus the residual value by the money factor. The calculator then applies the sales tax rate to estimate the final monthly lease payment.
+</p>
+
+<p>
+If your dealer provides an APR instead of a money factor, this calculator converts the APR to an approximate money factor by dividing the APR by 2,400. If you have a money factor, multiplying it by 2,400 provides an approximate equivalent APR.
+</p>
+
+<h3>
+What is residual value on a car lease?
 </h3>
 
 
@@ -2014,7 +2069,7 @@ values can result in lower payments.
 
 
 <h3>
-Why the negotiated price matters
+Why negotiated car price affects a lease payment
 </h3>
 
 
@@ -2070,7 +2125,7 @@ monthly number.
 
 
 <h3>
-Leasing versus buying
+Car leasing vs. buying
 </h3>
 
 
@@ -2103,7 +2158,7 @@ financing costs, mileage and how long you plan to keep the car.
 
 
 <h3>
-Before signing a lease
+What to check before signing a car lease
 </h3>
 
 
@@ -2193,6 +2248,9 @@ that are not included here.
 
 
 
+<!-- ADSENSE: BEFORE FAQ INSERTION POINT -->
+<!-- Paste approved Google AdSense unit code here -->
+
 <!-- =========================================================
      FAQ
 ========================================================= -->
@@ -2200,7 +2258,7 @@ that are not included here.
 <section class="content-card">
 
 <h2>
-    Auto Lease Calculator FAQ
+    Auto Lease Calculator FAQ – Payments, Money Factor & Residual Value
 </h2>
 
 
