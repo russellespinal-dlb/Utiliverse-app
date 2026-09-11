@@ -3,11 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Time Tracking Suite | Utiliverse</title>
-<meta name="description" content="Free online stopwatch, countdown timer, and Pomodoro tracker to boost your productivity.">
-<meta name="robots" content="index,follow">
+<title>Online Stopwatch, Countdown Timer & Pomodoro | Utiliverse</title>
+<meta name="description" content="Free online stopwatch, countdown timer and Pomodoro timer. Record cumulative laps, pause and resume timers, and use 25-minute focus with 5-minute breaks.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="theme-color" content="#020617">
 <link rel="canonical" href="https://utiliverse.app/Time_Tracking_Suite/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Online Stopwatch, Countdown Timer & Pomodoro | Utiliverse">
+<meta property="og:description" content="Use a browser-based stopwatch with laps, custom countdown timer, and 25/5 Pomodoro focus timer.">
+<meta property="og:url" content="https://utiliverse.app/Time_Tracking_Suite/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Online Stopwatch, Countdown Timer & Pomodoro | Utiliverse">
+<meta name="twitter:description" content="Free browser-based stopwatch, countdown timer and Pomodoro focus timer.">
+
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
@@ -59,23 +68,78 @@ body.light-mode header a:hover{
   color:#0f172a !important;
 }
 
+
+.free-browser-note{font-size:.75rem;color:#94a3b8;font-weight:700;white-space:nowrap}
+#theme-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
+  padding:0;
+  border:1px solid #334155;
+  border-radius:12px;
+  background:rgba(15,23,42,.72);
+  color:#94a3b8;
+  box-shadow:none;
+  appearance:none;
+  -webkit-appearance:none;
+  cursor:pointer;
+  transition:background .2s ease,color .2s ease,border-color .2s ease;
+}
+#theme-toggle:hover{background:#1e293b;color:#fff;border-color:#475569}
+#theme-toggle:focus-visible,.btn:focus-visible,.input:focus-visible{outline:2px solid #6366f1;outline-offset:2px}
+#theme-toggle svg{width:18px;height:18px;stroke-width:2}
+.theme-hidden{display:none!important}
+body.light-mode #theme-toggle{background:#fff;border-color:#cbd5e1;color:#475569}
+body.light-mode #theme-toggle:hover{background:#f1f5f9;border-color:#94a3b8;color:#0f172a}
+body.light-mode .free-browser-note{color:#64748b}
+.local-processing-note{margin-top:14px;color:#94a3b8;font-size:12px;line-height:1.6}
+body.light-mode .local-processing-note{color:#64748b}
+@media(max-width:640px){
+  .free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}
+  #theme-toggle{width:38px;height:38px;flex:0 0 auto}
+  .time-display{font-size:2.35rem!important}
+}
+
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Time Tracking Suite","url":"https://utiliverse.app/Time_Tracking_Suite/","applicationCategory":"ProductivityApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based stopwatch, countdown timer and Pomodoro timer with cumulative laps, pause and resume controls, and timestamp-based time calculations.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Online stopwatch","Cumulative stopwatch lap timestamps","Pause and resume stopwatch","Custom countdown timer","Pause and resume countdown","25-minute Pomodoro work timer","5-minute Pomodoro break timer","Automatic Pomodoro mode switching after an interval","Timestamp-based elapsed and remaining time calculations"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does the timer keep accurate time if I switch browser tabs?","acceptedAnswer":{"@type":"Answer","text":"The stopwatch, countdown and Pomodoro calculations use timestamps based on Date.now(). A background tab may refresh visually less often, but the displayed time corrects from the system clock when JavaScript runs again."}},{"@type":"Question","name":"What happens when the countdown reaches zero?","acceptedAnswer":{"@type":"Answer","text":"The countdown stops at zero and its Start button returns to the ready state. This version does not play an alarm sound."}},{"@type":"Question","name":"Can I pause and resume the countdown timer?","acceptedAnswer":{"@type":"Answer","text":"Yes. Pausing stores the remaining duration, and Resume continues from that stored amount."}},{"@type":"Question","name":"How many stopwatch laps can I record?","acceptedAnswer":{"@type":"Answer","text":"The page does not impose a fixed lap count. Lap entries remain in the scrollable list while the page stays open, subject to available browser memory."}},{"@type":"Question","name":"What does each stopwatch lap represent?","acceptedAnswer":{"@type":"Answer","text":"Each lap records the total elapsed stopwatch time when the Lap button is pressed. It is a cumulative timestamp rather than the split time since the previous lap."}},{"@type":"Question","name":"Can I pause and resume the stopwatch?","acceptedAnswer":{"@type":"Answer","text":"Yes. Pausing stores the elapsed time, and starting again continues from that stored value."}},{"@type":"Question","name":"Can I switch Pomodoro modes while the timer is running?","acceptedAnswer":{"@type":"Answer","text":"No. The Work and Break mode buttons are ignored while the Pomodoro timer is running. Pause or reset before switching modes manually."}},{"@type":"Question","name":"What happens when a Pomodoro interval reaches zero?","acceptedAnswer":{"@type":"Answer","text":"The interval stops and switches to the opposite mode. Work switches to a 5-minute Break and Break switches to a 25-minute Work interval. The next interval does not start automatically."}}]}</script>
 </head>
 <body>
+<!--
+SEO TARGET CLUSTER
+Primary: online stopwatch and timer
+Secondary: online stopwatch, countdown timer, Pomodoro timer,
+focus timer, lap stopwatch, browser timer, productivity timer,
+25 minute timer, 5 minute break timer
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
 <header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800 transition-all duration-300">
 <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
 <a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2 transition-colors"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse</a>
 <div class="flex items-center gap-3">
-  <span class="text-xs sm:text-sm font-medium text-slate-500 whitespace-nowrap">100% Free and Browser Based</span>
-  <button id="theme-toggle" class="text-slate-400 hover:text-white transition-colors cursor-pointer" type="button" aria-label="Toggle light and dark mode" title="Toggle light and dark mode"><i data-lucide="sun" id="theme-icon" class="w-5 h-5"></i></button>
+  <span class="free-browser-note">100% Free and Browser Based</span>
+  <button id="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+  <svg id="moon-icon" class="theme-hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
+  <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+</button>
 </div>
 </div>
 </header>
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
 <main class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
 <div class="max-w-3xl">
 <p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Productivity</p>
-<h1 class="text-4xl sm:text-5xl font-black mt-2">Time Tracking Suite</h1>
-<p class="mt-4 text-lg muted">Manage your workflow with a precision stopwatch, countdown timer, and Pomodoro tracker.</p>
+<h1 class="text-4xl sm:text-5xl font-black mt-2">Online Stopwatch, Countdown Timer &amp; Pomodoro</h1>
+<p class="mt-4 text-lg muted">Track elapsed time, run custom countdowns, record cumulative laps, and use a 25-minute work / 5-minute break Pomodoro timer directly in your browser.</p>
 </div>
 
 <section class="grid lg:grid-cols-3 md:grid-cols-2 gap-6 mt-8">
@@ -141,14 +205,28 @@ body.light-mode header a:hover{
     </div>
   </div>
 </section>
+<p class="local-processing-note">Browser-based timing: stopwatch, countdown, Pomodoro state and lap entries are handled locally on this page and are not submitted to a Utiliverse server. Timers reset if the page is reloaded or closed.</p>
+
+<!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
 
 <section class="article max-w-4xl mt-16">
-<h2>Mastering Productivity: The Power of Digital Time Tracking</h2>
-<p>Time is the only non-renewable resource, making efficient time management a cornerstone of professional success and personal growth. Whether you are executing high-frequency trades on Nasdaq futures, practicing guitar chord transitions, or managing a diverse web development project, digital time tracking tools provide the strict boundaries necessary to maintain deep focus and measure objective progress.</p>
+<h2>How to Use the Online Stopwatch, Countdown Timer and Pomodoro</h2>
+<p>Different timing modes suit different tasks. Use the stopwatch when you want to measure an unknown duration, the countdown timer when you already know how much time is available, and the Pomodoro timer when you want a repeatable work-and-break rhythm. All three tools stay on the same page so you can choose the timing method that fits the task.</p>
 <h3>The Pomodoro Technique: Maximizing Cognitive Endurance</h3>
-<p>Developed in the late 1980s, the Pomodoro Technique involves breaking work into highly focused intervals (traditionally 25 minutes), separated by short breaks. This prevents cognitive fatigue and forces prioritization. A dedicated browser-based Pomodoro timer removes the temptation to check a smartphone, keeping your eyes on your desktop environment where the actual work happens. The strict cadence of "Work" and "Break" modes trains the brain to execute tasks in sprints rather than marathons, highly suitable for coding sessions or intense market analysis.</p>
+<p>The Pomodoro Technique commonly uses focused work intervals separated by short breaks. This implementation provides a 25-minute Work mode and a 5-minute Break mode. When one interval reaches zero, the tool switches to the opposite mode but does not automatically start it, giving you control over when the next session begins.</p>
 <h3>Precision Measurement with Stopwatches and Countdowns</h3>
-<p>While the Pomodoro technique structures workflow, count-up stopwatches and countdown timers serve distinct, vital roles. A stopwatch with lap functionality allows for the granular measurement of repetitive tasks—such as timing website load speeds after deploying new code or tracking the duration of specific daily practice routines. Conversely, a custom countdown timer creates a hard deadline for open-ended tasks, instilling a sense of urgency that effectively combats Parkinson’s Law (the adage that work expands to fill the time allotted for its completion).</p>
+<p>The stopwatch measures elapsed time and lets you save cumulative lap timestamps without stopping the clock. The countdown timer accepts hours, minutes and seconds, can be paused and resumed, and stops at zero. These modes are useful for practice sessions, study blocks, workouts, presentations, troubleshooting, cooking, meetings and other everyday timing tasks.</p>
+
+
+<h3>Quick Start</h3>
+<ul>
+<li><strong>Stopwatch:</strong> select Start to begin, Lap to record the current total elapsed time, Pause to stop temporarily, and Reset after pausing to clear the stopwatch and laps.</li>
+<li><strong>Countdown:</strong> enter hours, minutes and/or seconds, select Start, then Pause or Resume as needed. Reset clears the active countdown.</li>
+<li><strong>Pomodoro:</strong> choose Work (25m) or Break (5m), select Start, and pause or reset whenever needed. Mode changes are disabled while the timer is actively running.</li>
+</ul>
 
 <h3>Timeboxing Open-Ended Work</h3>
 <p>One of the most practical uses for a countdown timer is timeboxing: deciding in advance how much time a task deserves and stopping or reassessing when that block ends. This can be useful for email triage, research, administrative work, household tasks, study sessions, or debugging. A defined time boundary reduces the tendency to keep polishing low-impact details indefinitely. When the timer ends, you can decide whether the task is complete, whether another block is justified, or whether attention should move to a higher-priority activity.</p>
@@ -165,23 +243,24 @@ body.light-mode header a:hover{
 </section>
 
 <section class="article max-w-4xl mt-8">
-<h2>Frequently Asked Questions</h2>
-<details class="faq"><summary>Does the timer run if I switch browser tabs?</summary><p class="muted">Yes, the time calculation is based on your system clock, meaning it will accurately track time even if the browser tab is minimized or inactive.</p></details>
-<details class="faq"><summary>What happens when the countdown hits zero?</summary><p class="muted">The timer will automatically stop at zero. In future updates, auditory alerts can be enabled in your browser settings.</p></details>
-<details class="faq"><summary>How many laps can I record on the stopwatch?</summary><p class="muted">The tool does not impose a fixed lap limit. Lap entries are added to the scrollable list for as long as the page remains open and the browser has available memory.</p></details>
-
-<details class="faq"><summary>Can I pause and resume the stopwatch without losing the elapsed time?</summary><p class="muted">Yes. When you pause the stopwatch, the elapsed time is stored. Pressing Start again continues from that stored value rather than resetting the stopwatch to zero.</p></details>
-
-<details class="faq"><summary>What does each stopwatch lap entry represent?</summary><p class="muted">Each lap records the total elapsed stopwatch time at the moment the Lap button is pressed. The current implementation records cumulative lap timestamps rather than calculating a separate split duration between one lap and the next.</p></details>
-
-<details class="faq"><summary>Can I switch between Work and Break mode while the Pomodoro timer is running?</summary><p class="muted">No. The mode buttons are intentionally ignored while the Pomodoro timer is running. Pause or reset the timer first if you want to manually switch between the 25-minute Work mode and the 5-minute Break mode.</p></details>
-
-<details class="faq"><summary>What happens when a Pomodoro interval reaches zero?</summary><p class="muted">When the active Pomodoro interval reaches zero, the timer stops and automatically switches to the opposite mode. A completed Work interval switches to Break mode, while a completed Break interval switches back to Work mode. The next interval does not start automatically; you press Start when you are ready.</p></details>
+<h2>Stopwatch, Countdown Timer &amp; Pomodoro FAQ</h2>
+<details class="faq"><summary>Does the timer keep accurate time if I switch browser tabs?</summary><p class="muted">The stopwatch, countdown and Pomodoro calculations use timestamps based on your system clock. A background tab may refresh visually less often, but the displayed value corrects from those timestamps when JavaScript runs again.</p></details>
+<details class="faq"><summary>What happens when the countdown reaches zero?</summary><p class="muted">The countdown stops at zero and returns to the ready state. This version does not play an alarm sound.</p></details>
+<details class="faq"><summary>Can I pause and resume the countdown timer?</summary><p class="muted">Yes. Pausing stores the remaining duration, and Resume continues from that stored amount.</p></details>
+<details class="faq"><summary>How many stopwatch laps can I record?</summary><p class="muted">The page does not impose a fixed lap count. Lap entries remain in the scrollable list while the page stays open, subject to available browser memory.</p></details>
+<details class="faq"><summary>What does each stopwatch lap represent?</summary><p class="muted">Each lap records the total elapsed stopwatch time when you press Lap. It is a cumulative timestamp rather than the split time since the previous lap.</p></details>
+<details class="faq"><summary>Can I pause and resume the stopwatch?</summary><p class="muted">Yes. Pausing stores the elapsed time, and starting again continues from that stored value.</p></details>
+<details class="faq"><summary>Can I switch Pomodoro modes while the timer is running?</summary><p class="muted">No. The Work and Break mode buttons are ignored while the Pomodoro timer is running. Pause or reset before switching modes manually.</p></details>
+<details class="faq"><summary>What happens when a Pomodoro interval reaches zero?</summary><p class="muted">The interval stops and switches to the opposite mode. Work switches to a 5-minute Break and Break switches to a 25-minute Work interval. The next interval does not start automatically.</p></details>
 </section>
 </main>
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
 <footer class="border-t border-slate-800 bg-slate-950 mt-12">
 <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500">
-  <span>© <span id="year"></span> Utiliverse. All rights reserved.</span>
+  <span>© 2026 Utiliverse. All rights reserved.</span>
   <span>100% Free and Browser Based</span>
 </div>
 </footer>
@@ -189,13 +268,40 @@ body.light-mode header a:hover{
 <script>
 // --- Initialization & Theme ---
 lucide.createIcons();
-document.getElementById('year').textContent = new Date().getFullYear();
 
-document.getElementById('theme-toggle').addEventListener('click', () => {
-  document.body.classList.toggle('light-mode');
-  const icon = document.getElementById('theme-icon');
-  icon.setAttribute('data-lucide', document.body.classList.contains('light-mode') ? 'moon' : 'sun');
-  lucide.createIcons();
+const themeToggle = document.getElementById('theme-toggle');
+const moonIcon = document.getElementById('moon-icon');
+const sunIcon = document.getElementById('sun-icon');
+const metaTheme = document.querySelector('meta[name="theme-color"]');
+
+function applyTheme(theme) {
+  const light = theme === 'light';
+
+  document.body.classList.toggle('light-mode', light);
+  moonIcon.classList.toggle('theme-hidden', !light);
+  sunIcon.classList.toggle('theme-hidden', light);
+
+  const label = light ? 'Switch to dark mode' : 'Switch to light mode';
+  themeToggle.setAttribute('aria-label', label);
+  themeToggle.title = label;
+
+  if (metaTheme) {
+    metaTheme.setAttribute('content', light ? '#f8fafc' : '#020617');
+  }
+}
+
+const savedTheme = localStorage.getItem('utiliverse-theme');
+const initialTheme = savedTheme ||
+  (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+
+applyTheme(initialTheme);
+
+themeToggle.addEventListener('click', () => {
+  const nextTheme =
+    document.body.classList.contains('light-mode') ? 'dark' : 'light';
+
+  localStorage.setItem('utiliverse-theme', nextTheme);
+  applyTheme(nextTheme);
 });
 
 // Utility formatting function
@@ -209,11 +315,11 @@ let swRunning = false;
 let swLapCount = 0;
 
 function swFormat(time) {
-  const date = new Date(time);
-  const h = pad(date.getUTCHours());
-  const m = pad(date.getUTCMinutes());
-  const s = pad(date.getUTCSeconds());
-  const ms = pad(Math.floor(date.getUTCMilliseconds() / 10));
+  const safeTime = Math.max(0, time);
+  const h = pad(Math.floor(safeTime / 3600000));
+  const m = pad(Math.floor((safeTime % 3600000) / 60000));
+  const s = pad(Math.floor((safeTime % 60000) / 1000));
+  const ms = pad(Math.floor((safeTime % 1000) / 10));
   return `${h}:${m}:${s}.${ms}`;
 }
 
@@ -294,9 +400,17 @@ function tmUpdate() {
 
 function tmToggle() {
   const btn = document.getElementById('tm-start-btn');
-  const h = parseInt(document.getElementById('tm-h').value) || 0;
-  const m = parseInt(document.getElementById('tm-m').value) || 0;
-  const s = parseInt(document.getElementById('tm-s').value) || 0;
+  const hInput = document.getElementById('tm-h');
+  const mInput = document.getElementById('tm-m');
+  const sInput = document.getElementById('tm-s');
+
+  const h = Math.min(99, Math.max(0, parseInt(hInput.value) || 0));
+  const m = Math.min(59, Math.max(0, parseInt(mInput.value) || 0));
+  const s = Math.min(59, Math.max(0, parseInt(sInput.value) || 0));
+
+  hInput.value = h || '';
+  mInput.value = m || '';
+  sInput.value = s || '';
 
   if (tmRunning) {
     clearInterval(tmInterval);
