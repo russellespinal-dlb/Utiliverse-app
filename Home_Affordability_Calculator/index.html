@@ -10,14 +10,21 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>
-        Home Affordability Calculator | Utiliverse
-    </title>
+    <title>Home Affordability Calculator – How Much House Can I Afford? | Utiliverse</title>
 
-    <meta
-        name="description"
-        content="Estimate how much home you may be able to afford based on income, debt, down payment, mortgage rate, taxes, insurance and other housing costs."
-    >
+    <meta name="description" content="Free home affordability calculator to estimate how much house you can afford based on income, monthly debts, down payment, mortgage rate, taxes, insurance, HOA fees and maintenance.">
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+    <meta name="theme-color" content="#020617">
+    <link rel="canonical" href="https://utiliverse.app/Home_Affordability_Calculator/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Utiliverse">
+    <meta property="og:title" content="Home Affordability Calculator – How Much House Can I Afford?">
+    <meta property="og:description" content="Estimate a comfortable home price using income, debt, down payment, mortgage rate, taxes, insurance, HOA fees and maintenance.">
+    <meta property="og:url" content="https://utiliverse.app/Home_Affordability_Calculator/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Home Affordability Calculator – How Much House Can I Afford?">
+    <meta name="twitter:description" content="Estimate how much house you may be able to afford using your income, debts and expected housing costs.">
+
 
     <style>
 *{box-sizing:border-box}html{scroll-behavior:smooth}
@@ -27,7 +34,7 @@ button,input,select{font:inherit}button{border:0}
 .topbar-inner{max-width:1152px;margin:auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .back-link{color:#cbd5e1;text-decoration:none;font-size:14px;font-weight:700;transition:.2s}.back-link:hover{color:#fff}
 .brand{color:#f8fafc;font-size:17px;font-weight:800;letter-spacing:-.3px}.brand span{color:#818cf8}
-.theme-toggle{width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;border:1px solid #334155;border-radius:12px;background:rgba(15,23,42,.72);color:#94a3b8;cursor:pointer;transition:.2s}.theme-toggle:hover{color:#fff;background:#1e293b;border-color:#475569}.theme-toggle svg{width:19px;height:19px}.theme-toggle #theme-icon{font-size:19px;line-height:1;display:inline-flex;align-items:center;justify-content:center}
+.theme-toggle{width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;border:1px solid #334155;border-radius:12px;background:rgba(15,23,42,.72);color:#94a3b8;cursor:pointer;transition:.2s}.theme-toggle:hover{color:#fff;background:#1e293b;border-color:#475569}.theme-toggle svg{width:19px;height:19px}.theme-toggle .theme-svg{width:18px;height:18px;stroke-width:2}.theme-toggle .hidden{display:none}.free-browser-note{color:#94a3b8;font-size:12px;font-weight:700;white-space:nowrap;letter-spacing:.1px}
 .page-header{max-width:1152px;margin:auto;padding:48px 24px 22px}.eyebrow{display:inline-block;color:#a5b4fc;background:rgba(99,102,241,.13);border:1px solid rgba(99,102,241,.25);padding:6px 11px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:13px}
 h1{margin:0 0 12px;color:#f8fafc;font-size:clamp(32px,4vw,48px);line-height:1.08;letter-spacing:-1.5px}.subtitle{max-width:760px;margin:0;color:#94a3b8;font-size:17px;line-height:1.7}
 .container{max-width:1152px;margin:auto;padding:12px 24px 64px}.calculator-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(360px,.95fr);gap:18px;align-items:start}
@@ -44,14 +51,29 @@ input,select{width:100%;height:46px;border:1px solid #475569;border-radius:12px;
 .amortization-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px 0}.amortization-stat{background:rgba(15,23,42,.55);border:1px solid #334155;border-radius:12px;padding:15px}.amortization-stat span{display:block;color:#64748b;font-size:11px;margin-bottom:5px}.amortization-stat strong{display:block;font-size:17px;color:#f8fafc}.table-wrapper{width:100%;overflow-x:auto;border:1px solid #334155;border-radius:12px}.amortization-table{width:100%;border-collapse:collapse;min-width:650px;font-size:13px}.amortization-table th{background:#0f172a;color:#cbd5e1;font-size:12px;font-weight:800;text-align:right;padding:13px;border-bottom:1px solid #334155}.amortization-table th:first-child{text-align:center}.amortization-table td{color:#cbd5e1;padding:12px 13px;text-align:right;border-bottom:1px solid rgba(71,85,105,.45)}.amortization-table td:first-child{text-align:center;font-weight:800;color:#f8fafc}.amortization-table tbody tr:last-child td{border:0}.amortization-table tbody tr:hover{background:rgba(51,65,85,.25)}
 .faq-section{margin-top:20px}.faq-item{border:1px solid #334155;border-radius:12px;margin-top:10px;overflow:hidden;background:rgba(15,23,42,.45)}.faq-question{width:100%;display:flex;justify-content:space-between;align-items:center;text-align:left;background:transparent;color:#f8fafc;padding:17px 18px;font-size:14px;font-weight:800;cursor:pointer;transition:.2s}.faq-question:hover{background:rgba(51,65,85,.28)}.faq-question span:last-child{color:#818cf8;font-size:20px;line-height:1;transition:.2s}.faq-question.active span:last-child{transform:rotate(45deg)}.faq-answer{display:none;padding:0 18px 18px;border-top:1px solid #334155}.faq-answer.open{display:block}.faq-answer p{margin:14px 0 0;color:#94a3b8;font-size:13px;line-height:1.75}
 footer{margin-top:28px;border-top:1px solid #1e293b;background:rgba(2,6,23,.72)}.footer-inner{max-width:1152px;margin:auto;padding:25px 24px;display:flex;justify-content:space-between;gap:20px;color:#64748b;font-size:12px}
-body.light-mode{background:#f8fafc;color:#0f172a}body.light-mode .topbar{background:rgba(255,255,255,.9);border-color:#e2e8f0}body.light-mode .back-link{color:#475569}body.light-mode .back-link:hover{color:#0f172a}body.light-mode .brand{color:#0f172a}body.light-mode .theme-toggle{background:#fff;border-color:#cbd5e1;color:#475569}body.light-mode .theme-toggle:hover{background:#f1f5f9;color:#0f172a}body.light-mode h1{color:#0f172a}body.light-mode .subtitle{color:#64748b}body.light-mode .eyebrow{color:#4f46e5;background:#eef2ff;border-color:#c7d2fe}body.light-mode .card,body.light-mode .info-section{background:rgba(255,255,255,.84);border-color:#e2e8f0;box-shadow:0 12px 35px rgba(15,23,42,.07)}body.light-mode .section-heading h2,body.light-mode .results-header h2,body.light-mode .info-section h2{color:#0f172a}body.light-mode .section-heading p,body.light-mode .results-header p,body.light-mode .info-section>p{color:#64748b}body.light-mode .form-section{border-color:#e2e8f0}body.light-mode .form-section-title,body.light-mode .breakdown-title,body.light-mode .info-box h3{color:#1e293b}body.light-mode label{color:#334155}body.light-mode input,body.light-mode select{background:#fff;border-color:#cbd5e1;color:#0f172a}body.light-mode .helper{color:#64748b}body.light-mode .reset-btn{background:#f1f5f9;border-color:#cbd5e1;color:#334155}body.light-mode .reset-btn:hover{background:#e2e8f0}body.light-mode .results-header{background:linear-gradient(135deg,#eef2ff,#f8fafc);border-color:#e2e8f0}body.light-mode .result-label,body.light-mode .result-note{color:#64748b}body.light-mode .breakdown-row{border-color:#eef2f7}body.light-mode .breakdown-label{color:#64748b}body.light-mode .breakdown-value{color:#1e293b}body.light-mode .info-box,body.light-mode .amortization-stat{background:#f8fafc;border-color:#e2e8f0}body.light-mode .info-box p{color:#64748b}body.light-mode .disclaimer{color:#64748b}body.light-mode .table-wrapper{border-color:#e2e8f0}body.light-mode .amortization-table th{background:#f8fafc;color:#475569;border-color:#e2e8f0}body.light-mode .amortization-table td{color:#334155;border-color:#eef2f7}body.light-mode .amortization-table td:first-child{color:#0f172a}body.light-mode .faq-item{background:#fff;border-color:#e2e8f0}body.light-mode .faq-question{color:#1e293b}body.light-mode .faq-question:hover{background:#f8fafc}body.light-mode .faq-answer{border-color:#e2e8f0}body.light-mode .faq-answer p{color:#64748b}body.light-mode footer{background:#fff;border-color:#e2e8f0}
-@media(max-width:850px){.calculator-grid{grid-template-columns:1fr}.results-card{position:static}.info-grid{grid-template-columns:1fr}.amortization-summary{grid-template-columns:1fr 1fr}}@media(max-width:600px){.topbar-inner{padding:14px 18px}.brand{display:none}.page-header{padding:34px 18px 20px}.container{padding:8px 18px 45px}.form-card,.results-header,.main-result,.breakdown{padding-left:20px;padding-right:20px}.form-grid{grid-template-columns:1fr}.form-group.full{grid-column:auto}.affordability-box{margin-left:20px;margin-right:20px}.button-row{flex-direction:column}.reset-btn{width:100%}.footer-inner{flex-direction:column}.amortization-summary{grid-template-columns:1fr}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+body.light-mode{background:#f8fafc;color:#0f172a}body.light-mode .topbar{background:rgba(255,255,255,.9);border-color:#e2e8f0}body.light-mode .back-link{color:#475569}body.light-mode .back-link:hover{color:#0f172a}body.light-mode .brand{color:#0f172a}body.light-mode .free-browser-note{color:#64748b}body.light-mode .theme-toggle{background:#fff;border-color:#cbd5e1;color:#475569}body.light-mode .theme-toggle:hover{background:#f1f5f9;color:#0f172a}body.light-mode h1{color:#0f172a}body.light-mode .subtitle{color:#64748b}body.light-mode .eyebrow{color:#4f46e5;background:#eef2ff;border-color:#c7d2fe}body.light-mode .card,body.light-mode .info-section{background:rgba(255,255,255,.84);border-color:#e2e8f0;box-shadow:0 12px 35px rgba(15,23,42,.07)}body.light-mode .section-heading h2,body.light-mode .results-header h2,body.light-mode .info-section h2{color:#0f172a}body.light-mode .section-heading p,body.light-mode .results-header p,body.light-mode .info-section>p{color:#64748b}body.light-mode .form-section{border-color:#e2e8f0}body.light-mode .form-section-title,body.light-mode .breakdown-title,body.light-mode .info-box h3{color:#1e293b}body.light-mode label{color:#334155}body.light-mode input,body.light-mode select{background:#fff;border-color:#cbd5e1;color:#0f172a}body.light-mode .helper{color:#64748b}body.light-mode .reset-btn{background:#f1f5f9;border-color:#cbd5e1;color:#334155}body.light-mode .reset-btn:hover{background:#e2e8f0}body.light-mode .results-header{background:linear-gradient(135deg,#eef2ff,#f8fafc);border-color:#e2e8f0}body.light-mode .result-label,body.light-mode .result-note{color:#64748b}body.light-mode .breakdown-row{border-color:#eef2f7}body.light-mode .breakdown-label{color:#64748b}body.light-mode .breakdown-value{color:#1e293b}body.light-mode .info-box,body.light-mode .amortization-stat{background:#f8fafc;border-color:#e2e8f0}body.light-mode .info-box p{color:#64748b}body.light-mode .disclaimer{color:#64748b}body.light-mode .table-wrapper{border-color:#e2e8f0}body.light-mode .amortization-table th{background:#f8fafc;color:#475569;border-color:#e2e8f0}body.light-mode .amortization-table td{color:#334155;border-color:#eef2f7}body.light-mode .amortization-table td:first-child{color:#0f172a}body.light-mode .faq-item{background:#fff;border-color:#e2e8f0}body.light-mode .faq-question{color:#1e293b}body.light-mode .faq-question:hover{background:#f8fafc}body.light-mode .faq-answer{border-color:#e2e8f0}body.light-mode .faq-answer p{color:#64748b}body.light-mode footer{background:#fff;border-color:#e2e8f0}
+@media(max-width:850px){.calculator-grid{grid-template-columns:1fr}.results-card{position:static}.info-grid{grid-template-columns:1fr}.amortization-summary{grid-template-columns:1fr 1fr}}@media(max-width:600px){.topbar-inner{padding:14px 18px}.topbar-actions{display:flex;align-items:center;gap:8px}.free-browser-note{font-size:10px;white-space:normal;text-align:right;max-width:118px;line-height:1.2}.theme-toggle{width:38px;height:38px;flex:0 0 auto}.brand{display:none}.page-header{padding:34px 18px 20px}.container{padding:8px 18px 45px}.form-card,.results-header,.main-result,.breakdown{padding-left:20px;padding-right:20px}.form-grid{grid-template-columns:1fr}.form-group.full{grid-column:auto}.affordability-box{margin-left:20px;margin-right:20px}.button-row{flex-direction:column}.reset-btn{width:100%}.footer-inner{flex-direction:column}.amortization-summary{grid-template-columns:1fr}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
 
+
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Home Affordability Calculator","url":"https://utiliverse.app/Home_Affordability_Calculator/","applicationCategory":"FinanceApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based home affordability calculator that estimates a potential home purchase price using income, monthly debts, down payment, mortgage rate, property taxes, homeowners insurance, HOA fees and maintenance.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Home affordability estimate","Mortgage payment estimate","Debt-to-income affordability guidance","Property tax and homeowners insurance inputs","HOA and maintenance cost inputs","Down payment and mortgage term inputs","Year-by-year mortgage amortization schedule"]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much house can I afford based on my income?","acceptedAnswer":{"@type":"Answer","text":"Home affordability depends on income, existing debts, down payment, interest rate, property taxes, insurance, HOA fees and other housing costs. This calculator uses a housing budget of approximately 28% of gross monthly income and then estimates a mortgage amount that fits within that budget."}},{"@type":"Question","name":"Does my down payment change how much I can afford?","acceptedAnswer":{"@type":"Answer","text":"Yes. A larger down payment generally allows a higher purchase price for the same mortgage payment because less money needs to be borrowed."}},{"@type":"Question","name":"Why are property taxes and insurance included?","acceptedAnswer":{"@type":"Answer","text":"Property taxes and homeowners insurance are recurring ownership costs and can materially affect the total monthly housing budget."}},{"@type":"Question","name":"What does the amortization schedule show?","acceptedAnswer":{"@type":"Answer","text":"The amortization schedule summarizes how the estimated mortgage balance changes over time and how yearly payments are divided between principal and interest."}},{"@type":"Question","name":"Is this calculator the same as getting mortgage pre-approval?","acceptedAnswer":{"@type":"Answer","text":"No. The calculator is for education and planning. A lender may consider credit, employment, assets, reserves, loan program requirements, debt-to-income ratios and other underwriting factors."}}]}</script>
 </head>
 
 
 <body>
+<!--
+SEO TARGET CLUSTER
+Primary: home affordability calculator
+Secondary: how much house can I afford, house affordability calculator,
+mortgage affordability calculator, home buying budget calculator,
+debt-to-income ratio, monthly housing budget, down payment affordability
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
 
 
     <!-- =========================================================
@@ -61,9 +83,18 @@ body.light-mode{background:#f8fafc;color:#0f172a}body.light-mode .topbar{backgro
     <header class="topbar">
         <div class="topbar-inner">
             <a href="https://utiliverse.app" class="back-link">&larr; Back to Utiliverse</a>
-            <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to light mode" title="Toggle light/dark mode">
-                <span id="theme-icon" aria-hidden="true">☀</span>
-            </button>
+            <div class="topbar-actions" style="display:flex;align-items:center;gap:12px">
+                <span class="free-browser-note">100% Free and Browser Based</span>
+                <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+                    <svg id="moon-icon" class="theme-svg hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path>
+                    </svg>
+                    <svg id="sun-icon" class="theme-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -82,20 +113,10 @@ body.light-mode{background:#f8fafc;color:#0f172a}body.light-mode .topbar{backgro
         </div>
 
 
-        <h1>
-
-            How Much Home Can You Comfortably Afford?
-
-        </h1>
+        <h1>Home Affordability Calculator – How Much House Can You Afford?</h1>
 
 
-        <p class="subtitle">
-
-            Build a personalized estimate using your income,
-            existing obligations, down payment, mortgage rate
-            and expected homeownership expenses.
-
-        </p>
+        <p class="subtitle">Estimate how much house you may be able to afford using your gross monthly income, existing debt, down payment, mortgage rate, property taxes, homeowners insurance, HOA fees and maintenance costs.</p>
 
     </section>
 
@@ -996,6 +1017,11 @@ body.light-mode{background:#f8fafc;color:#0f172a}body.light-mode .topbar{backgro
 
         
 
+        <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-CALCULATOR PLACEMENT
+             Paste approved Google AdSense code here after approval.
+             This insertion point is intentionally invisible and reserves no space.
+        -->
+
         <!-- =====================================================
              UNDERSTANDING YOUR ESTIMATE
         ====================================================== -->
@@ -1115,11 +1141,7 @@ body.light-mode{background:#f8fafc;color:#0f172a}body.light-mode .topbar{backgro
         <section class="info-section">
 
 
-            <h2>
-
-                About This Home Affordability Calculator
-
-            </h2>
+            <h2>How This Home Affordability Calculator Works</h2>
 
 
             <p>
@@ -1196,6 +1218,29 @@ body.light-mode{background:#f8fafc;color:#0f172a}body.light-mode .topbar{backgro
         </section>
 
 
+
+
+        <section class="info-section">
+            <h2>How Much House Can I Afford?</h2>
+            <p>Your home-buying budget depends on more than the mortgage principal and interest payment. Income, recurring debt, down payment, mortgage rate, property taxes, homeowners insurance, HOA fees and maintenance can all change the purchase price that fits within a monthly budget.</p>
+            <p>This calculator uses an estimated housing target of 28% of gross monthly income, then subtracts the non-mortgage housing costs you enter to estimate how much principal and interest may fit inside that target. It also compares your estimated housing cost plus existing monthly debts with your gross income to provide a debt-to-income affordability indicator.</p>
+            <h3>What the estimate includes</h3>
+            <div class="info-grid">
+                <div class="info-box">
+                    <h3>Mortgage payment</h3>
+                    <p>Principal and interest are estimated from the mortgage rate, loan term and calculated loan amount.</p>
+                </div>
+                <div class="info-box">
+                    <h3>Ownership costs</h3>
+                    <p>Property taxes, homeowners insurance, HOA fees and your optional maintenance reserve reduce the amount available for principal and interest.</p>
+                </div>
+                <div class="info-box">
+                    <h3>Debt-to-income context</h3>
+                    <p>Existing monthly debt is included when the tool evaluates whether the resulting housing budget falls into a comfortable, moderate or higher debt range.</p>
+                </div>
+            </div>
+            <p class="disclaimer">This calculator does not estimate private mortgage insurance (PMI), closing costs, lender fees or every loan-program requirement. Those costs can affect the amount you may actually be able to borrow or comfortably spend.</p>
+        </section>
 
         <!-- =====================================================
              FAQ
@@ -1460,6 +1505,11 @@ body.light-mode{background:#f8fafc;color:#0f172a}body.light-mode .topbar{backgro
         </section>
 
 
+        <!-- GOOGLE ADSENSE: PRE-FOOTER PLACEMENT
+             Paste approved Google AdSense code here after approval.
+             This insertion point is intentionally invisible and reserves no space.
+        -->
+
     </main>
 
 
@@ -1469,28 +1519,10 @@ body.light-mode{background:#f8fafc;color:#0f172a}body.light-mode .topbar{backgro
     ========================================================= -->
 
     <footer>
-
-
         <div class="footer-inner">
-
-
-            <div>
-
-                &copy; <span id="year"></span> Utiliverse
-
-            </div>
-
-
-            <div>
-
-                Financial tools for everyday decisions.
-
-            </div>
-
-
+            <div>© 2026 Utiliverse. All rights reserved.</div>
+            <div>100% Free and Browser Based</div>
         </div>
-
-
     </footer>
 
 
@@ -1500,21 +1532,29 @@ body.light-mode{background:#f8fafc;color:#0f172a}body.light-mode .topbar{backgro
     ========================================================= -->
 
     <script>
-        document.getElementById("year").textContent = new Date().getFullYear();
-
         /* =========================================================
            LIGHT / DARK MODE
         ========================================================= */
         (function () {
             const themeToggle = document.getElementById("theme-toggle");
-            const themeIcon = document.getElementById("theme-icon");
+            const moonIcon = document.getElementById("moon-icon");
+            const sunIcon = document.getElementById("sun-icon");
+            const metaTheme = document.querySelector('meta[name="theme-color"]');
 
             function applyTheme(theme) {
                 const isLight = theme === "light";
                 document.body.classList.toggle("light-mode", isLight);
-                themeIcon.textContent = isLight ? "☾" : "☀";
+
+                // Light mode shows moon (switch to dark); dark mode shows sun (switch to light).
+                moonIcon.classList.toggle("hidden", !isLight);
+                sunIcon.classList.toggle("hidden", isLight);
+
                 themeToggle.setAttribute("aria-label", isLight ? "Switch to dark mode" : "Switch to light mode");
                 themeToggle.setAttribute("title", isLight ? "Switch to dark mode" : "Switch to light mode");
+
+                if (metaTheme) {
+                    metaTheme.setAttribute("content", isLight ? "#f8fafc" : "#020617");
+                }
             }
 
             const savedTheme = localStorage.getItem("utiliverse-theme");
