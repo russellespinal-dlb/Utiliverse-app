@@ -141,9 +141,14 @@
     <loc>https://utiliverse.app/Word_Counter/</loc>
   </url>
 
-  <!-- Time Tools -->
+  <!-- Time Tracking Suite -->
   <url>
-    <loc>https://utiliverse.app/Time_Tools.html/</loc>
+    <loc>https://utiliverse.app/Time_Tracking_Suite.html/</loc>
+  </url>
+
+  <!-- JSON to CSV Converter -->
+  <url>
+    <loc>https://utiliverse.app/JSON_to_CSV_Converter.html/</loc>
   </url>
 
   <!-- Privacy Policy -->
