@@ -3,11 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Volume Calculator | Utiliverse</title>
-<meta name="description" content="Calculate the volume of cubes, spheres, cylinders, and cones instantly with our free browser-based tool.">
-<meta name="robots" content="index,follow">
+<title>Volume Calculator – Cube, Cylinder, Sphere & Cone | Utiliverse</title>
+<meta name="description" content="Free volume calculator for rectangular prisms, cylinders, spheres and cones. Enter dimensions to calculate cubic volume instantly in your browser.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="theme-color" content="#020617">
 <link rel="canonical" href="https://utiliverse.app/Volume_Calculator">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Volume Calculator – Cube, Cylinder, Sphere & Cone | Utiliverse">
+<meta property="og:description" content="Calculate cubic volume for rectangular prisms, cylinders, spheres and cones directly in your browser.">
+<meta property="og:url" content="https://utiliverse.app/Volume_Calculator">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Volume Calculator – Cube, Cylinder, Sphere & Cone | Utiliverse">
+<meta name="twitter:description" content="Free browser-based volume calculator for four common 3D shapes.">
+
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
@@ -46,97 +55,212 @@ body.light-mode header a:hover{
   color:#0f172a !important;
 }
 
+
+.free-browser-note{font-size:.75rem;color:#94a3b8;font-weight:700;white-space:nowrap}
+#theme-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
+  padding:0;
+  border:1px solid #334155;
+  border-radius:12px;
+  background:rgba(15,23,42,.72);
+  color:#94a3b8;
+  box-shadow:none;
+  appearance:none;
+  -webkit-appearance:none;
+  cursor:pointer;
+  transition:background .2s ease,color .2s ease,border-color .2s ease;
+}
+#theme-toggle:hover{background:#1e293b;color:#fff;border-color:#475569}
+#theme-toggle:focus-visible,.btn:focus-visible,.input:focus-visible{outline:2px solid #6366f1;outline-offset:2px}
+#theme-toggle svg{width:18px;height:18px;stroke-width:2}
+.theme-hidden{display:none!important}
+body.light-mode #theme-toggle{background:#fff;border-color:#cbd5e1;color:#475569}
+body.light-mode #theme-toggle:hover{background:#f1f5f9;border-color:#94a3b8;color:#0f172a}
+body.light-mode .free-browser-note{color:#64748b}
+.local-processing-note{font-size:12px;line-height:1.65;color:#94a3b8}
+body.light-mode .local-processing-note{color:#64748b}
+.formula-box{margin:1.25rem 0;padding:1rem;border:1px solid #334155;border-radius:12px;background:rgba(15,23,42,.55)}
+body.light-mode .formula-box{border-color:#e2e8f0;background:#f8fafc}
+@media(max-width:640px){
+  .free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}
+  #theme-toggle{width:38px;height:38px;flex:0 0 auto}
+}
+
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Volume Calculator","url":"https://utiliverse.app/Volume_Calculator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based volume calculator for rectangular prisms, cylinders, spheres and cones.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Rectangular prism volume","Cube volume","Cylinder volume","Sphere volume","Cone volume","Decimal dimension support","Local browser calculations"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What shapes can this volume calculator calculate?","acceptedAnswer":{"@type":"Answer","text":"This calculator supports rectangular prisms and cubes, cylinders, spheres and cones."}},{"@type":"Question","name":"What units should I use?","acceptedAnswer":{"@type":"Answer","text":"You can use any consistent length unit, such as inches, feet, centimeters or meters. Use the same unit for every dimension in one calculation. The result is returned in that unit cubed."}},{"@type":"Question","name":"What is the formula for a rectangular prism?","acceptedAnswer":{"@type":"Answer","text":"Volume equals length multiplied by width multiplied by height: V = l \u00d7 w \u00d7 h."}},{"@type":"Question","name":"What is the formula for a cylinder?","acceptedAnswer":{"@type":"Answer","text":"Cylinder volume is V = \u03c0r\u00b2h, where r is the radius and h is the height."}},{"@type":"Question","name":"What is the formula for a sphere?","acceptedAnswer":{"@type":"Answer","text":"Sphere volume is V = 4/3 \u00d7 \u03c0r\u00b3, where r is the radius."}},{"@type":"Question","name":"What is the formula for a cone?","acceptedAnswer":{"@type":"Answer","text":"Cone volume is V = 1/3 \u00d7 \u03c0r\u00b2h, where r is the radius and h is the height."}},{"@type":"Question","name":"Can I enter decimal measurements?","acceptedAnswer":{"@type":"Answer","text":"Yes. The dimension fields accept decimal values, which is useful for measurements such as 2.5 feet or 7.25 centimeters."}},{"@type":"Question","name":"Are my measurements saved or uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. The volume calculations run locally in your browser and the measurements are not submitted to a Utiliverse server by this tool."}}]}</script>
 </head>
 <body>
+<!--
+SEO TARGET CLUSTER
+Primary: volume calculator
+Secondary: cube volume calculator, rectangular prism volume calculator,
+cylinder volume calculator, sphere volume calculator, cone volume calculator,
+cubic volume calculator, geometry volume calculator
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
 <header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800 transition-all duration-300">
 <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
 <a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2 transition-colors"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse</a>
 <div class="flex items-center gap-3">
-  <span class="text-xs sm:text-sm font-medium text-slate-500 whitespace-nowrap">100% Free and Browser Based</span>
-  <button id="theme-toggle" class="text-slate-400 hover:text-white transition-colors cursor-pointer" type="button" aria-label="Toggle light and dark mode" title="Toggle light and dark mode"><i data-lucide="sun" id="theme-icon" class="w-5 h-5"></i></button>
+  <span class="free-browser-note">100% Free and Browser Based</span>
+  <button id="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+  <svg id="moon-icon" class="theme-hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
+  <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+</button>
 </div>
 </div>
 </header>
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
 <main class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
 <div class="max-w-3xl">
 <p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Geometry</p>
 <h1 class="text-4xl sm:text-5xl font-black mt-2">Volume Calculator</h1>
-<p class="mt-4 text-lg muted">Calculate the cubic volume of common geometric shapes.</p>
+<p class="mt-4 text-lg muted">Calculate the volume of rectangular prisms, cylinders, spheres and cones using your own dimensions.</p>
 </div>
 
 <section class="grid sm:grid-cols-2 gap-6 mt-8">
   <div class="glass p-6 rounded-2xl flex flex-col gap-3">
     <h3 class="font-bold text-lg">Cube / Rectangular Prism</h3>
-    <input type="number" id="c_l" min="0" aria-label="Length" class="input p-2 rounded-lg" placeholder="Length">
-    <input type="number" id="c_w" min="0" aria-label="Width" class="input p-2 rounded-lg" placeholder="Width">
-    <input type="number" id="c_h" min="0" aria-label="Height" class="input p-2 rounded-lg" placeholder="Height">
+    <input type="number" id="c_l" min="0" step="any" inputmode="decimal" aria-label="Length" class="input p-2 rounded-lg" placeholder="Length">
+    <input type="number" id="c_w" min="0" step="any" inputmode="decimal" aria-label="Width" class="input p-2 rounded-lg" placeholder="Width">
+    <input type="number" id="c_h" min="0" step="any" inputmode="decimal" aria-label="Height" class="input p-2 rounded-lg" placeholder="Height">
     <button class="btn primary mt-2" onclick="calcCube()">Calculate</button>
-    <div class="mt-2 text-xl font-bold text-indigo-400" id="res_cube">--</div>
+    <div class="mt-2 text-xl font-bold text-indigo-400" id="res_cube" aria-live="polite">--</div>
   </div>
 
   <div class="glass p-6 rounded-2xl flex flex-col gap-3">
     <h3 class="font-bold text-lg">Cylinder</h3>
-    <input type="number" id="cy_r" min="0" aria-label="Radius" class="input p-2 rounded-lg" placeholder="Radius">
-    <input type="number" id="cy_h" min="0" aria-label="Height" class="input p-2 rounded-lg" placeholder="Height">
+    <input type="number" id="cy_r" min="0" step="any" inputmode="decimal" aria-label="Radius" class="input p-2 rounded-lg" placeholder="Radius">
+    <input type="number" id="cy_h" min="0" step="any" inputmode="decimal" aria-label="Height" class="input p-2 rounded-lg" placeholder="Height">
     <button class="btn primary mt-2" onclick="calcCyl()">Calculate</button>
-    <div class="mt-2 text-xl font-bold text-indigo-400" id="res_cyl">--</div>
+    <div class="mt-2 text-xl font-bold text-indigo-400" id="res_cyl" aria-live="polite">--</div>
   </div>
 
   <div class="glass p-6 rounded-2xl flex flex-col gap-3">
     <h3 class="font-bold text-lg">Sphere</h3>
-    <input type="number" id="s_r" min="0" aria-label="Radius" class="input p-2 rounded-lg" placeholder="Radius">
+    <input type="number" id="s_r" min="0" step="any" inputmode="decimal" aria-label="Radius" class="input p-2 rounded-lg" placeholder="Radius">
     <button class="btn primary mt-2" onclick="calcSphere()">Calculate</button>
-    <div class="mt-2 text-xl font-bold text-indigo-400" id="res_sphere">--</div>
+    <div class="mt-2 text-xl font-bold text-indigo-400" id="res_sphere" aria-live="polite">--</div>
   </div>
 
   <div class="glass p-6 rounded-2xl flex flex-col gap-3">
     <h3 class="font-bold text-lg">Cone</h3>
-    <input type="number" id="co_r" min="0" aria-label="Radius" class="input p-2 rounded-lg" placeholder="Radius">
-    <input type="number" id="co_h" min="0" aria-label="Height" class="input p-2 rounded-lg" placeholder="Height">
+    <input type="number" id="co_r" min="0" step="any" inputmode="decimal" aria-label="Radius" class="input p-2 rounded-lg" placeholder="Radius">
+    <input type="number" id="co_h" min="0" step="any" inputmode="decimal" aria-label="Height" class="input p-2 rounded-lg" placeholder="Height">
     <button class="btn primary mt-2" onclick="calcCone()">Calculate</button>
-    <div class="mt-2 text-xl font-bold text-indigo-400" id="res_cone">--</div>
+    <div class="mt-2 text-xl font-bold text-indigo-400" id="res_cone" aria-live="polite">--</div>
   </div>
 </section>
+<p class="local-processing-note mt-4">Browser-based calculation: the dimensions you enter are calculated locally on this page and are not submitted to a Utiliverse server.</p>
+
+<!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
 
 <section class="article max-w-4xl mt-16">
-<h2>Why Digital Calculators Matter: Unit and Currency Conversions in Daily Life</h2>
-<p>In our increasingly interconnected and fast-paced digital world, the need for precise mathematical transformations is more prevalent than ever. Whether you are navigating the complexities of international finance, scaling a recipe in your kitchen, or developing architectural blueprints, utility tools—ranging from percent calculators to advanced unit and currency converters—serve as the foundation for accuracy. This article explores the extensive use cases for unit and currency conversions, demonstrating why having access to reliable, browser-based utilities is essential for both professionals and everyday users.</p>
-<h3>The Critical Role of Currency Conversion</h3>
-<p>Currency conversion is perhaps the most frequent mathematical operation performed by internet users globally. The dynamic nature of foreign exchange (Forex) markets means that values fluctuate by the second. For international travelers, currency calculators are indispensable for budgeting. Knowing the exact exchange rate ensures that individuals do not overpay for lodging, food, or souvenirs, and helps them avoid hidden fees often applied by credit card companies and airport kiosks.</p>
-<p>Beyond tourism, the boom in global e-commerce has made currency conversion a daily necessity for consumers and business owners alike. An online shopper in the United States purchasing a custom leather good from Italy needs to convert Euros to US Dollars to understand the true cost. Conversely, the Italian merchant must price their goods competitively while accounting for conversion rates and international shipping costs.</p>
-<h3>Unit Conversions in Professional and Personal Settings</h3>
-<p>While currency focuses on finance, unit conversions dictate the physical world. The global divide between the metric system and the imperial system necessitates constant conversion for engineering, science, construction, and culinary arts.</p>
-<p>In the culinary world, recipes are frequently shared across borders. A baker in London using a recipe developed in New York must convert cups and fluid ounces into milliliters and grams. Precision here is not just a matter of preference; it is chemical necessity. Baking requires exact ratios, and a failure to convert volume to mass correctly can result in a culinary disaster. Volume calculators become vital tools for determining the exact capacity of baking tins or liquid containers.</p>
-<p>In engineering and construction, the stakes are significantly higher. Materials must be ordered using precise measurements. If an architectural plan drafted in metric units (meters, centimeters) is executed by a contractor accustomed to imperial units (feet, inches), a unit converter ensures structural integrity. Consider a civil engineer calculating the volume of concrete needed for a cylindrical pillar; they must convert dimensions accurately before using a volume calculator to find the cubic yardage required. A minor decimal error during conversion could lead to thousands of dollars in wasted materials or, worse, safety hazards.</p>
-<h3>Conclusion</h3>
-<p>The digitization of mathematical utilities has democratized access to precision. You no longer need to be a mathematician or carry a specialized scientific device to navigate a world of shifting currencies and varying measurement systems. Browser-based tools provide instant, accessible, and accurate answers, empowering users to make informed decisions and execute complex projects safely.</p>
+<h2>How to Use the Volume Calculator</h2>
+<p>Select the card for the shape you want to calculate, enter the requested dimensions, and choose Calculate. Keep every input in the same length unit. If you enter feet, the result is cubic feet; if you enter centimeters, the result is cubic centimeters.</p>
 
-<h2>Frequently Asked Questions</h2>
-<details class="faq"><summary>What is volume?</summary><p class="muted">Volume is the amount of 3D space occupied by an object, typically measured in cubic units like cubic meters or cubic inches.</p></details>
-<details class="faq"><summary>What units should I use?</summary><p class="muted">You can use any unit (inches, meters, feet), but ensure you use the same unit for all inputs. The output will be in that unit cubed.</p></details>
-<details class="faq"><summary>How do I find the volume of water a tank holds?</summary><p class="muted">Calculate the volume of the cylinder or cube tank, then use a unit converter to change cubic meters/inches into gallons or liters.</p></details>
-<details class="faq"><summary>Is the formula for a cone accurate?</summary><p class="muted">Yes, we use the standard mathematical formula: (1/3) × π × r² × height.</p></details>
-<details class="faq"><summary>Are these calculations saved?</summary><p class="muted">No, everything is processed locally in your browser for speed and privacy.</p></details>
+<h3>Volume Formulas Used</h3>
+<div class="formula-box">
+<p><strong>Rectangular prism:</strong> V = length × width × height</p>
+<p><strong>Cylinder:</strong> V = π × radius² × height</p>
+<p><strong>Sphere:</strong> V = 4/3 × π × radius³</p>
+<p><strong>Cone:</strong> V = 1/3 × π × radius² × height</p>
+</div>
+
+<h3>Rectangular Prism and Cube Volume</h3>
+<p>A rectangular prism uses three dimensions: length, width and height. Multiply all three values to find the amount of three-dimensional space inside the shape. A cube is a special rectangular prism where all three dimensions are equal, so the same calculator works for both.</p>
+
+<h3>Cylinder Volume</h3>
+<p>A cylinder uses its radius and height. The calculator first squares the radius, multiplies by π, and then multiplies by the height. The radius is half the diameter, so if you only know the diameter, divide it by two before entering the value.</p>
+
+<h3>Sphere Volume</h3>
+<p>A sphere needs only its radius. The formula uses the radius cubed and multiplies by 4/3 × π. Because the radius is raised to the third power, even a small change in radius can produce a much larger change in volume.</p>
+
+<h3>Cone Volume</h3>
+<p>A cone with the same base radius and height as a cylinder has one-third of that cylinder's volume. Enter the cone's radius and perpendicular height to calculate its cubic volume.</p>
+
+<h3>Using Consistent Units</h3>
+<p>This calculator does not convert units automatically. Use the same unit for every dimension in a calculation. Mixing feet and inches, for example, produces a meaningless result unless you convert them to one common unit first. The output is labeled “cubic units” because the specific unit depends on what you entered.</p>
+
+<h3>Common Uses for Volume Calculations</h3>
+<p>Volume calculations can help estimate container capacity, room or box space, material quantities, tank dimensions, concrete forms, science problems, packaging, landscaping and other three-dimensional measurements. For liquid capacity or material purchasing, you may still need to convert the cubic result into liters, gallons, cubic yards or another practical unit.</p>
+
+<h2>Volume Calculator FAQ</h2>
+<details class="faq"><summary>What shapes can this volume calculator calculate?</summary><p class="muted">This calculator supports rectangular prisms and cubes, cylinders, spheres and cones.</p></details>
+<details class="faq"><summary>What units should I use?</summary><p class="muted">Use any consistent length unit such as inches, feet, centimeters or meters. Use the same unit for every dimension in one calculation. The result is returned in that unit cubed.</p></details>
+<details class="faq"><summary>What is the formula for a rectangular prism?</summary><p class="muted">Volume equals length multiplied by width multiplied by height: V = l × w × h.</p></details>
+<details class="faq"><summary>What is the formula for a cylinder?</summary><p class="muted">Cylinder volume is V = πr²h, where r is the radius and h is the height.</p></details>
+<details class="faq"><summary>What is the formula for a sphere?</summary><p class="muted">Sphere volume is V = 4/3 × πr³, where r is the radius.</p></details>
+<details class="faq"><summary>What is the formula for a cone?</summary><p class="muted">Cone volume is V = 1/3 × πr²h, where r is the radius and h is the height.</p></details>
+<details class="faq"><summary>Can I enter decimal measurements?</summary><p class="muted">Yes. The dimension fields accept decimal values, which is useful for measurements such as 2.5 feet or 7.25 centimeters.</p></details>
+<details class="faq"><summary>Are my measurements saved or uploaded?</summary><p class="muted">No. The volume calculations run locally in your browser and the measurements are not submitted to a Utiliverse server by this tool.</p></details>
 </section>
 </main>
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
 <footer class="border-t border-slate-800 bg-slate-950 mt-12">
 <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500">
-  <span>© <span id="year"></span> Utiliverse. All rights reserved.</span>
+  <span>© 2026 Utiliverse. All rights reserved.</span>
   <span>100% Free and Browser Based</span>
 </div>
 </footer>
 <script>
 lucide.createIcons();
-document.getElementById('year').textContent=new Date().getFullYear();
-document.getElementById('theme-toggle').addEventListener('click', () => {
-  document.body.classList.toggle('light-mode');
-  const icon = document.getElementById('theme-icon');
-  icon.setAttribute('data-lucide', document.body.classList.contains('light-mode') ? 'moon' : 'sun');
-  lucide.createIcons();
+const themeToggle = document.getElementById('theme-toggle');
+const moonIcon = document.getElementById('moon-icon');
+const sunIcon = document.getElementById('sun-icon');
+const metaTheme = document.querySelector('meta[name="theme-color"]');
+
+function applyTheme(theme) {
+  const light = theme === 'light';
+
+  document.body.classList.toggle('light-mode', light);
+  moonIcon.classList.toggle('theme-hidden', !light);
+  sunIcon.classList.toggle('theme-hidden', light);
+
+  const label = light ? 'Switch to dark mode' : 'Switch to light mode';
+  themeToggle.setAttribute('aria-label', label);
+  themeToggle.title = label;
+
+  if (metaTheme) {
+    metaTheme.setAttribute('content', light ? '#f8fafc' : '#020617');
+  }
+}
+
+const savedTheme = localStorage.getItem('utiliverse-theme');
+const initialTheme = savedTheme ||
+  (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+
+applyTheme(initialTheme);
+
+themeToggle.addEventListener('click', () => {
+  const nextTheme =
+    document.body.classList.contains('light-mode') ? 'dark' : 'light';
+
+  localStorage.setItem('utiliverse-theme', nextTheme);
+  applyTheme(nextTheme);
 });
 
 function displayResult(element, isValid, result) {
+  isValid = isValid && Number.isFinite(result);
+
   if (!isValid) {
     element.innerText = 'Please enter valid numbers';
     element.classList.remove('text-indigo-400');
