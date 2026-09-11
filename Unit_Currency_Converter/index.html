@@ -2,20 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#020617">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Unit & Currency Converter — Utiliverse</title>
+<title>Currency & Unit Converter – Live Exchange Rates | Utiliverse</title>
 
-<meta name="description" content="Free online unit and currency converter with live exchange rates. Convert USD, DOP, EUR, GBP, CAD and hundreds of international currencies, plus length, weight, temperature and other common units.">
-
-<meta name="keywords" content="currency converter, USD to DOP, Dominican peso converter, dollar to peso converter, exchange rate calculator, unit converter, currency exchange calculator, live currency rates">
+<meta name="description" content="Free currency and unit converter with latest available exchange rates. Convert USD, DOP, EUR, GBP, CAD and many currencies, plus length, weight, temperature, area, volume, speed and digital storage.">
 
 <link rel="canonical" href="https://utiliverse.app/Unit_Currency_Converter/">
 
-<meta property="og:title" content="Unit & Currency Converter — Utiliverse">
-<meta property="og:description" content="Convert currencies using live exchange rates and instantly convert common units for everyday calculations.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://utiliverse.app/converter/">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Currency & Unit Converter – Live Exchange Rates | Utiliverse">
+<meta property="og:description" content="Convert currencies with latest available exchange-rate data and instantly convert common measurement units.">
+<meta property="og:url" content="https://utiliverse.app/Unit_Currency_Converter/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Currency & Unit Converter – Live Exchange Rates | Utiliverse">
+<meta name="twitter:description" content="Free browser-based currency and measurement converter for exchange rates and common units.">
 
 <script src="https://cdn.tailwindcss.com"></script>
 
@@ -146,31 +150,7 @@ body {
   background: #475569;
 }
 
-/*
-===========================================================
-GOOGLE ADSENSE PLACEHOLDERS
-===========================================================
 
-When your AdSense account is approved, replace the comments
-below with your Google AdSense code.
-
-These placeholders intentionally produce NO visible boxes,
-spacing, borders, backgrounds, or advertisement labels.
-
-TOP ADSENSE:
-<!-- ADSENSE_TOP -->
-
-MID ADSENSE:
-<!-- ADSENSE_MID -->
-
-SIDEBAR ADSENSE:
-<!-- ADSENSE_SIDEBAR -->
-
-BOTTOM ADSENSE:
-<!-- ADSENSE_BOTTOM -->
-
-===========================================================
-*/
 
 /* =========================================================
    LIGHT / DARK MODE TOGGLE
@@ -319,85 +299,61 @@ body.light-mode ::-webkit-scrollbar-thumb:hover {
   }
 }
 
+
+.free-browser-note{font-size:.75rem;color:#94a3b8;font-weight:700;white-space:nowrap}
+.theme-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
+  flex:0 0 40px;
+  padding:0;
+  border:1px solid #334155;
+  border-radius:12px;
+  background:rgba(15,23,42,.72);
+  color:#94a3b8;
+  box-shadow:none;
+  appearance:none;
+  -webkit-appearance:none;
+  cursor:pointer;
+  transition:background .2s ease,color .2s ease,border-color .2s ease;
+}
+.theme-toggle:hover{background:#1e293b;color:#fff;border-color:#475569}
+.theme-toggle:focus-visible,.input-dark:focus-visible,.select-search:focus-visible,.swap-button:focus-visible{outline:2px solid #6366f1;outline-offset:2px}
+.theme-toggle svg{width:18px;height:18px;stroke-width:2}
+.theme-hidden{display:none!important}
+body.light-mode .theme-toggle{background:#fff;border-color:#cbd5e1;color:#475569}
+body.light-mode .theme-toggle:hover{background:#f1f5f9;border-color:#94a3b8;color:#0f172a}
+body.light-mode .free-browser-note{color:#64748b}
+.processing-note{font-size:12px;line-height:1.65;color:#94a3b8}
+body.light-mode .processing-note{color:#64748b}
+@media(max-width:640px){
+  .free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}
+  .theme-toggle{width:38px;height:38px;flex-basis:38px}
+  #currencyResult,#unitResult{font-size:2rem!important}
+}
+
 </style>
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "Utiliverse Unit & Currency Converter",
-  "url": "https://utiliverse.app/converter/",
-  "applicationCategory": "UtilitiesApplication",
-  "operatingSystem": "Any",
-  "description": "Free online unit and currency converter with live exchange rates and common measurement conversions.",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  }
-}
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "How does the currency converter calculate exchange rates?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The currency converter retrieves exchange-rate data from an online rate service and uses the latest available rate to calculate the requested conversion."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Can I convert US dollars to Dominican pesos?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. The converter includes USD and DOP, allowing users to calculate conversions between US dollars and Dominican pesos when live DOP exchange-rate data is available."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Are currency exchange rates constantly changing?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Foreign exchange markets change throughout the day. The rate displayed by this calculator reflects the latest rate data retrieved by the application and may differ from the rate offered by a bank, card issuer, money-transfer service or exchange office."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Does the converter support units other than currency?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. The Unit Converter includes common measurement categories such as length, weight, temperature, area, volume, speed and digital storage."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "Is this currency converter the same as the rate my bank will charge?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. The calculator provides an informational exchange-rate estimate. Banks, credit cards and money-transfer companies may add spreads, fees or other charges."
-      }    
-    },
-    {
-      "@type": "Question",
-      "name": "Does Utiliverse charge a fee for currency conversions?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. Utiliverse provides this online calculator as a free browser-based utility. The calculator does not execute currency transactions."
-      }
-    }
-  ]
-}
-</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Currency & Unit Converter","url":"https://utiliverse.app/Unit_Currency_Converter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled. Currency conversions require internet access to retrieve exchange-rate data.","description":"Free browser-based currency and unit converter with latest available exchange-rate data and conversions for length, weight, temperature, area, volume, speed and digital storage.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["International currency conversion","USD to DOP and DOP to USD conversion","Searchable country and currency directory","Latest available exchange-rate data","Currency swap control","Length conversion","Weight conversion","Temperature conversion","Area conversion","Volume conversion","Speed conversion","1024-based digital storage conversion"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does the currency converter calculate exchange rates?","acceptedAnswer":{"@type":"Answer","text":"The converter requests the latest available rate data for the selected source currency from an online exchange-rate service and uses the returned destination-currency rate to calculate the conversion."}},{"@type":"Question","name":"Can I convert US dollars to Dominican pesos?","acceptedAnswer":{"@type":"Answer","text":"Yes. USD and DOP are included. The page defaults to USD as the source and DOP as the destination when it first loads."}},{"@type":"Question","name":"Are the exchange rates the same as the rate my bank will charge?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. The displayed rate is an informational market-rate estimate from the data provider. Banks, card issuers, transfer services and exchange offices may use different rates and add spreads or fees."}},{"@type":"Question","name":"How current are the currency rates?","acceptedAnswer":{"@type":"Answer","text":"The page displays the data date supplied by the exchange-rate service when available. Currency markets can move after that data was published, so verify important transactions with the provider handling the payment."}},{"@type":"Question","name":"Which unit categories are supported?","acceptedAnswer":{"@type":"Answer","text":"The Unit Converter supports length, weight, temperature, area, volume, speed and digital storage."}},{"@type":"Question","name":"How are digital storage units calculated?","acceptedAnswer":{"@type":"Answer","text":"This version uses 1024-based factors: 1 kilobyte is treated as 1024 bytes, 1 megabyte as 1024 kilobytes, and so on."}},{"@type":"Question","name":"Are unit conversions processed locally?","acceptedAnswer":{"@type":"Answer","text":"Yes. Measurement-unit conversions are calculated directly in your browser. Currency conversion additionally contacts an external exchange-rate service to retrieve rate data."}},{"@type":"Question","name":"Does Utiliverse execute currency exchanges or charge conversion fees?","acceptedAnswer":{"@type":"Answer","text":"No. This tool only calculates informational estimates and does not buy, sell, transfer or exchange money."}}]}</script>
 
 </head>
 
 <body>
+<!--
+SEO TARGET CLUSTER
+Primary: currency and unit converter
+Secondary: currency converter, unit converter, USD to DOP converter,
+Dominican peso converter, exchange rate calculator, length converter,
+weight converter, temperature converter, measurement converter
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
 
 <!-- =====================================================
      HEADER
@@ -418,10 +374,7 @@ body.light-mode ::-webkit-scrollbar-thumb:hover {
       </a>
 
       <div class="flex items-center gap-3">
-        <div id="browser-status-badge" class="flex items-center gap-2 text-xs text-slate-400">
-          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-          Free & Browser-Based
-        </div>
+        <span class="free-browser-note">100% Free and Browser Based</span>
 
         <button
           id="theme-toggle"
@@ -429,7 +382,10 @@ body.light-mode ::-webkit-scrollbar-thumb:hover {
           class="theme-toggle"
           aria-label="Switch to light mode"
           title="Switch to light mode"
-        ><span id="theme-icon">☀</span></button>
+        >
+          <svg id="moon-icon" class="theme-hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
+          <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+        </button>
       </div>
 
     </div>
@@ -438,6 +394,11 @@ body.light-mode ::-webkit-scrollbar-thumb:hover {
 
 </header>
 
+
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
 
 <!-- =====================================================
      HERO
@@ -451,22 +412,19 @@ body.light-mode ::-webkit-scrollbar-thumb:hover {
 
       <i data-lucide="refresh-cw" class="w-4 h-4"></i>
 
-      Live Currency Rates + Unit Conversion
+      Currency Rates + Unit Conversion
 
     </div>
 
     <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight">
-
-      Unit & Currency Converter
-
+      Currency &amp; Unit Converter
     </h1>
 
     <p class="mt-4 text-lg text-slate-400 leading-relaxed">
 
-      Convert international currencies and everyday measurements quickly,
-      clearly and without complicated menus. Use live exchange-rate data
-      for supported currencies or switch to the unit converter for
-      instant measurement calculations.
+      Convert international currencies using the latest available exchange-rate
+      data, or switch to the unit converter for length, weight, temperature,
+      area, volume, speed and digital-storage calculations.
 
     </p>
 
@@ -626,6 +584,7 @@ body.light-mode ::-webkit-scrollbar-thumb:hover {
 
         <div
           id="currencyResult"
+          aria-live="polite"
           class="text-4xl sm:text-5xl font-bold text-white mt-2 break-words"
         >
           —
@@ -640,6 +599,7 @@ body.light-mode ::-webkit-scrollbar-thumb:hover {
 
         <div
           id="rateStatus"
+          aria-live="polite"
           class="text-xs text-slate-500 mt-2"
         ></div>
 
@@ -650,6 +610,7 @@ body.light-mode ::-webkit-scrollbar-thumb:hover {
 
       <div
         id="currencyError"
+        role="alert"
         class="hidden mt-4 rounded-xl border border-red-500/30 bg-red-500/10 text-red-300 p-4 text-sm"
       ></div>
 
@@ -747,6 +708,7 @@ body.light-mode ::-webkit-scrollbar-thumb:hover {
 
         <div
           id="unitResult"
+          aria-live="polite"
           class="text-4xl font-bold mt-2"
         >
           —
@@ -758,6 +720,13 @@ body.light-mode ::-webkit-scrollbar-thumb:hover {
 
   </div>
 
+  <p class="processing-note mt-4 max-w-4xl">Measurement conversions are calculated locally in your browser. Currency conversion sends the selected currency codes to the exchange-rate service so the page can retrieve the latest available rate data; Utiliverse does not execute a financial transaction.</p>
+
+  <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
+       Paste approved Google AdSense code here after approval.
+       This comment is intentionally invisible and reserves no space.
+  -->
+
 
   <!-- =====================================================
        ABOUT / SEO CONTENT
@@ -766,24 +735,22 @@ body.light-mode ::-webkit-scrollbar-thumb:hover {
   <section class="max-w-4xl mx-auto mt-16">
 
     <h2 class="text-3xl sm:text-4xl font-bold">
-      About the Utiliverse Unit & Currency Converter
+      How to Use the Currency & Unit Converter
     </h2>
 
     <div class="mt-6 space-y-5 text-slate-400 leading-8">
 
       <p>
-        The Utiliverse Unit & Currency Converter is a free online conversion
-        tool designed to make everyday calculations faster and easier.
-        Instead of opening separate websites for currency exchange,
-        measurement conversions, travel calculations, cooking measurements,
-        international shopping or home improvement projects, you can use
-        one simple browser-based utility.
+        Use the Currency Converter tab for exchange-rate estimates. Enter an
+        amount, search or select the source and destination currencies, and
+        review the converted amount, the rate used and the provider's data
+        date when available. Use the swap button to reverse the selected
+        currencies.
       </p>
 
       <p>
-        The currency converter supports a comprehensive directory of
-        internationally recognized currencies and identifies each currency
-        using its country or region, currency name and ISO three-letter code.
+        The currency directory contains country and region entries identified
+        by currency name and three-letter code.
         This includes widely used currencies such as the US Dollar (USD),
         Euro (EUR), British Pound Sterling (GBP), Canadian Dollar (CAD),
         Japanese Yen (JPY), Mexican Peso (MXN), and Dominican Peso (DOP).
@@ -825,6 +792,14 @@ body.light-mode ::-webkit-scrollbar-thumb:hover {
       </p>
 
       <p>
+        The digital-storage category in this version uses 1024-based factors:
+        1 kilobyte is treated as 1,024 bytes, 1 megabyte as 1,024 kilobytes,
+        1 gigabyte as 1,024 megabytes and 1 terabyte as 1,024 gigabytes.
+        This is a binary-style convention, so results may differ from products
+        that use decimal 1,000-based storage units.
+      </p>
+
+      <p>
         For international travelers, the currency converter can provide a
         quick estimate of how much money a purchase may cost in another
         currency. A traveler from the United States visiting the Dominican
@@ -862,8 +837,14 @@ body.light-mode ::-webkit-scrollbar-thumb:hover {
         No account is required to perform a basic conversion.
       </p>
 
+      <p class="rounded-xl border border-amber-500/20 bg-amber-500/5 p-4">
+        <strong>Exchange-rate note:</strong> Currency results are informational
+        estimates. The tool does not include card-network markups, bank spreads,
+        transfer fees, cash-exchange fees, taxes or other transaction costs.
+      </p>
+
       <p>
-        Always remember that live exchange-rate calculations are estimates.
+        Always remember that exchange-rate calculations are estimates.
         Banks, credit-card networks, airports, money-transfer services and
         currency-exchange offices may use different rates and may add fees
         or spreads. For significant financial transactions, verify the final
@@ -882,131 +863,64 @@ body.light-mode ::-webkit-scrollbar-thumb:hover {
 
   <section class="max-w-4xl mx-auto mt-16 mb-16">
 
-    <h2 class="text-3xl font-bold mb-6">
-      Frequently Asked Questions
-    </h2>
+    <h2 class="text-3xl font-bold mb-6">Currency &amp; Unit Converter FAQ</h2>
 
     <div class="space-y-3">
-
       <details class="glass rounded-xl p-5">
-
-        <summary class="cursor-pointer font-semibold">
-          How does the currency converter calculate exchange rates?
-        </summary>
-
-        <p class="mt-3 text-slate-400 leading-7">
-          The converter retrieves exchange-rate data from an online rate
-          service and uses the latest available rate to calculate the
-          requested conversion. Rates can change throughout the day.
-        </p>
-
+        <summary class="cursor-pointer font-semibold">How does the currency converter calculate exchange rates?</summary>
+        <p class="mt-3 text-slate-400 leading-7">The converter requests the latest available rate data for the selected source currency from an online exchange-rate service and uses the returned destination-currency rate to calculate the conversion.</p>
       </details>
-
-
       <details class="glass rounded-xl p-5">
-
-        <summary class="cursor-pointer font-semibold">
-          Can I convert US dollars to Dominican pesos?
-        </summary>
-
-        <p class="mt-3 text-slate-400 leading-7">
-          Yes. The converter includes USD and DOP. Select US Dollar as the
-          source currency and Dominican Peso as the destination currency
-          to calculate the conversion.
-        </p>
-
+        <summary class="cursor-pointer font-semibold">Can I convert US dollars to Dominican pesos?</summary>
+        <p class="mt-3 text-slate-400 leading-7">Yes. USD and DOP are included. The page defaults to USD as the source and DOP as the destination when it first loads.</p>
       </details>
-
-
       <details class="glass rounded-xl p-5">
-
-        <summary class="cursor-pointer font-semibold">
-          Are currency exchange rates constantly changing?
-        </summary>
-
-        <p class="mt-3 text-slate-400 leading-7">
-          Yes. Foreign exchange markets change continuously. The rate shown
-          by this calculator reflects the latest data successfully retrieved
-          by the application and may differ from the rate offered by your
-          bank or money-transfer provider.
-        </p>
-
+        <summary class="cursor-pointer font-semibold">Are the exchange rates the same as the rate my bank will charge?</summary>
+        <p class="mt-3 text-slate-400 leading-7">Not necessarily. The displayed rate is an informational market-rate estimate from the data provider. Banks, card issuers, transfer services and exchange offices may use different rates and add spreads or fees.</p>
       </details>
-
-
       <details class="glass rounded-xl p-5">
-
-        <summary class="cursor-pointer font-semibold">
-          Does the calculator support measurements as well as currencies?
-        </summary>
-
-        <p class="mt-3 text-slate-400 leading-7">
-          Yes. Switch to Unit Converter to calculate length, weight,
-          temperature, area, volume, speed and digital-storage conversions.
-        </p>
-
+        <summary class="cursor-pointer font-semibold">How current are the currency rates?</summary>
+        <p class="mt-3 text-slate-400 leading-7">The page displays the data date supplied by the exchange-rate service when available. Currency markets can move after that data was published, so verify important transactions with the provider handling the payment.</p>
       </details>
-
-
       <details class="glass rounded-xl p-5">
-
-        <summary class="cursor-pointer font-semibold">
-          Will this give me the exact amount my bank will charge?
-        </summary>
-
-        <p class="mt-3 text-slate-400 leading-7">
-          Not necessarily. Banks, card networks and money-transfer companies
-          may add exchange-rate spreads, service fees or other charges.
-          Use the calculator as an informational estimate and confirm the
-          final transaction rate with your provider.
-        </p>
-
+        <summary class="cursor-pointer font-semibold">Which unit categories are supported?</summary>
+        <p class="mt-3 text-slate-400 leading-7">The Unit Converter supports length, weight, temperature, area, volume, speed and digital storage.</p>
       </details>
-
-
       <details class="glass rounded-xl p-5">
-
-        <summary class="cursor-pointer font-semibold">
-          Does Utiliverse charge a fee for using the converter?
-        </summary>
-
-        <p class="mt-3 text-slate-400 leading-7">
-          No. Utiliverse provides the online conversion tool as a free
-          browser-based utility. It does not execute currency transactions.
-        </p>
-
+        <summary class="cursor-pointer font-semibold">How are digital storage units calculated?</summary>
+        <p class="mt-3 text-slate-400 leading-7">This version uses 1024-based factors: 1 kilobyte is treated as 1024 bytes, 1 megabyte as 1024 kilobytes, and so on.</p>
       </details>
-
+      <details class="glass rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold">Are unit conversions processed locally?</summary>
+        <p class="mt-3 text-slate-400 leading-7">Yes. Measurement-unit conversions are calculated directly in your browser. Currency conversion additionally contacts an external exchange-rate service to retrieve rate data.</p>
+      </details>
+      <details class="glass rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold">Does Utiliverse execute currency exchanges or charge conversion fees?</summary>
+        <p class="mt-3 text-slate-400 leading-7">No. This tool only calculates informational estimates and does not buy, sell, transfer or exchange money.</p>
+      </details>
     </div>
-
   </section>
 
 
 </main>
 
 
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
 <!-- =====================================================
      FOOTER
 ====================================================== -->
 
 <footer class="border-t border-slate-800 bg-slate-950">
-
   <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8">
-
     <div class="flex flex-col sm:flex-row justify-between gap-4 text-sm text-slate-500">
-
-      <div>
-        © <span id="year"></span> Utiliverse. All rights reserved.
-      </div>
-
-      <div>
-        Currency conversions are estimates and are not financial advice.
-      </div>
-
+      <div>© 2026 Utiliverse. All rights reserved.</div>
+      <div>100% Free and Browser Based</div>
     </div>
-
   </div>
-
 </footer>
 
 
@@ -1233,6 +1147,7 @@ let currencyMode = true;
 let rateCache = {};
 
 let lastRateUpdate = null;
+let currencyRequestSequence = 0;
 
 
 /* =====================================================
@@ -1244,11 +1159,7 @@ document.addEventListener("DOMContentLoaded", () => {
   populateCurrencySelects();
 
   populateUnits();
-
-  document.getElementById("year").textContent =
-    new Date().getFullYear();
-
-  lucide.createIcons();
+lucide.createIcons();
 
   convertCurrency();
 
@@ -1418,9 +1329,14 @@ async function convertCurrency() {
 
   error.classList.add("hidden");
 
-  if (!from || !to) return;
+  if (!from || !to) {
+    currencyRequestSequence++;
+    return;
+  }
 
   if (from === to) {
+
+    currencyRequestSequence++;
 
     result.textContent =
       formatNumber(amount) + " " + to;
@@ -1440,17 +1356,22 @@ async function convertCurrency() {
 
   if (rateCache[cacheKey]) {
 
+    const cached = rateCache[cacheKey];
+
     displayCurrencyResult(
       amount,
       from,
       to,
-      rateCache[cacheKey]
+      cached.rate,
+      cached.date
     );
 
     return;
 
   }
 
+
+  const requestId = ++currencyRequestSequence;
 
   result.textContent = "Loading...";
 
@@ -1465,8 +1386,8 @@ async function convertCurrency() {
     /*
       ExchangeRate-API public endpoint.
 
-      We request rates using USD as the base and
-      calculate cross-rates when necessary.
+      The selected source currency is requested as the base,
+      and the returned destination-currency rate is used directly.
     */
 
     const response =
@@ -1494,19 +1415,34 @@ async function convertCurrency() {
     const rate =
       Number(data.rates[to]);
 
-    rateCache[cacheKey] = rate;
-
-    lastRateUpdate =
+    const rateDate =
       data.date || new Date().toISOString().slice(0,10);
+
+    rateCache[cacheKey] = {
+      rate,
+      date: rateDate
+    };
+
+    lastRateUpdate = rateDate;
+
+    // Ignore a late response if a newer conversion request has started.
+    if (requestId !== currencyRequestSequence) {
+      return;
+    }
 
     displayCurrencyResult(
       amount,
       from,
       to,
-      rate
+      rate,
+      rateDate
     );
 
   } catch (err) {
+
+    if (requestId !== currencyRequestSequence) {
+      return;
+    }
 
     result.textContent = "Unavailable";
 
@@ -1535,7 +1471,8 @@ function displayCurrencyResult(
   amount,
   from,
   to,
-  rate
+  rate,
+  rateDate = lastRateUpdate
 ) {
 
   const converted =
@@ -1551,8 +1488,8 @@ function displayCurrencyResult(
 
   document.getElementById("rateStatus")
     .textContent =
-      lastRateUpdate
-        ? `Rate data date: ${lastRateUpdate}.`
+      rateDate
+        ? `Rate data date: ${rateDate}.`
         : "Latest available rate retrieved.";
 
 }
@@ -1718,12 +1655,12 @@ const units = {
 
     squareFoot: {
       name:"Square Feet",
-      factor:.092903
+      factor:.09290304
     },
 
     squareYard: {
       name:"Square Yards",
-      factor:.836127
+      factor:.83612736
     },
 
     acre: {
@@ -1812,22 +1749,22 @@ const units = {
     },
 
     kilobyte: {
-      name:"Kilobytes",
+      name:"Kilobytes (1024 B)",
       factor:1024
     },
 
     megabyte: {
-      name:"Megabytes",
+      name:"Megabytes (1024² B)",
       factor:1048576
     },
 
     gigabyte: {
-      name:"Gigabytes",
+      name:"Gigabytes (1024³ B)",
       factor:1073741824
     },
 
     terabyte: {
-      name:"Terabytes",
+      name:"Terabytes (1024⁴ B)",
       factor:1099511627776
     }
 
@@ -2041,19 +1978,33 @@ function switchMode(mode) {
 <script>
 (function(){
   const toggle = document.getElementById("theme-toggle");
-  const icon = document.getElementById("theme-icon");
-  if (!toggle || !icon) return;
+  const moon = document.getElementById("moon-icon");
+  const sun = document.getElementById("sun-icon");
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+
+  if (!toggle || !moon || !sun) return;
 
   function applyTheme(theme) {
     const light = theme === "light";
+
     document.body.classList.toggle("light-mode", light);
-    icon.textContent = light ? "☾" : "☀";
-    toggle.setAttribute("aria-label", light ? "Switch to dark mode" : "Switch to light mode");
-    toggle.title = light ? "Switch to dark mode" : "Switch to light mode";
+    moon.classList.toggle("theme-hidden", !light);
+    sun.classList.toggle("theme-hidden", light);
+
+    const label = light ? "Switch to dark mode" : "Switch to light mode";
+    toggle.setAttribute("aria-label", label);
+    toggle.title = label;
+
+    if (metaTheme) {
+      metaTheme.setAttribute("content", light ? "#f8fafc" : "#020617");
+    }
   }
 
   const saved = localStorage.getItem("utiliverse-theme");
-  applyTheme(saved === "light" ? "light" : "dark");
+  const initial = saved ||
+    (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+
+  applyTheme(initial);
 
   toggle.addEventListener("click", function(){
     const next = document.body.classList.contains("light-mode") ? "dark" : "light";
