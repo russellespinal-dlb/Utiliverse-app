@@ -3,8 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HTML Viewer & Formatter - Utiliverse</title>
-  <meta name="description" content="Free online HTML Viewer, Formatter, and Minifier. View your HTML code in real-time.">
+  <title>HTML Viewer & Formatter – Beautify, Minify & Preview | Utiliverse</title>
+  <meta name="description" content="Free online HTML viewer, formatter and minifier. Beautify HTML, minify markup, copy code and preview HTML instantly in a live browser-based editor.">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#020617">
+  <link rel="canonical" href="https://utiliverse.app/HTML_Viewer/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Utiliverse">
+  <meta property="og:title" content="HTML Viewer & Formatter – Beautify, Minify & Preview | Utiliverse">
+  <meta property="og:description" content="Beautify, minify, copy and preview HTML instantly with this free browser-based HTML viewer and formatter.">
+  <meta property="og:url" content="https://utiliverse.app/HTML_Viewer/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="HTML Viewer & Formatter – Beautify, Minify & Preview | Utiliverse">
+  <meta name="twitter:description" content="Format, minify and preview HTML instantly in your browser.">
   
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -20,14 +31,25 @@
        DARK MODE & THEME STYLES
     ========================================================= */
 
+    body {
+      background:
+        radial-gradient(circle at 10% 0%, rgba(99,102,241,.10), transparent 32%),
+        #f8fafc;
+    }
+
     body.dark-mode {
-      background-color: #0f172a !important;
-      color: #e2e8f0 !important;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(99,102,241,.14), transparent 32%),
+        radial-gradient(circle at 90% 15%, rgba(124,58,237,.08), transparent 28%),
+        #020617 !important;
+      color: #f8fafc !important;
     }
 
     body.dark-mode header {
-      background-color: rgba(15, 23, 42, 0.90) !important;
-      border-color: #334155 !important;
+      background: rgba(2, 6, 23, .82) !important;
+      border-color: #1e293b !important;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
 
     body.dark-mode header .text-slate-900 {
@@ -39,13 +61,16 @@
     }
 
     body.dark-mode .tool-container {
-      background-color: #1e293b !important;
+      background: rgba(30,41,59,.72) !important;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border-color: #334155 !important;
+      box-shadow: 0 18px 50px rgba(0,0,0,.18);
     }
 
     body.dark-mode .tool-header {
-      background-color: #334155 !important;
-      border-color: #475569 !important;
+      background: rgba(15,23,42,.55) !important;
+      border-color: #334155 !important;
     }
     
     body.dark-mode .tool-header span {
@@ -81,40 +106,57 @@
     ========================================================= */
 
     .theme-toggle {
-      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0;
-      padding: 9px;
-      border-radius: 9999px;
-      border: 1px solid #e2e8f0;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border-radius: 12px;
+      border: 1px solid #cbd5e1;
       background: #ffffff;
-      color: #334155;
+      color: #475569;
       cursor: pointer;
-      font-size: 13px;
-      font-weight: 600;
-      transition: all 0.2s ease;
+      box-shadow: none;
+      appearance: none;
+      -webkit-appearance: none;
+      transition: background .2s ease, color .2s ease, border-color .2s ease;
     }
 
     .theme-toggle:hover {
       background: #f1f5f9;
-      transform: translateY(-1px);
+      color: #0f172a;
+      border-color: #94a3b8;
     }
 
     body.dark-mode .theme-toggle {
-      background: #1e293b;
-      border-color: #475569;
-      color: #e2e8f0;
+      background: rgba(15,23,42,.72);
+      border-color: #334155;
+      color: #94a3b8;
     }
 
     body.dark-mode .theme-toggle:hover {
-      background: #334155;
+      background: #1e293b;
+      color: #ffffff;
+      border-color: #475569;
     }
 
     .theme-icon {
-      width: 17px;
-      height: 17px;
+      width: 18px;
+      height: 18px;
+      stroke-width: 2;
+    }
+
+    .free-browser-note {
+      color: #64748b;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+      letter-spacing: .1px;
+    }
+
+    body.dark-mode .free-browser-note {
+      color: #94a3b8;
     }
 
     /* Smooth Transitions */
@@ -232,8 +274,11 @@
     }
 
     body.dark-mode .info-section {
-      background-color: #1e293b !important;
+      background: rgba(30,41,59,.72) !important;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border-color: #334155 !important;
+      box-shadow: 0 18px 50px rgba(0,0,0,.18);
     }
 
     body.dark-mode .info-section h2 {
@@ -273,8 +318,47 @@
       color: #ffffff !important;
     }
 
+
+    body.dark-mode main h1 {
+      color: #f8fafc !important;
+    }
+
+    body.dark-mode main > div:first-child p {
+      color: #94a3b8 !important;
+    }
+
+    @media (max-width: 640px) {
+      .free-browser-note {
+        max-width: 118px;
+        white-space: normal;
+        text-align: right;
+        font-size: 10px;
+        line-height: 1.2;
+      }
+
+      .theme-toggle {
+        width: 38px;
+        height: 38px;
+        flex: 0 0 auto;
+      }
+    }
+
   </style>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse HTML Viewer & Formatter","url":"https://utiliverse.app/HTML_Viewer/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based HTML viewer, formatter, beautifier and minifier with live preview, copy and clear controls.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Live HTML preview","HTML beautifier and formatter","Lightweight HTML minifier","Copy HTML to clipboard","Clear editor","Sandboxed iframe preview","Browser-based code processing"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does the HTML Viewer & Formatter do?","acceptedAnswer":{"@type":"Answer","text":"It lets you enter HTML, see a live browser preview, beautify the markup for readability, minify it for a more compact representation, clear the editor, and copy the current code to your clipboard."}},{"@type":"Question","name":"Does the preview run JavaScript?","acceptedAnswer":{"@type":"Answer","text":"Yes. The preview iframe currently uses a sandbox that allows scripts and modal dialogs. Small JavaScript examples can run, although sandbox restrictions can make some browser features behave differently from a normal deployed page."}},{"@type":"Question","name":"Is the HTML I enter uploaded to Utiliverse?","acceptedAnswer":{"@type":"Answer","text":"The editor and preview operate in the browser and the entered HTML is assigned to the iframe through srcdoc. External resources referenced by the HTML may still be requested by the browser."}},{"@type":"Question","name":"What is the difference between Beautify and Minify?","acceptedAnswer":{"@type":"Answer","text":"Beautify adds indentation and line breaks to make markup easier to read. Minify removes comments, line breaks, spacing between tags, and repeated whitespace to make the source more compact."}},{"@type":"Question","name":"Can this tool validate whether my HTML is standards-compliant?","acceptedAnswer":{"@type":"Answer","text":"No. The preview can reveal obvious rendering problems, but it is not a formal HTML validator."}},{"@type":"Question","name":"Can I use this instead of a full code editor or browser DevTools?","acceptedAnswer":{"@type":"Answer","text":"It is best for quick HTML experiments, formatting, minification and small previews. Larger projects still benefit from a full development environment and browser DevTools."}}]}</script>
 </head>
+
+<!--
+SEO TARGET CLUSTER
+Primary: HTML viewer
+Secondary: HTML formatter, HTML beautifier, HTML minifier, live HTML preview,
+HTML code viewer, online HTML editor, format HTML online, preview HTML online
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
 
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
 
@@ -291,8 +375,8 @@
 
       <!-- Right Side -->
       <div class="flex items-center gap-4">
-        <div class="hidden sm:block text-sm font-medium text-slate-500">
-          100% Free & Browser-Based
+        <div class="free-browser-note">
+          100% Free and Browser Based
         </div>
         <!-- DARK MODE BUTTON -->
         <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
@@ -311,11 +395,18 @@
       <div>
         <h1 class="text-3xl font-bold text-slate-900 flex items-center gap-3">
           <i data-lucide="code" class="w-8 h-8 text-indigo-600"></i>
-          HTML Viewer & Formatter
+          HTML Viewer, Formatter & Minifier
         </h1>
-        <p class="text-slate-500 mt-1 text-sm">Write, format, minify, and preview HTML instantly.</p>
+        <p class="text-slate-500 mt-1 text-sm">Paste or write HTML, beautify or minify the markup, copy the result, and see a live HTML preview instantly in your browser.</p>
       </div>
     </div>
+
+
+    <!-- =========================================================
+         GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
+         Paste approved Google AdSense code here after approval.
+         This comment is intentionally invisible and reserves no space.
+    ========================================================= -->
 
     <!-- 2-Column Grid layout -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-grow min-h-[65vh]">
@@ -366,15 +457,22 @@
 
     </div>
 
+
+    <!-- =========================================================
+         GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
+         Paste approved Google AdSense code here after approval.
+         This comment is intentionally invisible and reserves no space.
+    ========================================================= -->
+
     <!-- =========================================================
          ABOUT / USE CASES / FAQ
     ========================================================= -->
     <div class="info-wrap">
 
       <section class="info-section" aria-labelledby="about-html-viewer">
-        <h2 id="about-html-viewer">About the Utiliverse HTML Viewer & Formatter</h2>
+        <h2 id="about-html-viewer">Free Online HTML Viewer, Formatter & Live Preview</h2>
 
-        <p>The Utiliverse HTML Viewer & Formatter is a browser-based workspace for writing, inspecting, formatting, minifying, copying, and previewing HTML. The editor on the left accepts ordinary HTML markup, while the preview pane on the right renders that markup so you can immediately compare source code with browser output. This makes the tool useful for quick experiments, code cleanup, learning, documentation, troubleshooting, and small front-end tasks where opening a full development environment would be unnecessary.</p>
+        <p>The Utiliverse HTML Viewer & Formatter is a free online HTML viewer, HTML formatter, HTML beautifier and lightweight HTML minifier for writing, inspecting, formatting, copying, and previewing HTML. The editor on the left accepts ordinary HTML markup, while the preview pane on the right renders that markup so you can immediately compare source code with browser output. This makes the tool useful for quick experiments, code cleanup, learning, documentation, troubleshooting, and small front-end tasks where opening a full development environment would be unnecessary.</p>
 
         <p>The live preview uses an iframe with the <code>srcdoc</code> property. That lets the browser render the HTML you enter as its own document instead of inserting it directly into the surrounding Utiliverse page. The iframe is sandboxed and currently allows scripts and modal dialogs, so small JavaScript examples can run while remaining more restricted than a normal top-level browser tab. Because browser and sandbox behavior can differ from a production site, the preview should be treated as a development aid rather than a complete substitute for testing a deployed page.</p>
 
@@ -383,6 +481,20 @@
         <p>The tool also helps demonstrate the difference between source structure and rendered presentation. HTML describes elements and document structure, while CSS, browser defaults, fonts, viewport size, scripts, and external resources influence the final appearance. Editing the markup and watching the preview update makes it easier to understand how those pieces work together.</p>
 
         <p>The core editor and preview operate in the browser. However, HTML can reference external images, fonts, stylesheets, scripts, videos, APIs, and other resources. If the code you preview contains an external URL, your browser may contact that service while rendering the preview. Avoid placing secrets, private tokens, confidential URLs, or sensitive production data inside test markup.</p>
+      </section>
+
+
+      <section class="info-section" aria-labelledby="how-to-use-html-viewer">
+        <h2 id="how-to-use-html-viewer">How to Use the HTML Viewer</h2>
+        <p>Paste or type HTML into the editor on the left. The live preview on the right updates as you edit, so you can compare your source markup with the rendered result without refreshing the page.</p>
+        <ul>
+          <li><strong>Beautify:</strong> format messy or minified HTML with readable indentation and line breaks.</li>
+          <li><strong>Minify:</strong> remove comments, line breaks, spacing between tags, and repeated whitespace for a more compact snippet.</li>
+          <li><strong>Copy:</strong> copy the current HTML code to your clipboard.</li>
+          <li><strong>Clear:</strong> empty the editor and preview so you can start again.</li>
+          <li><strong>Live Preview:</strong> render the current markup inside the sandboxed preview frame as you type.</li>
+        </ul>
+        <p>The editor and formatting actions run in your browser. If the HTML you preview references external scripts, images, stylesheets, fonts, APIs, or other URLs, your browser may contact those external services while rendering the preview.</p>
       </section>
 
       <section class="info-section" aria-labelledby="html-viewer-use-cases">
@@ -419,7 +531,7 @@
       </section>
 
       <section class="info-section" aria-labelledby="html-viewer-faq">
-        <h2 id="html-viewer-faq">Frequently Asked Questions</h2>
+        <h2 id="html-viewer-faq">HTML Viewer & Formatter FAQ</h2>
 
         <details class="faq-item">
           <summary>1. What does the HTML Viewer & Formatter do?</summary>
@@ -458,7 +570,22 @@
       </section>
     </div>
 
+
+  <!-- =========================================================
+       GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+       Paste approved Google AdSense code here after approval.
+       This comment is intentionally invisible and reserves no space.
+  ========================================================= -->
+
   </main>
+
+
+  <footer class="border-t border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-950/90">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-sm text-slate-500 dark:text-slate-400">
+      <span>© 2026 Utiliverse. All rights reserved.</span>
+      <span>100% Free and Browser Based</span>
+    </div>
+  </footer>
 
   <script>
     // Initialize Lucide Icons
@@ -485,7 +612,7 @@
     htmlInput.addEventListener('input', updatePreview);
 
     function updatePreview() {
-      // Create a blob and use URL.createObjectURL for better isolation and script execution
+      // Render the current HTML inside the sandboxed iframe using srcdoc
       const htmlContent = htmlInput.value;
       previewFrame.srcdoc = htmlContent;
     }
@@ -538,38 +665,38 @@
     }
 
     /* =========================================================
-       DARK MODE LOGIC 
+       LIGHT / DARK THEME
     ========================================================= */
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = document.getElementById('themeIcon');
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+
+    function applyTheme(theme) {
+      const isDark = theme === 'dark';
+      document.body.classList.toggle('dark-mode', isDark);
+
+      themeIcon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
+      themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+      themeToggle.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+
+      if (metaTheme) {
+        metaTheme.setAttribute('content', isDark ? '#020617' : '#f8fafc');
+      }
+
+      lucide.createIcons();
+    }
 
     function initTheme() {
-      // Check localStorage or system preference
-      if (localStorage.getItem('theme') === 'dark' || 
-          (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.body.classList.add('dark-mode');
-        updateThemeUI(true);
-      }
+      const savedTheme = localStorage.getItem('utiliverse-theme');
+      const initialTheme = savedTheme || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      applyTheme(initialTheme);
     }
 
     themeToggle.addEventListener('click', () => {
-      const isDark = document.body.classList.toggle('dark-mode');
-      updateThemeUI(isDark);
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      const nextTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+      localStorage.setItem('utiliverse-theme', nextTheme);
+      applyTheme(nextTheme);
     });
-
-    function updateThemeUI(isDark) {
-      if (isDark) {
-        themeIcon.setAttribute('data-lucide', 'sun');
-        themeToggle.setAttribute('aria-label', 'Switch to light mode');
-        themeToggle.setAttribute('title', 'Switch to light mode');
-      } else {
-        themeIcon.setAttribute('data-lucide', 'moon');
-        themeToggle.setAttribute('aria-label', 'Switch to dark mode');
-        themeToggle.setAttribute('title', 'Switch to dark mode');
-      }
-      lucide.createIcons();
-    }
   </script>
 </body>
 </html>
