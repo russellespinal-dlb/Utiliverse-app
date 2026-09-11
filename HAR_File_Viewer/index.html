@@ -1,26 +1,45 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>HAR File Viewer & Network Analyzer | Utiliverse</title><meta name="description" content="Open and inspect HAR files locally in your browser. Review requests, statuses, URLs, timing, and network errors."><meta name="robots" content="index,follow"><meta name="theme-color" content="#020617"><link rel="canonical" href="https://utiliverse.app/HAR_File_Viewer/"><script src="https://cdn.tailwindcss.com"></script><script src="https://unpkg.com/lucide@latest"></script><style>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>HAR File Viewer & Analyzer – Inspect Network Requests | Utiliverse</title><meta name="description" content="Free online HAR file viewer and analyzer. Open HTTP Archive (.har) files locally in your browser to inspect requests, status codes, URLs, timings, errors and request details."><meta name="robots" content="index,follow"><meta name="theme-color" content="#020617"><link rel="canonical" href="https://utiliverse.app/HAR_File_Viewer/"><meta property="og:type" content="website"><meta property="og:site_name" content="Utiliverse"><meta property="og:title" content="HAR File Viewer & Analyzer – Inspect Network Requests | Utiliverse"><meta property="og:description" content="Open HTTP Archive (.har) files locally in your browser and inspect requests, status codes, URLs, timings, errors and request details."><meta property="og:url" content="https://utiliverse.app/HAR_File_Viewer/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="HAR File Viewer & Analyzer – Inspect Network Requests | Utiliverse"><meta name="twitter:description" content="Inspect HAR files, HTTP requests, errors and timings locally in your browser."><script src="https://cdn.tailwindcss.com"></script><script src="https://unpkg.com/lucide@latest"></script><style>
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;color:#f8fafc;font-family:Inter,system-ui,sans-serif}.glass{background:rgba(30,41,59,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid #334155}.input{background:#0f172a;border:1px solid #475569;color:#f8fafc}.input:focus{outline:none;border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.15)}.btn{border:1px solid #475569;background:#1e293b;color:#f8fafc;border-radius:12px;padding:.75rem 1rem;font-weight:700;transition:.2s}.btn:hover{background:#334155}.primary{background:linear-gradient(135deg,#6366f1,#4f46e5);border-color:#6366f1}.primary:hover{filter:brightness(1.08)}.result{background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.25)}.muted{color:#94a3b8}.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.ad-slot{display:contents}.article h2{font-size:1.9rem;font-weight:800;color:#fff;margin:2.2rem 0 .9rem}.article h3{font-size:1.2rem;font-weight:750;color:#e2e8f0;margin:1.7rem 0 .65rem}.article p,.article li{color:#94a3b8;line-height:1.85}.article ul{padding-left:1.3rem}.faq{border-bottom:1px solid #334155}.faq summary{list-style:none;cursor:pointer;padding:1rem 0;font-weight:700}.faq summary::-webkit-details-marker{display:none}
 /* =========================================================
    UTILIVERSE LIGHT / DARK THEME TOGGLE
 ========================================================= */
 #theme-toggle{
-  border:0;
-  background:transparent;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
+  border:1px solid #334155;
+  background:rgba(15,23,42,.72);
   color:#94a3b8;
-  font-size:20px;
-  line-height:1;
   cursor:pointer;
-  padding:5px 7px;
-  border-radius:9px;
-  transition:.15s ease;
+  padding:0;
+  border-radius:12px;
+  box-shadow:none;
+  appearance:none;
+  -webkit-appearance:none;
+  transition:background .2s ease,color .2s ease,border-color .2s ease;
 }
 #theme-toggle:hover{
   color:#fff;
-  background:rgba(148,163,184,.10);
+  background:#1e293b;
+  border-color:#475569;
 }
 #theme-toggle:focus-visible{
   outline:2px solid #6366f1;
   outline-offset:3px;
+}
+#theme-toggle svg{
+  width:18px;
+  height:18px;
+  stroke-width:2;
+}
+.free-browser-note{
+  color:#94a3b8;
+  font-size:12px;
+  font-weight:700;
+  white-space:nowrap;
+  letter-spacing:.1px;
 }
 
 body.light-mode{
@@ -38,11 +57,17 @@ body.light-mode footer{
 }
 
 body.light-mode #theme-toggle{
+  background:#fff;
+  border-color:#cbd5e1;
   color:#475569;
 }
 body.light-mode #theme-toggle:hover{
   color:#0f172a;
   background:#f1f5f9;
+  border-color:#94a3b8;
+}
+body.light-mode .free-browser-note{
+  color:#64748b;
 }
 
 body.light-mode .glass{
@@ -95,14 +120,87 @@ body.light-mode #harRows tr:hover{
 }
 
 @media(max-width:640px){
-  #theme-toggle{font-size:19px}
+  .free-browser-note{
+    max-width:118px;
+    white-space:normal;
+    text-align:right;
+    font-size:10px;
+    line-height:1.2;
+  }
+  #theme-toggle{
+    width:38px;
+    height:38px;
+    flex:0 0 auto;
+  }
 }
-</style><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Har File Viewer","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script></head><body><header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800"><div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between"><a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse</a><div class="flex items-center gap-3">
-<span class="text-xs text-slate-500 hidden sm:inline">Free & Browser-Based</span>
-<button id="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode"><span id="theme-icon" aria-hidden="true">☀</span></button>
+</style><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse HAR File Viewer & Analyzer","url":"https://utiliverse.app/HAR_File_Viewer/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based HAR file viewer for opening HTTP Archive files and inspecting network requests, status codes, URLs, timings, errors and serialized request details.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Open HAR and compatible JSON files","Count total network requests","Summarize successful and error responses","Display request methods, status codes, URLs and timings","Inspect serialized HAR entry details","Local browser-based file processing"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does HAR stand for?","acceptedAnswer":{"@type":"Answer","text":"HAR stands for HTTP Archive. It is a JSON-based format used to record HTTP network requests and responses from a browser or other compatible debugging tool."}},{"@type":"Question","name":"Can I open a .har file here?","acceptedAnswer":{"@type":"Answer","text":"Yes. Select a HAR file or compatible JSON export using the file picker."}},{"@type":"Question","name":"Does my HAR file leave my computer?","acceptedAnswer":{"@type":"Answer","text":"The parsing in this page runs locally in your browser and does not upload the selected HAR file to a Utiliverse server."}},{"@type":"Question","name":"Can HAR files contain cookies or authentication tokens?","acceptedAnswer":{"@type":"Answer","text":"Yes. HAR files may contain cookies, authorization headers, URLs, query parameters, request bodies and other sensitive data. Review and sanitize a HAR before sharing it."}},{"@type":"Question","name":"Does total request time equal page load time?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. This viewer adds recorded request durations. Multiple browser requests can overlap, so the sum can be longer than the actual elapsed page-load time."}},{"@type":"Question","name":"Can this replace browser DevTools?","acceptedAnswer":{"@type":"Answer","text":"No. It is a lightweight viewer for exported HAR files, not a replacement for the full live Network panel in browser developer tools."}}]}</script></head><body><!--
+SEO TARGET CLUSTER
+Primary: HAR file viewer
+Secondary: HAR analyzer, HTTP Archive viewer, network request analyzer,
+open HAR file online, inspect HAR file, HAR network analyzer, browser-based HAR viewer
+
+ADSENSE NOTE
+Insertion points are HTML comments only until approved AdSense code is added.
+They create no visible boxes or reserved layout space.
+-->
+<header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800"><div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between"><a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse</a><div class="flex items-center gap-3">
+<span class="free-browser-note">100% Free and Browser Based</span>
+<button id="theme-toggle" type="button" aria-label="Switch to light mode" title="Toggle light/dark mode"><i id="theme-icon" data-lucide="sun" aria-hidden="true"></i></button>
 </div></div></header><!-- GOOGLE ADSENSE: TOP PLACEMENT
      Paste your approved AdSense code here. Invisible insertion point only.
---><main class="max-w-6xl mx-auto px-4 sm:px-6 py-12"><div><p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Network debugging</p><h1 class="text-4xl sm:text-5xl font-black mt-2">HAR File Viewer</h1><p class="mt-4 text-lg muted max-w-3xl">Open a HAR file in your browser and inspect requests, status codes, URLs, timing, headers, and response metadata.</p></div><section class="glass rounded-3xl p-6 sm:p-8 mt-8"><input id="harFile" type="file" accept=".har,.json" class="input w-full rounded-xl p-3"><div class="grid sm:grid-cols-4 gap-3 mt-5"><div class="glass rounded-xl p-4"><span class="muted text-xs">Requests</span><div id="count" class="text-2xl font-bold mt-1">0</div></div><div class="glass rounded-xl p-4"><span class="muted text-xs">2xx</span><div id="ok" class="text-2xl font-bold mt-1">0</div></div><div class="glass rounded-xl p-4"><span class="muted text-xs">Errors</span><div id="err" class="text-2xl font-bold mt-1">0</div></div><div class="glass rounded-xl p-4"><span class="muted text-xs">Total time</span><div id="time" class="text-2xl font-bold mt-1">0 ms</div></div></div><div class="mt-6 overflow-x-auto"><table class="w-full text-sm"><thead><tr class="text-slate-500 text-xs uppercase"><th class="text-left py-3">Method</th><th class="text-left py-3">Status</th><th class="text-left py-3">URL</th><th class="text-right py-3">Time</th></tr></thead><tbody id="harRows"></tbody></table></div></section><section class="article max-w-4xl mt-16"><h2>What is a HAR file?</h2><p>A HAR, or HTTP Archive, is a structured record of network activity captured while a web page or application is loading and communicating with servers. It commonly contains request URLs, HTTP methods, response status codes, headers, timing information, and other request metadata.</p><p>A HAR viewer turns that raw JSON-like structure into a more practical debugging view. Instead of scrolling through a large text file, developers can quickly find failed requests, slow responses, suspicious redirects, unexpectedly large resources, or calls going to an unfamiliar host.</p><h3>Practical debugging uses</h3><ul><li>Find 4xx and 5xx responses during a bug report.</li><li>Identify slow network requests that affect page loading.</li><li>Inspect API endpoints and request methods.</li><li>Review third-party resources and redirects.</li><li>Share a compact request overview with QA or engineering teams.</li></ul><p>HAR files can contain sensitive information, including URLs, headers, cookies, request bodies, or tokens depending on how the capture was created. Treat HAR exports like sensitive diagnostic artifacts and avoid sharing them publicly unless they have been sanitized.</p><h3>Performance investigations</h3><p>A HAR viewer is particularly valuable when a page feels slow but the cause is unclear. A request list can reveal that a single API call waits several seconds, a third-party resource blocks progress, or a series of redirects adds unexpected delay. Looking at the network timeline turns a vague complaint such as “the page is slow” into a concrete investigation.</p><p>Developers can compare requests by HTTP status, duration, URL, and resource type. A slow image request suggests a different optimization path from a slow API call. A failing JavaScript file can explain why a page becomes unusable. A cascade of 404 responses can point to stale asset references or incorrect deployment paths.</p><h3>QA and bug reproduction</h3><p>Quality-assurance teams frequently use HAR captures when a problem cannot be reproduced from screenshots alone. The network log can show what the browser actually requested at the moment the defect occurred. That makes it easier to communicate the problem to backend, frontend, infrastructure, or vendor teams.</p><h3>Security and privacy precautions</h3><p>HAR files deserve careful handling. Depending on the capture settings, they can contain cookies, authorization headers, query parameters, personal information, or request bodies. Before sharing a HAR, remove credentials and other sensitive data. A local viewer is convenient for inspection, but it does not make a sensitive HAR safe to distribute.</p><p>When a request looks suspicious, inspect the hostname, response status, redirect chain, timing, and headers together. A single metric rarely explains a defect. The value of HAR analysis comes from seeing the entire request-response story in context.</p><h3>When browser DevTools is still better</h3><p>The full Network panel in browser developer tools remains the richest debugging environment because it offers filters, waterfalls, initiators, blocking controls, live captures, and many other diagnostics. A lightweight viewer is most useful when you already have a HAR file and want a focused second opinion or a quick portable inspection surface.</p><h3>Working with exported diagnostics</h3><p>Support teams can use a HAR viewer to turn a developer's exported network capture into a fast first-pass report. Instead of asking the original author to reproduce the problem immediately, the team can inspect the existing evidence for failed endpoints, unusual response times, redirects, and request patterns. This can shorten troubleshooting cycles, particularly when the issue occurs only intermittently or in a customer's environment that engineers cannot directly access.</p><h2>Frequently Asked Questions</h2><details class="faq"><summary>Can I open a .har file here?</summary><p class="muted">Yes. Select a HAR file or compatible JSON export.</p></details><details class="faq"><summary>Does the file leave my computer?</summary><p class="muted">This viewer reads the selected file locally in your browser.</p></details><details class="faq"><summary>Can I inspect individual requests?</summary><p class="muted">Yes. Click a request row to view its serialized details.</p></details><details class="faq"><summary>Can HAR files contain sensitive information?</summary><p class="muted">Yes. Headers, cookies, URLs, and payloads can contain sensitive information.</p></details><details class="faq"><summary>What do 4xx and 5xx responses mean?</summary><p class="muted">4xx responses generally indicate a client/request problem, while 5xx responses indicate a server-side failure.</p></details><details class="faq"><summary>Can this replace browser DevTools?</summary><p class="muted">It is a focused inspection utility, not a replacement for the full network debugging features of browser developer tools.</p></details></section></main><script>document.getElementById('harFile').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text()),entries=d.log&&Array.isArray(d.log.entries)?d.log.entries:[];document.getElementById('count').textContent=entries.length;document.getElementById('ok').textContent=entries.filter(x=>x.response?.status>=200&&x.response.status<300).length;document.getElementById('err').textContent=entries.filter(x=>x.response?.status>=400).length;document.getElementById('time').textContent=Math.round(entries.reduce((a,x)=>a+(x.time||0),0))+' ms';const body=document.getElementById('harRows');body.innerHTML='';entries.forEach((x,i)=>{const tr=document.createElement('tr');tr.className='border-t border-slate-800 hover:bg-indigo-500/5 cursor-pointer';tr.innerHTML=`<td class="py-3">${x.request?.method||''}</td><td class="py-3">${x.response?.status||''}</td><td class="py-3 max-w-xl truncate">${x.request?.url||''}</td><td class="py-3 text-right">${Math.round(x.time||0)} ms</td>`;tr.onclick=()=>alert(JSON.stringify(x,null,2));body.appendChild(tr)})}catch(err){alert('Could not read this HAR/JSON file: '+err.message)}});</script><footer class="border-t border-slate-800 bg-slate-950"><div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500"><span>© <span id="year"></span> Utiliverse. All rights reserved.</span><span>Tools are designed for browser-based use.</span></div></footer><script>document.getElementById('year').textContent=new Date().getFullYear();lucide.createIcons();
+--><main class="max-w-6xl mx-auto px-4 sm:px-6 py-12"><div><p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Network debugging</p><h1 class="text-4xl sm:text-5xl font-black mt-2">HAR File Viewer & Network Analyzer</h1><p class="mt-4 text-lg muted max-w-3xl">Open an HTTP Archive (.har) file locally in your browser to inspect network requests, status codes, URLs, timings, errors and individual request details.</p></div><section class="glass rounded-3xl p-6 sm:p-8 mt-8"><input id="harFile" type="file" accept=".har,.json" class="input w-full rounded-xl p-3"><p class="muted text-xs mt-3 flex items-start gap-2"><i data-lucide="shield-check" class="w-4 h-4 mt-0.5 flex-shrink-0 text-indigo-400"></i><span>Local browser processing: the selected HAR file is read by this page in your browser and is not uploaded to a Utiliverse server.</span></p><div class="grid sm:grid-cols-4 gap-3 mt-5"><div class="glass rounded-xl p-4"><span class="muted text-xs">Requests</span><div id="count" class="text-2xl font-bold mt-1">0</div></div><div class="glass rounded-xl p-4"><span class="muted text-xs">2xx</span><div id="ok" class="text-2xl font-bold mt-1">0</div></div><div class="glass rounded-xl p-4"><span class="muted text-xs">Errors</span><div id="err" class="text-2xl font-bold mt-1">0</div></div><div class="glass rounded-xl p-4"><span class="muted text-xs">Total time</span><div id="time" class="text-2xl font-bold mt-1">0 ms</div></div></div><div class="mt-6 overflow-x-auto"><table class="w-full text-sm"><thead><tr class="text-slate-500 text-xs uppercase"><th class="text-left py-3">Method</th><th class="text-left py-3">Status</th><th class="text-left py-3">URL</th><th class="text-right py-3">Time</th></tr></thead><tbody id="harRows"></tbody></table></div></section><!-- GOOGLE ADSENSE: MID-PAGE / AFTER-ANALYZER PLACEMENT
+     Paste your approved AdSense code here. Invisible insertion point only.
+--><section class="article max-w-4xl mt-16">
+<h2>What Is a HAR File?</h2>
+<p>A HAR file, short for HTTP Archive, is a JSON-based record of network activity captured while a website or web application is loading and communicating with servers. A HAR can contain request URLs, HTTP methods, response status codes, headers, timing information, cookies, query parameters and other diagnostic details depending on how the capture was created.</p>
+<p>This HAR file viewer converts the raw archive into a simpler request list so you can quickly scan methods, status codes, URLs and request duration without manually reading the JSON structure.</p>
+
+<h2>How to Use This HAR File Viewer</h2>
+<p>Select a <strong>.har</strong> file or compatible JSON export using the file picker above. The viewer parses the archive locally in your browser, counts the detected requests, summarizes successful 2xx responses and HTTP errors, and calculates the sum of the recorded request durations.</p>
+<p>Each request row shows the HTTP method, response status, URL and recorded request time. Click a row to inspect the serialized HAR entry for that request. The detailed entry can contain additional request and response information provided by the original archive.</p>
+
+<h3>Find failed network requests</h3>
+<p>HTTP 4xx and 5xx responses are common starting points when debugging a web application. A 404 can indicate a missing resource or incorrect path, while a 500-series response often points to a server-side failure. The summary above counts responses with status codes of 400 or higher so errors are easier to identify.</p>
+
+<h3>Investigate slow requests</h3>
+<p>HAR files are useful when a site or application feels slow but the source of the delay is unclear. Comparing request durations can help you spot API calls, scripts, images, fonts or third-party resources that took unusually long to complete. The displayed total time in this viewer adds individual request durations; because browser requests can overlap, that total is not the same thing as page-load wall-clock time.</p>
+
+<h3>Inspect API and third-party traffic</h3>
+<p>A HAR request list can make it easier to see which hosts and endpoints a page contacted. Developers and support teams can use that information to review API calls, redirects, third-party services, analytics requests or resources loaded from external domains.</p>
+
+<h2>How to Export a HAR File</h2>
+<p>Modern browsers provide HAR export from their developer tools. In Chrome and Microsoft Edge, open Developer Tools, choose the Network panel, reproduce the problem or reload the page, and use the HAR export option. Firefox also provides HAR export from its Network tools. Browser labels and menus can change over time, so use the network panel's export or save-HAR control available in your browser version.</p>
+<p>When troubleshooting an intermittent issue, start the network capture before reproducing the problem so the relevant requests are included in the archive.</p>
+
+<h2>HAR File Privacy and Security</h2>
+<p>HAR files can contain sensitive diagnostic information. Depending on the capture, that may include cookies, authorization headers, query parameters, request bodies, email addresses, internal hostnames, account identifiers or session tokens. Treat HAR exports like sensitive support files.</p>
+<p>This viewer reads the selected file locally using browser JavaScript and does not contain code that uploads the HAR to a Utiliverse server. Local processing reduces unnecessary transmission of the file, but it does not make a HAR safe to share with other people. Review and sanitize sensitive information before sending a HAR to a support team, vendor or public forum.</p>
+
+<h2>Common HAR Troubleshooting Uses</h2>
+<ul>
+<li>Find 4xx and 5xx responses during a bug investigation.</li>
+<li>Identify unusually slow requests or API calls.</li>
+<li>Review request methods, URLs and external hosts.</li>
+<li>Investigate redirects and missing resources.</li>
+<li>Inspect an exported network capture from a user or QA report.</li>
+<li>Compare request behavior before and after a deployment or configuration change.</li>
+</ul>
+
+<h3>HAR viewer vs. browser DevTools</h3>
+<p>Browser DevTools remains the richer environment for live network debugging because it can provide filters, initiator information, waterfall timing, live captures and other diagnostics. A standalone HAR analyzer is useful when you already have an exported archive and want a quick browser-based view without recreating the original session.</p>
+
+<h2>HAR File Viewer FAQ</h2>
+<details class="faq"><summary>What does HAR stand for?</summary><p class="muted">HAR stands for HTTP Archive. It is a JSON-based format used to record HTTP network requests and responses from a browser or other compatible debugging tool.</p></details>
+<details class="faq"><summary>Can I open a .har file here?</summary><p class="muted">Yes. Select a HAR file or compatible JSON export using the file picker above.</p></details>
+<details class="faq"><summary>Does my HAR file leave my computer?</summary><p class="muted">The parsing in this page runs locally in your browser and does not upload the selected HAR file to a Utiliverse server.</p></details>
+<details class="faq"><summary>Can I inspect individual requests?</summary><p class="muted">Yes. Click a request row to view the serialized details stored for that HAR entry.</p></details>
+<details class="faq"><summary>Can HAR files contain cookies or authentication tokens?</summary><p class="muted">Yes. HAR files may contain cookies, authorization headers, URLs, query parameters, request bodies and other sensitive data. Review and sanitize a HAR before sharing it.</p></details>
+<details class="faq"><summary>What do 4xx and 5xx responses mean?</summary><p class="muted">4xx responses generally indicate a client or request problem, while 5xx responses generally indicate that the server could not complete the request.</p></details>
+<details class="faq"><summary>Does total request time equal page load time?</summary><p class="muted">Not necessarily. This viewer adds recorded request durations. Multiple browser requests can overlap, so the sum can be longer than the actual elapsed page-load time.</p></details>
+<details class="faq"><summary>Can this replace browser DevTools?</summary><p class="muted">No. It is a lightweight viewer for exported HAR files, not a replacement for the full live Network panel in browser developer tools.</p></details>
+</section><!-- GOOGLE ADSENSE: PRE-FOOTER PLACEMENT
+     Paste your approved AdSense code here. Invisible insertion point only.
+--></main><script>document.getElementById('harFile').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text()),entries=d.log&&Array.isArray(d.log.entries)?d.log.entries:[];document.getElementById('count').textContent=entries.length;document.getElementById('ok').textContent=entries.filter(x=>x.response?.status>=200&&x.response.status<300).length;document.getElementById('err').textContent=entries.filter(x=>x.response?.status>=400).length;document.getElementById('time').textContent=Math.round(entries.reduce((a,x)=>a+(x.time||0),0))+' ms';const body=document.getElementById('harRows');body.innerHTML='';entries.forEach((x,i)=>{const tr=document.createElement('tr');tr.className='border-t border-slate-800 hover:bg-indigo-500/5 cursor-pointer';tr.innerHTML=`<td class="py-3">${x.request?.method||''}</td><td class="py-3">${x.response?.status||''}</td><td class="py-3 max-w-xl truncate">${x.request?.url||''}</td><td class="py-3 text-right">${Math.round(x.time||0)} ms</td>`;tr.onclick=()=>alert(JSON.stringify(x,null,2));body.appendChild(tr)})}catch(err){alert('Could not read this HAR/JSON file: '+err.message)}});</script><footer class="border-t border-slate-800 bg-slate-950"><div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500"><span>© <span id="year"></span> Utiliverse. All rights reserved.</span><span>Tools are designed for browser-based use.</span></div></footer><script>document.getElementById('year').textContent=new Date().getFullYear();lucide.createIcons();
 (function(){
   const toggle = document.getElementById("theme-toggle");
   const icon = document.getElementById("theme-icon");
@@ -114,7 +212,7 @@ body.light-mode #harRows tr:hover{
     const light = theme === "light";
     document.body.classList.toggle("light-mode", light);
 
-    icon.textContent = light ? "☾" : "☀";
+    icon.setAttribute("data-lucide", light ? "moon" : "sun");
     toggle.setAttribute(
       "aria-label",
       light ? "Switch to dark mode" : "Switch to light mode"
@@ -127,6 +225,8 @@ body.light-mode #harRows tr:hover{
         light ? "#f8fafc" : "#020617"
       );
     }
+
+    if(window.lucide) lucide.createIcons();
   }
 
   const savedTheme = localStorage.getItem("utiliverse-theme");
