@@ -3,8 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Utiliverse JSON Formatter & Validator - Free Online Tool</title>
-    <meta name="description" content="Free online JSON Formatter and Validator. Prettify, minify, and debug JSON data instantly. Features syntax highlighting, dark mode, and a full-screen code viewer.">
+    <title>JSON Formatter & Validator – Beautify, Minify & Validate | Utiliverse</title>
+    <meta name="description" content="Free online JSON formatter and validator. Beautify, minify, validate and copy JSON with syntax highlighting and a full-screen viewer, all in your browser.">
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+    <meta name="theme-color" content="#020617">
+    <link rel="canonical" href="https://utiliverse.app/JSON_Utility/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Utiliverse">
+    <meta property="og:title" content="JSON Formatter & Validator – Beautify, Minify & Validate | Utiliverse">
+    <meta property="og:description" content="Format, validate, minify and inspect JSON directly in your browser with syntax highlighting and a full-screen viewer.">
+    <meta property="og:url" content="https://utiliverse.app/JSON_Utility/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="JSON Formatter & Validator – Beautify, Minify & Validate | Utiliverse">
+    <meta name="twitter:description" content="Beautify, validate and minify JSON locally in your browser.">
+
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -40,28 +52,6 @@
             background-color: #4b5563;
             border-radius: 4px;
         }
-        
-        /* AdSense Placeholder Styling */
-        .ad-placeholder {
-            width: 100%;
-            background-color: #f3f4f6;
-            border: 2px dashed #d1d5db;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #9ca3af;
-            font-size: 0.875rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin: 1.5rem 0;
-            border-radius: 0.5rem;
-        }
-        .dark .ad-placeholder {
-            background-color: #1f2937;
-            border-color: #374151;
-            color: #6b7280;
-        }
 
         /* Syntax Highlighting */
         .json-key { color: #111827; font-weight: 600; }
@@ -77,44 +67,51 @@
 
         /* Utiliverse header/theme consistency */
         #themeToggle {
-            border: 0;
-            box-shadow: none;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            width:40px;
+            height:40px;
+            padding:0;
+            border:1px solid #334155;
+            border-radius:12px;
+            background:rgba(15,23,42,.72);
+            color:#94a3b8;
+            box-shadow:none;
+            appearance:none;
+            -webkit-appearance:none;
+            cursor:pointer;
+            transition:background .2s ease,color .2s ease,border-color .2s ease;
         }
-        #themeToggle svg {
-            stroke: currentColor;
-        }
-        .dark #themeToggle {
-            color: #94a3b8;
-        }
-        .dark #themeToggle:hover {
-            color: #ffffff;
-        }
-        html:not(.dark) #themeToggle {
-            color: #334155;
-        }
-        html:not(.dark) #themeToggle:hover {
-            color: #0f172a;
+        #themeToggle:hover {background:#1e293b;border-color:#475569;color:#fff;}
+        #themeToggle:focus-visible {outline:2px solid #6366f1;outline-offset:3px;}
+        #themeToggle svg {width:18px;height:18px;stroke-width:2;stroke:currentColor;}
+        html:not(.dark) #themeToggle {background:#fff;border-color:#cbd5e1;color:#475569;}
+        html:not(.dark) #themeToggle:hover {background:#f1f5f9;border-color:#94a3b8;color:#0f172a;}
+        .free-browser-note{color:#6b7280;font-size:12px;font-weight:700;white-space:nowrap;letter-spacing:.1px;}
+        .dark .free-browser-note{color:#94a3b8;}
+        .theme-hidden{display:none!important;}
+        @media(max-width:640px){
+            .free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2;}
+            #themeToggle{width:38px;height:38px;flex:0 0 auto;}
         }
 
     </style>
 
     <!-- SEO Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Utiliverse JSON Formatter",
-      "applicationCategory": "DeveloperApplication",
-      "operatingSystem": "Any",
-      "description": "Format, validate, and minify JSON data directly in your browser with syntax highlighting and a full-screen code popout viewer.",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
-    }
-    </script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse JSON Formatter & Validator","url":"https://utiliverse.app/JSON_Utility/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based JSON formatter, validator and minifier with syntax highlighting, copy, paste and full-screen popout viewing.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Format and beautify JSON","Validate JSON syntax","Minify JSON","Syntax-highlight formatted JSON","Paste JSON from clipboard","Copy formatted or minified JSON","Full-screen popout viewer","Client-side JSON processing"]}</script>
 </head>
+<!--
+SEO TARGET CLUSTER
+Primary: JSON formatter
+Secondary: JSON validator, JSON beautifier, JSON minifier, format JSON online,
+validate JSON online, JSON parser, JSON pretty print, JSON syntax checker
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
 <body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-200">
 
     <!-- Header -->
@@ -126,21 +123,28 @@
             </a>
             
             <div class="flex items-center gap-3">
-                <span class="text-xs sm:text-sm font-medium text-gray-500 dark:text-gray-400 whitespace-nowrap">100% Free and Browser Based</span>
-                <button id="themeToggle" class="p-1.5 bg-transparent hover:opacity-80 transition-opacity text-gray-700 dark:text-gray-300" aria-label="Switch to light mode" title="Switch to light mode" type="button">
-                    <i id="themeIcon" data-lucide="sun" class="w-5 h-5"></i>
+                <span class="free-browser-note">100% Free and Browser Based</span>
+                <button id="themeToggle" aria-label="Switch to light mode" title="Switch to light mode" type="button">
+                    <svg id="moonIcon" class="theme-hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
+                    <svg id="sunIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
                 </button>
             </div>
         </div>
     </header>
-
-    <!-- Top AdSense Placeholder -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
-        <div class="ad-placeholder h-24">Google AdSense Placeholder (Leaderboard)</div>
-    </div>
+    <!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
+         Paste approved Google AdSense code here after approval.
+         This comment is intentionally invisible and reserves no space.
+    -->
 
     <!-- Main Workspace -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+
+        <section class="mb-8">
+            <p class="text-xs uppercase tracking-widest text-brand-500 dark:text-brand-400 font-bold">Developer Utility</p>
+            <h1 class="text-4xl sm:text-5xl font-black tracking-tight mt-2">JSON Formatter, Validator & Minifier</h1>
+            <p class="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-3xl leading-relaxed">Beautify, validate, minify, inspect and copy JSON directly in your browser with syntax highlighting and a full-screen popout viewer.</p>
+        </section>
+
         
         <!-- Controls -->
         <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
@@ -192,11 +196,10 @@
         </div>
 
     </main>
-
-    <!-- Mid AdSense Placeholder -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6">
-        <div class="ad-placeholder h-24">Google AdSense Placeholder (Banner)</div>
-    </div>
+    <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
+         Paste approved Google AdSense code here after approval.
+         This comment is intentionally invisible and reserves no space.
+    -->
 
     <!-- Popout Modal -->
     <div id="popoutModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 opacity-0 transition-opacity duration-300">
@@ -221,7 +224,7 @@
     <!-- SEO Content Section (800-1000 words) -->
     <section class="max-w-4xl mx-auto px-4 sm:px-6 py-16">
         <article class="prose prose-slate dark:prose-invert prose-lg max-w-none font-sans leading-relaxed">
-            <h2 class="text-3xl font-extrabold tracking-tight mb-6">The Comprehensive Guide to JSON Formatting and Parsing</h2>
+            <h2 class="text-3xl font-extrabold tracking-tight mb-6">How to Format, Validate and Minify JSON</h2>
             
             <p>JSON (JavaScript Object Notation) has established itself as the undisputed standard for data exchange on the modern web. From configuring lightweight web applications to transferring massive datasets across enterprise APIs, understanding how to read, write, and format JSON is a mandatory skill for modern developers, data analysts, and system administrators. However, as JSON files grow in complexity, they can quickly become unreadable. This is where a dedicated JSON Formatter and Validator becomes an indispensable utility in your digital toolkit.</p>
 
@@ -255,12 +258,12 @@
             <p>Before JSON, XML (eXtensible Markup Language) was the reigning champion of data transfer. While XML is still heavily used in older enterprise systems and specific industries (like RSS feeds and SOAP APIs), JSON has largely replaced it for modern web development.</p>
             <p>Why did JSON win? Primarily due to its lightweight nature. XML requires closing tags for every piece of data, leading to "bloated" payloads that take longer to transfer and parse. JSON, utilizing simple brackets and braces, dramatically reduces file sizes. Additionally, JSON maps directly to data structures in object-oriented programming (arrays and dictionaries), making it natively easier for developers to work with in code without needing complex parsing libraries.</p>
 
-            <h3 class="text-2xl font-bold mt-10 mb-4">How to Maximize the Utiliverse JSON Tool</h3>
-            <p>The Utiliverse JSON Formatter was engineered for speed, privacy, and ease of use. It executes entirely within your browser on the client side, meaning your sensitive API keys, configuration data, and proprietary payloads are never transmitted to our servers. Here is how to get the most out of the tool:</p>
+            <h3 class="text-2xl font-bold mt-10 mb-4">How to Use the Utiliverse JSON Formatter</h3>
+            <p>The Utiliverse JSON Formatter was engineered for speed, privacy, and ease of use. The format, minify, validation, syntax-highlighting and copy operations are performed by JavaScript in your browser, so the JSON text is not submitted to a Utiliverse server by these tool functions. Here is how to get the most out of the tool:</p>
             
             <ol class="list-decimal pl-6 mb-6 space-y-3">
                 <li><strong>Prettify and Indent:</strong> Paste your raw or minified code into the Input box and click "Format". The tool will instantly restructure the data with clean indentation and inject syntax highlighting, allowing you to easily distinguish strings, numbers, booleans, and null values.</li>
-                <li><strong>Popout Viewer:</strong> Working with deeply nested or massive JSON files can be frustrating within a small browser window. Click the "Popout" button above the output area to launch a full-screen modal view. This allows you to scroll freely through massive datasets without feeling confined.</li>
+                <li><strong>Popout Viewer:</strong> Working with deeply nested or longer JSON payloads can be frustrating within a small browser window. Click the "Popout" button above the output area to launch a full-screen modal view. This gives you more room to scroll through longer JSON output.</li>
                 <li><strong>Minify for Production:</strong> If you have formatted a configuration file and are ready to deploy it to production, click "Minify". This strips away the formatting, giving you the smallest possible footprint for maximum performance.</li>
                 <li><strong>Error Debugging:</strong> If you paste invalid code, the tool will instantly alert you in the status bar, preventing you from deploying broken code.</li>
             </ol>
@@ -268,15 +271,14 @@
             <p>Whether you are configuring a Node.js package, parsing a RESTful API response, or managing cloud infrastructure configurations, mastering JSON formatting is an essential step in modern computing. Bookmark this utility for instant access whenever you need a reliable, secure data formatting environment.</p>
         </article>
     </section>
-
-    <!-- Bottom AdSense Placeholder -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 mb-16">
-        <div class="ad-placeholder h-[250px]">Google AdSense Placeholder (Medium Rectangle)</div>
-    </div>
+    <!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+         Paste approved Google AdSense code here after approval.
+         This comment is intentionally invisible and reserves no space.
+    -->
 
     <!-- FAQ Section -->
     <section class="max-w-3xl mx-auto px-4 sm:px-6 pb-24 border-t border-gray-200 dark:border-gray-800 pt-16">
-        <h2 class="text-3xl font-extrabold tracking-tight mb-8 text-center">Frequently Asked Questions</h2>
+        <h2 class="text-3xl font-extrabold tracking-tight mb-8 text-center">JSON Formatter & Validator FAQ</h2>
         
         <div class="space-y-4" id="faq-container">
             <!-- FAQs will be injected by JS for structured data integration -->
@@ -284,9 +286,9 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-white dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800 py-12">
+    <footer class="bg-white dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800 py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p class="text-gray-500 dark:text-gray-400 text-sm">© <span id="currentYear"></span> Utiliverse. Client-side tools for modern developers.</p>
+            <p class="text-gray-500 dark:text-gray-400 text-sm">© 2026 Utiliverse. All rights reserved.</p>
             <p class="text-gray-500 dark:text-gray-400 text-sm">100% Free and Browser Based</p>
         </div>
     </footer>
@@ -295,8 +297,6 @@
     <script>
         // Initialize Lucide Icons
         lucide.createIcons();
-        const currentYear = document.getElementById('currentYear');
-        if (currentYear) currentYear.textContent = new Date().getFullYear();
 
         // DOM Elements
         const inputArea = document.getElementById('jsonInput');
@@ -309,25 +309,38 @@
 
         // State
         let rawJSON = '';
-        let isDark = document.documentElement.classList.contains('dark');
+        let isDark = true;
 
-        function renderThemeIcon() {
-            themeToggle.innerHTML = isDark
-                ? '<i id="themeIcon" data-lucide="sun" class="w-5 h-5"></i>'
-                : '<i id="themeIcon" data-lucide="moon" class="w-5 h-5"></i>';
+        const moonIcon = document.getElementById('moonIcon');
+        const sunIcon = document.getElementById('sunIcon');
+        const metaTheme = document.querySelector('meta[name="theme-color"]');
+
+        function applyTheme(theme) {
+            isDark = theme === 'dark';
+            document.documentElement.classList.toggle('dark', isDark);
+
+            moonIcon.classList.toggle('theme-hidden', isDark);
+            sunIcon.classList.toggle('theme-hidden', !isDark);
+
             themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
             themeToggle.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-            lucide.createIcons();
+
+            if (metaTheme) {
+                metaTheme.setAttribute('content', isDark ? '#020617' : '#f8fafc');
+            }
         }
+
+        const savedTheme = localStorage.getItem('utiliverse-theme');
+        const initialTheme = savedTheme ||
+            (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        applyTheme(initialTheme);
 
         // Theme Toggling Logic
         themeToggle.addEventListener('click', () => {
-            isDark = !isDark;
-            document.documentElement.classList.toggle('dark', isDark);
-            renderThemeIcon();
+            const nextTheme = isDark ? 'light' : 'dark';
+            localStorage.setItem('utiliverse-theme', nextTheme);
+            applyTheme(nextTheme);
         });
-
-        renderThemeIcon();
 
         // Syntax Highlighter Function
         function syntaxHighlight(json) {
@@ -473,28 +486,36 @@
         // FAQ Data and Schema Injection
         const faqs = [
             {
-                q: "What is JSON?",
-                a: "JSON (JavaScript Object Notation) is a lightweight data-interchange format. It is easy for humans to read and write and easy for machines to parse and generate. It is heavily used in web development for sending data between a server and a web application."
+                q: "What does this JSON Formatter and Validator do?",
+                a: "It parses JSON with the browser's built-in JSON parser, formats valid JSON with indentation, minifies it into a compact string, highlights formatted output, and reports parser errors when the input is invalid."
             },
             {
-                q: "Is this JSON Formatter secure to use for private data?",
-                a: "Yes. The Utiliverse JSON Formatter operates entirely client-side (in your web browser). Your JSON data is never sent to our servers, logged, or saved, ensuring complete privacy for sensitive API keys and database configurations."
+                q: "Is my JSON uploaded to Utiliverse?",
+                a: "The formatting, minifying, validation, syntax-highlighting, copy, and popout functions run in your browser. The JSON text is not submitted to a Utiliverse server by these tool functions."
             },
             {
                 q: "Why is my JSON showing an error?",
-                a: "JSON has strict syntax rules. The most common errors include using single quotes instead of double quotes, forgetting quotes around keys, or leaving a trailing comma at the end of an array or object. The tool will provide a specific error message to help you locate the issue."
+                a: "JSON has strict syntax rules. Common problems include single quotes instead of double quotes, unquoted object keys, trailing commas, malformed escape sequences, or missing commas, brackets, or braces. The browser parser returns an error message when parsing fails."
             },
             {
-                q: "What is the difference between formatting and minifying?",
-                a: "Formatting (or prettifying) adds whitespace, line breaks, and indentation to make the code readable for humans. Minifying does the exact opposite—it removes all unnecessary spacing to make the file size as small as possible for faster network transfers."
-            },
-            {
-                q: "Can I format large JSON files with this tool?",
-                a: "Yes, this tool can handle very large JSON payloads. If the output becomes difficult to navigate in the standard view, click the 'Popout' button to open a full-screen code viewer, allowing you to scroll through massive datasets effortlessly."
+                q: "What is the difference between formatting and minifying JSON?",
+                a: "Formatting adds indentation and line breaks to make valid JSON easier to read. Minifying parses the same data and serializes it without unnecessary formatting whitespace, producing a more compact representation."
             },
             {
                 q: "Does JSON support comments?",
-                a: "By default, the official JSON specification does not support comments (like // or /* */ used in JavaScript). If you try to parse JSON with comments, standard parsers will throw an error. You must remove comments before using the code in production."
+                a: "Standard JSON does not support JavaScript-style // comments or /* block comments */. Because this tool uses JSON.parse, JSON containing comments will fail validation unless the comments are removed."
+            },
+            {
+                q: "Can I paste JSON directly from my clipboard?",
+                a: "Yes. The Paste button uses the browser Clipboard API to read text when the browser grants permission, then automatically runs the formatter."
+            },
+            {
+                q: "Can I copy the formatted or minified output?",
+                a: "Yes. After a successful format or minify operation, the Copy button writes the current raw JSON output to your clipboard using the browser Clipboard API."
+            },
+            {
+                q: "Can I view long JSON output in a larger window?",
+                a: "Yes. The Popout button opens the current output in a large modal viewer with scrolling and a Copy Code button."
             }
         ];
 
