@@ -4,16 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-<title>Utiliverse Color Screen — Free Fullscreen Color & Display Tool</title>
+<title>Screen Color Tester – Fullscreen Colors & HEX/RGB | Utiliverse</title>
 
-<meta name="description" content="Free online fullscreen color screen and color generator. Display black, white, red, green, blue, yellow, orange, pink, purple or any custom color. Preview colors, copy HEX and RGB values, enter fullscreen mode and download high-resolution color images.">
+<meta name="description" content="Free screen color tester and fullscreen color tool. Display preset or custom colors, view HEX/RGB values, inspect a display, use a timer, and download solid-color PNG images.">
 
-<meta name="keywords" content="color screen, fullscreen color screen, black screen, white screen, red screen, blue screen, green screen, color generator, HEX color picker, RGB color picker, screen test, display test, fullscreen color, color image generator">
-
-<meta name="robots" content="index, follow">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="theme-color" content="#020617">
 
 <link rel="canonical" href="https://utiliverse.app/Screen_Color-Tester/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Screen Color Tester – Fullscreen Colors & HEX/RGB | Utiliverse">
+<meta property="og:description" content="Display preset or custom colors fullscreen, inspect HEX/RGB values, test a screen visually, use a timer, and download solid-color PNG images.">
+<meta property="og:url" content="https://utiliverse.app/Screen_Color-Tester/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Screen Color Tester – Fullscreen Colors & HEX/RGB | Utiliverse">
+<meta name="twitter:description" content="Free browser-based fullscreen color screen, HEX/RGB viewer and solid-color PNG generator.">
+
 
 <!-- Tailwind -->
 <script src="https://cdn.tailwindcss.com"></script>
@@ -221,20 +228,6 @@ body {
 
 .btn-secondary:hover {
     background: #334155;
-}
-
-.ad-slot {
-    min-height: 90px;
-    border: 1px dashed #334155;
-    border-radius: 12px;
-    background: rgba(15,23,42,.35);
-    color: #64748b;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:11px;
-    text-transform:uppercase;
-    letter-spacing:.12em;
 }
 
 .faq-item {
@@ -668,37 +661,65 @@ body.color-fullscreen-fallback {
     }
 }
 
+
+/* Standard Utiliverse header controls */
+.topbar-actions{display:flex;align-items:center;gap:12px}
+.free-browser-note{color:#94a3b8;font-size:12px;font-weight:700;white-space:nowrap;letter-spacing:.1px}
+.theme-toggle{
+    width:40px;
+    height:40px;
+    flex:0 0 40px;
+    border:1px solid #334155;
+    border-radius:12px;
+    background:rgba(15,23,42,.72);
+    color:#94a3b8;
+    box-shadow:none;
+    appearance:none;
+    -webkit-appearance:none;
+    transform:none;
+}
+.theme-toggle:hover{
+    background:#1e293b;
+    border-color:#475569;
+    color:#fff;
+    transform:none;
+}
+.theme-toggle svg{width:18px;height:18px;stroke-width:2}
+.theme-icon-moon{display:none}
+.theme-icon-sun{display:block}
+body.light-mode .theme-toggle{background:#fff;border-color:#cbd5e1;color:#475569}
+body.light-mode .theme-toggle:hover{background:#f1f5f9;border-color:#94a3b8;color:#0f172a}
+body.light-mode .theme-icon-sun{display:none}
+body.light-mode .theme-icon-moon{display:block}
+body.light-mode .free-browser-note{color:#64748b}
+.local-processing-note{color:#94a3b8;font-size:12px;line-height:1.65}
+body.light-mode .local-processing-note{color:#64748b}
+@media(max-width:640px){
+    .free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}
+    .theme-toggle{width:38px;height:38px;flex-basis:38px}
+}
+
 </style>
 
 <!-- SEO Structured Data -->
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"WebApplication",
-  "name":"Utiliverse Color Screen",
-  "url":"https://utiliverse.app/color-screen/",
-  "applicationCategory":"UtilitiesApplication",
-  "operatingSystem":"Any",
-  "description":"A free browser-based fullscreen color display, color picker, screen testing and image generation utility.",
-  "offers":{
-    "@type":"Offer",
-    "price":"0",
-    "priceCurrency":"USD"
-  }
-}
-</script>
-
-<script type="application/ld+json" id="faqSchema">
-{
-  "@context":"https://schema.org",
-  "@type":"FAQPage",
-  "mainEntity":[]
-}
-</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Screen Color Tester","url":"https://utiliverse.app/Screen_Color-Tester/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based screen color tester and fullscreen color utility with preset and custom colors, HEX/RGB values, a screen timer and solid-color PNG export.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Fullscreen solid-color display","Preset screen colors","Custom color spectrum and hue controls","Six-digit HEX color input","HEX and RGB color values","Visual display inspection aid","Fullscreen exit timer","Custom-size PNG color image export","Mobile fullscreen fallback"]}</script>
+<script type="application/ld+json" id="faqSchema">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What can I use a black screen for?","acceptedAnswer":{"@type":"Answer","text":"A black fullscreen display can be used for basic display inspection, dark-room viewing, presentations, photography or video work, ambient backgrounds, and other situations where a uniform dark surface is useful."}},{"@type":"Question","name":"Can I make the selected color fullscreen?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool uses the browser Fullscreen API where available and a viewport-filling fallback on browsers that do not provide normal element fullscreen."}},{"@type":"Question","name":"Can I download the selected color as an image?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter the desired width and height and select Download PNG. The solid-color image is generated in the browser."}},{"@type":"Question","name":"Can I enter my own HEX color?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter a six-digit HEX value such as #6366F1, or use the spectrum and hue controls to create a custom color."}},{"@type":"Question","name":"Can this tool help test a monitor or phone screen?","acceptedAnswer":{"@type":"Answer","text":"Yes. Uniform colors can make some visible brightness, uniformity or pixel issues easier to notice. It is a visual inspection aid, not a replacement for calibration hardware or professional diagnostics."}},{"@type":"Question","name":"What does the screen timer do?","acceptedAnswer":{"@type":"Answer","text":"The timer counts down for the selected number of minutes and exits the fullscreen color view when the timer reaches zero."}},{"@type":"Question","name":"Are my selected colors uploaded to Utiliverse?","acceptedAnswer":{"@type":"Answer","text":"No. Color selection, fullscreen display, HEX/RGB conversion and PNG generation are performed in your browser by this tool. The page does load interface libraries from public CDNs."}},{"@type":"Question","name":"Why can the same HEX color look different on two screens?","acceptedAnswer":{"@type":"Answer","text":"Displays can differ in brightness, contrast, panel technology, calibration and color profiles, so the same digital color value can appear different across devices."}}]}</script>
 
 </head>
 
 <body>
+<!--
+SEO TARGET CLUSTER
+Primary: screen color tester
+Secondary: fullscreen color screen, black screen, white screen,
+screen test, display test, HEX color screen, RGB color screen,
+solid color screen, fullscreen color generator
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
 
 <!-- ========================= HEADER ========================= -->
 
@@ -708,27 +729,16 @@ body.color-fullscreen-fallback {
 
 <div class="h-16 flex items-center justify-between">
 
-<a href="/" class="flex items-center gap-3">
-
-<div class="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
-
-<i data-lucide="layers" class="w-5 h-5 text-white"></i>
-
-</div>
-
-<span class="font-bold text-xl tracking-tight">
-Utiliverse
-</span>
-
+<a href="https://utiliverse.app" class="flex items-center gap-2 text-sm font-semibold text-slate-300 hover:text-white">
+<i data-lucide="arrow-left" class="w-4 h-4"></i>
+Back to Utiliverse
 </a>
 
 <div class="flex items-center gap-3">
 
-<span class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold">
+<span class="free-browser-note">100% Free and Browser Based</span>
 
-<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
 
-100% Client-Side & Private
 
 </span>
 
@@ -739,10 +749,10 @@ type="button"
 aria-label="Switch to light mode"
 title="Switch light/dark mode"
 >
-<svg class="theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+<svg id="moon-icon" class="theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path>
 </svg>
-<svg class="theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+<svg id="sun-icon" class="theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true">
 <circle cx="12" cy="12" r="4"></circle>
 <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
 </svg>
@@ -767,23 +777,18 @@ title="Switch light/dark mode"
 
 <span class="badge-dot" id="badgeDot" style="background:#000000"></span>
 
-Fullscreen Color Utility
+Screen Color Tester
 
 </div>
 
 <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-tight">
-
-A cleaner way to
-
-<span class="gradient-text">
-display any color.
-</span>
-
+Screen Color Tester &amp;
+<span class="gradient-text">Fullscreen Color Tool</span>
 </h1>
 
 <p class="mt-5 text-lg text-slate-400 leading-relaxed max-w-2xl">
 
-Display a precise color across your entire screen, test a display, create a clean background, preview a HEX value, or download a solid-color image. Everything happens directly in your browser.
+Display a preset or custom color across your screen, inspect a display visually, preview HEX and RGB values, use a fullscreen timer, or download a solid-color PNG at custom dimensions.
 
 </p>
 
@@ -792,17 +797,10 @@ Display a precise color across your entire screen, test a display, create a clea
 </section>
 
 
-<!-- ========================= TOP AD ========================= -->
-
-<div class="ad-container max-w-7xl mx-auto px-4 sm:px-6 mb-8">
-
-<div class="ad-slot">
-
-Advertisement Space
-
-</div>
-
-</div>
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
 
 
 <!-- ========================= MAIN WORKSPACE ========================= -->
@@ -1114,6 +1112,8 @@ class="timer-display text-center mt-4 text-indigo-400"
 </div>
 
 
+<p class="local-processing-note mt-4">Core color selection, HEX/RGB conversion, fullscreen display and PNG generation run in your browser and are not submitted to a Utiliverse processing server. The page loads interface libraries from public CDNs.</p>
+
 <!-- ========================= COLOR INFO ========================= -->
 
 <section class="mt-8 glass rounded-2xl p-6">
@@ -1154,32 +1154,10 @@ RGB:
 </section>
 
 
-<!-- ========================= MID AD ========================= -->
-
-<div class="ad-container grid lg:grid-cols-3 gap-6 mt-8">
-
-<div class="lg:col-span-2">
-
-<div class="ad-slot min-h-[180px]">
-
-Advertisement Space
-
-</div>
-
-</div>
-
-<div>
-
-<div class="ad-slot min-h-[180px]">
-
-Advertisement Space
-
-</div>
-
-</div>
-
-</div>
-
+<!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
 
 <!-- ========================= COLOR DIRECTORY ========================= -->
 
@@ -1287,18 +1265,18 @@ Questions about <span id="faqColorName">Black</span>
 </main>
 
 
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
 <!-- ========================= SIMPLE FOOTER ========================= -->
 
 <footer class="border-t border-slate-800 bg-slate-950">
-
-<div class="max-w-7xl mx-auto px-4 sm:px-6 py-6">
-
-<p class="text-left text-xs text-slate-600 m-0">
-© <span id="year"></span> Utiliverse. All rights reserved.
-</p>
-
+<div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-slate-500">
+<span>© 2026 Utiliverse. All rights reserved.</span>
+<span>100% Free and Browser Based</span>
 </div>
-
 </footer>
 
 
@@ -1308,7 +1286,6 @@ Questions about <span id="faqColorName">Black</span>
 
 lucide.createIcons();
 
-document.getElementById("year").textContent = new Date().getFullYear();
 
 
 /* ============================================================
@@ -1645,7 +1622,7 @@ function hexToRgb(hex) {
 
     hex = hex.replace("#","");
 
-    if(hex.length !== 6) return null;
+    if(!/^[0-9A-Fa-f]{6}$/.test(hex)) return null;
 
     const num = parseInt(hex,16);
 
@@ -2050,14 +2027,29 @@ document.addEventListener("webkitfullscreenchange", handleNativeFullscreenChange
 function downloadImage() {
 
     const width =
-        parseInt(
-            document.getElementById("imageWidth").value
-        ) || 1920;
+        Math.min(
+            12000,
+            Math.max(
+                1,
+                parseInt(
+                    document.getElementById("imageWidth").value
+                ) || 1920
+            )
+        );
 
     const height =
-        parseInt(
-            document.getElementById("imageHeight").value
-        ) || 1080;
+        Math.min(
+            12000,
+            Math.max(
+                1,
+                parseInt(
+                    document.getElementById("imageHeight").value
+                ) || 1080
+            )
+        );
+
+    document.getElementById("imageWidth").value = width;
+    document.getElementById("imageHeight").value = height;
 
     const hex =
         document.getElementById("infoHex").textContent;
@@ -2129,9 +2121,17 @@ function startTimer() {
     clearInterval(timerInterval);
 
     const minutes =
-        parseInt(
-            document.getElementById("timerMinutes").value
-        ) || 5;
+        Math.min(
+            999,
+            Math.max(
+                1,
+                parseInt(
+                    document.getElementById("timerMinutes").value
+                ) || 5
+            )
+        );
+
+    document.getElementById("timerMinutes").value = minutes;
 
     timerSeconds =
         minutes * 60;
@@ -2340,17 +2340,33 @@ function updateColorContent(name) {
     const container =
         document.getElementById("colorContent");
 
-    const data =
+    const presetData =
         colors[name];
 
+    const currentHex =
+        document.getElementById("infoHex").textContent || "#000000";
+
+    const currentRgb =
+        hexToRgb(currentHex) || {r:0,g:0,b:0};
+
+    const data =
+        presetData || {
+            hex: currentHex.toUpperCase(),
+            rgb: [currentRgb.r, currentRgb.g, currentRgb.b]
+        };
+
     const useCases =
-        colorUseCases[name] || colorUseCases.Black;
+        colorUseCases[name] || [
+            ["Custom Color Preview","Use the custom color as a fullscreen visual reference, design preview, presentation background or general solid-color surface."],
+            ["Design and Development","Copy the HEX or RGB value for use in CSS, graphics software, presentation tools or other digital workflows."],
+            ["Screen Inspection","A uniform custom color can help with basic visual inspection of brightness, uniformity or pixel behavior. It is not a substitute for professional calibration or hardware diagnostics."]
+        ];
 
     let html = `
 
         <p>
-        The <strong>${name} screen</strong> on Utiliverse is designed as a simple,
-        browser-based color utility that lets you display a consistent ${name.toLowerCase()}
+        The <strong>${name === "Custom" ? "custom color screen" : name + " screen"}</strong> on Utiliverse is designed as a simple,
+        browser-based color utility that lets you display a consistent ${name === "Custom" ? "custom color" : name.toLowerCase()}
         surface across your screen. Instead of opening a graphics editor or searching for
         a pre-made image, you can select a color, preview its exact HEX and RGB values,
         enter fullscreen mode, and download a PNG at the dimensions you choose.
@@ -2485,31 +2501,60 @@ function updateFAQ(name) {
     const container =
         document.getElementById("faqContainer");
 
+    const currentHex =
+        document.getElementById("infoHex").textContent || "#000000";
+
+    const currentRgb =
+        hexToRgb(currentHex) || {r:0,g:0,b:0};
+
+    const colorLabel =
+        name === "Custom"
+            ? "custom color"
+            : name.toLowerCase();
+
+    const rgbText =
+        `${currentRgb.r}, ${currentRgb.g}, ${currentRgb.b}`;
+
     const faqs = [
 
         {
-            q:`What can I use a ${name.toLowerCase()} screen for?`,
-            a:`A ${name.toLowerCase()} fullscreen display can be used for basic display inspection, creative projects, presentations, photography experiments, ambient backgrounds, color demonstrations and many other situations where a uniform color surface is useful.`
+            q:`What can I use a ${colorLabel} screen for?`,
+            a:`A ${colorLabel} fullscreen display can be used for basic display inspection, creative projects, presentations, photography experiments, ambient backgrounds, color demonstrations and other situations where a uniform color surface is useful.`
         },
 
         {
-            q:`Can I make the ${name.toLowerCase()} color fullscreen?`,
-            a:`Yes. Select the Fullscreen button in the preview area. Your browser will use its fullscreen capability to display the selected color across the available screen. Press Escape to leave fullscreen mode.`
+            q:`Can I make the ${colorLabel} fullscreen?`,
+            a:`Yes. Select Fullscreen in the preview area. The tool uses the browser Fullscreen API where available and a viewport-filling fallback on browsers that do not provide normal element fullscreen. Tap, click or press Escape to exit.`
         },
 
         {
-            q:`Can I download the ${name.toLowerCase()} screen as an image?`,
-            a:`Yes. Choose your desired image width and height and select Download PNG. The image is generated locally in your browser using the selected color.`
+            q:`Can I download the ${colorLabel} as an image?`,
+            a:`Yes. Choose the image width and height and select Download PNG. The solid-color image is generated locally in your browser.`
         },
 
         {
-            q:`What HEX and RGB value does the ${name.toLowerCase()} color use?`,
-            a:`The standard ${name.toLowerCase()} preset currently uses ${colors[name].hex}, which corresponds to RGB ${colors[name].rgb.join(", ")}. You can also create a different shade using the custom color picker.`
+            q:`What HEX and RGB values are currently selected?`,
+            a:`The selected color is ${currentHex.toUpperCase()}, corresponding to RGB ${rgbText}. You can change it with a preset, the spectrum and hue controls, or a six-digit HEX value.`
         },
 
         {
-            q:`Can I use this color screen to test my monitor?`,
-            a:`Yes. A solid-color screen can be useful for visual inspection of displays. You may notice differences in brightness, color uniformity or individual pixels more easily against a consistent surface. It should be considered a basic visual testing aid rather than a replacement for professional display calibration or hardware diagnostics.`
+            q:`Can I use this color screen to test my monitor or phone?`,
+            a:`Yes. A uniform color can make some visible brightness, color-uniformity or pixel issues easier to notice. It is a basic visual inspection aid rather than a replacement for professional display calibration or hardware diagnostics.`
+        },
+
+        {
+            q:`What does the screen timer do?`,
+            a:`The timer counts down for the number of minutes you enter. When it reaches zero, the tool exits the fullscreen color view.`
+        },
+
+        {
+            q:`Are my selected colors uploaded to Utiliverse?`,
+            a:`No. Color selection, HEX/RGB conversion, fullscreen display and PNG generation are performed in your browser by this tool. The page does load interface libraries from public CDNs.`
+        },
+
+        {
+            q:`Why can the same HEX color look different on another screen?`,
+            a:`Displays can differ in brightness, contrast, panel technology, calibration and color profiles, so the same digital HEX or RGB value can appear different across devices.`
         }
 
     ];
@@ -2525,9 +2570,13 @@ function updateFAQ(name) {
 
         item.innerHTML = `
 
-            <div
-                class="faq-question"
+            <button
+                type="button"
+                class="faq-question w-full text-left"
                 onclick="toggleFAQ(${index})"
+                aria-expanded="false"
+                aria-controls="faqAnswer${index}"
+                id="faqQuestion${index}"
             >
 
                 <span>
@@ -2537,15 +2586,18 @@ function updateFAQ(name) {
                 <span
                     id="faqIcon${index}"
                     class="text-indigo-400 text-xl"
+                    aria-hidden="true"
                 >
                     +
                 </span>
 
-            </div>
+            </button>
 
             <div
                 id="faqAnswer${index}"
                 class="faq-answer hidden"
+                role="region"
+                aria-labelledby="faqQuestion${index}"
             >
                 ${faq.a}
             </div>
@@ -2555,7 +2607,6 @@ function updateFAQ(name) {
         container.appendChild(item);
 
     });
-
 
     const schema =
         document.getElementById("faqSchema");
@@ -2589,7 +2640,6 @@ function updateFAQ(name) {
 
 }
 
-
 function toggleFAQ(index) {
 
     const answer =
@@ -2604,10 +2654,21 @@ function toggleFAQ(index) {
 
     answer.classList.toggle("hidden");
 
+    const isOpen =
+        !answer.classList.contains("hidden");
+
     icon.textContent =
-        answer.classList.contains("hidden")
-        ? "+"
-        : "−";
+        isOpen ? "−" : "+";
+
+    const question =
+        document.getElementById("faqQuestion"+index);
+
+    if (question) {
+        question.setAttribute(
+            "aria-expanded",
+            isOpen ? "true" : "false"
+        );
+    }
 
 }
 
