@@ -380,7 +380,8 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
         </div>
         <!-- DARK MODE BUTTON -->
         <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
-          <i id="themeIcon" data-lucide="moon" class="theme-icon"></i>
+          <i id="moonIcon" data-lucide="moon" class="theme-icon"></i>
+          <i id="sunIcon" data-lucide="sun" class="theme-icon hidden"></i>
         </button>
       </div>
     </div>
@@ -668,22 +669,24 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
        LIGHT / DARK THEME
     ========================================================= */
     const themeToggle = document.getElementById('themeToggle');
-    const themeIcon = document.getElementById('themeIcon');
+    const moonIcon = document.getElementById('moonIcon');
+    const sunIcon = document.getElementById('sunIcon');
     const metaTheme = document.querySelector('meta[name="theme-color"]');
 
     function applyTheme(theme) {
       const isDark = theme === 'dark';
       document.body.classList.toggle('dark-mode', isDark);
 
-      themeIcon.setAttribute('data-lucide', isDark ? 'sun' : 'moon');
+      // Dark mode shows the sun (switch to light); light mode shows the moon (switch to dark).
+      moonIcon.classList.toggle('hidden', isDark);
+      sunIcon.classList.toggle('hidden', !isDark);
+
       themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
       themeToggle.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode');
 
       if (metaTheme) {
         metaTheme.setAttribute('content', isDark ? '#020617' : '#f8fafc');
       }
-
-      lucide.createIcons();
     }
 
     function initTheme() {
