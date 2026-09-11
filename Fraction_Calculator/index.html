@@ -3,8 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Fraction Calculator | Math, Decimal & Fraction Converter</title>
-    <meta name="description" content="Free online fraction tools. Calculate mixed numbers, convert decimals to fractions, and convert fractions to decimals instantly. Comprehensive real-world use cases included.">
+    <title>Fraction Calculator & Decimal Converter | Utiliverse</title>
+    <meta name="description" content="Free online fraction calculator to add, subtract, multiply and divide fractions or mixed numbers. Simplify results and convert decimals to fractions or fractions to decimals instantly.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://utiliverse.app/Fraction_Calculator/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Utiliverse">
+    <meta property="og:title" content="Fraction Calculator & Decimal Converter | Utiliverse">
+    <meta property="og:description" content="Add, subtract, multiply and divide fractions or mixed numbers, then convert between fractions and decimals with this free browser-based calculator.">
+    <meta property="og:url" content="https://utiliverse.app/Fraction_Calculator/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Fraction Calculator & Decimal Converter | Utiliverse">
+    <meta name="twitter:description" content="Calculate fractions and mixed numbers, simplify results, and convert between fractions and decimals.">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,16 +29,16 @@
                 extend: {
                     colors: {
                         brand: {
-                            50: '#f0fdfa',
-                            100: '#ccfbf1',
-                            200: '#99f6e4',
-                            300: '#5eead4',
-                            400: '#2dd4bf',
-                            500: '#14b8a6',
-                            600: '#0d9488',
-                            700: '#0f766e',
-                            800: '#115e59',
-                            900: '#134e4a',
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            200: '#c7d2fe',
+                            300: '#a5b4fc',
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
                         }
                     },
                     boxShadow: {
@@ -75,25 +85,100 @@
             from { opacity: 0; transform: translateY(5px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* =========================================================
+           UTILIVERSE SHARED THEME — SLATE / INDIGO
+           Existing calculator layout and controls are retained.
+        ========================================================= */
+        body {
+            background:
+                radial-gradient(circle at 10% 0%, rgba(99,102,241,.10), transparent 32%),
+                #f8fafc;
+        }
+        html.dark body {
+            background:
+                radial-gradient(circle at 10% 0%, rgba(99,102,241,.14), transparent 32%),
+                radial-gradient(circle at 90% 15%, rgba(124,58,237,.08), transparent 28%),
+                #020617;
+        }
+        #themeToggle {
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            width:40px;
+            height:40px;
+            padding:0;
+            border:1px solid #cbd5e1;
+            border-radius:12px;
+            background:#ffffff;
+            color:#475569;
+            box-shadow:none;
+            appearance:none;
+            -webkit-appearance:none;
+            transition:background .2s ease,color .2s ease,border-color .2s ease;
+        }
+        #themeToggle:hover {
+            background:#f1f5f9;
+            color:#0f172a;
+            border-color:#94a3b8;
+        }
+        html.dark #themeToggle {
+            background:rgba(15,23,42,.72);
+            border-color:#334155;
+            color:#94a3b8;
+        }
+        html.dark #themeToggle:hover {
+            background:#1e293b;
+            border-color:#475569;
+            color:#ffffff;
+        }
+        #themeToggle svg {
+            width:18px;
+            height:18px;
+            stroke-width:2;
+        }
+        .free-browser-note {
+            color:#64748b;
+            font-size:12px;
+            font-weight:700;
+            white-space:nowrap;
+            letter-spacing:.1px;
+        }
+        html.dark .free-browser-note {
+            color:#94a3b8;
+        }
+        @media (max-width:640px) {
+            .free-browser-note {
+                max-width:118px;
+                white-space:normal;
+                text-align:right;
+                font-size:10px;
+                line-height:1.2;
+            }
+            #themeToggle {
+                width:38px;
+                height:38px;
+                flex:0 0 auto;
+            }
+        }
+
     </style>
 
     <!-- SEO Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Utiliverse Ultimate Fraction & Decimal Tools",
-      "applicationCategory": "EducationalApplication",
-      "operatingSystem": "Any",
-      "description": "Calculate fractions, convert decimals to fractions, and convert fractions to decimals with ease.",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
-    }
-    </script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Fraction Calculator","url":"https://utiliverse.app/Fraction_Calculator/","applicationCategory":"EducationalApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free online fraction calculator for adding, subtracting, multiplying and dividing fractions and mixed numbers, plus decimal-to-fraction and fraction-to-decimal conversion.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Add fractions","Subtract fractions","Multiply fractions","Divide fractions","Mixed number calculations","Simplified fraction results","Decimal to fraction conversion","Fraction to decimal conversion"]}</script>
 </head>
+<!--
+SEO TARGET CLUSTER
+Primary: fraction calculator
+Secondary: mixed number calculator, add fractions, subtract fractions, multiply fractions,
+divide fractions, simplify fractions, decimal to fraction calculator, fraction to decimal calculator,
+fraction converter, fractions in simplest form
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments below.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans antialiased selection:bg-brand-500/30">
 
     <!-- Sticky Glassmorphism Header -->
@@ -106,10 +191,12 @@
                 <span class="font-bold text-lg tracking-tight text-slate-800 dark:text-slate-100">Back to Utiliverse</span>
             </a>
             
-            <button id="themeToggle" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500" aria-label="Toggle Dark Mode">
-                <i data-lucide="sun" id="sunIcon" class="w-5 h-5 hidden"></i>
-                <i data-lucide="moon" id="moonIcon" class="w-5 h-5 hidden"></i>
-            </button>
+            <div class="flex items-center gap-3">
+                <span class="free-browser-note">100% Free and Browser Based</span>
+                <button id="themeToggle" type="button" aria-label="Switch to light mode" title="Toggle light/dark mode">
+                    <i data-lucide="sun" id="themeIcon" aria-hidden="true"></i>
+                </button>
+            </div>
         </div>
     </header>
 
@@ -118,9 +205,16 @@
         
         <!-- Hero Section -->
         <div class="text-center mb-10 animate-fade-in">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-6 tracking-tight leading-tight">Fraction & Decimal<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-brand-700 dark:from-brand-400 dark:to-brand-600">Master Suite</span></h1>
-            <p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">Calculate mixed numbers or seamlessly convert between decimals and fractions with absolute precision.</p>
+            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-6 tracking-tight leading-tight">Fraction Calculator <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-brand-700 dark:from-brand-400 dark:to-brand-600">& Decimal Converter</span></h1>
+            <p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">Use this free online fraction calculator to add, subtract, multiply or divide fractions and mixed numbers, simplify the result, and convert between fractions and decimals.</p>
         </div>
+
+
+        <!-- =========================================================
+             GOOGLE ADSENSE: TOP / ABOVE-CALCULATOR INSERTION POINT
+             Paste approved Google AdSense code here after approval.
+             This comment is intentionally invisible and reserves no space.
+        ========================================================= -->
 
         <!-- Tool Navigation Tabs -->
         <div class="flex flex-wrap justify-center gap-2 mb-8 bg-slate-200/50 dark:bg-slate-800/50 p-1.5 rounded-2xl max-w-fit mx-auto border border-slate-200 dark:border-slate-700">
@@ -281,47 +375,101 @@
             </div>
         </div>
 
-        <!-- SEO Article Content (~900 words) -->
+
+        <!-- =========================================================
+             GOOGLE ADSENSE: MID-PAGE / AFTER-CALCULATOR INSERTION POINT
+             Paste approved Google AdSense code here after approval.
+             This comment is intentionally invisible and reserves no space.
+        ========================================================= -->
+
+        <!-- SEO Article Content -->
         <article class="prose prose-slate dark:prose-invert prose-lg md:prose-xl max-w-4xl mx-auto mb-24 bg-white dark:bg-slate-900 p-8 md:p-14 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-800 transition-colors">
-            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-8 leading-tight">Bridging the Gap: The Essential Need for Decimal and Fraction Conversions</h2>
-            
-            <p class="lead text-xl text-slate-600 dark:text-slate-300 mb-8">In the modern mathematical landscape, humanity operates using two distinct linguistic dialects: the precise, digital clarity of the decimal system, and the physical, proportional reality of fractions. While calculators and computers naturally favor decimals, the tangible world we construct, cook in, and trade within relies heavily on mixed numbers and fractions.</p>
-            
-            <p>Mastering the ability to not only calculate mixed numbers but to fluidly convert decimals to fractions (and fractions to decimals) is a critical capability. Relying on mental approximations can lead to structural failures, financial miscalculations, and logistical nightmares. Let us explore the diverse, real-world use cases where converting and calculating these metrics is an absolute necessity.</p>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-8 leading-tight">
+                How to Use the Fraction Calculator
+            </h2>
 
-            <h3 class="text-2xl font-bold mt-12 mb-6 text-slate-800 dark:text-slate-100 border-b pb-2 border-slate-200 dark:border-slate-800">1. Precision Machining and Engineering (Decimals to Fractions)</h3>
-            <p>In mechanical engineering and precision CNC machining, digital blueprints are almost exclusively rendered using the metric system or highly precise imperial decimals. A CAD (Computer-Aided Design) software might output a necessary hole diameter as 0.3125 inches.</p>
-            <p>However, when a machinist walks over to the physical drill press, the physical drill bits available in North American tool shops are categorized by fractions. The machinist must immediately convert 0.3125 into a fraction to select the correct bit. By utilizing a decimal-to-fraction calculator, 0.3125 is instantly recognized as 5/16 of an inch. A miscalculation here—perhaps guessing that 0.3125 is closer to 1/4 (0.25) or 3/8 (0.375)—would result in a scrapped part, wasted raw materials, and lost labor hours.</p>
+            <p class="lead text-xl text-slate-600 dark:text-slate-300 mb-8">
+                This fraction calculator handles the most common fraction operations in one place. You can add, subtract, multiply or divide proper fractions, improper fractions and mixed numbers. The result is reduced to simplest form and can also be displayed as a mixed number and decimal when appropriate.
+            </p>
 
-            <h3 class="text-2xl font-bold mt-12 mb-6 text-slate-800 dark:text-slate-100 border-b pb-2 border-slate-200 dark:border-slate-800">2. Financial Analysis and Equity Trading (Fractions to Decimals)</h3>
-            <p>The global financial market is a prime example of where fraction-to-decimal conversion is necessary for wealth management. Historically, major stock exchanges like the NYSE traded in fractional spreads (such as 1/8 or 1/16 of a dollar). While the markets have modernized to decimalization, the concept of fractional ownership has exploded in popularity.</p>
-            <p>Retail investors utilizing modern brokerage applications frequently purchase "fractional shares." For example, if an investor owns 4 and 7/8 shares of a high-value tech stock, they must convert that mixed number into a decimal (4.875) to accurately multiply it by the live, second-by-second ticker price. Furthermore, calculating dividend payouts, margin requirements, and compound interest rates demands that all fractional holdings be converted into clean, workable decimals.</p>
+            <h3 class="text-2xl font-bold mt-12 mb-6 text-slate-800 dark:text-slate-100 border-b pb-2 border-slate-200 dark:border-slate-800">
+                Add and subtract fractions
+            </h3>
+            <p>
+                When two fractions have different denominators, they must be expressed using a common denominator before their numerators can be combined. For example, 1/3 + 1/4 can be rewritten as 4/12 + 3/12, which equals 7/12. The calculator performs the equivalent arithmetic automatically and reduces the final answer when possible.
+            </p>
+            <p>
+                Mixed numbers are supported as well. Enter the whole-number portion in the Whole field and the fractional portion in the numerator and denominator fields. A value such as 2 1/2 is converted internally to an improper fraction for the calculation, then presented in a readable form in the result.
+            </p>
 
-            <h3 class="text-2xl font-bold mt-12 mb-6 text-slate-800 dark:text-slate-100 border-b pb-2 border-slate-200 dark:border-slate-800">3. Culinary Scaling and Recipe Adaptation</h3>
-            <p>The culinary arts operate exactly at the intersection of fractions and decimals. Professional digital kitchen scales measure weight in precise decimal grams, while traditional recipes dictate volume using fractions (e.g., 1/2 cup, 3/4 teaspoon).</p>
-            <p>Imagine a baker importing a European recipe that calls for ingredients scaling mathematically. If a recipe needs to be increased by a factor of 1.75 to fit a specific commercial baking tin, the baker must multiply every ingredient by this decimal. If an ingredient originally called for 1 and 1/3 cups of sugar, the baker must calculate: 1 1/3 (fraction) × 1.75 (decimal). Converting 1.75 to the fraction 7/4 allows the baker to multiply (4/3 × 7/4), yielding 28/12, which simplifies to 2 and 1/3 cups. Without a versatile calculator, this multi-step mathematical translation is prone to human error, potentially ruining the chemical balance of the bake.</p>
+            <h3 class="text-2xl font-bold mt-12 mb-6 text-slate-800 dark:text-slate-100 border-b pb-2 border-slate-200 dark:border-slate-800">
+                Multiply fractions
+            </h3>
+            <p>
+                To multiply fractions, multiply the numerators together and multiply the denominators together. For example, 2/3 × 3/5 produces 6/15, which simplifies to 2/5. The calculator automatically reduces the product to lowest terms using the greatest common divisor.
+            </p>
 
-            <h3 class="text-2xl font-bold mt-12 mb-6 text-slate-800 dark:text-slate-100 border-b pb-2 border-slate-200 dark:border-slate-800">4. Carpentry, Architecture, and DIY Construction</h3>
-            <p>Architects design using digital tablets that calculate room areas and material loads in decimals, but builders on the ground execute those designs using tape measures graded in 16ths of an inch. </p>
-            <p>When an architect specifies a wall span of 12.625 feet, the site foreman cannot mark "point six two five" on a piece of lumber. They must convert that decimal extension (.625) into a fraction, revealing it to be exactly 5/8 of a foot (or 7.5 inches). Conversely, when a carpenter measures three pieces of scrap trim at 4 1/2 inches, 3 3/4 inches, and 6 1/8 inches, and needs to input the total yield into a digital inventory software, they must first add the fractions and then convert the final sum into a decimal format accepted by the computer system.</p>
+            <h3 class="text-2xl font-bold mt-12 mb-6 text-slate-800 dark:text-slate-100 border-b pb-2 border-slate-200 dark:border-slate-800">
+                Divide fractions
+            </h3>
+            <p>
+                Dividing by a fraction is equivalent to multiplying by its reciprocal. For example, 3/4 ÷ 2/5 becomes 3/4 × 5/2, which equals 15/8 or 1 7/8. A denominator of zero is not valid, and this calculator blocks undefined division-by-zero operations.
+            </p>
 
-            <h3 class="text-2xl font-bold mt-12 mb-6 text-slate-800 dark:text-slate-100 border-b pb-2 border-slate-200 dark:border-slate-800">5. Education and Academic Application</h3>
-            <p>Finally, understanding the relationship between decimals and fractions is a foundational pillar of early mathematics education. Students are frequently tasked with identifying equivalent values to build number sense. A comprehensive calculator tool does not just provide the answer; it verifies a student's manual work, confirming that a complex repeating decimal visually translates to a specific rational fraction, thereby reinforcing the theoretical concepts taught in the classroom.</p>
+            <h3 class="text-2xl font-bold mt-12 mb-6 text-slate-800 dark:text-slate-100 border-b pb-2 border-slate-200 dark:border-slate-800">
+                Decimal to fraction calculator
+            </h3>
+            <p>
+                The Decimal to Fraction tab converts a terminating decimal into an equivalent fraction. A decimal such as 0.75 represents 75 hundredths, or 75/100. Dividing the numerator and denominator by their greatest common divisor reduces that value to 3/4. Likewise, 3.125 becomes 3125/1000 and simplifies to 25/8, which is also 3 1/8.
+            </p>
+            <p>
+                The converter uses the number of decimal places you enter to build the denominator as a power of ten, then reduces the fraction. Because the input is finite, repeating decimals such as 0.333... are treated according to the exact digits entered rather than as an infinite repeating value.
+            </p>
 
-            <p class="mt-8 font-semibold">Ultimately, fractions and decimals are two sides of the same mathematical coin. Whether you are engineering aerospace components, balancing an investment portfolio, or scaling a recipe for a family dinner, the ability to seamlessly calculate and convert between these formats bridges the gap between theoretical data and practical execution.</p>
+            <h3 class="text-2xl font-bold mt-12 mb-6 text-slate-800 dark:text-slate-100 border-b pb-2 border-slate-200 dark:border-slate-800">
+                Fraction to decimal calculator
+            </h3>
+            <p>
+                Converting a fraction to a decimal is done by dividing the numerator by the denominator. For example, 3/4 equals 0.75 and 5/8 equals 0.625. You can also enter a mixed number such as 2 1/4, which converts to 2.25.
+            </p>
+
+            <h3 class="text-2xl font-bold mt-12 mb-6 text-slate-800 dark:text-slate-100 border-b pb-2 border-slate-200 dark:border-slate-800">
+                What does simplest form mean?
+            </h3>
+            <p>
+                A fraction is in simplest form, or lowest terms, when the numerator and denominator no longer share a common factor greater than one. For example, 12/18 simplifies to 2/3 because both 12 and 18 can be divided by 6. Reducing fractions makes equivalent values easier to compare and use in later calculations.
+            </p>
+
+            <h3 class="text-2xl font-bold mt-12 mb-6 text-slate-800 dark:text-slate-100 border-b pb-2 border-slate-200 dark:border-slate-800">
+                Common uses for fraction calculations
+            </h3>
+            <p>
+                Fraction math appears in recipes, measurements, carpentry, construction, schoolwork, engineering and everyday comparisons. A cook may need to double 3/4 cup, a carpenter may add several fractional-inch measurements, or a student may need to verify a mixed-number calculation. Decimal conversion is also useful when a measurement written as a fraction must be entered into software that expects decimal values.
+            </p>
+
+            <p class="mt-8 font-semibold">
+                Use the tabs above to switch between fraction arithmetic, decimal-to-fraction conversion and fraction-to-decimal conversion without leaving the page.
+            </p>
         </article>
 
         <!-- FAQ Section (8 Questions) -->
         <section class="max-w-4xl mx-auto mb-20" id="faq-section">
             <div class="text-center mb-10">
-                <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white">Frequently Asked Questions</h2>
-                <p class="text-slate-600 dark:text-slate-400 mt-3 text-lg">Clear answers regarding fraction arithmetic and decimal conversions.</p>
+                <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white">Fraction Calculator FAQ</h2>
+                <p class="text-slate-600 dark:text-slate-400 mt-3 text-lg">Common questions about fraction arithmetic, mixed numbers, simplifying fractions and decimal conversions.</p>
             </div>
             
             <div class="space-y-4" id="faq-container">
                 <!-- FAQs dynamically injected for clean DOM -->
             </div>
         </section>
+
+
+        <!-- =========================================================
+             GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+             Paste approved Google AdSense code here after approval.
+             This comment is intentionally invisible and reserves no space.
+        ========================================================= -->
 
     </main>
 
@@ -342,28 +490,31 @@
     <script>
         // --- 1. Theme Management ---
         const themeToggleBtn = document.getElementById('themeToggle');
-        const sunIcon = document.getElementById('sunIcon');
-        const moonIcon = document.getElementById('moonIcon');
+        const themeIcon = document.getElementById('themeIcon');
 
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-            sunIcon.classList.remove('hidden');
-        } else {
-            document.documentElement.classList.remove('dark');
-            moonIcon.classList.remove('hidden');
+        function applyTheme(theme) {
+            const dark = theme === 'dark';
+            document.documentElement.classList.toggle('dark', dark);
+            if (themeIcon) {
+                themeIcon.setAttribute('data-lucide', dark ? 'sun' : 'moon');
+            }
+            if (themeToggleBtn) {
+                themeToggleBtn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+                themeToggleBtn.title = dark ? 'Switch to light mode' : 'Switch to dark mode';
+            }
+            if (window.lucide) lucide.createIcons();
         }
 
+        const savedTheme = localStorage.getItem('utiliverse-theme');
+        const initialTheme = savedTheme || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        applyTheme(initialTheme);
+
         themeToggleBtn.addEventListener('click', function() {
-            sunIcon.classList.toggle('hidden');
-            moonIcon.classList.toggle('hidden');
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                localStorage.setItem('color-theme', 'light');
-            } else {
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('color-theme', 'dark');
-            }
+            const nextTheme = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+            localStorage.setItem('utiliverse-theme', nextTheme);
+            applyTheme(nextTheme);
         });
+
 
         lucide.createIcons();
 
@@ -579,14 +730,15 @@
 
         // --- 5. FAQ Data & Rendering (8 Questions) ---
         const faqs = [
-            { q: "How do I convert a decimal to a fraction?", a: "To convert a decimal to a fraction, look at the number of decimal places. Place the digits after the decimal over a power of 10 (10 for one place, 100 for two, 1000 for three). Then, simplify the resulting fraction by finding the greatest common divisor." },
-            { q: "How do I convert a fraction to a decimal?", a: "Converting a fraction to a decimal is simply a matter of division. Divide the top number (numerator) by the bottom number (denominator). For example, to convert 3/4, divide 3 by 4 to get 0.75." },
-            { q: "What is a mixed number?", a: "A mixed number is a combination of a whole integer and a proper fraction, such as 2 1/4. It represents a value greater than one, written in a format that is easily understandable for physical measurements." },
-            { q: "How does the calculator handle negative decimals?", a: "If you input a negative decimal (like -3.25), the tool automatically preserves the negative value, applying it to the resulting fraction to yield an accurate negative improper fraction or negative mixed number." },
-            { q: "Can this tool handle repeating decimals?", a: "This specific calculator converts terminating decimals. A repeating decimal (like 0.333...) theoretically converts to fractions like 1/3, but inputting it manually will calculate based on the exact finite number of digits you provide." },
-            { q: "Why do we need a common denominator for addition?", a: "Denominators dictate the 'size' of the fractional pieces. You cannot mathematically add pieces of different sizes (like 1/3 and 1/8) without first translating them into equivalent, equally sized pieces." },
-            { q: "What is an improper fraction?", a: "An improper fraction is a fraction where the numerator (the top number) is equal to or greater than the denominator (the bottom number), such as 5/4. They are mathematically useful but often converted to mixed numbers for readability." },
-            { q: "What happens if I try to divide a fraction by zero?", a: "In mathematics, dividing any number by zero is 'undefined.' The calculator has safety checks built-in to prevent this operation and will display an error message prompting you to change the denominator." }
+            { q: "How do I add fractions with different denominators?", a: "Find a common denominator, rewrite each fraction using that denominator, add the numerators, and simplify the result. For example, 1/3 + 1/4 becomes 4/12 + 3/12 = 7/12." },
+            { q: "How do I subtract fractions?", a: "Use a common denominator, subtract the numerators, keep the denominator, and then reduce the result to simplest form." },
+            { q: "How do I multiply fractions?", a: "Multiply the numerators together and multiply the denominators together, then simplify. For example, 2/3 × 3/5 = 6/15 = 2/5." },
+            { q: "How do I divide fractions?", a: "Multiply the first fraction by the reciprocal of the second fraction. For example, 3/4 ÷ 2/5 becomes 3/4 × 5/2 = 15/8 = 1 7/8." },
+            { q: "What is a mixed number?", a: "A mixed number combines a whole number and a proper fraction, such as 2 1/4. This calculator converts mixed numbers to improper fractions internally so they can be calculated accurately." },
+            { q: "How do I convert a decimal to a fraction?", a: "Write the decimal as an integer over a power of 10 based on the number of decimal places, then reduce the fraction. For example, 0.75 = 75/100 = 3/4." },
+            { q: "How do I convert a fraction to a decimal?", a: "Divide the numerator by the denominator. For example, 3/4 equals 0.75 and 5/8 equals 0.625." },
+            { q: "What does simplest form mean?", a: "A fraction is in simplest form when the numerator and denominator have no common factor greater than one. For example, 12/18 reduces to 2/3." },
+            { q: "Can this calculator convert repeating decimals exactly?", a: "The decimal-to-fraction tool converts the finite decimal digits you enter. Infinite repeating decimals such as 0.333... require special repeating-decimal logic and are not inferred automatically from a finite typed value." }
         ];
 
         const faqContainer = document.getElementById('faq-container');
