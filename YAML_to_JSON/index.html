@@ -3,11 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>YAML to JSON Converter | Utiliverse</title>
-<meta name="description" content="Convert YAML configuration and structured data to formatted JSON in your browser.">
-<meta name="robots" content="index,follow">
+<title>YAML to JSON Converter – Format & Validate YAML | Utiliverse</title>
+<meta name="description" content="Free YAML to JSON converter and formatter. Convert YAML configuration and structured data into readable JSON with live validation directly in your browser.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="theme-color" content="#020617">
 <link rel="canonical" href="https://utiliverse.app/YAML_to_JSON/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="YAML to JSON Converter – Format & Validate YAML | Utiliverse">
+<meta property="og:description" content="Convert YAML to formatted JSON, see parsing errors, load an example and copy the result directly in your browser.">
+<meta property="og:url" content="https://utiliverse.app/YAML_to_JSON/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="YAML to JSON Converter – Format & Validate YAML | Utiliverse">
+<meta name="twitter:description" content="Free browser-based YAML to JSON converter with formatted output and parsing feedback.">
+
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
@@ -82,57 +91,120 @@ body.light-mode footer {
   border-color: #e2e8f0;
 }
 body.light-mode footer span { color: #64748b; }
+
+.free-browser-note{font-size:.75rem;color:#94a3b8;font-weight:700;white-space:nowrap}
+#theme-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
+  padding:0;
+  border:1px solid #334155;
+  border-radius:12px;
+  background:rgba(15,23,42,.72);
+  color:#94a3b8;
+  box-shadow:none;
+  appearance:none;
+  -webkit-appearance:none;
+  cursor:pointer;
+  transition:background .2s ease,color .2s ease,border-color .2s ease;
+}
+#theme-toggle:hover{background:#1e293b;color:#fff;border-color:#475569}
+#theme-toggle:focus-visible,.btn:focus-visible,.input:focus-visible{outline:2px solid #6366f1;outline-offset:2px}
+#theme-toggle svg{width:18px;height:18px;stroke-width:2}
+.theme-hidden{display:none!important}
+body.light-mode #theme-toggle{background:#fff;border-color:#cbd5e1;color:#475569}
+body.light-mode #theme-toggle:hover{background:#f1f5f9;border-color:#94a3b8;color:#0f172a}
+body.light-mode .free-browser-note{color:#64748b}
+.local-processing-note{font-size:12px;line-height:1.65;color:#94a3b8}
+body.light-mode .local-processing-note{color:#64748b}
+.formula-box{margin:1.25rem 0;padding:1rem;border:1px solid #334155;border-radius:12px;background:rgba(15,23,42,.55)}
+body.light-mode .formula-box{border-color:#e2e8f0;background:#f8fafc}
+@media(max-width:640px){
+  .free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}
+  #theme-toggle{width:38px;height:38px;flex:0 0 auto}
+  #yaml,#json{font-size:16px!important}
+}
+
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Yaml To Json","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse YAML to JSON Converter","url":"https://utiliverse.app/YAML_to_JSON/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled. The page loads the js-yaml parser from a public CDN.","description":"Free browser-based YAML to JSON converter that parses YAML, reports syntax errors and produces formatted JSON output.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Live YAML parsing","Formatted JSON output","YAML syntax error feedback","Nested objects and arrays","Example YAML loader","Copy JSON output","Clear input and output","Browser-side conversion"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the YAML to JSON conversion performed locally?","acceptedAnswer":{"@type":"Answer","text":"Yes. The YAML text is parsed and the JSON result is generated in your browser. The page loads the js-yaml library and interface resources from public CDNs, but this tool does not submit your YAML to a Utiliverse conversion server."}},{"@type":"Question","name":"Can nested YAML be converted?","acceptedAnswer":{"@type":"Answer","text":"Yes. Valid nested mappings, lists and scalar values supported by the js-yaml parser are converted into the corresponding JavaScript data structure and then formatted as JSON."}},{"@type":"Question","name":"Does the JSON output get formatted?","acceptedAnswer":{"@type":"Answer","text":"Yes. The output uses two-space indentation so objects and arrays are easier to read."}},{"@type":"Question","name":"What happens if my YAML is invalid?","acceptedAnswer":{"@type":"Answer","text":"The status area shows the parser error. The most recent valid JSON output is left in place so a parsing error does not silently replace it with misleading data."}},{"@type":"Question","name":"What happens with an empty or comment-only YAML document?","acceptedAnswer":{"@type":"Answer","text":"An empty input clears the output. A YAML document containing only comments or otherwise parsing to no value is represented as JSON null."}},{"@type":"Question","name":"Can I copy the converted JSON?","acceptedAnswer":{"@type":"Answer","text":"Yes. Use the Copy button. The page reports whether copying succeeded or whether clipboard access was unavailable."}},{"@type":"Question","name":"Does YAML support features that JSON does not?","acceptedAnswer":{"@type":"Answer","text":"Yes. YAML supports comments and additional syntax such as anchors, aliases and type handling. The parser resolves supported YAML constructs before the result is serialized to JSON, so the JSON representation may not preserve YAML-specific syntax."}},{"@type":"Question","name":"Should I paste passwords, API keys or secrets into the converter?","acceptedAnswer":{"@type":"Answer","text":"Avoid placing real secrets into any webpage unless you trust the full environment. This converter performs the conversion in the browser, but the page still loads JavaScript libraries from public CDNs."}}]}</script>
 </head>
 <body>
+<!--
+SEO TARGET CLUSTER
+Primary: YAML to JSON converter
+Secondary: YAML converter, YAML to JSON formatter, YAML parser,
+convert YAML to JSON online, YAML validator, JSON formatter,
+developer YAML tool, configuration converter
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
 <header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800 transition-all duration-300">
 <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
 <a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2 transition-colors">
   <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse
 </a>
 <div class="flex items-center gap-4">
-  <span class="text-xs text-slate-500 hidden sm:inline-block">Free & Browser-Based</span>
-  <button id="theme-toggle" class="text-slate-400 hover:text-white transition-colors cursor-pointer" aria-label="Toggle light/dark mode">
-    <i data-lucide="sun" id="theme-icon" class="w-5 h-5"></i>
+  <span class="free-browser-note">100% Free and Browser Based</span>
+  <button id="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+    <svg id="moon-icon" class="theme-hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
+    <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
   </button>
 </div>
 </div>
 </header>
-<!-- GOOGLE ADSENSE: TOP PLACEMENT
-     Paste your approved AdSense code here. Invisible insertion point only.
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
 -->
 <main class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
 <div class="max-w-3xl">
 <p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Developer utility</p>
-<h1 class="text-4xl sm:text-5xl font-black mt-2">YAML to JSON Converter</h1>
-<p class="mt-4 text-lg muted leading-relaxed">Turn YAML configuration and structured data into formatted JSON directly in your browser.</p>
+<h1 class="text-4xl sm:text-5xl font-black mt-2">YAML to JSON Converter &amp; Formatter</h1>
+<p class="mt-4 text-lg muted leading-relaxed">Convert YAML configuration and structured data into formatted JSON with live parsing feedback directly in your browser.</p>
 </div>
 <section class="glass rounded-3xl p-5 sm:p-8 mt-8">
 <div class="grid lg:grid-cols-2 gap-5">
 <div>
 <div class="flex justify-between mb-2">
-<label class="font-semibold">YAML input</label>
+<label for="yaml" class="font-semibold">YAML input</label>
 <button class="btn text-xs" onclick="loadYaml()">Example</button>
 </div>
 <textarea id="yaml" class="input w-full rounded-xl p-4 h-96 font-mono text-sm" placeholder="name: Utiliverse&#10;features:&#10;  - calculators&#10;  - converters"></textarea>
 </div>
 <div>
 <div class="flex justify-between mb-2">
-<label class="font-semibold">JSON output</label>
+<label for="json" class="font-semibold">JSON output</label>
 <button class="btn text-xs" onclick="copyOut()">Copy</button>
 </div>
 <textarea id="json" class="input w-full rounded-xl p-4 h-96 font-mono text-sm" readonly></textarea>
-<div id="status" class="mt-3 text-sm muted">Ready</div>
+<div id="status" class="mt-3 text-sm muted" role="status" aria-live="polite">Ready</div>
 </div>
 </div>
 <div class="flex gap-3 mt-5">
 <button class="btn" onclick="clearAll()">Clear</button>
 </div>
 </section>
+<p class="local-processing-note mt-4">Browser-based conversion: YAML parsing and JSON generation happen on this page and your entered YAML is not submitted to a Utiliverse conversion server. The page loads js-yaml and interface libraries from public CDNs.</p>
+
+<!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
 <section class="article max-w-4xl mt-16">
 <p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Guide</p>
-<h2>Why convert YAML to JSON?</h2>
+<h2>How to Convert YAML to JSON</h2>
+<p>Paste YAML into the left editor and the converter parses it automatically as you type. Valid YAML is serialized into readable JSON with two-space indentation in the right editor. If the YAML is invalid, the status area shows the parser error while the previous valid JSON remains available for comparison.</p>
+<div class="formula-box">
+<p><strong>YAML input → js-yaml parser → JavaScript value → JSON.stringify(..., null, 2)</strong></p>
+<p>The conversion represents the parsed data structure. YAML-specific comments and formatting are not preserved in JSON.</p>
+</div>
 <p>YAML is popular for configuration because it is compact and comfortable for humans to edit. JSON is equally important when structured data needs to move between browser applications, APIs, automation scripts, and services that expect a standardized JSON document.</p>
 <p>Use this converter when you receive configuration in YAML but need a JSON representation for a web application, API request, test fixture, data inspection workflow, or another development tool. Converting in the browser keeps the workflow quick and avoids needless copy-and-paste between multiple services.</p>
 <h3>Common use cases</h3>
@@ -153,35 +225,19 @@ body.light-mode footer span { color: #64748b; }
 <p>Format conversion is also useful during troubleshooting. When a configuration behaves unexpectedly, comparing the YAML source with its JSON representation can make data types and nesting easier to inspect. This is especially helpful when a system accepts JSON but the human-edited source is maintained as YAML.</p>
 <p>Documentation teams can use converted JSON examples in API guides, code snippets, and test fixtures. Developers can then copy a formatted object directly into a JavaScript file or a request body. The conversion does not replace schema validation or application testing, but it can make the data shape much easier to review.</p>
 <h3>Why local processing is useful</h3>
-<p>Development data can contain internal hostnames, configuration values, example credentials, identifiers, or other information that should not be pasted into an unfamiliar service. A browser-side utility reduces one potential transfer point because the conversion itself can happen locally. You should still avoid pasting real secrets into any webpage and should review the security of your overall environment.</p>
-<p>For complex YAML, always remember that YAML supports features beyond the basic object, array, and scalar structures represented by strict JSON. Anchors, aliases, custom tags, and other advanced constructs may require a full YAML implementation and careful review. The correct workflow is to validate the result before using it in production.</p>
+<p>Development data can contain internal hostnames, configuration values, identifiers or secrets. The conversion itself happens in the browser rather than on a Utiliverse conversion server, but this page loads JavaScript libraries from public CDNs. Avoid pasting real passwords, private keys or production secrets into any webpage unless you trust the full environment.</p>
+<p>For complex YAML, remember that YAML supports features beyond the basic object, array and scalar syntax of strict JSON. Supported anchors, aliases and data types are resolved by the parser before JSON serialization, while unsupported custom tags can produce parsing errors. Review the resulting JSON before using it in production.</p>
 <h3>Team workflows and safer handoffs</h3>
 <p>Conversion is also valuable when several people use the same data in different environments. One teammate can maintain a readable YAML configuration while another needs JSON for an API test or browser fixture. Having a quick format conversion step makes that handoff easier to reproduce and reduces manual editing. For team documentation, save the original source alongside the generated representation so future changes can be traced back to the authoritative file.</p>
-<h2>Frequently Asked Questions</h2>
-<details class="faq">
-<summary>Is the conversion performed locally?</summary>
-<p class="muted">Yes. The browser parses the YAML and creates the JSON output locally; the entered text is not sent to a conversion server by this page.</p>
-</details>
-<details class="faq">
-<summary>Can nested YAML be converted?</summary>
-<p class="muted">Yes, provided the YAML is valid and uses constructs supported by the parser bundled with the page.</p>
-</details>
-<details class="faq">
-<summary>Does the output get formatted?</summary>
-<p class="muted">Yes. JSON is indented for readability.</p>
-</details>
-<details class="faq">
-<summary>Can I copy the result?</summary>
-<p class="muted">Yes. Use the Copy button next to the output.</p>
-</details>
-<details class="faq">
-<summary>What happens if my YAML is invalid?</summary>
-<p class="muted">The tool displays a parsing error and leaves the previous valid output untouched.</p>
-</details>
-<details class="faq">
-<summary>Is JSON better than YAML?</summary>
-<p class="muted">Neither is universally better. The useful choice depends on whether human-friendly configuration or broad machine/data interchange is the priority.</p>
-</details>
+<h2>YAML to JSON Converter FAQ</h2>
+<details class="faq"><summary>Is the YAML to JSON conversion performed locally?</summary><p class="muted">Yes. The YAML text is parsed and the JSON result is generated in your browser. The page loads the js-yaml library and interface resources from public CDNs, but this tool does not submit your YAML to a Utiliverse conversion server.</p></details>
+<details class="faq"><summary>Can nested YAML be converted?</summary><p class="muted">Yes. Valid nested mappings, lists and scalar values supported by the js-yaml parser are converted into the corresponding JavaScript data structure and then formatted as JSON.</p></details>
+<details class="faq"><summary>Does the JSON output get formatted?</summary><p class="muted">Yes. The output uses two-space indentation so objects and arrays are easier to read.</p></details>
+<details class="faq"><summary>What happens if my YAML is invalid?</summary><p class="muted">The status area shows the parser error. The most recent valid JSON output is left in place so a parsing error does not silently replace it with misleading data.</p></details>
+<details class="faq"><summary>What happens with an empty or comment-only YAML document?</summary><p class="muted">An empty input clears the output. A YAML document containing only comments or otherwise parsing to no value is represented as JSON null.</p></details>
+<details class="faq"><summary>Can I copy the converted JSON?</summary><p class="muted">Yes. Use the Copy button. The page reports whether copying succeeded or whether clipboard access was unavailable.</p></details>
+<details class="faq"><summary>Does YAML support features that JSON does not?</summary><p class="muted">Yes. YAML supports comments and additional syntax such as anchors, aliases and type handling. The parser resolves supported YAML constructs before the result is serialized to JSON, so the JSON representation may not preserve YAML-specific syntax.</p></details>
+<details class="faq"><summary>Should I paste passwords, API keys or secrets into the converter?</summary><p class="muted">Avoid placing real secrets into any webpage unless you trust the full environment. This converter performs the conversion in the browser, but the page still loads JavaScript libraries from public CDNs.</p></details>
 </section>
 </main>
 <script>
@@ -197,7 +253,8 @@ function convert() {
 
   try {
     const obj = jsyaml.load(s);
-    document.getElementById('json').value = JSON.stringify(obj, null, 2);
+    const normalized = obj === undefined ? null : obj;
+    document.getElementById('json').value = JSON.stringify(normalized, null, 2);
     document.getElementById('status').textContent = 'Conversion complete';
   } catch(e) {
     document.getElementById('status').textContent = 'Error: ' + e.message;
@@ -210,8 +267,21 @@ function loadYaml() {
   convert();
 }
 
-function copyOut() {
-  navigator.clipboard.writeText(document.getElementById('json').value);
+async function copyOut() {
+  const output = document.getElementById('json').value;
+  const status = document.getElementById('status');
+
+  if (!output) {
+    status.textContent = 'Nothing to copy';
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(output);
+    status.textContent = 'JSON copied to clipboard';
+  } catch (err) {
+    status.textContent = 'Unable to copy automatically. Select the JSON and copy it manually.';
+  }
 }
 
 function clearAll() {
@@ -220,34 +290,54 @@ function clearAll() {
   document.getElementById('status').textContent = 'Ready';
 }
 
-function toggleTheme() {
-  const body = document.body;
-  const icon = document.getElementById('theme-icon');
-  
-  body.classList.toggle('light-mode');
-  
-  if (body.classList.contains('light-mode')) {
-    icon.setAttribute('data-lucide', 'moon');
-  } else {
-    icon.setAttribute('data-lucide', 'sun');
+document.getElementById('yaml').addEventListener('input', convert);
+
+const themeToggle = document.getElementById('theme-toggle');
+const moonIcon = document.getElementById('moon-icon');
+const sunIcon = document.getElementById('sun-icon');
+const metaTheme = document.querySelector('meta[name="theme-color"]');
+
+function applyTheme(theme) {
+  const light = theme === 'light';
+
+  document.body.classList.toggle('light-mode', light);
+  moonIcon.classList.toggle('theme-hidden', !light);
+  sunIcon.classList.toggle('theme-hidden', light);
+
+  const label = light ? 'Switch to dark mode' : 'Switch to light mode';
+  themeToggle.setAttribute('aria-label', label);
+  themeToggle.title = label;
+
+  if (metaTheme) {
+    metaTheme.setAttribute('content', light ? '#f8fafc' : '#020617');
   }
-  
-  // Re-initialize the specific icon to render the change
-  lucide.createIcons();
 }
 
-// Event Listeners
-document.getElementById('yaml').addEventListener('input', convert);
-document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+const savedTheme = localStorage.getItem('utiliverse-theme');
+const initialTheme = savedTheme ||
+  (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+
+applyTheme(initialTheme);
+
+themeToggle.addEventListener('click', () => {
+  const nextTheme =
+    document.body.classList.contains('light-mode') ? 'dark' : 'light';
+
+  localStorage.setItem('utiliverse-theme', nextTheme);
+  applyTheme(nextTheme);
+});
 </script>
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
 <footer class="border-t border-slate-800 bg-slate-950 transition-colors duration-300">
 <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500">
-<span>© <span id="year"></span> Utiliverse. All rights reserved.</span>
-<span>Tools are designed for browser-based use.</span>
+<span>© 2026 Utiliverse. All rights reserved.</span>
+<span>100% Free and Browser Based</span>
 </div>
 </footer>
 <script>
-document.getElementById('year').textContent = new Date().getFullYear();
 lucide.createIcons();
 </script>
 </body>
