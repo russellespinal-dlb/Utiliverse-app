@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Scientific Calculator | Utiliverse</title>
+<title>Scientific Calculator – Trig, Logs, Powers & Roots | Utiliverse</title>
 
-<meta name="description" content="Free online scientific calculator for arithmetic, trigonometry, powers, roots, logarithms, factorials and more.">
+<meta name="description" content="Free online scientific calculator for arithmetic, DEG/RAD trigonometry, powers, roots, logarithms, factorials, percentages, memory and keyboard input.">
 
 <style>
 
@@ -886,15 +886,73 @@ body.light-mode footer {
     }
 }
 
-/* GOOGLE ADSENSE: TOP PLACEMENT
-   Paste approved Google AdSense code here after approval.
-   This placeholder is intentionally invisible and reserves no physical space.
-*/
+
+
+
+.topbar-actions{display:flex;align-items:center;gap:12px}
+.free-browser-note{color:#94a3b8;font-size:12px;font-weight:700;white-space:nowrap;letter-spacing:.1px}
+#theme-toggle{
+    width:40px;
+    height:40px;
+    padding:0;
+    border:1px solid #334155;
+    border-radius:12px;
+    background:rgba(15,23,42,.72);
+    color:#94a3b8;
+    box-shadow:none;
+    appearance:none;
+    -webkit-appearance:none;
+    transform:none;
+}
+#theme-toggle:hover{
+    background:#1e293b;
+    color:#fff;
+    border-color:#475569;
+    transform:none;
+}
+#theme-toggle svg{width:18px;height:18px;stroke-width:2}
+.theme-hidden{display:none!important}
+body.light-mode #theme-toggle{background:#fff;border-color:#cbd5e1;color:#475569}
+body.light-mode #theme-toggle:hover{background:#f1f5f9;border-color:#94a3b8;color:#0f172a}
+body.light-mode .free-browser-note{color:#64748b}
+.local-processing-note{max-width:680px;margin:-12px auto 28px;color:#94a3b8;font-size:11px;line-height:1.6}
+body.light-mode .local-processing-note{color:#64748b}
+@media(max-width:650px){
+    .free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}
+    #theme-toggle{width:38px;height:38px;flex:0 0 auto}
+}
 
 </style>
+
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/Scientific_Calculator/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Scientific Calculator – Trig, Logs, Powers & Roots | Utiliverse">
+<meta property="og:description" content="Calculate arithmetic, trigonometry, powers, roots, logarithms, factorials and more directly in your browser.">
+<meta property="og:url" content="https://utiliverse.app/Scientific_Calculator/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Scientific Calculator – Trig, Logs, Powers & Roots | Utiliverse">
+<meta name="twitter:description" content="Free browser-based scientific calculator with DEG/RAD modes, memory, history and keyboard support.">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Scientific Calculator","url":"https://utiliverse.app/Scientific_Calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based scientific calculator for arithmetic, trigonometry, powers, roots, logarithms, factorials, percentages, memory, history and keyboard input.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Basic arithmetic","Degrees and radians trigonometry","Inverse trigonometric functions","Powers and square or cube roots","Natural and base-10 logarithms","Factorials","Percent calculations","Memory functions","ANS recall","Calculation history","Keyboard input"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is this scientific calculator used for?","acceptedAnswer":{"@type":"Answer","text":"It performs standard arithmetic plus trigonometric functions, inverse trig, powers, roots, logarithms, factorials, percentages, memory operations and expression calculations."}},{"@type":"Question","name":"What is the difference between DEG and RAD?","acceptedAnswer":{"@type":"Answer","text":"DEG interprets trigonometric inputs as degrees, while RAD interprets them as radians. Inverse trig results are also converted to degrees when DEG mode is selected."}},{"@type":"Question","name":"How does the x\u02b8 button work?","acceptedAnswer":{"@type":"Answer","text":"The x\u02b8 button inserts the exponent operator. Enter the base, select x\u02b8, enter the exponent and then calculate the expression."}},{"@type":"Question","name":"What is the difference between log and ln?","acceptedAnswer":{"@type":"Answer","text":"The log button calculates the base-10 logarithm, while ln calculates the natural logarithm using base e."}},{"@type":"Question","name":"What values can the factorial function use?","acceptedAnswer":{"@type":"Answer","text":"This calculator accepts whole-number factorial inputs from 0 through 170. Negative values, non-integers and values above 170 return an error."}},{"@type":"Question","name":"How does the percent button work?","acceptedAnswer":{"@type":"Answer","text":"The percent symbol is interpreted as division by 100 when an expression is evaluated. For example, 25% evaluates to 0.25 and 200 \u00d7 10% evaluates to 20."}},{"@type":"Question","name":"Can I use my keyboard?","acceptedAnswer":{"@type":"Answer","text":"Yes. Numbers, decimal points, parentheses, percent signs and common arithmetic operators are supported. Enter or equals calculates, Backspace deletes the last character and Escape clears the calculator."}},{"@type":"Question","name":"Does the calculator save my calculations to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Calculator operations and recent history are handled in the browser and are not submitted to a Utiliverse server by the calculator code."}}]}</script>
 </head>
 
 <body>
+<!--
+SEO TARGET CLUSTER
+Primary: scientific calculator
+Secondary: online scientific calculator, trig calculator, logarithm calculator,
+power calculator, root calculator, factorial calculator, degree radian calculator,
+advanced calculator, math calculator
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
 
 <!-- =========================================================
      TOP NAVIGATION
@@ -905,16 +963,20 @@ body.light-mode footer {
             ← Back to Utiliverse
         </a>
 
-        <button
-            id="theme-toggle"
-            type="button"
-            aria-label="Switch to light mode"
-            title="Switch to light mode"
-        >
-            <span id="theme-icon" aria-hidden="true">☀</span>
-        </button>
+        <div class="topbar-actions">
+            <span class="free-browser-note">100% Free and Browser Based</span>
+            <button id="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+                <svg id="moon-icon" class="theme-hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
+                <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+            </button>
+        </div>
     </div>
 </header>
+
+<!-- GOOGLE ADSENSE: TOP / ABOVE-CALCULATOR INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
 
 <!-- =========================================================
      PAGE HEADER
@@ -923,7 +985,7 @@ body.light-mode footer {
     <div class="eyebrow">Math &amp; Science</div>
     <h1>Scientific Calculator</h1>
     <p class="subtitle">
-        A modern calculator for everyday math, advanced functions and scientific calculations.
+        Calculate arithmetic, trigonometry, powers, roots, logarithms, factorials and percentages with DEG/RAD modes, memory, history and keyboard support.
     </p>
 </section>
 
@@ -1066,13 +1128,18 @@ body.light-mode footer {
 </div>
 
 </section>
+<p class="local-processing-note">Browser-based calculation: expressions, memory values and recent calculation history are handled locally on this page and are not submitted to a Utiliverse server.</p>
 
+<!-- GOOGLE ADSENSE: MID-PAGE / AFTER-CALCULATOR INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
 
 <!-- ABOUT -->
 
 <section class="content-card">
 
-<h2>About the Scientific Calculator</h2>
+<h2>Free Online Scientific Calculator</h2>
 
 <p>
 A scientific calculator is designed to handle mathematical problems that go beyond basic addition, subtraction, multiplication and division. While a standard calculator is useful for everyday arithmetic, a scientific calculator adds functions that are commonly used in algebra, geometry, trigonometry, statistics, science, engineering and higher-level mathematics.
@@ -1195,81 +1262,37 @@ For schoolwork, professional calculations or important decisions, it is a good p
 
 <h2>Scientific Calculator FAQ</h2>
 
-<div class="faq-item">
+<div class="faq-item"><div class="faq-question">1. What is this scientific calculator used for?</div><p>It performs standard arithmetic plus trigonometric functions, inverse trig, powers, roots, logarithms, factorials, percentages, memory operations and expression calculations.</p></div>
 
-<div class="faq-question">
-1. What is a scientific calculator used for?
-</div>
+<div class="faq-item"><div class="faq-question">2. What is the difference between DEG and RAD?</div><p>DEG interprets trigonometric inputs as degrees, while RAD interprets them as radians. Inverse trig results are also converted to degrees when DEG mode is selected.</p></div>
 
-<p>
-A scientific calculator performs normal arithmetic plus advanced functions such as trigonometry, logarithms, powers, roots and factorials. It is commonly used for mathematics, science, engineering and technical calculations.
-</p>
+<div class="faq-item"><div class="faq-question">3. How does the xʸ button work?</div><p>The xʸ button inserts the exponent operator. Enter the base number, select xʸ, enter the exponent and press equals. For example, 2 xʸ 3 evaluates to 8.</p></div>
 
-</div>
+<div class="faq-item"><div class="faq-question">4. What is the difference between log and ln?</div><p>The log button calculates the base-10 logarithm. The ln button calculates the natural logarithm using the mathematical constant e as its base.</p></div>
 
+<div class="faq-item"><div class="faq-question">5. What values can I use with factorial?</div><p>This calculator accepts whole-number factorial inputs from 0 through 170. Negative values, non-integers and values above 170 return an error.</p></div>
 
-<div class="faq-item">
+<div class="faq-item"><div class="faq-question">6. How does the percent button work?</div><p>The percent symbol is interpreted as division by 100 when an expression is evaluated. For example, 25% evaluates to 0.25 and 200 × 10% evaluates to 20.</p></div>
 
-<div class="faq-question">
-2. What is the difference between DEG and RAD?
-</div>
+<div class="faq-item"><div class="faq-question">7. Can I use my keyboard?</div><p>Yes. Numbers, decimal points, parentheses, percent signs and common arithmetic operators are supported. Press Enter or equals to calculate, Backspace to remove the last character and Escape to clear the calculator.</p></div>
 
-<p>
-DEG means degrees and RAD means radians. They are two different ways of measuring angles. Select the mode that matches the units used in your problem before calculating sine, cosine or tangent.
-</p>
-
-</div>
-
-
-<div class="faq-item">
-
-<div class="faq-question">
-3. What does the xʸ button do?
-</div>
-
-<p>
-The xʸ function raises one number to a selected power. For example, 2 raised to the third power is 8. Enter the base number, select xʸ, enter the exponent and calculate the result.
-</p>
-
-</div>
-
-
-<div class="faq-item">
-
-<div class="faq-question">
-4. What is the difference between log and ln?
-</div>
-
-<p>
-Log normally refers to the base-10 logarithm, while ln refers to the natural logarithm using the mathematical constant e as its base. Which one you need depends on the formula or mathematical problem.
-</p>
-
-</div>
-
-
-<div class="faq-item">
-
-<div class="faq-question">
-5. Can I use my keyboard with this calculator?
-</div>
-
-<p>
-Yes. Numbers, decimal points, parentheses and common arithmetic operators can be entered using your keyboard. Press Enter to calculate and Backspace to remove the last character.
-</p>
-
-</div>
+<div class="faq-item"><div class="faq-question">8. Does the calculator save my calculations to a server?</div><p>No. Calculator operations, memory values and recent history are handled in your browser and are not submitted to a Utiliverse server by the calculator code.</p></div>
 
 </section>
 
 </main>
 
 
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
 <footer>
-
-    <p>
-        © 2026 Utiliverse. Scientific calculations are provided for general informational and educational purposes.
-    </p>
-
+    <div style="max-width:1152px;margin:auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+        <span>© 2026 Utiliverse. All rights reserved.</span>
+        <span>100% Free and Browser Based</span>
+    </div>
 </footer>
 
 
@@ -1541,6 +1564,19 @@ function calculate() {
 
     try {
 
+        /*
+         * The display is editable, so validate the raw expression before
+         * using Function(). Only numeric mathematical tokens supported by
+         * this calculator are accepted. This prevents pasted JavaScript or
+         * other arbitrary code from reaching the evaluator.
+         */
+        const allowedExpression =
+            /^[0-9+\-*/^().%πeE\s]+$/;
+
+        if (!allowedExpression.test(input)) {
+            throw new Error("Unsupported expression");
+        }
+
         let expression = input;
 
         expression = expression
@@ -1548,12 +1584,6 @@ function calculate() {
             .replace(/\be\b/g, "Math.E")
             .replace(/\^/g, "**")
             .replace(/%/g, "/100");
-
-        /*
-         * Evaluate the arithmetic expression.
-         * The calculator accepts the controlled mathematical
-         * input produced by its own interface.
-         */
 
         let result = Function(
             '"use strict"; return (' + expression + ')'
@@ -1783,9 +1813,11 @@ document.addEventListener(
 ========================================================= */
 (function() {
     const toggle = document.getElementById("theme-toggle");
-    const icon = document.getElementById("theme-icon");
+    const moon = document.getElementById("moon-icon");
+    const sun = document.getElementById("sun-icon");
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
 
-    if (!toggle || !icon) {
+    if (!toggle || !moon || !sun) {
         return;
     }
 
@@ -1793,16 +1825,24 @@ document.addEventListener(
         const light = theme === "light";
 
         document.body.classList.toggle("light-mode", light);
-        icon.textContent = light ? "☾" : "☀";
+        moon.classList.toggle("theme-hidden", !light);
+        sun.classList.toggle("theme-hidden", light);
         toggle.setAttribute(
             "aria-label",
             light ? "Switch to dark mode" : "Switch to light mode"
         );
         toggle.title = light ? "Switch to dark mode" : "Switch to light mode";
+
+        if (metaTheme) {
+            metaTheme.setAttribute("content", light ? "#f8fafc" : "#020617");
+        }
     }
 
     const savedTheme = localStorage.getItem("utiliverse-theme");
-    applyTheme(savedTheme || "dark");
+    const initialTheme = savedTheme ||
+        (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+
+    applyTheme(initialTheme);
 
     toggle.addEventListener("click", function() {
         const nextTheme = document.body.classList.contains("light-mode")
