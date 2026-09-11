@@ -3,11 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Word & Character Count | Utiliverse</title>
-<meta name="description" content="Count words, characters, and sentences instantly with our free browser-based text analyzer tool.">
-<meta name="robots" content="index,follow">
+<title>Word Counter – Characters, Sentences & Text Length | Utiliverse</title>
+<meta name="description" content="Free online word counter for words, characters with and without whitespace, and sentences. Analyze text instantly in your browser for writing, essays and SEO.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="theme-color" content="#020617">
 <link rel="canonical" href="https://utiliverse.app/Word_Counter/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Word Counter – Characters, Sentences & Text Length | Utiliverse">
+<meta property="og:description" content="Count words, characters, whitespace-free characters and sentences instantly in your browser.">
+<meta property="og:url" content="https://utiliverse.app/Word_Counter/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Word Counter – Characters, Sentences & Text Length | Utiliverse">
+<meta name="twitter:description" content="Free browser-based word and character counter with live sentence counting.">
+
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
@@ -35,72 +44,192 @@ body.light-mode .article h2{color:#0f172a;}
 body.light-mode .article h3{color:#1e293b;}
 body.light-mode .article p{color:#475569;}
 body.light-mode header{background:rgba(255,255,255,0.9);border-color:#e2e8f0;}
+
+.free-browser-note{font-size:.75rem;color:#94a3b8;font-weight:700;white-space:nowrap}
+#theme-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
+  padding:0;
+  border:1px solid #334155;
+  border-radius:12px;
+  background:rgba(15,23,42,.72);
+  color:#94a3b8;
+  box-shadow:none;
+  appearance:none;
+  -webkit-appearance:none;
+  cursor:pointer;
+  transition:background .2s ease,color .2s ease,border-color .2s ease;
+}
+#theme-toggle:hover{background:#1e293b;color:#fff;border-color:#475569}
+#theme-toggle:focus-visible,.btn:focus-visible,.input:focus-visible{outline:2px solid #6366f1;outline-offset:2px}
+#theme-toggle svg{width:18px;height:18px;stroke-width:2}
+.theme-hidden{display:none!important}
+body.light-mode #theme-toggle{background:#fff;border-color:#cbd5e1;color:#475569}
+body.light-mode #theme-toggle:hover{background:#f1f5f9;border-color:#94a3b8;color:#0f172a}
+body.light-mode .free-browser-note{color:#64748b}
+.local-processing-note{font-size:12px;line-height:1.65;color:#94a3b8}
+body.light-mode .local-processing-note{color:#64748b}
+.formula-box{margin:1.25rem 0;padding:1rem;border:1px solid #334155;border-radius:12px;background:rgba(15,23,42,.55)}
+body.light-mode .formula-box{border-color:#e2e8f0;background:#f8fafc}
+body.light-mode .article li{color:#475569}
+body.light-mode footer{background:#f8fafc;border-color:#e2e8f0}
+body.light-mode footer span{color:#64748b}
+@media(max-width:640px){
+  .free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}
+  #theme-toggle{width:38px;height:38px;flex:0 0 auto}
+  #text_input{font-size:16px!important}
+}
+
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Word Counter","url":"https://utiliverse.app/Word_Counter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based word counter that reports words, characters with whitespace, characters without whitespace, and sentence estimates.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Live word count","Character count including whitespace","Character count excluding whitespace","Sentence count estimate","Paste or type text","Clear text control","Local browser processing"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How are words counted?","acceptedAnswer":{"@type":"Answer","text":"Words are counted by trimming the text and splitting it at one or more whitespace characters. Any non-empty whitespace-separated token counts as one word in this version."}},{"@type":"Question","name":"What is the difference between character count with and without whitespace?","acceptedAnswer":{"@type":"Answer","text":"Characters with whitespace counts every character in the text. Characters without whitespace removes spaces, tabs, line breaks and other whitespace characters before counting."}},{"@type":"Question","name":"How are sentences counted?","acceptedAnswer":{"@type":"Answer","text":"The tool splits text at one or more periods, exclamation points or question marks and counts the non-empty text segments that remain. It is a practical estimate rather than full linguistic sentence parsing."}},{"@type":"Question","name":"Does punctuation count as a character?","acceptedAnswer":{"@type":"Answer","text":"Yes. Punctuation marks count as characters in both character totals unless the character itself is whitespace."}},{"@type":"Question","name":"Is there a fixed text limit?","acceptedAnswer":{"@type":"Answer","text":"The page does not impose its own fixed character limit, but practical limits depend on the memory and performance of the browser and device."}},{"@type":"Question","name":"Can I paste text from an essay or document?","acceptedAnswer":{"@type":"Answer","text":"Yes. You can paste plain text into the text box and the counts update automatically."}},{"@type":"Question","name":"Does the Word Counter save or upload my text?","acceptedAnswer":{"@type":"Answer","text":"No. The counting logic runs locally in your browser and the text is not submitted to a Utiliverse text-analysis server by this tool."}},{"@type":"Question","name":"Why might this word count differ from another app?","acceptedAnswer":{"@type":"Answer","text":"Different applications use different rules for hyphens, punctuation, contractions, emojis and special characters. This tool uses a simple whitespace-separated token count."}}]}</script>
 </head>
 <body>
+<!--
+SEO TARGET CLUSTER
+Primary: word counter
+Secondary: character counter, sentence counter, word count tool,
+character count tool, text length counter, online word counter,
+essay word counter, count words and characters
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
 <header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800 transition-all duration-300">
 <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
 <a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2 transition-colors"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse</a>
 <div class="flex items-center gap-3">
-  <span class="text-xs sm:text-sm font-medium text-slate-500 whitespace-nowrap">100% Free and Browser Based</span>
-  <button id="theme-toggle" class="text-slate-400 hover:text-white transition-colors cursor-pointer" type="button" aria-label="Toggle light and dark mode" title="Toggle light and dark mode"><i data-lucide="sun" id="theme-icon" class="w-5 h-5"></i></button>
+  <span class="free-browser-note">100% Free and Browser Based</span>
+  <button id="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+  <svg id="moon-icon" class="theme-hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
+  <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+</button>
 </div>
 </div>
 </header>
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
 <main class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
 <div class="max-w-3xl">
 <p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Text Tools</p>
-<h1 class="text-4xl sm:text-5xl font-black mt-2">Word & Character Count</h1>
-<p class="mt-4 text-lg muted">Analyze your text length for essays, social media posts, and SEO.</p>
+<h1 class="text-4xl sm:text-5xl font-black mt-2">Word Counter &amp; Character Counter</h1>
+<p class="mt-4 text-lg muted">Count words, characters, whitespace-free characters and sentences instantly as you type or paste text.</p>
 </div>
 
 <section class="mt-8">
   <div class="grid sm:grid-cols-4 gap-3 mb-6">
-    <div class="glass rounded-xl p-4"><span class="muted text-xs uppercase font-bold">Words</span><div id="c_words" class="text-3xl font-black mt-1 text-indigo-400">0</div></div>
-    <div class="glass rounded-xl p-4"><span class="muted text-xs uppercase font-bold">Chars (No Spaces)</span><div id="c_chars_ns" class="text-3xl font-black mt-1 text-indigo-400">0</div></div>
-    <div class="glass rounded-xl p-4"><span class="muted text-xs uppercase font-bold">Chars (With Spaces)</span><div id="c_chars_s" class="text-3xl font-black mt-1 text-indigo-400">0</div></div>
-    <div class="glass rounded-xl p-4"><span class="muted text-xs uppercase font-bold">Sentences</span><div id="c_sent" class="text-3xl font-black mt-1 text-indigo-400">0</div></div>
+    <div class="glass rounded-xl p-4"><span class="muted text-xs uppercase font-bold">Words</span><div id="c_words" aria-live="polite" class="text-3xl font-black mt-1 text-indigo-400">0</div></div>
+    <div class="glass rounded-xl p-4"><span class="muted text-xs uppercase font-bold">Chars (No Whitespace)</span><div id="c_chars_ns" aria-live="polite" class="text-3xl font-black mt-1 text-indigo-400">0</div></div>
+    <div class="glass rounded-xl p-4"><span class="muted text-xs uppercase font-bold">Chars (With Spaces)</span><div id="c_chars_s" aria-live="polite" class="text-3xl font-black mt-1 text-indigo-400">0</div></div>
+    <div class="glass rounded-xl p-4"><span class="muted text-xs uppercase font-bold">Sentences</span><div id="c_sent" aria-live="polite" class="text-3xl font-black mt-1 text-indigo-400">0</div></div>
   </div>
   
   <textarea id="text_input" rows="12" class="input w-full rounded-2xl p-4 text-lg resize-y" placeholder="Type or paste your text here to begin analyzing..."></textarea>
   <button class="btn mt-4" onclick="document.getElementById('text_input').value=''; analyzeText();">Clear Text</button>
 </section>
+<p class="local-processing-note mt-4">Browser-based analysis: the text you enter is counted locally on this page and is not submitted to a Utiliverse text-analysis server.</p>
+
+<!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
 
 <section class="article max-w-4xl mt-16">
-<h2>Why Digital Calculators Matter: Unit and Currency Conversions in Daily Life</h2>
-<p>In our increasingly interconnected and fast-paced digital world, the need for precise mathematical transformations is more prevalent than ever. Whether you are navigating the complexities of international finance, scaling a recipe in your kitchen, or developing architectural blueprints, utility tools—ranging from percent calculators to advanced unit and currency converters—serve as the foundation for accuracy. This article explores the extensive use cases for unit and currency conversions, demonstrating why having access to reliable, browser-based utilities is essential for both professionals and everyday users.</p>
-<h3>The Critical Role of Currency Conversion</h3>
-<p>Currency conversion is perhaps the most frequent mathematical operation performed by internet users globally. The dynamic nature of foreign exchange (Forex) markets means that values fluctuate by the second. For international travelers, currency calculators are indispensable for budgeting. Knowing the exact exchange rate ensures that individuals do not overpay for lodging, food, or souvenirs, and helps them avoid hidden fees often applied by credit card companies and airport kiosks.</p>
-<p>Beyond tourism, the boom in global e-commerce has made currency conversion a daily necessity for consumers and business owners alike. An online shopper in the United States purchasing a custom leather good from Italy needs to convert Euros to US Dollars to understand the true cost. Conversely, the Italian merchant must price their goods competitively while accounting for conversion rates and international shipping costs.</p>
-<h3>Unit Conversions in Professional and Personal Settings</h3>
-<p>While currency focuses on finance, unit conversions dictate the physical world. The global divide between the metric system and the imperial system necessitates constant conversion for engineering, science, construction, and culinary arts.</p>
-<p>In the culinary world, recipes are frequently shared across borders. A baker in London using a recipe developed in New York must convert cups and fluid ounces into milliliters and grams. Precision here is not just a matter of preference; it is chemical necessity. Baking requires exact ratios, and a failure to convert volume to mass correctly can result in a culinary disaster. Volume calculators become vital tools for determining the exact capacity of baking tins or liquid containers.</p>
-<p>In engineering and construction, the stakes are significantly higher. Materials must be ordered using precise measurements. If an architectural plan drafted in metric units (meters, centimeters) is executed by a contractor accustomed to imperial units (feet, inches), a unit converter ensures structural integrity. Consider a civil engineer calculating the volume of concrete needed for a cylindrical pillar; they must convert dimensions accurately before using a volume calculator to find the cubic yardage required. A minor decimal error during conversion could lead to thousands of dollars in wasted materials or, worse, safety hazards.</p>
-<h3>Conclusion</h3>
-<p>The digitization of mathematical utilities has democratized access to precision. You no longer need to be a mathematician or carry a specialized scientific device to navigate a world of shifting currencies and varying measurement systems. Browser-based tools provide instant, accessible, and accurate answers, empowering users to make informed decisions and execute complex projects safely.</p>
+<h2>How to Use the Word Counter</h2>
+<p>Type or paste text into the box above. The four counters update automatically as the text changes, so there is no Analyze button to press. Use Clear Text when you want to reset the editor and all counts to zero.</p>
 
-<h2>Frequently Asked Questions</h2>
-<details class="faq"><summary>How are words counted?</summary><p class="muted">Words are calculated by splitting the text by spaces and line breaks, ignoring empty gaps.</p></details>
-<details class="faq"><summary>Why is character count without spaces important?</summary><p class="muted">Many academic and professional assignments, as well as specific software limitations, require a strict character limit that excludes whitespace.</p></details>
-<details class="faq"><summary>How does it count sentences?</summary><p class="muted">The tool looks for standard punctuation marks like periods, exclamation points, and question marks to determine where a sentence ends.</p></details>
-<details class="faq"><summary>Is there a limit to how much text I can paste?</summary><p class="muted">No, because processing happens directly in your browser, you can analyze thousands of words instantly without server limitations.</p></details>
-<details class="faq"><summary>Does it count punctuation as characters?</summary><p class="muted">Yes, punctuation marks are counted as characters in both the 'with spaces' and 'without spaces' metrics.</p></details>
+<h3>How the Counts Work</h3>
+<div class="formula-box">
+<p><strong>Words:</strong> non-empty tokens separated by one or more whitespace characters.</p>
+<p><strong>Characters with spaces:</strong> every character in the text, including spaces, tabs and line breaks.</p>
+<p><strong>Characters without whitespace:</strong> the same text after whitespace characters are removed.</p>
+<p><strong>Sentences:</strong> non-empty text segments separated by one or more periods, exclamation points or question marks.</p>
+</div>
+
+<h3>Word Count</h3>
+<p>The word total is useful for essays, articles, reports, assignments, blog posts and other writing with length requirements. This implementation uses a simple whitespace-based rule, so any non-empty token between spaces or line breaks counts as one word. That means hyphenated terms, contractions and punctuation can be treated differently than they are in some word processors.</p>
+
+<h3>Character Count With and Without Whitespace</h3>
+<p>The character count with spaces includes every character exactly as entered. The whitespace-free count removes spaces, tabs, line breaks and other whitespace before counting. Punctuation, numbers, emoji and symbols still count as characters when present.</p>
+
+<h3>Sentence Count</h3>
+<p>The sentence total is an estimate based on periods, exclamation points and question marks. It works well for ordinary prose, but abbreviations, decimal numbers, ellipses and unusual punctuation can cause a simple punctuation-based counter to differ from a grammar-aware editor.</p>
+
+<h3>Common Uses</h3>
+<ul>
+<li>Checking essay, assignment and application length requirements.</li>
+<li>Monitoring article, blog-post and web-copy length.</li>
+<li>Reviewing character limits for forms and social-media fields.</li>
+<li>Comparing drafts and editing text for concision.</li>
+<li>Checking sentence counts during writing practice.</li>
+</ul>
+
+<h3>Why Counts Can Differ Between Tools</h3>
+<p>There is no single universal rule for every edge case in word counting. Different editors may treat hyphenated words, apostrophes, URLs, emojis or special Unicode characters differently. For strict submission requirements, compare the result with the specific platform or software that will receive the text.</p>
+
+<h2>Word Counter FAQ</h2>
+<details class="faq"><summary>How are words counted?</summary><p class="muted">Words are counted by trimming the text and splitting it at one or more whitespace characters. Any non-empty whitespace-separated token counts as one word in this version.</p></details>
+<details class="faq"><summary>What is the difference between character count with and without whitespace?</summary><p class="muted">Characters with whitespace counts every character in the text. Characters without whitespace removes spaces, tabs, line breaks and other whitespace characters before counting.</p></details>
+<details class="faq"><summary>How are sentences counted?</summary><p class="muted">The tool splits text at one or more periods, exclamation points or question marks and counts the non-empty text segments that remain. It is a practical estimate rather than full linguistic sentence parsing.</p></details>
+<details class="faq"><summary>Does punctuation count as a character?</summary><p class="muted">Yes. Punctuation marks count as characters in both character totals unless the character itself is whitespace.</p></details>
+<details class="faq"><summary>Is there a fixed text limit?</summary><p class="muted">The page does not impose its own fixed character limit, but practical limits depend on the memory and performance of the browser and device.</p></details>
+<details class="faq"><summary>Can I paste text from an essay or document?</summary><p class="muted">Yes. You can paste plain text into the text box and the counts update automatically.</p></details>
+<details class="faq"><summary>Does the Word Counter save or upload my text?</summary><p class="muted">No. The counting logic runs locally in your browser and the text is not submitted to a Utiliverse text-analysis server by this tool.</p></details>
+<details class="faq"><summary>Why might this word count differ from another app?</summary><p class="muted">Different applications use different rules for hyphens, punctuation, contractions, emojis and special characters. This tool uses a simple whitespace-separated token count.</p></details>
 </section>
 </main>
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
 <footer class="border-t border-slate-800 bg-slate-950 mt-12">
 <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500">
-  <span>© <span id="year"></span> Utiliverse. All rights reserved.</span>
+  <span>© 2026 Utiliverse. All rights reserved.</span>
   <span>100% Free and Browser Based</span>
 </div>
 </footer>
 <script>
 lucide.createIcons();
-document.getElementById('year').textContent=new Date().getFullYear();
-document.getElementById('theme-toggle').addEventListener('click', () => {
-  document.body.classList.toggle('light-mode');
-  const icon = document.getElementById('theme-icon');
-  icon.setAttribute('data-lucide', document.body.classList.contains('light-mode') ? 'moon' : 'sun');
-  lucide.createIcons();
+const themeToggle = document.getElementById('theme-toggle');
+const moonIcon = document.getElementById('moon-icon');
+const sunIcon = document.getElementById('sun-icon');
+const metaTheme = document.querySelector('meta[name="theme-color"]');
+
+function applyTheme(theme) {
+  const light = theme === 'light';
+
+  document.body.classList.toggle('light-mode', light);
+  moonIcon.classList.toggle('theme-hidden', !light);
+  sunIcon.classList.toggle('theme-hidden', light);
+
+  const label = light ? 'Switch to dark mode' : 'Switch to light mode';
+  themeToggle.setAttribute('aria-label', label);
+  themeToggle.title = label;
+
+  if (metaTheme) {
+    metaTheme.setAttribute('content', light ? '#f8fafc' : '#020617');
+  }
+}
+
+const savedTheme = localStorage.getItem('utiliverse-theme');
+const initialTheme = savedTheme ||
+  (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+
+applyTheme(initialTheme);
+
+themeToggle.addEventListener('click', () => {
+  const nextTheme =
+    document.body.classList.contains('light-mode') ? 'dark' : 'light';
+
+  localStorage.setItem('utiliverse-theme', nextTheme);
+  applyTheme(nextTheme);
 });
 
 const textEl = document.getElementById('text_input');
