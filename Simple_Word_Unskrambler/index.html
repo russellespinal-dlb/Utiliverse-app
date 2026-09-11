@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Word Unskrambler | Free Online Anagram & Word Solver | Utiliverse</title>
-    <meta name="description" content="Unscramble any string of letters to instantly find hidden words for puzzles, word games, and anagrams. 100% free and private browser-based tool.">
-    <meta name="robots" content="index, follow">
+    <title>Word Unscrambler – Anagram & Word Solver | Utiliverse</title>
+    <meta name="description" content="Free word unscrambler and anagram solver. Enter jumbled letters, set a minimum word length, and find valid English words that can be formed from those letters.">
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"><meta name="theme-color" content="#020617">
     <link rel="canonical" href="https://utiliverse.app/Simple_Word_Unskrambler/">
     
-    <!-- Open Graph Metadata -->
-    <meta property="og:title" content="Simple Word Unskrambler | Free Online Anagram Solver | Utiliverse">
-    <meta property="og:description" content="Unscramble any string of letters to instantly find hidden words for puzzles and word games. 100% free and private.">
-    <meta property="og:url" content="https://utiliverse.app/word-unskrambler/">
+    <!-- Open Graph / Social Metadata -->
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Utiliverse">
+    <meta property="og:title" content="Word Unscrambler – Anagram & Word Solver | Utiliverse">
+    <meta property="og:description" content="Enter jumbled letters and find valid English words that can be formed from them using a browser-based word solver.">
+    <meta property="og:url" content="https://utiliverse.app/Simple_Word_Unskrambler/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Word Unscrambler – Anagram & Word Solver | Utiliverse">
+    <meta name="twitter:description" content="Find words from scrambled letters with minimum-length and result-count controls.">
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -396,32 +400,50 @@
             }
         }
 
+    
+        .header-actions{display:flex;align-items:center;gap:12px}
+        .free-browser-note{color:#64748b;font-size:12px;font-weight:700;white-space:nowrap;letter-spacing:.1px}
+        body.dark-mode .free-browser-note{color:#94a3b8!important}
+        .theme-toggle{
+            width:40px;height:40px;flex:0 0 40px;padding:0;
+            display:inline-flex;align-items:center;justify-content:center;
+            border:1px solid #cbd5e1;border-radius:12px;background:#fff;color:#475569;
+            box-shadow:none;appearance:none;-webkit-appearance:none;transform:none;
+        }
+        .theme-toggle:hover{background:#f1f5f9;color:#0f172a;transform:none}
+        body.dark-mode .theme-toggle{background:rgba(15,23,42,.72)!important;border-color:#334155!important;color:#94a3b8!important}
+        body.dark-mode .theme-toggle:hover{background:#1e293b!important;border-color:#475569!important;color:#fff!important}
+        .theme-toggle svg{width:18px;height:18px;stroke-width:2}
+        .theme-icon-sun{display:none}
+        .theme-icon-moon{display:block}
+        body.dark-mode .theme-icon-sun{display:block}
+        body.dark-mode .theme-icon-moon{display:none}
+        .processing-note{font-size:12px;line-height:1.6;color:#64748b}
+        body.dark-mode .processing-note{color:#94a3b8!important}
+        @media(max-width:640px){
+            .free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}
+            .theme-toggle{width:38px;height:38px;flex-basis:38px}
+        }
+
     </style>
 
     <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Simple Word Unskrambler",
-      "url": "https://utiliverse.app/word-unskrambler/",
-      "description": "A free, browser-based utility to instantly unscramble random letters and find hidden dictionary words.",
-      "applicationCategory": "UtilityApplication",
-      "operatingSystem": "All",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "provider": {
-        "@type": "Organization",
-        "name": "Utiliverse",
-        "url": "https://utiliverse.app"
-      }
-    }
-    </script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Simple Word Unskrambler","url":"https://utiliverse.app/Simple_Word_Unskrambler/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled and an internet connection to load the word dictionary.","description":"Free browser-based word unscrambler and anagram solver that finds English words that can be formed from a supplied set of letters.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Find dictionary words from scrambled letters","Respect repeated-letter counts","Minimum word length filter","Selectable maximum result count","Longest words shown first","Copy displayed results to clipboard","Example letter sets","Browser-side matching after dictionary download"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does the Word Unskrambler do?","acceptedAnswer":{"@type":"Answer","text":"It checks a downloaded English word list and returns words that can be formed using only the letters you entered, without using any letter more times than it appears in your input."}},{"@type":"Question","name":"Do results have to use every letter I enter?","acceptedAnswer":{"@type":"Answer","text":"No. Results may use some or all of the available letters, as long as they meet the selected minimum length and do not require extra letters."}},{"@type":"Question","name":"Can I limit how many results are displayed?","acceptedAnswer":{"@type":"Answer","text":"Yes. The result-count menu lets you display 5 through 50 words or choose All Possible Words."}},{"@type":"Question","name":"How are the results sorted?","acceptedAnswer":{"@type":"Answer","text":"Matching words are sorted by length from longest to shortest, then alphabetically when two words have the same length."}},{"@type":"Question","name":"Will it use letters I did not enter?","acceptedAnswer":{"@type":"Answer","text":"No. A result is only accepted when every letter in that word can be supplied by your input, including repeated-letter counts."}},{"@type":"Question","name":"Why might a valid word be missing?","acceptedAnswer":{"@type":"Answer","text":"Results depend on the word list loaded by the tool. Proper nouns, uncommon terms, regional words, newly coined words or words absent from that dictionary may not appear."}},{"@type":"Question","name":"Are my letters sent to a server for matching?","acceptedAnswer":{"@type":"Answer","text":"The matching logic runs in your browser after the page downloads its English word list from GitHub. Your entered letter string is not submitted to a Utiliverse word-solving server by this tool."}},{"@type":"Question","name":"Can I use the results for word games?","acceptedAnswer":{"@type":"Answer","text":"Yes, but different games use different official dictionaries and rules. Always verify a suggested word against the rules and accepted word list for the specific game."}}]}</script>
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex flex-col">
+<!--
+SEO TARGET CLUSTER
+Primary: word unscrambler
+Secondary: anagram solver, word solver, unscramble letters,
+find words from letters, jumbled letters solver, word game helper,
+anagram generator, letters to words
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
 
     <!-- Global Toast Container -->
     <div id="toast-container" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2"></div>
@@ -429,20 +451,17 @@
     <!-- Header -->
     <header class="bg-white border-b border-slate-200 sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <a href="/" class="flex items-center text-sm font-medium text-slate-500 hover:text-indigo-600 transition-colors" aria-label="Back to Utiliverse">
+            <a href="https://utiliverse.app" class="flex items-center text-sm font-medium text-slate-500 hover:text-indigo-600 transition-colors" aria-label="Back to Utiliverse">
                 <i data-lucide="arrow-left" class="w-4 h-4 mr-1"></i> Back to Utiliverse
             </a>
-            <div class="flex items-center gap-2 sm:gap-3">
+            <div class="header-actions"><span class="free-browser-note">100% Free and Browser Based</span>
                 <span id="dictionary-status" class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-700 border border-amber-200">
                     <i data-lucide="loader" class="w-3 h-3 mr-1 animate-spin"></i> Loading Dictionary...
                 </span>
-                <button
-                    id="theme-toggle"
-                    type="button"
-                    class="theme-toggle"
-                    aria-label="Switch to dark mode"
-                    title="Switch to dark mode"
-                ><span id="theme-icon" aria-hidden="true">☾</span></button>
+                <button id="theme-toggle" type="button" class="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode">
+                    <svg id="moon-icon" class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
+                    <svg id="sun-icon" class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+                </button>
             </div>
         </div>
     </header>
@@ -451,18 +470,18 @@
 
         <!-- Hero Section -->
         <section class="text-center max-w-3xl mx-auto">
-            <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">Simple Word Unskrambler</h1>
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">Word Unscrambler &amp; Anagram Solver</h1>
             <p class="text-lg text-slate-600 mb-4">
-                Enter any jumbled string of letters and instantly discover all the valid hidden words you can make. Perfect for solving anagrams, decoding puzzles, and dominating word games.
+                Enter jumbled letters and find English words that can be formed from them. Filter by minimum word length, limit the number of results, and copy matching words with one click.
             </p>
-            <p class="text-sm font-medium text-indigo-600 bg-indigo-50 inline-block px-4 py-2 rounded-full border border-indigo-100">
-                <i data-lucide="lock" class="w-4 h-4 inline mr-1 -mt-0.5"></i> Private by design — word processing happens in your browser.
+            <p class="processing-note bg-indigo-50 inline-block px-4 py-2 rounded-full border border-indigo-100">
+                Word matching runs in your browser after the English dictionary is downloaded from GitHub.
             </p>
         </section>
 
-        <!-- GOOGLE ADSENSE: TOP PLACEMENT
+        <!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
              Paste approved Google AdSense code here after approval.
-             This placeholder is intentionally invisible and reserves no physical space.
+             This comment is intentionally invisible and reserves no space.
         -->
 
         <!-- Main Tool Area -->
@@ -471,7 +490,7 @@
             <!-- Calculator Card (Left/Main Column) -->
             <div class="lg:col-span-8 bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">
                 <div class="flex items-center justify-between mb-6">
-                    <h2 class="text-2xl font-bold text-slate-900">Unskramble Your Letters</h2>
+                    <h2 class="text-2xl font-bold text-slate-900">Unscramble Your Letters</h2>
                     <button id="btn-reset" class="text-slate-400 hover:text-slate-600 transition-colors flex items-center text-sm font-medium" aria-label="Reset Tool">
                         <i data-lucide="rotate-ccw" class="w-4 h-4 mr-1"></i> Reset
                     </button>
@@ -501,7 +520,7 @@
 
                 <!-- Action Area -->
                 <button id="btn-unscramble" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl shadow-sm transition-colors flex justify-center items-center text-lg disabled:opacity-50 disabled:cursor-not-allowed">
-                    <i data-lucide="text-search" class="w-5 h-5 mr-2"></i> Unskramble Now
+                    <i data-lucide="text-search" class="w-5 h-5 mr-2"></i> Unscramble Now
                 </button>
 
                 <!-- Results Area (Hidden initially) -->
@@ -573,41 +592,43 @@
                         <i data-lucide="info" class="w-4 h-4 mr-1"></i> How it works
                     </h4>
                     <p class="text-xs text-indigo-700 leading-relaxed">
-                        The Unskrambler analyzes your letters and checks them against a localized dictionary of common English words. It will only return words that can be legitimately formed using the exact letters provided.
+                        The tool downloads a common-English word list, then checks it locally in your browser. Results may use some or all of your letters, but they cannot use a letter more times than it appears in your input.
                     </p>
                 </div>
             </div>
         </div>
 
-        <!-- GOOGLE ADSENSE: IN-CONTENT PLACEMENT
+        <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
              Paste approved Google AdSense code here after approval.
-             This placeholder is intentionally invisible and reserves no physical space.
+             This comment is intentionally invisible and reserves no space.
         -->
 
         <!-- SEO Content Section -->
         <article class="w-full max-w-4xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 p-8 sm:p-12 prose prose-slate max-w-none">
-            <h2 class="text-3xl font-extrabold text-slate-900 mb-6">About the Simple Word Unskrambler</h2>
+            <h2 class="text-3xl font-extrabold text-slate-900 mb-6">How the Word Unscrambler Works</h2>
             
             <p class="text-slate-600 mb-6 leading-relaxed">
-                Whether you're stuck on a difficult anagram, looking to maximize your points in a competitive word game, or just want to see how many dictionary words are hidden inside your own name, the <strong>Simple Word Unskrambler</strong> is your ultimate companion. This tool reverses the scrambling process: instead of randomizing letters, it meticulously analyzes a random string and returns valid English words.
+                Enter a set of letters and the tool compares them with the downloaded English word list. A candidate is accepted only when every letter in that word can be supplied by your input, including repeated-letter counts. Results do not have to use every letter you entered, which is why shorter words may appear alongside full-length anagrams.
             </p>
 
             <p class="text-slate-600 mb-6 leading-relaxed">
-                By allowing you to select exactly how many word combinations you want the unskrambler to generate (in increments of 5), you maintain complete control over the output. You can choose to find just a handful of quick 5-letter options, or expand the search to return all possible permutations available in the dictionary dataset.
+                Use the minimum-length slider to hide very short matches, then choose how many results to display. The result menu supports 5 through 50 displayed words or an All Possible Words option. Matches are sorted by length from longest to shortest and alphabetically within the same length.
             </p>
 
             <p class="text-slate-600 mb-6 leading-relaxed">
                 The tool is also useful when you want to explore the structure of a set of letters rather than solve one specific puzzle. Because results are sorted with longer words first, you can quickly spot the most complete matches before scanning shorter alternatives. That makes the Unskrambler helpful for vocabulary practice, classroom activities, brainstorming, spelling exercises, and anyone curious about how many recognizable English words can be formed from a single collection of letters.
             </p>
 
-            <h3 class="text-2xl font-bold text-slate-900 mt-10 mb-4">Master Your Favorite Word Games</h3>
+            <h3 class="text-2xl font-bold text-slate-900 mt-10 mb-4">How to Use the Word Unscrambler</h3>
+<p class="text-slate-600 mb-6 leading-relaxed">Type or paste letters into the input box. Non-letter characters are ignored during matching. Choose the minimum word length and the maximum number of results, then select <strong>Unscramble Now</strong>. The longest matching words appear first. Use <strong>Copy Words to Clipboard</strong> to copy the displayed list.</p>
+<h3 class="text-2xl font-bold text-slate-900 mt-10 mb-4">Using the Tool for Word Games</h3>
             
             <p class="text-slate-600 mb-6 leading-relaxed">
-                Word unskramblers are incredibly popular tools for players of games like Scrabble®, Words with Friends®, Wordscapes®, and daily puzzle challenges. When you find yourself with a tray full of vowels or awkward consonants, dropping them into the unskrambler reveals high-value words you might have completely overlooked. 
+                Word unscramblers can be useful for anagrams, classroom exercises and word games. Enter the letters available to you, review the returned matches, and verify any candidate against the rules and official word list for the specific game you are playing. 
             </p>
 
             <p class="text-slate-600 mb-6 leading-relaxed">
-                To use the tool effectively for gaming, simply enter your available tiles into the text box. The local processing engine will instantly evaluate all letter combinations and present you with valid dictionary hits. Use the "Minimum Word Length" slider to filter out two-letter words if you're specifically hunting for a high-scoring 5 or 6-letter play.
+                To use the tool effectively for gaming, simply enter your available tiles into the text box. After the dictionary has loaded, the browser evaluates the available word list against your letters and presents matching entries. Use the "Minimum Word Length" slider to filter out two-letter words if you're specifically hunting for a high-scoring 5 or 6-letter play.
             </p>
 
             <p class="text-slate-600 mb-6 leading-relaxed">
@@ -642,9 +663,8 @@
 
         <!-- FAQ Section -->
         <section class="w-full max-w-4xl mx-auto mb-12">
-            <h2 class="text-2xl font-bold text-slate-900 mb-6 text-center">Frequently Asked Questions</h2>
+            <h2 class="text-2xl font-bold text-slate-900 mb-6 text-center">Word Unscrambler FAQ</h2>
             <div class="space-y-4">
-                <!-- FAQ 1 -->
                 <details class="group bg-white rounded-xl border border-slate-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
                     <summary class="flex items-center justify-between p-6 cursor-pointer bg-white hover:bg-slate-50 transition-colors">
                         <h3 class="text-base font-bold text-slate-900">What does the Word Unskrambler do?</h3>
@@ -652,111 +672,85 @@
                             <i data-lucide="chevron-down" class="w-5 h-5"></i>
                         </span>
                     </summary>
-                    <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
-                        The Word Unskrambler takes any random string of letters you provide and searches for valid English dictionary words that can be constructed using only those specific letters. It is essentially an anagram solver and word generator combined into one simple interface.
-                    </div>
+                    <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">It checks a downloaded English word list and returns words that can be formed using only the letters you entered, without using any letter more times than it appears in your input.</div>
                 </details>
-
-                <!-- FAQ 2 -->
                 <details class="group bg-white rounded-xl border border-slate-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
                     <summary class="flex items-center justify-between p-6 cursor-pointer bg-white hover:bg-slate-50 transition-colors">
-                        <h3 class="text-base font-bold text-slate-900">Can I limit how many word combinations are generated?</h3>
+                        <h3 class="text-base font-bold text-slate-900">Do results have to use every letter I enter?</h3>
                         <span class="transition duration-300 group-open:-rotate-180 text-indigo-600">
                             <i data-lucide="chevron-down" class="w-5 h-5"></i>
                         </span>
                     </summary>
-                    <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
-                        Yes! Using the settings panel, you can choose exactly how many word combinations you want to generate in increments of 5 (e.g., 5, 10, 15, 20 words). You can also select "All Possible Words" if you want a complete list of every single dictionary match.
-                    </div>
+                    <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">No. Results may use some or all of the available letters, as long as they meet the selected minimum length and do not require extra letters.</div>
                 </details>
-
-                <!-- FAQ 3 -->
                 <details class="group bg-white rounded-xl border border-slate-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
                     <summary class="flex items-center justify-between p-6 cursor-pointer bg-white hover:bg-slate-50 transition-colors">
-                        <h3 class="text-base font-bold text-slate-900">Will it generate words using letters I didn't enter?</h3>
+                        <h3 class="text-base font-bold text-slate-900">Can I limit how many results are displayed?</h3>
                         <span class="transition duration-300 group-open:-rotate-180 text-indigo-600">
                             <i data-lucide="chevron-down" class="w-5 h-5"></i>
                         </span>
                     </summary>
-                    <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
-                        No. The unskrambler algorithm strictly adheres to the letters provided in your input box. If you enter one "A", it will only return words that contain a maximum of one "A". It will not artificially add letters that you do not possess.
-                    </div>
+                    <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">Yes. The result-count menu lets you display 5 through 50 words or choose All Possible Words.</div>
                 </details>
-
-                <!-- FAQ 4 -->
                 <details class="group bg-white rounded-xl border border-slate-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
                     <summary class="flex items-center justify-between p-6 cursor-pointer bg-white hover:bg-slate-50 transition-colors">
-                        <h3 class="text-base font-bold text-slate-900">Are proper nouns or slang included?</h3>
+                        <h3 class="text-base font-bold text-slate-900">How are the results sorted?</h3>
                         <span class="transition duration-300 group-open:-rotate-180 text-indigo-600">
                             <i data-lucide="chevron-down" class="w-5 h-5"></i>
                         </span>
                     </summary>
-                    <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
-                        The tool utilizes a standard list of common English dictionary words. Highly obscure slang, newly invented terms, or specific proper nouns (like character names) may not be recognized, ensuring the output is highly relevant for standard word puzzles and anagrams.
-                    </div>
+                    <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">Matching words are sorted by length from longest to shortest, then alphabetically when two words have the same length.</div>
                 </details>
-
-                <!-- FAQ 5 -->
                 <details class="group bg-white rounded-xl border border-slate-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
                     <summary class="flex items-center justify-between p-6 cursor-pointer bg-white hover:bg-slate-50 transition-colors">
-                        <h3 class="text-base font-bold text-slate-900">Why am I getting shorter words than the letters I entered?</h3>
+                        <h3 class="text-base font-bold text-slate-900">Will it use letters I did not enter?</h3>
                         <span class="transition duration-300 group-open:-rotate-180 text-indigo-600">
                             <i data-lucide="chevron-down" class="w-5 h-5"></i>
                         </span>
                     </summary>
-                    <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
-                        The Unskrambler looks for any valid word that can be formed from the letters you supplied, so a result does not have to use every letter. If you enter six letters, the list may contain valid three-, four-, five-, and six-letter words depending on your minimum-length setting and the words available in the dictionary.
-                    </div>
+                    <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">No. A result is only accepted when every letter in that word can be supplied by your input, including repeated-letter counts.</div>
                 </details>
-
-                <!-- FAQ 6 -->
                 <details class="group bg-white rounded-xl border border-slate-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
                     <summary class="flex items-center justify-between p-6 cursor-pointer bg-white hover:bg-slate-50 transition-colors">
-                        <h3 class="text-base font-bold text-slate-900">Can I use the Unskrambler to improve my vocabulary?</h3>
+                        <h3 class="text-base font-bold text-slate-900">Why might a valid word be missing?</h3>
                         <span class="transition duration-300 group-open:-rotate-180 text-indigo-600">
                             <i data-lucide="chevron-down" class="w-5 h-5"></i>
                         </span>
                     </summary>
-                    <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
-                        Yes. Entering familiar letter groups and reviewing the returned words can expose you to combinations you may not notice on your own. It can be especially useful for spelling practice, anagram exercises, classroom activities, and learning how common prefixes, suffixes, and letter patterns form different English words.
-                    </div>
+                    <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">Results depend on the word list loaded by the tool. Proper nouns, uncommon terms, regional words, newly coined words or words absent from that dictionary may not appear.</div>
                 </details>
-
-                <!-- FAQ 7 -->
                 <details class="group bg-white rounded-xl border border-slate-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
                     <summary class="flex items-center justify-between p-6 cursor-pointer bg-white hover:bg-slate-50 transition-colors">
-                        <h3 class="text-base font-bold text-slate-900">Why might a word I know be missing from the results?</h3>
+                        <h3 class="text-base font-bold text-slate-900">Are my letters sent to a server for matching?</h3>
                         <span class="transition duration-300 group-open:-rotate-180 text-indigo-600">
                             <i data-lucide="chevron-down" class="w-5 h-5"></i>
                         </span>
                     </summary>
-                    <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">
-                        Results depend on the English word list used by the tool. A legitimate word may be absent if it is uncommon, specialized, regional, newly coined, a proper noun, or simply not included in that dictionary source. Different word games can also use different official dictionaries, so acceptance may vary from one game to another.
-                    </div>
+                    <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">The matching logic runs in your browser after the page downloads its English word list from GitHub. Your entered letter string is not submitted to a Utiliverse word-solving server by this tool.</div>
                 </details>
-            </div>
+                <details class="group bg-white rounded-xl border border-slate-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+                    <summary class="flex items-center justify-between p-6 cursor-pointer bg-white hover:bg-slate-50 transition-colors">
+                        <h3 class="text-base font-bold text-slate-900">Can I use the results for word games?</h3>
+                        <span class="transition duration-300 group-open:-rotate-180 text-indigo-600">
+                            <i data-lucide="chevron-down" class="w-5 h-5"></i>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">Yes, but different games use different official dictionaries and rules. Always verify a suggested word against the rules and accepted word list for the specific game.</div>
+                </details>            </div>
         </section>
 
-        <!-- GOOGLE ADSENSE: BOTTOM PLACEMENT
+        <!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
              Paste approved Google AdSense code here after approval.
-             This placeholder is intentionally invisible and reserves no physical space.
+             This comment is intentionally invisible and reserves no space.
         -->
 
     </main>
 
     <!-- Footer -->
     <footer class="bg-white border-t border-slate-200 mt-auto">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-slate-500">
-            <div class="text-center md:text-left">
-                &copy; <script>document.write(new Date().getFullYear())</script> Utiliverse. All rights reserved. <br>
-                <span class="text-xs text-slate-400 mt-1 inline-block"><i data-lucide="shield" class="w-3 h-3 inline mr-0.5"></i> All word processing happens locally in your browser.</span>
-            </div>
-            <nav class="flex flex-wrap justify-center gap-6">
-                <a href="/" class="hover:text-indigo-600 transition">Home</a>
-                <a href="#" class="hover:text-indigo-600 transition">Privacy Policy</a>
-                <a href="#" class="hover:text-indigo-600 transition">Terms of Service</a>
-                <a href="#" class="hover:text-indigo-600 transition">Contact</a>
-            </nav>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-slate-500">
+            <span>© 2026 Utiliverse. All rights reserved.</span>
+            <span>100% Free and Browser Based</span>
         </div>
     </footer>
 
@@ -789,7 +783,12 @@
         // Load Dictionary on Startup
         // Using a reliable, lightweight static text file of common english words (no-swears)
         fetch('https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english-no-swears.txt')
-            .then(response => response.text())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Dictionary request failed: ${response.status}`);
+                }
+                return response.text();
+            })
             .then(text => {
                 // Split, trim, and filter out single letters (except a, i if needed, but let's filter > 1)
                 dictionary = text.split('\n').map(w => w.trim().toUpperCase()).filter(w => w.length >= 2);
@@ -816,10 +815,9 @@
             // Strip non-alphabetic chars and convert to upper
             let rawText = inputEl.value;
             let cleanText = rawText.replace(/[^a-zA-Z]/g, '').toUpperCase();
-            
-            if (rawText !== cleanText && rawText.length > 0) {
-                // Optionally auto-format input to remove spaces/numbers
-                // inputEl.value = cleanText;
+
+            if (rawText !== cleanText) {
+                inputEl.value = cleanText;
             }
 
             const length = cleanText.length;
@@ -830,6 +828,10 @@
             if (length > 0 && dictionary.length > 0) {
                 btnUnscramble.disabled = false;
                 lengthSlider.max = Math.max(2, length);
+
+                if (parseInt(lengthSlider.value) > parseInt(lengthSlider.max)) {
+                    lengthSlider.value = lengthSlider.max;
+                }
             } else {
                 btnUnscramble.disabled = true;
             }
@@ -1003,25 +1005,45 @@
     <script>
     (function () {
         const toggle = document.getElementById('theme-toggle');
-        const icon = document.getElementById('theme-icon');
-        if (!toggle || !icon) return;
+        const moon = document.getElementById('moon-icon');
+        const sun = document.getElementById('sun-icon');
+        const metaTheme = document.querySelector('meta[name="theme-color"]');
+
+        if (!toggle || !moon || !sun) return;
 
         function applyTheme(theme) {
             const isDark = theme === 'dark';
             document.body.classList.toggle('dark-mode', isDark);
             document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
-            icon.textContent = isDark ? '☀' : '☾';
+
+            moon.style.display = isDark ? 'none' : 'block';
+            sun.style.display = isDark ? 'block' : 'none';
+
             const label = isDark ? 'Switch to light mode' : 'Switch to dark mode';
             toggle.setAttribute('aria-label', label);
             toggle.title = label;
+
+            if (metaTheme) {
+                metaTheme.setAttribute('content', isDark ? '#020617' : '#f8fafc');
+            }
         }
 
         const savedTheme = localStorage.getItem('utiliverse-theme');
-        const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        applyTheme(savedTheme === 'dark' || savedTheme === 'light' ? savedTheme : (systemDark ? 'dark' : 'light'));
+        const systemDark = window.matchMedia &&
+            window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        applyTheme(
+            savedTheme === 'dark' || savedTheme === 'light'
+                ? savedTheme
+                : (systemDark ? 'dark' : 'light')
+        );
 
         toggle.addEventListener('click', function () {
-            const nextTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+            const nextTheme =
+                document.body.classList.contains('dark-mode')
+                    ? 'light'
+                    : 'dark';
+
             localStorage.setItem('utiliverse-theme', nextTheme);
             applyTheme(nextTheme);
         });
