@@ -74,6 +74,28 @@
         .dark .json-boolean { color: #a78bfa; }
         .json-null { color: #dc2626; font-weight: 600;}
         .dark .json-null { color: #f87171; }
+
+        /* Utiliverse header/theme consistency */
+        #themeToggle {
+            border: 0;
+            box-shadow: none;
+        }
+        #themeToggle svg {
+            stroke: currentColor;
+        }
+        .dark #themeToggle {
+            color: #94a3b8;
+        }
+        .dark #themeToggle:hover {
+            color: #ffffff;
+        }
+        html:not(.dark) #themeToggle {
+            color: #334155;
+        }
+        html:not(.dark) #themeToggle:hover {
+            color: #0f172a;
+        }
+
     </style>
 
     <!-- SEO Structured Data -->
@@ -98,18 +120,15 @@
     <!-- Header -->
     <header class="border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-950/80 backdrop-blur-md sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-            <a href="/" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                <div class="w-8 h-8 rounded-lg bg-brand-500 flex items-center justify-center text-white">
-                    <i data-lucide="layers" class="w-5 h-5"></i>
-                </div>
-                <span class="font-bold text-xl tracking-tight hidden sm:block">Utiliverse</span>
-                <span class="text-sm font-medium text-gray-500 dark:text-gray-400 ml-2">/ JSON Formatter</span>
+            <a href="https://utiliverse.app" class="text-sm font-semibold text-gray-700 dark:text-gray-300 hover:text-gray-950 dark:hover:text-white flex items-center gap-2 transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                <span>Back to Utiliverse</span>
             </a>
             
-            <div class="flex items-center gap-4">
-                <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors" aria-label="Toggle Dark Mode">
-                    <i data-lucide="sun" class="w-5 h-5 hidden dark:block text-yellow-400"></i>
-                    <i data-lucide="moon" class="w-5 h-5 block dark:hidden text-gray-600"></i>
+            <div class="flex items-center gap-3">
+                <span class="text-xs sm:text-sm font-medium text-gray-500 dark:text-gray-400 whitespace-nowrap">100% Free and Browser Based</span>
+                <button id="themeToggle" class="p-1.5 bg-transparent hover:opacity-80 transition-opacity text-gray-700 dark:text-gray-300" aria-label="Switch to light mode" title="Switch to light mode" type="button">
+                    <i id="themeIcon" data-lucide="sun" class="w-5 h-5"></i>
                 </button>
             </div>
         </div>
@@ -266,14 +285,9 @@
 
     <!-- Footer -->
     <footer class="bg-white dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800 py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-2">
-                <div class="w-6 h-6 rounded bg-brand-500 flex items-center justify-center text-white">
-                    <i data-lucide="layers" class="w-3 h-3"></i>
-                </div>
-                <span class="font-bold tracking-tight">Utiliverse</span>
-            </div>
-            <p class="text-gray-500 dark:text-gray-400 text-sm">© <script>document.write(new Date().getFullYear())</script> Utiliverse. Client-side tools for modern developers.</p>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p class="text-gray-500 dark:text-gray-400 text-sm">© <span id="currentYear"></span> Utiliverse. Client-side tools for modern developers.</p>
+            <p class="text-gray-500 dark:text-gray-400 text-sm">100% Free and Browser Based</p>
         </div>
     </footer>
 
@@ -281,6 +295,8 @@
     <script>
         // Initialize Lucide Icons
         lucide.createIcons();
+        const currentYear = document.getElementById('currentYear');
+        if (currentYear) currentYear.textContent = new Date().getFullYear();
 
         // DOM Elements
         const inputArea = document.getElementById('jsonInput');
@@ -295,15 +311,23 @@
         let rawJSON = '';
         let isDark = document.documentElement.classList.contains('dark');
 
+        function renderThemeIcon() {
+            themeToggle.innerHTML = isDark
+                ? '<i id="themeIcon" data-lucide="sun" class="w-5 h-5"></i>'
+                : '<i id="themeIcon" data-lucide="moon" class="w-5 h-5"></i>';
+            themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+            themeToggle.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+            lucide.createIcons();
+        }
+
         // Theme Toggling Logic
         themeToggle.addEventListener('click', () => {
             isDark = !isDark;
-            if (isDark) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
+            document.documentElement.classList.toggle('dark', isDark);
+            renderThemeIcon();
         });
+
+        renderThemeIcon();
 
         // Syntax Highlighter Function
         function syntaxHighlight(json) {
