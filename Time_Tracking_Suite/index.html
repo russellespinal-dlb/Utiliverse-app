@@ -45,13 +45,22 @@ body.light-mode header{background:rgba(255,255,255,0.9);border-color:#e2e8f0;}
 .lap-list::-webkit-scrollbar {width:6px;}
 .lap-list::-webkit-scrollbar-track {background:transparent;}
 .lap-list::-webkit-scrollbar-thumb {background:#475569;border-radius:10px;}
+
+body.light-mode footer{background:#f8fafc;border-color:#e2e8f0;}
+body.light-mode header .text-slate-500{color:#64748b!important;}
+body.light-mode footer .text-slate-500,
+body.light-mode footer{color:#64748b;}
+
 </style>
 </head>
 <body>
 <header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800 transition-all duration-300">
 <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
 <a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2 transition-colors"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse</a>
-<button id="theme-toggle" class="text-slate-400 hover:text-white transition-colors cursor-pointer"><i data-lucide="sun" id="theme-icon" class="w-5 h-5"></i></button>
+<div class="flex items-center gap-3">
+  <span class="text-xs sm:text-sm font-medium text-slate-500 whitespace-nowrap">100% Free and Browser Based</span>
+  <button id="theme-toggle" class="text-slate-400 hover:text-white transition-colors cursor-pointer" type="button" aria-label="Toggle light and dark mode" title="Toggle light and dark mode"><i data-lucide="sun" id="theme-icon" class="w-5 h-5"></i></button>
+</div>
 </div>
 </header>
 <main class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
@@ -132,17 +141,41 @@ body.light-mode header{background:rgba(255,255,255,0.9);border-color:#e2e8f0;}
 <p>Developed in the late 1980s, the Pomodoro Technique involves breaking work into highly focused intervals (traditionally 25 minutes), separated by short breaks. This prevents cognitive fatigue and forces prioritization. A dedicated browser-based Pomodoro timer removes the temptation to check a smartphone, keeping your eyes on your desktop environment where the actual work happens. The strict cadence of "Work" and "Break" modes trains the brain to execute tasks in sprints rather than marathons, highly suitable for coding sessions or intense market analysis.</p>
 <h3>Precision Measurement with Stopwatches and Countdowns</h3>
 <p>While the Pomodoro technique structures workflow, count-up stopwatches and countdown timers serve distinct, vital roles. A stopwatch with lap functionality allows for the granular measurement of repetitive tasks—such as timing website load speeds after deploying new code or tracking the duration of specific daily practice routines. Conversely, a custom countdown timer creates a hard deadline for open-ended tasks, instilling a sense of urgency that effectively combats Parkinson’s Law (the adage that work expands to fill the time allotted for its completion).</p>
+
+<h3>Timeboxing Open-Ended Work</h3>
+<p>One of the most practical uses for a countdown timer is timeboxing: deciding in advance how much time a task deserves and stopping or reassessing when that block ends. This can be useful for email triage, research, administrative work, household tasks, study sessions, or debugging. A defined time boundary reduces the tendency to keep polishing low-impact details indefinitely. When the timer ends, you can decide whether the task is complete, whether another block is justified, or whether attention should move to a higher-priority activity.</p>
+
+<p>Timeboxing can also make large projects feel more approachable. Instead of focusing on an entire report, coding assignment, cleaning project, or study chapter, a user can commit to one concentrated block. The goal of the timer is not to make every activity faster; it is to create a clear start and stopping point. Over time, repeated timed sessions can also help you estimate how long recurring tasks actually take, making future planning more realistic.</p>
+
+<h3>Using Laps to Measure Repeated Work</h3>
+<p>The stopwatch lap feature is useful when one session contains multiple repeated attempts. A student might record practice runs, an athlete might compare intervals, a developer might time several manual test passes, or a support technician might measure repeated setup steps. In this implementation, each lap records the total elapsed stopwatch time at the moment the Lap button is pressed. Because the entries are kept in a scrollable list, several checkpoints can be reviewed without interrupting the running stopwatch.</p>
+
+<h3>Why Browser Timers Can Stay Accurate When a Tab Is Inactive</h3>
+<p>Browsers may reduce how frequently background tabs are allowed to run scheduled JavaScript callbacks. A timer that simply subtracts one second every time a callback fires can therefore drift when a tab is inactive. This Time Tracking Suite avoids that approach for its active stopwatch, countdown, and Pomodoro calculations. It compares the current system time with a recorded start or target time using <code>Date.now()</code>, so the displayed value can correct itself when the browser gets another opportunity to update the page. The visual refresh may pause or update less often in a background tab, but the elapsed or remaining time is calculated from timestamps rather than from the number of interval callbacks that occurred.</p>
+
+<p>Digital time tracking works best when it supports a workflow instead of becoming another source of distraction. A stopwatch is ideal when the duration is unknown and measurement is the goal. A countdown is better when the amount of available time is already known. Pomodoro-style work and break intervals are useful when you want a repeatable rhythm for focused effort. Choosing the right mode for the task keeps the tool simple while providing enough structure to make progress visible and measurable.</p>
 </section>
 
 <section class="article max-w-4xl mt-8">
 <h2>Frequently Asked Questions</h2>
 <details class="faq"><summary>Does the timer run if I switch browser tabs?</summary><p class="muted">Yes, the time calculation is based on your system clock, meaning it will accurately track time even if the browser tab is minimized or inactive.</p></details>
 <details class="faq"><summary>What happens when the countdown hits zero?</summary><p class="muted">The timer will automatically stop at zero. In future updates, auditory alerts can be enabled in your browser settings.</p></details>
-<details class="faq"><summary>How many laps can I record on the stopwatch?</summary><p class="muted">You can record an unlimited number of laps. The lap list becomes scrollable after the first few entries, displaying the time elapsed between each lap press.</p></details>
+<details class="faq"><summary>How many laps can I record on the stopwatch?</summary><p class="muted">The tool does not impose a fixed lap limit. Lap entries are added to the scrollable list for as long as the page remains open and the browser has available memory.</p></details>
+
+<details class="faq"><summary>Can I pause and resume the stopwatch without losing the elapsed time?</summary><p class="muted">Yes. When you pause the stopwatch, the elapsed time is stored. Pressing Start again continues from that stored value rather than resetting the stopwatch to zero.</p></details>
+
+<details class="faq"><summary>What does each stopwatch lap entry represent?</summary><p class="muted">Each lap records the total elapsed stopwatch time at the moment the Lap button is pressed. The current implementation records cumulative lap timestamps rather than calculating a separate split duration between one lap and the next.</p></details>
+
+<details class="faq"><summary>Can I switch between Work and Break mode while the Pomodoro timer is running?</summary><p class="muted">No. The mode buttons are intentionally ignored while the Pomodoro timer is running. Pause or reset the timer first if you want to manually switch between the 25-minute Work mode and the 5-minute Break mode.</p></details>
+
+<details class="faq"><summary>What happens when a Pomodoro interval reaches zero?</summary><p class="muted">When the active Pomodoro interval reaches zero, the timer stops and automatically switches to the opposite mode. A completed Work interval switches to Break mode, while a completed Break interval switches back to Work mode. The next interval does not start automatically; you press Start when you are ready.</p></details>
 </section>
 </main>
 <footer class="border-t border-slate-800 bg-slate-950 mt-12">
-<div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 text-sm text-slate-500">© <span id="year"></span> Utiliverse. All rights reserved.</div>
+<div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500">
+  <span>© <span id="year"></span> Utiliverse. All rights reserved.</span>
+  <span>100% Free and Browser Based</span>
+</div>
 </footer>
 
 <script>
