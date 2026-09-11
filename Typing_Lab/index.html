@@ -3,11 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Typing Test | Speed, Accuracy & Consistency | Utiliverse</title>
-<meta name="description" content="Practice typing speed and accuracy with a clean browser-based typing test.">
-<meta name="robots" content="index,follow">
+<title>Typing Test – WPM, Accuracy & Speed Practice | Utiliverse</title>
+<meta name="description" content="Free online typing test for WPM, accuracy and speed practice. Choose 15, 30, 60 or 120 seconds and practice words, sentences, punctuation and numbers.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="theme-color" content="#020617">
 <link rel="canonical" href="https://utiliverse.app/Typing_Lab">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Typing Test – WPM, Accuracy & Speed Practice | Utiliverse">
+<meta property="og:description" content="Measure WPM and accuracy with 15, 30, 60 or 120 second typing tests and optional sentence, punctuation and number practice.">
+<meta property="og:url" content="https://utiliverse.app/Typing_Lab">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Typing Test – WPM, Accuracy & Speed Practice | Utiliverse">
+<meta name="twitter:description" content="Free browser-based typing speed and accuracy test with multiple durations and practice modes.">
+
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
@@ -85,29 +94,69 @@ body.light-mode footer {
   border-color: #e2e8f0;
 }
 body.light-mode footer span { color: #64748b; }
+
+.free-browser-note{font-size:.75rem;color:#94a3b8;font-weight:700;white-space:nowrap}
+#theme-toggle{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:40px;height:40px;padding:0;border:1px solid #334155;border-radius:12px;
+  background:rgba(15,23,42,.72);color:#94a3b8;box-shadow:none;
+  appearance:none;-webkit-appearance:none;cursor:pointer;
+  transition:background .2s ease,color .2s ease,border-color .2s ease;
+}
+#theme-toggle:hover{background:#1e293b;color:#fff;border-color:#475569}
+#theme-toggle:focus-visible,.btn:focus-visible,.input:focus-visible{outline:2px solid #6366f1;outline-offset:2px}
+#theme-toggle svg{width:18px;height:18px;stroke-width:2}
+.theme-hidden{display:none!important}
+body.light-mode #theme-toggle{background:#fff;border-color:#cbd5e1;color:#475569}
+body.light-mode #theme-toggle:hover{background:#f1f5f9;border-color:#94a3b8;color:#0f172a}
+body.light-mode .free-browser-note{color:#64748b}
+.local-processing-note{color:#94a3b8;font-size:12px;line-height:1.65}
+body.light-mode .local-processing-note{color:#64748b}
+@media(max-width:640px){
+  .free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}
+  #theme-toggle{width:38px;height:38px;flex:0 0 auto}
+  #typing{font-size:16px!important}
+  #prompt{font-size:1rem!important;line-height:1.75!important}
+}
+
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Typing Lab","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Typing Lab","url":"https://utiliverse.app/Typing_Lab","applicationCategory":"EducationalApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based typing test for measuring words per minute, accuracy and typed characters across timed word and sentence practice modes.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["15 second typing test","30 second typing test","60 second typing test","120 second typing test","Words per minute estimate","Typing accuracy percentage","Live correct and incorrect character highlighting","Sentence practice mode","Punctuation practice option","Number practice option","Automatic finish when the prompt is completed"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does WPM mean?","acceptedAnswer":{"@type":"Answer","text":"WPM means words per minute. This calculator treats five correctly typed characters as one standardized word and scales that result to one minute based on elapsed test time."}},{"@type":"Question","name":"How is typing accuracy calculated?","acceptedAnswer":{"@type":"Answer","text":"Accuracy is the number of correctly typed character positions divided by the total number of characters you entered, multiplied by 100."}},{"@type":"Question","name":"Can I choose the typing test duration?","acceptedAnswer":{"@type":"Answer","text":"Yes. The Typing Lab provides 15, 30, 60 and 120 second test modes."}},{"@type":"Question","name":"Can I practice complete sentences?","acceptedAnswer":{"@type":"Answer","text":"Yes. Sentence mode uses complete built-in sentences. While sentence mode is active, the separate punctuation and number options are disabled."}},{"@type":"Question","name":"Can I practice punctuation and numbers?","acceptedAnswer":{"@type":"Answer","text":"Yes. In word mode, you can independently enable punctuation and numbers before restarting the test."}},{"@type":"Question","name":"What happens if I finish the prompt before time runs out?","acceptedAnswer":{"@type":"Answer","text":"The test ends immediately when you type the full prompt, and WPM is calculated from the actual elapsed time rather than the full selected duration."}},{"@type":"Question","name":"Does the Typing Lab save or upload what I type?","acceptedAnswer":{"@type":"Answer","text":"No. The prompt, scoring and typed text are handled in your browser by this page and are not submitted to a Utiliverse scoring server."}},{"@type":"Question","name":"Why can my WPM vary between tests?","acceptedAnswer":{"@type":"Answer","text":"Results can vary with test length, text difficulty, punctuation, numbers, keyboard layout, device, fatigue and familiarity with the prompt. Repeating the same duration under similar conditions gives a more useful personal baseline."}}]}</script>
 </head>
 <body>
+<!--
+SEO TARGET CLUSTER
+Primary: typing test
+Secondary: typing speed test, WPM test, typing accuracy test,
+typing practice, online typing test, words per minute calculator,
+typing speed practice, keyboard typing test
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
 <header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800 transition-all duration-300">
 <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
 <a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2 transition-colors"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse</a>
 <div class="flex items-center gap-4">
-  <span class="text-xs text-slate-500 hidden sm:inline-block">Free & Browser-Based</span>
-  <button id="theme-toggle" class="text-slate-400 hover:text-white transition-colors cursor-pointer" aria-label="Toggle light/dark mode">
-    <i data-lucide="sun" id="theme-icon" class="w-5 h-5"></i>
+  <span class="free-browser-note">100% Free and Browser Based</span>
+  <button id="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+    <svg id="moon-icon" class="theme-hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
+    <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
   </button>
 </div>
 </div>
 </header>
-<!-- GOOGLE ADSENSE: TOP PLACEMENT
-     Paste your approved AdSense code here. Invisible insertion point only.
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
 -->
 <main class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
 <div class="max-w-3xl">
 <p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Typing practice</p>
-<h1 class="text-4xl sm:text-5xl font-black mt-2">Typing Lab</h1>
-<p class="mt-4 text-lg muted">A clean, distraction-free typing test for improving speed, accuracy, and consistency.</p>
+<h1 class="text-4xl sm:text-5xl font-black mt-2">Typing Test – WPM &amp; Accuracy Practice</h1>
+<p class="mt-4 text-lg muted">Measure typing speed and accuracy with 15, 30, 60 or 120 second tests, live character feedback, sentence practice, punctuation and numbers.</p>
 </div>
 <section class="glass rounded-3xl p-5 sm:p-8 mt-8">
 <div class="flex flex-wrap gap-2 mb-6">
@@ -132,10 +181,17 @@ body.light-mode footer span { color: #64748b; }
 </div>
 <p id="result" class="muted text-sm mt-4">Type the displayed text to begin.</p>
 </section>
+<p class="local-processing-note mt-4">Browser-based practice: prompts, typed text, WPM and accuracy are processed locally on this page and are not submitted to a Utiliverse scoring server.</p>
+
+<!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
 <section class="article max-w-4xl mt-16">
-<h2>About the Utiliverse Typing Lab</h2>
-<p>A typing test measures how quickly and accurately you reproduce a passage of text. Speed is commonly expressed as words per minute, while accuracy compares correctly typed characters with the number of characters entered. Looking at both metrics provides a more useful picture than speed alone.</p>
-<p>The Utiliverse Typing Lab is designed around a minimal testing loop: choose a duration, read the displayed passage, type it as accurately as possible, and review the result when the timer ends. The interface avoids unnecessary visual distractions so the user's attention can remain on the text and keyboard.</p>
+<h2>How to Use the Typing Test</h2>
+<p>Choose a test length, click the typing box, and begin reproducing the displayed prompt. The timer starts with your first typed character. Correct characters appear in green, incorrect positions appear in red, and the test ends when the selected time expires or when you finish the full prompt.</p>
+<p>Use word mode for randomized vocabulary practice, or enable Sentence mode for complete built-in sentences. In word mode, Punctuation and Numbers can be enabled independently. Restart generates a fresh prompt while keeping the selected duration and practice options.</p>
 <h3>Why practice typing?</h3>
 <ul>
 <li>Students can build keyboard familiarity and reduce hunt-and-peck habits.</li>
@@ -146,7 +202,11 @@ body.light-mode footer span { color: #64748b; }
 </ul>
 <p>Accuracy matters because raw speed can become counterproductive if frequent corrections erase the advantage. A good practice routine gradually increases speed while keeping error rates under control. Short tests are useful for warmups, while longer tests can reveal consistency over time.</p>
 <h3>How WPM is estimated</h3>
-<p>Many typing tests use five characters as one standardized word. The simplified calculation here uses correctly typed characters divided by five and then annualizes that figure to one minute based on the elapsed test time. The number should be used as a consistent benchmark rather than a statement about typing performance in every real-world context.</p>
+<p>Many typing tests use five characters as one standardized word. The calculation here uses correctly typed characters divided by five and then scales that figure to one minute based on the elapsed test time. The number should be used as a consistent benchmark rather than a statement about typing performance in every real-world context.</p>
+
+<h3>How WPM and accuracy are calculated</h3>
+<p><strong>WPM</strong> = (correctly typed character positions ÷ 5) ÷ elapsed minutes. <strong>Accuracy</strong> = correctly typed character positions ÷ total characters entered × 100. If you finish the prompt early, WPM uses the actual elapsed time. A minimum of one second is used internally to avoid division by zero on extremely fast completion.</p>
+
 <h3>Building speed and accuracy together</h3>
 <p>Typing skill is not simply a race to produce the largest WPM number. Useful keyboard fluency comes from combining speed with accuracy, rhythm, and low mental overhead. A person who types slightly slower but makes very few errors may outperform a faster typist once correction time is considered.</p>
 <p>Short tests are useful for warmups and quick benchmarks. A 15-second sprint can reveal peak burst speed, while 60- or 120-second sessions can show whether that speed can be sustained. Repeating the same duration over several sessions creates a more meaningful personal baseline than comparing one unusually good or bad result.</p>
@@ -159,13 +219,15 @@ body.light-mode footer span { color: #64748b; }
 <p>Most importantly, treat a typing test as a measurement tool rather than a judgment. Keyboard layouts, language, text familiarity, physical comfort, and device differences all influence results. Consistency over time is a better sign of improvement than any single personal-best score.</p>
 <h3>Using typing results as a baseline</h3>
 <p>To make improvement measurable, record the same test duration and compare results under similar conditions. Track WPM and accuracy together, and pay attention to whether gains remain consistent across multiple sessions. A personal baseline can be more useful than comparing your score with someone else's because language familiarity, keyboard layout, device type, and practice routine all influence the result. The purpose of the test is to make progress visible and encourage better habits over time.</p>
-<h2>Frequently Asked Questions</h2>
-<details class="faq"><summary>What does WPM mean?</summary><p class="muted">WPM means words per minute and is commonly estimated from the number of correctly typed characters divided by five.</p></details>
-<details class="faq"><summary>Is accuracy more important than speed?</summary><p class="muted">Both matter. High speed with frequent mistakes can be less useful than slightly slower, accurate typing.</p></details>
-<details class="faq"><summary>Can I choose the test duration?</summary><p class="muted">Yes. This version offers 15, 30, 60, and 120 second tests.</p></details>
-<details class="faq"><summary>Does the test store my typing?</summary><p class="muted">The practice session runs locally in the browser and is not sent to a remote scoring service.</p></details>
-<details class="faq"><summary>Can I practice with punctuation?</summary><p class="muted">Yes. Use the Punctuation toggle before restarting the test.</p></details>
-<details class="faq"><summary>Can I practice with numbers?</summary><p class="muted">Yes. Use the Numbers toggle to include numeric characters.</p></details>
+<h2>Typing Test FAQ</h2>
+<details class="faq"><summary>What does WPM mean?</summary><p class="muted">WPM means words per minute. This Typing Lab treats five correctly typed characters as one standardized word and scales the result to one minute based on elapsed test time.</p></details>
+<details class="faq"><summary>How is typing accuracy calculated?</summary><p class="muted">Accuracy is the number of correctly typed character positions divided by the total number of characters you entered, multiplied by 100.</p></details>
+<details class="faq"><summary>Can I choose the typing test duration?</summary><p class="muted">Yes. This version offers 15, 30, 60 and 120 second tests.</p></details>
+<details class="faq"><summary>Can I practice complete sentences?</summary><p class="muted">Yes. Sentence mode uses complete built-in sentences. While sentence mode is active, the separate punctuation and number controls are disabled.</p></details>
+<details class="faq"><summary>Can I practice punctuation and numbers?</summary><p class="muted">Yes. In word mode, you can independently enable punctuation and numbers before restarting the test.</p></details>
+<details class="faq"><summary>What happens if I finish the prompt before time runs out?</summary><p class="muted">The test ends immediately when you type the full prompt, and WPM is calculated from the actual elapsed time instead of the full selected duration.</p></details>
+<details class="faq"><summary>Does the Typing Lab save or upload what I type?</summary><p class="muted">No. The prompt, scoring and typed text are handled in your browser and are not submitted to a Utiliverse scoring server.</p></details>
+<details class="faq"><summary>Why can my WPM vary between tests?</summary><p class="muted">Results can vary with test length, text difficulty, punctuation, numbers, keyboard layout, device, fatigue and familiarity with the prompt. Repeating the same duration under similar conditions gives a more useful personal baseline.</p></details>
 </section>
 </main>
 <script>
@@ -187,7 +249,7 @@ const sentencesList = [
   "Reading documentation can save hours of debugging time."
 ];
 
-let duration=15, started=false, endTime=0, startTime=0, timer=null;
+let duration=15, started=false, finished=false, endTime=0, startTime=0, timer=null;
 let withPunct=false, withNums=false, withSentences=false;
 let currentText="";
 
@@ -245,6 +307,7 @@ function paint(){
 function restart(){
   clearInterval(timer);
   started=false;
+  finished=false;
   startTime=0;
   
   generateText();
@@ -275,6 +338,8 @@ function startTimer(){
 }
 
 function finish(){
+  if (finished) return;
+  finished=true;
   clearInterval(timer);
   started=false;
   document.getElementById('typing').disabled = true;
@@ -296,16 +361,23 @@ function finish(){
   
   document.getElementById('wpm').textContent=wpm;
   document.getElementById('acc').textContent=acc+'%';
-  document.getElementById('result').textContent=`Thank you for typing but Time is up! Results: ${wpm} WPM at ${acc}% accuracy.`;
+  document.getElementById('result').textContent=`Results: ${wpm} WPM at ${acc}% accuracy.`;
   document.getElementById('time').textContent='0.0';
 }
 
 document.getElementById('typing').addEventListener('input',e=>{
+  if (e.target.value.length > currentText.length) {
+    e.target.value = e.target.value.slice(0, currentText.length);
+  }
+
   const val=e.target.value;
-  if(!started&&val.length>0)startTimer();
+
+  if(!started && !finished && val.length>0) startTimer();
+
   updateColors(val);
   document.getElementById('chars').textContent=val.length;
-  if(val.length>=currentText.length)finish();
+
+  if(val.length>=currentText.length) finish();
 });
 
 // Prevent the Enter key from adding newlines to the textarea
@@ -354,32 +426,55 @@ function toggleNumbers(){
   restart();
 }
 
-function toggleTheme() {
-  const body = document.body;
-  const icon = document.getElementById('theme-icon');
-  
-  body.classList.toggle('light-mode');
-  
-  if (body.classList.contains('light-mode')) {
-    icon.setAttribute('data-lucide', 'moon');
-  } else {
-    icon.setAttribute('data-lucide', 'sun');
+const themeToggle = document.getElementById('theme-toggle');
+const moonIcon = document.getElementById('moon-icon');
+const sunIcon = document.getElementById('sun-icon');
+const metaTheme = document.querySelector('meta[name="theme-color"]');
+
+function applyTheme(theme) {
+  const light = theme === 'light';
+
+  document.body.classList.toggle('light-mode', light);
+  moonIcon.classList.toggle('theme-hidden', !light);
+  sunIcon.classList.toggle('theme-hidden', light);
+
+  const label = light ? 'Switch to dark mode' : 'Switch to light mode';
+  themeToggle.setAttribute('aria-label', label);
+  themeToggle.title = label;
+
+  if (metaTheme) {
+    metaTheme.setAttribute('content', light ? '#f8fafc' : '#020617');
   }
-  lucide.createIcons();
+
   updateColors(document.getElementById('typing').value);
 }
 
-document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+const savedTheme = localStorage.getItem('utiliverse-theme');
+const initialTheme = savedTheme ||
+  (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+
+applyTheme(initialTheme);
+
+themeToggle.addEventListener('click', () => {
+  const nextTheme =
+    document.body.classList.contains('light-mode') ? 'dark' : 'light';
+
+  localStorage.setItem('utiliverse-theme', nextTheme);
+  applyTheme(nextTheme);
+});
 restart();
 </script>
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
 <footer class="border-t border-slate-800 bg-slate-950 transition-colors duration-300">
 <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500">
-<span>© <span id="year"></span> Utiliverse. All rights reserved.</span>
-<span>Tools are designed for browser-based use.</span>
+<span>© 2026 Utiliverse. All rights reserved.</span>
+<span>100% Free and Browser Based</span>
 </div>
 </footer>
 <script>
-document.getElementById('year').textContent=new Date().getFullYear();
 lucide.createIcons();
 </script>
 </body>
