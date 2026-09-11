@@ -4,16 +4,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>Image Resizer & Format Utility | Utiliverse</title>
-  <meta name="description" content="Free browser-based image resizer and social media format converter. Resize, crop, and convert PNG, JPG, WEBP, GIF, SVG, BMP and ICO images to exact social media dimensions — 100% client-side, nothing uploaded.">
+  <title>Image Converter & Resizer – JPG, PNG, WebP & BMP | Utiliverse</title>
+  <meta name="description" content="Free online image converter and resizer. Convert PNG, JPG, WEBP, GIF, SVG, BMP and ICO images to JPG, PNG, WebP or BMP, resize or crop them, and use social media presets locally in your browser.">
   <meta name="robots" content="index,follow">
   <meta name="theme-color" content="#020617">
   <link rel="canonical" href="https://utiliverse.app/Image_Converter/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Utiliverse">
+  <meta property="og:title" content="Image Converter & Resizer – JPG, PNG, WebP & BMP | Utiliverse">
+  <meta property="og:description" content="Convert, resize and crop images locally in your browser with JPG, PNG, WebP and BMP export plus social media presets.">
+  <meta property="og:url" content="https://utiliverse.app/Image_Converter/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Image Converter & Resizer – JPG, PNG, WebP & BMP | Utiliverse">
+  <meta name="twitter:description" content="Convert, resize and crop images locally in your browser.">
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
-
-  <!-- Google AdSense Script -->
-  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
 
   <style>
     *{box-sizing:border-box}
@@ -133,24 +139,81 @@
       transition:all .3s cubic-bezier(0.4,0,0.2,1);z-index:100;
     }
     .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+    #theme-toggle{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:40px;
+      height:40px;
+      padding:0;
+      border:1px solid #334155;
+      border-radius:12px;
+      background:rgba(15,23,42,.72);
+      color:#94a3b8;
+      cursor:pointer;
+      box-shadow:none;
+      appearance:none;
+      -webkit-appearance:none;
+      transition:background .2s ease,color .2s ease,border-color .2s ease;
+    }
+    #theme-toggle:hover{background:#1e293b;color:#fff;border-color:#475569}
+    #theme-toggle:focus-visible{outline:2px solid #6366f1;outline-offset:3px}
+    #theme-toggle svg{width:18px;height:18px;stroke-width:2}
+    .free-browser-note{color:#94a3b8;font-size:12px;font-weight:700;white-space:nowrap;letter-spacing:.1px}
+    body.light-mode #theme-toggle{background:#fff;border-color:#cbd5e1;color:#475569}
+    body.light-mode #theme-toggle:hover{background:#f1f5f9;color:#0f172a;border-color:#94a3b8}
+    body.light-mode .free-browser-note{color:#64748b}
+    @media(max-width:640px){
+      .free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}
+      #theme-toggle{width:38px;height:38px;flex:0 0 auto}
+    }
+
   </style>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Image Converter & Resizer","url":"https://utiliverse.app/Image_Converter/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript and Canvas support.","description":"Free browser-based image converter and resizer for converting, resizing and cropping common image formats with JPG, PNG, WebP and BMP export.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Convert images to JPG","Convert images to PNG","Convert images to WebP","Convert images to BMP","Resize images to custom dimensions","Fit, crop or stretch resize modes","Live image preview","Social media image size presets","Local browser-based image processing"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does this tool upload my images to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Image decoding, resizing, cropping and export run locally in your browser. Your image file is not uploaded to a Utiliverse server."}},{"@type":"Question","name":"Why did my PNG transparent background turn white?","acceptedAnswer":{"@type":"Answer","text":"JPG does not support transparency, so transparent areas are filled with white when exporting to JPG. Use PNG or WebP to preserve transparency."}},{"@type":"Question","name":"What is the difference between Fit and Cover resize modes?","acceptedAnswer":{"@type":"Answer","text":"Fit keeps the entire image visible and adds padding when necessary. Cover fills the target dimensions and crops overflow from the edges."}},{"@type":"Question","name":"Which output formats can I convert images to?","acceptedAnswer":{"@type":"Answer","text":"The converter can export processed images as JPG, PNG, WebP or BMP. JPG and WebP also support an adjustable quality setting."}},{"@type":"Question","name":"Does the tool preserve animated GIFs?","acceptedAnswer":{"@type":"Answer","text":"No. GIF files can be opened as an input format, but the canvas workflow processes them as a single static image frame rather than preserving animation."}},{"@type":"Question","name":"Can I resize an image to exact pixel dimensions?","acceptedAnswer":{"@type":"Answer","text":"Yes. You can enter a custom width and height from 1 to 8000 pixels, lock the aspect ratio, and choose Stretch, Fit or Cover."}},{"@type":"Question","name":"Are social media size presets included?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool includes preset dimensions for Instagram, Facebook, YouTube and X / Twitter. Selecting a preset fills the matching width and height values."}}]}</script>
 </head>
 
 <body>
+<!--
+SEO TARGET CLUSTER
+Primary: image converter
+Secondary: image resizer, JPG converter, PNG converter, WebP converter,
+image format converter, resize image online, crop image online,
+social media image resizer, browser-based image converter
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments below.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
 
   <header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800 transition-all duration-300">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
       <a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2 transition-colors"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse</a>
-      <button id="theme-toggle" class="text-slate-400 hover:text-white transition-colors cursor-pointer"><i data-lucide="sun" id="theme-icon" class="w-5 h-5"></i></button>
+      <div class="flex items-center gap-3">
+        <span class="free-browser-note">100% Free and Browser Based</span>
+        <button id="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+          <svg id="moon-icon" class="hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
+          <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+        </button>
+      </div>
     </div>
   </header>
 
   <main class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
     <div class="max-w-3xl">
       <p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Media Utility</p>
-      <h1 class="text-4xl sm:text-5xl font-black mt-2">Image Resizer & Formatter</h1>
-      <p class="mt-4 text-lg muted">Resize, crop, and convert graphics to exact social media dimensions — 100% locally in your browser.</p>
+      <h1 class="text-4xl sm:text-5xl font-black mt-2">Image Converter & Resizer</h1>
+      <p class="mt-4 text-lg muted">Convert, resize and crop images to JPG, PNG, WebP or BMP, set custom dimensions, or use built-in social media presets — all locally in your browser.</p>
     </div>
+
+
+    <!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
+         Paste approved Google AdSense code here after approval.
+         This comment is intentionally invisible and reserves no space.
+    -->
 
     <section class="grid lg:grid-cols-5 gap-6 mt-8">
       <div class="lg:col-span-3 flex flex-col gap-6">
@@ -271,8 +334,14 @@
       </div>
     </section>
 
+
+    <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
+         Paste approved Google AdSense code here after approval.
+         This comment is intentionally invisible and reserves no space.
+    -->
+
     <section class="article max-w-4xl mx-auto mt-16 px-4">
-      <h2>How to Use the Image Resizer</h2>
+      <h2>How to Use the Image Converter & Resizer</h2>
       <div class="glass p-6 rounded-2xl mt-6">
         <ol class="list-decimal pl-5 space-y-3">
           <li>Drag and drop an image into the upload zone, or click <strong>Choose File</strong> to browse your device. PNG, JPG, WEBP, GIF, SVG, BMP and ICO are all supported.</li>
@@ -283,7 +352,7 @@
         </ol>
       </div>
 
-      <h2 class="mt-12">Supported Image Formats Explained</h2>
+      <h2 class="mt-12">Supported Image Converter Formats</h2>
       <div class="grid md:grid-cols-2 gap-6 mt-6">
         <div class="glass p-6 rounded-2xl">
           <h3>Input Formats</h3>
@@ -332,7 +401,16 @@
         </table>
       </div>
 
-      <h2 class="mt-16">Frequently Asked Questions</h2>
+
+      <h2 class="mt-16">Convert Images Between JPG, PNG, WebP and BMP</h2>
+      <p>This image converter can take supported source images such as PNG, JPG/JPEG, WebP, GIF, SVG, BMP and ICO and export the processed result as JPG, PNG, WebP or BMP. You can keep the original dimensions, enter a custom width and height, or use a preset size before exporting.</p>
+      <p>Use JPG when you want compact files for photographs, PNG when you need lossless output or transparency, WebP for efficient web delivery with transparency support, and BMP when you need an uncompressed bitmap format. GIF input is treated as a static image during canvas processing rather than preserving animation.</p>
+
+      <h2 class="mt-12">Resize, Fit or Crop an Image</h2>
+      <p>The resize controls support three different workflows. <strong>Stretch</strong> forces the image to the exact target width and height. <strong>Fit</strong> keeps the entire image visible and adds padding when the target aspect ratio is different. <strong>Cover</strong> fills the complete output frame and crops the edges when necessary.</p>
+      <p>The live preview and crop overlay help you see the expected result before downloading the converted file.</p>
+
+      <h2 class="mt-16">Image Converter & Resizer FAQ</h2>
       <div class="glass p-6 rounded-2xl mt-6 space-y-4">
         <details class="group cursor-pointer py-2">
           <summary class="faq-question font-bold text-lg hover:text-indigo-400 transition-colors flex justify-between items-center outline-none">
@@ -360,15 +438,53 @@
           <p class="faq-answer mt-3 leading-relaxed m-0"><strong>Fit (Pad)</strong> scales your entire image to fit inside the target dimensions, adding padding (transparent or white, depending on the format) to any extra space. <strong>Cover (Crop)</strong> scales your image up so it completely fills the target dimensions, cutting off the overlapping edges to guarantee a perfect fit without distortion.</p>
         </details>
         <hr class="faq-divider border-slate-800">
+
+        <details class="group cursor-pointer py-2">
+          <summary class="faq-question font-bold text-lg hover:text-indigo-400 transition-colors flex justify-between items-center outline-none">
+            Which output formats can I convert images to?
+            <i data-lucide="chevron-down" class="w-5 h-5 transition-transform group-open:rotate-180 text-slate-400"></i>
+          </summary>
+          <p class="faq-answer mt-3 leading-relaxed m-0">The current converter can export processed images as JPG, PNG, WEBP, or BMP. JPG and WEBP also support an adjustable quality setting in the tool.</p>
+        </details>
+        <hr class="faq-divider border-slate-800">
+
+        <details class="group cursor-pointer py-2">
+          <summary class="faq-question font-bold text-lg hover:text-indigo-400 transition-colors flex justify-between items-center outline-none">
+            Does the tool preserve animated GIFs?
+            <i data-lucide="chevron-down" class="w-5 h-5 transition-transform group-open:rotate-180 text-slate-400"></i>
+          </summary>
+          <p class="faq-answer mt-3 leading-relaxed m-0">No. GIF files can be opened as an input format, but the browser-based canvas workflow processes them as a single static image frame rather than preserving animation.</p>
+        </details>
+        <hr class="faq-divider border-slate-800">
+
+        <details class="group cursor-pointer py-2">
+          <summary class="faq-question font-bold text-lg hover:text-indigo-400 transition-colors flex justify-between items-center outline-none">
+            Can I resize an image to exact pixel dimensions?
+            <i data-lucide="chevron-down" class="w-5 h-5 transition-transform group-open:rotate-180 text-slate-400"></i>
+          </summary>
+          <p class="faq-answer mt-3 leading-relaxed m-0">Yes. You can enter a custom width and height from 1 to 8000 pixels, lock the aspect ratio, and choose Stretch, Fit, or Cover depending on how you want the image to fill the target size.</p>
+        </details>
+        <hr class="faq-divider border-slate-800">
+
+        <details class="group cursor-pointer py-2">
+          <summary class="faq-question font-bold text-lg hover:text-indigo-400 transition-colors flex justify-between items-center outline-none">
+            Are social media size presets included?
+            <i data-lucide="chevron-down" class="w-5 h-5 transition-transform group-open:rotate-180 text-slate-400"></i>
+          </summary>
+          <p class="faq-answer mt-3 leading-relaxed m-0">Yes. The tool includes preset dimensions for Instagram, Facebook, YouTube, and X / Twitter. Choosing a preset automatically fills the matching width and height values.</p>
+        </details>
+        <hr class="faq-divider border-slate-800">
       </div>
     </section>
 
+
+  <!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+       Paste approved Google AdSense code here after approval.
+       This comment is intentionally invisible and reserves no space.
+  -->
+
   </main>
-  <footer class="border-t border-slate-800 bg-slate-950 mt-12">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 text-sm text-slate-500 text-center">
-      © <span id="year"></span> Utiliverse. All processing happens locally in your browser. No images are uploaded to any server.
-    </div>
-  </footer>
+  <footer class="border-t border-slate-800 bg-slate-950 mt-12"><div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500"><span>© 2026 Utiliverse. All rights reserved.</span><span>100% Free and Browser Based</span></div></footer>
 
   <div class="toast" id="toast"></div>
 
@@ -382,17 +498,27 @@
       "use strict";
 
       lucide.createIcons();
-      document.getElementById("year").textContent = new Date().getFullYear();
 
       /* ---------------- Theme ---------------- */
       var themeToggle = document.getElementById("theme-toggle");
-      var themeIcon = document.getElementById("theme-icon");
+      var moonIcon = document.getElementById("moon-icon");
+      var sunIcon = document.getElementById("sun-icon");
+      var metaTheme = document.querySelector('meta[name="theme-color"]');
 
       function applyTheme(theme) {
         var light = theme === "light";
         document.body.classList.toggle("light-mode", light);
-        themeIcon.setAttribute("data-lucide", light ? "moon" : "sun");
-        lucide.createIcons();
+
+        // Light mode shows moon (switch to dark); dark mode shows sun (switch to light).
+        moonIcon.classList.toggle("hidden", !light);
+        sunIcon.classList.toggle("hidden", light);
+
+        themeToggle.setAttribute("aria-label", light ? "Switch to dark mode" : "Switch to light mode");
+        themeToggle.title = light ? "Switch to dark mode" : "Switch to light mode";
+
+        if (metaTheme) {
+          metaTheme.setAttribute("content", light ? "#f8fafc" : "#020617");
+        }
       }
 
       var savedTheme = localStorage.getItem("utiliverse-theme");
