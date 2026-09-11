@@ -3,8 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Internet Speed Test — Download, Upload, Ping & Jitter | Utiliverse</title>
-<meta name="description" content="Run a browser-based internet speed test with selectable nearby test servers, automatic location detection, download and upload measurements, ping, jitter, ISP details and connection quality.">
+<title>Internet Speed Test – Download, Upload, Ping & Jitter | Utiliverse</title>
+<meta name="description" content="Free browser-based internet speed test. Measure download speed, upload speed, ping and jitter, view ISP details, and compare connection quality using Cloudflare test endpoints.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/Internet_Speed_Test/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Internet Speed Test – Download, Upload, Ping & Jitter | Utiliverse">
+<meta property="og:description" content="Measure browser download speed, upload speed, ping and jitter with Cloudflare test endpoints and connection-quality estimates.">
+<meta property="og:url" content="https://utiliverse.app/Internet_Speed_Test/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Internet Speed Test – Download, Upload, Ping & Jitter | Utiliverse">
+<meta name="twitter:description" content="Test download, upload, ping and jitter directly from your browser.">
+
 <style>
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.14),transparent 32%),radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;color:#f8fafc;font-family:Inter,system-ui,sans-serif;transition:background 0.3s, color 0.3s}
@@ -83,19 +95,66 @@ body.light-mode #serverList .server-card{
   color:#334155;
 }
 
-@media(max-width:640px){.hero-title{font-size:2.25rem}}
+
+
+#theme-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
+  padding:0;
+  border:1px solid #334155;
+  border-radius:12px;
+  background:rgba(15,23,42,.72);
+  color:#94a3b8;
+  cursor:pointer;
+  box-shadow:none;
+  appearance:none;
+  -webkit-appearance:none;
+  transition:background .2s ease,color .2s ease,border-color .2s ease;
+}
+#theme-toggle:hover{background:#1e293b;color:#fff;border-color:#475569}
+#theme-toggle:focus-visible{outline:2px solid #6366f1;outline-offset:3px}
+#theme-toggle svg{width:18px;height:18px;stroke-width:2}
+.free-browser-note{color:#94a3b8;font-size:12px;font-weight:700;white-space:nowrap;letter-spacing:.1px}
+body.light-mode #theme-toggle{background:#fff;border-color:#cbd5e1;color:#475569}
+body.light-mode #theme-toggle:hover{background:#f1f5f9;color:#0f172a;border-color:#94a3b8}
+body.light-mode .free-browser-note{color:#64748b}
+@media(max-width:640px){
+  .hero-title{font-size:2.25rem}
+  .free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}
+  #theme-toggle{width:38px;height:38px;flex:0 0 auto}
+}
+
 </style>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
-</head>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Internet Speed Test","url":"https://utiliverse.app/Internet_Speed_Test/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript, Fetch API and network access.","description":"Free browser-based internet speed test that estimates download speed, upload speed, ping and jitter using Cloudflare speed-test endpoints.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Download speed estimate","Upload speed estimate","Ping measurement","Jitter measurement","ISP and approximate location display","Connection quality estimate","Repeat testing from the browser"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does this internet speed test measure?","acceptedAnswer":{"@type":"Answer","text":"It measures estimated download speed, upload speed, ping and jitter from your browser."}},{"@type":"Question","name":"Why can my speed test results change from one run to another?","acceptedAnswer":{"@type":"Answer","text":"Results can vary because of Wi-Fi quality, other devices using bandwidth, background traffic, VPNs, device load, ISP congestion, network routing and test-endpoint conditions."}},{"@type":"Question","name":"What is ping?","acceptedAnswer":{"@type":"Answer","text":"Ping is an estimate of round-trip response time between your browser and the test endpoint."}},{"@type":"Question","name":"What is jitter?","acceptedAnswer":{"@type":"Answer","text":"Jitter describes variation in repeated latency samples. Lower and more consistent jitter is generally preferable for real-time applications."}},{"@type":"Question","name":"Should I test over Wi-Fi or Ethernet?","acceptedAnswer":{"@type":"Answer","text":"Testing both can be useful. Ethernet provides a wired comparison, while Wi-Fi reflects the actual wireless performance seen by that device."}},{"@type":"Question","name":"Does the test use external services?","acceptedAnswer":{"@type":"Answer","text":"Yes. The speed test contacts Cloudflare speed-test endpoints, and the page requests ISP and approximate city or region information from IPinfo."}},{"@type":"Question","name":"Does choosing a city force the test through that physical server?","acceptedAnswer":{"@type":"Answer","text":"No. The current geographic entries all use the same Cloudflare speed endpoint, and Cloudflare routing determines the physical edge that handles the traffic."}},{"@type":"Question","name":"Is the connection-quality rating an ISP guarantee?","acceptedAnswer":{"@type":"Answer","text":"No. The rating is a simple Utiliverse heuristic based on measured ping and download speed, not an ISP service-level guarantee."}}]}</script></head>
 <body>
+<!--
+SEO TARGET CLUSTER
+Primary: internet speed test
+Secondary: download speed test, upload speed test, ping test, jitter test,
+Wi-Fi speed test, bandwidth test, connection speed test, browser speed test
+
+CANONICAL NOTE
+The canonical uses the Utiliverse-style route /Internet_Speed_Test/.
+Verify that this is the preferred live production URL when publishing.
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
 <header class="sticky top-0 z-50">
 <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
 <a href="https://utiliverse.app" class="text-sm font-semibold muted hover:opacity-75 flex items-center gap-2"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse</a>
-<div class="flex items-center gap-4">
-  <span class="hidden sm:inline badge"><span class="w-2 h-2 bg-emerald-400 rounded-full"></span>Browser-Based</span>
-  <button onclick="toggleTheme()" class="btn p-2 text-sm flex items-center justify-center rounded-full" title="Toggle Theme" aria-label="Toggle Theme">
-    <i data-lucide="sun" id="themeIcon" class="w-4 h-4"></i>
+<div class="flex items-center gap-3">
+  <span class="free-browser-note">100% Free and Browser Based</span>
+  <button id="theme-toggle" onclick="toggleTheme()" type="button" title="Switch to light mode" aria-label="Switch to light mode">
+    <svg id="moonIcon" class="hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
+    <svg id="sunIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
   </button>
 </div>
 </div>
@@ -104,9 +163,13 @@ body.light-mode #serverList .server-card{
 <section class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-8">
 <p class="text-xs uppercase tracking-widest text-indigo-500 font-bold">Connectivity utility</p>
 <h1 class="hero-title text-4xl sm:text-5xl font-black mt-2">Internet Speed Test</h1>
-<p class="mt-4 text-lg muted max-w-3xl leading-relaxed">Measure download speed, upload speed, latency and jitter using a selectable test location, with an automatic nearby-server option when your browser can provide location data.</p>
+<p class="mt-4 text-lg muted max-w-3xl leading-relaxed">Measure browser download speed, upload speed, ping and jitter using Cloudflare speed-test endpoints, with connection-quality estimates and optional location-assisted profile selection.</p>
 </section>
 
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
 <main class="max-w-6xl mx-auto px-4 sm:px-6 pb-16">
 <section class="glass rounded-3xl p-5 sm:p-8">
 <div class="grid lg:grid-cols-[1fr_360px] gap-8">
@@ -127,10 +190,18 @@ body.light-mode #serverList .server-card{
 </div>
 
 <div class="mt-5 grid sm:grid-cols-4 gap-3 text-sm">
-<div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase">Test server</div><div id="serverName" class="font-semibold mt-1">Auto-Selecting…</div><div id="serverMeta" class="text-xs muted mt-1">—</div></div>
-<div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase">Network path</div><div id="networkMode" class="font-semibold mt-1">Multi-server</div><div class="text-xs muted mt-1">Browser Engine</div></div>
+<div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase">Test profile</div><div id="serverName" class="font-semibold mt-1">Auto-Selecting…</div><div id="serverMeta" class="text-xs muted mt-1">—</div></div>
+<div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase">Network path</div><div id="networkMode" class="font-semibold mt-1">Cloudflare Edge</div><div class="text-xs muted mt-1">Browser Engine</div></div>
 <div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase">Last test</div><div id="lastTest" class="font-semibold mt-1">—</div><div class="text-xs muted mt-1">Browser estimate</div></div>
 <div class="glass-soft rounded-xl p-4"><div class="muted text-xs uppercase">Duration</div><div id="testDuration" class="font-semibold mt-1">—</div><div class="text-xs muted mt-1">Seconds</div></div>
+</div>
+
+<div class="glass-soft rounded-xl p-4 mt-3 text-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+  <div>
+    <div class="muted text-xs uppercase tracking-wider">Current Public IP Address</div>
+    <div id="currentIp" class="font-mono font-semibold mt-1 break-all">Detecting…</div>
+  </div>
+  <div class="text-xs muted">Detected through the existing ISP lookup</div>
 </div>
 </div>
 
@@ -149,11 +220,11 @@ body.light-mode #serverList .server-card{
 </div>
 
 <button id="geoBtn" onclick="detectClosestServer()" class="w-full text-indigo-400 hover:text-indigo-300 font-semibold text-sm flex items-center justify-center gap-2 mb-6 transition-colors">
-  <i data-lucide="navigation" class="w-4 h-4"></i> Select Automatically
+  <i data-lucide="navigation" class="w-4 h-4"></i> Choose Nearby Profile
 </button>
 
 <div class="relative mb-2">
-  <input id="serverSearch" oninput="renderServers()" placeholder="Search test nodes..." class="w-full bg-slate-900 border border-slate-700 text-slate-200 rounded-full pl-4 pr-10 py-2.5 text-sm focus:outline-none focus:border-indigo-500 transition-colors">
+  <input id="serverSearch" oninput="renderServers()" placeholder="Search test profiles..." class="w-full bg-slate-900 border border-slate-700 text-slate-200 rounded-full pl-4 pr-10 py-2.5 text-sm focus:outline-none focus:border-indigo-500 transition-colors">
   <button onclick="clearSearch()" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300">
     <i data-lucide="x" class="w-4 h-4"></i>
   </button>
@@ -165,11 +236,19 @@ body.light-mode #serverList .server-card{
 </div>
 </section>
 
+<p class="muted text-xs mt-4 leading-relaxed">
+<strong>How this test connects:</strong> speed measurements send test traffic to Cloudflare's public speed endpoints. The page also requests ISP/city information from IPinfo when it loads. Browser geolocation is requested only if you choose <strong>Choose Nearby Profile</strong>. The geographic profile labels do not guarantee which physical Cloudflare edge receives the test because Cloudflare routing is automatic.
+</p>
+
+<!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TEST INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
 <section class="article max-w-4xl mx-auto mt-16 px-4">
 <h2>How this internet speed test works</h2>
-<p>Understanding your internet connection's performance is critical in today's digital landscape. Our browser-based internet speed test provides a highly accurate, real-time assessment of your network's capabilities by measuring four primary metrics: download speed, upload speed, latency (ping), and jitter.</p>
+<p>Understanding your internet connection's performance is critical in today's digital landscape. This browser-based internet speed test provides a practical estimate of four primary connection metrics: download speed, upload speed, latency (ping), and jitter.</p>
 
-<p>When you initiate the test, your browser establishes a secure connection to a selected test server—ideally one located geographically close to you to minimize baseline routing delays. To measure latency and jitter, the tool sends a series of small, instantaneous requests to the server. The time it takes for these requests to reach the server and return to your device is recorded as your ping, measured in milliseconds (ms). By sending multiple requests back-to-back, we can also calculate jitter, which represents the variance or instability in those ping times.</p>
+<p>When you initiate the test, your browser connects to Cloudflare's speed-test endpoint. The current interface includes geographic reference profiles, but Cloudflare's network routing determines the physical edge that ultimately handles the request. To measure latency and jitter, the tool sends a series of small, instantaneous requests to the server. The time it takes for these requests to reach the server and return to your device is recorded as your ping, measured in milliseconds (ms). By sending multiple requests back-to-back, we can also calculate jitter, which represents the variance or instability in those ping times.</p>
 
 <p>Next, the tool assesses your download speed. It does this by requesting large, incompressible data payloads from the server. As your browser downloads this data, the tool continuously monitors the transfer rate, calculating how many megabits per second (Mbps) your connection can handle. We utilize a sustained payload transfer—specifically up to 100 megabytes—to ensure the connection reaches its maximum throughput, allowing us to bypass initial burst speeds and measure your true sustained download capacity.</p>
 
@@ -177,6 +256,11 @@ body.light-mode #serverList .server-card{
 <p>Speed-test results can vary even when your internet plan has not changed. Wi-Fi signal strength, router load, other devices using bandwidth, browser activity, VPNs, security software, and the network path to the test endpoint can all influence a measurement. For a cleaner comparison, close large downloads or cloud backups, test from the same device and location, and run several tests rather than relying on a single result.</p>
 
 <p>The four measurements describe different parts of connection quality. Download speed reflects how quickly data reaches your device, upload speed measures how quickly your device can send data, ping measures round-trip response time, and jitter measures how consistent that response time is across repeated samples. A connection can therefore have high throughput but still feel poor for gaming or video calls if latency or jitter is excessive.</p>
+
+
+<h2>How to Use the Internet Speed Test</h2>
+<p>Click <strong>Start Test</strong> to measure ping, jitter, download speed and upload speed. The tool first sends several small requests to estimate latency and jitter, then downloads a larger payload to estimate downstream throughput and uploads generated data to estimate upstream throughput.</p>
+<p>For a cleaner comparison, pause large downloads, cloud backups and software updates while testing. If possible, compare a wired Ethernet result with Wi-Fi from the same device. Run more than one test because browser speed measurements can vary with Wi-Fi conditions, congestion, device load, routing and endpoint performance.</p>
 
 <h2>Common Use Cases</h2>
 <p>There are numerous scenarios where running an internet speed test is not just helpful, but necessary for optimizing your digital experience.</p>
@@ -205,45 +289,49 @@ body.light-mode #serverList .server-card{
   <p class="mt-4 mb-0">For the most useful diagnosis, repeat the test under comparable conditions and consider both wired and Wi-Fi results. Browser-based measurements are practical estimates and can differ from ISP-side or dedicated testing equipment.</p>
 </div>
 
-<h2>Frequently Asked Questions</h2>
+<h2>Internet Speed Test FAQ</h2>
 <div class="mt-6 border-t border-slate-700/50 pt-4">
   <details class="faq">
-    <summary>1. What is considered a "good" download speed? <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i></summary>
-    <p>A good download speed depends entirely on your usage habits. For basic web browsing and checking email, 10 to 25 Mbps is sufficient. If you regularly stream 4K video, engage in competitive online gaming, or have multiple users connected simultaneously, speeds between 100 Mbps and 200 Mbps are recommended. For households with heavy smart-home integration and multiple simultaneous heavy downloaders, Gigabit (1000 Mbps) connections are becoming increasingly popular.</p>
+    <summary>1. What does this internet speed test measure? <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i></summary>
+    <p>It measures estimated download speed, upload speed, ping and jitter from your browser. Download and upload are reported in megabits per second (Mbps), while ping and jitter are reported in milliseconds (ms).</p>
   </details>
   <details class="faq">
-    <summary>2. Why is my upload speed significantly slower than my download speed? <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i></summary>
-    <p>Most residential internet plans are "asymmetrical," meaning the ISP allocates much more bandwidth to downloading than uploading. This is because the average user consumes far more data (streaming movies, downloading files) than they create (uploading videos, sending large attachments). However, fiber-optic internet plans often offer symmetrical speeds, where download and upload rates are identical.</p>
+    <summary>2. Why can my speed test results change from one run to another? <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i></summary>
+    <p>Results can change because of Wi-Fi signal quality, other devices using bandwidth, background downloads, VPNs, browser/device load, ISP congestion, network routing and conditions at the test endpoint. Running several tests under similar conditions gives a better comparison than relying on one result.</p>
   </details>
   <details class="faq">
-    <summary>3. What exactly is latency or ping? <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i></summary>
-    <p>Latency, commonly referred to as ping, is the reaction time of your connection. It measures how quickly your device receives a response after sending out a request. A ping of under 20 milliseconds (ms) is considered excellent and is ideal for gaming and real-time voice calls. Anything above 100 ms may result in noticeable delay during interactive online activities.</p>
+    <summary>3. What is ping? <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i></summary>
+    <p>Ping is an estimate of round-trip response time between your browser and the test endpoint. Lower latency is generally more helpful for interactive activities such as gaming, voice calls, remote desktops and real-time collaboration.</p>
   </details>
   <details class="faq">
-    <summary>4. How does jitter affect my internet experience? <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i></summary>
-    <p>Jitter is the measure of the variability in your ping over time. If your ping constantly fluctuates (e.g., jumping from 20 ms to 90 ms and back), you have high jitter. This instability can cause packet loss, leading to glitchy voice calls, robotic-sounding audio, and stuttering video streams. A lower jitter value indicates a more stable and reliable connection.</p>
+    <summary>4. What is jitter? <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i></summary>
+    <p>Jitter describes variation in repeated latency samples. Lower, more consistent jitter is generally preferable for real-time audio, video calls and gaming because packet timing is more stable.</p>
   </details>
   <details class="faq">
-    <summary>5. Why do my speed test results vary if I run the test multiple times? <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i></summary>
-    <p>Internet speeds are dynamic and can fluctuate based on numerous factors. Network congestion in your neighborhood, the number of devices connected to your local Wi-Fi, background updates running on your device, and even the physical distance to the selected test server can all impact your results. For the most accurate baseline, run the test multiple times at different times of the day.</p>
+    <summary>5. Should I test over Wi-Fi or Ethernet? <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i></summary>
+    <p>If you want to compare your local Wi-Fi performance with a wired baseline, run both. Ethernet can reduce the effects of wireless interference and signal strength, while a Wi-Fi test reflects the performance your device actually experiences over that wireless connection.</p>
   </details>
   <details class="faq">
-    <summary>6. Should I test my speed over a Wi-Fi or Ethernet connection? <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i></summary>
-    <p>For the most accurate measurement of the speed your ISP is providing, you should connect your computer directly to your router or modem using an Ethernet cable. Wi-Fi signals are subject to interference from walls, furniture, other electronic devices, and distance, which can artificially lower your test results.</p>
+    <summary>6. Does the test use external services? <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i></summary>
+    <p>Yes. The speed test sends network requests to Cloudflare speed-test endpoints. The page also requests ISP and approximate city/region information from IPinfo when it loads. Browser geolocation is requested only when you choose the nearby-profile option.</p>
   </details>
   <details class="faq">
-    <summary>7. Why does the test let me choose different server locations? <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i></summary>
-    <p>The distance between your device and the test server naturally adds latency and can slow down transfer rates. By selecting a server geographically close to you, you minimize these routing delays to get a pure measurement of your local network's capacity. However, testing against a distant server can simulate how fast you can access international websites or services.</p>
+    <summary>7. Does choosing a city force the test through that physical server? <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i></summary>
+    <p>No. In the current build, the geographic entries are reference profiles that all use the same Cloudflare speed endpoint. Cloudflare routing determines the physical edge that receives the traffic, so the listed city is not a guaranteed server location.</p>
   </details>
   <details class="faq">
-    <summary>8. Does this speed test work accurately on mobile devices like smartphones and tablets? <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i></summary>
-    <p>Yes, this browser-based tool is fully responsive and will measure the internet speed of your mobile device. If you are connected to Wi-Fi, it will test your local network. If you disconnect from Wi-Fi, it will measure the speed of your cellular network (4G LTE or 5G). Keep in mind that cellular speeds are highly dependent on signal strength and tower congestion.</p>
+    <summary>8. Is the connection-quality rating an ISP guarantee? <i data-lucide="chevron-down" class="w-4 h-4 text-slate-500"></i></summary>
+    <p>No. The Excellent, Good and Fair labels are simple Utiliverse heuristics based on the measured ping and download speed. They are not ISP service-level guarantees and do not account for every workload or network condition.</p>
   </details>
 </div>
 </section>
 </main>
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
 
-<footer><div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm muted"><span>© <span id="year"></span> Utiliverse. All rights reserved.</span><span>Results are browser-based estimates, not guaranteed ISP measurements.</span></div></footer>
+<footer><div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm muted"><span>© 2026 Utiliverse. All rights reserved.</span><span>100% Free and Browser Based</span></div></footer>
 
 <script>
 // Restored Cloudflare global nodes for stable, CORS-compliant testing.
@@ -258,18 +346,26 @@ const DEFAULT_SERVERS = [
 const state = { servers: [], selected: null, geo: null, running: false, theme: 'dark' };
 const el = id => document.getElementById(id);
 
+function applyTheme(theme) {
+  const light = theme === 'light';
+  document.body.classList.toggle('light-mode', light);
+  state.theme = light ? 'light' : 'dark';
+
+  el('moonIcon').classList.toggle('hidden', !light);
+  el('sunIcon').classList.toggle('hidden', light);
+
+  const toggle = el('theme-toggle');
+  toggle.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
+  toggle.title = light ? 'Switch to dark mode' : 'Switch to light mode';
+
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+  if (metaTheme) metaTheme.setAttribute('content', light ? '#f8fafc' : '#020617');
+}
+
 function toggleTheme() {
-  const body = document.body;
-  if (state.theme === 'dark') {
-    body.classList.add('light-mode');
-    state.theme = 'light';
-    el('themeIcon').setAttribute('data-lucide', 'moon');
-  } else {
-    body.classList.remove('light-mode');
-    state.theme = 'dark';
-    el('themeIcon').setAttribute('data-lucide', 'sun');
-  }
-  lucide.createIcons();
+  const next = state.theme === 'dark' ? 'light' : 'dark';
+  localStorage.setItem('utiliverse-theme', next);
+  applyTheme(next);
 }
 
 function setStatus(text, kind = '') {
@@ -302,10 +398,12 @@ async function detectUserISP() {
     
     el('userIsp').textContent = ispName;
     el('userLocation').textContent = `${data.city || 'Unknown City'}, ${data.region || 'Unknown Region'}`;
+    el('currentIp').textContent = data.ip || 'Unavailable';
   } catch (err) {
     console.warn('Could not auto-detect ISP via IPinfo', err);
     el('userIsp').textContent = 'ISP Detection Failed';
     el('userLocation').textContent = 'Location unavailable';
+    el('currentIp').textContent = 'Unavailable';
   }
 }
 
@@ -353,9 +451,9 @@ function selectServer(id, update = true) {
   }
   el('serverName').textContent = state.selected?.name || 'Not selected';
   el('serverMeta').textContent = state.selected?.location ? `${state.selected.location}` : '—';
-  el('networkMode').textContent = 'Active Server';
+  el('networkMode').textContent = 'Cloudflare Edge';
   renderServers();
-  if (update) setStatus(`Selected ${state.selected.name}. Click 'Start Test' to begin.`, '');
+  if (update) setStatus(`Selected ${state.selected.name} reference profile. Click 'Start Test' to begin.`, '');
 }
 
 async function detectClosestServer() {
@@ -376,14 +474,14 @@ async function detectClosestServer() {
     const validServers = state.servers.filter(s => Number.isFinite(s.distanceGeo)).sort((a, b) => a.distanceGeo - b.distanceGeo);
     if (validServers.length > 0) {
       selectServer(validServers[0].id);
-      setStatus(`Closest server selected: ${validServers[0].name}.`, 'ok');
+      setStatus(`Nearby reference profile selected: ${validServers[0].name}.`, 'ok');
     } else {
       selectServer('cf-auto');
     }
     renderServers();
     resetGeoBtn();
   }, err => {
-    setStatus('Location permission denied. Defaulting to auto-edge server.', 'warn');
+    setStatus('Location permission denied. Using the automatic Cloudflare edge profile.', 'warn');
     selectServer('cf-auto');
     resetGeoBtn();
   }, { timeout: 8000 });
@@ -391,7 +489,7 @@ async function detectClosestServer() {
 
 function resetGeoBtn() {
   el('geoBtn').disabled = false;
-  el('geoBtn').innerHTML = '<i data-lucide="navigation" class="w-4 h-4"></i> Select Automatically';
+  el('geoBtn').innerHTML = '<i data-lucide="navigation" class="w-4 h-4"></i> Choose Nearby Profile';
   lucide.createIcons();
 }
 
@@ -525,10 +623,11 @@ function finishTest() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  const savedTheme = localStorage.getItem('utiliverse-theme');
+  applyTheme(savedTheme || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
   detectUserISP();
   loadServers();
   lucide.createIcons();
-  el('year').textContent = new Date().getFullYear();
   
   document.querySelectorAll('.faq').forEach(details => {
     details.addEventListener('toggle', (e) => {
