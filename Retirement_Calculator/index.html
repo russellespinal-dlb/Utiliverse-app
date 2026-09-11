@@ -10,12 +10,23 @@
     content="width=device-width, initial-scale=1.0"
 >
 
-<title>Retirement Calculator | Utiliverse</title>
+<title>Retirement Calculator – Savings Goal, Income & Contributions | Utiliverse</title>
 
 <meta
     name="description"
-    content="Estimate how much you may need for retirement, how much to save, potential retirement income, and how long your savings may last."
+    content="Free retirement calculator to estimate your retirement savings goal, projected balance, monthly contribution needed, retirement income and long-term savings growth."
 >
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/Retirement_Calculator/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Retirement Calculator – Savings Goal, Income & Contributions | Utiliverse">
+<meta property="og:description" content="Estimate a retirement savings target, projected balance, monthly saving requirement and retirement income using your own assumptions.">
+<meta property="og:url" content="https://utiliverse.app/Retirement_Calculator/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Retirement Calculator – Savings Goal, Income & Contributions | Utiliverse">
+<meta name="twitter:description" content="Estimate retirement savings, contributions, income needs and long-term growth in your browser.">
 
 <style>
 
@@ -1409,17 +1420,65 @@ body.light-mode #theme-toggle{color:#475569 !important;}
     .container{padding:8px 18px 48px;}
 }
 
-/* GOOGLE ADSENSE: TOP PLACEMENT
-   Paste approved Google AdSense code here after approval.
-   This placeholder is intentionally invisible and reserves no physical space.
-*/
+
+
+
+/* Standard Utiliverse header controls */
+.topbar-actions{display:flex;align-items:center;gap:12px}
+.free-browser-note{color:#94a3b8;font-size:12px;font-weight:700;white-space:nowrap;letter-spacing:.1px}
+#theme-toggle{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:40px;
+    height:40px;
+    padding:0;
+    border:1px solid #334155 !important;
+    border-radius:12px;
+    background:rgba(15,23,42,.72) !important;
+    color:#94a3b8 !important;
+    cursor:pointer;
+    box-shadow:none;
+    appearance:none;
+    -webkit-appearance:none;
+    transition:background .2s ease,color .2s ease,border-color .2s ease;
+}
+#theme-toggle:hover{background:#1e293b !important;color:#fff !important;border-color:#475569 !important}
+#theme-toggle:focus-visible{outline:2px solid #6366f1;outline-offset:3px}
+#theme-toggle svg{width:18px;height:18px;stroke-width:2}
+body.light-mode #theme-toggle{background:#fff !important;border-color:#cbd5e1 !important;color:#475569 !important}
+body.light-mode #theme-toggle:hover{background:#f1f5f9 !important;border-color:#94a3b8 !important;color:#0f172a !important}
+body.light-mode .free-browser-note{color:#64748b}
+.theme-hidden{display:none!important}
+.local-processing-note{margin:14px 0 0;color:var(--muted);font-size:11px;line-height:1.55}
+.formula-box{margin:22px 0;padding:18px;border:1px solid var(--border);border-radius:10px;background:var(--soft);font-size:13px;line-height:1.9;color:var(--muted)}
+.formula-box strong{color:var(--text)}
+@media(max-width:600px){
+    .free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}
+    #theme-toggle{width:38px;height:38px;flex:0 0 auto}
+}
 
 </style>
 
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Retirement Calculator","url":"https://utiliverse.app/Retirement_Calculator/","applicationCategory":"FinanceApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based retirement calculator for estimating a retirement savings target, projected savings, monthly contribution needs and retirement income.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Retirement savings goal estimate","Projected savings at retirement","Estimated monthly contribution needed","Retirement income target","Other retirement income adjustment","Investment return and inflation assumptions","Retirement-period modeling","Pre-retirement savings projection table"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much money do I need to retire?","acceptedAnswer":{"@type":"Answer","text":"There is no single amount for everyone. This calculator estimates a target from your projected final income, income-replacement target, other retirement income, retirement period, investment-return assumption and inflation assumption."}},{"@type":"Question","name":"How does other retirement income affect the estimate?","acceptedAnswer":{"@type":"Answer","text":"Expected monthly income such as Social Security, a pension or an annuity is subtracted from the target retirement income before estimating the amount the investment portfolio needs to provide."}},{"@type":"Question","name":"What investment return should I use?","acceptedAnswer":{"@type":"Answer","text":"No return is guaranteed. Use an assumption appropriate for your planning scenario and compare multiple return assumptions rather than relying on one optimistic value."}},{"@type":"Question","name":"How does inflation affect the calculation?","acceptedAnswer":{"@type":"Answer","text":"The calculator combines the investment-return and inflation assumptions into a simplified real-return estimate when calculating the retirement savings target."}},{"@type":"Question","name":"What does estimated monthly saving needed mean?","acceptedAnswer":{"@type":"Answer","text":"It is the approximate monthly contribution required from now until retirement to reach the modeled retirement savings target, after accounting for the projected growth of current savings."}},{"@type":"Question","name":"Can I retire earlier if I save more?","acceptedAnswer":{"@type":"Answer","text":"Potentially. A higher contribution can increase projected savings, while changing retirement age also changes the number of saving years and the length of the modeled retirement period."}},{"@type":"Question","name":"Does the calculator include taxes, investment fees or required minimum distributions?","acceptedAnswer":{"@type":"Answer","text":"No. This simplified calculator does not model income taxes, investment fees, account-specific tax treatment, required minimum distributions, healthcare costs or detailed Social Security rules."}},{"@type":"Question","name":"Are the retirement results guaranteed?","acceptedAnswer":{"@type":"Answer","text":"No. The results are educational estimates based on the assumptions entered. Actual returns, inflation, spending, taxes, longevity and retirement income can differ."}}]}</script>
 </head>
 
 
 <body>
+<!--
+SEO TARGET CLUSTER
+Primary: retirement calculator
+Secondary: retirement savings calculator, retirement income calculator,
+how much do I need to retire, retirement contribution calculator,
+retirement nest egg calculator, retirement planning calculator
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
 
 
 <!-- =========================================================
@@ -1438,19 +1497,24 @@ body.light-mode #theme-toggle{color:#475569 !important;}
         </a>
 
 
-        <button
-            id="theme-toggle"
-            type="button"
-            aria-label="Toggle dark and light mode"
-            title="Toggle dark and light mode"
-            style="border:0;background:transparent;color:#94a3b8;font-size:20px;line-height:1;cursor:pointer;padding:4px 6px;"
-        ><span id="theme-icon">☀</span></button>
+        <div class="topbar-actions">
+            <span class="free-browser-note">100% Free and Browser Based</span>
+            <button id="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+                <svg id="moon-icon" class="theme-hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
+                <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+            </button>
+        </div>
 
     </div>
 
 </header>
 
 
+
+<!-- GOOGLE ADSENSE: TOP / ABOVE-CALCULATOR INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
 
 <!-- =========================================================
      PAGE HEADER
@@ -1470,9 +1534,9 @@ body.light-mode #theme-toggle{color:#475569 !important;}
 
     <p class="subtitle">
 
-        Estimate how much you may need for retirement,
-        how much you may need to save, and what your
-        savings could potentially provide later in life.
+        Estimate your retirement savings goal, projected balance,
+        monthly contribution requirement and retirement income using
+        your own age, income, savings, return and inflation assumptions.
 
     </p>
 
@@ -1822,6 +1886,7 @@ body.light-mode #theme-toggle{color:#475569 !important;}
 
     </div>
 
+<p class="local-processing-note">Browser-based calculation: the financial assumptions you enter are calculated locally on this page and are not submitted to a Utiliverse server.</p>
 
 </section>
 
@@ -1929,7 +1994,7 @@ body.light-mode #theme-toggle{color:#475569 !important;}
         <div class="result-row">
 
             <span>
-                Portfolio-supported monthly income
+                Estimated monthly income from projected portfolio
             </span>
 
             <strong id="portfolioIncome">
@@ -1998,6 +2063,11 @@ body.light-mode #theme-toggle{color:#475569 !important;}
 </div>
 
 
+
+<!-- GOOGLE ADSENSE: MID-PAGE / AFTER-CALCULATOR INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
 
 <!-- =========================================================
      PROJECTION TABLE
@@ -2243,9 +2313,7 @@ additional money may also have years to compound.
 If your employer provides a retirement-plan match, consider
 including the employer contribution when determining the amount
 being added to your retirement account. Employer matching programs
-can be an important part of a retirement strategy. The Calculator.net
-retirement material also discusses employer-sponsored plans such as
-401(k)s, 403(b)s and 457 plans. :contentReference[oaicite:3]{index=3}
+can be an important part of a retirement strategy.
 
 </p>
 
@@ -2283,13 +2351,11 @@ How much should you save?
 <p>
 
 There is no universal savings percentage that guarantees a
-successful retirement. Popular rules of thumb sometimes suggest
-saving around 10% to 15% of income during working years, while
-other approaches focus on replacing a percentage of pre-retirement
-income or accumulating a multiple of annual spending. These are
-starting points rather than guarantees. The Calculator.net source
-also discusses the commonly referenced 10% rule, 70%-80% income
-replacement approach and 4% withdrawal rule. :contentReference[oaicite:4]{index=4}
+successful retirement. The amount you may need to save depends on
+your age, current balance, retirement date, spending target, other
+retirement income, investment results and inflation. Generic rules
+of thumb can be useful for orientation, but they should not replace
+a calculation based on your own assumptions.
 
 </p>
 
@@ -2303,6 +2369,16 @@ retirement age can all change the amount you need.
 
 </p>
 
+
+
+<div class="formula-box">
+    <strong>How this calculator models the estimate</strong><br>
+    Projected final income = current income × (1 + income growth)<sup>years to retirement</sup><br>
+    Target retirement income = projected final income × selected replacement percentage<br>
+    Portfolio income need = target retirement income − expected other retirement income<br>
+    Real return ≈ (1 + investment return) ÷ (1 + inflation) − 1<br>
+    Projected savings = future value of current savings + future value of annual contributions
+</div>
 
 <h3>
 Understanding the retirement withdrawal estimate
@@ -2457,186 +2533,61 @@ financial flexibility.
     Retirement Calculator FAQ
 </h2>
 
-
-<!-- FAQ 1 -->
-
 <div class="faq-item">
-
-    <button
-        class="faq-button"
-        onclick="toggleFAQ(this)"
-        type="button"
-    >
-
-        <span>
-            How much money do I need to retire?
-        </span>
-
-        <span class="faq-icon">
-            +
-        </span>
-
+    <button class="faq-button" onclick="toggleFAQ(this)" type="button" aria-expanded="false">
+        <span>How much money do I need to retire?</span><span class="faq-icon">+</span>
     </button>
-
-
-    <div class="faq-answer">
-
-        There is no single amount that works for everyone. Your
-        target depends on your desired retirement spending,
-        retirement age, life expectancy, Social Security or pension
-        income, taxes, inflation and investment returns. This
-        calculator estimates a target based on the assumptions you
-        enter so you can explore different scenarios.
-
-    </div>
-
+    <div class="faq-answer">There is no single amount for everyone. This calculator estimates a target from your projected final income, selected income-replacement percentage, other retirement income, retirement period, investment-return assumption and inflation assumption.</div>
 </div>
 
-
-
-<!-- FAQ 2 -->
-
 <div class="faq-item">
-
-    <button
-        class="faq-button"
-        onclick="toggleFAQ(this)"
-        type="button"
-    >
-
-        <span>
-            What percentage of my income should I save?
-        </span>
-
-        <span class="faq-icon">
-            +
-        </span>
-
+    <button class="faq-button" onclick="toggleFAQ(this)" type="button" aria-expanded="false">
+        <span>How does other retirement income affect the estimate?</span><span class="faq-icon">+</span>
     </button>
-
-
-    <div class="faq-answer">
-
-        A common rule of thumb is to save roughly 10% to 15% of
-        income, but the appropriate amount depends on your age,
-        retirement goal, existing savings and desired lifestyle.
-        Someone starting late may need to save considerably more,
-        while someone with substantial existing investments may
-        need less additional savings.
-
-    </div>
-
+    <div class="faq-answer">Expected monthly income such as Social Security, a pension or an annuity is subtracted from the target retirement income before the calculator estimates how much income the investment portfolio needs to provide.</div>
 </div>
 
-
-
-<!-- FAQ 3 -->
-
 <div class="faq-item">
-
-    <button
-        class="faq-button"
-        onclick="toggleFAQ(this)"
-        type="button"
-    >
-
-        <span>
-            What investment return should I use?
-        </span>
-
-        <span class="faq-icon">
-            +
-        </span>
-
+    <button class="faq-button" onclick="toggleFAQ(this)" type="button" aria-expanded="false">
+        <span>What investment return should I use?</span><span class="faq-icon">+</span>
     </button>
-
-
-    <div class="faq-answer">
-
-        There is no guaranteed rate of return. A reasonable planning
-        approach is to test several assumptions rather than relying
-        on one number. For example, you might compare a conservative
-        scenario with a moderate scenario and a more optimistic
-        scenario. Remember that investment returns fluctuate and
-        past performance does not guarantee future results.
-
-    </div>
-
+    <div class="faq-answer">No return is guaranteed. Use an assumption appropriate for your planning scenario and compare multiple return assumptions instead of relying on one optimistic number.</div>
 </div>
 
-
-
-<!-- FAQ 4 -->
-
 <div class="faq-item">
-
-    <button
-        class="faq-button"
-        onclick="toggleFAQ(this)"
-        type="button"
-    >
-
-        <span>
-            Should Social Security be included?
-        </span>
-
-        <span class="faq-icon">
-            +
-        </span>
-
+    <button class="faq-button" onclick="toggleFAQ(this)" type="button" aria-expanded="false">
+        <span>How does inflation affect the calculation?</span><span class="faq-icon">+</span>
     </button>
-
-
-    <div class="faq-answer">
-
-        If you expect to receive Social Security, pension income or
-        another reliable retirement income source, you can include
-        an estimate in the other monthly income field. For a more
-        precise Social Security estimate, use your benefit statement
-        or an appropriate Social Security planning tool rather than
-        relying on a generic estimate.
-
-    </div>
-
+    <div class="faq-answer">The calculator combines the investment-return and inflation assumptions into a simplified real-return estimate when calculating the retirement savings target.</div>
 </div>
 
-
-
-<!-- FAQ 5 -->
-
 <div class="faq-item">
-
-    <button
-        class="faq-button"
-        onclick="toggleFAQ(this)"
-        type="button"
-    >
-
-        <span>
-            Can I retire earlier if I save more?
-        </span>
-
-        <span class="faq-icon">
-            +
-        </span>
-
+    <button class="faq-button" onclick="toggleFAQ(this)" type="button" aria-expanded="false">
+        <span>What does estimated monthly saving needed mean?</span><span class="faq-icon">+</span>
     </button>
-
-
-    <div class="faq-answer">
-
-        Potentially. Saving more can increase the amount available
-        when you retire, while retiring later provides additional
-        years for contributions and investment growth. The effect
-        depends on your investment returns, spending needs and
-        how long your retirement savings must last. Try changing
-        the retirement age and annual contribution in the calculator
-        to see how those assumptions affect the projection.
-
-    </div>
-
+    <div class="faq-answer">It is the approximate monthly contribution required from now until retirement to reach the modeled savings target after accounting for the projected growth of your current retirement savings.</div>
 </div>
 
+<div class="faq-item">
+    <button class="faq-button" onclick="toggleFAQ(this)" type="button" aria-expanded="false">
+        <span>Can I retire earlier if I save more?</span><span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">Potentially. Saving more can increase the projected balance, while changing retirement age also changes both the number of saving years and the length of the modeled retirement period.</div>
+</div>
+
+<div class="faq-item">
+    <button class="faq-button" onclick="toggleFAQ(this)" type="button" aria-expanded="false">
+        <span>Does this calculator include taxes, investment fees or required minimum distributions?</span><span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">No. This simplified calculator does not model income taxes, investment fees, account-specific tax treatment, required minimum distributions, healthcare costs or detailed Social Security rules.</div>
+</div>
+
+<div class="faq-item">
+    <button class="faq-button" onclick="toggleFAQ(this)" type="button" aria-expanded="false">
+        <span>Are the retirement results guaranteed?</span><span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">No. The results are educational estimates based on the assumptions entered. Actual investment returns, inflation, spending, taxes, longevity and retirement income can differ.</div>
+</div>
 
 </section>
 
@@ -2646,24 +2597,20 @@ financial flexibility.
 
 
 
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
 <!-- =========================================================
      FOOTER
 ========================================================= -->
 
 <footer>
-
     <div class="footer-inner">
-
-        <div>
-            &copy; 2026 Utiliverse
-        </div>
-
-        <div>
-            Simple tools for everyday decisions.
-        </div>
-
+        <div>© 2026 Utiliverse. All rights reserved.</div>
+        <div>100% Free and Browser Based</div>
     </div>
-
 </footer>
 
 
@@ -2883,16 +2830,6 @@ function calculateRetirement() {
 
 
     /* -----------------------------------------------------
-       INFLATION ADJUSTMENT
-       Convert retirement income into future dollars.
-    ----------------------------------------------------- */
-
-    const inflationAdjustedTarget =
-        annualRetirementIncome;
-
-
-
-    /* -----------------------------------------------------
        FUTURE VALUE OF CURRENT SAVINGS
     ----------------------------------------------------- */
 
@@ -2929,6 +2866,24 @@ function calculateRetirement() {
 
 
     /* -----------------------------------------------------
+       OTHER RETIREMENT INCOME
+    ----------------------------------------------------- */
+
+    const annualOtherIncome =
+        otherMonthlyIncome *
+        12;
+
+
+    const annualPortfolioNeed =
+        Math.max(
+            0,
+            annualRetirementIncome -
+            annualOtherIncome
+        );
+
+
+
+    /* -----------------------------------------------------
        REQUIRED NEST EGG
        
        Use a simplified real-return annuity approach.
@@ -2954,7 +2909,7 @@ function calculateRetirement() {
     ) {
 
         requiredNestEgg =
-            annualRetirementIncome *
+            annualPortfolioNeed *
             retirementYears;
 
     }
@@ -2963,7 +2918,7 @@ function calculateRetirement() {
 
         requiredNestEgg =
 
-            annualRetirementIncome *
+            annualPortfolioNeed *
 
             (
                 1 -
@@ -2982,47 +2937,33 @@ function calculateRetirement() {
 
 
     /* -----------------------------------------------------
-       OTHER RETIREMENT INCOME
-    ----------------------------------------------------- */
-
-    const annualOtherIncome =
-        otherMonthlyIncome *
-        12;
-
-
-    const annualPortfolioNeed =
-        Math.max(
-            0,
-            annualRetirementIncome -
-            annualOtherIncome
-        );
-
-
-
-    /* -----------------------------------------------------
        PORTFOLIO MONTHLY INCOME
        
        Simplified initial withdrawal rate
        based on required nest egg.
     ----------------------------------------------------- */
 
-    let portfolioMonthlyIncome = 0;
+    let estimatedAnnualPortfolioIncome = 0;
 
 
     if (
-        projectedSavings > 0
+        projectedSavings > 0 &&
+        requiredNestEgg > 0
     ) {
 
-        portfolioMonthlyIncome =
+        estimatedAnnualPortfolioIncome =
+            projectedSavings *
             (
-                projectedSavings *
-                (
-                    1 /
-                    retirementYears
-                )
-            ) / 12;
+                annualPortfolioNeed /
+                requiredNestEgg
+            );
 
     }
+
+
+    const portfolioMonthlyIncome =
+        estimatedAnnualPortfolioIncome /
+        12;
 
 
 
@@ -3091,14 +3032,7 @@ function calculateRetirement() {
     ----------------------------------------------------- */
 
     const firstYearWithdrawal =
-        projectedSavings *
-        (
-            annualPortfolioNeed /
-            Math.max(
-                requiredNestEgg,
-                1
-            )
-        );
+        estimatedAnnualPortfolioIncome;
 
 
 
@@ -3212,10 +3146,10 @@ function calculateRetirement() {
             "var(--success)";
 
         statusTitle.textContent =
-            "Strong projected position";
+            "Meets the modeled savings target";
 
         statusText.textContent =
-            "Under these assumptions, your projected retirement savings meet or exceed the estimated target.";
+            "Under the assumptions entered, your projected retirement savings meet or exceed this calculator’s modeled target. This is a planning estimate, not a guarantee.";
 
     }
 
@@ -3288,28 +3222,19 @@ function buildProjectionTable(
     annualReturn
 ) {
 
-
     const table =
         document.getElementById(
             "projectionTable"
         );
 
-
     table.innerHTML = "";
-
 
     let balance =
         startingBalance;
 
-
     const years =
         retirementAge -
         currentAge;
-
-
-    /*
-       Show approximately 6 checkpoints.
-    */
 
     const interval =
         Math.max(
@@ -3319,85 +3244,71 @@ function buildProjectionTable(
             )
         );
 
+    // Starting point at the user's current age.
+    const startingRow =
+        document.createElement(
+            "tr"
+        );
+
+    startingRow.innerHTML = `
+        <td>${currentAge}</td>
+        <td>${money(balance)}</td>
+        <td>${money(0)}</td>
+        <td>${money(0)}</td>
+        <td>${money(balance)}</td>
+    `;
+
+    table.appendChild(startingRow);
 
     for (
-        let year = 0;
+        let year = 1;
         year <= years;
         year++
     ) {
 
+        const startingYearBalance =
+            balance;
+
+        const growth =
+            startingYearBalance *
+            annualReturn;
+
+        const contribution =
+            annualContribution;
+
+        const endingBalance =
+            startingYearBalance +
+            growth +
+            contribution;
+
+        balance =
+            endingBalance;
 
         if (
             year % interval !== 0 &&
             year !== years
         ) {
-
             continue;
-
         }
-
-
-        const contribution =
-            year === 0
-                ? 0
-                : annualContribution;
-
-
-        const growth =
-            (
-                balance +
-                contribution
-            ) *
-            annualReturn;
-
-
-        const endingBalance =
-            balance +
-            contribution +
-            growth;
-
 
         const age =
             currentAge +
             year;
-
 
         const row =
             document.createElement(
                 "tr"
             );
 
-
         row.innerHTML = `
-
-            <td>
-                ${age}
-            </td>
-
-            <td>
-                ${money(balance)}
-            </td>
-
-            <td>
-                ${money(contribution)}
-            </td>
-
-            <td>
-                ${money(growth)}
-            </td>
-
-            <td>
-                ${money(endingBalance)}
-            </td>
-
+            <td>${age}</td>
+            <td>${money(startingYearBalance)}</td>
+            <td>${money(contribution)}</td>
+            <td>${money(growth)}</td>
+            <td>${money(endingBalance)}</td>
         `;
 
-
         table.appendChild(row);
-
-
-        balance =
-            endingBalance;
 
     }
 
@@ -3530,6 +3441,13 @@ function toggleFAQ(button) {
         });
 
 
+    document
+        .querySelectorAll(".faq-button")
+        .forEach(function(item) {
+            item.setAttribute("aria-expanded", "false");
+        });
+
+
     if (!isOpen) {
 
         answer.classList.add(
@@ -3538,6 +3456,8 @@ function toggleFAQ(button) {
 
         icon.textContent =
             "−";
+
+        button.setAttribute("aria-expanded", "true");
 
     }
 
@@ -3563,19 +3483,25 @@ document.addEventListener(
 ========================================================= */
 (function(){
     const toggle = document.getElementById("theme-toggle");
-    const icon = document.getElementById("theme-icon");
-    if(!toggle || !icon) return;
+    const moon = document.getElementById("moon-icon");
+    const sun = document.getElementById("sun-icon");
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    if(!toggle || !moon || !sun) return;
 
     function applyTheme(theme){
         const light = theme === "light";
         document.body.classList.toggle("light-mode", light);
-        icon.textContent = light ? "☾" : "☀";
+        moon.classList.toggle("theme-hidden", !light);
+        sun.classList.toggle("theme-hidden", light);
         toggle.setAttribute("aria-label", light ? "Switch to dark mode" : "Switch to light mode");
         toggle.title = light ? "Switch to dark mode" : "Switch to light mode";
+        if(metaTheme) metaTheme.setAttribute("content", light ? "#f8fafc" : "#020617");
     }
 
     const saved = localStorage.getItem("utiliverse-theme");
-    applyTheme(saved || "dark");
+    const initial = saved ||
+        (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+    applyTheme(initial);
 
     toggle.addEventListener("click", function(){
         const next = document.body.classList.contains("light-mode") ? "dark" : "light";
