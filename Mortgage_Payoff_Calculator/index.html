@@ -3,65 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Mortgage Payoff Calculator | Utiliverse</title>
-<meta name="description" content="Use the free Utiliverse Mortgage Payoff Calculator to see how extra monthly, annual, one-time, or biweekly payments could shorten your mortgage and reduce total interest.">
+<title>Mortgage Payoff Calculator – Extra Payments & Interest Savings | Utiliverse</title>
+<meta name="description" content="Free mortgage payoff calculator. See how extra monthly, annual, one-time or biweekly-equivalent payments could shorten your loan, reduce interest and change your payoff date.">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#020617">
 <link rel="canonical" href="https://utiliverse.app/Mortgage_Payoff_Calculator/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Mortgage Payoff Calculator – Extra Payments & Interest Savings | Utiliverse">
+<meta property="og:description" content="Estimate an earlier mortgage payoff date, time saved and interest savings from additional principal payments.">
+<meta property="og:url" content="https://utiliverse.app/Mortgage_Payoff_Calculator/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mortgage Payoff Calculator – Extra Payments & Interest Savings | Utiliverse">
+<meta name="twitter:description" content="See how extra mortgage payments could affect payoff time and total interest.">
+
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<!-- FAQ Structured Data -->
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"FAQPage",
-  "mainEntity":[
-    {
-      "@type":"Question",
-      "name":"How does the Mortgage Payoff Calculator work?",
-      "acceptedAnswer":{
-        "@type":"Answer",
-        "text":"The calculator compares your existing mortgage payment schedule with an accelerated schedule based on the additional payments you choose. It estimates your new payoff time, interest savings and remaining balance over time."
-      }
-    },
-    {
-      "@type":"Question",
-      "name":"Does paying extra on my mortgage really save interest?",
-      "acceptedAnswer":{
-        "@type":"Answer",
-        "text":"Yes. Additional principal payments reduce the balance used to calculate future interest. The earlier the principal is reduced, the more potential interest savings can accumulate over the remaining life of the loan."
-      }
-    },
-    {
-      "@type":"Question",
-      "name":"Is paying every two weeks better than paying monthly?",
-      "acceptedAnswer":{
-        "@type":"Answer",
-        "text":"A true biweekly payment schedule can result in 26 half-payments each year, which equals 13 full monthly payments instead of 12. That additional payment can help reduce the mortgage balance sooner, although the exact effect depends on how your lender processes payments."
-      }
-    },
-    {
-      "@type":"Question",
-      "name":"Should I pay off my mortgage early or invest the extra money?",
-      "acceptedAnswer":{
-        "@type":"Answer",
-        "text":"There is no universal answer. Paying down a mortgage provides a predictable interest savings benefit, while investing may provide higher potential returns but also carries market risk. Emergency savings, high-interest debt, retirement contributions, taxes and your mortgage rate should all be considered."
-      }
-    },
-    {
-      "@type":"Question",
-      "name":"Can my mortgage have a prepayment penalty?",
-      "acceptedAnswer":{
-        "@type":"Answer",
-        "text":"Some mortgages may have restrictions or penalties associated with early repayment. Check your mortgage documents or contact your lender before making a large additional payment or paying the loan off completely."
-      }
-    }
-  ]
-}
-</script>
+<!-- Structured Data -->
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Mortgage Payoff Calculator","url":"https://utiliverse.app/Mortgage_Payoff_Calculator/","applicationCategory":"FinanceApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based mortgage payoff calculator for comparing a current payment schedule with extra monthly, annual, one-time and biweekly-equivalent principal payment strategies.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Extra monthly mortgage payment modeling","Annual additional principal payment modeling","One-time principal payment modeling","Biweekly-equivalent payoff strategy","Estimated payoff date comparison","Estimated interest savings","Mortgage balance chart","Payoff comparison table","Month-by-month amortization schedule"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does the Mortgage Payoff Calculator work?","acceptedAnswer":{"@type":"Answer","text":"The calculator compares the payoff schedule created from your remaining balance, interest rate and current principal-and-interest payment with a second schedule that includes the additional payments you choose."}},{"@type":"Question","name":"Does paying extra on my mortgage save interest?","acceptedAnswer":{"@type":"Answer","text":"Additional principal payments reduce the balance used to calculate future interest, which can reduce total interest and shorten the payoff period when the lender applies the extra amount to principal."}},{"@type":"Question","name":"How is biweekly mode modeled in this calculator?","acceptedAnswer":{"@type":"Answer","text":"The calculator approximates 26 half-payments per year by adding the equivalent of one extra regular payment each year. Actual lender processing of biweekly or partial payments can differ."}},{"@type":"Question","name":"Can I model a one-time mortgage payment?","acceptedAnswer":{"@type":"Answer","text":"Yes. The one-time additional payment is applied at the beginning of the modeled accelerated schedule as extra principal."}},{"@type":"Question","name":"Can I add an extra payment once per year?","acceptedAnswer":{"@type":"Answer","text":"Yes. The annual-extra field adds the entered amount once every twelve modeled months."}},{"@type":"Question","name":"Should I pay off my mortgage early or invest the extra money?","acceptedAnswer":{"@type":"Answer","text":"There is no universal answer. Mortgage prepayment offers predictable interest savings, while investments may provide higher potential returns but involve risk. Consider emergency savings, other debt, retirement contributions, taxes and your mortgage rate."}},{"@type":"Question","name":"Can my mortgage have a prepayment penalty?","acceptedAnswer":{"@type":"Answer","text":"Some mortgages may include prepayment restrictions or fees. Review your loan documents or contact your servicer before making a large extra payment or complete payoff."}},{"@type":"Question","name":"Is this calculator an official mortgage payoff quote?","acceptedAnswer":{"@type":"Answer","text":"No. It is an educational estimate. An official payoff statement from your servicer may include daily interest, fees, escrow adjustments and other amounts not modeled by this calculator."}}]}</script>
 
 <style>
 *{box-sizing:border-box}
@@ -153,40 +116,63 @@ body.light-mode #theme-toggle:hover{
   color:#0f172a !important;
 }
 
+
+.free-browser-note{color:#94a3b8;font-size:12px;font-weight:700;white-space:nowrap;letter-spacing:.1px}
+#theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border:1px solid #334155;border-radius:12px;background:rgba(15,23,42,.72);color:#94a3b8;box-shadow:none;appearance:none;-webkit-appearance:none;cursor:pointer;transition:background .2s ease,color .2s ease,border-color .2s ease}
+#theme-toggle:hover{background:#1e293b;color:#fff;border-color:#475569}
+#theme-toggle:focus-visible{outline:2px solid #6366f1;outline-offset:3px}
+#theme-toggle svg{width:18px;height:18px;stroke-width:2}
+body.light-mode .free-browser-note{color:#64748b}
+body.light-mode #theme-toggle{background:#fff;border-color:#cbd5e1;color:#475569!important}
+body.light-mode #theme-toggle:hover{background:#f1f5f9;border-color:#94a3b8;color:#0f172a!important}
+body.light-mode #currentPaymentResult,body.light-mode #originalPayoff,body.light-mode #originalInterest,body.light-mode #originalTime,body.light-mode .data-table td.text-white,body.light-mode #amortizationBody .text-white{color:#0f172a!important}
+@media(max-width:640px){.free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}#theme-toggle{width:38px;height:38px;flex:0 0 auto}}
+
 </style>
 </head>
 <body>
+<!--
+SEO TARGET CLUSTER
+Primary: mortgage payoff calculator
+Secondary: extra mortgage payment calculator, early mortgage payoff calculator,
+mortgage interest savings calculator, pay off mortgage early,
+biweekly mortgage payoff calculator, lump sum mortgage payment calculator
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
 
 <header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800 transition-all duration-300">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-    <a href="/" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2 transition-colors">
+    <a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2 transition-colors">
       <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse
     </a>
     <div class="flex items-center gap-3">
-      <span class="text-xs sm:text-sm font-medium text-slate-500 whitespace-nowrap">100% Free and Browser Based</span>
-      <button id="theme-toggle" class="text-slate-400 hover:text-white transition-colors cursor-pointer" type="button" aria-label="Toggle light and dark mode" title="Toggle light and dark mode">
-        <i data-lucide="sun" id="theme-icon" class="w-5 h-5"></i>
+      <span class="free-browser-note">100% Free and Browser Based</span>
+      <button id="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+        <svg id="moon-icon" class="hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
+        <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
       </button>
     </div>
   </div>
 </header>
 
 <main class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-  
-  <!-- AdSense Top (Hidden until approved) -->
-  <div class="hidden max-w-3xl mx-auto mb-12 flex justify-center w-full">
-    <!-- Replace this comment with Google AdSense Code -->
-  </div>
+  <!-- GOOGLE ADSENSE: TOP / ABOVE-CALCULATOR INSERTION POINT
+       Paste approved Google AdSense code here after approval.
+       This comment is intentionally invisible and reserves no space.
+  -->
 
   <div class="max-w-3xl">
-    <p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Mortgage Payoff Calculator</p>
-    <h1 class="text-4xl sm:text-5xl font-black mt-2">See how much sooner you could own your home — and how much interest you could avoid.</h1>
+    <p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Mortgage Calculator</p>
+    <h1 class="text-4xl sm:text-5xl font-black mt-2">Mortgage Payoff Calculator with Extra Payments</h1>
     <p class="mt-4 text-lg muted leading-relaxed">
-      Enter your current mortgage information and experiment with additional monthly, yearly, one-time or biweekly payments. Utiliverse compares your regular payoff schedule with an accelerated strategy so you can see the potential difference in time and interest.
+      Estimate how extra monthly, annual, one-time or biweekly-equivalent principal payments could change your mortgage payoff date, total interest and remaining balance over time.
     </p>
   </div>
 
-  <section class="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-8 mt-12">
+  <section class="mt-12">
     
     <div>
       <!-- Current Mortgage Input -->
@@ -212,7 +198,7 @@ body.light-mode #theme-toggle:hover{
             <p class="text-xs muted mt-2">Enter principal and interest if possible.</p>
           </div>
           <div>
-            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">Remaining loan term</label>
+            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">Remaining loan term (reference)</label>
             <div class="grid grid-cols-2 gap-2">
               <input id="years" type="number" class="input font-mono" value="25" min="0" step="1" placeholder="Years">
               <input id="months" type="number" class="input font-mono" value="0" min="0" max="11" step="1" placeholder="Months">
@@ -246,7 +232,7 @@ body.light-mode #theme-toggle:hover{
               <button id="monthlyBtn" class="btn primary rounded-l-lg rounded-r-none flex-1 border-r-0" type="button">Monthly</button>
               <button id="biweeklyBtn" class="btn rounded-r-lg rounded-l-none flex-1" type="button">Biweekly</button>
             </div>
-            <p class="text-xs muted mt-2">Biweekly mode uses 26 half-payments per year.</p>
+            <p class="text-xs muted mt-2">Biweekly mode approximates 26 half-payments by adding the equivalent of one extra regular payment each year.</p>
           </div>
         </div>
       </div>
@@ -296,11 +282,10 @@ body.light-mode #theme-toggle:hover{
           <span id="timelineEnd">—</span>
         </div>
       </div>
-
-      <!-- AdSense Middle (Hidden until approved) -->
-      <div class="hidden mb-10 flex justify-center w-full">
-        <!-- Replace this comment with Google AdSense Code -->
-      </div>
+      <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-RESULTS INSERTION POINT
+           Paste approved Google AdSense code here after approval.
+           This comment is intentionally invisible and reserves no space.
+      -->
 
       <!-- Chart -->
       <div class="glass p-6 rounded-2xl mb-8">
@@ -368,19 +353,12 @@ body.light-mode #theme-toggle:hover{
 
     </div>
 
-    <!-- Sidebar AdSense (Hidden until approved) -->
-    <aside class="hidden lg:block">
-      <div class="sticky top-24 flex justify-center w-full">
-        <!-- Replace this comment with Google AdSense Code -->
-      </div>
-    </aside>
-
   </section>
 
   <!-- About Section -->
   <section class="article max-w-4xl mt-16 pt-12 border-t border-slate-800">
     <p class="text-xs uppercase tracking-widest text-indigo-400 font-bold mb-3">Understanding mortgage payoff</p>
-    <h2>What is a Mortgage Payoff Calculator?</h2>
+    <h2>How a Mortgage Payoff Calculator Works</h2>
     
     <p>A Mortgage Payoff Calculator helps homeowners understand what could happen if they pay more than their required mortgage payment. Instead of simply showing the amount due each month, it focuses on the bigger picture: how quickly the remaining loan balance could disappear, how much interest may be avoided, and how different payment strategies can change the life of the loan.</p>
     
@@ -406,6 +384,11 @@ body.light-mode #theme-toggle:hover{
     
     <p>The results are estimates rather than a lender payoff quote. Actual mortgage servicing can involve escrow, payment-processing rules, rounding, interest accrual conventions, fees and other factors that may change the exact payoff amount. If you are preparing to completely pay off your mortgage, request an official payoff statement from your mortgage servicer.</p>
     
+
+    <h2>How to Use the Mortgage Payoff Calculator</h2>
+    <p>Start with the remaining principal balance from your latest mortgage statement, your annual interest rate and your normal principal-and-interest payment. Then enter any extra amount you want to model each month, once per year or as a one-time principal payment.</p>
+    <p>The results compare the current modeled schedule with the accelerated schedule, including estimated payoff dates, total interest, interest savings, time saved, a balance chart and a month-by-month amortization table. Biweekly mode is represented as the annual equivalent of one additional regular payment rather than modeling the exact day each half-payment reaches a servicer.</p>
+
     <div class="glass p-6 rounded-xl font-mono text-sm leading-loose mt-8">
       Monthly interest rate = annual interest rate ÷ 12<br>
       Interest charged = current balance × monthly interest rate<br>
@@ -439,7 +422,7 @@ body.light-mode #theme-toggle:hover{
 
   <!-- FAQ Section -->
   <section class="article max-w-4xl mt-16 pt-12 border-t border-slate-800 mb-16">
-    <h2>Frequently asked questions</h2>
+    <h2>Mortgage Payoff Calculator FAQ</h2>
     <p class="mb-8">Common questions about paying off a mortgage early.</p>
     
     <details class="faq" open>
@@ -462,18 +445,21 @@ body.light-mode #theme-toggle:hover{
       <summary>Can my mortgage have a prepayment penalty? <i data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-200"></i></summary>
       <p class="mt-2">Some mortgages can contain restrictions or fees associated with early repayment. Rules vary based on the loan, lender and circumstances. Review your mortgage documents or contact your loan servicer before making a large lump-sum payment or requesting a complete payoff.</p>
     </details>
+
+    <details class="faq"><summary>Can I model a one-time lump-sum mortgage payment? <i data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-200"></i></summary><p class="mt-2">Yes. Enter the amount in the one-time additional payment field. The current model applies that amount as extra principal in the first modeled month of the accelerated schedule.</p></details>
+    <details class="faq"><summary>How does the calculator handle an annual extra payment? <i data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-200"></i></summary><p class="mt-2">The annual-extra amount is added to principal once every twelve modeled months. This can approximate using a yearly bonus, tax refund or other recurring lump sum toward the mortgage.</p></details>
+    <details class="faq"><summary>Is this the same as an official mortgage payoff quote? <i data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-200"></i></summary><p class="mt-2">No. This calculator is an educational estimate. A lender or servicer payoff statement may include daily accrued interest, fees, escrow adjustments and other amounts that are not modeled here.</p></details>
   </section>
 
 </main>
-
-<!-- AdSense Bottom (Hidden until approved) -->
-<div class="hidden max-w-6xl mx-auto px-5 mb-12 flex justify-center w-full">
-  <!-- Replace this comment with Google AdSense Code -->
-</div>
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
 
 <footer class="border-t border-slate-800 bg-slate-950">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500 font-mono">
-    <span>© <span id="currentYear"></span> Utiliverse. All rights reserved.</span>
+    <span>© 2026 Utiliverse. All rights reserved.</span>
     <span>100% Free and Browser Based</span>
   </div>
 </footer>
@@ -482,7 +468,6 @@ body.light-mode #theme-toggle:hover{
 (function(){
   // --- Initialization & Theme ---
   lucide.createIcons();
-  document.getElementById('currentYear').textContent = new Date().getFullYear();
 
   // FAQ Icon Rotation Logic
   document.querySelectorAll('.faq').forEach(details => {
@@ -500,14 +485,30 @@ body.light-mode #theme-toggle:hover{
   Chart.defaults.color = '#94a3b8';
   Chart.defaults.font.family = 'Inter, system-ui, sans-serif';
 
-  document.getElementById('theme-toggle').addEventListener('click', () => {
-    document.body.classList.toggle('light-mode');
-    const icon = document.getElementById('theme-icon');
-    const isLight = document.body.classList.contains('light-mode');
-    icon.setAttribute('data-lucide', isLight ? 'moon' : 'sun');
-    lucide.createIcons();
-    
-    // Update chart grid lines based on theme
+  const themeToggle = document.getElementById('theme-toggle');
+  const moonIcon = document.getElementById('moon-icon');
+  const sunIcon = document.getElementById('sun-icon');
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+
+  function applyTheme(theme){
+    const isLight = theme === 'light';
+    document.body.classList.toggle('light-mode', isLight);
+    moonIcon.classList.toggle('hidden', !isLight);
+    sunIcon.classList.toggle('hidden', isLight);
+    themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+    themeToggle.title = isLight ? 'Switch to dark mode' : 'Switch to light mode';
+    if(metaTheme) metaTheme.setAttribute('content', isLight ? '#f8fafc' : '#020617');
+  }
+
+  const savedTheme = localStorage.getItem('utiliverse-theme');
+  applyTheme(savedTheme || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+
+  themeToggle.addEventListener('click', () => {
+    const nextTheme = document.body.classList.contains('light-mode') ? 'dark' : 'light';
+    localStorage.setItem('utiliverse-theme', nextTheme);
+    applyTheme(nextTheme);
+
+    const isLight = nextTheme === 'light';
     if(chart) {
       chart.options.scales.x.grid.color = isLight ? '#e2e8f0' : 'rgba(51, 65, 85, 0.5)';
       chart.options.scales.y.grid.color = isLight ? '#e2e8f0' : 'rgba(51, 65, 85, 0.5)';
@@ -588,7 +589,7 @@ body.light-mode #theme-toggle:hover{
       
       if(extraAnnual > 0 && month % 12 === 0) extra += extraAnnual;
       if(month === 1) extra += oneTime;
-      if(biweekly && month % 12 === 12) extra += regularPayment;
+      if(biweekly && month % 12 === 0) extra += regularPayment;
 
       let principal = regularPrincipal;
       let totalPrincipal = principal + extra;
