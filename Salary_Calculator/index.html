@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Salary Calculator | Hourly to Annual Pay | Utiliverse</title><meta name="description" content="Convert hourly, daily, weekly, biweekly, semi-monthly, monthly, quarterly and annual pay with the free Utiliverse Salary Calculator, including a working-day adjustment."><meta name="robots" content="index,follow"><link rel="canonical" href="https://utiliverse.app/salary-calculator/"><meta property="og:title" content="Salary Calculator | Utiliverse"><meta property="og:description" content="Convert gross compensation between common pay frequencies and compare working-day adjusted values."><meta property="og:url" content="https://utiliverse.app/Salary_Calculator/"><script src="https://cdn.tailwindcss.com"></script><script src="https://unpkg.com/lucide@latest"></script><style>*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.14),transparent 32%),#020617;color:#f8fafc;font-family:Inter,system-ui,sans-serif}.glass{background:rgba(30,41,59,.72);backdrop-filter:blur(14px);border:1px solid #334155}.input,.select{background:#0f172a;border:1px solid #475569;color:#fff}.input:focus,.select:focus{outline:none;border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.15)}.article h2{font-size:1.9rem;font-weight:800;color:#fff;margin:2rem 0 .8rem}.article h3{font-size:1.2rem;font-weight:750;color:#e2e8f0;margin:1.5rem 0 .5rem}.article p{color:#94a3b8;line-height:1.85;margin:.8rem 0}.faq{border-bottom:1px solid #334155}details summary{list-style:none;cursor:pointer}details summary::-webkit-details-marker{display:none}.ad{display:contents}
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Salary Calculator – Hourly to Annual Pay Converter | Utiliverse</title><meta name="description" content="Free salary calculator to convert hourly, daily, weekly, biweekly, semi-monthly, monthly, quarterly and annual gross pay with an optional working-day adjustment."><meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"><meta name="theme-color" content="#020617"><link rel="canonical" href="https://utiliverse.app/salary-calculator/"><meta property="og:type" content="website"><meta property="og:site_name" content="Utiliverse"><meta property="og:title" content="Salary Calculator – Hourly to Annual Pay Converter | Utiliverse"><meta property="og:description" content="Convert gross compensation between common pay frequencies and compare an optional working-day adjusted annualized value."><meta property="og:url" content="https://utiliverse.app/salary-calculator/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Salary Calculator – Hourly to Annual Pay Converter | Utiliverse"><meta name="twitter:description" content="Convert hourly, daily, weekly, monthly and annual gross compensation in your browser."><script src="https://cdn.tailwindcss.com"></script><script src="https://unpkg.com/lucide@latest"></script><style>*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.14),transparent 32%),#020617;color:#f8fafc;font-family:Inter,system-ui,sans-serif}.glass{background:rgba(30,41,59,.72);backdrop-filter:blur(14px);border:1px solid #334155}.input,.select{background:#0f172a;border:1px solid #475569;color:#fff}.input:focus,.select:focus{outline:none;border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.15)}.article h2{font-size:1.9rem;font-weight:800;color:#fff;margin:2rem 0 .8rem}.article h3{font-size:1.2rem;font-weight:750;color:#e2e8f0;margin:1.5rem 0 .5rem}.article p{color:#94a3b8;line-height:1.85;margin:.8rem 0}.faq{border-bottom:1px solid #334155}details summary{list-style:none;cursor:pointer}details summary::-webkit-details-marker{display:none}.ad{display:contents}
 /* =========================================================
    UTILIVERSE SALARY CALCULATOR — POLISHED THEME
 ========================================================= */
@@ -16,24 +16,26 @@ header{
 }
 
 #theme-toggle{
-  border:0;
-  background:transparent;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
+  padding:0;
+  border:1px solid #334155;
+  border-radius:12px;
+  background:rgba(15,23,42,.72);
   color:#94a3b8;
-  font-size:20px;
-  line-height:1;
   cursor:pointer;
-  padding:5px 7px;
-  border-radius:9px;
-  transition:.15s ease;
+  box-shadow:none;
+  appearance:none;
+  -webkit-appearance:none;
+  transition:background .2s ease,color .2s ease,border-color .2s ease;
 }
-#theme-toggle:hover{
-  color:#fff;
-  background:rgba(148,163,184,.10);
-}
-#theme-toggle:focus-visible{
-  outline:2px solid #6366f1;
-  outline-offset:3px;
-}
+#theme-toggle:hover{background:#1e293b;color:#fff;border-color:#475569}
+#theme-toggle:focus-visible{outline:2px solid #6366f1;outline-offset:3px}
+#theme-toggle svg{width:18px;height:18px;stroke-width:2}
+.free-browser-note{color:#94a3b8;font-size:12px;font-weight:700;white-space:nowrap;letter-spacing:.1px}
 
 .salary-card{
   box-shadow:
@@ -117,13 +119,9 @@ body.light-mode footer{
   background:rgba(255,255,255,.90)!important;
   border-color:#e2e8f0!important;
 }
-body.light-mode #theme-toggle{
-  color:#475569;
-}
-body.light-mode #theme-toggle:hover{
-  color:#0f172a;
-  background:#f1f5f9;
-}
+body.light-mode #theme-toggle{background:#fff;border-color:#cbd5e1;color:#475569}
+body.light-mode #theme-toggle:hover{background:#f1f5f9;border-color:#94a3b8;color:#0f172a}
+body.light-mode .free-browser-note{color:#64748b}
 body.light-mode .glass{
   background:rgba(255,255,255,.90);
   border-color:#cbd5e1;
@@ -182,15 +180,49 @@ body.light-mode .faq{
 }
 
 @media(max-width:640px){
-  #theme-toggle{font-size:19px}
+  .free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}
+  #theme-toggle{width:38px;height:38px;flex:0 0 auto}
   .salary-table th,.salary-table td{padding:11px 12px}
 }
-</style><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Salary Calculator","url":"https://utiliverse.app/salary-calculator/","applicationCategory":"FinanceApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does this salary calculator do?","acceptedAnswer":{"@type":"Answer","text":"It converts gross compensation between hourly, daily, weekly, biweekly, semi-monthly, monthly, quarterly and annual amounts."}},{"@type":"Question","name":"What is biweekly pay?","acceptedAnswer":{"@type":"Answer","text":"Biweekly pay generally occurs every two weeks, creating 26 pay periods in a year."}},{"@type":"Question","name":"What is semi-monthly pay?","acceptedAnswer":{"@type":"Answer","text":"Semi-monthly pay normally occurs twice each month, creating 24 pay periods per year."}},{"@type":"Question","name":"How does the adjusted value work?","acceptedAnswer":{"@type":"Answer","text":"The adjusted view subtracts entered holidays and vacation days from a 260-weekday baseline."}},{"@type":"Question","name":"Does this calculate take-home pay?","acceptedAnswer":{"@type":"Answer","text":"No. It provides gross compensation estimates and does not calculate taxes or payroll deductions."}},{"@type":"Question","name":"Can contractors use it?","acceptedAnswer":{"@type":"Answer","text":"Yes. Contractors can annualize hourly or daily rates, but business costs, taxes and unpaid time should be considered separately."}},{"@type":"Question","name":"What assumptions are used?","acceptedAnswer":{"@type":"Answer","text":"The default model uses 52 weeks, 260 weekdays, 5 workdays per week and 40 hours per week."}},{"@type":"Question","name":"Does paid time off reduce my salary?","acceptedAnswer":{"@type":"Answer","text":"Paid time off normally does not reduce stated gross salary; the adjusted figure is an annualized working-day comparison."}}]}</script></head><body><header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800"><div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between"><a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2"><i data-lucide="arrow-left" class="w-4 h-4"></i>Back to Utiliverse</a><div class="flex items-center gap-3">
-<span class="text-xs text-slate-500 hidden sm:inline">Free & Browser-Based</span>
-<button id="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode"><span id="theme-icon" aria-hidden="true">☀</span></button>
-</div></div></header><!-- GOOGLE ADSENSE: TOP PLACEMENT. Replace this comment with approved AdSense code; no visible placeholder is rendered. --><section class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-8"><p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Compensation planning</p><h1 class="text-4xl sm:text-5xl font-black mt-2">Salary Calculator</h1><p class="text-lg text-slate-400 mt-4 max-w-3xl leading-relaxed">Translate a wage or salary into common pay periods and compare a simple working-day adjusted view.</p></section><main class="max-w-6xl mx-auto px-4 sm:px-6 pb-16"><section class="glass salary-card rounded-3xl p-5 sm:p-8"><div class="grid lg:grid-cols-[350px_1fr] gap-8"><div><label class="salary-field-label">Pay amount ($)<input id="amt" type="number" value="30" min="0" step=".01" class="input w-full rounded-xl p-3 mt-2"></label><label class="salary-field-label mt-4">This amount is<select id="freq" class="select w-full rounded-xl p-3 mt-2"><option value="hourly">Hourly</option><option value="daily">Daily</option><option value="weekly">Weekly</option><option value="biweekly">Bi-weekly</option><option value="semimonthly">Semi-monthly</option><option value="monthly">Monthly</option><option value="quarterly">Quarterly</option><option value="annual">Annual</option></select></label><label class="salary-field-label mt-4">Hours per week<input id="hrs" type="number" value="40" min="0" class="input w-full rounded-xl p-3 mt-2"></label><label class="salary-field-label mt-4">Workdays per week<input id="days" type="number" value="5" min="1" max="7" class="input w-full rounded-xl p-3 mt-2"></label><div class="grid grid-cols-2 gap-3 mt-4"><label class="salary-field-label">Holidays<input id="hol" type="number" value="11" min="0" class="input w-full rounded-xl p-3 mt-2"></label><label class="salary-field-label">Vacation days<input id="vac" type="number" value="10" min="0" class="input w-full rounded-xl p-3 mt-2"></label></div></div><div><div class="salary-result rounded-2xl p-6"><p class="text-xs uppercase tracking-widest text-indigo-300 font-bold">Annual equivalent</p><div id="annual" class="text-4xl sm:text-5xl font-black mt-2">$0</div><p id="adjust" class="text-slate-400 text-sm mt-2"></p></div><div class="salary-table-wrap mt-6"><table class="salary-table w-full text-sm"><thead class="text-slate-500"><tr><th class="text-left py-3">Pay period</th><th class="text-right py-3">Unadjusted</th><th class="text-right py-3">Adjusted</th></tr></thead><tbody id="rows"></tbody></table></div></div></div></section><!-- GOOGLE ADSENSE: MID PLACEMENT. Replace this comment with approved AdSense code; no visible placeholder is rendered. --><article class="article max-w-4xl mx-auto mt-16"><p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Utiliverse guide</p><h2>How to use a salary calculator</h2><p>A salary calculator turns a compensation number into formats that are easier to compare. An employer may quote an annual salary while another role advertises an hourly rate. Converting both to a common set of pay periods helps job seekers, employees, contractors and business owners understand the gross value of each arrangement.</p><p>Enter the amount you know, select its frequency and review the equivalent figures. Hourly calculations depend on the work schedule, so the calculator asks for hours per week and workdays per week. The adjusted column provides a simple way to account for entered holidays and vacation days against a 260-weekday baseline.</p><h3>Biweekly versus semi-monthly</h3><p>Biweekly and semi-monthly are not the same. Biweekly pay normally occurs every two weeks, creating 26 pay periods in a year. Semi-monthly pay happens twice each month, producing 24 pay periods. The individual checks can therefore be different even when the annual salary is identical.</p><h3>Why the adjusted column matters</h3><p>The adjusted figure is most useful as a comparison tool. It can illustrate the annualized value of a pay rate based on days actually worked rather than simply dividing an annual salary by a fixed number of periods. It is not a payroll statement and does not estimate taxes or deductions.</p><h2>Practical use cases</h2><p>Job seekers can compare offers presented in different formats. A $75,000 salary and a $36 hourly role can be translated into annual, monthly, weekly and hourly equivalents before considering benefits and other employment conditions.</p><p>Contractors can use the calculator to annualize hourly and daily rates. This is helpful when setting a target rate, but contractors should also account for unpaid marketing time, insurance, software, equipment, self-employment taxes, downtime and benefits they must provide themselves.</p><p>Employees considering a raise can estimate the gross effect of an hourly increase. A change that sounds small per hour can represent a meaningful annual difference when multiplied across a full work year. The calculator can provide a useful starting point for compensation discussions.</p><p>People comparing jobs with different schedules can use the hours and workday inputs to put the offers on more equal footing. A role with a higher annual salary may involve substantially more work time, while another role may provide more paid leave or a shorter schedule.</p><p>Small-business owners and managers can use the tool for rough staffing estimates. Converting hourly rates into weekly and annual figures can help when evaluating headcount costs. Actual employer cost will normally be higher after payroll taxes, benefits, insurance and other expenses are included.</p><p>Students entering the workforce can use the calculator to learn how compensation is expressed. It can make job postings easier to compare when one lists an hourly rate and another lists an annual salary.</p><p>People relocating can combine the salary calculation with a cost-of-living review. An annual figure becomes more meaningful when compared with housing, commuting, healthcare and other major expenses. The calculator does not perform that comparison, but it supplies a consistent compensation baseline.</p><p>Finally, remember that gross pay and take-home pay are different concepts. Taxes, retirement contributions, insurance premiums, bonuses, commissions and other deductions are not included here. Use the output as an estimate and consult the actual compensation agreement for exact details.</p></article><section class="max-w-4xl mx-auto mt-16 mb-12"><h2 class="text-3xl font-black">Frequently Asked Questions</h2><div class="mt-4"><details class="faq py-5"><summary>What does this salary calculator do?</summary><p class="text-slate-400 mt-3">It converts gross compensation between common hourly, daily, weekly, biweekly, semi-monthly, monthly, quarterly and annual frequencies.</p></details><details class="faq py-5"><summary>What is biweekly pay?</summary><p class="text-slate-400 mt-3">Biweekly pay generally occurs every two weeks, producing 26 pay periods in a year.</p></details><details class="faq py-5"><summary>What is semi-monthly pay?</summary><p class="text-slate-400 mt-3">Semi-monthly pay normally occurs twice each month, producing 24 pay periods.</p></details><details class="faq py-5"><summary>How does the adjusted value work?</summary><p class="text-slate-400 mt-3">It subtracts entered holidays and vacation days from a 260-weekday baseline for an annualized comparison.</p></details><details class="faq py-5"><summary>Does this calculate take-home pay?</summary><p class="text-slate-400 mt-3">No. It estimates gross compensation and does not calculate payroll deductions.</p></details><details class="faq py-5"><summary>Can contractors use it?</summary><p class="text-slate-400 mt-3">Yes, but contractors should separately account for business expenses, taxes, benefits and unpaid time.</p></details><details class="faq py-5"><summary>What assumptions are used?</summary><p class="text-slate-400 mt-3">The defaults use 52 weeks, 260 weekdays, five workdays and 40 hours per week.</p></details><details class="faq py-5"><summary>Does paid time off reduce salary?</summary><p class="text-slate-400 mt-3">Normally not; the adjusted column is a working-day comparison rather than a payroll deduction.</p></details></div></section><!-- GOOGLE ADSENSE: PRE-FOOTER PLACEMENT. Replace this comment with approved AdSense code; no visible placeholder is rendered. --></main><footer class="border-t border-slate-800 bg-slate-950"><div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 text-sm text-slate-500 flex justify-between"><span>© <span id="yr"></span> Utiliverse</span><span>Gross compensation estimates only.</span></div></footer><script>
+</style><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Salary Calculator","url":"https://utiliverse.app/salary-calculator/","applicationCategory":"FinanceApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based salary calculator for converting gross compensation between hourly, daily, weekly, biweekly, semi-monthly, monthly, quarterly and annual pay.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Hourly to annual salary conversion","Daily to annual pay conversion","Weekly and biweekly pay conversion","Semi-monthly and monthly pay conversion","Quarterly and annual pay conversion","Custom hours per week","Custom workdays per week","Optional holiday and vacation day adjustment","Browser-based calculations"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does this salary calculator do?","acceptedAnswer":{"@type":"Answer","text":"It converts gross compensation between hourly, daily, weekly, biweekly, semi-monthly, monthly, quarterly and annual amounts."}},{"@type":"Question","name":"How does hourly pay convert to annual salary?","acceptedAnswer":{"@type":"Answer","text":"Hourly pay is multiplied by the entered hours per week and by 52 weeks."}},{"@type":"Question","name":"What is biweekly pay?","acceptedAnswer":{"@type":"Answer","text":"Biweekly pay generally occurs every two weeks, producing 26 pay periods in a 52-week year."}},{"@type":"Question","name":"What is semi-monthly pay?","acceptedAnswer":{"@type":"Answer","text":"Semi-monthly pay normally occurs twice per month, producing 24 pay periods per year."}},{"@type":"Question","name":"How does the adjusted value work?","acceptedAnswer":{"@type":"Answer","text":"The adjusted view reduces the modeled workdays for the year by the entered holiday and vacation days, using 52 weeks multiplied by the entered workdays per week as the baseline."}},{"@type":"Question","name":"Does this calculate take-home pay?","acceptedAnswer":{"@type":"Answer","text":"No. It estimates gross compensation only and does not calculate income taxes, payroll taxes, insurance, retirement contributions or other deductions."}},{"@type":"Question","name":"Can contractors use this calculator?","acceptedAnswer":{"@type":"Answer","text":"Yes. Contractors can annualize hourly or daily rates, but business costs, self-employment taxes, benefits and unpaid time should be considered separately."}},{"@type":"Question","name":"Does paid time off reduce my stated salary?","acceptedAnswer":{"@type":"Answer","text":"Normally no. The adjusted column is a working-day comparison tool and should not be interpreted as an employer payroll deduction when holidays or vacation are paid."}}]}</script></head><body><!--
+SEO TARGET CLUSTER
+Primary: salary calculator
+Secondary: hourly to annual salary calculator, hourly to salary converter,
+annual to hourly calculator, biweekly pay calculator, semi-monthly pay calculator,
+gross pay calculator, salary conversion calculator
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+<header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800"><div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between"><a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2"><i data-lucide="arrow-left" class="w-4 h-4"></i>Back to Utiliverse</a><div class="flex items-center gap-3">
+<span class="free-browser-note">100% Free and Browser Based</span>
+<button id="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+<svg id="moon-icon" class="hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
+<svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+</button>
+</div></div></header><!-- GOOGLE ADSENSE: TOP / ABOVE-CALCULATOR INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+--><section class="max-w-6xl mx-auto px-4 sm:px-6 pt-12 pb-8"><p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Compensation planning</p><h1 class="text-4xl sm:text-5xl font-black mt-2">Salary Calculator</h1><p class="text-lg text-slate-400 mt-4 max-w-3xl leading-relaxed">Convert hourly, daily, weekly, biweekly, semi-monthly, monthly, quarterly or annual gross pay into equivalent pay periods and compare an optional working-day adjusted view.</p></section><main class="max-w-6xl mx-auto px-4 sm:px-6 pb-16"><section class="glass salary-card rounded-3xl p-5 sm:p-8"><div class="grid lg:grid-cols-[350px_1fr] gap-8"><div><label class="salary-field-label">Pay amount ($)<input id="amt" type="number" value="30" min="0" step=".01" class="input w-full rounded-xl p-3 mt-2"></label><label class="salary-field-label mt-4">This amount is<select id="freq" class="select w-full rounded-xl p-3 mt-2"><option value="hourly">Hourly</option><option value="daily">Daily</option><option value="weekly">Weekly</option><option value="biweekly">Bi-weekly</option><option value="semimonthly">Semi-monthly</option><option value="monthly">Monthly</option><option value="quarterly">Quarterly</option><option value="annual">Annual</option></select></label><label class="salary-field-label mt-4">Hours per week<input id="hrs" type="number" value="40" min="0" class="input w-full rounded-xl p-3 mt-2"></label><label class="salary-field-label mt-4">Workdays per week<input id="days" type="number" value="5" min="1" max="7" class="input w-full rounded-xl p-3 mt-2"></label><div class="grid grid-cols-2 gap-3 mt-4"><label class="salary-field-label">Holidays<input id="hol" type="number" value="11" min="0" class="input w-full rounded-xl p-3 mt-2"></label><label class="salary-field-label">Vacation days<input id="vac" type="number" value="10" min="0" class="input w-full rounded-xl p-3 mt-2"></label></div></div><div><div class="salary-result rounded-2xl p-6"><p class="text-xs uppercase tracking-widest text-indigo-300 font-bold">Annual equivalent</p><div id="annual" class="text-4xl sm:text-5xl font-black mt-2">$0</div><p id="adjust" class="text-slate-400 text-sm mt-2"></p></div><div class="salary-table-wrap mt-6"><table class="salary-table w-full text-sm"><thead class="text-slate-500"><tr><th class="text-left py-3">Pay period</th><th class="text-right py-3">Unadjusted</th><th class="text-right py-3">Adjusted</th></tr></thead><tbody id="rows"></tbody></table></div></div></div></section><p class="text-xs text-slate-500 mt-4 max-w-4xl mx-auto">Browser-based calculation: the compensation values you enter are calculated locally on this page and are not submitted to a Utiliverse server.</p><!-- GOOGLE ADSENSE: MID-PAGE / AFTER-CALCULATOR INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+--><article class="article max-w-4xl mx-auto mt-16"><p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Utiliverse guide</p><h2>How to Use the Salary Calculator</h2><p>A salary calculator turns a compensation number into formats that are easier to compare. An employer may quote an annual salary while another role advertises an hourly rate. Converting both to a common set of pay periods helps job seekers, employees, contractors and business owners understand the gross value of each arrangement.</p><p>Enter the amount you know, select its frequency and review the equivalent figures. Hourly calculations depend on the work schedule, so the calculator asks for hours per week and workdays per week. The adjusted column provides a simple way to account for entered holidays and vacation days against a 260-weekday baseline.</p><h2>Salary Conversion Formulas</h2>
+<p>The calculator annualizes the amount you enter, then converts that annual figure into the other pay periods. For hourly pay, annual gross pay equals <strong>hourly rate × hours per week × 52</strong>. For daily pay, annual gross pay equals <strong>daily rate × workdays per week × 52</strong>. Weekly, biweekly, semi-monthly, monthly and quarterly pay use 52, 26, 24, 12 and 4 periods per year respectively.</p>
+<p>The adjusted column is a comparison model rather than a payroll calculation. Its workday baseline is <strong>52 × your entered workdays per week</strong>, then the entered holiday and vacation days are subtracted. If those days are paid time off, your actual stated salary normally does not fall simply because you take them.</p><h3>Biweekly versus semi-monthly</h3><p>Biweekly and semi-monthly are not the same. Biweekly pay normally occurs every two weeks, creating 26 pay periods in a year. Semi-monthly pay happens twice each month, producing 24 pay periods. The individual checks can therefore be different even when the annual salary is identical.</p><h3>Why the adjusted column matters</h3><p>The adjusted figure is most useful as a comparison tool. It can illustrate the annualized value of a pay rate based on days actually worked rather than simply dividing an annual salary by a fixed number of periods. It is not a payroll statement and does not estimate taxes or deductions.</p><h2>Practical use cases</h2><p>Job seekers can compare offers presented in different formats. A $75,000 salary and a $36 hourly role can be translated into annual, monthly, weekly and hourly equivalents before considering benefits and other employment conditions.</p><p>Contractors can use the calculator to annualize hourly and daily rates. This is helpful when setting a target rate, but contractors should also account for unpaid marketing time, insurance, software, equipment, self-employment taxes, downtime and benefits they must provide themselves.</p><p>Employees considering a raise can estimate the gross effect of an hourly increase. A change that sounds small per hour can represent a meaningful annual difference when multiplied across a full work year. The calculator can provide a useful starting point for compensation discussions.</p><p>People comparing jobs with different schedules can use the hours and workday inputs to put the offers on more equal footing. A role with a higher annual salary may involve substantially more work time, while another role may provide more paid leave or a shorter schedule.</p><p>Small-business owners and managers can use the tool for rough staffing estimates. Converting hourly rates into weekly and annual figures can help when evaluating headcount costs. Actual employer cost will normally be higher after payroll taxes, benefits, insurance and other expenses are included.</p><p>Students entering the workforce can use the calculator to learn how compensation is expressed. It can make job postings easier to compare when one lists an hourly rate and another lists an annual salary.</p><p>People relocating can combine the salary calculation with a cost-of-living review. An annual figure becomes more meaningful when compared with housing, commuting, healthcare and other major expenses. The calculator does not perform that comparison, but it supplies a consistent compensation baseline.</p><p>Finally, remember that gross pay and take-home pay are different concepts. Taxes, retirement contributions, insurance premiums, bonuses, commissions and other deductions are not included here. Use the output as an estimate and consult the actual compensation agreement for exact details.</p></article><section class="max-w-4xl mx-auto mt-16 mb-12"><h2 class="text-3xl font-black">Salary Calculator FAQ</h2><div class="mt-4">
+<details class="faq py-5"><summary>What does this salary calculator do?</summary><p class="text-slate-400 mt-3">It converts gross compensation between hourly, daily, weekly, biweekly, semi-monthly, monthly, quarterly and annual amounts.</p></details>
+<details class="faq py-5"><summary>How does hourly pay convert to annual salary?</summary><p class="text-slate-400 mt-3">Hourly pay is multiplied by the entered hours per week and by 52 weeks.</p></details>
+<details class="faq py-5"><summary>What is biweekly pay?</summary><p class="text-slate-400 mt-3">Biweekly pay generally occurs every two weeks, producing 26 pay periods in a 52-week year.</p></details>
+<details class="faq py-5"><summary>What is semi-monthly pay?</summary><p class="text-slate-400 mt-3">Semi-monthly pay normally occurs twice per month, producing 24 pay periods per year.</p></details>
+<details class="faq py-5"><summary>How does the adjusted value work?</summary><p class="text-slate-400 mt-3">The adjusted view uses 52 weeks multiplied by your entered workdays per week as the annual workday baseline, then subtracts the holiday and vacation days you enter.</p></details>
+<details class="faq py-5"><summary>Does this calculate take-home pay?</summary><p class="text-slate-400 mt-3">No. It estimates gross compensation only and does not calculate taxes, insurance, retirement contributions or other payroll deductions.</p></details>
+<details class="faq py-5"><summary>Can contractors use this calculator?</summary><p class="text-slate-400 mt-3">Yes. Contractors can annualize hourly or daily rates, but business expenses, self-employment taxes, benefits and unpaid time should be considered separately.</p></details>
+<details class="faq py-5"><summary>Does paid time off reduce my stated salary?</summary><p class="text-slate-400 mt-3">Normally no. The adjusted column is a working-day comparison tool, not an employer payroll deduction when holidays or vacation are paid.</p></details>
+</div></section><!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+--></main><footer class="border-t border-slate-800 bg-slate-950"><div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 text-sm text-slate-500 flex flex-col sm:flex-row justify-between gap-3"><span>© 2026 Utiliverse. All rights reserved.</span><span>100% Free and Browser Based</span></div></footer><script>
 lucide.createIcons();
-document.getElementById("yr").textContent = new Date().getFullYear();
 
 const $ = id => document.getElementById(id);
 
@@ -250,13 +282,20 @@ function calc(){
     );
 
   /*
-    The adjusted view uses the same 260-weekday comparison baseline
-    as the original page content. For hourly input, it directly models
-    hours per workday multiplied by the adjusted number of workdays.
+    The adjusted view uses the entered work schedule rather than a
+    fixed five-day week. It is a comparison model, not payroll tax logic.
   */
-  const baselineWorkdays = 260;
+  const baselineWorkdays =
+    52 * workdaysPerWeek;
+
+  const requestedNonWorkingDays =
+    holidays + vacationDays;
+
   const adjustedWorkdays =
-    Math.max(0, baselineWorkdays - holidays - vacationDays);
+    Math.max(
+      0,
+      baselineWorkdays - requestedNonWorkingDays
+    );
 
   let adjustedAnnual;
 
@@ -280,7 +319,7 @@ function calc(){
       "Enter a pay amount to calculate salary equivalents.";
   }else{
     $("adjust").textContent =
-      `Adjusted annualized value after ${holidays + vacationDays} entered non-working days: ${money(adjustedAnnual)}.`;
+      `Working-day adjusted annualized value after ${holidays + vacationDays} entered non-working days: ${money(adjustedAnnual)}.`;
   }
 
   const regularHourly =
@@ -289,7 +328,9 @@ function calc(){
       : 0;
 
   const regularDaily =
-    annualGross / baselineWorkdays;
+    baselineWorkdays > 0
+      ? annualGross / baselineWorkdays
+      : 0;
 
   const adjustedDaily =
     adjustedWorkdays > 0
@@ -332,25 +373,25 @@ function calc(){
 ========================================================= */
 (function(){
   const toggle = $("theme-toggle");
-  const icon = $("theme-icon");
-  if(!toggle || !icon) return;
+  const moon = $("moon-icon");
+  const sun = $("sun-icon");
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+  if(!toggle || !moon || !sun) return;
 
   function applyTheme(theme){
     const light = theme === "light";
     document.body.classList.toggle("light-mode", light);
-    icon.textContent = light ? "☾" : "☀";
-    toggle.setAttribute(
-      "aria-label",
-      light ? "Switch to dark mode" : "Switch to light mode"
-    );
-    toggle.title =
-      light ? "Switch to dark mode" : "Switch to light mode";
+    moon.classList.toggle("hidden", !light);
+    sun.classList.toggle("hidden", light);
+    toggle.setAttribute("aria-label", light ? "Switch to dark mode" : "Switch to light mode");
+    toggle.title = light ? "Switch to dark mode" : "Switch to light mode";
+    if(metaTheme) metaTheme.setAttribute("content", light ? "#f8fafc" : "#020617");
   }
 
-  const savedTheme =
-    localStorage.getItem("utiliverse-theme");
-
-  applyTheme(savedTheme || "dark");
+  const savedTheme = localStorage.getItem("utiliverse-theme");
+  const initialTheme = savedTheme ||
+    (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+  applyTheme(initialTheme);
 
   toggle.addEventListener("click", function(){
     const nextTheme =
@@ -358,11 +399,7 @@ function calc(){
         ? "dark"
         : "light";
 
-    localStorage.setItem(
-      "utiliverse-theme",
-      nextTheme
-    );
-
+    localStorage.setItem("utiliverse-theme", nextTheme);
     applyTheme(nextTheme);
   });
 })();
