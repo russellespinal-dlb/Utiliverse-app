@@ -3,11 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Percent Calculator | Utiliverse</title>
-<meta name="description" content="Calculate percentages instantly. Find percent increases, decreases, and ratios with our free browser-based percent calculator.">
+<title>Percentage Calculator – X% of Y, Ratios & Percent Change | Utiliverse</title>
+<meta name="description" content="Free percentage calculator for X% of Y, finding what percent one number is of another, and calculating percentage increase or decrease instantly in your browser.">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#020617">
 <link rel="canonical" href="https://utiliverse.app/Percent_Calculator">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Percentage Calculator – X% of Y, Ratios & Percent Change | Utiliverse">
+<meta property="og:description" content="Calculate X% of Y, find what percentage one number is of another, and calculate percentage increase or decrease.">
+<meta property="og:url" content="https://utiliverse.app/Percent_Calculator">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Percentage Calculator – X% of Y, Ratios & Percent Change | Utiliverse">
+<meta name="twitter:description" content="Calculate common percentage problems instantly in your browser.">
+
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
@@ -48,23 +57,74 @@ body.light-mode header{background:rgba(255,255,255,0.9);border-color:#e2e8f0;}
 body.light-mode header a,body.light-mode header button{color:#475569;}
 body.light-mode header a:hover,body.light-mode header button:hover{color:#0f172a;}
 body.light-mode footer{background:#f8fafc;border-color:#e2e8f0;}
+
+.free-browser-note{color:#94a3b8;font-size:12px;font-weight:700;white-space:nowrap;letter-spacing:.1px}
+#theme-toggle{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
+  padding:0;
+  border:1px solid #334155;
+  border-radius:12px;
+  background:rgba(15,23,42,.72);
+  color:#94a3b8;
+  box-shadow:none;
+  appearance:none;
+  -webkit-appearance:none;
+  cursor:pointer;
+  transition:background .2s ease,color .2s ease,border-color .2s ease;
+}
+#theme-toggle:hover{background:#1e293b;color:#fff;border-color:#475569}
+#theme-toggle:focus-visible{outline:2px solid #6366f1;outline-offset:3px}
+#theme-toggle svg{width:18px;height:18px;stroke-width:2}
+body.light-mode .free-browser-note{color:#64748b}
+body.light-mode #theme-toggle{background:#fff;border-color:#cbd5e1;color:#475569}
+body.light-mode #theme-toggle:hover{background:#f1f5f9;border-color:#94a3b8;color:#0f172a}
+@media(max-width:640px){
+  .free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}
+  #theme-toggle{width:38px;height:38px;flex:0 0 auto}
+}
+
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Percentage Calculator","url":"https://utiliverse.app/Percent_Calculator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based percentage calculator for X percent of Y, percentage ratios, and percentage increase or decrease.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Calculate X percent of Y","Find what percentage X is of Y","Calculate percentage increase","Calculate percentage decrease","Supports decimal and negative numeric inputs","Browser-based calculations"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a percentage?","acceptedAnswer":{"@type":"Answer","text":"A percentage expresses a number or ratio as a fraction of 100. For example, 25% means 25 out of 100, or 0.25 as a decimal."}},{"@type":"Question","name":"How do I calculate X percent of Y?","acceptedAnswer":{"@type":"Answer","text":"Divide X by 100 and multiply by Y. For example, 20% of 150 is 0.20 \u00d7 150 = 30."}},{"@type":"Question","name":"How do I find what percentage X is of Y?","acceptedAnswer":{"@type":"Answer","text":"Divide X by Y and multiply by 100. For example, 30 is 20% of 150 because 30 \u00f7 150 \u00d7 100 = 20%."}},{"@type":"Question","name":"How do I calculate percentage increase or decrease?","acceptedAnswer":{"@type":"Answer","text":"Subtract the original value from the new value, divide by the absolute value of the original value, and multiply by 100. A positive result indicates an increase and a negative result indicates a decrease."}},{"@type":"Question","name":"Can percentage change be calculated when the starting value is zero?","acceptedAnswer":{"@type":"Answer","text":"No. Percentage change is undefined when the original value is zero because the calculation requires division by the original value."}},{"@type":"Question","name":"Can I use decimal values in this calculator?","acceptedAnswer":{"@type":"Answer","text":"Yes. The calculator accepts numeric decimal values and displays results with up to four decimal places."}},{"@type":"Question","name":"Does this percentage calculator save my calculations?","acceptedAnswer":{"@type":"Answer","text":"No. The calculations are performed in JavaScript in your browser and this page does not save or submit the entered values to a Utiliverse server."}},{"@type":"Question","name":"What is the difference between percentage and percentage points?","acceptedAnswer":{"@type":"Answer","text":"Percentage describes a relative amount out of 100, while percentage points describe the arithmetic difference between two percentage values. Moving from 20% to 25% is an increase of 5 percentage points, or a 25% relative increase."}}]}</script>
 </head>
 <body>
+<!--
+SEO TARGET CLUSTER
+Primary: percentage calculator
+Secondary: percent calculator, X percent of Y, what percent is X of Y,
+percentage increase calculator, percentage decrease calculator,
+percentage change calculator, percentage formula
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
 <header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800 transition-all duration-300">
 <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
 <a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2 transition-colors"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse</a>
 <div class="flex items-center gap-3">
-  <span class="text-xs sm:text-sm font-medium text-slate-500 whitespace-nowrap">100% Free and Browser Based</span>
-  <button id="theme-toggle" class="text-slate-400 hover:text-white transition-colors cursor-pointer" type="button" aria-label="Toggle light and dark mode" title="Toggle light and dark mode"><i data-lucide="sun" id="theme-icon" class="w-5 h-5"></i></button>
+  <span class="free-browser-note">100% Free and Browser Based</span>
+  <button id="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+    <svg id="moon-icon" class="hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
+    <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+  </button>
 </div>
 </div>
 </header>
+<!-- GOOGLE ADSENSE: TOP / ABOVE-CALCULATOR INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
 <main class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
 <div class="max-w-3xl">
 <p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Mathematics</p>
-<h1 class="text-4xl sm:text-5xl font-black mt-2">Percent Calculator</h1>
-<p class="mt-4 text-lg muted">Instantly calculate percentage values, ratios, and percentage changes.</p>
+<h1 class="text-4xl sm:text-5xl font-black mt-2">Percentage Calculator</h1>
+<p class="mt-4 text-lg muted">Calculate X% of Y, find what percentage one number is of another, and measure percentage increase or decrease instantly.</p>
 </div>
 
 <section class="grid md:grid-cols-3 gap-6 mt-8">
@@ -101,51 +161,78 @@ body.light-mode footer{background:#f8fafc;border-color:#e2e8f0;}
     <div class="mt-2 text-xl font-bold text-indigo-400" id="res3">--</div>
   </div>
 </section>
+<p class="text-xs muted mt-4">Browser-based calculation: the numbers you enter are calculated on this page and are not submitted to a Utiliverse server.</p>
 
+<!-- GOOGLE ADSENSE: MID-PAGE / AFTER-CALCULATOR INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
 <section class="article max-w-4xl mt-16">
-<h2>Why Digital Calculators Matter: Unit and Currency Conversions in Daily Life</h2>
-<p>In our increasingly interconnected and fast-paced digital world, the need for precise mathematical transformations is more prevalent than ever. Whether you are navigating the complexities of international finance, scaling a recipe in your kitchen, or developing architectural blueprints, utility tools—ranging from percent calculators to advanced unit and currency converters—serve as the foundation for accuracy. This article explores the extensive use cases for unit and currency conversions, demonstrating why having access to reliable, browser-based utilities is essential for both professionals and everyday users.</p>
+<h2>How to Use the Percentage Calculator</h2>
+<p>This page solves three common percentage problems. Use the first calculator to find a percentage of a number, the second to find what percentage one value represents of another, and the third to calculate percentage change from an original value to a new value.</p>
 
-<h3>The Critical Role of Currency Conversion</h3>
-<p>Currency conversion is perhaps the most frequent mathematical operation performed by internet users globally. The dynamic nature of foreign exchange (Forex) markets means that values fluctuate by the second. For international travelers, currency calculators are indispensable for budgeting. Knowing the exact exchange rate ensures that individuals do not overpay for lodging, food, or souvenirs, and helps them avoid hidden fees often applied by credit card companies and airport kiosks.</p>
-<p>Beyond tourism, the boom in global e-commerce has made currency conversion a daily necessity for consumers and business owners alike. An online shopper in the United States purchasing a custom leather good from Italy needs to convert Euros to US Dollars to understand the true cost. Conversely, the Italian merchant must price their goods competitively while accounting for conversion rates and international shipping costs. For businesses engaged in import and export, even a minor percentage change in the exchange rate—which is where a percentage calculator comes in handy—can dictate whether a quarterly earnings report shows a profit or a loss. Automated currency conversion tools embedded in financial software rely on these same basic algorithmic principles to manage payroll for remote, globally distributed teams.</p>
+<h3>1. What is X% of Y?</h3>
+<p>Use this when you know the percentage and the total amount. The formula is <strong>(X ÷ 100) × Y</strong>. For example, 15% of 200 is 30.</p>
 
-<h3>Unit Conversions in Professional and Personal Settings</h3>
-<p>While currency focuses on finance, unit conversions dictate the physical world. The global divide between the metric system and the imperial system necessitates constant conversion for engineering, science, construction, and culinary arts.</p>
-<p>In the culinary world, recipes are frequently shared across borders. A baker in London using a recipe developed in New York must convert cups and fluid ounces into milliliters and grams. Precision here is not just a matter of preference; it is chemical necessity. Baking requires exact ratios, and a failure to convert volume to mass correctly can result in a culinary disaster. Volume calculators become vital tools for determining the exact capacity of baking tins or liquid containers.</p>
-<p>In engineering and construction, the stakes are significantly higher. Materials must be ordered using precise measurements. If an architectural plan drafted in metric units (meters, centimeters) is executed by a contractor accustomed to imperial units (feet, inches), a unit converter ensures structural integrity. Consider a civil engineer calculating the volume of concrete needed for a cylindrical pillar; they must convert dimensions accurately before using a volume calculator to find the cubic yardage required. A minor decimal error during conversion could lead to thousands of dollars in wasted materials or, worse, safety hazards.</p>
+<h3>2. X is what percent of Y?</h3>
+<p>Use this when you know the part and the whole but need the percentage. The formula is <strong>(X ÷ Y) × 100</strong>. For example, 45 out of 60 is 75%.</p>
 
-<h3>Intersections of Percentages, Units, and Currency</h3>
-<p>The beauty of digital utility tools is how frequently they intersect. Consider a common use case: international real estate investment. An investor needs to calculate the square footage (unit conversion) of a property listed in square meters. They must then evaluate the asking price from a foreign currency to their local currency (currency conversion). Finally, they must determine the potential return on investment (ROI) or the interest rate of a mortgage (percentage calculation).</p>
-<p>Percentage calculators are the backbone of financial literacy. They are used to figure out sales tax on a purchase, determine a gratuity at a restaurant, calculate the discount during a holiday sale, or track the percentage increase of an asset's value over time. When dealing with currency conversions, percentages are used to calculate markup fees charged by exchange bureaus. A traveler might convert $1,000 to another currency and realize the exchange service took a 3% fee. Without a percent calculator, understanding the true cost of that transaction becomes a tedious manual exercise.</p>
+<h3>3. Percentage change from X to Y</h3>
+<p>Use this to measure how much a value increased or decreased relative to the starting value. This calculator uses <strong>((Y − X) ÷ |X|) × 100</strong>. A positive result indicates an increase and a negative result indicates a decrease. If the starting value is zero, percentage change is undefined because the formula would require division by zero.</p>
 
-<h3>Conclusion</h3>
-<p>The digitization of mathematical utilities has democratized access to precision. You no longer need to be a mathematician or carry a specialized scientific device to navigate a world of shifting currencies and varying measurement systems. Browser-based tools provide instant, accessible, and accurate answers, empowering users to make informed financial decisions, execute complex projects safely, and interact seamlessly in a globalized economy. Whether you are measuring the volume of a shipping container, converting Yen to Pounds, or finding a 15% discount, these utilities are the silent engines of daily problem-solving.</p>
+<h2>Common Uses for Percentage Calculations</h2>
+<ul>
+<li><strong>Discounts:</strong> find how much a sale percentage reduces a price.</li>
+<li><strong>Tips and gratuities:</strong> calculate a percentage of a restaurant bill or service charge.</li>
+<li><strong>Taxes and fees:</strong> estimate percentage-based charges added to an amount.</li>
+<li><strong>Grades and scores:</strong> determine what percentage of questions, points, or tasks were completed correctly.</li>
+<li><strong>Business metrics:</strong> compare growth, declines, conversion rates, margins, completion rates, and other ratios.</li>
+<li><strong>Personal finance:</strong> measure changes in savings, expenses, balances, income, or investment values.</li>
+</ul>
 
-<h2>Frequently Asked Questions</h2>
-<details class="faq"><summary>What is a percentage?</summary><p class="muted">A percentage is a number or ratio expressed as a fraction of 100. It is widely used to denote a portion of a whole.</p></details>
-<details class="faq"><summary>How do I calculate a percentage increase?</summary><p class="muted">Subtract the original value from the new value, divide the result by the original value, and multiply by 100.</p></details>
-<details class="faq"><summary>Can I use this tool on my mobile device?</summary><p class="muted">Yes, our utility is fully responsive and works perfectly on smartphones, tablets, and desktops.</p></details>
-<details class="faq"><summary>Does this tool store my calculations?</summary><p class="muted">No. All calculations are performed instantly in your browser and are not saved or sent to any server.</p></details>
-<details class="faq"><summary>How is percentage different from percentile?</summary><p class="muted">Percentage is a rate per hundred, while percentile indicates the value below which a given percentage of observations in a group fall.</p></details>
-<details class="faq"><summary>Why would I need to find what percent X is of Y?</summary><p class="muted">This is useful for finding test scores (e.g., 45 out of 50), calculating profit margins, or determining completion rates.</p></details>
+<h2>Percentage vs. Percentage Points</h2>
+<p>Percentage and percentage points are related but not interchangeable. If a rate rises from 20% to 25%, it increased by <strong>5 percentage points</strong>. Relative to the original 20%, however, the increase is <strong>25%</strong> because 5 ÷ 20 × 100 = 25%.</p>
+
+<h2>Percentage Calculator FAQ</h2>
+<details class="faq"><summary>What is a percentage?</summary><p class="muted">A percentage expresses a number or ratio as a fraction of 100. For example, 25% means 25 out of 100, which is 0.25 as a decimal.</p></details>
+<details class="faq"><summary>How do I calculate X percent of Y?</summary><p class="muted">Divide X by 100 and multiply by Y. For example, 20% of 150 is 0.20 × 150 = 30.</p></details>
+<details class="faq"><summary>How do I find what percentage X is of Y?</summary><p class="muted">Divide X by Y and multiply by 100. For example, 30 is 20% of 150 because 30 ÷ 150 × 100 = 20%.</p></details>
+<details class="faq"><summary>How do I calculate percentage increase or decrease?</summary><p class="muted">Subtract the original value from the new value, divide by the absolute value of the original value, and multiply by 100. Positive results indicate an increase and negative results indicate a decrease.</p></details>
+<details class="faq"><summary>Can I calculate percentage change when the starting value is zero?</summary><p class="muted">No. Percentage change is undefined when the original value is zero because the formula requires division by the starting value.</p></details>
+<details class="faq"><summary>Can I use decimal values?</summary><p class="muted">Yes. The calculator accepts decimal numeric inputs and displays results with up to four decimal places.</p></details>
+<details class="faq"><summary>Does this calculator save my numbers?</summary><p class="muted">No. The calculations are performed in JavaScript in your browser, and this page does not save or submit the entered values to a Utiliverse server.</p></details>
+<details class="faq"><summary>What is the difference between percentage and percentage points?</summary><p class="muted">Percentage describes a relative amount out of 100. Percentage points describe the arithmetic difference between two percentage values. Moving from 20% to 25% is a gain of 5 percentage points, but a 25% relative increase.</p></details>
 </section>
 </main>
-<footer class="border-t border-slate-800 bg-slate-950 transition-colors duration-300 mt-12">
-<div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500">
-<span>© <span id="year"></span> Utiliverse. All rights reserved.</span>
-<span>Calculations are provided for general informational and educational purposes.</span>
-</div>
-</footer>
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+<footer class="border-t border-slate-800 bg-slate-950 transition-colors duration-300 mt-12"><div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500"><span>© 2026 Utiliverse. All rights reserved.</span><span>100% Free and Browser Based</span></div></footer>
 <script>
 lucide.createIcons();
-document.getElementById('year').textContent=new Date().getFullYear();
-document.getElementById('theme-toggle').addEventListener('click', () => {
-  document.body.classList.toggle('light-mode');
-  const icon = document.getElementById('theme-icon');
-  if(document.body.classList.contains('light-mode')) icon.setAttribute('data-lucide', 'moon');
-  else icon.setAttribute('data-lucide', 'sun');
-  lucide.createIcons();
+const themeToggle = document.getElementById('theme-toggle');
+const moonIcon = document.getElementById('moon-icon');
+const sunIcon = document.getElementById('sun-icon');
+const metaTheme = document.querySelector('meta[name="theme-color"]');
+
+function applyTheme(theme){
+  const isLight = theme === 'light';
+  document.body.classList.toggle('light-mode', isLight);
+  moonIcon.classList.toggle('hidden', !isLight);
+  sunIcon.classList.toggle('hidden', isLight);
+  themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+  themeToggle.title = isLight ? 'Switch to dark mode' : 'Switch to light mode';
+  if(metaTheme) metaTheme.setAttribute('content', isLight ? '#f8fafc' : '#020617');
+}
+
+const savedTheme = localStorage.getItem('utiliverse-theme');
+applyTheme(savedTheme || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
+
+themeToggle.addEventListener('click', () => {
+  const nextTheme = document.body.classList.contains('light-mode') ? 'dark' : 'light';
+  localStorage.setItem('utiliverse-theme', nextTheme);
+  applyTheme(nextTheme);
 });
 
 function calc1() {
