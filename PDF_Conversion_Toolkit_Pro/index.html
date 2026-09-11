@@ -3,11 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>PDF Conversion Toolkit Pro | Utiliverse</title>
-<meta name="description" content="Convert PDF, image, text, HTML, Markdown, JSON and XML files in your browser. Extract PDF text, export PDF pages to images, merge, split and rotate PDFs.">
-<meta name="robots" content="index,follow">
+<title>PDF Converter & Toolkit – Merge, Split, Images & Text | Utiliverse</title>
+<meta name="description" content="Free browser-based PDF converter and toolkit. Convert images, text, HTML, Markdown, JSON and XML to PDF; export PDF text or images; merge, split and rotate PDFs.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="theme-color" content="#020617">
 <link rel="canonical" href="https://utiliverse.app/PDF_Conversion_Toolkit_Pro/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="PDF Converter & Toolkit – Merge, Split, Images & Text | Utiliverse">
+<meta property="og:description" content="Convert supported files to PDF, export PDF text or page images, and merge, split or rotate PDFs in your browser.">
+<meta property="og:url" content="https://utiliverse.app/PDF_Conversion_Toolkit_Pro/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PDF Converter & Toolkit – Merge, Split, Images & Text | Utiliverse">
+<meta name="twitter:description" content="Browser-based PDF conversion, image export, text extraction, merge, split and rotate tools.">
+
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
@@ -139,17 +148,27 @@ body{
   font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
 }
 #theme-toggle{
-  border:0;
-  background:transparent;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:40px;
+  height:40px;
+  padding:0;
+  border:1px solid #334155;
+  background:rgba(15,23,42,.72);
   color:#94a3b8;
   line-height:1;
   cursor:pointer;
-  padding:4px 6px;
-  border-radius:6px;
-  transition:color .15s ease,opacity .15s ease;
+  border-radius:12px;
+  box-shadow:none;
+  appearance:none;
+  -webkit-appearance:none;
+  transition:background .2s ease,color .2s ease,border-color .2s ease;
 }
-#theme-toggle:hover{color:#fff}
+#theme-toggle:hover{color:#fff;background:#1e293b;border-color:#475569}
 #theme-toggle:focus-visible{outline:2px solid #6366f1;outline-offset:3px}
+#theme-toggle svg{width:18px;height:18px;stroke-width:2}
+.free-browser-note{font-size:.75rem;color:#94a3b8;font-weight:700;white-space:nowrap}
 .status-text{
   font-size:.75rem;
   color:#64748b;
@@ -213,12 +232,16 @@ body.light-mode header a:hover{
   color:#0f172a!important;
 }
 body.light-mode #theme-toggle{
-  color:#334155!important;
+  background:#fff;
+  border-color:#cbd5e1;
+  color:#475569!important;
 }
 body.light-mode #theme-toggle:hover{
   color:#0f172a!important;
   background:#f1f5f9;
+  border-color:#94a3b8;
 }
+body.light-mode .free-browser-note{color:#64748b}
 body.light-mode .glass{
   background:rgba(255,255,255,.90);
   border-color:#cbd5e1;
@@ -270,51 +293,54 @@ body.light-mode .result-panel p{color:#047857}
 
 @media(max-width:640px){
   .header-inner{gap:.65rem}
-  .status-text{font-size:.68rem;white-space:normal;text-align:right;line-height:1.15}
-  #theme-toggle{font-size:19px}
+  .status-text,.free-browser-note{font-size:.68rem;white-space:normal;text-align:right;line-height:1.15;max-width:118px}
+  #theme-toggle{width:38px;height:38px;flex:0 0 auto}
 }
 </style>
 
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"WebApplication",
-  "name":"Utiliverse PDF Conversion Toolkit Pro",
-  "applicationCategory":"UtilitiesApplication",
-  "operatingSystem":"Any",
-  "url":"https://utiliverse.app/pdf/",
-  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
-  "description":"Browser-based PDF conversion and utility tools for supported document, image and PDF workflows."
-}
-</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse PDF Conversion Toolkit Pro","url":"https://utiliverse.app/PDF_Conversion_Toolkit_Pro/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based PDF converter and toolkit for supported document, image and PDF workflows including text extraction, PDF page image export, merge, split and rotation.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["TXT to PDF","JSON to PDF","XML to PDF","HTML to PDF","Markdown to PDF","PDF to TXT","PDF to RTF","PDF to HTML","PDF to Markdown","PDF to XML","JPG to PDF","PNG to PDF","WebP to PDF","PDF to JPG","PDF to PNG","PDF to WebP","Merge PDFs","Split PDF pages into separate PDFs","Rotate PDF pages"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are my files uploaded to Utiliverse when I use this PDF Toolkit?","acceptedAnswer":{"@type":"Answer","text":"The core conversion and PDF-processing work runs in the browser. Selected files are not sent to a Utiliverse conversion server by the toolkit code. The page loads processing libraries from public CDNs, and HTML files may reference remote resources that the browser can request separately."}},{"@type":"Question","name":"What image formats can I export from a PDF?","acceptedAnswer":{"@type":"Answer","text":"PDF pages can be rendered as JPG, PNG or WebP images. Multi-page PDFs are packaged into a ZIP archive with one image per page."}},{"@type":"Question","name":"Can this tool extract text from scanned PDFs?","acceptedAnswer":{"@type":"Answer","text":"Only if the PDF already contains selectable text. This version does not perform OCR, so image-only scanned PDFs usually require a separate OCR tool."}},{"@type":"Question","name":"Which image types can be converted into PDF files?","acceptedAnswer":{"@type":"Answer","text":"JPG/JPEG, PNG and WebP images are supported. Multiple images can be combined into one multi-page PDF."}},{"@type":"Question","name":"Can I merge, split and rotate PDF files?","acceptedAnswer":{"@type":"Answer","text":"Yes. Merge combines multiple PDFs, Split creates one PDF per source page inside a ZIP archive, and Rotate turns every page 90 degrees clockwise."}},{"@type":"Question","name":"Will password-protected, encrypted or damaged PDFs always work?","acceptedAnswer":{"@type":"Answer","text":"No. Some protected, encrypted, malformed or damaged PDFs may not open with the browser libraries used by this toolkit."}},{"@type":"Question","name":"Does this toolkit create PDF/A files or perform professional PDF compression?","acceptedAnswer":{"@type":"Answer","text":"No. PDF/A conformance and advanced PDF compression are not implemented in this version."}},{"@type":"Question","name":"Can I convert HTML or Markdown to PDF?","acceptedAnswer":{"@type":"Answer","text":"Yes. HTML can be rendered in a sandboxed browser frame with scripts disabled, and Markdown is converted to HTML before being rendered to PDF."}},{"@type":"Question","name":"Does PDF to HTML recreate the original PDF layout?","acceptedAnswer":{"@type":"Answer","text":"No. PDF-to-HTML in this toolkit extracts selectable text and wraps it in an HTML document. It does not reconstruct the original page layout, fonts or graphics."}},{"@type":"Question","name":"What happens when a PDF has multiple pages and I export it as images?","acceptedAnswer":{"@type":"Answer","text":"The toolkit renders one image per PDF page and packages the images into a ZIP archive for download."}}]}</script>
 </head>
 
 <body>
+<!--
+SEO TARGET CLUSTER
+Primary: PDF converter
+Secondary: PDF toolkit, image to PDF, PDF to image, PDF to JPG,
+PDF to PNG, PDF to text, merge PDF, split PDF, rotate PDF,
+HTML to PDF, Markdown to PDF, JSON to PDF
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
 <header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800">
   <div class="header-inner max-w-6xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
     <a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2">
       <span aria-hidden="true">←</span> Back to Utiliverse
     </a>
     <div class="flex items-center gap-3">
-      <span class="status-text">100% Free and Browser Based</span>
+      <span class="free-browser-note">100% Free and Browser Based</span>
       <button id="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
-        <i id="theme-icon" data-lucide="sun" class="w-5 h-5" aria-hidden="true"></i>
+        <svg id="moon-icon" class="hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
+        <svg id="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
       </button>
     </div>
   </div>
 </header>
 
-<!-- GOOGLE ADSENSE: TOP PLACEMENT
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
      Paste approved Google AdSense code here after approval.
-     This placeholder is intentionally invisible and reserves no physical space.
+     This comment is intentionally invisible and reserves no space.
 -->
 
 <main class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
   <div class="max-w-3xl">
     <p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">PDF & document tools</p>
-    <h1 class="text-4xl sm:text-5xl font-black mt-2">PDF Conversion Toolkit Pro</h1>
+    <h1 class="text-4xl sm:text-5xl font-black mt-2">PDF Converter & Conversion Toolkit Pro</h1>
     <p class="mt-4 text-lg muted leading-relaxed">
-      Convert supported documents and images to PDF, extract PDF text, render PDF pages as images, and perform common PDF operations directly in your browser.
+      Convert supported images, text, HTML, Markdown, JSON and XML files to PDF; export PDF text or page images; and merge, split or rotate PDFs directly in your browser.
     </p>
   </div>
 
@@ -368,13 +394,13 @@ body.light-mode .result-panel p{color:#047857}
     </div>
   </section>
 
-  <!-- GOOGLE ADSENSE: MID-PAGE PLACEMENT
+  <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
        Paste approved Google AdSense code here after approval.
-       This placeholder is intentionally invisible and reserves no physical space.
+       This comment is intentionally invisible and reserves no space.
   -->
 
   <section class="article max-w-4xl mt-16">
-    <h2>About the Utiliverse PDF Conversion Toolkit</h2>
+    <h2>Free Browser-Based PDF Converter & Toolkit</h2>
     <p>The Utiliverse PDF Conversion Toolkit is designed for practical browser-based file work: converting supported images and text-oriented files into PDF, extracting text from PDFs, rendering PDF pages to common image formats, and performing a few structural PDF operations such as merging, splitting, and rotating pages. The focus is on producing real downloadable files rather than changing a filename extension or returning placeholder content. Each option shown in the conversion grid is connected to a browser-side process that creates the requested output format or, when one input naturally creates several outputs, a ZIP archive containing those files.</p>
 
     <p>Different file conversions require different techniques. PDF is a page-description format, so a PDF can contain text, vector graphics, raster images, fonts, forms, and other objects. Turning a PDF into plain text is therefore not the same operation as turning it into an image. Text extraction uses PDF.js to read text items embedded in each page. Image export uses the same PDF rendering engine to draw each page to a canvas before encoding that canvas as PNG, JPEG, or WebP. A multi-page PDF becomes multiple image files, so the toolkit packages those pages into a ZIP archive when more than one page is present.</p>
@@ -388,6 +414,11 @@ body.light-mode .result-panel p{color:#047857}
     <p>The structural PDF utilities use pdf-lib. Merge PDF combines the pages of two or more selected PDF files into a new PDF in the order the files are supplied by the browser. Split PDF creates a separate valid PDF for every page and places those PDFs into a ZIP archive. Rotate PDF turns every page of one PDF 90 degrees clockwise while preserving the page content. These operations modify page structure without pretending to perform archival conformance or advanced compression. Options such as PDF/A conversion were intentionally excluded because creating a formally conforming archival PDF requires more than simply re-saving a document and should be verified with dedicated conformance tools.</p>
 
     <p>Processing takes place in the browser, so the toolkit itself does not upload your selected file to a Utiliverse conversion server. The page loads its processing libraries from public content-delivery networks, and HTML files can reference external resources. Remote images, fonts, or stylesheets may therefore be requested by your browser while preparing an HTML-based PDF. Avoid placing private credentials or sensitive URLs inside test HTML.</p>
+
+    
+    <h2>How to Use the PDF Conversion Toolkit</h2>
+    <p>Choose a category, select one of the conversion or PDF utility cards, and then select or drag in the required file. The page automatically restricts the file picker to the extensions supported by the chosen operation. For image-to-PDF and Merge PDF workflows, multiple files can be selected.</p>
+    <p>Select <strong>Process File</strong> to run the conversion in your browser. Progress is shown on the page, and when processing finishes the generated PDF, image, document or ZIP archive appears as a downloadable result. The available cards are limited to operations that are actually implemented by this page.</p>
 
     <h2>Practical Use Cases</h2>
     <h3>Creating PDFs from images and simple documents</h3>
@@ -415,7 +446,7 @@ body.light-mode .result-panel p{color:#047857}
   </section>
 
   <section class="article max-w-4xl mt-16 mb-16">
-    <h2>Frequently Asked Questions</h2>
+    <h2>PDF Converter & Toolkit FAQ</h2>
     <p>These answers describe the actual capabilities and limitations of this browser-based PDF Toolkit.</p>
 
     <details class="faq">
@@ -452,18 +483,33 @@ body.light-mode .result-panel p{color:#047857}
       <summary>Does this toolkit create PDF/A files or perform professional PDF compression?</summary>
       <p>No. Formal PDF/A conformance requires specific archival rules and validation, and professional PDF compression may involve image recompression, font handling, object optimization, and other specialized processing. Those options are intentionally not presented as supported conversions in this version of the toolkit.</p>
     </details>
-  </section>
+  
+    <details class="faq">
+      <summary>Can I convert HTML or Markdown files to PDF?</summary>
+      <p>Yes. HTML is rendered inside a sandboxed browser frame with scripts disabled. Markdown is first converted to HTML with the Marked library and then rendered through the same browser-based PDF workflow.</p>
+    </details>
+
+    <details class="faq">
+      <summary>Does PDF to HTML recreate the original PDF layout?</summary>
+      <p>No. The PDF-to-HTML option extracts selectable text and places it into an HTML document organized by page. It does not attempt to reproduce the original PDF fonts, graphics, columns, forms, or exact page layout.</p>
+    </details>
+
+    <details class="faq">
+      <summary>What happens when I export a multi-page PDF as images?</summary>
+      <p>The toolkit renders one JPG, PNG, or WebP image for each PDF page. When the source contains more than one page, the generated images are packaged into a ZIP archive for a single download.</p>
+    </details>
+</section>
 
 </main>
 
-<!-- GOOGLE ADSENSE: PRE-FOOTER PLACEMENT
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
      Paste approved Google AdSense code here after approval.
-     This placeholder is intentionally invisible and reserves no physical space.
+     This comment is intentionally invisible and reserves no space.
 -->
 
 <footer class="border-t border-slate-800 bg-slate-950">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500">
-    <span>© <span id="year"></span> Utiliverse. All rights reserved.</span>
+    <span>© 2026 Utiliverse. All rights reserved.</span>
     <span>100% Free and Browser Based</span>
   </div>
 </footer>
@@ -1158,28 +1204,30 @@ blockquote{border-left:4px solid #cbd5e1;padding-left:14px;color:#475569}
 
   /* Theme */
   const toggle = el("theme-toggle");
+  const moonIcon = el("moon-icon");
+  const sunIcon = el("sun-icon");
   const metaTheme = document.querySelector('meta[name="theme-color"]');
-
-  function renderThemeIcon(light) {
-    /* Recreate the icon placeholder each time because Lucide replaces
-       data-lucide elements with SVG nodes during rendering. */
-    toggle.innerHTML = light
-      ? '<i id="theme-icon" data-lucide="moon" class="w-5 h-5" aria-hidden="true"></i>'
-      : '<i id="theme-icon" data-lucide="sun" class="w-5 h-5" aria-hidden="true"></i>';
-
-    if (window.lucide) lucide.createIcons();
-  }
 
   function applyTheme(theme) {
     const light = theme === "light";
     document.body.classList.toggle("light-mode", light);
-    renderThemeIcon(light);
+
+    // Dark mode shows sun (switch to light); light mode shows moon (switch to dark).
+    moonIcon.classList.toggle("hidden", !light);
+    sunIcon.classList.toggle("hidden", light);
+
     toggle.setAttribute("aria-label", light ? "Switch to dark mode" : "Switch to light mode");
     toggle.title = light ? "Switch to dark mode" : "Switch to light mode";
-    if (metaTheme) metaTheme.setAttribute("content", light ? "#f8fafc" : "#020617");
+
+    if (metaTheme) {
+      metaTheme.setAttribute("content", light ? "#f8fafc" : "#020617");
+    }
   }
 
-  applyTheme(localStorage.getItem("utiliverse-theme") || "dark");
+  const savedTheme = localStorage.getItem("utiliverse-theme");
+  const initialTheme = savedTheme ||
+    (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+  applyTheme(initialTheme);
 
   toggle.addEventListener("click", () => {
     const next = document.body.classList.contains("light-mode") ? "dark" : "light";
@@ -1187,7 +1235,6 @@ blockquote{border-left:4px solid #cbd5e1;padding-left:14px;color:#475569}
     applyTheme(next);
   });
 
-  el("year").textContent = new Date().getFullYear();
   renderGrid();
 })();
 </script>
