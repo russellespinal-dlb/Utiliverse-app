@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Privacy Policy | Utiliverse</title>
+<meta name="description" content="Privacy Policy for Utiliverse, including browser-based tools, third-party services, advertising, cookies, and Google AdSense disclosures.">
+<link rel="canonical" href="https://utiliverse.app/Privacy_Policy.html">
 <meta name="theme-color" content="#020617">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
@@ -13,18 +15,49 @@
   .article p, .article li { color: #94a3b8; line-height: 1.75; margin-bottom: 1rem; }
   .article ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; }
 
-  .theme-toggle{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem .75rem;border:1px solid #334155;border-radius:.75rem;background:#0f172a;color:#e2e8f0;cursor:pointer;font:inherit;font-size:.875rem;font-weight:600}
-  .theme-toggle:hover{background:#1e293b}
-  .theme-toggle svg{width:1rem;height:1rem}
+  .theme-toggle{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:38px;
+    height:38px;
+    padding:0;
+    border:0;
+    border-radius:.5rem;
+    background:transparent;
+    color:#94a3b8;
+    cursor:pointer;
+    line-height:1;
+    transition:color .15s ease,background .15s ease;
+  }
+  .theme-toggle:hover{color:#fff;background:rgba(30,41,59,.45)}
+  .theme-toggle:focus-visible{outline:2px solid #6366f1;outline-offset:3px}
+  .theme-toggle svg{
+    width:20px;
+    height:20px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
   body.light-mode{background:#f8fafc;color:#0f172a}
   body.light-mode header{background:rgba(255,255,255,.9);border-color:#e2e8f0}
+  body.light-mode header a{color:#334155!important}
+  body.light-mode header a:hover{color:#0f172a!important}
   body.light-mode footer{background:#fff;border-color:#e2e8f0}
   body.light-mode .article h1{color:#0f172a}
   body.light-mode .article h2{color:#1e293b}
   body.light-mode .article p,body.light-mode .article li{color:#475569}
   body.light-mode .article a{color:#4f46e5}
-  body.light-mode .theme-toggle{background:#fff;border-color:#cbd5e1;color:#334155}
-  body.light-mode .theme-toggle:hover{background:#f1f5f9}
+  body.light-mode .theme-toggle{
+    background:transparent;
+    color:#334155;
+  }
+  body.light-mode .theme-toggle:hover{
+    background:#f1f5f9;
+    color:#0f172a;
+  }
 </style>
 </head>
 <body>
@@ -32,39 +65,50 @@
   <div class="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
     <div class="flex items-center justify-between w-full gap-4">
       <a href="/" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse</a>
-      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to light mode">
-        <i id="themeIcon" data-lucide="sun"></i><span id="themeText">Light Mode</span>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+        <span id="themeIcon" aria-hidden="true"></span>
       </button>
     </div>
   </div>
 </header>
 <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12 article">
   <h1 class="text-4xl font-black mb-2">Privacy Policy</h1>
-  <p class="text-sm text-slate-500 mb-8">Last Updated: August 31, 2026</p>
+  <p class="text-sm text-slate-500 mb-8">Last Updated: September 12, 2026</p>
 
   <h2>1. Information We Collect</h2>
-  <p>At Utiliverse, we believe in minimizing data collection. Many of our utility tools are designed to execute entirely within your web browser. For example, text processing and typing test inputs are not transmitted to or stored on our servers. When you visit our website, standard standard server logs (such as IP addresses, browser types, and timestamps) may be automatically collected to ensure network security and monitor site performance.</p>
+  <p>At Utiliverse, we believe in minimizing data collection. Many of our utility tools are designed to execute entirely within your web browser. For example, text-processing inputs and typing-test inputs are generally processed locally by the tool and are not intentionally transmitted to or stored on a Utiliverse application server unless a specific tool clearly states that it uses an external service.</p>
+  <p>When you visit Utiliverse, standard server and network logs may be automatically generated for security, reliability, abuse prevention, and site-performance purposes. Depending on the infrastructure involved, these logs may include information such as your IP address, browser or user-agent information, requested page, and timestamps.</p>
 
   <h2>2. Third-Party Services and APIs</h2>
-  <p>Some of our tools rely on external infrastructure to function correctly. When using these specific tools, your requests may interact directly with third-party providers:</p>
+  <p>Some Utiliverse tools rely on external infrastructure or third-party services to provide specific features. When you use those tools, your browser may communicate directly with the applicable provider. Examples may include:</p>
   <ul>
-    <li><strong>Cloudflare:</strong> Tools designed to test network latency and speeds may route traffic through Cloudflare servers.</li>
-    <li><strong>Financial Data Providers:</strong> Tools requiring live data (such as currency conversion rates) query third-party financial APIs.</li>
+    <li><strong>Cloudflare:</strong> Network-performance or speed-testing features may send requests through Cloudflare infrastructure.</li>
+    <li><strong>Financial Data Providers:</strong> Tools requiring live information, such as currency exchange rates, may request data from third-party financial APIs.</li>
+    <li><strong>Content Delivery Networks (CDNs):</strong> Some pages may load JavaScript libraries, fonts, or other resources from third-party content-delivery networks.</li>
   </ul>
-  <p>These third-party providers may collect connection data in accordance with their own respective privacy policies.</p>
+  <p>Third-party providers may receive connection and technical information as necessary to provide their services and may process that information under their own privacy policies. Utiliverse does not control the privacy practices of independent third-party services.</p>
 
-  <h2>3. Advertising and Cookies</h2>
-  <p>Utiliverse uses third-party advertising companies, such as Google AdSense, to serve ads when you visit our website. These companies may use cookies (such as the DoubleClick cookie) to serve ads based on your prior visits to our website or other websites on the internet.</p>
+  <h2>3. Advertising, Cookies, and Similar Technologies</h2>
+  <p>Utiliverse may use third-party advertising services, including Google AdSense, to display advertisements on the website. When advertising services are enabled, third-party vendors, including Google, may place and read cookies on your browser or use technologies such as web beacons, IP addresses, or other identifiers to collect information as a result of ad serving on Utiliverse.</p>
+  <p>Google and its advertising partners may use advertising cookies to serve ads based on a user's prior visits to Utiliverse and/or other websites. Google's use of advertising cookies enables Google and its partners to serve ads to users based on visits to Utiliverse and other sites on the Internet.</p>
+  <p>For more information about how Google uses information from websites and apps that use Google services, visit
+    <a href="https://policies.google.com/technologies/partner-sites" class="text-indigo-400 hover:underline" target="_blank" rel="noopener noreferrer">How Google uses information from sites or apps that use our services</a>.
+  </p>
   <ul>
-    <li>Users may opt out of personalized advertising by visiting Google's <a href="https://myadcenter.google.com/" class="text-indigo-400 hover:underline" target="_blank">Ads Settings</a>.</li>
-    <li>Alternatively, you can opt out of some third-party vendors' uses of cookies for personalized advertising by visiting <a href="https://www.aboutads.info/choices/" class="text-indigo-400 hover:underline" target="_blank">www.aboutads.info</a>.</li>
+    <li>You may manage or opt out of personalized advertising through Google's <a href="https://myadcenter.google.com/" class="text-indigo-400 hover:underline" target="_blank" rel="noopener noreferrer">My Ad Center / Ads Settings</a>.</li>
+    <li>You may also opt out of some third-party vendors' use of cookies for personalized advertising through <a href="https://www.aboutads.info/choices/" class="text-indigo-400 hover:underline" target="_blank" rel="noopener noreferrer">AboutAds</a>, where available.</li>
+    <li>If additional third-party advertising vendors or ad networks are used, those providers may also use cookies or similar technologies subject to their own privacy policies and available opt-out controls.</li>
   </ul>
 
-  <h2>4. Data Retention</h2>
-  <p>Because we do not require user accounts or database profiles to use our standard utilities, we do not actively store your personal data long-term. Any connection logs retained for security and operational purposes are routinely purged.</p>
+  <h2>4. Consent and Privacy Choices</h2>
+  <p>Where required by applicable law, Utiliverse may present a consent message or other privacy controls before certain advertising or storage technologies are used. These controls may allow you to make choices about personalized advertising, cookies, or related data processing. Your available choices can vary depending on your location, browser, device, and the services enabled on the site.</p>
+  <p>You can also use your browser settings to block, delete, or limit cookies. Restricting cookies may affect the behavior of some website features or third-party services.</p>
 
-  <h2>5. Changes to This Policy</h2>
-  <p>We may update this Privacy Policy periodically. Any changes will be posted on this page with an updated revision date.</p>
+  <h2>5. Data Retention</h2>
+  <p>Utiliverse does not require user accounts or persistent database profiles for its standard utility tools. Information processed only inside your browser is not retained by Utiliverse after the page is closed unless a particular tool explicitly uses browser storage for a feature such as saved preferences. Server or network logs retained for security, reliability, abuse prevention, or operational purposes may be kept for a limited period consistent with those purposes and the practices of the infrastructure providers involved.</p>
+
+  <h2>6. Changes to This Policy</h2>
+  <p>We may update this Privacy Policy periodically to reflect changes to Utiliverse, third-party services, advertising practices, legal requirements, or privacy controls. Any updated version will be posted on this page with a revised "Last Updated" date.</p>
 </main>
 <footer class="border-t border-slate-800 bg-slate-950 mt-12">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 py-8 text-sm text-slate-500">
@@ -73,16 +117,20 @@
 </footer>
 <script>
   const themeToggle = document.getElementById('themeToggle');
-  const themeText = document.getElementById('themeText');
-  const themeIcon = document.getElementById('themeIcon');
+
+  function renderThemeIcon(isLight) {
+    themeToggle.innerHTML = isLight
+      ? '<i data-lucide="moon" class="w-5 h-5" aria-hidden="true"></i>'
+      : '<i data-lucide="sun" class="w-5 h-5" aria-hidden="true"></i>';
+    if (window.lucide) lucide.createIcons();
+  }
 
   function applyTheme(theme) {
     const isLight = theme === 'light';
     document.body.classList.toggle('light-mode', isLight);
-    themeText.textContent = isLight ? 'Dark Mode' : 'Light Mode';
-    themeIcon.setAttribute('data-lucide', isLight ? 'moon' : 'sun');
+    renderThemeIcon(isLight);
     themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
-    lucide.createIcons();
+    themeToggle.title = isLight ? 'Switch to dark mode' : 'Switch to light mode';
   }
 
   const savedTheme = localStorage.getItem('utiliverse-theme');
