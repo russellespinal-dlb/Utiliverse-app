@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Case Converter – Uppercase, Lowercase, Title & Camel Case | Utiliverse</title>
+<meta name="description" content="Free online case converter for uppercase, lowercase, title case, sentence case, camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE and more.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/Case_Converter/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Case Converter – Uppercase, Lowercase, Title & Camel Case | Utiliverse">
+<meta property="og:description" content="Convert text between 15 case styles including uppercase, lowercase, title case, sentence case, camelCase, snake_case and kebab-case.">
+<meta property="og:url" content="https://utiliverse.app/Case_Converter/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Case Converter – Uppercase, Lowercase, Title & Camel Case | Utiliverse">
+<meta name="twitter:description" content="Free browser-based text case converter with 15 writing and developer naming styles.">
+
+
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --bg:#020617;--panel:rgba(30,41,59,.72);--panel2:rgba(15,23,42,.70);
+  --border:#334155;--border2:#475569;--text:#f8fafc;--muted:#94a3b8;
+  --indigo:#6366f1;--indigo2:#4f46e5;--green:#34d399;--rose:#fb7185;
+}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),
+    radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),
+    #020617;
+  color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  transition:background .25s ease,color .25s ease;
+}
+a{color:inherit}
+button,textarea{font:inherit}
+button{touch-action:manipulation}
+.container{max-width:1152px;margin:0 auto;padding:0 16px}
+
+header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(2,6,23,.82);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid #1e293b;
+}
+.header-inner{min-height:65px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.back-link{display:flex;align-items:center;gap:8px;text-decoration:none;color:#cbd5e1;font-size:14px;font-weight:700}
+.back-link:hover{color:#fff}
+.header-right{display:flex;align-items:center;gap:12px}
+.free-label{font-size:13px;font-weight:650;color:#64748b;white-space:nowrap}
+.theme-toggle{
+  display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;
+  border:1px solid #334155;background:rgba(15,23,42,.72);color:#94a3b8;border-radius:12px;cursor:pointer;
+  box-shadow:none;appearance:none;-webkit-appearance:none;
+  transition:color .15s ease,background .15s ease,border-color .15s ease
+}
+.theme-toggle:hover{color:#fff;background:#1e293b;border-color:#475569}
+.theme-toggle:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
+.theme-toggle svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+main{padding:48px 0 72px}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:#818cf8;font-weight:850}
+h1{font-size:clamp(38px,5vw,58px);line-height:1.04;margin:10px 0 14px;font-weight:900;letter-spacing:-.035em}
+.hero p{max-width:850px;color:var(--muted);font-size:18px;line-height:1.72;margin:0}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.badge{border:1px solid var(--border);background:rgba(15,23,42,.66);border-radius:999px;padding:7px 10px;color:#cbd5e1;font-size:12px;font-weight:750}
+
+.glass{background:var(--panel);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:20px}
+.tool{margin-top:28px;padding:22px}
+.section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.section-title{font-size:22px;font-weight:850;margin:4px 0 0}
+.small{font-size:12px;color:#64748b;line-height:1.55}
+
+.editor-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}
+.editor-card{background:var(--panel2);border:1px solid var(--border);border-radius:16px;overflow:hidden;min-width:0}
+.editor-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 13px;border-bottom:1px solid var(--border)}
+.editor-title{font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:850;color:#94a3b8}
+.editor-meta{font-size:11px;color:#64748b}
+textarea{
+  width:100%;min-height:290px;resize:vertical;border:0;outline:none;background:#0f172a;color:#e2e8f0;
+  padding:16px;font-size:15px;line-height:1.65;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace
+}
+textarea::placeholder{color:#475569}
+textarea:focus{box-shadow:inset 0 0 0 2px rgba(99,102,241,.55)}
+
+.actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}
+.btn{
+  min-height:42px;border:1px solid var(--border2);background:#1e293b;color:#f8fafc;
+  border-radius:11px;padding:10px 14px;font-weight:800;cursor:pointer;transition:.16s ease
+}
+.btn:hover:not(:disabled){background:#334155}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.primary{background:linear-gradient(135deg,var(--indigo),var(--indigo2));border-color:var(--indigo)}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.danger{color:#fecdd3}
+.status{font-size:11px;color:#6ee7b7;min-height:16px}
+
+.mode-wrap{margin-top:18px}
+.mode-label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#64748b;font-weight:850;margin-bottom:9px}
+.mode-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.mode{
+  min-height:66px;border:1px solid var(--border);background:#0f172a;color:#cbd5e1;border-radius:13px;
+  padding:10px;text-align:left;cursor:pointer;transition:.16s ease
+}
+.mode:hover{border-color:#6366f1;background:rgba(99,102,241,.08)}
+.mode.active{border-color:#818cf8;background:rgba(99,102,241,.14);box-shadow:inset 0 0 0 1px rgba(129,140,248,.18)}
+.mode strong{display:block;font-size:13px;color:#e2e8f0}
+.mode span{display:block;margin-top:4px;font-size:10px;color:#64748b;line-height:1.35}
+
+.options{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:14px;padding:13px 14px;background:var(--panel2);border:1px solid var(--border);border-radius:14px}
+.checks{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.check{display:flex;align-items:center;gap:8px;color:#cbd5e1;font-size:12px;font-weight:700}
+.check input{width:17px;height:17px;accent-color:var(--indigo)}
+.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin-top:14px}
+.stat{background:var(--panel2);border:1px solid var(--border);border-radius:13px;padding:12px;min-width:0}
+.stat small{display:block;color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.07em;font-weight:850}
+.stat strong{display:block;color:#e2e8f0;font-size:18px;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.preview{margin-top:14px;background:var(--panel2);border:1px solid var(--border);border-radius:14px;padding:13px}
+.preview-title{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#64748b;font-weight:850}
+.preview-code{margin-top:6px;color:#cbd5e1;font-size:12px;line-height:1.55;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;overflow-wrap:anywhere}
+
+.article{max-width:900px;margin-top:64px}
+.article h2{font-size:30px;line-height:1.25;font-weight:900;margin:38px 0 13px;color:#fff}
+.article h3{font-size:19px;line-height:1.4;font-weight:850;margin:27px 0 9px;color:#e2e8f0}
+.article p,.article li{color:#94a3b8;line-height:1.84;margin:0 0 15px}
+.article ul{padding-left:20px}
+.callout{border:1px solid rgba(99,102,241,.28);background:rgba(99,102,241,.07);border-radius:15px;padding:16px;margin:22px 0}
+.callout strong{color:#c7d2fe}
+.faq{border-bottom:1px solid var(--border)}
+.faq summary{list-style:none;cursor:pointer;padding:16px 0;font-weight:800;display:flex;justify-content:space-between;gap:15px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:#818cf8;font-size:20px}
+.faq[open] summary::after{content:"−"}
+
+footer{border-top:1px solid #1e293b;background:#020617}
+.footer-inner{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:14px;color:#64748b;font-size:13px}
+
+/* Light mode */
+body.light-mode{
+  --panel:rgba(255,255,255,.92);--panel2:rgba(248,250,252,.96);--border:#dbe3ee;--border2:#cbd5e1;
+  --text:#0f172a;--muted:#475569;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(99,102,241,.08),transparent 32%),
+    radial-gradient(circle at 90% 15%,rgba(124,58,237,.05),transparent 28%),#f8fafc;
+  color:#0f172a
+}
+body.light-mode header{background:rgba(255,255,255,.93);border-bottom-color:#e2e8f0}
+body.light-mode .back-link{color:#334155}
+body.light-mode .back-link:hover{color:#0f172a}
+body.light-mode .theme-toggle{color:#475569;background:#fff;border-color:#cbd5e1}
+body.light-mode .theme-toggle:hover{color:#0f172a;background:#f1f5f9;border-color:#94a3b8}
+body.light-mode .free-label{color:#64748b}
+body.light-mode .badge{background:#fff;color:#475569}
+body.light-mode textarea{background:#fff;color:#0f172a}
+body.light-mode textarea::placeholder{color:#94a3b8}
+body.light-mode .mode{background:#fff;color:#475569}
+body.light-mode .mode:hover{background:#eef2ff}
+body.light-mode .mode.active{background:#eef2ff}
+body.light-mode .mode strong,body.light-mode .stat strong{color:#0f172a}
+body.light-mode .btn:not(.primary){background:#f1f5f9;color:#334155}
+body.light-mode .btn:not(.primary):hover:not(:disabled){background:#e2e8f0}
+body.light-mode .check{color:#334155}
+body.light-mode .preview-code{color:#334155}
+body.light-mode .article h2{color:#0f172a}
+body.light-mode .article h3{color:#1e293b}
+body.light-mode .article p,body.light-mode .article li{color:#475569}
+body.light-mode .callout{background:#eef2ff}
+body.light-mode .callout strong{color:#4338ca}
+body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
+
+@media(max-width:900px){.mode-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:760px){.editor-grid{grid-template-columns:1fr}.mode-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){
+  main{padding-top:34px}.stats{grid-template-columns:1fr 1fr}.free-label{font-size:10.5px;max-width:130px;white-space:normal;text-align:right;line-height:1.2}
+}
+@media(max-width:380px){.mode-grid,.stats{grid-template-columns:1fr}.header-right{gap:6px}}
+
+.theme-hidden{display:none!important}
+.local-processing-note{font-size:12px;line-height:1.65;color:#94a3b8;margin-top:14px}
+body.light-mode .local-processing-note{color:#64748b}
+@media(max-width:560px){textarea{font-size:16px}}
+
+</style>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Case Converter","url":"https://utiliverse.app/Case_Converter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based case converter for uppercase, lowercase, title case, sentence case, capitalized case, alternating case, inverse case and common developer naming conventions.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["UPPERCASE","lowercase","Title Case","Sentence case","Capitalized Case","Alternating case","Inverse case","camelCase","PascalCase","snake_case","kebab-case","CONSTANT_CASE","dot.case","path/case","Header-Case","Trim line edges","Collapse repeated spaces","Character, word, line and sentence statistics","Copy output","Download UTF-8 TXT"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What text case formats does this converter support?","acceptedAnswer":{"@type":"Answer","text":"It supports uppercase, lowercase, title case, sentence case, capitalized case, alternating case, inverse case, camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, dot.case, path/case, and Header-Case."}},{"@type":"Question","name":"What is the difference between Title Case and Capitalized Case?","acceptedAnswer":{"@type":"Answer","text":"Title Case keeps common short English function words lowercase when they appear in the middle of a heading, while Capitalized Case simply capitalizes the first letter of every detected word."}},{"@type":"Question","name":"Does sentence case know which words are proper nouns?","acceptedAnswer":{"@type":"Answer","text":"No. Sentence case can identify likely sentence starts, but it cannot reliably infer names, acronyms, brands, or specialized capitalization from plain text alone. Review those items after conversion."}},{"@type":"Question","name":"Will punctuation and line breaks be preserved?","acceptedAnswer":{"@type":"Answer","text":"They are preserved by natural-language modes such as uppercase, lowercase, title case, sentence case, capitalized case, alternating case, and inverse case. Identifier modes intentionally normalize separators and punctuation."}},{"@type":"Question","name":"Does the tool support accented and non-English letters?","acceptedAnswer":{"@type":"Answer","text":"It uses Unicode-aware matching and JavaScript's built-in case conversion, so many non-ASCII letters are supported. Locale-specific capitalization rules can still differ, so important multilingual text should be reviewed."}},{"@type":"Question","name":"What do \u201cTrim line edges\u201d and \u201cCollapse repeated spaces\u201d do?","acceptedAnswer":{"@type":"Answer","text":"Trim line edges removes whitespace from the beginning and end of each line. Collapse repeated spaces reduces consecutive spaces or tabs inside a line to one space. Neither option removes line breaks."}},{"@type":"Question","name":"Is kebab-case output automatically safe as a URL slug?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. Kebab case is a naming format, not a complete slug-validation system. A publishing platform may require additional transliteration, reserved-character rules, normalization, length limits, or uniqueness checks."}},{"@type":"Question","name":"Can I save the converted result?","acceptedAnswer":{"@type":"Answer","text":"Yes. Use Copy Output to place the result on the clipboard or Download TXT to save the current converted output as a UTF-8 plain-text file."}}]}</script>
+</head>
+
+<body>
+<!--
+SEO TARGET CLUSTER
+Primary: case converter
+Secondary: uppercase converter, lowercase converter, title case converter,
+sentence case converter, camelCase converter, PascalCase converter,
+snake_case converter, kebab-case converter, text case converter
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
+<header>
+  <div class="container header-inner">
+    <a class="back-link" href="https://utiliverse.app"><span aria-hidden="true">←</span><span>Back to Utiliverse</span></a>
+    <div class="header-right">
+      <span class="free-label">100% Free and Browser Based</span>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+        <svg id="moonIcon" class="theme-hidden" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
+        <svg id="sunIcon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
+<main>
+<div class="container">
+  <section class="hero">
+    <div class="eyebrow">Text utility</div>
+    <h1>Case Converter – Uppercase, Lowercase &amp; More</h1>
+    <p>Convert text instantly between 15 writing and developer naming styles, including UPPERCASE, lowercase, Title Case, Sentence case, camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, and more.</p>
+    <div class="badges">
+      <span class="badge">15 case styles</span>
+      <span class="badge">Unicode-aware word handling</span>
+      <span class="badge">Processed locally in your browser</span>
+    </div>
+  </section>
+
+  <section class="glass tool" aria-labelledby="toolHeading">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Convert text case</div>
+        <h2 id="toolHeading" class="section-title">Paste text, then choose a case</h2>
+      </div>
+      <div class="small">Your text is transformed locally by JavaScript and is not submitted to a Utiliverse conversion server.</div>
+    </div>
+
+    <div class="editor-grid">
+      <div class="editor-card">
+        <div class="editor-head">
+          <label for="inputText" class="editor-title">Input</label>
+          <span id="inputMeta" class="editor-meta">0 characters</span>
+        </div>
+        <textarea id="inputText" spellcheck="true" placeholder="Type or paste your text here..."></textarea>
+      </div>
+
+      <div class="editor-card">
+        <div class="editor-head">
+          <label for="outputText" class="editor-title">Converted output</label>
+          <span id="outputMeta" class="editor-meta">0 characters</span>
+        </div>
+        <textarea id="outputText" spellcheck="false" readonly aria-live="polite" placeholder="Your converted text will appear here..."></textarea>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button id="copyBtn" class="btn primary" type="button">Copy Output</button>
+      <button id="useOutputBtn" class="btn" type="button">Use Output as Input</button>
+      <button id="downloadBtn" class="btn" type="button">Download TXT</button>
+      <button id="clearBtn" class="btn danger" type="button">Clear</button>
+      <span id="status" class="status" aria-live="polite"></span>
+    </div>
+
+    <div class="mode-wrap">
+      <div class="mode-label">Case styles</div>
+      <div id="modeGrid" class="mode-grid">
+        <button class="mode active" data-mode="upper" type="button"><strong>UPPERCASE</strong><span>EVERY LETTER UPPERCASE</span></button>
+        <button class="mode" data-mode="lower" type="button"><strong>lowercase</strong><span>every letter lowercase</span></button>
+        <button class="mode" data-mode="title" type="button"><strong>Title Case</strong><span>Smart English headline style</span></button>
+        <button class="mode" data-mode="sentence" type="button"><strong>Sentence case</strong><span>Capitalize sentence starts</span></button>
+        <button class="mode" data-mode="capitalized" type="button"><strong>Capitalized Case</strong><span>Capitalize every word</span></button>
+        <button class="mode" data-mode="alternating" type="button"><strong>aLtErNaTiNg</strong><span>Alternate letter casing</span></button>
+        <button class="mode" data-mode="inverse" type="button"><strong>iNVERSE cASE</strong><span>Flip upper/lower letters</span></button>
+        <button class="mode" data-mode="camel" type="button"><strong>camelCase</strong><span>Developer identifier style</span></button>
+        <button class="mode" data-mode="pascal" type="button"><strong>PascalCase</strong><span>Capitalized identifier style</span></button>
+        <button class="mode" data-mode="snake" type="button"><strong>snake_case</strong><span>Words joined by underscores</span></button>
+        <button class="mode" data-mode="kebab" type="button"><strong>kebab-case</strong><span>Words joined by hyphens</span></button>
+        <button class="mode" data-mode="constant" type="button"><strong>CONSTANT_CASE</strong><span>Uppercase underscore style</span></button>
+        <button class="mode" data-mode="dot" type="button"><strong>dot.case</strong><span>Words joined by periods</span></button>
+        <button class="mode" data-mode="path" type="button"><strong>path/case</strong><span>Words joined by slashes</span></button>
+        <button class="mode" data-mode="header" type="button"><strong>Header-Case</strong><span>Capitalized hyphen style</span></button>
+      </div>
+    </div>
+
+    <div class="options">
+      <div class="checks">
+        <label class="check"><input id="trimLines" type="checkbox"> Trim line edges</label>
+        <label class="check"><input id="collapseSpaces" type="checkbox"> Collapse repeated spaces</label>
+      </div>
+      <button id="sampleBtn" class="btn" type="button">Load Sample</button>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><small>Characters</small><strong id="charCount">0</strong></div>
+      <div class="stat"><small>No whitespace</small><strong id="noSpaceCount">0</strong></div>
+      <div class="stat"><small>Words</small><strong id="wordCount">0</strong></div>
+      <div class="stat"><small>Lines</small><strong id="lineCount">0</strong></div>
+      <div class="stat"><small>Sentences</small><strong id="sentenceCount">0</strong></div>
+    </div>
+
+    <div class="preview">
+      <div class="preview-title">Active transformation</div>
+      <div id="modeDescription" class="preview-code">UPPERCASE converts cased letters to uppercase while preserving punctuation, spaces and line breaks.</div>
+    </div>
+  </section>
+  <p class="local-processing-note">Browser-based processing: case conversion, text statistics, copying, and TXT generation are handled locally by this page and your text is not submitted to a Utiliverse conversion server.</p>
+
+  <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
+       Paste approved Google AdSense code here after approval.
+       This comment is intentionally invisible and reserves no space.
+  -->
+
+  <section class="article">
+    <h2>How to Use the Case Converter</h2>
+    <p>Paste or type text into the Input editor, then choose any case style. The converted result updates immediately. Optional line trimming and repeated-space collapsing are applied before conversion. Use Copy Output, Use Output as Input, or Download TXT when you are ready to reuse the result.</p>
+<p>The Utiliverse Case Converter is a browser-based text transformation tool for writers, editors, students, marketers, developers, data analysts, and anyone who needs to normalize capitalization quickly. Everyday formats such as uppercase, lowercase, title case, sentence case, and capitalized case preserve the structure of the text, while developer-oriented formats such as camelCase, PascalCase, snake_case, and kebab-case intentionally turn words into normalized identifiers.</p>
+
+    <p>The core conversion runs entirely in the browser. The page does not need to send your pasted text to a Utiliverse conversion server to change its capitalization. That makes the tool convenient for drafts, code labels, headings, lists, documentation snippets, spreadsheet labels, configuration names, filenames, and other ordinary text work. As with any browser tool, avoid pasting highly sensitive information when your environment, browser extensions, or device itself is not trusted.</p>
+
+    <h3>Uppercase, lowercase, and inverse case</h3>
+    <p>UPPERCASE converts letters that have an uppercase form into that form, while lowercase performs the reverse. Numbers, punctuation, symbols, spaces, and line breaks remain unchanged. Inverse case is different: it examines each cased character and flips uppercase letters to lowercase and lowercase letters to uppercase. Characters that do not have a meaningful upper/lower distinction are left as they are. Alternating case applies a repeating lower-uppercase pattern across detected letters while leaving non-letter characters in place.</p>
+
+    <h3>Title case versus capitalized case</h3>
+    <p>Capitalized Case is deliberately simple: every detected word begins with an uppercase letter and the remaining cased letters are lowercased. Title Case uses a more editorial approach for English text. Common short function words such as “a,” “an,” “the,” “and,” “or,” “but,” “in,” “on,” “at,” “to,” “for,” “of,” “by,” and “as” remain lowercase when they appear in the middle of a title, while the first and last detected words are capitalized. Different publishers use different title-case style guides, so the result should be treated as a practical default rather than a replacement for a publication's house style.</p>
+
+    <h3>Sentence case</h3>
+    <p>Sentence case lowercases the input first and then capitalizes the first detected letter at the beginning of the text, after sentence-ending punctuation, and at the beginning of a new line. This is useful when a paragraph arrives in all caps or inconsistent capitalization and needs a readable baseline. Proper nouns, acronyms, trademarks, product names, and specialized abbreviations cannot be inferred reliably from capitalization alone, so sentence-case output may still need human review.</p>
+
+    <h3>Developer naming conventions</h3>
+    <p>Software projects frequently use naming conventions that remove ordinary spaces and punctuation. camelCase begins with a lowercase word and capitalizes each later word, as in <code>customerOrderTotal</code>. PascalCase capitalizes every component, as in <code>CustomerOrderTotal</code>. snake_case joins lowercase words with underscores, kebab-case uses hyphens, dot.case uses periods, and path/case uses forward slashes. CONSTANT_CASE uses uppercase words joined by underscores, while Header-Case capitalizes the components and joins them with hyphens.</p>
+
+    <p>For these identifier-style conversions, the tool first identifies Unicode letter-and-number tokens and then normalizes their separators. This means punctuation that is meaningful in natural-language prose may be removed when creating an identifier. That behavior is intentional: a phrase such as “Customer order: #42” becomes a normalized series of word-like tokens rather than preserving the colon and hash mark. When exact punctuation must remain, use one of the natural-language transformations instead.</p>
+
+    <h3>Unicode and language considerations</h3>
+    <p>Modern JavaScript case conversion understands far more than ASCII, and this tool uses Unicode-aware token matching for its identifier transformations. Accented Latin letters and many characters from other writing systems are therefore handled more reliably than with an A–Z-only regular expression. Even so, capitalization rules are language-dependent. Turkish dotted and dotless I, German sharp S, Greek sigma forms, and scripts without upper/lower case distinctions are examples of why one universal casing algorithm cannot perfectly match every locale or editorial rule. Review important multilingual text after conversion.</p>
+
+    <h2>Practical Use Cases</h2>
+    <h3>Cleaning headings and copied text</h3>
+    <p>Text copied from PDFs, spreadsheets, emails, older systems, or forms often arrives in ALL CAPS or inconsistent mixed case. Lowercase, sentence case, and title case can quickly create a cleaner starting point without manually editing every word. The character, word, line, and sentence counters also provide a quick view of the amount of text being processed.</p>
+
+    <h3>Preparing code variables and configuration keys</h3>
+    <p>Developers frequently receive labels in human-readable form and need to turn them into consistent identifiers. A phrase such as “Account notification preference” can become <code>accountNotificationPreference</code>, <code>AccountNotificationPreference</code>, <code>account_notification_preference</code>, or <code>account-notification-preference</code> depending on the conventions of the language, framework, API, database, or configuration format in use. The converter makes those variations easy to compare.</p>
+
+    <h3>Creating filenames, slugs, and structured labels</h3>
+    <p>Kebab case and snake case are often useful for filenames, URL-like labels, export columns, and structured datasets. The converter normalizes visible word separators, but it is not a complete URL slug generator: it does not guarantee transliteration, reserved-character handling, filesystem compatibility, or uniqueness. If a platform imposes specific filename or URL rules, validate the final result against those rules before publishing.</p>
+
+    <h3>Editing documentation and marketing copy</h3>
+    <p>Writers can use title case for draft headings, sentence case for body copy that arrived in all caps, or capitalized case for labels where every word is intentionally emphasized. Marketing teams can normalize campaign labels, button text, spreadsheet headings, and content inventories. Because house styles differ, editorial judgment should still be applied to brand names, acronyms, proper nouns, and headline conventions.</p>
+
+    <h3>Working with bulk lists and multi-line text</h3>
+    <p>The converter preserves line breaks for natural-language transformations, making it useful for lists, notes, and blocks of text. Optional line trimming removes whitespace at the beginning and end of each line, while the repeated-space option reduces runs of spaces and tabs without deleting line breaks. Identifier modes normalize the full text into tokens, so they are better suited to a phrase or label than to a long multi-paragraph document.</p>
+
+    <div class="callout"><strong>Privacy note:</strong> case conversion is performed locally in your browser. Copying and downloading are initiated by your browser, and the tool does not need to submit the text to a Utiliverse conversion server.</div>
+
+    <h2>Frequently Asked Questions</h2>
+    <details class="faq"><summary>What text case formats does this converter support?</summary><p>It supports uppercase, lowercase, title case, sentence case, capitalized case, alternating case, inverse case, camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, dot.case, path/case, and Header-Case.</p></details>
+    <details class="faq"><summary>What is the difference between Title Case and Capitalized Case?</summary><p>Title Case keeps common short English function words lowercase when they appear in the middle of a heading, while Capitalized Case simply capitalizes the first letter of every detected word.</p></details>
+    <details class="faq"><summary>Does sentence case know which words are proper nouns?</summary><p>No. Sentence case can identify likely sentence starts, but it cannot reliably infer names, acronyms, brands, or specialized capitalization from plain text alone. Review those items after conversion.</p></details>
+    <details class="faq"><summary>Will punctuation and line breaks be preserved?</summary><p>They are preserved by natural-language modes such as uppercase, lowercase, title case, sentence case, capitalized case, alternating case, and inverse case. Identifier modes intentionally normalize separators and punctuation.</p></details>
+    <details class="faq"><summary>Does the tool support accented and non-English letters?</summary><p>It uses Unicode-aware matching and JavaScript's built-in case conversion, so many non-ASCII letters are supported. Locale-specific capitalization rules can still differ, so important multilingual text should be reviewed.</p></details>
+    <details class="faq"><summary>What do “Trim line edges” and “Collapse repeated spaces” do?</summary><p>Trim line edges removes whitespace from the beginning and end of each line. Collapse repeated spaces reduces consecutive spaces or tabs inside a line to one space. Neither option removes line breaks.</p></details>
+    <details class="faq"><summary>Is kebab-case output automatically safe as a URL slug?</summary><p>Not necessarily. Kebab case is a naming format, not a complete slug-validation system. A publishing platform may require additional transliteration, reserved-character rules, normalization, length limits, or uniqueness checks.</p></details>
+    <details class="faq"><summary>Can I save the converted result?</summary><p>Yes. Use Copy Output to place the result on the clipboard or Download TXT to save the current converted output as a UTF-8 plain-text file.</p></details>
+  </section>
+</div>
+</main>
+
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
+<footer>
+  <div class="container footer-inner">
+    <span>© 2026 Utiliverse. All rights reserved.</span>
+    <span>100% Free and Browser Based</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+  const input = $("inputText");
+  const output = $("outputText");
+  let activeMode = "upper";
+const descriptions = {
+    upper:"UPPERCASE converts cased letters to uppercase while preserving punctuation, spaces and line breaks.",
+    lower:"lowercase converts cased letters to lowercase while preserving punctuation, spaces and line breaks.",
+    title:"Title Case capitalizes major words and keeps a practical set of common English small words lowercase in the middle.",
+    sentence:"Sentence case lowercases text first, then capitalizes likely sentence and line starts.",
+    capitalized:"Capitalized Case uppercases the first cased letter of every detected word and lowercases the rest.",
+    alternating:"aLtErNaTiNg case alternates lowercase and uppercase across detected letters while preserving other characters.",
+    inverse:"iNVERSE cASE flips uppercase letters to lowercase and lowercase letters to uppercase.",
+    camel:"camelCase joins normalized word tokens with no separator and begins with a lowercase token.",
+    pascal:"PascalCase joins normalized word tokens with no separator and capitalizes every token.",
+    snake:"snake_case joins normalized lowercase word tokens with underscores.",
+    kebab:"kebab-case joins normalized lowercase word tokens with hyphens.",
+    constant:"CONSTANT_CASE joins normalized uppercase word tokens with underscores.",
+    dot:"dot.case joins normalized lowercase word tokens with periods.",
+    path:"path/case joins normalized lowercase word tokens with forward slashes.",
+    header:"Header-Case capitalizes normalized word tokens and joins them with hyphens."
+  };
+
+  function applyTheme(theme) {
+    const light = theme === "light";
+    const moon = $("moonIcon");
+    const sun = $("sunIcon");
+    const toggle = $("themeToggle");
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+
+    document.body.classList.toggle("light-mode", light);
+    moon.classList.toggle("theme-hidden", !light);
+    sun.classList.toggle("theme-hidden", light);
+
+    const label = light ? "Switch to dark mode" : "Switch to light mode";
+    toggle.setAttribute("aria-label", label);
+    toggle.title = label;
+
+    if (metaTheme) {
+      metaTheme.setAttribute("content", light ? "#f8fafc" : "#020617");
+    }
+  }
+
+  const savedTheme = localStorage.getItem("utiliverse-theme");
+  const initialTheme = savedTheme === "light" || savedTheme === "dark"
+    ? savedTheme
+    : (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+
+  applyTheme(initialTheme);
+
+  $("themeToggle").addEventListener("click", () => {
+    const next = document.body.classList.contains("light-mode") ? "dark" : "light";
+    localStorage.setItem("utiliverse-theme", next);
+    applyTheme(next);
+  });
+
+  function preprocess(text) {
+    let value = text.replace(/\r\n?/g, "\n");
+    if ($("trimLines").checked) {
+      value = value.split("\n").map(line => line.trim()).join("\n");
+    }
+    if ($("collapseSpaces").checked) {
+      value = value.split("\n").map(line => line.replace(/[ \t]+/g, " ")).join("\n");
+    }
+    return value;
+  }
+
+  function tokenize(text) {
+    const tokens = [];
+    const re = /[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu;
+    let match;
+    while ((match = re.exec(text)) !== null) tokens.push(match[0]);
+    return tokens;
+  }
+
+  function capWord(word) {
+    const chars = Array.from(word.toLowerCase());
+    for (let i = 0; i < chars.length; i++) {
+      if (/\p{L}/u.test(chars[i])) {
+        chars[i] = chars[i].toUpperCase();
+        break;
+      }
+    }
+    return chars.join("");
+  }
+
+  function transformWordsPreserving(text, wordFn) {
+    return text.replace(/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu, wordFn);
+  }
+
+  function titleCase(text) {
+    const smallWords = new Set(["a","an","the","and","or","but","nor","as","at","by","for","in","of","on","per","to","via","vs","with"]);
+    const matches = [...text.matchAll(/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu)];
+    if (!matches.length) return text;
+    let index = 0;
+    return transformWordsPreserving(text, word => {
+      const lower = word.toLowerCase();
+      const isEdge = index === 0 || index === matches.length - 1;
+      index++;
+      return !isEdge && smallWords.has(lower) ? lower : capWord(word);
+    });
+  }
+
+  function sentenceCase(text) {
+    const lower = text.toLowerCase();
+    let capitalizeNext = true;
+    const chars = Array.from(lower);
+    for (let i = 0; i < chars.length; i++) {
+      const ch = chars[i];
+      if (capitalizeNext && /\p{L}/u.test(ch)) {
+        chars[i] = ch.toUpperCase();
+        capitalizeNext = false;
+      }
+      if (/[.!?]/u.test(ch) || ch === "\n") capitalizeNext = true;
+      else if (/\p{L}|\p{N}/u.test(ch) && !capitalizeNext) {
+        // stay in current sentence
+      }
+    }
+    return chars.join("");
+  }
+
+  function alternatingCase(text) {
+    let upperNext = false;
+    return Array.from(text).map(ch => {
+      if (!/\p{L}/u.test(ch)) return ch;
+      const result = upperNext ? ch.toUpperCase() : ch.toLowerCase();
+      upperNext = !upperNext;
+      return result;
+    }).join("");
+  }
+
+  function inverseCase(text) {
+    return Array.from(text).map(ch => {
+      if (!/\p{L}/u.test(ch)) return ch;
+      const upper = ch.toUpperCase();
+      const lower = ch.toLowerCase();
+      if (ch === upper && ch !== lower) return lower;
+      if (ch === lower && ch !== upper) return upper;
+      return ch;
+    }).join("");
+  }
+
+  function identifierTokens(text) {
+    return tokenize(text).flatMap(token => {
+      // Identifier modes normalize apostrophes and punctuation rather than preserving them.
+      const normalized = token.replace(/['’]/gu, "");
+      const asciiSplit = normalized
+        .replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+        .replace(/([A-Z]+)([A-Z][a-z])/g, "$1 $2");
+      return asciiSplit.split(/\s+/).filter(Boolean);
+    });
+  }
+
+  function identifier(text, mode) {
+    const words = identifierTokens(text);
+    if (!words.length) return "";
+    const lower = words.map(w => w.toLowerCase());
+
+    if (mode === "camel") {
+      return lower[0] + lower.slice(1).map(capWord).join("");
+    }
+    if (mode === "pascal") return lower.map(capWord).join("");
+    if (mode === "snake") return lower.join("_");
+    if (mode === "kebab") return lower.join("-");
+    if (mode === "constant") return lower.join("_").toUpperCase();
+    if (mode === "dot") return lower.join(".");
+    if (mode === "path") return lower.join("/");
+    if (mode === "header") return lower.map(capWord).join("-");
+    return text;
+  }
+
+  function convert(text, mode) {
+    text = preprocess(text);
+    switch (mode) {
+      case "upper": return text.toUpperCase();
+      case "lower": return text.toLowerCase();
+      case "title": return titleCase(text);
+      case "sentence": return sentenceCase(text);
+      case "capitalized": return transformWordsPreserving(text, capWord);
+      case "alternating": return alternatingCase(text);
+      case "inverse": return inverseCase(text);
+      case "camel":
+      case "pascal":
+      case "snake":
+      case "kebab":
+      case "constant":
+      case "dot":
+      case "path":
+      case "header": return identifier(text, mode);
+      default: return text;
+    }
+  }
+
+  function countWords(text) {
+    return tokenize(text).length;
+  }
+
+  function countSentences(text) {
+    const trimmed = text.trim();
+    if (!trimmed) return 0;
+    const endings = trimmed.match(/[.!?]+(?=\s|$)/g);
+    if (endings && endings.length) return endings.length;
+    return countWords(trimmed) ? 1 : 0;
+  }
+
+  function updateStats(text) {
+    $("charCount").textContent = Array.from(text).length.toLocaleString("en-US");
+    $("noSpaceCount").textContent = Array.from(text.replace(/\s/gu,"")).length.toLocaleString("en-US");
+    $("wordCount").textContent = countWords(text).toLocaleString("en-US");
+    $("lineCount").textContent = (text ? text.split(/\r\n?|\n/).length : 0).toLocaleString("en-US");
+    $("sentenceCount").textContent = countSentences(text).toLocaleString("en-US");
+    $("inputMeta").textContent = `${Array.from(text).length.toLocaleString("en-US")} characters`;
+  }
+
+  function update() {
+    const source = input.value;
+    const result = convert(source, activeMode);
+    output.value = result;
+    updateStats(source);
+    $("outputMeta").textContent = `${Array.from(result).length.toLocaleString("en-US")} characters`;
+    $("modeDescription").textContent = descriptions[activeMode];
+  }
+
+  document.querySelectorAll(".mode").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".mode").forEach(x => x.classList.remove("active"));
+      btn.classList.add("active");
+      activeMode = btn.dataset.mode;
+      update();
+    });
+  });
+
+  input.addEventListener("input", update);
+  $("trimLines").addEventListener("change", update);
+  $("collapseSpaces").addEventListener("change", update);
+
+  $("sampleBtn").addEventListener("click", () => {
+    input.value = `the quick brown fox jumps over the lazy dog.
+UTILIVERSE MAKES BROWSER-BASED TOOLS SIMPLE.
+customer order notification preference`;
+    update();
+    input.focus();
+  });
+
+  $("clearBtn").addEventListener("click", () => {
+    input.value = "";
+    output.value = "";
+    $("status").textContent = "";
+    update();
+    input.focus();
+  });
+
+  $("useOutputBtn").addEventListener("click", () => {
+    input.value = output.value;
+    update();
+    input.focus();
+  });
+
+  async function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.left = "-9999px";
+    document.body.appendChild(ta);
+    ta.select();
+    const copied = document.execCommand("copy");
+    ta.remove();
+    if (!copied) throw new Error("Copy command failed");
+  }
+
+  $("copyBtn").addEventListener("click", async () => {
+    if (!output.value) {
+      $("status").textContent = "Nothing to copy";
+      return;
+    }
+    try {
+      await copyText(output.value);
+      $("status").textContent = "Copied";
+      setTimeout(() => $("status").textContent = "", 1600);
+    } catch {
+      $("status").textContent = "Copy unavailable";
+    }
+  });
+
+  $("downloadBtn").addEventListener("click", () => {
+    if (!output.value) {
+      $("status").textContent = "Nothing to download";
+      return;
+    }
+    const blob = new Blob([output.value], {type:"text/plain;charset=utf-8"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `utiliverse-${activeMode}-case.txt`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url),1000);
+  });
+
+  update();
+})();
+</script>
+</body>
+</html>
