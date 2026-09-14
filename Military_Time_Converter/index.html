@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Military Time Converter – 24 Hour to AM/PM | Utiliverse</title>
+<meta name="description" content="Free military time converter. Convert 24-hour military time to 12-hour AM/PM time or regular time back to military time. Supports HHMM and HH:MM formats.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/Military_Time_Converter/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Military Time Converter – 24 Hour to AM/PM | Utiliverse">
+<meta property="og:description" content="Convert military 24-hour time to regular AM/PM time, or convert 12-hour time back to military HHMM and HH:MM formats.">
+<meta property="og:url" content="https://utiliverse.app/Military_Time_Converter/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Military Time Converter – 24 Hour to AM/PM | Utiliverse">
+<meta name="twitter:description" content="Free browser-based military time converter with midnight, noon, HHMM and HH:MM support.">
+
+
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --panel:rgba(30,41,59,.72);--panel2:rgba(15,23,42,.70);--border:#334155;--border2:#475569;
+  --text:#f8fafc;--muted:#94a3b8;--indigo:#6366f1;--indigo2:#4f46e5;--green:#34d399;
+  --amber:#fbbf24;--rose:#fb7185
+}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),
+    radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;
+  color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  transition:background .25s ease,color .25s ease
+}
+a{color:inherit}button,input,select{font:inherit}button{touch-action:manipulation}
+.container{max-width:1152px;margin:0 auto;padding:0 16px}
+
+header{
+  position:sticky;top:0;z-index:50;background:rgba(2,6,23,.82);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid #1e293b
+}
+.header-inner{min-height:65px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.back-link{display:flex;align-items:center;gap:8px;text-decoration:none;color:#cbd5e1;font-size:14px;font-weight:700}
+.back-link:hover{color:#fff}.header-right{display:flex;align-items:center;gap:12px}
+.free-label{font-size:13px;font-weight:650;color:#64748b;white-space:nowrap}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border:1px solid #334155;background:rgba(15,23,42,.72);color:#94a3b8;border-radius:12px;cursor:pointer;box-shadow:none;appearance:none;-webkit-appearance:none}
+.theme-toggle:hover{color:#fff;background:#1e293b;border-color:#475569}
+.theme-toggle:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
+.theme-toggle svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+main{padding:48px 0 72px}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:#818cf8;font-weight:850}
+h1{font-size:clamp(38px,5vw,58px);line-height:1.04;margin:10px 0 14px;font-weight:900;letter-spacing:-.035em}
+.hero p{max-width:900px;color:var(--muted);font-size:18px;line-height:1.72;margin:0}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.badge{border:1px solid var(--border);background:rgba(15,23,42,.66);border-radius:999px;padding:7px 10px;color:#cbd5e1;font-size:12px;font-weight:750}
+
+.glass{background:var(--panel);backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:20px}
+.tool{margin-top:28px;padding:22px}
+.section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.section-title{font-size:22px;font-weight:850;margin:4px 0 0}.small{font-size:12px;color:#64748b;line-height:1.55}
+
+.tabs{display:flex;gap:7px;flex-wrap:wrap;margin-top:18px}
+.tab{min-height:40px;border:1px solid var(--border);background:#0f172a;color:#94a3b8;border-radius:10px;padding:9px 13px;font-weight:800;cursor:pointer}
+.tab.active{background:rgba(99,102,241,.14);border-color:#818cf8;color:#c7d2fe}
+.tab:hover{border-color:#6366f1;color:#e2e8f0}
+
+.converter{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:end;margin-top:18px}
+.field label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#64748b;font-weight:850;margin-bottom:7px}
+.input-wrap{display:grid;grid-template-columns:1fr auto;gap:8px}
+.time-input,.period-select{
+  width:100%;min-height:52px;background:#0f172a;border:1px solid var(--border2);color:#f8fafc;
+  border-radius:12px;padding:11px 13px;outline:none
+}
+.time-input{font-size:22px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;letter-spacing:.04em}
+.time-input:focus,.period-select:focus{border-color:var(--indigo);box-shadow:0 0 0 3px rgba(99,102,241,.15)}
+.period-select{min-width:88px;font-weight:800}
+.swap-btn{width:50px;height:52px;border:1px solid var(--border2);background:#1e293b;color:#e2e8f0;border-radius:12px;cursor:pointer;font-size:20px;font-weight:900}
+.swap-btn:hover{background:#334155}
+
+.result-card{margin-top:15px;background:linear-gradient(135deg,rgba(99,102,241,.14),rgba(124,58,237,.08));border:1px solid rgba(129,140,248,.35);border-radius:18px;padding:21px}
+.result-label{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:#818cf8;font-weight:850}
+.result-value{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:clamp(32px,6vw,54px);font-weight:900;margin-top:6px;letter-spacing:.02em}
+.result-sub{margin-top:7px;color:#94a3b8;font-size:13px;line-height:1.55}
+.tag{display:inline-flex;margin-top:10px;border:1px solid rgba(52,211,153,.28);background:rgba(52,211,153,.08);color:#a7f3d0;border-radius:999px;padding:6px 9px;font-size:11px;font-weight:850}
+
+.quick{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.chip{border:1px solid var(--border);background:#0f172a;color:#94a3b8;border-radius:999px;padding:7px 10px;font-size:11px;font-weight:800;cursor:pointer}
+.chip:hover{border-color:#6366f1;color:#c7d2fe}
+
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:12px}
+.stat{background:var(--panel2);border:1px solid var(--border);border-radius:14px;padding:13px;min-width:0}
+.stat small{display:block;color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.07em;font-weight:850}
+.stat strong{display:block;color:#e2e8f0;font-size:18px;margin-top:5px;overflow-wrap:anywhere}
+.stat span{display:block;color:#64748b;font-size:10px;line-height:1.4;margin-top:4px}
+
+.actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}
+.btn{min-height:42px;border:1px solid var(--border2);background:#1e293b;color:#f8fafc;border-radius:10px;padding:9px 12px;font-weight:800;cursor:pointer}
+.btn:hover{background:#334155}.btn.primary{background:linear-gradient(135deg,var(--indigo),var(--indigo2));border-color:var(--indigo)}
+.status{font-size:11px;color:#6ee7b7;min-height:16px}
+
+.table-wrap{margin-top:14px;border:1px solid var(--border);border-radius:15px;overflow:auto;background:var(--panel2)}
+.time-table{width:100%;border-collapse:collapse;min-width:620px}
+.time-table th,.time-table td{padding:10px 13px;border-top:1px solid rgba(71,85,105,.38);text-align:left}
+.time-table thead th{border-top:0;color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.07em}
+.time-table td{color:#cbd5e1;font-size:12px}.time-table td:last-child{font-weight:800}
+.time-table tr.active-row{background:rgba(99,102,241,.08)}
+
+.note{margin-top:14px;padding:12px 13px;background:rgba(99,102,241,.06);border:1px solid rgba(99,102,241,.20);border-radius:12px;color:#94a3b8;font-size:12px;line-height:1.65}
+.note strong{color:#c7d2fe}
+
+.article{max-width:900px;margin-top:64px}
+.article h2{font-size:30px;line-height:1.25;font-weight:900;margin:38px 0 13px;color:#fff}
+.article h3{font-size:19px;line-height:1.4;font-weight:850;margin:27px 0 9px;color:#e2e8f0}
+.article p,.article li{color:#94a3b8;line-height:1.84;margin:0 0 15px}.article ul{padding-left:20px}
+.callout{border:1px solid rgba(99,102,241,.28);background:rgba(99,102,241,.07);border-radius:15px;padding:16px;margin:22px 0}
+.callout strong{color:#c7d2fe}
+.faq{border-bottom:1px solid var(--border)}
+.faq summary{list-style:none;cursor:pointer;padding:16px 0;font-weight:800;display:flex;justify-content:space-between;gap:15px}
+.faq summary::-webkit-details-marker{display:none}.faq summary::after{content:"+";color:#818cf8;font-size:20px}.faq[open] summary::after{content:"−"}
+
+footer{border-top:1px solid #1e293b;background:#020617}
+.footer-inner{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:14px;color:#64748b;font-size:13px}
+
+/* Light mode */
+body.light-mode{--panel:rgba(255,255,255,.92);--panel2:rgba(248,250,252,.96);--border:#dbe3ee;--border2:#cbd5e1;--text:#0f172a;--muted:#475569;background:#f8fafc;color:#0f172a}
+body.light-mode header{background:rgba(255,255,255,.93);border-bottom-color:#e2e8f0}
+body.light-mode .back-link{color:#334155}body.light-mode .back-link:hover{color:#0f172a}
+body.light-mode .theme-toggle{color:#475569;background:#fff;border-color:#cbd5e1}body.light-mode .theme-toggle:hover{color:#0f172a;background:#f1f5f9;border-color:#94a3b8}
+body.light-mode .badge,body.light-mode .tab,body.light-mode .chip{background:#fff;color:#475569}
+body.light-mode .tab.active{background:#eef2ff;color:#4338ca}
+body.light-mode .time-input,body.light-mode .period-select{background:#fff;color:#0f172a}
+body.light-mode .swap-btn,body.light-mode .btn:not(.primary){background:#f1f5f9;color:#334155}
+body.light-mode .swap-btn:hover,body.light-mode .btn:not(.primary):hover{background:#e2e8f0}
+body.light-mode .stat strong,body.light-mode .time-table td{color:#334155}
+body.light-mode .article h2{color:#0f172a}body.light-mode .article h3{color:#1e293b}
+body.light-mode .article p,body.light-mode .article li{color:#475569}
+body.light-mode .callout{background:#eef2ff}body.light-mode .callout strong{color:#4338ca}
+body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
+
+@media(max-width:780px){.converter{grid-template-columns:1fr}.swap-btn{justify-self:center;transform:rotate(90deg)}.stats{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){
+  main{padding-top:34px}.stats{grid-template-columns:1fr 1fr}.free-label{font-size:10.5px;max-width:130px;white-space:normal;text-align:right;line-height:1.2}
+}
+@media(max-width:390px){.stats{grid-template-columns:1fr}.header-right{gap:6px}}
+
+.theme-hidden{display:none!important}
+.tab:focus-visible,.chip:focus-visible,.swap-btn:focus-visible,.btn:focus-visible,.time-input:focus-visible,.period-select:focus-visible{outline:2px solid var(--indigo);outline-offset:2px}
+.local-processing-note{font-size:12px;line-height:1.65;color:#94a3b8;margin-top:14px}
+body.light-mode .local-processing-note{color:#64748b}
+@media(max-width:560px){.time-input,.period-select{font-size:16px}}
+
+</style>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Military Time Converter","url":"https://utiliverse.app/Military_Time_Converter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based military time converter for converting 24-hour military time to 12-hour AM/PM time and regular time back to military HHMM and HH:MM notation.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Military time to regular time","Regular time to military time","HHMM input","HH:MM input","AM and PM conversion","Midnight and noon handling","Minutes-after-midnight calculation","24-hour reference table","Quick example times","Copyable result","Browser-local calculation"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is 1300 military time?","acceptedAnswer":{"@type":"Answer","text":"1300 is 1:00 PM. For afternoon military times above 1200, subtract 12 from the hour."}},{"@type":"Question","name":"What is 0000 in regular time?","acceptedAnswer":{"@type":"Answer","text":"0000 is 12:00 AM, or midnight."}},{"@type":"Question","name":"What is 1200 in regular time?","acceptedAnswer":{"@type":"Answer","text":"1200 is 12:00 PM, or noon."}},{"@type":"Question","name":"What is 8:30 PM in military time?","acceptedAnswer":{"@type":"Answer","text":"8:30 PM converts to 2030 military time, or 20:30 on a colon-separated 24-hour clock."}},{"@type":"Question","name":"Do I need to enter the colon?","acceptedAnswer":{"@type":"Answer","text":"No. Military \u2192 Regular mode accepts both four-digit forms such as 1730 and colon forms such as 17:30."}},{"@type":"Question","name":"Why does military time use leading zeros?","acceptedAnswer":{"@type":"Answer","text":"Leading zeros keep compact times at four digits and make morning hours less ambiguous. For example, 7:05 AM is written 0705."}},{"@type":"Question","name":"Is 2400 valid?","acceptedAnswer":{"@type":"Answer","text":"It is sometimes used to mark the end of a day in schedules, but standard clock notation uses 0000 for midnight. This converter accepts times from 0000 through 2359."}},{"@type":"Question","name":"Does this convert time zones too?","acceptedAnswer":{"@type":"Answer","text":"No. It changes only the display format between 24-hour and 12-hour notation."}}]}</script>
+</head>
+
+<body>
+<!--
+SEO TARGET CLUSTER
+Primary: military time converter
+Secondary: 24 hour to 12 hour converter, military time to regular time,
+regular time to military time, 24 hour clock converter, AM PM converter,
+HHMM converter, military time calculator
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
+<header>
+  <div class="container header-inner">
+    <a class="back-link" href="https://utiliverse.app"><span aria-hidden="true">←</span><span>Back to Utiliverse</span></a>
+    <div class="header-right">
+      <span class="free-label">100% Free and Browser Based</span>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+        <svg id="moonIcon" class="theme-hidden" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
+        <svg id="sunIcon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
+<main>
+<div class="container">
+  <section class="hero">
+    <div class="eyebrow">Time utility</div>
+    <h1>Military Time Converter – 24 Hour to AM/PM</h1>
+    <p>Convert military 24-hour time to regular 12-hour AM/PM time—or convert regular time back to military time—in compact HHMM or colon-separated HH:MM format.</p>
+    <div class="badges">
+      <span class="badge">Military ⇄ Regular time</span>
+      <span class="badge">HHMM & HH:MM support</span>
+      <span class="badge">Midnight & noon handled correctly</span>
+    </div>
+  </section>
+
+  <section class="glass tool" aria-labelledby="toolHeading">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">24-hour / 12-hour conversion</div>
+        <h2 id="toolHeading" class="section-title">Convert military and regular time</h2>
+      </div>
+      <div class="small">Examples: 1730 → 5:30 PM · 8:15 PM → 2015</div>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Time conversion direction">
+      <button id="militaryTab" class="tab active" type="button" role="tab" aria-selected="true">Military → Regular</button>
+      <button id="regularTab" class="tab" type="button" role="tab" aria-selected="false">Regular → Military</button>
+    </div>
+
+    <div class="converter">
+      <div class="field">
+        <label id="inputLabel" for="timeInput">Military time</label>
+        <div class="input-wrap">
+          <input id="timeInput" class="time-input" type="text" inputmode="numeric" autocomplete="off" spellcheck="false" value="1730" placeholder="1730 or 17:30">
+          <select id="periodSelect" class="period-select" aria-label="AM or PM" style="display:none">
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+          </select>
+        </div>
+      </div>
+
+      <button id="swapBtn" class="swap-btn" type="button" title="Swap direction" aria-label="Swap conversion direction">⇄</button>
+
+      <div class="field">
+        <label id="outputLabel" for="outputInput">Regular time</label>
+        <input id="outputInput" class="time-input" type="text" readonly value="" aria-live="polite">
+      </div>
+    </div>
+
+    <div class="result-card" aria-live="polite">
+      <div id="resultLabel" class="result-label">Regular 12-hour time</div>
+      <div id="resultValue" class="result-value">5:30 PM</div>
+      <div id="resultSub" class="result-sub">1730 military time is 5:30 PM.</div>
+      <div id="periodTag" class="tag">Afternoon / Evening</div>
+    </div>
+
+    <div class="quick">
+      <button class="chip example-military" data-value="0000" type="button">0000</button>
+      <button class="chip example-military" data-value="0630" type="button">0630</button>
+      <button class="chip example-military" data-value="1200" type="button">1200</button>
+      <button class="chip example-military" data-value="1430" type="button">1430</button>
+      <button class="chip example-military" data-value="1730" type="button">1730</button>
+      <button class="chip example-military" data-value="2359" type="button">2359</button>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><small>24-hour time</small><strong id="militaryStat">17:30</strong><span>colon format</span></div>
+      <div class="stat"><small>Military format</small><strong id="compactStat">1730</strong><span>four digits</span></div>
+      <div class="stat"><small>12-hour time</small><strong id="regularStat">5:30 PM</strong><span>AM / PM format</span></div>
+      <div class="stat"><small>Minutes after midnight</small><strong id="minutesStat">1,050</strong><span>0–1,439</span></div>
+    </div>
+
+    <div class="actions">
+      <button id="copyBtn" class="btn primary" type="button">Copy Result</button>
+      <button id="resetBtn" class="btn" type="button">Reset</button>
+      <span id="status" class="status" aria-live="polite"></span>
+    </div>
+
+    <div class="table-wrap">
+      <table class="time-table">
+        <thead><tr><th>Military</th><th>24-hour</th><th>Regular</th><th>Period</th></tr></thead>
+        <tbody id="referenceTable"></tbody>
+      </table>
+    </div>
+
+    <div class="note"><strong>Military-time note:</strong> this tool uses the common numeric 24-hour clock convention from 0000 through 2359. “2400” is sometimes used operationally to mean the end of a day, but it is not accepted here as a standard clock time because 00:00 represents midnight at the start of the next day.</div>
+  </section>
+  <p class="local-processing-note">Browser-based calculation: time parsing, format conversion, statistics, and the reference-table highlight are handled locally on this page and the time you enter is not submitted to a Utiliverse server.</p>
+
+  <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
+       Paste approved Google AdSense code here after approval.
+       This comment is intentionally invisible and reserves no space.
+  -->
+
+  <section class="article">
+    <h2>How to Use the Military Time Converter</h2>
+    <p>Choose Military → Regular to enter a 24-hour time such as 1730 or 17:30, or choose Regular → Military to enter a 12-hour time and select AM or PM. The result updates immediately, and the page also shows compact military notation, colon-separated 24-hour time, regular AM/PM time, and minutes after midnight.</p>
+<p>The Utiliverse Military Time Converter translates between the 24-hour clock commonly called military time and the 12-hour clock used in everyday AM/PM notation. It works in both directions, so you can enter a military time such as 1730 and see 5:30 PM, or enter a regular time such as 8:15 PM and see 2015.</p>
+
+    <p>The converter accepts military time with or without a colon. That means both <code>1730</code> and <code>17:30</code> are recognized as the same time. In regular-time mode, enter an hour and minutes such as <code>8:15</code>, then select AM or PM. The result updates immediately in compact military format and standard colon-separated 24-hour format.</p>
+
+    <h3>How military time works</h3>
+    <p>Military time uses a 24-hour day beginning at 0000 and ending at 2359. The first two digits represent the hour and the last two represent the minutes. Because each hour number occurs only once during the day, there is no need to add AM or PM. For example, 0900 means 9:00 AM, while 2100 means 9:00 PM.</p>
+
+    <p>Leading zeros are important in compact military notation. Seven-thirty in the morning is written as 0730 rather than 730 when a four-digit format is expected. The converter automatically pads output to four digits so morning hours remain clear and consistent.</p>
+
+    <h3>Converting military time to regular time</h3>
+    <p>From 0100 through 1159, the hour usually stays the same and receives an AM label. For example, 0845 becomes 8:45 AM. The special case is midnight: 0000 becomes 12:00 AM. Noon is 1200, which becomes 12:00 PM.</p>
+
+    <p>For times from 1300 through 2359, subtract 12 from the hour and use PM. Thus 1300 becomes 1:00 PM, 1545 becomes 3:45 PM, and 2310 becomes 11:10 PM. The minute portion does not change during the conversion.</p>
+
+    <h3>Converting regular time to military time</h3>
+    <p>For AM times from 1:00 AM through 11:59 AM, keep the hour and add a leading zero when needed. For example, 6:20 AM becomes 0620. The exception is 12:00 AM through 12:59 AM: subtract 12 from the hour, making midnight hour 00, so 12:30 AM becomes 0030.</p>
+
+    <p>For PM times from 1:00 PM through 11:59 PM, add 12 to the hour. For example, 4:05 PM becomes 1605 and 9:45 PM becomes 2145. Noon is the exception: 12:00 PM remains 1200 because the 12-hour value already matches the 24-hour noon hour.</p>
+
+    <h3>Midnight, noon, 0000, and 1200</h3>
+    <p>Midnight and noon cause more conversion mistakes than most other times. Midnight is 12:00 AM in the 12-hour system and 00:00 or 0000 in the 24-hour system. Noon is 12:00 PM and corresponds to 12:00 or 1200. Remembering those two anchor points makes most other conversions straightforward.</p>
+
+    <p>You may occasionally see 2400 in schedules or operational documents to indicate the end of a calendar day. It can be useful when describing a boundary, but ordinary 24-hour clock notation runs from 00:00 through 23:59. This converter therefore treats 0000 as midnight and does not accept 2400 as a clock input.</p>
+
+    <h3>Military time versus civilian 24-hour time</h3>
+    <p>The underlying hours and minutes are the same. The biggest visual difference is formatting. Military contexts commonly write four digits without a colon, such as 1845. Civilian 24-hour clocks often use a colon, such as 18:45. The converter displays both so you can move easily between schedules, travel information, healthcare records, logistics, and everyday AM/PM time.</p>
+
+    <h2>Practical Use Cases</h2>
+    <h3>Travel and transportation</h3>
+    <p>Airlines, rail systems, transit schedules, and international timetables frequently use the 24-hour clock. A traveler accustomed to AM/PM notation can quickly convert 18:20 to 6:20 PM or verify that 07:05 means 7:05 AM.</p>
+
+    <h3>Healthcare and medical records</h3>
+    <p>Hospitals and clinical systems often use 24-hour time because it avoids ambiguity between morning and evening. Converting a chart time such as 2145 to 9:45 PM can make records easier to understand for patients and families while preserving the original time reference.</p>
+
+    <h3>Military, emergency, and public-safety schedules</h3>
+    <p>Military units, emergency services, dispatch systems, and other operations may use compact 24-hour notation for clarity. The converter can help new personnel, students, family members, or anyone reading such schedules become familiar with the notation.</p>
+
+    <h3>Work schedules and global teams</h3>
+    <p>Some employers use 24-hour schedules to reduce AM/PM mistakes, especially for overnight shifts. Converting 2230 to 10:30 PM or 0545 to 5:45 AM can make shift start and end times easier to interpret.</p>
+
+    <h3>Education and practice</h3>
+    <p>The reference table and quick examples make the page useful for learning the pattern. Once you know that afternoon hours generally subtract 12 when moving to regular time—and add 12 when moving to military time—the system becomes easy to use mentally.</p>
+
+    <div class="callout"><strong>Important:</strong> this is a clock-format converter, not a time-zone converter. Converting 1800 to 6:00 PM does not change the location, date, UTC offset, daylight-saving status, or actual moment in time.</div>
+
+    <h2>Frequently Asked Questions</h2>
+    <details class="faq"><summary>What is 1300 military time?</summary><p>1300 is 1:00 PM. For afternoon military times above 1200, subtract 12 from the hour.</p></details>
+    <details class="faq"><summary>What is 0000 in regular time?</summary><p>0000 is 12:00 AM, or midnight.</p></details>
+    <details class="faq"><summary>What is 1200 in regular time?</summary><p>1200 is 12:00 PM, or noon.</p></details>
+    <details class="faq"><summary>What is 8:30 PM in military time?</summary><p>8:30 PM converts to 2030 military time, or 20:30 on a colon-separated 24-hour clock.</p></details>
+    <details class="faq"><summary>Do I need to enter the colon?</summary><p>No. Military → Regular mode accepts both four-digit forms such as 1730 and colon forms such as 17:30.</p></details>
+    <details class="faq"><summary>Why does military time use leading zeros?</summary><p>Leading zeros keep compact times at four digits and make morning hours less ambiguous. For example, 7:05 AM is written 0705.</p></details>
+    <details class="faq"><summary>Is 2400 valid?</summary><p>It is sometimes used to mark the end of a day in schedules, but standard clock notation uses 0000 for midnight. This converter accepts times from 0000 through 2359.</p></details>
+    <details class="faq"><summary>Does this convert time zones too?</summary><p>No. It changes only the display format between 24-hour and 12-hour notation.</p></details>
+  </section>
+</div>
+</main>
+
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
+<footer>
+  <div class="container footer-inner">
+    <span>© 2026 Utiliverse. All rights reserved.</span>
+    <span>100% Free and Browser Based</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+  let mode = "militaryToRegular";
+
+  function applyTheme(theme) {
+    const light = theme === "light";
+    const moon = $("moonIcon");
+    const sun = $("sunIcon");
+    const toggle = $("themeToggle");
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+
+    document.body.classList.toggle("light-mode", light);
+    moon.classList.toggle("theme-hidden", !light);
+    sun.classList.toggle("theme-hidden", light);
+
+    const label = light ? "Switch to dark mode" : "Switch to light mode";
+    toggle.setAttribute("aria-label", label);
+    toggle.title = label;
+
+    if (metaTheme) {
+      metaTheme.setAttribute("content", light ? "#f8fafc" : "#020617");
+    }
+  }
+
+  const savedTheme = localStorage.getItem("utiliverse-theme");
+  const initialTheme = savedTheme === "light" || savedTheme === "dark"
+    ? savedTheme
+    : (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+
+  applyTheme(initialTheme);
+
+  $("themeToggle").addEventListener("click", () => {
+    const next = document.body.classList.contains("light-mode") ? "dark" : "light";
+    localStorage.setItem("utiliverse-theme", next);
+    applyTheme(next);
+  });
+
+  function pad2(n) { return String(n).padStart(2,"0"); }
+
+  function parseMilitary(input) {
+    let value = String(input || "").trim().replace(/\s+/g,"");
+    if (!value) return null;
+
+    let hour, minute;
+
+    if (/^\d{1,2}:\d{2}$/.test(value)) {
+      const parts = value.split(":");
+      hour = Number(parts[0]);
+      minute = Number(parts[1]);
+    } else if (/^\d{1,4}$/.test(value)) {
+      value = value.padStart(4,"0");
+      hour = Number(value.slice(0,2));
+      minute = Number(value.slice(2));
+    } else {
+      return null;
+    }
+
+    if (!Number.isInteger(hour) || !Number.isInteger(minute) || hour < 0 || hour > 23 || minute < 0 || minute > 59) return null;
+    return {hour, minute};
+  }
+
+  function parseRegular(input, period) {
+    const value = String(input || "").trim().replace(/\s+/g,"");
+    if (!value) return null;
+
+    let hour, minute = 0;
+
+    if (/^\d{1,2}:\d{2}$/.test(value)) {
+      const parts = value.split(":");
+      hour = Number(parts[0]);
+      minute = Number(parts[1]);
+    } else if (/^\d{1,2}$/.test(value)) {
+      hour = Number(value);
+    } else {
+      return null;
+    }
+
+    if (!Number.isInteger(hour) || !Number.isInteger(minute) || hour < 1 || hour > 12 || minute < 0 || minute > 59) return null;
+
+    let h24 = hour;
+    if (period === "AM") {
+      if (hour === 12) h24 = 0;
+    } else {
+      if (hour !== 12) h24 = hour + 12;
+    }
+
+    return {hour:h24, minute};
+  }
+
+  function formats(hour, minute) {
+    const compact = `${pad2(hour)}${pad2(minute)}`;
+    const h24 = `${pad2(hour)}:${pad2(minute)}`;
+    const period = hour >= 12 ? "PM" : "AM";
+    const h12 = hour % 12 || 12;
+    const regular = `${h12}:${pad2(minute)} ${period}`;
+    const minutesAfterMidnight = hour * 60 + minute;
+
+    let dayPeriod = "Morning";
+    if (hour === 0 && minute === 0) dayPeriod = "Midnight";
+    else if (hour < 5) dayPeriod = "Late night";
+    else if (hour < 12) dayPeriod = "Morning";
+    else if (hour === 12 && minute === 0) dayPeriod = "Noon";
+    else if (hour < 17) dayPeriod = "Afternoon";
+    else if (hour < 21) dayPeriod = "Evening";
+    else dayPeriod = "Night";
+
+    return {compact,h24,regular,minutesAfterMidnight,dayPeriod};
+  }
+
+  function update() {
+    const raw = $("timeInput").value;
+    const parsed = mode === "militaryToRegular"
+      ? parseMilitary(raw)
+      : parseRegular(raw,$("periodSelect").value);
+
+    if (!parsed) {
+      $("outputInput").value = "";
+      $("resultValue").textContent = "—";
+      $("resultSub").textContent = mode === "militaryToRegular"
+        ? "Enter a valid military time from 0000 through 2359."
+        : "Enter a valid 12-hour time from 1:00 through 12:59.";
+      $("periodTag").textContent = "Waiting for valid time";
+      $("militaryStat").textContent = "—";
+      $("compactStat").textContent = "—";
+      $("regularStat").textContent = "—";
+      $("minutesStat").textContent = "—";
+      highlightReference(null);
+      return;
+    }
+
+    const f = formats(parsed.hour,parsed.minute);
+
+    if (mode === "militaryToRegular") {
+      $("outputInput").value = f.regular;
+      $("resultLabel").textContent = "Regular 12-hour time";
+      $("resultValue").textContent = f.regular;
+      $("resultSub").textContent = `${f.compact} military time is ${f.regular}.`;
+    } else {
+      $("outputInput").value = f.compact;
+      $("resultLabel").textContent = "Military time";
+      $("resultValue").textContent = f.compact;
+      $("resultSub").textContent = `${f.regular} is ${f.compact} military time (${f.h24}).`;
+    }
+
+    $("periodTag").textContent = f.dayPeriod;
+    $("militaryStat").textContent = f.h24;
+    $("compactStat").textContent = f.compact;
+    $("regularStat").textContent = f.regular;
+    $("minutesStat").textContent = f.minutesAfterMidnight.toLocaleString("en-US");
+    highlightReference(parsed.hour);
+  }
+
+  function setMode(next, preserve=false) {
+    $("status").textContent = "";
+    let previous = null;
+
+    if (preserve) {
+      previous = mode === "militaryToRegular"
+        ? parseMilitary($("timeInput").value)
+        : parseRegular($("timeInput").value,$("periodSelect").value);
+    }
+
+    mode = next;
+    const m2r = mode === "militaryToRegular";
+    $("militaryTab").classList.toggle("active",m2r);
+    $("regularTab").classList.toggle("active",!m2r);
+    $("militaryTab").setAttribute("aria-selected", String(m2r));
+    $("regularTab").setAttribute("aria-selected", String(!m2r));
+    $("periodSelect").style.display = m2r ? "none" : "block";
+    $("inputLabel").textContent = m2r ? "Military time" : "Regular time";
+    $("outputLabel").textContent = m2r ? "Regular time" : "Military time";
+    $("timeInput").placeholder = m2r ? "1730 or 17:30" : "5:30";
+    $("timeInput").inputMode = "numeric";
+
+    if (previous) {
+      const f = formats(previous.hour,previous.minute);
+      if (m2r) {
+        $("timeInput").value = f.compact;
+      } else {
+        $("timeInput").value = `${previous.hour % 12 || 12}:${pad2(previous.minute)}`;
+        $("periodSelect").value = previous.hour >= 12 ? "PM" : "AM";
+      }
+    } else if (!preserve) {
+      if (m2r) $("timeInput").value = "1730";
+      else {
+        $("timeInput").value = "5:30";
+        $("periodSelect").value = "PM";
+      }
+    }
+
+    update();
+  }
+
+  $("militaryTab").addEventListener("click",()=>setMode("militaryToRegular",true));
+  $("regularTab").addEventListener("click",()=>setMode("regularToMilitary",true));
+  $("swapBtn").addEventListener("click",()=>setMode(mode==="militaryToRegular"?"regularToMilitary":"militaryToRegular",true));
+  $("timeInput").addEventListener("input",()=>{$("status").textContent="";update()});
+  $("periodSelect").addEventListener("change",()=>{$("status").textContent="";update()});
+
+  document.querySelectorAll(".example-military").forEach(btn => {
+    btn.addEventListener("click",() => {
+      setMode("militaryToRegular");
+      $("timeInput").value = btn.dataset.value;
+      update();
+    });
+  });
+
+  $("resetBtn").addEventListener("click",() => {
+    $("status").textContent = "";
+    setMode("militaryToRegular");
+  });
+
+  async function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.left = "-9999px";
+    document.body.appendChild(ta);
+    ta.select();
+    const copied = document.execCommand("copy");
+    ta.remove();
+    if (!copied) throw new Error("Copy command failed");
+  }
+
+  $("copyBtn").addEventListener("click",async() => {
+    if ($("resultValue").textContent === "—") {
+      $("status").textContent = "Enter a valid time first.";
+      return;
+    }
+    try {
+      await copyText(`${$("resultValue").textContent} — ${$("resultSub").textContent}`);
+      $("status").textContent = "Result copied.";
+      setTimeout(()=>$("status").textContent="",1500);
+    } catch {
+      $("status").textContent = "Copy unavailable.";
+    }
+  });
+
+  function buildReference() {
+    const hours = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23];
+    $("referenceTable").innerHTML = hours.map(h => {
+      const f = formats(h,0);
+      return `<tr data-hour="${h}">
+        <td>${f.compact}</td>
+        <td>${f.h24}</td>
+        <td>${f.regular}</td>
+        <td>${f.dayPeriod}</td>
+      </tr>`;
+    }).join("");
+  }
+
+  function highlightReference(hour) {
+    document.querySelectorAll("#referenceTable tr").forEach(row => {
+      row.classList.toggle("active-row",Number(row.dataset.hour)===hour);
+    });
+  }
+
+  buildReference();
+  update();
+})();
+</script>
+</body>
+</html>
