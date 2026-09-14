@@ -166,19 +166,24 @@
     <loc>https://utiliverse.app/Animal_Age_Calculator.html/</loc>
   </url>
 
-  <!--Days Between Dates Calculator -->
+  <!--Email DNS Checker -->
   <url>
-    <loc>https://utiliverse.app/Days_Between_Dates_Calculator.html/</loc>
+    <loc>https://utiliverse.app/Email_DNS_Checker.html/</loc>
   </url>
 
-  <!--Days Between Dates Calculator -->
+  <!--Military Time Converter -->
   <url>
-    <loc>https://utiliverse.app/Days_Between_Dates_Calculator.html/</loc>
+    <loc>https://utiliverse.app/Military_Time_Converter .html/</loc>
   </url>
 
-  <!--Days Between Dates Calculator -->
+  <!--Time Unit Converter -->
   <url>
-    <loc>https://utiliverse.app/Days_Between_Dates_Calculator.html/</loc>
+    <loc>https://utiliverse.app/Time_Unit_Converter.html/</loc>
+  </url>
+
+  <!--Text to Morse Code Converter -->
+  <url>
+    <loc>https://utiliverse.app/Text_to_Morse_Code_Converter.html/</loc>
   </url>
 
   <!-- Privacy Policy -->
