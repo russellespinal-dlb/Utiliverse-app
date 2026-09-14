@@ -1,1 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Time Unit Converter – Seconds, Minutes, Hours & More | Utiliverse</title>
+<meta name="description" content="Free time unit converter for milliseconds, seconds, minutes, hours, days, weeks, average months, years, decades and centuries with live results and an all-units table.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/Time_Unit_Converter/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Time Unit Converter – Seconds, Minutes, Hours & More | Utiliverse">
+<meta property="og:description" content="Convert time durations from milliseconds through centuries with live results, configurable precision and an all-units comparison table.">
+<meta property="og:url" content="https://utiliverse.app/Time_Unit_Converter/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Time Unit Converter – Seconds, Minutes, Hours & More | Utiliverse">
+<meta name="twitter:description" content="Free browser-based duration converter for milliseconds, seconds, minutes, hours, days, weeks, months, years and more.">
 
+
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --panel:rgba(30,41,59,.72);--panel2:rgba(15,23,42,.70);
+  --border:#334155;--border2:#475569;--text:#f8fafc;--muted:#94a3b8;
+  --indigo:#6366f1;--indigo2:#4f46e5;--green:#34d399;--amber:#fbbf24
+}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),
+    radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;
+  color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  transition:background .25s ease,color .25s ease
+}
+a{color:inherit}
+button,input,select{font:inherit}
+button{touch-action:manipulation}
+.container{max-width:1152px;margin:0 auto;padding:0 16px}
+
+header{
+  position:sticky;top:0;z-index:50;background:rgba(2,6,23,.82);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid #1e293b
+}
+.header-inner{min-height:65px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.back-link{display:flex;align-items:center;gap:8px;text-decoration:none;color:#cbd5e1;font-size:14px;font-weight:700}
+.back-link:hover{color:#fff}
+.header-right{display:flex;align-items:center;gap:12px}
+.free-label{font-size:13px;font-weight:650;color:#64748b;white-space:nowrap}
+.theme-toggle{
+  display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;
+  border:1px solid #334155;background:rgba(15,23,42,.72);color:#94a3b8;border-radius:12px;cursor:pointer;
+  box-shadow:none;appearance:none;-webkit-appearance:none
+}
+.theme-toggle:hover{color:#fff;background:#1e293b;border-color:#475569}
+.theme-toggle:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
+.theme-toggle svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+main{padding:48px 0 72px}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:#818cf8;font-weight:850}
+h1{font-size:clamp(38px,5vw,58px);line-height:1.04;margin:10px 0 14px;font-weight:900;letter-spacing:-.035em}
+.hero p{max-width:900px;color:var(--muted);font-size:18px;line-height:1.72;margin:0}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.badge{border:1px solid var(--border);background:rgba(15,23,42,.66);border-radius:999px;padding:7px 10px;color:#cbd5e1;font-size:12px;font-weight:750}
+
+.glass{background:var(--panel);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:20px}
+.tool{margin-top:28px;padding:22px}
+.section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.section-title{font-size:22px;font-weight:850;margin:4px 0 0}
+.small{font-size:12px;color:#64748b;line-height:1.55}
+
+.converter{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:end;margin-top:20px}
+.side label,.precision-wrap label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#64748b;font-weight:850;margin-bottom:7px}
+.value-input,.unit-select,.precision-select{
+  width:100%;min-height:48px;background:#0f172a;border:1px solid var(--border2);color:#f8fafc;
+  border-radius:12px;padding:11px 13px;outline:none
+}
+.value-input{font-size:20px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+.value-input:focus,.unit-select:focus,.precision-select:focus{border-color:var(--indigo);box-shadow:0 0 0 3px rgba(99,102,241,.15)}
+.side-grid{display:grid;grid-template-columns:1.25fr .9fr;gap:8px}
+.swap-btn{
+  width:48px;height:48px;border:1px solid var(--border2);background:#1e293b;color:#e2e8f0;
+  border-radius:12px;cursor:pointer;font-size:20px;font-weight:900
+}
+.swap-btn:hover{background:#334155}
+
+.result-card{
+  margin-top:14px;background:linear-gradient(135deg,rgba(99,102,241,.14),rgba(124,58,237,.08));
+  border:1px solid rgba(129,140,248,.35);border-radius:18px;padding:20px
+}
+.result-label{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:#818cf8;font-weight:850}
+.result-value{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-size:clamp(25px,4vw,40px);font-weight:900;margin-top:6px;overflow-wrap:anywhere}
+.result-equation{margin-top:6px;color:#94a3b8;font-size:12px;line-height:1.55;overflow-wrap:anywhere}
+
+.toolbar{display:flex;align-items:end;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:12px}
+.quick{display:flex;gap:7px;flex-wrap:wrap}
+.chip{border:1px solid var(--border);background:#0f172a;color:#94a3b8;border-radius:999px;padding:7px 10px;font-size:11px;font-weight:800;cursor:pointer}
+.chip:hover{border-color:#6366f1;color:#c7d2fe}
+.right-tools{display:flex;gap:8px;align-items:end;flex-wrap:wrap}
+.precision-wrap{min-width:150px}
+.btn{
+  min-height:42px;border:1px solid var(--border2);background:#1e293b;color:#f8fafc;
+  border-radius:10px;padding:9px 12px;font-weight:800;cursor:pointer
+}
+.btn:hover{background:#334155}
+.status{font-size:11px;color:#6ee7b7;min-height:16px;margin-top:8px}
+
+.table-wrap{margin-top:14px;border:1px solid var(--border);border-radius:15px;overflow:auto;background:var(--panel2)}
+.all-table{width:100%;border-collapse:collapse;min-width:650px}
+.all-table th,.all-table td{padding:11px 13px;border-top:1px solid rgba(71,85,105,.38);text-align:left}
+.all-table thead th{border-top:0;color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.07em}
+.all-table td{color:#cbd5e1;font-size:12px}
+.all-table td.value{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;text-align:right;font-weight:800}
+.all-table tr.active-row{background:rgba(99,102,241,.08)}
+
+.note{
+  margin-top:14px;padding:12px 13px;background:rgba(99,102,241,.06);
+  border:1px solid rgba(99,102,241,.20);border-radius:12px;color:#94a3b8;font-size:12px;line-height:1.65
+}
+.note strong{color:#c7d2fe}
+
+.article{max-width:900px;margin-top:64px}
+.article h2{font-size:30px;line-height:1.25;font-weight:900;margin:38px 0 13px;color:#fff}
+.article h3{font-size:19px;line-height:1.4;font-weight:850;margin:27px 0 9px;color:#e2e8f0}
+.article p,.article li{color:#94a3b8;line-height:1.84;margin:0 0 15px}.article ul{padding-left:20px}
+.callout{border:1px solid rgba(99,102,241,.28);background:rgba(99,102,241,.07);border-radius:15px;padding:16px;margin:22px 0}
+.callout strong{color:#c7d2fe}
+.faq{border-bottom:1px solid var(--border)}
+.faq summary{list-style:none;cursor:pointer;padding:16px 0;font-weight:800;display:flex;justify-content:space-between;gap:15px}
+.faq summary::-webkit-details-marker{display:none}.faq summary::after{content:"+";color:#818cf8;font-size:20px}.faq[open] summary::after{content:"−"}
+
+footer{border-top:1px solid #1e293b;background:#020617}
+.footer-inner{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:14px;color:#64748b;font-size:13px}
+
+/* light */
+body.light-mode{
+  --panel:rgba(255,255,255,.92);--panel2:rgba(248,250,252,.96);--border:#dbe3ee;--border2:#cbd5e1;
+  --text:#0f172a;--muted:#475569;background:#f8fafc;color:#0f172a
+}
+body.light-mode header{background:rgba(255,255,255,.93);border-bottom-color:#e2e8f0}
+body.light-mode .back-link{color:#334155}body.light-mode .back-link:hover{color:#0f172a}
+body.light-mode .theme-toggle{color:#475569;background:#fff;border-color:#cbd5e1}body.light-mode .theme-toggle:hover{color:#0f172a;background:#f1f5f9;border-color:#94a3b8}
+body.light-mode .badge,body.light-mode .chip{background:#fff;color:#475569}
+body.light-mode .value-input,body.light-mode .unit-select,body.light-mode .precision-select{background:#fff;color:#0f172a}
+body.light-mode .swap-btn,body.light-mode .btn{background:#f1f5f9;color:#334155}
+body.light-mode .swap-btn:hover,body.light-mode .btn:hover{background:#e2e8f0}
+body.light-mode .all-table td{color:#334155}
+body.light-mode .article h2{color:#0f172a}body.light-mode .article h3{color:#1e293b}
+body.light-mode .article p,body.light-mode .article li{color:#475569}
+body.light-mode .callout{background:#eef2ff}body.light-mode .callout strong{color:#4338ca}
+body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
+
+@media(max-width:780px){
+  .converter{grid-template-columns:1fr}.swap-btn{justify-self:center;transform:rotate(90deg)}
+}
+@media(max-width:560px){
+  main{padding-top:34px}.side-grid{grid-template-columns:1fr}.free-label{font-size:10.5px;max-width:130px;white-space:normal;text-align:right;line-height:1.2}
+}
+
+.theme-hidden{display:none!important}
+.swap-btn:focus-visible,.btn:focus-visible,.chip:focus-visible,.value-input:focus-visible,.unit-select:focus-visible,.precision-select:focus-visible{outline:2px solid var(--indigo);outline-offset:2px}
+.local-processing-note{font-size:12px;line-height:1.65;color:#94a3b8;margin-top:14px}
+body.light-mode .local-processing-note{color:#64748b}
+@media(max-width:560px){.value-input,.unit-select,.precision-select{font-size:16px}}
+
+</style>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Time Unit Converter","url":"https://utiliverse.app/Time_Unit_Converter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based time unit converter for milliseconds, seconds, minutes, hours, days, weeks, average Gregorian months, years, decades and centuries.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Milliseconds conversion","Seconds conversion","Minutes conversion","Hours conversion","Days conversion","Weeks conversion","Average Gregorian months","Average Gregorian years","Decades","Centuries","Live all-units conversion table","4, 6, 8 or 12 significant-digit display precision","Swap source and destination units","Copy conversion result","Browser-local calculations"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which time units are supported?","acceptedAnswer":{"@type":"Answer","text":"Milliseconds, seconds, minutes, hours, days, weeks, average Gregorian months, average Gregorian years, decades, and centuries."}},{"@type":"Question","name":"How many milliseconds are in one second?","acceptedAnswer":{"@type":"Answer","text":"Exactly 1,000 milliseconds are used per second."}},{"@type":"Question","name":"How many days are in one month in this converter?","acceptedAnswer":{"@type":"Answer","text":"An average month is 30.436875 days because the converter uses the 365.2425-day average Gregorian year divided by 12."}},{"@type":"Question","name":"How many days are in one year?","acceptedAnswer":{"@type":"Answer","text":"For unit conversion, the tool uses 365.2425 days per average Gregorian year. An individual calendar year still has either 365 or 366 days."}},{"@type":"Question","name":"Why doesn't one month always equal 30 or 31 days?","acceptedAnswer":{"@type":"Answer","text":"Actual calendar months have variable lengths. This converter uses a stated average so month-based duration conversions remain internally consistent."}},{"@type":"Question","name":"Can I convert negative or decimal durations?","acceptedAnswer":{"@type":"Answer","text":"Yes. The numeric input supports decimal and negative values, and browsers commonly accept scientific notation as well."}},{"@type":"Question","name":"Is this appropriate for finding the time between two dates?","acceptedAnswer":{"@type":"Answer","text":"Not when exact calendar boundaries matter. Use a date-difference calculator for two actual dates because months, leap years, and calendar positions affect the exact interval."}},{"@type":"Question","name":"Are my conversion values uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. The calculation is performed entirely in JavaScript in your browser."}}]}</script>
+</head>
+
+<body>
+<!--
+SEO TARGET CLUSTER
+Primary: time unit converter
+Secondary: seconds to minutes converter, minutes to hours converter,
+hours to days converter, milliseconds converter, time conversion calculator,
+days to weeks converter, months to years converter, duration converter
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
+<header>
+  <div class="container header-inner">
+    <a class="back-link" href="https://utiliverse.app"><span aria-hidden="true">←</span><span>Back to Utiliverse</span></a>
+    <div class="header-right">
+      <span class="free-label">100% Free and Browser Based</span>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+        <svg id="moonIcon" class="theme-hidden" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
+        <svg id="sunIcon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
+<main>
+<div class="container">
+  <section class="hero">
+    <div class="eyebrow">Time utility</div>
+    <h1>Time Unit Converter – Seconds, Minutes, Hours &amp; More</h1>
+    <p>Convert durations instantly between milliseconds, seconds, minutes, hours, days, weeks, average months, years, decades, and centuries with a complete all-units breakdown.</p>
+    <div class="badges">
+      <span class="badge">Milliseconds → Centuries</span>
+      <span class="badge">10 time units</span>
+      <span class="badge">Browser-only calculations</span>
+    </div>
+  </section>
+
+  <section class="glass tool" aria-labelledby="toolHeading">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Duration conversion</div>
+        <h2 id="toolHeading" class="section-title">Convert between time units</h2>
+      </div>
+      <div class="small">Months and years use average Gregorian durations so every conversion has a consistent numeric factor.</div>
+    </div>
+
+    <div class="converter">
+      <div class="side">
+        <label for="valueInput">From value and unit</label>
+        <div class="side-grid">
+          <input id="valueInput" class="value-input" type="number" step="any" value="1" aria-label="Value to convert">
+          <select id="fromUnit" class="unit-select" aria-label="From unit"></select>
+        </div>
+      </div>
+
+      <button id="swapBtn" class="swap-btn" type="button" aria-label="Swap units" title="Swap units">⇄</button>
+
+      <div class="side">
+        <label for="resultInput">Converted value and unit</label>
+        <div class="side-grid">
+          <input id="resultInput" class="value-input" type="text" readonly aria-label="Converted result">
+          <select id="toUnit" class="unit-select" aria-label="To unit"></select>
+        </div>
+      </div>
+    </div>
+
+    <div class="result-card" aria-live="polite">
+      <div class="result-label">Converted result</div>
+      <div id="resultValue" class="result-value">—</div>
+      <div id="resultEquation" class="result-equation">Enter a value to convert.</div>
+    </div>
+
+    <div class="toolbar">
+      <div class="quick">
+        <button class="chip preset" data-value="1" data-unit="second" type="button">1 second</button>
+        <button class="chip preset" data-value="1" data-unit="minute" type="button">1 minute</button>
+        <button class="chip preset" data-value="1" data-unit="day" type="button">1 day</button>
+        <button class="chip preset" data-value="1" data-unit="year" type="button">1 year</button>
+        <button class="chip preset" data-value="1" data-unit="century" type="button">1 century</button>
+      </div>
+
+      <div class="right-tools">
+        <div class="precision-wrap">
+          <label for="precision">Display precision</label>
+          <select id="precision" class="precision-select">
+            <option value="4">4 significant digits</option>
+            <option value="6" selected>6 significant digits</option>
+            <option value="8">8 significant digits</option>
+            <option value="12">12 significant digits</option>
+          </select>
+        </div>
+        <button id="copyBtn" class="btn" type="button">Copy Result</button>
+        <button id="resetBtn" class="btn" type="button">Reset</button>
+      </div>
+    </div>
+
+    <div id="status" class="status" aria-live="polite"></div>
+
+    <div class="table-wrap">
+      <table class="all-table">
+        <thead><tr><th>Unit</th><th>Definition used</th><th style="text-align:right">Converted value</th></tr></thead>
+        <tbody id="conversionTable"></tbody>
+      </table>
+    </div>
+
+    <div class="note"><strong>Conversion basis:</strong> 1 minute = 60 seconds, 1 hour = 60 minutes, 1 day = 24 hours, and 1 week = 7 days. For longer calendar-named durations, this converter uses the average Gregorian year of <strong>365.2425 days</strong>; one average month is one-twelfth of that year, one decade is 10 years, and one century is 100 years.</div>
+  </section>
+  <p class="local-processing-note">Browser-based calculation: time-unit conversions and formatting are performed locally on this page and the values you enter are not submitted to a Utiliverse server.</p>
+
+  <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
+       Paste approved Google AdSense code here after approval.
+       This comment is intentionally invisible and reserves no space.
+  -->
+
+  <section class="article">
+    <h2>How to Use the Time Unit Converter</h2>
+    <p>Enter a duration, choose the source and destination units, and the converted result updates immediately. Use Swap Units to reverse the selected units, choose a significant-digit setting for display precision, or review the all-units table to see the same duration expressed in every supported unit.</p>
+<p>The Utiliverse Time Unit Converter converts a numeric duration from one unit into another, covering values from milliseconds all the way through centuries. It is useful for programming, science, project planning, performance measurements, scheduling, education, data analysis, historical comparisons, and any situation where the same amount of elapsed time needs to be expressed in a different unit.</p>
+
+    <p>The tool includes milliseconds, seconds, minutes, hours, days, weeks, average Gregorian months, average Gregorian years, decades, and centuries. Enter a value, choose the source unit and destination unit, and the conversion updates immediately. The all-units table also shows the same duration expressed in every supported unit, which is useful when you want to compare several scales at once instead of running separate conversions.</p>
+
+    <h3>How fixed time-unit conversion works</h3>
+    <p>Most short duration conversions are exact by definition. One second contains 1,000 milliseconds. One minute contains 60 seconds. One hour contains 60 minutes, which is 3,600 seconds. One day contains 24 hours, or 86,400 seconds, and one seven-day week contains 604,800 seconds. These relationships do not depend on the calendar date where the duration starts.</p>
+
+    <p>The converter internally reduces the source value to seconds and then divides by the destination unit's number of seconds. For example, converting 2 hours to minutes first represents two hours as 7,200 seconds and then divides by 60 seconds per minute to produce 120 minutes. The same approach works in the opposite direction and across very different scales, such as milliseconds to years or centuries to seconds.</p>
+
+    <h3>Why months need an average</h3>
+    <p>A calendar month is not a fixed duration. February can have 28 or 29 days, while other months have 30 or 31. That means there is no single exact conversion such as “one calendar month equals exactly X seconds” that is correct for every date. A duration converter therefore needs a stated convention whenever months are treated as numeric units.</p>
+
+    <p>Utiliverse uses the average Gregorian year of 365.2425 days and divides it by 12. This gives an average month of 30.436875 days. That convention is useful for general numerical conversion because twelve average months equal one average year exactly within the model. It should not be confused with adding one calendar month to a specific date, which can produce 28, 29, 30, or 31 days depending on the starting date.</p>
+
+    <h3>Average Gregorian years, decades, and centuries</h3>
+    <p>The Gregorian calendar's leap-year pattern averages to 365.2425 days per year over its full 400-year cycle. This converter uses that average for year-based duration conversion. One year is therefore treated as 31,556,952 seconds. A decade is ten of those average years, and a century is one hundred average years.</p>
+
+    <p>This convention is ideal when the task is unit conversion, but a real date interval may contain a different number of leap days. For example, counting the exact time between January 1 of one year and January 1 of another requires calendar-aware arithmetic. If your question is “how many days are between these two actual dates?” use a date-difference calculator rather than this fixed-factor time converter.</p>
+
+    <h3>Significant digits and display formatting</h3>
+    <p>The precision selector changes how many significant digits are displayed. Significant digits are different from a fixed number of decimal places because they adapt to the magnitude of the number. A result such as 0.0000315569 and a result such as 31,556,900 can both be shown with a consistent level of meaningful precision without forcing the same number of digits after the decimal point.</p>
+
+    <p>Very small or very large results may be displayed in scientific notation. This is especially useful when converting milliseconds to centuries or centuries to milliseconds, where the scale difference can produce many leading zeros or very large integers. Internally, the page uses JavaScript Number arithmetic; the formatting choice affects the display but not the underlying conversion factor used for the calculation.</p>
+
+    <h2>Practical Use Cases</h2>
+    <h3>Programming and API development</h3>
+    <p>Software often represents timeouts, cache durations, animation delays, polling intervals, and timestamps in milliseconds or seconds. Documentation or configuration may use minutes, hours, or days instead. A developer can quickly convert a 900,000-millisecond timeout into 15 minutes or verify that 86,400,000 milliseconds equals one day before placing the value into code or an environment setting.</p>
+
+    <h3>Performance and benchmark analysis</h3>
+    <p>Application and hardware benchmarks frequently report latency in milliseconds, while long-running jobs may be discussed in seconds, minutes, or hours. Converting between scales makes reports easier to interpret. For example, a process taking 125,000 milliseconds may be easier to communicate as roughly 2.083 minutes.</p>
+
+    <h3>Project planning and long-duration estimates</h3>
+    <p>Hours can be converted to days or weeks for planning, while days can be expressed as average months or years for high-level estimates. Decades and centuries are useful for historical, astronomical, archival, or large-scale comparisons where ordinary day counts become unwieldy. Because months and years are averaged in this tool, calendar-sensitive deadlines should still be scheduled using actual dates.</p>
+
+    <h3>Education and dimensional reasoning</h3>
+    <p>Students can use the all-units table to see how a single duration changes across different scales. Starting with one day, for instance, shows 86,400 seconds, 1,440 minutes, 24 hours, one-seventh of a week, and a small fraction of an average year. This helps reinforce unit-factor reasoning rather than treating each conversion as an unrelated formula.</p>
+
+    <h3>Scientific and historical comparisons</h3>
+    <p>Long time scales can be easier to understand when converted into familiar units. A hundred years can be expressed as approximately 3.1556952 billion seconds under the average Gregorian convention, while a millisecond is only a tiny fraction of a century. The converter makes those scale differences visible without requiring manual chains of multiplication.</p>
+
+    <div class="callout"><strong>Important distinction:</strong> this tool converts durations with fixed factors. It does not model time zones, daylight-saving changes, leap seconds, or the variable number of days in a particular calendar month. Those tasks require calendar-aware date and time calculations.</div>
+
+    <h2>Frequently Asked Questions</h2>
+    <details class="faq"><summary>Which time units are supported?</summary><p>Milliseconds, seconds, minutes, hours, days, weeks, average Gregorian months, average Gregorian years, decades, and centuries.</p></details>
+    <details class="faq"><summary>How many milliseconds are in one second?</summary><p>Exactly 1,000 milliseconds are used per second.</p></details>
+    <details class="faq"><summary>How many days are in one month in this converter?</summary><p>An average month is 30.436875 days because the converter uses the 365.2425-day average Gregorian year divided by 12.</p></details>
+    <details class="faq"><summary>How many days are in one year?</summary><p>For unit conversion, the tool uses 365.2425 days per average Gregorian year. An individual calendar year still has either 365 or 366 days.</p></details>
+    <details class="faq"><summary>Why doesn't one month always equal 30 or 31 days?</summary><p>Actual calendar months have variable lengths. This converter uses a stated average so month-based duration conversions remain internally consistent.</p></details>
+    <details class="faq"><summary>Can I convert negative or decimal durations?</summary><p>Yes. The numeric input supports decimal and negative values, and browsers commonly accept scientific notation as well.</p></details>
+    <details class="faq"><summary>Is this appropriate for finding the time between two dates?</summary><p>Not when exact calendar boundaries matter. Use a date-difference calculator for two actual dates because months, leap years, and calendar positions affect the exact interval.</p></details>
+    <details class="faq"><summary>Are my conversion values uploaded?</summary><p>No. The calculation is performed entirely in JavaScript in your browser.</p></details>
+  </section>
+</div>
+</main>
+
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
+<footer>
+  <div class="container footer-inner">
+    <span>© 2026 Utiliverse. All rights reserved.</span>
+    <span>100% Free and Browser Based</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+
+  const DAY = 86400;
+  const AVG_YEAR_DAYS = 365.2425;
+  const AVG_YEAR_SECONDS = AVG_YEAR_DAYS * DAY;
+
+  const UNITS = [
+    {key:"millisecond", label:"Milliseconds", singular:"millisecond", symbol:"ms", seconds:0.001, definition:"0.001 second"},
+    {key:"second", label:"Seconds", singular:"second", symbol:"s", seconds:1, definition:"Base unit"},
+    {key:"minute", label:"Minutes", singular:"minute", symbol:"min", seconds:60, definition:"60 seconds"},
+    {key:"hour", label:"Hours", singular:"hour", symbol:"hr", seconds:3600, definition:"60 minutes"},
+    {key:"day", label:"Days", singular:"day", symbol:"day", seconds:DAY, definition:"24 hours"},
+    {key:"week", label:"Weeks", singular:"week", symbol:"wk", seconds:7*DAY, definition:"7 days"},
+    {key:"month", label:"Average Months", singular:"average month", symbol:"mo", seconds:AVG_YEAR_SECONDS/12, definition:"30.436875 days"},
+    {key:"year", label:"Average Years", singular:"average year", symbol:"yr", seconds:AVG_YEAR_SECONDS, definition:"365.2425 days"},
+    {key:"decade", label:"Decades", singular:"decade", symbol:"decade", seconds:AVG_YEAR_SECONDS*10, definition:"10 average years"},
+    {key:"century", label:"Centuries", singular:"century", symbol:"century", seconds:AVG_YEAR_SECONDS*100, definition:"100 average years"}
+  ];
+
+  const unitMap = Object.fromEntries(UNITS.map(u => [u.key,u]));
+
+  function applyTheme(theme) {
+    const light = theme === "light";
+    const moon = $("moonIcon");
+    const sun = $("sunIcon");
+    const toggle = $("themeToggle");
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+
+    document.body.classList.toggle("light-mode", light);
+    moon.classList.toggle("theme-hidden", !light);
+    sun.classList.toggle("theme-hidden", light);
+
+    const label = light ? "Switch to dark mode" : "Switch to light mode";
+    toggle.setAttribute("aria-label", label);
+    toggle.title = label;
+
+    if (metaTheme) {
+      metaTheme.setAttribute("content", light ? "#f8fafc" : "#020617");
+    }
+  }
+
+  const savedTheme = localStorage.getItem("utiliverse-theme");
+  const initialTheme = savedTheme === "light" || savedTheme === "dark"
+    ? savedTheme
+    : (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+
+  applyTheme(initialTheme);
+
+  $("themeToggle").addEventListener("click", () => {
+    const next = document.body.classList.contains("light-mode") ? "dark" : "light";
+    localStorage.setItem("utiliverse-theme", next);
+    applyTheme(next);
+  });
+
+  function populateSelect(select, selected) {
+    select.innerHTML = UNITS.map(u => `<option value="${u.key}"${u.key===selected?" selected":""}>${u.label} (${u.symbol})</option>`).join("");
+  }
+
+  populateSelect($("fromUnit"), "second");
+  populateSelect($("toUnit"), "millisecond");
+
+  function convert(value, fromKey, toKey) {
+    const from = unitMap[fromKey], to = unitMap[toKey];
+    return value * from.seconds / to.seconds;
+  }
+
+  function formatNumber(value) {
+    if (!Number.isFinite(value)) return value > 0 ? "∞" : value < 0 ? "-∞" : "—";
+    if (Object.is(value, -0) || value === 0) return "0";
+
+    const sig = Number($("precision").value);
+    const abs = Math.abs(value);
+
+    if (abs >= 1e12 || abs < 1e-6) {
+      return value.toExponential(sig - 1);
+    }
+
+    const rounded = Number(value.toPrecision(sig));
+    return rounded.toLocaleString("en-US", {
+      maximumSignificantDigits:sig,
+      useGrouping:true
+    });
+  }
+
+  function rawCopyNumber(value) {
+    if (!Number.isFinite(value)) return String(value);
+    return value.toPrecision(15).replace(/(?:\.0+|(\.\d+?)0+)(e|$)/, "$1$2");
+  }
+
+  function pluralLabel(unit, value) {
+    return Math.abs(value) === 1 ? unit.singular : unit.label.toLowerCase();
+  }
+
+  function update() {
+    const raw = $("valueInput").value;
+    const value = Number(raw);
+    const fromKey = $("fromUnit").value;
+    const toKey = $("toUnit").value;
+    const from = unitMap[fromKey], to = unitMap[toKey];
+
+    if (raw.trim() === "" || !Number.isFinite(value)) {
+      $("resultInput").value = "";
+      $("resultValue").textContent = "—";
+      $("resultEquation").textContent = "Enter a valid numeric value to convert.";
+      $("conversionTable").innerHTML = "";
+      return;
+    }
+
+    const result = convert(value, fromKey, toKey);
+    const formatted = formatNumber(result);
+
+    $("resultInput").value = formatted;
+    $("resultValue").textContent = `${formatted} ${to.symbol}`;
+    $("resultEquation").textContent =
+      `${formatNumber(value)} ${pluralLabel(from,value)} = ${formatted} ${pluralLabel(to,result)}`;
+
+    $("conversionTable").innerHTML = UNITS.map(u => {
+      const converted = convert(value, fromKey, u.key);
+      return `<tr class="${u.key===toKey?"active-row":""}">
+        <td>${u.label} (${u.symbol})</td>
+        <td>${u.definition}</td>
+        <td class="value">${formatNumber(converted)}</td>
+      </tr>`;
+    }).join("");
+  }
+
+  ["valueInput","fromUnit","toUnit","precision"].forEach(id => {
+    $(id).addEventListener(id === "valueInput" ? "input" : "change", () => {
+      $("status").textContent = "";
+      update();
+    });
+  });
+
+  $("swapBtn").addEventListener("click", () => {
+    const a = $("fromUnit").value;
+    $("fromUnit").value = $("toUnit").value;
+    $("toUnit").value = a;
+    $("status").textContent = "";
+    update();
+  });
+
+  document.querySelectorAll(".preset").forEach(btn => {
+    btn.addEventListener("click", () => {
+      $("valueInput").value = btn.dataset.value;
+      $("fromUnit").value = btn.dataset.unit;
+      $("status").textContent = "";
+      update();
+    });
+  });
+
+  $("resetBtn").addEventListener("click", () => {
+    $("valueInput").value = "1";
+    $("fromUnit").value = "second";
+    $("toUnit").value = "millisecond";
+    $("precision").value = "6";
+    $("status").textContent = "";
+    update();
+  });
+
+  async function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.left = "-9999px";
+    document.body.appendChild(ta);
+    ta.select();
+    const copied = document.execCommand("copy");
+    ta.remove();
+    if (!copied) throw new Error("Copy command failed");
+  }
+
+  $("copyBtn").addEventListener("click", async () => {
+    const raw = $("valueInput").value;
+    const value = Number(raw);
+    if (raw.trim() === "" || !Number.isFinite(value)) {
+      $("status").textContent = "Enter a valid value first.";
+      return;
+    }
+
+    const from = unitMap[$("fromUnit").value];
+    const to = unitMap[$("toUnit").value];
+    const result = convert(value, from.key, to.key);
+    const text = `${rawCopyNumber(value)} ${from.symbol} = ${rawCopyNumber(result)} ${to.symbol}`;
+
+    try {
+      await copyText(text);
+      $("status").textContent = "Result copied.";
+      setTimeout(() => $("status").textContent = "", 1500);
+    } catch {
+      $("status").textContent = "Copy unavailable.";
+    }
+  });
+
+  update();
+})();
+</script>
+</body>
+</html>
