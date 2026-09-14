@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Animal Age Calculator – Dog, Cat, Rabbit & Horse | Utiliverse</title>
+<meta name="description" content="Free animal age calculator for dogs, cats, rabbits and horses. Estimate pet age in human-equivalent years or reverse human age into an approximate animal age.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/Animal_Age_Converter/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Animal Age Calculator – Dog, Cat, Rabbit & Horse | Utiliverse">
+<meta property="og:description" content="Estimate dog, cat, rabbit and horse ages in human-equivalent years, or reverse the calculation from human age back to animal age.">
+<meta property="og:url" content="https://utiliverse.app/Animal_Age_Converter/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Animal Age Calculator – Dog, Cat, Rabbit & Horse | Utiliverse">
+<meta name="twitter:description" content="Free browser-based pet age converter with dog-size adjustments, reverse conversion and broad life-stage estimates.">
+
+
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --panel:rgba(30,41,59,.72);--panel2:rgba(15,23,42,.70);
+  --border:#334155;--border2:#475569;--text:#f8fafc;--muted:#94a3b8;
+  --indigo:#6366f1;--indigo2:#4f46e5;--green:#34d399;--amber:#fbbf24;--rose:#fb7185
+}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),
+    radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;
+  color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  transition:background .25s ease,color .25s ease
+}
+a{color:inherit}
+button,input,select{font:inherit}
+button{touch-action:manipulation}
+.container{max-width:1152px;margin:0 auto;padding:0 16px}
+
+header{
+  position:sticky;top:0;z-index:50;background:rgba(2,6,23,.82);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid #1e293b
+}
+.header-inner{min-height:65px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.back-link{display:flex;align-items:center;gap:8px;text-decoration:none;color:#cbd5e1;font-size:14px;font-weight:700}
+.back-link:hover{color:#fff}
+.header-right{display:flex;align-items:center;gap:12px}
+.free-label{font-size:13px;font-weight:650;color:#64748b;white-space:nowrap}
+.theme-toggle{
+  display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;
+  border:1px solid #334155;background:rgba(15,23,42,.72);color:#94a3b8;border-radius:12px;cursor:pointer;
+  box-shadow:none;appearance:none;-webkit-appearance:none
+}
+.theme-toggle:hover{color:#fff;background:#1e293b;border-color:#475569}
+.theme-toggle:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
+.theme-toggle svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+main{padding:48px 0 72px}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:#818cf8;font-weight:850}
+h1{font-size:clamp(38px,5vw,58px);line-height:1.04;margin:10px 0 14px;font-weight:900;letter-spacing:-.035em}
+.hero p{max-width:900px;color:var(--muted);font-size:18px;line-height:1.72;margin:0}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.badge{border:1px solid var(--border);background:rgba(15,23,42,.66);border-radius:999px;padding:7px 10px;color:#cbd5e1;font-size:12px;font-weight:750}
+
+.glass{background:var(--panel);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:20px}
+.tool{margin-top:28px;padding:22px}
+.section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.section-title{font-size:22px;font-weight:850;margin:4px 0 0}
+.small{font-size:12px;color:#64748b;line-height:1.55}
+
+.tabs{display:flex;gap:7px;flex-wrap:wrap;margin-top:18px}
+.tab{
+  min-height:40px;border:1px solid var(--border);background:#0f172a;color:#94a3b8;
+  border-radius:10px;padding:9px 13px;font-weight:800;cursor:pointer
+}
+.tab.active{background:rgba(99,102,241,.14);border-color:#818cf8;color:#c7d2fe}
+.tab:hover{border-color:#6366f1;color:#e2e8f0}
+
+.form-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:16px}
+.field label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#64748b;font-weight:850;margin-bottom:7px}
+.input,.select{
+  width:100%;min-height:48px;background:#0f172a;border:1px solid var(--border2);color:#f8fafc;
+  border-radius:12px;padding:11px 13px;outline:none
+}
+.input{font-size:18px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace}
+.input:focus,.select:focus{border-color:var(--indigo);box-shadow:0 0 0 3px rgba(99,102,241,.15)}
+
+.dog-size-wrap{display:none;margin-top:10px}
+.dog-size-wrap.show{display:block}
+.size-options{display:flex;gap:8px;flex-wrap:wrap}
+.size-btn{
+  border:1px solid var(--border);background:#0f172a;color:#94a3b8;border-radius:999px;
+  padding:8px 11px;font-size:11px;font-weight:800;cursor:pointer
+}
+.size-btn.active{background:rgba(99,102,241,.14);border-color:#818cf8;color:#c7d2fe}
+.size-btn:hover{border-color:#6366f1}
+
+.result-card{
+  margin-top:16px;background:linear-gradient(135deg,rgba(99,102,241,.14),rgba(124,58,237,.08));
+  border:1px solid rgba(129,140,248,.35);border-radius:18px;padding:20px
+}
+.result-label{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:#818cf8;font-weight:850}
+.result-value{font-size:clamp(28px,5vw,46px);font-weight:900;margin-top:6px;letter-spacing:-.02em;overflow-wrap:anywhere}
+.result-sub{margin-top:7px;color:#94a3b8;font-size:13px;line-height:1.6}
+.stage-pill{display:inline-flex;margin-top:11px;border:1px solid rgba(52,211,153,.28);background:rgba(52,211,153,.08);color:#a7f3d0;border-radius:999px;padding:6px 9px;font-size:11px;font-weight:850}
+
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:12px}
+.stat{background:var(--panel2);border:1px solid var(--border);border-radius:14px;padding:13px;min-width:0}
+.stat small{display:block;color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.07em;font-weight:850}
+.stat strong{display:block;color:#e2e8f0;font-size:18px;margin-top:5px;overflow-wrap:anywhere}
+.stat span{display:block;color:#64748b;font-size:10px;line-height:1.4;margin-top:4px}
+
+.actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}
+.btn{
+  min-height:42px;border:1px solid var(--border2);background:#1e293b;color:#f8fafc;
+  border-radius:10px;padding:9px 12px;font-weight:800;cursor:pointer
+}
+.btn:hover{background:#334155}
+.btn.primary{background:linear-gradient(135deg,var(--indigo),var(--indigo2));border-color:var(--indigo)}
+.status{font-size:11px;color:#6ee7b7;min-height:16px}
+
+.table-wrap{margin-top:14px;border:1px solid var(--border);border-radius:15px;overflow:auto;background:var(--panel2)}
+.age-table{width:100%;border-collapse:collapse;min-width:620px}
+.age-table th,.age-table td{padding:11px 13px;border-top:1px solid rgba(71,85,105,.38);text-align:left}
+.age-table thead th{border-top:0;color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.07em}
+.age-table td{color:#cbd5e1;font-size:12px}
+.age-table td.value{text-align:right;font-weight:800}
+.age-table tr.active-row{background:rgba(99,102,241,.08)}
+
+.note{
+  margin-top:14px;padding:12px 13px;background:rgba(99,102,241,.06);
+  border:1px solid rgba(99,102,241,.20);border-radius:12px;color:#94a3b8;font-size:12px;line-height:1.65
+}
+.note strong{color:#c7d2fe}
+
+.article{max-width:900px;margin-top:64px}
+.article h2{font-size:30px;line-height:1.25;font-weight:900;margin:38px 0 13px;color:#fff}
+.article h3{font-size:19px;line-height:1.4;font-weight:850;margin:27px 0 9px;color:#e2e8f0}
+.article p,.article li{color:#94a3b8;line-height:1.84;margin:0 0 15px}.article ul{padding-left:20px}
+.callout{border:1px solid rgba(99,102,241,.28);background:rgba(99,102,241,.07);border-radius:15px;padding:16px;margin:22px 0}
+.callout strong{color:#c7d2fe}
+.faq{border-bottom:1px solid var(--border)}
+.faq summary{list-style:none;cursor:pointer;padding:16px 0;font-weight:800;display:flex;justify-content:space-between;gap:15px}
+.faq summary::-webkit-details-marker{display:none}.faq summary::after{content:"+";color:#818cf8;font-size:20px}.faq[open] summary::after{content:"−"}
+
+footer{border-top:1px solid #1e293b;background:#020617}
+.footer-inner{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:14px;color:#64748b;font-size:13px}
+
+/* light */
+body.light-mode{
+  --panel:rgba(255,255,255,.92);--panel2:rgba(248,250,252,.96);--border:#dbe3ee;--border2:#cbd5e1;
+  --text:#0f172a;--muted:#475569;background:#f8fafc;color:#0f172a
+}
+body.light-mode header{background:rgba(255,255,255,.93);border-bottom-color:#e2e8f0}
+body.light-mode .back-link{color:#334155}body.light-mode .back-link:hover{color:#0f172a}
+body.light-mode .theme-toggle{color:#475569;background:#fff;border-color:#cbd5e1}body.light-mode .theme-toggle:hover{color:#0f172a;background:#f1f5f9;border-color:#94a3b8}
+body.light-mode .badge,body.light-mode .tab,body.light-mode .size-btn{background:#fff;color:#475569}
+body.light-mode .tab.active,body.light-mode .size-btn.active{background:#eef2ff;color:#4338ca}
+body.light-mode .input,body.light-mode .select{background:#fff;color:#0f172a}
+body.light-mode .btn:not(.primary){background:#f1f5f9;color:#334155}
+body.light-mode .btn:not(.primary):hover{background:#e2e8f0}
+body.light-mode .stat strong,body.light-mode .age-table td{color:#334155}
+body.light-mode .article h2{color:#0f172a}body.light-mode .article h3{color:#1e293b}
+body.light-mode .article p,body.light-mode .article li{color:#475569}
+body.light-mode .callout{background:#eef2ff}body.light-mode .callout strong{color:#4338ca}
+body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
+
+@media(max-width:780px){.form-grid{grid-template-columns:1fr 1fr}.form-grid .field:first-child{grid-column:1/-1}.stats{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){
+  main{padding-top:34px}.form-grid{grid-template-columns:1fr}.form-grid .field:first-child{grid-column:auto}.stats{grid-template-columns:1fr 1fr}
+  .free-label{font-size:10.5px;max-width:130px;white-space:normal;text-align:right;line-height:1.2}
+}
+@media(max-width:390px){.stats{grid-template-columns:1fr}.header-right{gap:6px}}
+
+.theme-hidden{display:none!important}
+.tab:focus-visible,.size-btn:focus-visible,.btn:focus-visible,.input:focus-visible,.select:focus-visible{outline:2px solid var(--indigo);outline-offset:2px}
+.local-processing-note{font-size:12px;line-height:1.65;color:#94a3b8;margin-top:14px}
+body.light-mode .local-processing-note{color:#64748b}
+@media(max-width:560px){.input,.select{font-size:16px}}
+
+</style>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Animal Age Converter","url":"https://utiliverse.app/Animal_Age_Converter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based animal age calculator that estimates human-equivalent ages for dogs, cats, rabbits and horses and can reverse the same models from human age to animal age.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Dog age to human-equivalent years","Cat age to human-equivalent years","Rabbit age to human-equivalent years","Horse age to human-equivalent years","Human age to animal age reverse conversion","Dog size adjustment","Years or months input","Broad life-stage estimate","Species age comparison table","Copyable result","Browser-local calculation"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is animal age in human years scientifically exact?","acceptedAnswer":{"@type":"Answer","text":"No. It is an educational approximation. Species, breed, body size, genetics, nutrition, disease, and individual development all affect how an animal ages."}},{"@type":"Question","name":"Why doesn't the dog converter multiply by seven?","acceptedAnswer":{"@type":"Answer","text":"Dogs mature much faster during their first two years, and larger dogs generally age faster later in life. The converter therefore uses a nonlinear early-life model and size-dependent later years."}},{"@type":"Question","name":"How are cat years calculated?","acceptedAnswer":{"@type":"Answer","text":"The first cat year is estimated at about 15 human-equivalent years, the second at about 24, and later cat years add roughly four each."}},{"@type":"Question","name":"Why does dog size change the answer?","acceptedAnswer":{"@type":"Answer","text":"Small dogs generally have longer lifespans than giant dogs, so the model uses a slower later-life conversion rate for smaller dogs and a faster one for larger dogs."}},{"@type":"Question","name":"Can I convert from human age back to animal age?","acceptedAnswer":{"@type":"Answer","text":"Yes. Human \u2192 Animal mode reverses the same age model used for the selected species and dog size."}},{"@type":"Question","name":"Can I use months instead of years?","acceptedAnswer":{"@type":"Answer","text":"Yes. Select Months as the input unit. The tool converts months to fractional years before calculating the equivalent age."}},{"@type":"Question","name":"Does \u201csenior\u201d mean my pet has a medical problem?","acceptedAnswer":{"@type":"Answer","text":"No. The life-stage label is a broad educational category. A veterinarian can assess the actual health and age-related needs of an individual animal."}},{"@type":"Question","name":"Does Utiliverse store the age I enter?","acceptedAnswer":{"@type":"Answer","text":"No. The calculation is performed locally in your browser and does not require a server request."}}]}</script>
+</head>
+
+<body>
+<!--
+SEO TARGET CLUSTER
+Primary: animal age calculator
+Secondary: dog age calculator, cat age calculator, rabbit age calculator,
+horse age calculator, pet age to human years, dog years to human years,
+cat years to human years, animal age converter
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
+<header>
+  <div class="container header-inner">
+    <a class="back-link" href="https://utiliverse.app"><span aria-hidden="true">←</span><span>Back to Utiliverse</span></a>
+    <div class="header-right">
+      <span class="free-label">100% Free and Browser Based</span>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+        <svg id="moonIcon" class="theme-hidden" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
+        <svg id="sunIcon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
+<main>
+<div class="container">
+  <section class="hero">
+    <div class="eyebrow">Pet & animal utility</div>
+    <h1>Animal Age Calculator – Pet Years to Human Years</h1>
+    <p>Estimate dog, cat, rabbit, or horse age in human-equivalent years—or reverse human age into an approximate animal age using the same educational model.</p>
+    <div class="badges">
+      <span class="badge">Animal ⇄ Human age</span>
+      <span class="badge">Dogs, cats, rabbits & horses</span>
+      <span class="badge">Dog size adjustment</span>
+    </div>
+  </section>
+
+  <section class="glass tool" aria-labelledby="toolHeading">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Age equivalence estimator</div>
+        <h2 id="toolHeading" class="section-title">Convert animal age and human-equivalent age</h2>
+      </div>
+      <div class="small">These are broad educational estimates, not biological or veterinary measurements.</div>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Age conversion direction">
+      <button id="animalToHumanTab" class="tab active" type="button" role="tab" aria-selected="true">Animal → Human</button>
+      <button id="humanToAnimalTab" class="tab" type="button" role="tab" aria-selected="false">Human → Animal</button>
+    </div>
+
+    <div class="form-grid">
+      <div class="field">
+        <label for="species">Animal</label>
+        <select id="species" class="select">
+          <option value="dog">Dog</option>
+          <option value="cat">Cat</option>
+          <option value="rabbit">Rabbit</option>
+          <option value="horse">Horse</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label id="ageLabel" for="ageInput">Animal age</label>
+        <input id="ageInput" class="input" type="number" min="0" step="0.01" value="5">
+      </div>
+
+      <div class="field">
+        <label for="ageUnit">Input unit</label>
+        <select id="ageUnit" class="select">
+          <option value="years">Years</option>
+          <option value="months">Months</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="dogSizeWrap" class="dog-size-wrap show">
+      <div class="field">
+        <label>Dog adult size</label>
+        <div class="size-options" role="group" aria-label="Dog adult size">
+          <button class="size-btn active" data-size="small" type="button" aria-pressed="true">Small (&lt; 20 lb)</button>
+          <button class="size-btn" data-size="medium" type="button" aria-pressed="false">Medium (20–50 lb)</button>
+          <button class="size-btn" data-size="large" type="button" aria-pressed="false">Large (51–90 lb)</button>
+          <button class="size-btn" data-size="giant" type="button" aria-pressed="false">Giant (&gt; 90 lb)</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="result-card" aria-live="polite">
+      <div id="resultLabel" class="result-label">Approximate human-equivalent age</div>
+      <div id="resultValue" class="result-value">—</div>
+      <div id="resultSub" class="result-sub">Enter an age to see the estimate.</div>
+      <div id="stagePill" class="stage-pill">Life stage: —</div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><small>Animal age</small><strong id="animalAgeStat">—</strong><span>estimated years</span></div>
+      <div class="stat"><small>Human equivalent</small><strong id="humanAgeStat">—</strong><span>approximate years</span></div>
+      <div class="stat"><small>Model</small><strong id="modelStat">—</strong><span>species-specific curve</span></div>
+      <div class="stat"><small>Life stage</small><strong id="stageStat">—</strong><span>broad category</span></div>
+    </div>
+
+    <div class="actions">
+      <button id="swapBtn" class="btn primary" type="button">Swap Direction</button>
+      <button id="copyBtn" class="btn" type="button">Copy Result</button>
+      <button id="resetBtn" class="btn" type="button">Reset</button>
+      <span id="status" class="status" aria-live="polite"></span>
+    </div>
+
+    <div class="table-wrap">
+      <table class="age-table">
+        <thead>
+          <tr><th id="tableAnimalHeading">Animal age</th><th>Life stage</th><th style="text-align:right">Approx. human-equivalent age</th></tr>
+        </thead>
+        <tbody id="ageTable"></tbody>
+      </table>
+    </div>
+
+    <div class="note"><strong>Important:</strong> “human years” for animals are only a comparison tool. The converter uses simple species-specific age curves and broad dog-size adjustments. Breed, genetics, body condition, healthcare, activity, and individual variation can make a real animal age faster or slower than this estimate.</div>
+  </section>
+  <p class="local-processing-note">Browser-based calculation: age conversion, life-stage estimates, table generation, and result formatting are performed locally on this page and the values you enter are not submitted to a Utiliverse server.</p>
+
+  <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
+       Paste approved Google AdSense code here after approval.
+       This comment is intentionally invisible and reserves no space.
+  -->
+
+  <section class="article">
+    <h2>How to Use the Animal Age Calculator</h2>
+    <p>Choose Animal → Human or Human → Animal, select the species, enter an age in years or months, and review the estimated equivalent age and broad life stage. For dogs, choose the adult size category because the model uses different later-life rates for small, medium, large, and giant dogs.</p>
+<p>The Utiliverse Animal Age Converter estimates an animal's age in human-equivalent years and can reverse the same model to estimate animal age from a human age. It currently supports dogs, cats, rabbits, and horses, with an additional size adjustment for dogs. The purpose is educational: the result offers an intuitive way to compare life stages across species, not a literal biological conversion.</p>
+
+    <p>Animal aging is not linear. A one-year-old dog is not developmentally equivalent to a seven-year-old child, and a two-year-old cat is not simply twice as old as a one-year-old cat in biological terms. Many companion animals mature rapidly during their first year or two and then move through adulthood at a slower rate. That is why this tool does not use one constant multiplier across the animal's entire life.</p>
+
+    <h3>Why the old “multiply by seven” dog rule is too simple</h3>
+    <p>The familiar idea that one dog year equals seven human years is easy to remember, but it does not reflect how dogs develop. Dogs reach sexual and physical maturity far faster than humans. A typical one-year-old dog is already much closer to a young adult than to a seven-year-old child. The first two dog years therefore account for a large amount of human-equivalent development in this model.</p>
+
+    <p>Utiliverse estimates the first dog year at about 15 human-equivalent years and the second year at about 24. After that, the rate depends on adult body size. Small dogs add roughly four human-equivalent years for each additional dog year, medium dogs add about five, large dogs about six, and giant dogs about seven. These rates are intentionally broad and should not be read as a veterinary prognosis for a particular breed.</p>
+
+    <h3>How cat age is estimated</h3>
+    <p>Cats also mature very quickly. This converter treats the first cat year as roughly 15 human-equivalent years and the second as roughly 24. Each additional cat year adds approximately four human-equivalent years. Under that model, a five-year-old cat is about 36 human-equivalent years, while a ten-year-old cat is about 56.</p>
+
+    <p>Indoor lifestyle, nutrition, preventive care, genetics, and chronic disease can substantially affect feline aging. A human-equivalent number cannot capture those factors. The value is best used as a rough developmental comparison and a way to understand why a cat that is only several chronological years old may already be in mature adulthood.</p>
+
+    <h3>Rabbit age conversion</h3>
+    <p>Rabbits have shorter lifespans and mature extremely quickly. The converter models the first rabbit year as about 21 human-equivalent years and the second as about 27. Each year after that adds roughly six human-equivalent years. This creates a steeper age curve than the dog or cat models and reflects the much shorter overall timescale of rabbit development.</p>
+
+    <p>Domestic rabbit lifespan varies with breed, size, housing, diet, reproductive status, and veterinary care. Small rabbits can follow a different longevity pattern from giant breeds, so the rabbit conversion should be viewed as a general companion-rabbit estimate rather than a breed-specific formula.</p>
+
+    <h3>Horse age conversion</h3>
+    <p>Horses mature on a different schedule. The converter uses milestone points of approximately 6.5 human-equivalent years at age one, 13 at age two, 18 at age three, and 20.5 at age four. After age four, it adds about 2.5 human-equivalent years for each additional horse year. The smaller multiplier later in life reflects the fact that horses can live for several decades.</p>
+
+    <p>As with every animal in the tool, the horse estimate is not meant to determine fitness, workload, or medical status. A horse's practical age depends on development, breed, musculoskeletal condition, training history, dental health, and many other factors that a simple age-equivalence model cannot represent.</p>
+
+    <h3>How reverse conversion works</h3>
+    <p>Human-to-Animal mode does not use a separate formula. It mathematically reverses the same age curve used in Animal-to-Human mode. For example, if the selected dog model maps age two to roughly 24 human-equivalent years, entering 24 human years in reverse mode returns approximately two dog years. Values between milestones are interpolated continuously so decimals and ages entered in months can be handled smoothly.</p>
+
+    <h3>Why dog size matters</h3>
+    <p>Body size is one of the broadest differences in canine aging. Small dogs often live longer than giant breeds, while giant dogs tend to reach senior life stages sooner. That does not mean every small dog ages slowly or every large dog ages quickly, but it is a meaningful enough population-level pattern to justify a size control in a general converter.</p>
+
+    <p>The size categories in this tool are intentionally simple: small, medium, large, and giant. They are based on adult body weight ranges rather than breed names because mixed-breed dogs may not fit a single breed-specific pattern. If you need health guidance for a real dog, a veterinarian who knows the animal's breed, weight, medical history, and condition is far more informative than an online age conversion.</p>
+
+    <h2>Practical Use Cases</h2>
+    <h3>Understanding life stages</h3>
+    <p>Pet owners can use the converter to put an animal's age into an intuitive human context. A result can help explain why a young-looking pet may already be a mature adult or why preventive care often changes as animals move into middle age and senior years. The accompanying life-stage label gives a broad category such as juvenile, adult, mature, or senior.</p>
+
+    <h3>Educational activities</h3>
+    <p>Teachers and students can compare how quickly different species mature and how lifespan influences age equivalence. Switching between a rabbit, dog, cat, and horse illustrates why one universal “animal years” multiplier does not work across species.</p>
+
+    <h3>Adoption and rescue context</h3>
+    <p>When adopting an adult animal with an estimated chronological age, the converter can provide a rough sense of the equivalent human life stage. It should not be used to determine exact birth date, remaining lifespan, or medical risk, especially when the animal's original history is unknown.</p>
+
+    <h3>Fun comparisons with family ages</h3>
+    <p>The reverse mode makes it easy to ask playful questions such as, “What dog age is roughly equivalent to 40 human years?” or “How old would I be as a cat?” Those comparisons are inherently approximate, but they are useful for entertainment and for understanding the nonlinear nature of animal development.</p>
+
+    <div class="callout"><strong>Veterinary note:</strong> do not use a human-equivalent age to make medical decisions. Vaccination schedules, nutrition, exercise, reproductive care, dental care, screening, and senior-pet recommendations should be based on the actual species, breed, chronological age, health history, and veterinarian guidance.</div>
+
+    <h2>Frequently Asked Questions</h2>
+    <details class="faq"><summary>Is animal age in human years scientifically exact?</summary><p>No. It is an educational approximation. Species, breed, body size, genetics, nutrition, disease, and individual development all affect how an animal ages.</p></details>
+    <details class="faq"><summary>Why doesn't the dog converter multiply by seven?</summary><p>Dogs mature much faster during their first two years, and larger dogs generally age faster later in life. The converter therefore uses a nonlinear early-life model and size-dependent later years.</p></details>
+    <details class="faq"><summary>How are cat years calculated?</summary><p>The first cat year is estimated at about 15 human-equivalent years, the second at about 24, and later cat years add roughly four each.</p></details>
+    <details class="faq"><summary>Why does dog size change the answer?</summary><p>Small dogs generally have longer lifespans than giant dogs, so the model uses a slower later-life conversion rate for smaller dogs and a faster one for larger dogs.</p></details>
+    <details class="faq"><summary>Can I convert from human age back to animal age?</summary><p>Yes. Human → Animal mode reverses the same age model used for the selected species and dog size.</p></details>
+    <details class="faq"><summary>Can I use months instead of years?</summary><p>Yes. Select Months as the input unit. The tool converts months to fractional years before calculating the equivalent age.</p></details>
+    <details class="faq"><summary>Does “senior” mean my pet has a medical problem?</summary><p>No. The life-stage label is a broad educational category. A veterinarian can assess the actual health and age-related needs of an individual animal.</p></details>
+    <details class="faq"><summary>Does Utiliverse store the age I enter?</summary><p>No. The calculation is performed locally in your browser and does not require a server request.</p></details>
+  </section>
+</div>
+</main>
+
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
+<footer>
+  <div class="container footer-inner">
+    <span>© 2026 Utiliverse. All rights reserved.</span>
+    <span>100% Free and Browser Based</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+  let direction = "animalToHuman";
+  let dogSize = "small";
+
+  const DOG_RATES = {small:4,medium:5,large:6,giant:7};
+  const DOG_LABELS = {small:"Small dog",medium:"Medium dog",large:"Large dog",giant:"Giant dog"};
+
+  function applyTheme(theme) {
+    const light = theme === "light";
+    const moon = $("moonIcon");
+    const sun = $("sunIcon");
+    const toggle = $("themeToggle");
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+
+    document.body.classList.toggle("light-mode", light);
+    moon.classList.toggle("theme-hidden", !light);
+    sun.classList.toggle("theme-hidden", light);
+
+    const label = light ? "Switch to dark mode" : "Switch to light mode";
+    toggle.setAttribute("aria-label", label);
+    toggle.title = label;
+
+    if (metaTheme) {
+      metaTheme.setAttribute("content", light ? "#f8fafc" : "#020617");
+    }
+  }
+
+  const savedTheme = localStorage.getItem("utiliverse-theme");
+  const initialTheme = savedTheme === "light" || savedTheme === "dark"
+    ? savedTheme
+    : (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+
+  applyTheme(initialTheme);
+
+  $("themeToggle").addEventListener("click", () => {
+    const next = document.body.classList.contains("light-mode") ? "dark" : "light";
+    localStorage.setItem("utiliverse-theme", next);
+    applyTheme(next);
+  });
+
+  function animalToHumanYears(species, age, size=dogSize) {
+    age = Math.max(0, age);
+    if (species === "dog") {
+      if (age <= 1) return age * 15;
+      if (age <= 2) return 15 + (age - 1) * 9;
+      return 24 + (age - 2) * DOG_RATES[size];
+    }
+    if (species === "cat") {
+      if (age <= 1) return age * 15;
+      if (age <= 2) return 15 + (age - 1) * 9;
+      return 24 + (age - 2) * 4;
+    }
+    if (species === "rabbit") {
+      if (age <= 1) return age * 21;
+      if (age <= 2) return 21 + (age - 1) * 6;
+      return 27 + (age - 2) * 6;
+    }
+    if (species === "horse") {
+      if (age <= 1) return age * 6.5;
+      if (age <= 2) return 6.5 + (age - 1) * 6.5;
+      if (age <= 3) return 13 + (age - 2) * 5;
+      if (age <= 4) return 18 + (age - 3) * 2.5;
+      return 20.5 + (age - 4) * 2.5;
+    }
+    return 0;
+  }
+
+  function humanToAnimalYears(species, human, size=dogSize) {
+    human = Math.max(0, human);
+    if (species === "dog") {
+      if (human <= 15) return human / 15;
+      if (human <= 24) return 1 + (human - 15) / 9;
+      return 2 + (human - 24) / DOG_RATES[size];
+    }
+    if (species === "cat") {
+      if (human <= 15) return human / 15;
+      if (human <= 24) return 1 + (human - 15) / 9;
+      return 2 + (human - 24) / 4;
+    }
+    if (species === "rabbit") {
+      if (human <= 21) return human / 21;
+      if (human <= 27) return 1 + (human - 21) / 6;
+      return 2 + (human - 27) / 6;
+    }
+    if (species === "horse") {
+      if (human <= 6.5) return human / 6.5;
+      if (human <= 13) return 1 + (human - 6.5) / 6.5;
+      if (human <= 18) return 2 + (human - 13) / 5;
+      if (human <= 20.5) return 3 + (human - 18) / 2.5;
+      return 4 + (human - 20.5) / 2.5;
+    }
+    return 0;
+  }
+
+  function stageFor(species, animalAge, size=dogSize) {
+    if (species === "dog") {
+      const senior = {small:10,medium:9,large:7,giant:6}[size];
+      if (animalAge < 1) return "Puppy / juvenile";
+      if (animalAge < 3) return "Young adult";
+      if (animalAge < senior - 2) return "Adult";
+      if (animalAge < senior) return "Mature adult";
+      return "Senior";
+    }
+    if (species === "cat") {
+      if (animalAge < 1) return "Kitten / juvenile";
+      if (animalAge < 3) return "Young adult";
+      if (animalAge < 7) return "Adult";
+      if (animalAge < 11) return "Mature adult";
+      return "Senior";
+    }
+    if (species === "rabbit") {
+      if (animalAge < 1) return "Juvenile";
+      if (animalAge < 3) return "Young adult";
+      if (animalAge < 6) return "Adult";
+      return "Senior";
+    }
+    if (species === "horse") {
+      if (animalAge < 4) return "Young / developing";
+      if (animalAge < 15) return "Adult";
+      if (animalAge < 20) return "Mature adult";
+      return "Senior";
+    }
+    return "—";
+  }
+
+  function modelName(species) {
+    if (species === "dog") return `${DOG_LABELS[dogSize]} curve`;
+    if (species === "cat") return "Cat curve";
+    if (species === "rabbit") return "Rabbit curve";
+    if (species === "horse") return "Horse curve";
+    return "—";
+  }
+
+  function speciesName(species) {
+    return {dog:"dog",cat:"cat",rabbit:"rabbit",horse:"horse"}[species] || "animal";
+  }
+
+  function formatAge(age) {
+    if (!Number.isFinite(age)) return "—";
+    if (age < 1) {
+      const months = age * 12;
+      return `${months.toFixed(months < 10 ? 1 : 0)} months`;
+    }
+    const digits = age < 10 ? 2 : 1;
+    return `${Number(age.toFixed(digits)).toLocaleString("en-US")} years`;
+  }
+
+  function maxTableAge(species) {
+    return {dog:16,cat:18,rabbit:12,horse:30}[species] || 15;
+  }
+
+  function updateDogSizeVisibility() {
+    $("dogSizeWrap").classList.toggle("show", $("species").value === "dog");
+  }
+
+  function updateTable(species, animalAge) {
+    const max = maxTableAge(species);
+    const rows = [];
+    for (let age = 1; age <= max; age++) {
+      const human = animalToHumanYears(species, age);
+      const active = Math.abs(age - animalAge) < 0.5;
+      rows.push(`<tr class="${active ? "active-row" : ""}">
+        <td>${age} ${age===1?"year":"years"}</td>
+        <td>${stageFor(species,age)}</td>
+        <td class="value">${Number(human.toFixed(1)).toLocaleString("en-US")} human years</td>
+      </tr>`);
+    }
+    $("ageTable").innerHTML = rows.join("");
+  }
+
+  function update() {
+    const species = $("species").value;
+    const unit = $("ageUnit").value;
+    const raw = $("ageInput").value;
+    const input = Number(raw);
+
+    updateDogSizeVisibility();
+
+    if (raw.trim() === "" || !Number.isFinite(input) || input < 0) {
+      $("resultValue").textContent = "—";
+      $("resultSub").textContent = "Enter a valid non-negative age.";
+      $("animalAgeStat").textContent = "—";
+      $("humanAgeStat").textContent = "—";
+      $("modelStat").textContent = modelName(species);
+      $("stageStat").textContent = "—";
+      $("stagePill").textContent = "Life stage: —";
+      $("ageTable").innerHTML = "";
+      return;
+    }
+
+    const inputYears = unit === "months" ? input / 12 : input;
+    let animalAge, humanAge;
+
+    if (direction === "animalToHuman") {
+      animalAge = inputYears;
+      humanAge = animalToHumanYears(species, animalAge);
+      $("resultLabel").textContent = "Approximate human-equivalent age";
+      $("resultValue").textContent = formatAge(humanAge);
+      $("resultSub").textContent = `${formatAge(animalAge)} as a ${speciesName(species)} is approximately equivalent to ${formatAge(humanAge)} in this model.`;
+    } else {
+      humanAge = inputYears;
+      animalAge = humanToAnimalYears(species, humanAge);
+      $("resultLabel").textContent = `Approximate ${speciesName(species)} age`;
+      $("resultValue").textContent = formatAge(animalAge);
+      $("resultSub").textContent = `${formatAge(humanAge)} human years is approximately equivalent to ${formatAge(animalAge)} as a ${speciesName(species)} in this model.`;
+    }
+
+    const stage = stageFor(species, animalAge);
+    $("stagePill").textContent = `Life stage: ${stage}`;
+    $("animalAgeStat").textContent = formatAge(animalAge);
+    $("humanAgeStat").textContent = formatAge(humanAge);
+    $("modelStat").textContent = modelName(species);
+    $("stageStat").textContent = stage;
+
+    updateTable(species, animalAge);
+  }
+
+  function setDirection(next) {
+    $("status").textContent = "";
+    direction = next;
+    const a2h = next === "animalToHuman";
+    $("animalToHumanTab").classList.toggle("active", a2h);
+    $("humanToAnimalTab").classList.toggle("active", !a2h);
+    $("animalToHumanTab").setAttribute("aria-selected", String(a2h));
+    $("humanToAnimalTab").setAttribute("aria-selected", String(!a2h));
+    $("ageLabel").textContent = a2h ? "Animal age" : "Human age";
+    update();
+  }
+
+  $("animalToHumanTab").addEventListener("click", () => setDirection("animalToHuman"));
+  $("humanToAnimalTab").addEventListener("click", () => setDirection("humanToAnimal"));
+  $("species").addEventListener("change", () => {$("status").textContent = ""; update();});
+  $("ageUnit").addEventListener("change", () => {$("status").textContent = ""; update();});
+  $("ageInput").addEventListener("input", () => {$("status").textContent = ""; update();});
+
+  document.querySelectorAll(".size-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      $("status").textContent = "";
+      dogSize = btn.dataset.size;
+      document.querySelectorAll(".size-btn").forEach(x => {
+        const selected = x === btn;
+        x.classList.toggle("active", selected);
+        x.setAttribute("aria-pressed", String(selected));
+      });
+      update();
+    });
+  });
+
+  $("swapBtn").addEventListener("click", () => {
+    const species = $("species").value;
+    const raw = $("ageInput").value;
+    const input = Number(raw);
+    const unit = $("ageUnit").value;
+
+    if (raw.trim() !== "" && Number.isFinite(input) && input >= 0) {
+      const inputYears = unit === "months" ? input / 12 : input;
+      const converted = direction === "animalToHuman"
+        ? animalToHumanYears(species,inputYears)
+        : humanToAnimalYears(species,inputYears);
+      $("ageInput").value = Number(converted.toFixed(4));
+      $("ageUnit").value = "years";
+    }
+    setDirection(direction === "animalToHuman" ? "humanToAnimal" : "animalToHuman");
+  });
+
+  $("resetBtn").addEventListener("click", () => {
+    direction = "animalToHuman";
+    dogSize = "small";
+    $("species").value = "dog";
+    $("ageInput").value = "5";
+    $("ageUnit").value = "years";
+    document.querySelectorAll(".size-btn").forEach(x => {
+      const selected = x.dataset.size === "small";
+      x.classList.toggle("active", selected);
+      x.setAttribute("aria-pressed", String(selected));
+    });
+    $("status").textContent = "";
+    setDirection("animalToHuman");
+  });
+
+  async function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.left = "-9999px";
+    document.body.appendChild(ta);
+    ta.select();
+    const copied = document.execCommand("copy");
+    ta.remove();
+    if (!copied) throw new Error("Copy command failed");
+  }
+
+  $("copyBtn").addEventListener("click", async () => {
+    if ($("resultValue").textContent === "—") {
+      $("status").textContent = "Enter a valid age first.";
+      return;
+    }
+    const text = `${$("resultLabel").textContent}: ${$("resultValue").textContent}. ${$("resultSub").textContent}`;
+    try {
+      await copyText(text);
+      $("status").textContent = "Result copied.";
+      setTimeout(() => $("status").textContent = "", 1500);
+    } catch {
+      $("status").textContent = "Copy unavailable.";
+    }
+  });
+
+  update();
+})();
+</script>
+</body>
+</html>
