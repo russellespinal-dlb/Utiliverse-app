@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Password Strength Checker – Entropy & Crack Time | Utiliverse</title>
+<meta name="description" content="Free password strength checker with entropy estimates, crack-time scenarios, pattern detection, security recommendations, and a Web Crypto password generator.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/Password_Strength_Analyzer/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Password Strength Checker – Entropy & Crack Time | Utiliverse">
+<meta property="og:description" content="Check password strength, estimated entropy, predictable patterns and illustrative offline crack times directly in your browser.">
+<meta property="og:url" content="https://utiliverse.app/Password_Strength_Analyzer/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Password Strength Checker – Entropy & Crack Time | Utiliverse">
+<meta name="twitter:description" content="Free local password strength analysis with entropy estimates, pattern checks and secure password generation.">
+
+
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --panel:rgba(30,41,59,.72);--panel2:rgba(15,23,42,.70);--border:#334155;--border2:#475569;
+  --text:#f8fafc;--muted:#94a3b8;--indigo:#6366f1;--indigo2:#4f46e5;--green:#34d399;
+  --amber:#fbbf24;--orange:#fb923c;--rose:#fb7185;--sky:#38bdf8
+}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),
+    radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;
+  color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  transition:background .25s ease,color .25s ease
+}
+a{color:inherit}button,input{font:inherit}button{touch-action:manipulation}
+.container{max-width:1152px;margin:0 auto;padding:0 16px}
+header{
+  position:sticky;top:0;z-index:50;background:rgba(2,6,23,.82);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid #1e293b
+}
+.header-inner{min-height:65px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.back-link{display:flex;align-items:center;gap:8px;text-decoration:none;color:#cbd5e1;font-size:14px;font-weight:700}
+.back-link:hover{color:#fff}.header-right{display:flex;align-items:center;gap:12px}
+.free-label{font-size:13px;font-weight:650;color:#64748b;white-space:nowrap}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border:1px solid #334155;background:rgba(15,23,42,.72);color:#94a3b8;border-radius:12px;cursor:pointer;box-shadow:none;appearance:none;-webkit-appearance:none}
+.theme-toggle:hover{color:#fff;background:#1e293b;border-color:#475569}
+.theme-toggle:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
+.theme-toggle svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+main{padding:48px 0 72px}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:#818cf8;font-weight:850}
+h1{font-size:clamp(38px,5vw,58px);line-height:1.04;margin:10px 0 14px;font-weight:900;letter-spacing:-.035em}
+.hero p{max-width:900px;color:var(--muted);font-size:18px;line-height:1.72;margin:0}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.badge{border:1px solid var(--border);background:rgba(15,23,42,.66);border-radius:999px;padding:7px 10px;color:#cbd5e1;font-size:12px;font-weight:750}
+.glass{background:var(--panel);backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:20px}
+.tool{margin-top:28px;padding:22px}.section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.section-title{font-size:22px;font-weight:850;margin:4px 0 0}.small{font-size:12px;color:#64748b;line-height:1.55}
+
+.password-wrap{position:relative;margin-top:20px}
+.password-input{
+  width:100%;min-height:58px;background:#0f172a;border:1px solid var(--border2);color:#f8fafc;border-radius:14px;
+  padding:14px 112px 14px 15px;outline:none;font-size:18px;letter-spacing:.02em
+}
+.password-input:focus{border-color:var(--indigo);box-shadow:0 0 0 3px rgba(99,102,241,.15)}
+.password-input::placeholder{color:#64748b}
+.input-actions{position:absolute;right:9px;top:50%;transform:translateY(-50%);display:flex;gap:5px}
+.icon-btn{border:1px solid var(--border);background:#1e293b;color:#cbd5e1;border-radius:9px;padding:7px 9px;font-size:11px;font-weight:800;cursor:pointer}
+.icon-btn:hover{background:#334155}
+
+.meter{height:10px;background:#0f172a;border:1px solid var(--border);border-radius:999px;overflow:hidden;margin-top:14px}
+.meter-fill{height:100%;width:0;background:#64748b;transition:width .2s ease,background .2s ease}
+.score-row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:10px}
+.strength{font-size:24px;font-weight:900}.score-note{font-size:12px;color:#64748b}
+
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin-top:16px}
+.stat{background:var(--panel2);border:1px solid var(--border);border-radius:14px;padding:13px;min-width:0}
+.stat small{display:block;color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.07em;font-weight:850}
+.stat strong{display:block;color:#e2e8f0;font-size:20px;margin-top:5px;overflow-wrap:anywhere}
+.stat span{display:block;color:#64748b;font-size:10px;line-height:1.4;margin-top:4px}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.panel{background:var(--panel2);border:1px solid var(--border);border-radius:15px;padding:15px;min-width:0}
+.panel h3{font-size:14px;margin:0;color:#e2e8f0}.panel-sub{font-size:10px;color:#64748b;margin-top:3px;line-height:1.45}
+.checks{margin-top:9px}
+.check{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid rgba(71,85,105,.38)}
+.check:first-child{border-top:0}
+.check-left{display:flex;gap:8px;min-width:0}.dot{width:9px;height:9px;border-radius:50%;background:#64748b;margin-top:4px;flex:0 0 auto}
+.dot.good{background:var(--green)}.dot.warn{background:var(--amber)}.dot.bad{background:var(--rose)}
+.check strong{display:block;font-size:12px;color:#e2e8f0}.check p{margin:2px 0 0;color:#64748b;font-size:10px;line-height:1.4}
+.check-value{font-size:11px;color:#cbd5e1;font-weight:800;text-align:right}
+
+.crack-table{width:100%;border-collapse:collapse;margin-top:9px;font-size:11px}
+.crack-table th,.crack-table td{padding:8px;border-top:1px solid rgba(71,85,105,.38);text-align:left;vertical-align:top}
+.crack-table th{color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.05em}
+.crack-table td{color:#cbd5e1}.crack-table td:last-child{text-align:right;font-weight:800}
+
+.recommendations{margin-top:10px}
+.rec{display:flex;gap:9px;padding:10px 0;border-top:1px solid rgba(71,85,105,.38)}
+.rec:first-child{border-top:0}.rec-icon{font-size:13px}.rec strong{font-size:12px;color:#e2e8f0}.rec p{margin:2px 0 0;color:#94a3b8;font-size:11px;line-height:1.5}
+
+.generator{margin-top:10px;padding:13px;border:1px solid var(--border);border-radius:14px;background:var(--panel2)}
+.generator-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.generator h3{font-size:14px;margin:0;color:#e2e8f0}
+.range-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;margin-top:10px}
+.range{width:100%;accent-color:var(--indigo)}
+.range-value{min-width:46px;text-align:right;color:#cbd5e1;font-size:12px;font-weight:800}
+.options{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px}
+.option{display:flex;align-items:center;gap:7px;color:#cbd5e1;font-size:11px;font-weight:700}
+.option input{accent-color:var(--indigo)}
+.btn{min-height:40px;border:1px solid var(--border2);background:#1e293b;color:#f8fafc;border-radius:10px;padding:9px 12px;font-weight:800;cursor:pointer}
+.btn:hover{background:#334155}.btn.primary{background:linear-gradient(135deg,var(--indigo),var(--indigo2));border-color:var(--indigo)}
+.generated{margin-top:10px;display:grid;grid-template-columns:1fr auto auto;gap:8px}
+.generated input{width:100%;min-height:42px;border:1px solid var(--border2);background:#0f172a;color:#f8fafc;border-radius:10px;padding:9px 11px;font-family:ui-monospace,monospace;outline:none}
+.status{font-size:11px;color:#6ee7b7;min-height:16px;margin-top:8px}
+
+.privacy{margin-top:14px;padding:12px 13px;background:rgba(99,102,241,.06);border:1px solid rgba(99,102,241,.20);border-radius:12px;color:#94a3b8;font-size:12px;line-height:1.6}
+.privacy strong{color:#c7d2fe}
+
+.article{max-width:900px;margin-top:64px}
+.article h2{font-size:30px;line-height:1.25;font-weight:900;margin:38px 0 13px;color:#fff}
+.article h3{font-size:19px;line-height:1.4;font-weight:850;margin:27px 0 9px;color:#e2e8f0}
+.article p,.article li{color:#94a3b8;line-height:1.84;margin:0 0 15px}.article ul{padding-left:20px}
+.callout{border:1px solid rgba(99,102,241,.28);background:rgba(99,102,241,.07);border-radius:15px;padding:16px;margin:22px 0}
+.callout strong{color:#c7d2fe}
+.faq{border-bottom:1px solid var(--border)}.faq summary{list-style:none;cursor:pointer;padding:16px 0;font-weight:800;display:flex;justify-content:space-between;gap:15px}
+.faq summary::-webkit-details-marker{display:none}.faq summary::after{content:"+";color:#818cf8;font-size:20px}.faq[open] summary::after{content:"−"}
+
+footer{border-top:1px solid #1e293b;background:#020617}
+.footer-inner{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:14px;color:#64748b;font-size:13px}
+
+/* Light mode */
+body.light-mode{--panel:rgba(255,255,255,.92);--panel2:rgba(248,250,252,.96);--border:#dbe3ee;--border2:#cbd5e1;--text:#0f172a;--muted:#475569;background:#f8fafc;color:#0f172a}
+body.light-mode header{background:rgba(255,255,255,.93);border-bottom-color:#e2e8f0}
+body.light-mode .back-link{color:#334155}body.light-mode .back-link:hover{color:#0f172a}
+body.light-mode .theme-toggle{color:#475569;background:#fff;border-color:#cbd5e1}body.light-mode .theme-toggle:hover{color:#0f172a;background:#f1f5f9;border-color:#94a3b8}
+body.light-mode .badge{background:#fff;color:#475569}
+body.light-mode .password-input,body.light-mode .generated input{background:#fff;color:#0f172a}
+body.light-mode .icon-btn,body.light-mode .btn:not(.primary){background:#f1f5f9;color:#334155}
+body.light-mode .icon-btn:hover,body.light-mode .btn:not(.primary):hover{background:#e2e8f0}
+body.light-mode .stat strong,body.light-mode .panel h3,body.light-mode .generator h3,body.light-mode .check strong,body.light-mode .rec strong{color:#0f172a}
+body.light-mode .check-value,body.light-mode .crack-table td,body.light-mode .option{color:#334155}
+body.light-mode .article h2{color:#0f172a}body.light-mode .article h3{color:#1e293b}body.light-mode .article p,body.light-mode .article li{color:#475569}
+body.light-mode .callout{background:#eef2ff}body.light-mode .callout strong{color:#4338ca}
+body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
+
+@media(max-width:900px){.stats{grid-template-columns:1fr 1fr}}
+@media(max-width:760px){.grid-2{grid-template-columns:1fr}}
+@media(max-width:560px){
+  main{padding-top:34px}.stats{grid-template-columns:1fr 1fr}.generated{grid-template-columns:1fr 1fr}.generated input{grid-column:1/-1}
+  .free-label{font-size:10.5px;max-width:130px;white-space:normal;text-align:right;line-height:1.2}
+}
+@media(max-width:390px){.stats{grid-template-columns:1fr}.header-right{gap:6px}}
+
+.theme-hidden{display:none!important}
+.icon-btn:focus-visible,.btn:focus-visible,.password-input:focus-visible,.range:focus-visible,.option input:focus-visible{outline:2px solid var(--indigo);outline-offset:2px}
+.local-processing-note{font-size:12px;line-height:1.65;color:#94a3b8;margin-top:14px}
+body.light-mode .local-processing-note{color:#64748b}
+@media(max-width:560px){.password-input,.generated input{font-size:16px}}
+
+</style>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Password Strength Analyzer","url":"https://utiliverse.app/Password_Strength_Analyzer/","applicationCategory":"SecurityApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled. Secure password generation requires the Web Crypto API.","description":"Free browser-based password strength checker with heuristic scoring, entropy estimates, predictable-pattern detection, illustrative offline crack times, recommendations and secure password generation.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Local password analysis","Heuristic strength score","Estimated entropy","Character-pool estimate","Common-password detection","Sequence detection","Keyboard-pattern detection","Repeated-character and repeated-chunk detection","Year-like pattern detection","Illustrative offline crack-time scenarios","Password improvement recommendations","Web Crypto password generator","Adjustable 12 to 64 character generation","Optional ambiguous-character inclusion","Copy generated password"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does Utiliverse receive the password I type?","acceptedAnswer":{"@type":"Answer","text":"No. The analyzer runs locally in your browser and does not send the entered password to a Utiliverse server or external password-checking API."}},{"@type":"Question","name":"How is the strength score calculated?","acceptedAnswer":{"@type":"Answer","text":"The score combines password length, estimated search-space entropy, character variety, common-password detection, repetition, simple sequences, keyboard patterns, year/date-like fragments, and repeated chunks. It is a heuristic rather than a formal security proof."}},{"@type":"Question","name":"Are the crack-time estimates accurate?","acceptedAnswer":{"@type":"Answer","text":"They are illustrative estimates. Actual attack time depends on the password hash, attacker hardware, dictionary strategy, leaked data, password predictability, and many other factors."}},{"@type":"Question","name":"Does this check whether my password was leaked?","acceptedAnswer":{"@type":"Answer","text":"No. The page deliberately avoids sending password material or a derived hash to an external breach service. It checks only a small built-in list of extremely common passwords and patterns."}},{"@type":"Question","name":"How long should a password be?","acceptedAnswer":{"@type":"Answer","text":"There is no single magic length, but longer unique passwords generally provide much better guessing resistance. Randomly generated passwords of substantial length or well-constructed random passphrases are strong choices."}},{"@type":"Question","name":"Are symbols required for a strong password?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. Symbols expand the possible character pool, but length and unpredictability matter more than satisfying a cosmetic complexity rule. A long random password can be strong even when a particular site limits symbols."}},{"@type":"Question","name":"Is the password generator secure?","acceptedAnswer":{"@type":"Answer","text":"The generator uses crypto.getRandomValues when the browser provides it. That API is designed for cryptographically strong random values. The page will warn if a secure random source is unavailable."}},{"@type":"Question","name":"Should I reuse a strong password on multiple sites?","acceptedAnswer":{"@type":"Answer","text":"No. Reuse turns one compromised account into a risk for other accounts. Use a unique password for every important service and store those passwords in a reputable password manager."}}]}</script>
+</head>
+
+<body>
+<!--
+SEO TARGET CLUSTER
+Primary: password strength checker
+Secondary: password strength analyzer, password entropy checker,
+password crack time estimator, password security checker,
+password strength test, secure password generator, password checker
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
+<header>
+  <div class="container header-inner">
+    <a class="back-link" href="https://utiliverse.app"><span aria-hidden="true">←</span><span>Back to Utiliverse</span></a>
+    <div class="header-right">
+      <span class="free-label">100% Free and Browser Based</span>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+        <svg id="moonIcon" class="theme-hidden" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
+        <svg id="sunIcon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
+<main>
+<div class="container">
+  <section class="hero">
+    <div class="eyebrow">Crypto & security utility</div>
+    <h1>Password Strength Checker &amp; Analyzer</h1>
+    <p>Check password length, estimated entropy, predictable patterns, heuristic strength, and illustrative offline crack resistance—without sending the password to a server.</p>
+    <div class="badges">
+      <span class="badge">Local browser analysis</span>
+      <span class="badge">Entropy & crack-time estimates</span>
+      <span class="badge">Secure password generator</span>
+    </div>
+  </section>
+
+  <section class="glass tool" aria-labelledby="toolHeading">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Password analysis</div>
+        <h2 id="toolHeading" class="section-title">Test a password</h2>
+      </div>
+      <div class="small">For privacy, analysis is performed locally in JavaScript. Avoid testing a real password on any device or browser environment you do not trust.</div>
+    </div>
+
+    <label for="passwordInput" class="small" style="display:block;margin-top:20px">Password to analyze</label>
+    <div class="password-wrap" style="margin-top:8px">
+      <input id="passwordInput" class="password-input" type="password" autocomplete="new-password" spellcheck="false" placeholder="Enter a password to analyze">
+      <div class="input-actions">
+        <button id="toggleVisibility" class="icon-btn" type="button">Show</button>
+        <button id="clearBtn" class="icon-btn" type="button">Clear</button>
+      </div>
+    </div>
+
+    <div class="meter" role="progressbar" aria-label="Password strength score" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="meterFill" class="meter-fill"></div></div>
+    <div class="score-row">
+      <div id="strengthLabel" class="strength" aria-live="polite">Enter a password</div>
+      <div id="scoreNote" class="score-note" aria-live="polite">Score: 0 / 100</div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><small>Length</small><strong id="lengthStat">0</strong><span>characters</span></div>
+      <div class="stat"><small>Estimated entropy</small><strong id="entropyStat">0 bits</strong><span>heuristic estimate</span></div>
+      <div class="stat"><small>Character pool</small><strong id="poolStat">0</strong><span>estimated symbols</span></div>
+      <div class="stat"><small>Pattern penalties</small><strong id="penaltyStat">0</strong><span>detected issues</span></div>
+    </div>
+
+    <div class="grid-2">
+      <section class="panel">
+        <h3>Password checks</h3>
+        <div class="panel-sub">A quick breakdown of length, variety, and predictability.</div>
+        <div id="checkList" class="checks"></div>
+      </section>
+
+      <section class="panel">
+        <h3>Estimated offline guessing time</h3>
+        <div class="panel-sub">Illustrative only. Real attack speed depends heavily on the password hash and attack strategy.</div>
+        <table class="crack-table">
+          <thead><tr><th>Scenario</th><th>Guess rate</th><th>Estimated time</th></tr></thead>
+          <tbody>
+            <tr><td>Slow hash</td><td>1,000/sec</td><td id="crackSlow">—</td></tr>
+            <tr><td>Fast hash / GPU</td><td>1 billion/sec</td><td id="crackFast">—</td></tr>
+            <tr><td>Very fast offline</td><td>1 trillion/sec</td><td id="crackExtreme">—</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="panel">
+        <h3>Recommendations</h3>
+        <div class="panel-sub">Ways to improve this specific password.</div>
+        <div id="recommendations" class="recommendations"></div>
+      </section>
+
+      <section class="panel">
+        <h3>What the score means</h3>
+        <div class="panel-sub">Heuristic score—not a guarantee.</div>
+        <div class="checks">
+          <div class="check"><div class="check-left"><i class="dot bad"></i><div><strong>0–39: Weak</strong><p>Too short, predictable, common, or heavily patterned.</p></div></div></div>
+          <div class="check"><div class="check-left"><i class="dot warn"></i><div><strong>40–64: Fair</strong><p>Some resistance, but meaningful weaknesses remain.</p></div></div></div>
+          <div class="check"><div class="check-left"><i class="dot warn"></i><div><strong>65–79: Good</strong><p>Reasonable structure and length, with room to improve.</p></div></div></div>
+          <div class="check"><div class="check-left"><i class="dot good"></i><div><strong>80–100: Strong</strong><p>Long and difficult to predict under this heuristic.</p></div></div></div>
+        </div>
+      </section>
+    </div>
+
+    <section class="generator">
+      <div class="generator-head">
+        <div>
+          <h3>Generate a strong password</h3>
+          <div class="panel-sub">Uses the browser Web Crypto API when available.</div>
+        </div>
+        <button id="generateBtn" class="btn primary" type="button">Generate</button>
+      </div>
+
+      <div class="range-row">
+        <input id="generatorLength" class="range" type="range" min="12" max="64" step="1" value="20">
+        <span id="generatorLengthValue" class="range-value">20 chars</span>
+      </div>
+
+      <div class="options">
+        <label class="option"><input id="genUpper" type="checkbox" checked> Uppercase</label>
+        <label class="option"><input id="genLower" type="checkbox" checked> Lowercase</label>
+        <label class="option"><input id="genNumbers" type="checkbox" checked> Numbers</label>
+        <label class="option"><input id="genSymbols" type="checkbox" checked> Symbols</label>
+        <label class="option"><input id="genAmbiguous" type="checkbox"> Include ambiguous characters</label>
+      </div>
+
+      <div class="generated">
+        <input id="generatedPassword" type="text" readonly aria-label="Generated password">
+        <button id="useGeneratedBtn" class="btn" type="button">Analyze</button>
+        <button id="copyGeneratedBtn" class="btn" type="button">Copy</button>
+      </div>
+      <div id="generatorStatus" class="status" aria-live="polite"></div>
+    </section>
+
+    <div class="privacy"><strong>Privacy:</strong> the password you type is analyzed only in this page's browser context. This tool does not transmit it to Utiliverse or an external breach-checking service. Closing or refreshing the page clears the entered value unless your browser or an extension independently retains form data.</div>
+  </section>
+  <p class="local-processing-note">Browser-based processing: password analysis, scoring, recommendations, and password generation are handled locally on this page. The entered password is not submitted to a Utiliverse server or external breach-checking service.</p>
+
+  <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
+       Paste approved Google AdSense code here after approval.
+       This comment is intentionally invisible and reserves no space.
+  -->
+
+  <section class="article">
+    <h2>How to Use the Password Strength Checker</h2>
+    <p>Enter a password to see the strength score, estimated entropy, character pool, pattern penalties, password checks, illustrative offline guessing times, and recommendations. Use Show only when you are comfortable displaying the password on screen. The generator below can create a random password with selected character classes using the browser Web Crypto API.</p>
+<p>The Utiliverse Password Strength Analyzer provides a practical, browser-based way to examine how difficult a password appears to be to guess. Instead of judging a password only by whether it contains an uppercase letter, a number, and a symbol, the analyzer considers several factors at once: total length, estimated character-set size, repeated characters, simple sequences, common keyboard runs, repeated blocks, common-password matches, and the amount of apparent search-space entropy that remains after heuristic penalties.</p>
+
+    <p>The analysis is intentionally local. The password is processed by JavaScript running in your browser and is not submitted to a Utiliverse server. This matters because a password-strength tool should not require you to disclose the very secret it is evaluating. Even with local processing, do not enter a valuable production password on a shared, compromised, or otherwise untrusted device. Browser extensions, malware, screen recording, or a compromised operating system can undermine the privacy of any web page.</p>
+
+    <h3>Why password length matters so much</h3>
+    <p>Length is one of the most important contributors to resistance against exhaustive guessing. If characters are selected independently and unpredictably from a large set, every additional character multiplies the number of possibilities. For a truly random password, twenty characters from a broad alphabet can provide dramatically more search space than an eight-character password. Human-created passwords, however, are rarely random, which is why length by itself is not the entire story.</p>
+
+    <p>A long password such as a familiar quotation, keyboard walk, repeated word, or common phrase may be easier to guess than its raw character count suggests. Attackers do not always try every possible string in alphabetical order. They use leaked-password dictionaries, language models, mangling rules, common substitutions, keyboard patterns, dates, names, and other strategies designed to find human-selected passwords early. The analyzer therefore reduces its entropy estimate when it sees obvious predictable structure.</p>
+
+    <h3>What password entropy means</h3>
+    <p>Entropy is commonly expressed in bits and can be used to describe the size of a search space. If a password is generated uniformly at random from a character pool of size N and has length L, a simple search-space estimate is <code>L × log2(N)</code> bits. That calculation can be meaningful for a genuinely random generator, but it overstates the strength of memorable human-selected passwords because their choices are not uniformly distributed.</p>
+
+    <p>Utiliverse displays a heuristic entropy estimate rather than pretending that every password is random. It begins with a character-pool estimate and then applies penalties for common passwords, sequences, repeated characters, repeated chunks, dates or year-like patterns, keyboard walks, and limited variety. The resulting value is useful for comparison and education, but it is not a formal cryptographic measurement of the probability distribution that produced the password.</p>
+
+    <h3>Understanding crack-time estimates</h3>
+    <p>The crack-time table converts the adjusted entropy estimate into illustrative offline-guessing times at several assumed guess rates. A slow password hash might permit relatively few guesses per second, while a fast or poorly protected hash can be tested vastly faster with GPUs or specialized hardware. The table includes 1,000 guesses per second, one billion guesses per second, and one trillion guesses per second to demonstrate how much the underlying storage method changes the risk.</p>
+
+    <p>These times are not predictions of how long a real attacker will need. A targeted attacker may guess a predictable password almost immediately using dictionaries or personal information even when brute-force arithmetic suggests a long search. Conversely, a properly implemented memory-hard password hashing scheme can make each guess deliberately expensive. The most important lesson is that password quality and secure password storage work together.</p>
+
+    <h3>Common passwords and predictable patterns</h3>
+    <p>The analyzer contains a small local list of extremely common passwords and password stems such as common numeric sequences, simple keyboard walks, and frequently reused words. A match creates a large penalty because attackers routinely test these strings early. The local list is not a complete breach corpus, so a password that does not match it should never be interpreted as “not breached.” This tool intentionally does not contact an online breach database.</p>
+
+    <p>Sequence detection also looks for simple increasing or decreasing runs such as <code>abcd</code>, <code>1234</code>, and keyboard fragments such as <code>qwerty</code>. Repeated-character runs and repeated chunks are penalized because they reduce unpredictability. The goal is not to enforce arbitrary composition rules; it is to highlight structures that make guessing easier.</p>
+
+    <h3>Random passwords and passphrases</h3>
+    <p>For many accounts, the easiest way to obtain a strong unique password is to let a reputable password manager generate and store one. The generator included on this page uses the browser's cryptographic random-number generator when available and can combine uppercase letters, lowercase letters, digits, and symbols. Longer generated passwords generally provide more search space without requiring you to memorize every character.</p>
+
+    <p>Long passphrases can also be strong when their words are chosen with sufficient randomness rather than as a familiar sentence or quotation. A phrase consisting of several independently selected random words can be both memorable and resistant to guessing. The exact number of words needed depends on how the words were chosen and the size of the word list. Simply adding punctuation to a famous quotation does not transform it into a random passphrase.</p>
+
+    <h2>Practical Use Cases</h2>
+    <h3>Reviewing a password policy</h3>
+    <p>Administrators and developers can use the analyzer to understand why rigid rules such as “one uppercase, one number, one symbol” do not automatically create strong passwords. A short password can satisfy all of those requirements and remain easy to guess. Modern policies generally benefit from allowing substantial length, blocking known-compromised choices, supporting password managers, and avoiding unnecessary composition rules that encourage predictable substitutions.</p>
+
+    <h3>Teaching password security</h3>
+    <p>The live meter makes it easy to demonstrate how length, repetition, sequences, and predictable words affect a heuristic score. Students can compare a short complex-looking password with a longer random password and see why apparent visual complexity is not the same as unpredictability. The crack-time scenarios also illustrate why the security of the stored password hash matters.</p>
+
+    <h3>Generating a new unique password</h3>
+    <p>The built-in generator is useful when you need a random password for a new account or test environment. Select the desired character classes, choose a length, and generate a value using the browser Web Crypto API. For important accounts, a dedicated password manager remains preferable because it can create, store, synchronize, and autofill unique credentials without requiring you to copy them manually.</p>
+
+    <div class="callout"><strong>Important:</strong> a high score does not prove that a password is safe. A strong password must also be unique to the account, kept secret, and protected by secure account practices such as multi-factor authentication where available. If a password has already been exposed, replace it regardless of its score.</div>
+
+    <h2>Frequently Asked Questions</h2>
+    <details class="faq"><summary>Does Utiliverse receive the password I type?</summary><p>No. The analyzer runs locally in your browser and does not send the entered password to a Utiliverse server or external password-checking API.</p></details>
+    <details class="faq"><summary>How is the strength score calculated?</summary><p>The score combines password length, estimated search-space entropy, character variety, common-password detection, repetition, simple sequences, keyboard patterns, year/date-like fragments, and repeated chunks. It is a heuristic rather than a formal security proof.</p></details>
+    <details class="faq"><summary>Are the crack-time estimates accurate?</summary><p>They are illustrative estimates. Actual attack time depends on the password hash, attacker hardware, dictionary strategy, leaked data, password predictability, and many other factors.</p></details>
+    <details class="faq"><summary>Does this check whether my password was leaked?</summary><p>No. The page deliberately avoids sending password material or a derived hash to an external breach service. It checks only a small built-in list of extremely common passwords and patterns.</p></details>
+    <details class="faq"><summary>How long should a password be?</summary><p>There is no single magic length, but longer unique passwords generally provide much better guessing resistance. Randomly generated passwords of substantial length or well-constructed random passphrases are strong choices.</p></details>
+    <details class="faq"><summary>Are symbols required for a strong password?</summary><p>Not necessarily. Symbols expand the possible character pool, but length and unpredictability matter more than satisfying a cosmetic complexity rule. A long random password can be strong even when a particular site limits symbols.</p></details>
+    <details class="faq"><summary>Is the password generator secure?</summary><p>The generator uses <code>crypto.getRandomValues</code> when the browser provides it. That API is designed for cryptographically strong random values. The page will warn if a secure random source is unavailable.</p></details>
+    <details class="faq"><summary>Should I reuse a strong password on multiple sites?</summary><p>No. Reuse turns one compromised account into a risk for other accounts. Use a unique password for every important service and store those passwords in a reputable password manager.</p></details>
+  </section>
+</div>
+</main>
+
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
+<footer>
+  <div class="container footer-inner">
+    <span>© 2026 Utiliverse. All rights reserved.</span>
+    <span>100% Free and Browser Based</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+
+  const COMMON = new Set([
+    "password","password1","password123","123456","1234567","12345678","123456789","1234567890",
+    "qwerty","qwerty123","abc123","111111","000000","letmein","welcome","admin","administrator",
+    "iloveyou","monkey","dragon","football","baseball","login","princess","sunshine","master",
+    "passw0rd","p@ssword","p@ssw0rd","trustno1","whatever","secret","computer","zaq12wsx"
+  ]);
+
+  const KEYBOARD_PATTERNS = [
+    "qwerty","asdfgh","zxcvbn","qazwsx","1q2w3e","12345","09876","poiuyt","lkjhg","mnbvc"
+  ];
+
+  function applyTheme(theme) {
+    const light = theme === "light";
+    const moon = $("moonIcon");
+    const sun = $("sunIcon");
+    const toggle = $("themeToggle");
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+
+    document.body.classList.toggle("light-mode", light);
+    moon.classList.toggle("theme-hidden", !light);
+    sun.classList.toggle("theme-hidden", light);
+
+    const label = light ? "Switch to dark mode" : "Switch to light mode";
+    toggle.setAttribute("aria-label", label);
+    toggle.title = label;
+
+    if (metaTheme) {
+      metaTheme.setAttribute("content", light ? "#f8fafc" : "#020617");
+    }
+  }
+
+  const savedTheme = localStorage.getItem("utiliverse-theme");
+  const initialTheme = savedTheme === "light" || savedTheme === "dark"
+    ? savedTheme
+    : (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+
+  applyTheme(initialTheme);
+
+  $("themeToggle").addEventListener("click", () => {
+    const next = document.body.classList.contains("light-mode") ? "dark" : "light";
+    localStorage.setItem("utiliverse-theme", next);
+    applyTheme(next);
+  });
+
+  function characterPool(password) {
+    let pool = 0;
+    if (/[a-z]/.test(password)) pool += 26;
+    if (/[A-Z]/.test(password)) pool += 26;
+    if (/[0-9]/.test(password)) pool += 10;
+    if (/[^A-Za-z0-9\s]/.test(password)) pool += 33;
+    if (/\s/.test(password)) pool += 1;
+    return pool;
+  }
+
+  function hasSequence(password) {
+    const s = password.toLowerCase();
+    const sources = ["abcdefghijklmnopqrstuvwxyz","zyxwvutsrqponmlkjihgfedcba","0123456789","9876543210"];
+    for (const source of sources) {
+      for (let i = 0; i <= source.length - 4; i++) {
+        if (s.includes(source.slice(i, i + 4))) return true;
+      }
+    }
+    return false;
+  }
+
+  function hasKeyboardPattern(password) {
+    const s = password.toLowerCase();
+    return KEYBOARD_PATTERNS.some(p => s.includes(p) || s.includes([...p].reverse().join("")));
+  }
+
+  function repeatedChunk(password) {
+    const s = password.toLowerCase();
+    if (/^(.)\1{3,}$/.test(s)) return true;
+    for (let size = 1; size <= Math.floor(s.length / 2); size++) {
+      if (s.length % size === 0) {
+        const chunk = s.slice(0, size);
+        if (chunk.repeat(s.length / size) === s && s.length >= 6) return true;
+      }
+    }
+    return /(.)\1{2,}/.test(s);
+  }
+
+  function analyze(password) {
+    const length = Array.from(password).length;
+    const pool = characterPool(password);
+    const rawEntropy = length && pool ? length * Math.log2(pool) : 0;
+
+    const checks = {
+      length12: length >= 12,
+      length16: length >= 16,
+      lower: /[a-z]/.test(password),
+      upper: /[A-Z]/.test(password),
+      digit: /[0-9]/.test(password),
+      symbol: /[^A-Za-z0-9\s]/.test(password),
+      common: COMMON.has(password.toLowerCase()),
+      sequence: hasSequence(password),
+      keyboard: hasKeyboardPattern(password),
+      repeat: repeatedChunk(password),
+      yearLike: /(19|20)\d{2}/.test(password),
+      mostlyOneType: [/[a-z]/,/[A-Z]/,/[0-9]/,/[^A-Za-z0-9\s]/].filter(r => r.test(password)).length <= 1
+    };
+
+    let adjusted = rawEntropy;
+    let penalties = 0;
+
+    if (checks.common) { adjusted = Math.min(adjusted, 12); penalties++; }
+    if (checks.sequence) { adjusted *= 0.62; penalties++; }
+    if (checks.keyboard) { adjusted *= 0.58; penalties++; }
+    if (checks.repeat) { adjusted *= 0.58; penalties++; }
+    if (checks.yearLike) { adjusted *= 0.88; penalties++; }
+    if (checks.mostlyOneType && length > 0) { adjusted *= 0.86; penalties++; }
+    if (length < 8 && length > 0) { adjusted *= 0.55; penalties++; }
+    else if (length < 12 && length > 0) { adjusted *= 0.78; penalties++; }
+
+    adjusted = Math.max(0, Math.min(rawEntropy, adjusted));
+
+    let score = 0;
+    if (length) {
+      score = Math.min(100, Math.round(adjusted * 1.12));
+      if (length >= 12) score += 5;
+      if (length >= 16) score += 5;
+      const varieties = [checks.lower,checks.upper,checks.digit,checks.symbol].filter(Boolean).length;
+      score += Math.max(0, varieties - 1) * 2;
+      if (checks.common) score = Math.min(score, 15);
+      score = Math.max(0, Math.min(100, score));
+    }
+
+    return { length, pool, rawEntropy, adjusted, score, penalties, checks };
+  }
+
+  function formatDuration(seconds) {
+    if (!isFinite(seconds)) return "Effectively unbounded";
+    if (seconds < 0.001) return "< 1 millisecond";
+    if (seconds < 1) return `${Math.max(1,Math.round(seconds*1000))} ms`;
+    if (seconds < 60) return `${Math.round(seconds)} sec`;
+    if (seconds < 3600) return `${Math.round(seconds/60)} min`;
+    if (seconds < 86400) return `${Math.round(seconds/3600)} hr`;
+    if (seconds < 31557600) return `${Math.round(seconds/86400)} days`;
+    const years = seconds / 31557600;
+    if (years < 1e3) return `${Math.round(years)} years`;
+    if (years < 1e6) return `${(years/1e3).toFixed(1)} thousand years`;
+    if (years < 1e9) return `${(years/1e6).toFixed(1)} million years`;
+    if (years < 1e12) return `${(years/1e9).toFixed(1)} billion years`;
+    return `${(years/1e12).toFixed(1)} trillion+ years`;
+  }
+
+  function crackTime(bits, rate) {
+    if (!bits) return 0;
+    // Average exhaustive search is approximately half the keyspace.
+    const log2Seconds = bits - 1 - Math.log2(rate);
+    if (log2Seconds > 1023) return Infinity;
+    return Math.pow(2, log2Seconds);
+  }
+
+  function strengthMeta(score, password) {
+    if (!password) return {label:"Enter a password", color:"#64748b", width:0};
+    if (score < 40) return {label:"Weak", color:"#fb7185", width:Math.max(8,score)};
+    if (score < 65) return {label:"Fair", color:"#fb923c", width:score};
+    if (score < 80) return {label:"Good", color:"#fbbf24", width:score};
+    if (score < 95) return {label:"Strong", color:"#34d399", width:score};
+    return {label:"Very Strong", color:"#34d399", width:100};
+  }
+
+  function renderCheck(label, detail, ok, value, neutral=false) {
+    const cls = neutral ? "warn" : ok ? "good" : "bad";
+    return `<div class="check">
+      <div class="check-left"><i class="dot ${cls}"></i><div><strong>${label}</strong><p>${detail}</p></div></div>
+      <div class="check-value">${value}</div>
+    </div>`;
+  }
+
+  function recommendationsFor(a) {
+    const r = [];
+    const c = a.checks;
+
+    if (a.length < 12) r.push(["Increase the length","Aim for at least 12–16 characters when the service permits it. Length has a major impact on guessing resistance."]);
+    else if (a.length < 16) r.push(["Consider a little more length","Sixteen or more characters gives substantially more room for unpredictability, especially for generated passwords."]);
+    if (c.common) r.push(["Replace this common password","This exact value appears in the tool's local common-password list and should not be used."]);
+    if (c.sequence) r.push(["Remove obvious sequences","Avoid runs such as abcd, 1234, or their reverse forms. Attackers test them early."]);
+    if (c.keyboard) r.push(["Avoid keyboard walks","Patterns such as qwerty, asdfgh, and 1q2w3e are highly predictable."]);
+    if (c.repeat) r.push(["Reduce repetition","Repeated characters or repeated chunks shrink the effective search space."]);
+    if (c.yearLike) r.push(["Avoid predictable years","Dates and years are common components in password-guessing rules."]);
+    if (c.mostlyOneType && a.length < 20) r.push(["Add unpredictability","Using more than one character type can expand the search space when length is limited."]);
+    if (a.score >= 80) r.push(["Keep it unique","Even a strong password should never be reused across important accounts."]);
+    r.push(["Use a password manager","A reputable password manager can generate and store long, unique passwords so you do not have to memorize them."]);
+    return r;
+  }
+
+  function update() {
+    const password = $("passwordInput").value;
+    const a = analyze(password);
+    const meta = strengthMeta(a.score, password);
+
+    $("meterFill").style.width = `${meta.width}%`;
+    $("meterFill").style.background = meta.color;
+    $("strengthLabel").textContent = meta.label;
+    $("strengthLabel").style.color = meta.color;
+    $("scoreNote").textContent = `Score: ${a.score} / 100`;
+    document.querySelector(".meter").setAttribute("aria-valuenow", String(a.score));
+
+    $("lengthStat").textContent = a.length;
+    $("entropyStat").textContent = `${a.adjusted.toFixed(1)} bits`;
+    $("poolStat").textContent = a.pool;
+    $("penaltyStat").textContent = a.penalties;
+
+    const c = a.checks;
+    $("checkList").innerHTML =
+      renderCheck("Length", "Longer passwords generally resist guessing better.", a.length >= 12, `${a.length} chars`) +
+      renderCheck("Lowercase letters", "Detected lowercase A–Z.", c.lower, c.lower ? "Yes" : "No") +
+      renderCheck("Uppercase letters", "Detected uppercase A–Z.", c.upper, c.upper ? "Yes" : "No") +
+      renderCheck("Numbers", "Detected decimal digits.", c.digit, c.digit ? "Yes" : "No") +
+      renderCheck("Symbols", "Detected non-alphanumeric symbols.", c.symbol, c.symbol ? "Yes" : "No") +
+      renderCheck("Common password", "Checks a small built-in list of extremely common values.", !c.common, c.common ? "Match" : "No match") +
+      renderCheck("Sequences / keyboard patterns", "Looks for simple alphabetic, numeric, and keyboard runs.", !(c.sequence || c.keyboard), (c.sequence || c.keyboard) ? "Detected" : "None");
+
+    $("crackSlow").textContent = password ? formatDuration(crackTime(a.adjusted, 1e3)) : "—";
+    $("crackFast").textContent = password ? formatDuration(crackTime(a.adjusted, 1e9)) : "—";
+    $("crackExtreme").textContent = password ? formatDuration(crackTime(a.adjusted, 1e12)) : "—";
+
+    $("recommendations").innerHTML = recommendationsFor(a).map((x,i) =>
+      `<div class="rec"><div class="rec-icon">${i===0 && a.score<80 ? "!" : "•"}</div><div><strong>${x[0]}</strong><p>${x[1]}</p></div></div>`
+    ).join("");
+  }
+
+  $("passwordInput").addEventListener("input", update);
+  $("toggleVisibility").addEventListener("click", () => {
+    const input = $("passwordInput");
+    const show = input.type === "password";
+    input.type = show ? "text" : "password";
+    $("toggleVisibility").textContent = show ? "Hide" : "Show";
+  });
+  $("clearBtn").addEventListener("click", () => {
+    $("passwordInput").value = "";
+    $("passwordInput").type = "password";
+    $("toggleVisibility").textContent = "Show";
+    update();
+    $("passwordInput").focus();
+  });
+
+  window.addEventListener("pagehide", () => {
+    $("passwordInput").type = "password";
+    $("toggleVisibility").textContent = "Show";
+  });
+
+  $("generatorLength").addEventListener("input", () => {
+    $("generatorLengthValue").textContent = `${$("generatorLength").value} chars`;
+  });
+
+  function randomIndex(max) {
+    if (!window.crypto || !crypto.getRandomValues) throw new Error("Secure random generator unavailable");
+    const limit = Math.floor(0x100000000 / max) * max;
+    const arr = new Uint32Array(1);
+    do { crypto.getRandomValues(arr); } while (arr[0] >= limit);
+    return arr[0] % max;
+  }
+
+  function secureShuffle(chars) {
+    for (let i = chars.length - 1; i > 0; i--) {
+      const j = randomIndex(i + 1);
+      [chars[i], chars[j]] = [chars[j], chars[i]];
+    }
+    return chars;
+  }
+
+  function generatePassword() {
+    const length = Number($("generatorLength").value);
+    const ambiguous = $("genAmbiguous").checked;
+
+    let sets = [];
+    let upper = ambiguous ? "ABCDEFGHIJKLMNOPQRSTUVWXYZ" : "ABCDEFGHJKLMNPQRSTUVWXYZ";
+    let lower = ambiguous ? "abcdefghijklmnopqrstuvwxyz" : "abcdefghijkmnopqrstuvwxyz";
+    let nums = ambiguous ? "0123456789" : "23456789";
+    const symbols = "!@#$%^&*()-_=+[]{};:,.?";
+
+    if ($("genUpper").checked) sets.push(upper);
+    if ($("genLower").checked) sets.push(lower);
+    if ($("genNumbers").checked) sets.push(nums);
+    if ($("genSymbols").checked) sets.push(symbols);
+
+    if (!sets.length) {
+      $("generatorStatus").textContent = "Select at least one character set.";
+      return;
+    }
+
+    try {
+      const all = sets.join("");
+      const chars = [];
+      sets.forEach(set => chars.push(set[randomIndex(set.length)]));
+      while (chars.length < length) chars.push(all[randomIndex(all.length)]);
+      secureShuffle(chars);
+      $("generatedPassword").value = chars.join("");
+      $("generatorStatus").textContent = "Generated with Web Crypto.";
+    } catch (e) {
+      $("generatorStatus").textContent = "Secure random generation is unavailable in this browser.";
+    }
+  }
+
+  $("generateBtn").addEventListener("click", generatePassword);
+  $("useGeneratedBtn").addEventListener("click", () => {
+    const value = $("generatedPassword").value;
+    if (!value) return;
+    $("passwordInput").value = value;
+    update();
+    $("passwordInput").scrollIntoView({behavior:"smooth", block:"center"});
+  });
+
+  async function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.left = "-9999px";
+    document.body.appendChild(ta);
+    ta.select();
+    const copied = document.execCommand("copy");
+    ta.remove();
+    if (!copied) throw new Error("Copy command failed");
+  }
+
+  $("copyGeneratedBtn").addEventListener("click", async () => {
+    const value = $("generatedPassword").value;
+    if (!value) {
+      $("generatorStatus").textContent = "Generate a password first.";
+      return;
+    }
+    try {
+      await copyText(value);
+      $("generatorStatus").textContent = "Generated password copied.";
+    } catch {
+      $("generatorStatus").textContent = "Copy unavailable.";
+    }
+  });
+
+  generatePassword();
+  update();
+})();
+</script>
+</body>
+</html>
