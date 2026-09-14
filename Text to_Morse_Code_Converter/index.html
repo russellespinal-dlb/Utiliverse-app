@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Text to Morse Code Converter – Encode, Decode & Play | Utiliverse</title>
+<meta name="description" content="Free text to Morse code converter. Encode text into International Morse, decode Morse back to text, play audio, adjust WPM and pitch, copy results, and download TXT.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/Text_to_Morse_Code/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Text to Morse Code Converter – Encode, Decode & Play | Utiliverse">
+<meta property="og:description" content="Encode text into International Morse code, decode Morse back to text, and play timed Morse audio in your browser.">
+<meta property="og:url" content="https://utiliverse.app/Text_to_Morse_Code/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Text to Morse Code Converter – Encode, Decode & Play | Utiliverse">
+<meta name="twitter:description" content="Free browser-based Morse code translator with audio playback, WPM control, copy and TXT download.">
+
+
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --panel:rgba(30,41,59,.72);--panel2:rgba(15,23,42,.70);
+  --border:#334155;--border2:#475569;--text:#f8fafc;--muted:#94a3b8;
+  --indigo:#6366f1;--indigo2:#4f46e5;--green:#34d399;--amber:#fbbf24;--rose:#fb7185
+}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),
+    radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),
+    #020617;
+  color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  transition:background .25s ease,color .25s ease
+}
+a{color:inherit}
+button,textarea,input,select{font:inherit}
+button{touch-action:manipulation}
+.container{max-width:1152px;margin:0 auto;padding:0 16px}
+
+header{
+  position:sticky;top:0;z-index:50;background:rgba(2,6,23,.82);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid #1e293b
+}
+.header-inner{min-height:65px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.back-link{display:flex;align-items:center;gap:8px;text-decoration:none;color:#cbd5e1;font-size:14px;font-weight:700}
+.back-link:hover{color:#fff}
+.header-right{display:flex;align-items:center;gap:12px}
+.free-label{font-size:13px;font-weight:650;color:#64748b;white-space:nowrap}
+.theme-toggle{
+  display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;
+  border:1px solid #334155;background:rgba(15,23,42,.72);color:#94a3b8;border-radius:12px;cursor:pointer;
+  box-shadow:none;appearance:none;-webkit-appearance:none;
+  transition:color .15s ease,background .15s ease,border-color .15s ease
+}
+.theme-toggle:hover{color:#fff;background:#1e293b;border-color:#475569}
+.theme-toggle:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
+.theme-toggle svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+main{padding:48px 0 72px}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:#818cf8;font-weight:850}
+h1{font-size:clamp(38px,5vw,58px);line-height:1.04;margin:10px 0 14px;font-weight:900;letter-spacing:-.035em}
+.hero p{max-width:860px;color:var(--muted);font-size:18px;line-height:1.72;margin:0}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.badge{border:1px solid var(--border);background:rgba(15,23,42,.66);border-radius:999px;padding:7px 10px;color:#cbd5e1;font-size:12px;font-weight:750}
+
+.glass{background:var(--panel);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:20px}
+.tool{margin-top:28px;padding:22px}
+.section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.section-title{font-size:22px;font-weight:850;margin:4px 0 0}
+.small{font-size:12px;color:#64748b;line-height:1.55}
+
+.tabs{display:flex;gap:7px;flex-wrap:wrap;margin-top:18px}
+.tab{min-height:40px;border:1px solid var(--border);background:#0f172a;color:#94a3b8;border-radius:10px;padding:9px 13px;font-weight:800;cursor:pointer}
+.tab.active{background:rgba(99,102,241,.14);border-color:#818cf8;color:#c7d2fe}
+.tab:hover{border-color:#6366f1;color:#e2e8f0}
+
+.editor-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.editor-card{background:var(--panel2);border:1px solid var(--border);border-radius:16px;overflow:hidden;min-width:0}
+.editor-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 13px;border-bottom:1px solid var(--border)}
+.editor-title{font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:850;color:#94a3b8}
+.editor-meta{font-size:11px;color:#64748b}
+textarea{
+  width:100%;min-height:280px;resize:vertical;border:0;outline:none;background:#0f172a;color:#e2e8f0;
+  padding:16px;font-size:15px;line-height:1.65;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace
+}
+textarea::placeholder{color:#475569}
+textarea:focus{box-shadow:inset 0 0 0 2px rgba(99,102,241,.55)}
+#outputText.morse-output{
+  font-size:18px;
+  line-height:1.75;
+  letter-spacing:.03em;
+  font-weight:600;
+}
+
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.control-card{background:var(--panel2);border:1px solid var(--border);border-radius:14px;padding:13px}
+.control-card label{display:block;color:#94a3b8;font-size:11px;text-transform:uppercase;letter-spacing:.07em;font-weight:850;margin-bottom:8px}
+.select{width:100%;min-height:42px;border:1px solid var(--border2);background:#0f172a;color:#e2e8f0;border-radius:10px;padding:8px 10px;outline:none}
+.range-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
+.range{width:100%;accent-color:var(--indigo)}
+.range-value{min-width:68px;text-align:right;color:#cbd5e1;font-size:12px;font-weight:800}
+
+.actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}
+.btn{
+  min-height:42px;border:1px solid var(--border2);background:#1e293b;color:#f8fafc;
+  border-radius:11px;padding:10px 14px;font-weight:800;cursor:pointer;transition:.16s ease
+}
+.btn:hover:not(:disabled){background:#334155}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.primary{background:linear-gradient(135deg,var(--indigo),var(--indigo2));border-color:var(--indigo)}
+.btn.primary:hover:not(:disabled){filter:brightness(1.08)}
+.btn.stop{color:#fecdd3}
+.status{font-size:11px;color:#6ee7b7;min-height:16px}
+
+.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin-top:14px}
+.stat{background:var(--panel2);border:1px solid var(--border);border-radius:13px;padding:12px;min-width:0}
+.stat small{display:block;color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.07em;font-weight:850}
+.stat strong{display:block;color:#e2e8f0;font-size:18px;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.reference{margin-top:14px;border:1px solid var(--border);background:var(--panel2);border-radius:14px;overflow:hidden}
+.reference summary{cursor:pointer;padding:13px 14px;font-weight:800;color:#e2e8f0}
+.morse-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;padding:0 14px 14px}
+.morse-item{border:1px solid var(--border);border-radius:9px;padding:8px;background:#0f172a;text-align:center}
+.morse-item strong{display:block;color:#e2e8f0;font-size:12px}
+.morse-item span{display:block;color:#818cf8;font-family:ui-monospace,monospace;font-size:11px;margin-top:3px}
+
+.note{margin-top:14px;padding:11px 12px;border:1px solid rgba(99,102,241,.22);background:rgba(99,102,241,.06);border-radius:11px;color:#94a3b8;font-size:11px;line-height:1.55}
+.note strong{color:#c7d2fe}
+
+.article{max-width:900px;margin-top:64px}
+.article h2{font-size:30px;line-height:1.25;font-weight:900;margin:38px 0 13px;color:#fff}
+.article h3{font-size:19px;line-height:1.4;font-weight:850;margin:27px 0 9px;color:#e2e8f0}
+.article p,.article li{color:#94a3b8;line-height:1.84;margin:0 0 15px}
+.article ul{padding-left:20px}
+.callout{border:1px solid rgba(99,102,241,.28);background:rgba(99,102,241,.07);border-radius:15px;padding:16px;margin:22px 0}
+.callout strong{color:#c7d2fe}
+.faq{border-bottom:1px solid var(--border)}
+.faq summary{list-style:none;cursor:pointer;padding:16px 0;font-weight:800;display:flex;justify-content:space-between;gap:15px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:#818cf8;font-size:20px}
+.faq[open] summary::after{content:"−"}
+
+footer{border-top:1px solid #1e293b;background:#020617}
+.footer-inner{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:14px;color:#64748b;font-size:13px}
+
+/* light mode */
+body.light-mode{
+  --panel:rgba(255,255,255,.92);--panel2:rgba(248,250,252,.96);--border:#dbe3ee;--border2:#cbd5e1;
+  --text:#0f172a;--muted:#475569;background:#f8fafc;color:#0f172a
+}
+body.light-mode header{background:rgba(255,255,255,.93);border-bottom-color:#e2e8f0}
+body.light-mode .back-link{color:#334155}
+body.light-mode .back-link:hover{color:#0f172a}
+body.light-mode .theme-toggle{color:#475569;background:#fff;border-color:#cbd5e1}
+body.light-mode .theme-toggle:hover{color:#0f172a;background:#f1f5f9;border-color:#94a3b8}
+body.light-mode .badge,body.light-mode .tab,body.light-mode .morse-item{background:#fff;color:#475569}
+body.light-mode .tab.active{background:#eef2ff;color:#4338ca}
+body.light-mode textarea,body.light-mode .select{background:#fff;color:#0f172a}
+body.light-mode textarea::placeholder{color:#94a3b8}
+body.light-mode .btn:not(.primary){background:#f1f5f9;color:#334155}
+body.light-mode .btn:not(.primary):hover:not(:disabled){background:#e2e8f0}
+body.light-mode .stat strong,body.light-mode .reference summary,body.light-mode .morse-item strong{color:#0f172a}
+body.light-mode .article h2{color:#0f172a}
+body.light-mode .article h3{color:#1e293b}
+body.light-mode .article p,body.light-mode .article li{color:#475569}
+body.light-mode .callout{background:#eef2ff}
+body.light-mode .callout strong{color:#4338ca}
+body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
+
+@media(max-width:900px){.stats{grid-template-columns:repeat(3,minmax(0,1fr))}.morse-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:760px){.editor-grid,.controls{grid-template-columns:1fr}}
+@media(max-width:560px){
+  main{padding-top:34px}.stats{grid-template-columns:1fr 1fr}.morse-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .free-label{font-size:10.5px;max-width:130px;white-space:normal;text-align:right;line-height:1.2}
+}
+@media(max-width:390px){.morse-grid{grid-template-columns:1fr 1fr}.header-right{gap:6px}}
+
+.theme-hidden{display:none!important}
+.btn:focus-visible,.tab:focus-visible,.select:focus-visible,.range:focus-visible{outline:2px solid var(--indigo);outline-offset:2px}
+.local-processing-note{font-size:12px;line-height:1.65;color:#94a3b8;margin-top:14px}
+body.light-mode .local-processing-note{color:#64748b}
+@media(max-width:560px){textarea,.select{font-size:16px}}
+
+</style>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Text to Morse Code Converter","url":"https://utiliverse.app/Text_to_Morse_Code/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled. Audio playback requires Web Audio API support.","description":"Free browser-based Morse code converter for encoding text, decoding Morse, playing timed Morse audio, copying results and downloading text files.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Text to International Morse code","Morse code to text","Slash or three-space word separators","5 to 40 WPM playback speed","300 to 1000 Hz tone frequency","Web Audio API playback","Unsupported-character count","Morse token and signal statistics","Morse code reference chart","Copy output","Download UTF-8 TXT","Swap conversion direction"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What Morse code standard does this tool use?","acceptedAnswer":{"@type":"Answer","text":"It uses common International Morse code mappings for the English alphabet A\u2013Z, digits 0\u20139, and widely used punctuation marks."}},{"@type":"Question","name":"How are spaces between words represented?","acceptedAnswer":{"@type":"Answer","text":"Text-to-Morse mode can use either a slash or three spaces between words. Morse-to-Text mode understands both formats."}},{"@type":"Question","name":"Can I convert Morse code back into text?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose Morse \u2192 Text, enter each Morse character separated by a space, and use a slash or multiple spaces between words."}},{"@type":"Question","name":"Can I listen to the Morse code?","acceptedAnswer":{"@type":"Answer","text":"Yes. Play Morse generates tones using the browser's Web Audio API. You can adjust speed from 5 to 40 WPM and pitch from 300 to 1000 Hz."}},{"@type":"Question","name":"What happens to characters that do not have a mapping?","acceptedAnswer":{"@type":"Answer","text":"When encoding text, unsupported non-whitespace characters are omitted and counted. When decoding, unknown Morse tokens are displayed as a question mark."}},{"@type":"Question","name":"Does the audio player use standard Morse timing?","acceptedAnswer":{"@type":"Answer","text":"It uses the conventional 1:3 dot-to-dash ratio with one-unit element gaps, three-unit letter gaps, and seven-unit word gaps. Speed is derived from the PARIS WPM convention."}},{"@type":"Question","name":"Is my text sent to a server?","acceptedAnswer":{"@type":"Answer","text":"No. The translation, decoding, statistics, audio generation, clipboard operation, and TXT-file generation are performed in your browser."}},{"@type":"Question","name":"Can I save my Morse code?","acceptedAnswer":{"@type":"Answer","text":"Yes. Use Copy Output for the clipboard or Download TXT to save the current converted result as a UTF-8 text file."}}]}</script>
+</head>
+
+<body>
+<!--
+SEO TARGET CLUSTER
+Primary: text to Morse code converter
+Secondary: Morse code translator, Morse code decoder, text to Morse,
+Morse to text, Morse code encoder, Morse audio player,
+International Morse code converter, Morse code generator
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
+<header>
+  <div class="container header-inner">
+    <a class="back-link" href="https://utiliverse.app"><span aria-hidden="true">←</span><span>Back to Utiliverse</span></a>
+    <div class="header-right">
+      <span class="free-label">100% Free and Browser Based</span>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+        <svg id="moonIcon" class="theme-hidden" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
+        <svg id="sunIcon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
+<main>
+<div class="container">
+  <section class="hero">
+    <div class="eyebrow">Text utility</div>
+    <h1>Text to Morse Code Converter &amp; Morse Translator</h1>
+    <p>Encode text into International Morse code, decode Morse back into readable text, and play timed Morse audio with adjustable speed and tone—all directly in your browser.</p>
+    <div class="badges">
+      <span class="badge">Text ⇄ Morse</span>
+      <span class="badge">Morse audio playback</span>
+      <span class="badge">Processed locally in your browser</span>
+    </div>
+  </section>
+
+  <section class="glass tool" aria-labelledby="toolHeading">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Morse translator</div>
+        <h2 id="toolHeading" class="section-title">Encode or decode Morse code</h2>
+      </div>
+      <div class="small">Supports letters A–Z, digits 0–9, and common International Morse punctuation.</div>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Conversion direction">
+      <button id="encodeTab" class="tab active" type="button" role="tab" aria-selected="true" aria-controls="inputText">Text → Morse</button>
+      <button id="decodeTab" class="tab" type="button" role="tab" aria-selected="false" aria-controls="inputText">Morse → Text</button>
+    </div>
+
+    <div class="editor-grid">
+      <div class="editor-card">
+        <div class="editor-head">
+          <label id="inputTitle" for="inputText" class="editor-title">Text input</label>
+          <span id="inputMeta" class="editor-meta">0 characters</span>
+        </div>
+        <textarea id="inputText" spellcheck="true" placeholder="Type or paste text here..."></textarea>
+      </div>
+
+      <div class="editor-card">
+        <div class="editor-head">
+          <label id="outputTitle" for="outputText" class="editor-title">Morse output</label>
+          <span id="outputMeta" class="editor-meta">0 symbols</span>
+        </div>
+        <textarea id="outputText" spellcheck="false" readonly aria-live="polite" placeholder="Converted Morse code will appear here..."></textarea>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="control-card">
+        <label for="wordSeparator">Word separator</label>
+        <select id="wordSeparator" class="select">
+          <option value="slash">Slash ( / )</option>
+          <option value="threeSpaces">Three spaces</option>
+        </select>
+      </div>
+
+      <div class="control-card">
+        <label for="wpm">Playback speed</label>
+        <div class="range-row">
+          <input id="wpm" class="range" type="range" min="5" max="40" step="1" value="18">
+          <span id="wpmValue" class="range-value">18 WPM</span>
+        </div>
+      </div>
+
+      <div class="control-card">
+        <label for="frequency">Tone frequency</label>
+        <div class="range-row">
+          <input id="frequency" class="range" type="range" min="300" max="1000" step="10" value="600">
+          <span id="frequencyValue" class="range-value">600 Hz</span>
+        </div>
+      </div>
+
+      <div class="control-card">
+        <label>Audio</label>
+        <div class="actions" style="margin-top:0">
+          <button id="playBtn" class="btn primary" type="button">Play Morse</button>
+          <button id="stopBtn" class="btn stop" type="button" disabled>Stop</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button id="copyBtn" class="btn primary" type="button">Copy Output</button>
+      <button id="swapBtn" class="btn" type="button">Swap Direction</button>
+      <button id="downloadBtn" class="btn" type="button">Download TXT</button>
+      <button id="sampleBtn" class="btn" type="button">Load Sample</button>
+      <button id="clearBtn" class="btn" type="button">Clear</button>
+      <span id="status" class="status" aria-live="polite"></span>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><small>Input characters</small><strong id="charCount">0</strong></div>
+      <div class="stat"><small>Words</small><strong id="wordCount">0</strong></div>
+      <div class="stat"><small>Morse tokens</small><strong id="tokenCount">0</strong></div>
+      <div class="stat"><small>Dots + dashes</small><strong id="signalCount">0</strong></div>
+      <div class="stat"><small>Unsupported</small><strong id="unsupportedCount">0</strong></div>
+    </div>
+
+    <details class="reference">
+      <summary>Morse code reference chart</summary>
+      <div id="morseGrid" class="morse-grid"></div>
+    </details>
+
+    <div class="note"><strong>Audio timing:</strong> playback uses a standard Morse timing ratio: dot = 1 unit, dash = 3 units, gap inside a character = 1 unit, gap between letters = 3 units, and gap between words = 7 units. WPM timing is based on the common PARIS standard.</div>
+  </section>
+  <p class="local-processing-note">Browser-based processing: encoding, decoding, statistics, audio generation, clipboard copying, and TXT creation are handled locally on this page and your text is not submitted to a Utiliverse server.</p>
+
+  <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
+       Paste approved Google AdSense code here after approval.
+       This comment is intentionally invisible and reserves no space.
+  -->
+
+  <section class="article">
+    <h2>How to Use the Text to Morse Code Converter</h2>
+    <p>Choose Text → Morse to encode ordinary text, or Morse → Text to decode dots and dashes. In encoding mode you can choose a slash or three spaces between words. Use Play Morse to hear the current Morse sequence, adjust the WPM and tone frequency if needed, then copy or download the result.</p>
+<p>The Utiliverse Text to Morse Code Converter translates ordinary text into the dot-and-dash patterns used by International Morse code and can reverse the process by decoding Morse symbols back into readable characters. It is designed for students, radio hobbyists, educators, puzzle makers, developers, and anyone who wants a fast way to translate Morse without manually looking up every character in a chart.</p>
+
+    <p>The conversion runs locally in your browser. Your text does not need to be submitted to a Utiliverse server simply to encode or decode it. The same browser-side approach is used for the character statistics, Morse reference table, audio timing, copying, and TXT downloads. The audio feature uses the Web Audio API available in modern browsers and creates the tones on your device.</p>
+
+    <h3>How text is converted into Morse code</h3>
+    <p>International Morse code represents letters, numbers, and selected punctuation as sequences of short signals called dots and longer signals called dashes. For example, A is <code>.-</code>, B is <code>-...</code>, and the digit 1 is <code>.----</code>. When encoding text, the converter uppercases letters for lookup purposes, translates every supported character, separates letter codes with spaces, and inserts a larger separator between words.</p>
+
+    <p>By default, Utiliverse uses a forward slash between words because it is easy to see and common in written Morse notation. You can switch the output to three spaces instead. Either format can be decoded by the tool. Actual transmitted Morse does not send a slash character to represent a space; instead, the receiving operator recognizes a longer silence between words. Written Morse needs a visible convention, so slash notation is useful for text-based tools.</p>
+
+    <h3>Decoding Morse code back to text</h3>
+    <p>In Morse-to-Text mode, each sequence of dots and dashes is treated as one character. A single ordinary space separates letter codes, while a slash or a run of multiple spaces separates words. Known sequences are replaced with their matching character. Unrecognized sequences are represented with a question mark so that malformed or unsupported input remains visible instead of silently disappearing.</p>
+
+    <p>Because Morse notation can be written in different ways, clean separators matter. For example, <code>... --- ...</code> decodes to SOS. If all nine symbols are entered without spaces, the decoder cannot know how the individual letters were intended to be divided. The converter normalizes Unicode dot and dash lookalikes such as bullets and long dashes where practical, but standard periods and hyphens provide the clearest input.</p>
+
+    <h3>Morse timing and audio playback</h3>
+    <p>Morse code depends not only on dots and dashes but also on timing. A dot lasts one timing unit and a dash lasts three. The silent gap between parts of the same character is one unit, the gap between letters is three units, and the gap between words is seven units. Maintaining those proportions is what allows a listener to distinguish a sequence of symbols.</p>
+
+    <p>The speed control is expressed in words per minute (WPM) using the common PARIS convention. A standard timing approximation sets one dot unit to 1.2 divided by the selected WPM in seconds. At 20 WPM, for example, one unit is approximately 60 milliseconds. The pitch control changes the tone frequency but does not change the Morse symbols or timing. Many operators prefer an audible sidetone somewhere around the middle of the available range, but personal preference and hearing vary.</p>
+
+    <h3>Supported characters and punctuation</h3>
+    <p>The converter includes the International Morse mappings most people need for ordinary English-language work: A through Z, digits 0 through 9, and common punctuation such as period, comma, question mark, apostrophe, exclamation mark, slash, parentheses, ampersand, colon, semicolon, equals sign, plus sign, hyphen, underscore, quotation mark, dollar sign, and at sign. Unsupported characters are not guessed. In Text-to-Morse mode they are omitted from the encoded stream and counted in the Unsupported statistic so that you know the source contained characters outside the mapping.</p>
+
+    <p>Morse systems can include procedural signals, accented characters, and national extensions beyond the basic international alphabet. Those extensions are not universal across every operating context. This general-purpose converter therefore focuses on the widely recognized International Morse alphabet and punctuation rather than pretending that every Unicode character has a single standardized Morse equivalent.</p>
+
+    <h2>Practical Use Cases</h2>
+    <h3>Learning and practicing Morse code</h3>
+    <p>Students can type a phrase, inspect its Morse translation, and then use the audio player to hear the timing. The reference chart provides quick access to individual character mappings, while adjustable WPM allows practice to start slowly and increase as recognition improves. Reversing the direction is useful for self-testing: enter Morse from memory and confirm the decoded result.</p>
+
+    <h3>Amateur radio and communications education</h3>
+    <p>Morse code remains associated with amateur radio, historical radio communication, signaling, and emergency-communications education. This tool is useful for preparing practice material and understanding character patterns, but it is not a radio transmitter, keyer, decoder for live RF audio, or substitute for the operating rules that apply to licensed communications.</p>
+
+    <h3>Puzzles, games, classroom activities, and escape rooms</h3>
+    <p>Morse is frequently used in puzzles because the encoding is recognizable yet still requires translation. Teachers can prepare exercises, game designers can create clues, and puzzle solvers can decode strings without manually consulting a printed chart. The TXT download option also makes it convenient to save generated Morse for worksheets or project notes.</p>
+
+    <h3>Developer testing and data transformation</h3>
+    <p>Developers sometimes need a deterministic Morse mapping for demos, coding exercises, unit tests, or educational interfaces. The output uses simple ASCII dots, hyphens, spaces, and optional slashes, making it easy to paste into source code or structured text. If a production system requires a different alphabet, prosigns, Farnsworth timing, or locale-specific symbols, its exact specification should be implemented separately.</p>
+
+    <div class="callout"><strong>Accuracy note:</strong> this tool translates written characters and generates synthetic Morse audio. It does not attempt to recognize live microphone audio, radio signals, noisy recordings, or hand-keyed timing variations.</div>
+
+    <h2>Frequently Asked Questions</h2>
+    <details class="faq"><summary>What Morse code standard does this tool use?</summary><p>It uses common International Morse code mappings for the English alphabet A–Z, digits 0–9, and widely used punctuation marks.</p></details>
+    <details class="faq"><summary>How are spaces between words represented?</summary><p>Text-to-Morse mode can use either a slash or three spaces between words. Morse-to-Text mode understands both formats.</p></details>
+    <details class="faq"><summary>Can I convert Morse code back into text?</summary><p>Yes. Choose Morse → Text, enter each Morse character separated by a space, and use a slash or multiple spaces between words.</p></details>
+    <details class="faq"><summary>Can I listen to the Morse code?</summary><p>Yes. Play Morse generates tones using the browser's Web Audio API. You can adjust speed from 5 to 40 WPM and pitch from 300 to 1000 Hz.</p></details>
+    <details class="faq"><summary>What happens to characters that do not have a mapping?</summary><p>When encoding text, unsupported non-whitespace characters are omitted and counted. When decoding, unknown Morse tokens are displayed as a question mark.</p></details>
+    <details class="faq"><summary>Does the audio player use standard Morse timing?</summary><p>It uses the conventional 1:3 dot-to-dash ratio with one-unit element gaps, three-unit letter gaps, and seven-unit word gaps. Speed is derived from the PARIS WPM convention.</p></details>
+    <details class="faq"><summary>Is my text sent to a server?</summary><p>No. The translation, decoding, statistics, audio generation, clipboard operation, and TXT-file generation are performed in your browser.</p></details>
+    <details class="faq"><summary>Can I save my Morse code?</summary><p>Yes. Use Copy Output for the clipboard or Download TXT to save the current converted result as a UTF-8 text file.</p></details>
+  </section>
+</div>
+</main>
+
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
+<footer>
+  <div class="container footer-inner">
+    <span>© 2026 Utiliverse. All rights reserved.</span>
+    <span>100% Free and Browser Based</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+  let mode = "encode";
+  let audioContext = null;
+  let activeNodes = [];
+  let playbackTimer = null;
+
+  const MORSE = {
+    A:".-", B:"-...", C:"-.-.", D:"-..", E:".", F:"..-.", G:"--.", H:"....", I:"..", J:".---",
+    K:"-.-", L:".-..", M:"--", N:"-.", O:"---", P:".--.", Q:"--.-", R:".-.", S:"...", T:"-",
+    U:"..-", V:"...-", W:".--", X:"-..-", Y:"-.--", Z:"--..",
+    "0":"-----","1":".----","2":"..---","3":"...--","4":"....-","5":".....","6":"-....","7":"--...",
+    "8":"---..","9":"----.",
+    ".":".-.-.-", ",":"--..--", "?":"..--..", "'":".----.", "!":"-.-.--", "/":"-..-.",
+    "(":"-.--.", ")":"-.--.-", "&":".-...", ":":"---...", ";":"-.-.-.", "=":"-...-",
+    "+":".-.-.", "-":"-....-", "_":"..--.-", '"':".-..-.", "$":"...-..-", "@":".--.-."
+  };
+  const REVERSE = Object.fromEntries(Object.entries(MORSE).map(([k,v]) => [v,k]));
+
+  function applyTheme(theme) {
+    const light = theme === "light";
+    const moon = $("moonIcon");
+    const sun = $("sunIcon");
+    const toggle = $("themeToggle");
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+
+    document.body.classList.toggle("light-mode", light);
+    moon.classList.toggle("theme-hidden", !light);
+    sun.classList.toggle("theme-hidden", light);
+
+    const label = light ? "Switch to dark mode" : "Switch to light mode";
+    toggle.setAttribute("aria-label", label);
+    toggle.title = label;
+
+    if (metaTheme) {
+      metaTheme.setAttribute("content", light ? "#f8fafc" : "#020617");
+    }
+  }
+
+  const savedTheme = localStorage.getItem("utiliverse-theme");
+  const initialTheme = savedTheme === "light" || savedTheme === "dark"
+    ? savedTheme
+    : (window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+
+  applyTheme(initialTheme);
+
+  $("themeToggle").addEventListener("click", () => {
+    const next = document.body.classList.contains("light-mode") ? "dark" : "light";
+    localStorage.setItem("utiliverse-theme", next);
+    applyTheme(next);
+  });
+
+  function normalizeMorse(text) {
+    return String(text || "")
+      .replace(/[•·]/g, ".")
+      .replace(/[–—−]/g, "-")
+      .replace(/\u00A0/g, " ")
+      .trim();
+  }
+
+  function encodeText(text) {
+    const separator = $("wordSeparator").value === "threeSpaces" ? "   " : " / ";
+    let unsupported = 0;
+    const words = String(text).trim().split(/\s+/).filter(Boolean);
+    const encodedWords = words.map(word => {
+      const letters = [];
+      for (const ch of Array.from(word.toUpperCase())) {
+        if (MORSE[ch]) letters.push(MORSE[ch]);
+        else unsupported++;
+      }
+      return letters.join(" ");
+    }).filter(Boolean);
+    return { output: encodedWords.join(separator), unsupported };
+  }
+
+  function decodeMorse(text) {
+    const normalized = normalizeMorse(text);
+    if (!normalized) return { output:"", unsupported:0 };
+
+    // Slash or 2+ spaces are accepted as word separators.
+    const wordGroups = normalized
+      .replace(/\s*\/\s*/g, "  ")
+      .split(/\s{2,}/)
+      .filter(Boolean);
+
+    let unsupported = 0;
+    const decoded = wordGroups.map(group => {
+      return group.trim().split(/\s+/).filter(Boolean).map(token => {
+        if (REVERSE[token] !== undefined) return REVERSE[token];
+        unsupported++;
+        return "?";
+      }).join("");
+    }).join(" ");
+
+    return { output:decoded, unsupported };
+  }
+
+  function countWords(text) {
+    const t = String(text || "").trim();
+    return t ? t.split(/\s+/).length : 0;
+  }
+
+  function morseTokens(text) {
+    const n = normalizeMorse(text);
+    return n ? n.replace(/\s*\/\s*/g, " ").split(/\s+/).filter(x => /^[.-]+$/.test(x)) : [];
+  }
+
+  function update() {
+    const source = $("inputText").value;
+    const result = mode === "encode" ? encodeText(source) : decodeMorse(source);
+    $("outputText").value = result.output;
+
+    const morse = mode === "encode" ? result.output : source;
+    $("inputMeta").textContent = `${Array.from(source).length.toLocaleString("en-US")} characters`;
+    $("outputMeta").textContent = mode === "encode"
+      ? `${morseTokens(result.output).length.toLocaleString("en-US")} Morse tokens`
+      : `${Array.from(result.output).length.toLocaleString("en-US")} characters`;
+
+    $("charCount").textContent = Array.from(source).length.toLocaleString("en-US");
+    $("wordCount").textContent = countWords(mode === "encode" ? source : result.output).toLocaleString("en-US");
+    $("tokenCount").textContent = morseTokens(morse).length.toLocaleString("en-US");
+    $("signalCount").textContent = (morse.match(/[.-]/g) || []).length.toLocaleString("en-US");
+    $("unsupportedCount").textContent = result.unsupported.toLocaleString("en-US");
+  }
+
+  function setMode(next) {
+    stopPlayback();
+    mode = next;
+    const enc = mode === "encode";
+    $("encodeTab").classList.toggle("active", enc);
+    $("decodeTab").classList.toggle("active", !enc);
+    $("encodeTab").setAttribute("aria-selected", String(enc));
+    $("decodeTab").setAttribute("aria-selected", String(!enc));
+    $("inputTitle").textContent = enc ? "Text input" : "Morse input";
+    $("outputTitle").textContent = enc ? "Morse output" : "Decoded text";
+    $("inputText").placeholder = enc ? "Type or paste text here..." : "Enter Morse, e.g. ... --- ...";
+    $("outputText").placeholder = enc ? "Converted Morse code will appear here..." : "Decoded text will appear here...";
+    $("outputText").classList.toggle("morse-output", enc);
+    $("wordSeparator").disabled = !enc;
+    update();
+  }
+
+  $("encodeTab").addEventListener("click", () => setMode("encode"));
+  $("decodeTab").addEventListener("click", () => setMode("decode"));
+  $("inputText").addEventListener("input", update);
+  $("wordSeparator").addEventListener("change", update);
+
+  $("swapBtn").addEventListener("click", () => {
+    const currentOutput = $("outputText").value;
+    setMode(mode === "encode" ? "decode" : "encode");
+    $("inputText").value = currentOutput;
+    update();
+    $("inputText").focus();
+  });
+
+  $("sampleBtn").addEventListener("click", () => {
+    if (mode === "encode") {
+      $("inputText").value = "SOS from Utiliverse";
+    } else {
+      $("inputText").value = "... --- ... / ..-. .-. --- -- / ..- - .. .-.. .. ...- . .-. ... .";
+    }
+    update();
+  });
+
+  $("clearBtn").addEventListener("click", () => {
+    stopPlayback();
+    $("inputText").value = "";
+    $("outputText").value = "";
+    $("status").textContent = "";
+    update();
+    $("inputText").focus();
+  });
+
+  async function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.left = "-9999px";
+    document.body.appendChild(ta);
+    ta.select();
+    const copied = document.execCommand("copy");
+    ta.remove();
+    if (!copied) throw new Error("Copy command failed");
+  }
+
+  $("copyBtn").addEventListener("click", async () => {
+    if (!$("outputText").value) {
+      $("status").textContent = "Nothing to copy";
+      return;
+    }
+    try {
+      await copyText($("outputText").value);
+      $("status").textContent = "Copied";
+      setTimeout(() => $("status").textContent = "", 1500);
+    } catch {
+      $("status").textContent = "Copy unavailable";
+    }
+  });
+
+  $("downloadBtn").addEventListener("click", () => {
+    if (!$("outputText").value) {
+      $("status").textContent = "Nothing to download";
+      return;
+    }
+    const blob = new Blob([$("outputText").value], {type:"text/plain;charset=utf-8"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = mode === "encode" ? "utiliverse-morse-code.txt" : "utiliverse-decoded-text.txt";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  });
+
+  $("wpm").addEventListener("input", () => $("wpmValue").textContent = `${$("wpm").value} WPM`);
+  $("frequency").addEventListener("input", () => $("frequencyValue").textContent = `${$("frequency").value} Hz`);
+
+  function morseForPlayback() {
+    if (mode === "encode") return $("outputText").value;
+    return normalizeMorse($("inputText").value);
+  }
+
+  function stopPlayback() {
+    if (playbackTimer) {
+      clearTimeout(playbackTimer);
+      playbackTimer = null;
+    }
+    activeNodes.forEach(node => {
+      try { node.stop(); } catch {}
+    });
+    activeNodes = [];
+    $("playBtn").disabled = false;
+    $("stopBtn").disabled = true;
+  }
+
+  function scheduleTone(ctx, start, duration, frequency) {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = "sine";
+    osc.frequency.value = frequency;
+    gain.gain.setValueAtTime(0.0001, start);
+    gain.gain.exponentialRampToValueAtTime(0.18, start + 0.005);
+    gain.gain.setValueAtTime(0.18, Math.max(start + 0.006, start + duration - 0.008));
+    gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(start);
+    osc.stop(start + duration + 0.01);
+    activeNodes.push(osc);
+  }
+
+  $("playBtn").addEventListener("click", async () => {
+    const morse = morseForPlayback();
+    if (!morse || !(morse.match(/[.-]/))) {
+      $("status").textContent = "No Morse code to play";
+      return;
+    }
+
+    stopPlayback();
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) {
+      $("status").textContent = "Audio is not supported in this browser";
+      return;
+    }
+
+    audioContext = audioContext || new AudioCtx();
+    if (audioContext.state === "suspended") await audioContext.resume();
+
+    const wpm = Number($("wpm").value);
+    const freq = Number($("frequency").value);
+    const unit = 1.2 / wpm;
+    const normalized = normalizeMorse(morse)
+      .replace(/\s*\/\s*/g, " / ")
+      .replace(/\s{2,}/g, " / ")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    const words = normalized.split(/\s+\/\s+/);
+    let t = audioContext.currentTime + 0.08;
+
+    words.forEach((word, wi) => {
+      const letters = word.split(/\s+/).filter(Boolean);
+      letters.forEach((code, li) => {
+        [...code].forEach((symbol, si) => {
+          if (symbol === "." || symbol === "-") {
+            const duration = (symbol === "." ? 1 : 3) * unit;
+            scheduleTone(audioContext, t, duration, freq);
+            t += duration;
+            if (si < code.length - 1) t += unit;
+          }
+        });
+        if (li < letters.length - 1) t += 3 * unit;
+      });
+      if (wi < words.length - 1) t += 7 * unit;
+    });
+
+    $("playBtn").disabled = true;
+    $("stopBtn").disabled = false;
+    $("status").textContent = "Playing Morse…";
+    const ms = Math.max(0, (t - audioContext.currentTime + 0.05) * 1000);
+    playbackTimer = setTimeout(() => {
+      activeNodes = [];
+      playbackTimer = null;
+      $("playBtn").disabled = false;
+      $("stopBtn").disabled = true;
+      $("status").textContent = "";
+    }, ms);
+  });
+
+  $("stopBtn").addEventListener("click", () => {
+    stopPlayback();
+    $("status").textContent = "Playback stopped";
+    setTimeout(() => $("status").textContent = "", 1200);
+  });
+
+  window.addEventListener("pagehide", stopPlayback);
+
+  const referenceKeys = [
+    ..."ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    ..."0123456789",
+    ".",",","?","'","!","/","(",")","&",":",";","=","+","-","_",'"',"$","@"
+  ];
+  $("morseGrid").innerHTML = referenceKeys.map(k =>
+    `<div class="morse-item"><strong>${k}</strong><span>${MORSE[k]}</span></div>`
+  ).join("");
+
+  $("outputText").classList.add("morse-output");
+  update();
+})();
+</script>
+</body>
+</html>
