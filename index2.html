@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Utiliverse – Free Online Calculators, Converters & Utility Tools</title>
+<meta name="description" content="Free online calculators, converters and browser-based utility tools for finance, developers, text, math, time, PDFs, images and everyday tasks.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#f8fafc">
+<link rel="canonical" href="https://utiliverse.app/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Utiliverse – Free Online Calculators, Converters & Utility Tools">
+<meta property="og:description" content="Browse free browser-based calculators, converters, developer tools, text tools, math tools, time utilities and testing resources.">
+<meta property="og:url" content="https://utiliverse.app/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Utiliverse – Free Online Calculators, Converters & Utility Tools">
+<meta name="twitter:description" content="Free online calculators, converters and practical browser-based utilities for everyday tasks and technical work.">
+
+<style>
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --bg:#f8fafc;--surface:#ffffff;--surface-soft:#f1f5f9;--surface-glass:rgba(255,255,255,.84);
+  --text:#0f172a;--muted:#64748b;--muted2:#94a3b8;--border:#e2e8f0;--border-strong:#cbd5e1;
+  --indigo:#4f46e5;--indigo2:#6366f1;--shadow:0 10px 30px rgba(15,23,42,.06);
+}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
+a{color:inherit}button,input{font:inherit}button{touch-action:manipulation}
+.container{width:min(1180px,calc(100% - 32px));margin:0 auto}
+.hidden{display:none!important}
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.header-inner{height:66px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-weight:900;letter-spacing:-.02em;font-size:20px}
+.brand-mark{display:inline-flex;width:40px;height:40px;align-items:center;justify-content:center;border-radius:12px;background:var(--indigo);color:white}
+.brand-mark svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.header-right{display:flex;align-items:center;gap:12px}
+.free-label{font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border:1px solid var(--border-strong);background:#fff;color:#475569;border-radius:12px;cursor:pointer;box-shadow:none;appearance:none;-webkit-appearance:none}
+.theme-toggle:hover{background:#f1f5f9;color:#0f172a;border-color:#94a3b8}
+.theme-toggle:focus-visible,.search-input:focus-visible,.search-clear:focus-visible,.cat-btn:focus-visible,.tool-card:focus-visible,.footer-links a:focus-visible{outline:2px solid var(--indigo2);outline-offset:3px}
+.theme-toggle svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.theme-hidden{display:none!important}
+
+.hero{padding:54px 0 30px;background:radial-gradient(circle at 50% 0%,rgba(99,102,241,.13),transparent 44%),linear-gradient(to bottom,#eef2ff55,var(--bg))}
+.hero-inner{max-width:860px;margin:0 auto;text-align:center}
+.eyebrow{font-size:12px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:#6366f1}
+h1{font-size:clamp(38px,6vw,58px);line-height:1.03;letter-spacing:-.04em;margin:10px 0 14px}
+.hero-copy{max-width:720px;margin:0 auto;color:var(--muted);font-size:18px;line-height:1.7}
+.hero-meta{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:18px 0 0}
+.meta-pill{border:1px solid var(--border);background:rgba(255,255,255,.72);color:#475569;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:800}
+
+.directory-controls{max-width:880px;margin:26px auto 0}
+.search-wrap{position:relative}
+.search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);width:20px;height:20px;color:#94a3b8;pointer-events:none}
+.search-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.search-input{width:100%;min-height:56px;border:1px solid var(--border);border-radius:18px;background:var(--surface);color:var(--text);padding:14px 52px 14px 48px;font-size:16px;box-shadow:0 6px 20px rgba(15,23,42,.05);outline:none}
+.search-input:focus{border-color:#818cf8;box-shadow:0 0 0 4px rgba(99,102,241,.12)}
+.search-clear{position:absolute;right:10px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:#64748b;width:36px;height:36px;border-radius:10px;cursor:pointer;font-size:22px;line-height:1}
+.search-clear:hover{background:var(--surface-soft);color:var(--text)}
+.filters{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:15px}
+.cat-btn{border:1px solid var(--border);background:var(--surface);color:#475569;border-radius:999px;padding:8px 13px;font-size:13px;font-weight:800;cursor:pointer}
+.cat-btn:hover{border-color:#a5b4fc;color:#4338ca}
+.cat-btn.active{background:#0f172a;color:#fff;border-color:#0f172a}
+.results-line{display:flex;justify-content:center;align-items:center;min-height:28px;margin-top:10px;color:var(--muted);font-size:13px;font-weight:650}
+
+main{padding:30px 0 72px}
+.section-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:18px}
+.section-heading h2{font-size:28px;letter-spacing:-.025em;margin:0}
+.section-heading p{color:var(--muted);margin:4px 0 0;line-height:1.55;font-size:14px}
+.recent-section{margin-bottom:42px}
+.recent-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.tool-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.tool-card{--accent:#6366f1;--accent-soft:#eef2ff;display:flex;flex-direction:column;justify-content:space-between;gap:20px;min-width:0;padding:22px;background:var(--surface);border:1px solid var(--border);border-radius:20px;text-decoration:none;box-shadow:0 1px 2px rgba(15,23,42,.03);transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}
+.tool-card:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--accent) 50%,var(--border));box-shadow:var(--shadow)}
+.compact-card{padding:19px;border-radius:18px}
+.card-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px}
+.tool-icon{width:46px;height:46px;border-radius:14px;background:var(--accent-soft);color:var(--accent);display:inline-flex;align-items:center;justify-content:center}
+.tool-icon svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.category-badge{font-size:11px;font-weight:850;color:var(--accent);background:var(--accent-soft);border-radius:999px;padding:6px 9px;white-space:nowrap}
+.tool-card h3{font-size:19px;line-height:1.35;margin:0;letter-spacing:-.015em}
+.tool-card p{margin:8px 0 0;color:var(--muted);font-size:14px;line-height:1.68}
+.open-tool{display:inline-flex;align-items:center;gap:6px;color:var(--accent);font-size:13px;font-weight:850}
+.tool-card:hover .open-tool span{transform:translateX(3px)}
+.open-tool span{transition:transform .16s ease}
+.accent-finance{--accent:#e11d48;--accent-soft:#fff1f2}
+.accent-developer{--accent:#4f46e5;--accent-soft:#eef2ff}
+.accent-text{--accent:#7c3aed;--accent-soft:#f5f3ff}
+.accent-math{--accent:#2563eb;--accent-soft:#eff6ff}
+.accent-time{--accent:#059669;--accent-soft:#ecfdf5}
+.accent-converter{--accent:#0891b2;--accent-soft:#ecfeff}
+.accent-testing{--accent:#d97706;--accent-soft:#fffbeb}
+.accent-productivity{--accent:#475569;--accent-soft:#f1f5f9}
+
+.no-results{display:none;margin-top:20px;padding:30px;border:1px dashed var(--border-strong);border-radius:20px;text-align:center;background:var(--surface);color:var(--muted)}
+.no-results.show{display:block}
+.no-results strong{display:block;color:var(--text);font-size:18px;margin-bottom:6px}
+.no-results button{margin-top:12px;border:1px solid var(--border-strong);border-radius:10px;padding:9px 12px;background:var(--surface-soft);color:var(--text);font-weight:800;cursor:pointer}
+
+.editorial-wrap{padding:0 0 62px}
+.editorial-card{background:var(--surface);border:1px solid var(--border);border-radius:26px;padding:32px;box-shadow:0 1px 2px rgba(15,23,42,.03)}
+.editorial-inner{max-width:920px;margin:0 auto}
+.editorial-card h2{font-size:clamp(28px,4vw,40px);line-height:1.16;letter-spacing:-.035em;margin:8px 0 18px}
+.editorial-card>div>p,.editorial-copy p{color:var(--muted);line-height:1.8;margin:0 0 14px}
+.benefits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:24px}
+.benefit{border:1px solid var(--border);background:var(--surface-soft);border-radius:18px;padding:18px}
+.benefit h3{font-size:16px;margin:0 0 7px}
+.benefit p{font-size:13px;line-height:1.65;color:var(--muted);margin:0}
+.editorial-link{color:#4f46e5;font-weight:800;text-decoration:none}
+.editorial-link:hover{text-decoration:underline}
+
+footer{border-top:1px solid var(--border);background:var(--surface)}
+.footer-inner{min-height:94px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:18px;color:var(--muted);font-size:13px}
+.footer-main{display:flex;flex-direction:column;gap:5px}
+.footer-main strong{color:var(--text);font-weight:750}
+.footer-side{display:flex;align-items:center;gap:22px;flex-wrap:wrap;justify-content:flex-end}
+.footer-links{display:flex;gap:16px;flex-wrap:wrap}
+.footer-links a{text-decoration:none}
+.footer-links a:hover{color:var(--text)}
+.footer-free{font-weight:800;white-space:nowrap}
+
+body.dark-mode{
+  --bg:#020617;--surface:#0f172a;--surface-soft:#111c2f;--surface-glass:rgba(15,23,42,.86);
+  --text:#f8fafc;--muted:#94a3b8;--muted2:#64748b;--border:#1e293b;--border-strong:#334155;
+  --shadow:0 14px 36px rgba(0,0,0,.22);
+}
+body.dark-mode header{background:rgba(2,6,23,.86)}
+body.dark-mode .theme-toggle{background:#0f172a;border-color:#334155;color:#94a3b8}
+body.dark-mode .theme-toggle:hover{background:#1e293b;color:#fff;border-color:#475569}
+body.dark-mode .hero{background:radial-gradient(circle at 50% 0%,rgba(99,102,241,.16),transparent 46%),linear-gradient(to bottom,#11182755,var(--bg))}
+body.dark-mode .meta-pill{background:rgba(15,23,42,.74);color:#cbd5e1}
+body.dark-mode .cat-btn.active{background:#f8fafc;color:#0f172a;border-color:#f8fafc}
+body.dark-mode .cat-btn:hover{color:#c7d2fe}
+body.dark-mode .tool-card:hover{border-color:var(--accent)}
+body.dark-mode .accent-finance{--accent:#fb7185;--accent-soft:rgba(225,29,72,.14)}
+body.dark-mode .accent-developer{--accent:#a5b4fc;--accent-soft:rgba(79,70,229,.18)}
+body.dark-mode .accent-text{--accent:#c4b5fd;--accent-soft:rgba(124,58,237,.17)}
+body.dark-mode .accent-math{--accent:#93c5fd;--accent-soft:rgba(37,99,235,.16)}
+body.dark-mode .accent-time{--accent:#6ee7b7;--accent-soft:rgba(5,150,105,.15)}
+body.dark-mode .accent-converter{--accent:#67e8f9;--accent-soft:rgba(8,145,178,.15)}
+body.dark-mode .accent-testing{--accent:#fcd34d;--accent-soft:rgba(217,119,6,.15)}
+body.dark-mode .accent-productivity{--accent:#cbd5e1;--accent-soft:rgba(71,85,105,.35)}
+body.dark-mode .editorial-link{color:#a5b4fc}
+
+@media(max-width:980px){
+  .recent-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .benefits{grid-template-columns:1fr}
+}
+@media(max-width:680px){
+  .container{width:min(100% - 24px,1180px)}
+  .header-inner{height:64px}
+  .brand{font-size:18px}
+  .brand-mark{width:36px;height:36px}
+  .header-right{gap:7px}
+  .free-label{font-size:10.5px;max-width:128px;white-space:normal;text-align:right;line-height:1.18}
+  .hero{padding:38px 0 22px}
+  .hero-copy{font-size:16px}
+  .directory-controls{margin-top:22px}
+  .filters{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px;scrollbar-width:thin}
+  .cat-btn{flex:0 0 auto}
+  main{padding-top:24px}
+  .section-heading{align-items:flex-start;flex-direction:column;gap:4px}
+  .recent-grid,.tool-grid{grid-template-columns:1fr}
+  .tool-card{padding:20px}
+  .editorial-card{padding:24px 20px}
+  .footer-inner{grid-template-columns:1fr;padding:24px 0;text-align:center}
+  .footer-side{justify-content:center;gap:12px}
+  .footer-links{justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;transition:none!important}
+}
+
+</style>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://utiliverse.app/#website","url":"https://utiliverse.app/","name":"Utiliverse","description":"Free online calculators, converters, developer tools, text tools, math tools, time utilities, testing tools and productivity resources."},{"@type":"CollectionPage","@id":"https://utiliverse.app/#homepage","url":"https://utiliverse.app/","name":"Utiliverse \u2013 Free Online Calculators, Converters & Utility Tools","isPartOf":{"@id":"https://utiliverse.app/#website"},"description":"Browse free browser-based calculators, converters and utility tools for finance, developers, text, math, time, testing and everyday tasks.","mainEntity":{"@id":"https://utiliverse.app/#tools"}},{"@type":"ItemList","@id":"https://utiliverse.app/#tools","name":"Utiliverse Tool Directory","numberOfItems":39,"itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"WebPage","name":"Mortgage Payoff Calculator","url":"https://utiliverse.app/Mortgage_Payoff_Calculator/"}},{"@type":"ListItem","position":2,"item":{"@type":"WebPage","name":"PDF Conversion Toolkit Pro","url":"https://utiliverse.app/PDF_Conversion_Toolkit_Pro/"}},{"@type":"ListItem","position":3,"item":{"@type":"WebPage","name":"Image Resizer & Social Media Format Utility","url":"https://utiliverse.app/Image_Converter/"}},{"@type":"ListItem","position":4,"item":{"@type":"WebPage","name":"Home Affordability Calculator","url":"https://utiliverse.app/Home_Affordability_Calculator/"}},{"@type":"ListItem","position":5,"item":{"@type":"WebPage","name":"Auto Lease Calculator","url":"https://utiliverse.app/Auto_Lease_Calculator/"}},{"@type":"ListItem","position":6,"item":{"@type":"WebPage","name":"Retirement Calculator","url":"https://utiliverse.app/Retirement_Calculator/"}},{"@type":"ListItem","position":7,"item":{"@type":"WebPage","name":"Rental Property Calculator","url":"https://utiliverse.app/Rental_Property_Calculator/"}},{"@type":"ListItem","position":8,"item":{"@type":"WebPage","name":"Scientific Calculator","url":"https://utiliverse.app/Scientific_Calculator/"}},{"@type":"ListItem","position":9,"item":{"@type":"WebPage","name":"Screen Color Tester","url":"https://utiliverse.app/Screen_Color-Tester/"}},{"@type":"ListItem","position":10,"item":{"@type":"WebPage","name":"Simple Word Unscrambler","url":"https://utiliverse.app/Simple_Word_Unskrambler/"}},{"@type":"ListItem","position":11,"item":{"@type":"WebPage","name":"Unit & Currency Converter","url":"https://utiliverse.app/Unit_Currency_Converter/"}},{"@type":"ListItem","position":12,"item":{"@type":"WebPage","name":"JSON Formatting Utility","url":"https://utiliverse.app/JSON_Utility/"}},{"@type":"ListItem","position":13,"item":{"@type":"WebPage","name":"Fraction Calculator","url":"https://utiliverse.app/Fraction_Calculator/"}},{"@type":"ListItem","position":14,"item":{"@type":"WebPage","name":"Email Message Header Analyzer","url":"https://utiliverse.app/Email_Message_Header_Analyzer/"}},{"@type":"ListItem","position":15,"item":{"@type":"WebPage","name":"Compound Interest Calculator","url":"https://utiliverse.app/Compound_Interest_Calculator/"}},{"@type":"ListItem","position":16,"item":{"@type":"WebPage","name":"Salary Calculator","url":"https://utiliverse.app/Salary_Calculator/"}},{"@type":"ListItem","position":17,"item":{"@type":"WebPage","name":"IP Subnet Calculator","url":"https://utiliverse.app/ip-subnet-calculator/"}},{"@type":"ListItem","position":18,"item":{"@type":"WebPage","name":"Random String Generator","url":"https://utiliverse.app/Random_String_Generator/"}},{"@type":"ListItem","position":19,"item":{"@type":"WebPage","name":"Hash Generator","url":"https://utiliverse.app/Hash_Generator/"}},{"@type":"ListItem","position":20,"item":{"@type":"WebPage","name":"HAR File Viewer","url":"https://utiliverse.app/HAR_File_Viewer/"}},{"@type":"ListItem","position":21,"item":{"@type":"WebPage","name":"HEX to RGB","url":"https://utiliverse.app/HEX_to_RGB/"}},{"@type":"ListItem","position":22,"item":{"@type":"WebPage","name":"Internet Speed Test","url":"https://utiliverse.app/Internet_Speed_Test/"}},{"@type":"ListItem","position":23,"item":{"@type":"WebPage","name":"YAML to JSON","url":"https://utiliverse.app/YAML_to_JSON/"}},{"@type":"ListItem","position":24,"item":{"@type":"WebPage","name":"Typing Lab","url":"https://utiliverse.app/Typing_Lab"}},{"@type":"ListItem","position":25,"item":{"@type":"WebPage","name":"HTML Viewer","url":"https://utiliverse.app/HTML_Viewer/"}},{"@type":"ListItem","position":26,"item":{"@type":"WebPage","name":"Percentage Calculator","url":"https://utiliverse.app/Percent_Calculator"}},{"@type":"ListItem","position":27,"item":{"@type":"WebPage","name":"Word Counter","url":"https://utiliverse.app/Word_Counter/"}},{"@type":"ListItem","position":28,"item":{"@type":"WebPage","name":"Volume Calculator","url":"https://utiliverse.app/Volume_Calculator"}},{"@type":"ListItem","position":29,"item":{"@type":"WebPage","name":"Time Tracking Suite","url":"https://utiliverse.app/Time_Tracking_Suite"}},{"@type":"ListItem","position":30,"item":{"@type":"WebPage","name":"JSON to CSV Converter","url":"https://utiliverse.app/JSON_to_CSV_Converter"}},{"@type":"ListItem","position":31,"item":{"@type":"WebPage","name":"Time Zone Converter","url":"https://utiliverse.app/Time_Zone_Converter"}},{"@type":"ListItem","position":32,"item":{"@type":"WebPage","name":"Days Between Dates Calculator","url":"https://utiliverse.app/Days_Between_Dates/"}},{"@type":"ListItem","position":33,"item":{"@type":"WebPage","name":"Military Time Converter","url":"https://utiliverse.app/Military_Time_Converter/"}},{"@type":"ListItem","position":34,"item":{"@type":"WebPage","name":"Time Unit Converter","url":"https://utiliverse.app/Time_Unit_Converter/"}},{"@type":"ListItem","position":35,"item":{"@type":"WebPage","name":"Text to Morse Code Converter","url":"https://utiliverse.app/Text_to_Morse_Code/"}},{"@type":"ListItem","position":36,"item":{"@type":"WebPage","name":"Password Strength Analyzer","url":"https://utiliverse.app/Password_Strength_Analyzer/"}},{"@type":"ListItem","position":37,"item":{"@type":"WebPage","name":"Email DNS Checker","url":"https://utiliverse.app/Email_DNS_Reputation_Checker/"}},{"@type":"ListItem","position":38,"item":{"@type":"WebPage","name":"Animal Age Calculator","url":"https://utiliverse.app/Animal_Age_Converter/"}},{"@type":"ListItem","position":39,"item":{"@type":"WebPage","name":"Case Converter","url":"https://utiliverse.app/Case_Converter/"}}]}]}</script>
+</head>
+
+<body>
+<!--
+UTILIVERSE HOMEPAGE V2
+Primary SEO target: free online utility tools
+Secondary: online calculators, converters, developer tools, text tools,
+math tools, time and date tools, testing tools, productivity tools
+
+GOOGLE ADSENSE
+Only invisible insertion comments are included. No visible placeholder box,
+border, label, or reserved ad space is rendered before approved ad code is added.
+-->
+
+<header>
+  <div class="container header-inner">
+    <a class="brand" href="https://utiliverse.app/" aria-label="Utiliverse home">
+      <span class="brand-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 8 4-8 4-8-4 8-4Z"/><path d="m4 10 8 4 8-4M4 14l8 4 8-4"/></svg></span>
+      <span>Utiliverse</span>
+    </a>
+    <div class="header-right">
+      <span class="free-label">100% Free and Browser Based</span>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
+        <svg id="moonIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"/></svg>
+        <svg id="sunIcon" class="theme-hidden" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="eyebrow">Free online utility tools</div>
+    <h1>Fast, Free Utilities for Everyday Tasks</h1>
+    <p class="hero-copy">No sign-ups and no software installs. Find practical calculators, converters, developer tools, text utilities, time tools, and testing resources in one organized directory.</p>
+
+    <div class="hero-meta">
+      <span class="meta-pill"><span id="heroToolCount">39</span> tools and growing</span>
+      <span class="meta-pill">Searchable directory</span>
+      <span class="meta-pill">Desktop & mobile friendly</span>
+    </div>
+
+    <div class="directory-controls">
+      <div class="search-wrap">
+        <span class="search-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></span>
+        <input id="searchInput" class="search-input" type="search" autocomplete="off"
+               placeholder="Search tools (e.g., Mortgage, JSON, Morse, Time)..."
+               aria-label="Search Utiliverse tools">
+        <button id="clearSearch" class="search-clear hidden" type="button" aria-label="Clear search" title="Clear search">×</button>
+      </div>
+
+      <div id="categoryFilters" class="filters" aria-label="Filter tools by category">
+        <button class="cat-btn active" type="button" data-filter="all" aria-pressed="true">All Tools</button>
+<button class="cat-btn" type="button" data-filter="finance" aria-pressed="false">Finance</button>
+<button class="cat-btn" type="button" data-filter="developer" aria-pressed="false">Developer</button>
+<button class="cat-btn" type="button" data-filter="text" aria-pressed="false">Text</button>
+<button class="cat-btn" type="button" data-filter="math" aria-pressed="false">Math</button>
+<button class="cat-btn" type="button" data-filter="time" aria-pressed="false">Time & Date</button>
+<button class="cat-btn" type="button" data-filter="converter" aria-pressed="false">Converters</button>
+<button class="cat-btn" type="button" data-filter="testing" aria-pressed="false">Testing</button>
+<button class="cat-btn" type="button" data-filter="productivity" aria-pressed="false">Productivity</button>
+      </div>
+
+      <div id="resultsLine" class="results-line" role="status" aria-live="polite">39 tools available</div>
+    </div>
+  </div>
+</section>
+
+<!-- GOOGLE ADSENSE: TOP / AFTER-HERO INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
+<main>
+  <div class="container">
+    <section id="recentSection" class="recent-section" aria-labelledby="recentHeading">
+      <div class="section-heading">
+        <div>
+          <h2 id="recentHeading">Recently Added</h2>
+          <p>A few of the newest utilities added to the Utiliverse directory.</p>
+        </div>
+      </div>
+      <div class="recent-grid">
+        
+<a class="tool-card compact-card accent-time" href="./Military_Time_Converter/"
+   data-categories="time converter"
+   data-search="military time converter convert 24-hour military time to 12-hour am/pm time or regular time back to military hhmm and hh:mm formats. military time 24 hour 12 hour am pm hhmm time &amp; date time converter">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+      <span class="category-badge">Time &amp; Date</span>
+    </div>
+    <h3>Military Time Converter</h3>
+    <p>Convert 24-hour military time to 12-hour AM/PM time or regular time back to military HHMM and HH:MM formats.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card compact-card accent-productivity" href="./Animal_Age_Converter/"
+   data-categories="productivity math"
+   data-search="animal age calculator estimate dog, cat, rabbit, and horse ages in human-equivalent years or reverse human age into an approximate animal age. dog years cat years rabbit horse pet human equivalent age productivity productivity math">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8l1 3h3v15H4V6h3l1-3Z"/><path d="M9 12l2 2 4-4"/></svg></span>
+      <span class="category-badge">Productivity</span>
+    </div>
+    <h3>Animal Age Calculator</h3>
+    <p>Estimate dog, cat, rabbit, and horse ages in human-equivalent years or reverse human age into an approximate animal age.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card compact-card accent-developer" href="./Password_Strength_Analyzer/"
+   data-categories="developer testing"
+   data-search="password strength analyzer free password strength checker with entropy estimates, crack-time scenarios, pattern detection, security recommendations, and a web crypto password generator. password strength entropy crack time generator security developer developer testing">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></svg></span>
+      <span class="category-badge">Developer</span>
+    </div>
+    <h3>Password Strength Analyzer</h3>
+    <p>Free password strength checker with entropy estimates, crack-time scenarios, pattern detection, security recommendations, and a Web Crypto password generator.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card compact-card accent-text" href="./Case_Converter/"
+   data-categories="text converter"
+   data-search="case converter convert text between uppercase, lowercase, title case, sentence case, camelcase, pascalcase, snake_case, kebab-case, and more. uppercase lowercase title case sentence camelcase pascalcase snake kebab text text text converter">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 10h12M4 14h16M4 18h10"/></svg></span>
+      <span class="category-badge">Text</span>
+    </div>
+    <h3>Case Converter</h3>
+    <p>Convert text between uppercase, lowercase, title case, sentence case, camelCase, PascalCase, snake_case, kebab-case, and more.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+      </div>
+    </section>
+
+    <section id="directory" aria-labelledby="directoryHeading">
+      <div class="section-heading">
+        <div>
+          <h2 id="directoryHeading">All Utiliverse Tools</h2>
+          <p>Search or filter the full directory. Some tools appear in more than one category when their use cases overlap.</p>
+        </div>
+      </div>
+
+      <noscript>
+        <div class="no-results show"><strong>JavaScript is disabled.</strong>All tools remain available below, but search and category filtering require JavaScript.</div>
+      </noscript>
+
+      <div id="toolsGrid" class="tool-grid">
+        
+<a class="tool-card accent-finance" href="./Mortgage_Payoff_Calculator/"
+   data-categories="finance"
+   data-search="mortgage payoff calculator estimate mortgage payoff timing, monthly principal and interest, amortization, and interest savings from extra payments. mortgage extra payment payoff amortization interest loan finance finance">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M16 8.5c-.7-.9-2-1.5-3.6-1.5-2 0-3.4.9-3.4 2.3 0 1.5 1.5 2.1 3.6 2.6 2.3.6 3.4 1.3 3.4 2.8 0 1.4-1.5 2.3-3.5 2.3-1.9 0-3.4-.7-4.3-1.8M12 5v14"/></svg></span>
+      <span class="category-badge">Finance</span>
+    </div>
+    <h3>Mortgage Payoff Calculator</h3>
+    <p>Estimate mortgage payoff timing, monthly principal and interest, amortization, and interest savings from extra payments.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-productivity" href="./PDF_Conversion_Toolkit_Pro/"
+   data-categories="productivity converter"
+   data-search="pdf conversion toolkit pro merge, split, rotate, convert, and extract content from pdf files with browser-based document tools. pdf merge split rotate jpg png webp text markdown json xml html productivity productivity converter">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8l1 3h3v15H4V6h3l1-3Z"/><path d="M9 12l2 2 4-4"/></svg></span>
+      <span class="category-badge">Productivity</span>
+    </div>
+    <h3>PDF Conversion Toolkit Pro</h3>
+    <p>Merge, split, rotate, convert, and extract content from PDF files with browser-based document tools.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-productivity" href="./Image_Converter/"
+   data-categories="productivity converter"
+   data-search="image resizer &amp; social media format utility convert, resize, and prepare images with custom dimensions, aspect controls, and social-media presets. image photo resize crop dimensions aspect social media jpg png webp bmp productivity productivity converter">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8l1 3h3v15H4V6h3l1-3Z"/><path d="M9 12l2 2 4-4"/></svg></span>
+      <span class="category-badge">Productivity</span>
+    </div>
+    <h3>Image Resizer &amp; Social Media Format Utility</h3>
+    <p>Convert, resize, and prepare images with custom dimensions, aspect controls, and social-media presets.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-finance" href="./Home_Affordability_Calculator/"
+   data-categories="finance"
+   data-search="home affordability calculator estimate your home buying budget using income, debts, mortgage rates, taxes, insurance, down payment and loan type. house home mortgage income debt dti down payment affordability finance finance">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M16 8.5c-.7-.9-2-1.5-3.6-1.5-2 0-3.4.9-3.4 2.3 0 1.5 1.5 2.1 3.6 2.6 2.3.6 3.4 1.3 3.4 2.8 0 1.4-1.5 2.3-3.5 2.3-1.9 0-3.4-.7-4.3-1.8M12 5v14"/></svg></span>
+      <span class="category-badge">Finance</span>
+    </div>
+    <h3>Home Affordability Calculator</h3>
+    <p>Estimate your home buying budget using income, debts, mortgage rates, taxes, insurance, down payment and loan type.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-finance" href="./Auto_Lease_Calculator/"
+   data-categories="finance"
+   data-search="auto lease calculator estimate your monthly car lease payment, depreciation, finance charge, taxes and total lease cost with the utiliverse auto lease calculator. car auto lease monthly payment residual money factor depreciation finance finance">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M16 8.5c-.7-.9-2-1.5-3.6-1.5-2 0-3.4.9-3.4 2.3 0 1.5 1.5 2.1 3.6 2.6 2.3.6 3.4 1.3 3.4 2.8 0 1.4-1.5 2.3-3.5 2.3-1.9 0-3.4-.7-4.3-1.8M12 5v14"/></svg></span>
+      <span class="category-badge">Finance</span>
+    </div>
+    <h3>Auto Lease Calculator</h3>
+    <p>Estimate your monthly car lease payment, depreciation, finance charge, taxes and total lease cost with the Utiliverse Auto Lease Calculator.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-finance" href="./Retirement_Calculator/"
+   data-categories="finance"
+   data-search="retirement calculator estimate how much you may need for retirement, how much to save, potential retirement income, and how long your savings may last. retirement savings income nest egg contribution investment finance finance">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M16 8.5c-.7-.9-2-1.5-3.6-1.5-2 0-3.4.9-3.4 2.3 0 1.5 1.5 2.1 3.6 2.6 2.3.6 3.4 1.3 3.4 2.8 0 1.4-1.5 2.3-3.5 2.3-1.9 0-3.4-.7-4.3-1.8M12 5v14"/></svg></span>
+      <span class="category-badge">Finance</span>
+    </div>
+    <h3>Retirement Calculator</h3>
+    <p>Estimate how much you may need for retirement, how much to save, potential retirement income, and how long your savings may last.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-finance" href="./Rental_Property_Calculator/"
+   data-categories="finance"
+   data-search="rental property calculator analyze a rental property investment with estimated cash flow, cap rate, cash-on-cash return, equity, sale proceeds and projected profit. rental property roi cash flow cap rate investment landlord finance finance">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M16 8.5c-.7-.9-2-1.5-3.6-1.5-2 0-3.4.9-3.4 2.3 0 1.5 1.5 2.1 3.6 2.6 2.3.6 3.4 1.3 3.4 2.8 0 1.4-1.5 2.3-3.5 2.3-1.9 0-3.4-.7-4.3-1.8M12 5v14"/></svg></span>
+      <span class="category-badge">Finance</span>
+    </div>
+    <h3>Rental Property Calculator</h3>
+    <p>Analyze a rental property investment with estimated cash flow, cap rate, cash-on-cash return, equity, sale proceeds and projected profit.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-math" href="./Scientific_Calculator/"
+   data-categories="math"
+   data-search="scientific calculator free online scientific calculator for arithmetic, trigonometry, powers, roots, logarithms, factorials and more. scientific trig sine cosine logarithm power root factorial math math math">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/></svg></span>
+      <span class="category-badge">Math</span>
+    </div>
+    <h3>Scientific Calculator</h3>
+    <p>Free online scientific calculator for arithmetic, trigonometry, powers, roots, logarithms, factorials and more.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-testing" href="./Screen_Color-Tester/"
+   data-categories="testing"
+   data-search="screen color tester test fullscreen solid colors, inspect hex and rgb values, use presets, and create simple color test images. screen color monitor dead pixel fullscreen hex rgb display tester testing testing">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16M6 16l3-4 3 2 5-7 2 2"/><circle cx="9" cy="12" r="1"/><circle cx="17" cy="7" r="1"/></svg></span>
+      <span class="category-badge">Testing</span>
+    </div>
+    <h3>Screen Color Tester</h3>
+    <p>Test fullscreen solid colors, inspect HEX and RGB values, use presets, and create simple color test images.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-text" href="./Simple_Word_Unskrambler/"
+   data-categories="text"
+   data-search="simple word unscrambler find possible words from a set of letters with adjustable minimum length and result limits. anagram letters word solver unscramble text text">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 10h12M4 14h16M4 18h10"/></svg></span>
+      <span class="category-badge">Text</span>
+    </div>
+    <h3>Simple Word Unscrambler</h3>
+    <p>Find possible words from a set of letters with adjustable minimum length and result limits.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-converter" href="./Unit_Currency_Converter/"
+   data-categories="converter finance"
+   data-search="unit &amp; currency converter convert common measurement units and currencies with a single browser-based conversion tool. unit currency exchange length weight temperature volume speed converters converter finance">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h11l-3-3M17 17H6l3 3M18 7l-3 3M6 17l3-3"/></svg></span>
+      <span class="category-badge">Converters</span>
+    </div>
+    <h3>Unit &amp; Currency Converter</h3>
+    <p>Convert common measurement units and currencies with a single browser-based conversion tool.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-developer" href="./JSON_Utility/"
+   data-categories="developer"
+   data-search="json formatting utility format, validate, and minify json data directly in your browser with syntax highlighting and a full-screen code popout viewer. json formatter validator beautify minify developer developer developer">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></svg></span>
+      <span class="category-badge">Developer</span>
+    </div>
+    <h3>JSON Formatting Utility</h3>
+    <p>Format, validate, and minify JSON data directly in your browser with syntax highlighting and a full-screen code popout viewer.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-math" href="./Fraction_Calculator/"
+   data-categories="math"
+   data-search="fraction calculator calculate fractions instantly. add, subtract, multiply, and divide mixed and proper fractions. fraction decimal mixed number add subtract multiply divide math math">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/></svg></span>
+      <span class="category-badge">Math</span>
+    </div>
+    <h3>Fraction Calculator</h3>
+    <p>Calculate fractions instantly. Add, subtract, multiply, and divide mixed and proper fractions.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-developer" href="./Email_Message_Header_Analyzer/"
+   data-categories="developer"
+   data-search="email message header analyzer analyze email internet headers, inspect hop latencies, and check authentication results like spf, dkim, and dmarc. email header spf dkim dmarc hops latency authentication developer developer">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></svg></span>
+      <span class="category-badge">Developer</span>
+    </div>
+    <h3>Email Message Header Analyzer</h3>
+    <p>Analyze email internet headers, inspect hop latencies, and check authentication results like SPF, DKIM, and DMARC.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-finance" href="./Compound_Interest_Calculator/"
+   data-categories="finance"
+   data-search="compound interest calculator free compound interest calculator for estimating growth, comparing compounding frequencies and understanding effective annual rates. compound interest investment growth savings rate finance finance">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M16 8.5c-.7-.9-2-1.5-3.6-1.5-2 0-3.4.9-3.4 2.3 0 1.5 1.5 2.1 3.6 2.6 2.3.6 3.4 1.3 3.4 2.8 0 1.4-1.5 2.3-3.5 2.3-1.9 0-3.4-.7-4.3-1.8M12 5v14"/></svg></span>
+      <span class="category-badge">Finance</span>
+    </div>
+    <h3>Compound Interest Calculator</h3>
+    <p>Free compound interest calculator for estimating growth, comparing compounding frequencies and understanding effective annual rates.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-finance" href="./Salary_Calculator/"
+   data-categories="finance"
+   data-search="salary calculator convert hourly, daily, weekly, biweekly, semi-monthly, monthly, quarterly and annual pay with the free utiliverse salary calculator, including a working-day adjustment. salary hourly annual weekly biweekly monthly pay wage finance finance">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M16 8.5c-.7-.9-2-1.5-3.6-1.5-2 0-3.4.9-3.4 2.3 0 1.5 1.5 2.1 3.6 2.6 2.3.6 3.4 1.3 3.4 2.8 0 1.4-1.5 2.3-3.5 2.3-1.9 0-3.4-.7-4.3-1.8M12 5v14"/></svg></span>
+      <span class="category-badge">Finance</span>
+    </div>
+    <h3>Salary Calculator</h3>
+    <p>Convert hourly, daily, weekly, biweekly, semi-monthly, monthly, quarterly and annual pay with the free Utiliverse Salary Calculator, including a working-day adjustment.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-developer" href="./ip-subnet-calculator/"
+   data-categories="developer math"
+   data-search="ip subnet calculator free ipv4 and ipv6 subnet calculator. calculate network address, broadcast, host range, subnet mask, usable hosts and ipv6 prefix information. ipv4 ipv6 subnet cidr mask hosts network broadcast developer developer math">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></svg></span>
+      <span class="category-badge">Developer</span>
+    </div>
+    <h3>IP Subnet Calculator</h3>
+    <p>Free IPv4 and IPv6 subnet calculator. Calculate network address, broadcast, host range, subnet mask, usable hosts and IPv6 prefix information.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-developer" href="./Random_String_Generator/"
+   data-categories="developer productivity"
+   data-search="random string generator generate customizable random strings using browser cryptographic randomness. random string secure crypto token letters numbers symbols developer developer productivity">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></svg></span>
+      <span class="category-badge">Developer</span>
+    </div>
+    <h3>Random String Generator</h3>
+    <p>Generate customizable random strings using browser cryptographic randomness.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-developer" href="./Hash_Generator/"
+   data-categories="developer"
+   data-search="hash generator generate sha cryptographic hashes locally in your browser using the web crypto api. hash sha sha256 sha384 sha512 sha1 crypto developer developer">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></svg></span>
+      <span class="category-badge">Developer</span>
+    </div>
+    <h3>Hash Generator</h3>
+    <p>Generate SHA cryptographic hashes locally in your browser using the Web Crypto API.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-developer" href="./HAR_File_Viewer/"
+   data-categories="developer testing"
+   data-search="har file viewer open and inspect har files locally in your browser. review requests, statuses, urls, timing, and network errors. har network requests http timing browser developer developer developer testing">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></svg></span>
+      <span class="category-badge">Developer</span>
+    </div>
+    <h3>HAR File Viewer</h3>
+    <p>Open and inspect HAR files locally in your browser. Review requests, statuses, URLs, timing, and network errors.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-developer" href="./HEX_to_RGB/"
+   data-categories="developer converter"
+   data-search="hex to rgb convert hex colors to rgb, hsl and css values with a free browser-based developer utility. hex rgb hsl css color converter developer developer developer converter">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></svg></span>
+      <span class="category-badge">Developer</span>
+    </div>
+    <h3>HEX to RGB</h3>
+    <p>Convert HEX colors to RGB, HSL and CSS values with a free browser-based developer utility.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-testing" href="./Internet_Speed_Test/"
+   data-categories="testing"
+   data-search="internet speed test measure browser-based download, upload, ping, and jitter performance using network test endpoints. speed test download upload ping jitter internet network testing testing">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16M6 16l3-4 3 2 5-7 2 2"/><circle cx="9" cy="12" r="1"/><circle cx="17" cy="7" r="1"/></svg></span>
+      <span class="category-badge">Testing</span>
+    </div>
+    <h3>Internet Speed Test</h3>
+    <p>Measure browser-based download, upload, ping, and jitter performance using network test endpoints.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-developer" href="./YAML_to_JSON/"
+   data-categories="developer converter"
+   data-search="yaml to json convert yaml configuration and structured data to formatted json in your browser. yaml json converter formatter config developer developer developer converter">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></svg></span>
+      <span class="category-badge">Developer</span>
+    </div>
+    <h3>YAML to JSON</h3>
+    <p>Convert YAML configuration and structured data to formatted JSON in your browser.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-testing" href="./Typing_Lab"
+   data-categories="testing text"
+   data-search="typing lab practice typing speed and accuracy with timed word and sentence tests, wpm, accuracy, and character tracking. typing test wpm accuracy speed practice keyboard testing testing text">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19h16M6 16l3-4 3 2 5-7 2 2"/><circle cx="9" cy="12" r="1"/><circle cx="17" cy="7" r="1"/></svg></span>
+      <span class="category-badge">Testing</span>
+    </div>
+    <h3>Typing Lab</h3>
+    <p>Practice typing speed and accuracy with timed word and sentence tests, WPM, accuracy, and character tracking.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-developer" href="./HTML_Viewer/"
+   data-categories="developer"
+   data-search="html viewer view, format, minify, and preview html code in a browser-based developer utility. html viewer formatter minifier preview code developer developer developer">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></svg></span>
+      <span class="category-badge">Developer</span>
+    </div>
+    <h3>HTML Viewer</h3>
+    <p>View, format, minify, and preview HTML code in a browser-based developer utility.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-math" href="./Percent_Calculator"
+   data-categories="math"
+   data-search="percentage calculator calculate percentages, ratios, percent increases, and percent decreases with three common percentage formulas. percent percentage increase decrease ratio math math math">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/></svg></span>
+      <span class="category-badge">Math</span>
+    </div>
+    <h3>Percentage Calculator</h3>
+    <p>Calculate percentages, ratios, percent increases, and percent decreases with three common percentage formulas.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-text" href="./Word_Counter/"
+   data-categories="text productivity"
+   data-search="word counter count words, characters, whitespace-free characters, and estimated sentences directly in your browser. word count character count sentence text text text productivity">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 10h12M4 14h16M4 18h10"/></svg></span>
+      <span class="category-badge">Text</span>
+    </div>
+    <h3>Word Counter</h3>
+    <p>Count words, characters, whitespace-free characters, and estimated sentences directly in your browser.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-math" href="./Volume_Calculator"
+   data-categories="math"
+   data-search="volume calculator calculate the volume of cubes, spheres, cylinders, and cones instantly with our free browser-based tool. volume cube rectangular prism cylinder sphere cone math math math">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 12h2M14 12h2M8 16h2M14 16h2"/></svg></span>
+      <span class="category-badge">Math</span>
+    </div>
+    <h3>Volume Calculator</h3>
+    <p>Calculate the volume of cubes, spheres, cylinders, and cones instantly with our free browser-based tool.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-time" href="./Time_Tracking_Suite"
+   data-categories="time productivity"
+   data-search="time tracking suite free online stopwatch, countdown timer, and pomodoro tracker to boost your productivity. stopwatch countdown timer pomodoro time tracker time &amp; date time productivity">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+      <span class="category-badge">Time &amp; Date</span>
+    </div>
+    <h3>Time Tracking Suite</h3>
+    <p>Free online stopwatch, countdown timer, and Pomodoro tracker to boost your productivity.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-developer" href="./JSON_to_CSV_Converter"
+   data-categories="developer converter"
+   data-search="json to csv converter convert json arrays into spreadsheet-friendly csv with nested-object flattening and local browser processing. json csv spreadsheet flatten convert developer developer developer converter">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></svg></span>
+      <span class="category-badge">Developer</span>
+    </div>
+    <h3>JSON to CSV Converter</h3>
+    <p>Convert JSON arrays into spreadsheet-friendly CSV with nested-object flattening and local browser processing.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-time" href="./Time_Zone_Converter"
+   data-categories="time converter"
+   data-search="time zone converter compare multiple world time zones at a glance with dst-aware iana time zone conversion, meeting overlap highlighting, and 12/24-hour formats. timezone time zone world clock dst meeting iana time &amp; date time converter">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+      <span class="category-badge">Time &amp; Date</span>
+    </div>
+    <h3>Time Zone Converter</h3>
+    <p>Compare multiple world time zones at a glance with DST-aware IANA time zone conversion, meeting overlap highlighting, and 12/24-hour formats.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-time" href="./Days_Between_Dates/"
+   data-categories="time math"
+   data-search="days between dates calculator free days-between-dates calculator for elapsed or inclusive days, weeks, weekdays, weekends, leap days, and calendar span. days between dates date difference weekdays weekends leap days duration time &amp; date time math">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+      <span class="category-badge">Time &amp; Date</span>
+    </div>
+    <h3>Days Between Dates Calculator</h3>
+    <p>Free days-between-dates calculator for elapsed or inclusive days, weeks, weekdays, weekends, leap days, and calendar span.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-time" href="./Military_Time_Converter/"
+   data-categories="time converter"
+   data-search="military time converter convert 24-hour military time to 12-hour am/pm time or regular time back to military hhmm and hh:mm formats. military time 24 hour 12 hour am pm hhmm time &amp; date time converter">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+      <span class="category-badge">Time &amp; Date</span>
+    </div>
+    <h3>Military Time Converter</h3>
+    <p>Convert 24-hour military time to 12-hour AM/PM time or regular time back to military HHMM and HH:MM formats.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-time" href="./Time_Unit_Converter/"
+   data-categories="time converter"
+   data-search="time unit converter free time unit converter for milliseconds, seconds, minutes, hours, days, weeks, average months, years, decades and centuries with live results and an all-units table. milliseconds seconds minutes hours days weeks months years decades centuries time &amp; date time converter">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+      <span class="category-badge">Time &amp; Date</span>
+    </div>
+    <h3>Time Unit Converter</h3>
+    <p>Free time unit converter for milliseconds, seconds, minutes, hours, days, weeks, average months, years, decades and centuries with live results and an all-units table.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-text" href="./Text_to_Morse_Code/"
+   data-categories="text converter"
+   data-search="text to morse code converter free text to morse code converter. encode text into international morse, decode morse back to text, play audio, adjust wpm and pitch, copy results, and download txt. morse code translator encoder decoder audio wpm text text converter">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 10h12M4 14h16M4 18h10"/></svg></span>
+      <span class="category-badge">Text</span>
+    </div>
+    <h3>Text to Morse Code Converter</h3>
+    <p>Free text to Morse code converter. Encode text into International Morse, decode Morse back to text, play audio, adjust WPM and pitch, copy results, and download TXT.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-developer" href="./Password_Strength_Analyzer/"
+   data-categories="developer testing"
+   data-search="password strength analyzer free password strength checker with entropy estimates, crack-time scenarios, pattern detection, security recommendations, and a web crypto password generator. password strength entropy crack time generator security developer developer testing">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></svg></span>
+      <span class="category-badge">Developer</span>
+    </div>
+    <h3>Password Strength Analyzer</h3>
+    <p>Free password strength checker with entropy estimates, crack-time scenarios, pattern detection, security recommendations, and a Web Crypto password generator.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-developer" href="./Email_DNS_Reputation_Checker/"
+   data-categories="developer testing"
+   data-search="email dns checker check mx, spf, dkim, and dmarc records, resolve mail-server ips, estimate spf lookups, and open reputation checks. dns mx spf dkim dmarc email reputation mail server developer developer testing">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 9-4 3 4 3M16 9l4 3-4 3M14 5l-4 14"/></svg></span>
+      <span class="category-badge">Developer</span>
+    </div>
+    <h3>Email DNS Checker</h3>
+    <p>Check MX, SPF, DKIM, and DMARC records, resolve mail-server IPs, estimate SPF lookups, and open reputation checks.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-productivity" href="./Animal_Age_Converter/"
+   data-categories="productivity math"
+   data-search="animal age calculator estimate dog, cat, rabbit, and horse ages in human-equivalent years or reverse human age into an approximate animal age. dog years cat years rabbit horse pet human equivalent age productivity productivity math">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8l1 3h3v15H4V6h3l1-3Z"/><path d="M9 12l2 2 4-4"/></svg></span>
+      <span class="category-badge">Productivity</span>
+    </div>
+    <h3>Animal Age Calculator</h3>
+    <p>Estimate dog, cat, rabbit, and horse ages in human-equivalent years or reverse human age into an approximate animal age.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+
+<a class="tool-card accent-text" href="./Case_Converter/"
+   data-categories="text converter"
+   data-search="case converter convert text between uppercase, lowercase, title case, sentence case, camelcase, pascalcase, snake_case, kebab-case, and more. uppercase lowercase title case sentence camelcase pascalcase snake kebab text text text converter">
+  <div>
+    <div class="card-top">
+      <span class="tool-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 10h12M4 14h16M4 18h10"/></svg></span>
+      <span class="category-badge">Text</span>
+    </div>
+    <h3>Case Converter</h3>
+    <p>Convert text between uppercase, lowercase, title case, sentence case, camelCase, PascalCase, snake_case, kebab-case, and more.</p>
+  </div>
+  <span class="open-tool">Open Tool <span aria-hidden="true">→</span></span>
+</a>
+      </div>
+
+      <div id="noResults" class="no-results">
+        <strong>No matching tools found.</strong>
+        Try a broader search or clear the active category filter.
+        <div><button id="resetFilters" type="button">Show All Tools</button></div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<!-- GOOGLE ADSENSE: MID-PAGE / AFTER-DIRECTORY INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
+<section class="editorial-wrap">
+  <div class="container">
+    <article class="editorial-card">
+      <div class="editorial-inner">
+        <div class="eyebrow">About Utiliverse</div>
+        <h2>Practical tools for everyday decisions, tasks, and technical work</h2>
+        <div class="editorial-copy">
+          <p>Utiliverse is a growing collection of free browser-based calculators, converters, developer utilities, productivity tools, text tools, and testing resources. The goal is simple: make practical tools easy to find, understand, and use without unnecessary setup.</p>
+          <p>Many tools can process information directly in your browser. Some features rely on external libraries, public data, or network services, so individual tool pages explain their behavior when that distinction matters. Calculator results are estimates based on the inputs and assumptions shown by each tool.</p>
+          <p>Use the directory above to explore financial planning tools, technical utilities, document and image tools, text transformations, time utilities, calculations, and everyday digital helpers. For more detail about the site's purpose, privacy approach, and development philosophy, visit <a class="editorial-link" href="./About.html">About Utiliverse</a>.</p>
+        </div>
+
+        <div class="benefits">
+          <div class="benefit">
+            <h3>Browser First</h3>
+            <p>Open focused utilities without installing specialized software or creating an account.</p>
+          </div>
+          <div class="benefit">
+            <h3>Clear Inputs & Results</h3>
+            <p>Tools are designed around understandable controls, useful outputs, and stated assumptions or limitations.</p>
+          </div>
+          <div class="benefit">
+            <h3>Growing Directory</h3>
+            <p>New tools and improvements are added across finance, development, text, math, time, testing, and productivity.</p>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-main">
+      <strong>© 2026 Utiliverse. All rights reserved.</strong>
+      <span>Free calculators, converters, and practical browser-based utilities.</span>
+    </div>
+    <div class="footer-side">
+      <nav class="footer-links" aria-label="Footer">
+        <a href="./Privacy_Policy.html">Privacy Policy</a>
+        <a href="./Terms_of_Service.html">Terms of Service</a>
+        <a href="./Contact_Info.html">Contact</a>
+        <a href="./About.html">About</a>
+      </nav>
+      <span class="footer-free">100% Free and Browser Based</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+  const cards = [...document.querySelectorAll("#toolsGrid .tool-card")];
+  const categoryButtons = [...document.querySelectorAll(".cat-btn")];
+  const searchInput = $("searchInput");
+  const clearSearch = $("clearSearch");
+  const resultsLine = $("resultsLine");
+  const noResults = $("noResults");
+  const recentSection = $("recentSection");
+  let activeCategory = "all";
+
+  function applyTheme(theme) {
+    const dark = theme === "dark";
+    document.body.classList.toggle("dark-mode", dark);
+
+    $("moonIcon").classList.toggle("theme-hidden", dark);
+    $("sunIcon").classList.toggle("theme-hidden", !dark);
+
+    const label = dark ? "Switch to light mode" : "Switch to dark mode";
+    $("themeToggle").setAttribute("aria-label", label);
+    $("themeToggle").title = label;
+
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", dark ? "#020617" : "#f8fafc");
+  }
+
+  const savedTheme = localStorage.getItem("utiliverse-theme");
+  const systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  applyTheme(savedTheme === "dark" || savedTheme === "light" ? savedTheme : (systemDark ? "dark" : "light"));
+
+  $("themeToggle").addEventListener("click", () => {
+    const next = document.body.classList.contains("dark-mode") ? "light" : "dark";
+    localStorage.setItem("utiliverse-theme", next);
+    applyTheme(next);
+  });
+
+  function normalize(value) {
+    return String(value || "").toLowerCase().trim();
+  }
+
+  function applyFilters() {
+    const query = normalize(searchInput.value);
+    let shown = 0;
+
+    cards.forEach(card => {
+      const categories = normalize(card.dataset.categories).split(/\s+/).filter(Boolean);
+      const matchesCategory = activeCategory === "all" || categories.includes(activeCategory);
+      const matchesSearch = !query || normalize(card.dataset.search).includes(query);
+      const visible = matchesCategory && matchesSearch;
+      card.hidden = !visible;
+      if (visible) shown++;
+    });
+
+    clearSearch.classList.toggle("hidden", !query);
+    noResults.classList.toggle("show", shown === 0);
+
+    const filtered = query || activeCategory !== "all";
+    recentSection.classList.toggle("hidden", Boolean(filtered));
+
+    if (!filtered) {
+      resultsLine.textContent = `${cards.length} tools available`;
+    } else {
+      resultsLine.textContent = `${shown} tool${shown === 1 ? "" : "s"} found`;
+    }
+  }
+
+  categoryButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      activeCategory = button.dataset.filter;
+      categoryButtons.forEach(btn => {
+        const selected = btn === button;
+        btn.classList.toggle("active", selected);
+        btn.setAttribute("aria-pressed", String(selected));
+      });
+      applyFilters();
+    });
+  });
+
+  searchInput.addEventListener("input", applyFilters);
+
+  searchInput.addEventListener("keydown", event => {
+    if (event.key === "Escape" && searchInput.value) {
+      searchInput.value = "";
+      applyFilters();
+    }
+  });
+
+  clearSearch.addEventListener("click", () => {
+    searchInput.value = "";
+    searchInput.focus();
+    applyFilters();
+  });
+
+  $("resetFilters").addEventListener("click", () => {
+    searchInput.value = "";
+    activeCategory = "all";
+    categoryButtons.forEach(btn => {
+      const selected = btn.dataset.filter === "all";
+      btn.classList.toggle("active", selected);
+      btn.setAttribute("aria-pressed", String(selected));
+    });
+    applyFilters();
+    searchInput.focus();
+  });
+
+  applyFilters();
+})();
+</script>
+</body>
+</html>
