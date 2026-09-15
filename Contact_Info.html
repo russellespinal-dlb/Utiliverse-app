@@ -3,7 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Contact Us | Utiliverse</title>
+<meta name="description" content="Contact Utiliverse to suggest a new browser-based tool, report a bug, ask a general question, or discuss business and advertising opportunities.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<link rel="canonical" href="https://utiliverse.app/Contact_Info.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Contact Utiliverse – Tool Suggestions, Bug Reports & Support">
+<meta property="og:description" content="Send Utiliverse a tool suggestion, bug report, general inquiry, or business and advertising message.">
+<meta property="og:url" content="https://utiliverse.app/Contact_Info.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Contact Utiliverse – Tool Suggestions, Bug Reports & Support">
+<meta name="twitter:description" content="Send Utiliverse a tool suggestion, bug report, general inquiry, or business and advertising message.">
+<title>Contact Utiliverse – Tool Suggestions, Bug Reports & Support</title>
 <meta name="theme-color" content="#020617">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
@@ -15,6 +26,21 @@
   .btn { background: linear-gradient(135deg,#6366f1,#4f46e5); color: #fff; border-radius: 8px; padding: 0.75rem 1.5rem; font-weight: 600; cursor: pointer; border: none; transition: 0.2s; }
   .btn:hover { filter: brightness(1.1); }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "Contact Utiliverse",
+  "url": "https://utiliverse.app/Contact_Info.html",
+  "description": "Contact Utiliverse for tool suggestions, bug reports, general inquiries, and business or advertising opportunities.",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Utiliverse",
+    "url": "https://utiliverse.app/"
+  }
+}
+</script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
 <header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800">
@@ -23,18 +49,18 @@
   </div>
 </header>
 <main class="max-w-2xl mx-auto px-4 sm:px-6 py-12">
-  <h1 class="text-4xl font-black mb-4">Get in Touch</h1>
-  <p class="text-slate-400 mb-8 text-lg">Have a suggestion for a new tool, found a bug, or just want to say hello? Fill out the form below and we'll get back to you.</p>
+  <h1 class="text-4xl font-black mb-4">Contact Utiliverse</h1>
+  <p class="text-slate-400 mb-8 text-lg">Have a suggestion for a new Utiliverse tool, found a bug in one of our browser-based utilities, have a general question, or want to discuss business or advertising? Fill out the form below and we’ll get back to you.</p>
 
-  <form action="#" method="POST" class="glass p-6 sm:p-8 rounded-2xl flex flex-col gap-5">
+  <form id="contactForm" action="/api/contact" method="POST" class="glass p-6 sm:p-8 rounded-2xl flex flex-col gap-5" aria-label="Contact Utiliverse form">
     <div>
       <label for="name" class="block text-sm font-medium text-slate-300 mb-2">Name</label>
-      <input type="text" id="name" name="name" required class="input w-full rounded-xl p-3" placeholder="John Doe">
+      <input type="text" id="name" name="name" maxlength="100" autocomplete="name" required class="input w-full rounded-xl p-3" placeholder="John Doe">
     </div>
     
     <div>
       <label for="email" class="block text-sm font-medium text-slate-300 mb-2">Email Address</label>
-      <input type="email" id="email" name="email" required class="input w-full rounded-xl p-3" placeholder="john@example.com">
+      <input type="email" id="email" name="email" maxlength="254" autocomplete="email" required class="input w-full rounded-xl p-3" placeholder="john@example.com">
     </div>
 
     <div>
@@ -49,13 +75,34 @@
 
     <div>
       <label for="message" class="block text-sm font-medium text-slate-300 mb-2">Message</label>
-      <textarea id="message" name="message" rows="5" required class="input w-full rounded-xl p-3 resize-none" placeholder="How can we help?"></textarea>
+      <textarea id="message" name="message" rows="5" maxlength="5000" required class="input w-full rounded-xl p-3 resize-none" placeholder="How can we help?"></textarea>
     </div>
 
-    <button type="submit" class="btn mt-2 self-start flex items-center gap-2">
-      Send Message <i data-lucide="send" class="w-4 h-4"></i>
+    <!-- Spam trap: real visitors never see or fill this field. -->
+    <div aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden">
+      <label for="company_website">Leave this field empty</label>
+      <input type="text" id="company_website" name="company_website" tabindex="-1" autocomplete="off">
+    </div>
+
+    <div>
+      <div class="cf-turnstile"
+           data-sitekey="0x4AAAAAAE25wfa2VTi8Adhn"
+           data-action="contact"
+           data-theme="auto"></div>
+      <p class="text-xs text-slate-500 mt-2">Spam protection is provided by Cloudflare Turnstile.</p>
+    </div>
+
+    <div id="formStatus" class="hidden rounded-xl border p-4 text-sm" role="status" aria-live="polite"></div>
+
+    <button id="submitButton" type="submit" class="btn mt-2 self-start flex items-center gap-2">
+      <span id="submitLabel">Send Message</span> <i data-lucide="send" class="w-4 h-4"></i>
     </button>
   </form>
+
+<section class="mt-8 text-slate-400 text-sm leading-7" aria-labelledby="contact-help-heading">
+  <h2 id="contact-help-heading" class="text-xl font-bold text-slate-200 mb-2">What can you contact us about?</h2>
+  <p>Use this page to send Utiliverse a new tool suggestion, report a problem with an existing utility, ask a general question, or reach out about business and advertising opportunities.</p>
+</section>
 </main>
 <footer class="border-t border-slate-800 bg-slate-950 mt-12">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 py-8 text-sm text-slate-500">
@@ -65,6 +112,83 @@
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
   lucide.createIcons();
+
+  (() => {
+    const form = document.getElementById('contactForm');
+    const submitButton = document.getElementById('submitButton');
+    const submitLabel = document.getElementById('submitLabel');
+    const statusBox = document.getElementById('formStatus');
+
+    function showStatus(message, type = 'info') {
+      statusBox.textContent = message;
+      statusBox.classList.remove(
+        'hidden',
+        'border-emerald-700/50','bg-emerald-950/40','text-emerald-200',
+        'border-red-700/50','bg-red-950/40','text-red-200',
+        'border-indigo-700/50','bg-indigo-950/40','text-indigo-200'
+      );
+
+      if (type === 'success') {
+        statusBox.classList.add('border-emerald-700/50','bg-emerald-950/40','text-emerald-200');
+      } else if (type === 'error') {
+        statusBox.classList.add('border-red-700/50','bg-red-950/40','text-red-200');
+      } else {
+        statusBox.classList.add('border-indigo-700/50','bg-indigo-950/40','text-indigo-200');
+      }
+    }
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const data = new FormData(form);
+      const token = data.get('cf-turnstile-response');
+
+      if (!token) {
+        showStatus('Please complete the spam-protection check and try again.', 'error');
+        return;
+      }
+
+      submitButton.disabled = true;
+      submitButton.style.opacity = '.65';
+      submitButton.style.cursor = 'not-allowed';
+      submitLabel.textContent = 'Sending…';
+      showStatus('Sending your message…');
+
+      try {
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        let result = {};
+        try { result = await response.json(); } catch {}
+
+        if (!response.ok || !result.ok) {
+          throw new Error(result.message || 'We could not send your message. Please try again.');
+        }
+
+        showStatus('Message sent successfully. Thanks for contacting Utiliverse!', 'success');
+        form.reset();
+
+        if (window.turnstile && typeof window.turnstile.reset === 'function') {
+          window.turnstile.reset();
+        }
+      } catch (error) {
+        showStatus(error.message || 'We could not send your message. Please try again.', 'error');
+
+        // Turnstile tokens are single-use, so reset after a failed request.
+        if (window.turnstile && typeof window.turnstile.reset === 'function') {
+          window.turnstile.reset();
+        }
+      } finally {
+        submitButton.disabled = false;
+        submitButton.style.opacity = '';
+        submitButton.style.cursor = '';
+        submitLabel.textContent = 'Send Message';
+      }
+    });
+  })();
 </script>
 </body>
 </html>
