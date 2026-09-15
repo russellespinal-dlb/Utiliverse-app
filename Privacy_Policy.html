@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Privacy Policy | Utiliverse</title>
-<meta name="description" content="Privacy Policy for Utiliverse, including browser-based tools, third-party services, advertising, cookies, and Google AdSense disclosures.">
+<meta name="description" content="Privacy Policy for Utiliverse, including browser-based tools, contact-form processing, third-party services, advertising, cookies, and Google AdSense disclosures.">
 <link rel="canonical" href="https://utiliverse.app/Privacy_Policy.html">
 <meta name="theme-color" content="#020617">
 <script src="https://cdn.tailwindcss.com"></script>
@@ -73,22 +73,36 @@
 </header>
 <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12 article">
   <h1 class="text-4xl font-black mb-2">Privacy Policy</h1>
-  <p class="text-sm text-slate-500 mb-8">Last Updated: September 12, 2026</p>
+  <p class="text-sm text-slate-500 mb-8">Last Updated: September 15, 2026</p>
 
   <h2>1. Information We Collect</h2>
-  <p>At Utiliverse, we believe in minimizing data collection. Many of our utility tools are designed to execute entirely within your web browser. For example, text-processing inputs and typing-test inputs are generally processed locally by the tool and are not intentionally transmitted to or stored on a Utiliverse application server unless a specific tool clearly states that it uses an external service.</p>
+  <p>At Utiliverse, we believe in minimizing data collection. Many of our utility tools are designed to execute entirely within your web browser. For example, text-processing inputs, image-processing inputs, and typing-test inputs are generally processed locally by the tool and are not intentionally transmitted to or stored on a Utiliverse application server unless a specific tool clearly states that it uses an external service.</p>
+  <p>If you use the Utiliverse contact form, we collect the information you choose to submit, which may include your name, email address, selected subject, and message. This information is used to receive, review, and respond to your inquiry, suggestion, bug report, or business-related message.</p>
   <p>When you visit Utiliverse, standard server and network logs may be automatically generated for security, reliability, abuse prevention, and site-performance purposes. Depending on the infrastructure involved, these logs may include information such as your IP address, browser or user-agent information, requested page, and timestamps.</p>
 
   <h2>2. Third-Party Services and APIs</h2>
-  <p>Some Utiliverse tools rely on external infrastructure or third-party services to provide specific features. When you use those tools, your browser may communicate directly with the applicable provider. Examples may include:</p>
+  <p>Some Utiliverse tools and site features rely on external infrastructure or third-party services to provide specific functionality. When you use those features, your browser or the Utiliverse backend may communicate with the applicable provider. Examples may include:</p>
   <ul>
-    <li><strong>Cloudflare:</strong> Network-performance or speed-testing features may send requests through Cloudflare infrastructure.</li>
+    <li><strong>Cloudflare:</strong> Utiliverse uses Cloudflare infrastructure for security, performance, request routing, and certain backend functions. The contact form also uses Cloudflare Turnstile to help detect and prevent automated spam and abuse. Turnstile may process technical information such as IP address, browser or device characteristics, and interaction signals for verification purposes.</li>
+    <li><strong>Resend:</strong> Contact-form submissions are transmitted through Resend so the message can be delivered by email. The submitted name, email address, subject, and message may therefore be processed by Resend as part of email delivery.</li>
+    <li><strong>Google / Gmail:</strong> Contact-form messages may be delivered to and stored in a Utiliverse-managed Gmail mailbox. Google may process those emails in accordance with its own privacy practices.</li>
     <li><strong>Financial Data Providers:</strong> Tools requiring live information, such as currency exchange rates, may request data from third-party financial APIs.</li>
     <li><strong>Content Delivery Networks (CDNs):</strong> Some pages may load JavaScript libraries, fonts, or other resources from third-party content-delivery networks.</li>
   </ul>
-  <p>Third-party providers may receive connection and technical information as necessary to provide their services and may process that information under their own privacy policies. Utiliverse does not control the privacy practices of independent third-party services.</p>
+  <p>Third-party providers may receive connection, technical, and submitted information as necessary to provide their services and may process that information under their own privacy policies. Utiliverse does not control the privacy practices of independent third-party services.</p>
+  <p>For additional information, you may review the privacy information published by
+    <a href="https://www.cloudflare.com/privacypolicy/" class="text-indigo-400 hover:underline" target="_blank" rel="noopener noreferrer">Cloudflare</a>,
+    <a href="https://resend.com/legal/privacy-policy" class="text-indigo-400 hover:underline" target="_blank" rel="noopener noreferrer">Resend</a>, and
+    <a href="https://policies.google.com/privacy" class="text-indigo-400 hover:underline" target="_blank" rel="noopener noreferrer">Google</a>.
+  </p>
 
-  <h2>3. Advertising, Cookies, and Similar Technologies</h2>
+
+  <h2>3. Contact Form and Communications</h2>
+  <p>When you submit the contact form, the form sends your name, email address, selected subject, message, and a Cloudflare Turnstile verification token to a Utiliverse backend endpoint. Cloudflare processes the verification request, and, after successful validation, the message is sent through Resend to a Utiliverse-managed email inbox.</p>
+  <p>The email address you provide is used as the reply-to address so Utiliverse can respond directly to you. Please do not include passwords, payment-card details, government identification numbers, health information, or other highly sensitive information in the contact form.</p>
+  <p>Contact-form information is used for purposes such as responding to inquiries, reviewing bug reports or tool suggestions, handling business or advertising communications, preventing abuse, and maintaining records reasonably necessary for follow-up and site operations.</p>
+
+  <h2>4. Advertising, Cookies, and Similar Technologies</h2>
   <p>Utiliverse may use third-party advertising services, including Google AdSense, to display advertisements on the website. When advertising services are enabled, third-party vendors, including Google, may place and read cookies on your browser or use technologies such as web beacons, IP addresses, or other identifiers to collect information as a result of ad serving on Utiliverse.</p>
   <p>Google and its advertising partners may use advertising cookies to serve ads based on a user's prior visits to Utiliverse and/or other websites. Google's use of advertising cookies enables Google and its partners to serve ads to users based on visits to Utiliverse and other sites on the Internet.</p>
   <p>For more information about how Google uses information from websites and apps that use Google services, visit
@@ -100,14 +114,16 @@
     <li>If additional third-party advertising vendors or ad networks are used, those providers may also use cookies or similar technologies subject to their own privacy policies and available opt-out controls.</li>
   </ul>
 
-  <h2>4. Consent and Privacy Choices</h2>
+  <h2>5. Consent and Privacy Choices</h2>
   <p>Where required by applicable law, Utiliverse may present a consent message or other privacy controls before certain advertising or storage technologies are used. These controls may allow you to make choices about personalized advertising, cookies, or related data processing. Your available choices can vary depending on your location, browser, device, and the services enabled on the site.</p>
   <p>You can also use your browser settings to block, delete, or limit cookies. Restricting cookies may affect the behavior of some website features or third-party services.</p>
 
-  <h2>5. Data Retention</h2>
-  <p>Utiliverse does not require user accounts or persistent database profiles for its standard utility tools. Information processed only inside your browser is not retained by Utiliverse after the page is closed unless a particular tool explicitly uses browser storage for a feature such as saved preferences. Server or network logs retained for security, reliability, abuse prevention, or operational purposes may be kept for a limited period consistent with those purposes and the practices of the infrastructure providers involved.</p>
+  <h2>6. Data Retention</h2>
+  <p>Utiliverse does not require user accounts or persistent database profiles for its standard utility tools. Information processed only inside your browser is not retained by Utiliverse after the page is closed unless a particular tool explicitly uses browser storage for a feature such as saved preferences.</p>
+  <p>Contact-form submissions may remain in the receiving email mailbox and may also appear in limited delivery, security, or operational records maintained by service providers such as Cloudflare, Resend, or Google. Utiliverse may retain contact messages for as long as reasonably necessary to respond, maintain correspondence history, investigate abuse or technical issues, comply with applicable obligations, or support legitimate business and site-operational needs. Messages that are no longer needed may be deleted in the ordinary course of mailbox and account management.</p>
+  <p>Server or network logs retained for security, reliability, abuse prevention, or operational purposes may be kept for a limited period consistent with those purposes and the practices of the infrastructure providers involved.</p>
 
-  <h2>6. Changes to This Policy</h2>
+  <h2>7. Changes to This Policy</h2>
   <p>We may update this Privacy Policy periodically to reflect changes to Utiliverse, third-party services, advertising practices, legal requirements, or privacy controls. Any updated version will be posted on this page with a revised "Last Updated" date.</p>
 </main>
 <footer class="border-t border-slate-800 bg-slate-950 mt-12">
