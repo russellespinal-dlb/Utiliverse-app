@@ -10,24 +10,24 @@
     content="width=device-width, initial-scale=1.0"
 >
 
-<title>Auto Lease Calculator – Monthly Car Lease Payment | Utiliverse</title>
+<title>International Auto Lease Calculator – US, Canada, UK & More | Utiliverse</title>
 <script src="https://unpkg.com/lucide@latest"></script>
 
 <meta
     name="description"
-    content="Free auto lease calculator to estimate monthly car lease payments, depreciation, money factor or APR, taxes, residual value and total lease cost."
+    content="Free international auto lease calculator for the US, Canada, UK, Australia, New Zealand and selected European markets. Estimate monthly lease payments using local currency, APR or money factor, tax/VAT/GST settings, residual value and total lease cost."
 >
 
 <link rel="canonical" href="https://utiliverse.app/Auto_Lease_Calculator/">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Utiliverse">
-<meta property="og:title" content="Auto Lease Calculator – Estimate Monthly Car Lease Payment">
-<meta property="og:description" content="Estimate a car lease payment using vehicle price, residual value, lease term, down payment, trade-in, sales tax, money factor or APR.">
+<meta property="og:title" content="International Auto Lease Calculator – US, Canada, UK & More">
+<meta property="og:description" content="Estimate a vehicle lease payment with country presets for currency, APR or money factor, VAT/GST/sales-tax handling, residual value, term and upfront contribution.">
 <meta property="og:url" content="https://utiliverse.app/Auto_Lease_Calculator/">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Auto Lease Calculator – Monthly Car Lease Payment Estimator">
-<meta name="twitter:description" content="Free online car lease calculator for monthly payment, residual value, money factor, depreciation, taxes and total lease cost.">
+<meta name="twitter:title" content="International Auto Lease Calculator – Monthly Payment Estimator">
+<meta name="twitter:description" content="Free browser-based international car lease calculator with local currency, tax/VAT/GST handling, APR or money factor, residual value and total lease cost.">
 
 <script type="application/ld+json">
 {
@@ -37,7 +37,7 @@
   "url": "https://utiliverse.app/Auto_Lease_Calculator/",
   "applicationCategory": "FinanceApplication",
   "operatingSystem": "Any",
-  "description": "Free online auto lease calculator that estimates monthly car lease payments, depreciation, finance charges, taxes, residual value and total lease cost using a money factor or APR.",
+  "description": "Free international auto lease calculator with market presets for local currency, tax or VAT/GST handling, APR or money factor, residual value, depreciation, finance charges and estimated total lease cost.",
   "offers": {
     "@type": "Offer",
     "price": "0",
@@ -1378,6 +1378,18 @@ body.light-mode footer{background:#fff;border-color:#e2e8f0}
 @media(max-width:850px){.calculator-grid{grid-template-columns:1fr}.results-card{position:static}}
 @media(max-width:600px){.topbar-inner{padding:14px 18px}.topbar-actions{gap:8px}.free-browser-note{font-size:10px;white-space:normal;text-align:right;max-width:115px;line-height:1.2}.theme-toggle{width:38px;height:38px;flex:0 0 auto}}
 
+
+/* INTERNATIONAL LEASE CONTROLS */
+.market-note{grid-column:1/-1;padding:12px 14px;border:1px solid rgba(99,102,241,.25);border-radius:12px;background:rgba(99,102,241,.08);color:#a5b4fc;font-size:12px;line-height:1.6}
+body.light-mode .market-note{background:#eef2ff;border-color:#c7d2fe;color:#4338ca}
+.tax-mode-note{margin-top:5px;font-size:11px;line-height:1.55;color:#94a3b8}
+body.light-mode .tax-mode-note{color:#64748b}
+.country-support-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:16px 0 22px}
+.country-support-list div{padding:12px 13px;border:1px solid #334155;border-radius:12px;background:rgba(15,23,42,.45);color:#cbd5e1;font-size:12px}
+body.light-mode .country-support-list div{background:#f8fafc;border-color:#e2e8f0;color:#334155}
+@media(max-width:700px){.country-support-list{grid-template-columns:1fr 1fr}}
+@media(max-width:460px){.country-support-list{grid-template-columns:1fr}}
+
 </style>
 
 </head>
@@ -1426,14 +1438,13 @@ body.light-mode footer{background:#fff;border-color:#e2e8f0}
 
 
     <h1>
-        Auto Lease Calculator – Estimate Your Monthly Car Lease Payment
+        International Auto Lease Calculator – Estimate Monthly Car Lease Payments
     </h1>
 
 
     <p class="subtitle">
 
-        Use this free online car lease calculator to estimate your monthly lease payment,
-        depreciation, finance charge, taxes, residual value and overall lease cost.
+        Use this free international car lease calculator to estimate a monthly lease payment, depreciation, finance charge, tax or VAT/GST treatment, residual value and overall lease cost using market presets for several countries.
 
     </p>
 
@@ -1473,6 +1484,30 @@ body.light-mode footer{background:#fff;border-color:#e2e8f0}
 
     <div class="form-grid">
 
+        <div class="form-group full">
+            <label for="marketSelect">Country / market</label>
+            <select id="marketSelect">
+                <option value="us" selected>United States — USD</option>
+                <option value="ca">Canada — CAD</option>
+                <option value="uk">United Kingdom — GBP</option>
+                <option value="au">Australia — AUD</option>
+                <option value="nz">New Zealand — NZD</option>
+                <option value="de">Germany — EUR</option>
+                <option value="fr">France — EUR</option>
+                <option value="nl">Netherlands — EUR</option>
+                <option value="ie">Ireland — EUR</option>
+                <option value="es">Spain — EUR</option>
+                <option value="it">Italy — EUR</option>
+                <option value="custom">Custom market / currency settings</option>
+            </select>
+            <span class="helper">Presets change currency formatting, a reference tax rate, tax treatment and the default rate-entry style. Replace preset values with the figures from your actual lease quote.</span>
+        </div>
+
+        <div id="marketNote" class="market-note">
+            United States preset: sales-tax treatment varies by state and locality. Enter the rate and tax treatment shown on your dealer quote.
+        </div>
+
+
 
         <!-- VEHICLE PRICE -->
 
@@ -1484,7 +1519,7 @@ body.light-mode footer{background:#fff;border-color:#e2e8f0}
 
             <div class="input-wrap">
 
-                <span class="currency-symbol">$</span>
+                <span class="currency-symbol" data-currency-symbol>$</span>
 
                 <input
                     id="vehiclePrice"
@@ -1552,7 +1587,7 @@ body.light-mode footer{background:#fff;border-color:#e2e8f0}
 
             <div class="input-wrap">
 
-                <span class="currency-symbol">$</span>
+                <span class="currency-symbol" data-currency-symbol>$</span>
 
                 <input
                     id="residualValue"
@@ -1564,6 +1599,10 @@ body.light-mode footer{background:#fff;border-color:#e2e8f0}
                 >
 
             </div>
+
+            <span class="helper" id="residualHelper">
+                Enter the contractual residual or estimated end-of-lease value in the selected currency.
+            </span>
 
         </div>
 
@@ -1579,7 +1618,7 @@ body.light-mode footer{background:#fff;border-color:#e2e8f0}
 
             <div class="input-wrap">
 
-                <span class="currency-symbol">$</span>
+                <span class="currency-symbol" data-currency-symbol>$</span>
 
                 <input
                     id="downPayment"
@@ -1600,13 +1639,13 @@ body.light-mode footer{background:#fff;border-color:#e2e8f0}
 
         <div class="form-group">
 
-            <label for="tradeIn">
-                Trade-in value
+            <label for="tradeIn" id="tradeInLabel">
+                Trade-in / part-exchange value
             </label>
 
             <div class="input-wrap">
 
-                <span class="currency-symbol">$</span>
+                <span class="currency-symbol" data-currency-symbol>$</span>
 
                 <input
                     id="tradeIn"
@@ -1623,11 +1662,32 @@ body.light-mode footer{background:#fff;border-color:#e2e8f0}
 
 
 
-        <!-- SALES TAX -->
+        <!-- TAX TREATMENT -->
+
+        <div class="form-group full">
+
+            <label for="taxMode">
+                Tax / VAT / GST treatment
+            </label>
+
+            <select id="taxMode">
+                <option value="add">Add tax to the monthly lease charge</option>
+                <option value="included">Tax is already included in the entered vehicle and residual values</option>
+                <option value="none">Exclude tax from this estimate</option>
+            </select>
+
+            <span class="tax-mode-note" id="taxModeHelper">
+                Choose the option that best matches the figures shown on your lease quote.
+            </span>
+
+        </div>
+
+
+        <!-- SALES TAX / VAT / GST -->
 
         <div class="form-group">
 
-            <label for="salesTax">
+            <label for="salesTax" id="taxRateLabel">
                 Sales tax
             </label>
 
@@ -1638,14 +1698,14 @@ body.light-mode footer{background:#fff;border-color:#e2e8f0}
                     type="number"
                     value="7"
                     min="0"
-                    max="20"
+                    max="35"
                     step="0.01"
                 >
 
             </div>
 
-            <span class="helper">
-                Enter your applicable tax rate.
+            <span class="helper" id="taxHelper">
+                Enter the applicable local sales-tax rate.
             </span>
 
         </div>
@@ -1823,7 +1883,7 @@ body.light-mode footer{background:#fff;border-color:#e2e8f0}
 
         <div class="result-row">
 
-            <span>
+            <span id="monthlyTaxLabel">
                 Estimated monthly tax
             </span>
 
@@ -1905,7 +1965,7 @@ body.light-mode footer{background:#fff;border-color:#e2e8f0}
     <div class="result-highlight">
 
         <div class="result-highlight-title">
-            Lease rate conversion
+            Lease rate interpretation
         </div>
 
         <div
@@ -1967,6 +2027,31 @@ depreciation is spread across the scheduled payments.
 
 </p>
 
+
+<h3>
+International car lease calculations
+</h3>
+
+<p>
+This version of the calculator includes market presets for the United States, Canada, the United Kingdom, Australia, New Zealand, Germany, France, the Netherlands, Ireland, Spain and Italy. The preset changes the displayed currency, provides a starting tax or VAT/GST rate, selects a common rate-entry style and chooses a default tax treatment. These presets are conveniences rather than legal or lender-specific rules. Vehicle leasing contracts differ by country, region, lender, tax status and whether the customer is an individual or a business.
+</p>
+
+<div class="country-support-list">
+    <div><strong>United States</strong><br>USD · sales tax · APR or money factor</div>
+    <div><strong>Canada</strong><br>CAD · GST/HST/PST · APR</div>
+    <div><strong>United Kingdom</strong><br>GBP · VAT · APR</div>
+    <div><strong>Australia</strong><br>AUD · GST · APR</div>
+    <div><strong>New Zealand</strong><br>NZD · GST · APR</div>
+    <div><strong>Selected EU markets</strong><br>EUR · VAT · APR</div>
+</div>
+
+<p>
+The calculator offers three tax treatments because lease quotations are not presented the same way everywhere. Choose <strong>Add tax to the monthly lease charge</strong> when your figures are before tax and tax is charged on the periodic payment. Choose <strong>Tax is already included</strong> when the vehicle price and residual values you enter are tax-inclusive figures. Choose <strong>Exclude tax</strong> if you want to compare the underlying lease calculation without tax. The displayed tax rate remains editable so you can use the rate that actually applies to your location and contract.
+</p>
+
+<p>
+Outside the United States, APR or another annual interest-rate convention is generally easier to compare than a U.S.-style money factor. For consistency, this calculator converts APR to an approximate lease factor using the same simplified relationship used by the original calculator. Your lessor may use a different actuarial method, fees, rounding rules or payment timing, so the dealer or leasing-company quote should remain the final source for contractual figures.
+</p>
 
 <h3>
 How to use the car lease calculator
@@ -2240,7 +2325,8 @@ that are not included here.
     acquisition fees, registration, documentation fees, dealer
     charges, incentives, rebates, mileage adjustments, security
     deposits and other costs. Always review the complete lease
-    agreement before signing.
+    agreement before signing. Country presets and tax defaults are reference settings only
+    and are not tax, legal, accounting or lending advice.
 
 </div>
 
@@ -2440,6 +2526,40 @@ that are not included here.
 </div>
 
 
+
+<!-- FAQ 6 -->
+<div class="faq-item">
+    <button class="faq-button" onclick="toggleFAQ(this)" type="button">
+        <span>Which countries can I use with this international lease calculator?</span>
+        <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+        The calculator includes presets for the United States, Canada, the United Kingdom, Australia, New Zealand, Germany, France, the Netherlands, Ireland, Spain and Italy, plus a custom-market option. Presets mainly control currency formatting, a reference tax rate, tax treatment and the default rate-entry style. Enter the actual figures from your local lease quote.
+    </div>
+</div>
+
+<!-- FAQ 7 -->
+<div class="faq-item">
+    <button class="faq-button" onclick="toggleFAQ(this)" type="button">
+        <span>How should I handle VAT, GST, HST or sales tax?</span>
+        <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+        Use the tax-treatment selector to match the way your quote is presented. If the quote is before tax and tax is charged on each payment, choose Add tax. If the vehicle and residual values you enter already include VAT or GST, choose Tax already included. Tax rules vary by country, state, province and customer type, so replace the preset rate with the rate that actually applies to your contract.
+    </div>
+</div>
+
+<!-- FAQ 8 -->
+<div class="faq-item">
+    <button class="faq-button" onclick="toggleFAQ(this)" type="button">
+        <span>Why does the calculator offer both APR and money factor?</span>
+        <span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">
+        Money factor is common in U.S. automobile leasing, while APR or annual interest-rate terminology is more familiar in many other markets. The calculator accepts either and uses an approximate conversion so the same simplified lease model can be compared across markets. A lender may calculate finance charges differently, so use the rate and payment method shown in your actual agreement.
+    </div>
+</div>
+
 </section>
 
 
@@ -2499,457 +2619,212 @@ that are not included here.
 <script>
 
 /* =========================================================
-   UTILITY FUNCTIONS
+   INTERNATIONAL MARKET PRESETS
 ========================================================= */
 
-function getNumber(id) {
+const MARKET_CONFIG = {
+    us:{name:"United States",currency:"USD",locale:"en-US",taxLabel:"Sales tax",defaultTax:7,taxMode:"add",rateType:"moneyfactor",defaultRate:0.00208,note:"United States preset: sales-tax treatment varies by state and locality. Enter the rate and tax treatment shown on your dealer quote."},
+    ca:{name:"Canada",currency:"CAD",locale:"en-CA",taxLabel:"GST / HST / PST",defaultTax:13,taxMode:"add",rateType:"apr",defaultRate:5,note:"Canada preset: GST/HST/PST treatment and the combined rate vary by province. The 13% value is only an example starting point—replace it with the rate that applies to the vehicle's province of registration and your contract."},
+    uk:{name:"United Kingdom",currency:"GBP",locale:"en-GB",taxLabel:"VAT",defaultTax:20,taxMode:"included",rateType:"apr",defaultRate:6,note:"United Kingdom preset: the standard VAT reference rate is 20%. Consumer vehicle figures are often shown VAT-inclusive, so the preset starts in included-tax mode. Match the calculator to the figures on your actual quote."},
+    au:{name:"Australia",currency:"AUD",locale:"en-AU",taxLabel:"GST",defaultTax:10,taxMode:"included",rateType:"apr",defaultRate:6.5,note:"Australia preset: the GST reference rate is 10%. Retail figures are commonly GST-inclusive, but lease structures—including novated leases—can have additional tax and benefit rules not modeled here."},
+    nz:{name:"New Zealand",currency:"NZD",locale:"en-NZ",taxLabel:"GST",defaultTax:15,taxMode:"included",rateType:"apr",defaultRate:6.5,note:"New Zealand preset: the GST reference rate is 15%. The preset assumes entered vehicle and residual figures include GST; change the treatment if your quote is presented differently."},
+    de:{name:"Germany",currency:"EUR",locale:"de-DE",taxLabel:"VAT / MwSt.",defaultTax:19,taxMode:"included",rateType:"apr",defaultRate:5,note:"Germany preset: the standard VAT reference rate is 19%. Consumer pricing is commonly VAT-inclusive; business VAT recovery and lease accounting are outside this calculator."},
+    fr:{name:"France",currency:"EUR",locale:"fr-FR",taxLabel:"VAT / TVA",defaultTax:20,taxMode:"included",rateType:"apr",defaultRate:5,note:"France preset: the standard VAT reference rate is 20%. Use the tax treatment and figures shown on the lessor's quote."},
+    nl:{name:"Netherlands",currency:"EUR",locale:"nl-NL",taxLabel:"VAT / BTW",defaultTax:21,taxMode:"included",rateType:"apr",defaultRate:5,note:"Netherlands preset: the standard VAT reference rate is 21%. The preset uses VAT-inclusive input treatment unless you choose otherwise."},
+    ie:{name:"Ireland",currency:"EUR",locale:"en-IE",taxLabel:"VAT",defaultTax:23,taxMode:"included",rateType:"apr",defaultRate:5,note:"Ireland preset: the standard VAT reference rate is 23%. Enter the actual lease figures and tax treatment from your agreement."},
+    es:{name:"Spain",currency:"EUR",locale:"es-ES",taxLabel:"VAT / IVA",defaultTax:21,taxMode:"included",rateType:"apr",defaultRate:5,note:"Spain preset: the standard VAT reference rate is 21%. The calculator is an estimate and does not model business-specific VAT recovery."},
+    it:{name:"Italy",currency:"EUR",locale:"it-IT",taxLabel:"VAT / IVA",defaultTax:22,taxMode:"included",rateType:"apr",defaultRate:5,note:"Italy preset: the standard VAT reference rate is 22%. Replace preset values with the figures shown in the actual lease proposal."},
+    custom:{name:"Custom market",currency:"USD",locale:"en-US",taxLabel:"Tax",defaultTax:0,taxMode:"add",rateType:"apr",defaultRate:5,note:"Custom preset: use the calculator as a generic lease estimator and enter the currency-equivalent figures, rate and tax treatment that apply to your quote."}
+};
 
-    const value =
-        parseFloat(
-            document.getElementById(id).value
-        );
+let activeMarket="us";
 
-    return isNaN(value)
-        ? 0
-        : value;
+function getNumber(id){
+    const value=parseFloat(document.getElementById(id).value);
+    return isNaN(value)?0:value;
 }
 
-
-function money(value) {
-
-    return new Intl.NumberFormat(
-        "en-US",
-        {
-            style: "currency",
-            currency: "USD",
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        }
-    ).format(value);
+function getMarketConfig(){
+    return MARKET_CONFIG[activeMarket]||MARKET_CONFIG.us;
 }
 
-
-/* =========================================================
-   RATE TYPE CHANGE
-========================================================= */
-
-document
-    .querySelectorAll(
-        'input[name="rateType"]'
-    )
-    .forEach(function(radio) {
-
-        radio.addEventListener(
-            "change",
-            function() {
-
-                const rate =
-                    getNumber("leaseRate");
-
-                const helper =
-                    document.getElementById(
-                        "rateHelper"
-                    );
-
-                if (
-                    this.value ===
-                    "moneyfactor"
-                ) {
-
-                    helper.textContent =
-                        "Example: 0.00208 is approximately 5.00% APR.";
-
-                } else {
-
-                    helper.textContent =
-                        "Enter the annual percentage rate, such as 5.00.";
-
-                }
-
-            }
-        );
-
-    });
-
-
-/* =========================================================
-   MAIN CALCULATION
-========================================================= */
-
-function calculateLease() {
-
-
-    /* -----------------------------------------------------
-       INPUTS
-    ----------------------------------------------------- */
-
-    const vehiclePrice =
-        getNumber("vehiclePrice");
-
-    const leaseTerm =
-        getNumber("leaseTerm");
-
-    const residualValue =
-        getNumber("residualValue");
-
-    const downPayment =
-        getNumber("downPayment");
-
-    const tradeIn =
-        getNumber("tradeIn");
-
-    const salesTax =
-        getNumber("salesTax");
-
-    const rate =
-        getNumber("leaseRate");
-
-
-    const rateType =
-        document.querySelector(
-            'input[name="rateType"]:checked'
-        ).value;
-
-
-
-    /* -----------------------------------------------------
-       VALIDATION
-    ----------------------------------------------------- */
-
-    if (vehiclePrice <= 0) {
-
-        alert(
-            "Please enter a valid vehicle price."
-        );
-
-        return;
-
+function getCurrencySymbol(config=getMarketConfig()){
+    try{
+        const parts=new Intl.NumberFormat(config.locale,{style:"currency",currency:config.currency,currencyDisplay:"narrowSymbol"}).formatToParts(0);
+        const symbol=parts.find(part=>part.type==="currency");
+        return symbol?symbol.value:config.currency;
+    }catch(error){
+        return config.currency;
     }
-
-
-    if (leaseTerm <= 0) {
-
-        alert(
-            "Please enter a valid lease term."
-        );
-
-        return;
-
-    }
-
-
-    if (residualValue < 0) {
-
-        alert(
-            "Please enter a valid residual value."
-        );
-
-        return;
-
-    }
-
-
-
-    /* -----------------------------------------------------
-       ADJUSTED CAPITALIZED COST
-    -----------------------------------------------------
-
-       Vehicle price
-       minus down payment
-       minus trade-in
-
-    ----------------------------------------------------- */
-
-    let adjustedCost =
-        vehiclePrice -
-        downPayment -
-        tradeIn;
-
-
-    if (adjustedCost < 0) {
-
-        adjustedCost = 0;
-
-    }
-
-
-
-    /* -----------------------------------------------------
-       MONEY FACTOR
-    ----------------------------------------------------- */
-
-    let moneyFactor = 0;
-
-    let apr = 0;
-
-
-    if (rateType === "moneyfactor") {
-
-        moneyFactor =
-            rate;
-
-        apr =
-            moneyFactor *
-            2400;
-
-    }
-
-    else {
-
-        apr =
-            rate;
-
-        moneyFactor =
-            apr /
-            2400;
-
-    }
-
-
-
-    /* -----------------------------------------------------
-       DEPRECIATION
-    ----------------------------------------------------- */
-
-    let totalDepreciation =
-        adjustedCost -
-        residualValue;
-
-
-    /*
-       If the residual is greater than the adjusted cost,
-       don't create a negative depreciation charge.
-    */
-
-    if (
-        totalDepreciation < 0
-    ) {
-
-        totalDepreciation = 0;
-
-    }
-
-
-    const monthlyDepreciation =
-        totalDepreciation /
-        leaseTerm;
-
-
-
-    /* -----------------------------------------------------
-       MONTHLY FINANCE CHARGE
-    -----------------------------------------------------
-
-       Common lease calculation:
-
-       (Adjusted Cost + Residual)
-       × Money Factor
-
-    ----------------------------------------------------- */
-
-    const monthlyFinance =
-        (
-            adjustedCost +
-            residualValue
-        )
-        *
-        moneyFactor;
-
-
-
-    /* -----------------------------------------------------
-       MONTHLY TAX
-    ----------------------------------------------------- */
-
-    const monthlyTax =
-        (
-            monthlyDepreciation +
-            monthlyFinance
-        )
-        *
-        (
-            salesTax / 100
-        );
-
-
-
-    /* -----------------------------------------------------
-       MONTHLY PAYMENT
-    ----------------------------------------------------- */
-
-    const monthlyPayment =
-        monthlyDepreciation +
-        monthlyFinance +
-        monthlyTax;
-
-
-
-    /* -----------------------------------------------------
-       TOTALS
-    ----------------------------------------------------- */
-
-    const totalPayments =
-        monthlyPayment *
-        leaseTerm;
-
-
-    const upfrontContribution =
-        downPayment +
-        tradeIn;
-
-
-    const totalLeaseCost =
-        totalPayments +
-        downPayment;
-
-
-
-    /* -----------------------------------------------------
-       UPDATE RESULTS
-    ----------------------------------------------------- */
-
-    document.getElementById(
-        "monthlyPayment"
-    ).textContent =
-        money(monthlyPayment);
-
-
-    document.getElementById(
-        "monthlyDepreciation"
-    ).textContent =
-        money(monthlyDepreciation);
-
-
-    document.getElementById(
-        "monthlyFinance"
-    ).textContent =
-        money(monthlyFinance);
-
-
-    document.getElementById(
-        "monthlyTax"
-    ).textContent =
-        money(monthlyTax);
-
-
-    document.getElementById(
-        "adjustedCost"
-    ).textContent =
-        money(adjustedCost);
-
-
-    document.getElementById(
-        "resultResidual"
-    ).textContent =
-        money(residualValue);
-
-
-    document.getElementById(
-        "totalPayments"
-    ).textContent =
-        money(totalPayments);
-
-
-    document.getElementById(
-        "upfrontContribution"
-    ).textContent =
-        money(upfrontContribution);
-
-
-    document.getElementById(
-        "totalLeaseCost"
-    ).textContent =
-        money(totalLeaseCost);
-
-
-
-    /* -----------------------------------------------------
-       RATE CONVERSION
-    ----------------------------------------------------- */
-
-    document.getElementById(
-        "rateConversion"
-    ).textContent =
-
-        rateType === "moneyfactor"
-
-        ?
-
-        "Money factor "
-        + rate.toFixed(5)
-        + " is approximately "
-        + apr.toFixed(2)
-        + "% APR."
-
-        :
-
-        "APR "
-        + apr.toFixed(2)
-        + "% corresponds to an estimated money factor of "
-        + moneyFactor.toFixed(5)
-        + ".";
-
 }
 
+function money(value){
+    const config=getMarketConfig();
+    try{
+        return new Intl.NumberFormat(config.locale,{style:"currency",currency:config.currency,minimumFractionDigits:2,maximumFractionDigits:2}).format(value);
+    }catch(error){
+        return config.currency+" "+Number(value||0).toFixed(2);
+    }
+}
 
-/* =========================================================
-   RESET
-========================================================= */
+function refreshCurrencySymbols(){
+    const symbol=getCurrencySymbol();
+    document.querySelectorAll("[data-currency-symbol]").forEach(el=>el.textContent=symbol);
+}
 
-function resetCalculator() {
+function setRateType(type){
+    const radio=document.getElementById(type==="moneyfactor"?"moneyFactorOption":"aprOption");
+    if(radio) radio.checked=true;
+    updateRateHelper();
+}
 
+function updateRateHelper(){
+    const checked=document.querySelector('input[name="rateType"]:checked');
+    const helper=document.getElementById("rateHelper");
+    if(!checked||!helper) return;
+    helper.textContent=checked.value==="moneyfactor"
+        ?"Enter the lease money factor. Example: 0.00208 is approximately 5.00% APR."
+        :"Enter the annual percentage rate. The calculator converts it to an approximate lease factor for this simplified model.";
+}
 
-    document.getElementById(
-        "vehiclePrice"
-    ).value =
-        "50000";
+function updateTaxModeHelper(){
+    const mode=document.getElementById("taxMode").value;
+    const helper=document.getElementById("taxModeHelper");
+    if(mode==="add"){
+        helper.textContent="The entered tax rate is added to the estimated monthly depreciation and finance charge.";
+    }else if(mode==="included"){
+        helper.textContent="No extra tax is added. The calculator treats vehicle and residual values as tax-inclusive and shows an estimated tax portion embedded in the payment.";
+    }else{
+        helper.textContent="Tax is excluded from the monthly estimate so you can compare the underlying lease calculation.";
+    }
+}
 
+function applyMarketPreset(key,{setFinancialDefaults=true}={}){
+    const config=MARKET_CONFIG[key]||MARKET_CONFIG.us;
+    activeMarket=key;
 
-    document.getElementById(
-        "leaseTerm"
-    ).value =
-        "36";
+    document.getElementById("taxRateLabel").textContent=config.taxLabel;
+    document.getElementById("taxHelper").textContent=
+        "Reference rate: "+config.defaultTax.toFixed(2).replace(/\.00$/,"")+"%. Replace it with the rate that actually applies to your lease.";
+    document.getElementById("marketNote").textContent=config.note;
 
+    if(setFinancialDefaults){
+        document.getElementById("salesTax").value=String(config.defaultTax);
+        document.getElementById("taxMode").value=config.taxMode;
+        document.getElementById("leaseRate").value=String(config.defaultRate);
+        setRateType(config.rateType);
+    }
 
-    document.getElementById(
-        "residualValue"
-    ).value =
-        "24000";
-
-
-    document.getElementById(
-        "downPayment"
-    ).value =
-        "10000";
-
-
-    document.getElementById(
-        "tradeIn"
-    ).value =
-        "0";
-
-
-    document.getElementById(
-        "salesTax"
-    ).value =
-        "7";
-
-
-    document.getElementById(
-        "leaseRate"
-    ).value =
-        "0.00208";
-
-
-    document.getElementById(
-        "moneyFactorOption"
-    ).checked =
-        true;
-
-
+    refreshCurrencySymbols();
+    updateTaxModeHelper();
     calculateLease();
-
 }
+
+document.getElementById("marketSelect").addEventListener("change",function(){
+    applyMarketPreset(this.value,{setFinancialDefaults:true});
+});
+
+document.querySelectorAll('input[name="rateType"]').forEach(radio=>{
+    radio.addEventListener("change",updateRateHelper);
+});
+
+document.getElementById("taxMode").addEventListener("change",function(){
+    updateTaxModeHelper();
+    calculateLease();
+});
+
+function calculateLease(){
+    const vehiclePrice=getNumber("vehiclePrice");
+    const leaseTerm=getNumber("leaseTerm");
+    const residualValue=getNumber("residualValue");
+    const downPayment=getNumber("downPayment");
+    const tradeIn=getNumber("tradeIn");
+    const taxRate=getNumber("salesTax");
+    const rate=getNumber("leaseRate");
+    const taxMode=document.getElementById("taxMode").value;
+    const checkedRate=document.querySelector('input[name="rateType"]:checked');
+    const rateType=checkedRate?checkedRate.value:"apr";
+
+    if(vehiclePrice<=0){alert("Please enter a valid vehicle price.");return;}
+    if(leaseTerm<=0){alert("Please enter a valid lease term.");return;}
+    if(residualValue<0){alert("Please enter a valid residual value.");return;}
+    if(taxRate<0||taxRate>35){alert("Please enter a tax rate between 0% and 35%.");return;}
+
+    let adjustedCost=vehiclePrice-downPayment-tradeIn;
+    if(adjustedCost<0) adjustedCost=0;
+
+    let moneyFactor=0;
+    let apr=0;
+
+    if(rateType==="moneyfactor"){
+        moneyFactor=Math.max(0,rate);
+        apr=moneyFactor*2400;
+    }else{
+        apr=Math.max(0,rate);
+        moneyFactor=apr/2400;
+    }
+
+    const totalDepreciation=Math.max(0,adjustedCost-residualValue);
+    const monthlyDepreciation=totalDepreciation/leaseTerm;
+    const monthlyFinance=(adjustedCost+residualValue)*moneyFactor;
+    const preTaxMonthly=monthlyDepreciation+monthlyFinance;
+
+    let monthlyPayment=preTaxMonthly;
+    let displayedMonthlyTax=0;
+    let taxLabelText="Estimated monthly tax";
+
+    if(taxMode==="add"){
+        displayedMonthlyTax=preTaxMonthly*(taxRate/100);
+        monthlyPayment=preTaxMonthly+displayedMonthlyTax;
+        taxLabelText="Estimated monthly tax added";
+    }else if(taxMode==="included"){
+        monthlyPayment=preTaxMonthly;
+        displayedMonthlyTax=taxRate>0?monthlyPayment*(taxRate/(100+taxRate)):0;
+        taxLabelText="Estimated tax included in payment";
+    }else{
+        taxLabelText="Tax excluded from estimate";
+    }
+
+    const totalPayments=monthlyPayment*leaseTerm;
+    const upfrontContribution=downPayment+tradeIn;
+    const totalLeaseCost=totalPayments+downPayment;
+
+    document.getElementById("monthlyPayment").textContent=money(monthlyPayment);
+    document.getElementById("monthlyDepreciation").textContent=money(monthlyDepreciation);
+    document.getElementById("monthlyFinance").textContent=money(monthlyFinance);
+    document.getElementById("monthlyTax").textContent=money(displayedMonthlyTax);
+    document.getElementById("monthlyTaxLabel").textContent=taxLabelText;
+    document.getElementById("adjustedCost").textContent=money(adjustedCost);
+    document.getElementById("resultResidual").textContent=money(residualValue);
+    document.getElementById("totalPayments").textContent=money(totalPayments);
+    document.getElementById("upfrontContribution").textContent=money(upfrontContribution);
+    document.getElementById("totalLeaseCost").textContent=money(totalLeaseCost);
+
+    const config=getMarketConfig();
+    document.getElementById("rateConversion").textContent=
+        rateType==="moneyfactor"
+        ?"Money factor "+rate.toFixed(5)+" is approximately "+apr.toFixed(2)+"% APR. Money-factor conventions are most common in U.S.-style auto leasing."
+        :config.name+" estimate using APR "+apr.toFixed(2)+"%. For this simplified model, that corresponds to an approximate lease factor of "+moneyFactor.toFixed(5)+". Actual lessor finance-charge methods and rounding can differ.";
+}
+
+function resetCalculator(){
+    document.getElementById("marketSelect").value="us";
+    activeMarket="us";
+    document.getElementById("vehiclePrice").value="50000";
+    document.getElementById("leaseTerm").value="36";
+    document.getElementById("residualValue").value="24000";
+    document.getElementById("downPayment").value="10000";
+    document.getElementById("tradeIn").value="0";
+    applyMarketPreset("us",{setFinancialDefaults:true});
+}
+
+document.addEventListener("DOMContentLoaded",function(){
+    const selectedMarket=document.getElementById("marketSelect").value||"us";
+    applyMarketPreset(selectedMarket,{setFinancialDefaults:false});
+    updateRateHelper();
+    updateTaxModeHelper();
+});
+
 
 
 /* =========================================================
@@ -3014,18 +2889,7 @@ function toggleFAQ(button) {
 }
 
 
-/* =========================================================
-   INITIAL CALCULATION
-========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function() {
-
-        calculateLease();
-
-    }
-);
 
 </script>
 
