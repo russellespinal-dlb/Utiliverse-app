@@ -154,12 +154,12 @@ h1{font-size:clamp(38px,5vw,58px);line-height:1.04;margin:10px 0 14px;font-weigh
 
 .actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}
 .btn{
-  min-height:42px;border:1px solid var(--border2);background:#1e293b;color:#f8fafc;
+  min-height:42px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid var(--border2);background:#1e293b;color:#f8fafc;
   border-radius:10px;padding:9px 12px;font-weight:800;cursor:pointer
 }
 .btn:hover:not(:disabled){background:#334155}
 .btn.primary{background:linear-gradient(135deg,var(--indigo),var(--indigo2));border-color:var(--indigo)}
-.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:disabled,.disabled-download{opacity:.45;cursor:not-allowed;pointer-events:auto}
 .status{font-size:11px;color:#6ee7b7;min-height:16px}
 
 .note{
@@ -274,9 +274,10 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
 
     <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Choose or drop an image">
       <strong>Drop an image here, paste from your clipboard, or choose a file</strong>
-      <p>Accepts any image format your browser can decode. Common formats include JPG/JPEG, PNG, WebP, GIF, SVG, BMP, and AVIF. HEIC/HEIF/TIFF support depends on the browser.</p>
+      <p>Accepts any image format your browser can decode. Common formats include JPG/JPEG, PNG, WebP, GIF, SVG, BMP, and AVIF. HEIC/HEIF/TIFF support depends on the browser. Standard PNG files should load in modern browsers.</p>
       <label class="file-button" for="fileInput">Choose Image</label>
       <input id="fileInput" type="file" accept="image/*,.heic,.heif,.tif,.tiff,.avif,.bmp,.svg">
+      <div id="dropStatus" class="status" aria-live="polite" style="margin-top:9px"></div>
     </div>
 
     <div id="workspace" class="workspace">
@@ -378,7 +379,16 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
         <div class="preview-head">
           <div><h3>Cropped preview</h3><p id="previewInfo">Adjust the crop area to update the preview.</p></div>
         </div>
-        <div class="preview-shell"><canvas id="previewCanvas"></canvas></div>
+        <div class="preview-shell">
+          <canvas id="previewCanvas"></canvas>
+          <img id="saveImage" alt="Cropped image ready to save" style="display:none;max-width:100%;max-height:330px">
+        </div>
+        <div id="manualSaveWrap" style="display:none;margin-top:10px">
+          <div class="note" style="margin-top:0">
+            <strong>Download blocked by this browser or preview:</strong>
+            right-click the cropped image above and choose <strong>Save Image As…</strong>
+          </div>
+        </div>
       </section>
     </div>
 
@@ -483,6 +493,7 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
   let activeRatio = "free";
   let interaction = null;
   let renderTimer = null;
+  let downloadUrl = null;
 
   const sunSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>';
   const moonSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
@@ -790,6 +801,8 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
     if (!info) return;
     const r = info.source;
     $("previewInfo").textContent = `Crop: ${r.w.toLocaleString("en-US")} × ${r.h.toLocaleString("en-US")} px · X ${r.x.toLocaleString("en-US")} · Y ${r.y.toLocaleString("en-US")}`;
+    $("previewCanvas").style.display = "block";
+    clearPreparedDownload();
   }
 
   function schedulePreview() {
@@ -799,7 +812,11 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
 
   $("qualityRange").addEventListener("input",() => {
     $("qualityValue").textContent = `${$("qualityRange").value}%`;
+    clearPreparedDownload();
   });
+
+  $("formatSelect").addEventListener("change",clearPreparedDownload);
+  $("maxSizeSelect").addEventListener("change",clearPreparedDownload);
   $("previewBtn").addEventListener("click",renderPreview);
   $("resetCropBtn").addEventListener("click",resetCrop);
 
@@ -809,77 +826,215 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
     return "png";
   }
 
-  $("downloadBtn").addEventListener("click",() => {
-    if (!image) return;
+  function clearPreparedDownload() {
+    if (downloadUrl) {
+      URL.revokeObjectURL(downloadUrl);
+      downloadUrl = null;
+    }
+    $("manualSaveWrap").style.display = "none";
+    $("saveImage").removeAttribute("src");
+    $("saveImage").style.display = "none";
+  }
 
+  function canvasToBlob(canvasEl,type,quality) {
+    return new Promise(resolve => canvasEl.toBlob(resolve,type,quality));
+  }
+
+  function buildExportCanvas() {
     const outCanvas = document.createElement("canvas");
     const outCtx = outCanvas.getContext("2d");
-    let info;
+    const info = renderCropTo(outCtx,outCanvas,false);
+    const type = $("formatSelect").value;
+    const quality = Number($("qualityRange").value)/100;
+    const ext = outputExtension(type);
+    const base = (file?.name || "image").replace(/\.[^.]+$/,"").replace(/[^\w.-]+/g,"_") || "image";
+    return {
+      canvas:outCanvas,
+      info,
+      type,
+      quality,
+      ext,
+      filename:`${base}_cropped.${ext}`
+    };
+  }
+
+  function mimeDescription(type) {
+    if (type === "image/jpeg") return {description:"JPEG image",extensions:[".jpg",".jpeg"]};
+    if (type === "image/webp") return {description:"WebP image",extensions:[".webp"]};
+    return {description:"PNG image",extensions:[".png"]};
+  }
+
+  function exposeManualSaveFromDataURL(dataUrl,filename) {
+    clearPreparedDownload();
+
+    const img = $("saveImage");
+    img.src = dataUrl;
+    img.alt = `Cropped image ready to save: ${filename}`;
+    img.style.display = "block";
+
+    $("previewCanvas").style.display = "none";
+    $("manualSaveWrap").style.display = "block";
+  }
+
+  $("downloadBtn").addEventListener("click", async () => {
+    if (!image) {
+      $("status").textContent = "Choose an image first.";
+      return;
+    }
+
+    let exp;
     try {
-      info = renderCropTo(outCtx,outCanvas,false);
+      exp = buildExportCanvas();
     } catch {
       $("status").textContent = "The crop is too large for this browser to export.";
       return;
     }
 
-    const type = $("formatSelect").value;
-    const quality = Number($("qualityRange").value)/100;
-    const ext = outputExtension(type);
-    const base = (file?.name || "image").replace(/\.[^.]+$/,"").replace(/[^\w.-]+/g,"_") || "image";
+    let dataUrl;
+    try {
+      // Create the encoded image synchronously during the user gesture.
+      // This also gives us a fallback that works in embedded previews.
+      dataUrl = exp.canvas.toDataURL(exp.type,exp.quality);
+    } catch {
+      $("status").textContent = "This browser could not encode the cropped image.";
+      return;
+    }
 
-    outCanvas.toBlob(blob => {
-      if (!blob) {
-        $("status").textContent = "This browser could not encode the selected output format.";
+    // File System Access API: best option in supported normal Chromium tabs.
+    if (window.showSaveFilePicker) {
+      try {
+        const desc = mimeDescription(exp.type);
+        const handle = await window.showSaveFilePicker({
+          suggestedName:exp.filename,
+          types:[{
+            description:desc.description,
+            accept:{[exp.type]:desc.extensions}
+          }]
+        });
+
+        const blob = await canvasToBlob(exp.canvas,exp.type,exp.quality);
+        if (!blob) throw new Error("Encoding failed");
+
+        const writable = await handle.createWritable();
+        await writable.write(blob);
+        await writable.close();
+
+        $("status").textContent =
+          `Saved ${exp.info.output.w} × ${exp.info.output.h} ${exp.ext.toUpperCase()} successfully.`;
+        setTimeout(()=>$("status").textContent="",2600);
         return;
+      } catch (err) {
+        if (err && err.name === "AbortError") {
+          $("status").textContent = "Save canceled.";
+          return;
+        }
+        // Continue to browser download / manual fallback below.
       }
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `${base}_cropped.${ext}`;
-      document.body.appendChild(a);
+    }
+
+    // Try a direct download from the data URL.
+    const a = document.createElement("a");
+    a.href = dataUrl;
+    a.download = exp.filename;
+    a.style.display = "none";
+    document.body.appendChild(a);
+
+    let attempted = false;
+    try {
       a.click();
-      a.remove();
-      setTimeout(()=>URL.revokeObjectURL(url),1500);
-      $("status").textContent = `Downloaded ${info.output.w} × ${info.output.h} ${ext.toUpperCase()}.`;
-      setTimeout(()=>$("status").textContent="",2200);
-    },type,quality);
+      attempted = true;
+    } catch {}
+    a.remove();
+
+    // Always expose a preview-safe fallback that does not rely on blob: URLs.
+    exposeManualSaveFromDataURL(dataUrl,exp.filename);
+
+    $("status").textContent = attempted
+      ? "Download requested. If your preview blocks it, right-click the cropped image shown below and choose Save Image As."
+      : "Automatic download is blocked here. Right-click the cropped image shown below and choose Save Image As.";
   });
+
+  function finishImageLoad(img, selectedFile) {
+    clearPreparedDownload();
+    image = img;
+    $("workspace").classList.add("show");
+    $("fileName").textContent = selectedFile.name || "Pasted image";
+    $("fileType").textContent = selectedFile.type || getExt(selectedFile.name);
+    $("sourceSize").textContent = `${img.naturalWidth.toLocaleString("en-US")} × ${img.naturalHeight.toLocaleString("en-US")} px`;
+    $("fileSize").textContent = formatBytes(selectedFile.size);
+    activeRatio = "free";
+    document.querySelectorAll(".aspect-btn").forEach(x=>x.classList.toggle("active",x.dataset.ratio==="free"));
+    crop = {x:.1,y:.1,w:.8,h:.8};
+    fitDisplay();
+    renderPreview();
+    $("status").textContent = "";
+    $("dropStatus").textContent = `Loaded ${selectedFile.name || "image"} — crop it below.`;
+    setTimeout(() => $("workspace").scrollIntoView({behavior:"smooth",block:"start"}), 50);
+  }
+
+  function showDecodeError(selectedFile) {
+    image = null;
+    $("workspace").classList.remove("show");
+    $("status").textContent = "";
+    const type = selectedFile.type || "unknown MIME type";
+    $("dropStatus").textContent =
+      `Could not decode ${selectedFile.name || "this image"} (${type}). ` +
+      `If this is a normal PNG/JPEG/WebP file, try another browser or re-save the image.`;
+  }
+
+  function loadViaObjectURL(selectedFile) {
+    try {
+      if (objectUrl) {
+        URL.revokeObjectURL(objectUrl);
+        objectUrl = null;
+      }
+      objectUrl = URL.createObjectURL(selectedFile);
+      const img = new Image();
+      img.onload = () => finishImageLoad(img, selectedFile);
+      img.onerror = () => showDecodeError(selectedFile);
+      img.src = objectUrl;
+    } catch {
+      showDecodeError(selectedFile);
+    }
+  }
 
   function loadFile(selectedFile) {
     if (!selectedFile) return;
     file = selectedFile;
+    $("dropStatus").textContent = `Loading ${selectedFile.name || "image"}…`;
 
-    if (objectUrl) {
-      URL.revokeObjectURL(objectUrl);
-      objectUrl = null;
+    // Prefer FileReader/data URLs. This is more reliable in browser previews,
+    // sandboxed environments, and hosts that restrict blob: URLs.
+    if (window.FileReader) {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const img = new Image();
+
+        img.onload = () => finishImageLoad(img, selectedFile);
+
+        img.onerror = () => {
+          // Some browsers handle blob URLs better for certain formats,
+          // so try that route before reporting a failure.
+          loadViaObjectURL(selectedFile);
+        };
+
+        img.src = reader.result;
+      };
+
+      reader.onerror = () => loadViaObjectURL(selectedFile);
+      reader.readAsDataURL(selectedFile);
+      return;
     }
 
-    objectUrl = URL.createObjectURL(selectedFile);
-    const img = new Image();
-    img.onload = () => {
-      image = img;
-      $("workspace").classList.add("show");
-      $("fileName").textContent = selectedFile.name || "Pasted image";
-      $("fileType").textContent = selectedFile.type || getExt(selectedFile.name);
-      $("sourceSize").textContent = `${img.naturalWidth.toLocaleString("en-US")} × ${img.naturalHeight.toLocaleString("en-US")} px`;
-      $("fileSize").textContent = formatBytes(selectedFile.size);
-      activeRatio = "free";
-      document.querySelectorAll(".aspect-btn").forEach(x=>x.classList.toggle("active",x.dataset.ratio==="free"));
-      crop = {x:.1,y:.1,w:.8,h:.8};
-      fitDisplay();
-      renderPreview();
-      $("status").textContent = "";
-    };
-    img.onerror = () => {
-      image = null;
-      $("workspace").classList.remove("show");
-      $("status").textContent = "";
-      alert("This image format could not be decoded by your browser. Try PNG, JPEG, WebP, GIF, SVG, BMP, AVIF, or convert the file first.");
-    };
-    img.src = objectUrl;
+    loadViaObjectURL(selectedFile);
   }
 
-  $("fileInput").addEventListener("change",e => loadFile(e.target.files?.[0]));
+  $("fileInput").addEventListener("change",e => {
+    const selected = e.target.files?.[0];
+    if (selected) loadFile(selected);
+    e.target.value = "";
+  });
 
   const dropzone = $("dropzone");
   ["dragenter","dragover"].forEach(type => dropzone.addEventListener(type,e => {
@@ -901,7 +1056,7 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
     }
   });
   dropzone.addEventListener("click",e => {
-    if (e.target.closest(".file-button")) return;
+    if (e.target.closest(".file-button") || e.target === $("fileInput")) return;
     $("fileInput").click();
   });
 
@@ -917,6 +1072,11 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
   window.addEventListener("resize",() => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(fitDisplay,120);
+  });
+
+  window.addEventListener("beforeunload",() => {
+    if (downloadUrl) URL.revokeObjectURL(downloadUrl);
+    if (objectUrl) URL.revokeObjectURL(objectUrl);
   });
 })();
 </script>
