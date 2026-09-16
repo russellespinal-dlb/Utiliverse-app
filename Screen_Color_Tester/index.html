@@ -702,8 +702,8 @@ body.light-mode .local-processing-note{color:#64748b}
 </style>
 
 <!-- SEO Structured Data -->
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Screen Color Tester","url":"https://utiliverse.app/Screen_Color-Tester/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based screen color tester and fullscreen color utility with preset and custom colors, HEX/RGB values, a screen timer and solid-color PNG export.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Fullscreen solid-color display","Preset screen colors","Custom color spectrum and hue controls","Six-digit HEX color input","HEX and RGB color values","Visual display inspection aid","Fullscreen exit timer","Custom-size PNG color image export","Mobile fullscreen fallback"]}</script>
-<script type="application/ld+json" id="faqSchema">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What can I use a black screen for?","acceptedAnswer":{"@type":"Answer","text":"A black fullscreen display can be used for basic display inspection, dark-room viewing, presentations, photography or video work, ambient backgrounds, and other situations where a uniform dark surface is useful."}},{"@type":"Question","name":"Can I make the selected color fullscreen?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool uses the browser Fullscreen API where available and a viewport-filling fallback on browsers that do not provide normal element fullscreen."}},{"@type":"Question","name":"Can I download the selected color as an image?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter the desired width and height and select Download PNG. The solid-color image is generated in the browser."}},{"@type":"Question","name":"Can I enter my own HEX color?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter a six-digit HEX value such as #6366F1, or use the spectrum and hue controls to create a custom color."}},{"@type":"Question","name":"Can this tool help test a monitor or phone screen?","acceptedAnswer":{"@type":"Answer","text":"Yes. Uniform colors can make some visible brightness, uniformity or pixel issues easier to notice. It is a visual inspection aid, not a replacement for calibration hardware or professional diagnostics."}},{"@type":"Question","name":"What does the screen timer do?","acceptedAnswer":{"@type":"Answer","text":"The timer counts down for the selected number of minutes and exits the fullscreen color view when the timer reaches zero."}},{"@type":"Question","name":"Are my selected colors uploaded to Utiliverse?","acceptedAnswer":{"@type":"Answer","text":"No. Color selection, fullscreen display, HEX/RGB conversion and PNG generation are performed in your browser by this tool. The page does load interface libraries from public CDNs."}},{"@type":"Question","name":"Why can the same HEX color look different on two screens?","acceptedAnswer":{"@type":"Answer","text":"Displays can differ in brightness, contrast, panel technology, calibration and color profiles, so the same digital color value can appear different across devices."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Screen Color Tester","url":"https://utiliverse.app/Screen_Color_Tester/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based screen color tester and fullscreen color utility with preset and custom colors, HEX/RGB values, a screen timer and solid-color PNG export.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Fullscreen solid-color display","Preset screen colors","Custom color spectrum and hue controls","Six-digit HEX color input","HEX and RGB color values","Visual display inspection aid","Fullscreen exit timer","Custom-size PNG color image export","Mobile fullscreen fallback"]}</script>
+<script type="application/ld+json" id="faqSchema">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What can I use a black screen for?","acceptedAnswer":{"@type":"Answer","text":"A black fullscreen display can be used for basic display inspection, dark-room viewing, presentations, photography or video work, ambient backgrounds, and other situations where a uniform dark surface is useful."}},{"@type":"Question","name":"Can I make the selected color fullscreen?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool uses the browser Fullscreen API where available and a viewport-filling fallback on browsers that do not provide normal element fullscreen."}},{"@type":"Question","name":"Can I download the selected color as an image?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter the desired width and height and select Download PNG. The solid-color image is generated in the browser."}},{"@type":"Question","name":"Can I enter my own HEX color?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter a six-digit HEX value such as #6366F1, or use the spectrum and hue controls to create a custom color."}},{"@type":"Question","name":"Can this tool help test a monitor or phone screen?","acceptedAnswer":{"@type":"Answer","text":"Yes. Uniform colors can make isolated pixels, uneven brightness, color tint, edge glow, banding, or other visible inconsistencies easier to notice. It is a visual inspection aid, not professional calibration or hardware diagnostics."}},{"@type":"Question","name":"What color sequence should I use for a quick visual screen check?","acceptedAnswer":{"@type":"Answer","text":"A practical sequence is black, white, red, green, and blue, followed by a neutral gray such as #808080. Different uniform fields can make different visible display irregularities easier to notice."}},{"@type":"Question","name":"Can this tool tell me whether a pixel is dead or stuck?","acceptedAnswer":{"@type":"Answer","text":"The tool can help reveal a pixel that behaves differently across several full-screen colors, but it cannot definitively diagnose the cause or replace manufacturer diagnostics."}},{"@type":"Question","name":"What does the screen timer do?","acceptedAnswer":{"@type":"Answer","text":"The timer counts down for the selected number of minutes and exits the fullscreen color view when the timer reaches zero."}},{"@type":"Question","name":"Are my selected colors uploaded to Utiliverse?","acceptedAnswer":{"@type":"Answer","text":"No. Color selection, fullscreen display, HEX/RGB conversion, and PNG generation are performed in your browser by this tool. The page does load interface libraries from public CDNs."}},{"@type":"Question","name":"Why can the same HEX color look different on two screens?","acceptedAnswer":{"@type":"Answer","text":"Displays can differ in brightness, contrast, panel technology, calibration, and color profiles, so the same digital color value can appear different across devices."}}]}</script>
 
 </head>
 
@@ -2394,6 +2394,25 @@ function updateColorContent(name) {
         </p>
 
         <h3>
+        A practical visual display-testing sequence
+        </h3>
+
+        <p>
+        For a quick visual screen check, first clean the display gently and use the
+        device at its normal resolution and a comfortable brightness level. Then move
+        through several uniform fields rather than judging the panel from only one
+        color: black, white, red, green and blue are useful starting points, and a
+        neutral gray such as <strong>#808080</strong> can help reveal tint or
+        brightness differences. Look at the screen from your normal viewing position,
+        then inspect it more closely for isolated pixels, unusually bright or dark
+        points, color patches, edge glow, banding or areas that appear noticeably
+        different from the rest of the panel. Repeat the check at another brightness
+        level if needed. This process can make visible irregularities easier to notice,
+        but it does not measure color accuracy, response time, HDR performance or
+        calibration quality.
+        </p>
+
+        <h3>
         ${name} color use cases
         </h3>
     `;
@@ -2539,7 +2558,17 @@ function updateFAQ(name) {
 
         {
             q:`Can I use this color screen to test my monitor or phone?`,
-            a:`Yes. A uniform color can make some visible brightness, color-uniformity or pixel issues easier to notice. It is a basic visual inspection aid rather than a replacement for professional display calibration or hardware diagnostics.`
+            a:`Yes. A uniform color can make isolated pixels, uneven brightness, color tint, edge glow, banding or other visible inconsistencies easier to notice. Check several colors rather than relying on a single screen. This is a visual inspection aid, not a replacement for calibration hardware, manufacturer diagnostics or professional display testing.`
+        },
+
+        {
+            q:`What color sequence should I use for a quick visual screen check?`,
+            a:`A practical sequence is black, white, red, green and blue, followed by a neutral gray such as #808080 if you want another uniform reference. Black and white can help expose brightness and edge-lighting differences, while the primary RGB colors can make isolated pixel or color-channel inconsistencies easier to notice.`
+        },
+
+        {
+            q:`Can this tool tell me whether a pixel is dead or stuck?`,
+            a:`It can help you spot a pixel that behaves differently from surrounding pixels, but it cannot definitively diagnose the cause. A point that stays dark, bright or the wrong color across several full-screen fields may indicate an abnormal pixel, but confirmation can depend on panel technology and the device manufacturer's diagnostic guidance.`
         },
 
         {
