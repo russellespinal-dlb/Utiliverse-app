@@ -1,1 +1,200 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Leap Year Checker – Is This Year a Leap Year? | Utiliverse</title>
+<meta name="description" content="Free Leap Year Checker. Instantly check whether a year is a leap year, see the Gregorian rule, find nearby leap years, and scan a year range.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/Leap_Year_Checker/">
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+:root{--panel:rgba(30,41,59,.72);--panel2:rgba(15,23,42,.70);--border:#334155;--border2:#475569;--text:#f8fafc;--muted:#94a3b8;--indigo:#6366f1;--indigo2:#4f46e5;--green:#34d399;--amber:#fbbf24;--rose:#fb7185}
+body{margin:0;background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;transition:.25s}
+a{color:inherit}button,input{font:inherit}.container{max-width:1152px;margin:auto;padding:0 16px}
+header{position:sticky;top:0;z-index:50;background:rgba(2,6,23,.82);backdrop-filter:blur(16px);border-bottom:1px solid #1e293b}
+.header-inner{min-height:65px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.back-link{display:flex;gap:8px;text-decoration:none;color:#cbd5e1;font-size:14px;font-weight:700}.back-link:hover{color:#fff}
+.header-right{display:flex;align-items:center;gap:12px}.free-label{font-size:13px;font-weight:650;color:#64748b;white-space:nowrap}
+.theme-toggle{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border:0;background:transparent;color:#94a3b8;border-radius:8px;cursor:pointer}
+.theme-toggle:hover{color:#fff;background:rgba(30,41,59,.45)}.theme-toggle svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+main{padding:48px 0 72px}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:#818cf8;font-weight:850}
+h1{font-size:clamp(38px,5vw,58px);line-height:1.04;margin:10px 0 14px;font-weight:900;letter-spacing:-.035em}
+.hero p{max-width:900px;color:var(--muted);font-size:18px;line-height:1.72;margin:0}.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.badge{border:1px solid var(--border);background:rgba(15,23,42,.66);border-radius:999px;padding:7px 10px;color:#cbd5e1;font-size:12px;font-weight:750}
+.glass{background:var(--panel);backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:20px}.tool{margin-top:28px;padding:22px}
+.section-head{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}.section-title{font-size:22px;font-weight:850;margin:4px 0 0}.small{font-size:12px;color:#64748b;line-height:1.55}
+.checker-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;margin-top:18px}.panel{background:var(--panel2);border:1px solid var(--border);border-radius:16px;padding:16px}
+.field label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#64748b;font-weight:850;margin-bottom:7px}
+.year-row{display:grid;grid-template-columns:1fr auto;gap:9px}.year-input{width:100%;min-height:54px;background:#0f172a;border:1px solid var(--border2);color:#f8fafc;border-radius:12px;padding:11px 13px;outline:none;font-size:22px;font-family:ui-monospace,monospace}
+.year-input:focus{border-color:var(--indigo);box-shadow:0 0 0 3px rgba(99,102,241,.15)}
+.btn{min-height:42px;border:1px solid var(--border2);background:#1e293b;color:#f8fafc;border-radius:10px;padding:9px 12px;font-weight:800;cursor:pointer}.btn:hover{background:#334155}.btn.primary{background:linear-gradient(135deg,var(--indigo),var(--indigo2));border-color:var(--indigo)}
+.quick{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.chip{border:1px solid var(--border);background:#0f172a;color:#94a3b8;border-radius:999px;padding:7px 10px;font-size:11px;font-weight:800;cursor:pointer}.chip:hover{border-color:#6366f1;color:#c7d2fe}
+.result-card{height:100%;background:linear-gradient(135deg,rgba(99,102,241,.14),rgba(124,58,237,.08));border:1px solid rgba(129,140,248,.35);border-radius:16px;padding:18px}
+.result-label{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:#818cf8;font-weight:850}.result-value{font-size:clamp(30px,5vw,46px);font-weight:900;margin-top:7px}.result-sub{margin-top:7px;color:#94a3b8;font-size:13px;line-height:1.6}
+.result-pill{display:inline-flex;margin-top:10px;border:1px solid rgba(52,211,153,.28);background:rgba(52,211,153,.08);color:#a7f3d0;border-radius:999px;padding:6px 9px;font-size:11px;font-weight:850}.result-pill.no{border-color:rgba(251,113,133,.28);background:rgba(251,113,133,.08);color:#fecdd3}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-top:12px}.stat{background:var(--panel2);border:1px solid var(--border);border-radius:14px;padding:13px}.stat small{display:block;color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.07em;font-weight:850}.stat strong{display:block;color:#e2e8f0;font-size:18px;margin-top:5px}.stat span{display:block;color:#64748b;font-size:10px;margin-top:4px}
+.rule-box,.range-box{margin-top:14px;padding:14px;background:var(--panel2);border:1px solid var(--border);border-radius:15px}.rule-box h3,.range-box h3{margin:0 0 8px;font-size:14px;color:#e2e8f0}
+.rule-item{display:flex;gap:9px;padding:8px 0;border-top:1px solid rgba(71,85,105,.38)}.rule-item:first-child{border-top:0}.dot{width:9px;height:9px;border-radius:50%;background:#64748b;margin-top:5px;flex:none}.dot.good{background:var(--green)}.dot.warn{background:var(--amber)}.dot.bad{background:var(--rose)}
+.rule-item strong{font-size:12px;color:#e2e8f0}.rule-item p{margin:2px 0 0;color:#64748b;font-size:10px;line-height:1.45}
+.range-grid{display:grid;grid-template-columns:1fr 1fr auto;gap:9px;align-items:end;margin-top:12px}.range-summary{margin-top:10px;color:#94a3b8;font-size:12px;line-height:1.55}.year-list{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.year-badge{border:1px solid rgba(129,140,248,.35);background:rgba(99,102,241,.08);color:#c7d2fe;border-radius:999px;padding:6px 9px;font-size:11px;font-weight:800}
+.actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}.status{font-size:11px;color:#6ee7b7;min-height:16px}
+.note{margin-top:14px;padding:12px 13px;background:rgba(99,102,241,.06);border:1px solid rgba(99,102,241,.20);border-radius:12px;color:#94a3b8;font-size:12px;line-height:1.65}.note strong{color:#c7d2fe}
+.article{max-width:900px;margin-top:64px}.article h2{font-size:30px;font-weight:900;margin:38px 0 13px;color:#fff}.article h3{font-size:19px;font-weight:850;margin:27px 0 9px;color:#e2e8f0}.article p,.article li{color:#94a3b8;line-height:1.84;margin:0 0 15px}
+.callout{border:1px solid rgba(99,102,241,.28);background:rgba(99,102,241,.07);border-radius:15px;padding:16px;margin:22px 0}.callout strong{color:#c7d2fe}
+.faq{border-bottom:1px solid var(--border)}.faq summary{list-style:none;cursor:pointer;padding:16px 0;font-weight:800;display:flex;justify-content:space-between;gap:15px}.faq summary::-webkit-details-marker{display:none}.faq summary::after{content:"+";color:#818cf8;font-size:20px}.faq[open] summary::after{content:"−"}
+footer{border-top:1px solid #1e293b;background:#020617}.footer-inner{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:14px;color:#64748b;font-size:13px}
+body.light-mode{--panel:rgba(255,255,255,.92);--panel2:rgba(248,250,252,.96);--border:#dbe3ee;--border2:#cbd5e1;--text:#0f172a;--muted:#475569;background:#f8fafc;color:#0f172a}
+body.light-mode header{background:rgba(255,255,255,.93);border-bottom-color:#e2e8f0}body.light-mode .back-link{color:#334155}body.light-mode .theme-toggle{color:#334155}body.light-mode .badge,body.light-mode .chip{background:#fff;color:#475569}body.light-mode .year-input{background:#fff;color:#0f172a}body.light-mode .btn:not(.primary){background:#f1f5f9;color:#334155}body.light-mode .stat strong,body.light-mode .rule-box h3,body.light-mode .range-box h3,body.light-mode .rule-item strong{color:#0f172a}body.light-mode .article h2{color:#0f172a}body.light-mode .article h3{color:#1e293b}body.light-mode .article p,body.light-mode .article li{color:#475569}body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
+@media(max-width:800px){.checker-grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.range-grid{grid-template-columns:1fr 1fr}.range-grid .btn{grid-column:1/-1}}
+@media(max-width:560px){.stats,.range-grid{grid-template-columns:1fr}.range-grid .btn{grid-column:auto}.free-label{font-size:10.5px;max-width:130px;white-space:normal;text-align:right}}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Leap Year Checker","url":"https://utiliverse.app/Leap_Year_Checker/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","description":"Check whether a year is a leap year and find leap years in a range.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How do you know if a year is a leap year?","acceptedAnswer":{"@type":"Answer","text":"A Gregorian year is a leap year if it is divisible by 4, except century years must also be divisible by 400."}},
+{"@type":"Question","name":"Is 2024 a leap year?","acceptedAnswer":{"@type":"Answer","text":"Yes. 2024 is divisible by 4 and is not a century year."}},
+{"@type":"Question","name":"Is 2100 a leap year?","acceptedAnswer":{"@type":"Answer","text":"No. 2100 is divisible by 100 but not by 400."}},
+{"@type":"Question","name":"Is 2000 a leap year?","acceptedAnswer":{"@type":"Answer","text":"Yes. 2000 is divisible by 400."}},
+{"@type":"Question","name":"How many days are in a leap year?","acceptedAnswer":{"@type":"Answer","text":"A leap year has 366 days and February has 29 days."}},
+{"@type":"Question","name":"Why do leap years exist?","acceptedAnswer":{"@type":"Answer","text":"Leap years keep the calendar aligned with Earth's approximately 365.242-day trip around the Sun."}},
+{"@type":"Question","name":"Does the rule work for every historical year?","acceptedAnswer":{"@type":"Answer","text":"The checker uses the proleptic Gregorian rule. Historical calendars differed before Gregorian adoption."}},
+{"@type":"Question","name":"Can I find leap years in a range?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter a start and end year to list every Gregorian leap year in that interval."}}
+]}
+</script>
+</head>
+<body>
+<header><div class="container header-inner"><a class="back-link" href="https://utiliverse.app">← <span>Back to Utiliverse</span></a><div class="header-right"><span class="free-label">100% Free and Browser Based</span><button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to light mode"><span id="themeIcon"></span></button></div></div></header>
+
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT -->
+
+<main><div class="container">
+<section class="hero"><div class="eyebrow">Date utility</div><h1>Leap Year Checker</h1><p>Instantly check whether any year is a leap year, see why it qualifies under the Gregorian calendar rule, find the previous and next leap years, and scan an entire year range.</p><div class="badges"><span class="badge">Gregorian leap-year rule</span><span class="badge">Previous & next leap years</span><span class="badge">Leap years by range</span></div></section>
+
+<section class="glass tool">
+<div class="section-head"><div><div class="eyebrow">Calendar checker</div><h2 class="section-title">Is this a leap year?</h2></div><div class="small">Rule: divisible by 4, except century years must also be divisible by 400.</div></div>
+
+<div class="checker-grid">
+<section class="panel"><div class="field"><label for="yearInput">Year</label><div class="year-row"><input id="yearInput" class="year-input" type="number" step="1" min="1" value="2024"><button id="checkBtn" class="btn primary" type="button">Check Year</button></div></div><div class="quick"><button id="currentYearBtn" class="chip" type="button">Current year</button><button class="chip preset" data-year="2000">2000</button><button class="chip preset" data-year="2024">2024</button><button class="chip preset" data-year="2100">2100</button><button class="chip preset" data-year="2400">2400</button></div></section>
+<section class="result-card"><div class="result-label">Leap year result</div><div id="resultValue" class="result-value">Yes — 2024 is a leap year</div><div id="resultSub" class="result-sub"></div><div id="resultPill" class="result-pill">366 days</div></section>
+</div>
+
+<div class="stats"><div class="stat"><small>Days in year</small><strong id="daysStat">366</strong><span>calendar days</span></div><div class="stat"><small>February</small><strong id="febStat">29 days</strong><span>month length</span></div><div class="stat"><small>Previous leap year</small><strong id="prevStat">2020</strong><span>before selected year</span></div><div class="stat"><small>Next leap year</small><strong id="nextStat">2028</strong><span>after selected year</span></div></div>
+
+<div class="rule-box"><h3>How the selected year passes or fails the rule</h3><div id="ruleList"></div></div>
+
+<div class="range-box"><h3>Find leap years in a range</h3><div class="small">Inclusive range, limited to 10,000 years per search.</div><div class="range-grid"><div class="field"><label for="startYear">Start year</label><input id="startYear" class="year-input" type="number" min="1" step="1" value="2020"></div><div class="field"><label for="endYear">End year</label><input id="endYear" class="year-input" type="number" min="1" step="1" value="2050"></div><button id="rangeBtn" class="btn primary" type="button">Find Leap Years</button></div><div id="rangeSummary" class="range-summary"></div><div id="yearList" class="year-list"></div></div>
+
+<div class="actions"><button id="copyBtn" class="btn primary" type="button">Copy Result</button><button id="resetBtn" class="btn" type="button">Reset</button><span id="status" class="status"></span></div>
+<div class="note"><strong>Calendar note:</strong> this checker applies the Gregorian leap-year rule mathematically to all positive years. Historical calendars before Gregorian adoption may have followed different rules.</div>
+</section>
+
+<!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT -->
+
+<section class="article">
+<h2>About the Utiliverse Leap Year Checker</h2>
+<p>The Utiliverse Leap Year Checker determines whether a year contains 365 or 366 days under the Gregorian calendar rule. Enter any positive year and the tool immediately shows whether it is a leap year, how many days February contains, the previous leap year, the next leap year, and the divisibility rule that applies.</p>
+<p>The checker also includes a range finder. If you need every leap year between two dates—for example, 2000 through 2050—you can enter the start and end years and receive the complete list. This is useful for scheduling, date calculations, software development, historical research, classroom exercises, and any task where February 29 can affect the result.</p>
+
+<h3>What makes a year a leap year?</h3>
+<p>The Gregorian calendar does not simply add a leap day every four years. The actual rule has three parts. First, a year divisible by 4 is normally a leap year. Second, a year divisible by 100 is normally not a leap year. Third, a year divisible by 400 is a leap year after all.</p>
+<p>That is why 2024 is a leap year, 2100 is not, and 2000 is. The year 2024 is divisible by 4 and is not a century year. The year 2100 is divisible by both 4 and 100, but not by 400. The year 2000 is divisible by 400, which restores leap-year status.</p>
+
+<h3>Why leap years are necessary</h3>
+<p>A calendar year of exactly 365 days is slightly shorter than Earth's actual trip around the Sun. The tropical year is approximately 365.242 days. If every calendar year contained exactly 365 days, the calendar would slowly drift relative to the seasons.</p>
+<p>Adding February 29 in selected years keeps the calendar much closer to the astronomical year. The Gregorian century exceptions improve the older every-four-years rule by removing some excess leap days. Over a 400-year Gregorian cycle, there are 97 leap years and 303 common years.</p>
+
+<h3>Why century years are different</h3>
+<p>Using only a divisible-by-4 rule would make the average calendar year 365.25 days long, which is slightly too long. The Gregorian system therefore skips leap day in most century years. Years such as 1700, 1800, 1900, and 2100 are not leap years even though they are divisible by 4.</p>
+<p>Every fourth century is kept as a leap year because years divisible by 400 qualify. That makes 1600, 2000, and 2400 leap years and gives the Gregorian calendar an average of 365.2425 days per year.</p>
+
+<h3>How many days are in a leap year?</h3>
+<p>A leap year contains 366 days instead of the usual 365. The additional day is February 29, giving February 29 days instead of 28. All other month lengths remain unchanged.</p>
+<p>The extra day can affect date arithmetic, anniversaries, recurring events, payroll calculations, software tests, and any logic that assumes a year always has the same number of days.</p>
+
+<h3>Leap years and software development</h3>
+<p>Leap years are a classic source of date-related software bugs. Code that assumes every year is exactly 365 days can produce incorrect age calculations, expiration dates, day counts, and recurring schedules. Correct implementations must account for February 29 and the century exceptions.</p>
+<p>A compact version of the Gregorian rule is: a year is leap if it is divisible by 400, or if it is divisible by 4 but not by 100. That condition is suitable for many programming languages and matches the rule used by modern calendar systems.</p>
+
+<h3>Historical calendar caution</h3>
+<p>The Gregorian calendar was introduced in 1582, but countries adopted it at different times. Earlier dates may have been recorded under the Julian calendar or another local system. Applying Gregorian rules backward to earlier years is called using a proleptic Gregorian calendar.</p>
+<p>For ordinary modern calculations, that convention is convenient. For historical research, however, you may need to know which calendar was actually in use in the place and period being studied.</p>
+
+<h2>Practical Use Cases</h2>
+<h3>Date and age calculations</h3><p>Leap years matter when counting exact days between dates, calculating age around February 29, or determining whether a date range crosses an extra calendar day.</p>
+<h3>Programming and QA testing</h3><p>Developers can use examples such as 1900, 2000, 2024, and 2100 to test every important branch of the Gregorian leap-year rule.</p>
+<h3>Scheduling and planning</h3><p>Organizations planning multi-year schedules, annual tasks, maintenance windows, or financial periods may need to know whether February has 28 or 29 days. The range finder identifies every leap year in a project horizon.</p>
+<h3>Education and classroom exercises</h3><p>The visible rule breakdown helps students understand why “every four years” is only a shortcut and how the 100-year and 400-year rules work together.</p>
+<div class="callout"><strong>Quick rule:</strong> divisible by 400 = leap year; otherwise divisible by 100 = not a leap year; otherwise divisible by 4 = leap year; all other years = common year.</div>
+
+<h2>Frequently Asked Questions</h2>
+<details class="faq"><summary>How do I know if a year is a leap year?</summary><p>A Gregorian year is a leap year if it is divisible by 4, except century years must also be divisible by 400.</p></details>
+<details class="faq"><summary>Is 2024 a leap year?</summary><p>Yes. 2024 is divisible by 4 and is not divisible by 100, so it has 366 days.</p></details>
+<details class="faq"><summary>Is 2100 a leap year?</summary><p>No. 2100 is divisible by 100 but not by 400, so it is a common year.</p></details>
+<details class="faq"><summary>Is 2000 a leap year?</summary><p>Yes. 2000 is divisible by 400.</p></details>
+<details class="faq"><summary>How many days are in a leap year?</summary><p>366 days. February contains 29 days instead of 28.</p></details>
+<details class="faq"><summary>Why do we have leap years?</summary><p>They keep the calendar aligned with Earth's approximately 365.242-day orbit around the Sun.</p></details>
+<details class="faq"><summary>Does the checker work for old historical years?</summary><p>It applies the Gregorian rule mathematically to all positive years. Historical calendars may have used different rules.</p></details>
+<details class="faq"><summary>Can I list leap years between two years?</summary><p>Yes. Use the range finder to list all leap years between the start and end year, inclusive.</p></details>
+</section>
+</div></main>
+
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT -->
+
+<footer><div class="container footer-inner"><span>© <span id="year"></span> Utiliverse. All rights reserved.</span><span>100% Free and Browser Based</span></div></footer>
+
+<script>
+(() => {
+"use strict";
+const $=id=>document.getElementById(id);
+const sun='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>';
+const moon='<svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+function theme(t){const l=t==="light";document.body.classList.toggle("light-mode",l);$("themeIcon").innerHTML=l?moon:sun;$("themeToggle").setAttribute("aria-label",l?"Switch to dark mode":"Switch to light mode")}
+theme(localStorage.getItem("utiliverse-theme")||"dark");
+$("themeToggle").onclick=()=>{const n=document.body.classList.contains("light-mode")?"dark":"light";localStorage.setItem("utiliverse-theme",n);theme(n)};
+$("year").textContent=new Date().getFullYear();
+
+function isLeap(y){return y%400===0||(y%4===0&&y%100!==0)}
+function valid(v){const y=Number(v);return Number.isInteger(y)&&y>=1}
+function prevLeap(y){for(let x=y-1;x>=1;x--)if(isLeap(x))return x;return null}
+function nextLeap(y){for(let x=y+1;;x++)if(isLeap(x))return x}
+function row(cls,title,text){return `<div class="rule-item"><span class="dot ${cls}"></span><div><strong>${title}</strong><p>${text}</p></div></div>`}
+function explain(y){
+ const d4=y%4===0,d100=y%100===0,d400=y%400===0;
+ return row(d4?"good":"bad","Divisible by 4",d4?`${y} is divisible by 4.`:`${y} is not divisible by 4.`)+
+ row(d100?"warn":"good","Century-year check",d100?`${y} is divisible by 100, so the 400-year rule matters.`:`${y} is not a century year.`)+
+ row(d400?"good":(d100?"bad":"good"),"Divisible by 400",d400?`${y} is divisible by 400.`:(d100?`${y} is not divisible by 400.`:"Not required for this non-century year."));
+}
+function updateYear(){
+ const raw=$("yearInput").value.trim();
+ if(!valid(raw)){["daysStat","febStat","prevStat","nextStat"].forEach(id=>$(id).textContent="—");$("resultValue").textContent="Enter a valid year";$("resultSub").textContent="Use a positive whole-number year such as 2024.";$("resultPill").textContent="Waiting for valid year";$("resultPill").className="result-pill no";$("ruleList").innerHTML="";return}
+ const y=Number(raw), leap=isLeap(y);
+ $("resultValue").textContent=leap?`Yes — ${y} is a leap year`:`No — ${y} is not a leap year`;
+ $("resultSub").textContent=leap?(y%400===0?`${y} is divisible by 400, so February has 29 days.`:`${y} is divisible by 4 and is not a century year, so February has 29 days.`):(y%100===0?`${y} is a century year but is not divisible by 400, so February has 28 days.`:`${y} is not divisible by 4, so it is a common year.`);
+ $("resultPill").textContent=leap?"366 days":"365 days";$("resultPill").className=leap?"result-pill":"result-pill no";
+ $("daysStat").textContent=leap?"366":"365";$("febStat").textContent=leap?"29 days":"28 days";$("prevStat").textContent=prevLeap(y)??"—";$("nextStat").textContent=nextLeap(y);$("ruleList").innerHTML=explain(y);
+}
+function updateRange(){
+ const a=$("startYear").value.trim(),b=$("endYear").value.trim();
+ if(!valid(a)||!valid(b)){$("rangeSummary").textContent="Enter positive whole-number start and end years.";$("yearList").innerHTML="";return}
+ let s=Number(a),e=Number(b);if(s>e)[s,e]=[e,s];
+ if(e-s>9999){$("rangeSummary").textContent="Please use a range of 10,000 years or fewer.";$("yearList").innerHTML="";return}
+ const ys=[];for(let y=s;y<=e;y++)if(isLeap(y))ys.push(y);
+ $("rangeSummary").textContent=ys.length?`${ys.length} leap year${ys.length===1?"":"s"} from ${s} through ${e}:`:`No leap years found from ${s} through ${e}.`;
+ $("yearList").innerHTML=ys.map(y=>`<span class="year-badge">${y}</span>`).join("");
+}
+$("yearInput").addEventListener("input",updateYear);$("checkBtn").onclick=updateYear;
+$("currentYearBtn").onclick=()=>{$("yearInput").value=new Date().getFullYear();updateYear()};
+document.querySelectorAll(".preset").forEach(b=>b.onclick=()=>{$("yearInput").value=b.dataset.year;updateYear()});
+$("startYear").addEventListener("input",updateRange);$("endYear").addEventListener("input",updateRange);$("rangeBtn").onclick=updateRange;
+$("resetBtn").onclick=()=>{$("yearInput").value="2024";$("startYear").value="2020";$("endYear").value="2050";$("status").textContent="";updateYear();updateRange()};
+async function copyText(t){if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(t);return}const a=document.createElement("textarea");a.value=t;a.style.position="fixed";a.style.left="-9999px";document.body.appendChild(a);a.select();document.execCommand("copy");a.remove()}
+$("copyBtn").onclick=async()=>{if(!valid($("yearInput").value.trim())){$("status").textContent="Enter a valid year first.";return}try{await copyText(`${$("resultValue").textContent}. ${$("resultSub").textContent} Previous leap year: ${$("prevStat").textContent}. Next leap year: ${$("nextStat").textContent}.`);$("status").textContent="Result copied.";setTimeout(()=>$("status").textContent="",1500)}catch{$("status").textContent="Copy unavailable."}};
+updateYear();updateRange();
+})();
+</script>
+</body></html>
