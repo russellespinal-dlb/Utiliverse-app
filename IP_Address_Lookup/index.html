@@ -1,1 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>IP Address Lookup – Location, ISP, ASN & Network Details | Utiliverse</title>
+<meta name="description" content="Free IP address lookup tool for IPv4 and IPv6. Find approximate IP location, ISP/organization, ASN, network range, timezone, coordinates, currency, and related network details.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/IP_Address_Lookup/">
 
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --panel:rgba(30,41,59,.72);--panel2:rgba(15,23,42,.70);
+  --border:#334155;--border2:#475569;--text:#f8fafc;--muted:#94a3b8;
+  --indigo:#6366f1;--indigo2:#4f46e5;--green:#34d399;--amber:#fbbf24;--rose:#fb7185;
+}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),
+    radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),
+    #020617;
+  color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  transition:background .25s ease,color .25s ease;
+}
+a{color:inherit}
+button,input{font:inherit}
+button{touch-action:manipulation}
+.container{max-width:1152px;margin:0 auto;padding:0 16px}
+
+header{
+  position:sticky;top:0;z-index:50;background:rgba(2,6,23,.82);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid #1e293b;
+}
+.header-inner{min-height:65px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.back-link{display:flex;align-items:center;gap:8px;text-decoration:none;color:#cbd5e1;font-size:14px;font-weight:700}
+.back-link:hover{color:#fff}
+.header-right{display:flex;align-items:center;gap:12px}
+.free-label{font-size:13px;font-weight:650;color:#64748b;white-space:nowrap}
+.theme-toggle{
+  display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;padding:0;
+  border:0;background:transparent;color:#94a3b8;border-radius:8px;cursor:pointer;
+  transition:color .15s ease,background .15s ease
+}
+.theme-toggle:hover{color:#fff;background:rgba(30,41,59,.45)}
+.theme-toggle:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
+.theme-toggle svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+main{padding:48px 0 72px}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:#818cf8;font-weight:850}
+h1{font-size:clamp(38px,5vw,58px);line-height:1.04;margin:10px 0 14px;font-weight:900;letter-spacing:-.035em}
+.hero p{max-width:860px;color:var(--muted);font-size:18px;line-height:1.72;margin:0}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.badge{border:1px solid var(--border);background:rgba(15,23,42,.66);border-radius:999px;padding:7px 10px;color:#cbd5e1;font-size:12px;font-weight:750}
+
+.glass{background:var(--panel);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:20px}
+.tool{margin-top:28px;padding:22px}
+.section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.section-title{font-size:22px;font-weight:850;margin:4px 0 0}
+.small{font-size:12px;color:#64748b;line-height:1.55}
+
+.lookup-row{display:grid;grid-template-columns:1fr auto auto;gap:10px;margin-top:20px}
+.input{
+  width:100%;min-height:48px;background:#0f172a;border:1px solid var(--border2);color:#f8fafc;
+  border-radius:12px;padding:11px 13px;outline:none;font-size:16px;font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace
+}
+.input:focus{border-color:var(--indigo);box-shadow:0 0 0 3px rgba(99,102,241,.15)}
+.input::placeholder{color:#64748b}
+.btn{
+  min-height:48px;border:1px solid var(--border2);background:#1e293b;color:#f8fafc;
+  border-radius:11px;padding:11px 15px;font-weight:850;cursor:pointer;transition:.16s ease;white-space:nowrap
+}
+.btn:hover:not(:disabled){background:#334155}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn.primary{background:linear-gradient(135deg,var(--indigo),var(--indigo2));border-color:var(--indigo)}
+.btn.primary:hover:not(:disabled){filter:brightness(1.08)}
+.quick-row{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}
+.chip{border:1px solid var(--border);background:#0f172a;color:#94a3b8;border-radius:999px;padding:7px 10px;font-size:11px;font-weight:800;cursor:pointer}
+.chip:hover{border-color:var(--indigo);color:#c7d2fe}
+
+.message{display:none;margin-top:13px;border-radius:11px;padding:10px 12px;font-size:13px;line-height:1.55}
+.message.error{display:block;background:rgba(244,63,94,.08);border:1px solid rgba(251,113,133,.28);color:#fecdd3}
+.message.info{display:block;background:rgba(99,102,241,.08);border:1px solid rgba(129,140,248,.28);color:#c7d2fe}
+
+.loading{display:none;margin-top:14px;padding:14px;border:1px solid var(--border);border-radius:14px;background:var(--panel2);color:#94a3b8;font-size:13px}
+.loading.show{display:flex;align-items:center;gap:10px}
+.spinner{width:18px;height:18px;border:2px solid #475569;border-top-color:#818cf8;border-radius:50%;animation:spin .75s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.results{display:none;margin-top:18px}
+.results.show{display:block}
+.result-hero{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;background:linear-gradient(135deg,rgba(99,102,241,.14),rgba(124,58,237,.08));border:1px solid rgba(129,140,248,.35);border-radius:18px;padding:20px}
+.ip-label{font-size:11px;text-transform:uppercase;letter-spacing:.09em;color:#818cf8;font-weight:850}
+.ip-value{font-size:clamp(24px,4vw,38px);font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;font-weight:900;margin-top:5px;overflow-wrap:anywhere}
+.ip-sub{color:#94a3b8;font-size:13px;margin-top:6px;line-height:1.5}
+.flag{font-size:42px;line-height:1}
+
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:10px}
+.card{background:var(--panel2);border:1px solid var(--border);border-radius:14px;padding:14px;min-width:0}
+.card small{display:block;color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.08em;font-weight:850}
+.card strong{display:block;color:#e2e8f0;font-size:16px;margin-top:5px;overflow-wrap:anywhere}
+.card span{display:block;color:#94a3b8;font-size:11px;line-height:1.45;margin-top:4px;overflow-wrap:anywhere}
+
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.detail{background:var(--panel2);border:1px solid var(--border);border-radius:14px;padding:15px}
+.detail h3{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#64748b;margin:0 0 12px}
+.row{display:grid;grid-template-columns:130px 1fr;gap:10px;padding:8px 0;border-top:1px solid rgba(71,85,105,.38)}
+.row:first-of-type{border-top:0;padding-top:0}
+.row .k{color:#64748b;font-size:12px}
+.row .v{color:#cbd5e1;font-size:12px;font-weight:700;overflow-wrap:anywhere;text-align:right}
+.links{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}
+.link-btn{display:inline-flex;align-items:center;text-decoration:none;min-height:40px;border:1px solid var(--border2);background:#1e293b;color:#e2e8f0;border-radius:10px;padding:9px 12px;font-size:12px;font-weight:800}
+.link-btn:hover{background:#334155}
+.status{font-size:11px;color:#6ee7b7;min-height:16px}
+
+.privacy-note{margin-top:14px;padding:12px 13px;background:rgba(99,102,241,.06);border:1px solid rgba(99,102,241,.20);border-radius:12px;color:#94a3b8;font-size:12px;line-height:1.6}
+.privacy-note strong{color:#c7d2fe}
+
+.article{max-width:900px;margin-top:64px}
+.article h2{font-size:30px;line-height:1.25;font-weight:900;margin:38px 0 13px;color:#fff}
+.article h3{font-size:19px;line-height:1.4;font-weight:850;margin:27px 0 9px;color:#e2e8f0}
+.article p,.article li{color:#94a3b8;line-height:1.84;margin:0 0 15px}
+.article ul{padding-left:20px}
+.callout{border:1px solid rgba(99,102,241,.28);background:rgba(99,102,241,.07);border-radius:15px;padding:16px;margin:22px 0}
+.callout strong{color:#c7d2fe}
+.faq{border-bottom:1px solid var(--border)}
+.faq summary{list-style:none;cursor:pointer;padding:16px 0;font-weight:800;display:flex;justify-content:space-between;gap:15px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:#818cf8;font-size:20px}
+.faq[open] summary::after{content:"−"}
+
+footer{border-top:1px solid #1e293b;background:#020617}
+.footer-inner{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:14px;color:#64748b;font-size:13px}
+
+/* Light mode */
+body.light-mode{
+  --panel:rgba(255,255,255,.92);--panel2:rgba(248,250,252,.96);--border:#dbe3ee;--border2:#cbd5e1;
+  --text:#0f172a;--muted:#475569;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(99,102,241,.08),transparent 32%),
+    radial-gradient(circle at 90% 15%,rgba(124,58,237,.05),transparent 28%),#f8fafc;color:#0f172a
+}
+body.light-mode header{background:rgba(255,255,255,.93);border-bottom-color:#e2e8f0}
+body.light-mode .back-link{color:#334155}
+body.light-mode .back-link:hover{color:#0f172a}
+body.light-mode .theme-toggle{color:#334155}
+body.light-mode .theme-toggle:hover{color:#0f172a;background:#f1f5f9}
+body.light-mode .free-label{color:#64748b}
+body.light-mode .badge{background:#fff;color:#475569}
+body.light-mode .input{background:#fff;color:#0f172a}
+body.light-mode .chip{background:#fff;color:#64748b}
+body.light-mode .btn:not(.primary),body.light-mode .link-btn{background:#f1f5f9;color:#334155}
+body.light-mode .btn:not(.primary):hover,body.light-mode .link-btn:hover{background:#e2e8f0}
+body.light-mode .card strong,body.light-mode .row .v{color:#0f172a}
+body.light-mode .ip-sub{color:#475569}
+body.light-mode .article h2{color:#0f172a}
+body.light-mode .article h3{color:#1e293b}
+body.light-mode .article p,body.light-mode .article li{color:#475569}
+body.light-mode .callout{background:#eef2ff}
+body.light-mode .callout strong{color:#4338ca}
+body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
+
+@media(max-width:900px){.cards{grid-template-columns:1fr 1fr}}
+@media(max-width:760px){.lookup-row{grid-template-columns:1fr 1fr}.lookup-row .input{grid-column:1/-1}.detail-grid{grid-template-columns:1fr}}
+@media(max-width:560px){
+  main{padding-top:34px}.cards{grid-template-columns:1fr}.result-hero{grid-template-columns:1fr}.flag{font-size:34px}
+  .free-label{font-size:10.5px;max-width:130px;white-space:normal;text-align:right;line-height:1.2}
+  .row{grid-template-columns:100px 1fr}
+}
+@media(max-width:390px){.lookup-row{grid-template-columns:1fr}.header-right{gap:6px}}
+</style>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse IP Address Lookup","url":"https://utiliverse.app/IP_Address_Lookup/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript and network access enabled.","description":"Look up IPv4 and IPv6 geolocation, ISP/organization, ASN, network, timezone and related IP metadata.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What information can an IP lookup show?","acceptedAnswer":{"@type":"Answer","text":"Depending on the data available for an address, this tool can show approximate city, region, country, postal code, latitude and longitude, timezone, network range, ASN, organization, currency, languages and related country metadata."}},
+{"@type":"Question","name":"Is IP geolocation an exact physical location?","acceptedAnswer":{"@type":"Answer","text":"No. IP geolocation is approximate and should not be interpreted as a precise home, street or device location. Accuracy varies by provider, network type, ISP architecture, VPN usage and address allocation."}},
+{"@type":"Question","name":"Does this tool support IPv6?","acceptedAnswer":{"@type":"Answer","text":"Yes. The lookup service supports both IPv4 and IPv6 addresses."}},
+{"@type":"Question","name":"Can I use the tool to find my public IP address?","acceptedAnswer":{"@type":"Answer","text":"Yes. The My Public IP button asks the external lookup service to return the public IP address it sees for your connection and its associated metadata."}},
+{"@type":"Question","name":"Can an IP lookup identify a person?","acceptedAnswer":{"@type":"Answer","text":"Not by itself. Public IP geolocation generally identifies network and approximate geographic information rather than the identity of the individual using the connection."}},
+{"@type":"Question","name":"Why can a VPN or mobile connection show a different city?","acceptedAnswer":{"@type":"Answer","text":"A VPN may expose the VPN server's IP instead of the user's ordinary public IP. Mobile carriers and large ISPs may route traffic through gateways located away from the device's actual location."}},
+{"@type":"Question","name":"What are ASN and network range?","acceptedAnswer":{"@type":"Answer","text":"An Autonomous System Number identifies a network operated under a common routing policy. A network range is the CIDR block associated with the returned IP allocation when that information is available."}},
+{"@type":"Question","name":"Is the lookup performed entirely offline?","acceptedAnswer":{"@type":"Answer","text":"No. Unlike local text utilities, IP geolocation requires current external network data. This page sends the queried IP address to the third-party geolocation provider ipapi.co and receives the lookup result."}}
+]}
+</script>
+</head>
+
+<body>
+<header>
+  <div class="container header-inner">
+    <a class="back-link" href="https://utiliverse.app"><span aria-hidden="true">←</span><span>Back to Utiliverse</span></a>
+    <div class="header-right">
+      <span class="free-label">100% Free and Browser Based</span>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode"><span id="themeIcon"></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
+<main>
+<div class="container">
+  <section class="hero">
+    <div class="eyebrow">Network & DNS utility</div>
+    <h1>IP Address Lookup</h1>
+    <p>Look up an IPv4 or IPv6 address to see its approximate geographic assignment, network range, ASN, organization, timezone, coordinates, currency, and other useful network metadata.</p>
+    <div class="badges">
+      <span class="badge">IPv4 & IPv6</span>
+      <span class="badge">ASN & network details</span>
+      <span class="badge">Approximate IP geolocation</span>
+    </div>
+  </section>
+
+  <section class="glass tool" aria-labelledby="toolHeading">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">IP geolocation lookup</div>
+        <h2 id="toolHeading" class="section-title">Enter an IP address</h2>
+      </div>
+      <div class="small">Geolocation is approximate. An IP address does not reveal an exact street address or a person's identity.</div>
+    </div>
+
+    <div class="lookup-row">
+      <input id="ipInput" class="input" type="text" inputmode="text" autocomplete="off" spellcheck="false" placeholder="e.g. 8.8.8.8 or 2606:4700:4700::1111" aria-label="IP address">
+      <button id="lookupBtn" class="btn primary" type="button">Lookup IP</button>
+      <button id="myIpBtn" class="btn" type="button">My Public IP</button>
+    </div>
+
+    <div class="quick-row">
+      <button class="chip sampleIp" data-ip="8.8.8.8" type="button">8.8.8.8</button>
+      <button class="chip sampleIp" data-ip="1.1.1.1" type="button">1.1.1.1</button>
+      <button class="chip sampleIp" data-ip="2606:4700:4700::1111" type="button">IPv6 example</button>
+      <button id="clearBtn" class="chip" type="button">Clear</button>
+    </div>
+
+    <div id="message" class="message" role="status" aria-live="polite"></div>
+    <div id="loading" class="loading"><span class="spinner" aria-hidden="true"></span><span>Looking up IP data…</span></div>
+
+    <div id="results" class="results" aria-live="polite">
+      <div class="result-hero">
+        <div>
+          <div class="ip-label">Lookup result</div>
+          <div id="ipValue" class="ip-value">—</div>
+          <div id="ipSub" class="ip-sub">—</div>
+        </div>
+        <div id="flag" class="flag" aria-hidden="true"></div>
+      </div>
+
+      <div class="cards">
+        <div class="card"><small>Location</small><strong id="locationCard">—</strong><span id="locationSub">—</span></div>
+        <div class="card"><small>Network / ASN</small><strong id="asnCard">—</strong><span id="asnSub">—</span></div>
+        <div class="card"><small>Timezone</small><strong id="timezoneCard">—</strong><span id="timezoneSub">—</span></div>
+      </div>
+
+      <div class="detail-grid">
+        <div class="detail">
+          <h3>Geographic details</h3>
+          <div class="row"><span class="k">Country</span><span id="country" class="v">—</span></div>
+          <div class="row"><span class="k">Region</span><span id="region" class="v">—</span></div>
+          <div class="row"><span class="k">City</span><span id="city" class="v">—</span></div>
+          <div class="row"><span class="k">Postal code</span><span id="postal" class="v">—</span></div>
+          <div class="row"><span class="k">Latitude</span><span id="latitude" class="v">—</span></div>
+          <div class="row"><span class="k">Longitude</span><span id="longitude" class="v">—</span></div>
+          <div class="row"><span class="k">Continent code</span><span id="continent" class="v">—</span></div>
+          <div class="row"><span class="k">EU member</span><span id="inEu" class="v">—</span></div>
+        </div>
+
+        <div class="detail">
+          <h3>Network & regional metadata</h3>
+          <div class="row"><span class="k">IP version</span><span id="version" class="v">—</span></div>
+          <div class="row"><span class="k">Network</span><span id="network" class="v">—</span></div>
+          <div class="row"><span class="k">ASN</span><span id="asn" class="v">—</span></div>
+          <div class="row"><span class="k">Organization</span><span id="org" class="v">—</span></div>
+          <div class="row"><span class="k">UTC offset</span><span id="utcOffset" class="v">—</span></div>
+          <div class="row"><span class="k">Calling code</span><span id="callingCode" class="v">—</span></div>
+          <div class="row"><span class="k">Currency</span><span id="currency" class="v">—</span></div>
+          <div class="row"><span class="k">Languages</span><span id="languages" class="v">—</span></div>
+        </div>
+      </div>
+
+      <div class="links">
+        <a id="mapLink" class="link-btn" href="#" target="_blank" rel="noopener noreferrer">View Approximate Map</a>
+        <a id="rdapLink" class="link-btn" href="#" target="_blank" rel="noopener noreferrer">Open RDAP Lookup</a>
+        <button id="copySummaryBtn" class="btn" type="button">Copy Summary</button>
+        <button id="copyJsonBtn" class="btn" type="button">Copy JSON</button>
+        <span id="copyStatus" class="status"></span>
+      </div>
+    </div>
+
+    <div class="privacy-note">
+      <strong>Data source & privacy:</strong> this tool uses the third-party IP geolocation service <a href="https://ipapi.co/" target="_blank" rel="noopener noreferrer">ipapi.co</a>. The IP address you look up is sent to that provider so it can return current geolocation and network metadata. Selecting <strong>My Public IP</strong> also allows the provider to see and return the public IP address associated with your connection.
+    </div>
+  </section>
+
+  <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
+       Paste approved Google AdSense code here after approval.
+       This comment is intentionally invisible and reserves no space.
+  -->
+
+  <section class="article">
+    <h2>About the Utiliverse IP Address Lookup Tool</h2>
+    <p>The Utiliverse IP Address Lookup tool helps you inspect public information associated with an IPv4 or IPv6 address. A lookup can return the approximate geographic area associated with the address, the organization or network announcing it, its Autonomous System Number (ASN), an allocated network range, a timezone, latitude and longitude estimates, and several country-level details. This is useful for network troubleshooting, investigating server logs, checking where a public endpoint appears to be routed, validating application behavior, and understanding the difference between an IP address and a precise device location.</p>
+
+    <p>Unlike many Utiliverse text and calculator tools that can run completely offline after the page loads, an IP lookup depends on a current external database. This page therefore sends the requested address to the third-party geolocation provider ipapi.co. Its API supports IPv4 and IPv6 and can return fields such as city, region, country, postal code, latitude, longitude, timezone, UTC offset, network, ASN, organization, currency, languages, country calling code, and related metadata. Availability and field coverage can vary by address and provider.</p>
+
+    <h3>IP geolocation is approximate, not GPS</h3>
+    <p>An IP address is assigned to a network connection or service, not to a guaranteed physical point on a map. Geolocation databases infer location from routing, registry information, ISP data, commercial observations, and other sources. A result may identify a city, metropolitan area, regional network hub, corporate gateway, hosting facility, or ISP allocation rather than the actual location of the person or device using the address. For that reason, the latitude and longitude shown by an IP lookup should be treated as approximate coordinates associated with the database record.</p>
+
+    <p>Accuracy can vary significantly. Residential broadband addresses may resolve near the subscriber's city, while mobile carriers can route users through gateways in another city or state. Corporate networks can send traffic through centralized offices. VPNs and privacy relays intentionally expose an intermediary server's IP address. Cloud platforms may advertise an address from one network while the underlying service is distributed across several locations. IP geolocation should therefore not be used as proof of a person's exact location.</p>
+
+    <h3>IPv4 and IPv6 support</h3>
+    <p>IPv4 addresses are written as four decimal numbers such as <code>8.8.8.8</code>, while IPv6 uses a much larger address space and hexadecimal notation such as <code>2606:4700:4700::1111</code>. This tool accepts both formats. IPv6 can compress consecutive groups of zeros with a double colon, which is why valid IPv6 addresses can look very different from one another even though they represent the same 128-bit address structure.</p>
+
+    <p>The lookup input is intentionally limited to IP addresses rather than domain names. A domain can resolve to one or many addresses, can use IPv4 and IPv6 simultaneously, and can change over time. If you are starting with a hostname, first resolve its DNS A or AAAA records with an appropriate DNS tool, then look up the individual IP address you want to investigate.</p>
+
+    <h3>Understanding ASN and organization information</h3>
+    <p>An Autonomous System Number identifies a collection of IP networks operated under a common routing policy. Internet service providers, cloud platforms, universities, enterprises, content-delivery networks, and other organizations can operate one or more autonomous systems. Seeing the ASN and organization associated with an address can help explain who is routing that block of Internet space, but it does not necessarily identify the end customer using a specific address.</p>
+
+    <p>The network field is commonly represented in CIDR notation, such as <code>203.0.113.0/24</code>. CIDR describes a range of IP addresses by combining a network address with a prefix length. The returned block can be helpful when reviewing firewall rules, logs, routing information, or address allocations, but the geolocation of one address should not automatically be assumed to describe every user or service in the entire block.</p>
+
+    <h3>Using the “My Public IP” option</h3>
+    <p>The My Public IP button sends a request without specifying a target address. The geolocation provider then sees the public source address of the request and returns information for that IP. If you are behind a home router, the result is usually the Internet-facing public address rather than a private address such as <code>192.168.x.x</code> used inside your local network. If you are connected through a VPN, proxy, corporate gateway, carrier-grade NAT, or privacy relay, the returned address may belong to that intermediary instead.</p>
+
+    <h2>Practical Use Cases</h2>
+    <h3>Investigating web and application logs</h3>
+    <p>Administrators often encounter unfamiliar addresses in web-server, authentication, firewall, or application logs. An IP lookup can provide context by showing the approximate region, network organization, ASN, and allocation block. That context can help distinguish a hosting provider from a residential ISP or identify traffic associated with a known cloud network. It should be one signal among many; geolocation alone does not establish whether traffic is legitimate or malicious.</p>
+
+    <h3>Checking VPN, proxy, or remote-work routing</h3>
+    <p>When a VPN is active, looking up your public IP can help confirm which network and approximate region the Internet sees. Remote workers can compare results before and after connecting to a VPN to verify that traffic appears to exit through the expected organization or region. A successful IP change does not by itself prove that every application or DNS request is using the same tunnel, so dedicated leak tests may still be appropriate.</p>
+
+    <h3>Supporting localization and regional diagnostics</h3>
+    <p>Developers sometimes use approximate IP location to select default languages, currency suggestions, content regions, or edge locations. This lookup can help test what a geolocation database currently reports for a specific address. Because users travel, share networks, use VPNs, and can be misclassified, important decisions should provide a manual override rather than relying exclusively on IP-based location.</p>
+
+    <h3>Understanding CDN and cloud endpoints</h3>
+    <p>Public services frequently resolve to addresses owned by cloud platforms or content-delivery networks. Looking up those addresses can reveal the announced ASN and organization, which is useful when tracing requests or reviewing architecture. The displayed city should not be assumed to identify the exact physical server because modern distributed systems can use anycast routing, edge networks, load balancing, and virtualized infrastructure.</p>
+
+    <h3>Network education and troubleshooting</h3>
+    <p>Students and support technicians can use the tool to connect concepts such as IP version, CIDR networks, autonomous systems, public addressing, private addressing, and geolocation. The RDAP link provides a convenient next step for examining registry data associated with the address. Registry records and geolocation records answer different questions: registry information describes address allocation and registration, while geolocation databases estimate where an address is being used or routed.</p>
+
+    <div class="callout"><strong>Accuracy and privacy note:</strong> IP location results are approximate and can be wrong or outdated. Do not use them to identify an exact home, street address, or individual. The queried IP is sent to the external geolocation provider because a current network database is required to perform the lookup.</div>
+
+    <h2>Frequently Asked Questions</h2>
+    <details class="faq"><summary>What information can an IP lookup show?</summary><p>Depending on available data, it can show approximate city, region, country, postal code, coordinates, timezone, network range, ASN, organization, currency, languages, and other country-level metadata.</p></details>
+    <details class="faq"><summary>Is the map location the exact location of the device?</summary><p>No. The coordinates are an approximate location associated with the IP record. They may represent a city, ISP gateway, network hub, hosting facility, or other estimated point rather than the physical device.</p></details>
+    <details class="faq"><summary>Does this tool support IPv6 addresses?</summary><p>Yes. The lookup service supports both IPv4 and IPv6. IPv6 addresses may use compressed notation with a double colon.</p></details>
+    <details class="faq"><summary>Why does my VPN show a different country or city?</summary><p>A VPN normally exposes the VPN server's public IP to external websites. The lookup therefore reports information associated with that server rather than your ordinary ISP address.</p></details>
+    <details class="faq"><summary>Can an IP lookup tell me who a person is?</summary><p>No. Public IP metadata does not normally identify the individual using a connection. Subscriber identity information is generally held by network providers and is not exposed through ordinary geolocation APIs.</p></details>
+    <details class="faq"><summary>What is an ASN?</summary><p>An Autonomous System Number identifies a network or group of networks operated under a common Internet routing policy. ISPs, cloud providers, universities, large businesses, and CDNs commonly operate autonomous systems.</p></details>
+    <details class="faq"><summary>Why might the organization differ from the company or person using the IP?</summary><p>The returned organization often identifies the ISP, hosting company, cloud network, or routing organization that controls the address block rather than the individual customer using a particular address.</p></details>
+    <details class="faq"><summary>Does Utiliverse perform the lookup without contacting another service?</summary><p>No. Current geolocation and ASN information requires an external data source. This page sends the target IP address to ipapi.co and displays the metadata returned by that provider.</p></details>
+  </section>
+</div>
+</main>
+
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
+<footer>
+  <div class="container footer-inner">
+    <span>© <span id="year"></span> Utiliverse. All rights reserved.</span>
+    <span>100% Free and Browser Based</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+  const API_BASE = "https://ipapi.co";
+  let lastData = null;
+
+  const sunSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>';
+  const moonSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+
+  function applyTheme(theme) {
+    const light = theme === "light";
+    document.body.classList.toggle("light-mode", light);
+    $("themeIcon").innerHTML = light ? moonSvg : sunSvg;
+    $("themeToggle").setAttribute("aria-label", light ? "Switch to dark mode" : "Switch to light mode");
+    $("themeToggle").title = light ? "Switch to dark mode" : "Switch to light mode";
+    document.querySelector('meta[name="theme-color"]').content = light ? "#f8fafc" : "#020617";
+  }
+
+  applyTheme(localStorage.getItem("utiliverse-theme") || "dark");
+  $("themeToggle").addEventListener("click", () => {
+    const next = document.body.classList.contains("light-mode") ? "dark" : "light";
+    localStorage.setItem("utiliverse-theme", next);
+    applyTheme(next);
+  });
+  $("year").textContent = new Date().getFullYear();
+
+  function isIPv4(value) {
+    const parts = value.split(".");
+    if (parts.length !== 4) return false;
+    return parts.every(part => /^\d{1,3}$/.test(part) && Number(part) >= 0 && Number(part) <= 255 && part === String(Number(part)));
+  }
+
+  function isIPv6(value) {
+    if (!value.includes(":") || !/^[0-9A-Fa-f:.]+$/.test(value) || value.includes(":::")) return false;
+    // IPv4-embedded IPv6 is accepted when its tail is valid IPv4.
+    let v = value;
+    const lastColon = v.lastIndexOf(":");
+    const tail = v.slice(lastColon + 1);
+    if (tail.includes(".")) {
+      if (!isIPv4(tail)) return false;
+      v = v.slice(0,lastColon) + ":0:0";
+    }
+    if ((v.match(/::/g) || []).length > 1) return false;
+    const halves = v.split("::");
+    const left = halves[0] ? halves[0].split(":").filter(Boolean) : [];
+    const right = halves.length > 1 && halves[1] ? halves[1].split(":").filter(Boolean) : [];
+    if (![...left,...right].every(g => /^[0-9A-Fa-f]{1,4}$/.test(g))) return false;
+    return halves.length === 2 ? left.length + right.length < 8 : left.length + right.length === 8;
+  }
+
+  function isValidIp(value) {
+    return isIPv4(value) || isIPv6(value);
+  }
+
+  function isPrivateIPv4(ip) {
+    if (!isIPv4(ip)) return false;
+    const p = ip.split(".").map(Number);
+    return p[0] === 10 ||
+      (p[0] === 172 && p[1] >= 16 && p[1] <= 31) ||
+      (p[0] === 192 && p[1] === 168) ||
+      p[0] === 127 ||
+      (p[0] === 169 && p[1] === 254) ||
+      p[0] === 0 ||
+      (p[0] >= 224);
+  }
+
+  function isSpecialIPv6(ip) {
+    if (!isIPv6(ip)) return false;
+    const lower = ip.toLowerCase();
+    if (lower === "::1" || lower === "::") return true;
+    const firstGroup = lower.split(":")[0] || "0";
+    const first = parseInt(firstGroup, 16);
+    const uniqueLocal = first >= 0xfc00 && first <= 0xfdff;   // fc00::/7
+    const linkLocal = first >= 0xfe80 && first <= 0xfebf;     // fe80::/10
+    const multicast = first >= 0xff00 && first <= 0xffff;     // ff00::/8
+    return uniqueLocal || linkLocal || multicast;
+  }
+
+  function showMessage(type="", text="") {
+    const el = $("message");
+    el.className = "message" + (type ? " " + type : "");
+    el.textContent = text;
+  }
+
+  function setLoading(on) {
+    $("loading").classList.toggle("show", on);
+    $("lookupBtn").disabled = on;
+    $("myIpBtn").disabled = on;
+  }
+
+  function safe(value, fallback="Not available") {
+    if (value === null || value === undefined || value === "") return fallback;
+    return String(value);
+  }
+
+  function flagEmoji(code) {
+    if (!code || !/^[A-Za-z]{2}$/.test(code)) return "";
+    return [...code.toUpperCase()].map(c => String.fromCodePoint(127397 + c.charCodeAt(0))).join("");
+  }
+
+  function setText(id, value) {
+    $(id).textContent = safe(value);
+  }
+
+  function render(data) {
+    lastData = data;
+    $("results").classList.add("show");
+
+    setText("ipValue", data.ip);
+    const cityRegion = [data.city, data.region, data.country_name].filter(Boolean).join(", ");
+    $("ipSub").textContent = cityRegion || "Location details unavailable";
+    $("flag").textContent = flagEmoji(data.country_code);
+
+    $("locationCard").textContent = [data.city, data.region_code || data.region].filter(Boolean).join(", ") || safe(data.country_name);
+    $("locationSub").textContent = [data.country_name, data.postal].filter(Boolean).join(" • ") || "Approximate geolocation";
+    $("asnCard").textContent = safe(data.asn);
+    $("asnSub").textContent = safe(data.org);
+    $("timezoneCard").textContent = safe(data.timezone);
+    $("timezoneSub").textContent = data.utc_offset ? `UTC offset ${data.utc_offset}` : "UTC offset unavailable";
+
+    setText("country", [data.country_name, data.country_code].filter(Boolean).join(" • "));
+    setText("region", [data.region, data.region_code].filter(Boolean).join(" • "));
+    setText("city", data.city);
+    setText("postal", data.postal);
+    setText("latitude", data.latitude);
+    setText("longitude", data.longitude);
+    setText("continent", data.continent_code);
+    setText("inEu", data.in_eu === true ? "Yes" : data.in_eu === false ? "No" : null);
+
+    setText("version", data.version);
+    setText("network", data.network);
+    setText("asn", data.asn);
+    setText("org", data.org);
+    setText("utcOffset", data.utc_offset);
+    setText("callingCode", data.country_calling_code);
+    setText("currency", [data.currency, data.currency_name].filter(Boolean).join(" • "));
+    setText("languages", data.languages);
+
+    if (data.latitude !== null && data.latitude !== undefined && data.longitude !== null && data.longitude !== undefined) {
+      $("mapLink").href = `https://www.openstreetmap.org/?mlat=${encodeURIComponent(data.latitude)}&mlon=${encodeURIComponent(data.longitude)}#map=9/${encodeURIComponent(data.latitude)}/${encodeURIComponent(data.longitude)}`;
+      $("mapLink").style.display = "inline-flex";
+    } else {
+      $("mapLink").style.display = "none";
+    }
+
+    $("rdapLink").href = `https://rdap.org/ip/${encodeURIComponent(data.ip)}`;
+  }
+
+  async function lookup(ip = "") {
+    ip = String(ip || "").trim();
+
+    if (ip && !isValidIp(ip)) {
+      $("results").classList.remove("show");
+      showMessage("error", "Enter a valid IPv4 or IPv6 address. Hostnames and domain names are not accepted by this IP lookup.");
+      return;
+    }
+
+    if (ip && (isPrivateIPv4(ip) || isSpecialIPv6(ip))) {
+      $("results").classList.remove("show");
+      showMessage("info", "That appears to be a private, loopback, link-local, multicast, or otherwise non-public address. Public geolocation databases generally cannot provide meaningful Internet-location data for it.");
+      return;
+    }
+
+    showMessage();
+    setLoading(true);
+    $("results").classList.remove("show");
+
+    const url = ip ? `${API_BASE}/${encodeURIComponent(ip)}/json/` : `${API_BASE}/json/`;
+
+    try {
+      const response = await fetch(url, {headers:{"Accept":"application/json"}});
+      if (!response.ok) throw new Error(`Lookup service returned HTTP ${response.status}.`);
+      const data = await response.json();
+
+      if (data.error) {
+        throw new Error(data.reason || "The lookup service could not return data for that address.");
+      }
+      if (!data.ip) throw new Error("The lookup service returned an incomplete response.");
+
+      $("ipInput").value = data.ip;
+      render(data);
+    } catch (err) {
+      showMessage("error", `${err.message || "Unable to complete the IP lookup."} The external geolocation service may be unavailable or rate-limited. Please try again later.`);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  $("lookupBtn").addEventListener("click", () => lookup($("ipInput").value));
+  $("myIpBtn").addEventListener("click", () => lookup(""));
+  $("ipInput").addEventListener("keydown", e => {
+    if (e.key === "Enter") lookup($("ipInput").value);
+  });
+
+  document.querySelectorAll(".sampleIp").forEach(btn => {
+    btn.addEventListener("click", () => {
+      $("ipInput").value = btn.dataset.ip;
+      lookup(btn.dataset.ip);
+    });
+  });
+
+  $("clearBtn").addEventListener("click", () => {
+    $("ipInput").value = "";
+    $("results").classList.remove("show");
+    showMessage();
+    lastData = null;
+    $("ipInput").focus();
+  });
+
+  async function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.left = "-9999px";
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    ta.remove();
+  }
+
+  function summaryText(data) {
+    return [
+      "Utiliverse IP Address Lookup",
+      `IP: ${safe(data.ip)}`,
+      `Version: ${safe(data.version)}`,
+      `Location: ${[data.city,data.region,data.country_name].filter(Boolean).join(", ") || "Not available"}`,
+      `Postal code: ${safe(data.postal)}`,
+      `Coordinates: ${data.latitude ?? "N/A"}, ${data.longitude ?? "N/A"}`,
+      `Timezone: ${safe(data.timezone)}`,
+      `UTC offset: ${safe(data.utc_offset)}`,
+      `Network: ${safe(data.network)}`,
+      `ASN: ${safe(data.asn)}`,
+      `Organization: ${safe(data.org)}`,
+      `Currency: ${[data.currency,data.currency_name].filter(Boolean).join(" • ") || "Not available"}`,
+      `Languages: ${safe(data.languages)}`
+    ].join("\n");
+  }
+
+  $("copySummaryBtn").addEventListener("click", async () => {
+    if (!lastData) return;
+    try {
+      await copyText(summaryText(lastData));
+      $("copyStatus").textContent = "Summary copied";
+      setTimeout(() => $("copyStatus").textContent = "", 1600);
+    } catch {
+      $("copyStatus").textContent = "Copy unavailable";
+    }
+  });
+
+  $("copyJsonBtn").addEventListener("click", async () => {
+    if (!lastData) return;
+    try {
+      await copyText(JSON.stringify(lastData, null, 2));
+      $("copyStatus").textContent = "JSON copied";
+      setTimeout(() => $("copyStatus").textContent = "", 1600);
+    } catch {
+      $("copyStatus").textContent = "Copy unavailable";
+    }
+  });
+})();
+</script>
+</body>
+</html>
