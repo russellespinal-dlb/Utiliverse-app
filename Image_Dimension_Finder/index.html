@@ -1,1 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Image Dimension Finder – Width, Height, Aspect Ratio & Size | Utiliverse</title>
+<meta name="description" content="Free browser-based Image Dimension Finder. Upload or paste an image to instantly see width, height, aspect ratio, megapixels, orientation, file type, file size, transparency, and print-size estimates.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/Image_Dimension_Finder/">
 
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --panel:rgba(30,41,59,.72);--panel2:rgba(15,23,42,.70);--border:#334155;--border2:#475569;
+  --text:#f8fafc;--muted:#94a3b8;--indigo:#6366f1;--indigo2:#4f46e5;--green:#34d399;
+  --amber:#fbbf24;--rose:#fb7185
+}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),
+    radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;
+  color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  transition:background .25s ease,color .25s ease
+}
+a{color:inherit}
+button,input{font:inherit}
+button{touch-action:manipulation}
+.container{max-width:1152px;margin:0 auto;padding:0 16px}
+
+header{
+  position:sticky;top:0;z-index:50;background:rgba(2,6,23,.82);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid #1e293b
+}
+.header-inner{min-height:65px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.back-link{display:flex;align-items:center;gap:8px;text-decoration:none;color:#cbd5e1;font-size:14px;font-weight:700}
+.back-link:hover{color:#fff}
+.header-right{display:flex;align-items:center;gap:12px}
+.free-label{font-size:13px;font-weight:650;color:#64748b;white-space:nowrap}
+.theme-toggle{
+  display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;padding:0;
+  border:0;background:transparent;color:#94a3b8;border-radius:8px;cursor:pointer
+}
+.theme-toggle:hover{color:#fff;background:rgba(30,41,59,.45)}
+.theme-toggle:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
+.theme-toggle svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+main{padding:48px 0 72px}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:#818cf8;font-weight:850}
+h1{font-size:clamp(38px,5vw,58px);line-height:1.04;margin:10px 0 14px;font-weight:900;letter-spacing:-.035em}
+.hero p{max-width:930px;color:var(--muted);font-size:18px;line-height:1.72;margin:0}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.badge{border:1px solid var(--border);background:rgba(15,23,42,.66);border-radius:999px;padding:7px 10px;color:#cbd5e1;font-size:12px;font-weight:750}
+
+.glass{background:var(--panel);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:20px}
+.tool{margin-top:28px;padding:22px}
+.section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.section-title{font-size:22px;font-weight:850;margin:4px 0 0}
+.small{font-size:12px;color:#64748b;line-height:1.55}
+
+.dropzone{
+  margin-top:18px;border:1.5px dashed #475569;border-radius:16px;padding:25px;text-align:center;
+  background:rgba(15,23,42,.52);transition:.18s ease;cursor:pointer
+}
+.dropzone.dragover{border-color:#818cf8;background:rgba(99,102,241,.09)}
+.dropzone strong{display:block;color:#e2e8f0;font-size:15px}
+.dropzone p{margin:6px auto 0;color:#64748b;font-size:11px;line-height:1.55;max-width:760px}
+.file-button{
+  display:inline-flex;align-items:center;justify-content:center;margin-top:12px;min-height:42px;
+  border:1px solid #6366f1;background:linear-gradient(135deg,var(--indigo),var(--indigo2));
+  color:#fff;border-radius:10px;padding:9px 13px;font-weight:800;cursor:pointer
+}
+#fileInput{display:none}
+
+.results{display:none;margin-top:16px}
+.results.show{display:block}
+
+.top-grid{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:14px}
+.preview-card,.info-card{background:var(--panel2);border:1px solid var(--border);border-radius:16px;padding:14px;min-width:0}
+.preview-card h3,.info-card h3,.print-card h3{margin:0;color:#e2e8f0;font-size:14px}
+.preview-card p,.info-card p,.print-card p{margin:3px 0 0;color:#64748b;font-size:10px;line-height:1.45}
+.preview-shell{
+  margin-top:11px;display:flex;align-items:center;justify-content:center;min-height:260px;max-height:520px;
+  overflow:auto;border:1px solid var(--border);border-radius:12px;padding:10px;
+  background:
+    linear-gradient(45deg,#111827 25%,transparent 25%),
+    linear-gradient(-45deg,#111827 25%,transparent 25%),
+    linear-gradient(45deg,transparent 75%,#111827 75%),
+    linear-gradient(-45deg,transparent 75%,#111827 75%),#0b1220;
+  background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0
+}
+#previewImage{display:block;max-width:100%;max-height:490px;object-fit:contain}
+
+.dim-hero{
+  margin-top:11px;padding:18px;border:1px solid rgba(129,140,248,.35);
+  background:linear-gradient(135deg,rgba(99,102,241,.14),rgba(124,58,237,.08));border-radius:14px
+}
+.dim-label{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:#818cf8;font-weight:850}
+.dim-value{font-size:clamp(32px,5vw,48px);font-weight:900;letter-spacing:-.03em;margin-top:5px}
+.dim-sub{margin-top:6px;color:#94a3b8;font-size:12px;line-height:1.55}
+
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+.stat{background:#0f172a;border:1px solid var(--border);border-radius:12px;padding:11px;min-width:0}
+.stat small{display:block;color:#64748b;font-size:9px;text-transform:uppercase;letter-spacing:.07em;font-weight:850}
+.stat strong{display:block;color:#e2e8f0;font-size:15px;margin-top:4px;overflow-wrap:anywhere}
+.stat span{display:block;color:#64748b;font-size:9px;line-height:1.4;margin-top:3px}
+
+.detail-list{margin-top:10px;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.detail-row{display:flex;justify-content:space-between;gap:14px;padding:9px 11px;border-top:1px solid var(--border);font-size:11px}
+.detail-row:first-child{border-top:0}
+.detail-row span{color:#64748b}
+.detail-row strong{color:#cbd5e1;text-align:right;overflow-wrap:anywhere}
+
+.actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}
+.btn{
+  min-height:42px;border:1px solid var(--border2);background:#1e293b;color:#f8fafc;
+  border-radius:10px;padding:9px 12px;font-weight:800;cursor:pointer
+}
+.btn:hover{background:#334155}
+.btn.primary{background:linear-gradient(135deg,var(--indigo),var(--indigo2));border-color:var(--indigo)}
+.status{font-size:11px;color:#6ee7b7;min-height:16px}
+
+.print-card{margin-top:14px;background:var(--panel2);border:1px solid var(--border);border-radius:16px;padding:14px}
+.print-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:10px}
+.print-item{background:#0f172a;border:1px solid var(--border);border-radius:12px;padding:11px}
+.print-item small{display:block;color:#818cf8;font-size:10px;font-weight:850}
+.print-item strong{display:block;color:#e2e8f0;font-size:14px;margin-top:4px}
+.print-item span{display:block;color:#64748b;font-size:9px;margin-top:3px}
+
+.note{
+  margin-top:14px;padding:12px 13px;background:rgba(99,102,241,.06);
+  border:1px solid rgba(99,102,241,.20);border-radius:12px;color:#94a3b8;font-size:12px;line-height:1.65
+}
+.note strong{color:#c7d2fe}
+
+.article{max-width:900px;margin-top:64px}
+.article h2{font-size:30px;line-height:1.25;font-weight:900;margin:38px 0 13px;color:#fff}
+.article h3{font-size:19px;line-height:1.4;font-weight:850;margin:27px 0 9px;color:#e2e8f0}
+.article p,.article li{color:#94a3b8;line-height:1.84;margin:0 0 15px}
+.article ul{padding-left:20px}
+.callout{border:1px solid rgba(99,102,241,.28);background:rgba(99,102,241,.07);border-radius:15px;padding:16px;margin:22px 0}
+.callout strong{color:#c7d2fe}
+.faq{border-bottom:1px solid var(--border)}
+.faq summary{list-style:none;cursor:pointer;padding:16px 0;font-weight:800;display:flex;justify-content:space-between;gap:15px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:#818cf8;font-size:20px}
+.faq[open] summary::after{content:"−"}
+
+footer{border-top:1px solid #1e293b;background:#020617}
+.footer-inner{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:14px;color:#64748b;font-size:13px}
+
+/* Light mode */
+body.light-mode{
+  --panel:rgba(255,255,255,.92);--panel2:rgba(248,250,252,.96);--border:#dbe3ee;--border2:#cbd5e1;
+  --text:#0f172a;--muted:#475569;background:#f8fafc;color:#0f172a
+}
+body.light-mode header{background:rgba(255,255,255,.93);border-bottom-color:#e2e8f0}
+body.light-mode .back-link{color:#334155}
+body.light-mode .back-link:hover{color:#0f172a}
+body.light-mode .theme-toggle{color:#334155}
+body.light-mode .theme-toggle:hover{color:#0f172a;background:#f1f5f9}
+body.light-mode .badge{background:#fff;color:#475569}
+body.light-mode .dropzone{background:#fff}
+body.light-mode .dropzone strong,body.light-mode .preview-card h3,body.light-mode .info-card h3,body.light-mode .print-card h3,body.light-mode .stat strong,body.light-mode .print-item strong{color:#0f172a}
+body.light-mode .stat,body.light-mode .print-item{background:#fff}
+body.light-mode .detail-row strong{color:#334155}
+body.light-mode .btn:not(.primary){background:#f1f5f9;color:#334155}
+body.light-mode .btn:not(.primary):hover{background:#e2e8f0}
+body.light-mode .article h2{color:#0f172a}
+body.light-mode .article h3{color:#1e293b}
+body.light-mode .article p,body.light-mode .article li{color:#475569}
+body.light-mode .callout{background:#eef2ff}
+body.light-mode .callout strong{color:#4338ca}
+body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
+
+@media(max-width:860px){.top-grid{grid-template-columns:1fr}.print-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){
+  main{padding-top:34px}.stats{grid-template-columns:1fr 1fr}.print-grid{grid-template-columns:1fr 1fr}
+  .free-label{font-size:10.5px;max-width:130px;white-space:normal;text-align:right;line-height:1.2}
+}
+@media(max-width:390px){.stats,.print-grid{grid-template-columns:1fr}.header-right{gap:6px}}
+</style>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Image Dimension Finder","url":"https://utiliverse.app/Image_Dimension_Finder/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript and image decoding support.","description":"Inspect image width, height, aspect ratio, megapixels, orientation, file type, file size, transparency, and print-size estimates locally in the browser.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How do I find an image's dimensions?","acceptedAnswer":{"@type":"Answer","text":"Choose, drop, or paste an image. The tool reads the browser-decoded image width and height and displays them in pixels."}},
+{"@type":"Question","name":"What image formats are supported?","acceptedAnswer":{"@type":"Answer","text":"The tool accepts any image format the current browser can decode. Common formats include JPEG, PNG, WebP, GIF, SVG, BMP, and AVIF. HEIC, HEIF, TIFF, and RAW support varies by browser."}},
+{"@type":"Question","name":"Does the tool upload my image?","acceptedAnswer":{"@type":"Answer","text":"No. The image is read and analyzed locally in your browser."}},
+{"@type":"Question","name":"What is image aspect ratio?","acceptedAnswer":{"@type":"Answer","text":"Aspect ratio is the proportional relationship between width and height, such as 16:9, 4:3, 3:2, or 1:1."}},
+{"@type":"Question","name":"How are megapixels calculated?","acceptedAnswer":{"@type":"Answer","text":"Megapixels are calculated by multiplying width by height and dividing the total number of pixels by one million."}},
+{"@type":"Question","name":"Can the tool detect transparency?","acceptedAnswer":{"@type":"Answer","text":"For browser-readable raster images, the tool samples the rendered image for pixels with alpha transparency. SVG and other rendered formats are also analyzed after browser rendering."}},
+{"@type":"Question","name":"What do the print-size estimates mean?","acceptedAnswer":{"@type":"Answer","text":"They divide the pixel dimensions by a chosen pixels-per-inch value such as 300 PPI. Actual print quality depends on the image and printer."}},
+{"@type":"Question","name":"Can I copy the image metadata?","acceptedAnswer":{"@type":"Answer","text":"Yes. Copy Summary creates a text summary of the image dimensions, aspect ratio, file information, and related measurements."}}
+]}
+</script>
+</head>
+
+<body>
+<header>
+  <div class="container header-inner">
+    <a class="back-link" href="https://utiliverse.app"><span aria-hidden="true">←</span><span>Back to Utiliverse</span></a>
+    <div class="header-right">
+      <span class="free-label">100% Free and Browser Based</span>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode"><span id="themeIcon"></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
+<main>
+<div class="container">
+  <section class="hero">
+    <div class="eyebrow">Image utility</div>
+    <h1>Image Dimension Finder</h1>
+    <p>Upload, drop, or paste an image to instantly inspect its width, height, aspect ratio, orientation, megapixels, file size, format, transparency, and useful print-size estimates.</p>
+    <div class="badges">
+      <span class="badge">Width × Height in pixels</span>
+      <span class="badge">Aspect ratio & megapixels</span>
+      <span class="badge">100% local image analysis</span>
+    </div>
+  </section>
+
+  <section class="glass tool" aria-labelledby="toolHeading">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Image metadata</div>
+        <h2 id="toolHeading" class="section-title">Find image dimensions</h2>
+      </div>
+      <div class="small">The selected image is analyzed locally and is not uploaded to Utiliverse.</div>
+    </div>
+
+    <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Choose or drop an image">
+      <strong>Drop an image here, paste from your clipboard, or choose a file</strong>
+      <p>Works with image formats your browser can decode. Common formats include JPG/JPEG, PNG, WebP, GIF, SVG, BMP, and AVIF. HEIC/HEIF/TIFF/RAW support depends on the browser.</p>
+      <label class="file-button" for="fileInput">Choose Image</label>
+      <input id="fileInput" type="file" accept="image/*,.heic,.heif,.tif,.tiff,.avif,.bmp,.svg">
+      <div id="dropStatus" class="status" aria-live="polite" style="margin-top:9px"></div>
+    </div>
+
+    <div id="results" class="results">
+      <div class="top-grid">
+        <section class="preview-card">
+          <h3>Image preview</h3>
+          <p>Preview is scaled to fit; reported dimensions always use the decoded source image.</p>
+          <div class="preview-shell">
+            <img id="previewImage" alt="Selected image preview">
+          </div>
+        </section>
+
+        <section class="info-card">
+          <h3>Image details</h3>
+          <p>Dimensions and derived measurements update when a new image is selected.</p>
+
+          <div class="dim-hero">
+            <div class="dim-label">Image dimensions</div>
+            <div id="dimensionValue" class="dim-value">—</div>
+            <div id="dimensionSub" class="dim-sub">Choose an image to inspect it.</div>
+          </div>
+
+          <div class="stats">
+            <div class="stat"><small>Width</small><strong id="widthStat">—</strong><span>pixels</span></div>
+            <div class="stat"><small>Height</small><strong id="heightStat">—</strong><span>pixels</span></div>
+            <div class="stat"><small>Aspect ratio</small><strong id="ratioStat">—</strong><span>simplified ratio</span></div>
+            <div class="stat"><small>Megapixels</small><strong id="mpStat">—</strong><span>million pixels</span></div>
+            <div class="stat"><small>Orientation</small><strong id="orientationStat">—</strong><span>image shape</span></div>
+            <div class="stat"><small>Transparency</small><strong id="alphaStat">—</strong><span>sampled render</span></div>
+          </div>
+
+          <div class="detail-list">
+            <div class="detail-row"><span>File name</span><strong id="nameDetail">—</strong></div>
+            <div class="detail-row"><span>Detected type</span><strong id="typeDetail">—</strong></div>
+            <div class="detail-row"><span>File size</span><strong id="sizeDetail">—</strong></div>
+            <div class="detail-row"><span>Total pixels</span><strong id="pixelsDetail">—</strong></div>
+            <div class="detail-row"><span>Decimal ratio</span><strong id="decimalRatioDetail">—</strong></div>
+            <div class="detail-row"><span>Approx. raw RGBA memory</span><strong id="memoryDetail">—</strong></div>
+          </div>
+
+          <div class="actions">
+            <button id="copyBtn" class="btn primary" type="button">Copy Summary</button>
+            <button id="clearBtn" class="btn" type="button">Clear</button>
+            <span id="copyStatus" class="status" aria-live="polite"></span>
+          </div>
+        </section>
+      </div>
+
+      <section class="print-card">
+        <h3>Approximate print size from pixel dimensions</h3>
+        <p>These are mathematical size estimates only. They do not read an embedded DPI/PPI tag from the file.</p>
+        <div id="printGrid" class="print-grid"></div>
+      </section>
+    </div>
+
+    <div class="note"><strong>Format note:</strong> “any image format” in a browser means any format the browser can decode. Standard PNG, JPEG, WebP, GIF, SVG, BMP, and AVIF commonly work in modern browsers. Specialized formats such as HEIC/HEIF, TIFF, or camera RAW may require conversion first.</div>
+  </section>
+
+  <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
+       Paste approved Google AdSense code here after approval.
+       This comment is intentionally invisible and reserves no space.
+  -->
+
+  <section class="article">
+    <h2>About the Utiliverse Image Dimension Finder</h2>
+    <p>The Utiliverse Image Dimension Finder gives you the most useful size and shape information about an image without requiring an editing application. Choose a file, drag it onto the page, or paste an image from your clipboard and the tool immediately reports its decoded width and height in pixels. It also calculates aspect ratio, total pixel count, megapixels, orientation, estimated raw pixel memory, and several print-size equivalents.</p>
+
+    <p>All analysis happens in the browser. The image is read from your device, decoded by the browser, and inspected locally. It is not uploaded to a Utiliverse server. That makes the tool useful for screenshots, personal photos, website graphics, design assets, product images, and other files where you simply need the dimensions without transmitting the original image to an external processor.</p>
+
+    <h3>What are image dimensions?</h3>
+    <p>Digital image dimensions describe the number of pixels across the image and the number of pixels down the image. A 1920 × 1080 image contains 1,920 horizontal pixels and 1,080 vertical pixels. Those dimensions describe the image's pixel grid, not its physical size on a screen or sheet of paper.</p>
+
+    <p>The same 1920 × 1080 file can appear large or small depending on display scaling, CSS, screen density, document layout, or print settings. Pixel dimensions are therefore the most reliable starting point when checking whether an image meets a website, application, social-media, print, or upload requirement.</p>
+
+    <h3>Understanding aspect ratio</h3>
+    <p>Aspect ratio describes the proportional relationship between image width and height. Common ratios include 1:1 for a square, 4:3 for traditional displays and many cameras, 3:2 for common photographic formats, 16:9 for widescreen media, and 9:16 for vertical video and social-media layouts.</p>
+
+    <p>The finder simplifies the width and height using their greatest common divisor. For example, 1920 × 1080 reduces to 16:9. An unusual image size may produce a less familiar ratio such as 683:512. The decimal ratio is also shown so designers and developers can compare dimensions numerically.</p>
+
+    <h3>Megapixels and total pixels</h3>
+    <p>Megapixels are calculated by multiplying width by height and dividing by one million. A 4000 × 3000 image contains 12,000,000 pixels, or 12 megapixels. Megapixels are a convenient way to describe the overall pixel count of photographs and high-resolution graphics.</p>
+
+    <p>Megapixel count alone does not determine visual quality. Lens quality, focus, compression, noise, processing, scaling, and subject detail all matter. However, the pixel count is useful for determining whether an image has enough resolution for a target display or print size.</p>
+
+    <h3>Image orientation</h3>
+    <p>An image is labeled landscape when its width is greater than its height, portrait when its height is greater than its width, and square when the two dimensions are equal. Orientation is a simple property, but it can be useful when sorting assets, checking design specifications, or determining whether an image is appropriate for a horizontal or vertical layout.</p>
+
+    <h3>File size versus image dimensions</h3>
+    <p>File size and pixel dimensions measure different things. Two images can have exactly the same width and height but very different file sizes because of format, compression, image complexity, metadata, and quality settings. A detailed JPEG photograph may be several megabytes while a simple PNG graphic of the same dimensions may be larger or smaller depending on its content.</p>
+
+    <p>The tool therefore reports file size separately from pixel dimensions. It also estimates the memory required for an uncompressed four-channel RGBA pixel buffer by multiplying the total pixel count by four bytes. That value is not the file size; it is a rough illustration of how much memory a fully decoded image can occupy.</p>
+
+    <h3>Transparency detection</h3>
+    <p>The transparency check renders a scaled copy of the image to a canvas and samples the alpha channel. If any sampled pixel has an alpha value below 255, the image is reported as having transparency. This is especially useful for PNG, WebP, and rendered SVG files.</p>
+
+    <p>Because the check may use a scaled rendering for very large images, it is best viewed as a practical indicator rather than a forensic scan of every original pixel. JPEG does not support alpha transparency, while formats such as PNG and WebP can.</p>
+
+    <h3>Print-size estimates and PPI</h3>
+    <p>Physical print size depends on how many image pixels are assigned to each inch. At 300 pixels per inch, a 3000 × 2400 image corresponds mathematically to a 10 × 8 inch print. At 150 PPI, the same pixel dimensions correspond to 20 × 16 inches. The image has not changed; only the assumed pixel density has changed.</p>
+
+    <p>The tool displays approximate sizes at 72, 96, 150, and 300 PPI. These are calculations based solely on pixel dimensions. They do not read or enforce a DPI/PPI metadata tag embedded in the image, and they do not guarantee a particular print quality.</p>
+
+    <h2>Practical Use Cases</h2>
+    <h3>Checking website image requirements</h3>
+    <p>Web forms and content-management systems often require an image to be at least a certain width or to match a particular aspect ratio. The dimension finder lets you verify the file before uploading it to the site.</p>
+
+    <h3>Preparing social-media graphics</h3>
+    <p>Before cropping or resizing an image, you can check its existing dimensions and orientation to see how closely it matches a square, widescreen, or vertical target. The aspect-ratio result makes this especially quick.</p>
+
+    <h3>Inspecting screenshots</h3>
+    <p>Screenshots can differ depending on display resolution, browser zoom, device pixel ratio, and capture method. The finder shows the actual pixel dimensions stored in the screenshot file rather than the size at which it happens to appear on screen.</p>
+
+    <h3>Evaluating images for print</h3>
+    <p>The PPI estimates help answer questions such as whether a photograph has enough pixels for a planned print size. They are not a substitute for evaluating sharpness or printer requirements, but they provide a useful mathematical starting point.</p>
+
+    <h3>Developer and QA workflows</h3>
+    <p>Developers can verify generated images, exported screenshots, thumbnails, Open Graph images, banners, and application assets. Copy Summary makes it easy to paste the essential metadata into tickets, documentation, or QA notes.</p>
+
+    <div class="callout"><strong>Privacy:</strong> this tool analyzes the selected image locally in the browser. No image upload or external image-analysis API is required.</div>
+
+    <h2>Frequently Asked Questions</h2>
+    <details class="faq"><summary>How do I find an image's width and height?</summary><p>Choose, drop, or paste the image. Its decoded source width and height appear immediately in pixels.</p></details>
+    <details class="faq"><summary>Which image formats work?</summary><p>Any format your browser can decode can work. Common formats include JPEG, PNG, WebP, GIF, SVG, BMP, and AVIF. HEIC/HEIF, TIFF, and RAW support varies.</p></details>
+    <details class="faq"><summary>Is my image uploaded anywhere?</summary><p>No. The file is read and analyzed locally in your browser.</p></details>
+    <details class="faq"><summary>What is image aspect ratio?</summary><p>It is the proportional relationship between width and height. For example, 1920 × 1080 simplifies to 16:9.</p></details>
+    <details class="faq"><summary>How are megapixels calculated?</summary><p>Width is multiplied by height and the result is divided by 1,000,000.</p></details>
+    <details class="faq"><summary>Can this detect transparent pixels?</summary><p>Yes. The browser-rendered image is sampled for alpha values below full opacity.</p></details>
+    <details class="faq"><summary>What do the 72, 96, 150, and 300 PPI sizes mean?</summary><p>They show how large the image would be mathematically if its pixels were distributed at that many pixels per inch.</p></details>
+    <details class="faq"><summary>Can I copy the results?</summary><p>Yes. Copy Summary copies the main dimensions, aspect ratio, file information, orientation, megapixels, and related measurements.</p></details>
+  </section>
+</div>
+</main>
+
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
+<footer>
+  <div class="container footer-inner">
+    <span>© <span id="year"></span> Utiliverse. All rights reserved.</span>
+    <span>100% Free and Browser Based</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+  let current = null;
+
+  const sunSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>';
+  const moonSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+
+  function applyTheme(theme) {
+    const light = theme === "light";
+    document.body.classList.toggle("light-mode", light);
+    $("themeIcon").innerHTML = light ? moonSvg : sunSvg;
+    $("themeToggle").setAttribute("aria-label", light ? "Switch to dark mode" : "Switch to light mode");
+    $("themeToggle").title = light ? "Switch to dark mode" : "Switch to light mode";
+    document.querySelector('meta[name="theme-color"]').content = light ? "#f8fafc" : "#020617";
+  }
+
+  applyTheme(localStorage.getItem("utiliverse-theme") || "dark");
+  $("themeToggle").addEventListener("click", () => {
+    const next = document.body.classList.contains("light-mode") ? "dark" : "light";
+    localStorage.setItem("utiliverse-theme", next);
+    applyTheme(next);
+  });
+  $("year").textContent = new Date().getFullYear();
+
+  function gcd(a,b) {
+    a = Math.abs(Math.round(a));
+    b = Math.abs(Math.round(b));
+    while (b) [a,b] = [b,a%b];
+    return a || 1;
+  }
+
+  function simplifiedRatio(w,h) {
+    const g = gcd(w,h);
+    return `${Math.round(w/g)}:${Math.round(h/g)}`;
+  }
+
+  function orientation(w,h) {
+    if (w === h) return "Square";
+    return w > h ? "Landscape" : "Portrait";
+  }
+
+  function formatBytes(bytes) {
+    if (!Number.isFinite(bytes)) return "—";
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1048576) return `${(bytes/1024).toFixed(1)} KB`;
+    if (bytes < 1073741824) return `${(bytes/1048576).toFixed(2)} MB`;
+    return `${(bytes/1073741824).toFixed(2)} GB`;
+  }
+
+  function formatPixels(n) {
+    return Math.round(n).toLocaleString("en-US");
+  }
+
+  function fileType(file) {
+    if (file.type) return file.type;
+    const ext = (file.name.match(/\.([^.]+)$/)||[])[1];
+    return ext ? ext.toUpperCase() : "Unknown";
+  }
+
+  function printSizes(w,h) {
+    const ppis = [72,96,150,300];
+    $("printGrid").innerHTML = ppis.map(ppi => {
+      const wi = w/ppi, hi = h/ppi;
+      const wc = wi*2.54, hc = hi*2.54;
+      return `<div class="print-item">
+        <small>${ppi} PPI</small>
+        <strong>${wi.toFixed(2)} × ${hi.toFixed(2)} in</strong>
+        <span>${wc.toFixed(1)} × ${hc.toFixed(1)} cm</span>
+      </div>`;
+    }).join("");
+  }
+
+  function detectTransparency(img) {
+    try {
+      const maxSide = 800;
+      const scale = Math.min(1,maxSide/Math.max(img.naturalWidth,img.naturalHeight));
+      const w = Math.max(1,Math.round(img.naturalWidth*scale));
+      const h = Math.max(1,Math.round(img.naturalHeight*scale));
+      const c = document.createElement("canvas");
+      c.width = w;
+      c.height = h;
+      const x = c.getContext("2d",{willReadFrequently:true});
+      x.clearRect(0,0,w,h);
+      x.drawImage(img,0,0,w,h);
+      const data = x.getImageData(0,0,w,h).data;
+      for (let i=3;i<data.length;i+=4) {
+        if (data[i] < 255) return "Yes";
+      }
+      return "No";
+    } catch {
+      return "Unknown";
+    }
+  }
+
+  function render(file,img,dataUrl) {
+    const w = img.naturalWidth;
+    const h = img.naturalHeight;
+    const pixels = w*h;
+    const mp = pixels/1e6;
+    const ratio = simplifiedRatio(w,h);
+    const decimalRatio = w/h;
+    const orient = orientation(w,h);
+    const alpha = detectTransparency(img);
+    const rawBytes = pixels*4;
+
+    current = {
+      name:file.name || "Pasted image",
+      type:fileType(file),
+      size:file.size,
+      width:w,height:h,pixels,mp,ratio,decimalRatio,orient,alpha,rawBytes
+    };
+
+    $("previewImage").src = dataUrl;
+    $("previewImage").alt = `Preview of ${current.name}`;
+    $("results").classList.add("show");
+
+    $("dimensionValue").textContent = `${formatPixels(w)} × ${formatPixels(h)} px`;
+    $("dimensionSub").textContent = `${orient} image · ${ratio} aspect ratio · ${mp.toFixed(mp < 1 ? 3 : 2)} megapixels`;
+
+    $("widthStat").textContent = formatPixels(w);
+    $("heightStat").textContent = formatPixels(h);
+    $("ratioStat").textContent = ratio;
+    $("mpStat").textContent = mp.toFixed(mp < 1 ? 3 : 2);
+    $("orientationStat").textContent = orient;
+    $("alphaStat").textContent = alpha;
+
+    $("nameDetail").textContent = current.name;
+    $("typeDetail").textContent = current.type;
+    $("sizeDetail").textContent = formatBytes(file.size);
+    $("pixelsDetail").textContent = formatPixels(pixels);
+    $("decimalRatioDetail").textContent = decimalRatio.toFixed(4);
+    $("memoryDetail").textContent = formatBytes(rawBytes);
+
+    printSizes(w,h);
+
+    $("dropStatus").textContent = `Loaded ${current.name}.`;
+    $("copyStatus").textContent = "";
+    setTimeout(() => $("results").scrollIntoView({behavior:"smooth",block:"start"}),50);
+  }
+
+  function loadFile(file) {
+    if (!file) return;
+    $("dropStatus").textContent = `Reading ${file.name || "image"}…`;
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const dataUrl = reader.result;
+      const img = new Image();
+
+      img.onload = () => {
+        if (!img.naturalWidth || !img.naturalHeight) {
+          $("dropStatus").textContent = "The browser decoded the file but did not report valid image dimensions.";
+          return;
+        }
+        render(file,img,dataUrl);
+      };
+
+      img.onerror = () => {
+        $("results").classList.remove("show");
+        current = null;
+        $("dropStatus").textContent =
+          `Could not decode ${file.name || "this file"} (${file.type || "unknown type"}). ` +
+          `Try a browser-readable image such as PNG, JPEG, WebP, GIF, SVG, BMP, or AVIF.`;
+      };
+
+      img.src = dataUrl;
+    };
+
+    reader.onerror = () => {
+      $("dropStatus").textContent = "The browser could not read this file.";
+    };
+
+    reader.readAsDataURL(file);
+  }
+
+  $("fileInput").addEventListener("change",e => {
+    const f = e.target.files?.[0];
+    if (f) loadFile(f);
+    e.target.value = "";
+  });
+
+  const dropzone = $("dropzone");
+
+  ["dragenter","dragover"].forEach(type => dropzone.addEventListener(type,e => {
+    e.preventDefault();
+    dropzone.classList.add("dragover");
+  }));
+
+  ["dragleave","drop"].forEach(type => dropzone.addEventListener(type,e => {
+    e.preventDefault();
+    dropzone.classList.remove("dragover");
+  }));
+
+  dropzone.addEventListener("drop",e => {
+    const f = [...(e.dataTransfer?.files || [])].find(x =>
+      x.type.startsWith("image/") || /\.(heic|heif|tiff?|avif|bmp|svg)$/i.test(x.name)
+    );
+    if (f) loadFile(f);
+  });
+
+  dropzone.addEventListener("click",e => {
+    if (e.target.closest(".file-button") || e.target === $("fileInput")) return;
+    $("fileInput").click();
+  });
+
+  dropzone.addEventListener("keydown",e => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      $("fileInput").click();
+    }
+  });
+
+  document.addEventListener("paste",e => {
+    const item = [...(e.clipboardData?.items || [])].find(i => i.type.startsWith("image/"));
+    if (!item) return;
+    const f = item.getAsFile();
+    if (f) loadFile(f);
+  });
+
+  function summaryText() {
+    if (!current) return "";
+    return [
+      `Image: ${current.name}`,
+      `Dimensions: ${current.width} × ${current.height} px`,
+      `Aspect ratio: ${current.ratio} (${current.decimalRatio.toFixed(4)})`,
+      `Orientation: ${current.orient}`,
+      `Megapixels: ${current.mp.toFixed(current.mp < 1 ? 3 : 2)} MP`,
+      `Total pixels: ${current.pixels.toLocaleString("en-US")}`,
+      `File type: ${current.type}`,
+      `File size: ${formatBytes(current.size)}`,
+      `Transparency: ${current.alpha}`,
+      `Approx. raw RGBA memory: ${formatBytes(current.rawBytes)}`
+    ].join("\n");
+  }
+
+  async function copyText(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch {}
+    }
+
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.setAttribute("readonly","");
+    ta.style.position = "fixed";
+    ta.style.left = "-9999px";
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    ta.setSelectionRange(0,ta.value.length);
+
+    let ok = false;
+    try { ok = document.execCommand("copy"); } catch {}
+    ta.remove();
+
+    if (ok) return true;
+
+    window.prompt("Copy the image details below:",text);
+    return false;
+  }
+
+  $("copyBtn").addEventListener("click",async() => {
+    if (!current) {
+      $("copyStatus").textContent = "Choose an image first.";
+      return;
+    }
+
+    const ok = await copyText(summaryText());
+    $("copyStatus").textContent = ok
+      ? "Image details copied."
+      : "Clipboard access was blocked, so a manual copy box was opened.";
+
+    setTimeout(()=>$("copyStatus").textContent="",2200);
+  });
+
+  $("clearBtn").addEventListener("click",() => {
+    current = null;
+    $("results").classList.remove("show");
+    $("previewImage").removeAttribute("src");
+    $("dropStatus").textContent = "";
+    $("copyStatus").textContent = "";
+  });
+})();
+</script>
+</body>
+</html>
