@@ -1,1 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Image Watermark Maker – Add Text & Logo Watermarks | Utiliverse</title>
+<meta name="description" content="Free browser-based Image Watermark Maker. Add custom text or logo watermarks, adjust opacity, size, rotation, position, repeat/tile settings, preview locally, and export PNG, JPEG, or WebP.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/Image_Watermark_Maker/">
 
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --panel:rgba(30,41,59,.72);--panel2:rgba(15,23,42,.70);--border:#334155;--border2:#475569;
+  --text:#f8fafc;--muted:#94a3b8;--indigo:#6366f1;--indigo2:#4f46e5;--green:#34d399;
+  --amber:#fbbf24;--rose:#fb7185
+}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),
+    radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;
+  color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  transition:background .25s ease,color .25s ease
+}
+a{color:inherit}
+button,input,select{font:inherit}
+button{touch-action:manipulation}
+.container{max-width:1152px;margin:0 auto;padding:0 16px}
+
+header{
+  position:sticky;top:0;z-index:50;background:rgba(2,6,23,.82);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid #1e293b
+}
+.header-inner{min-height:65px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.back-link{display:flex;align-items:center;gap:8px;text-decoration:none;color:#cbd5e1;font-size:14px;font-weight:700}
+.back-link:hover{color:#fff}
+.header-right{display:flex;align-items:center;gap:12px}
+.free-label{font-size:13px;font-weight:650;color:#64748b;white-space:nowrap}
+.theme-toggle{
+  display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;padding:0;border:0;background:transparent;
+  color:#94a3b8;border-radius:8px;cursor:pointer
+}
+.theme-toggle:hover{color:#fff;background:rgba(30,41,59,.45)}
+.theme-toggle:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
+.theme-toggle svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+main{padding:48px 0 72px}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:#818cf8;font-weight:850}
+h1{font-size:clamp(38px,5vw,58px);line-height:1.04;margin:10px 0 14px;font-weight:900;letter-spacing:-.035em}
+.hero p{max-width:930px;color:var(--muted);font-size:18px;line-height:1.72;margin:0}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.badge{border:1px solid var(--border);background:rgba(15,23,42,.66);border-radius:999px;padding:7px 10px;color:#cbd5e1;font-size:12px;font-weight:750}
+
+.glass{background:var(--panel);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:20px}
+.tool{margin-top:28px;padding:22px}
+.section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.section-title{font-size:22px;font-weight:850;margin:4px 0 0}
+.small{font-size:12px;color:#64748b;line-height:1.55}
+
+.dropzone{
+  margin-top:18px;border:1.5px dashed #475569;border-radius:16px;padding:25px;text-align:center;
+  background:rgba(15,23,42,.52);transition:.18s ease;cursor:pointer
+}
+.dropzone.dragover{border-color:#818cf8;background:rgba(99,102,241,.09)}
+.dropzone strong{display:block;color:#e2e8f0;font-size:15px}
+.dropzone p{margin:6px auto 0;color:#64748b;font-size:11px;line-height:1.55;max-width:760px}
+.file-button{
+  display:inline-flex;align-items:center;justify-content:center;margin-top:12px;min-height:42px;
+  border:1px solid #6366f1;background:linear-gradient(135deg,var(--indigo),var(--indigo2));
+  color:#fff;border-radius:10px;padding:9px 13px;font-weight:800;cursor:pointer
+}
+#fileInput,#logoInput{display:none}
+
+.workspace{display:none;margin-top:16px}
+.workspace.show{display:block}
+.meta-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+.meta{background:var(--panel2);border:1px solid var(--border);border-radius:13px;padding:11px;min-width:0}
+.meta small{display:block;color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.07em;font-weight:850}
+.meta strong{display:block;color:#e2e8f0;font-size:13px;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.editor-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(300px,.75fr);gap:14px;margin-top:14px}
+.preview-card,.controls-card{background:var(--panel2);border:1px solid var(--border);border-radius:16px;padding:14px;min-width:0}
+.preview-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.preview-card h3,.controls-card h3{margin:0;color:#e2e8f0;font-size:14px}
+.preview-card p,.controls-card p{margin:3px 0 0;color:#64748b;font-size:10px;line-height:1.45}
+.preview-shell{
+  margin-top:11px;display:flex;align-items:center;justify-content:center;min-height:320px;max-height:650px;overflow:auto;
+  border:1px solid var(--border);border-radius:12px;padding:10px;
+  background:
+    linear-gradient(45deg,#111827 25%,transparent 25%),
+    linear-gradient(-45deg,#111827 25%,transparent 25%),
+    linear-gradient(45deg,transparent 75%,#111827 75%),
+    linear-gradient(-45deg,transparent 75%,#111827 75%),#0b1220;
+  background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0
+}
+#previewCanvas{display:block;max-width:100%;max-height:620px}
+
+.tabs{display:flex;gap:7px;margin-top:12px}
+.tab{
+  flex:1;min-height:40px;border:1px solid var(--border);background:#0f172a;color:#94a3b8;border-radius:10px;
+  padding:9px 12px;font-size:11px;font-weight:850;cursor:pointer
+}
+.tab.active{border-color:#818cf8;background:rgba(99,102,241,.14);color:#c7d2fe}
+
+.mode-panel{display:none}.mode-panel.show{display:block}
+.control{margin-top:12px}
+.control label{display:block;color:#94a3b8;font-size:10px;text-transform:uppercase;letter-spacing:.07em;font-weight:850;margin-bottom:6px}
+.text-input,.select,.num{
+  width:100%;min-height:42px;border:1px solid var(--border2);background:#0f172a;color:#e2e8f0;border-radius:10px;padding:8px 10px;outline:none
+}
+.text-input:focus,.select:focus,.num:focus{border-color:var(--indigo);box-shadow:0 0 0 3px rgba(99,102,241,.13)}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.range-row{display:grid;grid-template-columns:1fr auto;gap:9px;align-items:center}
+.range{width:100%;accent-color:var(--indigo)}
+.range-value{min-width:62px;text-align:right;color:#cbd5e1;font-size:11px;font-weight:800}
+
+.position-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.pos-btn{
+  min-height:36px;border:1px solid var(--border);background:#0f172a;color:#64748b;border-radius:8px;cursor:pointer;font-size:13px;font-weight:900
+}
+.pos-btn.active{border-color:#818cf8;background:rgba(99,102,241,.14);color:#c7d2fe}
+.pos-btn:hover{border-color:#6366f1;color:#e2e8f0}
+
+.check-row{display:flex;align-items:center;gap:8px;color:#cbd5e1;font-size:11px;font-weight:700}
+.check-row input{accent-color:var(--indigo)}
+
+.logo-drop{
+  border:1px dashed var(--border2);border-radius:11px;padding:12px;text-align:center;background:#0f172a
+}
+.logo-drop strong{display:block;color:#cbd5e1;font-size:11px}
+.logo-drop span{display:block;color:#64748b;font-size:9px;margin-top:3px}
+.logo-button{
+  display:inline-flex;margin-top:8px;border:1px solid var(--border2);background:#1e293b;color:#f8fafc;
+  border-radius:8px;padding:7px 9px;font-size:10px;font-weight:800;cursor:pointer
+}
+.logo-meta{margin-top:7px;color:#6ee7b7;font-size:10px;min-height:14px}
+
+.output-box{margin-top:14px;padding-top:13px;border-top:1px solid var(--border)}
+.actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}
+.btn{
+  min-height:42px;border:1px solid var(--border2);background:#1e293b;color:#f8fafc;border-radius:10px;
+  padding:9px 12px;font-weight:800;cursor:pointer
+}
+.btn:hover:not(:disabled){background:#334155}
+.btn.primary{background:linear-gradient(135deg,var(--indigo),var(--indigo2));border-color:var(--indigo)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.status{font-size:11px;color:#6ee7b7;min-height:17px;margin-top:8px}
+
+.final-card{display:none;margin-top:14px;background:var(--panel2);border:1px solid var(--border);border-radius:16px;padding:14px}
+.final-card.show{display:block}
+.final-card h3{margin:0;color:#e2e8f0;font-size:14px}
+.final-card p{margin:3px 0 0;color:#64748b;font-size:10px}
+.final-shell{
+  margin-top:10px;display:flex;align-items:center;justify-content:center;min-height:180px;max-height:500px;overflow:auto;
+  border:1px solid var(--border);border-radius:11px;background:#0b1220;padding:10px
+}
+#finalImage{display:block;max-width:100%;max-height:470px}
+.save-note{margin-top:10px;padding:11px;border:1px solid rgba(99,102,241,.2);background:rgba(99,102,241,.06);border-radius:10px;color:#94a3b8;font-size:11px;line-height:1.55}
+.save-note strong{color:#c7d2fe}
+
+.note{
+  margin-top:14px;padding:12px 13px;background:rgba(99,102,241,.06);
+  border:1px solid rgba(99,102,241,.20);border-radius:12px;color:#94a3b8;font-size:12px;line-height:1.65
+}
+.note strong{color:#c7d2fe}
+
+.article{max-width:900px;margin-top:64px}
+.article h2{font-size:30px;line-height:1.25;font-weight:900;margin:38px 0 13px;color:#fff}
+.article h3{font-size:19px;line-height:1.4;font-weight:850;margin:27px 0 9px;color:#e2e8f0}
+.article p,.article li{color:#94a3b8;line-height:1.84;margin:0 0 15px}
+.article ul{padding-left:20px}
+.callout{border:1px solid rgba(99,102,241,.28);background:rgba(99,102,241,.07);border-radius:15px;padding:16px;margin:22px 0}
+.callout strong{color:#c7d2fe}
+.faq{border-bottom:1px solid var(--border)}
+.faq summary{list-style:none;cursor:pointer;padding:16px 0;font-weight:800;display:flex;justify-content:space-between;gap:15px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:#818cf8;font-size:20px}
+.faq[open] summary::after{content:"−"}
+
+footer{border-top:1px solid #1e293b;background:#020617}
+.footer-inner{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:14px;color:#64748b;font-size:13px}
+
+/* Light mode */
+body.light-mode{
+  --panel:rgba(255,255,255,.92);--panel2:rgba(248,250,252,.96);--border:#dbe3ee;--border2:#cbd5e1;
+  --text:#0f172a;--muted:#475569;background:#f8fafc;color:#0f172a
+}
+body.light-mode header{background:rgba(255,255,255,.93);border-bottom-color:#e2e8f0}
+body.light-mode .back-link{color:#334155}
+body.light-mode .back-link:hover{color:#0f172a}
+body.light-mode .theme-toggle{color:#334155}
+body.light-mode .theme-toggle:hover{color:#0f172a;background:#f1f5f9}
+body.light-mode .badge{background:#fff;color:#475569}
+body.light-mode .dropzone{background:#fff}
+body.light-mode .dropzone strong,body.light-mode .preview-card h3,body.light-mode .controls-card h3,body.light-mode .final-card h3,body.light-mode .meta strong{color:#0f172a}
+body.light-mode .tab,body.light-mode .pos-btn,body.light-mode .logo-drop{background:#fff;color:#475569}
+body.light-mode .tab.active,body.light-mode .pos-btn.active{background:#eef2ff;color:#4338ca}
+body.light-mode .text-input,body.light-mode .select,body.light-mode .num{background:#fff;color:#0f172a}
+body.light-mode .logo-button,body.light-mode .btn:not(.primary){background:#f1f5f9;color:#334155}
+body.light-mode .btn:not(.primary):hover:not(:disabled){background:#e2e8f0}
+body.light-mode .check-row{color:#334155}
+body.light-mode .article h2{color:#0f172a}
+body.light-mode .article h3{color:#1e293b}
+body.light-mode .article p,body.light-mode .article li{color:#475569}
+body.light-mode .callout{background:#eef2ff}
+body.light-mode .callout strong{color:#4338ca}
+body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
+
+@media(max-width:920px){.editor-grid{grid-template-columns:1fr}.meta-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){
+  main{padding-top:34px}.meta-grid{grid-template-columns:1fr 1fr}.row-2{grid-template-columns:1fr}
+  .free-label{font-size:10.5px;max-width:130px;white-space:normal;text-align:right;line-height:1.2}
+}
+@media(max-width:390px){.meta-grid{grid-template-columns:1fr}.header-right{gap:6px}}
+</style>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Image Watermark Maker","url":"https://utiliverse.app/Image_Watermark_Maker/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript and Canvas support.","description":"Add text or logo watermarks to browser-readable images locally and export PNG, JPEG, or WebP.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Does the watermark tool upload my image?","acceptedAnswer":{"@type":"Answer","text":"No. The source image, watermark, preview, and export are processed locally in your browser."}},
+{"@type":"Question","name":"Can I add a text watermark?","acceptedAnswer":{"@type":"Answer","text":"Yes. You can set custom text, font, weight, color, size, opacity, rotation, position, margin, outline, and tiled repetition."}},
+{"@type":"Question","name":"Can I use a logo as the watermark?","acceptedAnswer":{"@type":"Answer","text":"Yes. Upload a browser-readable logo or graphic and adjust its size, opacity, rotation, position, margin, or tiled repetition."}},
+{"@type":"Question","name":"Which source image formats are supported?","acceptedAnswer":{"@type":"Answer","text":"Any image format the browser can decode can be used. Common formats include JPEG, PNG, WebP, GIF, SVG, BMP, and AVIF. HEIC, HEIF, TIFF, and RAW support varies by browser."}},
+{"@type":"Question","name":"Which output formats are available?","acceptedAnswer":{"@type":"Answer","text":"Watermarked images can be exported as PNG, JPEG, or WebP."}},
+{"@type":"Question","name":"Can the watermark repeat across the whole image?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enable Repeat / Tile Watermark to draw the watermark across the image instead of at one position."}},
+{"@type":"Question","name":"Can I control watermark transparency?","acceptedAnswer":{"@type":"Answer","text":"Yes. The opacity control ranges from subtle transparent marks to fully opaque watermarks."}},
+{"@type":"Question","name":"What happens if automatic download is blocked?","acceptedAnswer":{"@type":"Answer","text":"The generated watermarked image is shown on the page so it can be right-clicked and saved with Save Image As."}}
+]}
+</script>
+</head>
+
+<body>
+<header>
+  <div class="container header-inner">
+    <a class="back-link" href="https://utiliverse.app"><span aria-hidden="true">←</span><span>Back to Utiliverse</span></a>
+    <div class="header-right">
+      <span class="free-label">100% Free and Browser Based</span>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode"><span id="themeIcon"></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
+<main>
+<div class="container">
+  <section class="hero">
+    <div class="eyebrow">Image utility</div>
+    <h1>Image Watermark Maker</h1>
+    <p>Add a custom text or logo watermark to an image, control its position, size, opacity, rotation, outline, or repeated pattern, preview the result instantly, and export the finished image in your browser.</p>
+    <div class="badges">
+      <span class="badge">Text & logo watermarks</span>
+      <span class="badge">Position · opacity · rotation · tile</span>
+      <span class="badge">PNG · JPEG · WebP export</span>
+    </div>
+  </section>
+
+  <section class="glass tool" aria-labelledby="toolHeading">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Local watermark editor</div>
+        <h2 id="toolHeading" class="section-title">Add a watermark to an image</h2>
+      </div>
+      <div class="small">Your source image and watermark stay in the browser and are not uploaded to Utiliverse.</div>
+    </div>
+
+    <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Choose or drop a source image">
+      <strong>Drop an image here, paste from your clipboard, or choose a file</strong>
+      <p>Uses any image format your browser can decode. Common formats include JPG/JPEG, PNG, WebP, GIF, SVG, BMP, and AVIF. HEIC/HEIF/TIFF support depends on your browser.</p>
+      <label class="file-button" for="fileInput">Choose Image</label>
+      <input id="fileInput" type="file" accept="image/*,.heic,.heif,.tif,.tiff,.avif,.bmp,.svg">
+      <div id="dropStatus" class="status" aria-live="polite" style="margin-top:9px"></div>
+    </div>
+
+    <div id="workspace" class="workspace">
+      <div class="meta-grid">
+        <div class="meta"><small>File</small><strong id="fileName">—</strong></div>
+        <div class="meta"><small>Source dimensions</small><strong id="sourceDimensions">—</strong></div>
+        <div class="meta"><small>Type</small><strong id="fileType">—</strong></div>
+        <div class="meta"><small>File size</small><strong id="fileSize">—</strong></div>
+      </div>
+
+      <div class="editor-grid">
+        <section class="preview-card">
+          <div class="preview-head">
+            <div>
+              <h3>Live preview</h3>
+              <p>Preview is scaled for the page. Export uses the selected output dimensions.</p>
+            </div>
+            <button id="resetBtn" class="btn" type="button">Reset Watermark</button>
+          </div>
+          <div class="preview-shell"><canvas id="previewCanvas"></canvas></div>
+        </section>
+
+        <aside class="controls-card">
+          <h3>Watermark settings</h3>
+          <p>Choose text or logo mode, then adjust the watermark appearance.</p>
+
+          <div class="tabs">
+            <button id="textTab" class="tab active" type="button">Text Watermark</button>
+            <button id="logoTab" class="tab" type="button">Logo / Image</button>
+          </div>
+
+          <div id="textPanel" class="mode-panel show">
+            <div class="control">
+              <label for="watermarkText">Watermark text</label>
+              <input id="watermarkText" class="text-input" type="text" maxlength="120" value="© Utiliverse" placeholder="Your watermark">
+            </div>
+
+            <div class="control row-2">
+              <div>
+                <label for="fontSelect">Font</label>
+                <select id="fontSelect" class="select">
+                  <option value="Arial, sans-serif">Arial</option>
+                  <option value="Georgia, serif">Georgia</option>
+                  <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
+                  <option value="'Times New Roman', serif">Times New Roman</option>
+                  <option value="'Courier New', monospace">Courier New</option>
+                  <option value="system-ui, sans-serif" selected>System UI</option>
+                </select>
+              </div>
+              <div>
+                <label for="weightSelect">Weight</label>
+                <select id="weightSelect" class="select">
+                  <option value="400">Regular</option>
+                  <option value="600">Semi Bold</option>
+                  <option value="700" selected>Bold</option>
+                  <option value="900">Heavy</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="control row-2">
+              <div>
+                <label for="textColor">Text color</label>
+                <input id="textColor" class="text-input" type="color" value="#ffffff" style="padding:5px">
+              </div>
+              <div>
+                <label for="outlineColor">Outline color</label>
+                <input id="outlineColor" class="text-input" type="color" value="#000000" style="padding:5px">
+              </div>
+            </div>
+
+            <div class="control">
+              <label for="textSize">Text size</label>
+              <div class="range-row">
+                <input id="textSize" class="range" type="range" min="2" max="18" value="6" step=".5">
+                <span id="textSizeValue" class="range-value">6% width</span>
+              </div>
+            </div>
+
+            <div class="control">
+              <label class="check-row"><input id="outlineToggle" type="checkbox" checked> Add text outline for contrast</label>
+            </div>
+          </div>
+
+          <div id="logoPanel" class="mode-panel">
+            <div class="control logo-drop">
+              <strong>Choose a logo or watermark image</strong>
+              <span>Transparent PNG or WebP works especially well.</span>
+              <label class="logo-button" for="logoInput">Choose Logo</label>
+              <input id="logoInput" type="file" accept="image/*,.svg,.avif,.bmp">
+              <div id="logoMeta" class="logo-meta"></div>
+            </div>
+
+            <div class="control">
+              <label for="logoSize">Logo size</label>
+              <div class="range-row">
+                <input id="logoSize" class="range" type="range" min="5" max="60" value="22" step="1">
+                <span id="logoSizeValue" class="range-value">22% width</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="control">
+            <label for="opacityRange">Opacity</label>
+            <div class="range-row">
+              <input id="opacityRange" class="range" type="range" min="5" max="100" value="65" step="1">
+              <span id="opacityValue" class="range-value">65%</span>
+            </div>
+          </div>
+
+          <div class="control">
+            <label for="rotationRange">Rotation</label>
+            <div class="range-row">
+              <input id="rotationRange" class="range" type="range" min="-180" max="180" value="-15" step="1">
+              <span id="rotationValue" class="range-value">-15°</span>
+            </div>
+          </div>
+
+          <div class="control">
+            <label>Position</label>
+            <div class="position-grid">
+              <button class="pos-btn" data-pos="tl" type="button">↖</button>
+              <button class="pos-btn" data-pos="tc" type="button">↑</button>
+              <button class="pos-btn" data-pos="tr" type="button">↗</button>
+              <button class="pos-btn" data-pos="ml" type="button">←</button>
+              <button class="pos-btn" data-pos="cc" type="button">•</button>
+              <button class="pos-btn" data-pos="mr" type="button">→</button>
+              <button class="pos-btn" data-pos="bl" type="button">↙</button>
+              <button class="pos-btn" data-pos="bc" type="button">↓</button>
+              <button class="pos-btn active" data-pos="br" type="button">↘</button>
+            </div>
+          </div>
+
+          <div class="control">
+            <label for="marginRange">Edge margin</label>
+            <div class="range-row">
+              <input id="marginRange" class="range" type="range" min="0" max="15" value="4" step=".5">
+              <span id="marginValue" class="range-value">4%</span>
+            </div>
+          </div>
+
+          <div class="control">
+            <label class="check-row"><input id="tileToggle" type="checkbox"> Repeat / Tile Watermark</label>
+          </div>
+
+          <div class="output-box">
+            <div class="control row-2">
+              <div>
+                <label for="formatSelect">Output format</label>
+                <select id="formatSelect" class="select">
+                  <option value="image/png">PNG</option>
+                  <option value="image/jpeg">JPEG</option>
+                  <option value="image/webp">WebP</option>
+                </select>
+              </div>
+              <div>
+                <label for="maxSizeSelect">Max dimension</label>
+                <select id="maxSizeSelect" class="select">
+                  <option value="0">Original size</option>
+                  <option value="4096">4096 px</option>
+                  <option value="2048">2048 px</option>
+                  <option value="1024">1024 px</option>
+                  <option value="512">512 px</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="control">
+              <label for="qualityRange">JPEG / WebP quality</label>
+              <div class="range-row">
+                <input id="qualityRange" class="range" type="range" min="40" max="100" value="92" step="1">
+                <span id="qualityValue" class="range-value">92%</span>
+              </div>
+            </div>
+
+            <div class="actions">
+              <button id="saveBtn" class="btn primary" type="button">Save Watermarked Image</button>
+            </div>
+            <div id="saveStatus" class="status" aria-live="polite"></div>
+          </div>
+        </aside>
+      </div>
+
+      <section id="finalCard" class="final-card">
+        <h3>Watermarked image ready to save</h3>
+        <p>If the browser blocks the automatic download, the finished image is shown here.</p>
+        <div class="final-shell"><img id="finalImage" alt="Watermarked image ready to save"></div>
+        <div class="save-note"><strong>If no download begins:</strong> right-click the finished image above and choose <strong>Save Image As…</strong></div>
+      </section>
+    </div>
+
+    <div class="note"><strong>Format note:</strong> source-image support depends on what your browser can decode. Animated GIFs are rendered as a static image when exported. PNG and WebP can preserve transparency; JPEG cannot, so transparent areas are filled with white.</div>
+  </section>
+
+  <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
+       Paste approved Google AdSense code here after approval.
+       This comment is intentionally invisible and reserves no space.
+  -->
+
+  <section class="article">
+    <h2>About the Utiliverse Image Watermark Maker</h2>
+    <p>The Utiliverse Image Watermark Maker adds visible text or logo marks to digital images directly in your browser. A watermark can identify the creator, communicate copyright or ownership, promote a brand, label a draft, identify a proof, or make casual reuse less convenient. The editor provides a live preview and controls for opacity, placement, rotation, size, margins, and repeated watermark patterns.</p>
+
+    <p>The entire workflow is browser-based. Your source image and optional logo are read from your device and rendered with the HTML Canvas API. They are not uploaded to a Utiliverse server. When the watermark looks right, the full-resolution or optionally downscaled result can be exported as PNG, JPEG, or WebP.</p>
+
+    <h3>Text watermarks</h3>
+    <p>Text mode is useful for copyright notices, names, website addresses, social handles, proof labels, internal-use notices, and short branding messages. You can enter your own text, choose a font and weight, select text and outline colors, change the size, adjust opacity, and rotate the watermark.</p>
+
+    <p>The optional outline helps light text remain readable over bright areas and dark text remain readable over dark areas. Because an image can contain many different tones, adding contrast around the letters often produces a more reliable watermark than selecting a single text color alone.</p>
+
+    <h3>Logo and image watermarks</h3>
+    <p>Logo mode lets you use another browser-readable image as the watermark. Transparent PNG and WebP graphics are especially useful because only the logo itself appears over the source image. A logo with a solid background can also be used, but the entire rectangular image will be visible.</p>
+
+    <p>The logo size is expressed as a percentage of the source image width, so the watermark scales naturally across different image sizes. Opacity, rotation, position, edge margin, and tiled repetition work in logo mode just as they do with text.</p>
+
+    <h3>Watermark opacity</h3>
+    <p>A watermark does not always need to be fully opaque. Lower opacity allows the original photograph or design to remain visible underneath. Subtle watermarks are common when the goal is identification without significantly distracting from the image, while higher opacity is appropriate for proofs, drafts, or images where the watermark needs to be unmistakable.</p>
+
+    <p>There is no universal ideal opacity. Busy photographs may need a stronger watermark than a simple background, and a large center watermark can often use less opacity than a small corner watermark.</p>
+
+    <h3>Position and edge margins</h3>
+    <p>The nine-position grid covers the top-left, top-center, top-right, middle-left, center, middle-right, bottom-left, bottom-center, and bottom-right regions of the image. Edge margin controls how far a single watermark sits from the image boundary.</p>
+
+    <p>Corner watermarks are less intrusive but easier to crop away. Center watermarks are more visible and harder to remove without affecting the underlying image. The best choice depends on whether your priority is presentation, branding, identification, or deterrence.</p>
+
+    <h3>Rotation and repeated watermark patterns</h3>
+    <p>Rotation can make a watermark fit the composition or create the familiar diagonal proof-watermark appearance. The tool supports positive and negative angles, including horizontal text at zero degrees.</p>
+
+    <p>Repeat or Tile Watermark places the mark across the image in a spaced grid rather than using a single location. Tiled watermarks are useful for proofs, previews, stock-like presentations, and other situations where cropping one corner should not remove the only identifying mark.</p>
+
+    <h3>PNG, JPEG, and WebP output</h3>
+    <p>PNG is a good option for lossless output, screenshots, interface graphics, and images that need transparency. JPEG is broadly compatible and efficient for photographs but does not support transparent pixels. WebP can provide efficient photographic compression and transparency in modern browsers.</p>
+
+    <p>The JPEG/WebP quality slider controls lossy encoding quality. You can also set a maximum output dimension when a smaller web-ready image is preferred. Choosing Original Size preserves the selected source dimensions when the browser can allocate a canvas of that size.</p>
+
+    <h3>Watermarks and copyright protection</h3>
+    <p>A visible watermark can communicate ownership and discourage casual copying, but it is not digital rights management and cannot guarantee that an image will never be reused or edited. Sophisticated editing tools may remove or reconstruct parts of a watermarked image, particularly when the watermark covers a simple background.</p>
+
+    <p>For valuable work, watermarking can be one part of a broader workflow that also includes retaining original files, publishing appropriate copyright information, keeping creation records, and distributing only the resolution necessary for the intended use.</p>
+
+    <h2>Practical Use Cases</h2>
+    <h3>Photography proofs</h3>
+    <p>Photographers can place a semi-transparent studio name or PROOF label across preview images before clients choose final photographs. Repeated diagonal watermarks make it harder to remove the identification simply by cropping a corner.</p>
+
+    <h3>Social-media branding</h3>
+    <p>A small logo in the bottom corner can provide consistent branding for images posted to social networks. The opacity and margin controls help keep the logo visible without overwhelming the content.</p>
+
+    <h3>Product images and online listings</h3>
+    <p>Businesses can add a store name, website, or logo to product photographs before they are posted to marketplaces or catalog pages. A consistent position and scale can make a group of images look more professional.</p>
+
+    <h3>Draft and internal-use labels</h3>
+    <p>Large rotated text such as DRAFT, SAMPLE, PREVIEW, or INTERNAL can be placed across an image to communicate status. The tiled option works well when the label needs to remain visible throughout the image.</p>
+
+    <h3>Privacy-conscious watermarking</h3>
+    <p>Because the editor runs locally, it can be used for private images without first sending the original photograph to an external watermark service. The security of the local device and browser still matters, but Utiliverse does not require an image-upload API for this task.</p>
+
+    <div class="callout"><strong>Tip:</strong> for a watermark that is harder to remove, use a central or tiled placement with moderate opacity. For a cleaner presentation, use a smaller corner watermark with enough contrast to remain readable.</div>
+
+    <h2>Frequently Asked Questions</h2>
+    <details class="faq"><summary>Can I add text and logo watermarks?</summary><p>Yes. Switch between Text Watermark and Logo / Image modes and configure the watermark independently.</p></details>
+    <details class="faq"><summary>Are my images uploaded?</summary><p>No. Source images, logos, previews, and exports are processed locally in the browser.</p></details>
+    <details class="faq"><summary>Can I make the watermark transparent?</summary><p>Yes. Use the opacity slider to make either a text or logo watermark more subtle or more visible.</p></details>
+    <details class="faq"><summary>Can I repeat the watermark across the image?</summary><p>Yes. Enable Repeat / Tile Watermark to draw a spaced watermark pattern across the entire image.</p></details>
+    <details class="faq"><summary>Can I rotate a watermark?</summary><p>Yes. Rotation can be adjusted from -180° to +180°.</p></details>
+    <details class="faq"><summary>Which source image formats work?</summary><p>Any image format your browser can decode can work. JPEG, PNG, WebP, GIF, SVG, BMP, and AVIF are common; HEIC/HEIF and TIFF support varies.</p></details>
+    <details class="faq"><summary>Which output formats can I save?</summary><p>PNG, JPEG, and WebP are available. PNG and WebP can preserve transparency, while JPEG fills transparent regions with white.</p></details>
+    <details class="faq"><summary>What if my browser blocks the download?</summary><p>The finished watermarked image is displayed on the page so you can right-click it and choose Save Image As.</p></details>
+  </section>
+</div>
+</main>
+
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
+<footer>
+  <div class="container footer-inner">
+    <span>© <span id="year"></span> Utiliverse. All rights reserved.</span>
+    <span>100% Free and Browser Based</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+  const preview = $("previewCanvas");
+  const pctx = preview.getContext("2d");
+
+  let sourceImage = null;
+  let sourceFile = null;
+  let sourceDataUrl = "";
+  let logoImage = null;
+  let logoFile = null;
+  let mode = "text";
+  let position = "br";
+  let previewTimer = null;
+
+  const sunSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>';
+  const moonSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+
+  function applyTheme(theme) {
+    const light = theme === "light";
+    document.body.classList.toggle("light-mode", light);
+    $("themeIcon").innerHTML = light ? moonSvg : sunSvg;
+    $("themeToggle").setAttribute("aria-label", light ? "Switch to dark mode" : "Switch to light mode");
+    $("themeToggle").title = light ? "Switch to dark mode" : "Switch to light mode";
+    document.querySelector('meta[name="theme-color"]').content = light ? "#f8fafc" : "#020617";
+  }
+
+  applyTheme(localStorage.getItem("utiliverse-theme") || "dark");
+  $("themeToggle").addEventListener("click", () => {
+    const next = document.body.classList.contains("light-mode") ? "dark" : "light";
+    localStorage.setItem("utiliverse-theme", next);
+    applyTheme(next);
+  });
+  $("year").textContent = new Date().getFullYear();
+
+  function formatBytes(bytes) {
+    if (!Number.isFinite(bytes)) return "—";
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1048576) return `${(bytes/1024).toFixed(1)} KB`;
+    return `${(bytes/1048576).toFixed(2)} MB`;
+  }
+
+  function outputExtension(type) {
+    if (type === "image/jpeg") return "jpg";
+    if (type === "image/webp") return "webp";
+    return "png";
+  }
+
+  function readImageFile(file,onSuccess,onError) {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const img = new Image();
+      img.onload = () => onSuccess(img,reader.result);
+      img.onerror = () => onError?.();
+      img.src = reader.result;
+    };
+
+    reader.onerror = () => onError?.();
+    reader.readAsDataURL(file);
+  }
+
+  function loadSource(file) {
+    if (!file) return;
+    $("dropStatus").textContent = `Loading ${file.name || "image"}…`;
+
+    readImageFile(file,(img,dataUrl) => {
+      if (!img.naturalWidth || !img.naturalHeight) {
+        $("dropStatus").textContent = "The browser did not report valid dimensions for this image.";
+        return;
+      }
+
+      sourceFile = file;
+      sourceImage = img;
+      sourceDataUrl = dataUrl;
+
+      $("fileName").textContent = file.name || "Pasted image";
+      $("sourceDimensions").textContent = `${img.naturalWidth.toLocaleString("en-US")} × ${img.naturalHeight.toLocaleString("en-US")} px`;
+      $("fileType").textContent = file.type || "Unknown";
+      $("fileSize").textContent = formatBytes(file.size);
+
+      $("workspace").classList.add("show");
+      $("dropStatus").textContent = `Loaded ${file.name || "image"}.`;
+      $("finalCard").classList.remove("show");
+
+      renderPreview();
+      setTimeout(()=>$("workspace").scrollIntoView({behavior:"smooth",block:"start"}),50);
+    },() => {
+      $("dropStatus").textContent =
+        `Could not decode ${file.name || "this image"}. Try PNG, JPEG, WebP, GIF, SVG, BMP, or AVIF.`;
+    });
+  }
+
+  function loadLogo(file) {
+    if (!file) return;
+    $("logoMeta").textContent = `Loading ${file.name}…`;
+
+    readImageFile(file,(img) => {
+      logoFile = file;
+      logoImage = img;
+      $("logoMeta").textContent = `Loaded ${file.name} · ${img.naturalWidth} × ${img.naturalHeight}px`;
+      schedulePreview();
+    },() => {
+      logoFile = null;
+      logoImage = null;
+      $("logoMeta").textContent = "This logo format could not be decoded.";
+      schedulePreview();
+    });
+  }
+
+  function exportDimensions() {
+    const max = Number($("maxSizeSelect").value);
+    const w = sourceImage.naturalWidth;
+    const h = sourceImage.naturalHeight;
+    if (!max || Math.max(w,h) <= max) return {w,h};
+    const scale = max/Math.max(w,h);
+    return {w:Math.max(1,Math.round(w*scale)),h:Math.max(1,Math.round(h*scale))};
+  }
+
+  function placement(canvasW,canvasH,itemW,itemH,pos,marginPct) {
+    const mx = canvasW*(marginPct/100);
+    const my = canvasH*(marginPct/100);
+
+    const xMap = {
+      l:mx + itemW/2,
+      c:canvasW/2,
+      r:canvasW - mx - itemW/2
+    };
+    const yMap = {
+      t:my + itemH/2,
+      c:canvasH/2,
+      b:canvasH - my - itemH/2
+    };
+
+    const vertical = pos[0] === "t" ? "t" : (pos[0] === "m" || pos[0] === "c") ? "c" : "b";
+    const horizontal = pos[1] === "l" ? "l" : pos[1] === "c" ? "c" : "r";
+
+    return {
+      x:Math.max(itemW/2,Math.min(canvasW-itemW/2,xMap[horizontal])),
+      y:Math.max(itemH/2,Math.min(canvasH-itemH/2,yMap[vertical]))
+    };
+  }
+
+  function drawRotated(ctx,x,y,angle,drawFn) {
+    ctx.save();
+    ctx.translate(x,y);
+    ctx.rotate(angle*Math.PI/180);
+    drawFn();
+    ctx.restore();
+  }
+
+  function textMetrics(ctx,canvasW) {
+    const text = $("watermarkText").value || "Watermark";
+    const fontPx = Math.max(10,canvasW*(Number($("textSize").value)/100));
+    const weight = $("weightSelect").value;
+    const family = $("fontSelect").value;
+    ctx.font = `${weight} ${fontPx}px ${family}`;
+    const width = Math.max(1,ctx.measureText(text).width);
+    const height = fontPx*1.18;
+    return {text,fontPx,width,height};
+  }
+
+  function drawSingleText(ctx,w,h,x,y,angle,opacity) {
+    const m = textMetrics(ctx,w);
+    ctx.save();
+    ctx.globalAlpha = opacity;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.font = `${$("weightSelect").value} ${m.fontPx}px ${$("fontSelect").value}`;
+
+    drawRotated(ctx,x,y,angle,() => {
+      if ($("outlineToggle").checked) {
+        ctx.strokeStyle = $("outlineColor").value;
+        ctx.lineWidth = Math.max(1,m.fontPx*.07);
+        ctx.lineJoin = "round";
+        ctx.strokeText(m.text,0,0);
+      }
+      ctx.fillStyle = $("textColor").value;
+      ctx.fillText(m.text,0,0);
+    });
+
+    ctx.restore();
+    return m;
+  }
+
+  function drawSingleLogo(ctx,w,h,x,y,angle,opacity,logoW,logoH) {
+    if (!logoImage) return;
+    ctx.save();
+    ctx.globalAlpha = opacity;
+    drawRotated(ctx,x,y,angle,() => {
+      ctx.drawImage(logoImage,-logoW/2,-logoH/2,logoW,logoH);
+    });
+    ctx.restore();
+  }
+
+  function drawWatermark(ctx,w,h) {
+    const opacity = Number($("opacityRange").value)/100;
+    const angle = Number($("rotationRange").value);
+    const margin = Number($("marginRange").value);
+    const tiled = $("tileToggle").checked;
+
+    if (mode === "text") {
+      const metrics = textMetrics(ctx,w);
+
+      if (tiled) {
+        const gapX = Math.max(metrics.width*1.8,w*.18);
+        const gapY = Math.max(metrics.height*3.4,h*.16);
+        let row = 0;
+        for (let y=gapY/2;y<h+gapY;y+=gapY) {
+          const offset = row%2 ? gapX/2 : 0;
+          for (let x=gapX/2-offset;x<w+gapX;x+=gapX) {
+            drawSingleText(ctx,w,h,x,y,angle,opacity);
+          }
+          row++;
+        }
+      } else {
+        const p = placement(w,h,metrics.width,metrics.height,position,margin);
+        drawSingleText(ctx,w,h,p.x,p.y,angle,opacity);
+      }
+
+      return;
+    }
+
+    if (mode === "logo" && logoImage) {
+      const logoW = w*(Number($("logoSize").value)/100);
+      const logoH = logoW*(logoImage.naturalHeight/logoImage.naturalWidth);
+
+      if (tiled) {
+        const gapX = Math.max(logoW*1.75,w*.18);
+        const gapY = Math.max(logoH*1.75,h*.16);
+        let row = 0;
+        for (let y=gapY/2;y<h+gapY;y+=gapY) {
+          const offset = row%2 ? gapX/2 : 0;
+          for (let x=gapX/2-offset;x<w+gapX;x+=gapX) {
+            drawSingleLogo(ctx,w,h,x,y,angle,opacity,logoW,logoH);
+          }
+          row++;
+        }
+      } else {
+        const p = placement(w,h,logoW,logoH,position,margin);
+        drawSingleLogo(ctx,w,h,p.x,p.y,angle,opacity,logoW,logoH);
+      }
+    }
+  }
+
+  function drawComposite(canvas,ctx,w,h,forExport=false) {
+    canvas.width = w;
+    canvas.height = h;
+
+    if (forExport && $("formatSelect").value === "image/jpeg") {
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0,0,w,h);
+    } else {
+      ctx.clearRect(0,0,w,h);
+    }
+
+    ctx.drawImage(sourceImage,0,0,w,h);
+    drawWatermark(ctx,w,h);
+  }
+
+  function renderPreview() {
+    if (!sourceImage) return;
+
+    const maxW = 920;
+    const maxH = 620;
+    const scale = Math.min(maxW/sourceImage.naturalWidth,maxH/sourceImage.naturalHeight,1);
+    const w = Math.max(1,Math.round(sourceImage.naturalWidth*scale));
+    const h = Math.max(1,Math.round(sourceImage.naturalHeight*scale));
+
+    drawComposite(preview,pctx,w,h,false);
+    $("finalCard").classList.remove("show");
+  }
+
+  function schedulePreview() {
+    clearTimeout(previewTimer);
+    previewTimer = setTimeout(renderPreview,60);
+  }
+
+  function setMode(next) {
+    mode = next;
+    const text = next === "text";
+    $("textTab").classList.toggle("active",text);
+    $("logoTab").classList.toggle("active",!text);
+    $("textPanel").classList.toggle("show",text);
+    $("logoPanel").classList.toggle("show",!text);
+    schedulePreview();
+  }
+
+  $("textTab").addEventListener("click",()=>setMode("text"));
+  $("logoTab").addEventListener("click",()=>setMode("logo"));
+
+  document.querySelectorAll(".pos-btn").forEach(btn => {
+    btn.addEventListener("click",() => {
+      position = btn.dataset.pos;
+      document.querySelectorAll(".pos-btn").forEach(x=>x.classList.remove("active"));
+      btn.classList.add("active");
+      schedulePreview();
+    });
+  });
+
+  const controlIds = [
+    "watermarkText","fontSelect","weightSelect","textColor","outlineColor","textSize","outlineToggle",
+    "logoSize","opacityRange","rotationRange","marginRange","tileToggle"
+  ];
+
+  controlIds.forEach(id => {
+    const el = $(id);
+    const event = el.type === "text" || el.type === "range" || el.type === "color" ? "input" : "change";
+    el.addEventListener(event,() => {
+      $("textSizeValue").textContent = `${$("textSize").value}% width`;
+      $("logoSizeValue").textContent = `${$("logoSize").value}% width`;
+      $("opacityValue").textContent = `${$("opacityRange").value}%`;
+      $("rotationValue").textContent = `${$("rotationRange").value}°`;
+      $("marginValue").textContent = `${$("marginRange").value}%`;
+      schedulePreview();
+    });
+  });
+
+  $("qualityRange").addEventListener("input",() => {
+    $("qualityValue").textContent = `${$("qualityRange").value}%`;
+  });
+
+  $("resetBtn").addEventListener("click",() => {
+    mode = "text";
+    position = "br";
+    $("watermarkText").value = "© Utiliverse";
+    $("fontSelect").value = "system-ui, sans-serif";
+    $("weightSelect").value = "700";
+    $("textColor").value = "#ffffff";
+    $("outlineColor").value = "#000000";
+    $("textSize").value = "6";
+    $("outlineToggle").checked = true;
+    $("logoSize").value = "22";
+    $("opacityRange").value = "65";
+    $("rotationRange").value = "-15";
+    $("marginRange").value = "4";
+    $("tileToggle").checked = false;
+    $("textSizeValue").textContent = "6% width";
+    $("logoSizeValue").textContent = "22% width";
+    $("opacityValue").textContent = "65%";
+    $("rotationValue").textContent = "-15°";
+    $("marginValue").textContent = "4%";
+    document.querySelectorAll(".pos-btn").forEach(x=>x.classList.toggle("active",x.dataset.pos==="br"));
+    setMode("text");
+  });
+
+  $("fileInput").addEventListener("change",e => {
+    const f = e.target.files?.[0];
+    if (f) loadSource(f);
+    e.target.value = "";
+  });
+
+  $("logoInput").addEventListener("change",e => {
+    const f = e.target.files?.[0];
+    if (f) loadLogo(f);
+    e.target.value = "";
+  });
+
+  const dropzone = $("dropzone");
+
+  ["dragenter","dragover"].forEach(type => dropzone.addEventListener(type,e => {
+    e.preventDefault();
+    dropzone.classList.add("dragover");
+  }));
+
+  ["dragleave","drop"].forEach(type => dropzone.addEventListener(type,e => {
+    e.preventDefault();
+    dropzone.classList.remove("dragover");
+  }));
+
+  dropzone.addEventListener("drop",e => {
+    const f = [...(e.dataTransfer?.files || [])].find(x =>
+      x.type.startsWith("image/") || /\.(heic|heif|tiff?|avif|bmp|svg)$/i.test(x.name)
+    );
+    if (f) loadSource(f);
+  });
+
+  dropzone.addEventListener("click",e => {
+    if (e.target.closest(".file-button") || e.target === $("fileInput")) return;
+    $("fileInput").click();
+  });
+
+  dropzone.addEventListener("keydown",e => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      $("fileInput").click();
+    }
+  });
+
+  document.addEventListener("paste",e => {
+    const item = [...(e.clipboardData?.items || [])].find(i => i.type.startsWith("image/"));
+    if (!item) return;
+    const f = item.getAsFile();
+    if (f) loadSource(f);
+  });
+
+  function canvasToBlob(canvas,type,quality) {
+    return new Promise(resolve => canvas.toBlob(resolve,type,quality));
+  }
+
+  function mimeDescription(type) {
+    if (type === "image/jpeg") return {description:"JPEG image",extensions:[".jpg",".jpeg"]};
+    if (type === "image/webp") return {description:"WebP image",extensions:[".webp"]};
+    return {description:"PNG image",extensions:[".png"]};
+  }
+
+  $("saveBtn").addEventListener("click",async() => {
+    if (!sourceImage) {
+      $("saveStatus").textContent = "Choose a source image first.";
+      return;
+    }
+    if (mode === "logo" && !logoImage) {
+      $("saveStatus").textContent = "Choose a logo image first, or switch to Text Watermark.";
+      return;
+    }
+
+    const dims = exportDimensions();
+    const outCanvas = document.createElement("canvas");
+    const outCtx = outCanvas.getContext("2d");
+    const type = $("formatSelect").value;
+    const quality = Number($("qualityRange").value)/100;
+    const ext = outputExtension(type);
+    const base = (sourceFile?.name || "image").replace(/\.[^.]+$/,"").replace(/[^\w.-]+/g,"_") || "image";
+    const filename = `${base}_watermarked.${ext}`;
+
+    try {
+      drawComposite(outCanvas,outCtx,dims.w,dims.h,true);
+    } catch {
+      $("saveStatus").textContent = "This image is too large for the browser to export at the selected size.";
+      return;
+    }
+
+    let dataUrl;
+    try {
+      dataUrl = outCanvas.toDataURL(type,quality);
+    } catch {
+      $("saveStatus").textContent = "The browser could not encode this watermarked image.";
+      return;
+    }
+
+    // Preferred save flow in supporting browsers.
+    if (window.showSaveFilePicker) {
+      try {
+        const desc = mimeDescription(type);
+        const handle = await window.showSaveFilePicker({
+          suggestedName:filename,
+          types:[{
+            description:desc.description,
+            accept:{[type]:desc.extensions}
+          }]
+        });
+
+        const blob = await canvasToBlob(outCanvas,type,quality);
+        if (!blob) throw new Error("Encoding failed");
+        const writable = await handle.createWritable();
+        await writable.write(blob);
+        await writable.close();
+
+        $("saveStatus").textContent = `Saved ${dims.w} × ${dims.h} ${ext.toUpperCase()} successfully.`;
+        $("finalImage").src = dataUrl;
+        $("finalCard").classList.add("show");
+        setTimeout(()=>$("finalCard").scrollIntoView({behavior:"smooth",block:"start"}),60);
+        return;
+      } catch (err) {
+        if (err && err.name === "AbortError") {
+          $("saveStatus").textContent = "Save canceled.";
+          return;
+        }
+      }
+    }
+
+    // Standard download attempt.
+    const a = document.createElement("a");
+    a.href = dataUrl;
+    a.download = filename;
+    a.style.display = "none";
+    document.body.appendChild(a);
+    let attempted = false;
+    try { a.click(); attempted = true; } catch {}
+    a.remove();
+
+    // Always expose the finished encoded image as a reliable manual fallback.
+    $("finalImage").src = dataUrl;
+    $("finalImage").alt = `Finished watermarked image: ${filename}`;
+    $("finalCard").classList.add("show");
+    $("saveStatus").textContent = attempted
+      ? "Download requested. If your browser or preview blocks it, right-click the finished image below and choose Save Image As."
+      : "Automatic download is blocked here. Right-click the finished image below and choose Save Image As.";
+
+    setTimeout(()=>$("finalCard").scrollIntoView({behavior:"smooth",block:"start"}),60);
+  });
+
+  $("formatSelect").addEventListener("change",() => $("finalCard").classList.remove("show"));
+  $("maxSizeSelect").addEventListener("change",() => $("finalCard").classList.remove("show"));
+})();
+</script>
+</body>
+</html>
