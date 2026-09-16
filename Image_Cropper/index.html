@@ -1,1 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Image Cropper – Crop PNG, JPG, WebP, GIF, SVG & More | Utiliverse</title>
+<meta name="description" content="Free browser-based Image Cropper. Upload any image format your browser can decode, drag or resize the crop area, use aspect-ratio presets, preview the crop, and export as PNG, JPG, or WebP.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/Image_Cropper/">
 
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --panel:rgba(30,41,59,.72);--panel2:rgba(15,23,42,.70);--border:#334155;--border2:#475569;
+  --text:#f8fafc;--muted:#94a3b8;--indigo:#6366f1;--indigo2:#4f46e5;--green:#34d399;
+  --amber:#fbbf24;--rose:#fb7185
+}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),
+    radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;
+  color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  transition:background .25s ease,color .25s ease
+}
+a{color:inherit}
+button,input,select{font:inherit}
+button{touch-action:manipulation}
+.container{max-width:1152px;margin:0 auto;padding:0 16px}
+
+header{
+  position:sticky;top:0;z-index:50;background:rgba(2,6,23,.82);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid #1e293b
+}
+.header-inner{min-height:65px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.back-link{display:flex;align-items:center;gap:8px;text-decoration:none;color:#cbd5e1;font-size:14px;font-weight:700}
+.back-link:hover{color:#fff}
+.header-right{display:flex;align-items:center;gap:12px}
+.free-label{font-size:13px;font-weight:650;color:#64748b;white-space:nowrap}
+.theme-toggle{
+  display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;padding:0;
+  border:0;background:transparent;color:#94a3b8;border-radius:8px;cursor:pointer
+}
+.theme-toggle:hover{color:#fff;background:rgba(30,41,59,.45)}
+.theme-toggle:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
+.theme-toggle svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+main{padding:48px 0 72px}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:#818cf8;font-weight:850}
+h1{font-size:clamp(38px,5vw,58px);line-height:1.04;margin:10px 0 14px;font-weight:900;letter-spacing:-.035em}
+.hero p{max-width:930px;color:var(--muted);font-size:18px;line-height:1.72;margin:0}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.badge{border:1px solid var(--border);background:rgba(15,23,42,.66);border-radius:999px;padding:7px 10px;color:#cbd5e1;font-size:12px;font-weight:750}
+
+.glass{background:var(--panel);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:20px}
+.tool{margin-top:28px;padding:22px}
+.section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.section-title{font-size:22px;font-weight:850;margin:4px 0 0}
+.small{font-size:12px;color:#64748b;line-height:1.55}
+
+.dropzone{
+  margin-top:18px;border:1.5px dashed #475569;border-radius:16px;padding:24px;text-align:center;
+  background:rgba(15,23,42,.52);transition:.18s ease;cursor:pointer
+}
+.dropzone.dragover{border-color:#818cf8;background:rgba(99,102,241,.09)}
+.dropzone strong{display:block;color:#e2e8f0;font-size:15px}
+.dropzone p{margin:6px auto 0;color:#64748b;font-size:11px;line-height:1.5;max-width:720px}
+.file-button{
+  display:inline-flex;align-items:center;justify-content:center;margin-top:12px;min-height:42px;
+  border:1px solid #6366f1;background:linear-gradient(135deg,var(--indigo),var(--indigo2));
+  color:#fff;border-radius:10px;padding:9px 13px;font-weight:800;cursor:pointer
+}
+#fileInput{display:none}
+
+.workspace{display:none;margin-top:16px}
+.workspace.show{display:block}
+.meta-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+.meta{background:var(--panel2);border:1px solid var(--border);border-radius:13px;padding:11px;min-width:0}
+.meta small{display:block;color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.07em;font-weight:850}
+.meta strong{display:block;color:#e2e8f0;font-size:13px;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.editor-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(280px,.65fr);gap:14px;margin-top:14px}
+.editor-panel,.controls-panel{background:var(--panel2);border:1px solid var(--border);border-radius:16px;padding:14px;min-width:0}
+.editor-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.editor-head h3,.controls-panel h3{margin:0;color:#e2e8f0;font-size:14px}
+.editor-head p,.controls-panel p{margin:3px 0 0;color:#64748b;font-size:10px;line-height:1.45}
+
+.stage-shell{
+  position:relative;margin-top:12px;min-height:260px;display:flex;align-items:center;justify-content:center;
+  overflow:auto;background:
+    linear-gradient(45deg,#111827 25%,transparent 25%),
+    linear-gradient(-45deg,#111827 25%,transparent 25%),
+    linear-gradient(45deg,transparent 75%,#111827 75%),
+    linear-gradient(-45deg,transparent 75%,#111827 75%),#0b1220;
+  background-size:20px 20px;background-position:0 0,0 10px,10px -10px,-10px 0;
+  border:1px solid var(--border);border-radius:12px;padding:12px
+}
+.canvas-wrap{position:relative;line-height:0;user-select:none;touch-action:none}
+#imageCanvas{display:block;max-width:none}
+.crop-box{
+  position:absolute;border:2px solid #a5b4fc;box-shadow:0 0 0 9999px rgba(2,6,23,.58),0 0 0 1px rgba(255,255,255,.15) inset;
+  cursor:move;touch-action:none
+}
+.crop-box::before,.crop-box::after{
+  content:"";position:absolute;pointer-events:none
+}
+.crop-box::before{
+  left:33.333%;right:33.333%;top:0;bottom:0;border-left:1px solid rgba(255,255,255,.48);border-right:1px solid rgba(255,255,255,.48)
+}
+.crop-box::after{
+  top:33.333%;bottom:33.333%;left:0;right:0;border-top:1px solid rgba(255,255,255,.48);border-bottom:1px solid rgba(255,255,255,.48)
+}
+.handle{
+  position:absolute;width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid #6366f1;
+  z-index:3;box-shadow:0 1px 6px rgba(0,0,0,.35)
+}
+.handle.nw{left:-8px;top:-8px;cursor:nwse-resize}
+.handle.ne{right:-8px;top:-8px;cursor:nesw-resize}
+.handle.sw{left:-8px;bottom:-8px;cursor:nesw-resize}
+.handle.se{right:-8px;bottom:-8px;cursor:nwse-resize}
+.handle.n{left:50%;top:-8px;transform:translateX(-50%);cursor:ns-resize}
+.handle.s{left:50%;bottom:-8px;transform:translateX(-50%);cursor:ns-resize}
+.handle.w{left:-8px;top:50%;transform:translateY(-50%);cursor:ew-resize}
+.handle.e{right:-8px;top:50%;transform:translateY(-50%);cursor:ew-resize}
+
+.control{margin-top:12px}
+.control:first-of-type{margin-top:14px}
+.control label{display:block;color:#94a3b8;font-size:10px;text-transform:uppercase;letter-spacing:.07em;font-weight:850;margin-bottom:6px}
+.select,.num,.range{
+  width:100%;min-height:42px;border:1px solid var(--border2);background:#0f172a;color:#e2e8f0;border-radius:10px;padding:8px 10px;outline:none
+}
+.range{padding:0;accent-color:var(--indigo)}
+.range-row{display:grid;grid-template-columns:1fr auto;gap:9px;align-items:center}
+.range-value{min-width:62px;text-align:right;color:#cbd5e1;font-size:11px;font-weight:800}
+.pixel-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.aspect-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.aspect-btn{
+  border:1px solid var(--border);background:#0f172a;color:#94a3b8;border-radius:9px;padding:8px 5px;
+  font-size:10px;font-weight:800;cursor:pointer
+}
+.aspect-btn.active{border-color:#818cf8;background:rgba(99,102,241,.14);color:#c7d2fe}
+.aspect-btn:hover{border-color:#6366f1;color:#e2e8f0}
+
+.preview-card{margin-top:14px;background:var(--panel2);border:1px solid var(--border);border-radius:16px;padding:14px}
+.preview-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.preview-head h3{margin:0;color:#e2e8f0;font-size:14px}
+.preview-head p{margin:3px 0 0;color:#64748b;font-size:10px}
+.preview-shell{margin-top:10px;display:flex;justify-content:center;align-items:center;min-height:150px;max-height:360px;overflow:auto;border:1px solid var(--border);border-radius:11px;background:#0b1220;padding:10px}
+#previewCanvas{display:block;max-width:100%;max-height:330px}
+
+.actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px}
+.btn{
+  min-height:42px;border:1px solid var(--border2);background:#1e293b;color:#f8fafc;
+  border-radius:10px;padding:9px 12px;font-weight:800;cursor:pointer
+}
+.btn:hover:not(:disabled){background:#334155}
+.btn.primary{background:linear-gradient(135deg,var(--indigo),var(--indigo2));border-color:var(--indigo)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.status{font-size:11px;color:#6ee7b7;min-height:16px}
+
+.note{
+  margin-top:14px;padding:12px 13px;background:rgba(99,102,241,.06);
+  border:1px solid rgba(99,102,241,.20);border-radius:12px;color:#94a3b8;font-size:12px;line-height:1.65
+}
+.note strong{color:#c7d2fe}
+
+.article{max-width:900px;margin-top:64px}
+.article h2{font-size:30px;line-height:1.25;font-weight:900;margin:38px 0 13px;color:#fff}
+.article h3{font-size:19px;line-height:1.4;font-weight:850;margin:27px 0 9px;color:#e2e8f0}
+.article p,.article li{color:#94a3b8;line-height:1.84;margin:0 0 15px}
+.article ul{padding-left:20px}
+.callout{border:1px solid rgba(99,102,241,.28);background:rgba(99,102,241,.07);border-radius:15px;padding:16px;margin:22px 0}
+.callout strong{color:#c7d2fe}
+.faq{border-bottom:1px solid var(--border)}
+.faq summary{list-style:none;cursor:pointer;padding:16px 0;font-weight:800;display:flex;justify-content:space-between;gap:15px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:#818cf8;font-size:20px}
+.faq[open] summary::after{content:"−"}
+
+footer{border-top:1px solid #1e293b;background:#020617}
+.footer-inner{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:14px;color:#64748b;font-size:13px}
+
+/* Light mode */
+body.light-mode{
+  --panel:rgba(255,255,255,.92);--panel2:rgba(248,250,252,.96);--border:#dbe3ee;--border2:#cbd5e1;
+  --text:#0f172a;--muted:#475569;background:#f8fafc;color:#0f172a
+}
+body.light-mode header{background:rgba(255,255,255,.93);border-bottom-color:#e2e8f0}
+body.light-mode .back-link{color:#334155}
+body.light-mode .back-link:hover{color:#0f172a}
+body.light-mode .theme-toggle{color:#334155}
+body.light-mode .theme-toggle:hover{color:#0f172a;background:#f1f5f9}
+body.light-mode .badge,body.light-mode .aspect-btn{background:#fff;color:#475569}
+body.light-mode .aspect-btn.active{background:#eef2ff;color:#4338ca}
+body.light-mode .dropzone{background:#fff}
+body.light-mode .dropzone strong,body.light-mode .editor-head h3,body.light-mode .controls-panel h3,body.light-mode .preview-head h3,body.light-mode .meta strong{color:#0f172a}
+body.light-mode .select,body.light-mode .num{background:#fff;color:#0f172a}
+body.light-mode .btn:not(.primary){background:#f1f5f9;color:#334155}
+body.light-mode .btn:not(.primary):hover:not(:disabled){background:#e2e8f0}
+body.light-mode .article h2{color:#0f172a}
+body.light-mode .article h3{color:#1e293b}
+body.light-mode .article p,body.light-mode .article li{color:#475569}
+body.light-mode .callout{background:#eef2ff}
+body.light-mode .callout strong{color:#4338ca}
+body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
+
+@media(max-width:900px){.editor-grid{grid-template-columns:1fr}.meta-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){
+  main{padding-top:34px}.meta-grid{grid-template-columns:1fr 1fr}.pixel-grid{grid-template-columns:1fr 1fr}
+  .aspect-grid{grid-template-columns:repeat(2,1fr)}
+  .free-label{font-size:10.5px;max-width:130px;white-space:normal;text-align:right;line-height:1.2}
+}
+@media(max-width:390px){.meta-grid{grid-template-columns:1fr}.header-right{gap:6px}}
+</style>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Image Cropper","url":"https://utiliverse.app/Image_Cropper/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript and Canvas support.","description":"Crop browser-readable image files locally and export the crop as PNG, JPEG, or WebP.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What image formats can the cropper open?","acceptedAnswer":{"@type":"Answer","text":"It accepts any image format the current browser can decode. Commonly supported formats include JPEG, PNG, WebP, GIF, SVG, BMP, and often AVIF. HEIC, HEIF, TIFF, and some camera RAW formats depend on browser support and may not open."}},
+{"@type":"Question","name":"Does cropping upload my image?","acceptedAnswer":{"@type":"Answer","text":"No. Image decoding, crop selection, preview, and export are performed in the browser."}},
+{"@type":"Question","name":"Can I choose a fixed aspect ratio?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool includes Free, Original, 1:1, 4:3, 3:2, 16:9, and 9:16 crop modes."}},
+{"@type":"Question","name":"Can I enter exact crop dimensions?","acceptedAnswer":{"@type":"Answer","text":"Yes. X, Y, width, and height fields let you enter the crop rectangle in source-image pixels."}},
+{"@type":"Question","name":"Which formats can I export?","acceptedAnswer":{"@type":"Answer","text":"The crop can be exported as PNG, JPEG, or WebP using the browser Canvas API."}},
+{"@type":"Question","name":"What happens to animated GIFs?","acceptedAnswer":{"@type":"Answer","text":"The browser renders an image frame onto the canvas, so exported crops are static and do not preserve GIF animation."}},
+{"@type":"Question","name":"Does cropping reduce image quality?","acceptedAnswer":{"@type":"Answer","text":"PNG export is lossless. JPEG and WebP quality can be adjusted. If Original crop size is selected, the crop uses the source image's pixel dimensions."}},
+{"@type":"Question","name":"Can I crop a transparent image?","acceptedAnswer":{"@type":"Answer","text":"Yes. PNG and WebP can preserve transparency. JPEG does not support transparency, so transparent areas are filled with white."}}
+]}
+</script>
+</head>
+
+<body>
+<header>
+  <div class="container header-inner">
+    <a class="back-link" href="https://utiliverse.app"><span aria-hidden="true">←</span><span>Back to Utiliverse</span></a>
+    <div class="header-right">
+      <span class="free-label">100% Free and Browser Based</span>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode"><span id="themeIcon"></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
+<main>
+<div class="container">
+  <section class="hero">
+    <div class="eyebrow">Image utility</div>
+    <h1>Image Cropper</h1>
+    <p>Upload an image, drag and resize the crop area, choose an aspect ratio or enter exact pixel dimensions, preview the result, and export the crop as PNG, JPEG, or WebP—all in your browser.</p>
+    <div class="badges">
+      <span class="badge">Browser-readable image formats</span>
+      <span class="badge">Drag, resize & exact pixels</span>
+      <span class="badge">PNG · JPEG · WebP export</span>
+    </div>
+  </section>
+
+  <section class="glass tool" aria-labelledby="toolHeading">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Local image editor</div>
+        <h2 id="toolHeading" class="section-title">Crop an image</h2>
+      </div>
+      <div class="small">Your image stays on your device. Nothing is uploaded to Utiliverse.</div>
+    </div>
+
+    <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Choose or drop an image">
+      <strong>Drop an image here, paste from your clipboard, or choose a file</strong>
+      <p>Accepts any image format your browser can decode. Common formats include JPG/JPEG, PNG, WebP, GIF, SVG, BMP, and AVIF. HEIC/HEIF/TIFF support depends on the browser.</p>
+      <label class="file-button" for="fileInput">Choose Image</label>
+      <input id="fileInput" type="file" accept="image/*,.heic,.heif,.tif,.tiff,.avif,.bmp,.svg">
+    </div>
+
+    <div id="workspace" class="workspace">
+      <div class="meta-grid">
+        <div class="meta"><small>File</small><strong id="fileName">—</strong></div>
+        <div class="meta"><small>Format</small><strong id="fileType">—</strong></div>
+        <div class="meta"><small>Source size</small><strong id="sourceSize">—</strong></div>
+        <div class="meta"><small>File size</small><strong id="fileSize">—</strong></div>
+      </div>
+
+      <div class="editor-grid">
+        <section class="editor-panel">
+          <div class="editor-head">
+            <div><h3>Crop area</h3><p>Drag the crop box to move it. Drag any handle to resize it.</p></div>
+            <button id="resetCropBtn" class="btn" type="button">Reset Crop</button>
+          </div>
+
+          <div id="stageShell" class="stage-shell">
+            <div id="canvasWrap" class="canvas-wrap">
+              <canvas id="imageCanvas"></canvas>
+              <div id="cropBox" class="crop-box" hidden>
+                <span class="handle nw" data-handle="nw"></span>
+                <span class="handle n" data-handle="n"></span>
+                <span class="handle ne" data-handle="ne"></span>
+                <span class="handle e" data-handle="e"></span>
+                <span class="handle se" data-handle="se"></span>
+                <span class="handle s" data-handle="s"></span>
+                <span class="handle sw" data-handle="sw"></span>
+                <span class="handle w" data-handle="w"></span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="controls-panel">
+          <h3>Crop settings</h3>
+          <p>Choose a preset or enter exact source-image pixels.</p>
+
+          <div class="control">
+            <label>Aspect ratio</label>
+            <div class="aspect-grid">
+              <button class="aspect-btn active" data-ratio="free" type="button">Free</button>
+              <button class="aspect-btn" data-ratio="original" type="button">Original</button>
+              <button class="aspect-btn" data-ratio="1" type="button">1:1</button>
+              <button class="aspect-btn" data-ratio="1.3333333333" type="button">4:3</button>
+              <button class="aspect-btn" data-ratio="1.5" type="button">3:2</button>
+              <button class="aspect-btn" data-ratio="1.7777777778" type="button">16:9</button>
+              <button class="aspect-btn" data-ratio="0.5625" type="button">9:16</button>
+            </div>
+          </div>
+
+          <div class="control">
+            <label>Crop rectangle in source pixels</label>
+            <div class="pixel-grid">
+              <div><label for="cropX">X</label><input id="cropX" class="num" type="number" min="0" step="1"></div>
+              <div><label for="cropY">Y</label><input id="cropY" class="num" type="number" min="0" step="1"></div>
+              <div><label for="cropW">Width</label><input id="cropW" class="num" type="number" min="1" step="1"></div>
+              <div><label for="cropH">Height</label><input id="cropH" class="num" type="number" min="1" step="1"></div>
+            </div>
+          </div>
+
+          <div class="control">
+            <label for="formatSelect">Export format</label>
+            <select id="formatSelect" class="select">
+              <option value="image/png">PNG — lossless / transparency</option>
+              <option value="image/jpeg">JPEG — smaller photos</option>
+              <option value="image/webp">WebP — modern compressed</option>
+            </select>
+          </div>
+
+          <div class="control">
+            <label for="qualityRange">JPEG / WebP quality</label>
+            <div class="range-row">
+              <input id="qualityRange" class="range" type="range" min="40" max="100" step="1" value="92">
+              <span id="qualityValue" class="range-value">92%</span>
+            </div>
+          </div>
+
+          <div class="control">
+            <label for="maxSizeSelect">Maximum export dimension</label>
+            <select id="maxSizeSelect" class="select">
+              <option value="0">Original crop size</option>
+              <option value="4096">Max 4096 px</option>
+              <option value="2048">Max 2048 px</option>
+              <option value="1024">Max 1024 px</option>
+              <option value="512">Max 512 px</option>
+            </select>
+          </div>
+
+          <div class="actions">
+            <button id="previewBtn" class="btn" type="button">Refresh Preview</button>
+            <button id="downloadBtn" class="btn primary" type="button">Download Crop</button>
+          </div>
+          <div id="status" class="status" aria-live="polite"></div>
+        </aside>
+      </div>
+
+      <section class="preview-card">
+        <div class="preview-head">
+          <div><h3>Cropped preview</h3><p id="previewInfo">Adjust the crop area to update the preview.</p></div>
+        </div>
+        <div class="preview-shell"><canvas id="previewCanvas"></canvas></div>
+      </section>
+    </div>
+
+    <div class="note"><strong>Format note:</strong> “any format” on the web ultimately depends on what the browser can decode. This tool deliberately avoids uploading images to a conversion server. If your browser cannot open HEIC/HEIF, TIFF, RAW, or another specialized format, convert it to PNG/JPEG/WebP first or use a browser that supports that format. Animated GIFs are exported as a static cropped frame.</div>
+  </section>
+
+  <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
+       Paste approved Google AdSense code here after approval.
+       This comment is intentionally invisible and reserves no space.
+  -->
+
+  <section class="article">
+    <h2>About the Utiliverse Image Cropper</h2>
+    <p>The Utiliverse Image Cropper is a browser-based image editing tool for removing unwanted outer areas, changing composition, preparing social-media graphics, creating profile images, trimming screenshots, and resizing a crop for common web uses. The crop is selected visually by dragging and resizing a box over the image, while exact X, Y, width, and height fields are available when pixel-precise control matters.</p>
+
+    <p>The tool performs the editing locally in your browser. The image is decoded by your browser, drawn to an HTML canvas, and cropped using the source image's original pixel coordinates. The selected result can then be exported as PNG, JPEG, or WebP without sending the image to a Utiliverse server. This makes the cropper useful for private screenshots, family photos, work graphics, and other files you would rather keep on your own device.</p>
+
+    <h3>Which image formats can be opened?</h3>
+    <p>The file picker accepts image files broadly rather than restricting you to one extension. The actual formats that can open are determined by the browser's image decoder. Modern browsers commonly support JPEG/JPG, PNG, WebP, GIF, SVG, BMP, and increasingly AVIF. Support for HEIC, HEIF, TIFF, ICO variants, camera RAW formats, and less common legacy formats varies between browsers and operating systems.</p>
+
+    <p>This distinction is important because a fully local cropper cannot magically decode a format the browser itself does not understand unless additional decoder software is bundled or the image is sent to a server for conversion. Utiliverse keeps this tool browser-local, so an unsupported format produces a clear error instead of silently uploading the file elsewhere.</p>
+
+    <h3>How the crop area works</h3>
+    <p>After an image is loaded, the crop rectangle appears over the displayed image. Drag the center area to reposition the selection. Drag a corner or side handle to resize it. A rule-of-thirds grid is shown inside the crop box to help with composition. The darkened region outside the crop makes it easier to see exactly what will remain in the exported image.</p>
+
+    <p>The crop box is stored in normalized coordinates relative to the image, so the selection remains stable when the browser window changes size. The X, Y, width, and height controls show the equivalent crop in original source-image pixels. Editing those fields changes the visual crop box, which is useful for exact dimensions supplied by another application or design specification.</p>
+
+    <h3>Aspect ratio presets</h3>
+    <p>Free mode allows width and height to change independently. The Original preset uses the source image's original width-to-height ratio, while 1:1 creates a square crop. Other included ratios are 4:3, 3:2, 16:9, and 9:16. These ratios cover many cameras, displays, landscape graphics, thumbnails, videos, and vertical social-media compositions.</p>
+
+    <p>An aspect ratio controls the shape of the crop, not its final pixel dimensions. A 16:9 crop could be 1920×1080 pixels, 1280×720 pixels, or any other size with the same proportion. If you choose an export maximum, the tool scales the cropped result down while preserving the crop's aspect ratio.</p>
+
+    <h3>PNG, JPEG, and WebP export</h3>
+    <p>PNG is a good choice when you need lossless output, crisp interface graphics, text, or transparency. JPEG is widely compatible and often produces smaller files for photographs, but it uses lossy compression and cannot store transparency. WebP supports efficient compression and can also preserve transparency in browsers that support WebP export.</p>
+
+    <p>The quality slider affects JPEG and WebP compression. A higher value generally preserves more detail but creates a larger file. PNG is lossless, so the quality slider does not change PNG compression quality. When exporting a transparent source as JPEG, the cropper fills transparent pixels with white because JPEG has no alpha channel.</p>
+
+    <h3>Original crop size versus downscaled export</h3>
+    <p>By default, the crop is exported at the source image's original crop dimensions. For example, if a 4000×3000 photo is cropped to a 2000×2000 region, the exported PNG, JPEG, or WebP will be 2000×2000 pixels. The maximum-dimension control can downscale that crop to 4096, 2048, 1024, or 512 pixels on its longest side when a smaller file is more useful.</p>
+
+    <p>Downscaling is particularly useful for avatars, web uploads, messaging, and thumbnails. It also reduces memory usage when cropping very large photographs. The browser still has to decode the source image first, so extremely large images may be limited by the memory and canvas restrictions of the device.</p>
+
+    <h2>Practical Use Cases</h2>
+    <h3>Profile photos and avatars</h3>
+    <p>Use the 1:1 ratio to make a square profile image and position the subject inside the crop. You can then export at a smaller maximum dimension such as 512 or 1024 pixels for a clean avatar without keeping the full camera resolution.</p>
+
+    <h3>Social-media and video graphics</h3>
+    <p>Landscape 16:9 crops work well for many video thumbnails and widescreen graphics, while 9:16 is useful for vertical compositions. The ratio lock keeps the framing consistent while you move the crop around to emphasize the most important part of the image.</p>
+
+    <h3>Trimming screenshots</h3>
+    <p>Screenshots often contain browser chrome, desktop areas, or unrelated content. Free crop mode makes it easy to isolate a dialog box, chart, receipt, message, or code section. PNG export is usually ideal for screenshots because it keeps text and interface edges sharp.</p>
+
+    <h3>Preparing product and website images</h3>
+    <p>Consistent image shapes make card grids and product listings look more polished. The cropper can create repeated 4:3, 3:2, or square crops and optionally reduce the export size before the image is placed on a website.</p>
+
+    <h3>Privacy-conscious image editing</h3>
+    <p>Because the crop is performed locally, the tool is suitable when you want a quick browser workflow without handing the original image to an online processing service. As with any web application, the security of the local device and browser still matters.</p>
+
+    <div class="callout"><strong>Important limitation:</strong> browser-local cropping depends on browser decoding support. If a specialized source format cannot be decoded, the file must first be converted to a browser-readable image format. Export is intentionally limited to PNG, JPEG, and WebP because those formats are broadly supported by the Canvas API.</div>
+
+    <h2>Frequently Asked Questions</h2>
+    <details class="faq"><summary>Can I crop any image format?</summary><p>You can crop any image format your browser can decode. JPG/JPEG, PNG, WebP, GIF, SVG, BMP, and AVIF are common. HEIC/HEIF, TIFF, RAW, and specialized formats depend on browser support.</p></details>
+    <details class="faq"><summary>Are my images uploaded?</summary><p>No. Loading, cropping, previewing, and exporting are performed locally in your browser.</p></details>
+    <details class="faq"><summary>Can I choose a square or 16:9 crop?</summary><p>Yes. Presets include Free, Original, 1:1, 4:3, 3:2, 16:9, and 9:16.</p></details>
+    <details class="faq"><summary>Can I crop using exact pixel values?</summary><p>Yes. Edit the X, Y, width, and height fields to set the crop rectangle in original source-image pixels.</p></details>
+    <details class="faq"><summary>Which output formats are available?</summary><p>PNG, JPEG, and WebP. PNG is lossless, while JPEG and WebP offer adjustable quality.</p></details>
+    <details class="faq"><summary>Will animated GIFs remain animated?</summary><p>No. Canvas export produces a static image frame, so GIF animation is not preserved.</p></details>
+    <details class="faq"><summary>Can transparency be preserved?</summary><p>Yes with PNG and WebP. JPEG does not support transparency, so transparent pixels are filled with white.</p></details>
+    <details class="faq"><summary>Can the cropped image be resized?</summary><p>Yes. Choose Original crop size or set a maximum longest dimension of 4096, 2048, 1024, or 512 pixels.</p></details>
+  </section>
+</div>
+</main>
+
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
+     Paste approved Google AdSense code here after approval.
+     This comment is intentionally invisible and reserves no space.
+-->
+
+<footer>
+  <div class="container footer-inner">
+    <span>© <span id="year"></span> Utiliverse. All rights reserved.</span>
+    <span>100% Free and Browser Based</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+  const canvas = $("imageCanvas");
+  const ctx = canvas.getContext("2d");
+  const preview = $("previewCanvas");
+  const pctx = preview.getContext("2d");
+  const cropBox = $("cropBox");
+  const canvasWrap = $("canvasWrap");
+
+  let image = null;
+  let file = null;
+  let objectUrl = null;
+  let crop = {x:.1,y:.1,w:.8,h:.8};
+  let activeRatio = "free";
+  let interaction = null;
+  let renderTimer = null;
+
+  const sunSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>';
+  const moonSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+
+  function applyTheme(theme) {
+    const light = theme === "light";
+    document.body.classList.toggle("light-mode", light);
+    $("themeIcon").innerHTML = light ? moonSvg : sunSvg;
+    $("themeToggle").setAttribute("aria-label", light ? "Switch to dark mode" : "Switch to light mode");
+    $("themeToggle").title = light ? "Switch to dark mode" : "Switch to light mode";
+    document.querySelector('meta[name="theme-color"]').content = light ? "#f8fafc" : "#020617";
+  }
+
+  applyTheme(localStorage.getItem("utiliverse-theme") || "dark");
+  $("themeToggle").addEventListener("click", () => {
+    const next = document.body.classList.contains("light-mode") ? "dark" : "light";
+    localStorage.setItem("utiliverse-theme", next);
+    applyTheme(next);
+  });
+  $("year").textContent = new Date().getFullYear();
+
+  function formatBytes(bytes) {
+    if (!Number.isFinite(bytes)) return "—";
+    if (bytes < 1024) return `${bytes} B`;
+    if (bytes < 1048576) return `${(bytes/1024).toFixed(1)} KB`;
+    return `${(bytes/1048576).toFixed(2)} MB`;
+  }
+
+  function getExt(name) {
+    const m = String(name || "").match(/\.([^.]+)$/);
+    return m ? m[1].toUpperCase() : "Unknown";
+  }
+
+  function fitDisplay() {
+    if (!image) return;
+    const maxW = Math.max(280, Math.min(900, $("stageShell").clientWidth - 28));
+    const maxH = 620;
+    const scale = Math.min(maxW / image.naturalWidth, maxH / image.naturalHeight, 1);
+    const displayW = Math.max(1, Math.round(image.naturalWidth * scale));
+    const displayH = Math.max(1, Math.round(image.naturalHeight * scale));
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    canvas.width = Math.max(1, Math.round(displayW * dpr));
+    canvas.height = Math.max(1, Math.round(displayH * dpr));
+    canvas.style.width = `${displayW}px`;
+    canvas.style.height = `${displayH}px`;
+    canvasWrap.style.width = `${displayW}px`;
+    canvasWrap.style.height = `${displayH}px`;
+
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,displayW,displayH);
+    ctx.drawImage(image,0,0,displayW,displayH);
+    updateCropBox();
+  }
+
+  function updateCropBox() {
+    if (!image) return;
+    cropBox.hidden = false;
+    cropBox.style.left = `${crop.x*100}%`;
+    cropBox.style.top = `${crop.y*100}%`;
+    cropBox.style.width = `${crop.w*100}%`;
+    cropBox.style.height = `${crop.h*100}%`;
+    updatePixelInputs();
+    schedulePreview();
+  }
+
+  function sourceRect() {
+    if (!image) return {x:0,y:0,w:0,h:0};
+    let x = Math.round(crop.x * image.naturalWidth);
+    let y = Math.round(crop.y * image.naturalHeight);
+    let w = Math.round(crop.w * image.naturalWidth);
+    let h = Math.round(crop.h * image.naturalHeight);
+    w = Math.max(1, Math.min(w, image.naturalWidth - x));
+    h = Math.max(1, Math.min(h, image.naturalHeight - y));
+    return {x,y,w,h};
+  }
+
+  function updatePixelInputs() {
+    if (!image) return;
+    const r = sourceRect();
+    $("cropX").value = r.x;
+    $("cropY").value = r.y;
+    $("cropW").value = r.w;
+    $("cropH").value = r.h;
+  }
+
+  function ratioValue() {
+    if (!image || activeRatio === "free") return null;
+    if (activeRatio === "original") return image.naturalWidth / image.naturalHeight;
+    return Number(activeRatio);
+  }
+
+  function applyRatioCentered(ratio) {
+    if (!image || !ratio) return;
+    const imageRatio = image.naturalWidth / image.naturalHeight;
+    let w = .8, h = .8;
+
+    // normalized ratio relation: (w*imgW)/(h*imgH) = ratio
+    const normalizedRatio = ratio / imageRatio;
+    if (normalizedRatio >= 1) {
+      w = .8;
+      h = w / normalizedRatio;
+      if (h > .8) { h = .8; w = h * normalizedRatio; }
+    } else {
+      h = .8;
+      w = h * normalizedRatio;
+      if (w > .8) { w = .8; h = w / normalizedRatio; }
+    }
+
+    crop = {x:(1-w)/2,y:(1-h)/2,w,h};
+    updateCropBox();
+  }
+
+  function resetCrop() {
+    crop = {x:.1,y:.1,w:.8,h:.8};
+    const ratio = ratioValue();
+    if (ratio) applyRatioCentered(ratio);
+    else updateCropBox();
+  }
+
+  function pointerPos(e) {
+    const rect = canvasWrap.getBoundingClientRect();
+    return {
+      x:Math.max(0,Math.min(1,(e.clientX-rect.left)/rect.width)),
+      y:Math.max(0,Math.min(1,(e.clientY-rect.top)/rect.height)),
+      pxW:rect.width,
+      pxH:rect.height
+    };
+  }
+
+  function startInteraction(e) {
+    if (!image) return;
+    e.preventDefault();
+    const handle = e.target.dataset && e.target.dataset.handle ? e.target.dataset.handle : "move";
+    const p = pointerPos(e);
+    interaction = {
+      handle,
+      startX:p.x,startY:p.y,
+      crop:{...crop},
+      pointerId:e.pointerId,
+      pxW:p.pxW,pxH:p.pxH
+    };
+    cropBox.setPointerCapture?.(e.pointerId);
+  }
+
+  function moveInteraction(e) {
+    if (!interaction || !image) return;
+    e.preventDefault();
+
+    const p = pointerPos(e);
+    const dx = p.x - interaction.startX;
+    const dy = p.y - interaction.startY;
+    const start = interaction.crop;
+    const minW = Math.min(.9, 30 / Math.max(30,interaction.pxW));
+    const minH = Math.min(.9, 30 / Math.max(30,interaction.pxH));
+
+    let x=start.x,y=start.y,w=start.w,h=start.h;
+
+    if (interaction.handle === "move") {
+      x = Math.max(0,Math.min(1-w,start.x+dx));
+      y = Math.max(0,Math.min(1-h,start.y+dy));
+      crop = {x,y,w,h};
+      updateCropBox();
+      return;
+    }
+
+    const hnd = interaction.handle;
+    if (hnd.includes("e")) w = Math.max(minW, Math.min(1-start.x, start.w+dx));
+    if (hnd.includes("s")) h = Math.max(minH, Math.min(1-start.y, start.h+dy));
+    if (hnd.includes("w")) {
+      x = Math.max(0, Math.min(start.x+start.w-minW, start.x+dx));
+      w = start.w + (start.x-x);
+    }
+    if (hnd.includes("n")) {
+      y = Math.max(0, Math.min(start.y+start.h-minH, start.y+dy));
+      h = start.h + (start.y-y);
+    }
+
+    const ratio = ratioValue();
+    if (ratio) {
+      const imgRatio = image.naturalWidth / image.naturalHeight;
+      const nr = ratio / imgRatio;
+
+      const horizontal = hnd.includes("e") || hnd.includes("w");
+      const vertical = hnd.includes("n") || hnd.includes("s");
+
+      if (horizontal && !vertical) {
+        h = w / nr;
+      } else if (vertical && !horizontal) {
+        w = h * nr;
+      } else {
+        const targetH = w / nr;
+        const targetW = h * nr;
+        if (Math.abs(targetH-h) < Math.abs(targetW-w)) h = targetH;
+        else w = targetW;
+      }
+
+      if (hnd.includes("w")) x = start.x + start.w - w;
+      if (hnd.includes("n")) y = start.y + start.h - h;
+
+      if (x < 0) { w += x; x = 0; h = w/nr; if(hnd.includes("n")) y=start.y+start.h-h; }
+      if (y < 0) { h += y; y = 0; w = h*nr; if(hnd.includes("w")) x=start.x+start.w-w; }
+      if (x+w > 1) { w = 1-x; h = w/nr; if(hnd.includes("n")) y=start.y+start.h-h; }
+      if (y+h > 1) { h = 1-y; w = h*nr; if(hnd.includes("w")) x=start.x+start.w-w; }
+
+      w = Math.max(minW,w);
+      h = Math.max(minH,h);
+      x = Math.max(0,Math.min(1-w,x));
+      y = Math.max(0,Math.min(1-h,y));
+    }
+
+    crop = {x,y,w,h};
+    updateCropBox();
+  }
+
+  function endInteraction(e) {
+    if (!interaction) return;
+    try { cropBox.releasePointerCapture?.(interaction.pointerId); } catch {}
+    interaction = null;
+    renderPreview();
+  }
+
+  cropBox.addEventListener("pointerdown",startInteraction);
+  cropBox.addEventListener("pointermove",moveInteraction);
+  cropBox.addEventListener("pointerup",endInteraction);
+  cropBox.addEventListener("pointercancel",endInteraction);
+
+  document.querySelectorAll(".aspect-btn").forEach(btn => {
+    btn.addEventListener("click",() => {
+      activeRatio = btn.dataset.ratio;
+      document.querySelectorAll(".aspect-btn").forEach(x=>x.classList.remove("active"));
+      btn.classList.add("active");
+      if (activeRatio === "free") updateCropBox();
+      else applyRatioCentered(ratioValue());
+    });
+  });
+
+  ["cropX","cropY","cropW","cropH"].forEach(id => {
+    $(id).addEventListener("change",() => {
+      if (!image) return;
+      let x = Math.max(0,Number($("cropX").value)||0);
+      let y = Math.max(0,Number($("cropY").value)||0);
+      let w = Math.max(1,Number($("cropW").value)||1);
+      let h = Math.max(1,Number($("cropH").value)||1);
+
+      x = Math.min(x,image.naturalWidth-1);
+      y = Math.min(y,image.naturalHeight-1);
+      w = Math.min(w,image.naturalWidth-x);
+      h = Math.min(h,image.naturalHeight-y);
+
+      const ratio = ratioValue();
+      if (ratio) {
+        h = Math.max(1,Math.round(w/ratio));
+        if (y+h > image.naturalHeight) {
+          h = image.naturalHeight-y;
+          w = Math.max(1,Math.round(h*ratio));
+        }
+      }
+
+      crop = {
+        x:x/image.naturalWidth,
+        y:y/image.naturalHeight,
+        w:w/image.naturalWidth,
+        h:h/image.naturalHeight
+      };
+      updateCropBox();
+      renderPreview();
+    });
+  });
+
+  function exportDimensions(srcW,srcH) {
+    const max = Number($("maxSizeSelect").value);
+    if (!max || Math.max(srcW,srcH) <= max) return {w:srcW,h:srcH};
+    const scale = max / Math.max(srcW,srcH);
+    return {w:Math.max(1,Math.round(srcW*scale)),h:Math.max(1,Math.round(srcH*scale))};
+  }
+
+  function renderCropTo(targetCtx,targetCanvas,forPreview=false) {
+    if (!image) return null;
+    const r = sourceRect();
+    const dims = forPreview
+      ? (() => {
+          const max = 700;
+          const scale = Math.min(1,max/Math.max(r.w,r.h));
+          return {w:Math.max(1,Math.round(r.w*scale)),h:Math.max(1,Math.round(r.h*scale))};
+        })()
+      : exportDimensions(r.w,r.h);
+
+    targetCanvas.width = dims.w;
+    targetCanvas.height = dims.h;
+    targetCtx.clearRect(0,0,dims.w,dims.h);
+
+    if (!forPreview && $("formatSelect").value === "image/jpeg") {
+      targetCtx.fillStyle = "#ffffff";
+      targetCtx.fillRect(0,0,dims.w,dims.h);
+    }
+
+    targetCtx.drawImage(image,r.x,r.y,r.w,r.h,0,0,dims.w,dims.h);
+    return {source:r,output:dims};
+  }
+
+  function renderPreview() {
+    if (!image) return;
+    const info = renderCropTo(pctx,preview,true);
+    if (!info) return;
+    const r = info.source;
+    $("previewInfo").textContent = `Crop: ${r.w.toLocaleString("en-US")} × ${r.h.toLocaleString("en-US")} px · X ${r.x.toLocaleString("en-US")} · Y ${r.y.toLocaleString("en-US")}`;
+  }
+
+  function schedulePreview() {
+    clearTimeout(renderTimer);
+    renderTimer = setTimeout(renderPreview,80);
+  }
+
+  $("qualityRange").addEventListener("input",() => {
+    $("qualityValue").textContent = `${$("qualityRange").value}%`;
+  });
+  $("previewBtn").addEventListener("click",renderPreview);
+  $("resetCropBtn").addEventListener("click",resetCrop);
+
+  function outputExtension(type) {
+    if (type === "image/jpeg") return "jpg";
+    if (type === "image/webp") return "webp";
+    return "png";
+  }
+
+  $("downloadBtn").addEventListener("click",() => {
+    if (!image) return;
+
+    const outCanvas = document.createElement("canvas");
+    const outCtx = outCanvas.getContext("2d");
+    let info;
+    try {
+      info = renderCropTo(outCtx,outCanvas,false);
+    } catch {
+      $("status").textContent = "The crop is too large for this browser to export.";
+      return;
+    }
+
+    const type = $("formatSelect").value;
+    const quality = Number($("qualityRange").value)/100;
+    const ext = outputExtension(type);
+    const base = (file?.name || "image").replace(/\.[^.]+$/,"").replace(/[^\w.-]+/g,"_") || "image";
+
+    outCanvas.toBlob(blob => {
+      if (!blob) {
+        $("status").textContent = "This browser could not encode the selected output format.";
+        return;
+      }
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${base}_cropped.${ext}`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(()=>URL.revokeObjectURL(url),1500);
+      $("status").textContent = `Downloaded ${info.output.w} × ${info.output.h} ${ext.toUpperCase()}.`;
+      setTimeout(()=>$("status").textContent="",2200);
+    },type,quality);
+  });
+
+  function loadFile(selectedFile) {
+    if (!selectedFile) return;
+    file = selectedFile;
+
+    if (objectUrl) {
+      URL.revokeObjectURL(objectUrl);
+      objectUrl = null;
+    }
+
+    objectUrl = URL.createObjectURL(selectedFile);
+    const img = new Image();
+    img.onload = () => {
+      image = img;
+      $("workspace").classList.add("show");
+      $("fileName").textContent = selectedFile.name || "Pasted image";
+      $("fileType").textContent = selectedFile.type || getExt(selectedFile.name);
+      $("sourceSize").textContent = `${img.naturalWidth.toLocaleString("en-US")} × ${img.naturalHeight.toLocaleString("en-US")} px`;
+      $("fileSize").textContent = formatBytes(selectedFile.size);
+      activeRatio = "free";
+      document.querySelectorAll(".aspect-btn").forEach(x=>x.classList.toggle("active",x.dataset.ratio==="free"));
+      crop = {x:.1,y:.1,w:.8,h:.8};
+      fitDisplay();
+      renderPreview();
+      $("status").textContent = "";
+    };
+    img.onerror = () => {
+      image = null;
+      $("workspace").classList.remove("show");
+      $("status").textContent = "";
+      alert("This image format could not be decoded by your browser. Try PNG, JPEG, WebP, GIF, SVG, BMP, AVIF, or convert the file first.");
+    };
+    img.src = objectUrl;
+  }
+
+  $("fileInput").addEventListener("change",e => loadFile(e.target.files?.[0]));
+
+  const dropzone = $("dropzone");
+  ["dragenter","dragover"].forEach(type => dropzone.addEventListener(type,e => {
+    e.preventDefault();
+    dropzone.classList.add("dragover");
+  }));
+  ["dragleave","drop"].forEach(type => dropzone.addEventListener(type,e => {
+    e.preventDefault();
+    dropzone.classList.remove("dragover");
+  }));
+  dropzone.addEventListener("drop",e => {
+    const f = [...(e.dataTransfer?.files || [])].find(x => x.type.startsWith("image/") || /\.(heic|heif|tiff?|avif|bmp|svg)$/i.test(x.name));
+    if (f) loadFile(f);
+  });
+  dropzone.addEventListener("keydown",e => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      $("fileInput").click();
+    }
+  });
+  dropzone.addEventListener("click",e => {
+    if (e.target.closest(".file-button")) return;
+    $("fileInput").click();
+  });
+
+  document.addEventListener("paste",e => {
+    const item = [...(e.clipboardData?.items || [])].find(i => i.type.startsWith("image/"));
+    if (item) {
+      const f = item.getAsFile();
+      if (f) loadFile(f);
+    }
+  });
+
+  let resizeTimer;
+  window.addEventListener("resize",() => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(fitDisplay,120);
+  });
+})();
+</script>
+</body>
+</html>
