@@ -57,6 +57,17 @@
     .article ul { padding-left: 1.35rem; margin: 1rem 0; }
     .article li { margin-bottom: .5rem; }
   
+
+    .free-label {
+      color: #64748b;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    body.light-mode .free-label {
+      color: #64748b;
+    }
+
     /* Light / Dark theme toggle */
     #themeToggle {
       display: inline-flex;
@@ -158,6 +169,13 @@
     }
 
     @media (max-width: 640px) {
+      .free-label {
+        font-size: 10.5px;
+        max-width: 126px;
+        white-space: normal;
+        text-align: right;
+        line-height: 1.2;
+      }
       #themeToggle {
         width: 38px;
         height: 38px;
@@ -192,10 +210,7 @@
       Back to Utiliverse
     </a>
     <div class="flex items-center gap-3">
-      <div class="hidden sm:flex items-center gap-2 text-xs text-slate-500">
-        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-        Free & Browser-Based
-      </div>
+      <span class="free-label">100% Free and Browser Based</span>
 
       <button id="themeToggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
         <svg id="moonIcon" class="theme-hidden" viewBox="0 0 24 24" aria-hidden="true">
