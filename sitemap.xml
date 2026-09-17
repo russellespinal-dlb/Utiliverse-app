@@ -196,19 +196,24 @@
     <loc>https://utiliverse.app/Leap_Year_Checker/</loc>
   </url>
 
-  <!--Leap Year Checker -->
+  <!--Image Cropper -->
   <url>
     <loc>https://utiliverse.app/Image_Cropper/</loc>
   </url>
 
-  <!--Leap Year Checker -->
+  <!--Image Dimension Finder -->
   <url>
     <loc>https://utiliverse.app/Image_Dimension_Finder/</loc>
   </url>
 
-  <!--Leap Year Checker -->
+  <!--Image Watermark Maker -->
   <url>
     <loc>https://utiliverse.app/Image_Watermark_Maker/</loc>
+  </url>
+
+  <!--SSL Certificate Checker -->
+  <url>
+    <loc>https://utiliverse.app/SSL_Certificate_Checker/</loc>
   </url>
 
   <!-- Privacy Policy -->
