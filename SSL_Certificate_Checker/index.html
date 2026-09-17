@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SSL Certificate Checker – Check Expiration, Issuer & TLS Status | Utiliverse</title>
+  <meta name="description" content="Free SSL certificate checker to inspect a domain's certificate status, expiration date, issuer, subject, SAN coverage, TLS protocol, cipher and trust status.">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#020617">
+  <link rel="canonical" href="https://utiliverse.app/SSL_Certificate_Checker/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Utiliverse">
+  <meta property="og:title" content="SSL Certificate Checker – Check Expiration, Issuer & TLS Status | Utiliverse">
+  <meta property="og:description" content="Check a public hostname's SSL/TLS certificate, expiration date, issuer, hostname coverage, protocol and trust status.">
+  <meta property="og:url" content="https://utiliverse.app/SSL_Certificate_Checker/">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="SSL Certificate Checker | Utiliverse">
+  <meta name="twitter:description" content="Check SSL/TLS certificate validity, expiration, issuer, SANs, protocol and cipher information.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root{
+      --accent:#4f46e5;
+      --accent2:#7c3aed;
+      --good:#059669;
+      --warn:#d97706;
+      --bad:#dc2626;
+    }
+
+    body{
+      background:
+        radial-gradient(circle at 10% 0%, rgba(99,102,241,.10), transparent 32%),
+        #f8fafc;
+    }
+
+    body.dark-mode{
+      background:
+        radial-gradient(circle at 10% 0%, rgba(99,102,241,.14), transparent 32%),
+        radial-gradient(circle at 90% 15%, rgba(124,58,237,.08), transparent 28%),
+        #020617 !important;
+      color:#f8fafc !important;
+    }
+
+    body.dark-mode header{
+      background:rgba(2,6,23,.82)!important;
+      border-color:#1e293b!important;
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+    }
+
+    body.dark-mode header .text-slate-900{color:#f8fafc!important}
+    body.dark-mode header .text-slate-500{color:#94a3b8!important}
+    body.dark-mode header a{color:#cbd5e1!important}
+    body.dark-mode header a:hover{color:#fff!important}
+    body.dark-mode main h1{color:#f8fafc!important}
+    body.dark-mode main .hero-copy{color:#94a3b8!important}
+
+    .theme-toggle{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:40px;
+      height:40px;
+      padding:0;
+      border-radius:12px;
+      border:1px solid #cbd5e1;
+      background:#fff;
+      color:#475569;
+      cursor:pointer;
+      box-shadow:none;
+      appearance:none;
+      -webkit-appearance:none;
+      transition:background .2s ease,color .2s ease,border-color .2s ease;
+    }
+    .theme-toggle:hover{background:#f1f5f9;color:#0f172a;border-color:#94a3b8}
+    body.dark-mode .theme-toggle{background:rgba(15,23,42,.72);border-color:#334155;color:#94a3b8}
+    body.dark-mode .theme-toggle:hover{background:#1e293b;color:#fff;border-color:#475569}
+    .theme-icon{width:18px;height:18px;stroke-width:2}
+
+    .free-browser-note{
+      color:#64748b;
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+      letter-spacing:.1px;
+    }
+    body.dark-mode .free-browser-note{color:#94a3b8}
+
+    .tool-shell,.info-section{
+      background:#fff;
+      border:1px solid #e2e8f0;
+      border-radius:1rem;
+      box-shadow:0 1px 2px rgba(15,23,42,.04);
+    }
+    body.dark-mode .tool-shell,
+    body.dark-mode .info-section{
+      background:rgba(30,41,59,.72)!important;
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      border-color:#334155!important;
+      box-shadow:0 18px 50px rgba(0,0,0,.18);
+    }
+
+    .label{font-size:.83rem;font-weight:750;color:#334155}
+    body.dark-mode .label{color:#cbd5e1}
+
+    .field{
+      width:100%;
+      border:1px solid #cbd5e1;
+      background:#fff;
+      color:#0f172a;
+      border-radius:.8rem;
+      padding:.78rem .9rem;
+      outline:none;
+      transition:border-color .2s ease,box-shadow .2s ease,background .2s ease;
+    }
+    .field:focus{
+      border-color:#818cf8;
+      box-shadow:0 0 0 3px rgba(99,102,241,.14);
+    }
+    body.dark-mode .field{
+      background:#0f172a;
+      border-color:#475569;
+      color:#e2e8f0;
+    }
+
+    .btn-primary,.btn-secondary{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.5rem;
+      border-radius:.8rem;
+      padding:.78rem 1rem;
+      font-weight:800;
+      font-size:.9rem;
+      transition:transform .15s ease,background .2s ease,border-color .2s ease;
+    }
+    .btn-primary{background:#4f46e5;color:#fff}
+    .btn-primary:hover{background:#4338ca;transform:translateY(-1px)}
+    .btn-primary:disabled{opacity:.58;cursor:not-allowed;transform:none}
+    .btn-secondary{background:#fff;color:#334155;border:1px solid #cbd5e1}
+    .btn-secondary:hover{background:#f8fafc;border-color:#94a3b8}
+    body.dark-mode .btn-secondary{background:#1e293b;color:#e2e8f0;border-color:#475569}
+    body.dark-mode .btn-secondary:hover{background:#334155}
+
+    .status-banner{
+      border-radius:.95rem;
+      padding:1rem 1.05rem;
+      display:flex;
+      align-items:flex-start;
+      gap:.85rem;
+      border:1px solid #e2e8f0;
+      background:#f8fafc;
+    }
+    .status-banner.good{border-color:#a7f3d0;background:#ecfdf5}
+    .status-banner.warn{border-color:#fde68a;background:#fffbeb}
+    .status-banner.bad{border-color:#fecaca;background:#fef2f2}
+    .status-banner.neutral{border-color:#cbd5e1;background:#f8fafc}
+    body.dark-mode .status-banner.good{background:rgba(6,78,59,.24);border-color:#065f46}
+    body.dark-mode .status-banner.warn{background:rgba(120,53,15,.24);border-color:#92400e}
+    body.dark-mode .status-banner.bad{background:rgba(127,29,29,.24);border-color:#991b1b}
+    body.dark-mode .status-banner.neutral{background:#0f172a;border-color:#334155}
+
+    .status-title{font-weight:900;color:#0f172a}
+    .status-text{font-size:.9rem;color:#475569;margin-top:.2rem;line-height:1.55}
+    body.dark-mode .status-title{color:#f8fafc}
+    body.dark-mode .status-text{color:#94a3b8}
+
+    .metric{
+      border:1px solid #e2e8f0;
+      border-radius:.9rem;
+      padding:1rem;
+      background:#fff;
+      min-height:105px;
+    }
+    body.dark-mode .metric{background:#0f172a;border-color:#334155}
+    .metric-label{font-size:.76rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#64748b}
+    .metric-value{font-weight:900;color:#0f172a;margin-top:.45rem;word-break:break-word}
+    .metric-sub{font-size:.78rem;color:#64748b;margin-top:.3rem;line-height:1.4}
+    body.dark-mode .metric-value{color:#f8fafc}
+    body.dark-mode .metric-label,body.dark-mode .metric-sub{color:#94a3b8}
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      padding:.38rem .6rem;
+      border-radius:999px;
+      background:#eef2ff;
+      color:#4338ca;
+      font-size:.78rem;
+      font-weight:750;
+      margin:.18rem .22rem .18rem 0;
+      word-break:break-all;
+    }
+    body.dark-mode .chip{background:#312e81;color:#c7d2fe}
+
+    .detail-row{
+      display:grid;
+      grid-template-columns:minmax(130px, .42fr) minmax(0,1fr);
+      gap:1rem;
+      padding:.85rem 0;
+      border-bottom:1px solid #e2e8f0;
+    }
+    .detail-row:last-child{border-bottom:0}
+    .detail-key{font-size:.84rem;font-weight:800;color:#475569}
+    .detail-value{font-size:.9rem;color:#0f172a;word-break:break-word}
+    body.dark-mode .detail-row{border-color:#334155}
+    body.dark-mode .detail-key{color:#94a3b8}
+    body.dark-mode .detail-value{color:#e2e8f0}
+
+    .info-wrap{width:100%;max-width:72rem;margin:3.5rem auto 0}
+    .info-section{padding:1.5rem}
+    .info-section+.info-section{margin-top:1.5rem}
+    .info-section h2{font-size:1.65rem;line-height:1.25;font-weight:800;color:#0f172a;margin:0 0 .9rem;letter-spacing:-.02em}
+    .info-section h3{font-size:1.06rem;line-height:1.4;font-weight:800;color:#1e293b;margin:1.4rem 0 .45rem}
+    .info-section p,.info-section li{color:#475569;line-height:1.82;font-size:.98rem}
+    .info-section p{margin:.8rem 0}
+    .info-section ul,.info-section ol{padding-left:1.25rem;margin:.75rem 0}
+    body.dark-mode .info-section h2{color:#f8fafc!important}
+    body.dark-mode .info-section h3{color:#e2e8f0!important}
+    body.dark-mode .info-section p,body.dark-mode .info-section li{color:#94a3b8!important}
+
+    .faq-item{border-bottom:1px solid #e2e8f0}
+    .faq-item:last-child{border-bottom:0}
+    .faq-item summary{
+      list-style:none;
+      cursor:pointer;
+      padding:1rem 0;
+      font-weight:800;
+      color:#0f172a;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+    }
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:"+";font-size:1.2rem;color:#64748b;flex:0 0 auto}
+    .faq-item[open] summary::after{content:"−"}
+    .faq-item p{margin:0;padding:0 0 1rem}
+    body.dark-mode .faq-item{border-color:#334155}
+    body.dark-mode .faq-item summary{color:#e2e8f0}
+    body.dark-mode .faq-item summary::after{color:#94a3b8}
+
+    .loader{
+      width:18px;height:18px;border-radius:50%;
+      border:2px solid rgba(255,255,255,.35);
+      border-top-color:#fff;
+      animation:spin .7s linear infinite;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    .hidden-important{display:none!important}
+
+    @media (min-width:640px){.info-section{padding:2rem}}
+    @media (max-width:640px){
+      .free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}
+      .theme-toggle{width:38px;height:38px;flex:0 0 auto}
+      .detail-row{grid-template-columns:1fr;gap:.25rem}
+      .mobile-stack{width:100%}
+      .mobile-stack .btn-primary,.mobile-stack .btn-secondary{width:100%}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebApplication",
+    "name":"Utiliverse SSL Certificate Checker",
+    "url":"https://utiliverse.app/SSL_Certificate_Checker/",
+    "applicationCategory":"DeveloperApplication",
+    "operatingSystem":"Any",
+    "browserRequirements":"Requires a modern web browser with JavaScript enabled.",
+    "description":"Free online SSL/TLS certificate checker for inspecting certificate validity, expiration, issuer, subject, SAN coverage, TLS protocol, cipher and trust status.",
+    "isAccessibleForFree":true,
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+    "featureList":[
+      "SSL certificate expiration check",
+      "Certificate validity and authorization status",
+      "Issuer and subject information",
+      "Subject Alternative Name display",
+      "TLS protocol and cipher information",
+      "Custom TLS port support",
+      "Copyable certificate report"
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"What does an SSL certificate checker do?","acceptedAnswer":{"@type":"Answer","text":"An SSL certificate checker connects to a public TLS-enabled hostname and reports information about the certificate presented by that service, such as its validity period, issuer, subject, hostname coverage and trust status."}},
+      {"@type":"Question","name":"What port should I use for an HTTPS website?","acceptedAnswer":{"@type":"Answer","text":"Port 443 is the standard port for HTTPS and is the correct choice for most public websites. Use another port only when the TLS-enabled service is intentionally configured on a custom port."}},
+      {"@type":"Question","name":"What does days remaining mean?","acceptedAnswer":{"@type":"Answer","text":"Days remaining is the approximate number of full days between the current time and the certificate's expiration time. A low value is a reminder to verify renewal and deployment before the certificate expires."}},
+      {"@type":"Question","name":"What are Subject Alternative Names?","acceptedAnswer":{"@type":"Answer","text":"Subject Alternative Names, or SANs, are the hostnames covered by the certificate. Modern hostname validation primarily relies on SAN entries rather than only the certificate common name."}},
+      {"@type":"Question","name":"Why can a certificate be untrusted even if it has not expired?","acceptedAnswer":{"@type":"Answer","text":"Expiration is only one part of certificate validation. Trust can also fail because of a missing intermediate certificate, an untrusted issuer, a hostname mismatch or another validation problem."}},
+      {"@type":"Question","name":"Does this tool upload private keys or certificate files?","acceptedAnswer":{"@type":"Answer","text":"No private key or certificate file is requested. The hostname and port you enter are sent to the lookup service so it can connect to that public endpoint and return the certificate information."}}
+    ]
+  }
+  </script>
+</head>
+
+<!--
+SEO TARGET CLUSTER
+Primary: SSL certificate checker
+Secondary: SSL checker, TLS certificate checker, SSL expiration checker,
+certificate expiry checker, check SSL certificate, SSL validity checker,
+SSL issuer checker, HTTPS certificate checker, SSL status checker
+
+ADSENSE NOTE
+Approved AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+
+  <header class="sticky top-0 z-50 bg-white/80 backdrop-filter backdrop-blur-lg border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="https://utiliverse.app" class="flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-slate-900 transition">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        <span>Back to Utiliverse</span>
+      </a>
+
+      <div class="flex items-center gap-4">
+        <div class="free-browser-note">100% Free and Browser Based</div>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
+          <i id="moonIcon" data-lucide="moon" class="theme-icon"></i>
+          <i id="sunIcon" data-lucide="sun" class="theme-icon hidden"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+
+    <div class="mb-6">
+      <h1 class="text-3xl font-bold text-slate-900 flex items-center gap-3">
+        <i data-lucide="shield-check" class="w-8 h-8 text-indigo-600"></i>
+        SSL Certificate Checker
+      </h1>
+      <p class="hero-copy text-slate-500 mt-2 text-sm max-w-3xl">
+        Check the SSL/TLS certificate currently presented by a public hostname. Review expiration, trust status, issuer, subject, SAN coverage, TLS version, cipher and custom-port details.
+      </p>
+    </div>
+
+    <!-- =========================================================
+         GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
+         Paste approved Google AdSense code here after approval.
+         This comment is intentionally invisible and reserves no space.
+    ========================================================= -->
+
+    <section class="tool-shell overflow-hidden">
+      <div class="p-5 sm:p-6 border-b border-slate-200 dark-border">
+        <form id="sslForm" class="grid grid-cols-1 md:grid-cols-[1fr_150px_180px] gap-4 items-end" novalidate>
+          <div>
+            <label for="hostInput" class="label block mb-2">Domain or hostname</label>
+            <input id="hostInput" class="field" type="text" inputmode="url" autocomplete="off"
+                   placeholder="example.com or https://www.example.com" aria-describedby="hostHelp">
+            <p id="hostHelp" class="text-xs text-slate-500 mt-2">Public hostnames only. URLs are cleaned automatically.</p>
+          </div>
+
+          <div>
+            <label for="portInput" class="label block mb-2">Port</label>
+            <input id="portInput" class="field" type="number" min="1" max="65535" value="443" inputmode="numeric">
+          </div>
+
+          <button id="checkBtn" class="btn-primary" type="submit">
+            <i data-lucide="search" class="w-4 h-4"></i>
+            <span id="checkBtnText">Check Certificate</span>
+          </button>
+        </form>
+
+        <div class="mt-4 flex flex-wrap gap-2 mobile-stack">
+          <button id="exampleBtn" class="btn-secondary" type="button">
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+            Try example.com
+          </button>
+          <button id="resetBtn" class="btn-secondary" type="button">
+            <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+            Reset
+          </button>
+          <button id="copyBtn" class="btn-secondary hidden-important" type="button">
+            <i data-lucide="copy" class="w-4 h-4"></i>
+            Copy Results
+          </button>
+        </div>
+      </div>
+
+      <div class="p-5 sm:p-6">
+        <div id="idleState" class="text-center py-10">
+          <div class="mx-auto w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+            <i data-lucide="lock-keyhole" class="w-7 h-7"></i>
+          </div>
+          <h2 class="text-lg font-extrabold text-slate-900 mt-4 result-heading">Ready to check a certificate</h2>
+          <p class="text-sm text-slate-500 mt-2 max-w-xl mx-auto">
+            Enter a hostname and port above. Standard HTTPS normally uses port 443.
+          </p>
+        </div>
+
+        <div id="errorState" class="hidden-important">
+          <div class="status-banner bad">
+            <i data-lucide="circle-alert" class="w-5 h-5 text-red-600 mt-0.5 flex-none"></i>
+            <div>
+              <div class="status-title">Certificate check failed</div>
+              <div id="errorMessage" class="status-text">Please verify the hostname and try again.</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="resultsState" class="hidden-important">
+          <div id="statusBanner" class="status-banner neutral mb-5">
+            <i id="statusIcon" data-lucide="shield" class="w-5 h-5 text-slate-600 mt-0.5 flex-none"></i>
+            <div>
+              <div id="statusTitle" class="status-title">Certificate status</div>
+              <div id="statusText" class="status-text"></div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-5">
+            <div class="metric">
+              <div class="metric-label">Days Remaining</div>
+              <div id="daysRemaining" class="metric-value text-2xl">—</div>
+              <div id="daysSub" class="metric-sub">Until certificate expiration</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">Expires</div>
+              <div id="expiresAt" class="metric-value">—</div>
+              <div class="metric-sub">Certificate valid-to date</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">Trust / Authorization</div>
+              <div id="authorizedValue" class="metric-value">—</div>
+              <div class="metric-sub">Validation result reported by the live TLS check</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">TLS Protocol</div>
+              <div id="protocolValue" class="metric-value">—</div>
+              <div id="cipherSub" class="metric-sub">Negotiated protocol and cipher</div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+            <div class="metric min-h-0">
+              <div class="metric-label mb-2">Certificate Details</div>
+              <div class="detail-row">
+                <div class="detail-key">Checked host</div>
+                <div id="checkedHost" class="detail-value">—</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-key">Subject / Common Name</div>
+                <div id="subjectValue" class="detail-value">—</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-key">Issuer</div>
+                <div id="issuerValue" class="detail-value">—</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-key">Valid from</div>
+                <div id="validFromValue" class="detail-value">—</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-key">Valid to</div>
+                <div id="validToValue" class="detail-value">—</div>
+              </div>
+              <div class="detail-row">
+                <div class="detail-key">Cipher</div>
+                <div id="cipherValue" class="detail-value">—</div>
+              </div>
+            </div>
+
+            <div class="metric min-h-0">
+              <div class="metric-label mb-2">Hostname Coverage (SANs)</div>
+              <div id="sanContainer" class="mt-2"></div>
+              <p id="sanEmpty" class="text-sm text-slate-500 mt-2">No Subject Alternative Names were returned.</p>
+            </div>
+          </div>
+
+          <p class="text-xs text-slate-500 mt-5 leading-relaxed">
+            This page is a browser-based interface, but the live TLS inspection itself must be performed by a network service because browsers do not expose arbitrary remote certificate handshakes to page JavaScript. The hostname and port you enter are sent to the third-party lookup endpoint used by this tool. Do not enter private/internal hostnames or confidential infrastructure names.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
+         Paste approved Google AdSense code here after approval.
+         This comment is intentionally invisible and reserves no space.
+    ========================================================= -->
+
+    <div class="info-wrap">
+
+      <section class="info-section" aria-labelledby="about-ssl-checker">
+        <h2 id="about-ssl-checker">Free Online SSL Certificate Checker</h2>
+        <p>
+          The Utiliverse SSL Certificate Checker is a practical browser-based interface for checking the SSL/TLS certificate presented by a public website or other TLS-enabled hostname. It can help you confirm whether a certificate is still valid, how many days remain before expiration, who issued it, which hostname it was issued for, which Subject Alternative Names are covered, and which TLS protocol and cipher were negotiated during the check. These details are useful when diagnosing HTTPS warnings, confirming a renewal, checking a migration, or reviewing the basic certificate status of a server before a problem reaches visitors.
+        </p>
+        <p>
+          Although people commonly say “SSL certificate,” modern secure web connections use TLS, the successor to the older SSL protocols. The familiar SSL wording remains common in hosting dashboards, search terms, and certificate products, so this tool uses both terms. A successful result does not replace a full security audit: application security, HTTP security headers, revocation behavior, supported cipher suites, legacy-protocol exposure, DNS configuration, server patching, and content security all require separate checks.
+        </p>
+      </section>
+
+      <section class="info-section" aria-labelledby="how-to-use">
+        <h2 id="how-to-use">How to Use the SSL Certificate Checker</h2>
+
+        <p>
+          Start by entering the public domain name or hostname you want to inspect. You can type a simple hostname such as <strong>example.com</strong>, a subdomain such as <strong>www.example.com</strong>, or paste a complete HTTPS URL. The tool removes the URL scheme, path, query string, and fragment so the check is performed against the hostname itself. If you are troubleshooting a particular subdomain, check that exact subdomain instead of assuming every hostname on the same parent domain presents the same certificate.
+        </p>
+
+        <p>
+          Next, confirm the port. Port 443 is the standard port for HTTPS and is correct for most websites. Some administration panels, staging systems, APIs, mail services, or other TLS-enabled applications listen on different ports. If your service intentionally uses a custom TLS port, enter it before running the check. The port matters because two services on the same hostname can present different certificates.
+        </p>
+
+        <p>
+          Select <strong>Check Certificate</strong> to perform the lookup. The browser sends the hostname and port to the remote certificate-checking service, which opens the TLS connection and returns the certificate information to this page. This external step is necessary because standard browser JavaScript is restricted from opening arbitrary raw TLS sockets or directly reading another server’s certificate chain. If a lookup fails, confirm that the hostname is public, spelled correctly, resolves in DNS, and accepts TLS connections on the selected port.
+        </p>
+
+        <h3>Read the overall certificate status first</h3>
+        <p>
+          The status banner provides the quickest interpretation. A valid, authorized certificate with comfortable time remaining is shown as healthy. A certificate approaching expiration is shown as a warning, while an expired or unauthorized result is shown as a problem that needs attention. Renewal systems are often automated, but automation can fail because of DNS changes, ACME challenge errors, permission problems, an outdated load balancer certificate, or a service that was not reloaded after renewal.
+        </p>
+
+        <h3>Review expiration and validity dates</h3>
+        <p>
+          The <strong>Days Remaining</strong> card shows how much time is left before expiration, while the valid-from and valid-to fields show the certificate’s full validity window. If you recently renewed a certificate, use the valid-to date to confirm that the new certificate is actually being served. A renewed file sitting on the server does not help visitors if the web server, reverse proxy, CDN, or load balancer is still presenting the previous certificate.
+        </p>
+
+        <h3>Check the issuer, subject, and hostname coverage</h3>
+        <p>
+          The issuer identifies the certificate authority that signed the certificate, while the subject or common name provides a concise identity field. For modern hostname validation, pay close attention to the Subject Alternative Name list. SAN entries identify the hostnames the certificate is designed to cover. A certificate may include one hostname, several names, or a wildcard such as <strong>*.example.com</strong>. If the hostname you are testing is missing from the allowed names, users can receive a name-mismatch warning even when the certificate is current and signed by a trusted authority.
+        </p>
+
+        <h3>Understand trust and authorization</h3>
+        <p>
+          A certificate can be unexpired and still fail validation. The authorization result helps identify whether the live TLS connection was considered trusted by the checking service. Trust normally depends on a valid chain from the site certificate through the required intermediate certificate authorities to a trusted root. A missing intermediate, self-signed certificate, unknown certificate authority, invalid hostname, or another verification problem can cause failure. An independent check is useful when one device works while another reports a certificate warning.
+        </p>
+
+        <h3>Review the TLS protocol and cipher</h3>
+        <p>
+          The protocol and cipher fields show what the checker negotiated during its connection. These values confirm that TLS is working and provide a quick technical snapshot of the session. They are not a complete cipher-suite or protocol audit because a server can support many combinations even though one connection negotiates only one. For deeper testing, use a dedicated TLS scanner that enumerates supported protocol versions, cipher suites, and related server settings.
+        </p>
+
+        <h2 class="mt-8">Practical Use Cases for a Domain Certificate Checker</h2>
+
+        <h3>Confirm that a certificate renewal reached production</h3>
+        <p>
+          One of the most useful checks is immediately after renewal. Whether the certificate was renewed manually through a hosting provider or automatically through an ACME client such as Certbot, the new certificate still has to be deployed to the service that users actually reach. In environments with a CDN, reverse proxy, load balancer, multiple web servers, or regional endpoints, renewal and deployment are not always the same event. Checking the live hostname verifies the expiration date that an outside client currently sees.
+        </p>
+
+        <h3>Troubleshoot browser privacy and trust warnings</h3>
+        <p>
+          When a visitor reports “Your connection is not private,” “certificate not trusted,” or a similar warning, checking the affected hostname can quickly narrow the cause. An expired certificate points toward renewal. An authorization failure can suggest a chain or trust issue. A hostname absent from the SAN list suggests that the wrong certificate may have been installed, or traffic may be reaching an unexpected virtual host. Comparing the apex domain, the <strong>www</strong> hostname, and application subdomains can reveal whether only one endpoint is misconfigured.
+        </p>
+
+        <h3>Validate a new website, migration, CDN, or load balancer</h3>
+        <p>
+          Infrastructure changes often move TLS termination from one system to another. A site migration may shift HTTPS from a shared hosting server to a reverse proxy, cloud load balancer, CDN edge, or managed application platform. After DNS is changed, check the public hostname to confirm the new endpoint presents the expected certificate and correct hostname coverage. This is especially useful during staged migrations where the origin server and public edge can have different certificates.
+        </p>
+
+        <h3>Check multiple subdomains independently</h3>
+        <p>
+          Organizations often run separate certificates or TLS endpoints for <strong>www</strong>, APIs, login pages, webmail, dashboards, development environments, and customer portals. Even when one wildcard or multi-domain certificate is intended to cover several services, each public endpoint should be checked independently because the certificate actually served depends on the listener and routing configuration. A single outdated node behind a load balancer can also create intermittent problems.
+        </p>
+
+        <h3>Plan certificate-expiration monitoring</h3>
+        <p>
+          This tool is designed for on-demand checks rather than continuous monitoring, but the remaining-days result can help you decide which systems need automated alerts. Production certificates should normally be renewed well before expiration so there is time to correct failed validation, deployment, or service-reload steps. Teams that manage many domains often monitor certificate expiry alongside uptime and DNS health. Manual spot checks remain useful after maintenance because they confirm what is being served at that moment.
+        </p>
+
+        <h3>Verify certificates on non-standard TLS ports</h3>
+        <p>
+          HTTPS websites typically use 443, but TLS is also used by many other services and management interfaces. If a service exposes TLS on a custom public port, checking that exact port can reveal a certificate different from the one served on 443. This is helpful when a platform contains several listeners or when a reverse proxy handles the main website while another service terminates TLS itself. Only test systems you are authorized to administer or ordinary public services where connection testing is appropriate.
+        </p>
+
+        <h3>Use certificate information as one layer of a broader health check</h3>
+        <p>
+          A healthy certificate is important, but it does not prove that a website is fully secure or operational. A valid certificate can exist on a server with an application error, outdated software, weak authentication, unsafe cookies, missing security headers, vulnerable dependencies, or incorrect DNS. For dependable operations, combine live certificate checks with uptime monitoring, DNS validation, security-header review, application testing, backups, patch management, and a dedicated TLS configuration scan when deeper protocol analysis is needed.
+        </p>
+      </section>
+
+      <section class="info-section" aria-labelledby="faq">
+        <h2 id="faq">SSL Certificate Checker FAQ</h2>
+
+        <details class="faq-item">
+          <summary>What does an SSL certificate checker do?</summary>
+          <p>An SSL certificate checker connects to a public TLS-enabled hostname and reports information about the certificate presented by that service, such as its validity period, issuer, subject, hostname coverage and trust status.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>What port should I use for an HTTPS website?</summary>
+          <p>Port 443 is the standard port for HTTPS and is the correct choice for most public websites. Use another port only when the TLS-enabled service is intentionally configured on a custom port.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>What does “days remaining” mean?</summary>
+          <p>It is the approximate amount of time between the current check and the certificate’s expiration time. A low value is a signal to verify that renewal and deployment are working before the certificate expires.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>What are Subject Alternative Names (SANs)?</summary>
+          <p>SANs are the DNS hostnames a certificate is valid for. Modern browsers primarily use these names when determining whether a certificate matches the hostname a visitor requested.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Why can a certificate be untrusted even when it has not expired?</summary>
+          <p>Expiration is only one part of validation. Trust can also fail because of a missing intermediate certificate, an untrusted issuer, a hostname mismatch, a self-signed certificate, or another verification error.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Can this confirm that an automatic renewal was deployed?</summary>
+          <p>Yes. Checking the live public hostname after renewal is a useful way to confirm that visitors are actually receiving the new certificate rather than an older certificate that remains loaded on a web server, proxy, CDN, or load balancer.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Does this tool upload a private key or certificate file?</summary>
+          <p>No. The tool does not request private keys or local certificate files. The hostname and port you enter are sent to the remote lookup service so it can connect to that public endpoint and return certificate details.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Is a valid SSL certificate the same as a full security audit?</summary>
+          <p>No. Certificate validity is only one part of web security. A complete review can also include TLS versions and cipher suites, security headers, DNS, application vulnerabilities, software patching, authentication, cookies, revocation behavior and server configuration.</p>
+        </details>
+      </section>
+
+      <!-- =========================================================
+           GOOGLE ADSENSE: BOTTOM / AFTER-CONTENT INSERTION POINT
+           Paste approved Google AdSense code here after approval.
+           This comment is intentionally invisible and reserves no space.
+      ========================================================= -->
+
+    </div>
+  </main>
+
+  <footer class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-6 pt-2">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-500">
+      <div>© 2026 Utiliverse. All rights reserved.</div>
+      <div class="font-semibold text-right">100% Free and Browser Based</div>
+    </div>
+  </footer>
+
+<script>
+(() => {
+  const API_URL = "https://api.domainee.dev/v1/tools/ssl-check";
+
+  const $ = id => document.getElementById(id);
+  const sslForm = $("sslForm");
+  const hostInput = $("hostInput");
+  const portInput = $("portInput");
+  const checkBtn = $("checkBtn");
+  const checkBtnText = $("checkBtnText");
+  const exampleBtn = $("exampleBtn");
+  const resetBtn = $("resetBtn");
+  const copyBtn = $("copyBtn");
+  const idleState = $("idleState");
+  const errorState = $("errorState");
+  const resultsState = $("resultsState");
+  const errorMessage = $("errorMessage");
+  const statusBanner = $("statusBanner");
+  const statusTitle = $("statusTitle");
+  const statusText = $("statusText");
+
+  let lastReport = "";
+
+  function normalizeHost(raw) {
+    let value = (raw || "").trim();
+    if (!value) return "";
+
+    try {
+      const urlish = /^[a-z][a-z0-9+.-]*:\/\//i.test(value) ? value : `https://${value}`;
+      const u = new URL(urlish);
+      return u.hostname.replace(/^\[|\]$/g, "");
+    } catch {
+      value = value
+        .replace(/^[a-z][a-z0-9+.-]*:\/\//i, "")
+        .split("/")[0]
+        .split("?")[0]
+        .split("#")[0];
+
+      // Remove :port for normal hostnames while preserving raw IPv6 handling as best effort.
+      if ((value.match(/:/g) || []).length === 1) value = value.split(":")[0];
+      return value.trim().replace(/^\[|\]$/g, "");
+    }
+  }
+
+  function validHost(host) {
+    if (!host || host.length > 253) return false;
+    if (host === "localhost") return false;
+
+    // IPv4
+    if (/^\d{1,3}(?:\.\d{1,3}){3}$/.test(host)) {
+      return host.split(".").every(n => Number(n) >= 0 && Number(n) <= 255);
+    }
+
+    // Reasonable public DNS hostname validation.
+    const asciiHost = host.toLowerCase();
+    if (!asciiHost.includes(".")) return false;
+    return asciiHost.split(".").every(label =>
+      label.length > 0 &&
+      label.length <= 63 &&
+      /^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i.test(label)
+    );
+  }
+
+  function setLoading(isLoading) {
+    checkBtn.disabled = isLoading;
+    if (isLoading) {
+      checkBtnText.textContent = "Checking…";
+      if (!checkBtn.querySelector(".loader")) {
+        const icon = checkBtn.querySelector("[data-lucide]");
+        if (icon) icon.classList.add("hidden-important");
+        const loader = document.createElement("span");
+        loader.className = "loader";
+        checkBtn.prepend(loader);
+      }
+    } else {
+      checkBtnText.textContent = "Check Certificate";
+      checkBtn.querySelector(".loader")?.remove();
+      const icon = checkBtn.querySelector("[data-lucide]");
+      if (icon) icon.classList.remove("hidden-important");
+      lucide.createIcons();
+    }
+  }
+
+  function showOnly(which) {
+    idleState.classList.add("hidden-important");
+    errorState.classList.add("hidden-important");
+    resultsState.classList.add("hidden-important");
+    which.classList.remove("hidden-important");
+  }
+
+  function formatDate(value) {
+    if (!value) return "Not returned";
+    const d = new Date(value);
+    if (Number.isNaN(d.getTime())) return String(value);
+    return d.toLocaleString(undefined, {
+      year:"numeric", month:"short", day:"numeric",
+      hour:"numeric", minute:"2-digit", timeZoneName:"short"
+    });
+  }
+
+  function joinDN(obj) {
+    if (!obj || typeof obj !== "object") return "Not returned";
+    const parts = [];
+    if (obj.CN) parts.push(`CN=${obj.CN}`);
+    if (obj.O) parts.push(`O=${obj.O}`);
+    if (obj.OU) parts.push(`OU=${obj.OU}`);
+    if (obj.C) parts.push(`C=${obj.C}`);
+    return parts.length ? parts.join(", ") : "Not returned";
+  }
+
+  function text(id, value) {
+    $(id).textContent = value ?? "—";
+  }
+
+  function renderStatus(data) {
+    const days = Number.isFinite(Number(data.daysUntilExpiry)) ? Number(data.daysUntilExpiry) : null;
+    const expired = data.expired === true || (days !== null && days < 0);
+    const authorized = data.authorized === true;
+
+    statusBanner.className = "status-banner mb-5";
+
+    if (expired) {
+      statusBanner.classList.add("bad");
+      statusTitle.textContent = "Expired certificate";
+      statusText.textContent = "The certificate presented by this endpoint is expired. Renew and deploy a valid certificate before relying on this service for secure connections.";
+    } else if (!authorized) {
+      statusBanner.classList.add("bad");
+      statusTitle.textContent = "Certificate validation problem";
+      statusText.textContent = "The endpoint responded, but the live certificate check did not report it as authorized/trusted. Review the hostname, certificate chain and server configuration.";
+    } else if (days !== null && days <= 14) {
+      statusBanner.classList.add("warn");
+      statusTitle.textContent = "Certificate expires very soon";
+      statusText.textContent = `The certificate is currently authorized but has about ${days} day${days === 1 ? "" : "s"} remaining. Verify renewal and deployment immediately.`;
+    } else if (days !== null && days <= 30) {
+      statusBanner.classList.add("warn");
+      statusTitle.textContent = "Certificate approaching expiration";
+      statusText.textContent = `The certificate is currently authorized and has about ${days} days remaining. This is a good time to verify that automatic renewal is working.`;
+    } else {
+      statusBanner.classList.add("good");
+      statusTitle.textContent = "Certificate looks healthy";
+      statusText.textContent = days !== null
+        ? `The live endpoint reported an authorized certificate with about ${days} days remaining before expiration.`
+        : "The live endpoint reported an authorized certificate.";
+    }
+
+    const iconName = expired || !authorized ? "shield-alert" : (days !== null && days <= 30 ? "triangle-alert" : "shield-check");
+    const icon = $("statusIcon");
+    icon.setAttribute("data-lucide", iconName);
+    icon.className = expired || !authorized
+      ? "w-5 h-5 text-red-600 mt-0.5 flex-none"
+      : (days !== null && days <= 30
+          ? "w-5 h-5 text-amber-600 mt-0.5 flex-none"
+          : "w-5 h-5 text-emerald-600 mt-0.5 flex-none");
+  }
+
+  function render(data) {
+    renderStatus(data);
+
+    const days = Number.isFinite(Number(data.daysUntilExpiry)) ? Number(data.daysUntilExpiry) : null;
+    text("daysRemaining", days === null ? "—" : days);
+    text("daysSub", days === null ? "Remaining time not returned" : (days < 0 ? "Certificate has expired" : "Until certificate expiration"));
+    text("expiresAt", formatDate(data.validTo));
+    text("authorizedValue", data.authorized === true ? "Authorized" : data.authorized === false ? "Not authorized" : "Not returned");
+    text("protocolValue", data.protocol || "Not returned");
+    text("cipherSub", data.cipher?.name || "Cipher not returned");
+
+    text("checkedHost", `${data.host || normalizeHost(hostInput.value)}:${data.port || portInput.value}`);
+    text("subjectValue", joinDN(data.subject));
+    text("issuerValue", joinDN(data.issuer));
+    text("validFromValue", formatDate(data.validFrom));
+    text("validToValue", formatDate(data.validTo));
+    text("cipherValue", data.cipher ? [data.cipher.name, data.cipher.version].filter(Boolean).join(" · ") : "Not returned");
+
+    const sanContainer = $("sanContainer");
+    const sanEmpty = $("sanEmpty");
+    sanContainer.innerHTML = "";
+    const sans = Array.isArray(data.altNames) ? data.altNames : [];
+    if (sans.length) {
+      sanEmpty.classList.add("hidden-important");
+      sans.forEach(name => {
+        const span = document.createElement("span");
+        span.className = "chip";
+        span.textContent = name;
+        sanContainer.appendChild(span);
+      });
+    } else {
+      sanEmpty.classList.remove("hidden-important");
+    }
+
+    lastReport = [
+      "Utiliverse SSL Certificate Checker",
+      `Host: ${data.host || normalizeHost(hostInput.value)}`,
+      `Port: ${data.port || portInput.value}`,
+      `Authorized: ${data.authorized === true ? "Yes" : data.authorized === false ? "No" : "Not returned"}`,
+      `Expired: ${data.expired === true ? "Yes" : data.expired === false ? "No" : "Not returned"}`,
+      `Days until expiry: ${days === null ? "Not returned" : days}`,
+      `Valid from: ${formatDate(data.validFrom)}`,
+      `Valid to: ${formatDate(data.validTo)}`,
+      `Subject: ${joinDN(data.subject)}`,
+      `Issuer: ${joinDN(data.issuer)}`,
+      `Protocol: ${data.protocol || "Not returned"}`,
+      `Cipher: ${data.cipher ? [data.cipher.name, data.cipher.version].filter(Boolean).join(" / ") : "Not returned"}`,
+      `SANs: ${sans.length ? sans.join(", ") : "Not returned"}`
+    ].join("\n");
+
+    copyBtn.classList.remove("hidden-important");
+    showOnly(resultsState);
+    lucide.createIcons();
+  }
+
+  async function runCheck() {
+    const host = normalizeHost(hostInput.value);
+    const port = Number(portInput.value || 443);
+
+    hostInput.value = host;
+
+    if (!validHost(host)) {
+      errorMessage.textContent = "Enter a valid public hostname such as example.com or www.example.com. Internal single-label names and localhost are not supported.";
+      showOnly(errorState);
+      copyBtn.classList.add("hidden-important");
+      return;
+    }
+
+    if (!Number.isInteger(port) || port < 1 || port > 65535) {
+      errorMessage.textContent = "Enter a valid TCP port from 1 through 65535. HTTPS normally uses port 443.";
+      showOnly(errorState);
+      copyBtn.classList.add("hidden-important");
+      return;
+    }
+
+    setLoading(true);
+    errorState.classList.add("hidden-important");
+
+    try {
+      const target = port === 443 ? host : `${host}:${port}`;
+      const res = await fetch(`${API_URL}?host=${encodeURIComponent(target)}`, {
+        method: "GET",
+        headers: { "Accept": "application/json" }
+      });
+
+      let payload = null;
+      try { payload = await res.json(); } catch {}
+
+      if (!res.ok) {
+        if (res.status === 429) {
+          const retry = res.headers.get("Retry-After");
+          throw new Error(`The free certificate service rate limit was reached.${retry ? ` Try again in about ${retry} seconds.` : " Please try again later."}`);
+        }
+        throw new Error(payload?.error?.message || `The certificate service returned HTTP ${res.status}.`);
+      }
+
+      if (!payload?.ok || !payload?.data) {
+        throw new Error(payload?.error?.message || "No certificate information was returned for this hostname and port.");
+      }
+
+      render(payload.data);
+    } catch (err) {
+      errorMessage.textContent = err?.message || "Unable to complete the certificate check. Verify the hostname, port and network connection, then try again.";
+      showOnly(errorState);
+      copyBtn.classList.add("hidden-important");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  sslForm.addEventListener("submit", e => {
+    e.preventDefault();
+    runCheck();
+  });
+
+  exampleBtn.addEventListener("click", () => {
+    hostInput.value = "example.com";
+    portInput.value = "443";
+    runCheck();
+  });
+
+  resetBtn.addEventListener("click", () => {
+    hostInput.value = "";
+    portInput.value = "443";
+    lastReport = "";
+    copyBtn.classList.add("hidden-important");
+    showOnly(idleState);
+    hostInput.focus();
+  });
+
+  copyBtn.addEventListener("click", async () => {
+    if (!lastReport) return;
+    try {
+      await navigator.clipboard.writeText(lastReport);
+      const original = copyBtn.innerHTML;
+      copyBtn.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i> Copied';
+      lucide.createIcons();
+      setTimeout(() => {
+        copyBtn.innerHTML = original;
+        lucide.createIcons();
+      }, 1400);
+    } catch {
+      const ta = document.createElement("textarea");
+      ta.value = lastReport;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+    }
+  });
+
+  // Theme
+  const themeToggle = $("themeToggle");
+  const moonIcon = $("moonIcon");
+  const sunIcon = $("sunIcon");
+
+  function applyTheme(mode) {
+    const dark = mode === "dark";
+    document.body.classList.toggle("dark-mode", dark);
+    moonIcon.classList.toggle("hidden", dark);
+    sunIcon.classList.toggle("hidden", !dark);
+    themeToggle.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+    themeToggle.setAttribute("title", dark ? "Switch to light mode" : "Switch to dark mode");
+    localStorage.setItem("utiliverse-theme", dark ? "dark" : "light");
+    lucide.createIcons();
+  }
+
+  const savedTheme = localStorage.getItem("utiliverse-theme");
+  if (savedTheme) {
+    applyTheme(savedTheme);
+  } else {
+    applyTheme(window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  }
+
+  themeToggle.addEventListener("click", () => {
+    applyTheme(document.body.classList.contains("dark-mode") ? "light" : "dark");
+  });
+
+  lucide.createIcons();
+})();
+</script>
+</body>
+</html>
