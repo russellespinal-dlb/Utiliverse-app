@@ -46,6 +46,8 @@
   body.light-mode header a{color:#334155!important}
   body.light-mode header a:hover{color:#0f172a!important}
   body.light-mode footer{background:#fff;border-color:#e2e8f0}
+  body.light-mode footer a{color:#64748b}
+  body.light-mode footer a:hover{color:#0f172a}
   body.light-mode .article h1{color:#0f172a}
   body.light-mode .article h2{color:#1e293b}
   body.light-mode .article p,body.light-mode .article li{color:#475569}
@@ -64,10 +66,14 @@
 <header class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
     <div class="flex items-center justify-between w-full gap-4">
-      <a href="/" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse</a>
-      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
-        <span id="themeIcon" aria-hidden="true"></span>
-      </button>
+      <a href="https://utiliverse.app" class="text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2"><i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Utiliverse</a>
+
+      <div class="flex items-center gap-3">
+        <span class="hidden sm:inline text-xs font-bold text-slate-500 whitespace-nowrap">100% Free &amp; Browser Based</span>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+          <span id="themeIcon" aria-hidden="true"></span>
+        </button>
+      </div>
     </div>
   </div>
 </header>
@@ -127,8 +133,15 @@
   <p>We may update this Privacy Policy periodically to reflect changes to Utiliverse, third-party services, advertising practices, legal requirements, or privacy controls. Any updated version will be posted on this page with a revised "Last Updated" date.</p>
 </main>
 <footer class="border-t border-slate-800 bg-slate-950 mt-12">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 py-8 text-sm text-slate-500">
-    © <span id="year"></span> Utiliverse. All rights reserved.
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500">
+    <div>© <span id="year"></span> Utiliverse. All rights reserved.</div>
+
+    <nav class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2" aria-label="Footer navigation">
+      <a href="https://utiliverse.app/" class="hover:text-white transition">Home</a>
+      <a href="https://utiliverse.app/Terms_of_Service.html" class="hover:text-white transition">Terms of Service</a>
+      <a href="https://utiliverse.app/Contact_Info.html" class="hover:text-white transition">Contact</a>
+      <a href="https://utiliverse.app/About.html" class="hover:text-white transition">About</a>
+    </nav>
   </div>
 </footer>
 <script>
