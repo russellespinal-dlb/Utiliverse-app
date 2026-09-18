@@ -3,23 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ZIP & RAR Creator / Extractor – Compress & Unpack Archives | Utiliverse</title>
-  <meta name="description" content="Create ZIP and RAR archives, unzip ZIP files, and extract RAR files directly in your browser. Add files or folders, choose compression, preview archive contents, and download or save extracted files.">
+  <title>ZIP Creator & ZIP/RAR Extractor – Compress and Unpack Archives | Utiliverse</title>
+  <meta name="description" content="Create ZIP archives and extract ZIP or RAR files directly in your browser. Supports large-file ZIP streaming on compatible desktop browsers, folders, compression, and local extraction.">
   <meta name="robots" content="index,follow">
   <meta name="theme-color" content="#020617">
   <link rel="canonical" href="https://utiliverse.app/Archive_Creator_Extractor/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Utiliverse">
-  <meta property="og:title" content="ZIP & RAR Creator / Extractor | Utiliverse">
-  <meta property="og:description" content="Create ZIP or RAR archives and extract ZIP or RAR files directly in your browser.">
+  <meta property="og:title" content="ZIP Creator & ZIP/RAR Extractor | Utiliverse">
+  <meta property="og:description" content="Create ZIP archives and extract ZIP or RAR files directly in your browser.">
   <meta property="og:url" content="https://utiliverse.app/Archive_Creator_Extractor/">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="ZIP & RAR Creator / Extractor | Utiliverse">
-  <meta name="twitter:description" content="Create and extract ZIP and RAR archives directly in your browser.">
+  <meta name="twitter:title" content="ZIP Creator & ZIP/RAR Extractor | Utiliverse">
+  <meta name="twitter:description" content="Create ZIP archives and extract ZIP or RAR archives directly in your browser.">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
   <style>
     body{background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.10),transparent 32%),#f8fafc}
@@ -82,14 +81,15 @@
     @media (max-width:640px){.free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}.theme-toggle{width:38px;height:38px;flex:0 0 auto}.summary-grid{grid-template-columns:1fr}.file-row{grid-template-columns:minmax(0,1fr) 44px}.file-size{grid-column:1/2;text-align:left}.file-row .remove-cell{grid-column:2;grid-row:1/3}}
   </style>
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse ZIP & RAR Creator / Extractor","url":"https://utiliverse.app/Archive_Creator_Extractor/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript and WebAssembly enabled.","description":"Create ZIP and RAR archives and extract ZIP or RAR files directly in the browser.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Create ZIP archives","Create RAR 5 archives","Extract ZIP files","Extract RAR files","Add files and folders","Choose compression level","Save extracted files to a folder when supported","Browser-based archive processing"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse ZIP Creator & ZIP/RAR Extractor","url":"https://utiliverse.app/Archive_Creator_Extractor/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript and WebAssembly enabled.","description":"Create ZIP archives and extract ZIP or RAR files directly in the browser, with direct-to-disk ZIP writing on supported browsers.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Create ZIP archives","Stream large ZIP archives directly to disk on supported browsers","Extract ZIP files","Extract RAR files","Add files and folders","Choose ZIP compression level","Save extracted files to a folder when supported","Browser-based archive processing"]}</script>
 </head>
 
 <!--
 SEO TARGET CLUSTER
-Primary: ZIP RAR creator extractor
-Secondary: create RAR online, create ZIP online, unzip files online, unrar files online,
-RAR extractor, ZIP extractor, archive creator, archive extractor, compress files online
+Primary: ZIP creator and ZIP RAR extractor
+Secondary: create ZIP online, unzip files online, unrar files online,
+RAR extractor, ZIP extractor, archive creator, archive extractor, large ZIP creator,
+compress files online, stream ZIP to disk
 
 ADSENSE NOTE
 Approved Google AdSense code can replace the invisible insertion comments.
@@ -105,12 +105,12 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 </header>
 
 <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
-  <div class="mb-6"><h1 class="text-3xl font-bold text-slate-900 flex items-center gap-3"><i data-lucide="archive" class="w-8 h-8 text-indigo-600"></i>ZIP & RAR Creator / Extractor</h1><p class="hero-copy text-slate-500 mt-2 text-sm max-w-3xl">Create ZIP or RAR archives, unzip ZIP files, and extract RAR archives directly in your browser.</p></div>
+  <div class="mb-6"><h1 class="text-3xl font-bold text-slate-900 flex items-center gap-3"><i data-lucide="archive" class="w-8 h-8 text-indigo-600"></i>ZIP Creator & ZIP/RAR Extractor</h1><p class="hero-copy text-slate-500 mt-2 text-sm max-w-3xl">Create ZIP archives, unzip ZIP files, and extract RAR archives directly in your browser. Large ZIPs can stream directly to disk on supported desktop browsers.</p></div>
 
   <!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT -->
 
   <div class="tabs">
-    <button id="createTab" class="tab-btn active" type="button"><i data-lucide="package-plus" class="w-4 h-4"></i>Create Archive</button>
+    <button id="createTab" class="tab-btn active" type="button"><i data-lucide="package-plus" class="w-4 h-4"></i>Create ZIP</button>
     <button id="extractTab" class="tab-btn" type="button"><i data-lucide="package-open" class="w-4 h-4"></i>Extract Archive</button>
   </div>
 
@@ -131,15 +131,23 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
       <div class="space-y-6">
         <section class="tool-card overflow-hidden"><div class="section-head"><h2><i data-lucide="settings-2" class="w-5 h-5 text-indigo-600"></i>Archive Settings</h2></div>
           <div class="p-5 sm:p-6">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div><label class="label" for="archiveFormat">Format</label><select id="archiveFormat" class="field"><option value="zip">ZIP (.zip)</option><option value="rar">RAR 5 (.rar)</option></select></div>
-              <div><label class="label" for="archiveName">Archive name</label><input id="archiveName" class="field" type="text" value="utiliverse-archive" maxlength="100"></div>
+            <div>
+              <label class="label" for="archiveName">ZIP file name</label>
+              <input id="archiveName" class="field" type="text" value="utiliverse-archive" maxlength="100">
             </div>
-            <div class="mt-4"><label class="label" for="compressionLevel">Compression</label><select id="compressionLevel" class="field"><option value="0">Store only / fastest</option><option value="3">Fast</option><option value="6" selected>Normal</option><option value="9">Maximum</option></select></div>
-            <div id="rarPasswordWrap" class="mt-4 hidden-important"><label class="label" for="rarCreatePassword">Optional RAR password</label><input id="rarCreatePassword" class="field" type="password" autocomplete="new-password" placeholder="Leave blank for no password"><p class="note mt-2">Password protection is available for RAR creation. ZIP encryption is not enabled in this version.</p></div>
+            <div class="mt-4">
+              <label class="label" for="compressionLevel">ZIP compression</label>
+              <select id="compressionLevel" class="field">
+                <option value="0">Store only / fastest</option>
+                <option value="3">Fast</option>
+                <option value="6" selected>Normal</option>
+                <option value="9">Maximum</option>
+              </select>
+            </div>
+            <div id="largeFileGuidance" class="mt-4"></div>
             <div class="mt-5 summary-grid"><div class="summary-box"><div class="summary-label">Files</div><div id="createSummaryFiles" class="summary-value">0</div></div><div class="summary-box"><div class="summary-label">Source Size</div><div id="createSummarySize" class="summary-value">0 B</div></div><div class="summary-box"><div class="summary-label">Folders</div><div id="createSummaryFolders" class="summary-value">0</div></div></div>
-            <button id="createArchiveBtn" type="button" class="btn-primary w-full mt-5" disabled><i data-lucide="download" class="w-4 h-4"></i>Create Archive & Download</button>
-            <div id="createProgressWrap" class="hidden-important mt-5"><div class="flex items-center justify-between gap-3 mb-2 text-xs font-bold text-slate-500"><span id="createProgressLabel">Creating archive…</span><span id="createProgressPercent">0%</span></div><div class="progress-shell"><div id="createProgressBar" class="progress-bar"></div></div></div>
+            <button id="createArchiveBtn" type="button" class="btn-primary w-full mt-5" disabled><i data-lucide="download" class="w-4 h-4"></i>Create ZIP</button>
+            <div id="createProgressWrap" class="hidden-important mt-5"><div class="flex items-center justify-between gap-3 mb-2 text-xs font-bold text-slate-500"><span id="createProgressLabel">Creating ZIP…</span><span id="createProgressPercent">0%</span></div><div class="progress-shell"><div id="createProgressBar" class="progress-bar"></div></div></div>
             <div id="createStatus" class="mt-4"></div>
           </div></section>
       </div>
@@ -171,20 +179,34 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
   <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT -->
 
   <div class="info-wrap">
-    <section class="info-section"><h2>Free ZIP & RAR Archive Creator and Extractor</h2><p>The Utiliverse Archive Creator & Extractor combines four common archive tasks in one browser-based utility: creating ZIP archives, creating RAR 5 archives, extracting ZIP files, and extracting RAR archives. You can package multiple files or an entire folder into a single archive, choose a compression level, and download the result without installing a desktop utility. When opening an existing archive, the tool displays its extracted contents and lets you download individual files or save the full directory structure to a folder when your browser supports the File System Access API.</p><p>Archive work is performed in the browser. ZIP operations use JavaScript compression, while RAR creation and extraction use a WebAssembly-based RAR implementation. Because archives are processed in memory, very large files may require substantial RAM and can be better suited to a native desktop archiver.</p></section>
-    <section class="info-section"><h2>How to Create and Extract ZIP or RAR Files</h2>
-      <h3>Create a ZIP or RAR archive</h3><p>Choose the Create Archive tab, then add individual files or select an entire folder. The archive-content list shows the paths that will be written into the finished file. Folder selections keep their relative directory structure so a project or document collection can be restored after extraction. Remove any unwanted file before continuing.</p><p>Select ZIP or RAR 5 as the output format. ZIP is the broadest compatibility choice and is built into nearly every desktop operating system. RAR is useful when you specifically need the RAR format or want to exchange files with workflows that already use WinRAR or other RAR-compatible software. Choose a descriptive archive name and a compression level. Normal compression is a practical default; maximum compression can take longer and may provide little benefit for JPEG, MP4, PDF, or other data that is already compressed.</p><p>For RAR archives, you can optionally enter a password. The RAR writer creates a genuine RAR 5 archive rather than simply renaming another format. After you select Create Archive & Download, the files are read locally, compressed, and assembled in browser memory. The completed archive is then downloaded through a temporary browser object URL.</p>
-      <h3>Extract a ZIP or RAR archive</h3><p>Choose the Extract Archive tab and select a .zip or .rar file. If a RAR archive is password protected, enter its password before opening it. The extractor reads the archive, normalizes stored paths to prevent parent-directory traversal, and builds an in-memory list of extracted files. ZIP extraction is handled directly in JavaScript, while RAR extraction uses the browser RAR engine.</p><p>Each extracted item includes a Download button for saving that file individually. On browsers that support the File System Access API, such as many Chromium-based desktop browsers, the Save to Folder button can recreate the archive's subfolders inside a folder you choose. On browsers without that API, the Download Files button downloads the extracted files individually; your browser may ask for permission when several downloads are triggered.</p>
-      <h3>When to use ZIP versus RAR</h3><p>ZIP is generally the safest option when the recipient should be able to open the archive without installing additional software. RAR is popular for advanced archive workflows and can provide useful compression and archive features, but built-in operating-system support varies. If compatibility matters more than format preference, ZIP is usually the simpler choice. If a workflow specifically requires RAR, this tool can create a RAR 5 archive directly in the browser.</p>
-      <h3>Privacy and large-file considerations</h3><p>The selected files are not intentionally uploaded to a Utiliverse server by this page. The browser loads the JavaScript and WebAssembly libraries needed for archive processing, then reads your selected local files in memory. This design is convenient for privacy-sensitive everyday tasks, but it also means available device memory becomes the practical size limit. Creating or extracting several gigabytes can consume much more RAM than the final archive size because source data, compressed data, and extracted output may coexist temporarily.</p>
+    <section class="info-section"><h2>Free ZIP Creator and ZIP/RAR Extractor</h2>
+      <p>The Utiliverse Archive Creator & Extractor focuses on the archive features that can be implemented reliably in a browser: creating ZIP archives, extracting ZIP files, and extracting RAR archives. ZIP creation uses the modern zip.js library, which is designed for large data, streaming, Zip64 archives, and browser file APIs. On compatible Chromium-based desktop browsers, the tool can write the ZIP directly to a file you choose instead of first building the entire archive as one large in-memory object.</p>
+      <p>RAR creation is not offered in this version. RAR is a proprietary archive format, and reliable browser-side creation is not available through the extraction engine used here. Existing RAR and RAR5 archives can still be opened and extracted. This separation keeps the tool's buttons aligned with what the underlying browser libraries can actually perform.</p>
+    </section>
+    <section class="info-section"><h2>How to Create ZIP Files and Extract ZIP or RAR Archives</h2>
+      <h3>Create a ZIP archive</h3>
+      <p>Choose the Create ZIP tab, then add individual files or select an entire folder. The archive-content list shows the relative paths that will be stored in the ZIP. Folder selection keeps directory structure, which is useful for project files, website folders, documents, backups, and other collections where subfolders matter.</p>
+      <p>Choose a ZIP filename and compression level. Store-only is fastest and is often sensible for DMG, JPEG, MP4, MP3, and other content that is already compressed. Normal compression is a good general default for mixed files. Maximum compression can take much longer and usually provides limited additional savings on already-compressed source files.</p>
+      <h3>Large ZIP files and direct-to-disk mode</h3>
+      <p>The tool evaluates the combined source size before creation. Under 250 MB is treated as a normal browser workload. From 250 MB through 1 GB, the page recommends a desktop browser and direct-to-disk mode. Over 1 GB is labeled very large because browser, filesystem, memory, and device limits become increasingly important.</p>
+      <p>If the browser supports the File System Access API, selecting Create ZIP opens a Save dialog first. The ZIP is then written incrementally to that file while each source file is read, which avoids keeping the complete finished ZIP in page memory. This is the preferred path for a file such as a 735 MB DMG. If direct disk writing is unavailable, the tool falls back to building a downloadable Blob; that fallback can still fail with large inputs because the browser must retain more data in memory.</p>
+      <h3>Why a large DMG may not become much smaller</h3>
+      <p>Disk images often contain data that is already compressed. ZIP can still package the DMG successfully, but compression may provide little size reduction. For a large DMG, Store-only or Fast compression can save time and CPU usage. The purpose of ZIP in that case may be packaging, checksum-friendly transfer, or compatibility rather than substantial compression.</p>
+      <h3>Extract a ZIP or RAR archive</h3>
+      <p>Choose the Extract Archive tab and select a .zip or .rar file. ZIP extraction uses zip.js, while RAR extraction uses the browser RAR engine. For password-protected RAR archives, enter the password before extraction. Stored archive paths are normalized before output to prevent parent-directory traversal through entries such as ../file.</p>
+      <p>Extracted items can be downloaded individually. On browsers supporting direct folder access, Save to Folder recreates subdirectories inside a folder you choose. Extraction still requires browser resources for the extracted data, so extremely large archives can be more demanding than simply creating a streamed ZIP.</p>
+      <h3>Privacy and browser limits</h3>
+      <p>The source files you select are not sent to a Utiliverse upload endpoint. Compression and extraction run in your browser. The page does load its JavaScript/WebAssembly archive libraries from public CDNs. Direct-to-disk ZIP creation is the lowest-memory path available in this browser tool, but no browser-based utility can guarantee an unlimited file size: available RAM, storage space, browser limits, filesystem limits, and device performance still apply.</p>
     </section>
     <section class="info-section"><h2>Archive Tool FAQ</h2>
-      <details class="faq-item"><summary>Can this tool really create RAR files?</summary><p>Yes. The RAR option writes a genuine RAR 5 archive in the browser using a RAR implementation compiled for web use.</p></details>
+      <details class="faq-item"><summary>Can this tool create RAR files?</summary><p>No. This version creates ZIP files and extracts ZIP or RAR archives. RAR creation was removed because the browser extraction engine does not provide a dependable RAR-writing path.</p></details>
+      <details class="faq-item"><summary>Can it create a ZIP from a 735 MB DMG?</summary><p>On a compatible Chromium-based desktop browser, the direct-to-disk ZIP path is designed to handle large inputs more reliably because the finished ZIP is streamed to the chosen file instead of being assembled completely in page memory. Actual success still depends on free disk space, browser limits, device resources, and the source file.</p></details>
+      <details class="faq-item"><summary>What size warning does the tool use?</summary><p>Under 250 MB is shown as a normal workload, 250 MB through 1 GB is marked large with a recommendation to use a desktop browser and direct-to-disk mode, and more than 1 GB is marked very large and device dependent.</p></details>
       <details class="faq-item"><summary>Can it unzip ZIP files?</summary><p>Yes. Select a ZIP archive in Extract Archive mode to read and extract its files directly in the browser.</p></details>
-      <details class="faq-item"><summary>Can it unrar RAR files?</summary><p>Yes. RAR archives can be opened and extracted in the browser, including password-protected RAR files when the correct password is supplied.</p></details>
-      <details class="faq-item"><summary>Are my files uploaded?</summary><p>The selected archive and source files are processed locally in the browser by the archive libraries used on this page rather than being sent to a Utiliverse upload endpoint.</p></details>
-      <details class="faq-item"><summary>Can I preserve folders inside an archive?</summary><p>Yes. Folder selection preserves relative paths when creating archives, and Save to Folder can recreate extracted subfolders on supported browsers.</p></details>
-      <details class="faq-item"><summary>Why might a very large archive fail?</summary><p>Browser-based compression and extraction can require a large amount of memory. Very large archives may exceed the memory available to the tab or device.</p></details>
+      <details class="faq-item"><summary>Can it unrar RAR files?</summary><p>Yes. RAR and RAR5 archives can be opened and extracted in the browser, including password-protected RAR files when the correct password is supplied.</p></details>
+      <details class="faq-item"><summary>Are my source files uploaded?</summary><p>No. Selected source files and archives are processed locally by the browser-side archive libraries rather than uploaded to a Utiliverse server.</p></details>
+      <details class="faq-item"><summary>Can I preserve folders inside a ZIP?</summary><p>Yes. Folder selection preserves relative paths during ZIP creation, and Save to Folder can recreate extracted subfolders on supported browsers.</p></details>
+      <details class="faq-item"><summary>Why can very large extraction still fail?</summary><p>Extraction may hold one or more decompressed files in browser-managed memory before they are downloaded or saved. Very large archives can therefore exceed the memory available to the tab even though ZIP creation can stream directly to disk.</p></details>
     </section>
     <!-- GOOGLE ADSENSE: BOTTOM / AFTER-CONTENT INSERTION POINT -->
   </div>
@@ -193,55 +215,465 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 <footer class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-6 pt-2"><div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-500"><div>© 2026 Utiliverse. All rights reserved.</div><div class="font-semibold text-right">100% Free and Browser Based</div></div></footer>
 
 <script type="module">
-  import { RarArchive, RarWriter } from "https://esm.sh/@bitplane/rars@0.9.4";
+  import {
+    BlobReader,
+    BlobWriter,
+    ZipReader,
+    ZipWriter
+  } from "https://esm.sh/@zip.js/zip.js@2.8.15";
+  import { RarArchive } from "https://esm.sh/@bitplane/rars@0.9.4";
 
   const $ = id => document.getElementById(id);
   const createItems = new Map();
   let extractArchiveFile = null;
   let extractedFiles = [];
 
+  const MB = 1024 * 1024;
+  const GB = 1024 * MB;
+
   const esc = s => String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');
-  const bytesFmt = b => { if(!b) return '0 B'; const u=['B','KB','MB','GB','TB']; const i=Math.min(Math.floor(Math.log(b)/Math.log(1024)),u.length-1); const v=b/Math.pow(1024,i); return `${v>=100||i===0?v.toFixed(0):v.toFixed(1)} ${u[i]}`; };
+  const bytesFmt = b => {
+    if (!b) return '0 B';
+    const u=['B','KB','MB','GB','TB'];
+    const i=Math.min(Math.floor(Math.log(b)/Math.log(1024)),u.length-1);
+    const v=b/Math.pow(1024,i);
+    return `${v>=100||i===0?v.toFixed(0):v.toFixed(1)} ${u[i]}`;
+  };
   const safePath = p => String(p||'').replace(/\\/g,'/').split('/').filter(x=>x && x!=='.' && x!=='..').join('/');
-  const cleanName = n => (String(n||'utiliverse-archive').trim().replace(/\.(zip|rar)$/i,'').replace(/[<>:"/\\|?*\x00-\x1F]/g,'-').replace(/[. ]+$/g,'')||'utiliverse-archive').slice(0,100);
+  const cleanName = n => (String(n||'utiliverse-archive').trim().replace(/\.zip$/i,'').replace(/[<>:"/\\|?*\x00-\x1F]/g,'-').replace(/[. ]+$/g,'')||'utiliverse-archive').slice(0,100);
   const archivePath = f => safePath(f.webkitRelativePath || f.name || 'file');
+  const totalCreateSize = () => [...createItems.values()].reduce((s,x)=>s+x.file.size,0);
 
-  function status(target,type,msg){ if(!type||!msg){target.innerHTML='';return;} const icon=type==='good'?'circle-check':type==='warn'?'triangle-alert':'circle-alert'; target.innerHTML=`<div class="status-line ${type}"><i data-lucide="${icon}" class="w-4 h-4 flex-none mt-0.5"></i><div>${esc(msg)}</div></div>`; lucide.createIcons(); }
-  function downloadBlob(blob,name){ const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000); }
+  function status(target,type,msg){
+    if(!type||!msg){target.innerHTML='';return;}
+    const icon=type==='good'?'circle-check':type==='warn'?'triangle-alert':'circle-alert';
+    target.innerHTML=`<div class="status-line ${type}"><i data-lucide="${icon}" class="w-4 h-4 flex-none mt-0.5"></i><div>${esc(msg)}</div></div>`;
+    lucide.createIcons();
+  }
 
-  function switchTab(which){ const create=which==='create'; $('createPanel').classList.toggle('hidden-important',!create); $('extractPanel').classList.toggle('hidden-important',create); $('createTab').classList.toggle('active',create); $('extractTab').classList.toggle('active',!create); }
-  $('createTab').onclick=()=>switchTab('create'); $('extractTab').onclick=()=>switchTab('extract');
+  function downloadBlob(blob,name){
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url; a.download=name;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),30000);
+  }
 
-  function addCreateFiles(files){ Array.from(files||[]).forEach(f=>{const p=archivePath(f); if(p) createItems.set(p,{file:f,path:p});}); renderCreate(); }
-  function renderCreate(){ const list=[...createItems.values()].sort((a,b)=>a.path.localeCompare(b.path)); $('createList').innerHTML=''; if(!list.length)$('createList').innerHTML='<div class="empty-box">No files added yet.</div>'; else list.forEach(it=>{const parts=it.path.split('/'); const name=parts.pop(); const folder=parts.join('/'); const row=document.createElement('div'); row.className='file-row'; row.innerHTML=`<div class="file-main"><div class="file-name" title="${esc(name)}">${esc(name)}</div><div class="file-path">${folder?esc(folder+'/'):'Archive root'}</div></div><div class="file-size">${bytesFmt(it.file.size)}</div><div class="remove-cell text-right"><button class="btn-danger" type="button"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div>`; row.querySelector('button').onclick=()=>{createItems.delete(it.path);renderCreate();}; $('createList').appendChild(row); }); const size=list.reduce((s,x)=>s+x.file.size,0); const folders=new Set(); list.forEach(x=>{let cur='';x.path.split('/').slice(0,-1).forEach(p=>{cur=cur?cur+'/'+p:p;folders.add(cur);});}); $('createCount').textContent=`${list.length} file${list.length===1?'':'s'}`;$('createSummaryFiles').textContent=list.length;$('createSummarySize').textContent=bytesFmt(size);$('createSummaryFolders').textContent=folders.size;$('createArchiveBtn').disabled=!list.length; lucide.createIcons(); }
+  function switchTab(which){
+    const create=which==='create';
+    $('createPanel').classList.toggle('hidden-important',!create);
+    $('extractPanel').classList.toggle('hidden-important',create);
+    $('createTab').classList.toggle('active',create);
+    $('extractTab').classList.toggle('active',!create);
+  }
+  $('createTab').onclick=()=>switchTab('create');
+  $('extractTab').onclick=()=>switchTab('extract');
 
-  function bindDrop(zone,input,handler){ zone.onclick=()=>input.click(); zone.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();input.click();}}; ['dragenter','dragover'].forEach(ev=>zone.addEventListener(ev,e=>{e.preventDefault();zone.classList.add('dragover');})); ['dragleave','drop'].forEach(ev=>zone.addEventListener(ev,e=>{e.preventDefault();zone.classList.remove('dragover');})); zone.addEventListener('drop',e=>{if(e.dataTransfer?.files?.length)handler(e.dataTransfer.files);}); }
-  bindDrop($('createDrop'),$('createFileInput'),addCreateFiles); $('createAddFiles').onclick=()=>$('createFileInput').click(); $('createAddFolder').onclick=()=>$('createFolderInput').click(); $('createFileInput').onchange=()=>{addCreateFiles($('createFileInput').files);$('createFileInput').value='';}; $('createFolderInput').onchange=()=>{addCreateFiles($('createFolderInput').files);$('createFolderInput').value='';}; $('clearCreateBtn').onclick=()=>{createItems.clear();renderCreate();status($('createStatus'),'','');$('createProgressWrap').classList.add('hidden-important');};
+  function updateLargeFileGuidance(){
+    const size = totalCreateSize();
+    const box = $('largeFileGuidance');
+    if (!size) { box.innerHTML=''; return; }
 
-  $('archiveFormat').onchange=()=>{ const rar=$('archiveFormat').value==='rar'; $('rarPasswordWrap').classList.toggle('hidden-important',!rar); const sel=$('compressionLevel'); sel.innerHTML=rar?'<option value="0">Store only / fastest</option><option value="1">Fast</option><option value="3" selected>Normal</option><option value="5">Maximum</option>':'<option value="0">Store only / fastest</option><option value="3">Fast</option><option value="6" selected>Normal</option><option value="9">Maximum</option>'; };
+    const direct = 'showSaveFilePicker' in window;
+    let type='good';
+    let text='This is a normal browser-sized ZIP workload.';
 
-  async function createZip(){ const zip=new JSZip(); [...createItems.values()].forEach(x=>zip.file(x.path,x.file,{date:x.file.lastModified?new Date(x.file.lastModified):new Date()})); const lvl=Number($('compressionLevel').value); return await zip.generateAsync({type:'blob',compression:lvl===0?'STORE':'DEFLATE',compressionOptions:lvl===0?undefined:{level:lvl}},m=>{const p=Math.round(m.percent||0); $('createProgressBar').style.width=p+'%';$('createProgressPercent').textContent=p+'%';$('createProgressLabel').textContent=m.currentFile?`Adding ${m.currentFile}`:'Finalizing ZIP…';}); }
-  async function createRar(){ const lvl=Number($('compressionLevel').value); const password=$('rarCreatePassword').value||undefined; const writer=new RarWriter({format:'rar50',level:lvl,password}); let i=0; for(const x of createItems.values()){ const data=new Uint8Array(await x.file.arrayBuffer()); writer.add(x.path,data,{modifiedAt:x.file.lastModified?new Date(x.file.lastModified):new Date()}); i++; const p=Math.round(i/createItems.size*35); $('createProgressBar').style.width=p+'%';$('createProgressPercent').textContent=p+'%';$('createProgressLabel').textContent=`Preparing ${x.path}`; } const bytes=await writer.bytes({onProgress:({completed,total,phase})=>{const frac=total?completed/total:0; const p=Math.min(99,35+Math.round(frac*64));$('createProgressBar').style.width=p+'%';$('createProgressPercent').textContent=p+'%';$('createProgressLabel').textContent=phase?`RAR: ${phase}`:'Creating RAR…';}}); return new Blob([bytes],{type:'application/vnd.rar'}); }
+    if (size > GB) {
+      type='warn';
+      text=`Very large source set (${bytesFmt(size)}). ${direct ? 'Direct-to-disk ZIP writing is available in this browser and will be used.' : 'This browser does not expose direct-to-disk writing, so ZIP creation may fail from memory pressure. A Chromium-based desktop browser is recommended.'}`;
+    } else if (size >= 250*MB) {
+      type='warn';
+      text=`Large source set (${bytesFmt(size)}). ${direct ? 'Direct-to-disk ZIP writing is available and is recommended for this size.' : 'A desktop Chromium-based browser is recommended because this browser will need the in-memory fallback.'}`;
+    } else {
+      text=`Source size: ${bytesFmt(size)}. ${direct ? 'This browser also supports direct-to-disk ZIP writing.' : 'ZIP creation will use the browser-memory fallback.'}`;
+    }
 
-  $('createArchiveBtn').onclick=async()=>{ if(!createItems.size)return; const fmt=$('archiveFormat').value; $('createArchiveBtn').disabled=true;$('createProgressWrap').classList.remove('hidden-important');$('createProgressBar').style.width='0%';$('createProgressPercent').textContent='0%';status($('createStatus'),'',''); try{ const blob=fmt==='rar'?await createRar():await createZip(); const name=`${cleanName($('archiveName').value)}.${fmt}`; downloadBlob(blob,name);$('createProgressBar').style.width='100%';$('createProgressPercent').textContent='100%';$('createProgressLabel').textContent=`Created ${name}`;status($('createStatus'),'good',`${fmt.toUpperCase()} created successfully: ${name} (${bytesFmt(blob.size)}).`);}catch(e){console.error(e);status($('createStatus'),'bad',`Archive creation failed: ${e?.message||'Unknown error'}`);$('createProgressLabel').textContent='Archive creation failed';}finally{$('createArchiveBtn').disabled=!createItems.size;} };
+    const icon=type==='good'?'circle-check':'triangle-alert';
+    box.innerHTML=`<div class="status-line ${type}"><i data-lucide="${icon}" class="w-4 h-4 flex-none mt-0.5"></i><div>${esc(text)}</div></div>`;
+    lucide.createIcons();
+  }
 
-  bindDrop($('extractDrop'),$('extractInput'),files=>{if(files?.[0])selectExtract(files[0]);}); $('extractInput').onchange=()=>{if($('extractInput').files?.[0])selectExtract($('extractInput').files[0]);$('extractInput').value='';};
-  function selectExtract(f){ const ext=f.name.toLowerCase().split('.').pop(); if(!['zip','rar'].includes(ext)){status($('extractStatus'),'bad','Please select a .zip or .rar archive.');return;} extractArchiveFile=f; $('selectedArchiveBox').innerHTML=`<strong>${esc(f.name)}</strong><br>${bytesFmt(f.size)} · ${ext.toUpperCase()}`;$('openArchiveBtn').disabled=false; extractedFiles=[];renderExtracted();status($('extractStatus'),'',''); }
+  function addCreateFiles(files){
+    Array.from(files||[]).forEach(f=>{
+      const p=archivePath(f);
+      if(p) createItems.set(p,{file:f,path:p});
+    });
+    renderCreate();
+  }
 
-  function renderExtracted(){ $('extractList').innerHTML=''; if(!extractedFiles.length)$('extractList').innerHTML='<div class="empty-box">Extracted files will appear here.</div>'; else extractedFiles.forEach((it,idx)=>{const parts=it.path.split('/'); const name=parts.pop(); const folder=parts.join('/'); const row=document.createElement('div'); row.className='file-row'; row.innerHTML=`<div class="file-main"><div class="file-name">${esc(name)}</div><div class="file-path">${folder?esc(folder+'/'):'Archive root'}</div></div><div class="file-size">${bytesFmt(it.blob.size)}</div><div class="remove-cell text-right"><button class="btn-secondary" type="button" title="Download"><i data-lucide="download" class="w-4 h-4"></i></button></div>`; row.querySelector('button').onclick=()=>downloadBlob(it.blob,name); $('extractList').appendChild(row); }); $('extractCount').textContent=`${extractedFiles.length} file${extractedFiles.length===1?'':'s'}`;$('extractActionsCard').classList.toggle('hidden-important',!extractedFiles.length); $('folderSupportNote').textContent='showDirectoryPicker' in window?'Your browser supports saving extracted files directly into a chosen folder.':'This browser does not support direct folder writing; use Download Files or the individual download buttons.'; lucide.createIcons(); }
+  function renderCreate(){
+    const list=[...createItems.values()].sort((a,b)=>a.path.localeCompare(b.path));
+    $('createList').innerHTML='';
+    if(!list.length){
+      $('createList').innerHTML='<div class="empty-box">No files added yet.</div>';
+    } else {
+      list.forEach(it=>{
+        const parts=it.path.split('/');
+        const name=parts.pop();
+        const folder=parts.join('/');
+        const row=document.createElement('div');
+        row.className='file-row';
+        row.innerHTML=`<div class="file-main"><div class="file-name" title="${esc(name)}">${esc(name)}</div><div class="file-path">${folder?esc(folder+'/'):'Archive root'}</div></div><div class="file-size">${bytesFmt(it.file.size)}</div><div class="remove-cell text-right"><button class="btn-danger" type="button"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div>`;
+        row.querySelector('button').onclick=()=>{createItems.delete(it.path);renderCreate();};
+        $('createList').appendChild(row);
+      });
+    }
 
-  async function extractZip(file){ const zip=await JSZip.loadAsync(file); const entries=Object.values(zip.files).filter(x=>!x.dir); const out=[]; let i=0; for(const e of entries){ const path=safePath(e.name); if(!path)continue; const blob=await e.async('blob'); out.push({path,blob}); i++; const p=Math.round(i/Math.max(entries.length,1)*100);$('extractProgressBar').style.width=p+'%';$('extractProgressPercent').textContent=p+'%';$('extractProgressLabel').textContent=`Extracting ${path}`;} return out; }
-  async function extractRar(file){ const password=$('extractPassword').value||undefined; const archive=await RarArchive.open(file,password?{password}:{}); const entries=[...archive.entries]; const files=entries.filter(e=>!(e.isDirectory||String(e.name).endsWith('/'))); const out=[]; let i=0; try{for(const e of files){const path=safePath(e.name); if(!path)continue; const entry=archive.get(e.name); const bytes=await entry.bytes(); out.push({path,blob:new Blob([bytes])}); i++; const p=Math.round(i/Math.max(files.length,1)*100);$('extractProgressBar').style.width=p+'%';$('extractProgressPercent').textContent=p+'%';$('extractProgressLabel').textContent=`Extracting ${path}`;}}finally{archive.close?.();} return out; }
+    const size=list.reduce((s,x)=>s+x.file.size,0);
+    const folders=new Set();
+    list.forEach(x=>{
+      let cur='';
+      x.path.split('/').slice(0,-1).forEach(p=>{
+        cur=cur?cur+'/'+p:p;
+        folders.add(cur);
+      });
+    });
 
-  $('openArchiveBtn').onclick=async()=>{ if(!extractArchiveFile)return; $('openArchiveBtn').disabled=true;$('extractProgressWrap').classList.remove('hidden-important');$('extractProgressBar').style.width='0%';$('extractProgressPercent').textContent='0%';status($('extractStatus'),'',''); try{const rar=extractArchiveFile.name.toLowerCase().endsWith('.rar'); extractedFiles=rar?await extractRar(extractArchiveFile):await extractZip(extractArchiveFile); renderExtracted();$('extractProgressBar').style.width='100%';$('extractProgressPercent').textContent='100%';$('extractProgressLabel').textContent='Extraction complete';status($('extractStatus'),'good',`Extracted ${extractedFiles.length} file${extractedFiles.length===1?'':'s'} from ${extractArchiveFile.name}.`);}catch(e){console.error(e);extractedFiles=[];renderExtracted();status($('extractStatus'),'bad',`Extraction failed: ${e?.message||'The archive may be damaged or password protected.'}`);$('extractProgressLabel').textContent='Extraction failed';}finally{$('openArchiveBtn').disabled=!extractArchiveFile;} };
+    $('createCount').textContent=`${list.length} file${list.length===1?'':'s'}`;
+    $('createSummaryFiles').textContent=list.length;
+    $('createSummarySize').textContent=bytesFmt(size);
+    $('createSummaryFolders').textContent=folders.size;
+    $('createArchiveBtn').disabled=!list.length;
+    updateLargeFileGuidance();
+    lucide.createIcons();
+  }
 
-  async function saveToFolder(){ if(!extractedFiles.length)return; if(!window.showDirectoryPicker){status($('extractStatus'),'warn','Direct folder saving is not supported by this browser. Use Download Files instead.');return;} try{const root=await window.showDirectoryPicker(); for(const it of extractedFiles){const parts=it.path.split('/'); const filename=parts.pop(); let dir=root; for(const p of parts)dir=await dir.getDirectoryHandle(p,{create:true}); const fh=await dir.getFileHandle(filename,{create:true}); const w=await fh.createWritable(); await w.write(it.blob); await w.close();} status($('extractStatus'),'good',`Saved ${extractedFiles.length} extracted file${extractedFiles.length===1?'':'s'} to the selected folder.`);}catch(e){if(e?.name!=='AbortError')status($('extractStatus'),'bad',`Could not save the extracted files: ${e?.message||'Unknown error'}`);} }
-  $('saveFolderBtn').onclick=saveToFolder; $('downloadAllBtn').onclick=async()=>{ if(!extractedFiles.length)return; for(const it of extractedFiles){downloadBlob(it.blob,it.path.split('/').pop()); await new Promise(r=>setTimeout(r,160));} status($('extractStatus'),'good','Download requests were started for the extracted files. Your browser may ask permission for multiple downloads.'); };
-  $('clearExtractBtn').onclick=()=>{extractArchiveFile=null;extractedFiles=[];$('selectedArchiveBox').textContent='No archive selected.';$('openArchiveBtn').disabled=true;$('extractProgressWrap').classList.add('hidden-important');status($('extractStatus'),'','');renderExtracted();};
+  function bindDrop(zone,input,handler){
+    zone.onclick=()=>input.click();
+    zone.onkeydown=e=>{
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();input.click();}
+    };
+    ['dragenter','dragover'].forEach(ev=>zone.addEventListener(ev,e=>{
+      e.preventDefault(); zone.classList.add('dragover');
+    }));
+    ['dragleave','drop'].forEach(ev=>zone.addEventListener(ev,e=>{
+      e.preventDefault(); zone.classList.remove('dragover');
+    }));
+    zone.addEventListener('drop',e=>{
+      if(e.dataTransfer?.files?.length)handler(e.dataTransfer.files);
+    });
+  }
 
-  const themeToggle=$('themeToggle'),moon=$('moonIcon'),sun=$('sunIcon'); function applyTheme(mode){const dark=mode==='dark';document.body.classList.toggle('dark-mode',dark);moon.classList.toggle('hidden',dark);sun.classList.toggle('hidden',!dark);themeToggle.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');themeToggle.setAttribute('title',dark?'Switch to light mode':'Switch to dark mode');localStorage.setItem('utiliverse-theme',dark?'dark':'light');lucide.createIcons();} applyTheme(localStorage.getItem('utiliverse-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')); themeToggle.onclick=()=>applyTheme(document.body.classList.contains('dark-mode')?'light':'dark');
+  bindDrop($('createDrop'),$('createFileInput'),addCreateFiles);
+  $('createAddFiles').onclick=()=>$('createFileInput').click();
+  $('createAddFolder').onclick=()=>$('createFolderInput').click();
+  $('createFileInput').onchange=()=>{
+    addCreateFiles($('createFileInput').files);
+    $('createFileInput').value='';
+  };
+  $('createFolderInput').onchange=()=>{
+    addCreateFiles($('createFolderInput').files);
+    $('createFolderInput').value='';
+  };
+  $('clearCreateBtn').onclick=()=>{
+    createItems.clear();
+    renderCreate();
+    status($('createStatus'),'','');
+    $('createProgressWrap').classList.add('hidden-important');
+  };
 
-  renderCreate(); renderExtracted(); lucide.createIcons();
+  function updateCreateProgress(doneBytes, totalBytes, currentPath, currentIndex, fileCount){
+    const frac = totalBytes ? Math.min(1, doneBytes / totalBytes) : (fileCount ? currentIndex/fileCount : 0);
+    const p = Math.max(0, Math.min(99, Math.round(frac*100)));
+    $('createProgressBar').style.width=p+'%';
+    $('createProgressPercent').textContent=p+'%';
+    $('createProgressLabel').textContent=currentPath ? `Adding ${currentPath}` : 'Creating ZIP…';
+  }
+
+  async function addEntries(zipWriter){
+    const list=[...createItems.values()];
+    const total=totalCreateSize();
+    let completed=0;
+
+    for(let i=0;i<list.length;i++){
+      const x=list[i];
+      const fileSize=x.file.size || 0;
+      await zipWriter.add(
+        x.path,
+        new BlobReader(x.file),
+        {
+          level:Number($('compressionLevel').value),
+          lastModDate:x.file.lastModified ? new Date(x.file.lastModified) : new Date(),
+          onprogress:(index,max)=>{
+            const within = Number.isFinite(index) ? index : 0;
+            updateCreateProgress(completed + Math.min(within,fileSize), total, x.path, i, list.length);
+          }
+        }
+      );
+      completed += fileSize;
+      updateCreateProgress(completed,total,x.path,i+1,list.length);
+    }
+  }
+
+  async function createZipDirect(filename){
+    const handle = await window.showSaveFilePicker({
+      suggestedName: filename,
+      types: [{
+        description:'ZIP archive',
+        accept:{'application/zip':['.zip']}
+      }]
+    });
+
+    const writable = await handle.createWritable();
+    let zipWriter;
+    try{
+      zipWriter = new ZipWriter(writable, { zip64:true });
+      await addEntries(zipWriter);
+      await zipWriter.close();
+    }catch(e){
+      try { await writable.abort?.(); } catch {}
+      throw e;
+    }
+    return { mode:'disk', name:filename };
+  }
+
+  async function createZipFallback(filename){
+    const blobWriter = new BlobWriter('application/zip');
+    const zipWriter = new ZipWriter(blobWriter, { zip64:true });
+    await addEntries(zipWriter);
+    const blob = await zipWriter.close();
+    downloadBlob(blob,filename);
+    return { mode:'memory', name:filename, blob };
+  }
+
+  $('createArchiveBtn').onclick=async()=>{
+    if(!createItems.size)return;
+
+    const filename=`${cleanName($('archiveName').value)}.zip`;
+    const sourceSize=totalCreateSize();
+    const canDirect='showSaveFilePicker' in window;
+
+    $('createArchiveBtn').disabled=true;
+    $('createProgressWrap').classList.remove('hidden-important');
+    $('createProgressBar').style.width='0%';
+    $('createProgressPercent').textContent='0%';
+    $('createProgressLabel').textContent=canDirect ? 'Choose where to save the ZIP…' : 'Preparing ZIP…';
+    status($('createStatus'),'','');
+
+    try{
+      if(!canDirect && sourceSize >= 250*MB){
+        status($('createStatus'),'warn','This browser cannot stream the ZIP directly to a chosen file. Large ZIP creation will use browser memory and may fail. For a 735 MB source file, use a Chromium-based desktop browser when possible.');
+      }
+
+      const result = canDirect
+        ? await createZipDirect(filename)
+        : await createZipFallback(filename);
+
+      $('createProgressBar').style.width='100%';
+      $('createProgressPercent').textContent='100%';
+      $('createProgressLabel').textContent=`Created ${filename}`;
+
+      if(result.mode==='disk'){
+        status($('createStatus'),'good',`ZIP created successfully and written directly to disk: ${filename}.`);
+      }else{
+        status($('createStatus'),'good',`ZIP created successfully: ${filename} (${bytesFmt(result.blob.size)}).`);
+      }
+    }catch(e){
+      console.error(e);
+      if(e?.name==='AbortError'){
+        status($('createStatus'),'warn','ZIP creation was canceled before a save location was chosen.');
+        $('createProgressLabel').textContent='Canceled';
+      }else{
+        status($('createStatus'),'bad',`ZIP creation failed: ${e?.message||'The browser may have run out of memory or storage space.'}`);
+        $('createProgressLabel').textContent='ZIP creation failed';
+      }
+    }finally{
+      $('createArchiveBtn').disabled=!createItems.size;
+    }
+  };
+
+  bindDrop($('extractDrop'),$('extractInput'),files=>{
+    if(files?.[0])selectExtract(files[0]);
+  });
+  $('extractInput').onchange=()=>{
+    if($('extractInput').files?.[0])selectExtract($('extractInput').files[0]);
+    $('extractInput').value='';
+  };
+
+  function selectExtract(f){
+    const ext=f.name.toLowerCase().split('.').pop();
+    if(!['zip','rar'].includes(ext)){
+      status($('extractStatus'),'bad','Please select a .zip or .rar archive.');
+      return;
+    }
+    extractArchiveFile=f;
+    $('selectedArchiveBox').innerHTML=`<strong>${esc(f.name)}</strong><br>${bytesFmt(f.size)} · ${ext.toUpperCase()}`;
+    $('openArchiveBtn').disabled=false;
+    extractedFiles=[];
+    renderExtracted();
+    status($('extractStatus'),'','');
+  }
+
+  function renderExtracted(){
+    $('extractList').innerHTML='';
+    if(!extractedFiles.length){
+      $('extractList').innerHTML='<div class="empty-box">Extracted files will appear here.</div>';
+    }else{
+      extractedFiles.forEach(it=>{
+        const parts=it.path.split('/');
+        const name=parts.pop();
+        const folder=parts.join('/');
+        const row=document.createElement('div');
+        row.className='file-row';
+        row.innerHTML=`<div class="file-main"><div class="file-name">${esc(name)}</div><div class="file-path">${folder?esc(folder+'/'):'Archive root'}</div></div><div class="file-size">${bytesFmt(it.blob.size)}</div><div class="remove-cell text-right"><button class="btn-secondary" type="button" title="Download"><i data-lucide="download" class="w-4 h-4"></i></button></div>`;
+        row.querySelector('button').onclick=()=>downloadBlob(it.blob,name);
+        $('extractList').appendChild(row);
+      });
+    }
+
+    $('extractCount').textContent=`${extractedFiles.length} file${extractedFiles.length===1?'':'s'}`;
+    $('extractActionsCard').classList.toggle('hidden-important',!extractedFiles.length);
+    $('folderSupportNote').textContent='showDirectoryPicker' in window
+      ? 'Your browser supports saving extracted files directly into a chosen folder.'
+      : 'This browser does not support direct folder writing; use Download Files or the individual download buttons.';
+    lucide.createIcons();
+  }
+
+  async function extractZip(file){
+    const reader = new ZipReader(new BlobReader(file));
+    const entries = (await reader.getEntries()).filter(e=>!e.directory);
+    const out=[];
+    let completed=0;
+
+    try{
+      for(const e of entries){
+        const path=safePath(e.filename);
+        if(!path)continue;
+        const writer=new BlobWriter();
+        const blob=await e.getData(writer,{
+          onprogress:(index,max)=>{
+            const frac=max ? index/max : 0;
+            const p=Math.round(((completed + frac)/Math.max(entries.length,1))*100);
+            $('extractProgressBar').style.width=p+'%';
+            $('extractProgressPercent').textContent=p+'%';
+            $('extractProgressLabel').textContent=`Extracting ${path}`;
+          }
+        });
+        out.push({path,blob});
+        completed++;
+      }
+    }finally{
+      await reader.close();
+    }
+    return out;
+  }
+
+  async function extractRar(file){
+    const password=$('extractPassword').value||undefined;
+    const archive=await RarArchive.open(file,password?{password}:{});
+    const entries=[...archive.entries];
+    const files=entries.filter(e=>!(e.isDirectory||String(e.name).endsWith('/')));
+    const out=[];
+    let i=0;
+    try{
+      for(const e of files){
+        const path=safePath(e.name);
+        if(!path)continue;
+        const entry=archive.get(e.name);
+        const bytes=await entry.bytes();
+        out.push({path,blob:new Blob([bytes])});
+        i++;
+        const p=Math.round(i/Math.max(files.length,1)*100);
+        $('extractProgressBar').style.width=p+'%';
+        $('extractProgressPercent').textContent=p+'%';
+        $('extractProgressLabel').textContent=`Extracting ${path}`;
+      }
+    }finally{
+      archive.close?.();
+    }
+    return out;
+  }
+
+  $('openArchiveBtn').onclick=async()=>{
+    if(!extractArchiveFile)return;
+    $('openArchiveBtn').disabled=true;
+    $('extractProgressWrap').classList.remove('hidden-important');
+    $('extractProgressBar').style.width='0%';
+    $('extractProgressPercent').textContent='0%';
+    status($('extractStatus'),'','');
+
+    try{
+      const rar=extractArchiveFile.name.toLowerCase().endsWith('.rar');
+      extractedFiles=rar ? await extractRar(extractArchiveFile) : await extractZip(extractArchiveFile);
+      renderExtracted();
+      $('extractProgressBar').style.width='100%';
+      $('extractProgressPercent').textContent='100%';
+      $('extractProgressLabel').textContent='Extraction complete';
+      status($('extractStatus'),'good',`Extracted ${extractedFiles.length} file${extractedFiles.length===1?'':'s'} from ${extractArchiveFile.name}.`);
+    }catch(e){
+      console.error(e);
+      extractedFiles=[];
+      renderExtracted();
+      status($('extractStatus'),'bad',`Extraction failed: ${e?.message||'The archive may be damaged, unsupported, too large for available memory, or password protected.'}`);
+      $('extractProgressLabel').textContent='Extraction failed';
+    }finally{
+      $('openArchiveBtn').disabled=!extractArchiveFile;
+    }
+  };
+
+  async function saveToFolder(){
+    if(!extractedFiles.length)return;
+    if(!window.showDirectoryPicker){
+      status($('extractStatus'),'warn','Direct folder saving is not supported by this browser. Use Download Files instead.');
+      return;
+    }
+    try{
+      const root=await window.showDirectoryPicker();
+      for(const it of extractedFiles){
+        const parts=it.path.split('/');
+        const filename=parts.pop();
+        let dir=root;
+        for(const p of parts)dir=await dir.getDirectoryHandle(p,{create:true});
+        const fh=await dir.getFileHandle(filename,{create:true});
+        const w=await fh.createWritable();
+        await w.write(it.blob);
+        await w.close();
+      }
+      status($('extractStatus'),'good',`Saved ${extractedFiles.length} extracted file${extractedFiles.length===1?'':'s'} to the selected folder.`);
+    }catch(e){
+      if(e?.name!=='AbortError'){
+        status($('extractStatus'),'bad',`Could not save the extracted files: ${e?.message||'Unknown error'}`);
+      }
+    }
+  }
+
+  $('saveFolderBtn').onclick=saveToFolder;
+  $('downloadAllBtn').onclick=async()=>{
+    if(!extractedFiles.length)return;
+    for(const it of extractedFiles){
+      downloadBlob(it.blob,it.path.split('/').pop());
+      await new Promise(r=>setTimeout(r,160));
+    }
+    status($('extractStatus'),'good','Download requests were started for the extracted files. Your browser may ask permission for multiple downloads.');
+  };
+
+  $('clearExtractBtn').onclick=()=>{
+    extractArchiveFile=null;
+    extractedFiles=[];
+    $('selectedArchiveBox').textContent='No archive selected.';
+    $('openArchiveBtn').disabled=true;
+    $('extractProgressWrap').classList.add('hidden-important');
+    status($('extractStatus'),'','');
+    renderExtracted();
+  };
+
+  const themeToggle=$('themeToggle'),moon=$('moonIcon'),sun=$('sunIcon');
+  function applyTheme(mode){
+    const dark=mode==='dark';
+    document.body.classList.toggle('dark-mode',dark);
+    moon.classList.toggle('hidden',dark);
+    sun.classList.toggle('hidden',!dark);
+    themeToggle.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');
+    themeToggle.setAttribute('title',dark?'Switch to light mode':'Switch to dark mode');
+    localStorage.setItem('utiliverse-theme',dark?'dark':'light');
+    lucide.createIcons();
+  }
+  applyTheme(localStorage.getItem('utiliverse-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+  themeToggle.onclick=()=>applyTheme(document.body.classList.contains('dark-mode')?'light':'dark');
+
+  renderCreate();
+  renderExtracted();
+  lucide.createIcons();
 </script>
 </body>
 </html>
