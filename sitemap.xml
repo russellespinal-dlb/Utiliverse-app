@@ -221,9 +221,14 @@
     <loc>https://utiliverse.app/Bill_Splitter/</loc>
   </url>
 
-  <!-- BArchive Creator Extractor -->
+  <!-- Archive Creator Extractor -->
   <url>
     <loc>https://utiliverse.app/Archive_Creator_Extractor/</loc>
+  </url>
+
+  <!-- Tip Calculator -->
+  <url>
+    <loc>https://utiliverse.app/Tip_Calculator/</loc>
   </url>
   
   <!-- Privacy Policy -->
