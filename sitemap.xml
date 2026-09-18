@@ -151,37 +151,37 @@
     <loc>https://utiliverse.app/JSON_to_CSV_Converter/</loc>
   </url>
 
-  <!--Time Zone Converter -->
+  <!-- Time Zone Converter -->
   <url>
     <loc>https://utiliverse.app/Time_Zone_Converter/</loc>
   </url>
 
-  <!--Days Between Dates Calculator -->
+  <!-- Days Between Dates Calculator -->
   <url>
     <loc>https://utiliverse.app/Days_Between_Dates/</loc>
   </url>
 
-  <!--Animal Age Calculator -->
+  <!-- Animal Age Calculator -->
   <url>
     <loc>https://utiliverse.app/Animal_Age_Calculator/</loc>
   </url>
 
-  <!--Email DNS Checker -->
+  <!-- Email DNS Checker -->
   <url>
     <loc>https://utiliverse.app/Email_DNS_Checker/</loc>
   </url>
 
-  <!--Military Time Converter -->
+  <!-- Military Time Converter -->
   <url>
     <loc>https://utiliverse.app/Military_Time_Converter/</loc>
   </url>
 
-  <!--Time Unit Converter -->
+  <!-- Time Unit Converter -->
   <url>
     <loc>https://utiliverse.app/Time_Unit_Converter/</loc>
   </url>
 
-  <!--Text to Morse Code Converter -->
+  <!-- Text to Morse Code Converter -->
   <url>
     <loc>https://utiliverse.app/Text_to_Morse_Code_Converter/</loc>
   </url>
@@ -191,31 +191,36 @@
     <loc>https://utiliverse.app/IP_Address_Lookup/</loc>
   </url>
 
-  <!--Leap Year Checker -->
+  <!-- Leap Year Checker -->
   <url>
     <loc>https://utiliverse.app/Leap_Year_Checker/</loc>
   </url>
 
-  <!--Image Cropper -->
+  <!-- Image Cropper -->
   <url>
     <loc>https://utiliverse.app/Image_Cropper/</loc>
   </url>
 
-  <!--Image Dimension Finder -->
+  <!-- Image Dimension Finder -->
   <url>
     <loc>https://utiliverse.app/Image_Dimension_Finder/</loc>
   </url>
 
-  <!--Image Watermark Maker -->
+  <!-- Image Watermark Maker -->
   <url>
     <loc>https://utiliverse.app/Image_Watermark_Maker/</loc>
   </url>
 
-  <!--SSL Certificate Checker -->
+  <!-- SSL Certificate Checker -->
   <url>
     <loc>https://utiliverse.app/SSL_Certificate_Checker/</loc>
   </url>
 
+  <!-- Bill_Splitter -->
+  <url>
+    <loc>https://utiliverse.app/Bill_Splitter/</loc>
+  </url>
+  
   <!-- Privacy Policy -->
   <url>
     <loc>https://utiliverse.app/Privacy_Policy.html/</loc>
