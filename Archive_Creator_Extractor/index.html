@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZIP & RAR Creator / Extractor – Compress & Unpack Archives | Utiliverse</title>
+  <meta name="description" content="Create ZIP and RAR archives, unzip ZIP files, and extract RAR files directly in your browser. Add files or folders, choose compression, preview archive contents, and download or save extracted files.">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#020617">
+  <link rel="canonical" href="https://utiliverse.app/Archive_Creator_Extractor/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Utiliverse">
+  <meta property="og:title" content="ZIP & RAR Creator / Extractor | Utiliverse">
+  <meta property="og:description" content="Create ZIP or RAR archives and extract ZIP or RAR files directly in your browser.">
+  <meta property="og:url" content="https://utiliverse.app/Archive_Creator_Extractor/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="ZIP & RAR Creator / Extractor | Utiliverse">
+  <meta name="twitter:description" content="Create and extract ZIP and RAR archives directly in your browser.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+  <style>
+    body{background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.10),transparent 32%),#f8fafc}
+    body.dark-mode{background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.14),transparent 32%),radial-gradient(circle at 90% 15%,rgba(124,58,237,.08),transparent 28%),#020617!important;color:#f8fafc!important}
+    body.dark-mode header{background:rgba(2,6,23,.82)!important;border-color:#1e293b!important;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+    body.dark-mode header a{color:#cbd5e1!important} body.dark-mode header a:hover{color:#fff!important}
+    body.dark-mode main h1{color:#f8fafc!important} body.dark-mode .hero-copy{color:#94a3b8!important}
+    .theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border-radius:12px;border:1px solid #cbd5e1;background:#fff;color:#475569;cursor:pointer;box-shadow:none;appearance:none;-webkit-appearance:none;transition:.2s}
+    .theme-toggle:hover{background:#f1f5f9;color:#0f172a;border-color:#94a3b8}
+    body.dark-mode .theme-toggle{background:rgba(15,23,42,.72);border-color:#334155;color:#94a3b8}
+    body.dark-mode .theme-toggle:hover{background:#1e293b;color:#fff;border-color:#475569}
+    .theme-icon{width:18px;height:18px;stroke-width:2}
+    .free-browser-note{color:#64748b;font-size:12px;font-weight:700;white-space:nowrap;letter-spacing:.1px} body.dark-mode .free-browser-note{color:#94a3b8}
+
+    .tool-card,.info-section{background:#fff;border:1px solid #e2e8f0;border-radius:1rem;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+    body.dark-mode .tool-card,body.dark-mode .info-section{background:rgba(30,41,59,.72)!important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:#334155!important;box-shadow:0 18px 50px rgba(0,0,0,.18)}
+    .section-head{padding:1rem 1.15rem;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+    body.dark-mode .section-head{border-color:#334155}
+    .section-head h2{font-weight:850;color:#0f172a;display:flex;align-items:center;gap:.55rem} body.dark-mode .section-head h2{color:#f8fafc}
+
+    .tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.2rem}
+    .tab-btn{display:inline-flex;align-items:center;gap:.45rem;padding:.7rem 1rem;border:1px solid #cbd5e1;border-radius:.8rem;background:#fff;color:#475569;font-weight:800;font-size:.9rem;cursor:pointer;transition:.2s}
+    .tab-btn.active{background:#4f46e5;border-color:#4f46e5;color:#fff}
+    body.dark-mode .tab-btn{background:#1e293b;border-color:#475569;color:#cbd5e1} body.dark-mode .tab-btn.active{background:#4f46e5;border-color:#4f46e5;color:#fff}
+
+    .drop-zone{border:2px dashed #cbd5e1;border-radius:1rem;padding:2rem 1.25rem;text-align:center;background:#f8fafc;transition:.2s;cursor:pointer}
+    .drop-zone:hover,.drop-zone.dragover{border-color:#818cf8;background:#eef2ff;transform:translateY(-1px)}
+    body.dark-mode .drop-zone{background:#0f172a;border-color:#475569} body.dark-mode .drop-zone:hover,body.dark-mode .drop-zone.dragover{background:#1e1b4b;border-color:#6366f1}
+    .drop-title{font-weight:900;color:#0f172a} .drop-sub{font-size:.85rem;color:#64748b;margin-top:.35rem;line-height:1.55}
+    body.dark-mode .drop-title{color:#f8fafc} body.dark-mode .drop-sub{color:#94a3b8}
+
+    .label{display:block;font-size:.79rem;font-weight:800;color:#334155;margin-bottom:.4rem} body.dark-mode .label{color:#cbd5e1}
+    .field{width:100%;border:1px solid #cbd5e1;background:#fff;color:#0f172a;border-radius:.8rem;padding:.72rem .82rem;outline:none;transition:.2s}
+    .field:focus{border-color:#818cf8;box-shadow:0 0 0 3px rgba(99,102,241,.14)} body.dark-mode .field{background:#0f172a;border-color:#475569;color:#e2e8f0}
+
+    .btn-primary,.btn-secondary,.btn-danger{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;border-radius:.75rem;font-weight:800;transition:.2s}
+    .btn-primary{background:#4f46e5;color:#fff;padding:.74rem 1rem}.btn-primary:hover{background:#4338ca;transform:translateY(-1px)}.btn-primary:disabled{opacity:.55;cursor:not-allowed;transform:none}
+    .btn-secondary{background:#fff;color:#334155;border:1px solid #cbd5e1;padding:.68rem .9rem}.btn-secondary:hover{background:#f8fafc;border-color:#94a3b8}
+    body.dark-mode .btn-secondary{background:#1e293b;color:#e2e8f0;border-color:#475569} body.dark-mode .btn-secondary:hover{background:#334155}
+    .btn-danger{background:#fff;color:#dc2626;border:1px solid #fecaca;padding:.5rem .66rem}.btn-danger:hover{background:#fef2f2} body.dark-mode .btn-danger{background:#1e293b;border-color:#7f1d1d;color:#fca5a5}
+
+    .file-row{display:grid;grid-template-columns:minmax(0,1fr) 110px 48px;gap:.75rem;align-items:center;padding:.75rem 0;border-bottom:1px solid #e2e8f0}.file-row:last-child{border-bottom:0} body.dark-mode .file-row{border-color:#334155}
+    .file-main{min-width:0}.file-name{font-size:.9rem;font-weight:800;color:#0f172a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.file-path{font-size:.75rem;color:#64748b;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-top:.16rem}.file-size{font-size:.8rem;font-weight:700;color:#475569;text-align:right;white-space:nowrap}
+    body.dark-mode .file-name{color:#f8fafc} body.dark-mode .file-path{color:#94a3b8} body.dark-mode .file-size{color:#cbd5e1}
+
+    .summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem}.summary-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:.85rem;padding:.9rem} body.dark-mode .summary-box{background:#0f172a;border-color:#334155}
+    .summary-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;font-weight:850;color:#64748b}.summary-value{margin-top:.35rem;font-size:1.15rem;font-weight:900;color:#0f172a;word-break:break-word} body.dark-mode .summary-value{color:#f8fafc}
+
+    .progress-shell{height:10px;border-radius:999px;background:#e2e8f0;overflow:hidden} body.dark-mode .progress-shell{background:#334155}.progress-bar{height:100%;width:0%;border-radius:999px;background:linear-gradient(90deg,#4f46e5,#7c3aed);transition:width .15s ease}
+    .status-line{display:flex;align-items:flex-start;gap:.6rem;border-radius:.8rem;padding:.8rem .9rem;font-size:.86rem;line-height:1.5}.status-line.good{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46}.status-line.warn{background:#fffbeb;border:1px solid #fde68a;color:#92400e}.status-line.bad{background:#fef2f2;border:1px solid #fecaca;color:#991b1b}
+    body.dark-mode .status-line.good{background:rgba(6,78,59,.22);border-color:#065f46;color:#a7f3d0} body.dark-mode .status-line.warn{background:rgba(120,53,15,.22);border-color:#92400e;color:#fde68a} body.dark-mode .status-line.bad{background:rgba(127,29,29,.22);border-color:#991b1b;color:#fecaca}
+    .empty-box{padding:1rem;border:1px dashed #cbd5e1;border-radius:.8rem;color:#64748b;font-size:.85rem;text-align:center;background:#f8fafc} body.dark-mode .empty-box{background:#0f172a;border-color:#475569;color:#94a3b8}
+    .note{font-size:.78rem;line-height:1.55;color:#64748b}.hidden-important{display:none!important}
+
+    .info-wrap{width:100%;max-width:72rem;margin:3.5rem auto 0}.info-section{padding:1.5rem}.info-section+.info-section{margin-top:1.5rem}.info-section h2{font-size:1.65rem;line-height:1.25;font-weight:800;color:#0f172a;margin:0 0 .9rem;letter-spacing:-.02em}.info-section h3{font-size:1.06rem;line-height:1.4;font-weight:800;color:#1e293b;margin:1.4rem 0 .45rem}.info-section p,.info-section li{color:#475569;line-height:1.82;font-size:.98rem}.info-section p{margin:.8rem 0}.info-section ul{padding-left:1.25rem;margin:.75rem 0}
+    body.dark-mode .info-section h2{color:#f8fafc!important} body.dark-mode .info-section h3{color:#e2e8f0!important} body.dark-mode .info-section p,body.dark-mode .info-section li{color:#94a3b8!important}
+    .faq-item{border-bottom:1px solid #e2e8f0}.faq-item:last-child{border-bottom:0}.faq-item summary{list-style:none;cursor:pointer;padding:1rem 0;font-weight:800;color:#0f172a;display:flex;align-items:center;justify-content:space-between;gap:1rem}.faq-item summary::-webkit-details-marker{display:none}.faq-item summary::after{content:"+";font-size:1.2rem;color:#64748b;flex:0 0 auto}.faq-item[open] summary::after{content:"−"}.faq-item p{margin:0;padding:0 0 1rem} body.dark-mode .faq-item{border-color:#334155} body.dark-mode .faq-item summary{color:#e2e8f0}
+
+    @media (min-width:640px){.info-section{padding:2rem}}
+    @media (max-width:640px){.free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}.theme-toggle{width:38px;height:38px;flex:0 0 auto}.summary-grid{grid-template-columns:1fr}.file-row{grid-template-columns:minmax(0,1fr) 44px}.file-size{grid-column:1/2;text-align:left}.file-row .remove-cell{grid-column:2;grid-row:1/3}}
+  </style>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse ZIP & RAR Creator / Extractor","url":"https://utiliverse.app/Archive_Creator_Extractor/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript and WebAssembly enabled.","description":"Create ZIP and RAR archives and extract ZIP or RAR files directly in the browser.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Create ZIP archives","Create RAR 5 archives","Extract ZIP files","Extract RAR files","Add files and folders","Choose compression level","Save extracted files to a folder when supported","Browser-based archive processing"]}</script>
+</head>
+
+<!--
+SEO TARGET CLUSTER
+Primary: ZIP RAR creator extractor
+Secondary: create RAR online, create ZIP online, unzip files online, unrar files online,
+RAR extractor, ZIP extractor, archive creator, archive extractor, compress files online
+
+ADSENSE NOTE
+Approved Google AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+<header class="sticky top-0 z-50 bg-white/80 backdrop-filter backdrop-blur-lg border-b border-slate-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="https://utiliverse.app" class="flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-slate-900 transition"><i data-lucide="arrow-left" class="w-4 h-4"></i><span>Back to Utiliverse</span></a>
+    <div class="flex items-center gap-4"><div class="free-browser-note">100% Free and Browser Based</div><button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode"><i id="moonIcon" data-lucide="moon" class="theme-icon"></i><i id="sunIcon" data-lucide="sun" class="theme-icon hidden"></i></button></div>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+  <div class="mb-6"><h1 class="text-3xl font-bold text-slate-900 flex items-center gap-3"><i data-lucide="archive" class="w-8 h-8 text-indigo-600"></i>ZIP & RAR Creator / Extractor</h1><p class="hero-copy text-slate-500 mt-2 text-sm max-w-3xl">Create ZIP or RAR archives, unzip ZIP files, and extract RAR archives directly in your browser.</p></div>
+
+  <!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT -->
+
+  <div class="tabs">
+    <button id="createTab" class="tab-btn active" type="button"><i data-lucide="package-plus" class="w-4 h-4"></i>Create Archive</button>
+    <button id="extractTab" class="tab-btn" type="button"><i data-lucide="package-open" class="w-4 h-4"></i>Extract Archive</button>
+  </div>
+
+  <section id="createPanel">
+    <div class="grid grid-cols-1 xl:grid-cols-[1.18fr_.82fr] gap-6">
+      <div class="space-y-6">
+        <section class="tool-card overflow-hidden"><div class="section-head"><h2><i data-lucide="folder-plus" class="w-5 h-5 text-indigo-600"></i>Add Files</h2><button id="clearCreateBtn" type="button" class="btn-secondary"><i data-lucide="trash-2" class="w-4 h-4"></i>Clear All</button></div>
+          <div class="p-5 sm:p-6">
+            <div id="createDrop" class="drop-zone" tabindex="0" role="button"><div class="mx-auto w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center"><i data-lucide="upload-cloud" class="w-7 h-7"></i></div><div class="drop-title mt-4">Drop files here or click to browse</div><div class="drop-sub">Add individual files or select a folder to preserve its structure inside the archive.</div></div>
+            <input id="createFileInput" type="file" multiple class="hidden-important"><input id="createFolderInput" type="file" webkitdirectory directory multiple class="hidden-important">
+            <div class="mt-4 flex flex-wrap gap-2"><button id="createAddFiles" type="button" class="btn-primary"><i data-lucide="files" class="w-4 h-4"></i>Add Files</button><button id="createAddFolder" type="button" class="btn-secondary"><i data-lucide="folder-tree" class="w-4 h-4"></i>Add Folder</button></div>
+            <p class="note mt-4">Selected source files are processed locally in your browser.</p>
+          </div></section>
+
+        <section class="tool-card overflow-hidden"><div class="section-head"><h2><i data-lucide="list-tree" class="w-5 h-5 text-indigo-600"></i>Archive Contents</h2><span id="createCount" class="text-xs font-extrabold text-slate-500">0 files</span></div><div id="createList" class="p-5 sm:p-6"><div class="empty-box">No files added yet.</div></div></section>
+      </div>
+
+      <div class="space-y-6">
+        <section class="tool-card overflow-hidden"><div class="section-head"><h2><i data-lucide="settings-2" class="w-5 h-5 text-indigo-600"></i>Archive Settings</h2></div>
+          <div class="p-5 sm:p-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div><label class="label" for="archiveFormat">Format</label><select id="archiveFormat" class="field"><option value="zip">ZIP (.zip)</option><option value="rar">RAR 5 (.rar)</option></select></div>
+              <div><label class="label" for="archiveName">Archive name</label><input id="archiveName" class="field" type="text" value="utiliverse-archive" maxlength="100"></div>
+            </div>
+            <div class="mt-4"><label class="label" for="compressionLevel">Compression</label><select id="compressionLevel" class="field"><option value="0">Store only / fastest</option><option value="3">Fast</option><option value="6" selected>Normal</option><option value="9">Maximum</option></select></div>
+            <div id="rarPasswordWrap" class="mt-4 hidden-important"><label class="label" for="rarCreatePassword">Optional RAR password</label><input id="rarCreatePassword" class="field" type="password" autocomplete="new-password" placeholder="Leave blank for no password"><p class="note mt-2">Password protection is available for RAR creation. ZIP encryption is not enabled in this version.</p></div>
+            <div class="mt-5 summary-grid"><div class="summary-box"><div class="summary-label">Files</div><div id="createSummaryFiles" class="summary-value">0</div></div><div class="summary-box"><div class="summary-label">Source Size</div><div id="createSummarySize" class="summary-value">0 B</div></div><div class="summary-box"><div class="summary-label">Folders</div><div id="createSummaryFolders" class="summary-value">0</div></div></div>
+            <button id="createArchiveBtn" type="button" class="btn-primary w-full mt-5" disabled><i data-lucide="download" class="w-4 h-4"></i>Create Archive & Download</button>
+            <div id="createProgressWrap" class="hidden-important mt-5"><div class="flex items-center justify-between gap-3 mb-2 text-xs font-bold text-slate-500"><span id="createProgressLabel">Creating archive…</span><span id="createProgressPercent">0%</span></div><div class="progress-shell"><div id="createProgressBar" class="progress-bar"></div></div></div>
+            <div id="createStatus" class="mt-4"></div>
+          </div></section>
+      </div>
+    </div>
+  </section>
+
+  <section id="extractPanel" class="hidden-important">
+    <div class="grid grid-cols-1 xl:grid-cols-[.82fr_1.18fr] gap-6">
+      <div class="space-y-6">
+        <section class="tool-card overflow-hidden"><div class="section-head"><h2><i data-lucide="file-input" class="w-5 h-5 text-indigo-600"></i>Select Archive</h2><button id="clearExtractBtn" type="button" class="btn-secondary"><i data-lucide="rotate-ccw" class="w-4 h-4"></i>Reset</button></div>
+          <div class="p-5 sm:p-6">
+            <div id="extractDrop" class="drop-zone" tabindex="0" role="button"><div class="mx-auto w-14 h-14 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center"><i data-lucide="package-open" class="w-7 h-7"></i></div><div class="drop-title mt-4">Drop a ZIP or RAR archive here</div><div class="drop-sub">Supports standard ZIP files and RAR archives. Password-protected RAR files can be opened by entering the password below.</div></div>
+            <input id="extractInput" type="file" accept=".zip,.rar,application/zip,application/vnd.rar" class="hidden-important">
+            <div id="selectedArchiveBox" class="mt-4 empty-box">No archive selected.</div>
+            <div class="mt-4"><label class="label" for="extractPassword">Archive password (optional)</label><input id="extractPassword" class="field" type="password" autocomplete="current-password" placeholder="Used for password-protected RAR files"></div>
+            <button id="openArchiveBtn" type="button" class="btn-primary w-full mt-4" disabled><i data-lucide="scan-search" class="w-4 h-4"></i>Open & Extract Archive</button>
+            <div id="extractProgressWrap" class="hidden-important mt-5"><div class="flex items-center justify-between gap-3 mb-2 text-xs font-bold text-slate-500"><span id="extractProgressLabel">Extracting…</span><span id="extractProgressPercent">0%</span></div><div class="progress-shell"><div id="extractProgressBar" class="progress-bar"></div></div></div>
+            <div id="extractStatus" class="mt-4"></div>
+          </div></section>
+      </div>
+
+      <div class="space-y-6">
+        <section class="tool-card overflow-hidden"><div class="section-head"><h2><i data-lucide="files" class="w-5 h-5 text-indigo-600"></i>Extracted Contents</h2><span id="extractCount" class="text-xs font-extrabold text-slate-500">0 files</span></div><div id="extractList" class="p-5 sm:p-6"><div class="empty-box">Extracted files will appear here.</div></div></section>
+        <section id="extractActionsCard" class="tool-card overflow-hidden hidden-important"><div class="section-head"><h2><i data-lucide="download-cloud" class="w-5 h-5 text-indigo-600"></i>Save Extracted Files</h2></div><div class="p-5 sm:p-6"><div class="flex flex-wrap gap-2"><button id="saveFolderBtn" type="button" class="btn-primary"><i data-lucide="folder-down" class="w-4 h-4"></i>Save to Folder</button><button id="downloadAllBtn" type="button" class="btn-secondary"><i data-lucide="download" class="w-4 h-4"></i>Download Files</button></div><p id="folderSupportNote" class="note mt-3"></p></div></section>
+      </div>
+    </div>
+  </section>
+
+  <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT -->
+
+  <div class="info-wrap">
+    <section class="info-section"><h2>Free ZIP & RAR Archive Creator and Extractor</h2><p>The Utiliverse Archive Creator & Extractor combines four common archive tasks in one browser-based utility: creating ZIP archives, creating RAR 5 archives, extracting ZIP files, and extracting RAR archives. You can package multiple files or an entire folder into a single archive, choose a compression level, and download the result without installing a desktop utility. When opening an existing archive, the tool displays its extracted contents and lets you download individual files or save the full directory structure to a folder when your browser supports the File System Access API.</p><p>Archive work is performed in the browser. ZIP operations use JavaScript compression, while RAR creation and extraction use a WebAssembly-based RAR implementation. Because archives are processed in memory, very large files may require substantial RAM and can be better suited to a native desktop archiver.</p></section>
+    <section class="info-section"><h2>How to Create and Extract ZIP or RAR Files</h2>
+      <h3>Create a ZIP or RAR archive</h3><p>Choose the Create Archive tab, then add individual files or select an entire folder. The archive-content list shows the paths that will be written into the finished file. Folder selections keep their relative directory structure so a project or document collection can be restored after extraction. Remove any unwanted file before continuing.</p><p>Select ZIP or RAR 5 as the output format. ZIP is the broadest compatibility choice and is built into nearly every desktop operating system. RAR is useful when you specifically need the RAR format or want to exchange files with workflows that already use WinRAR or other RAR-compatible software. Choose a descriptive archive name and a compression level. Normal compression is a practical default; maximum compression can take longer and may provide little benefit for JPEG, MP4, PDF, or other data that is already compressed.</p><p>For RAR archives, you can optionally enter a password. The RAR writer creates a genuine RAR 5 archive rather than simply renaming another format. After you select Create Archive & Download, the files are read locally, compressed, and assembled in browser memory. The completed archive is then downloaded through a temporary browser object URL.</p>
+      <h3>Extract a ZIP or RAR archive</h3><p>Choose the Extract Archive tab and select a .zip or .rar file. If a RAR archive is password protected, enter its password before opening it. The extractor reads the archive, normalizes stored paths to prevent parent-directory traversal, and builds an in-memory list of extracted files. ZIP extraction is handled directly in JavaScript, while RAR extraction uses the browser RAR engine.</p><p>Each extracted item includes a Download button for saving that file individually. On browsers that support the File System Access API, such as many Chromium-based desktop browsers, the Save to Folder button can recreate the archive's subfolders inside a folder you choose. On browsers without that API, the Download Files button downloads the extracted files individually; your browser may ask for permission when several downloads are triggered.</p>
+      <h3>When to use ZIP versus RAR</h3><p>ZIP is generally the safest option when the recipient should be able to open the archive without installing additional software. RAR is popular for advanced archive workflows and can provide useful compression and archive features, but built-in operating-system support varies. If compatibility matters more than format preference, ZIP is usually the simpler choice. If a workflow specifically requires RAR, this tool can create a RAR 5 archive directly in the browser.</p>
+      <h3>Privacy and large-file considerations</h3><p>The selected files are not intentionally uploaded to a Utiliverse server by this page. The browser loads the JavaScript and WebAssembly libraries needed for archive processing, then reads your selected local files in memory. This design is convenient for privacy-sensitive everyday tasks, but it also means available device memory becomes the practical size limit. Creating or extracting several gigabytes can consume much more RAM than the final archive size because source data, compressed data, and extracted output may coexist temporarily.</p>
+    </section>
+    <section class="info-section"><h2>Archive Tool FAQ</h2>
+      <details class="faq-item"><summary>Can this tool really create RAR files?</summary><p>Yes. The RAR option writes a genuine RAR 5 archive in the browser using a RAR implementation compiled for web use.</p></details>
+      <details class="faq-item"><summary>Can it unzip ZIP files?</summary><p>Yes. Select a ZIP archive in Extract Archive mode to read and extract its files directly in the browser.</p></details>
+      <details class="faq-item"><summary>Can it unrar RAR files?</summary><p>Yes. RAR archives can be opened and extracted in the browser, including password-protected RAR files when the correct password is supplied.</p></details>
+      <details class="faq-item"><summary>Are my files uploaded?</summary><p>The selected archive and source files are processed locally in the browser by the archive libraries used on this page rather than being sent to a Utiliverse upload endpoint.</p></details>
+      <details class="faq-item"><summary>Can I preserve folders inside an archive?</summary><p>Yes. Folder selection preserves relative paths when creating archives, and Save to Folder can recreate extracted subfolders on supported browsers.</p></details>
+      <details class="faq-item"><summary>Why might a very large archive fail?</summary><p>Browser-based compression and extraction can require a large amount of memory. Very large archives may exceed the memory available to the tab or device.</p></details>
+    </section>
+    <!-- GOOGLE ADSENSE: BOTTOM / AFTER-CONTENT INSERTION POINT -->
+  </div>
+</main>
+
+<footer class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-6 pt-2"><div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-500"><div>© 2026 Utiliverse. All rights reserved.</div><div class="font-semibold text-right">100% Free and Browser Based</div></div></footer>
+
+<script type="module">
+  import { RarArchive, RarWriter } from "https://esm.sh/@bitplane/rars@0.9.4";
+
+  const $ = id => document.getElementById(id);
+  const createItems = new Map();
+  let extractArchiveFile = null;
+  let extractedFiles = [];
+
+  const esc = s => String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');
+  const bytesFmt = b => { if(!b) return '0 B'; const u=['B','KB','MB','GB','TB']; const i=Math.min(Math.floor(Math.log(b)/Math.log(1024)),u.length-1); const v=b/Math.pow(1024,i); return `${v>=100||i===0?v.toFixed(0):v.toFixed(1)} ${u[i]}`; };
+  const safePath = p => String(p||'').replace(/\\/g,'/').split('/').filter(x=>x && x!=='.' && x!=='..').join('/');
+  const cleanName = n => (String(n||'utiliverse-archive').trim().replace(/\.(zip|rar)$/i,'').replace(/[<>:"/\\|?*\x00-\x1F]/g,'-').replace(/[. ]+$/g,'')||'utiliverse-archive').slice(0,100);
+  const archivePath = f => safePath(f.webkitRelativePath || f.name || 'file');
+
+  function status(target,type,msg){ if(!type||!msg){target.innerHTML='';return;} const icon=type==='good'?'circle-check':type==='warn'?'triangle-alert':'circle-alert'; target.innerHTML=`<div class="status-line ${type}"><i data-lucide="${icon}" class="w-4 h-4 flex-none mt-0.5"></i><div>${esc(msg)}</div></div>`; lucide.createIcons(); }
+  function downloadBlob(blob,name){ const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000); }
+
+  function switchTab(which){ const create=which==='create'; $('createPanel').classList.toggle('hidden-important',!create); $('extractPanel').classList.toggle('hidden-important',create); $('createTab').classList.toggle('active',create); $('extractTab').classList.toggle('active',!create); }
+  $('createTab').onclick=()=>switchTab('create'); $('extractTab').onclick=()=>switchTab('extract');
+
+  function addCreateFiles(files){ Array.from(files||[]).forEach(f=>{const p=archivePath(f); if(p) createItems.set(p,{file:f,path:p});}); renderCreate(); }
+  function renderCreate(){ const list=[...createItems.values()].sort((a,b)=>a.path.localeCompare(b.path)); $('createList').innerHTML=''; if(!list.length)$('createList').innerHTML='<div class="empty-box">No files added yet.</div>'; else list.forEach(it=>{const parts=it.path.split('/'); const name=parts.pop(); const folder=parts.join('/'); const row=document.createElement('div'); row.className='file-row'; row.innerHTML=`<div class="file-main"><div class="file-name" title="${esc(name)}">${esc(name)}</div><div class="file-path">${folder?esc(folder+'/'):'Archive root'}</div></div><div class="file-size">${bytesFmt(it.file.size)}</div><div class="remove-cell text-right"><button class="btn-danger" type="button"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div>`; row.querySelector('button').onclick=()=>{createItems.delete(it.path);renderCreate();}; $('createList').appendChild(row); }); const size=list.reduce((s,x)=>s+x.file.size,0); const folders=new Set(); list.forEach(x=>{let cur='';x.path.split('/').slice(0,-1).forEach(p=>{cur=cur?cur+'/'+p:p;folders.add(cur);});}); $('createCount').textContent=`${list.length} file${list.length===1?'':'s'}`;$('createSummaryFiles').textContent=list.length;$('createSummarySize').textContent=bytesFmt(size);$('createSummaryFolders').textContent=folders.size;$('createArchiveBtn').disabled=!list.length; lucide.createIcons(); }
+
+  function bindDrop(zone,input,handler){ zone.onclick=()=>input.click(); zone.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();input.click();}}; ['dragenter','dragover'].forEach(ev=>zone.addEventListener(ev,e=>{e.preventDefault();zone.classList.add('dragover');})); ['dragleave','drop'].forEach(ev=>zone.addEventListener(ev,e=>{e.preventDefault();zone.classList.remove('dragover');})); zone.addEventListener('drop',e=>{if(e.dataTransfer?.files?.length)handler(e.dataTransfer.files);}); }
+  bindDrop($('createDrop'),$('createFileInput'),addCreateFiles); $('createAddFiles').onclick=()=>$('createFileInput').click(); $('createAddFolder').onclick=()=>$('createFolderInput').click(); $('createFileInput').onchange=()=>{addCreateFiles($('createFileInput').files);$('createFileInput').value='';}; $('createFolderInput').onchange=()=>{addCreateFiles($('createFolderInput').files);$('createFolderInput').value='';}; $('clearCreateBtn').onclick=()=>{createItems.clear();renderCreate();status($('createStatus'),'','');$('createProgressWrap').classList.add('hidden-important');};
+
+  $('archiveFormat').onchange=()=>{ const rar=$('archiveFormat').value==='rar'; $('rarPasswordWrap').classList.toggle('hidden-important',!rar); const sel=$('compressionLevel'); sel.innerHTML=rar?'<option value="0">Store only / fastest</option><option value="1">Fast</option><option value="3" selected>Normal</option><option value="5">Maximum</option>':'<option value="0">Store only / fastest</option><option value="3">Fast</option><option value="6" selected>Normal</option><option value="9">Maximum</option>'; };
+
+  async function createZip(){ const zip=new JSZip(); [...createItems.values()].forEach(x=>zip.file(x.path,x.file,{date:x.file.lastModified?new Date(x.file.lastModified):new Date()})); const lvl=Number($('compressionLevel').value); return await zip.generateAsync({type:'blob',compression:lvl===0?'STORE':'DEFLATE',compressionOptions:lvl===0?undefined:{level:lvl}},m=>{const p=Math.round(m.percent||0); $('createProgressBar').style.width=p+'%';$('createProgressPercent').textContent=p+'%';$('createProgressLabel').textContent=m.currentFile?`Adding ${m.currentFile}`:'Finalizing ZIP…';}); }
+  async function createRar(){ const lvl=Number($('compressionLevel').value); const password=$('rarCreatePassword').value||undefined; const writer=new RarWriter({format:'rar50',level:lvl,password}); let i=0; for(const x of createItems.values()){ const data=new Uint8Array(await x.file.arrayBuffer()); writer.add(x.path,data,{modifiedAt:x.file.lastModified?new Date(x.file.lastModified):new Date()}); i++; const p=Math.round(i/createItems.size*35); $('createProgressBar').style.width=p+'%';$('createProgressPercent').textContent=p+'%';$('createProgressLabel').textContent=`Preparing ${x.path}`; } const bytes=await writer.bytes({onProgress:({completed,total,phase})=>{const frac=total?completed/total:0; const p=Math.min(99,35+Math.round(frac*64));$('createProgressBar').style.width=p+'%';$('createProgressPercent').textContent=p+'%';$('createProgressLabel').textContent=phase?`RAR: ${phase}`:'Creating RAR…';}}); return new Blob([bytes],{type:'application/vnd.rar'}); }
+
+  $('createArchiveBtn').onclick=async()=>{ if(!createItems.size)return; const fmt=$('archiveFormat').value; $('createArchiveBtn').disabled=true;$('createProgressWrap').classList.remove('hidden-important');$('createProgressBar').style.width='0%';$('createProgressPercent').textContent='0%';status($('createStatus'),'',''); try{ const blob=fmt==='rar'?await createRar():await createZip(); const name=`${cleanName($('archiveName').value)}.${fmt}`; downloadBlob(blob,name);$('createProgressBar').style.width='100%';$('createProgressPercent').textContent='100%';$('createProgressLabel').textContent=`Created ${name}`;status($('createStatus'),'good',`${fmt.toUpperCase()} created successfully: ${name} (${bytesFmt(blob.size)}).`);}catch(e){console.error(e);status($('createStatus'),'bad',`Archive creation failed: ${e?.message||'Unknown error'}`);$('createProgressLabel').textContent='Archive creation failed';}finally{$('createArchiveBtn').disabled=!createItems.size;} };
+
+  bindDrop($('extractDrop'),$('extractInput'),files=>{if(files?.[0])selectExtract(files[0]);}); $('extractInput').onchange=()=>{if($('extractInput').files?.[0])selectExtract($('extractInput').files[0]);$('extractInput').value='';};
+  function selectExtract(f){ const ext=f.name.toLowerCase().split('.').pop(); if(!['zip','rar'].includes(ext)){status($('extractStatus'),'bad','Please select a .zip or .rar archive.');return;} extractArchiveFile=f; $('selectedArchiveBox').innerHTML=`<strong>${esc(f.name)}</strong><br>${bytesFmt(f.size)} · ${ext.toUpperCase()}`;$('openArchiveBtn').disabled=false; extractedFiles=[];renderExtracted();status($('extractStatus'),'',''); }
+
+  function renderExtracted(){ $('extractList').innerHTML=''; if(!extractedFiles.length)$('extractList').innerHTML='<div class="empty-box">Extracted files will appear here.</div>'; else extractedFiles.forEach((it,idx)=>{const parts=it.path.split('/'); const name=parts.pop(); const folder=parts.join('/'); const row=document.createElement('div'); row.className='file-row'; row.innerHTML=`<div class="file-main"><div class="file-name">${esc(name)}</div><div class="file-path">${folder?esc(folder+'/'):'Archive root'}</div></div><div class="file-size">${bytesFmt(it.blob.size)}</div><div class="remove-cell text-right"><button class="btn-secondary" type="button" title="Download"><i data-lucide="download" class="w-4 h-4"></i></button></div>`; row.querySelector('button').onclick=()=>downloadBlob(it.blob,name); $('extractList').appendChild(row); }); $('extractCount').textContent=`${extractedFiles.length} file${extractedFiles.length===1?'':'s'}`;$('extractActionsCard').classList.toggle('hidden-important',!extractedFiles.length); $('folderSupportNote').textContent='showDirectoryPicker' in window?'Your browser supports saving extracted files directly into a chosen folder.':'This browser does not support direct folder writing; use Download Files or the individual download buttons.'; lucide.createIcons(); }
+
+  async function extractZip(file){ const zip=await JSZip.loadAsync(file); const entries=Object.values(zip.files).filter(x=>!x.dir); const out=[]; let i=0; for(const e of entries){ const path=safePath(e.name); if(!path)continue; const blob=await e.async('blob'); out.push({path,blob}); i++; const p=Math.round(i/Math.max(entries.length,1)*100);$('extractProgressBar').style.width=p+'%';$('extractProgressPercent').textContent=p+'%';$('extractProgressLabel').textContent=`Extracting ${path}`;} return out; }
+  async function extractRar(file){ const password=$('extractPassword').value||undefined; const archive=await RarArchive.open(file,password?{password}:{}); const entries=[...archive.entries]; const files=entries.filter(e=>!(e.isDirectory||String(e.name).endsWith('/'))); const out=[]; let i=0; try{for(const e of files){const path=safePath(e.name); if(!path)continue; const entry=archive.get(e.name); const bytes=await entry.bytes(); out.push({path,blob:new Blob([bytes])}); i++; const p=Math.round(i/Math.max(files.length,1)*100);$('extractProgressBar').style.width=p+'%';$('extractProgressPercent').textContent=p+'%';$('extractProgressLabel').textContent=`Extracting ${path}`;}}finally{archive.close?.();} return out; }
+
+  $('openArchiveBtn').onclick=async()=>{ if(!extractArchiveFile)return; $('openArchiveBtn').disabled=true;$('extractProgressWrap').classList.remove('hidden-important');$('extractProgressBar').style.width='0%';$('extractProgressPercent').textContent='0%';status($('extractStatus'),'',''); try{const rar=extractArchiveFile.name.toLowerCase().endsWith('.rar'); extractedFiles=rar?await extractRar(extractArchiveFile):await extractZip(extractArchiveFile); renderExtracted();$('extractProgressBar').style.width='100%';$('extractProgressPercent').textContent='100%';$('extractProgressLabel').textContent='Extraction complete';status($('extractStatus'),'good',`Extracted ${extractedFiles.length} file${extractedFiles.length===1?'':'s'} from ${extractArchiveFile.name}.`);}catch(e){console.error(e);extractedFiles=[];renderExtracted();status($('extractStatus'),'bad',`Extraction failed: ${e?.message||'The archive may be damaged or password protected.'}`);$('extractProgressLabel').textContent='Extraction failed';}finally{$('openArchiveBtn').disabled=!extractArchiveFile;} };
+
+  async function saveToFolder(){ if(!extractedFiles.length)return; if(!window.showDirectoryPicker){status($('extractStatus'),'warn','Direct folder saving is not supported by this browser. Use Download Files instead.');return;} try{const root=await window.showDirectoryPicker(); for(const it of extractedFiles){const parts=it.path.split('/'); const filename=parts.pop(); let dir=root; for(const p of parts)dir=await dir.getDirectoryHandle(p,{create:true}); const fh=await dir.getFileHandle(filename,{create:true}); const w=await fh.createWritable(); await w.write(it.blob); await w.close();} status($('extractStatus'),'good',`Saved ${extractedFiles.length} extracted file${extractedFiles.length===1?'':'s'} to the selected folder.`);}catch(e){if(e?.name!=='AbortError')status($('extractStatus'),'bad',`Could not save the extracted files: ${e?.message||'Unknown error'}`);} }
+  $('saveFolderBtn').onclick=saveToFolder; $('downloadAllBtn').onclick=async()=>{ if(!extractedFiles.length)return; for(const it of extractedFiles){downloadBlob(it.blob,it.path.split('/').pop()); await new Promise(r=>setTimeout(r,160));} status($('extractStatus'),'good','Download requests were started for the extracted files. Your browser may ask permission for multiple downloads.'); };
+  $('clearExtractBtn').onclick=()=>{extractArchiveFile=null;extractedFiles=[];$('selectedArchiveBox').textContent='No archive selected.';$('openArchiveBtn').disabled=true;$('extractProgressWrap').classList.add('hidden-important');status($('extractStatus'),'','');renderExtracted();};
+
+  const themeToggle=$('themeToggle'),moon=$('moonIcon'),sun=$('sunIcon'); function applyTheme(mode){const dark=mode==='dark';document.body.classList.toggle('dark-mode',dark);moon.classList.toggle('hidden',dark);sun.classList.toggle('hidden',!dark);themeToggle.setAttribute('aria-label',dark?'Switch to light mode':'Switch to dark mode');themeToggle.setAttribute('title',dark?'Switch to light mode':'Switch to dark mode');localStorage.setItem('utiliverse-theme',dark?'dark':'light');lucide.createIcons();} applyTheme(localStorage.getItem('utiliverse-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light')); themeToggle.onclick=()=>applyTheme(document.body.classList.contains('dark-mode')?'light':'dark');
+
+  renderCreate(); renderExtracted(); lucide.createIcons();
+</script>
+</body>
+</html>
