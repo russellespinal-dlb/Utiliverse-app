@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crypto Converter – Convert Bitcoin, Ethereum & Crypto to Fiat | Utiliverse</title>
+<meta name="description" content="Free cryptocurrency converter for Bitcoin, Ethereum, Solana, XRP and other popular coins. Convert crypto to USD, EUR, GBP and more using live market prices.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/Crypto_Converter/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Crypto Converter – Convert Bitcoin, Ethereum & Crypto to Fiat | Utiliverse">
+<meta property="og:description" content="Convert popular cryptocurrencies to fiat currencies or other cryptocurrencies using current market prices.">
+<meta property="og:url" content="https://utiliverse.app/Crypto_Converter/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Crypto Converter | Utiliverse">
+<meta name="twitter:description" content="Convert Bitcoin, Ethereum and other crypto using live market prices.">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+body{background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.10),transparent 32%),#f8fafc}
+body.dark-mode{background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.14),transparent 32%),radial-gradient(circle at 90% 15%,rgba(124,58,237,.08),transparent 28%),#020617!important;color:#f8fafc!important}
+body.dark-mode header{background:rgba(2,6,23,.82)!important;border-color:#1e293b!important;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+body.dark-mode header a{color:#cbd5e1!important} body.dark-mode header a:hover{color:#fff!important}
+body.dark-mode main h1{color:#f8fafc!important} body.dark-mode .hero-copy{color:#94a3b8!important}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border-radius:12px;border:1px solid #cbd5e1;background:#fff;color:#475569;cursor:pointer;box-shadow:none;appearance:none;-webkit-appearance:none;transition:background .2s,color .2s,border-color .2s}
+.theme-toggle:hover{background:#f1f5f9;color:#0f172a;border-color:#94a3b8}
+body.dark-mode .theme-toggle{background:rgba(15,23,42,.72);border-color:#334155;color:#94a3b8}
+body.dark-mode .theme-toggle:hover{background:#1e293b;color:#fff}.theme-icon{width:18px;height:18px;stroke-width:2}
+.free-browser-note{color:#64748b;font-size:12px;font-weight:700;white-space:nowrap} body.dark-mode .free-browser-note{color:#94a3b8}
+.tool-card,.info-section{background:#fff;border:1px solid #e2e8f0;border-radius:1rem;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+body.dark-mode .tool-card,body.dark-mode .info-section{background:rgba(30,41,59,.72)!important;border-color:#334155!important;box-shadow:0 18px 50px rgba(0,0,0,.18)}
+.section-head{padding:1rem 1.15rem;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+body.dark-mode .section-head{border-color:#334155}.section-head h2{font-weight:850;color:#0f172a;display:flex;align-items:center;gap:.55rem} body.dark-mode .section-head h2{color:#f8fafc}
+.label{display:block;font-size:.79rem;font-weight:800;color:#334155;margin-bottom:.4rem} body.dark-mode .label{color:#cbd5e1}
+.field{width:100%;border:1px solid #cbd5e1;background:#fff;color:#0f172a;border-radius:.8rem;padding:.78rem .85rem;outline:none;transition:border-color .2s,box-shadow .2s,background .2s;font-size:1rem}
+.field:focus{border-color:#818cf8;box-shadow:0 0 0 3px rgba(99,102,241,.14)} body.dark-mode .field{background:#0f172a;border-color:#475569;color:#e2e8f0}
+.select-wrap{position:relative}.select-wrap select{padding-left:3rem}
+.asset-badge{position:absolute;left:.7rem;top:50%;transform:translateY(-50%);width:1.85rem;height:1.85rem;border-radius:999px;background:#eef2ff;color:#4338ca;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:900;pointer-events:none}
+body.dark-mode .asset-badge{background:#312e81;color:#e0e7ff}
+.swap-btn{width:46px;height:46px;border-radius:999px;border:1px solid #cbd5e1;background:#fff;color:#4f46e5;display:flex;align-items:center;justify-content:center;margin:0 auto;transition:transform .2s,background .2s}
+.swap-btn:hover{transform:rotate(180deg);background:#eef2ff} body.dark-mode .swap-btn{background:#1e293b;border-color:#475569;color:#a5b4fc} body.dark-mode .swap-btn:hover{background:#312e81}
+.result-card{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;border-radius:1rem;padding:1.25rem}
+.result-label{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;font-weight:850;opacity:.85}.result-value{font-size:2rem;font-weight:950;line-height:1.15;margin-top:.35rem;word-break:break-word}.result-rate{font-size:.88rem;opacity:.88;margin-top:.55rem;line-height:1.5}
+.popular-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.65rem}
+.popular-btn{padding:.8rem .55rem;border:1px solid #e2e8f0;border-radius:.85rem;background:#fff;text-align:center;transition:background .2s,border-color .2s,transform .12s}
+.popular-btn:hover{background:#f8fafc;border-color:#a5b4fc;transform:translateY(-1px)} body.dark-mode .popular-btn{background:#0f172a;border-color:#334155} body.dark-mode .popular-btn:hover{background:#1e293b;border-color:#6366f1}
+.popular-symbol{font-weight:900;color:#0f172a}.popular-name{font-size:.72rem;color:#64748b;margin-top:.16rem} body.dark-mode .popular-symbol{color:#f8fafc}
+.price-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
+.price-card{padding:.9rem;border:1px solid #e2e8f0;border-radius:.85rem;background:#f8fafc;display:flex;align-items:center;justify-content:space-between;gap:.8rem}
+body.dark-mode .price-card{background:#0f172a;border-color:#334155}.price-name{font-size:.82rem;font-weight:800;color:#0f172a}.price-symbol{font-size:.72rem;color:#64748b;margin-top:.15rem}.price-value{font-size:.88rem;font-weight:900;color:#0f172a;text-align:right}.price-change{font-size:.72rem;font-weight:800;text-align:right;margin-top:.15rem}.up{color:#059669}.down{color:#dc2626}.flat{color:#64748b}
+body.dark-mode .price-name,body.dark-mode .price-value{color:#f8fafc}
+.btn-secondary{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;border-radius:.75rem;font-weight:800;background:#fff;color:#334155;border:1px solid #cbd5e1;padding:.68rem .9rem;transition:background .2s,border-color .2s,transform .12s}
+.btn-secondary:hover{background:#f8fafc;border-color:#94a3b8} body.dark-mode .btn-secondary{background:#1e293b;color:#e2e8f0;border-color:#475569} body.dark-mode .btn-secondary:hover{background:#334155}
+.status{border-radius:.8rem;padding:.8rem .9rem;font-size:.83rem;line-height:1.5;display:flex;align-items:flex-start;gap:.55rem}.status.good{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46}.status.warn{background:#fffbeb;border:1px solid #fde68a;color:#92400e}.status.bad{background:#fef2f2;border:1px solid #fecaca;color:#991b1b}
+body.dark-mode .status.good{background:rgba(6,78,59,.22);border-color:#065f46;color:#a7f3d0} body.dark-mode .status.warn{background:rgba(120,53,15,.22);border-color:#92400e;color:#fde68a} body.dark-mode .status.bad{background:rgba(127,29,29,.22);border-color:#991b1b;color:#fecaca}
+.meta-row{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.76rem;color:#64748b}
+.info-wrap{width:100%;max-width:72rem;margin:3.5rem auto 0}.info-section{padding:1.5rem}.info-section+.info-section{margin-top:1.5rem}
+.info-section h2{font-size:1.65rem;line-height:1.25;font-weight:800;color:#0f172a;margin:0 0 .9rem;letter-spacing:-.02em}.info-section h3{font-size:1.06rem;line-height:1.4;font-weight:800;color:#1e293b;margin:1.4rem 0 .45rem}.info-section p,.info-section li{color:#475569;line-height:1.82;font-size:.98rem}.info-section p{margin:.8rem 0}
+body.dark-mode .info-section h2{color:#f8fafc!important} body.dark-mode .info-section h3{color:#e2e8f0!important} body.dark-mode .info-section p,body.dark-mode .info-section li{color:#94a3b8!important}
+.faq-item{border-bottom:1px solid #e2e8f0}.faq-item:last-child{border-bottom:0}.faq-item summary{list-style:none;cursor:pointer;padding:1rem 0;font-weight:800;color:#0f172a;display:flex;align-items:center;justify-content:space-between;gap:1rem}.faq-item summary::-webkit-details-marker{display:none}.faq-item summary::after{content:"+";font-size:1.2rem;color:#64748b}.faq-item[open] summary::after{content:"−"}.faq-item p{margin:0;padding:0 0 1rem} body.dark-mode .faq-item{border-color:#334155} body.dark-mode .faq-item summary{color:#e2e8f0}
+@media(min-width:640px){.info-section{padding:2rem}} @media(max-width:760px){.popular-grid{grid-template-columns:repeat(2,minmax(0,1fr))}} @media(max-width:640px){.free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}.theme-toggle{width:38px;height:38px}.price-grid{grid-template-columns:1fr}.result-value{font-size:1.65rem}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Crypto Converter","url":"https://utiliverse.app/Crypto_Converter/","applicationCategory":"FinanceApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled and internet access for live prices.","description":"Free cryptocurrency converter for converting popular cryptocurrencies to fiat currencies and other cryptocurrencies using current market prices.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+<header class="sticky top-0 z-50 bg-white/80 backdrop-filter backdrop-blur-lg border-b border-slate-200">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<a href="https://utiliverse.app" class="flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-slate-900 transition"><i data-lucide="arrow-left" class="w-4 h-4"></i><span>Back to Utiliverse</span></a>
+<div class="flex items-center gap-4"><div class="free-browser-note">100% Free and Browser Based</div><button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode"><i id="moonIcon" data-lucide="moon" class="theme-icon"></i><i id="sunIcon" data-lucide="sun" class="theme-icon hidden"></i></button></div>
+</div></header>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+<div class="mb-6"><h1 class="text-3xl font-bold text-slate-900 flex items-center gap-3"><i data-lucide="bitcoin" class="w-8 h-8 text-indigo-600"></i>Crypto Converter</h1><p class="hero-copy text-slate-500 mt-2 text-sm max-w-3xl">Convert popular cryptocurrencies to fiat currencies or other cryptocurrencies using current market prices.</p></div>
+
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
+Paste approved Google AdSense code here after approval.
+This comment is intentionally invisible and reserves no space. -->
+
+<div class="grid grid-cols-1 xl:grid-cols-[1.05fr_.95fr] gap-6">
+<div class="space-y-6">
+<section class="tool-card overflow-hidden">
+<div class="section-head"><h2><i data-lucide="repeat-2" class="w-5 h-5 text-indigo-600"></i> Convert Cryptocurrency</h2><button id="refreshBtn" type="button" class="btn-secondary"><i data-lucide="refresh-cw" class="w-4 h-4"></i> Refresh Prices</button></div>
+<div class="p-5 sm:p-6">
+<label class="label" for="amountInput">Amount</label><input id="amountInput" class="field" type="number" min="0" step="any" value="1" inputmode="decimal">
+<div class="grid grid-cols-1 md:grid-cols-[1fr_60px_1fr] gap-4 items-end mt-4">
+<div><label class="label" for="fromAsset">From</label><div class="select-wrap"><div id="fromBadge" class="asset-badge">BTC</div><select id="fromAsset" class="field"></select></div></div>
+<div class="flex items-end justify-center pb-1"><button id="swapBtn" class="swap-btn" type="button" aria-label="Swap currencies" title="Swap currencies"><i data-lucide="arrow-down-up" class="w-5 h-5"></i></button></div>
+<div><label class="label" for="toAsset">To</label><div class="select-wrap"><div id="toBadge" class="asset-badge">USD</div><select id="toAsset" class="field"></select></div></div>
+</div>
+<div class="result-card mt-5"><div class="result-label">Converted Amount</div><div id="resultValue" class="result-value">Loading prices…</div><div id="resultRate" class="result-rate">Fetching current market data.</div></div>
+<div id="statusArea" class="mt-4"></div>
+<div class="meta-row mt-4"><span id="updatedAt">Last updated: —</span><span>Reference prices only · No trades are executed</span></div>
+</div></section>
+
+<section class="tool-card overflow-hidden"><div class="section-head"><h2><i data-lucide="star" class="w-5 h-5 text-indigo-600"></i> Popular Cryptocurrencies</h2></div><div class="p-5 sm:p-6"><div id="popularGrid" class="popular-grid"></div></div></section>
+</div>
+
+<section class="tool-card overflow-hidden"><div class="section-head"><h2><i data-lucide="chart-no-axes-column-increasing" class="w-5 h-5 text-indigo-600"></i> Live Crypto Prices (USD)</h2></div><div class="p-5 sm:p-6"><div id="priceGrid" class="price-grid"></div><p class="text-xs text-slate-500 mt-4 leading-relaxed">Prices and 24-hour changes are market-reference values and can differ from individual exchanges.</p></div></section>
+</div>
+
+<!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
+Paste approved Google AdSense code here after approval.
+This comment is intentionally invisible and reserves no space. -->
+
+<div class="info-wrap">
+<section class="info-section">
+<h2>Free Online Cryptocurrency Converter</h2>
+<p>The Utiliverse Crypto Converter is a browser-based calculator for estimating the current value of popular cryptocurrencies in major fiat currencies or in another cryptocurrency. It supports Bitcoin, Ethereum, Tether, BNB, Solana, XRP, Cardano, Dogecoin, Avalanche, Chainlink, Litecoin, Polkadot, Bitcoin Cash, Stellar, Shiba Inu, Toncoin, Uniswap, NEAR, Dai, and USD Coin, along with major fiat currencies such as USD, EUR, GBP, JPY, CAD, AUD, CHF, INR, KRW, BRL, MXN, SGD, HKD, NZD, SEK, NOK, DKK, PLN, ZAR, and TRY.</p>
+<p>The converter retrieves current market-reference prices and performs the conversion in your browser. It does not connect to a wallet, transfer tokens, execute a trade, or charge a transaction fee. The displayed result is therefore an estimate based on market data, not a guaranteed amount you would receive from a particular exchange.</p>
+</section>
+
+<section class="info-section">
+<h2>How to Use the Crypto Converter</h2>
+<h3>Enter the amount you want to convert</h3>
+<p>Begin by typing an amount in the Amount field. You can enter a whole number such as 1 Bitcoin, a fraction such as 0.025 BTC, or a fiat amount such as 500 USD. Cryptocurrency values often involve many decimal places, so the calculator accepts fractional quantities and automatically adjusts the displayed precision based on the size of the result.</p>
+<h3>Select the source asset</h3>
+<p>Choose the cryptocurrency or fiat currency you are starting with. Select BTC if you want to know the value of a Bitcoin amount, ETH for Ethereum, or USD if you want to determine how much cryptocurrency a dollar amount could represent at the current reference price. Crypto and fiat currencies are grouped separately in the selector.</p>
+<h3>Select the target asset</h3>
+<p>Choose the asset you want to convert into. BTC to USD shows the estimated dollar value of Bitcoin, while USD to BTC reverses the calculation. You can also convert one cryptocurrency to another, such as BTC to ETH or SOL to XRP.</p>
+<h3>Use the swap button</h3>
+<p>The swap control reverses the From and To selections without changing the entered amount. It is useful for quickly comparing both directions of a conversion.</p>
+<h3>Use popular-coin shortcuts</h3>
+<p>The Popular Cryptocurrencies panel provides quick access to commonly searched assets. Selecting one makes that cryptocurrency the source asset while preserving the current target currency whenever possible.</p>
+<h3>Read the live-price overview</h3>
+<p>The price panel displays current USD reference prices for major cryptocurrencies together with their reported 24-hour percentage change when available. Positive and negative changes are informational only and should not be treated as trading signals.</p>
+<h3>Crypto-to-fiat calculations</h3>
+<p>When converting cryptocurrency to fiat, the calculator multiplies the crypto amount by the current reference price in the selected fiat currency. Actual exchange proceeds may differ because of bid-ask spreads, trading fees, market movement, withdrawal fees, taxes, or slippage.</p>
+<h3>Fiat-to-crypto calculations</h3>
+<p>For fiat-to-crypto conversions, the calculator divides the fiat amount by the current crypto price in that fiat currency. An exchange purchase may result in slightly fewer units after fees and spreads.</p>
+<h3>Crypto-to-crypto calculations</h3>
+<p>Crypto-to-crypto conversion uses a common USD reference price for both assets. The calculator determines the USD value of the source cryptocurrency and divides that value by the USD price of the target cryptocurrency.</p>
+<h2 class="mt-8">Practical Uses for a Crypto Converter</h2>
+<h3>Checking the value of a crypto balance</h3>
+<p>If you know how much Bitcoin, Ethereum, Solana, or another supported cryptocurrency you hold, enter that amount and convert it into your preferred fiat currency for a quick reference value.</p>
+<h3>Estimating a potential purchase</h3>
+<p>Select a fiat currency first and a cryptocurrency second to estimate how much crypto a given amount of money could represent before exchange fees.</p>
+<h3>Comparing cryptocurrencies</h3>
+<p>Crypto-to-crypto conversion makes relative values easier to understand by showing the approximate market relationship between two assets.</p>
+<h3>International reference values</h3>
+<p>Convert crypto into euros, pounds, Canadian dollars, yen, rupees, won, or another supported fiat currency to make global market prices easier to interpret.</p>
+<h3>Checking a quoted transaction</h3>
+<p>Compare a quoted crypto transaction with the current reference conversion, then account for the platform's disclosed fees and spread. A difference does not automatically indicate an error because venues can use different pricing models.</p>
+<h3>Understanding volatility</h3>
+<p>Cryptocurrency prices can move rapidly. Use Refresh Prices for a newer snapshot, and verify the executable price on the exchange or service you actually intend to use before making a transaction.</p>
+</section>
+
+<section class="info-section">
+<h2>Crypto Converter FAQ</h2>
+<details class="faq-item"><summary>How does the cryptocurrency converter calculate values?</summary><p>It retrieves current reference prices and multiplies or divides the entered amount according to the selected assets. Crypto-to-crypto conversions use the USD prices of both cryptocurrencies.</p></details>
+<details class="faq-item"><summary>Can I convert Bitcoin to US dollars?</summary><p>Yes. Select Bitcoin as the source, USD as the target, and enter the amount of Bitcoin you want to value.</p></details>
+<details class="faq-item"><summary>Can I convert dollars into Bitcoin or Ethereum?</summary><p>Yes. Select a supported fiat currency as the source and a supported cryptocurrency as the target.</p></details>
+<details class="faq-item"><summary>Can I convert one cryptocurrency to another?</summary><p>Yes. Select two supported cryptocurrencies and the tool calculates an approximate cross-rate from their USD reference prices.</p></details>
+<details class="faq-item"><summary>Why is the price different from my exchange?</summary><p>Prices vary by venue because of spreads, liquidity, fees, timing, regional demand, and market movement.</p></details>
+<details class="faq-item"><summary>Does the converter buy or sell cryptocurrency?</summary><p>No. It does not connect to wallets or exchanges and does not execute trades.</p></details>
+<details class="faq-item"><summary>How often do prices update?</summary><p>The page requests data when it loads, when you press Refresh Prices, and periodically while it remains open. API caching can still cause small delays.</p></details>
+<details class="faq-item"><summary>Is this financial advice?</summary><p>No. It is an informational utility and crypto markets are volatile.</p></details>
+</section>
+
+<!-- GOOGLE ADSENSE: BOTTOM / AFTER-CONTENT INSERTION POINT
+Paste approved Google AdSense code here after approval.
+This comment is intentionally invisible and reserves no space. -->
+</div>
+</main>
+
+<footer class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-6 pt-2"><div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-500"><div>© 2026 Utiliverse. All rights reserved.</div><div class="font-semibold text-right">100% Free and Browser Based</div></div></footer>
+
+<script>
+(()=>{
+const API="https://api.coingecko.com/api/v3";
+const cryptos=[
+{id:"bitcoin",symbol:"BTC",name:"Bitcoin"},{id:"ethereum",symbol:"ETH",name:"Ethereum"},{id:"tether",symbol:"USDT",name:"Tether"},{id:"binancecoin",symbol:"BNB",name:"BNB"},{id:"solana",symbol:"SOL",name:"Solana"},{id:"ripple",symbol:"XRP",name:"XRP"},{id:"cardano",symbol:"ADA",name:"Cardano"},{id:"dogecoin",symbol:"DOGE",name:"Dogecoin"},{id:"avalanche-2",symbol:"AVAX",name:"Avalanche"},{id:"chainlink",symbol:"LINK",name:"Chainlink"},{id:"litecoin",symbol:"LTC",name:"Litecoin"},{id:"polkadot",symbol:"DOT",name:"Polkadot"},{id:"bitcoin-cash",symbol:"BCH",name:"Bitcoin Cash"},{id:"stellar",symbol:"XLM",name:"Stellar"},{id:"shiba-inu",symbol:"SHIB",name:"Shiba Inu"},{id:"the-open-network",symbol:"TON",name:"Toncoin"},{id:"uniswap",symbol:"UNI",name:"Uniswap"},{id:"near",symbol:"NEAR",name:"NEAR Protocol"},{id:"dai",symbol:"DAI",name:"Dai"},{id:"usd-coin",symbol:"USDC",name:"USD Coin"}];
+const fiats=[{code:"usd",symbol:"USD",name:"US Dollar"},{code:"eur",symbol:"EUR",name:"Euro"},{code:"gbp",symbol:"GBP",name:"British Pound"},{code:"jpy",symbol:"JPY",name:"Japanese Yen"},{code:"cad",symbol:"CAD",name:"Canadian Dollar"},{code:"aud",symbol:"AUD",name:"Australian Dollar"},{code:"chf",symbol:"CHF",name:"Swiss Franc"},{code:"inr",symbol:"INR",name:"Indian Rupee"},{code:"krw",symbol:"KRW",name:"South Korean Won"},{code:"brl",symbol:"BRL",name:"Brazilian Real"},{code:"mxn",symbol:"MXN",name:"Mexican Peso"},{code:"sgd",symbol:"SGD",name:"Singapore Dollar"},{code:"hkd",symbol:"HKD",name:"Hong Kong Dollar"},{code:"nzd",symbol:"NZD",name:"New Zealand Dollar"},{code:"sek",symbol:"SEK",name:"Swedish Krona"},{code:"nok",symbol:"NOK",name:"Norwegian Krone"},{code:"dkk",symbol:"DKK",name:"Danish Krone"},{code:"pln",symbol:"PLN",name:"Polish Zloty"},{code:"zar",symbol:"ZAR",name:"South African Rand"},{code:"try",symbol:"TRY",name:"Turkish Lira"}];
+const popularIds=["bitcoin","ethereum","tether","binancecoin","solana","ripple","cardano","dogecoin"],tableIds=[...popularIds];
+const $=id=>document.getElementById(id),amountInput=$("amountInput"),fromAsset=$("fromAsset"),toAsset=$("toAsset"),resultValue=$("resultValue"),resultRate=$("resultRate"),statusArea=$("statusArea");
+let cache={},loading=false;
+function key(t,id){return t+":"+id}
+function buildOptions(sel,selected){sel.innerHTML="";const cg=document.createElement("optgroup");cg.label="Cryptocurrencies";cryptos.forEach(c=>{const o=document.createElement("option");o.value=key("crypto",c.id);o.textContent=`${c.symbol} — ${c.name}`;cg.appendChild(o)});const fg=document.createElement("optgroup");fg.label="Fiat Currencies";fiats.forEach(f=>{const o=document.createElement("option");o.value=key("fiat",f.code);o.textContent=`${f.symbol} — ${f.name}`;fg.appendChild(o)});sel.append(cg,fg);sel.value=selected}
+function asset(v){const [t,id]=v.split(":");if(t==="crypto")return {...cryptos.find(c=>c.id===id),type:t};return {...fiats.find(f=>f.code===id),type:t,id}}
+function fmt(v,a){if(!Number.isFinite(v))return"—";const x=Math.abs(v);let m=2;if(a.type==="crypto")m=x<.000001?10:x<.01?8:x<1?6:4;else m=x<1?4:2;return v.toLocaleString(undefined,{maximumFractionDigits:m})}
+function pf(v){if(!Number.isFinite(v))return"—";if(v>=1000)return"$"+v.toLocaleString(undefined,{maximumFractionDigits:2});if(v>=1)return"$"+v.toLocaleString(undefined,{maximumFractionDigits:4});if(v>=.01)return"$"+v.toLocaleString(undefined,{maximumFractionDigits:6});return"$"+v.toLocaleString(undefined,{maximumFractionDigits:10})}
+function status(t,m){if(!t||!m){statusArea.innerHTML="";return}const i=t==="good"?"circle-check":t==="warn"?"triangle-alert":"circle-alert";statusArea.innerHTML=`<div class="status ${t}"><i data-lucide="${i}" class="w-4 h-4 flex-none mt-0.5"></i><div>${m}</div></div>`;lucide.createIcons()}
+async function fetchPrices(){if(loading)return;loading=true;$("refreshBtn").disabled=true;status("warn","Refreshing cryptocurrency prices…");try{const ids=cryptos.map(c=>c.id).join(","),vs=fiats.map(f=>f.code).join(",");const r=await fetch(`${API}/simple/price?ids=${encodeURIComponent(ids)}&vs_currencies=${encodeURIComponent(vs)}&include_24hr_change=true&include_last_updated_at=true`,{headers:{Accept:"application/json"}});if(!r.ok)throw new Error("HTTP "+r.status);cache=await r.json();const stamps=Object.values(cache).map(v=>v.last_updated_at).filter(Boolean);$("updatedAt").textContent="Last updated: "+new Date((stamps.length?Math.max(...stamps)*1000:Date.now())).toLocaleString();renderTable();convert();status("good","Live reference prices updated successfully.")}catch(e){console.error(e);status("bad","Live prices could not be loaded. The public market-data service may be temporarily unavailable or rate-limited. Please try Refresh Prices again shortly.");resultValue.textContent="Price data unavailable";resultRate.textContent="A live price is required for this conversion."}finally{loading=false;$("refreshBtn").disabled=false}}
+function cp(id,fiat){return Number(cache?.[id]?.[fiat])}
+function convert(){const amt=Number(amountInput.value);if(!Number.isFinite(amt)||amt<0){resultValue.textContent="Enter a valid amount";resultRate.textContent="Amount must be zero or greater.";return}const f=asset(fromAsset.value),t=asset(toAsset.value);$("fromBadge").textContent=f.symbol.slice(0,4);$("toBadge").textContent=t.symbol.slice(0,4);if(f.type===t.type&&f.id===t.id){resultValue.textContent=`${fmt(amt,t)} ${t.symbol}`;resultRate.textContent=`1 ${f.symbol} = 1 ${t.symbol}`;return}let out,rate;if(f.type==="crypto"&&t.type==="fiat"){const p=cp(f.id,t.id);if(!Number.isFinite(p))return missing();rate=p;out=amt*p}else if(f.type==="fiat"&&t.type==="crypto"){const p=cp(t.id,f.id);if(!Number.isFinite(p)||p===0)return missing();rate=1/p;out=amt/p}else if(f.type==="crypto"&&t.type==="crypto"){const a=cp(f.id,"usd"),b=cp(t.id,"usd");if(!Number.isFinite(a)||!Number.isFinite(b)||b===0)return missing();rate=a/b;out=amt*rate}else{resultValue.textContent="Select at least one cryptocurrency";resultRate.textContent="This tool is designed for crypto ↔ fiat and crypto ↔ crypto conversions.";return}resultValue.textContent=`${fmt(out,t)} ${t.symbol}`;resultRate.textContent=`1 ${f.symbol} ≈ ${fmt(rate,t)} ${t.symbol}`}
+function missing(){resultValue.textContent="Loading price…";resultRate.textContent="Current market data is not available for this pair yet."}
+function renderPopular(){const g=$("popularGrid");g.innerHTML="";popularIds.forEach(id=>{const c=cryptos.find(x=>x.id===id),b=document.createElement("button");b.className="popular-btn";b.type="button";b.innerHTML=`<div class="popular-symbol">${c.symbol}</div><div class="popular-name">${c.name}</div>`;b.onclick=()=>{fromAsset.value=key("crypto",c.id);if(fromAsset.value===toAsset.value)toAsset.value=key("fiat","usd");convert()};g.appendChild(b)})}
+function renderTable(){const g=$("priceGrid");g.innerHTML="";tableIds.forEach(id=>{const c=cryptos.find(x=>x.id===id),p=Number(cache?.[id]?.usd),ch=Number(cache?.[id]?.usd_24h_change),d=document.createElement("div");d.className="price-card";const cls=!Number.isFinite(ch)?"flat":ch>0?"up":ch<0?"down":"flat",sign=Number.isFinite(ch)&&ch>0?"+":"";d.innerHTML=`<div><div class="price-name">${c.name}</div><div class="price-symbol">${c.symbol}</div></div><div><div class="price-value">${pf(p)}</div><div class="price-change ${cls}">${Number.isFinite(ch)?sign+ch.toFixed(2)+"%":"—"}</div></div>`;g.appendChild(d)})}
+buildOptions(fromAsset,key("crypto","bitcoin"));buildOptions(toAsset,key("fiat","usd"));renderPopular();
+amountInput.oninput=convert;fromAsset.onchange=convert;toAsset.onchange=convert;$("swapBtn").onclick=()=>{const a=fromAsset.value;fromAsset.value=toAsset.value;toAsset.value=a;convert()};$("refreshBtn").onclick=fetchPrices;
+const themeToggle=$("themeToggle"),moon=$("moonIcon"),sun=$("sunIcon");function applyTheme(m){const d=m==="dark";document.body.classList.toggle("dark-mode",d);moon.classList.toggle("hidden",d);sun.classList.toggle("hidden",!d);themeToggle.setAttribute("aria-label",d?"Switch to light mode":"Switch to dark mode");themeToggle.setAttribute("title",d?"Switch to light mode":"Switch to dark mode");localStorage.setItem("utiliverse-theme",d?"dark":"light");lucide.createIcons()}applyTheme(localStorage.getItem("utiliverse-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));themeToggle.onclick=()=>applyTheme(document.body.classList.contains("dark-mode")?"light":"dark");
+fetchPrices();setInterval(fetchPrices,60000);lucide.createIcons();
+})();
+</script>
+</body>
+</html>
