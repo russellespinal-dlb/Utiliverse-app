@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Sleep Calculator – Bedtime, Wake Time & Sleep Cycles | Utiliverse</title>
+  <meta name="description" content="Free sleep calculator. Find recommended bedtimes or wake-up times using adjustable sleep-cycle estimates, fall-asleep time, age guidance, and target sleep duration.">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#020617">
+  <link rel="canonical" href="https://utiliverse.app/Sleep_Calculator/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Utiliverse">
+  <meta property="og:title" content="Sleep Calculator – Bedtime, Wake Time & Sleep Cycles | Utiliverse">
+  <meta property="og:description" content="Calculate recommended sleep and wake times with sleep-cycle and duration estimates.">
+  <meta property="og:url" content="https://utiliverse.app/Sleep_Calculator/">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Sleep Calculator | Utiliverse">
+  <meta name="twitter:description" content="Estimate ideal bedtimes, wake-up times, sleep cycles, and total sleep duration.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    body{
+      background:
+        radial-gradient(circle at 10% 0%, rgba(99,102,241,.10), transparent 32%),
+        #f8fafc;
+    }
+    body.dark-mode{
+      background:
+        radial-gradient(circle at 10% 0%, rgba(99,102,241,.14), transparent 32%),
+        radial-gradient(circle at 90% 15%, rgba(124,58,237,.08), transparent 28%),
+        #020617!important;
+      color:#f8fafc!important;
+    }
+    body.dark-mode header{
+      background:rgba(2,6,23,.82)!important;
+      border-color:#1e293b!important;
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+    }
+    body.dark-mode header a{color:#cbd5e1!important}
+    body.dark-mode header a:hover{color:#fff!important}
+    body.dark-mode main h1{color:#f8fafc!important}
+    body.dark-mode .hero-copy{color:#94a3b8!important}
+
+    .theme-toggle{
+      display:inline-flex;align-items:center;justify-content:center;
+      width:40px;height:40px;padding:0;border-radius:12px;
+      border:1px solid #cbd5e1;background:#fff;color:#475569;
+      cursor:pointer;box-shadow:none;appearance:none;-webkit-appearance:none;
+      transition:background .2s,color .2s,border-color .2s;
+    }
+    .theme-toggle:hover{background:#f1f5f9;color:#0f172a;border-color:#94a3b8}
+    body.dark-mode .theme-toggle{background:rgba(15,23,42,.72);border-color:#334155;color:#94a3b8}
+    body.dark-mode .theme-toggle:hover{background:#1e293b;color:#fff}
+    .theme-icon{width:18px;height:18px;stroke-width:2}
+
+    .free-browser-note{color:#64748b;font-size:12px;font-weight:700;white-space:nowrap}
+    body.dark-mode .free-browser-note{color:#94a3b8}
+
+    .tool-card,.info-section{
+      background:#fff;border:1px solid #e2e8f0;border-radius:1rem;
+      box-shadow:0 1px 2px rgba(15,23,42,.04);
+    }
+    body.dark-mode .tool-card,body.dark-mode .info-section{
+      background:rgba(30,41,59,.72)!important;
+      border-color:#334155!important;
+      box-shadow:0 18px 50px rgba(0,0,0,.18);
+    }
+
+    .section-head{
+      padding:1rem 1.15rem;border-bottom:1px solid #e2e8f0;
+      display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+    }
+    body.dark-mode .section-head{border-color:#334155}
+    .section-head h2{font-weight:850;color:#0f172a;display:flex;align-items:center;gap:.55rem}
+    body.dark-mode .section-head h2{color:#f8fafc}
+
+    .label{display:block;font-size:.79rem;font-weight:800;color:#334155;margin-bottom:.4rem}
+    body.dark-mode .label{color:#cbd5e1}
+
+    .field{
+      width:100%;border:1px solid #cbd5e1;background:#fff;color:#0f172a;
+      border-radius:.8rem;padding:.75rem .82rem;outline:none;font-size:1rem;
+      transition:border-color .2s,box-shadow .2s,background .2s;
+    }
+    .field:focus{border-color:#818cf8;box-shadow:0 0 0 3px rgba(99,102,241,.14)}
+    body.dark-mode .field{background:#0f172a;border-color:#475569;color:#e2e8f0}
+
+    .mode-tabs{
+      display:grid;grid-template-columns:1fr 1fr;
+      border:1px solid #cbd5e1;border-radius:.85rem;padding:.25rem;gap:.25rem;background:#f8fafc;
+    }
+    body.dark-mode .mode-tabs{background:#0f172a;border-color:#475569}
+    .mode-tab{
+      border:0;border-radius:.65rem;padding:.72rem .8rem;font-weight:850;
+      color:#64748b;background:transparent;display:flex;align-items:center;justify-content:center;gap:.45rem;
+    }
+    .mode-tab.active{background:#4f46e5;color:#fff}
+    body.dark-mode .mode-tab:not(.active){color:#94a3b8}
+
+    .quick-mins{display:flex;flex-wrap:wrap;gap:.5rem}
+    .quick-min{
+      padding:.48rem .65rem;border-radius:.7rem;border:1px solid #cbd5e1;background:#fff;
+      color:#475569;font-size:.78rem;font-weight:800;
+    }
+    .quick-min.active,.quick-min:hover{background:#eef2ff;border-color:#a5b4fc;color:#4338ca}
+    body.dark-mode .quick-min{background:#0f172a;border-color:#475569;color:#cbd5e1}
+    body.dark-mode .quick-min.active,body.dark-mode .quick-min:hover{background:#312e81;border-color:#6366f1;color:#e0e7ff}
+
+    .btn-primary,.btn-secondary{
+      display:inline-flex;align-items:center;justify-content:center;gap:.45rem;
+      border-radius:.75rem;font-weight:800;transition:background .2s,border-color .2s,transform .12s;
+    }
+    .btn-primary{background:#4f46e5;color:#fff;padding:.74rem 1rem}
+    .btn-primary:hover{background:#4338ca;transform:translateY(-1px)}
+    .btn-secondary{background:#fff;color:#334155;border:1px solid #cbd5e1;padding:.68rem .9rem}
+    .btn-secondary:hover{background:#f8fafc;border-color:#94a3b8}
+    body.dark-mode .btn-secondary{background:#1e293b;color:#e2e8f0;border-color:#475569}
+    body.dark-mode .btn-secondary:hover{background:#334155}
+
+    .recommendation{
+      border:1px solid #e2e8f0;border-radius:.9rem;padding:1rem;background:#f8fafc;
+      display:grid;grid-template-columns:auto 1fr auto;gap:.85rem;align-items:center;
+    }
+    body.dark-mode .recommendation{background:#0f172a;border-color:#334155}
+    .rec-rank{
+      width:38px;height:38px;border-radius:999px;background:#eef2ff;color:#4338ca;
+      display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:900;
+    }
+    body.dark-mode .rec-rank{background:#312e81;color:#e0e7ff}
+    .rec-time{font-size:1.15rem;font-weight:900;color:#0f172a}
+    .rec-meta{font-size:.77rem;color:#64748b;margin-top:.15rem}
+    .rec-badge{
+      border-radius:999px;padding:.34rem .55rem;font-size:.7rem;font-weight:850;white-space:nowrap;
+      background:#ecfdf5;color:#047857;
+    }
+    body.dark-mode .rec-time{color:#f8fafc}
+    body.dark-mode .rec-badge{background:rgba(6,78,59,.28);color:#a7f3d0}
+
+    .summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem}
+    .summary-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:.85rem;padding:.9rem}
+    body.dark-mode .summary-box{background:#0f172a;border-color:#334155}
+    .summary-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;font-weight:850;color:#64748b}
+    .summary-value{font-size:1.08rem;font-weight:900;color:#0f172a;margin-top:.3rem}
+    body.dark-mode .summary-value{color:#f8fafc}
+
+    .age-note{
+      border:1px solid #dbeafe;background:#eff6ff;color:#1e3a8a;border-radius:.85rem;padding:.9rem;
+      font-size:.82rem;line-height:1.6;
+    }
+    body.dark-mode .age-note{background:rgba(30,58,138,.22);border-color:#1e40af;color:#bfdbfe}
+
+    .status{
+      border-radius:.8rem;padding:.78rem .9rem;font-size:.82rem;line-height:1.5;
+      display:flex;align-items:flex-start;gap:.55rem;
+    }
+    .status.warn{background:#fffbeb;border:1px solid #fde68a;color:#92400e}
+    body.dark-mode .status.warn{background:rgba(120,53,15,.22);border-color:#92400e;color:#fde68a}
+
+    .info-wrap{width:100%;max-width:72rem;margin:3.5rem auto 0}
+    .info-section{padding:1.5rem}
+    .info-section+.info-section{margin-top:1.5rem}
+    .info-section h2{font-size:1.65rem;line-height:1.25;font-weight:800;color:#0f172a;margin:0 0 .9rem;letter-spacing:-.02em}
+    .info-section h3{font-size:1.06rem;line-height:1.4;font-weight:800;color:#1e293b;margin:1.4rem 0 .45rem}
+    .info-section p,.info-section li{color:#475569;line-height:1.82;font-size:.98rem}
+    .info-section p{margin:.8rem 0}
+    .info-section ul{padding-left:1.25rem;margin:.75rem 0}
+    body.dark-mode .info-section h2{color:#f8fafc!important}
+    body.dark-mode .info-section h3{color:#e2e8f0!important}
+    body.dark-mode .info-section p,body.dark-mode .info-section li{color:#94a3b8!important}
+
+    .faq-item{border-bottom:1px solid #e2e8f0}
+    .faq-item:last-child{border-bottom:0}
+    .faq-item summary{
+      list-style:none;cursor:pointer;padding:1rem 0;font-weight:800;color:#0f172a;
+      display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    }
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:"+";font-size:1.2rem;color:#64748b}
+    .faq-item[open] summary::after{content:"−"}
+    .faq-item p{margin:0;padding:0 0 1rem}
+    body.dark-mode .faq-item{border-color:#334155}
+    body.dark-mode .faq-item summary{color:#e2e8f0}
+
+    .hidden-important{display:none!important}
+
+    @media(min-width:640px){.info-section{padding:2rem}}
+    @media(max-width:640px){
+      .free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}
+      .theme-toggle{width:38px;height:38px}
+      .summary-grid{grid-template-columns:1fr}
+      .recommendation{grid-template-columns:auto 1fr}
+      .rec-badge{grid-column:2}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebApplication",
+    "name":"Utiliverse Sleep Calculator",
+    "url":"https://utiliverse.app/Sleep_Calculator/",
+    "applicationCategory":"HealthApplication",
+    "operatingSystem":"Any",
+    "browserRequirements":"Requires a modern web browser with JavaScript enabled.",
+    "description":"Free sleep calculator for estimating bedtime, wake time, sleep cycles, fall-asleep time and recommended sleep windows.",
+    "isAccessibleForFree":true,
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+    "featureList":[
+      "Calculate bedtime from wake time",
+      "Calculate wake time from bedtime",
+      "Adjust time to fall asleep",
+      "Adjust estimated sleep-cycle length",
+      "Show several recommended sleep windows",
+      "Age-based sleep-duration guidance",
+      "12-hour and 24-hour time display",
+      "Browser-based calculations"
+    ]
+  }
+  </script>
+</head>
+
+<!--
+SEO TARGET CLUSTER
+Primary: sleep calculator
+Secondary: bedtime calculator, wake up time calculator, sleep cycle calculator,
+what time should I go to bed, what time should I wake up, 90 minute sleep cycle,
+ideal bedtime calculator, sleep schedule calculator, sleep duration calculator
+
+ADSENSE NOTE
+Approved Google AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+
+<header class="sticky top-0 z-50 bg-white/80 backdrop-filter backdrop-blur-lg border-b border-slate-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="https://utiliverse.app" class="flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-slate-900 transition">
+      <i data-lucide="arrow-left" class="w-4 h-4"></i>
+      <span>Back to Utiliverse</span>
+    </a>
+    <div class="flex items-center gap-4">
+      <div class="free-browser-note">100% Free and Browser Based</div>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
+        <i id="moonIcon" data-lucide="moon" class="theme-icon"></i>
+        <i id="sunIcon" data-lucide="sun" class="theme-icon hidden"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold text-slate-900 flex items-center gap-3">
+      <i data-lucide="moon-star" class="w-8 h-8 text-indigo-600"></i>
+      Sleep Calculator
+    </h1>
+    <p class="hero-copy text-slate-500 mt-2 text-sm max-w-3xl">
+      Estimate when to go to bed or when to wake up using adjustable sleep-cycle and sleep-onset assumptions.
+    </p>
+  </div>
+
+  <!-- =========================================================
+       GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
+       Paste approved Google AdSense code here after approval.
+       This comment is intentionally invisible and reserves no space.
+  ========================================================= -->
+
+  <div class="grid grid-cols-1 xl:grid-cols-[.9fr_1.1fr] gap-6">
+
+    <div class="space-y-6">
+      <section class="tool-card overflow-hidden">
+        <div class="section-head">
+          <h2><i data-lucide="alarm-clock" class="w-5 h-5 text-indigo-600"></i> Sleep Goal</h2>
+          <button id="resetBtn" class="btn-secondary" type="button">
+            <i data-lucide="rotate-ccw" class="w-4 h-4"></i> Reset
+          </button>
+        </div>
+
+        <div class="p-5 sm:p-6">
+          <div class="mode-tabs">
+            <button id="bedtimeMode" class="mode-tab active" type="button">
+              <i data-lucide="bed-double" class="w-4 h-4"></i>
+              When should I sleep?
+            </button>
+            <button id="wakeMode" class="mode-tab" type="button">
+              <i data-lucide="sunrise" class="w-4 h-4"></i>
+              When should I wake?
+            </button>
+          </div>
+
+          <div class="mt-5">
+            <label id="timeLabel" class="label" for="targetTime">I need to wake up at</label>
+            <input id="targetTime" class="field" type="time" value="07:00">
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+            <div>
+              <label class="label" for="fallAsleep">Time to fall asleep</label>
+              <select id="fallAsleep" class="field">
+                <option value="5">5 minutes</option>
+                <option value="10">10 minutes</option>
+                <option value="15" selected>15 minutes</option>
+                <option value="20">20 minutes</option>
+                <option value="30">30 minutes</option>
+                <option value="45">45 minutes</option>
+                <option value="60">60 minutes</option>
+              </select>
+            </div>
+            <div>
+              <label class="label" for="cycleLength">Estimated cycle length</label>
+              <select id="cycleLength" class="field">
+                <option value="80">80 minutes</option>
+                <option value="85">85 minutes</option>
+                <option value="90" selected>90 minutes</option>
+                <option value="95">95 minutes</option>
+                <option value="100">100 minutes</option>
+                <option value="105">105 minutes</option>
+                <option value="110">110 minutes</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <div class="label">Quick fall-asleep setting</div>
+            <div class="quick-mins">
+              <button class="quick-min" data-min="10" type="button">10 min</button>
+              <button class="quick-min active" data-min="15" type="button">15 min</button>
+              <button class="quick-min" data-min="20" type="button">20 min</button>
+              <button class="quick-min" data-min="30" type="button">30 min</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+            <div>
+              <label class="label" for="ageGroup">Age group</label>
+              <select id="ageGroup" class="field">
+                <option value="teen">Teen (14–17)</option>
+                <option value="adult" selected>Adult (18–64)</option>
+                <option value="older">Older adult (65+)</option>
+              </select>
+            </div>
+            <div>
+              <label class="label" for="timeFormat">Time format</label>
+              <select id="timeFormat" class="field">
+                <option value="12" selected>12-hour</option>
+                <option value="24">24-hour</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="ageGuidance" class="age-note mt-4"></div>
+
+          <button id="calculateBtn" class="btn-primary w-full mt-5" type="button">
+            <i data-lucide="calculator" class="w-4 h-4"></i>
+            Calculate Sleep Times
+          </button>
+        </div>
+      </section>
+
+      <section class="tool-card overflow-hidden">
+        <div class="section-head">
+          <h2><i data-lucide="info" class="w-5 h-5 text-indigo-600"></i> How This Estimate Works</h2>
+        </div>
+        <div class="p-5 sm:p-6 text-sm text-slate-500 leading-7">
+          <p>
+            The calculator uses your selected cycle length as a planning estimate, then adds or subtracts your expected time to fall asleep. Real sleep cycles vary throughout the night and from person to person, so the results are planning suggestions rather than a precise biological schedule.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <div>
+      <section class="tool-card overflow-hidden">
+        <div class="section-head">
+          <h2><i data-lucide="sparkles" class="w-5 h-5 text-indigo-600"></i> Recommended Times</h2>
+          <button id="copyBtn" class="btn-secondary" type="button">
+            <i data-lucide="copy" class="w-4 h-4"></i> Copy
+          </button>
+        </div>
+
+        <div class="p-5 sm:p-6">
+          <div class="summary-grid mb-5">
+            <div class="summary-box">
+              <div class="summary-label">Target</div>
+              <div id="targetSummary" class="summary-value">7:00 AM</div>
+            </div>
+            <div class="summary-box">
+              <div class="summary-label">Fall Asleep</div>
+              <div id="onsetSummary" class="summary-value">15 min</div>
+            </div>
+            <div class="summary-box">
+              <div class="summary-label">Cycle Estimate</div>
+              <div id="cycleSummary" class="summary-value">90 min</div>
+            </div>
+          </div>
+
+          <div id="recommendations" class="space-y-3"></div>
+
+          <div class="status warn mt-5">
+            <i data-lucide="triangle-alert" class="w-4 h-4 flex-none mt-0.5"></i>
+            <div>
+              Sleep-cycle timing is approximate. Consistent sleep duration, sleep quality, and individual needs matter more than trying to wake at an exact cycle boundary.
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
+       Paste approved Google AdSense code here after approval.
+       This comment is intentionally invisible and reserves no space.
+  ========================================================= -->
+
+  <div class="info-wrap">
+
+    <section class="info-section">
+      <h2>Free Online Sleep Calculator</h2>
+      <p>
+        The Utiliverse Sleep Calculator helps you plan a bedtime from a required wake-up time or estimate possible wake-up times from a planned bedtime. It uses an adjustable sleep-cycle estimate, adds the amount of time you expect to need before falling asleep, and displays several options with their estimated total sleep duration.
+      </p>
+      <p>
+        The reference tool uses a simple 90-minute sleep-cycle model with a selectable fall-asleep delay. This Utiliverse version keeps that useful workflow while making the assumptions visible and adjustable. Sleep cycles are not fixed clocks: their length and composition vary between people and across the same night. The calculator is therefore best used as a scheduling aid, not as a way to predict exactly when a specific sleep stage will end.
+      </p>
+    </section>
+
+    <section class="info-section">
+      <h2>How to Use the Sleep Calculator</h2>
+
+      <h3>Choose whether you are planning a bedtime or a wake time</h3>
+      <p>
+        Select When Should I Sleep when you already know the time you need to wake up. The calculator works backward and suggests bedtimes. Select When Should I Wake when you know when you plan to go to bed. In that mode, it works forward and estimates several possible wake-up times.
+      </p>
+
+      <h3>Enter your target clock time</h3>
+      <p>
+        Use the time field to enter the wake-up or bedtime you are planning around. The calculation handles overnight transitions automatically. A 7:00 AM wake-up time can therefore produce bedtime suggestions from the previous evening without requiring you to enter a date.
+      </p>
+
+      <h3>Estimate how long you usually take to fall asleep</h3>
+      <p>
+        The reference calculator offers several sleep-onset choices such as 10, 15, 20, and 30 minutes. Utiliverse includes those quick choices plus additional values. If you normally need about 15 minutes after getting into bed before actually sleeping, choose 15 minutes. In bedtime mode, that delay is added before the first estimated sleep cycle begins.
+      </p>
+
+      <h3>Adjust the estimated cycle length</h3>
+      <p>
+        Ninety minutes is commonly used in consumer sleep calculators because it provides a simple planning model, but real human sleep cycles are not always exactly 90 minutes. Utiliverse lets you change the estimate from 80 through 110 minutes. This does not make the calculation clinically precise; it simply lets you see how sensitive the suggested times are to the assumption.
+      </p>
+
+      <h3>Review several sleep-duration options</h3>
+      <p>
+        The results show multiple options instead of one supposedly perfect bedtime. Each result includes the clock time, estimated number of cycles, and estimated time asleep. Longer options are generally emphasized because sufficient total sleep is more important than achieving an exact multiple of a cycle estimate.
+      </p>
+
+      <h3>Use the age guidance as a broad reference</h3>
+      <p>
+        The age selector displays a general nightly sleep-duration range for teens, adults, or older adults. Individual sleep needs can vary, and health conditions, medications, work schedules, pregnancy, sleep debt, or other circumstances can change what is appropriate. The age guidance is intended to help interpret the options rather than diagnose sleep adequacy.
+      </p>
+
+      <h3>Switch between 12-hour and 24-hour time</h3>
+      <p>
+        Use the time-format selector to display results in the clock style you prefer. The underlying calculation is unchanged. This is helpful for travelers, shift workers, military-style schedules, or users in countries where 24-hour time is standard.
+      </p>
+
+      <h2 class="mt-8">Understanding Sleep Cycles</h2>
+
+      <h3>Sleep occurs in repeating stages</h3>
+      <p>
+        During a typical night, sleep moves through non-REM and REM stages repeatedly. Early cycles often contain more deep non-REM sleep, while later cycles typically contain more REM sleep. The pattern changes as the night progresses, which is one reason a fixed 90-minute formula should be treated as an approximation rather than an exact timetable.
+      </p>
+
+      <h3>Why cycle calculators can still be useful</h3>
+      <p>
+        A cycle-based calculator can be a practical scheduling tool because it encourages users to think in terms of complete blocks of sleep rather than choosing an arbitrary bedtime. It can also reveal whether a planned bedtime leaves enough opportunity for seven, eight, or nine hours of sleep. Its biggest value is planning awareness, not predicting the exact moment when the brain transitions between stages.
+      </p>
+
+      <h3>Total sleep opportunity matters</h3>
+      <p>
+        If two suggested times are available, the option that provides adequate overall sleep is usually more useful than a shorter option chosen solely because it appears to line up with a cycle boundary. Time in bed is also not identical to time asleep because awakenings and the time needed to fall asleep can reduce actual sleep duration.
+      </p>
+
+      <h2 class="mt-8">Practical Uses for a Sleep Calculator</h2>
+
+      <h3>Planning around an early work or school start</h3>
+      <p>
+        Enter the time you must wake up and compare several bedtime options. This can make it easier to see how late-evening activities affect the amount of sleep available before an early alarm.
+      </p>
+
+      <h3>Planning a bedtime before travel</h3>
+      <p>
+        If you have an early flight or long drive, use the required wake time to estimate when you would need to be in bed to allow a reasonable sleep window. The tool cannot account for jet lag or circadian adjustment, but it can help with basic schedule planning.
+      </p>
+
+      <h3>Estimating wake-up times after going to bed late</h3>
+      <p>
+        In wake-time mode, enter the time you expect to get into bed. The results show several possible wake times based on the selected sleep-onset delay and cycle estimate. This is useful for planning a flexible weekend morning or evaluating how much sleep a late bedtime would allow.
+      </p>
+
+      <h3>Comparing sleep-onset assumptions</h3>
+      <p>
+        If you are unsure whether you usually fall asleep in 10, 20, or 30 minutes, try different values. The results show how that difference moves the suggested clock times. This can be more realistic than assuming sleep begins immediately when your head touches the pillow.
+      </p>
+
+      <h3>Building a more consistent routine</h3>
+      <p>
+        A calculator can help establish a target bedtime, but consistency matters too. Using similar sleep and wake times from day to day can make a schedule easier to maintain. The calculator is best paired with practical habits such as allowing enough time for sleep and reducing repeated late-night schedule changes.
+      </p>
+    </section>
+
+    <section class="info-section">
+      <h2>Sleep Calculator FAQ</h2>
+
+      <details class="faq-item">
+        <summary>Are sleep cycles exactly 90 minutes?</summary>
+        <p>No. Ninety minutes is a convenient average used in many consumer sleep calculators, but real cycle lengths vary by person and across the night. That is why Utiliverse lets you adjust the cycle estimate.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>How much time should I allow to fall asleep?</summary>
+        <p>Use your own typical experience when possible. The tool provides common planning values including 10, 15, 20, and 30 minutes.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Can this calculator tell me the exact best time to wake up?</summary>
+        <p>No. It provides estimates based on a simplified cycle model. Sleep stages and awakenings cannot be predicted precisely from clock time alone.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Should I choose a shorter option because it ends at a cycle boundary?</summary>
+        <p>Not necessarily. Adequate total sleep and sleep quality are important. A longer sleep opportunity may be more useful than a shorter one selected only to match a cycle estimate.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Can I calculate backward from my alarm time?</summary>
+        <p>Yes. Choose When Should I Sleep, enter your required wake-up time, and the tool generates several estimated bedtimes.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Can I calculate forward from bedtime?</summary>
+        <p>Yes. Choose When Should I Wake, enter your planned bedtime, and the calculator generates several possible wake-up times.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Does the tool account for time spent falling asleep?</summary>
+        <p>Yes. Select an estimated sleep-onset delay and it will be included in the bedtime or wake-time calculation.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Is this a medical sleep assessment?</summary>
+        <p>No. It is a scheduling calculator. Persistent difficulty sleeping, excessive daytime sleepiness, loud snoring, breathing pauses during sleep, or other concerning symptoms should be discussed with a qualified healthcare professional.</p>
+      </details>
+    </section>
+
+    <!-- =========================================================
+         GOOGLE ADSENSE: BOTTOM / AFTER-CONTENT INSERTION POINT
+         Paste approved Google AdSense code here after approval.
+         This comment is intentionally invisible and reserves no space.
+    ========================================================= -->
+  </div>
+</main>
+
+<footer class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-6 pt-2">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-500">
+    <div>© 2026 Utiliverse. All rights reserved.</div>
+    <div class="font-semibold text-right">100% Free and Browser Based</div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+
+  const targetTime = $("targetTime");
+  const fallAsleep = $("fallAsleep");
+  const cycleLength = $("cycleLength");
+  const ageGroup = $("ageGroup");
+  const timeFormat = $("timeFormat");
+  const recommendations = $("recommendations");
+
+  let mode = "bedtime";
+
+  const ageRanges = {
+    teen:  {label:"Teen (14–17)", min:8, max:10, text:"General reference: teens often need about 8–10 hours of sleep per 24 hours."},
+    adult: {label:"Adult (18–64)", min:7, max:9, text:"General reference: many adults do best with about 7–9 hours of sleep per night."},
+    older: {label:"Older adult (65+)", min:7, max:8, text:"General reference: many older adults need about 7–8 hours of sleep per night."}
+  };
+
+  function parseTime(v){
+    const [h,m] = v.split(":").map(Number);
+    return h*60 + m;
+  }
+
+  function wrapMinutes(total){
+    total %= 1440;
+    if(total < 0) total += 1440;
+    return total;
+  }
+
+  function fmt(total){
+    total = wrapMinutes(total);
+    let h = Math.floor(total/60), m = total%60;
+
+    if(timeFormat.value === "24"){
+      return `${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}`;
+    }
+
+    const suffix = h >= 12 ? "PM" : "AM";
+    const hour = h % 12 || 12;
+    return `${hour}:${String(m).padStart(2,"0")} ${suffix}`;
+  }
+
+  function durationText(mins){
+    const h = Math.floor(mins/60);
+    const m = mins%60;
+    return m ? `${h} hr ${m} min` : `${h} hr`;
+  }
+
+  function updateAgeGuidance(){
+    $("ageGuidance").textContent = ageRanges[ageGroup.value].text + " Individual needs vary.";
+  }
+
+  function recommendationBadge(hours){
+    const r = ageRanges[ageGroup.value];
+    if(hours >= r.min && hours <= r.max) return "Within age guide";
+    if(hours > r.max) return "Longer option";
+    return "Shorter option";
+  }
+
+  function calculate(){
+    const target = parseTime(targetTime.value || "07:00");
+    const onset = Number(fallAsleep.value);
+    const cycle = Number(cycleLength.value);
+
+    $("targetSummary").textContent = fmt(target);
+    $("onsetSummary").textContent = `${onset} min`;
+    $("cycleSummary").textContent = `${cycle} min`;
+
+    const options = [];
+
+    for(let cycles=7; cycles>=4; cycles--){
+      const asleepMinutes = cycles * cycle;
+      const hours = asleepMinutes / 60;
+
+      let clock;
+      if(mode === "bedtime"){
+        clock = target - asleepMinutes - onset;
+      }else{
+        clock = target + onset + asleepMinutes;
+      }
+
+      options.push({cycles,asleepMinutes,hours,clock:wrapMinutes(clock)});
+    }
+
+    recommendations.innerHTML = "";
+
+    options.forEach((o,i)=>{
+      const div = document.createElement("div");
+      div.className = "recommendation";
+      div.innerHTML = `
+        <div class="rec-rank">${i+1}</div>
+        <div>
+          <div class="rec-time">${fmt(o.clock)}</div>
+          <div class="rec-meta">
+            ${o.cycles} estimated cycle${o.cycles===1?"":"s"} · ${durationText(o.asleepMinutes)} asleep
+            ${mode==="bedtime" ? ` · includes ${onset} min to fall asleep` : ` · after ${onset} min to fall asleep`}
+          </div>
+        </div>
+        <div class="rec-badge">${recommendationBadge(o.hours)}</div>
+      `;
+      recommendations.appendChild(div);
+    });
+  }
+
+  function setMode(next){
+    mode = next;
+    const bedtime = next === "bedtime";
+
+    $("bedtimeMode").classList.toggle("active",bedtime);
+    $("wakeMode").classList.toggle("active",!bedtime);
+    $("timeLabel").textContent = bedtime ? "I need to wake up at" : "I plan to go to bed at";
+    $("calculateBtn").innerHTML = bedtime
+      ? '<i data-lucide="calculator" class="w-4 h-4"></i> Calculate Bedtimes'
+      : '<i data-lucide="calculator" class="w-4 h-4"></i> Calculate Wake Times';
+
+    calculate();
+    lucide.createIcons();
+  }
+
+  $("bedtimeMode").addEventListener("click",()=>setMode("bedtime"));
+  $("wakeMode").addEventListener("click",()=>setMode("wake"));
+
+  document.querySelectorAll(".quick-min").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      fallAsleep.value = btn.dataset.min;
+      document.querySelectorAll(".quick-min").forEach(x=>x.classList.toggle("active",x===btn));
+      calculate();
+    });
+  });
+
+  fallAsleep.addEventListener("change",()=>{
+    document.querySelectorAll(".quick-min").forEach(btn=>{
+      btn.classList.toggle("active",btn.dataset.min === fallAsleep.value);
+    });
+    calculate();
+  });
+
+  [targetTime,cycleLength,timeFormat].forEach(el=>el.addEventListener("change",calculate));
+  ageGroup.addEventListener("change",()=>{
+    updateAgeGuidance();
+    calculate();
+  });
+
+  $("calculateBtn").addEventListener("click",calculate);
+
+  $("resetBtn").addEventListener("click",()=>{
+    targetTime.value = "07:00";
+    fallAsleep.value = "15";
+    cycleLength.value = "90";
+    ageGroup.value = "adult";
+    timeFormat.value = "12";
+    document.querySelectorAll(".quick-min").forEach(btn=>btn.classList.toggle("active",btn.dataset.min==="15"));
+    updateAgeGuidance();
+    setMode("bedtime");
+  });
+
+  $("copyBtn").addEventListener("click",async()=>{
+    const lines = [
+      "Utiliverse Sleep Calculator",
+      mode === "bedtime" ? `Wake time: ${fmt(parseTime(targetTime.value))}` : `Bedtime: ${fmt(parseTime(targetTime.value))}`,
+      `Time to fall asleep: ${fallAsleep.value} minutes`,
+      `Cycle estimate: ${cycleLength.value} minutes`,
+      "",
+      mode === "bedtime" ? "Suggested bedtimes:" : "Suggested wake times:"
+    ];
+
+    recommendations.querySelectorAll(".recommendation").forEach(row=>{
+      lines.push(`- ${row.querySelector(".rec-time").textContent} — ${row.querySelector(".rec-meta").textContent.trim()}`);
+    });
+
+    const text = lines.join("\n");
+
+    try{
+      await navigator.clipboard.writeText(text);
+    }catch{
+      const ta=document.createElement("textarea");
+      ta.value=text;document.body.appendChild(ta);ta.select();
+      document.execCommand("copy");ta.remove();
+    }
+
+    const btn=$("copyBtn");
+    const old=btn.innerHTML;
+    btn.innerHTML='<i data-lucide="check" class="w-4 h-4"></i> Copied';
+    lucide.createIcons();
+    setTimeout(()=>{btn.innerHTML=old;lucide.createIcons();},1400);
+  });
+
+  const themeToggle=$("themeToggle"),moon=$("moonIcon"),sun=$("sunIcon");
+
+  function applyTheme(modeName){
+    const dark=modeName==="dark";
+    document.body.classList.toggle("dark-mode",dark);
+    moon.classList.toggle("hidden",dark);
+    sun.classList.toggle("hidden",!dark);
+    themeToggle.setAttribute("aria-label",dark?"Switch to light mode":"Switch to dark mode");
+    themeToggle.setAttribute("title",dark?"Switch to light mode":"Switch to dark mode");
+    localStorage.setItem("utiliverse-theme",dark?"dark":"light");
+    lucide.createIcons();
+  }
+
+  applyTheme(localStorage.getItem("utiliverse-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+  themeToggle.addEventListener("click",()=>applyTheme(document.body.classList.contains("dark-mode")?"light":"dark"));
+
+  updateAgeGuidance();
+  setMode("bedtime");
+  lucide.createIcons();
+})();
+</script>
+</body>
+</html>
