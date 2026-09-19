@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bandwidth Calculator – Transfer Time, File Size & Speed | Utiliverse</title>
+<meta name="description" content="Free bandwidth calculator for transfer time, required bandwidth, and transferable file size. Supports Mbps, Gbps, MB/s, GB, GiB and practical efficiency estimates.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/Bandwidth_Calculator/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Bandwidth Calculator – Transfer Time, File Size & Speed | Utiliverse">
+<meta property="og:description" content="Calculate transfer time, file size, or required bandwidth with flexible data and speed units.">
+<meta property="og:url" content="https://utiliverse.app/Bandwidth_Calculator/">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+body{background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.10),transparent 32%),#f8fafc}
+body.dark-mode{background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.14),transparent 32%),#020617!important;color:#f8fafc!important}
+body.dark-mode header{background:rgba(2,6,23,.82)!important;border-color:#1e293b!important}
+body.dark-mode header a{color:#cbd5e1!important}.hero-copy{color:#64748b}body.dark-mode .hero-copy{color:#94a3b8!important}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;border:1px solid #cbd5e1;background:#fff;color:#475569;cursor:pointer}
+body.dark-mode .theme-toggle{background:#0f172a;border-color:#334155;color:#94a3b8}
+.free-browser-note{color:#64748b;font-size:12px;font-weight:700;white-space:nowrap}body.dark-mode .free-browser-note{color:#94a3b8}
+.tool-card,.info-section{background:#fff;border:1px solid #e2e8f0;border-radius:1rem;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+body.dark-mode .tool-card,body.dark-mode .info-section{background:rgba(30,41,59,.72)!important;border-color:#334155!important}
+.section-head{padding:1rem 1.15rem;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+body.dark-mode .section-head{border-color:#334155}.section-head h2{font-weight:850;color:#0f172a;display:flex;align-items:center;gap:.55rem}body.dark-mode .section-head h2{color:#f8fafc}
+.label{display:block;font-size:.79rem;font-weight:800;color:#334155;margin-bottom:.4rem}body.dark-mode .label{color:#cbd5e1}
+.field{width:100%;border:1px solid #cbd5e1;background:#fff;color:#0f172a;border-radius:.8rem;padding:.75rem .82rem;outline:none;font-size:1rem}
+body.dark-mode .field{background:#0f172a;border-color:#475569;color:#e2e8f0}.field:focus{border-color:#818cf8;box-shadow:0 0 0 3px rgba(99,102,241,.14)}
+.solve-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}.solve-btn{border:1px solid #cbd5e1;background:#fff;color:#475569;border-radius:.8rem;padding:.75rem .5rem;font-weight:850}.solve-btn.active,.solve-btn:hover{background:#eef2ff;border-color:#a5b4fc;color:#4338ca}
+body.dark-mode .solve-btn{background:#0f172a;border-color:#475569;color:#cbd5e1}body.dark-mode .solve-btn.active{background:#312e81;border-color:#6366f1;color:#e0e7ff}
+.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem}.quick-btn{border:1px solid #cbd5e1;background:#fff;color:#475569;border-radius:.7rem;padding:.55rem .45rem;font-size:.75rem;font-weight:800}body.dark-mode .quick-btn{background:#0f172a;border-color:#475569;color:#cbd5e1}
+.time-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.65rem}
+.result-card{background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;border-radius:1rem;padding:1.25rem}.result-label{font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;font-weight:850;opacity:.85}.result-value{font-size:2rem;font-weight:950;margin-top:.35rem}.result-sub{font-size:.84rem;opacity:.85;margin-top:.45rem}
+.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem}.summary-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:.85rem;padding:.9rem}body.dark-mode .summary-box{background:#0f172a;border-color:#334155}.summary-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;font-weight:850;color:#64748b}.summary-value{font-size:1.08rem;font-weight:900;color:#0f172a;margin-top:.3rem}body.dark-mode .summary-value{color:#f8fafc}
+.btn-secondary{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;border-radius:.75rem;font-weight:800;background:#fff;color:#334155;border:1px solid #cbd5e1;padding:.68rem .9rem}body.dark-mode .btn-secondary{background:#1e293b;color:#e2e8f0;border-color:#475569}
+.note{font-size:.78rem;line-height:1.55;color:#64748b}.ref-table{width:100%;border-collapse:collapse;font-size:.86rem}.ref-table th,.ref-table td{padding:.75rem;border-bottom:1px solid #e2e8f0;text-align:left}.ref-table th{font-weight:850;color:#334155;background:#f8fafc}body.dark-mode .ref-table th{background:#0f172a;color:#cbd5e1}body.dark-mode .ref-table td{border-color:#334155;color:#cbd5e1}
+.info-wrap{max-width:72rem;margin:3.5rem auto 0}.info-section{padding:1.5rem}.info-section+.info-section{margin-top:1.5rem}.info-section h2{font-size:1.65rem;font-weight:800;color:#0f172a;margin-bottom:.9rem}.info-section h3{font-size:1.06rem;font-weight:800;color:#1e293b;margin:1.4rem 0 .45rem}.info-section p{color:#475569;line-height:1.82;font-size:.98rem;margin:.8rem 0}body.dark-mode .info-section h2{color:#f8fafc!important}body.dark-mode .info-section h3{color:#e2e8f0!important}body.dark-mode .info-section p{color:#94a3b8!important}
+.faq-item{border-bottom:1px solid #e2e8f0}.faq-item summary{list-style:none;cursor:pointer;padding:1rem 0;font-weight:800;color:#0f172a;display:flex;justify-content:space-between}.faq-item summary::-webkit-details-marker{display:none}.faq-item summary::after{content:"+"}.faq-item[open] summary::after{content:"−"}.faq-item p{padding-bottom:1rem;margin:0}body.dark-mode .faq-item{border-color:#334155}body.dark-mode .faq-item summary{color:#e2e8f0}
+.hidden-important{display:none!important}
+@media(max-width:700px){.solve-grid{grid-template-columns:1fr}.quick-grid{grid-template-columns:repeat(2,1fr)}.time-grid{grid-template-columns:repeat(2,1fr)}.summary-grid{grid-template-columns:1fr}}
+@media(max-width:640px){.free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}.theme-toggle{width:38px;height:38px}.result-value{font-size:1.65rem}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Bandwidth Calculator","url":"https://utiliverse.app/Bandwidth_Calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<!-- SEO TARGET CLUSTER: bandwidth calculator, transfer time calculator, required bandwidth calculator, Mbps calculator, Gbps calculator -->
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT -->
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+<header class="sticky top-0 z-50 bg-white/80 border-b border-slate-200"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<a href="https://utiliverse.app" class="flex items-center gap-2 text-sm font-semibold text-slate-600"><i data-lucide="arrow-left" class="w-4 h-4"></i><span>Back to Utiliverse</span></a>
+<div class="flex items-center gap-4"><div class="free-browser-note">100% Free and Browser Based</div><button id="themeToggle" class="theme-toggle" type="button"><i id="moonIcon" data-lucide="moon" class="w-4 h-4"></i><i id="sunIcon" data-lucide="sun" class="w-4 h-4 hidden"></i></button></div>
+</div></header>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+<div class="mb-6"><h1 class="text-3xl font-bold text-slate-900 flex items-center gap-3"><i data-lucide="gauge" class="w-8 h-8 text-indigo-600"></i>Bandwidth Calculator</h1><p class="hero-copy mt-2 text-sm max-w-3xl">Calculate transfer time, required bandwidth, or file size using flexible data and speed units.</p></div>
+
+<div class="grid grid-cols-1 xl:grid-cols-[.95fr_1.05fr] gap-6">
+<div class="space-y-6">
+<section class="tool-card overflow-hidden"><div class="section-head"><h2><i data-lucide="calculator" class="w-5 h-5 text-indigo-600"></i>Solve For</h2><button id="resetBtn" class="btn-secondary" type="button"><i data-lucide="rotate-ccw" class="w-4 h-4"></i>Reset</button></div>
+<div class="p-5 sm:p-6">
+<div class="solve-grid"><button class="solve-btn active" data-mode="time" type="button">Transfer Time</button><button class="solve-btn" data-mode="size" type="button">File Size</button><button class="solve-btn" data-mode="speed" type="button">Bandwidth</button></div>
+
+<div id="sizeBlock" class="mt-5"><label class="label">File size</label><div class="grid grid-cols-[1fr_130px] gap-3"><input id="fileSize" class="field" type="number" min="0" step="any" value="1"><select id="fileUnit" class="field"><option>B</option><option>KB</option><option>MB</option><option selected>GB</option><option>TB</option><option>KiB</option><option>MiB</option><option>GiB</option><option>TiB</option></select></div></div>
+
+<div id="speedBlock" class="mt-5"><label class="label">Bandwidth / speed</label><div class="grid grid-cols-[1fr_130px] gap-3"><input id="speed" class="field" type="number" min="0" step="any" value="100"><select id="speedUnit" class="field"><option>Kbps</option><option selected>Mbps</option><option>Gbps</option><option>Tbps</option><option value="KBps">KB/s</option><option value="MBps">MB/s</option><option value="GBps">GB/s</option></select></div>
+<div class="label mt-3">Quick set</div><div class="quick-grid">
+<button class="quick-btn" data-speed="1" data-unit="Mbps">1 Mbps</button><button class="quick-btn" data-speed="10" data-unit="Mbps">10 Mbps</button><button class="quick-btn" data-speed="50" data-unit="Mbps">50 Mbps</button><button class="quick-btn" data-speed="100" data-unit="Mbps">100 Mbps</button><button class="quick-btn" data-speed="500" data-unit="Mbps">500 Mbps</button><button class="quick-btn" data-speed="1" data-unit="Gbps">1 Gbps</button><button class="quick-btn" data-speed="10" data-unit="Gbps">10 Gbps</button><button class="quick-btn" data-speed="100" data-unit="Gbps">100 Gbps</button>
+</div></div>
+
+<div id="timeBlock" class="mt-5 hidden-important"><label class="label">Transfer time</label><div class="time-grid">
+<div><label class="label">Days</label><input id="days" class="field" type="number" min="0" value="0"></div>
+<div><label class="label">Hours</label><input id="hours" class="field" type="number" min="0" value="0"></div>
+<div><label class="label">Minutes</label><input id="minutes" class="field" type="number" min="0" value="1"></div>
+<div><label class="label">Seconds</label><input id="seconds" class="field" type="number" min="0" step="any" value="20"></div>
+</div></div>
+
+<div class="mt-5"><label class="label">Real-world efficiency</label><select id="efficiency" class="field"><option value="1">100% theoretical</option><option value=".9">90%</option><option value=".8" selected>80% practical estimate</option><option value=".7">70%</option><option value=".6">60%</option><option value=".5">50%</option></select><p class="note mt-2">Use a lower efficiency to allow for protocol overhead, congestion, Wi-Fi conditions, server limits, or VPN overhead.</p></div>
+</div></section>
+</div>
+
+<div>
+<section class="tool-card overflow-hidden"><div class="section-head"><h2><i data-lucide="activity" class="w-5 h-5 text-indigo-600"></i>Result</h2><button id="copyBtn" class="btn-secondary" type="button"><i data-lucide="copy" class="w-4 h-4"></i>Copy</button></div>
+<div class="p-5 sm:p-6"><div class="result-card"><div id="resultLabel" class="result-label">Estimated Transfer Time</div><div id="resultValue" class="result-value">1 min 40 sec</div><div id="resultSub" class="result-sub"></div></div>
+<div class="summary-grid mt-4"><div class="summary-box"><div class="summary-label">Effective Speed</div><div id="effectiveSpeed" class="summary-value"></div></div><div class="summary-box"><div class="summary-label">Data Rate</div><div id="byteRate" class="summary-value"></div></div><div class="summary-box"><div class="summary-label">Efficiency</div><div id="efficiencyOut" class="summary-value"></div></div></div>
+</div></section>
+
+<section class="tool-card overflow-hidden mt-6"><div class="section-head"><h2><i data-lucide="network" class="w-5 h-5 text-indigo-600"></i>Common Bandwidth Reference</h2></div><div class="overflow-x-auto"><table class="ref-table">
+<thead><tr><th>Connection</th><th>Typical Speed</th><th>1 GB Theoretical</th></tr></thead>
+<tbody><tr><td>DSL</td><td>5 Mbps</td><td>~27 min</td></tr><tr><td>4G LTE</td><td>25 Mbps</td><td>~5 min 20 sec</td></tr><tr><td>Cable</td><td>100 Mbps</td><td>~80 sec</td></tr><tr><td>5G</td><td>500 Mbps</td><td>~16 sec</td></tr><tr><td>Gigabit Fiber</td><td>1 Gbps</td><td>~8 sec</td></tr><tr><td>10G Ethernet</td><td>10 Gbps</td><td>~0.8 sec</td></tr><tr><td>USB 3.0</td><td>5 Gbps</td><td>~1.6 sec</td></tr><tr><td>Thunderbolt 4</td><td>40 Gbps</td><td>~0.2 sec</td></tr></tbody>
+</table></div></section>
+</div></div>
+
+<!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT -->
+
+<div class="info-wrap">
+<section class="info-section"><h2>Free Online Bandwidth Calculator</h2><p>The Utiliverse Bandwidth Calculator estimates transfer time, transferable file size, or required bandwidth. It uses the basic relationship between data size, transfer speed, and time, converting everything internally to bits and bits per second so different units can be compared consistently.</p><p>Network speeds are usually advertised in bits per second while files are usually measured in bytes. Since one byte contains eight bits, a 100 Mbps connection has a theoretical maximum of about 12.5 MB per second before overhead.</p></section>
+
+<section class="info-section"><h2>How to Use the Bandwidth Calculator</h2>
+<h3>Calculate transfer time</h3><p>Select Transfer Time when you know the file size and connection speed. Enter the file size, choose its unit, enter bandwidth, and choose the speed unit. The calculator estimates how long the transfer will take after applying the selected efficiency factor.</p>
+<h3>Calculate transferable file size</h3><p>Select File Size when you know the bandwidth and total transfer window. Enter days, hours, minutes, and seconds. The calculator estimates how much data can move during that period.</p>
+<h3>Calculate required bandwidth</h3><p>Select Bandwidth when you know the amount of data and the transfer deadline. This is useful for backup windows, cloud migrations, NAS copies, or deciding whether a faster network link is needed.</p>
+<h3>Understand Mbps and MB/s</h3><p>Mbps means megabits per second, while MB/s means megabytes per second. Because eight bits equal one byte, 800 Mbps is 100 MB/s in a theoretical best case.</p>
+<h3>Understand GB and GiB</h3><p>GB uses decimal units based on powers of 1,000. GiB uses binary units based on powers of 1,024. Choosing the unit that matches the number shown by your operating system or application improves accuracy.</p>
+<h3>Use the efficiency setting</h3><p>Real throughput is often lower than the advertised line rate because of protocol overhead, congestion, retransmissions, Wi-Fi quality, storage limits, VPN encryption, and server-side bottlenecks. Eighty percent is a useful general planning estimate, while lower values can model less favorable conditions.</p>
+<h2 class="mt-8">Practical Uses</h2>
+<h3>Cloud backups</h3><p>Enter the amount of data and your measured upload speed to estimate how long a backup may take. Residential upload speed can be much lower than download speed, so use the correct direction.</p>
+<h3>Large downloads</h3><p>Estimate download times for operating-system images, games, media files, backups, datasets, or software installers.</p>
+<h3>NAS and server transfers</h3><p>Compare 1 Gbps, 2.5 Gbps, 10 Gbps, or faster networking for workstation-to-NAS and server-to-server transfers.</p>
+<h3>Migration planning</h3><p>Required Bandwidth mode can answer questions such as how fast a connection must be to move several terabytes overnight or within a maintenance window.</p>
+<h3>Video workflows</h3><p>Production teams can estimate file-copy times for large video assets across Ethernet, Wi-Fi, external storage, or remote network links.</p>
+</section>
+
+<section class="info-section"><h2>Bandwidth Calculator FAQ</h2>
+<details class="faq-item"><summary>What is the transfer-time formula?</summary><p>Transfer time equals file size in bits divided by effective bandwidth in bits per second.</p></details>
+<details class="faq-item"><summary>Why is my real transfer slower?</summary><p>Protocol overhead, congestion, retransmissions, storage speed, Wi-Fi conditions, server limits, VPNs, and hardware bottlenecks can reduce throughput.</p></details>
+<details class="faq-item"><summary>What is the difference between Mbps and MB/s?</summary><p>Mbps is megabits per second; MB/s is megabytes per second. Eight bits equal one byte.</p></details>
+<details class="faq-item"><summary>Can I calculate upload time?</summary><p>Yes. Enter your upload bandwidth instead of your download bandwidth.</p></details>
+<details class="faq-item"><summary>Can I calculate required internet speed?</summary><p>Yes. Select Bandwidth, enter the file size and desired transfer time, and the calculator estimates the required speed.</p></details>
+<details class="faq-item"><summary>Should I use 100% efficiency?</summary><p>Use 100% only for a theoretical best case. A lower value is normally more realistic for planning.</p></details>
+<details class="faq-item"><summary>Does this tool test my internet speed?</summary><p>No. It calculates from the values you enter; it does not perform a live speed test.</p></details>
+</section>
+
+<!-- GOOGLE ADSENSE: BOTTOM / AFTER-CONTENT INSERTION POINT -->
+</div>
+</main>
+
+<footer class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-6 pt-2"><div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-500"><div>© 2026 Utiliverse. All rights reserved.</div><div class="font-semibold text-right">100% Free and Browser Based</div></div></footer>
+
+<script>
+(()=>{
+const $=id=>document.getElementById(id);let mode="time";
+const sizeFactors={B:8,KB:8e3,MB:8e6,GB:8e9,TB:8e12,KiB:8192,MiB:8388608,GiB:8589934592,TiB:8796093022208};
+const speedFactors={Kbps:1e3,Mbps:1e6,Gbps:1e9,Tbps:1e12,KBps:8e3,MBps:8e6,GBps:8e9};
+const n=v=>{const x=Number(v);return Number.isFinite(x)&&x>=0?x:0};
+const secondsTotal=()=>n($("days").value)*86400+n($("hours").value)*3600+n($("minutes").value)*60+n($("seconds").value);
+function fmtDuration(sec){if(!Number.isFinite(sec)||sec<0)return"—";if(sec<1)return sec.toFixed(3)+" sec";let s=Math.round(sec),d=Math.floor(s/86400);s%=86400;let h=Math.floor(s/3600);s%=3600;let m=Math.floor(s/60);s%=60;return[d?d+" d":"",h?h+" hr":"",m?m+" min":"",s?s+" sec":""].filter(Boolean).join(" ")||"0 sec"}
+function fmtSize(bits){const bytes=bits/8,units=[["TB",1e12],["GB",1e9],["MB",1e6],["KB",1e3],["B",1]];for(const [u,f] of units)if(bytes>=f||u==="B")return(bytes/f).toLocaleString(undefined,{maximumFractionDigits:3})+" "+u}
+function fmtSpeed(bps){const units=[["Tbps",1e12],["Gbps",1e9],["Mbps",1e6],["Kbps",1e3],["bps",1]];for(const [u,f] of units)if(bps>=f||u==="bps")return(bps/f).toLocaleString(undefined,{maximumFractionDigits:3})+" "+u}
+function calc(){const eff=n($("efficiency").value)||1,bits=n($("fileSize").value)*sizeFactors[$("fileUnit").value],bps=n($("speed").value)*speedFactors[$("speedUnit").value],secs=secondsTotal();let label="",value="",sub="",effective=bps*eff;
+if(mode==="time"){const t=effective>0?bits/effective:NaN;label="Estimated Transfer Time";value=fmtDuration(t);sub=`Based on ${$("fileSize").value} ${$("fileUnit").value} at ${$("speed").value} ${$("speedUnit").value} with ${Math.round(eff*100)}% effective throughput.`}
+else if(mode==="size"){const out=bps*eff*secs;label="Estimated Transferable Data";value=fmtSize(out);sub=`At ${$("speed").value} ${$("speedUnit").value} for ${fmtDuration(secs)} with ${Math.round(eff*100)}% efficiency.`}
+else{const needed=secs>0?bits/secs/eff:NaN;label="Required Bandwidth";value=fmtSpeed(needed);sub=`To move ${$("fileSize").value} ${$("fileUnit").value} in ${fmtDuration(secs)} at ${Math.round(eff*100)}% efficiency.`;effective=needed*eff}
+$("resultLabel").textContent=label;$("resultValue").textContent=value;$("resultSub").textContent=sub;$("effectiveSpeed").textContent=Number.isFinite(effective)?fmtSpeed(effective):"—";$("byteRate").textContent=Number.isFinite(effective)?fmtSize(effective)+"/s":"—";$("efficiencyOut").textContent=Math.round(eff*100)+"%"}
+function setMode(m){mode=m;document.querySelectorAll(".solve-btn").forEach(b=>b.classList.toggle("active",b.dataset.mode===m));$("sizeBlock").classList.toggle("hidden-important",m==="size");$("speedBlock").classList.toggle("hidden-important",m==="speed");$("timeBlock").classList.toggle("hidden-important",m==="time");calc()}
+document.querySelectorAll(".solve-btn").forEach(b=>b.onclick=()=>setMode(b.dataset.mode));document.querySelectorAll(".quick-btn").forEach(b=>b.onclick=()=>{$("speed").value=b.dataset.speed;$("speedUnit").value=b.dataset.unit;calc()});
+["fileSize","fileUnit","speed","speedUnit","days","hours","minutes","seconds","efficiency"].forEach(id=>$(id).addEventListener("input",calc));
+$("resetBtn").onclick=()=>{$("fileSize").value=1;$("fileUnit").value="GB";$("speed").value=100;$("speedUnit").value="Mbps";$("days").value=0;$("hours").value=0;$("minutes").value=1;$("seconds").value=20;$("efficiency").value=".8";setMode("time")};
+$("copyBtn").onclick=async()=>{const text=`Utiliverse Bandwidth Calculator\n${$("resultLabel").textContent}: ${$("resultValue").textContent}\n${$("resultSub").textContent}`;try{await navigator.clipboard.writeText(text)}catch{const t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove()}};
+const toggle=$("themeToggle"),moon=$("moonIcon"),sun=$("sunIcon");function theme(m){const d=m==="dark";document.body.classList.toggle("dark-mode",d);moon.classList.toggle("hidden",d);sun.classList.toggle("hidden",!d);localStorage.setItem("utiliverse-theme",d?"dark":"light");lucide.createIcons()}theme(localStorage.getItem("utiliverse-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));toggle.onclick=()=>theme(document.body.classList.contains("dark-mode")?"light":"dark");setMode("time");lucide.createIcons();
+})();
+</script>
+</body>
+</html>
