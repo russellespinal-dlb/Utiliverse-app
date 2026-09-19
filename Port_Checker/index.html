@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Port Checker – TCP/UDP Port Lookup & Common Ports | Utiliverse</title>
+<meta name="description" content="Free port checker and TCP/UDP port lookup. Enter a port number or service name, identify common services, view port ranges, and filter a common ports reference table.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/Port_Checker/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Port Checker – TCP/UDP Port Lookup & Common Ports | Utiliverse">
+<meta property="og:description" content="Look up TCP and UDP ports, identify common services, and browse port ranges.">
+<meta property="og:url" content="https://utiliverse.app/Port_Checker/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Port Checker | Utiliverse">
+<meta name="twitter:description" content="Look up TCP/UDP ports and common network services.">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+body{background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.10),transparent 32%),#f8fafc}
+body.dark-mode{background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.14),transparent 32%),radial-gradient(circle at 90% 15%,rgba(124,58,237,.08),transparent 28%),#020617!important;color:#f8fafc!important}
+body.dark-mode header{background:rgba(2,6,23,.82)!important;border-color:#1e293b!important}
+body.dark-mode header a{color:#cbd5e1!important} body.dark-mode main h1{color:#f8fafc!important} .hero-copy{color:#64748b} body.dark-mode .hero-copy{color:#94a3b8!important}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;border:1px solid #cbd5e1;background:#fff;color:#475569;cursor:pointer}
+body.dark-mode .theme-toggle{background:#0f172a;border-color:#334155;color:#94a3b8}
+.free-browser-note{color:#64748b;font-size:12px;font-weight:700;white-space:nowrap} body.dark-mode .free-browser-note{color:#94a3b8}
+.tool-card,.info-section{background:#fff;border:1px solid #e2e8f0;border-radius:1rem;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+body.dark-mode .tool-card,body.dark-mode .info-section{background:rgba(30,41,59,.72)!important;border-color:#334155!important}
+.section-head{padding:1rem 1.15rem;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+body.dark-mode .section-head{border-color:#334155} .section-head h2{font-weight:850;color:#0f172a;display:flex;align-items:center;gap:.55rem} body.dark-mode .section-head h2{color:#f8fafc}
+.label{display:block;font-size:.79rem;font-weight:800;color:#334155;margin-bottom:.4rem} body.dark-mode .label{color:#cbd5e1}
+.field{width:100%;border:1px solid #cbd5e1;background:#fff;color:#0f172a;border-radius:.8rem;padding:.75rem .82rem;outline:none;font-size:1rem}
+body.dark-mode .field{background:#0f172a;border-color:#475569;color:#e2e8f0} .field:focus{border-color:#818cf8;box-shadow:0 0 0 3px rgba(99,102,241,.14)}
+.btn-primary,.btn-secondary{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;border-radius:.75rem;font-weight:800}
+.btn-primary{background:#4f46e5;color:#fff;padding:.74rem 1rem} .btn-primary:hover{background:#4338ca}
+.btn-secondary{background:#fff;color:#334155;border:1px solid #cbd5e1;padding:.68rem .9rem} body.dark-mode .btn-secondary{background:#1e293b;color:#e2e8f0;border-color:#475569}
+.result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
+.result-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:.85rem;padding:.95rem} body.dark-mode .result-box{background:#0f172a;border-color:#334155}
+.result-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;font-weight:850;color:#64748b} .result-value{font-size:1.08rem;font-weight:900;color:#0f172a;margin-top:.3rem;word-break:break-word} body.dark-mode .result-value{color:#f8fafc}
+.range-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem}
+.range-card{border:1px solid #e2e8f0;border-radius:.85rem;padding:.9rem;background:#f8fafc} body.dark-mode .range-card{background:#0f172a;border-color:#334155}
+.range-card.active{border-color:#818cf8;background:#eef2ff} body.dark-mode .range-card.active{background:#312e81;border-color:#6366f1}
+.range-num{font-weight:900;color:#0f172a;font-size:.9rem} .range-name{font-size:.75rem;color:#64748b;margin-top:.25rem} body.dark-mode .range-num{color:#f8fafc}
+.status-pill{display:inline-flex;align-items:center;gap:.35rem;border-radius:999px;padding:.32rem .55rem;font-size:.72rem;font-weight:850;background:#ecfdf5;color:#047857} body.dark-mode .status-pill{background:rgba(6,78,59,.28);color:#a7f3d0}
+.lookup-note{border-radius:.85rem;padding:.9rem;background:#eff6ff;border:1px solid #bfdbfe;color:#1e3a8a;font-size:.8rem;line-height:1.6} body.dark-mode .lookup-note{background:rgba(30,58,138,.22);border-color:#1e40af;color:#bfdbfe}
+.ref-table{width:100%;border-collapse:collapse;font-size:.84rem} .ref-table th,.ref-table td{padding:.72rem;border-bottom:1px solid #e2e8f0;text-align:left} .ref-table th{font-weight:850;color:#334155;background:#f8fafc;position:sticky;top:0} body.dark-mode .ref-table th{background:#0f172a;color:#cbd5e1} body.dark-mode .ref-table td{border-color:#334155;color:#cbd5e1}
+.table-scroll{max-height:520px;overflow:auto;border-top:1px solid #e2e8f0} body.dark-mode .table-scroll{border-color:#334155}
+.info-wrap{max-width:72rem;margin:3.5rem auto 0} .info-section{padding:1.5rem} .info-section+.info-section{margin-top:1.5rem}
+.info-section h2{font-size:1.65rem;font-weight:800;color:#0f172a;margin-bottom:.9rem} .info-section h3{font-size:1.06rem;font-weight:800;color:#1e293b;margin:1.4rem 0 .45rem} .info-section p,.info-section li{color:#475569;line-height:1.82;font-size:.98rem} .info-section p{margin:.8rem 0}
+body.dark-mode .info-section h2{color:#f8fafc!important} body.dark-mode .info-section h3{color:#e2e8f0!important} body.dark-mode .info-section p,body.dark-mode .info-section li{color:#94a3b8!important}
+.faq-item{border-bottom:1px solid #e2e8f0} .faq-item summary{list-style:none;cursor:pointer;padding:1rem 0;font-weight:800;color:#0f172a;display:flex;justify-content:space-between} .faq-item summary::-webkit-details-marker{display:none} .faq-item summary::after{content:"+"} .faq-item[open] summary::after{content:"−"} .faq-item p{padding-bottom:1rem;margin:0} body.dark-mode .faq-item{border-color:#334155} body.dark-mode .faq-item summary{color:#e2e8f0}
+@media(max-width:700px){.range-wrap{grid-template-columns:1fr}.result-grid{grid-template-columns:1fr}}
+@media(max-width:640px){.free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}.theme-toggle{width:38px;height:38px}}
+</style>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Port Checker","url":"https://utiliverse.app/Port_Checker/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based TCP and UDP port lookup with service names, descriptions, port ranges, and common-port references.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+</head>
+
+<!--
+SEO TARGET CLUSTER
+Primary: port checker
+Secondary: port lookup, TCP port lookup, UDP port lookup, common ports,
+port number checker, service port lookup, network port reference, port range checker,
+what port does service use, TCP UDP ports
+
+ADSENSE NOTE
+Approved Google AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+<header class="sticky top-0 z-50 bg-white/80 border-b border-slate-200">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<a href="https://utiliverse.app" class="flex items-center gap-2 text-sm font-semibold text-slate-600"><i data-lucide="arrow-left" class="w-4 h-4"></i><span>Back to Utiliverse</span></a>
+<div class="flex items-center gap-4"><div class="free-browser-note">100% Free and Browser Based</div><button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch theme"><i id="moonIcon" data-lucide="moon" class="w-4 h-4"></i><i id="sunIcon" data-lucide="sun" class="w-4 h-4 hidden"></i></button></div>
+</div></header>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+<div class="mb-6"><h1 class="text-3xl font-bold text-slate-900 flex items-center gap-3"><i data-lucide="network" class="w-8 h-8 text-indigo-600"></i>Port Checker</h1><p class="hero-copy mt-2 text-sm max-w-3xl">Look up TCP and UDP port numbers, identify common services, and understand where a port falls within the standard port ranges.</p></div>
+
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT -->
+
+<div class="grid grid-cols-1 xl:grid-cols-[.9fr_1.1fr] gap-6">
+<div class="space-y-6">
+<section class="tool-card overflow-hidden">
+<div class="section-head"><h2><i data-lucide="search" class="w-5 h-5 text-indigo-600"></i>Look Up Port</h2><button id="resetBtn" class="btn-secondary" type="button"><i data-lucide="rotate-ccw" class="w-4 h-4"></i>Reset</button></div>
+<div class="p-5 sm:p-6">
+<div class="grid grid-cols-1 sm:grid-cols-[1fr_150px] gap-4">
+<div><label class="label" for="query">Port number or service name</label><input id="query" class="field" type="text" value="443" placeholder="e.g. 443, https, ssh, mysql"></div>
+<div><label class="label" for="protocol">Protocol</label><select id="protocol" class="field"><option value="any" selected>Any</option><option value="tcp">TCP</option><option value="udp">UDP</option></select></div>
+</div>
+<button id="lookupBtn" class="btn-primary w-full mt-4" type="button"><i data-lucide="search" class="w-4 h-4"></i>Look Up</button>
+<div class="lookup-note mt-4"><strong>Port lookup vs. live reachability:</strong> this page identifies port numbers and common services. Web browsers do not expose arbitrary raw TCP/UDP socket access to normal page JavaScript, so this standalone tool does not pretend to determine whether a remote host's port is actually open.</div>
+</div></section>
+
+<section class="tool-card overflow-hidden">
+<div class="section-head"><h2><i data-lucide="badge-info" class="w-5 h-5 text-indigo-600"></i>Lookup Result</h2><span id="knownBadge" class="status-pill">Known port</span></div>
+<div class="p-5 sm:p-6">
+<div class="result-grid">
+<div class="result-box"><div class="result-label">Port</div><div id="outPort" class="result-value">443</div></div>
+<div class="result-box"><div class="result-label">Protocol</div><div id="outProtocol" class="result-value">TCP</div></div>
+<div class="result-box"><div class="result-label">Service</div><div id="outService" class="result-value">HTTPS</div></div>
+<div class="result-box"><div class="result-label">Range</div><div id="outRange" class="result-value">Well-Known / System</div></div>
+</div>
+<div class="result-box mt-3"><div class="result-label">Description</div><div id="outDescription" class="result-value text-base">HTTP over TLS/SSL</div></div>
+</div></section>
+
+<section class="tool-card overflow-hidden">
+<div class="section-head"><h2><i data-lucide="layers-3" class="w-5 h-5 text-indigo-600"></i>Port Range Overview</h2></div>
+<div class="p-5 sm:p-6">
+<div class="range-wrap">
+<div id="rangeWell" class="range-card"><div class="range-num">0–1023</div><div class="range-name">Well-Known / System</div></div>
+<div id="rangeReg" class="range-card"><div class="range-num">1024–49151</div><div class="range-name">Registered / User</div></div>
+<div id="rangeDyn" class="range-card"><div class="range-num">49152–65535</div><div class="range-name">Dynamic / Private</div></div>
+</div>
+</div></section>
+</div>
+
+<div>
+<section class="tool-card overflow-hidden">
+<div class="section-head"><h2><i data-lucide="list-filter" class="w-5 h-5 text-indigo-600"></i>Common Ports Reference</h2><span id="tableCount" class="text-xs font-bold text-slate-500"></span></div>
+<div class="p-4 border-b border-slate-200 dark:border-slate-700"><input id="filter" class="field" type="text" placeholder="Filter by port, protocol, service, or description..."></div>
+<div class="table-scroll"><table class="ref-table"><thead><tr><th>Port</th><th>Protocol</th><th>Service</th><th>Description</th></tr></thead><tbody id="portsBody"></tbody></table></div>
+</section>
+</div>
+</div>
+
+<!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT -->
+
+<div class="info-wrap">
+<section class="info-section">
+<h2>Free TCP and UDP Port Lookup</h2>
+<p>The Utiliverse Port Checker helps identify what a network port is commonly used for. Enter a port number such as 443 or a service name such as HTTPS, choose TCP, UDP, or Any, and the tool searches its built-in reference list. It also shows whether the port belongs to the well-known, registered, or dynamic/private range.</p>
+<p>Network ports range from 0 through 65535. The reference tool divides them into well-known ports from 0–1023, registered ports from 1024–49151, and dynamic/private ports from 49152–65535. citeturn637045view0</p>
+</section>
+
+<section class="info-section">
+<h2>How to Use the Port Checker</h2>
+<h3>Look up a port number</h3>
+<p>Type a number from 0 through 65535 and select the protocol. If the port is in the built-in common-services table, the page displays the service name and description. If no common service is listed, the tool still shows the correct numerical range for the port.</p>
+<h3>Search by service name</h3>
+<p>You can also enter a service such as HTTPS, SSH, DNS, MySQL, PostgreSQL, Redis, RDP, or WireGuard. When a service uses more than one protocol or port, the selected protocol helps narrow the result.</p>
+<h3>Understand TCP and UDP</h3>
+<p>TCP is connection-oriented and provides reliable, ordered delivery, while UDP is connectionless and emphasizes low overhead and speed. HTTP, HTTPS, SSH, and many database services commonly use TCP. DNS, DHCP, NTP, VoIP, and many real-time applications commonly use UDP, though some services support both. citeturn637045view0</p>
+<h3>Understand well-known ports</h3>
+<p>Ports 0 through 1023 are commonly called well-known or system ports. Familiar examples include SSH on 22, DNS on 53, HTTP on 80, and HTTPS on 443. These low-numbered ports are associated with standardized core services.</p>
+<h3>Understand registered ports</h3>
+<p>Ports 1024 through 49151 are the registered or user range. Many applications and databases operate here, including MySQL on 3306, PostgreSQL on 5432, Redis on 6379, and numerous vendor-specific services.</p>
+<h3>Understand dynamic and private ports</h3>
+<p>Ports 49152 through 65535 are commonly used as dynamic or ephemeral ports. Client systems frequently choose temporary source ports from this high range when opening outbound connections.</p>
+<h2 class="mt-8">Practical Uses</h2>
+<h3>Firewall configuration</h3>
+<p>Before allowing or blocking a port, look up its common service to verify what type of application may be affected. A port number alone does not prove which program is actually listening, but the reference can help identify the conventional use.</p>
+<h3>Server troubleshooting</h3>
+<p>If a web server, database, VPN, mail service, or remote-management tool is not reachable, confirming the expected service port is a useful first step before checking firewall rules, NAT, routing, or the actual listening process.</p>
+<h3>Learning common networking ports</h3>
+<p>The filterable reference table is useful for students, IT staff, developers, and administrators learning commonly encountered TCP and UDP services.</p>
+<h3>Security reviews</h3>
+<p>Open ports represent network entry points, so unnecessary services should generally be disabled or restricted. The reference site recommends closing ports that are not needed, using firewalls, auditing open ports, and keeping exposed services patched. citeturn637045view0</p>
+<h3>Why this browser tool does not scan hosts</h3>
+<p>A normal web page cannot create arbitrary raw TCP or UDP socket connections to any host and port. Browsers intentionally restrict that capability. A true reachability scan requires a server-side probe, command-line tool, native application, browser extension with special permissions, or another network-capable service. This Utiliverse page therefore performs a reliable local port/service lookup rather than displaying invented open/closed results.</p>
+</section>
+
+<section class="info-section">
+<h2>Port Checker FAQ</h2>
+<details class="faq-item"><summary>What port does HTTPS use?</summary><p>HTTPS commonly uses TCP port 443.</p></details>
+<details class="faq-item"><summary>What port does SSH use?</summary><p>SSH commonly uses TCP port 22.</p></details>
+<details class="faq-item"><summary>What port does DNS use?</summary><p>DNS commonly uses port 53. UDP is common for standard queries, while TCP is also used for cases such as zone transfers and larger responses.</p></details>
+<details class="faq-item"><summary>What is the highest valid port number?</summary><p>Port numbers range from 0 through 65535.</p></details>
+<details class="faq-item"><summary>What are ephemeral ports?</summary><p>They are temporary ports commonly selected by client systems for outbound connections, typically from the dynamic/private range of 49152–65535.</p></details>
+<details class="faq-item"><summary>Can this tool tell whether a remote port is open?</summary><p>No. This standalone browser tool performs port and service lookup. A real remote port test requires a network-capable backend or native socket access.</p></details>
+<details class="faq-item"><summary>Does a known port guarantee that service is running?</summary><p>No. Port assignments describe conventional usage. An administrator can configure software on a nonstandard port, and any service may be absent even when a port number is commonly associated with it.</p></details>
+</section>
+
+<!-- GOOGLE ADSENSE: BOTTOM / AFTER-CONTENT INSERTION POINT -->
+</div>
+</main>
+
+<footer class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-6 pt-2"><div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-500"><div>© 2026 Utiliverse. All rights reserved.</div><div class="font-semibold text-right">100% Free and Browser Based</div></div></footer>
+
+<script>
+(() => {
+const PORTS = [{"port": 20, "protocol": "tcp", "service": "FTP Data", "description": "File Transfer Protocol data channel"}, {"port": 21, "protocol": "tcp", "service": "FTP", "description": "File Transfer Protocol control channel"}, {"port": 22, "protocol": "tcp", "service": "SSH", "description": "Secure Shell remote login and secure file transfer"}, {"port": 23, "protocol": "tcp", "service": "Telnet", "description": "Unencrypted remote terminal access"}, {"port": 25, "protocol": "tcp", "service": "SMTP", "description": "Simple Mail Transfer Protocol"}, {"port": 53, "protocol": "tcp", "service": "DNS", "description": "Domain Name System zone transfers and large responses"}, {"port": 53, "protocol": "udp", "service": "DNS", "description": "Domain Name System queries"}, {"port": 67, "protocol": "udp", "service": "DHCP Server", "description": "Dynamic Host Configuration Protocol server"}, {"port": 68, "protocol": "udp", "service": "DHCP Client", "description": "Dynamic Host Configuration Protocol client"}, {"port": 69, "protocol": "udp", "service": "TFTP", "description": "Trivial File Transfer Protocol"}, {"port": 80, "protocol": "tcp", "service": "HTTP", "description": "Hypertext Transfer Protocol"}, {"port": 88, "protocol": "tcp", "service": "Kerberos", "description": "Kerberos authentication"}, {"port": 88, "protocol": "udp", "service": "Kerberos", "description": "Kerberos authentication"}, {"port": 110, "protocol": "tcp", "service": "POP3", "description": "Post Office Protocol version 3"}, {"port": 119, "protocol": "tcp", "service": "NNTP", "description": "Network News Transfer Protocol"}, {"port": 123, "protocol": "udp", "service": "NTP", "description": "Network Time Protocol"}, {"port": 135, "protocol": "tcp", "service": "MS RPC", "description": "Microsoft Remote Procedure Call endpoint mapper"}, {"port": 137, "protocol": "udp", "service": "NetBIOS Name", "description": "NetBIOS name service"}, {"port": 138, "protocol": "udp", "service": "NetBIOS Datagram", "description": "NetBIOS datagram service"}, {"port": 139, "protocol": "tcp", "service": "NetBIOS Session", "description": "NetBIOS session service"}, {"port": 143, "protocol": "tcp", "service": "IMAP", "description": "Internet Message Access Protocol"}, {"port": 161, "protocol": "udp", "service": "SNMP", "description": "Simple Network Management Protocol"}, {"port": 162, "protocol": "udp", "service": "SNMP Trap", "description": "SNMP trap notifications"}, {"port": 179, "protocol": "tcp", "service": "BGP", "description": "Border Gateway Protocol"}, {"port": 389, "protocol": "tcp", "service": "LDAP", "description": "Lightweight Directory Access Protocol"}, {"port": 389, "protocol": "udp", "service": "LDAP", "description": "LDAP connectionless protocol"}, {"port": 443, "protocol": "tcp", "service": "HTTPS", "description": "HTTP over TLS/SSL"}, {"port": 445, "protocol": "tcp", "service": "SMB", "description": "Server Message Block / Microsoft-DS"}, {"port": 465, "protocol": "tcp", "service": "SMTPS", "description": "SMTP over implicit TLS"}, {"port": 500, "protocol": "udp", "service": "IKE / ISAKMP", "description": "Internet Key Exchange for IPsec"}, {"port": 514, "protocol": "udp", "service": "Syslog", "description": "System logging"}, {"port": 515, "protocol": "tcp", "service": "LPD", "description": "Line Printer Daemon"}, {"port": 520, "protocol": "udp", "service": "RIP", "description": "Routing Information Protocol"}, {"port": 587, "protocol": "tcp", "service": "SMTP Submission", "description": "Email message submission"}, {"port": 631, "protocol": "tcp", "service": "IPP", "description": "Internet Printing Protocol"}, {"port": 636, "protocol": "tcp", "service": "LDAPS", "description": "LDAP over TLS/SSL"}, {"port": 993, "protocol": "tcp", "service": "IMAPS", "description": "IMAP over TLS"}, {"port": 995, "protocol": "tcp", "service": "POP3S", "description": "POP3 over TLS"}, {"port": 1080, "protocol": "tcp", "service": "SOCKS", "description": "SOCKS proxy"}, {"port": 1194, "protocol": "udp", "service": "OpenVPN", "description": "Common OpenVPN port"}, {"port": 1433, "protocol": "tcp", "service": "Microsoft SQL Server", "description": "Microsoft SQL Server database"}, {"port": 1434, "protocol": "udp", "service": "SQL Browser", "description": "Microsoft SQL Server Browser"}, {"port": 1521, "protocol": "tcp", "service": "Oracle Database", "description": "Oracle database listener"}, {"port": 1701, "protocol": "udp", "service": "L2TP", "description": "Layer 2 Tunneling Protocol"}, {"port": 1723, "protocol": "tcp", "service": "PPTP", "description": "Point-to-Point Tunneling Protocol"}, {"port": 1883, "protocol": "tcp", "service": "MQTT", "description": "MQTT messaging without TLS"}, {"port": 2049, "protocol": "tcp", "service": "NFS", "description": "Network File System"}, {"port": 2049, "protocol": "udp", "service": "NFS", "description": "Network File System"}, {"port": 3306, "protocol": "tcp", "service": "MySQL", "description": "MySQL database"}, {"port": 3389, "protocol": "tcp", "service": "RDP", "description": "Remote Desktop Protocol"}, {"port": 3478, "protocol": "udp", "service": "STUN", "description": "Session Traversal Utilities for NAT"}, {"port": 4500, "protocol": "udp", "service": "IPsec NAT-T", "description": "IPsec NAT Traversal"}, {"port": 5060, "protocol": "tcp", "service": "SIP", "description": "Session Initiation Protocol"}, {"port": 5060, "protocol": "udp", "service": "SIP", "description": "Session Initiation Protocol"}, {"port": 5061, "protocol": "tcp", "service": "SIPS", "description": "SIP over TLS"}, {"port": 5432, "protocol": "tcp", "service": "PostgreSQL", "description": "PostgreSQL database"}, {"port": 5672, "protocol": "tcp", "service": "AMQP", "description": "Advanced Message Queuing Protocol"}, {"port": 5900, "protocol": "tcp", "service": "VNC", "description": "Virtual Network Computing"}, {"port": 5985, "protocol": "tcp", "service": "WinRM HTTP", "description": "Windows Remote Management over HTTP"}, {"port": 5986, "protocol": "tcp", "service": "WinRM HTTPS", "description": "Windows Remote Management over HTTPS"}, {"port": 6379, "protocol": "tcp", "service": "Redis", "description": "Redis key-value database"}, {"port": 6443, "protocol": "tcp", "service": "Kubernetes API", "description": "Kubernetes API server"}, {"port": 8080, "protocol": "tcp", "service": "HTTP Alternate", "description": "Common alternate HTTP / proxy port"}, {"port": 8443, "protocol": "tcp", "service": "HTTPS Alternate", "description": "Common alternate HTTPS port"}, {"port": 8883, "protocol": "tcp", "service": "MQTTS", "description": "MQTT over TLS"}, {"port": 9200, "protocol": "tcp", "service": "Elasticsearch", "description": "Elasticsearch HTTP API"}, {"port": 9300, "protocol": "tcp", "service": "Elasticsearch Transport", "description": "Elasticsearch node transport"}, {"port": 9418, "protocol": "tcp", "service": "Git", "description": "Git protocol"}, {"port": 11211, "protocol": "tcp", "service": "Memcached", "description": "Memcached cache service"}, {"port": 25565, "protocol": "tcp", "service": "Minecraft Java", "description": "Default Minecraft Java Edition server"}, {"port": 27017, "protocol": "tcp", "service": "MongoDB", "description": "MongoDB database"}, {"port": 51820, "protocol": "udp", "service": "WireGuard", "description": "Default WireGuard VPN port"}];
+const $ = id => document.getElementById(id);
+
+function rangeFor(port){
+ if(port<=1023)return{name:"Well-Known / System",id:"rangeWell"};
+ if(port<=49151)return{name:"Registered / User",id:"rangeReg"};
+ return{name:"Dynamic / Private",id:"rangeDyn"};
+}
+
+function renderTable(list=PORTS){
+ const body=$("portsBody");body.innerHTML="";
+ list.forEach(x=>{
+   const tr=document.createElement("tr");
+   tr.innerHTML=`<td>${x.port}</td><td>${x.protocol.toUpperCase()}</td><td class="font-semibold">${x.service}</td><td>${x.description}</td>`;
+   tr.style.cursor="pointer";
+   tr.onclick=()=>{$("query").value=x.port;$("protocol").value=x.protocol;lookup();window.scrollTo({top:0,behavior:"smooth"})};
+   body.appendChild(tr);
+ });
+ $("tableCount").textContent=`${list.length} entr${list.length===1?"y":"ies"}`;
+}
+
+function lookup(){
+ const q=$("query").value.trim().toLowerCase();
+ const proto=$("protocol").value;
+ let matches=[];
+
+ if(/^\d+$/.test(q)){
+   const port=Number(q);
+   if(port<0||port>65535){
+     $("outPort").textContent="Invalid";$("outProtocol").textContent="—";$("outService").textContent="—";$("outDescription").textContent="Port must be between 0 and 65535.";$("outRange").textContent="—";$("knownBadge").textContent="Invalid port";return;
+   }
+   matches=PORTS.filter(x=>x.port===port&&(proto==="any"||x.protocol===proto));
+   const r=rangeFor(port);
+   document.querySelectorAll(".range-card").forEach(c=>c.classList.remove("active"));$(r.id).classList.add("active");
+   $("outPort").textContent=port;
+   $("outRange").textContent=r.name;
+ }else{
+   matches=PORTS.filter(x=>(x.service.toLowerCase().includes(q)||x.description.toLowerCase().includes(q))&&(proto==="any"||x.protocol===proto));
+   if(matches.length){
+     const r=rangeFor(matches[0].port);
+     document.querySelectorAll(".range-card").forEach(c=>c.classList.remove("active"));$(r.id).classList.add("active");
+     $("outPort").textContent=matches.map(x=>x.port).filter((v,i,a)=>a.indexOf(v)===i).join(", ");
+     $("outRange").textContent=r.name;
+   }else{
+     document.querySelectorAll(".range-card").forEach(c=>c.classList.remove("active"));
+     $("outPort").textContent="—";$("outRange").textContent="—";
+   }
+ }
+
+ if(matches.length){
+   $("outProtocol").textContent=[...new Set(matches.map(x=>x.protocol.toUpperCase()))].join(", ");
+   $("outService").textContent=[...new Set(matches.map(x=>x.service))].join(", ");
+   $("outDescription").textContent=[...new Set(matches.map(x=>x.description))].join(" • ");
+   $("knownBadge").textContent=matches.length>1?`${matches.length} matches`:"Known port";
+ }else{
+   if(/^\d+$/.test(q)){
+     $("outProtocol").textContent=proto==="any"?"TCP / UDP":proto.toUpperCase();
+     $("outService").textContent="No common service listed";
+     $("outDescription").textContent="This port is valid, but it is not in the built-in common-services reference.";
+     $("knownBadge").textContent="Valid port";
+   }else{
+     $("outProtocol").textContent="—";$("outService").textContent="No match";$("outDescription").textContent="Try another port number or service name.";$("knownBadge").textContent="No match";
+   }
+ }
+}
+
+$("lookupBtn").onclick=lookup;
+$("query").addEventListener("keydown",e=>{if(e.key==="Enter")lookup()});
+$("protocol").onchange=lookup;
+$("resetBtn").onclick=()=>{$("query").value="443";$("protocol").value="any";$("filter").value="";renderTable();lookup()};
+$("filter").oninput=()=>{
+ const q=$("filter").value.trim().toLowerCase();
+ const list=PORTS.filter(x=>String(x.port).includes(q)||x.protocol.includes(q)||x.service.toLowerCase().includes(q)||x.description.toLowerCase().includes(q));
+ renderTable(list);
+};
+
+const toggle=$("themeToggle"),moon=$("moonIcon"),sun=$("sunIcon");
+function theme(m){
+ const d=m==="dark";document.body.classList.toggle("dark-mode",d);moon.classList.toggle("hidden",d);sun.classList.toggle("hidden",!d);localStorage.setItem("utiliverse-theme",d?"dark":"light");lucide.createIcons();
+}
+theme(localStorage.getItem("utiliverse-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));
+toggle.onclick=()=>theme(document.body.classList.contains("dark-mode")?"light":"dark");
+
+renderTable();lookup();lucide.createIcons();
+})();
+</script>
+</body>
+</html>
