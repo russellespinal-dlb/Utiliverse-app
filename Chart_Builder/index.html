@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Chart Builder – Create Bar, Line, Area, Pie & Scatter Charts | Utiliverse</title>
+  <meta name="description" content="Free online chart builder. Paste CSV or table data, create bar, line, area, pie or scatter charts, customize labels and colors, then export PNG or SVG.">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#020617">
+  <link rel="canonical" href="https://utiliverse.app/Chart_Builder/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Utiliverse">
+  <meta property="og:title" content="Chart Builder – Create Bar, Line, Area, Pie & Scatter Charts | Utiliverse">
+  <meta property="og:description" content="Paste CSV or table data, build charts in your browser, customize them, and export PNG or SVG.">
+  <meta property="og:url" content="https://utiliverse.app/Chart_Builder/">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Chart Builder | Utiliverse">
+  <meta name="twitter:description" content="Create customizable charts from CSV or pasted table data in your browser.">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+  <style>
+    body{
+      background:
+        radial-gradient(circle at 10% 0%, rgba(99,102,241,.10), transparent 32%),
+        #f8fafc;
+    }
+
+    body.dark-mode{
+      background:
+        radial-gradient(circle at 10% 0%, rgba(99,102,241,.14), transparent 32%),
+        radial-gradient(circle at 90% 15%, rgba(124,58,237,.08), transparent 28%),
+        #020617 !important;
+      color:#f8fafc!important;
+    }
+
+    body.dark-mode header{
+      background:rgba(2,6,23,.82)!important;
+      border-color:#1e293b!important;
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+    }
+
+    body.dark-mode header a{color:#cbd5e1!important}
+    body.dark-mode header a:hover{color:#fff!important}
+    body.dark-mode main h1{color:#f8fafc!important}
+    body.dark-mode .hero-copy{color:#94a3b8!important}
+
+    .theme-toggle{
+      display:inline-flex;align-items:center;justify-content:center;
+      width:40px;height:40px;padding:0;border-radius:12px;
+      border:1px solid #cbd5e1;background:#fff;color:#475569;
+      cursor:pointer;box-shadow:none;appearance:none;-webkit-appearance:none;
+      transition:background .2s,color .2s,border-color .2s;
+    }
+    .theme-toggle:hover{background:#f1f5f9;color:#0f172a;border-color:#94a3b8}
+    body.dark-mode .theme-toggle{background:rgba(15,23,42,.72);border-color:#334155;color:#94a3b8}
+    body.dark-mode .theme-toggle:hover{background:#1e293b;color:#fff}
+    .theme-icon{width:18px;height:18px;stroke-width:2}
+
+    .free-browser-note{
+      color:#64748b;font-size:12px;font-weight:700;white-space:nowrap;
+    }
+    body.dark-mode .free-browser-note{color:#94a3b8}
+
+    .tool-card,.info-section{
+      background:#fff;border:1px solid #e2e8f0;border-radius:1rem;
+      box-shadow:0 1px 2px rgba(15,23,42,.04);
+    }
+    body.dark-mode .tool-card,body.dark-mode .info-section{
+      background:rgba(30,41,59,.72)!important;
+      border-color:#334155!important;
+      box-shadow:0 18px 50px rgba(0,0,0,.18);
+    }
+
+    .section-head{
+      padding:1rem 1.15rem;border-bottom:1px solid #e2e8f0;
+      display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+    }
+    body.dark-mode .section-head{border-color:#334155}
+    .section-head h2{
+      font-weight:850;color:#0f172a;display:flex;align-items:center;gap:.55rem;
+    }
+    body.dark-mode .section-head h2{color:#f8fafc}
+
+    .label{
+      display:block;font-size:.79rem;font-weight:800;color:#334155;margin-bottom:.4rem;
+    }
+    body.dark-mode .label{color:#cbd5e1}
+
+    .field,.textarea{
+      width:100%;border:1px solid #cbd5e1;background:#fff;color:#0f172a;
+      border-radius:.8rem;padding:.72rem .82rem;outline:none;
+      transition:border-color .2s,box-shadow .2s,background .2s;
+      font-size:1rem;
+    }
+    .field:focus,.textarea:focus{
+      border-color:#818cf8;box-shadow:0 0 0 3px rgba(99,102,241,.14);
+    }
+    .textarea{
+      min-height:220px;resize:vertical;
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
+      line-height:1.55;font-size:.88rem;
+    }
+    body.dark-mode .field,body.dark-mode .textarea{
+      background:#0f172a;border-color:#475569;color:#e2e8f0;
+    }
+
+    .chart-types{
+      display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:.55rem;
+    }
+    .chart-type-btn{
+      border:1px solid #cbd5e1;background:#fff;color:#475569;
+      border-radius:.8rem;padding:.7rem .35rem;font-size:.8rem;font-weight:800;
+      display:flex;flex-direction:column;align-items:center;gap:.35rem;
+      transition:background .2s,border-color .2s,color .2s,transform .12s;
+    }
+    .chart-type-btn:hover,.chart-type-btn.active{
+      background:#eef2ff;border-color:#a5b4fc;color:#4338ca;transform:translateY(-1px);
+    }
+    body.dark-mode .chart-type-btn{background:#0f172a;border-color:#475569;color:#cbd5e1}
+    body.dark-mode .chart-type-btn:hover,body.dark-mode .chart-type-btn.active{
+      background:#312e81;border-color:#6366f1;color:#e0e7ff;
+    }
+
+    .btn-primary,.btn-secondary,.btn-danger{
+      display:inline-flex;align-items:center;justify-content:center;gap:.45rem;
+      border-radius:.75rem;font-weight:800;
+      transition:background .2s,border-color .2s,transform .12s;
+    }
+    .btn-primary{background:#4f46e5;color:#fff;padding:.72rem 1rem}
+    .btn-primary:hover{background:#4338ca;transform:translateY(-1px)}
+    .btn-secondary{background:#fff;color:#334155;border:1px solid #cbd5e1;padding:.68rem .9rem}
+    .btn-secondary:hover{background:#f8fafc;border-color:#94a3b8}
+    body.dark-mode .btn-secondary{background:#1e293b;color:#e2e8f0;border-color:#475569}
+    body.dark-mode .btn-secondary:hover{background:#334155}
+    .btn-danger{background:#fff;color:#dc2626;border:1px solid #fecaca;padding:.68rem .9rem}
+    body.dark-mode .btn-danger{background:#1e293b;color:#fca5a5;border-color:#7f1d1d}
+
+    .check-row{
+      display:flex;align-items:center;gap:.6rem;min-height:34px;
+    }
+    .check-row input{width:18px;height:18px;accent-color:#4f46e5}
+    .check-row label{font-size:.85rem;color:#475569}
+    body.dark-mode .check-row label{color:#cbd5e1}
+
+    .preview-wrap{
+      min-height:460px;
+      border-radius:.9rem;
+      border:1px solid #e2e8f0;
+      background:#fff;
+      padding:.75rem;
+      overflow:hidden;
+    }
+    body.dark-mode .preview-wrap{background:#0f172a;border-color:#334155}
+
+    .color-grid{
+      display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem;
+    }
+    .color-row{
+      display:flex;align-items:center;justify-content:space-between;gap:.65rem;
+      border:1px solid #e2e8f0;border-radius:.75rem;padding:.6rem .7rem;
+      background:#f8fafc;
+    }
+    body.dark-mode .color-row{background:#0f172a;border-color:#334155}
+    .color-label{
+      min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+      font-size:.8rem;font-weight:800;color:#334155;
+    }
+    body.dark-mode .color-label{color:#cbd5e1}
+    .color-row input[type=color]{
+      width:38px;height:30px;border:0;padding:0;background:transparent;cursor:pointer;
+    }
+
+    .status{
+      border-radius:.8rem;padding:.78rem .9rem;font-size:.82rem;line-height:1.5;
+      display:flex;align-items:flex-start;gap:.55rem;
+    }
+    .status.good{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46}
+    .status.warn{background:#fffbeb;border:1px solid #fde68a;color:#92400e}
+    .status.bad{background:#fef2f2;border:1px solid #fecaca;color:#991b1b}
+    body.dark-mode .status.good{background:rgba(6,78,59,.22);border-color:#065f46;color:#a7f3d0}
+    body.dark-mode .status.warn{background:rgba(120,53,15,.22);border-color:#92400e;color:#fde68a}
+    body.dark-mode .status.bad{background:rgba(127,29,29,.22);border-color:#991b1b;color:#fecaca}
+
+    .data-meta{
+      display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+      font-size:.75rem;color:#64748b;margin-top:.65rem;
+    }
+
+    .info-wrap{width:100%;max-width:72rem;margin:3.5rem auto 0}
+    .info-section{padding:1.5rem}
+    .info-section+.info-section{margin-top:1.5rem}
+    .info-section h2{font-size:1.65rem;line-height:1.25;font-weight:800;color:#0f172a;margin:0 0 .9rem;letter-spacing:-.02em}
+    .info-section h3{font-size:1.06rem;line-height:1.4;font-weight:800;color:#1e293b;margin:1.4rem 0 .45rem}
+    .info-section p,.info-section li{color:#475569;line-height:1.82;font-size:.98rem}
+    .info-section p{margin:.8rem 0}
+    .info-section ul,.info-section ol{padding-left:1.25rem;margin:.75rem 0}
+    body.dark-mode .info-section h2{color:#f8fafc!important}
+    body.dark-mode .info-section h3{color:#e2e8f0!important}
+    body.dark-mode .info-section p,body.dark-mode .info-section li{color:#94a3b8!important}
+
+    .faq-item{border-bottom:1px solid #e2e8f0}
+    .faq-item:last-child{border-bottom:0}
+    .faq-item summary{
+      list-style:none;cursor:pointer;padding:1rem 0;font-weight:800;color:#0f172a;
+      display:flex;align-items:center;justify-content:space-between;gap:1rem;
+    }
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:"+";font-size:1.2rem;color:#64748b;flex:0 0 auto}
+    .faq-item[open] summary::after{content:"−"}
+    .faq-item p{margin:0;padding:0 0 1rem}
+    body.dark-mode .faq-item{border-color:#334155}
+    body.dark-mode .faq-item summary{color:#e2e8f0}
+
+    @media(min-width:640px){.info-section{padding:2rem}}
+    @media(max-width:760px){
+      .chart-types{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .color-grid{grid-template-columns:1fr}
+    }
+    @media(max-width:640px){
+      .free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}
+      .theme-toggle{width:38px;height:38px}
+      .preview-wrap{min-height:360px}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebApplication",
+    "name":"Utiliverse Chart Builder",
+    "url":"https://utiliverse.app/Chart_Builder/",
+    "applicationCategory":"UtilitiesApplication",
+    "operatingSystem":"Any",
+    "browserRequirements":"Requires a modern web browser with JavaScript enabled.",
+    "description":"Free browser-based chart builder for creating bar, line, area, pie and scatter charts from CSV or pasted table data.",
+    "isAccessibleForFree":true,
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+    "featureList":[
+      "Paste CSV or spreadsheet data",
+      "Automatic delimiter detection",
+      "Bar charts",
+      "Line charts",
+      "Area charts",
+      "Pie charts",
+      "Scatter plots",
+      "Custom chart titles and axis labels",
+      "Legend, grid and data-label toggles",
+      "Per-series color customization",
+      "PNG export",
+      "SVG export",
+      "Client-side chart generation"
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"What data can I paste into the chart builder?","acceptedAnswer":{"@type":"Answer","text":"You can paste comma-separated CSV, tab-separated spreadsheet data, semicolon-separated values, or pipe-delimited data."}},
+      {"@type":"Question","name":"Which chart types are supported?","acceptedAnswer":{"@type":"Answer","text":"The tool supports bar, line, area, pie and scatter charts."}},
+      {"@type":"Question","name":"Can I create a chart from Excel or Google Sheets data?","acceptedAnswer":{"@type":"Answer","text":"Yes. Copy a table range and paste it into the data box. Spreadsheet copies are normally tab-separated and can be detected automatically."}},
+      {"@type":"Question","name":"Can I export the chart?","acceptedAnswer":{"@type":"Answer","text":"Yes. You can export the current chart as PNG or SVG."}},
+      {"@type":"Question","name":"Does my data get uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Parsing and chart generation happen in your browser. The page loads its chart-rendering library from a CDN, but the pasted chart data is not submitted to Utiliverse."}},
+      {"@type":"Question","name":"How should scatter plot data be formatted?","acceptedAnswer":{"@type":"Answer","text":"Use two numeric columns representing X and Y values. A header row can be used to name the two dimensions."}}
+    ]
+  }
+  </script>
+</head>
+
+<!--
+SEO TARGET CLUSTER
+Primary: chart builder
+Secondary: online chart maker, graph maker, bar chart maker, line chart maker,
+pie chart maker, scatter plot maker, CSV chart generator, graph CSV data,
+create chart online, export chart PNG, export chart SVG
+
+ADSENSE NOTE
+Approved Google AdSense code can replace the invisible insertion comments.
+No visible placeholder box or reserved ad space is rendered before ad code is inserted.
+-->
+
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+
+<header class="sticky top-0 z-50 bg-white/80 backdrop-filter backdrop-blur-lg border-b border-slate-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="https://utiliverse.app" class="flex items-center gap-2 text-sm font-semibold text-slate-600 hover:text-slate-900 transition">
+      <i data-lucide="arrow-left" class="w-4 h-4"></i>
+      <span>Back to Utiliverse</span>
+    </a>
+    <div class="flex items-center gap-4">
+      <div class="free-browser-note">100% Free and Browser Based</div>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Switch to dark mode">
+        <i id="moonIcon" data-lucide="moon" class="theme-icon"></i>
+        <i id="sunIcon" data-lucide="sun" class="theme-icon hidden"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold text-slate-900 flex items-center gap-3">
+      <i data-lucide="chart-column-big" class="w-8 h-8 text-indigo-600"></i>
+      Chart Builder
+    </h1>
+    <p class="hero-copy text-slate-500 mt-2 text-sm max-w-3xl">
+      Paste CSV or spreadsheet data, choose a chart type, customize the design, and export your finished chart as PNG or SVG.
+    </p>
+  </div>
+
+  <!-- =========================================================
+       GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT
+       Paste approved Google AdSense code here after approval.
+       This comment is intentionally invisible and reserves no space.
+  ========================================================= -->
+
+  <div class="grid grid-cols-1 xl:grid-cols-[.88fr_1.12fr] gap-6">
+
+    <div class="space-y-6">
+      <section class="tool-card overflow-hidden">
+        <div class="section-head">
+          <h2><i data-lucide="table-2" class="w-5 h-5 text-indigo-600"></i> 1. Data</h2>
+          <div class="flex flex-wrap gap-2">
+            <button id="loadSampleBtn" class="btn-secondary" type="button">
+              <i data-lucide="sparkles" class="w-4 h-4"></i> Load Sample
+            </button>
+            <button id="clearBtn" class="btn-danger" type="button">
+              <i data-lucide="trash-2" class="w-4 h-4"></i> Clear
+            </button>
+          </div>
+        </div>
+
+        <div class="p-5 sm:p-6">
+          <label class="label" for="dataInput">Paste CSV or table data</label>
+          <textarea id="dataInput" class="textarea" spellcheck="false" placeholder="Month,Revenue,Expenses&#10;Jan,12000,8000&#10;Feb,15000,9000&#10;Mar,17000,10500"></textarea>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+            <div>
+              <label class="label" for="delimiter">Delimiter</label>
+              <select id="delimiter" class="field">
+                <option value="auto" selected>Auto detect</option>
+                <option value=",">Comma (,)</option>
+                <option value="tab">Tab</option>
+                <option value=";">Semicolon (;)</option>
+                <option value="|">Pipe (|)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="label" for="decimalMode">Number format</label>
+              <select id="decimalMode" class="field">
+                <option value="auto" selected>Auto / standard</option>
+                <option value="dot">Decimal point (1,234.56)</option>
+                <option value="comma">Decimal comma (1.234,56)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="check-row">
+              <input id="headerRow" type="checkbox" checked>
+              <label for="headerRow">First row is a header</label>
+            </div>
+            <div class="check-row">
+              <input id="categoryColumn" type="checkbox" checked>
+              <label for="categoryColumn">First column holds category labels</label>
+            </div>
+          </div>
+
+          <div class="data-meta">
+            <span id="detectedDelimiter">Delimiter: —</span>
+            <span id="dataStats">0 rows · 0 columns</span>
+          </div>
+          <div id="statusArea" class="mt-4"></div>
+        </div>
+      </section>
+
+      <section class="tool-card overflow-hidden">
+        <div class="section-head">
+          <h2><i data-lucide="chart-spline" class="w-5 h-5 text-indigo-600"></i> 2. Chart Type</h2>
+        </div>
+        <div class="p-5 sm:p-6">
+          <div class="chart-types">
+            <button class="chart-type-btn active" type="button" data-type="bar">
+              <i data-lucide="chart-column" class="w-5 h-5"></i><span>Bar</span>
+            </button>
+            <button class="chart-type-btn" type="button" data-type="line">
+              <i data-lucide="chart-no-axes-combined" class="w-5 h-5"></i><span>Line</span>
+            </button>
+            <button class="chart-type-btn" type="button" data-type="area">
+              <i data-lucide="chart-area" class="w-5 h-5"></i><span>Area</span>
+            </button>
+            <button class="chart-type-btn" type="button" data-type="pie">
+              <i data-lucide="chart-pie" class="w-5 h-5"></i><span>Pie</span>
+            </button>
+            <button class="chart-type-btn" type="button" data-type="scatter">
+              <i data-lucide="scatter-chart" class="w-5 h-5"></i><span>Scatter</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="tool-card overflow-hidden">
+        <div class="section-head">
+          <h2><i data-lucide="sliders-horizontal" class="w-5 h-5 text-indigo-600"></i> 3. Customize</h2>
+        </div>
+        <div class="p-5 sm:p-6">
+          <div>
+            <label class="label" for="chartTitle">Chart title</label>
+            <input id="chartTitle" class="field" type="text" value="Monthly Performance" maxlength="100">
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+            <div>
+              <label class="label" for="xAxisLabel">X axis label</label>
+              <input id="xAxisLabel" class="field" type="text" value="Month" maxlength="80">
+            </div>
+            <div>
+              <label class="label" for="yAxisLabel">Y axis label</label>
+              <input id="yAxisLabel" class="field" type="text" value="Amount" maxlength="80">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
+            <div class="check-row"><input id="showLegend" type="checkbox" checked><label for="showLegend">Legend</label></div>
+            <div class="check-row"><input id="showGrid" type="checkbox" checked><label for="showGrid">Grid</label></div>
+            <div class="check-row"><input id="showDataLabels" type="checkbox"><label for="showDataLabels">Data labels</label></div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+            <div>
+              <label class="label" for="chartHeight">Chart height</label>
+              <select id="chartHeight" class="field">
+                <option value="360">Compact – 360 px</option>
+                <option value="440" selected>Standard – 440 px</option>
+                <option value="520">Large – 520 px</option>
+                <option value="620">Extra large – 620 px</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="label" for="curveStyle">Line style</label>
+              <select id="curveStyle" class="field">
+                <option value="straight">Straight</option>
+                <option value="smooth" selected>Smooth</option>
+                <option value="stepline">Step</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mt-5">
+            <div class="flex items-center justify-between gap-3 mb-2">
+              <div class="label mb-0">Series colors</div>
+              <button id="resetColorsBtn" class="btn-secondary" type="button">
+                <i data-lucide="palette" class="w-4 h-4"></i> Reset Colors
+              </button>
+            </div>
+            <div id="colorControls" class="color-grid">
+              <div class="text-sm text-slate-500">Colors appear after valid data is loaded.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div>
+      <section class="tool-card overflow-hidden sticky top-20">
+        <div class="section-head">
+          <h2><i data-lucide="eye" class="w-5 h-5 text-indigo-600"></i> Preview</h2>
+          <div class="flex flex-wrap gap-2">
+            <button id="exportPngBtn" class="btn-secondary" type="button">
+              <i data-lucide="image-down" class="w-4 h-4"></i> PNG
+            </button>
+            <button id="exportSvgBtn" class="btn-secondary" type="button">
+              <i data-lucide="file-code-2" class="w-4 h-4"></i> SVG
+            </button>
+          </div>
+        </div>
+        <div class="p-4 sm:p-5">
+          <div class="preview-wrap">
+            <div id="chart"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
+       Paste approved Google AdSense code here after approval.
+       This comment is intentionally invisible and reserves no space.
+  ========================================================= -->
+
+  <div class="info-wrap">
+
+    <section class="info-section">
+      <h2>Free Online Chart Builder for CSV and Table Data</h2>
+      <p>
+        The Utiliverse Chart Builder turns pasted tabular data into a clean visual chart directly in your browser. You can copy a range from Excel, Google Sheets, Numbers, LibreOffice Calc, or another spreadsheet, paste CSV text from a file, or type a small table manually. The tool can create bar, line, area, pie, and scatter charts, then export the finished visualization as PNG or SVG.
+      </p>
+      <p>
+        Chart generation happens on the page, so your pasted dataset is not sent to a Utiliverse server. This makes the tool useful for quick reports, presentations, dashboards, homework, project summaries, business comparisons, and exploratory data visualization. The chart engine is loaded in the browser, and your data stays in the current page while you work.
+      </p>
+    </section>
+
+    <section class="info-section">
+      <h2>How to Build a Chart from CSV or Spreadsheet Data</h2>
+
+      <h3>Paste your data into the editor</h3>
+      <p>
+        Start by pasting a table into the data box. A common format uses the first row for column names and the first column for category labels. For example, a monthly sales chart might contain Month, Revenue, and Expenses as the header row, followed by January, February, and March data. If you copy cells directly from a spreadsheet, the pasted values are usually separated by tabs. CSV files commonly use commas, while some systems use semicolons or pipe characters.
+      </p>
+
+      <h3>Let the delimiter auto-detect or choose it manually</h3>
+      <p>
+        Auto Detect examines the pasted text and looks for tabs, commas, semicolons, and pipes. In most everyday datasets this identifies the correct separator immediately. If your text contains punctuation that confuses detection, choose the delimiter explicitly. Quoted CSV values are supported, so a value such as "New York, NY" remains one field instead of being split at the comma inside the quotation marks.
+      </p>
+
+      <h3>Describe how the table is structured</h3>
+      <p>
+        Keep First Row Is a Header enabled when the top row contains labels such as Month, Sales, Cost, or Users. Disable it when every row is data. Keep First Column Holds Category Labels enabled for charts where the first column contains categories such as months, products, regions, or departments. If the first column is also numeric data, turn the option off so it can be treated like the other series.
+      </p>
+
+      <h3>Choose the appropriate chart type</h3>
+      <p>
+        Bar charts work well for comparing categories or ranking values. Line charts are a strong choice for trends over time or another ordered sequence. Area charts show a trend while emphasizing the magnitude beneath the line. Pie charts show how a small number of categories contribute to a single total. Scatter plots show the relationship between two numeric variables and are useful for spotting patterns, clusters, or correlation.
+      </p>
+
+      <h3>Format bar, line, and area data</h3>
+      <p>
+        For bar, line, and area charts, the first column normally supplies category labels while each additional numeric column becomes a separate series. A table with Month, Revenue, and Expenses creates two plotted series across the month categories. This makes it easy to compare multiple measures without rebuilding the data into a special chart-specific format.
+      </p>
+
+      <h3>Format pie-chart data</h3>
+      <p>
+        Pie charts use the first column as slice labels and the first numeric data column as slice values. Additional numeric columns are ignored in pie mode because one pie is intended to show one part-to-whole relationship. For example, Region and Revenue can produce slices for North, South, East, and West. Pie charts work best with a modest number of categories; when there are many slices, a bar chart is usually easier to read.
+      </p>
+
+      <h3>Format scatter-plot data</h3>
+      <p>
+        A scatter plot needs two numeric columns. The first numeric column becomes the X value and the next becomes the Y value. If the table has a header row, those names are used to describe the series and axes where appropriate. Category text is not used to position scatter points because both coordinates must be numeric.
+      </p>
+
+      <h3>Customize the title, axes, legend, grid, and labels</h3>
+      <p>
+        Add a descriptive chart title and optional X- and Y-axis labels. You can show or hide the legend, grid lines, and data labels. Data labels place values directly on chart marks and can be useful for small datasets, while turning them off keeps crowded charts cleaner. The line-style control changes line and area charts between straight, smooth, and stepped rendering.
+      </p>
+
+      <h3>Change series colors</h3>
+      <p>
+        Once valid data is loaded, a color control appears for each series or pie slice. Use these controls when you need to match a presentation, brand palette, report theme, or category convention. Reset Colors restores the default Utiliverse palette. The chart automatically redraws as colors change, so you can compare combinations before exporting.
+      </p>
+
+      <h3>Export the finished chart</h3>
+      <p>
+        Choose PNG when you need a standard raster image for email, documents, social media, or quick insertion into a presentation. Choose SVG when you want a scalable vector file that can be enlarged without becoming blurry. SVG is particularly useful for print, slides, web design, and later editing in vector-graphics software.
+      </p>
+
+      <h2 class="mt-8">Practical Uses for the Chart Builder</h2>
+
+      <h3>Business and financial reporting</h3>
+      <p>
+        Paste monthly revenue, expenses, customer counts, conversion rates, inventory totals, or departmental metrics to create a quick chart for a meeting or report. Multiple series can make comparisons easier to understand than a raw spreadsheet table.
+      </p>
+
+      <h3>School and research projects</h3>
+      <p>
+        Students can visualize experiment results, survey responses, historical statistics, or classroom datasets without installing chart software. A scatter plot can illustrate relationships between two measured variables, while line and bar charts work well for trends and category comparisons.
+      </p>
+
+      <h3>Website and presentation graphics</h3>
+      <p>
+        Export SVG for sharp graphics in slide decks or websites, or use PNG when a simple image is more convenient. Because the chart title, axis labels, colors, legend, and grid can be adjusted before export, the same dataset can be styled differently for different audiences.
+      </p>
+
+      <h3>Quick spreadsheet visualization</h3>
+      <p>
+        When you only need a chart and do not want to reformat a workbook, copy the relevant spreadsheet range and paste it directly into Utiliverse. Tab-delimited clipboard data is detected automatically in most cases, letting you move from table to chart in seconds.
+      </p>
+
+      <h3>Exploring data before building a dashboard</h3>
+      <p>
+        A lightweight chart builder can help you test whether a dataset is better represented as bars, lines, areas, slices, or points before you commit to a larger dashboard or reporting system. Switching chart types on the same data can reveal which visual form communicates the pattern most clearly.
+      </p>
+    </section>
+
+    <section class="info-section">
+      <h2>Chart Builder FAQ</h2>
+
+      <details class="faq-item">
+        <summary>Can I paste data directly from Excel or Google Sheets?</summary>
+        <p>Yes. Copy a cell range and paste it into the data box. Spreadsheet clipboard data is usually tab-separated, which Auto Detect can recognize.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Which chart types are supported?</summary>
+        <p>The tool supports bar, line, area, pie, and scatter charts.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Can the tool detect commas, tabs, semicolons, and pipes?</summary>
+        <p>Yes. Auto Detect checks common delimiters, or you can choose one manually when needed.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Can I customize chart colors?</summary>
+        <p>Yes. Once the data is parsed, color controls appear for each data series or pie slice.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Can I download the chart?</summary>
+        <p>Yes. Export the current visualization as a PNG image or an SVG vector graphic.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Does Utiliverse upload my chart data?</summary>
+        <p>No. Data parsing and chart generation run in your browser. The page loads its chart-rendering library from a CDN, but the dataset you paste is not sent to Utiliverse.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Why is a pie chart using only one numeric column?</summary>
+        <p>A single pie represents one total divided into slices, so the first numeric series is used. Use a bar chart when you need to compare several measures across the same categories.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>What data does a scatter plot need?</summary>
+        <p>A scatter plot needs at least two numeric columns. The first supplies X coordinates and the second supplies Y coordinates.</p>
+      </details>
+    </section>
+
+    <!-- =========================================================
+         GOOGLE ADSENSE: BOTTOM / AFTER-CONTENT INSERTION POINT
+         Paste approved Google AdSense code here after approval.
+         This comment is intentionally invisible and reserves no space.
+    ========================================================= -->
+  </div>
+</main>
+
+<footer class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-6 pt-2">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-500">
+    <div>© 2026 Utiliverse. All rights reserved.</div>
+    <div class="font-semibold text-right">100% Free and Browser Based</div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+
+  const dataInput = $("dataInput");
+  const delimiterSelect = $("delimiter");
+  const decimalMode = $("decimalMode");
+  const headerRow = $("headerRow");
+  const categoryColumn = $("categoryColumn");
+  const chartTitle = $("chartTitle");
+  const xAxisLabel = $("xAxisLabel");
+  const yAxisLabel = $("yAxisLabel");
+  const showLegend = $("showLegend");
+  const showGrid = $("showGrid");
+  const showDataLabels = $("showDataLabels");
+  const chartHeight = $("chartHeight");
+  const curveStyle = $("curveStyle");
+  const colorControls = $("colorControls");
+  const statusArea = $("statusArea");
+
+  let chartType = "bar";
+  let chart = null;
+  let parsed = null;
+  let colors = [];
+  let renderTimer = null;
+
+  const defaultColors = [
+    "#4f46e5","#7c3aed","#0891b2","#059669","#d97706",
+    "#dc2626","#db2777","#2563eb","#65a30d","#9333ea",
+    "#0f766e","#ea580c"
+  ];
+
+  const sampleData = `Month,Revenue,Expenses
+Jan,12000,8000
+Feb,15000,9000
+Mar,17000,10500
+Apr,16000,9800
+May,19500,11200
+Jun,22000,12500`;
+
+  function escapeHTML(str){
+    return String(str)
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
+  }
+
+  function setStatus(type,message){
+    if(!type || !message){statusArea.innerHTML="";return;}
+    const icon = type==="good" ? "circle-check" : type==="warn" ? "triangle-alert" : "circle-alert";
+    statusArea.innerHTML = `<div class="status ${type}"><i data-lucide="${icon}" class="w-4 h-4 flex-none mt-0.5"></i><div>${escapeHTML(message)}</div></div>`;
+    lucide.createIcons();
+  }
+
+  function detectDelimiter(text){
+    const lines = text.split(/\r?\n/).filter(l=>l.trim()).slice(0,8);
+    if(!lines.length) return ",";
+
+    const candidates = [
+      {value:"\t",label:"Tab"},
+      {value:",",label:"Comma"},
+      {value:";",label:"Semicolon"},
+      {value:"|",label:"Pipe"}
+    ];
+
+    let best = candidates[1];
+    let bestScore = -Infinity;
+
+    for(const c of candidates){
+      const counts = lines.map(line => splitDelimited(line,c.value).length);
+      const avg = counts.reduce((a,b)=>a+b,0)/counts.length;
+      const variance = counts.reduce((s,n)=>s+Math.pow(n-avg,2),0)/counts.length;
+      const score = avg > 1 ? avg * 10 - variance * 3 : -10;
+      if(score > bestScore){bestScore = score;best = c;}
+    }
+
+    return best.value;
+  }
+
+  function splitDelimited(line,delim){
+    const out = [];
+    let cur = "";
+    let quoted = false;
+
+    for(let i=0;i<line.length;i++){
+      const ch = line[i];
+      if(ch === '"'){
+        if(quoted && line[i+1] === '"'){
+          cur += '"';
+          i++;
+        }else{
+          quoted = !quoted;
+        }
+      }else if(ch === delim && !quoted){
+        out.push(cur.trim());
+        cur = "";
+      }else{
+        cur += ch;
+      }
+    }
+    out.push(cur.trim());
+    return out;
+  }
+
+  function parseNumber(value){
+    let s = String(value ?? "").trim();
+    if(!s) return NaN;
+
+    const mode = decimalMode.value;
+    if(mode === "comma"){
+      s = s.replace(/\./g,"").replace(",",".");
+    }else{
+      s = s.replace(/,/g,"");
+    }
+
+    s = s.replace(/[$€£¥₹₩%]/g,"").trim();
+    const n = Number(s);
+    return Number.isFinite(n) ? n : NaN;
+  }
+
+  function parseInput(){
+    const text = dataInput.value.trim();
+    if(!text){
+      $("detectedDelimiter").textContent = "Delimiter: —";
+      $("dataStats").textContent = "0 rows · 0 columns";
+      return null;
+    }
+
+    const selected = delimiterSelect.value;
+    const delim = selected === "auto"
+      ? detectDelimiter(text)
+      : selected === "tab" ? "\t" : selected;
+
+    const lines = text.split(/\r?\n/).filter(line=>line.trim().length);
+    const rows = lines.map(line=>splitDelimited(line,delim));
+    const maxCols = Math.max(...rows.map(r=>r.length));
+    rows.forEach(r=>{while(r.length<maxCols)r.push("");});
+
+    const names = [];
+    let dataRows = rows;
+
+    if(headerRow.checked){
+      const hdr = rows[0];
+      dataRows = rows.slice(1);
+      for(let i=0;i<maxCols;i++) names.push(hdr[i] || `Series ${i+1}`);
+    }else{
+      for(let i=0;i<maxCols;i++) names.push(categoryColumn.checked && i===0 ? "Category" : `Series ${i+1}`);
+    }
+
+    const label = delim === "\t" ? "Tab" : delim === "," ? "Comma" : delim === ";" ? "Semicolon" : "Pipe";
+    $("detectedDelimiter").textContent = `Delimiter: ${label}`;
+    $("dataStats").textContent = `${dataRows.length} row${dataRows.length===1?"":"s"} · ${maxCols} column${maxCols===1?"":"s"}`;
+
+    return {rows:dataRows,names,maxCols,delimiter:delim};
+  }
+
+  function buildChartData(){
+    parsed = parseInput();
+    if(!parsed) return null;
+
+    if(parsed.rows.length === 0 || parsed.maxCols < 1){
+      setStatus("bad","Add at least one data row.");
+      return null;
+    }
+
+    if(chartType === "scatter"){
+      const numericCols = [];
+      for(let col=0; col<parsed.maxCols; col++){
+        const vals = parsed.rows.map(r=>parseNumber(r[col])).filter(Number.isFinite);
+        if(vals.length === parsed.rows.length && vals.length) numericCols.push(col);
+      }
+
+      if(numericCols.length < 2){
+        setStatus("bad","Scatter plots need at least two fully numeric columns.");
+        return null;
+      }
+
+      const xCol = numericCols[0], yCol = numericCols[1];
+      const points = parsed.rows.map(r=>({x:parseNumber(r[xCol]),y:parseNumber(r[yCol])}));
+      return {
+        type:"scatter",
+        series:[{name:parsed.names[yCol] || "Series",data:points}],
+        categories:[],
+        seriesNames:[parsed.names[yCol] || "Series"],
+        xName:parsed.names[xCol] || "X",
+        yName:parsed.names[yCol] || "Y"
+      };
+    }
+
+    if(chartType === "pie"){
+      const labelCol = categoryColumn.checked ? 0 : null;
+      let valueCol = categoryColumn.checked ? 1 : 0;
+
+      while(valueCol < parsed.maxCols){
+        const vals = parsed.rows.map(r=>parseNumber(r[valueCol]));
+        if(vals.every(Number.isFinite)) break;
+        valueCol++;
+      }
+
+      if(valueCol >= parsed.maxCols){
+        setStatus("bad","Pie charts need at least one numeric column.");
+        return null;
+      }
+
+      const labels = parsed.rows.map((r,i)=>labelCol!==null ? (r[labelCol] || `Item ${i+1}`) : `Item ${i+1}`);
+      const values = parsed.rows.map(r=>parseNumber(r[valueCol]));
+
+      return {
+        type:"pie",
+        labels,
+        values,
+        seriesNames:labels
+      };
+    }
+
+    const categoryCol = categoryColumn.checked ? 0 : null;
+    const startCol = categoryColumn.checked ? 1 : 0;
+    const categories = parsed.rows.map((r,i)=>categoryCol!==null ? (r[categoryCol] || `Item ${i+1}`) : `Item ${i+1}`);
+    const series = [];
+
+    for(let col=startCol; col<parsed.maxCols; col++){
+      const values = parsed.rows.map(r=>parseNumber(r[col]));
+      const finiteCount = values.filter(Number.isFinite).length;
+      if(finiteCount === 0) continue;
+
+      series.push({
+        name:parsed.names[col] || `Series ${col+1}`,
+        data:values.map(v=>Number.isFinite(v)?v:null)
+      });
+    }
+
+    if(!series.length){
+      setStatus("bad","No numeric series were found in the pasted data.");
+      return null;
+    }
+
+    return {
+      type:chartType,
+      categories,
+      series,
+      seriesNames:series.map(s=>s.name)
+    };
+  }
+
+  function ensureColors(count){
+    if(colors.length !== count){
+      colors = Array.from({length:count},(_,i)=>colors[i] || defaultColors[i % defaultColors.length]);
+    }
+  }
+
+  function renderColorControls(names){
+    ensureColors(names.length);
+    colorControls.innerHTML = "";
+
+    names.forEach((name,i)=>{
+      const row = document.createElement("div");
+      row.className = "color-row";
+      row.innerHTML = `
+        <div class="color-label" title="${escapeHTML(name)}">${escapeHTML(name)}</div>
+        <input type="color" value="${colors[i]}" aria-label="Color for ${escapeHTML(name)}">
+      `;
+      row.querySelector("input").addEventListener("input",e=>{
+        colors[i] = e.target.value;
+        scheduleRender(false);
+      });
+      colorControls.appendChild(row);
+    });
+  }
+
+  function optionsFor(data){
+    const dark = document.body.classList.contains("dark-mode");
+    const textColor = dark ? "#cbd5e1" : "#475569";
+    const gridColor = dark ? "#334155" : "#e2e8f0";
+    const height = Number(chartHeight.value);
+
+    const common = {
+      chart:{
+        type:data.type === "area" ? "area" : data.type,
+        height,
+        background:"transparent",
+        toolbar:{show:false},
+        animations:{enabled:true,speed:300},
+        foreColor:textColor
+      },
+      theme:{mode:dark ? "dark" : "light"},
+      colors,
+      title:{
+        text:chartTitle.value.trim(),
+        align:"center",
+        style:{fontSize:"18px",fontWeight:700,color:dark ? "#f8fafc" : "#0f172a"}
+      },
+      legend:{show:showLegend.checked,position:"bottom"},
+      grid:{show:showGrid.checked,borderColor:gridColor},
+      dataLabels:{enabled:showDataLabels.checked},
+      tooltip:{theme:dark ? "dark" : "light"},
+      noData:{text:"Paste valid data to build a chart"}
+    };
+
+    if(data.type === "pie"){
+      return {
+        ...common,
+        chart:{...common.chart,type:"pie"},
+        series:data.values,
+        labels:data.labels,
+        stroke:{width:1},
+        responsive:[{
+          breakpoint:640,
+          options:{legend:{position:"bottom"}}
+        }]
+      };
+    }
+
+    if(data.type === "scatter"){
+      return {
+        ...common,
+        series:data.series,
+        chart:{...common.chart,type:"scatter",zoom:{enabled:true,type:"xy"}},
+        xaxis:{
+          type:"numeric",
+          title:{text:xAxisLabel.value.trim() || data.xName || ""},
+          labels:{style:{colors:textColor}}
+        },
+        yaxis:{
+          title:{text:yAxisLabel.value.trim() || data.yName || ""},
+          labels:{style:{colors:textColor}}
+        },
+        markers:{size:6}
+      };
+    }
+
+    return {
+      ...common,
+      series:data.series,
+      xaxis:{
+        categories:data.categories,
+        title:{text:xAxisLabel.value.trim()},
+        labels:{rotate:data.categories.length>10 ? -45 : 0,style:{colors:textColor}}
+      },
+      yaxis:{
+        title:{text:yAxisLabel.value.trim()},
+        labels:{style:{colors:textColor}}
+      },
+      stroke:{
+        curve:curveStyle.value,
+        width:data.type === "bar" ? 0 : 3
+      },
+      fill:{
+        opacity:data.type === "area" ? .35 : 1
+      },
+      plotOptions:{
+        bar:{borderRadius:4,columnWidth:"58%"}
+      }
+    };
+  }
+
+  async function renderChart(updateColors=true){
+    const data = buildChartData();
+
+    if(!data){
+      if(chart){chart.destroy();chart=null;}
+      $("chart").innerHTML = "";
+      if(!dataInput.value.trim()) setStatus("warn","Paste data or load the sample to begin.");
+      colorControls.innerHTML = '<div class="text-sm text-slate-500">Colors appear after valid data is loaded.</div>';
+      return;
+    }
+
+    const names = data.seriesNames;
+    if(updateColors) renderColorControls(names);
+    else ensureColors(names.length);
+
+    setStatus("good",`Chart ready: ${parsed.rows.length} data row${parsed.rows.length===1?"":"s"} parsed successfully.`);
+
+    if(chart){
+      chart.destroy();
+      chart = null;
+    }
+
+    $("chart").innerHTML = "";
+    chart = new ApexCharts($("chart"),optionsFor(data));
+    await chart.render();
+  }
+
+  function scheduleRender(updateColors=true){
+    clearTimeout(renderTimer);
+    renderTimer = setTimeout(()=>renderChart(updateColors),120);
+  }
+
+  document.querySelectorAll(".chart-type-btn").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      chartType = btn.dataset.type;
+      document.querySelectorAll(".chart-type-btn").forEach(x=>x.classList.toggle("active",x===btn));
+      curveStyle.disabled = !["line","area"].includes(chartType);
+      scheduleRender(true);
+    });
+  });
+
+  [
+    dataInput,delimiterSelect,decimalMode,headerRow,categoryColumn,
+    chartTitle,xAxisLabel,yAxisLabel,showLegend,showGrid,showDataLabels,
+    chartHeight,curveStyle
+  ].forEach(el=>{
+    el.addEventListener(el.tagName==="TEXTAREA" || el.tagName==="INPUT" && el.type==="text" ? "input" : "change",()=>scheduleRender(true));
+  });
+
+  $("loadSampleBtn").addEventListener("click",()=>{
+    dataInput.value = sampleData;
+    delimiterSelect.value = "auto";
+    headerRow.checked = true;
+    categoryColumn.checked = true;
+    chartTitle.value = "Monthly Performance";
+    xAxisLabel.value = "Month";
+    yAxisLabel.value = "Amount";
+    chartType = "bar";
+    document.querySelectorAll(".chart-type-btn").forEach(btn=>btn.classList.toggle("active",btn.dataset.type==="bar"));
+    colors = [];
+    renderChart(true);
+  });
+
+  $("clearBtn").addEventListener("click",()=>{
+    dataInput.value = "";
+    parsed = null;
+    colors = [];
+    if(chart){chart.destroy();chart=null;}
+    $("chart").innerHTML = "";
+    colorControls.innerHTML = '<div class="text-sm text-slate-500">Colors appear after valid data is loaded.</div>';
+    $("detectedDelimiter").textContent = "Delimiter: —";
+    $("dataStats").textContent = "0 rows · 0 columns";
+    setStatus("warn","Paste data or load the sample to begin.");
+  });
+
+  $("resetColorsBtn").addEventListener("click",()=>{
+    const count = colors.length || 1;
+    colors = Array.from({length:count},(_,i)=>defaultColors[i % defaultColors.length]);
+    const data = buildChartData();
+    if(data){
+      renderColorControls(data.seriesNames);
+      renderChart(false);
+    }
+  });
+
+  async function exportChart(format){
+    if(!chart){
+      setStatus("warn","Create a valid chart before exporting.");
+      return;
+    }
+
+    try{
+      const result = await chart.dataURI();
+      const title = (chartTitle.value.trim() || "utiliverse-chart")
+        .replace(/[<>:"/\\|?*\x00-\x1F]/g,"-")
+        .replace(/\s+/g,"-")
+        .toLowerCase();
+
+      const a = document.createElement("a");
+      if(format === "png"){
+        a.href = result.imgURI;
+        a.download = `${title}.png`;
+      }else{
+        const svg = result.svgURI;
+        a.href = svg;
+        a.download = `${title}.svg`;
+      }
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    }catch(err){
+      console.error(err);
+      setStatus("bad","The chart could not be exported. Try refreshing the page and rebuilding the chart.");
+    }
+  }
+
+  $("exportPngBtn").addEventListener("click",()=>exportChart("png"));
+  $("exportSvgBtn").addEventListener("click",()=>exportChart("svg"));
+
+  const themeToggle = $("themeToggle");
+  const moonIcon = $("moonIcon");
+  const sunIcon = $("sunIcon");
+
+  function applyTheme(mode){
+    const dark = mode === "dark";
+    document.body.classList.toggle("dark-mode",dark);
+    moonIcon.classList.toggle("hidden",dark);
+    sunIcon.classList.toggle("hidden",!dark);
+    themeToggle.setAttribute("aria-label",dark ? "Switch to light mode" : "Switch to dark mode");
+    themeToggle.setAttribute("title",dark ? "Switch to light mode" : "Switch to dark mode");
+    localStorage.setItem("utiliverse-theme",dark ? "dark" : "light");
+    lucide.createIcons();
+    if(dataInput.value.trim()) scheduleRender(false);
+  }
+
+  const savedTheme = localStorage.getItem("utiliverse-theme");
+  applyTheme(savedTheme || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+
+  themeToggle.addEventListener("click",()=>{
+    applyTheme(document.body.classList.contains("dark-mode") ? "light" : "dark");
+  });
+
+  dataInput.value = sampleData;
+  renderChart(true);
+  lucide.createIcons();
+})();
+</script>
+</body>
+</html>
