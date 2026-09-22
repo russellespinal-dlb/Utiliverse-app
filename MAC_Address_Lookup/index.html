@@ -31,13 +31,443 @@ body{background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.10),transparen
 <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT -->
 <div class="info-wrap">
 <section class="info-section"><h2>Free Online MAC Address Vendor Lookup</h2><p>The Utiliverse MAC Address Lookup identifies the organization associated with a MAC address prefix and explains the address itself. A standard MAC address is 48 bits, or 6 bytes, and is typically written as 12 hexadecimal digits. The manufacturer portion comes from an IEEE-assigned prefix, while the remaining bits identify an interface within that allocation.</p><p>The tool accepts colon-separated, hyphen-separated, Cisco-style, and separator-free formats. It also exposes assignment metadata returned by the live vendor database, including MA-L, MA-M, or MA-S block types when available.</p></section>
-<section class="info-section"><h2>How to Use the MAC Address Lookup</h2><h3>Enter a full MAC address or OUI prefix</h3><p>Paste the address exactly as you found it. You can also enter only the first six hexadecimal digits when you need an OUI lookup.</p><h3>Identify the manufacturer</h3><p>Utiliverse queries a public MAC vendor database and displays the organization assigned to the matching IEEE address block. Vendor results describe the block owner, not necessarily the brand printed on the finished device.</p><h3>Understand the OUI and IEEE block</h3><p>The classic OUI is the first 24 bits of many MAC assignments. Modern IEEE allocation types can use other prefix lengths, and the returned block type may identify a more specific MA-L, MA-M, or MA-S assignment.</p><h3>Check globally unique versus locally administered</h3><p>The U/L bit in the first octet indicates whether the address is globally administered or locally administered. Locally administered addresses are common with MAC randomization, virtual adapters, containers, and manually configured interfaces.</p><h3>Check unicast versus multicast</h3><p>The I/G bit in the first octet distinguishes an individual unicast address from a group multicast address.</p><h3>Review vendor block details</h3><p>When available, the result includes the beginning and end of the assigned block, the allocation size, country code, and vendor-record update date. These describe the registered allocation, not the current physical location of a device.</p><h3>Convert between MAC formats</h3><p>The normalized-format section shows colon-separated, hyphen-separated, Cisco dotted, and plain hexadecimal versions for easy use across Windows, Linux, macOS, switches, routers, and firewalls.</p><h2 class="mt-8">Practical Uses</h2><h3>Identify unknown devices</h3><p>Vendor data can help narrow down an unfamiliar device shown by a router, access point, switch, DHCP lease table, or network monitor. Randomized addresses can make this less conclusive.</p><h3>Network inventory</h3><p>Administrators can compare DHCP leases, switch forwarding tables, wireless clients, and monitoring data with vendor assignments.</p><h3>Virtual machine identification</h3><p>Virtualization products often use recognizable MAC ranges, making vendor lookup useful in server and lab environments.</p><h3>Security investigations</h3><p>Vendor information is useful context but not proof of identity because MAC addresses can be changed, spoofed, or locally generated.</p><h3>Documentation and DHCP reservations</h3><p>Use the format converter to reduce transcription errors when recording devices, configuring reservations, or copying addresses between systems that use different notation.</p></section>
-<section class="info-section"><h2>MAC Address Lookup FAQ</h2><details class="faq-item"><summary>What part of a MAC address identifies the manufacturer?</summary><p>The leading IEEE-assigned portion identifies the organization that owns the address block. Traditional OUI assignments use the first 24 bits, though other IEEE assignment types can use different prefix lengths.</p></details><details class="faq-item"><summary>Can I look up a MAC address without separators?</summary><p>Yes. Plain hexadecimal, colon, hyphen, and Cisco dotted formats are supported.</p></details><details class="faq-item"><summary>Why does my phone show a different MAC address on each Wi-Fi network?</summary><p>Many modern devices use per-network randomized or private MAC addresses to reduce tracking.</p></details><details class="faq-item"><summary>Can a MAC lookup reveal the exact device model?</summary><p>Usually not. It identifies the address-block owner, not an exact model or serial number.</p></details><details class="faq-item"><summary>Can a MAC address reveal someone's location?</summary><p>Not from the address alone. The vendor allocation does not identify a device's current physical location.</p></details><details class="faq-item"><summary>What does locally administered mean?</summary><p>It means the address was assigned locally rather than directly using a globally unique IEEE allocation. Randomized and virtual MAC addresses commonly use this form.</p></details><details class="faq-item"><summary>Does Utiliverse store lookup history?</summary><p>This standalone page does not keep a local history. The entered address is sent to the public vendor lookup API to retrieve current assignment information.</p></details></section>
+<section class="info-section"><h2>How to Use the MAC Address Lookup</h2><h3>Enter a full MAC address or OUI prefix</h3><p>Paste the address exactly as you found it. You can also enter only the first six hexadecimal digits when you need an OUI lookup.</p><h3>Identify the manufacturer</h3><p>Utiliverse queries a public MAC vendor database and displays the organization assigned to the matching IEEE address block. If the detailed lookup service is temporarily unavailable, a second browser-compatible vendor service is used as a fallback. Vendor results describe the block owner, not necessarily the brand printed on the finished device.</p><h3>Understand the OUI and IEEE block</h3><p>The classic OUI is the first 24 bits of many MAC assignments. Modern IEEE allocation types can use other prefix lengths, and the returned block type may identify a more specific MA-L, MA-M, or MA-S assignment.</p><h3>Check globally unique versus locally administered</h3><p>The U/L bit in the first octet indicates whether the address is globally administered or locally administered. Locally administered addresses are common with MAC randomization, virtual adapters, containers, and manually configured interfaces.</p><h3>Check unicast versus multicast</h3><p>The I/G bit in the first octet distinguishes an individual unicast address from a group multicast address.</p><h3>Review vendor block details</h3><p>When available, the result includes the beginning and end of the assigned block, the allocation size, country code, and vendor-record update date. These describe the registered allocation, not the current physical location of a device.</p><h3>Convert between MAC formats</h3><p>The normalized-format section shows colon-separated, hyphen-separated, Cisco dotted, and plain hexadecimal versions for easy use across Windows, Linux, macOS, switches, routers, and firewalls.</p><h2 class="mt-8">Practical Uses</h2><h3>Identify unknown devices</h3><p>Vendor data can help narrow down an unfamiliar device shown by a router, access point, switch, DHCP lease table, or network monitor. Randomized addresses can make this less conclusive.</p><h3>Network inventory</h3><p>Administrators can compare DHCP leases, switch forwarding tables, wireless clients, and monitoring data with vendor assignments.</p><h3>Virtual machine identification</h3><p>Virtualization products often use recognizable MAC ranges, making vendor lookup useful in server and lab environments.</p><h3>Security investigations</h3><p>Vendor information is useful context but not proof of identity because MAC addresses can be changed, spoofed, or locally generated.</p><h3>Documentation and DHCP reservations</h3><p>Use the format converter to reduce transcription errors when recording devices, configuring reservations, or copying addresses between systems that use different notation.</p></section>
+<section class="info-section"><h2>MAC Address Lookup FAQ</h2><details class="faq-item"><summary>What part of a MAC address identifies the manufacturer?</summary><p>The leading IEEE-assigned portion identifies the organization that owns the address block. Traditional OUI assignments use the first 24 bits, though other IEEE assignment types can use different prefix lengths.</p></details><details class="faq-item"><summary>Can I look up a MAC address without separators?</summary><p>Yes. Plain hexadecimal, colon, hyphen, and Cisco dotted formats are supported.</p></details><details class="faq-item"><summary>Why does my phone show a different MAC address on each Wi-Fi network?</summary><p>Many modern devices use per-network randomized or private MAC addresses to reduce tracking.</p></details><details class="faq-item"><summary>Can a MAC lookup reveal the exact device model?</summary><p>Usually not. It identifies the address-block owner, not an exact model or serial number.</p></details><details class="faq-item"><summary>Can a MAC address reveal someone's location?</summary><p>Not from the address alone. The vendor allocation does not identify a device's current physical location.</p></details><details class="faq-item"><summary>What does locally administered mean?</summary><p>It means the address was assigned locally rather than directly using a globally unique IEEE allocation. Randomized and virtual MAC addresses commonly use this form.</p></details><details class="faq-item"><summary>Does Utiliverse store lookup history?</summary><p>This standalone page does not keep a local history. The entered address is sent to public MAC-vendor lookup services to retrieve current assignment information.</p></details></section>
 <!-- GOOGLE ADSENSE: BOTTOM / AFTER-CONTENT INSERTION POINT -->
 </div></main>
 <footer class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-6 pt-2"><div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-500"><div>© 2026 Utiliverse. All rights reserved.</div><div class="font-semibold text-right">100% Free and Browser Based</div></div></footer>
 <script>
-(()=>{const $=id=>document.getElementById(id);const esc=s=>String(s??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");function status(type,msg){const el=$("statusArea");if(!type||!msg){el.innerHTML="";return}const icon=type==="good"?"circle-check":type==="bad"?"circle-alert":type==="warn"?"triangle-alert":"info";el.innerHTML=`<div class="status-box ${type}"><i data-lucide="${icon}" class="w-4 h-4 flex-none mt-0.5"></i><div>${esc(msg)}</div></div>`;lucide.createIcons()}function norm(v){return String(v||"").toUpperCase().replace(/[^0-9A-F]/g,"")}function valid(h){return /^[0-9A-F]{6}([0-9A-F]{6})?$/.test(h)}function pairs(h){return h.match(/.{2}/g)||[]}function colon(h){return pairs(h).join(":")}function hyphen(h){return pairs(h).join("-")}function cisco(h){return h.match(/.{1,4}/g).join(".")}function chars(h){const f=parseInt(h.slice(0,2),16);return{multicast:(f&1)===1,local:(f&2)===2}}function renderLocal(h){const c=chars(h);$("outScope").textContent=c.local?"Locally Administered":"Globally Administered";$("outScopeSub").textContent=c.local?"May be randomized, virtual, or manually assigned.":"Uses globally administered address space.";$("outDelivery").textContent=c.multicast?"Multicast / Group":"Unicast / Individual";$("badges").innerHTML=[c.local?"Locally administered":"Globally administered",c.multicast?"Multicast":"Unicast"].map(x=>`<span class="badge">${x}</span>`).join("")}function renderFormats(h){$("fmtColon").textContent=colon(h);$("fmtHyphen").textContent=hyphen(h);$("fmtCisco").textContent=cisco(h);$("fmtPlain").textContent=h}function bfmt(v){const s=String(v||"").toUpperCase().replace(/[^0-9A-F]/g,"");return s.length===12?colon(s):s||"Not provided"}function render(d,h){renderFormats(h);renderLocal(h);$("outVendor").textContent=d?.found===false?"No registered vendor found":(d?.company||"Not provided");$("outOui").textContent=d?.macPrefix?colon(String(d.macPrefix).toUpperCase().replace(/[^0-9A-F]/g,"")):colon(h.slice(0,6));$("outCountry").textContent=d?.country||"Not provided";$("outBlockType").textContent=d?.blockType||"Not provided";$("outBlock").textContent=d?.blockStart||d?.blockEnd?`${bfmt(d.blockStart)} – ${bfmt(d.blockEnd)}`:"Not provided";$("outUpdated").textContent=d?.updated||"Not provided";$("outAddress").textContent=d?.address||"Not provided";const extra=[];if(d?.isRand===true||chars(h).local)extra.push("Randomized / local-address possibility");if(d?.isPrivate===true)extra.push("Private registration");if(d?.blockSize)extra.push(`Block size: ${Number(d.blockSize).toLocaleString()}`);if(extra.length){const a=[...$("badges").children].map(x=>x.textContent);$("badges").innerHTML=[...a,...extra].map(x=>`<span class="badge">${esc(x)}</span>`).join("")}$("rawOutput").textContent=JSON.stringify(d,null,2);status(d?.found===false?"warn":"good",d?.found===false?"Valid address, but no registered vendor assignment was returned. This often occurs with randomized or locally administered addresses.":`Vendor information loaded for ${colon(h)}.`)}async function lookup(){const h=norm($("macInput").value);if(!valid(h)){status("bad","Enter either a 6-digit OUI prefix or a complete 12-digit MAC address.");return}$("macInput").value=colon(h);renderFormats(h);renderLocal(h);$("lookupBtn").disabled=true;$("lookupBtn").textContent="Looking up…";status("info",`Looking up ${colon(h)}…`);try{const r=await fetch(`https://api.maclookup.app/v2/macs/${encodeURIComponent(colon(h))}`,{headers:{Accept:"application/json"}});if(r.status===429)throw new Error("The public lookup service is rate-limiting requests. Please wait and try again.");if(!r.ok)throw new Error(`Vendor lookup failed with HTTP ${r.status}.`);render(await r.json(),h)}catch(e){status("bad",e.message||"The MAC vendor lookup failed.")}finally{$("lookupBtn").disabled=false;$("lookupBtn").innerHTML='<i data-lucide="search" class="w-4 h-4"></i> Lookup Vendor';lucide.createIcons()}}$("lookupBtn").onclick=lookup;$("macInput").onkeydown=e=>{if(e.key==="Enter")lookup()};document.querySelectorAll(".example-btn").forEach(b=>b.onclick=()=>{$("macInput").value=b.dataset.mac;lookup()});$("rawToggleBtn").onclick=()=>{$("rawWrap").classList.toggle("hidden-important")};async function copy(text,btn){try{await navigator.clipboard.writeText(text)}catch{const t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove()}const old=btn.innerHTML;btn.textContent="Copied";setTimeout(()=>{btn.innerHTML=old;lucide.createIcons()},1200)}$("copyRawBtn").onclick=()=>copy($("rawOutput").textContent,$("copyRawBtn"));$("copySummaryBtn").onclick=()=>copy(`MAC: ${$("fmtColon").textContent}\nVendor: ${$("outVendor").textContent}\nOUI: ${$("outOui").textContent}\nCountry: ${$("outCountry").textContent}\nBlock Type: ${$("outBlockType").textContent}\nScope: ${$("outScope").textContent}\nDelivery: ${$("outDelivery").textContent}`,$("copySummaryBtn"));$("resetBtn").onclick=()=>location.reload();const toggle=$("themeToggle"),moon=$("moonIcon"),sun=$("sunIcon");function theme(m){const d=m==="dark";document.body.classList.toggle("dark-mode",d);moon.classList.toggle("hidden",d);sun.classList.toggle("hidden",!d);localStorage.setItem("utiliverse-theme",d?"dark":"light");lucide.createIcons()}theme(localStorage.getItem("utiliverse-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));toggle.onclick=()=>theme(document.body.classList.contains("dark-mode")?"light":"dark");status("info","Enter a MAC address or OUI prefix and select Lookup Vendor.");lucide.createIcons()})();
+(() => {
+  const $ = id => document.getElementById(id);
+
+  const esc = s => String(s ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+  function status(type,msg){
+    const el = $("statusArea");
+    if(!type || !msg){ el.innerHTML = ""; return; }
+    const icon = type === "good" ? "circle-check"
+      : type === "bad" ? "circle-alert"
+      : type === "warn" ? "triangle-alert"
+      : "info";
+    el.innerHTML = `<div class="status-box ${type}"><i data-lucide="${icon}" class="w-4 h-4 flex-none mt-0.5"></i><div>${esc(msg)}</div></div>`;
+    lucide.createIcons();
+  }
+
+  function norm(v){
+    return String(v || "").toUpperCase().replace(/[^0-9A-F]/g,"");
+  }
+
+  function valid(h){
+    return /^[0-9A-F]{6}([0-9A-F]{6})?$/.test(h);
+  }
+
+  function pairs(h){
+    return h.match(/.{2}/g) || [];
+  }
+
+  function colon(h){
+    return pairs(h).join(":");
+  }
+
+  function hyphen(h){
+    return pairs(h).join("-");
+  }
+
+  function cisco(h){
+    const groups = h.match(/.{1,4}/g) || [];
+    return groups.join(".");
+  }
+
+  function chars(h){
+    const f = parseInt(h.slice(0,2),16);
+    return {
+      multicast:(f & 1) === 1,
+      local:(f & 2) === 2
+    };
+  }
+
+  function renderLocal(h){
+    const c = chars(h);
+    $("outScope").textContent = c.local ? "Locally Administered" : "Globally Administered";
+    $("outScopeSub").textContent = c.local
+      ? "May be randomized, virtual, or manually assigned."
+      : "Uses globally administered address space.";
+    $("outDelivery").textContent = c.multicast ? "Multicast / Group" : "Unicast / Individual";
+    $("badges").innerHTML = [
+      c.local ? "Locally administered" : "Globally administered",
+      c.multicast ? "Multicast" : "Unicast"
+    ].map(x => `<span class="badge">${esc(x)}</span>`).join("");
+  }
+
+  function renderFormats(h){
+    $("fmtColon").textContent = colon(h);
+    $("fmtHyphen").textContent = hyphen(h);
+    $("fmtCisco").textContent = cisco(h);
+    $("fmtPlain").textContent = h;
+  }
+
+  function bfmt(v){
+    const s = String(v || "").toUpperCase().replace(/[^0-9A-F]/g,"");
+    return s.length === 12 ? colon(s) : (s || "Not provided");
+  }
+
+  function render(d,h){
+    renderFormats(h);
+    renderLocal(h);
+
+    const source = d?._source || "MAC vendor service";
+    const found = d?.found !== false && Boolean(d?.company);
+
+    $("outVendor").textContent = d?.found === false
+      ? (d?.company || "No registered vendor found")
+      : (d?.company || "Not provided");
+
+    $("outOui").textContent = d?.macPrefix
+      ? colon(String(d.macPrefix).toUpperCase().replace(/[^0-9A-F]/g,""))
+      : colon(h.slice(0,6));
+
+    $("outCountry").textContent = d?.country || "Not provided";
+    $("outBlockType").textContent = d?.blockType || "Not provided";
+
+    $("outBlock").textContent = (d?.blockStart || d?.blockEnd)
+      ? `${bfmt(d.blockStart)} – ${bfmt(d.blockEnd)}`
+      : "Not provided";
+
+    $("outUpdated").textContent = d?.updated || "Not provided";
+    $("outAddress").textContent = d?.address || "Not provided";
+
+    const extra = [];
+    const local = chars(h).local;
+
+    if(d?.isRand === true || local){
+      extra.push("Randomized / local-address possibility");
+    }
+    if(d?.isPrivate === true){
+      extra.push("Private registration");
+    }
+    if(d?.blockSize){
+      extra.push(`Block size: ${Number(d.blockSize).toLocaleString()}`);
+    }
+    extra.push(`Source: ${source}`);
+
+    const existing = [...$("badges").children].map(x => x.textContent);
+    $("badges").innerHTML = [...existing, ...extra]
+      .map(x => `<span class="badge">${esc(x)}</span>`)
+      .join("");
+
+    $("rawOutput").textContent = JSON.stringify(d,null,2);
+
+    if(d?.found === false){
+      status(
+        "warn",
+        local
+          ? "This is a locally administered or randomized-style address, so it may not have a registered hardware vendor."
+          : "The address is valid, but no registered vendor assignment was returned."
+      );
+    } else if(found){
+      status("good", `Vendor information loaded for ${colon(h)}.`);
+    } else {
+      status("warn", "The address is valid, but the vendor service did not return a manufacturer name.");
+    }
+  }
+
+  // Primary lookup: MACLookup's documented JSONP mode.
+  // JSONP is used here specifically so a standalone browser page does not depend on CORS support.
+  function lookupMacLookupJsonp(h){
+    return new Promise((resolve,reject) => {
+      const callbackName = "__utiliverseMacLookup_" + Date.now() + "_" + Math.random().toString(36).slice(2);
+      const script = document.createElement("script");
+      let settled = false;
+
+      const cleanup = () => {
+        if(script.parentNode) script.parentNode.removeChild(script);
+        try { delete window[callbackName]; } catch { window[callbackName] = undefined; }
+      };
+
+      const timer = setTimeout(() => {
+        if(settled) return;
+        settled = true;
+        cleanup();
+        reject(new Error("Detailed MAC vendor service timed out."));
+      }, 9000);
+
+      window[callbackName] = data => {
+        if(settled) return;
+        settled = true;
+        clearTimeout(timer);
+        cleanup();
+
+        if(!data || data.success === false){
+          reject(new Error(data?.error || "Detailed MAC vendor lookup did not return a usable response."));
+          return;
+        }
+
+        resolve({
+          ...data,
+          _source:"MACLookup.app"
+        });
+      };
+
+      script.onerror = () => {
+        if(settled) return;
+        settled = true;
+        clearTimeout(timer);
+        cleanup();
+        reject(new Error("Detailed MAC vendor service could not be reached."));
+      };
+
+      script.async = true;
+      script.referrerPolicy = "no-referrer";
+      script.src = `https://api.maclookup.app/v2/macs/${encodeURIComponent(h)}?format=jsonp&callback=${encodeURIComponent(callbackName)}`;
+      document.head.appendChild(script);
+    });
+  }
+
+  // Secondary lookup: browser-callable, keyless vendor-name endpoint with explicit CORS support.
+  async function lookupVendorFallback(h){
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 9000);
+
+    try{
+      const response = await fetch(
+        `https://api.macadress.com/v1/vendor/${encodeURIComponent(h)}`,
+        {
+          method:"GET",
+          mode:"cors",
+          cache:"default",
+          signal:controller.signal,
+          headers:{Accept:"text/plain"}
+        }
+      );
+
+      const body = (await response.text()).trim();
+
+      if(response.ok){
+        return {
+          success:true,
+          found:true,
+          macPrefix:h.slice(0,6),
+          company:body || "Vendor returned with no name",
+          address:"",
+          country:"",
+          blockStart:"",
+          blockEnd:"",
+          blockSize:null,
+          blockType:"",
+          updated:"",
+          isRand:chars(h).local,
+          isPrivate:false,
+          _source:"macadress.com fallback"
+        };
+      }
+
+      if(response.status === 404){
+        const local = /locally administered/i.test(body) || chars(h).local;
+        return {
+          success:true,
+          found:false,
+          macPrefix:h.slice(0,6),
+          company:local ? "Locally administered / randomized" : "No registered vendor found",
+          address:"",
+          country:"",
+          blockStart:"",
+          blockEnd:"",
+          blockSize:null,
+          blockType:"",
+          updated:"",
+          isRand:local,
+          isPrivate:false,
+          _source:"macadress.com fallback",
+          note:body || "not registered"
+        };
+      }
+
+      if(response.status === 429){
+        throw new Error("The fallback vendor service is temporarily rate-limiting requests.");
+      }
+
+      throw new Error(`Fallback vendor lookup failed with HTTP ${response.status}.`);
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  async function lookup(){
+    const h = norm($("macInput").value);
+
+    if(!valid(h)){
+      status("bad","Enter either a 6-digit OUI prefix or a complete 12-digit MAC address.");
+      return;
+    }
+
+    $("macInput").value = colon(h);
+    renderFormats(h);
+    renderLocal(h);
+
+    $("lookupBtn").disabled = true;
+    $("lookupBtn").innerHTML = '<i data-lucide="loader-circle" class="w-4 h-4 animate-spin"></i> Looking up…';
+    status("info",`Looking up ${colon(h)}…`);
+    lucide.createIcons();
+
+    let primaryError = null;
+
+    try{
+      try{
+        const detailed = await lookupMacLookupJsonp(h);
+        render(detailed,h);
+        return;
+      } catch(err){
+        primaryError = err;
+        console.warn("Primary MAC lookup failed; trying fallback.", err);
+      }
+
+      const fallback = await lookupVendorFallback(h);
+      fallback._primaryError = primaryError?.message || "";
+      render(fallback,h);
+
+      if(fallback.found !== false){
+        status(
+          "good",
+          `Vendor information loaded for ${colon(h)} using the fallback service because the detailed lookup service was unavailable.`
+        );
+      }
+    } catch(err){
+      console.error(err);
+
+      // Even if every network service is unavailable, still provide the locally computable MAC properties.
+      $("rawOutput").textContent = JSON.stringify({
+        input:colon(h),
+        localCharacteristics:chars(h),
+        primaryError:primaryError?.message || null,
+        finalError:err?.message || "Unknown lookup error"
+      },null,2);
+
+      if(chars(h).local){
+        $("outVendor").textContent = "Locally administered / randomized";
+        $("outOui").textContent = colon(h.slice(0,6));
+        $("outCountry").textContent = "Not applicable";
+        $("outBlockType").textContent = "Locally assigned";
+        $("outBlock").textContent = "Not applicable";
+        $("outUpdated").textContent = "Not applicable";
+        $("outAddress").textContent = "No IEEE vendor is expected for many locally administered addresses.";
+        status(
+          "warn",
+          "The live vendor services could not be reached, but this address is locally administered and may be randomized or virtual."
+        );
+      } else {
+        status(
+          "bad",
+          "The live vendor services could not be reached. Please check your connection and try again."
+        );
+      }
+    } finally {
+      $("lookupBtn").disabled = false;
+      $("lookupBtn").innerHTML = '<i data-lucide="search" class="w-4 h-4"></i> Lookup Vendor';
+      lucide.createIcons();
+    }
+  }
+
+  $("lookupBtn").onclick = lookup;
+
+  $("macInput").onkeydown = e => {
+    if(e.key === "Enter") lookup();
+  };
+
+  document.querySelectorAll(".example-btn").forEach(b => {
+    b.onclick = () => {
+      $("macInput").value = b.dataset.mac;
+      lookup();
+    };
+  });
+
+  $("rawToggleBtn").onclick = () => {
+    const hidden = $("rawWrap").classList.toggle("hidden-important");
+    $("rawToggleBtn").innerHTML = hidden
+      ? '<i data-lucide="braces" class="w-4 h-4"></i> Raw Data'
+      : '<i data-lucide="chevron-up" class="w-4 h-4"></i> Hide Raw';
+    lucide.createIcons();
+  };
+
+  async function copy(text,btn){
+    try{
+      await navigator.clipboard.writeText(text);
+    } catch {
+      const t = document.createElement("textarea");
+      t.value = text;
+      document.body.appendChild(t);
+      t.select();
+      document.execCommand("copy");
+      t.remove();
+    }
+
+    const old = btn.innerHTML;
+    btn.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i> Copied';
+    lucide.createIcons();
+    setTimeout(() => {
+      btn.innerHTML = old;
+      lucide.createIcons();
+    },1200);
+  }
+
+  $("copyRawBtn").onclick = () => copy($("rawOutput").textContent,$("copyRawBtn"));
+
+  $("copySummaryBtn").onclick = () => copy([
+    "Utiliverse MAC Address Lookup",
+    `MAC: ${$("fmtColon").textContent}`,
+    `Vendor: ${$("outVendor").textContent}`,
+    `OUI: ${$("outOui").textContent}`,
+    `Country: ${$("outCountry").textContent}`,
+    `Block Type: ${$("outBlockType").textContent}`,
+    `Scope: ${$("outScope").textContent}`,
+    `Delivery: ${$("outDelivery").textContent}`,
+    `Vendor Block: ${$("outBlock").textContent}`
+  ].join("\n"),$("copySummaryBtn"));
+
+  $("resetBtn").onclick = () => {
+    $("macInput").value = "3C:22:FB:00:00:00";
+    [
+      "outVendor","outOui","outCountry","outBlockType",
+      "outScope","outDelivery","outBlock","outUpdated","outAddress"
+    ].forEach(id => $(id).textContent = "—");
+
+    $("outScopeSub").textContent = "";
+    $("badges").innerHTML = '<span class="badge">—</span>';
+    ["fmtColon","fmtHyphen","fmtCisco","fmtPlain"].forEach(id => $(id).textContent = "—");
+    $("rawOutput").textContent = "{}";
+    $("rawWrap").classList.add("hidden-important");
+    status("info","Enter a MAC address or OUI prefix and select Lookup Vendor.");
+  };
+
+  const toggle = $("themeToggle");
+  const moon = $("moonIcon");
+  const sun = $("sunIcon");
+
+  function theme(m){
+    const d = m === "dark";
+    document.body.classList.toggle("dark-mode",d);
+    moon.classList.toggle("hidden",d);
+    sun.classList.toggle("hidden",!d);
+    localStorage.setItem("utiliverse-theme",d ? "dark" : "light");
+    lucide.createIcons();
+  }
+
+  theme(
+    localStorage.getItem("utiliverse-theme") ||
+    (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+  );
+
+  toggle.onclick = () => theme(
+    document.body.classList.contains("dark-mode") ? "light" : "dark"
+  );
+
+  status("info","Enter a MAC address or OUI prefix and select Lookup Vendor.");
+  lucide.createIcons();
+})();
 </script>
 </body>
 </html>
