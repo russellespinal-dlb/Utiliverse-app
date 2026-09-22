@@ -260,6 +260,16 @@
   <url>
     <loc>https://utiliverse.app/Port_Checker/</loc>
   </url>
+
+  <!-- WHOIS Lookup -->
+  <url>
+    <loc>https://utiliverse.app/WHOIS_Lookup/</loc>
+  </url>
+
+  <!-- MAC Address Lookup -->
+  <url>
+    <loc>https://utiliverse.app/MAC_Address_Lookup/</loc>
+  </url>
   
   <!-- Privacy Policy -->
   <url>
