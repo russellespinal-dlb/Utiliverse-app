@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WHOIS Lookup – Domain Registration & RDAP Checker | Utiliverse</title>
+<meta name="description" content="Free WHOIS and RDAP domain lookup. Check registrar, registration date, expiration date, domain status, nameservers, DNSSEC, domain age, and raw RDAP data.">
+<meta name="robots" content="index,follow"><meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/WHOIS_Lookup/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="WHOIS Lookup – Domain Registration & RDAP Checker | Utiliverse">
+<meta property="og:description" content="Look up domain registrar, dates, nameservers, status, DNSSEC and structured RDAP data.">
+<meta property="og:url" content="https://utiliverse.app/WHOIS_Lookup/">
+<script src="https://cdn.tailwindcss.com"></script><script src="https://unpkg.com/lucide@latest"></script>
+<style>
+body{background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.10),transparent 32%),#f8fafc}
+body.dark-mode{background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.14),transparent 32%),#020617!important;color:#f8fafc!important}
+body.dark-mode header{background:rgba(2,6,23,.82)!important;border-color:#1e293b!important}body.dark-mode header a{color:#cbd5e1!important}
+body.dark-mode main h1{color:#f8fafc!important}.hero-copy{color:#64748b}body.dark-mode .hero-copy{color:#94a3b8!important}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;border:1px solid #cbd5e1;background:#fff;color:#475569;cursor:pointer}
+body.dark-mode .theme-toggle{background:#0f172a;border-color:#334155;color:#94a3b8}
+.free-browser-note{color:#64748b;font-size:12px;font-weight:700;white-space:nowrap}body.dark-mode .free-browser-note{color:#94a3b8}
+.tool-card,.info-section{background:#fff;border:1px solid #e2e8f0;border-radius:1rem;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+body.dark-mode .tool-card,body.dark-mode .info-section{background:rgba(30,41,59,.72)!important;border-color:#334155!important}
+.section-head{padding:1rem 1.15rem;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+body.dark-mode .section-head{border-color:#334155}.section-head h2{font-weight:850;color:#0f172a;display:flex;align-items:center;gap:.55rem}body.dark-mode .section-head h2{color:#f8fafc}
+.label{display:block;font-size:.79rem;font-weight:800;color:#334155;margin-bottom:.4rem}body.dark-mode .label{color:#cbd5e1}
+.field{width:100%;border:1px solid #cbd5e1;background:#fff;color:#0f172a;border-radius:.8rem;padding:.78rem .85rem;outline:none;font-size:1rem}
+.field:focus{border-color:#818cf8;box-shadow:0 0 0 3px rgba(99,102,241,.14)}body.dark-mode .field{background:#0f172a;border-color:#475569;color:#e2e8f0}
+.btn-primary,.btn-secondary{display:inline-flex;align-items:center;justify-content:center;gap:.45rem;border-radius:.75rem;font-weight:800}
+.btn-primary{background:#4f46e5;color:#fff;padding:.75rem 1rem}.btn-primary:hover{background:#4338ca}.btn-primary:disabled{opacity:.55;cursor:not-allowed}
+.btn-secondary{background:#fff;color:#334155;border:1px solid #cbd5e1;padding:.68rem .9rem}body.dark-mode .btn-secondary{background:#1e293b;color:#e2e8f0;border-color:#475569}
+.examples{display:flex;flex-wrap:wrap;gap:.5rem}.example-btn{border:1px solid #cbd5e1;background:#fff;color:#475569;border-radius:999px;padding:.43rem .65rem;font-size:.75rem;font-weight:800}
+body.dark-mode .example-btn{background:#0f172a;border-color:#475569;color:#cbd5e1}
+.status-box{border-radius:.85rem;padding:.82rem .9rem;font-size:.83rem;line-height:1.55;display:flex;gap:.55rem;align-items:flex-start}
+.status-box.info{background:#eff6ff;border:1px solid #bfdbfe;color:#1e3a8a}.status-box.good{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46}.status-box.bad{background:#fef2f2;border:1px solid #fecaca;color:#991b1b}
+body.dark-mode .status-box.info{background:rgba(30,58,138,.22);border-color:#1e40af;color:#bfdbfe}body.dark-mode .status-box.good{background:rgba(6,78,59,.22);border-color:#065f46;color:#a7f3d0}body.dark-mode .status-box.bad{background:rgba(127,29,29,.22);border-color:#991b1b;color:#fecaca}
+.result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}.result-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:.85rem;padding:.95rem;min-width:0}
+body.dark-mode .result-box{background:#0f172a;border-color:#334155}.result-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;font-weight:850;color:#64748b}.result-value{font-size:1.02rem;font-weight:900;color:#0f172a;margin-top:.3rem;overflow-wrap:anywhere}body.dark-mode .result-value{color:#f8fafc}.result-sub{font-size:.74rem;color:#64748b;margin-top:.25rem}
+.badges{display:flex;flex-wrap:wrap;gap:.45rem}.badge{display:inline-flex;border-radius:999px;padding:.35rem .58rem;font-size:.72rem;font-weight:800;background:#f1f5f9;color:#475569;border:1px solid #e2e8f0}body.dark-mode .badge{background:#0f172a;color:#cbd5e1;border-color:#334155}
+.ns-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.65rem}.ns-item{border:1px solid #e2e8f0;border-radius:.75rem;padding:.75rem;background:#f8fafc;color:#334155;font-size:.83rem;font-weight:800;overflow-wrap:anywhere}body.dark-mode .ns-item{background:#0f172a;border-color:#334155;color:#cbd5e1}
+.raw-box{width:100%;min-height:280px;max-height:480px;overflow:auto;border:1px solid #334155;background:#020617;color:#cbd5e1;border-radius:.85rem;padding:1rem;font-family:monospace;font-size:.78rem;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}
+.hidden-important{display:none!important}.info-wrap{max-width:72rem;margin:3.5rem auto 0}.info-section{padding:1.5rem}.info-section+.info-section{margin-top:1.5rem}.info-section h2{font-size:1.65rem;font-weight:800;color:#0f172a;margin-bottom:.9rem}.info-section h3{font-size:1.06rem;font-weight:800;color:#1e293b;margin:1.4rem 0 .45rem}.info-section p{color:#475569;line-height:1.82;font-size:.98rem;margin:.8rem 0}body.dark-mode .info-section h2{color:#f8fafc!important}body.dark-mode .info-section h3{color:#e2e8f0!important}body.dark-mode .info-section p{color:#94a3b8!important}
+.faq-item{border-bottom:1px solid #e2e8f0}.faq-item summary{list-style:none;cursor:pointer;padding:1rem 0;font-weight:800;color:#0f172a;display:flex;justify-content:space-between;gap:1rem}.faq-item summary::-webkit-details-marker{display:none}.faq-item summary::after{content:"+"}.faq-item[open] summary::after{content:"−"}.faq-item p{padding-bottom:1rem;margin:0}body.dark-mode .faq-item{border-color:#334155}body.dark-mode .faq-item summary{color:#e2e8f0}
+@media(max-width:700px){.result-grid,.ns-grid{grid-template-columns:1fr}}@media(max-width:640px){.free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}.theme-toggle{width:38px;height:38px}}
+</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse WHOIS Lookup","url":"https://utiliverse.app/WHOIS_Lookup/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript and internet access.","description":"Free WHOIS and RDAP lookup for registrar, registration dates, expiration, status, nameservers and DNSSEC.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<!-- SEO TARGET CLUSTER: WHOIS lookup, RDAP lookup, domain registrar checker, domain expiration checker, domain age checker, nameserver lookup -->
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT -->
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+<header class="sticky top-0 z-50 bg-white/80 border-b border-slate-200"><div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<a href="https://utiliverse.app" class="flex items-center gap-2 text-sm font-semibold text-slate-600"><i data-lucide="arrow-left" class="w-4 h-4"></i><span>Back to Utiliverse</span></a>
+<div class="flex items-center gap-4"><div class="free-browser-note">100% Free and Browser Based</div><button id="themeToggle" class="theme-toggle" type="button"><i id="moonIcon" data-lucide="moon" class="w-4 h-4"></i><i id="sunIcon" data-lucide="sun" class="w-4 h-4 hidden"></i></button></div>
+</div></header>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+<div class="mb-6"><h1 class="text-3xl font-bold text-slate-900 flex items-center gap-3"><i data-lucide="globe-2" class="w-8 h-8 text-indigo-600"></i>WHOIS Lookup</h1><p class="hero-copy mt-2 text-sm max-w-3xl">Look up domain registrar, registration dates, expiration, status codes, nameservers, DNSSEC, and raw RDAP data.</p></div>
+
+<div class="grid grid-cols-1 xl:grid-cols-[.78fr_1.22fr] gap-6">
+<div class="space-y-6">
+<section class="tool-card overflow-hidden"><div class="section-head"><h2><i data-lucide="search" class="w-5 h-5 text-indigo-600"></i>Domain Lookup</h2><button id="resetBtn" class="btn-secondary" type="button"><i data-lucide="rotate-ccw" class="w-4 h-4"></i>Reset</button></div>
+<div class="p-5 sm:p-6">
+<label class="label" for="domainInput">Domain name</label><input id="domainInput" class="field" type="text" value="example.com" placeholder="example.com" autocapitalize="none" spellcheck="false">
+<p class="text-xs text-slate-500 mt-2">Paste a domain or full URL; the hostname will be extracted automatically.</p>
+<button id="lookupBtn" class="btn-primary w-full mt-4" type="button"><i data-lucide="search" class="w-4 h-4"></i>WHOIS / RDAP Lookup</button>
+<div class="mt-4"><div class="label">Try an example</div><div class="examples">
+<button class="example-btn" data-domain="google.com">google.com</button><button class="example-btn" data-domain="github.com">github.com</button><button class="example-btn" data-domain="wikipedia.org">wikipedia.org</button><button class="example-btn" data-domain="cloudflare.com">cloudflare.com</button>
+</div></div><div id="statusArea" class="mt-4"></div>
+</div></section>
+
+<section class="tool-card overflow-hidden"><div class="section-head"><h2><i data-lucide="shield-check" class="w-5 h-5 text-indigo-600"></i>About RDAP</h2></div><div class="p-5 sm:p-6 text-sm text-slate-500 leading-7">RDAP is the modern structured successor to traditional WHOIS. Registry and registrar privacy policies may limit which contact details are publicly returned.</div></section>
+</div>
+
+<div>
+<section class="tool-card overflow-hidden"><div class="section-head"><h2><i data-lucide="badge-info" class="w-5 h-5 text-indigo-600"></i>Domain Registration</h2><div class="flex gap-2 flex-wrap"><button id="copySummaryBtn" class="btn-secondary" type="button"><i data-lucide="copy" class="w-4 h-4"></i>Copy Summary</button><button id="rawToggleBtn" class="btn-secondary" type="button"><i data-lucide="braces" class="w-4 h-4"></i>Raw RDAP</button></div></div>
+<div class="p-5 sm:p-6">
+<div class="result-grid">
+<div class="result-box"><div class="result-label">Domain</div><div id="outDomain" class="result-value">example.com</div></div>
+<div class="result-box"><div class="result-label">Registrar</div><div id="outRegistrar" class="result-value">—</div><div id="outRegistrarId" class="result-sub"></div></div>
+<div class="result-box"><div class="result-label">Registered</div><div id="outCreated" class="result-value">—</div><div id="outAge" class="result-sub"></div></div>
+<div class="result-box"><div class="result-label">Expires</div><div id="outExpires" class="result-value">—</div><div id="outExpiry" class="result-sub"></div></div>
+<div class="result-box"><div class="result-label">Last Updated</div><div id="outUpdated" class="result-value">—</div></div>
+<div class="result-box"><div class="result-label">DNSSEC</div><div id="outDnssec" class="result-value">—</div></div>
+<div class="result-box"><div class="result-label">Registry Handle</div><div id="outHandle" class="result-value">—</div></div>
+<div class="result-box"><div class="result-label">RDAP Source</div><div class="result-value">rdap.org</div></div>
+</div>
+<div class="mt-5"><div class="label">Domain status</div><div id="statusBadges" class="badges"><span class="badge">—</span></div></div>
+<div class="mt-5"><div class="label">Name servers</div><div id="nameservers" class="ns-grid"><div class="ns-item">—</div></div></div>
+<div id="entityBlock" class="mt-5 hidden-important"><div class="label">Publicly returned organization / entity</div><div id="entityValue" class="result-box"></div></div>
+<div id="rawWrap" class="mt-5 hidden-important"><div class="flex items-center justify-between gap-3 mb-2"><div class="label mb-0">Raw RDAP JSON</div><button id="copyRawBtn" class="btn-secondary" type="button"><i data-lucide="copy" class="w-4 h-4"></i>Copy JSON</button></div><pre id="rawOutput" class="raw-box">{}</pre></div>
+</div></section>
+</div></div>
+
+<!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT -->
+
+<div class="info-wrap">
+<section class="info-section"><h2>Free WHOIS and RDAP Domain Lookup</h2><p>The Utiliverse WHOIS Lookup retrieves public domain-registration information using RDAP, or Registration Data Access Protocol. RDAP is the modern standardized replacement for older text-based WHOIS and can return structured data such as registrar, registration and expiration events, nameservers, domain status codes, DNSSEC information, registry identifiers, and public entity information.</p><p>Not every registry returns the same fields. Privacy rules, privacy-protection services, and registry policy can limit public contact details, so a missing registrant name does not necessarily mean the record is incomplete.</p></section>
+
+<section class="info-section"><h2>How to Use the WHOIS Lookup</h2>
+<h3>Enter a domain or URL</h3><p>Type a domain such as example.com or paste a full URL. Utiliverse removes the scheme, path, query string, port, and leading www prefix before performing the lookup.</p>
+<h3>Run the RDAP lookup</h3><p>The browser sends the domain to the public RDAP bootstrap service at rdap.org, which routes the request to the appropriate registry RDAP service. No API key is embedded in the page.</p>
+<h3>Check the registrar</h3><p>The registrar field identifies the organization responsible for managing the registration when that information is returned. An IANA registrar identifier is displayed when available.</p>
+<h3>Review important dates</h3><p>Registration, expiration, and last-updated events are converted into readable dates. Utiliverse also estimates domain age and the amount of time remaining until the reported expiration date.</p>
+<h3>Inspect domain status codes</h3><p>EPP status codes describe registration controls and pending operations. Transfer-prohibited or update-prohibited statuses are often security locks, while other statuses may describe deletion, renewal, or registry actions.</p>
+<h3>Check nameserver delegation</h3><p>The nameserver list shows DNS servers delegated for the domain by the registry. This is useful when checking a DNS-provider migration or registrar configuration.</p>
+<h3>Check DNSSEC</h3><p>When secure-DNS information is returned, the tool reports whether the registry delegation is signed. This is a registry-level indicator and not a complete end-to-end DNSSEC validation test.</p>
+<h3>View raw RDAP JSON</h3><p>Use Raw RDAP to inspect the complete structured response, including registry-specific fields, notices, links, entities, and remarks that may not appear in the summary cards.</p>
+<h2 class="mt-8">Practical Uses</h2>
+<h3>Domain renewal checks</h3><p>Use the reported expiration date as a quick reference when reviewing renewal schedules, while confirming final renewal status in the registrar account.</p>
+<h3>Registrar identification</h3><p>Find the registrar managing a domain when ownership records are old, several registrars are used, or a website was inherited from another administrator.</p>
+<h3>DNS troubleshooting</h3><p>Compare the registry nameserver delegation with the DNS provider you expect to use. This complements, rather than replaces, a full DNS-record lookup.</p>
+<h3>Transfer troubleshooting</h3><p>Review EPP status codes when a domain transfer or update is being blocked. Transfer locks are common security controls and may need to be changed at the registrar.</p>
+<h3>Domain research</h3><p>Registration date and age can provide context during technical or vendor research, but age alone does not prove legitimacy, trustworthiness, or continuous ownership.</p>
+</section>
+
+<section class="info-section"><h2>WHOIS Lookup FAQ</h2>
+<details class="faq-item"><summary>What is WHOIS?</summary><p>WHOIS is the traditional protocol and common term for querying registration information about domains, IP addresses, and autonomous systems.</p></details>
+<details class="faq-item"><summary>What is RDAP?</summary><p>RDAP stands for Registration Data Access Protocol. It provides registration information over HTTPS in structured JSON and is the modern successor to traditional WHOIS.</p></details>
+<details class="faq-item"><summary>Why is the registrant name hidden?</summary><p>Many registries and registrars redact personal information because of privacy law and privacy-protection services.</p></details>
+<details class="faq-item"><summary>Can I check when a domain expires?</summary><p>Yes, when the registry returns an expiration event.</p></details>
+<details class="faq-item"><summary>Can I see the registrar?</summary><p>Usually. Availability varies by registry and domain type.</p></details>
+<details class="faq-item"><summary>Does this show DNS records?</summary><p>It typically shows delegated nameservers and sometimes DNSSEC information, but it is not a complete A, AAAA, MX, TXT, or CNAME lookup.</p></details>
+<details class="faq-item"><summary>Why can a lookup fail?</summary><p>The domain may not exist, the registry may be unavailable or rate-limiting requests, or the top-level domain may not expose compatible public RDAP data.</p></details>
+<details class="faq-item"><summary>Does Utiliverse save my lookup history?</summary><p>This standalone page does not save a local lookup history. The requested domain is sent to the public RDAP service to obtain live registration data.</p></details>
+</section>
+<!-- GOOGLE ADSENSE: BOTTOM / AFTER-CONTENT INSERTION POINT -->
+</div>
+</main>
+
+<footer class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-6 pt-2"><div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-500"><div>© 2026 Utiliverse. All rights reserved.</div><div class="font-semibold text-right">100% Free and Browser Based</div></div></footer>
+
+<script>
+(()=>{
+const $=id=>document.getElementById(id);let lastData=null;
+const esc=s=>String(s??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
+function status(type,msg){const t=$("statusArea");if(!type||!msg){t.innerHTML="";return}const icon=type==="good"?"circle-check":type==="bad"?"circle-alert":"info";t.innerHTML=`<div class="status-box ${type}"><i data-lucide="${icon}" class="w-4 h-4 flex-none mt-0.5"></i><div>${esc(msg)}</div></div>`;lucide.createIcons()}
+function normalize(input){let v=String(input||"").trim();if(!v)return"";try{if(!/^[a-z][a-z0-9+.-]*:\/\//i.test(v))v="https://"+v;v=new URL(v).hostname}catch{v=v.replace(/^[a-z]+:\/\//i,"").split("/")[0].split("?")[0].split("#")[0].split(":")[0]}return v.replace(/\.$/,"").replace(/^www\./i,"").toLowerCase()}
+function valid(d){return !!d&&d.length<=253&&d.includes(".")&&!/\s/.test(d)}
+function evt(data,names){const e=Array.isArray(data.events)?data.events:[];for(const n of names){const x=e.find(v=>String(v.eventAction||"").toLowerCase()===n);if(x?.eventDate)return x.eventDate}return null}
+function df(v){if(!v)return"Not provided";const d=new Date(v);return isNaN(d)?String(v):d.toLocaleString(undefined,{year:"numeric",month:"short",day:"numeric",hour:"numeric",minute:"2-digit"})}
+function age(v){if(!v)return"";const d=new Date(v);if(isNaN(d))return"";const days=Math.floor((Date.now()-d)/86400000);if(days<0)return"";if(days<60)return`Approximately ${days} days old`;const yrs=Math.floor(days/365.25),mos=Math.floor((days-yrs*365.25)/30.44);return`Approximately ${yrs} year${yrs===1?"":"s"}${mos?` ${mos} month${mos===1?"":"s"}`:""} old`}
+function exp(v){if(!v)return"";const d=new Date(v);if(isNaN(d))return"";const days=Math.round(Math.abs(d-Date.now())/86400000);return d>=Date.now()?`About ${days} day${days===1?"":"s"} remaining`:`Reported expiration was about ${days} day${days===1?"":"s"} ago`}
+function vc(e,k){const a=e?.vcardArray?.[1];if(!Array.isArray(a))return"";const r=a.find(x=>Array.isArray(x)&&x[0]===k);return r?String(r[3]??""):""}
+function registrar(data){const es=Array.isArray(data.entities)?data.entities:[],r=es.find(e=>(e.roles||[]).map(String).map(x=>x.toLowerCase()).includes("registrar"));if(!r)return{name:"Not provided",id:""};const name=vc(r,"fn")||vc(r,"org")||r.handle||"Not provided";const p=(r.publicIds||[]).find(x=>String(x.type||"").toLowerCase().includes("iana"));return{name,id:p?.identifier?`IANA ID ${p.identifier}`:""}}
+function render(data,domain){lastData=data;const r=registrar(data),created=evt(data,["registration","registered"]),expires=evt(data,["expiration","expiry"]),updated=evt(data,["last changed","last update of rdap database","last update"]);
+$("outDomain").textContent=data.ldhName||data.unicodeName||domain;$("outRegistrar").textContent=r.name;$("outRegistrarId").textContent=r.id;$("outCreated").textContent=df(created);$("outAge").textContent=age(created);$("outExpires").textContent=df(expires);$("outExpiry").textContent=exp(expires);$("outUpdated").textContent=df(updated);$("outHandle").textContent=data.handle||"Not provided";
+$("outDnssec").textContent=data.secureDNS?(data.secureDNS.delegationSigned===true?"Signed / enabled":data.secureDNS.delegationSigned===false?"Not signed":"Information provided"):"Not provided";
+const sts=Array.isArray(data.status)&&data.status.length?data.status:["No status returned"];$("statusBadges").innerHTML=sts.map(x=>`<span class="badge">${esc(x)}</span>`).join("");
+const ns=(data.nameservers||[]).map(x=>x.ldhName||x.unicodeName).filter(Boolean);$("nameservers").innerHTML=ns.length?ns.map(x=>`<div class="ns-item">${esc(x)}</div>`).join(""):'<div class="ns-item">No nameservers returned</div>';
+const es=(data.entities||[]).filter(e=>!(e.roles||[]).map(String).map(x=>x.toLowerCase()).includes("registrar"));let entity=null;for(const e of es){const v=vc(e,"org")||vc(e,"fn");if(v){entity={v,roles:(e.roles||[]).join(", ")};break}}$("entityBlock").classList.toggle("hidden-important",!entity);if(entity)$("entityValue").innerHTML=`<div class="result-value">${esc(entity.v)}</div><div class="result-sub">${esc(entity.roles)}</div>`;
+$("rawOutput").textContent=JSON.stringify(data,null,2);status("good",`Registration data loaded for ${domain}.`)}
+async function lookup(){const d=normalize($("domainInput").value);if(!valid(d)){status("bad","Enter a valid domain such as example.com.");return}$("domainInput").value=d;$("lookupBtn").disabled=true;$("lookupBtn").textContent="Looking up…";status("info",`Querying RDAP for ${d}…`);try{const r=await fetch(`https://rdap.org/domain/${encodeURIComponent(d)}`,{headers:{Accept:"application/rdap+json, application/json"}});if(r.status===404)throw new Error("The domain was not found. It may be unregistered or unsupported.");if(r.status===429)throw new Error("The RDAP service is rate-limiting requests. Please wait and try again.");if(!r.ok)throw new Error(`RDAP request failed with HTTP ${r.status}.`);render(await r.json(),d)}catch(e){status("bad",e.message||"The RDAP lookup failed.")}finally{$("lookupBtn").disabled=false;$("lookupBtn").innerHTML='<i data-lucide="search" class="w-4 h-4"></i> WHOIS / RDAP Lookup';lucide.createIcons()}}
+$("lookupBtn").onclick=lookup;$("domainInput").onkeydown=e=>{if(e.key==="Enter")lookup()};document.querySelectorAll(".example-btn").forEach(b=>b.onclick=()=>{$("domainInput").value=b.dataset.domain;lookup()});
+$("rawToggleBtn").onclick=()=>{$("rawWrap").classList.toggle("hidden-important")};
+async function copy(text,btn){try{await navigator.clipboard.writeText(text)}catch{const t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove()}const old=btn.innerHTML;btn.textContent="Copied";setTimeout(()=>{btn.innerHTML=old;lucide.createIcons()},1200)}
+$("copyRawBtn").onclick=()=>copy($("rawOutput").textContent,$("copyRawBtn"));$("copySummaryBtn").onclick=()=>copy(`Domain: ${$("outDomain").textContent}\nRegistrar: ${$("outRegistrar").textContent}\nRegistered: ${$("outCreated").textContent}\nExpires: ${$("outExpires").textContent}\nUpdated: ${$("outUpdated").textContent}\nDNSSEC: ${$("outDnssec").textContent}\nStatuses: ${[...$("statusBadges").children].map(x=>x.textContent).join(", ")}\nNameservers: ${[...$("nameservers").children].map(x=>x.textContent).join(", ")}`,$("copySummaryBtn"));
+$("resetBtn").onclick=()=>location.reload();
+const toggle=$("themeToggle"),moon=$("moonIcon"),sun=$("sunIcon");function theme(m){const d=m==="dark";document.body.classList.toggle("dark-mode",d);moon.classList.toggle("hidden",d);sun.classList.toggle("hidden",!d);localStorage.setItem("utiliverse-theme",d?"dark":"light");lucide.createIcons()}theme(localStorage.getItem("utiliverse-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));toggle.onclick=()=>theme(document.body.classList.contains("dark-mode")?"light":"dark");
+status("info","Enter a domain and select WHOIS / RDAP Lookup.");lucide.createIcons();
+})();
+</script>
+</body></html>
