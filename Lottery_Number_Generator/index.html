@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lottery Number Generator – Quick Pick & Custom Draws | Utiliverse</title>
+<meta name="description" content="Generate random lottery numbers with popular presets or custom ranges. Create duplicate-free quick-pick lines using cryptographically strong browser randomness, optional bonus balls, exclusions, and batch generation.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#1d4ed8">
+<link rel="canonical" href="https://utiliverse.app/Lottery_Number_Generator/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Lottery Number Generator – Quick Pick & Custom Draws | Utiliverse">
+<meta property="og:description" content="Generate random lottery number lines from popular presets or your own custom number ranges.">
+<meta property="og:url" content="https://utiliverse.app/Lottery_Number_Generator/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lottery Number Generator | Utiliverse">
+<meta name="twitter:description" content="Free browser-based lottery quick-pick and custom number generator.">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+:root{
+  --accent:#1d4ed8;
+  --accent-strong:#1d4ed8;
+  --accent-soft:#eff6ff;
+  --accent-border:#bfdbfe;
+  --surface:#ffffff;
+  --surface-2:#f8fafc;
+  --text:#0f172a;
+  --muted:#64748b;
+  --border:#e2e8f0;
+  --bonus:#e11d48;
+  --bonus-soft:#fff1f2;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:
+    radial-gradient(circle at 5% 0%,rgba(29,78,216,.10),transparent 29%),
+    radial-gradient(circle at 96% 8%,rgba(124,58,237,.07),transparent 26%),
+    #f8fafc;
+  color:#334155;
+}
+body.dark-mode{
+  --accent:#60a5fa;
+  --accent-strong:#93c5fd;
+  --accent-soft:rgba(29,78,216,.16);
+  --accent-border:rgba(96,165,250,.28);
+  --surface:#0f172a;
+  --surface-2:#020617;
+  --text:#f8fafc;
+  --muted:#94a3b8;
+  --border:#334155;
+  --bonus:#fb7185;
+  --bonus-soft:rgba(225,29,72,.15);
+  background:
+    radial-gradient(circle at 5% 0%,rgba(29,78,216,.20),transparent 29%),
+    radial-gradient(circle at 96% 8%,rgba(124,58,237,.10),transparent 26%),
+    #020617!important;
+  color:#e2e8f0!important;
+}
+body.dark-mode header{background:rgba(2,6,23,.86)!important;border-color:#1e293b!important}
+body.dark-mode header a{color:#cbd5e1!important}
+body.dark-mode h1,body.dark-mode h2,body.dark-mode h3{color:#f8fafc!important}
+.theme-toggle{
+  width:40px;height:40px;border-radius:12px;border:1px solid #cbd5e1;background:#fff;color:#475569;
+  display:flex;align-items:center;justify-content:center;cursor:pointer
+}
+body.dark-mode .theme-toggle{background:#0f172a;border-color:#334155;color:#cbd5e1}
+.free-note{font-size:12px;font-weight:800;color:#64748b;white-space:nowrap}
+body.dark-mode .free-note{color:#94a3b8}
+
+.card,.info-section{
+  background:var(--surface);border:1px solid var(--border);border-radius:1rem;
+  box-shadow:0 1px 2px rgba(15,23,42,.04)
+}
+.card-head{
+  padding:1rem 1.15rem;border-bottom:1px solid var(--border);display:flex;align-items:center;
+  justify-content:space-between;gap:1rem;flex-wrap:wrap
+}
+.card-head h2{font-weight:900;color:var(--text);display:flex;align-items:center;gap:.5rem}
+.label{display:block;font-size:.79rem;font-weight:850;color:#334155;margin-bottom:.4rem}
+body.dark-mode .label{color:#cbd5e1}
+.field{
+  width:100%;border:1px solid #cbd5e1;background:#fff;color:#0f172a;border-radius:.8rem;
+  padding:.75rem .82rem;outline:none;font-size:.93rem
+}
+.field:focus{border-color:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.13)}
+body.dark-mode .field{background:#0f172a;border-color:#475569;color:#e2e8f0}
+.helper{font-size:.71rem;color:var(--muted);line-height:1.5;margin-top:.35rem}
+
+.btn-primary,.btn-secondary,.btn-ghost{
+  display:inline-flex;align-items:center;justify-content:center;gap:.43rem;border-radius:.73rem;
+  font-weight:850;transition:.15s ease
+}
+.btn-primary{background:#1d4ed8;color:#fff;padding:.76rem .98rem}
+.btn-primary:hover{background:#1e40af}
+.btn-secondary{background:#fff;color:#334155;border:1px solid #cbd5e1;padding:.69rem .86rem}
+.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border);padding:.63rem .79rem}
+body.dark-mode .btn-primary{background:#2563eb}
+body.dark-mode .btn-secondary{background:#1e293b;color:#e2e8f0;border-color:#475569}
+body.dark-mode .btn-ghost{color:#cbd5e1}
+
+.chip{
+  display:inline-flex;align-items:center;border-radius:999px;padding:.32rem .58rem;font-size:.7rem;
+  font-weight:850;background:var(--accent-soft);color:var(--accent-strong);border:1px solid var(--accent-border)
+}
+.notice{
+  border:1px solid #fde68a;background:#fffbeb;color:#92400e;border-radius:.9rem;
+  padding:.85rem .95rem;font-size:.78rem;line-height:1.55
+}
+body.dark-mode .notice{background:rgba(120,53,15,.2);border-color:#92400e;color:#fde68a}
+
+.preset-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem}
+.preset-btn{
+  border:1px solid var(--border);background:var(--surface-2);color:#475569;border-radius:.8rem;
+  padding:.7rem .75rem;text-align:left;cursor:pointer
+}
+.preset-btn:hover{border-color:#93c5fd}
+.preset-btn.active{border-color:#2563eb;background:#eff6ff}
+body.dark-mode .preset-btn{color:#cbd5e1}
+body.dark-mode .preset-btn.active{background:rgba(29,78,216,.17);border-color:#60a5fa}
+.preset-name{font-size:.77rem;font-weight:900;color:var(--text)}
+.preset-desc{font-size:.66rem;color:var(--muted);margin-top:.15rem;line-height:1.4}
+
+.settings-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.65rem}
+.toggle-row{
+  display:flex;align-items:flex-start;gap:.65rem;padding:.75rem;border-radius:.8rem;
+  border:1px solid var(--border);background:var(--surface-2)
+}
+.toggle-row input{margin-top:.15rem}
+.toggle-title{font-size:.78rem;font-weight:850;color:var(--text)}
+.toggle-copy{font-size:.69rem;color:var(--muted);line-height:1.4;margin-top:.12rem}
+
+.result-list{display:flex;flex-direction:column;gap:.72rem}
+.result-line{
+  display:grid;grid-template-columns:48px 1fr auto;gap:.8rem;align-items:center;
+  border:1px solid var(--border);background:var(--surface-2);border-radius:.95rem;padding:.78rem .85rem
+}
+.line-num{
+  width:36px;height:36px;border-radius:.7rem;display:flex;align-items:center;justify-content:center;
+  background:var(--accent-soft);color:var(--accent-strong);font-size:.72rem;font-weight:900
+}
+.ball-row{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap}
+.ball{
+  width:42px;height:42px;border-radius:999px;display:flex;align-items:center;justify-content:center;
+  background:#fff;color:#0f172a;border:2px solid #bfdbfe;font-size:.84rem;font-weight:950;
+  box-shadow:0 2px 5px rgba(15,23,42,.06)
+}
+body.dark-mode .ball{background:#111827;color:#f8fafc;border-color:#3b82f6}
+.ball.bonus{border-color:#fda4af;background:#fff1f2;color:#be123c}
+body.dark-mode .ball.bonus{background:rgba(225,29,72,.15);border-color:#fb7185;color:#fda4af}
+.bonus-label{font-size:.65rem;font-weight:850;color:#be123c;margin:0 .1rem}
+body.dark-mode .bonus-label{color:#fda4af}
+.copy-line{
+  width:34px;height:34px;border-radius:.65rem;border:1px solid var(--border);background:var(--surface);
+  color:#94a3b8;display:flex;align-items:center;justify-content:center
+}
+.copy-line:hover{color:#1d4ed8;border-color:#bfdbfe}
+
+.empty{
+  border:1px dashed var(--border);border-radius:1rem;padding:2.4rem 1rem;text-align:center;color:var(--muted)
+}
+.summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem}
+.summary-box{background:var(--surface-2);border:1px solid var(--border);border-radius:.85rem;padding:.8rem}
+.summary-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.05em;font-weight:850;color:var(--muted)}
+.summary-value{font-size:.92rem;font-weight:900;color:var(--text);margin-top:.25rem}
+
+.status-box{
+  border-radius:.85rem;padding:.8rem .9rem;font-size:.78rem;line-height:1.5;display:flex;gap:.5rem;align-items:flex-start
+}
+.status-box.info{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af}
+.status-box.good{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46}
+.status-box.warn{background:#fffbeb;border:1px solid #fde68a;color:#92400e}
+.status-box.bad{background:#fef2f2;border:1px solid #fecaca;color:#991b1b}
+body.dark-mode .status-box.info{background:rgba(29,78,216,.18);border-color:#1d4ed8;color:#bfdbfe}
+body.dark-mode .status-box.good{background:rgba(6,78,59,.2);border-color:#065f46;color:#a7f3d0}
+body.dark-mode .status-box.warn{background:rgba(120,53,15,.2);border-color:#92400e;color:#fde68a}
+body.dark-mode .status-box.bad{background:rgba(127,29,29,.2);border-color:#991b1b;color:#fecaca}
+
+.history-list{display:flex;flex-direction:column;gap:.5rem}
+.history-item{
+  border:1px solid var(--border);border-radius:.75rem;padding:.65rem .75rem;background:var(--surface-2);
+  font-size:.72rem;color:#475569;line-height:1.5
+}
+body.dark-mode .history-item{color:#cbd5e1}
+.history-time{font-size:.64rem;color:var(--muted);font-weight:750;margin-bottom:.2rem}
+
+.info-wrap{max-width:72rem;margin:3.5rem auto 0}
+.info-section{padding:1.5rem}
+.info-section+.info-section{margin-top:1.5rem}
+.info-section h2{font-size:1.5rem;font-weight:900;color:var(--text);margin-bottom:.85rem}
+.info-section h3{font-size:1.03rem;font-weight:850;color:var(--text);margin:1.2rem 0 .35rem}
+.info-section p,.info-section li{font-size:.94rem;line-height:1.78;color:#475569}
+body.dark-mode .info-section p,body.dark-mode .info-section li{color:#94a3b8!important}
+.info-section ul{padding-left:1.2rem;list-style:disc}
+.source-link{color:#1d4ed8;font-weight:800;text-decoration:underline;text-underline-offset:2px}
+body.dark-mode .source-link{color:#93c5fd}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-item summary{
+  list-style:none;cursor:pointer;padding:1rem 0;color:var(--text);font-weight:850;
+  display:flex;justify-content:space-between;gap:1rem
+}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"+"}
+.faq-item[open] summary::after{content:"−"}
+.faq-item p{padding-bottom:1rem;margin:0}
+
+@media(max-width:800px){
+  .settings-grid{grid-template-columns:1fr 1fr}
+  .summary-grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .free-note{font-size:10px;line-height:1.2;white-space:normal;text-align:right;max-width:118px}
+  .theme-toggle{width:38px;height:38px}
+  .preset-grid{grid-template-columns:1fr}
+  .settings-grid{grid-template-columns:1fr}
+  .result-line{grid-template-columns:38px 1fr}
+  .copy-line{grid-column:2;justify-self:start}
+  .ball{width:38px;height:38px}
+}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Utiliverse Lottery Number Generator",
+  "url":"https://utiliverse.app/Lottery_Number_Generator/",
+  "applicationCategory":"UtilitiesApplication",
+  "operatingSystem":"Any",
+  "browserRequirements":"Requires a modern browser with JavaScript and Web Crypto.",
+  "description":"A free browser-based random lottery number generator with popular presets, custom number ranges, bonus-ball pools, batch lines, exclusions, and cryptographically strong randomization.",
+  "isAccessibleForFree":true,
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"Can a lottery number generator predict winning numbers?","acceptedAnswer":{"@type":"Answer","text":"No. Lottery drawings are random. A random number generator can create quick-pick style combinations, but it cannot predict or improve the probability of a future draw."}},
+    {"@type":"Question","name":"How are the random numbers generated?","acceptedAnswer":{"@type":"Answer","text":"The tool uses the browser Web Crypto API and rejection sampling to select unbiased random values, then draws without replacement so main numbers do not repeat within a line."}},
+    {"@type":"Question","name":"Can I generate multiple lottery lines at once?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool can generate between 1 and 50 random lines in one batch."}},
+    {"@type":"Question","name":"Can I use a custom lottery format?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose Custom Draw and set the main number count and range, plus an optional separate bonus-number pool."}},
+    {"@type":"Question","name":"Does excluding numbers improve my lottery odds?","acceptedAnswer":{"@type":"Answer","text":"No. Exclusions only reflect personal preference. They do not make a remaining combination more likely to be drawn."}}
+  ]
+}
+</script>
+</head>
+
+<!-- SEO TARGET CLUSTER: lottery number generator, random lottery numbers, quick pick generator, Powerball number generator, Mega Millions number generator -->
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT -->
+
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+<header class="sticky top-0 z-50 bg-white/80 border-b border-slate-200 backdrop-blur">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="https://utiliverse.app" class="flex items-center gap-2 text-sm font-semibold text-slate-600">
+      <i data-lucide="arrow-left" class="w-4 h-4"></i><span>Back to Utiliverse</span>
+    </a>
+    <div class="flex items-center gap-4">
+      <div class="free-note">100% Free and Browser Based</div>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle light or dark mode">
+        <i id="moonIcon" data-lucide="moon" class="w-4 h-4"></i>
+        <i id="sunIcon" data-lucide="sun" class="w-4 h-4 hidden"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold text-slate-900 flex items-center gap-3">
+      <i data-lucide="dices" class="w-8 h-8" style="color:#1d4ed8"></i>
+      Lottery Number Generator
+    </h1>
+    <p class="mt-2 text-sm max-w-3xl muted">
+      Generate quick-pick style random number lines for popular lottery formats or build a custom draw. Every number is generated locally with cryptographically strong browser randomness.
+    </p>
+  </div>
+
+  <div class="notice mb-6">
+    <strong>Random picks only — not predictions.</strong> Every valid combination in a fair lottery draw has the same chance of being selected. These generated numbers cannot predict future results or improve the underlying odds. If you choose to play, follow the legal age and lottery rules where you are.
+  </div>
+
+  <div class="grid grid-cols-1 xl:grid-cols-[.9fr_1.1fr] gap-6">
+    <div class="space-y-6">
+      <section class="card overflow-hidden">
+        <div class="card-head">
+          <h2><i data-lucide="ticket-check" class="w-5 h-5" style="color:#1d4ed8"></i>Choose a Format</h2>
+        </div>
+        <div class="p-5">
+          <div id="presetGrid" class="preset-grid">
+            <button class="preset-btn active" type="button" data-preset="powerball">
+              <div class="preset-name">Powerball</div><div class="preset-desc">5 from 1–69 + 1 Powerball from 1–26</div>
+            </button>
+            <button class="preset-btn" type="button" data-preset="megamillions">
+              <div class="preset-name">Mega Millions</div><div class="preset-desc">5 from 1–70 + 1 Mega Ball from 1–24</div>
+            </button>
+            <button class="preset-btn" type="button" data-preset="euromillions">
+              <div class="preset-name">EuroMillions</div><div class="preset-desc">5 from 1–50 + 2 Lucky Stars from 1–12</div>
+            </button>
+            <button class="preset-btn" type="button" data-preset="uklotto">
+              <div class="preset-name">UK Lotto</div><div class="preset-desc">6 numbers from 1–59</div>
+            </button>
+            <button class="preset-btn" type="button" data-preset="lotto649">
+              <div class="preset-name">Lotto 6/49</div><div class="preset-desc">6 numbers from 1–49</div>
+            </button>
+            <button class="preset-btn" type="button" data-preset="lottoamerica">
+              <div class="preset-name">Lotto America</div><div class="preset-desc">5 from 1–52 + 1 Star Ball from 1–10</div>
+            </button>
+            <button class="preset-btn" type="button" data-preset="custom">
+              <div class="preset-name">Custom Draw</div><div class="preset-desc">Choose your own ranges and bonus pool</div>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="card overflow-hidden">
+        <div class="card-head">
+          <h2><i data-lucide="sliders-horizontal" class="w-5 h-5" style="color:#1d4ed8"></i>Draw Settings</h2>
+        </div>
+        <div class="p-5 space-y-4">
+          <div class="settings-grid">
+            <div>
+              <label class="label" for="mainCount">Main numbers</label>
+              <input id="mainCount" class="field" type="number" min="1" max="20" value="5">
+            </div>
+            <div>
+              <label class="label" for="mainMin">Lowest</label>
+              <input id="mainMin" class="field" type="number" min="-999999" max="999999" value="1">
+            </div>
+            <div>
+              <label class="label" for="mainMax">Highest</label>
+              <input id="mainMax" class="field" type="number" min="-999999" max="999999" value="69">
+            </div>
+          </div>
+
+          <label class="toggle-row cursor-pointer">
+            <input id="bonusEnabled" type="checkbox" class="h-4 w-4 accent-blue-700" checked>
+            <span><span class="toggle-title">Add a bonus / special ball</span><span class="toggle-copy block">Draw from a separate number pool.</span></span>
+          </label>
+
+          <div id="bonusSettings" class="settings-grid">
+            <div>
+              <label class="label" for="bonusCount">Bonus numbers</label>
+              <input id="bonusCount" class="field" type="number" min="1" max="10" value="1">
+            </div>
+            <div>
+              <label class="label" for="bonusMin">Lowest</label>
+              <input id="bonusMin" class="field" type="number" min="-999999" max="999999" value="1">
+            </div>
+            <div>
+              <label class="label" for="bonusMax">Highest</label>
+              <input id="bonusMax" class="field" type="number" min="-999999" max="999999" value="26">
+            </div>
+          </div>
+
+          <div>
+            <label class="label" for="lineCount">Number of lines</label>
+            <input id="lineCount" class="field" type="number" min="1" max="50" value="5">
+            <div class="helper">Generate 1 to 50 independent quick-pick lines at once.</div>
+          </div>
+
+          <div>
+            <label class="label" for="excludeNumbers">Exclude main numbers <span class="font-normal text-slate-400">(optional)</span></label>
+            <input id="excludeNumbers" class="field" type="text" placeholder="e.g. 4, 13, 22">
+            <div class="helper">Separate values with commas or spaces. Exclusions are a preference only and do not improve the odds.</div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <label class="toggle-row cursor-pointer">
+              <input id="sortNumbers" type="checkbox" class="h-4 w-4 accent-blue-700" checked>
+              <span><span class="toggle-title">Sort each line</span><span class="toggle-copy block">Display main and bonus numbers in ascending order.</span></span>
+            </label>
+            <label class="toggle-row cursor-pointer">
+              <input id="avoidRepeatLines" type="checkbox" class="h-4 w-4 accent-blue-700" checked>
+              <span><span class="toggle-title">Avoid duplicate lines</span><span class="toggle-copy block">Retry if an identical full line is generated in the same batch.</span></span>
+            </label>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button id="generateBtn" type="button" class="btn-primary">
+              <i data-lucide="sparkles" class="w-4 h-4"></i>Generate Numbers
+            </button>
+            <button id="clearBtn" type="button" class="btn-secondary">
+              <i data-lucide="trash-2" class="w-4 h-4"></i>Clear Results
+            </button>
+          </div>
+
+          <div id="statusArea"></div>
+        </div>
+      </section>
+    </div>
+
+    <div class="space-y-6">
+      <section class="card overflow-hidden">
+        <div class="card-head">
+          <h2><i data-lucide="clover" class="w-5 h-5" style="color:#1d4ed8"></i>Your Numbers</h2>
+          <div class="flex gap-2 flex-wrap">
+            <button id="regenerateBtn" type="button" class="btn-ghost text-xs">
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>Regenerate
+            </button>
+            <button id="copyAllBtn" type="button" class="btn-secondary text-xs">
+              <i data-lucide="copy" class="w-3.5 h-3.5"></i>Copy All
+            </button>
+          </div>
+        </div>
+
+        <div class="p-5">
+          <div class="summary-grid mb-5">
+            <div class="summary-box"><div class="summary-label">Format</div><div id="summaryFormat" class="summary-value">Powerball</div></div>
+            <div class="summary-box"><div class="summary-label">Lines</div><div id="summaryLines" class="summary-value">0</div></div>
+            <div class="summary-box"><div class="summary-label">Random Source</div><div class="summary-value">Web Crypto</div></div>
+          </div>
+
+          <div id="resultList" class="result-list">
+            <div class="empty">
+              <i data-lucide="dices" class="w-8 h-8 mx-auto mb-2"></i>
+              <div class="font-bold">Ready for a random draw</div>
+              <div class="text-xs mt-1">Choose a format and generate one or more lines.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card overflow-hidden">
+        <div class="card-head">
+          <h2><i data-lucide="history" class="w-5 h-5" style="color:#1d4ed8"></i>Recent Generations</h2>
+          <button id="clearHistoryBtn" type="button" class="btn-ghost text-xs"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i>Clear</button>
+        </div>
+        <div class="p-5">
+          <div id="historyList" class="history-list"></div>
+          <div class="helper mt-3">The last five batches are stored locally in this browser only.</div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT -->
+
+  <div class="info-wrap">
+    <section class="info-section">
+      <h2>How the Lottery Number Generator Works</h2>
+      <p>
+        The generator creates quick-pick style combinations by drawing numbers without replacement from the selected pool. That means a main number cannot appear twice in the same main-number set. If a game uses a separate bonus ball or Lucky Star pool, those values are drawn independently from that second range.
+      </p>
+      <p>
+        Random values come from the browser's Web Crypto API. The tool uses rejection sampling rather than a simple modulo operation so every integer in the requested range has an equal chance of selection. The numbers are generated locally in your browser and are not sent to a server.
+      </p>
+    </section>
+
+    <section class="info-section">
+      <h2>Popular Lottery Presets</h2>
+      <p>
+        The included presets reflect the published game matrices checked in September 2026: Powerball uses five numbers from 1–69 plus one Powerball from 1–26; Mega Millions uses five from 1–70 plus a Mega Ball from 1–24; EuroMillions uses five from 1–50 plus two Lucky Stars from 1–12; UK Lotto uses six from 1–59; Lotto 6/49 uses six from 1–49; and Lotto America uses five from 1–52 plus a Star Ball from 1–10.
+      </p>
+      <p>
+        Lottery rules can change. Before using a preset on an actual ticket, confirm the current game format with the official lottery in your jurisdiction.
+      </p>
+      <ul>
+        <li><a class="source-link" href="https://www.powerball.com/" target="_blank" rel="noopener">Official Powerball</a></li>
+        <li><a class="source-link" href="https://www.megamillions.com/" target="_blank" rel="noopener">Official Mega Millions</a></li>
+        <li><a class="source-link" href="https://www.national-lottery.co.uk/" target="_blank" rel="noopener">The UK National Lottery</a></li>
+        <li><a class="source-link" href="https://www.olg.ca/" target="_blank" rel="noopener">Ontario Lottery and Gaming Corporation</a></li>
+      </ul>
+    </section>
+
+    <section class="info-section">
+      <h2>Random Numbers Do Not Predict Lottery Results</h2>
+      <p>
+        A random number generator is useful for creating combinations without choosing them manually, but it does not identify "hot," "cold," overdue, lucky, or more likely future numbers. In a fair draw, past results do not make one valid combination inherently more likely than another valid combination in the next independent drawing.
+      </p>
+      <p>
+        Sorting numbers, excluding personally disliked numbers, generating multiple lines, or choosing a particular visual pattern does not improve the probability of any individual line. Those options are included for convenience and personal preference only.
+      </p>
+    </section>
+
+    <section class="info-section">
+      <h2>Lottery Number Generator FAQ</h2>
+      <details class="faq-item">
+        <summary>Can this tool predict winning lottery numbers?</summary>
+        <p>No. The generator produces random quick-pick style combinations. It cannot predict a future lottery result or improve the underlying odds of a valid line.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How random are the generated numbers?</summary>
+        <p>The tool uses the browser Web Crypto API together with rejection sampling to produce unbiased random integers, then samples without replacement within each number pool.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I generate multiple lottery tickets at once?</summary>
+        <p>Yes. Enter between 1 and 50 lines. Each line is generated independently, and the optional duplicate-line setting retries if the exact same complete line appears within the batch.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I create my own lottery format?</summary>
+        <p>Yes. Choose Custom Draw and specify the number of main picks, the lowest and highest values, and an optional separate bonus-number range.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does excluding certain numbers improve my chances?</summary>
+        <p>No. The exclusion field is only a convenience for personal preferences. Excluding numbers does not make the remaining valid combinations more likely to be drawn.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Are my generated lines saved?</summary>
+        <p>The tool keeps only the five most recent generated batches in local browser storage. You can clear that history at any time.</p>
+      </details>
+    </section>
+
+    <!-- GOOGLE ADSENSE: BOTTOM / AFTER-CONTENT INSERTION POINT -->
+  </div>
+</main>
+
+<footer class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-6 pt-2">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-500">
+    <div>© 2026 Utiliverse. All rights reserved.</div>
+    <div class="font-semibold text-right">100% Free and Browser Based</div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const HISTORY_KEY = "utiliverse-lottery-generator-history-v1";
+  let activePreset = "powerball";
+  let currentLines = [];
+
+  const presets = {
+    powerball:{name:"Powerball",mainCount:5,mainMin:1,mainMax:69,bonus:true,bonusCount:1,bonusMin:1,bonusMax:26,bonusName:"Powerball"},
+    megamillions:{name:"Mega Millions",mainCount:5,mainMin:1,mainMax:70,bonus:true,bonusCount:1,bonusMin:1,bonusMax:24,bonusName:"Mega Ball"},
+    euromillions:{name:"EuroMillions",mainCount:5,mainMin:1,mainMax:50,bonus:true,bonusCount:2,bonusMin:1,bonusMax:12,bonusName:"Lucky Stars"},
+    uklotto:{name:"UK Lotto",mainCount:6,mainMin:1,mainMax:59,bonus:false,bonusCount:0,bonusMin:1,bonusMax:1,bonusName:"Bonus"},
+    lotto649:{name:"Lotto 6/49",mainCount:6,mainMin:1,mainMax:49,bonus:false,bonusCount:0,bonusMin:1,bonusMax:1,bonusName:"Bonus"},
+    lottoamerica:{name:"Lotto America",mainCount:5,mainMin:1,mainMax:52,bonus:true,bonusCount:1,bonusMin:1,bonusMax:10,bonusName:"Star Ball"},
+    custom:{name:"Custom Draw",mainCount:6,mainMin:1,mainMax:49,bonus:false,bonusCount:1,bonusMin:1,bonusMax:10,bonusName:"Bonus"}
+  };
+
+  function esc(s){
+    return String(s ?? "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;").replaceAll("'","&#039;");
+  }
+
+  function status(type,msg){
+    const icon=type==="good"?"circle-check":type==="bad"?"circle-alert":type==="warn"?"triangle-alert":"info";
+    $("statusArea").innerHTML=`<div class="status-box ${type}"><i data-lucide="${icon}" class="w-4 h-4 flex-none mt-0.5"></i><div>${esc(msg)}</div></div>`;
+    lucide.createIcons();
+  }
+
+  function setPreset(key){
+    activePreset=key;
+    const p=presets[key];
+    $("mainCount").value=p.mainCount;
+    $("mainMin").value=p.mainMin;
+    $("mainMax").value=p.mainMax;
+    $("bonusEnabled").checked=p.bonus;
+    $("bonusCount").value=p.bonusCount || 1;
+    $("bonusMin").value=p.bonusMin;
+    $("bonusMax").value=p.bonusMax;
+    document.querySelectorAll(".preset-btn").forEach(b=>b.classList.toggle("active",b.dataset.preset===key));
+    updateBonusVisibility();
+    $("summaryFormat").textContent=p.name;
+    status("info",key==="custom"?"Custom draw loaded. Set the ranges you want.":`${p.name} preset loaded.`);
+  }
+
+  function updateBonusVisibility(){
+    $("bonusSettings").style.display=$("bonusEnabled").checked?"grid":"none";
+  }
+
+  function intValue(id){
+    return Math.trunc(Number($(id).value));
+  }
+
+  function exclusions(){
+    return new Set(
+      $("excludeNumbers").value
+        .split(/[\s,;]+/)
+        .map(x=>Number(x))
+        .filter(Number.isFinite)
+        .map(Math.trunc)
+    );
+  }
+
+  function validate(){
+    const mainCount=intValue("mainCount"),min=intValue("mainMin"),max=intValue("mainMax");
+    const lines=intValue("lineCount");
+    if(!Number.isInteger(mainCount)||mainCount<1||mainCount>20) return ["bad","Main number count must be between 1 and 20."];
+    if(!Number.isInteger(min)||!Number.isInteger(max)||min>max) return ["bad","Enter a valid main-number range with the lowest value less than or equal to the highest."];
+    if(max-min+1 > 1000000) return ["bad","The main-number range is too large. Use a span of 1,000,000 values or fewer."];
+    const ex=exclusions();
+    const available=Array.from({length:max-min+1},(_,i)=>min+i).filter(n=>!ex.has(n)).length;
+    if(mainCount>available) return ["bad",`Only ${available} main numbers remain after exclusions, but ${mainCount} are required.`];
+    if(!Number.isInteger(lines)||lines<1||lines>50) return ["bad","Number of lines must be between 1 and 50."];
+
+    if($("bonusEnabled").checked){
+      const bc=intValue("bonusCount"),bmin=intValue("bonusMin"),bmax=intValue("bonusMax");
+      if(!Number.isInteger(bc)||bc<1||bc>10) return ["bad","Bonus number count must be between 1 and 10."];
+      if(!Number.isInteger(bmin)||!Number.isInteger(bmax)||bmin>bmax) return ["bad","Enter a valid bonus-number range."];
+      if(bmax-bmin+1 > 1000000) return ["bad","The bonus-number range is too large. Use a span of 1,000,000 values or fewer."];
+      if(bc>bmax-bmin+1) return ["bad","The bonus pool does not contain enough unique values for the requested bonus count."];
+    }
+    return ["good","Settings are valid and ready to generate."];
+  }
+
+  // Uniform integer in [0, maxExclusive) using Web Crypto + rejection sampling.
+  function randomBelow(maxExclusive){
+    if(!Number.isInteger(maxExclusive)||maxExclusive<=0) throw new Error("Invalid random range.");
+    const range = 0x100000000; // 2^32
+    const limit = range - (range % maxExclusive);
+    const buf = new Uint32Array(1);
+    let x;
+    do{
+      crypto.getRandomValues(buf);
+      x=buf[0];
+    }while(x>=limit);
+    return x % maxExclusive;
+  }
+
+  function drawUnique(min,max,count,excluded=new Set()){
+    const pool=[];
+    for(let n=min;n<=max;n++) if(!excluded.has(n)) pool.push(n);
+
+    // Partial Fisher-Yates: only shuffle as far as needed.
+    for(let i=0;i<count;i++){
+      const j=i+randomBelow(pool.length-i);
+      [pool[i],pool[j]]=[pool[j],pool[i]];
+    }
+    return pool.slice(0,count);
+  }
+
+  function lineKey(line){
+    return `${line.main.join(",")}|${line.bonus.join(",")}`;
+  }
+
+  function generate(){
+    const [kind,msg]=validate();
+    if(kind==="bad"){status(kind,msg);return}
+
+    const mainCount=intValue("mainCount"),mainMin=intValue("mainMin"),mainMax=intValue("mainMax");
+    const bonusEnabled=$("bonusEnabled").checked;
+    const bonusCount=bonusEnabled?intValue("bonusCount"):0;
+    const bonusMin=bonusEnabled?intValue("bonusMin"):0;
+    const bonusMax=bonusEnabled?intValue("bonusMax"):0;
+    const lineCount=intValue("lineCount");
+    const ex=exclusions();
+    const sort=$("sortNumbers").checked;
+    const avoid=$("avoidRepeatLines").checked;
+    const seen=new Set();
+    const output=[];
+    let attempts=0;
+    const maxAttempts=Math.max(500,lineCount*50);
+
+    while(output.length<lineCount && attempts<maxAttempts){
+      attempts++;
+      let main=drawUnique(mainMin,mainMax,mainCount,ex);
+      let bonus=bonusEnabled?drawUnique(bonusMin,bonusMax,bonusCount):[];
+      if(sort){main.sort((a,b)=>a-b);bonus.sort((a,b)=>a-b)}
+      const line={main,bonus};
+      const key=lineKey(line);
+      if(avoid && seen.has(key)) continue;
+      seen.add(key);
+      output.push(line);
+    }
+
+    if(output.length<lineCount){
+      status("warn",`Generated ${output.length} unique line(s). The requested settings allow too few distinct combinations to guarantee ${lineCount} different lines.`);
+    }else{
+      status("good",`${lineCount} random line${lineCount===1?"":"s"} generated locally with Web Crypto.`);
+    }
+
+    currentLines=output;
+    renderResults();
+    addHistory(output);
+  }
+
+  function bonusLabel(){
+    if(activePreset!=="custom") return presets[activePreset].bonusName;
+    return "Bonus";
+  }
+
+  function renderResults(){
+    $("summaryLines").textContent=currentLines.length;
+    $("summaryFormat").textContent=presets[activePreset]?.name || "Custom Draw";
+
+    if(!currentLines.length){
+      $("resultList").innerHTML=`<div class="empty"><i data-lucide="dices" class="w-8 h-8 mx-auto mb-2"></i><div class="font-bold">Ready for a random draw</div><div class="text-xs mt-1">Choose a format and generate one or more lines.</div></div>`;
+      lucide.createIcons();
+      return;
+    }
+
+    $("resultList").innerHTML=currentLines.map((line,i)=>`
+      <div class="result-line">
+        <div class="line-num">${i+1}</div>
+        <div class="ball-row">
+          ${line.main.map(n=>`<span class="ball">${n}</span>`).join("")}
+          ${line.bonus.length?`<span class="bonus-label">${esc(bonusLabel())}</span>${line.bonus.map(n=>`<span class="ball bonus">${n}</span>`).join("")}`:""}
+        </div>
+        <button type="button" class="copy-line" data-copy-line="${i}" aria-label="Copy line ${i+1}"><i data-lucide="copy" class="w-4 h-4"></i></button>
+      </div>
+    `).join("");
+    lucide.createIcons();
+  }
+
+  function lineText(line,index=null){
+    const pre=index===null?"":`Line ${index+1}: `;
+    return pre + line.main.join(" - ") + (line.bonus.length?` | ${bonusLabel()}: ${line.bonus.join(" - ")}`:"");
+  }
+
+  async function copyText(text,button){
+    try{await navigator.clipboard.writeText(text)}
+    catch{
+      const t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove();
+    }
+    if(button){
+      const old=button.innerHTML;
+      button.innerHTML='<i data-lucide="check" class="w-3.5 h-3.5"></i>Copied';
+      lucide.createIcons();
+      setTimeout(()=>{button.innerHTML=old;lucide.createIcons()},1200);
+    }
+  }
+
+  $("resultList").addEventListener("click",e=>{
+    const b=e.target.closest("[data-copy-line]");
+    if(!b)return;
+    const i=Number(b.dataset.copyLine);
+    copyText(lineText(currentLines[i],i));
+  });
+
+  $("copyAllBtn").addEventListener("click",()=>{
+    if(!currentLines.length){status("warn","Generate at least one line before copying.");return}
+    copyText(
+      [`${presets[activePreset]?.name || "Lottery"} Random Numbers`,...currentLines.map((l,i)=>lineText(l,i))].join("\n"),
+      $("copyAllBtn")
+    );
+  });
+
+  function history(){
+    try{return JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]")}catch{return []}
+  }
+
+  function addHistory(lines){
+    const item={
+      time:new Date().toISOString(),
+      format:presets[activePreset]?.name || "Custom Draw",
+      bonusName:bonusLabel(),
+      lines:lines.slice(0,10)
+    };
+    const h=[item,...history()].slice(0,5);
+    localStorage.setItem(HISTORY_KEY,JSON.stringify(h));
+    renderHistory();
+  }
+
+  function renderHistory(){
+    const h=history();
+    if(!h.length){
+      $("historyList").innerHTML='<div class="helper">No recent generations yet.</div>';
+      return;
+    }
+    $("historyList").innerHTML=h.map(item=>{
+      const d=new Date(item.time);
+      const rows=(item.lines||[]).slice(0,3).map(l=>
+        `${(l.main||[]).join(" - ")}${l.bonus?.length?` | ${item.bonusName || "Bonus"}: ${l.bonus.join(" - ")}`:""}`
+      ).join("<br>");
+      return `<div class="history-item"><div class="history-time">${esc(item.format)} • ${esc(d.toLocaleString())}</div>${rows}${item.lines?.length>3?`<br>+ ${item.lines.length-3} more line(s)`:""}</div>`;
+    }).join("");
+  }
+
+  $("clearHistoryBtn").addEventListener("click",()=>{
+    localStorage.removeItem(HISTORY_KEY);
+    renderHistory();
+  });
+
+  $("presetGrid").addEventListener("click",e=>{
+    const b=e.target.closest("[data-preset]");
+    if(!b)return;
+    setPreset(b.dataset.preset);
+  });
+
+  ["mainCount","mainMin","mainMax","bonusCount","bonusMin","bonusMax"].forEach(id=>{
+    $(id).addEventListener("input",()=>{
+      if(activePreset!=="custom"){
+        activePreset="custom";
+        document.querySelectorAll(".preset-btn").forEach(b=>b.classList.toggle("active",b.dataset.preset==="custom"));
+        $("summaryFormat").textContent="Custom Draw";
+      }
+    });
+  });
+
+  $("bonusEnabled").addEventListener("change",()=>{
+    updateBonusVisibility();
+    if(activePreset!=="custom"){
+      activePreset="custom";
+      document.querySelectorAll(".preset-btn").forEach(b=>b.classList.toggle("active",b.dataset.preset==="custom"));
+      $("summaryFormat").textContent="Custom Draw";
+    }
+  });
+
+  $("generateBtn").addEventListener("click",generate);
+  $("regenerateBtn").addEventListener("click",generate);
+  $("clearBtn").addEventListener("click",()=>{
+    currentLines=[];
+    renderResults();
+    status("info","Results cleared. Your settings are unchanged.");
+  });
+
+  const toggle=$("themeToggle"),moon=$("moonIcon"),sun=$("sunIcon");
+  function theme(mode){
+    const dark=mode==="dark";
+    document.body.classList.toggle("dark-mode",dark);
+    moon.classList.toggle("hidden",dark);
+    sun.classList.toggle("hidden",!dark);
+    localStorage.setItem("utiliverse-theme",dark?"dark":"light");
+    lucide.createIcons();
+  }
+  theme(localStorage.getItem("utiliverse-theme") || (matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));
+  toggle.addEventListener("click",()=>theme(document.body.classList.contains("dark-mode")?"light":"dark"));
+
+  setPreset("powerball");
+  renderResults();
+  renderHistory();
+  lucide.createIcons();
+})();
+</script>
+</body>
+</html>
