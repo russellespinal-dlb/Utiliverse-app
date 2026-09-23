@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baby Name Finder – Search Names by Meaning, Origin & Style | Utiliverse</title>
+<meta name="description" content="Find baby name ideas by gender association, origin, first letter, length, style, or meaning. Save favorites, shuffle suggestions, and copy your shortlist with the free Utiliverse Baby Name Finder.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/Baby_Name_Finder/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Baby Name Finder – Meaning, Origin & Style | Utiliverse">
+<meta property="og:description" content="Explore baby names with flexible filters, favorites, random suggestions, meanings, and origins.">
+<meta property="og:url" content="https://utiliverse.app/Baby_Name_Finder/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Baby Name Finder | Utiliverse">
+<meta name="twitter:description" content="Find baby names by origin, style, first letter, length, and meaning.">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+:root{
+  --accent:#8b5cf6;
+  --accent-strong:#7c3aed;
+  --accent-soft:#f5f3ff;
+  --accent-border:#ddd6fe;
+  --surface:#fff;
+  --surface-2:#f8fafc;
+  --text:#0f172a;
+  --muted:#64748b;
+  --border:#e2e8f0;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:
+    radial-gradient(circle at 5% 0%,rgba(139,92,246,.10),transparent 29%),
+    radial-gradient(circle at 96% 10%,rgba(236,72,153,.08),transparent 27%),
+    #f8fafc;
+  color:#334155;
+}
+body.dark-mode{
+  --accent:#c4b5fd;
+  --accent-strong:#ddd6fe;
+  --accent-soft:rgba(139,92,246,.16);
+  --accent-border:rgba(196,181,253,.28);
+  --surface:#0f172a;
+  --surface-2:#020617;
+  --text:#f8fafc;
+  --muted:#94a3b8;
+  --border:#334155;
+  background:
+    radial-gradient(circle at 5% 0%,rgba(139,92,246,.18),transparent 29%),
+    radial-gradient(circle at 96% 10%,rgba(236,72,153,.10),transparent 27%),
+    #020617!important;
+  color:#e2e8f0!important;
+}
+body.dark-mode header{background:rgba(2,6,23,.86)!important;border-color:#1e293b!important}
+body.dark-mode header a{color:#cbd5e1!important}
+body.dark-mode h1,body.dark-mode h2,body.dark-mode h3{color:#f8fafc!important}
+body.dark-mode .muted,body.dark-mode .hero-copy{color:#94a3b8!important}
+.theme-toggle{
+  width:40px;height:40px;border:1px solid #cbd5e1;border-radius:12px;background:#fff;color:#475569;
+  display:inline-flex;align-items:center;justify-content:center;cursor:pointer
+}
+body.dark-mode .theme-toggle{background:#0f172a;border-color:#334155;color:#cbd5e1}
+.free-note{font-size:12px;font-weight:800;color:#64748b;white-space:nowrap}
+body.dark-mode .free-note{color:#94a3b8}
+.tool-card,.info-section{
+  background:var(--surface);border:1px solid var(--border);border-radius:1rem;
+  box-shadow:0 1px 2px rgba(15,23,42,.04)
+}
+.section-head{
+  border-bottom:1px solid var(--border);padding:1rem 1.15rem;display:flex;justify-content:space-between;
+  align-items:center;gap:1rem;flex-wrap:wrap
+}
+.section-head h2{font-weight:900;color:var(--text);display:flex;align-items:center;gap:.5rem}
+.label{display:block;font-size:.79rem;font-weight:850;color:#334155;margin-bottom:.4rem}
+body.dark-mode .label{color:#cbd5e1}
+.field{
+  width:100%;border:1px solid #cbd5e1;background:#fff;color:#0f172a;border-radius:.8rem;
+  padding:.75rem .82rem;outline:none;font-size:.93rem
+}
+.field:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(139,92,246,.14)}
+body.dark-mode .field{background:#0f172a;border-color:#475569;color:#e2e8f0}
+.helper{font-size:.72rem;color:var(--muted);line-height:1.45;margin-top:.32rem}
+.btn-primary,.btn-secondary,.btn-ghost{
+  display:inline-flex;align-items:center;justify-content:center;gap:.45rem;border-radius:.75rem;
+  font-weight:850;transition:.15s ease
+}
+.btn-primary{background:#8b5cf6;color:white;padding:.76rem .98rem}
+.btn-primary:hover{background:#7c3aed}
+.btn-secondary{background:#fff;color:#334155;border:1px solid #cbd5e1;padding:.7rem .88rem}
+.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border);padding:.65rem .82rem}
+body.dark-mode .btn-primary{background:#8b5cf6}
+body.dark-mode .btn-secondary{background:#1e293b;color:#e2e8f0;border-color:#475569}
+body.dark-mode .btn-ghost{color:#cbd5e1}
+.chip{
+  display:inline-flex;align-items:center;border-radius:999px;padding:.32rem .58rem;font-size:.7rem;font-weight:800;
+  background:var(--accent-soft);border:1px solid var(--accent-border);color:var(--accent-strong)
+}
+.result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.85rem}
+.name-card{
+  border:1px solid var(--border);background:var(--surface-2);border-radius:1rem;padding:1rem;position:relative
+}
+.name-card:hover{border-color:var(--accent-border);box-shadow:0 7px 20px rgba(15,23,42,.06)}
+.name-top{display:flex;align-items:flex-start;justify-content:space-between;gap:.7rem}
+.name-title{font-size:1.15rem;font-weight:950;color:var(--text)}
+.meta{font-size:.73rem;color:var(--muted);margin-top:.1rem}
+.meaning{font-size:.82rem;line-height:1.52;color:#475569;margin-top:.72rem}
+body.dark-mode .meaning{color:#cbd5e1}
+.tag-row{display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.75rem}
+.tag{
+  font-size:.65rem;font-weight:800;border-radius:999px;padding:.26rem .48rem;background:var(--accent-soft);
+  color:var(--accent-strong);border:1px solid var(--accent-border)
+}
+.fav-btn{
+  width:34px;height:34px;border-radius:.7rem;border:1px solid var(--border);background:var(--surface);
+  color:#94a3b8;display:flex;align-items:center;justify-content:center;cursor:pointer
+}
+.fav-btn.active{color:#e11d48;border-color:#fecdd3;background:#fff1f2}
+body.dark-mode .fav-btn{background:#0f172a}
+body.dark-mode .fav-btn.active{background:rgba(225,29,72,.16);border-color:rgba(251,113,133,.28);color:#fb7185}
+.empty{
+  grid-column:1/-1;border:1px dashed var(--border);border-radius:1rem;padding:2.2rem 1rem;text-align:center;
+  color:var(--muted)
+}
+.results-count{font-size:.76rem;font-weight:800;color:var(--muted)}
+.alpha-grid{display:grid;grid-template-columns:repeat(9,1fr);gap:.4rem}
+.alpha-btn{
+  border:1px solid var(--border);background:var(--surface-2);color:#475569;border-radius:.55rem;
+  font-size:.72rem;font-weight:850;padding:.43rem 0;cursor:pointer
+}
+.alpha-btn:hover,.alpha-btn.active{background:#8b5cf6;color:white;border-color:#8b5cf6}
+body.dark-mode .alpha-btn{color:#cbd5e1}
+.favorite-empty{font-size:.8rem;color:var(--muted);line-height:1.55}
+.favorite-list{display:flex;flex-wrap:wrap;gap:.45rem}
+.favorite-pill{
+  display:inline-flex;align-items:center;gap:.38rem;border:1px solid #fecdd3;background:#fff1f2;color:#be123c;
+  padding:.4rem .58rem;border-radius:999px;font-size:.74rem;font-weight:850
+}
+body.dark-mode .favorite-pill{background:rgba(225,29,72,.14);border-color:rgba(251,113,133,.28);color:#fda4af}
+.info-wrap{max-width:72rem;margin:3.5rem auto 0}
+.info-section{padding:1.5rem}
+.info-section+.info-section{margin-top:1.5rem}
+.info-section h2{font-size:1.5rem;font-weight:900;color:var(--text);margin-bottom:.85rem}
+.info-section h3{font-size:1.03rem;font-weight:850;color:var(--text);margin:1.25rem 0 .38rem}
+.info-section p,.info-section li{font-size:.94rem;line-height:1.78;color:#475569}
+body.dark-mode .info-section p,body.dark-mode .info-section li{color:#94a3b8!important}
+.info-section ul{padding-left:1.2rem;list-style:disc}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-item summary{
+  list-style:none;cursor:pointer;padding:1rem 0;color:var(--text);font-weight:850;
+  display:flex;justify-content:space-between;gap:1rem
+}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"+"}
+.faq-item[open] summary::after{content:"−"}
+.faq-item p{padding-bottom:1rem;margin:0}
+.notice{
+  border-radius:.9rem;padding:.85rem .95rem;background:#f5f3ff;border:1px solid #ddd6fe;
+  color:#5b21b6;font-size:.78rem;line-height:1.55
+}
+body.dark-mode .notice{background:rgba(91,33,182,.18);border-color:#5b21b6;color:#ddd6fe}
+@media(max-width:800px){
+  .result-grid{grid-template-columns:1fr}
+  .alpha-grid{grid-template-columns:repeat(7,1fr)}
+}
+@media(max-width:640px){
+  .free-note{font-size:10px;line-height:1.2;white-space:normal;text-align:right;max-width:118px}
+  .theme-toggle{width:38px;height:38px}
+  .alpha-grid{grid-template-columns:repeat(6,1fr)}
+}
+
+/* ============================================================
+   UTILIVERSE REFERENCE THEME
+   Synced to the attached Animal Age Calculator visual system.
+   ============================================================ */
+body{
+  background:#f8fafc!important;
+  color:#0f172a!important;
+}
+body.dark-mode{
+  background:
+    radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),
+    radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),
+    #020617!important;
+  color:#f8fafc!important;
+}
+header{
+  background:rgba(255,255,255,.93)!important;
+  border-bottom-color:#e2e8f0!important;
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+}
+body.dark-mode header{
+  background:rgba(2,6,23,.82)!important;
+  border-bottom-color:#1e293b!important;
+}
+header a{color:#334155!important}
+header a:hover{color:#0f172a!important}
+body.dark-mode header a{color:#cbd5e1!important}
+body.dark-mode header a:hover{color:#fff!important}
+
+.free-note{
+  color:#64748b!important;
+  font-size:13px!important;
+  font-weight:650!important;
+}
+body.dark-mode .free-note{color:#64748b!important}
+
+.theme-toggle{
+  background:#fff!important;
+  color:#475569!important;
+  border-color:#cbd5e1!important;
+  box-shadow:none!important;
+}
+.theme-toggle:hover{
+  color:#0f172a!important;
+  background:#f1f5f9!important;
+  border-color:#94a3b8!important;
+}
+body.dark-mode .theme-toggle{
+  background:rgba(15,23,42,.72)!important;
+  color:#94a3b8!important;
+  border-color:#334155!important;
+}
+body.dark-mode .theme-toggle:hover{
+  color:#fff!important;
+  background:#1e293b!important;
+  border-color:#475569!important;
+}
+
+.tool-card,.card,.info-section{
+  background:rgba(255,255,255,.92)!important;
+  border-color:#dbe3ee!important;
+  color:#0f172a!important;
+}
+body.dark-mode .tool-card,
+body.dark-mode .card,
+body.dark-mode .info-section{
+  background:rgba(30,41,59,.72)!important;
+  border-color:#334155!important;
+  color:#f8fafc!important;
+}
+
+.section-head,.card-head{border-bottom-color:#e2e8f0!important}
+body.dark-mode .section-head,
+body.dark-mode .card-head{border-bottom-color:#334155!important}
+.section-head h2,.card-head h2{color:#0f172a!important}
+body.dark-mode .section-head h2,
+body.dark-mode .card-head h2{color:#f8fafc!important}
+
+h1{color:#0f172a!important}
+body.dark-mode h1{color:#f8fafc!important}
+.hero-copy,.muted{color:#475569!important}
+body.dark-mode .hero-copy,
+body.dark-mode .muted{color:#94a3b8!important}
+
+.label{color:#64748b!important}
+body.dark-mode .label{color:#94a3b8!important}
+.helper,.small{color:#64748b!important}
+body.dark-mode .helper,
+body.dark-mode .small{color:#94a3b8!important}
+
+.field,
+.qty-input,.price-input,.status-select{
+  background:#fff!important;
+  color:#0f172a!important;
+  border-color:#cbd5e1!important;
+}
+.field:focus,
+.qty-input:focus,.price-input:focus,.status-select:focus{
+  border-color:#6366f1!important;
+  box-shadow:0 0 0 3px rgba(99,102,241,.15)!important;
+}
+body.dark-mode .field,
+body.dark-mode .qty-input,
+body.dark-mode .price-input,
+body.dark-mode .status-select{
+  background:#0f172a!important;
+  color:#f8fafc!important;
+  border-color:#475569!important;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,#6366f1,#4f46e5)!important;
+  border:1px solid #6366f1!important;
+  color:#fff!important;
+  font-weight:800!important;
+}
+.btn-primary:hover{filter:brightness(1.05)}
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.btn-ghost:focus-visible,
+.field:focus-visible{
+  outline:2px solid #6366f1!important;
+  outline-offset:2px!important;
+}
+.btn-secondary,.btn-ghost{
+  background:#f1f5f9!important;
+  color:#334155!important;
+  border-color:#cbd5e1!important;
+  font-weight:800!important;
+}
+.btn-secondary:hover,.btn-ghost:hover{background:#e2e8f0!important}
+body.dark-mode .btn-secondary,
+body.dark-mode .btn-ghost{
+  background:#1e293b!important;
+  color:#f8fafc!important;
+  border-color:#475569!important;
+}
+body.dark-mode .btn-secondary:hover,
+body.dark-mode .btn-ghost:hover{background:#334155!important}
+
+.notice{
+  background:#eef2ff!important;
+  border-color:#c7d2fe!important;
+  color:#4338ca!important;
+}
+body.dark-mode .notice{
+  background:rgba(99,102,241,.07)!important;
+  border-color:rgba(99,102,241,.28)!important;
+  color:#c7d2fe!important;
+}
+
+.status-box.info{
+  background:#eef2ff!important;
+  border-color:#c7d2fe!important;
+  color:#4338ca!important;
+}
+body.dark-mode .status-box.info{
+  background:rgba(99,102,241,.07)!important;
+  border-color:rgba(99,102,241,.28)!important;
+  color:#c7d2fe!important;
+}
+
+.info-section h2{color:#0f172a!important;font-weight:900!important}
+.info-section h3{color:#1e293b!important;font-weight:850!important}
+.info-section p,.info-section li{color:#475569!important}
+body.dark-mode .info-section h2{color:#fff!important}
+body.dark-mode .info-section h3{color:#e2e8f0!important}
+body.dark-mode .info-section p,
+body.dark-mode .info-section li{color:#94a3b8!important}
+
+.faq-item{border-color:#e2e8f0!important}
+.faq-item summary{color:#0f172a!important}
+body.dark-mode .faq-item{border-color:#334155!important}
+body.dark-mode .faq-item summary{color:#e2e8f0!important}
+
+footer{
+  background:#f8fafc!important;
+  border-top:1px solid #e2e8f0!important;
+  color:#64748b!important;
+}
+body.dark-mode footer{
+  background:#020617!important;
+  border-top-color:#1e293b!important;
+  color:#64748b!important;
+}
+
+
+.name-card{
+  background:#f8fafc!important;
+  border-color:#dbe3ee!important;
+}
+body.dark-mode .name-card{
+  background:rgba(15,23,42,.70)!important;
+  border-color:#334155!important;
+}
+.alpha-btn{
+  background:#fff!important;
+  color:#475569!important;
+  border-color:#dbe3ee!important;
+}
+.alpha-btn:hover,.alpha-btn.active{
+  background:#eef2ff!important;
+  border-color:#818cf8!important;
+  color:#4338ca!important;
+}
+body.dark-mode .alpha-btn{
+  background:#0f172a!important;
+  color:#94a3b8!important;
+  border-color:#334155!important;
+}
+body.dark-mode .alpha-btn:hover,
+body.dark-mode .alpha-btn.active{
+  background:rgba(99,102,241,.14)!important;
+  border-color:#818cf8!important;
+  color:#c7d2fe!important;
+}
+.tag{
+  background:#fff!important;
+  border-color:#dbe3ee!important;
+  color:#475569!important;
+}
+body.dark-mode .tag{
+  background:#0f172a!important;
+  border-color:#334155!important;
+  color:#cbd5e1!important;
+}
+.meaning{color:#475569!important}
+body.dark-mode .meaning{color:#94a3b8!important}
+.fav-btn{
+  background:#fff!important;
+  border-color:#dbe3ee!important;
+}
+body.dark-mode .fav-btn{
+  background:#0f172a!important;
+  border-color:#334155!important;
+}
+
+</style>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Utiliverse Baby Name Finder",
+  "url":"https://utiliverse.app/Baby_Name_Finder/",
+  "applicationCategory":"LifestyleApplication",
+  "operatingSystem":"Any",
+  "browserRequirements":"Requires a modern web browser with JavaScript.",
+  "description":"A free browser-based baby name finder with filters for gender association, origin, first letter, length, style, and meaning.",
+  "isAccessibleForFree":true,
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"How does the Baby Name Finder work?","acceptedAnswer":{"@type":"Answer","text":"Choose any combination of common gender association, origin, first letter, name length, style, or a keyword. The tool filters its built-in name collection instantly and lets you save favorites."}},
+    {"@type":"Question","name":"Are baby name meanings always exact?","acceptedAnswer":{"@type":"Answer","text":"No. Name meanings and origins can vary by language, spelling, history, and source. The finder presents commonly cited associations as inspiration rather than definitive etymology."}},
+    {"@type":"Question","name":"Can I save favorite baby names?","acceptedAnswer":{"@type":"Answer","text":"Yes. Favorites are stored locally in your browser so you can return to your shortlist on the same device and browser."}},
+    {"@type":"Question","name":"Does the Baby Name Finder require an account?","acceptedAnswer":{"@type":"Answer","text":"No. The tool is free and browser based and does not require an account."}},
+    {"@type":"Question","name":"Can I search for unisex baby names?","acceptedAnswer":{"@type":"Answer","text":"Yes. Select Unisex under common usage, or leave the filter set to Any to browse names across all usage groups."}}
+  ]
+}
+</script>
+</head>
+
+<!-- SEO TARGET CLUSTER: baby name finder, baby names by meaning, baby names by origin, boy names, girl names, unisex baby names -->
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT -->
+
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+<header class="sticky top-0 z-50 bg-white/80 border-b border-slate-200 backdrop-blur">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="https://utiliverse.app" class="flex items-center gap-2 text-sm font-semibold text-slate-600">
+      <i data-lucide="arrow-left" class="w-4 h-4"></i><span>Back to Utiliverse</span>
+    </a>
+    <div class="flex items-center gap-4">
+      <div class="free-note">100% Free and Browser Based</div>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle light or dark mode">
+        <i id="moonIcon" data-lucide="moon" class="w-4 h-4"></i>
+        <i id="sunIcon" data-lucide="sun" class="w-4 h-4 hidden"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+  <div class="mb-6">
+    
+    <h1 class="text-3xl font-bold text-slate-900 flex items-center gap-3">
+      <i data-lucide="badge-help" class="w-8 h-8" style="color:#6366f1"></i>
+      Baby Name Finder
+    </h1>
+    <p class="hero-copy mt-2 text-sm max-w-3xl">
+      Explore baby name ideas by common gender association, origin, first letter, length, style, or meaning. Save favorites as you browse and build a shortlist directly in your browser.
+    </p>
+  </div>
+
+  <div class="notice mb-6">
+    <strong>A note about names:</strong> meanings, origins, spellings, and gender usage can differ across languages, cultures, regions, and sources. This finder uses commonly cited associations for inspiration rather than treating any label or etymology as absolute.
+  </div>
+
+  <div class="grid grid-cols-1 xl:grid-cols-[360px_1fr] gap-6">
+    <div class="space-y-6">
+      <section class="tool-card overflow-hidden">
+        <div class="section-head">
+          <h2><i data-lucide="sliders-horizontal" class="w-5 h-5" style="color:#6366f1"></i>Find a Name</h2>
+        </div>
+        <div class="p-5 space-y-4">
+          <div>
+            <label class="label" for="keyword">Name or meaning keyword</label>
+            <div class="relative">
+              <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+              <input id="keyword" class="field !pl-9" type="search" placeholder="e.g. light, strong, Luna...">
+            </div>
+          </div>
+
+          <div>
+            <label class="label" for="gender">Common usage</label>
+            <select id="gender" class="field">
+              <option value="any">Any</option>
+              <option value="girl">Girl</option>
+              <option value="boy">Boy</option>
+              <option value="unisex">Unisex</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="label" for="origin">Origin / tradition</label>
+            <select id="origin" class="field"><option value="any">Any origin</option></select>
+          </div>
+
+          <div>
+            <label class="label">Starting letter</label>
+            <input id="letter" type="hidden" value="any">
+            <div id="alphaGrid" class="alpha-grid"></div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-4">
+            <div>
+              <label class="label" for="length">Name length</label>
+              <select id="length" class="field">
+                <option value="any">Any length</option>
+                <option value="short">Short • 3–5 letters</option>
+                <option value="medium">Medium • 6–7 letters</option>
+                <option value="long">Long • 8+ letters</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="label" for="style">Style</label>
+              <select id="style" class="field"><option value="any">Any style</option></select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3 pt-1">
+            <button id="surpriseBtn" type="button" class="btn-primary">
+              <i data-lucide="dices" class="w-4 h-4"></i>Surprise Me
+            </button>
+            <button id="resetBtn" type="button" class="btn-secondary">
+              <i data-lucide="rotate-ccw" class="w-4 h-4"></i>Reset
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="tool-card overflow-hidden">
+        <div class="section-head">
+          <h2><i data-lucide="heart" class="w-5 h-5" style="color:#e11d48"></i>Favorites</h2>
+          <button id="copyFavBtn" type="button" class="btn-ghost text-xs">
+            <i data-lucide="copy" class="w-3.5 h-3.5"></i>Copy
+          </button>
+        </div>
+        <div class="p-5">
+          <div id="favoriteList"></div>
+          <button id="clearFavBtn" type="button" class="btn-ghost text-xs mt-4 hidden">
+            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>Clear favorites
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <section class="tool-card overflow-hidden">
+      <div class="section-head">
+        <h2><i data-lucide="list-filter" class="w-5 h-5" style="color:#6366f1"></i>Name Ideas</h2>
+        <div class="flex items-center gap-2">
+          <div id="resultsCount" class="results-count">—</div>
+          <button id="shuffleBtn" type="button" class="btn-ghost text-xs">
+            <i data-lucide="shuffle" class="w-3.5 h-3.5"></i>Shuffle
+          </button>
+        </div>
+      </div>
+      <div class="p-5">
+        <div id="resultsGrid" class="result-grid"></div>
+        <div class="mt-5 flex justify-center">
+          <button id="showMoreBtn" type="button" class="btn-secondary hidden">
+            <i data-lucide="plus" class="w-4 h-4"></i>Show More
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT -->
+
+  <div class="info-wrap">
+    <section class="info-section">
+      <h2>How to Use the Baby Name Finder</h2>
+      <p>
+        Start broad or combine several filters. You can browse names by common gender usage, origin or linguistic tradition, starting letter, length, and style. The keyword box searches names, origins, meanings, and style tags, so searches such as <strong>light</strong>, <strong>nature</strong>, <strong>Irish</strong>, or a specific name can narrow the list quickly.
+      </p>
+      <p>
+        Select the heart on any result to save it to your favorites. Favorites are stored locally in your browser on the current device, and the shortlist can be copied when you are ready to share ideas with a partner, relative, or friend.
+      </p>
+    </section>
+
+    <section class="info-section">
+      <h2>Ways to Narrow Down Baby Name Ideas</h2>
+      <h3>Start with sound</h3>
+      <p>
+        Try a preferred first letter or name length before focusing on meaning. Short names can pair well with longer surnames, while longer first names may offer more nickname options.
+      </p>
+      <h3>Explore origin and tradition</h3>
+      <p>
+        An origin filter can help surface names connected with a family language, cultural tradition, or naming style. Many names have traveled between languages over centuries, so the origin shown here is best understood as a common association rather than an exclusive identity.
+      </p>
+      <h3>Search by meaning or style</h3>
+      <p>
+        Use a word such as <em>light</em>, <em>strong</em>, <em>nature</em>, <em>classic</em>, or <em>mythological</em> to discover names that share a theme. Because etymology can be complex, meanings in this tool are concise commonly cited interpretations rather than definitive linguistic claims.
+      </p>
+    </section>
+
+    <section class="info-section">
+      <h2>Baby Name Finder FAQ</h2>
+      <details class="faq-item">
+        <summary>How does the Baby Name Finder work?</summary>
+        <p>Choose any combination of common usage, origin, starting letter, length, style, or keyword. The tool filters its built-in name collection instantly and displays matching ideas.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Are the name meanings and origins definitive?</summary>
+        <p>No. Name meanings and origins can vary by language, spelling, historical period, and source. The tool presents concise, commonly cited associations as inspiration.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I save favorite names?</summary>
+        <p>Yes. Select the heart on a name card. Favorites are stored locally in your browser, so they remain available when you revisit the page using the same browser and device unless local site data is cleared.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I search for unisex baby names?</summary>
+        <p>Yes. Choose Unisex from the Common Usage filter, or leave the filter on Any to browse across all usage groups.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does the tool rank names by popularity?</summary>
+        <p>No. This version is designed for discovery rather than live popularity ranking. Results are shuffled so the same few names do not always appear first.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does the Baby Name Finder require an account?</summary>
+        <p>No. It is free and browser based. No account or sign-in is required to search or save favorites locally.</p>
+      </details>
+    </section>
+
+    <!-- GOOGLE ADSENSE: BOTTOM / AFTER-CONTENT INSERTION POINT -->
+  </div>
+</main>
+
+<footer class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-6 pt-2">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-500">
+    <div>© 2026 Utiliverse. All rights reserved.</div>
+    <div class="font-semibold text-right">100% Free and Browser Based</div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const NAMES = [{"name":"Amelia","gender":"girl","origin":"Germanic","meaning":"work; industrious","styles":["classic","vintage"]},{"name":"Ava","gender":"girl","origin":"Germanic / Latin","meaning":"life; bird (associations vary by origin)","styles":["classic","short"]},{"name":"Aurora","gender":"girl","origin":"Latin","meaning":"dawn","styles":["mythological","nature"]},{"name":"Abigail","gender":"girl","origin":"Hebrew","meaning":"my father's joy","styles":["biblical","classic"]},{"name":"Adeline","gender":"girl","origin":"French / Germanic","meaning":"noble","styles":["vintage","classic"]},{"name":"Alice","gender":"girl","origin":"Germanic / French","meaning":"noble","styles":["classic","vintage"]},{"name":"Aria","gender":"girl","origin":"Italian","meaning":"air; melody","styles":["modern","musical"]},{"name":"Athena","gender":"girl","origin":"Greek","meaning":"name of the Greek goddess of wisdom","styles":["mythological","strong"]},{"name":"Bella","gender":"girl","origin":"Italian / Latin","meaning":"beautiful","styles":["short","soft"]},{"name":"Camila","gender":"girl","origin":"Latin / Spanish","meaning":"young ceremonial attendant","styles":["international","classic"]},{"name":"Caroline","gender":"girl","origin":"French / Germanic","meaning":"free person","styles":["classic","royal"]},{"name":"Charlotte","gender":"girl","origin":"French","meaning":"free person","styles":["classic","royal"]},{"name":"Chloe","gender":"girl","origin":"Greek","meaning":"young green shoot","styles":["classic","nature"]},{"name":"Clara","gender":"girl","origin":"Latin","meaning":"bright; clear","styles":["vintage","classic"]},{"name":"Daisy","gender":"girl","origin":"English","meaning":"day's eye; the flower","styles":["nature","vintage"]},{"name":"Delilah","gender":"girl","origin":"Hebrew","meaning":"delicate","styles":["biblical","soft"]},{"name":"Eleanor","gender":"girl","origin":"French / Greek","meaning":"commonly associated with light; exact origin debated","styles":["classic","royal"]},{"name":"Elena","gender":"girl","origin":"Greek / Spanish","meaning":"bright; shining light","styles":["international","classic"]},{"name":"Eliana","gender":"girl","origin":"Hebrew","meaning":"my God has answered","styles":["biblical","soft"]},{"name":"Elise","gender":"girl","origin":"French / Hebrew","meaning":"pledged to God","styles":["classic","soft"]},{"name":"Elizabeth","gender":"girl","origin":"Hebrew","meaning":"God is my oath","styles":["biblical","royal","classic"]},{"name":"Ella","gender":"girl","origin":"Germanic / English","meaning":"fairy maiden; other origins also exist","styles":["short","classic"]},{"name":"Emilia","gender":"girl","origin":"Latin","meaning":"rival; striving","styles":["classic","international"]},{"name":"Emma","gender":"girl","origin":"Germanic","meaning":"whole; universal","styles":["classic","short"]},{"name":"Evelyn","gender":"girl","origin":"English / French","meaning":"desired; wished-for (associations vary)","styles":["classic","vintage"]},{"name":"Faith","gender":"girl","origin":"English","meaning":"faith; trust","styles":["virtue","short"]},{"name":"Fiona","gender":"girl","origin":"Scottish / Gaelic","meaning":"fair; white","styles":["international","classic"]},{"name":"Freya","gender":"girl","origin":"Old Norse","meaning":"lady; name of the Norse goddess","styles":["mythological","strong"]},{"name":"Gabriella","gender":"girl","origin":"Hebrew / Italian","meaning":"God is my strength","styles":["biblical","international"]},{"name":"Grace","gender":"girl","origin":"Latin / English","meaning":"grace; favor","styles":["virtue","classic"]},{"name":"Hazel","gender":"girl","origin":"English","meaning":"hazel tree","styles":["nature","vintage"]},{"name":"Isabella","gender":"girl","origin":"Hebrew / Spanish / Italian","meaning":"pledged to God","styles":["classic","royal","international"]},{"name":"Ivy","gender":"girl","origin":"English","meaning":"ivy plant","styles":["nature","short"]},{"name":"Jade","gender":"girl","origin":"Spanish / English","meaning":"jade gemstone","styles":["nature","short"]},{"name":"Josephine","gender":"girl","origin":"Hebrew / French","meaning":"God will add","styles":["vintage","classic"]},{"name":"Julia","gender":"girl","origin":"Latin","meaning":"youthful","styles":["classic","international"]},{"name":"Layla","gender":"girl","origin":"Arabic","meaning":"night","styles":["international","soft"]},{"name":"Leah","gender":"girl","origin":"Hebrew","meaning":"weary; interpretation debated","styles":["biblical","short"]},{"name":"Lila","gender":"girl","origin":"Arabic / Sanskrit / Persian","meaning":"night; play; meanings vary by language","styles":["international","soft","short"]},{"name":"Lily","gender":"girl","origin":"English / Latin","meaning":"lily flower","styles":["nature","classic"]},{"name":"Luna","gender":"girl","origin":"Latin","meaning":"moon","styles":["nature","modern"]},{"name":"Lucy","gender":"girl","origin":"Latin","meaning":"light","styles":["classic","short"]},{"name":"Maeve","gender":"girl","origin":"Irish","meaning":"intoxicating; she who rules","styles":["celtic","strong"]},{"name":"Maya","gender":"girl","origin":"Multiple","meaning":"meanings vary across Sanskrit, Hebrew, Greek, and other traditions","styles":["international","short"]},{"name":"Mia","gender":"girl","origin":"Italian / Scandinavian","meaning":"mine; beloved (associations vary)","styles":["short","international"]},{"name":"Naomi","gender":"girl","origin":"Hebrew","meaning":"pleasantness","styles":["biblical","classic"]},{"name":"Nora","gender":"girl","origin":"Irish / Latin","meaning":"honor; light (associations vary)","styles":["classic","short"]},{"name":"Nova","gender":"girl","origin":"Latin","meaning":"new; also a star that suddenly brightens","styles":["modern","nature"]},{"name":"Olivia","gender":"girl","origin":"Latin","meaning":"olive; olive tree","styles":["classic","nature"]},{"name":"Penelope","gender":"girl","origin":"Greek","meaning":"weaver; exact etymology debated","styles":["mythological","classic"]},{"name":"Phoebe","gender":"girl","origin":"Greek","meaning":"bright; radiant","styles":["mythological","classic"]},{"name":"Rose","gender":"girl","origin":"Latin / English","meaning":"rose flower","styles":["nature","classic","short"]},{"name":"Ruby","gender":"girl","origin":"Latin / English","meaning":"ruby gemstone","styles":["nature","vintage"]},{"name":"Sabrina","gender":"girl","origin":"Celtic / Latin tradition","meaning":"associated with the River Severn","styles":["international","classic"]},{"name":"Sadie","gender":"girl","origin":"Hebrew / English","meaning":"princess","styles":["vintage","soft"]},{"name":"Sofia","gender":"girl","origin":"Greek","meaning":"wisdom","styles":["classic","international"]},{"name":"Stella","gender":"girl","origin":"Latin","meaning":"star","styles":["nature","vintage"]},{"name":"Valentina","gender":"girl","origin":"Latin","meaning":"strong; healthy","styles":["romantic","international"]},{"name":"Vera","gender":"girl","origin":"Slavic / Latin","meaning":"faith; true","styles":["vintage","short"]},{"name":"Victoria","gender":"girl","origin":"Latin","meaning":"victory","styles":["royal","classic"]},{"name":"Violet","gender":"girl","origin":"Latin / English","meaning":"violet flower","styles":["nature","vintage"]},{"name":"Willow","gender":"girl","origin":"English","meaning":"willow tree","styles":["nature","modern"]},{"name":"Zara","gender":"girl","origin":"Arabic / Hebrew","meaning":"radiance; flower; meanings vary by origin","styles":["international","strong","short"]},{"name":"Zoe","gender":"girl","origin":"Greek","meaning":"life","styles":["classic","short"]},{"name":"Alexander","gender":"boy","origin":"Greek","meaning":"defender of men","styles":["classic","strong","royal"]},{"name":"Andrew","gender":"boy","origin":"Greek","meaning":"manly; brave","styles":["classic","biblical"]},{"name":"Anthony","gender":"boy","origin":"Latin","meaning":"from the Roman family name Antonius; exact meaning uncertain","styles":["classic","international"]},{"name":"Arthur","gender":"boy","origin":"Celtic","meaning":"commonly associated with bear; exact etymology debated","styles":["royal","classic","vintage"]},{"name":"Asher","gender":"boy","origin":"Hebrew","meaning":"happy; blessed","styles":["biblical","modern"]},{"name":"Atlas","gender":"boy","origin":"Greek","meaning":"name of the mythological Titan who bore the heavens","styles":["mythological","strong"]},{"name":"Benjamin","gender":"boy","origin":"Hebrew","meaning":"son of the right hand","styles":["biblical","classic"]},{"name":"Caleb","gender":"boy","origin":"Hebrew","meaning":"faithful; wholehearted (traditional association)","styles":["biblical","classic"]},{"name":"Charles","gender":"boy","origin":"Germanic / French","meaning":"free man","styles":["classic","royal"]},{"name":"Daniel","gender":"boy","origin":"Hebrew","meaning":"God is my judge","styles":["biblical","classic"]},{"name":"David","gender":"boy","origin":"Hebrew","meaning":"beloved","styles":["biblical","classic"]},{"name":"Elias","gender":"boy","origin":"Hebrew / Greek","meaning":"Yahweh is my God","styles":["biblical","international"]},{"name":"Elijah","gender":"boy","origin":"Hebrew","meaning":"Yahweh is my God","styles":["biblical","classic"]},{"name":"Elliot","gender":"boy","origin":"English / Hebrew","meaning":"the Lord is my God (traditional association)","styles":["classic","soft"]},{"name":"Emmett","gender":"boy","origin":"Germanic / English","meaning":"universal; powerful (associations vary)","styles":["vintage","strong"]},{"name":"Ethan","gender":"boy","origin":"Hebrew","meaning":"strong; firm","styles":["biblical","strong"]},{"name":"Ezra","gender":"boy","origin":"Hebrew","meaning":"help","styles":["biblical","short"]},{"name":"Felix","gender":"boy","origin":"Latin","meaning":"happy; fortunate","styles":["vintage","international"]},{"name":"Gabriel","gender":"boy","origin":"Hebrew","meaning":"God is my strength","styles":["biblical","classic"]},{"name":"George","gender":"boy","origin":"Greek","meaning":"farmer; earth-worker","styles":["classic","royal"]},{"name":"Henry","gender":"boy","origin":"Germanic","meaning":"home ruler","styles":["classic","royal"]},{"name":"Hugo","gender":"boy","origin":"Germanic / Latin","meaning":"mind; intellect","styles":["vintage","international","short"]},{"name":"Isaac","gender":"boy","origin":"Hebrew","meaning":"he will laugh","styles":["biblical","classic"]},{"name":"Jack","gender":"boy","origin":"English","meaning":"God is gracious (as a form of John)","styles":["classic","short"]},{"name":"Jacob","gender":"boy","origin":"Hebrew","meaning":"supplanter; holder of the heel","styles":["biblical","classic"]},{"name":"James","gender":"boy","origin":"Hebrew / English","meaning":"supplanter","styles":["classic","royal","biblical"]},{"name":"Jasper","gender":"boy","origin":"Persian","meaning":"treasurer","styles":["vintage","nature"]},{"name":"Jonah","gender":"boy","origin":"Hebrew","meaning":"dove","styles":["biblical","soft"]},{"name":"Joseph","gender":"boy","origin":"Hebrew","meaning":"God will add","styles":["biblical","classic"]},{"name":"Julian","gender":"boy","origin":"Latin","meaning":"youthful","styles":["classic","international"]},{"name":"Kai","gender":"unisex","origin":"Multiple","meaning":"meanings vary across Hawaiian, Scandinavian, Japanese, and other traditions","styles":["international","short","modern"]},{"name":"Leo","gender":"boy","origin":"Latin","meaning":"lion","styles":["classic","strong","short"]},{"name":"Leon","gender":"boy","origin":"Greek / Latin","meaning":"lion","styles":["classic","strong"]},{"name":"Liam","gender":"boy","origin":"Irish","meaning":"resolute protector","styles":["celtic","strong","short"]},{"name":"Lucas","gender":"boy","origin":"Latin / Greek","meaning":"from Lucania; also associated with light","styles":["classic","international"]},{"name":"Mateo","gender":"boy","origin":"Spanish / Hebrew","meaning":"gift of God","styles":["biblical","international"]},{"name":"Matthew","gender":"boy","origin":"Hebrew","meaning":"gift of God","styles":["biblical","classic"]},{"name":"Maxwell","gender":"boy","origin":"Scottish","meaning":"Mack's stream","styles":["classic","strong"]},{"name":"Miles","gender":"boy","origin":"Latin / Germanic","meaning":"soldier; gracious (associations vary)","styles":["classic","soft"]},{"name":"Nathaniel","gender":"boy","origin":"Hebrew","meaning":"gift of God","styles":["biblical","classic"]},{"name":"Nicholas","gender":"boy","origin":"Greek","meaning":"victory of the people","styles":["classic","international"]},{"name":"Noah","gender":"boy","origin":"Hebrew","meaning":"rest; comfort","styles":["biblical","soft","short"]},{"name":"Oliver","gender":"boy","origin":"Latin / French","meaning":"olive tree (traditional association)","styles":["classic","nature"]},{"name":"Oscar","gender":"boy","origin":"Irish / Old Norse","meaning":"deer friend; divine spear (associations vary)","styles":["vintage","international"]},{"name":"Owen","gender":"boy","origin":"Welsh","meaning":"well-born; youthful (traditional associations)","styles":["celtic","classic"]},{"name":"Roman","gender":"boy","origin":"Latin","meaning":"citizen of Rome","styles":["strong","international"]},{"name":"Samuel","gender":"boy","origin":"Hebrew","meaning":"heard by God","styles":["biblical","classic"]},{"name":"Sebastian","gender":"boy","origin":"Greek / Latin","meaning":"from Sebastia; venerable","styles":["classic","international"]},{"name":"Silas","gender":"boy","origin":"Latin / Greek","meaning":"of the forest (traditional association)","styles":["biblical","nature"]},{"name":"Theodore","gender":"boy","origin":"Greek","meaning":"gift of God","styles":["classic","vintage"]},{"name":"Thomas","gender":"boy","origin":"Aramaic","meaning":"twin","styles":["biblical","classic"]},{"name":"Victor","gender":"boy","origin":"Latin","meaning":"conqueror; victor","styles":["strong","classic"]},{"name":"William","gender":"boy","origin":"Germanic","meaning":"resolute protector","styles":["classic","royal"]},{"name":"Wyatt","gender":"boy","origin":"English / Germanic","meaning":"brave in war","styles":["strong","vintage"]},{"name":"Xavier","gender":"boy","origin":"Basque / Spanish","meaning":"new house","styles":["international","strong"]},{"name":"Zachary","gender":"boy","origin":"Hebrew","meaning":"the Lord has remembered","styles":["biblical","classic"]},{"name":"Alex","gender":"unisex","origin":"Greek","meaning":"defender","styles":["classic","short"]},{"name":"Ari","gender":"unisex","origin":"Hebrew / Scandinavian","meaning":"lion; eagle (associations vary)","styles":["international","short","strong"]},{"name":"Aspen","gender":"unisex","origin":"English","meaning":"aspen tree","styles":["nature","modern"]},{"name":"Avery","gender":"unisex","origin":"English / French","meaning":"ruler of the elves (traditional association)","styles":["modern","soft"]},{"name":"Bailey","gender":"unisex","origin":"English","meaning":"bailiff; steward","styles":["modern","friendly"]},{"name":"Blair","gender":"unisex","origin":"Scottish","meaning":"field; plain","styles":["celtic","short","strong"]},{"name":"Cameron","gender":"unisex","origin":"Scottish","meaning":"crooked nose (surname origin)","styles":["celtic","classic"]},{"name":"Casey","gender":"unisex","origin":"Irish","meaning":"brave in battle (traditional association)","styles":["celtic","friendly"]},{"name":"Charlie","gender":"unisex","origin":"English / Germanic","meaning":"free person","styles":["classic","friendly"]},{"name":"Dakota","gender":"unisex","origin":"Dakota language / American usage","meaning":"friend; ally (commonly cited association)","styles":["modern","nature"]},{"name":"Drew","gender":"unisex","origin":"Greek / English","meaning":"strong; courageous","styles":["short","classic"]},{"name":"Eden","gender":"unisex","origin":"Hebrew","meaning":"delight","styles":["biblical","nature"]},{"name":"Emerson","gender":"unisex","origin":"English","meaning":"son of Emery","styles":["modern","surname"]},{"name":"Finley","gender":"unisex","origin":"Scottish / Irish","meaning":"fair warrior","styles":["celtic","modern"]},{"name":"Harper","gender":"unisex","origin":"English","meaning":"harp player","styles":["musical","surname"]},{"name":"Hayden","gender":"unisex","origin":"English","meaning":"hay valley; heathen valley (surname associations vary)","styles":["surname","modern"]},{"name":"Indigo","gender":"unisex","origin":"Greek / English","meaning":"indigo dye; deep blue-violet color","styles":["nature","modern"]},{"name":"Jamie","gender":"unisex","origin":"Hebrew / English","meaning":"supplanter","styles":["classic","friendly"]},{"name":"Jordan","gender":"unisex","origin":"Hebrew","meaning":"to flow down; associated with the Jordan River","styles":["biblical","classic"]},{"name":"Lane","gender":"unisex","origin":"English","meaning":"path; roadway","styles":["short","surname"]},{"name":"Logan","gender":"unisex","origin":"Scottish","meaning":"little hollow","styles":["celtic","strong"]},{"name":"Morgan","gender":"unisex","origin":"Welsh","meaning":"sea-born; sea circle (traditional associations)","styles":["celtic","classic"]},{"name":"Noel","gender":"unisex","origin":"French / Latin","meaning":"Christmas","styles":["international","classic"]},{"name":"Oakley","gender":"unisex","origin":"English","meaning":"oak clearing","styles":["nature","surname"]},{"name":"Parker","gender":"unisex","origin":"English","meaning":"park keeper","styles":["surname","modern"]},{"name":"Phoenix","gender":"unisex","origin":"Greek","meaning":"mythical bird reborn from ashes","styles":["mythological","strong"]},{"name":"Quinn","gender":"unisex","origin":"Irish","meaning":"descendant of Conn; wisdom association","styles":["celtic","short","strong"]},{"name":"Reese","gender":"unisex","origin":"Welsh","meaning":"enthusiasm; ardor","styles":["celtic","short"]},{"name":"Remy","gender":"unisex","origin":"French / Latin","meaning":"oarsman; remedy (associations vary)","styles":["international","soft"]},{"name":"Riley","gender":"unisex","origin":"Irish / English","meaning":"valiant; rye clearing (associations vary)","styles":["celtic","friendly"]},{"name":"River","gender":"unisex","origin":"English","meaning":"river","styles":["nature","modern"]},{"name":"Robin","gender":"unisex","origin":"Germanic / English","meaning":"bright fame","styles":["classic","nature"]},{"name":"Rowan","gender":"unisex","origin":"Irish / Scottish","meaning":"little red one; rowan tree","styles":["celtic","nature"]},{"name":"Sage","gender":"unisex","origin":"Latin / English","meaning":"wise; sage herb","styles":["nature","virtue","short"]},{"name":"Sam","gender":"unisex","origin":"Hebrew / English","meaning":"heard by God; name of God (associations vary)","styles":["classic","short"]},{"name":"Skyler","gender":"unisex","origin":"Dutch / English","meaning":"scholar (traditional surname association)","styles":["modern","surname"]},{"name":"Taylor","gender":"unisex","origin":"English / French","meaning":"tailor","styles":["surname","classic"]},{"name":"Winter","gender":"unisex","origin":"English","meaning":"winter season","styles":["nature","modern"]},{"name":"Wren","gender":"unisex","origin":"English","meaning":"wren bird","styles":["nature","short"]}];
+  const $ = id => document.getElementById(id);
+  const PAGE = 16;
+  let shown = PAGE;
+  let orderSeed = 0;
+
+  function esc(s){
+    return String(s ?? "")
+      .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;").replaceAll("'","&#039;");
+  }
+
+  function titleCase(s){
+    return String(s).replace(/\b\w/g,c=>c.toUpperCase());
+  }
+
+  function unique(list){
+    return [...new Set(list)].sort((a,b)=>a.localeCompare(b));
+  }
+
+  function populateFilters(){
+    const origins = unique(NAMES.flatMap(n=>n.origin.split(" / ")));
+    const styles = unique(NAMES.flatMap(n=>n.styles));
+
+    $("origin").innerHTML = '<option value="any">Any origin</option>' +
+      origins.map(x=>`<option value="${esc(x.toLowerCase())}">${esc(x)}</option>`).join("");
+
+    $("style").innerHTML = '<option value="any">Any style</option>' +
+      styles.map(x=>`<option value="${esc(x)}">${esc(titleCase(x))}</option>`).join("");
+
+    const letters = ["Any",..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"];
+    $("alphaGrid").innerHTML = letters.map(l=>{
+      const v = l === "Any" ? "any" : l.toLowerCase();
+      return `<button type="button" class="alpha-btn ${v==="any"?"active":""}" data-letter="${v}">${l}</button>`;
+    }).join("");
+
+    $("alphaGrid").addEventListener("click",e=>{
+      const b = e.target.closest("[data-letter]");
+      if(!b) return;
+      $("letter").value = b.dataset.letter;
+      document.querySelectorAll(".alpha-btn").forEach(x=>x.classList.toggle("active",x===b));
+      shown = PAGE;
+      render();
+    });
+  }
+
+  function lengthMatch(name,kind){
+    if(kind === "any") return true;
+    const l = name.length;
+    if(kind === "short") return l >= 3 && l <= 5;
+    if(kind === "medium") return l >= 6 && l <= 7;
+    return l >= 8;
+  }
+
+  function seededSort(list){
+    return [...list].sort((a,b)=>{
+      const ha = hash(a.name + orderSeed);
+      const hb = hash(b.name + orderSeed);
+      return ha - hb;
+    });
+  }
+
+  function hash(str){
+    let h = 2166136261;
+    for(let i=0;i<str.length;i++){
+      h ^= str.charCodeAt(i);
+      h = Math.imul(h,16777619);
+    }
+    return h >>> 0;
+  }
+
+  function filtered(){
+    const q = $("keyword").value.trim().toLowerCase();
+    const gender = $("gender").value;
+    const origin = $("origin").value;
+    const letter = $("letter").value;
+    const len = $("length").value;
+    const style = $("style").value;
+
+    return NAMES.filter(n=>{
+      const hay = [n.name,n.gender,n.origin,n.meaning,...n.styles].join(" ").toLowerCase();
+      const originParts = n.origin.toLowerCase().split(" / ");
+      return (!q || hay.includes(q))
+        && (gender === "any" || n.gender === gender)
+        && (origin === "any" || originParts.includes(origin))
+        && (letter === "any" || n.name.toLowerCase().startsWith(letter))
+        && lengthMatch(n.name,len)
+        && (style === "any" || n.styles.includes(style));
+    });
+  }
+
+  function favs(){
+    try{ return JSON.parse(localStorage.getItem("utiliverse-baby-name-favorites") || "[]"); }
+    catch{ return []; }
+  }
+
+  function setFavs(v){
+    localStorage.setItem("utiliverse-baby-name-favorites",JSON.stringify(v));
+  }
+
+  function isFav(name){
+    return favs().includes(name);
+  }
+
+  function toggleFav(name){
+    let f = favs();
+    f = f.includes(name) ? f.filter(x=>x!==name) : [...f,name];
+    setFavs(f);
+    renderFavorites();
+    renderResultsOnly();
+  }
+
+  function usageLabel(v){
+    return v === "girl" ? "Girl" : v === "boy" ? "Boy" : "Unisex";
+  }
+
+  function card(n){
+    const active = isFav(n.name);
+    return `
+      <article class="name-card">
+        <div class="name-top">
+          <div>
+            <div class="name-title">${esc(n.name)}</div>
+            <div class="meta">${usageLabel(n.gender)} • ${esc(n.origin)}</div>
+          </div>
+          <button type="button" class="fav-btn ${active?"active":""}" data-fav="${esc(n.name)}" aria-label="${active?"Remove":"Add"} ${esc(n.name)} ${active?"from":"to"} favorites">
+            <i data-lucide="heart" class="w-4 h-4" ${active?'fill="currentColor"':""}></i>
+          </button>
+        </div>
+        <div class="meaning"><strong>Meaning:</strong> ${esc(n.meaning)}</div>
+        <div class="tag-row">${n.styles.map(s=>`<span class="tag">${esc(titleCase(s))}</span>`).join("")}</div>
+      </article>`;
+  }
+
+  function renderResultsOnly(){
+    const all = seededSort(filtered());
+    const visible = all.slice(0,shown);
+    $("resultsCount").textContent = `${all.length} match${all.length===1?"":"es"}`;
+
+    if(!all.length){
+      $("resultsGrid").innerHTML = `<div class="empty">
+        <i data-lucide="search-x" class="w-7 h-7 mx-auto mb-2"></i>
+        <div class="font-bold">No names match those filters.</div>
+        <div class="text-xs mt-1">Try removing a filter or using a broader keyword.</div>
+      </div>`;
+    } else {
+      $("resultsGrid").innerHTML = visible.map(card).join("");
+    }
+
+    $("showMoreBtn").classList.toggle("hidden",visible.length >= all.length);
+    lucide.createIcons();
+  }
+
+  function renderFavorites(){
+    const f = favs();
+    if(!f.length){
+      $("favoriteList").innerHTML = `<div class="favorite-empty">Select the heart on any name to build a shortlist. Favorites stay on this device and browser.</div>`;
+      $("clearFavBtn").classList.add("hidden");
+      return;
+    }
+    $("favoriteList").innerHTML = `<div class="favorite-list">${f.map(name=>`
+      <button type="button" class="favorite-pill" data-remove-fav="${esc(name)}" title="Remove ${esc(name)}">
+        <i data-lucide="heart" class="w-3.5 h-3.5" fill="currentColor"></i>${esc(name)}<i data-lucide="x" class="w-3 h-3"></i>
+      </button>`).join("")}</div>`;
+    $("clearFavBtn").classList.remove("hidden");
+    lucide.createIcons();
+  }
+
+  function render(){
+    renderResultsOnly();
+    renderFavorites();
+  }
+
+  function reset(){
+    $("keyword").value = "";
+    $("gender").value = "any";
+    $("origin").value = "any";
+    $("length").value = "any";
+    $("style").value = "any";
+    $("letter").value = "any";
+    document.querySelectorAll(".alpha-btn").forEach(x=>x.classList.toggle("active",x.dataset.letter==="any"));
+    shown = PAGE;
+    orderSeed++;
+    render();
+  }
+
+  function surprise(){
+    $("keyword").value = "";
+    $("gender").value = "any";
+    $("origin").value = "any";
+    $("length").value = "any";
+    $("style").value = "any";
+    $("letter").value = "any";
+    document.querySelectorAll(".alpha-btn").forEach(x=>x.classList.toggle("active",x.dataset.letter==="any"));
+    shown = 6;
+    orderSeed = Date.now();
+    render();
+  }
+
+  async function copyText(text,button){
+    try{ await navigator.clipboard.writeText(text); }
+    catch{
+      const ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();
+      document.execCommand("copy");ta.remove();
+    }
+    const old=button.innerHTML;
+    button.innerHTML='<i data-lucide="check" class="w-3.5 h-3.5"></i>Copied';
+    lucide.createIcons();
+    setTimeout(()=>{button.innerHTML=old;lucide.createIcons()},1200);
+  }
+
+  populateFilters();
+
+  ["keyword","gender","origin","length","style"].forEach(id=>{
+    const evt = id === "keyword" ? "input" : "change";
+    $(id).addEventListener(evt,()=>{shown=PAGE;renderResultsOnly()});
+  });
+
+  $("resultsGrid").addEventListener("click",e=>{
+    const b=e.target.closest("[data-fav]");
+    if(b) toggleFav(b.dataset.fav);
+  });
+
+  $("favoriteList").addEventListener("click",e=>{
+    const b=e.target.closest("[data-remove-fav]");
+    if(b) toggleFav(b.dataset.removeFav);
+  });
+
+  $("resetBtn").addEventListener("click",reset);
+  $("surpriseBtn").addEventListener("click",surprise);
+  $("shuffleBtn").addEventListener("click",()=>{orderSeed=Date.now();renderResultsOnly()});
+  $("showMoreBtn").addEventListener("click",()=>{shown+=PAGE;renderResultsOnly()});
+  $("clearFavBtn").addEventListener("click",()=>{setFavs([]);render()});
+  $("copyFavBtn").addEventListener("click",()=>{
+    const f=favs();
+    copyText(f.length ? "Baby name favorites:\n"+f.join("\n") : "No baby name favorites saved yet.",$("copyFavBtn"));
+  });
+
+  const toggle=$("themeToggle"), moon=$("moonIcon"), sun=$("sunIcon");
+  function theme(mode){
+    const dark=mode==="dark";
+    document.body.classList.toggle("dark-mode",dark);
+    moon.classList.toggle("hidden",dark);
+    sun.classList.toggle("hidden",!dark);
+    localStorage.setItem("utiliverse-theme",dark?"dark":"light");const mt=document.querySelector('meta[name="theme-color"]');if(mt)mt.setAttribute("content",dark?"#020617":"#f8fafc");
+    lucide.createIcons();
+  }
+  theme(localStorage.getItem("utiliverse-theme") || (matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));
+  toggle.addEventListener("click",()=>theme(document.body.classList.contains("dark-mode")?"light":"dark"));
+
+  render();
+  lucide.createIcons();
+})();
+</script>
+</body>
+</html>
