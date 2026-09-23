@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random Name Generator – First, Last & Full Names | Utiliverse</title>
+<meta name="description" content="Generate random first names, last names, or full names by common usage, naming tradition, first letter, length, and style. Create multiple names at once, add middle names, exclude names, save favorites, and copy results.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/Random_Name_Generator/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Random Name Generator | Utiliverse">
+<meta property="og:description" content="Generate random first names, last names, or full names with flexible filters and local browser randomness.">
+<meta property="og:url" content="https://utiliverse.app/Random_Name_Generator/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Random Name Generator | Utiliverse">
+<meta name="twitter:description" content="Free browser-based random name generator with filters, favorites, and batch generation.">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+:root{
+ --accent:#a21caf;--accent-strong:#86198f;--accent-soft:#fdf4ff;--accent-border:#f5d0fe;
+ --surface:#fff;--surface2:#f8fafc;--text:#0f172a;--muted:#64748b;--border:#e2e8f0;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.10),transparent 32%),#f8fafc;
+ color:#334155
+}
+body.dark-mode{
+ --accent:#e879f9;--accent-strong:#f0abfc;--accent-soft:rgba(162,28,175,.17);--accent-border:rgba(232,121,249,.28);
+ --surface:#0f172a;--surface2:#020617;--text:#f8fafc;--muted:#94a3b8;--border:#334155;
+ background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.14),transparent 32%),radial-gradient(circle at 90% 15%,rgba(124,58,237,.08),transparent 28%),#020617!important;
+ color:#e2e8f0!important
+}
+body.dark-mode header{background:rgba(2,6,23,.86)!important;border-color:#1e293b!important}
+body.dark-mode header a{color:#cbd5e1!important}
+body.dark-mode h1,body.dark-mode h2,body.dark-mode h3{color:#f8fafc!important}
+.theme-toggle{width:40px;height:40px;border-radius:12px;border:1px solid #cbd5e1;background:#fff;color:#475569;display:flex;align-items:center;justify-content:center;cursor:pointer}
+body.dark-mode .theme-toggle{background:#0f172a;border-color:#334155;color:#cbd5e1}
+.free-note{font-size:12px;font-weight:800;color:#64748b;white-space:nowrap}
+body.dark-mode .free-note{color:#94a3b8}
+
+.card,.info-section{background:var(--surface);border:1px solid var(--border);border-radius:1rem;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.card-head{padding:1rem 1.15rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.card-head h2{font-weight:900;color:var(--text);display:flex;align-items:center;gap:.5rem}
+.label{display:block;font-size:.78rem;font-weight:850;color:#334155;margin-bottom:.38rem}
+body.dark-mode .label{color:#cbd5e1}
+.field{width:100%;border:1px solid #cbd5e1;background:#fff;color:#0f172a;border-radius:.8rem;padding:.74rem .82rem;outline:none;font-size:.92rem}
+.field:focus{border-color:#c026d3;box-shadow:0 0 0 3px rgba(192,38,211,.12)}
+body.dark-mode .field{background:#0f172a;border-color:#475569;color:#e2e8f0}
+.helper{font-size:.71rem;color:var(--muted);line-height:1.48;margin-top:.35rem}
+
+.btn-primary,.btn-secondary,.btn-ghost{display:inline-flex;align-items:center;justify-content:center;gap:.42rem;border-radius:.72rem;font-weight:850;transition:.15s ease}
+.btn-primary{background:#a21caf;color:#fff;padding:.74rem .96rem}
+.btn-primary:hover{background:#86198f}
+.btn-secondary{background:#fff;color:#334155;border:1px solid #cbd5e1;padding:.68rem .85rem}
+.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border);padding:.62rem .78rem}
+body.dark-mode .btn-primary{background:#a21caf}
+body.dark-mode .btn-secondary{background:#1e293b;color:#e2e8f0;border-color:#475569}
+body.dark-mode .btn-ghost{color:#cbd5e1}
+
+.chip{display:inline-flex;align-items:center;border-radius:999px;padding:.32rem .58rem;font-size:.7rem;font-weight:850;background:var(--accent-soft);color:var(--accent-strong);border:1px solid var(--accent-border)}
+.notice{border:1px solid #f5d0fe;background:#fdf4ff;color:#86198f;border-radius:.9rem;padding:.85rem .95rem;font-size:.78rem;line-height:1.55}
+body.dark-mode .notice{background:rgba(134,25,143,.18);border-color:#86198f;color:#f0abfc}
+
+.mode-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem}
+.mode-btn{border:1px solid var(--border);background:var(--surface2);color:#475569;border-radius:.78rem;padding:.68rem .45rem;font-size:.72rem;font-weight:850;display:flex;align-items:center;justify-content:center;gap:.4rem}
+.mode-btn.active{background:#a21caf;color:#fff;border-color:#a21caf}
+body.dark-mode .mode-btn{color:#cbd5e1}
+.filter-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
+.toggle-row{display:flex;align-items:flex-start;gap:.65rem;padding:.72rem;border:1px solid var(--border);background:var(--surface2);border-radius:.8rem}
+.toggle-row input{margin-top:.15rem}
+.toggle-title{font-size:.77rem;font-weight:850;color:var(--text)}
+.toggle-copy{font-size:.68rem;color:var(--muted);line-height:1.4;margin-top:.1rem}
+
+.result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
+.name-card{border:1px solid var(--border);background:var(--surface2);border-radius:.95rem;padding:.92rem;display:flex;align-items:center;justify-content:space-between;gap:.8rem}
+.name-main{min-width:0}
+.name-value{font-size:1rem;font-weight:950;color:var(--text);overflow-wrap:anywhere}
+.name-meta{font-size:.68rem;color:var(--muted);margin-top:.18rem}
+.name-actions{display:flex;gap:.4rem;flex:none}
+.icon-btn{width:34px;height:34px;border:1px solid var(--border);background:var(--surface);border-radius:.65rem;color:#94a3b8;display:flex;align-items:center;justify-content:center}
+.icon-btn:hover{color:#a21caf;border-color:#f5d0fe}
+.icon-btn.fav.active{color:#e11d48;border-color:#fecdd3;background:#fff1f2}
+body.dark-mode .icon-btn{background:#0f172a}
+body.dark-mode .icon-btn.fav.active{background:rgba(225,29,72,.15);color:#fb7185;border-color:rgba(251,113,133,.3)}
+
+.summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem}
+.summary{background:var(--surface2);border:1px solid var(--border);border-radius:.85rem;padding:.78rem}
+.summary-label{font-size:.64rem;text-transform:uppercase;letter-spacing:.05em;font-weight:850;color:var(--muted)}
+.summary-value{font-size:.92rem;font-weight:900;color:var(--text);margin-top:.23rem}
+.empty{grid-column:1/-1;border:1px dashed var(--border);border-radius:1rem;padding:2.2rem 1rem;text-align:center;color:var(--muted)}
+
+.favorite-list{display:flex;gap:.45rem;flex-wrap:wrap}
+.favorite-pill{display:inline-flex;align-items:center;gap:.38rem;border:1px solid #fecdd3;background:#fff1f2;color:#be123c;padding:.4rem .58rem;border-radius:999px;font-size:.73rem;font-weight:850}
+body.dark-mode .favorite-pill{background:rgba(225,29,72,.14);border-color:rgba(251,113,133,.28);color:#fda4af}
+.small{font-size:.71rem;color:var(--muted);line-height:1.5}
+
+.status-box{border-radius:.85rem;padding:.78rem .88rem;font-size:.78rem;line-height:1.5;display:flex;gap:.5rem;align-items:flex-start}
+.status-box.info{background:#fdf4ff;border:1px solid #f5d0fe;color:#86198f}
+.status-box.good{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46}
+.status-box.warn{background:#fffbeb;border:1px solid #fde68a;color:#92400e}
+.status-box.bad{background:#fef2f2;border:1px solid #fecaca;color:#991b1b}
+body.dark-mode .status-box.info{background:rgba(134,25,143,.18);border-color:#86198f;color:#f0abfc}
+body.dark-mode .status-box.good{background:rgba(6,78,59,.2);border-color:#065f46;color:#a7f3d0}
+body.dark-mode .status-box.warn{background:rgba(120,53,15,.2);border-color:#92400e;color:#fde68a}
+body.dark-mode .status-box.bad{background:rgba(127,29,29,.2);border-color:#991b1b;color:#fecaca}
+
+.history-list{display:flex;flex-direction:column;gap:.5rem}
+.history-item{border:1px solid var(--border);border-radius:.75rem;background:var(--surface2);padding:.65rem .72rem;font-size:.72rem;color:#475569;line-height:1.5}
+body.dark-mode .history-item{color:#cbd5e1}
+.history-time{font-size:.63rem;color:var(--muted);font-weight:750;margin-bottom:.2rem}
+
+.info-wrap{max-width:72rem;margin:3.5rem auto 0}
+.info-section{padding:1.5rem}
+.info-section+.info-section{margin-top:1.5rem}
+.info-section h2{font-size:1.5rem;font-weight:900;color:var(--text);margin-bottom:.85rem}
+.info-section h3{font-size:1.03rem;font-weight:850;color:var(--text);margin:1.2rem 0 .35rem}
+.info-section p,.info-section li{font-size:.94rem;line-height:1.78;color:#475569}
+body.dark-mode .info-section p,body.dark-mode .info-section li{color:#94a3b8!important}
+.info-section ul{padding-left:1.2rem;list-style:disc}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-item summary{list-style:none;cursor:pointer;padding:1rem 0;color:var(--text);font-weight:850;display:flex;justify-content:space-between;gap:1rem}
+.faq-item summary::-webkit-details-marker{display:none}.faq-item summary::after{content:"+"}.faq-item[open] summary::after{content:"−"}.faq-item p{padding-bottom:1rem;margin:0}
+
+@media(max-width:800px){
+ .result-grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+ .free-note{font-size:10px;line-height:1.2;white-space:normal;text-align:right;max-width:118px}
+ .theme-toggle{width:38px;height:38px}
+ .mode-grid{grid-template-columns:1fr}
+ .filter-grid{grid-template-columns:1fr}
+ .summary-grid{grid-template-columns:1fr}
+}
+
+/* ============================================================
+   UTILIVERSE REFERENCE THEME
+   Synced to the attached Animal Age Calculator visual system.
+   ============================================================ */
+body{
+  background:#f8fafc!important;
+  color:#0f172a!important;
+}
+body.dark-mode{
+  background:
+    radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),
+    radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),
+    #020617!important;
+  color:#f8fafc!important;
+}
+header{
+  background:rgba(255,255,255,.93)!important;
+  border-bottom-color:#e2e8f0!important;
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+}
+body.dark-mode header{
+  background:rgba(2,6,23,.82)!important;
+  border-bottom-color:#1e293b!important;
+}
+header a{color:#334155!important}
+header a:hover{color:#0f172a!important}
+body.dark-mode header a{color:#cbd5e1!important}
+body.dark-mode header a:hover{color:#fff!important}
+
+.free-note{
+  color:#64748b!important;
+  font-size:13px!important;
+  font-weight:650!important;
+}
+body.dark-mode .free-note{color:#64748b!important}
+
+.theme-toggle{
+  background:#fff!important;
+  color:#475569!important;
+  border-color:#cbd5e1!important;
+  box-shadow:none!important;
+}
+.theme-toggle:hover{
+  color:#0f172a!important;
+  background:#f1f5f9!important;
+  border-color:#94a3b8!important;
+}
+body.dark-mode .theme-toggle{
+  background:rgba(15,23,42,.72)!important;
+  color:#94a3b8!important;
+  border-color:#334155!important;
+}
+body.dark-mode .theme-toggle:hover{
+  color:#fff!important;
+  background:#1e293b!important;
+  border-color:#475569!important;
+}
+
+.tool-card,.card,.info-section{
+  background:rgba(255,255,255,.92)!important;
+  border-color:#dbe3ee!important;
+  color:#0f172a!important;
+}
+body.dark-mode .tool-card,
+body.dark-mode .card,
+body.dark-mode .info-section{
+  background:rgba(30,41,59,.72)!important;
+  border-color:#334155!important;
+  color:#f8fafc!important;
+}
+
+.section-head,.card-head{border-bottom-color:#e2e8f0!important}
+body.dark-mode .section-head,
+body.dark-mode .card-head{border-bottom-color:#334155!important}
+.section-head h2,.card-head h2{color:#0f172a!important}
+body.dark-mode .section-head h2,
+body.dark-mode .card-head h2{color:#f8fafc!important}
+
+h1{color:#0f172a!important}
+body.dark-mode h1{color:#f8fafc!important}
+.hero-copy,.muted{color:#475569!important}
+body.dark-mode .hero-copy,
+body.dark-mode .muted{color:#94a3b8!important}
+
+.label{color:#64748b!important}
+body.dark-mode .label{color:#94a3b8!important}
+.helper,.small{color:#64748b!important}
+body.dark-mode .helper,
+body.dark-mode .small{color:#94a3b8!important}
+
+.field,
+.qty-input,.price-input,.status-select{
+  background:#fff!important;
+  color:#0f172a!important;
+  border-color:#cbd5e1!important;
+}
+.field:focus,
+.qty-input:focus,.price-input:focus,.status-select:focus{
+  border-color:#6366f1!important;
+  box-shadow:0 0 0 3px rgba(99,102,241,.15)!important;
+}
+body.dark-mode .field,
+body.dark-mode .qty-input,
+body.dark-mode .price-input,
+body.dark-mode .status-select{
+  background:#0f172a!important;
+  color:#f8fafc!important;
+  border-color:#475569!important;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,#6366f1,#4f46e5)!important;
+  border:1px solid #6366f1!important;
+  color:#fff!important;
+  font-weight:800!important;
+}
+.btn-primary:hover{filter:brightness(1.05)}
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.btn-ghost:focus-visible,
+.field:focus-visible{
+  outline:2px solid #6366f1!important;
+  outline-offset:2px!important;
+}
+.btn-secondary,.btn-ghost{
+  background:#f1f5f9!important;
+  color:#334155!important;
+  border-color:#cbd5e1!important;
+  font-weight:800!important;
+}
+.btn-secondary:hover,.btn-ghost:hover{background:#e2e8f0!important}
+body.dark-mode .btn-secondary,
+body.dark-mode .btn-ghost{
+  background:#1e293b!important;
+  color:#f8fafc!important;
+  border-color:#475569!important;
+}
+body.dark-mode .btn-secondary:hover,
+body.dark-mode .btn-ghost:hover{background:#334155!important}
+
+.notice{
+  background:#eef2ff!important;
+  border-color:#c7d2fe!important;
+  color:#4338ca!important;
+}
+body.dark-mode .notice{
+  background:rgba(99,102,241,.07)!important;
+  border-color:rgba(99,102,241,.28)!important;
+  color:#c7d2fe!important;
+}
+
+.status-box.info{
+  background:#eef2ff!important;
+  border-color:#c7d2fe!important;
+  color:#4338ca!important;
+}
+body.dark-mode .status-box.info{
+  background:rgba(99,102,241,.07)!important;
+  border-color:rgba(99,102,241,.28)!important;
+  color:#c7d2fe!important;
+}
+
+.info-section h2{color:#0f172a!important;font-weight:900!important}
+.info-section h3{color:#1e293b!important;font-weight:850!important}
+.info-section p,.info-section li{color:#475569!important}
+body.dark-mode .info-section h2{color:#fff!important}
+body.dark-mode .info-section h3{color:#e2e8f0!important}
+body.dark-mode .info-section p,
+body.dark-mode .info-section li{color:#94a3b8!important}
+
+.faq-item{border-color:#e2e8f0!important}
+.faq-item summary{color:#0f172a!important}
+body.dark-mode .faq-item{border-color:#334155!important}
+body.dark-mode .faq-item summary{color:#e2e8f0!important}
+
+footer{
+  background:#f8fafc!important;
+  border-top:1px solid #e2e8f0!important;
+  color:#64748b!important;
+}
+body.dark-mode footer{
+  background:#020617!important;
+  border-top-color:#1e293b!important;
+  color:#64748b!important;
+}
+
+
+.mode-btn{
+  background:#fff!important;
+  color:#475569!important;
+  border-color:#dbe3ee!important;
+}
+.mode-btn:hover{
+  border-color:#6366f1!important;
+  color:#4338ca!important;
+}
+.mode-btn.active{
+  background:#eef2ff!important;
+  border-color:#818cf8!important;
+  color:#4338ca!important;
+}
+body.dark-mode .mode-btn{
+  background:#0f172a!important;
+  color:#94a3b8!important;
+  border-color:#334155!important;
+}
+body.dark-mode .mode-btn:hover{
+  border-color:#6366f1!important;
+  color:#e2e8f0!important;
+}
+body.dark-mode .mode-btn.active{
+  background:rgba(99,102,241,.14)!important;
+  border-color:#818cf8!important;
+  color:#c7d2fe!important;
+}
+.toggle-row,.name-card,.summary,.history-item{
+  background:#f8fafc!important;
+  border-color:#dbe3ee!important;
+}
+body.dark-mode .toggle-row,
+body.dark-mode .name-card,
+body.dark-mode .summary,
+body.dark-mode .history-item{
+  background:rgba(15,23,42,.70)!important;
+  border-color:#334155!important;
+}
+.name-meta{color:#64748b!important}
+body.dark-mode .name-meta{color:#94a3b8!important}
+.icon-btn{
+  background:#fff!important;
+  border-color:#dbe3ee!important;
+}
+body.dark-mode .icon-btn{
+  background:#0f172a!important;
+  border-color:#334155!important;
+}
+
+</style>
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org","@type":"WebApplication",
+ "name":"Utiliverse Random Name Generator",
+ "url":"https://utiliverse.app/Random_Name_Generator/",
+ "applicationCategory":"UtilitiesApplication","operatingSystem":"Any",
+ "browserRequirements":"Requires a modern browser with JavaScript and Web Crypto.",
+ "description":"A free browser-based random name generator for first names, last names, and full names with filters for common usage, naming tradition, first letter, length, style, middle names, exclusions, favorites, and batch generation.",
+ "isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+}
+</script>
+
+<script type="application/ld+json">
+{
+ "@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+  {"@type":"Question","name":"How does the Random Name Generator work?","acceptedAnswer":{"@type":"Answer","text":"The tool filters its built-in name collections based on your settings, then uses browser cryptographic randomness to choose names without relying on an external name API."}},
+  {"@type":"Question","name":"Can I generate full names?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose Full Name to combine a first name with an optional middle name and a surname from the selected naming tradition."}},
+  {"@type":"Question","name":"Can I generate several names at once?","acceptedAnswer":{"@type":"Answer","text":"Yes. You can generate between 1 and 100 names in one batch."}},
+  {"@type":"Question","name":"Can I save favorite generated names?","acceptedAnswer":{"@type":"Answer","text":"Yes. Favorites are saved locally in the current browser and can be copied as a shortlist."}},
+  {"@type":"Question","name":"Are the origin and gender labels absolute?","acceptedAnswer":{"@type":"Answer","text":"No. Name usage varies across cultures, regions, languages, families, and time. The labels in this tool are broad discovery filters rather than strict classifications."}}
+ ]}
+</script>
+</head>
+
+<!-- SEO TARGET CLUSTER: random name generator, first name generator, last name generator, full name generator, character name generator -->
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT -->
+
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+<header class="sticky top-0 z-50 bg-white/80 border-b border-slate-200 backdrop-blur">
+ <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+  <a href="https://utiliverse.app" class="flex items-center gap-2 text-sm font-semibold text-slate-600"><i data-lucide="arrow-left" class="w-4 h-4"></i><span>Back to Utiliverse</span></a>
+  <div class="flex items-center gap-4">
+   <div class="free-note">100% Free and Browser Based</div>
+   <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle light or dark mode"><i id="moonIcon" data-lucide="moon" class="w-4 h-4"></i><i id="sunIcon" data-lucide="sun" class="w-4 h-4 hidden"></i></button>
+  </div>
+ </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+ <div class="mb-6">
+  
+  <h1 class="text-3xl font-bold text-slate-900 flex items-center gap-3"><i data-lucide="user-round-search" class="w-8 h-8" style="color:#6366f1"></i>Random Name Generator</h1>
+  <p class="mt-2 text-sm max-w-3xl muted">Generate random first names, last names, or full names for stories, examples, test data, games, brainstorming, and other creative uses. Filter by naming tradition, common usage, first letter, length, and style.</p>
+ </div>
+
+ <div class="notice mb-6">
+  <strong>Name labels are flexible.</strong> Names move between languages, cultures, and regions over time, and gender usage can vary by person and place. The origin/tradition and usage filters below are broad discovery aids rather than definitive identity labels.
+ </div>
+
+ <div class="grid grid-cols-1 xl:grid-cols-[.85fr_1.15fr] gap-6">
+  <div class="space-y-6">
+   <section class="card overflow-hidden">
+    <div class="card-head"><h2><i data-lucide="sliders-horizontal" class="w-5 h-5" style="color:#6366f1"></i>Generator Settings</h2></div>
+    <div class="p-5 space-y-4">
+     <div>
+      <label class="label">Name Type</label>
+      <div id="modeGrid" class="mode-grid">
+       <button class="mode-btn" type="button" data-mode="first"><i data-lucide="user" class="w-4 h-4"></i>First Name</button>
+       <button class="mode-btn" type="button" data-mode="last"><i data-lucide="signature" class="w-4 h-4"></i>Last Name</button>
+       <button class="mode-btn active" type="button" data-mode="full"><i data-lucide="contact-round" class="w-4 h-4"></i>Full Name</button>
+      </div>
+     </div>
+
+     <div class="filter-grid">
+      <div>
+       <label class="label" for="gender">Common Usage</label>
+       <select id="gender" class="field">
+        <option value="any">Any</option>
+        <option value="f">Feminine</option>
+        <option value="m">Masculine</option>
+        <option value="u">Unisex / Broad Usage</option>
+       </select>
+      </div>
+      <div>
+       <label class="label" for="origin">Naming Tradition</label>
+       <select id="origin" class="field"><option value="any">Any tradition</option></select>
+      </div>
+      <div>
+       <label class="label" for="starts">Starts With</label>
+       <select id="starts" class="field"><option value="any">Any letter</option></select>
+      </div>
+      <div>
+       <label class="label" for="length">First-Name Length</label>
+       <select id="length" class="field">
+        <option value="any">Any length</option>
+        <option value="short">Short • 3–5 letters</option>
+        <option value="medium">Medium • 6–7 letters</option>
+        <option value="long">Long • 8+ letters</option>
+       </select>
+      </div>
+      <div>
+       <label class="label" for="style">First-Name Style</label>
+       <select id="style" class="field"><option value="any">Any style</option></select>
+      </div>
+      <div>
+       <label class="label" for="count">How Many?</label>
+       <input id="count" class="field" type="number" min="1" max="100" value="12">
+      </div>
+     </div>
+
+     <label id="middleToggleWrap" class="toggle-row cursor-pointer">
+      <input id="middleName" type="checkbox" class="h-4 w-4 accent-fuchsia-700">
+      <span><span class="toggle-title">Include a middle name</span><span class="toggle-copy block">Available when Full Name is selected.</span></span>
+     </label>
+
+     <label class="toggle-row cursor-pointer">
+      <input id="noRepeats" type="checkbox" class="h-4 w-4 accent-fuchsia-700" checked>
+      <span><span class="toggle-title">Avoid duplicate generated names</span><span class="toggle-copy block">Retries when an identical result appears in the same batch.</span></span>
+     </label>
+
+     <div>
+      <label class="label" for="exclude">Exclude Names <span class="font-normal text-slate-400">(optional)</span></label>
+      <input id="exclude" class="field" type="text" placeholder="e.g. Alex, Smith, Oliver">
+      <div class="helper">Separate names with commas. For full names, excluding a first name or surname removes combinations containing it.</div>
+     </div>
+
+     <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <button id="generateBtn" type="button" class="btn-primary"><i data-lucide="sparkles" class="w-4 h-4"></i>Generate Names</button>
+      <button id="resetBtn" type="button" class="btn-secondary"><i data-lucide="rotate-ccw" class="w-4 h-4"></i>Reset</button>
+     </div>
+     <div id="statusArea"></div>
+    </div>
+   </section>
+
+   <section class="card overflow-hidden">
+    <div class="card-head">
+     <h2><i data-lucide="heart" class="w-5 h-5" style="color:#e11d48"></i>Favorites</h2>
+     <button id="copyFavBtn" class="btn-ghost text-xs" type="button"><i data-lucide="copy" class="w-3.5 h-3.5"></i>Copy</button>
+    </div>
+    <div class="p-5">
+     <div id="favorites"></div>
+     <button id="clearFavBtn" class="btn-ghost text-xs mt-4 hidden" type="button"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i>Clear Favorites</button>
+    </div>
+   </section>
+  </div>
+
+  <div class="space-y-6">
+   <section class="card overflow-hidden">
+    <div class="card-head">
+     <h2><i data-lucide="list-sparkles" class="w-5 h-5" style="color:#6366f1"></i>Generated Names</h2>
+     <div class="flex gap-2 flex-wrap">
+      <button id="regenerateBtn" type="button" class="btn-ghost text-xs"><i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>Regenerate</button>
+      <button id="copyAllBtn" type="button" class="btn-secondary text-xs"><i data-lucide="copy" class="w-3.5 h-3.5"></i>Copy All</button>
+     </div>
+    </div>
+    <div class="p-5">
+     <div class="summary-grid mb-5">
+      <div class="summary"><div class="summary-label">Type</div><div id="summaryType" class="summary-value">Full Name</div></div>
+      <div class="summary"><div class="summary-label">Tradition</div><div id="summaryOrigin" class="summary-value">Any</div></div>
+      <div class="summary"><div class="summary-label">Random Source</div><div class="summary-value">Web Crypto</div></div>
+     </div>
+     <div id="resultGrid" class="result-grid">
+      <div class="empty"><i data-lucide="user-round-plus" class="w-8 h-8 mx-auto mb-2"></i><div class="font-bold">Ready to generate names</div><div class="text-xs mt-1">Choose your filters and generate a batch.</div></div>
+     </div>
+    </div>
+   </section>
+
+   <section class="card overflow-hidden">
+    <div class="card-head">
+     <h2><i data-lucide="history" class="w-5 h-5" style="color:#6366f1"></i>Recent Generations</h2>
+     <button id="clearHistoryBtn" class="btn-ghost text-xs" type="button"><i data-lucide="trash-2" class="w-3.5 h-3.5"></i>Clear</button>
+    </div>
+    <div class="p-5">
+     <div id="historyList" class="history-list"></div>
+     <div class="helper mt-3">The last five batches are stored locally in this browser only.</div>
+    </div>
+   </section>
+  </div>
+ </div>
+
+ <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT -->
+
+ <div class="info-wrap">
+  <section class="info-section">
+   <h2>How the Random Name Generator Works</h2>
+   <p>The generator first filters the built-in name collection based on the settings you choose, then selects values using the browser's Web Crypto API. For full names, it combines a first name with a surname from the selected naming tradition; an optional middle name can be added from the same filtered first-name pool.</p>
+   <p>No external name API is required. Generation, favorites, and recent-history features all work inside the browser. Favorites and the last five batches are stored locally on the current device.</p>
+  </section>
+
+  <section class="info-section">
+   <h2>Ways to Use Random Names</h2>
+   <ul>
+    <li>Create placeholder names for mockups, demos, spreadsheets, or test data.</li>
+    <li>Brainstorm names for fictional characters, games, stories, or role-playing campaigns.</li>
+    <li>Generate a quick list when you need neutral example names for documentation or training material.</li>
+    <li>Explore broad naming traditions without having to think of every option manually.</li>
+   </ul>
+   <p>For real-world identity data, use appropriate privacy and consent practices. Randomly generated names should not be assumed to correspond to real people.</p>
+  </section>
+
+  <section class="info-section">
+   <h2>About Naming Traditions and Labels</h2>
+   <p>Names frequently cross language and cultural boundaries. A name may be common in several regions, may have multiple spellings, or may be used differently across communities. The tradition filters in this tool are intentionally broad and are meant to help discovery rather than define a person's ethnicity, nationality, or identity.</p>
+   <p>The Feminine, Masculine, and Unisex / Broad Usage filters likewise reflect common naming usage in parts of the world rather than fixed rules about who can use a name.</p>
+  </section>
+
+  <section class="info-section">
+   <h2>Random Name Generator FAQ</h2>
+   <details class="faq-item"><summary>Can I generate full names?</summary><p>Yes. Select Full Name to combine a random first name and surname. You can also enable an optional middle name.</p></details>
+   <details class="faq-item"><summary>Can I generate multiple names at once?</summary><p>Yes. Enter any quantity from 1 to 100 and the tool will produce a batch of names.</p></details>
+   <details class="faq-item"><summary>How are the names chosen?</summary><p>The tool filters its local name data according to your settings and then uses the browser Web Crypto API for random selection.</p></details>
+   <details class="faq-item"><summary>Can I prevent repeats?</summary><p>Yes. Avoid duplicate generated names is enabled by default. The generator will retry duplicate results within the same batch when enough unique combinations are available.</p></details>
+   <details class="faq-item"><summary>Can I save favorite names?</summary><p>Yes. Select the heart on any generated name. Favorites are saved locally in your browser and can be copied as a shortlist.</p></details>
+   <details class="faq-item"><summary>Are the naming-tradition labels exact?</summary><p>No. Names can belong to more than one linguistic or cultural tradition, and usage changes over time. The filters are broad discovery categories rather than definitive identity labels.</p></details>
+  </section>
+
+  <!-- GOOGLE ADSENSE: BOTTOM / AFTER-CONTENT INSERTION POINT -->
+ </div>
+</main>
+
+<footer class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-6 pt-2">
+ <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-500">
+  <div>© 2026 Utiliverse. All rights reserved.</div>
+  <div class="font-semibold text-right">100% Free and Browser Based</div>
+ </div>
+</footer>
+
+<script>
+(() => {
+ const FIRST=[{"name":"Oliver","gender":"m","origin":"English","style":"classic"},{"name":"Henry","gender":"m","origin":"English","style":"classic"},{"name":"Jack","gender":"m","origin":"English","style":"short"},{"name":"George","gender":"m","origin":"English","style":"classic"},{"name":"Arthur","gender":"m","origin":"English","style":"vintage"},{"name":"Edward","gender":"m","origin":"English","style":"classic"},{"name":"William","gender":"m","origin":"English","style":"classic"},{"name":"Thomas","gender":"m","origin":"English","style":"classic"},{"name":"Samuel","gender":"m","origin":"English","style":"classic"},{"name":"Leo","gender":"m","origin":"English","style":"short"},{"name":"James","gender":"m","origin":"English","style":"classic"},{"name":"Theodore","gender":"m","origin":"English","style":"vintage"},{"name":"Amelia","gender":"f","origin":"English","style":"classic"},{"name":"Charlotte","gender":"f","origin":"English","style":"classic"},{"name":"Alice","gender":"f","origin":"English","style":"vintage"},{"name":"Eleanor","gender":"f","origin":"English","style":"classic"},{"name":"Grace","gender":"f","origin":"English","style":"classic"},{"name":"Lucy","gender":"f","origin":"English","style":"short"},{"name":"Violet","gender":"f","origin":"English","style":"vintage"},{"name":"Hazel","gender":"f","origin":"English","style":"vintage"},{"name":"Rose","gender":"f","origin":"English","style":"short"},{"name":"Clara","gender":"f","origin":"English","style":"classic"},{"name":"Ruby","gender":"f","origin":"English","style":"vintage"},{"name":"Ivy","gender":"f","origin":"English","style":"short"},{"name":"Avery","gender":"u","origin":"English","style":"modern"},{"name":"Harper","gender":"u","origin":"English","style":"modern"},{"name":"Parker","gender":"u","origin":"English","style":"modern"},{"name":"Riley","gender":"u","origin":"English","style":"modern"},{"name":"Taylor","gender":"u","origin":"English","style":"classic"},{"name":"Morgan","gender":"u","origin":"English","style":"classic"},{"name":"Mateo","gender":"m","origin":"Spanish","style":"classic"},{"name":"Santiago","gender":"m","origin":"Spanish","style":"classic"},{"name":"Diego","gender":"m","origin":"Spanish","style":"classic"},{"name":"Javier","gender":"m","origin":"Spanish","style":"classic"},{"name":"Alejandro","gender":"m","origin":"Spanish","style":"classic"},{"name":"Carlos","gender":"m","origin":"Spanish","style":"classic"},{"name":"Miguel","gender":"m","origin":"Spanish","style":"classic"},{"name":"Rafael","gender":"m","origin":"Spanish","style":"classic"},{"name":"Nicolás","gender":"m","origin":"Spanish","style":"classic"},{"name":"Adrián","gender":"m","origin":"Spanish","style":"modern"},{"name":"Gabriel","gender":"m","origin":"Spanish","style":"classic"},{"name":"Lucas","gender":"m","origin":"Spanish","style":"classic"},{"name":"Sofía","gender":"f","origin":"Spanish","style":"classic"},{"name":"Lucía","gender":"f","origin":"Spanish","style":"classic"},{"name":"Elena","gender":"f","origin":"Spanish","style":"classic"},{"name":"Camila","gender":"f","origin":"Spanish","style":"modern"},{"name":"Valentina","gender":"f","origin":"Spanish","style":"romantic"},{"name":"Isabella","gender":"f","origin":"Spanish","style":"classic"},{"name":"Mariana","gender":"f","origin":"Spanish","style":"classic"},{"name":"Natalia","gender":"f","origin":"Spanish","style":"classic"},{"name":"Daniela","gender":"f","origin":"Spanish","style":"classic"},{"name":"Gabriela","gender":"f","origin":"Spanish","style":"classic"},{"name":"Lola","gender":"f","origin":"Spanish","style":"short"},{"name":"Alba","gender":"f","origin":"Spanish","style":"short"},{"name":"Alex","gender":"u","origin":"Spanish","style":"short"},{"name":"Andrea","gender":"u","origin":"Spanish","style":"classic"},{"name":"Louis","gender":"m","origin":"French","style":"classic"},{"name":"Hugo","gender":"m","origin":"French","style":"short"},{"name":"Jules","gender":"m","origin":"French","style":"vintage"},{"name":"Gabriel","gender":"m","origin":"French","style":"classic"},{"name":"Arthur","gender":"m","origin":"French","style":"classic"},{"name":"Mathis","gender":"m","origin":"French","style":"modern"},{"name":"Raphaël","gender":"m","origin":"French","style":"classic"},{"name":"Théo","gender":"m","origin":"French","style":"short"},{"name":"Bastien","gender":"m","origin":"French","style":"modern"},{"name":"Maxime","gender":"m","origin":"French","style":"classic"},{"name":"Émile","gender":"m","origin":"French","style":"vintage"},{"name":"Luc","gender":"m","origin":"French","style":"short"},{"name":"Chloé","gender":"f","origin":"French","style":"classic"},{"name":"Élise","gender":"f","origin":"French","style":"classic"},{"name":"Juliette","gender":"f","origin":"French","style":"romantic"},{"name":"Claire","gender":"f","origin":"French","style":"classic"},{"name":"Amélie","gender":"f","origin":"French","style":"classic"},{"name":"Manon","gender":"f","origin":"French","style":"modern"},{"name":"Camille","gender":"f","origin":"French","style":"classic"},{"name":"Céleste","gender":"f","origin":"French","style":"vintage"},{"name":"Margot","gender":"f","origin":"French","style":"vintage"},{"name":"Noémie","gender":"f","origin":"French","style":"classic"},{"name":"Louise","gender":"f","origin":"French","style":"classic"},{"name":"Adèle","gender":"f","origin":"French","style":"vintage"},{"name":"Sacha","gender":"u","origin":"French","style":"modern"},{"name":"Dominique","gender":"u","origin":"French","style":"classic"},{"name":"Luca","gender":"m","origin":"Italian","style":"short"},{"name":"Matteo","gender":"m","origin":"Italian","style":"classic"},{"name":"Leonardo","gender":"m","origin":"Italian","style":"classic"},{"name":"Marco","gender":"m","origin":"Italian","style":"classic"},{"name":"Alessandro","gender":"m","origin":"Italian","style":"classic"},{"name":"Giovanni","gender":"m","origin":"Italian","style":"classic"},{"name":"Enzo","gender":"m","origin":"Italian","style":"short"},{"name":"Lorenzo","gender":"m","origin":"Italian","style":"classic"},{"name":"Davide","gender":"m","origin":"Italian","style":"classic"},{"name":"Antonio","gender":"m","origin":"Italian","style":"classic"},{"name":"Federico","gender":"m","origin":"Italian","style":"classic"},{"name":"Paolo","gender":"m","origin":"Italian","style":"classic"},{"name":"Giulia","gender":"f","origin":"Italian","style":"classic"},{"name":"Sofia","gender":"f","origin":"Italian","style":"classic"},{"name":"Aurora","gender":"f","origin":"Italian","style":"romantic"},{"name":"Beatrice","gender":"f","origin":"Italian","style":"classic"},{"name":"Chiara","gender":"f","origin":"Italian","style":"classic"},{"name":"Elisa","gender":"f","origin":"Italian","style":"classic"},{"name":"Francesca","gender":"f","origin":"Italian","style":"classic"},{"name":"Bianca","gender":"f","origin":"Italian","style":"romantic"},{"name":"Ginevra","gender":"f","origin":"Italian","style":"vintage"},{"name":"Alessia","gender":"f","origin":"Italian","style":"modern"},{"name":"Lucia","gender":"f","origin":"Italian","style":"classic"},{"name":"Valeria","gender":"f","origin":"Italian","style":"classic"},{"name":"Andrea","gender":"u","origin":"Italian","style":"classic"},{"name":"Felix","gender":"m","origin":"German","style":"classic"},{"name":"Leon","gender":"m","origin":"German","style":"short"},{"name":"Johann","gender":"m","origin":"German","style":"classic"},{"name":"Maximilian","gender":"m","origin":"German","style":"classic"},{"name":"Friedrich","gender":"m","origin":"German","style":"vintage"},{"name":"Lukas","gender":"m","origin":"German","style":"classic"},{"name":"Niklas","gender":"m","origin":"German","style":"modern"},{"name":"Emil","gender":"m","origin":"German","style":"vintage"},{"name":"Jonas","gender":"m","origin":"German","style":"classic"},{"name":"Karl","gender":"m","origin":"German","style":"short"},{"name":"Moritz","gender":"m","origin":"German","style":"classic"},{"name":"Otto","gender":"m","origin":"German","style":"vintage"},{"name":"Hannah","gender":"f","origin":"German","style":"classic"},{"name":"Clara","gender":"f","origin":"German","style":"classic"},{"name":"Greta","gender":"f","origin":"German","style":"vintage"},{"name":"Lena","gender":"f","origin":"German","style":"short"},{"name":"Johanna","gender":"f","origin":"German","style":"classic"},{"name":"Emilia","gender":"f","origin":"German","style":"classic"},{"name":"Frida","gender":"f","origin":"German","style":"vintage"},{"name":"Sophie","gender":"f","origin":"German","style":"classic"},{"name":"Marlene","gender":"f","origin":"German","style":"vintage"},{"name":"Heidi","gender":"f","origin":"German","style":"vintage"},{"name":"Anika","gender":"f","origin":"German","style":"modern"},{"name":"Liesel","gender":"f","origin":"German","style":"vintage"},{"name":"Sascha","gender":"u","origin":"German","style":"modern"},{"name":"Finn","gender":"m","origin":"Irish / Scottish","style":"short"},{"name":"Ronan","gender":"m","origin":"Irish / Scottish","style":"classic"},{"name":"Declan","gender":"m","origin":"Irish / Scottish","style":"classic"},{"name":"Cian","gender":"m","origin":"Irish / Scottish","style":"short"},{"name":"Ewan","gender":"m","origin":"Irish / Scottish","style":"classic"},{"name":"Callum","gender":"m","origin":"Irish / Scottish","style":"classic"},{"name":"Liam","gender":"m","origin":"Irish / Scottish","style":"short"},{"name":"Niall","gender":"m","origin":"Irish / Scottish","style":"classic"},{"name":"Aidan","gender":"m","origin":"Irish / Scottish","style":"classic"},{"name":"Connor","gender":"m","origin":"Irish / Scottish","style":"classic"},{"name":"Malcolm","gender":"m","origin":"Irish / Scottish","style":"classic"},{"name":"Duncan","gender":"m","origin":"Irish / Scottish","style":"classic"},{"name":"Maeve","gender":"f","origin":"Irish / Scottish","style":"classic"},{"name":"Fiona","gender":"f","origin":"Irish / Scottish","style":"classic"},{"name":"Niamh","gender":"f","origin":"Irish / Scottish","style":"classic"},{"name":"Isla","gender":"f","origin":"Irish / Scottish","style":"short"},{"name":"Orla","gender":"f","origin":"Irish / Scottish","style":"short"},{"name":"Ailsa","gender":"f","origin":"Irish / Scottish","style":"classic"},{"name":"Bridget","gender":"f","origin":"Irish / Scottish","style":"classic"},{"name":"Moira","gender":"f","origin":"Irish / Scottish","style":"classic"},{"name":"Eileen","gender":"f","origin":"Irish / Scottish","style":"classic"},{"name":"Rowan","gender":"u","origin":"Irish / Scottish","style":"nature"},{"name":"Quinn","gender":"u","origin":"Irish / Scottish","style":"short"},{"name":"Rory","gender":"u","origin":"Irish / Scottish","style":"short"},{"name":"Erik","gender":"m","origin":"Nordic","style":"classic"},{"name":"Lars","gender":"m","origin":"Nordic","style":"short"},{"name":"Soren","gender":"m","origin":"Nordic","style":"classic"},{"name":"Magnus","gender":"m","origin":"Nordic","style":"strong"},{"name":"Leif","gender":"m","origin":"Nordic","style":"short"},{"name":"Anders","gender":"m","origin":"Nordic","style":"classic"},{"name":"Johan","gender":"m","origin":"Nordic","style":"classic"},{"name":"Nils","gender":"m","origin":"Nordic","style":"short"},{"name":"Emil","gender":"m","origin":"Nordic","style":"classic"},{"name":"Bjorn","gender":"m","origin":"Nordic","style":"strong"},{"name":"Henrik","gender":"m","origin":"Nordic","style":"classic"},{"name":"Axel","gender":"m","origin":"Nordic","style":"strong"},{"name":"Freja","gender":"f","origin":"Nordic","style":"classic"},{"name":"Astrid","gender":"f","origin":"Nordic","style":"strong"},{"name":"Ingrid","gender":"f","origin":"Nordic","style":"classic"},{"name":"Liv","gender":"f","origin":"Nordic","style":"short"},{"name":"Solveig","gender":"f","origin":"Nordic","style":"classic"},{"name":"Sigrid","gender":"f","origin":"Nordic","style":"classic"},{"name":"Linnea","gender":"f","origin":"Nordic","style":"nature"},{"name":"Elsa","gender":"f","origin":"Nordic","style":"classic"},{"name":"Maja","gender":"f","origin":"Nordic","style":"short"},{"name":"Kari","gender":"u","origin":"Nordic","style":"classic"},{"name":"Haruto","gender":"m","origin":"Japanese","style":"modern"},{"name":"Ren","gender":"m","origin":"Japanese","style":"short"},{"name":"Yuto","gender":"m","origin":"Japanese","style":"modern"},{"name":"Sota","gender":"m","origin":"Japanese","style":"short"},{"name":"Kaito","gender":"m","origin":"Japanese","style":"modern"},{"name":"Daiki","gender":"m","origin":"Japanese","style":"modern"},{"name":"Takumi","gender":"m","origin":"Japanese","style":"classic"},{"name":"Riku","gender":"m","origin":"Japanese","style":"short"},{"name":"Hiroto","gender":"m","origin":"Japanese","style":"modern"},{"name":"Akira","gender":"u","origin":"Japanese","style":"classic"},{"name":"Haru","gender":"u","origin":"Japanese","style":"short"},{"name":"Yui","gender":"f","origin":"Japanese","style":"short"},{"name":"Aoi","gender":"u","origin":"Japanese","style":"short"},{"name":"Sakura","gender":"f","origin":"Japanese","style":"nature"},{"name":"Hina","gender":"f","origin":"Japanese","style":"short"},{"name":"Mei","gender":"f","origin":"Japanese","style":"short"},{"name":"Rin","gender":"u","origin":"Japanese","style":"short"},{"name":"Nanami","gender":"f","origin":"Japanese","style":"modern"},{"name":"Yuna","gender":"f","origin":"Japanese","style":"modern"},{"name":"Mio","gender":"f","origin":"Japanese","style":"short"},{"name":"Kaori","gender":"f","origin":"Japanese","style":"classic"},{"name":"Emi","gender":"f","origin":"Japanese","style":"short"},{"name":"Nao","gender":"u","origin":"Japanese","style":"short"},{"name":"Noah","gender":"m","origin":"Hebrew","style":"classic"},{"name":"Eitan","gender":"m","origin":"Hebrew","style":"strong"},{"name":"Ari","gender":"m","origin":"Hebrew","style":"short"},{"name":"David","gender":"m","origin":"Hebrew","style":"classic"},{"name":"Daniel","gender":"m","origin":"Hebrew","style":"classic"},{"name":"Ezra","gender":"m","origin":"Hebrew","style":"short"},{"name":"Asher","gender":"m","origin":"Hebrew","style":"classic"},{"name":"Micah","gender":"u","origin":"Hebrew","style":"classic"},{"name":"Eli","gender":"m","origin":"Hebrew","style":"short"},{"name":"Jonah","gender":"m","origin":"Hebrew","style":"classic"},{"name":"Samuel","gender":"m","origin":"Hebrew","style":"classic"},{"name":"Isaac","gender":"m","origin":"Hebrew","style":"classic"},{"name":"Maya","gender":"f","origin":"Hebrew","style":"short"},{"name":"Noa","gender":"f","origin":"Hebrew","style":"short"},{"name":"Talia","gender":"f","origin":"Hebrew","style":"classic"},{"name":"Leah","gender":"f","origin":"Hebrew","style":"short"},{"name":"Naomi","gender":"f","origin":"Hebrew","style":"classic"},{"name":"Eliana","gender":"f","origin":"Hebrew","style":"classic"},{"name":"Miriam","gender":"f","origin":"Hebrew","style":"classic"},{"name":"Shira","gender":"f","origin":"Hebrew","style":"classic"},{"name":"Yael","gender":"f","origin":"Hebrew","style":"short"},{"name":"Ariel","gender":"u","origin":"Hebrew","style":"classic"},{"name":"Omar","gender":"m","origin":"Arabic","style":"classic"},{"name":"Zayd","gender":"m","origin":"Arabic","style":"short"},{"name":"Amir","gender":"m","origin":"Arabic","style":"classic"},{"name":"Yusuf","gender":"m","origin":"Arabic","style":"classic"},{"name":"Karim","gender":"m","origin":"Arabic","style":"classic"},{"name":"Tariq","gender":"m","origin":"Arabic","style":"classic"},{"name":"Samir","gender":"m","origin":"Arabic","style":"classic"},{"name":"Rami","gender":"m","origin":"Arabic","style":"short"},{"name":"Adil","gender":"m","origin":"Arabic","style":"classic"},{"name":"Nabil","gender":"m","origin":"Arabic","style":"classic"},{"name":"Faris","gender":"m","origin":"Arabic","style":"strong"},{"name":"Malik","gender":"m","origin":"Arabic","style":"strong"},{"name":"Layla","gender":"f","origin":"Arabic","style":"classic"},{"name":"Nadia","gender":"f","origin":"Arabic","style":"classic"},{"name":"Amira","gender":"f","origin":"Arabic","style":"classic"},{"name":"Salma","gender":"f","origin":"Arabic","style":"classic"},{"name":"Yasmin","gender":"f","origin":"Arabic","style":"nature"},{"name":"Hana","gender":"f","origin":"Arabic","style":"short"},{"name":"Mariam","gender":"f","origin":"Arabic","style":"classic"},{"name":"Noor","gender":"u","origin":"Arabic","style":"short"},{"name":"Rania","gender":"f","origin":"Arabic","style":"classic"},{"name":"Samira","gender":"f","origin":"Arabic","style":"classic"},{"name":"Farah","gender":"f","origin":"Arabic","style":"classic"},{"name":"Amina","gender":"f","origin":"Arabic","style":"classic"}];
+ const SURNAMES={"English":["Smith","Johnson","Williams","Brown","Taylor","Wilson","Davies","Evans","Thomas","Roberts","Walker","Wright","Green","Hall","Baker","Cooper"],"Spanish":["García","Rodríguez","Martínez","López","Hernández","González","Pérez","Sánchez","Ramírez","Torres","Flores","Rivera","Morales","Vargas","Castro","Rojas"],"French":["Martin","Bernard","Dubois","Thomas","Robert","Richard","Petit","Durand","Leroy","Moreau","Simon","Laurent","Michel","Lefèvre","Roux","Fournier"],"Italian":["Rossi","Russo","Ferrari","Esposito","Bianchi","Romano","Colombo","Ricci","Marino","Greco","Bruno","Gallo","Conti","De Luca","Costa","Giordano"],"German":["Müller","Schmidt","Schneider","Fischer","Weber","Meyer","Wagner","Becker","Hoffmann","Schäfer","Koch","Bauer","Richter","Klein","Wolf","Schröder"],"Irish / Scottish":["Murphy","Kelly","Sullivan","O'Brien","Walsh","Murray","Kennedy","Campbell","Stewart","MacDonald","Morrison","Douglas","Ferguson","Graham","Fraser","Reid"],"Nordic":["Andersen","Johansen","Hansen","Larsen","Nielsen","Eriksen","Svensson","Johansson","Lindberg","Berg","Dahl","Lund","Nyström","Holm","Björk","Solberg"],"Japanese":["Sato","Suzuki","Takahashi","Tanaka","Watanabe","Ito","Yamamoto","Nakamura","Kobayashi","Kato","Yoshida","Yamada","Sasaki","Yamaguchi","Matsumoto","Inoue"],"Hebrew":["Cohen","Levi","Mizrahi","Peretz","Biton","Dahan","Friedman","Shapiro","Rosen","Katz","Ben-David","Amar","Dayan","Barak","Navon","Tal"],"Arabic":["Haddad","Khalil","Mansour","Saleh","Nasser","Hamdan","Farah","Rahman","Karim","Hussein","Yasin","Saad","Najjar","Malik","Habib","Salim"]};
+ const $=id=>document.getElementById(id);
+ const FAV_KEY="utiliverse-random-name-favorites-v1";
+ const HISTORY_KEY="utiliverse-random-name-history-v1";
+ let mode="full";
+ let current=[];
+
+ function esc(s){return String(s??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
+ function unique(a){return [...new Set(a)]}
+ function randomBelow(max){if(!Number.isInteger(max)||max<=0)throw new Error("Invalid random range");const span=0x100000000,limit=span-(span%max),buf=new Uint32Array(1);let x;do{crypto.getRandomValues(buf);x=buf[0]}while(x>=limit);return x%max}
+ function pick(a){return a[randomBelow(a.length)]}
+
+ function populate(){
+  const origins=unique(FIRST.map(x=>x.origin)).sort((a,b)=>a.localeCompare(b));
+  $("origin").innerHTML='<option value="any">Any tradition</option>'+origins.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join("");
+  $("starts").innerHTML='<option value="any">Any letter</option>'+Array.from({length:26},(_,i)=>String.fromCharCode(65+i)).map(x=>`<option value="${x}">${x}</option>`).join("");
+  const styles=unique(FIRST.map(x=>x.style)).sort();
+  $("style").innerHTML='<option value="any">Any style</option>'+styles.map(x=>`<option value="${x}">${x[0].toUpperCase()+x.slice(1)}</option>`).join("");
+ }
+
+ function lengthMatch(n,v){const l=[...n].length;if(v==="any")return true;if(v==="short")return l>=3&&l<=5;if(v==="medium")return l>=6&&l<=7;return l>=8}
+ function excludedSet(){return new Set($("exclude").value.split(",").map(x=>x.trim().toLocaleLowerCase()).filter(Boolean))}
+ function firstPool(){
+  const g=$("gender").value,o=$("origin").value,s=$("starts").value,l=$("length").value,st=$("style").value,ex=excludedSet();
+  return FIRST.filter(x=>
+    (g==="any"||x.gender===g) &&
+    (o==="any"||x.origin===o) &&
+    (s==="any"||x.name.toLocaleUpperCase().startsWith(s)) &&
+    lengthMatch(x.name,l) &&
+    (st==="any"||x.style===st) &&
+    !ex.has(x.name.toLocaleLowerCase())
+  );
+ }
+ function surnamePool(){
+  const o=$("origin").value,ex=excludedSet();
+  let arr=o==="any"?Object.entries(SURNAMES).flatMap(([origin,names])=>names.map(name=>({name,origin}))):(SURNAMES[o]||[]).map(name=>({name,origin:o}));
+  return arr.filter(x=>!ex.has(x.name.toLocaleLowerCase()));
+ }
+ function formatUsage(g){return g==="f"?"Feminine":g==="m"?"Masculine":"Unisex / Broad Usage"}
+
+ function generateOne(fp,sp){
+  if(mode==="first"){
+    const f=pick(fp);return {value:f.name,meta:`${formatUsage(f.gender)} • ${f.origin} • ${f.style}`};
+  }
+  if(mode==="last"){
+    const s=pick(sp);return {value:s.name,meta:`Surname • ${s.origin}`};
+  }
+  const f=pick(fp);
+  const s=pick(sp);
+  let middle="";
+  if($("middleName").checked){
+    let candidates=fp.filter(x=>x.name!==f.name);
+    if(candidates.length)middle=" "+pick(candidates).name;
+  }
+  return {value:`${f.name}${middle} ${s.name}`,meta:`${formatUsage(f.gender)} • ${f.origin}`};
+ }
+
+ function status(type,msg){
+  const icon=type==="good"?"circle-check":type==="bad"?"circle-alert":type==="warn"?"triangle-alert":"info";
+  $("statusArea").innerHTML=`<div class="status-box ${type}"><i data-lucide="${icon}" class="w-4 h-4 flex-none mt-0.5"></i><div>${esc(msg)}</div></div>`;lucide.createIcons();
+ }
+
+ function generate(){
+  const count=Math.trunc(Number($("count").value));
+  if(!Number.isInteger(count)||count<1||count>100){status("bad","Choose between 1 and 100 names.");return}
+  const fp=firstPool(),sp=surnamePool();
+  if((mode==="first"||mode==="full")&&!fp.length){status("bad","No first names match those filters. Broaden one or more settings.");return}
+  if((mode==="last"||mode==="full")&&!sp.length){status("bad","No surnames match that naming-tradition filter.");return}
+
+  const avoid=$("noRepeats").checked,seen=new Set(),out=[];
+  const maxAttempts=Math.max(500,count*60);
+  let attempts=0;
+  while(out.length<count&&attempts<maxAttempts){
+    attempts++;
+    const item=generateOne(fp,sp),k=item.value.toLocaleLowerCase();
+    if(avoid&&seen.has(k))continue;
+    seen.add(k);out.push(item);
+  }
+  current=out;
+  if(out.length<count)status("warn",`Generated ${out.length} unique name(s). The current filters do not provide enough distinct combinations for ${count}.`);
+  else status("good",`${out.length} random name${out.length===1?"":"s"} generated locally with Web Crypto.`);
+  render();
+  addHistory();
+ }
+
+ function modeLabel(){return mode==="first"?"First Name":mode==="last"?"Last Name":"Full Name"}
+ function render(){
+  $("summaryType").textContent=modeLabel();
+  $("summaryOrigin").textContent=$("origin").value==="any"?"Any":$("origin").value;
+  if(!current.length){
+    $("resultGrid").innerHTML='<div class="empty"><i data-lucide="user-round-plus" class="w-8 h-8 mx-auto mb-2"></i><div class="font-bold">Ready to generate names</div><div class="text-xs mt-1">Choose your filters and generate a batch.</div></div>';
+  }else{
+    const f=favorites();
+    $("resultGrid").innerHTML=current.map((x,i)=>`
+      <article class="name-card">
+       <div class="name-main"><div class="name-value">${esc(x.value)}</div><div class="name-meta">${esc(x.meta)}</div></div>
+       <div class="name-actions">
+        <button type="button" class="icon-btn fav ${f.includes(x.value)?"active":""}" data-fav="${esc(x.value)}" aria-label="Favorite ${esc(x.value)}"><i data-lucide="heart" class="w-4 h-4" ${f.includes(x.value)?'fill="currentColor"':""}></i></button>
+        <button type="button" class="icon-btn" data-copy="${i}" aria-label="Copy ${esc(x.value)}"><i data-lucide="copy" class="w-4 h-4"></i></button>
+       </div>
+      </article>`).join("");
+  }
+  renderFavorites();lucide.createIcons();
+ }
+
+ function favorites(){try{return JSON.parse(localStorage.getItem(FAV_KEY)||"[]")}catch{return []}}
+ function setFavorites(v){localStorage.setItem(FAV_KEY,JSON.stringify(v))}
+ function toggleFavorite(name){
+  let f=favorites();f=f.includes(name)?f.filter(x=>x!==name):[...f,name];setFavorites(f);render();
+ }
+ function renderFavorites(){
+  const f=favorites();
+  if(!f.length){$("favorites").innerHTML='<div class="small">Select the heart on a generated name to build a shortlist.</div>';$("clearFavBtn").classList.add("hidden");return}
+  $("favorites").innerHTML=`<div class="favorite-list">${f.map(x=>`<button type="button" class="favorite-pill" data-remove-fav="${esc(x)}"><i data-lucide="heart" class="w-3.5 h-3.5" fill="currentColor"></i>${esc(x)}<i data-lucide="x" class="w-3 h-3"></i></button>`).join("")}</div>`;
+  $("clearFavBtn").classList.remove("hidden");
+ }
+
+ async function copyText(text,b){
+  try{await navigator.clipboard.writeText(text)}catch{const t=document.createElement("textarea");t.value=text;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove()}
+  if(b){const old=b.innerHTML;b.innerHTML='<i data-lucide="check" class="w-3.5 h-3.5"></i>Copied';lucide.createIcons();setTimeout(()=>{b.innerHTML=old;lucide.createIcons()},1200)}
+ }
+
+ $("resultGrid").addEventListener("click",e=>{
+  const f=e.target.closest("[data-fav]");if(f){toggleFavorite(f.dataset.fav);return}
+  const c=e.target.closest("[data-copy]");if(c)copyText(current[Number(c.dataset.copy)].value,c);
+ });
+ $("favorites").addEventListener("click",e=>{const b=e.target.closest("[data-remove-fav]");if(b)toggleFavorite(b.dataset.removeFav)});
+
+ function history(){try{return JSON.parse(localStorage.getItem(HISTORY_KEY)||"[]")}catch{return []}}
+ function addHistory(){
+  if(!current.length)return;
+  const item={time:new Date().toISOString(),mode:modeLabel(),origin:$("origin").value==="any"?"Any":$("origin").value,names:current.slice(0,12).map(x=>x.value)};
+  localStorage.setItem(HISTORY_KEY,JSON.stringify([item,...history()].slice(0,5)));renderHistory();
+ }
+ function renderHistory(){
+  const h=history();
+  if(!h.length){$("historyList").innerHTML='<div class="small">No recent generations yet.</div>';return}
+  $("historyList").innerHTML=h.map(x=>`<div class="history-item"><div class="history-time">${esc(x.mode)} • ${esc(x.origin)} • ${esc(new Date(x.time).toLocaleString())}</div>${x.names.slice(0,5).map(esc).join(" • ")}${x.names.length>5?` • +${x.names.length-5} more`:""}</div>`).join("");
+ }
+
+ $("modeGrid").addEventListener("click",e=>{
+  const b=e.target.closest("[data-mode]");if(!b)return;mode=b.dataset.mode;
+  document.querySelectorAll(".mode-btn").forEach(x=>x.classList.toggle("active",x===b));
+  $("middleToggleWrap").style.display=mode==="full"?"flex":"none";
+  current=[];render();
+ });
+ $("generateBtn").addEventListener("click",generate);
+ $("regenerateBtn").addEventListener("click",generate);
+ $("copyAllBtn").addEventListener("click",()=>{if(!current.length){status("warn","Generate names before copying.");return}copyText(current.map(x=>x.value).join("\n"),$("copyAllBtn"))});
+ $("copyFavBtn").addEventListener("click",()=>copyText(favorites().length?favorites().join("\n"):"No favorites saved.",$("copyFavBtn")));
+ $("clearFavBtn").addEventListener("click",()=>{setFavorites([]);render()});
+ $("clearHistoryBtn").addEventListener("click",()=>{localStorage.removeItem(HISTORY_KEY);renderHistory()});
+
+ $("resetBtn").addEventListener("click",()=>{
+  mode="full";document.querySelectorAll(".mode-btn").forEach(x=>x.classList.toggle("active",x.dataset.mode==="full"));
+  $("gender").value="any";$("origin").value="any";$("starts").value="any";$("length").value="any";$("style").value="any";$("count").value="12";$("middleName").checked=false;$("noRepeats").checked=true;$("exclude").value="";
+  $("middleToggleWrap").style.display="flex";current=[];render();status("info","Generator settings reset.");
+ });
+
+ const toggle=$("themeToggle"),moon=$("moonIcon"),sun=$("sunIcon");
+ function theme(m){const d=m==="dark";document.body.classList.toggle("dark-mode",d);moon.classList.toggle("hidden",d);sun.classList.toggle("hidden",!d);localStorage.setItem("utiliverse-theme",d?"dark":"light");const mt=document.querySelector('meta[name="theme-color"]');if(mt)mt.setAttribute("content",d?"#020617":"#f8fafc");lucide.createIcons()}
+ theme(localStorage.getItem("utiliverse-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));
+ toggle.addEventListener("click",()=>theme(document.body.classList.contains("dark-mode")?"light":"dark"));
+
+ populate();render();renderHistory();status("info","Choose your filters and generate a random batch.");lucide.createIcons();
+})();
+</script>
+</body>
+</html>
