@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fix & Flip Profit Calculator – Estimate Rehab ROI & Profit | Utiliverse</title>
+<meta name="description" content="Estimate fix-and-flip profit, project costs, financing, holding costs, break-even sale price, ROI, cash required, target purchase price, and sensitivity scenarios with the free Utiliverse Fix & Flip Profit Calculator.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/Fix_and_Flip_Profit_Calculator/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Fix & Flip Profit Calculator | Utiliverse">
+<meta property="og:description" content="Estimate flip profit, rehab costs, financing, ROI, break-even, cash needed, and target purchase price.">
+<meta property="og:url" content="https://utiliverse.app/Fix_and_Flip_Profit_Calculator/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fix & Flip Profit Calculator | Utiliverse">
+<meta name="twitter:description" content="Free browser-based property flip profit and ROI calculator.">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+:root{
+  --accent:#e11d48;
+  --accent-strong:#be123c;
+  --accent-soft:#fff1f2;
+  --accent-border:#fecdd3;
+  --surface:#ffffff;
+  --surface-2:#f8fafc;
+  --text:#0f172a;
+  --muted:#64748b;
+  --border:#e2e8f0;
+  --good:#059669;
+  --warn:#d97706;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.10),transparent 32%),#f8fafc;
+  color:#334155;
+}
+body.dark-mode{
+  --accent:#fb7185;
+  --accent-strong:#fda4af;
+  --accent-soft:rgba(225,29,72,.14);
+  --accent-border:rgba(251,113,133,.28);
+  --surface:#0f172a;
+  --surface-2:#020617;
+  --text:#f8fafc;
+  --muted:#94a3b8;
+  --border:#334155;
+  background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.14),transparent 32%),radial-gradient(circle at 90% 15%,rgba(124,58,237,.08),transparent 28%),#020617!important;
+  color:#e2e8f0!important;
+}
+body.dark-mode header{background:rgba(2,6,23,.86)!important;border-color:#1e293b!important}
+body.dark-mode header a{color:#cbd5e1!important}
+body.dark-mode h1,body.dark-mode h2,body.dark-mode h3{color:#f8fafc!important}
+
+.theme-toggle{
+  width:40px;height:40px;border-radius:12px;border:1px solid #cbd5e1;background:#fff;color:#475569;
+  display:flex;align-items:center;justify-content:center;cursor:pointer
+}
+body.dark-mode .theme-toggle{background:#0f172a;border-color:#334155;color:#cbd5e1}
+.free-note{font-size:12px;font-weight:800;color:#64748b;white-space:nowrap}
+body.dark-mode .free-note{color:#94a3b8}
+
+.card,.info-section{
+  background:var(--surface);border:1px solid var(--border);border-radius:1rem;
+  box-shadow:0 1px 2px rgba(15,23,42,.04)
+}
+.card-head{
+  padding:1rem 1.15rem;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;
+  align-items:center;gap:1rem;flex-wrap:wrap
+}
+.card-head h2{font-weight:900;color:var(--text);display:flex;align-items:center;gap:.5rem}
+.label{display:block;font-size:.78rem;font-weight:850;color:#334155;margin-bottom:.38rem}
+body.dark-mode .label{color:#cbd5e1}
+.field{
+  width:100%;border:1px solid #cbd5e1;background:#fff;color:#0f172a;border-radius:.8rem;
+  padding:.74rem .82rem;outline:none;font-size:.92rem
+}
+.field:focus{border-color:#e11d48;box-shadow:0 0 0 3px rgba(225,29,72,.12)}
+body.dark-mode .field{background:#0f172a;border-color:#475569;color:#e2e8f0}
+.helper{font-size:.71rem;color:var(--muted);line-height:1.5;margin-top:.35rem}
+
+.btn-primary,.btn-secondary,.btn-ghost{
+  display:inline-flex;align-items:center;justify-content:center;gap:.43rem;border-radius:.73rem;
+  font-weight:850;transition:.15s ease
+}
+.btn-primary{background:#e11d48;color:#fff;padding:.75rem .98rem}
+.btn-primary:hover{background:#be123c}
+.btn-secondary{background:#fff;color:#334155;border:1px solid #cbd5e1;padding:.69rem .86rem}
+.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border);padding:.63rem .79rem}
+body.dark-mode .btn-primary{background:#e11d48}
+body.dark-mode .btn-secondary{background:#1e293b;color:#e2e8f0;border-color:#475569}
+body.dark-mode .btn-ghost{color:#cbd5e1}
+
+.chip{
+  display:inline-flex;align-items:center;border-radius:999px;padding:.32rem .58rem;font-size:.7rem;
+  font-weight:850;background:var(--accent-soft);color:var(--accent-strong);border:1px solid var(--accent-border)
+}
+.notice{
+  border:1px solid #fed7aa;background:#fff7ed;color:#9a3412;border-radius:.9rem;
+  padding:.85rem .95rem;font-size:.78rem;line-height:1.55
+}
+body.dark-mode .notice{background:rgba(154,52,18,.18);border-color:#9a3412;color:#fed7aa}
+
+.tab-row{display:flex;gap:.45rem;flex-wrap:wrap}
+.tab-btn{
+  border:1px solid var(--border);background:var(--surface-2);color:#475569;border-radius:.7rem;
+  padding:.55rem .75rem;font-size:.72rem;font-weight:850
+}
+.tab-btn.active{background:#e11d48;color:#fff;border-color:#e11d48}
+body.dark-mode .tab-btn{color:#cbd5e1}
+
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}
+.input-wrap{position:relative}
+.prefix,.suffix{position:absolute;top:50%;transform:translateY(-50%);color:#94a3b8;font-size:.85rem;pointer-events:none}
+.prefix{left:12px}.suffix{right:12px}
+.has-prefix{padding-left:28px}
+.has-suffix{padding-right:34px}
+
+.summary-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.7rem}
+.summary-card{background:var(--surface-2);border:1px solid var(--border);border-radius:.9rem;padding:.88rem}
+.summary-label{font-size:.64rem;text-transform:uppercase;letter-spacing:.05em;font-weight:850;color:var(--muted)}
+.summary-value{font-size:1.15rem;font-weight:950;color:var(--text);margin-top:.25rem;overflow-wrap:anywhere}
+.summary-sub{font-size:.67rem;color:var(--muted);margin-top:.16rem;line-height:1.35}
+.positive{color:#047857!important}
+.negative{color:#be123c!important}
+body.dark-mode .positive{color:#6ee7b7!important}
+body.dark-mode .negative{color:#fda4af!important}
+
+.breakdown{display:flex;flex-direction:column;gap:.65rem}
+.break-row{
+  display:grid;grid-template-columns:minmax(130px,1fr) 2fr 110px;gap:.7rem;align-items:center
+}
+.break-label{font-size:.75rem;font-weight:800;color:#475569}
+body.dark-mode .break-label{color:#cbd5e1}
+.bar-track{height:10px;background:#e2e8f0;border-radius:999px;overflow:hidden}
+body.dark-mode .bar-track{background:#334155}
+.bar-fill{height:100%;background:#e11d48;border-radius:999px}
+.break-value{text-align:right;font-size:.75rem;font-weight:900;color:var(--text)}
+
+.metric-table{width:100%;border-collapse:collapse;font-size:.78rem}
+.metric-table th,.metric-table td{padding:.68rem .6rem;border-bottom:1px solid var(--border);text-align:left}
+.metric-table th{font-size:.67rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.metric-table td:last-child,.metric-table th:last-child{text-align:right}
+.metric-table tr:last-child td{border-bottom:0}
+
+.rule-card{
+  background:var(--accent-soft);border:1px solid var(--accent-border);border-radius:.9rem;padding:1rem
+}
+.rule-title{font-size:.78rem;font-weight:900;color:var(--accent-strong)}
+.rule-value{font-size:1.35rem;font-weight:950;color:var(--text);margin-top:.25rem}
+.rule-copy{font-size:.7rem;color:var(--muted);line-height:1.5;margin-top:.3rem}
+
+.sensitivity-wrap{overflow-x:auto}
+.sensitivity{width:100%;border-collapse:separate;border-spacing:0;min-width:560px;font-size:.76rem}
+.sensitivity th,.sensitivity td{border-right:1px solid var(--border);border-bottom:1px solid var(--border);padding:.65rem;text-align:center}
+.sensitivity th:first-child,.sensitivity td:first-child{border-left:1px solid var(--border)}
+.sensitivity thead th{border-top:1px solid var(--border);background:var(--surface-2);color:var(--muted);font-size:.67rem;text-transform:uppercase}
+.sensitivity thead th:first-child{border-radius:.7rem 0 0 0}
+.sensitivity thead th:last-child{border-radius:0 .7rem 0 0}
+.sens-positive{background:#ecfdf5;color:#047857;font-weight:850}
+.sens-negative{background:#fff1f2;color:#be123c;font-weight:850}
+body.dark-mode .sens-positive{background:rgba(6,95,70,.18);color:#6ee7b7}
+body.dark-mode .sens-negative{background:rgba(159,18,57,.18);color:#fda4af}
+
+.status-box{
+  border-radius:.85rem;padding:.8rem .9rem;font-size:.78rem;line-height:1.5;display:flex;gap:.5rem;align-items:flex-start
+}
+.status-box.info{background:#fff1f2;border:1px solid #fecdd3;color:#9f1239}
+.status-box.good{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46}
+.status-box.warn{background:#fffbeb;border:1px solid #fde68a;color:#92400e}
+.status-box.bad{background:#fef2f2;border:1px solid #fecaca;color:#991b1b}
+body.dark-mode .status-box.info{background:rgba(159,18,57,.18);border-color:#9f1239;color:#fda4af}
+body.dark-mode .status-box.good{background:rgba(6,78,59,.2);border-color:#065f46;color:#a7f3d0}
+body.dark-mode .status-box.warn{background:rgba(120,53,15,.2);border-color:#92400e;color:#fde68a}
+body.dark-mode .status-box.bad{background:rgba(127,29,29,.2);border-color:#991b1b;color:#fecaca}
+
+.info-wrap{max-width:72rem;margin:3.5rem auto 0}
+.info-section{padding:1.5rem}
+.info-section+.info-section{margin-top:1.5rem}
+.info-section h2{font-size:1.5rem;font-weight:900;color:var(--text);margin-bottom:.85rem}
+.info-section h3{font-size:1.03rem;font-weight:850;color:var(--text);margin:1.2rem 0 .35rem}
+.info-section p,.info-section li{font-size:.94rem;line-height:1.78;color:#475569}
+body.dark-mode .info-section p,body.dark-mode .info-section li{color:#94a3b8!important}
+.info-section ul{padding-left:1.2rem;list-style:disc}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-item summary{
+  list-style:none;cursor:pointer;padding:1rem 0;color:var(--text);font-weight:850;
+  display:flex;justify-content:space-between;gap:1rem
+}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"+"}
+.faq-item[open] summary::after{content:"−"}
+.faq-item p{padding-bottom:1rem;margin:0}
+.print-only{display:none}
+
+@media(max-width:900px){
+  .summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:700px){
+  .form-grid{grid-template-columns:1fr}
+  .break-row{grid-template-columns:1fr 1.5fr 90px}
+}
+@media(max-width:640px){
+  .free-note{font-size:10px;line-height:1.2;white-space:normal;text-align:right;max-width:118px}
+  .theme-toggle{width:38px;height:38px}
+  .summary-grid{grid-template-columns:1fr 1fr}
+  .break-row{grid-template-columns:1fr 80px}
+  .bar-track{grid-column:1/-1;grid-row:2}
+}
+@media print{
+  header,footer,.info-wrap,.no-print{display:none!important}
+  body{background:#fff!important;color:#111!important}
+  main{max-width:none!important;padding:0!important}
+  .card{box-shadow:none!important;border-color:#ddd!important}
+  .print-only{display:block!important}
+}
+
+/* ============================================================
+   UTILIVERSE REFERENCE THEME
+   Synced to the attached Animal Age Calculator visual system.
+   ============================================================ */
+body{
+  background:#f8fafc!important;
+  color:#0f172a!important;
+}
+body.dark-mode{
+  background:
+    radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),
+    radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),
+    #020617!important;
+  color:#f8fafc!important;
+}
+header{
+  background:rgba(255,255,255,.93)!important;
+  border-bottom-color:#e2e8f0!important;
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+}
+body.dark-mode header{
+  background:rgba(2,6,23,.82)!important;
+  border-bottom-color:#1e293b!important;
+}
+header a{color:#334155!important}
+header a:hover{color:#0f172a!important}
+body.dark-mode header a{color:#cbd5e1!important}
+body.dark-mode header a:hover{color:#fff!important}
+
+.free-note{
+  color:#64748b!important;
+  font-size:13px!important;
+  font-weight:650!important;
+}
+body.dark-mode .free-note{color:#64748b!important}
+
+.theme-toggle{
+  background:#fff!important;
+  color:#475569!important;
+  border-color:#cbd5e1!important;
+  box-shadow:none!important;
+}
+.theme-toggle:hover{
+  color:#0f172a!important;
+  background:#f1f5f9!important;
+  border-color:#94a3b8!important;
+}
+body.dark-mode .theme-toggle{
+  background:rgba(15,23,42,.72)!important;
+  color:#94a3b8!important;
+  border-color:#334155!important;
+}
+body.dark-mode .theme-toggle:hover{
+  color:#fff!important;
+  background:#1e293b!important;
+  border-color:#475569!important;
+}
+
+.tool-card,.card,.info-section{
+  background:rgba(255,255,255,.92)!important;
+  border-color:#dbe3ee!important;
+  color:#0f172a!important;
+}
+body.dark-mode .tool-card,
+body.dark-mode .card,
+body.dark-mode .info-section{
+  background:rgba(30,41,59,.72)!important;
+  border-color:#334155!important;
+  color:#f8fafc!important;
+}
+
+.section-head,.card-head{border-bottom-color:#e2e8f0!important}
+body.dark-mode .section-head,
+body.dark-mode .card-head{border-bottom-color:#334155!important}
+.section-head h2,.card-head h2{color:#0f172a!important}
+body.dark-mode .section-head h2,
+body.dark-mode .card-head h2{color:#f8fafc!important}
+
+h1{color:#0f172a!important}
+body.dark-mode h1{color:#f8fafc!important}
+.hero-copy,.muted{color:#475569!important}
+body.dark-mode .hero-copy,
+body.dark-mode .muted{color:#94a3b8!important}
+
+.label{color:#64748b!important}
+body.dark-mode .label{color:#94a3b8!important}
+.helper,.small{color:#64748b!important}
+body.dark-mode .helper,
+body.dark-mode .small{color:#94a3b8!important}
+
+.field,
+.qty-input,.price-input,.status-select{
+  background:#fff!important;
+  color:#0f172a!important;
+  border-color:#cbd5e1!important;
+}
+.field:focus,
+.qty-input:focus,.price-input:focus,.status-select:focus{
+  border-color:#6366f1!important;
+  box-shadow:0 0 0 3px rgba(99,102,241,.15)!important;
+}
+body.dark-mode .field,
+body.dark-mode .qty-input,
+body.dark-mode .price-input,
+body.dark-mode .status-select{
+  background:#0f172a!important;
+  color:#f8fafc!important;
+  border-color:#475569!important;
+}
+
+.btn-primary{
+  background:linear-gradient(135deg,#6366f1,#4f46e5)!important;
+  border:1px solid #6366f1!important;
+  color:#fff!important;
+  font-weight:800!important;
+}
+.btn-primary:hover{filter:brightness(1.05)}
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.btn-ghost:focus-visible,
+.field:focus-visible{
+  outline:2px solid #6366f1!important;
+  outline-offset:2px!important;
+}
+.btn-secondary,.btn-ghost{
+  background:#f1f5f9!important;
+  color:#334155!important;
+  border-color:#cbd5e1!important;
+  font-weight:800!important;
+}
+.btn-secondary:hover,.btn-ghost:hover{background:#e2e8f0!important}
+body.dark-mode .btn-secondary,
+body.dark-mode .btn-ghost{
+  background:#1e293b!important;
+  color:#f8fafc!important;
+  border-color:#475569!important;
+}
+body.dark-mode .btn-secondary:hover,
+body.dark-mode .btn-ghost:hover{background:#334155!important}
+
+.notice{
+  background:#eef2ff!important;
+  border-color:#c7d2fe!important;
+  color:#4338ca!important;
+}
+body.dark-mode .notice{
+  background:rgba(99,102,241,.07)!important;
+  border-color:rgba(99,102,241,.28)!important;
+  color:#c7d2fe!important;
+}
+
+.status-box.info{
+  background:#eef2ff!important;
+  border-color:#c7d2fe!important;
+  color:#4338ca!important;
+}
+body.dark-mode .status-box.info{
+  background:rgba(99,102,241,.07)!important;
+  border-color:rgba(99,102,241,.28)!important;
+  color:#c7d2fe!important;
+}
+
+.info-section h2{color:#0f172a!important;font-weight:900!important}
+.info-section h3{color:#1e293b!important;font-weight:850!important}
+.info-section p,.info-section li{color:#475569!important}
+body.dark-mode .info-section h2{color:#fff!important}
+body.dark-mode .info-section h3{color:#e2e8f0!important}
+body.dark-mode .info-section p,
+body.dark-mode .info-section li{color:#94a3b8!important}
+
+.faq-item{border-color:#e2e8f0!important}
+.faq-item summary{color:#0f172a!important}
+body.dark-mode .faq-item{border-color:#334155!important}
+body.dark-mode .faq-item summary{color:#e2e8f0!important}
+
+footer{
+  background:#f8fafc!important;
+  border-top:1px solid #e2e8f0!important;
+  color:#64748b!important;
+}
+body.dark-mode footer{
+  background:#020617!important;
+  border-top-color:#1e293b!important;
+  color:#64748b!important;
+}
+
+
+.tab-btn{
+  background:#fff!important;
+  color:#475569!important;
+  border-color:#dbe3ee!important;
+}
+.tab-btn:hover{
+  border-color:#6366f1!important;
+  color:#4338ca!important;
+}
+.tab-btn.active{
+  background:#eef2ff!important;
+  border-color:#818cf8!important;
+  color:#4338ca!important;
+}
+body.dark-mode .tab-btn{
+  background:#0f172a!important;
+  color:#94a3b8!important;
+  border-color:#334155!important;
+}
+body.dark-mode .tab-btn.active{
+  background:rgba(99,102,241,.14)!important;
+  border-color:#818cf8!important;
+  color:#c7d2fe!important;
+}
+.summary-card,.summary-box,.rule-card{
+  background:#f8fafc!important;
+  border-color:#dbe3ee!important;
+}
+body.dark-mode .summary-card,
+body.dark-mode .summary-box,
+body.dark-mode .rule-card{
+  background:rgba(15,23,42,.70)!important;
+  border-color:#334155!important;
+}
+.bar-track{background:#e2e8f0!important}
+body.dark-mode .bar-track{background:#334155!important}
+.bar-fill{background:#6366f1!important}
+.rule-title{color:#4338ca!important}
+body.dark-mode .rule-title{color:#c7d2fe!important}
+.sensitivity thead th{
+  background:#f8fafc!important;
+  color:#64748b!important;
+}
+body.dark-mode .sensitivity thead th{
+  background:#0f172a!important;
+  color:#94a3b8!important;
+}
+
+</style>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Utiliverse Fix & Flip Profit Calculator",
+  "url":"https://utiliverse.app/Fix_and_Flip_Profit_Calculator/",
+  "applicationCategory":"FinanceApplication",
+  "operatingSystem":"Any",
+  "browserRequirements":"Requires a modern web browser with JavaScript.",
+  "description":"A free browser-based fix-and-flip calculator for purchase price, renovation costs, financing, holding costs, selling costs, profit, ROI, cash required, break-even sale price, target purchase price, and sensitivity analysis.",
+  "isAccessibleForFree":true,
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"How do I calculate profit on a fix-and-flip project?","acceptedAnswer":{"@type":"Answer","text":"Estimated profit is the expected sale price minus acquisition cost, purchase closing costs, renovation and contingency, financing costs, holding costs, and selling costs."}},
+    {"@type":"Question","name":"What costs should a house flip calculator include?","acceptedAnswer":{"@type":"Answer","text":"A useful estimate should include purchase price, purchase closing costs, renovation, contingency, financing fees and interest, property taxes, insurance, utilities, HOA or other holding costs, selling commission, seller closing costs, and marketing or staging costs when applicable."}},
+    {"@type":"Question","name":"What is the 70 percent rule for house flipping?","acceptedAnswer":{"@type":"Answer","text":"The 70 percent rule is a rough investor heuristic that estimates a maximum purchase price as 70 percent of after-repair value minus renovation costs. It is not a universal rule and does not replace a complete project analysis."}},
+    {"@type":"Question","name":"What is break-even sale price?","acceptedAnswer":{"@type":"Answer","text":"Break-even sale price is the estimated sale price at which net proceeds after percentage-based selling costs equal total project costs, producing approximately zero profit."}},
+    {"@type":"Question","name":"Does this calculator guarantee a real estate investment return?","acceptedAnswer":{"@type":"Answer","text":"No. The calculator provides estimates based on the inputs entered. Actual renovation costs, property values, financing, taxes, timelines, closing costs, and sale proceeds may differ."}}
+  ]
+}
+</script>
+</head>
+
+<!-- SEO TARGET CLUSTER: fix and flip calculator, house flipping calculator, flip profit calculator, rehab ROI calculator, max purchase price flip -->
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT -->
+
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+<header class="sticky top-0 z-50 bg-white/80 border-b border-slate-200 backdrop-blur">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="https://utiliverse.app" class="flex items-center gap-2 text-sm font-semibold text-slate-600">
+      <i data-lucide="arrow-left" class="w-4 h-4"></i><span>Back to Utiliverse</span>
+    </a>
+    <div class="flex items-center gap-4">
+      <div class="free-note">100% Free and Browser Based</div>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle light or dark mode">
+        <i id="moonIcon" data-lucide="moon" class="w-4 h-4"></i>
+        <i id="sunIcon" data-lucide="sun" class="w-4 h-4 hidden"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+  <div class="mb-6">
+    
+    <h1 class="text-3xl font-bold text-slate-900 flex items-center gap-3">
+      <i data-lucide="hammer" class="w-8 h-8" style="color:#6366f1"></i>
+      Fix & Flip Profit Calculator
+    </h1>
+    <p class="mt-2 text-sm max-w-3xl muted">
+      Estimate acquisition, renovation, financing, holding, and selling costs for a property flip. See expected profit, ROI, cash required, break-even sale price, target purchase price, and downside/upside scenarios.
+    </p>
+  </div>
+
+  <div class="notice mb-6">
+    <strong>Planning estimate only.</strong> Real estate projects involve local taxes, permits, lender terms, contractor risk, market changes, title/closing costs, and other expenses that can materially change the outcome. Verify assumptions with qualified local professionals before making an investment decision.
+  </div>
+
+  <div class="grid grid-cols-1 xl:grid-cols-[.88fr_1.12fr] gap-6">
+    <div class="space-y-6">
+      <section class="card overflow-hidden">
+        <div class="card-head">
+          <h2><i data-lucide="house" class="w-5 h-5" style="color:#6366f1"></i>Property & Purchase</h2>
+        </div>
+        <div class="p-5 space-y-4">
+          <div class="form-grid">
+            <div>
+              <label class="label" for="purchasePrice">Purchase Price</label>
+              <div class="input-wrap"><span class="prefix">$</span><input id="purchasePrice" class="field has-prefix" type="number" min="0" step="1000" value="220000"></div>
+            </div>
+            <div>
+              <label class="label" for="arv">Expected Sale Price / ARV</label>
+              <div class="input-wrap"><span class="prefix">$</span><input id="arv" class="field has-prefix" type="number" min="0" step="1000" value="350000"></div>
+            </div>
+            <div>
+              <label class="label" for="buyClosingPct">Purchase Closing Costs</label>
+              <div class="input-wrap"><input id="buyClosingPct" class="field has-suffix" type="number" min="0" max="25" step=".1" value="2"><span class="suffix">%</span></div>
+            </div>
+            <div>
+              <label class="label" for="fixedAcquisition">Other Acquisition Costs</label>
+              <div class="input-wrap"><span class="prefix">$</span><input id="fixedAcquisition" class="field has-prefix" type="number" min="0" step="100" value="1500"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card overflow-hidden">
+        <div class="card-head">
+          <h2><i data-lucide="paint-roller" class="w-5 h-5" style="color:#6366f1"></i>Renovation</h2>
+        </div>
+        <div class="p-5 space-y-4">
+          <div class="form-grid">
+            <div>
+              <label class="label" for="rehab">Renovation Budget</label>
+              <div class="input-wrap"><span class="prefix">$</span><input id="rehab" class="field has-prefix" type="number" min="0" step="1000" value="55000"></div>
+            </div>
+            <div>
+              <label class="label" for="contingencyPct">Rehab Contingency</label>
+              <div class="input-wrap"><input id="contingencyPct" class="field has-suffix" type="number" min="0" max="100" step="1" value="10"><span class="suffix">%</span></div>
+              <div class="helper">Adds a reserve for unexpected renovation costs.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card overflow-hidden">
+        <div class="card-head">
+          <h2><i data-lucide="landmark" class="w-5 h-5" style="color:#6366f1"></i>Financing</h2>
+        </div>
+        <div class="p-5 space-y-4">
+          <div>
+            <label class="label" for="financingType">Purchase Financing</label>
+            <select id="financingType" class="field">
+              <option value="loan" selected>Loan / Hard Money / Private Financing</option>
+              <option value="cash">Cash Purchase</option>
+            </select>
+          </div>
+
+          <div id="loanFields" class="space-y-4">
+            <div class="form-grid">
+              <div>
+                <label class="label" for="ltv">Loan % of Purchase Price</label>
+                <div class="input-wrap"><input id="ltv" class="field has-suffix" type="number" min="0" max="100" step="1" value="80"><span class="suffix">%</span></div>
+              </div>
+              <div>
+                <label class="label" for="interestRate">Annual Interest Rate</label>
+                <div class="input-wrap"><input id="interestRate" class="field has-suffix" type="number" min="0" max="100" step=".1" value="11"><span class="suffix">%</span></div>
+              </div>
+              <div>
+                <label class="label" for="points">Origination / Points</label>
+                <div class="input-wrap"><input id="points" class="field has-suffix" type="number" min="0" max="25" step=".1" value="2"><span class="suffix">%</span></div>
+              </div>
+              <div>
+                <label class="label" for="otherFinance">Other Financing Fees</label>
+                <div class="input-wrap"><span class="prefix">$</span><input id="otherFinance" class="field has-prefix" type="number" min="0" step="100" value="750"></div>
+              </div>
+            </div>
+            <div class="helper">Interest is estimated as simple interest on the entered loan amount for the holding period. Actual draw schedules, interest reserves, amortization, extension fees, and lender charges may differ.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card overflow-hidden">
+        <div class="card-head">
+          <h2><i data-lucide="calendar-clock" class="w-5 h-5" style="color:#6366f1"></i>Holding & Sale</h2>
+        </div>
+        <div class="p-5 space-y-4">
+          <div class="form-grid">
+            <div>
+              <label class="label" for="holdMonths">Holding Period</label>
+              <div class="input-wrap"><input id="holdMonths" class="field has-suffix" type="number" min="0" max="120" step="1" value="6"><span class="suffix">mo</span></div>
+            </div>
+            <div>
+              <label class="label" for="propertyTax">Property Taxes / Month</label>
+              <div class="input-wrap"><span class="prefix">$</span><input id="propertyTax" class="field has-prefix" type="number" min="0" step="10" value="450"></div>
+            </div>
+            <div>
+              <label class="label" for="insurance">Insurance / Month</label>
+              <div class="input-wrap"><span class="prefix">$</span><input id="insurance" class="field has-prefix" type="number" min="0" step="10" value="250"></div>
+            </div>
+            <div>
+              <label class="label" for="utilities">Utilities / Month</label>
+              <div class="input-wrap"><span class="prefix">$</span><input id="utilities" class="field has-prefix" type="number" min="0" step="10" value="300"></div>
+            </div>
+            <div>
+              <label class="label" for="hoa">HOA / Month</label>
+              <div class="input-wrap"><span class="prefix">$</span><input id="hoa" class="field has-prefix" type="number" min="0" step="10" value="0"></div>
+            </div>
+            <div>
+              <label class="label" for="otherHolding">Other Holding / Month</label>
+              <div class="input-wrap"><span class="prefix">$</span><input id="otherHolding" class="field has-prefix" type="number" min="0" step="10" value="150"></div>
+            </div>
+            <div>
+              <label class="label" for="commissionPct">Agent Commission</label>
+              <div class="input-wrap"><input id="commissionPct" class="field has-suffix" type="number" min="0" max="25" step=".1" value="5"><span class="suffix">%</span></div>
+            </div>
+            <div>
+              <label class="label" for="sellClosingPct">Seller Closing Costs</label>
+              <div class="input-wrap"><input id="sellClosingPct" class="field has-suffix" type="number" min="0" max="25" step=".1" value="2"><span class="suffix">%</span></div>
+            </div>
+            <div>
+              <label class="label" for="staging">Staging / Marketing / Misc.</label>
+              <div class="input-wrap"><span class="prefix">$</span><input id="staging" class="field has-prefix" type="number" min="0" step="100" value="2500"></div>
+            </div>
+            <div>
+              <label class="label" for="targetProfit">Target Profit</label>
+              <div class="input-wrap"><span class="prefix">$</span><input id="targetProfit" class="field has-prefix" type="number" min="0" step="1000" value="40000"></div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 no-print">
+            <button id="calculateBtn" class="btn-primary" type="button"><i data-lucide="calculator" class="w-4 h-4"></i>Calculate</button>
+            <button id="copyBtn" class="btn-secondary" type="button"><i data-lucide="copy" class="w-4 h-4"></i>Copy Summary</button>
+            <button id="printBtn" class="btn-secondary" type="button"><i data-lucide="printer" class="w-4 h-4"></i>Print</button>
+          </div>
+          <div id="statusArea"></div>
+        </div>
+      </section>
+    </div>
+
+    <div class="space-y-6">
+      <section class="card overflow-hidden">
+        <div class="card-head">
+          <h2><i data-lucide="chart-no-axes-combined" class="w-5 h-5" style="color:#6366f1"></i>Project Snapshot</h2>
+          <span class="chip" id="snapshotBadge">Estimate</span>
+        </div>
+        <div class="p-5">
+          <div class="print-only mb-4">
+            <h2 style="font-size:22px;font-weight:800">Utiliverse Fix & Flip Profit Estimate</h2>
+            <p style="font-size:12px;color:#555">Planning estimate based on the entered assumptions.</p>
+          </div>
+
+          <div class="summary-grid">
+            <div class="summary-card">
+              <div class="summary-label">Expected Profit</div>
+              <div id="profitOut" class="summary-value">—</div>
+              <div id="profitSub" class="summary-sub">Sale price less all modeled costs</div>
+            </div>
+            <div class="summary-card">
+              <div class="summary-label">ROI on Total Cost</div>
+              <div id="roiCostOut" class="summary-value">—</div>
+              <div class="summary-sub">Profit ÷ total project cost</div>
+            </div>
+            <div class="summary-card">
+              <div class="summary-label">Cash Required Before Sale</div>
+              <div id="cashOut" class="summary-value">—</div>
+              <div class="summary-sub">Estimated equity + costs paid during project</div>
+            </div>
+            <div class="summary-card">
+              <div class="summary-label">Cash-on-Cash ROI</div>
+              <div id="cashRoiOut" class="summary-value">—</div>
+              <div class="summary-sub">Profit ÷ cash required before sale</div>
+            </div>
+            <div class="summary-card">
+              <div class="summary-label">Total Project Cost</div>
+              <div id="totalCostOut" class="summary-value">—</div>
+              <div class="summary-sub">Including modeled selling costs</div>
+            </div>
+            <div class="summary-card">
+              <div class="summary-label">Break-Even Sale Price</div>
+              <div id="breakEvenOut" class="summary-value">—</div>
+              <div class="summary-sub">Approximate zero-profit sale price</div>
+            </div>
+            <div class="summary-card">
+              <div class="summary-label">Target Max Purchase</div>
+              <div id="targetPurchaseOut" class="summary-value">—</div>
+              <div class="summary-sub">For the entered target profit</div>
+            </div>
+            <div class="summary-card">
+              <div class="summary-label">Profit per Holding Month</div>
+              <div id="monthlyProfitOut" class="summary-value">—</div>
+              <div class="summary-sub">Simple profit ÷ holding months</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card overflow-hidden">
+        <div class="card-head">
+          <h2><i data-lucide="list-tree" class="w-5 h-5" style="color:#6366f1"></i>Cost Breakdown</h2>
+        </div>
+        <div class="p-5">
+          <div id="breakdown" class="breakdown"></div>
+          <div class="mt-5">
+            <table class="metric-table">
+              <tbody>
+                <tr><td>Purchase closing costs</td><td id="buyCloseOut">—</td></tr>
+                <tr><td>Renovation + contingency</td><td id="rehabTotalOut">—</td></tr>
+                <tr><td>Financing costs</td><td id="financeCostOut">—</td></tr>
+                <tr><td>Holding costs</td><td id="holdingCostOut">—</td></tr>
+                <tr><td>Selling costs</td><td id="sellingCostOut">—</td></tr>
+                <tr><td>Estimated net sale proceeds</td><td id="netSaleOut">—</td></tr>
+                <tr><td>Estimated loan amount</td><td id="loanOut">—</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="card overflow-hidden">
+        <div class="card-head">
+          <h2><i data-lucide="ruler" class="w-5 h-5" style="color:#6366f1"></i>Quick Purchase Checks</h2>
+        </div>
+        <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="rule-card">
+            <div class="rule-title">70% Rule Reference</div>
+            <div id="rule70Out" class="rule-value">—</div>
+            <div class="rule-copy">70% × expected sale price − base renovation budget. This is a rough heuristic only and excludes many project-specific costs.</div>
+          </div>
+          <div class="rule-card">
+            <div class="rule-title">Target Profit Purchase Price</div>
+            <div id="ruleTargetOut" class="rule-value">—</div>
+            <div class="rule-copy">Back-solves an approximate maximum purchase price using the entered costs, financing assumptions, expected sale price, and target profit.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card overflow-hidden">
+        <div class="card-head">
+          <h2><i data-lucide="table-properties" class="w-5 h-5" style="color:#6366f1"></i>Profit Sensitivity</h2>
+        </div>
+        <div class="p-5">
+          <div class="helper mb-3">Estimated profit if sale price and renovation cost move away from the base case.</div>
+          <div class="sensitivity-wrap">
+            <table class="sensitivity">
+              <thead>
+                <tr>
+                  <th>Rehab \ Sale</th>
+                  <th>-10%</th>
+                  <th>-5%</th>
+                  <th>Base</th>
+                  <th>+5%</th>
+                  <th>+10%</th>
+                </tr>
+              </thead>
+              <tbody id="sensitivityBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT -->
+
+  <div class="info-wrap">
+    <section class="info-section">
+      <h2>How the Fix & Flip Profit Calculator Works</h2>
+      <p>
+        The calculator starts with the purchase price and adds acquisition closing costs, renovation costs, a rehab contingency, financing charges, monthly holding expenses, and selling costs. It then subtracts those modeled costs from the expected resale price to estimate profit.
+      </p>
+      <p>
+        If financing is selected, the tool estimates the loan amount as a percentage of the purchase price, adds origination points and other lender fees, and estimates simple interest over the holding period. Real hard-money and private-loan structures may use renovation draws, interest reserves, minimum interest, extension charges, or other terms, so lender documents should always control the final analysis.
+      </p>
+    </section>
+
+    <section class="info-section">
+      <h2>Costs to Include in a Property Flip</h2>
+      <h3>Acquisition Costs</h3>
+      <p>Beyond the purchase price, acquisition costs may include title, escrow or attorney fees, transfer-related charges, inspection, appraisal, recording, lender fees, and other local closing expenses.</p>
+
+      <h3>Renovation and Contingency</h3>
+      <p>A renovation budget should account for labor, materials, permits, demolition, disposal, design, and project management when applicable. A contingency reserve can help model the possibility of hidden damage, change orders, or price increases.</p>
+
+      <h3>Holding Costs</h3>
+      <p>Property tax, insurance, utilities, HOA charges, lawn or pool service, security, maintenance, loan interest, and other recurring expenses continue while the property is held. Delays can therefore affect profit even if the renovation budget itself does not change.</p>
+
+      <h3>Selling Costs</h3>
+      <p>Sale-related costs can include brokerage compensation, seller closing costs, title or attorney costs where applicable, concessions, staging, photography, marketing, repairs identified during inspection, and other transaction expenses.</p>
+    </section>
+
+    <section class="info-section">
+      <h2>Understanding the Results</h2>
+      <h3>Expected Profit</h3>
+      <p>Expected profit is the estimated sale price minus all project costs modeled by the calculator.</p>
+
+      <h3>ROI on Total Cost</h3>
+      <p>This is estimated profit divided by total project cost. It shows profit relative to the entire modeled cost of the project, not just the investor's cash contribution.</p>
+
+      <h3>Cash-on-Cash ROI</h3>
+      <p>This estimate divides profit by the modeled cash required before the property sells. It can look higher when leverage is used, but leverage also increases financing risk and carrying costs.</p>
+
+      <h3>Break-Even Sale Price</h3>
+      <p>The break-even estimate solves for the sale price at which net proceeds after percentage-based selling costs approximately equal the modeled project costs.</p>
+    </section>
+
+    <section class="info-section">
+      <h2>What Is the 70% Rule?</h2>
+      <p>
+        The so-called 70% rule is a common rule-of-thumb sometimes used by property investors: multiply the expected after-repair value by 70%, then subtract renovation costs. The result is treated as a rough purchase-price reference. It is not a substitute for a full analysis because local selling costs, financing, taxes, holding time, market conditions, property type, and desired return can make a very different purchase price appropriate.
+      </p>
+    </section>
+
+    <section class="info-section">
+      <h2>Fix & Flip Profit Calculator FAQ</h2>
+
+      <details class="faq-item">
+        <summary>How is estimated flip profit calculated?</summary>
+        <p>The tool subtracts the purchase price, acquisition costs, renovation and contingency, financing costs, holding costs, and selling costs from the expected sale price.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Does the calculator include financing?</summary>
+        <p>Yes. You can model a loan as a percentage of purchase price, annual interest, origination points, other financing fees, and the holding period. Interest is estimated using a simplified non-amortizing approach.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>What does target maximum purchase price mean?</summary>
+        <p>It is the approximate purchase price that would produce the target profit you entered, assuming the rest of the modeled costs and expected sale price remain unchanged.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Should I rely on the 70% rule?</summary>
+        <p>No single percentage rule fits every property or market. The 70% rule is shown only as a quick reference. A detailed cost and risk analysis is more informative.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Why is sensitivity analysis useful?</summary>
+        <p>Flip projects can be affected by lower resale prices and higher renovation costs. The sensitivity table shows how estimated profit changes under several simple downside and upside combinations.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Does this calculator guarantee an investment return?</summary>
+        <p>No. It is a planning calculator. Actual property value, contractor costs, loan terms, taxes, permits, repairs, timeline, transaction costs, and market conditions can differ from the assumptions entered.</p>
+      </details>
+    </section>
+
+    <!-- GOOGLE ADSENSE: BOTTOM / AFTER-CONTENT INSERTION POINT -->
+  </div>
+</main>
+
+<footer class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-6 pt-2">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-500">
+    <div>© 2026 Utiliverse. All rights reserved.</div>
+    <div class="font-semibold text-right">100% Free and Browser Based</div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const $=id=>document.getElementById(id);
+  let last=null;
+
+  const ids=[
+    "purchasePrice","arv","buyClosingPct","fixedAcquisition","rehab","contingencyPct",
+    "financingType","ltv","interestRate","points","otherFinance","holdMonths",
+    "propertyTax","insurance","utilities","hoa","otherHolding","commissionPct",
+    "sellClosingPct","staging","targetProfit"
+  ];
+
+  function num(id){
+    const v=Number($(id).value);
+    return Number.isFinite(v)?v:0;
+  }
+  function money(v){
+    if(!Number.isFinite(v)) return "—";
+    return new Intl.NumberFormat("en-US",{style:"currency",currency:"USD",maximumFractionDigits:0}).format(v);
+  }
+  function pct(v){
+    if(!Number.isFinite(v)) return "—";
+    return `${v.toFixed(1)}%`;
+  }
+  function esc(s){
+    return String(s??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;").replaceAll("'","&#039;");
+  }
+  function status(type,msg){
+    const icon=type==="good"?"circle-check":type==="bad"?"circle-alert":type==="warn"?"triangle-alert":"info";
+    $("statusArea").innerHTML=`<div class="status-box ${type}"><i data-lucide="${icon}" class="w-4 h-4 flex-none mt-0.5"></i><div>${esc(msg)}</div></div>`;
+    lucide.createIcons();
+  }
+
+  function validate(){
+    const p=num("purchasePrice"),arv=num("arv"),months=num("holdMonths");
+    if(p<0||arv<0) return ["bad","Purchase price and expected sale price cannot be negative."];
+    if(arv===0) return ["bad","Enter an expected sale price / ARV greater than zero."];
+    if(months<0||months>120) return ["bad","Holding period must be between 0 and 120 months."];
+    const pctIds=["buyClosingPct","contingencyPct","ltv","interestRate","points","commissionPct","sellClosingPct"];
+    for(const id of pctIds){
+      if(num(id)<0) return ["bad","Percentage inputs cannot be negative."];
+    }
+    if(num("ltv")>100) return ["bad","Loan percentage cannot exceed 100% of purchase price in this model."];
+    if(num("commissionPct")+num("sellClosingPct")>=100) return ["bad","Combined percentage-based selling costs must be less than 100%."];
+    return ["good","Estimate updated using the current assumptions."];
+  }
+
+  function compute(overrides={}){
+    const purchase=overrides.purchase ?? num("purchasePrice");
+    const sale=overrides.sale ?? num("arv");
+    const rehabBase=overrides.rehab ?? num("rehab");
+    const buyClosePct=num("buyClosingPct")/100;
+    const buyClose=purchase*buyClosePct;
+    const acquisitionFixed=num("fixedAcquisition");
+
+    const contingencyPct=num("contingencyPct")/100;
+    const contingency=rehabBase*contingencyPct;
+    const rehabTotal=rehabBase+contingency;
+
+    const months=num("holdMonths");
+    const financing=$("financingType").value==="loan";
+    const ltv=financing?num("ltv")/100:0;
+    const loan=purchase*ltv;
+    const points=financing?loan*(num("points")/100):0;
+    const interest=financing?loan*(num("interestRate")/100)*(months/12):0;
+    const otherFinance=financing?num("otherFinance"):0;
+    const financeCost=points+interest+otherFinance;
+
+    const monthlyHolding=num("propertyTax")+num("insurance")+num("utilities")+num("hoa")+num("otherHolding");
+    const holding=monthlyHolding*months;
+
+    const commissionPct=num("commissionPct")/100;
+    const sellClosePct=num("sellClosingPct")/100;
+    const sellPct=commissionPct+sellClosePct;
+    const staging=num("staging");
+    const selling=sale*sellPct+staging;
+
+    const projectCost=purchase+buyClose+acquisitionFixed+rehabTotal+financeCost+holding+selling;
+    const netSale=sale-selling;
+    const profit=sale-projectCost;
+
+    const cashRequired=(purchase-loan)+buyClose+acquisitionFixed+rehabTotal+financeCost+holding;
+    const roiCost=projectCost>0?profit/projectCost*100:0;
+    const cashRoi=cashRequired>0?profit/cashRequired*100:0;
+    const monthlyProfit=months>0?profit/months:profit;
+
+    const fixedBeforeSale=purchase+buyClose+acquisitionFixed+rehabTotal+financeCost+holding+staging;
+    const breakEven=(1-sellPct)>0?fixedBeforeSale/(1-sellPct):NaN;
+
+    const financeFactor=financing
+      ? ltv*((num("points")/100)+(num("interestRate")/100)*(months/12))
+      : 0;
+    const purchaseFactor=1+buyClosePct+financeFactor;
+    const targetProfit=num("targetProfit");
+    const netSaleBeforePurchase=sale-(sale*sellPct)-staging-rehabTotal-holding-(financing?otherFinance:0)-acquisitionFixed-targetProfit;
+    const targetPurchase=purchaseFactor>0?netSaleBeforePurchase/purchaseFactor:NaN;
+
+    const rule70=sale*.70-rehabBase;
+
+    return {
+      purchase,sale,buyClose,acquisitionFixed,rehabBase,contingency,rehabTotal,
+      loan,points,interest,otherFinance,financeCost,monthlyHolding,holding,
+      selling,projectCost,netSale,profit,cashRequired,roiCost,cashRoi,monthlyProfit,
+      breakEven,targetPurchase,rule70,sellPct,months,financing
+    };
+  }
+
+  function paintValue(el,value,isProfit=false){
+    el.textContent=value;
+    el.classList.remove("positive","negative");
+    if(isProfit && last){
+      if(last.profit>0) el.classList.add("positive");
+      if(last.profit<0) el.classList.add("negative");
+    }
+  }
+
+  function renderBreakdown(r){
+    const items=[
+      ["Purchase Price",r.purchase],
+      ["Acquisition Costs",r.buyClose+r.acquisitionFixed],
+      ["Renovation",r.rehabTotal],
+      ["Financing",r.financeCost],
+      ["Holding Costs",r.holding],
+      ["Selling Costs",r.selling]
+    ];
+    const max=Math.max(...items.map(x=>x[1]),1);
+    $("breakdown").innerHTML=items.map(([label,val])=>`
+      <div class="break-row">
+        <div class="break-label">${label}</div>
+        <div class="bar-track"><div class="bar-fill" style="width:${Math.max(1,Math.min(100,val/max*100)).toFixed(1)}%"></div></div>
+        <div class="break-value">${money(val)}</div>
+      </div>`).join("");
+  }
+
+  function scenarioProfit(saleFactor,rehabFactor){
+    return compute({sale:num("arv")*saleFactor,rehab:num("rehab")*rehabFactor}).profit;
+  }
+
+  function renderSensitivity(){
+    const rehabScenarios=[
+      ["-10%",.90],["Base",1],["+10%",1.10]
+    ];
+    const saleScenarios=[.90,.95,1,1.05,1.10];
+    $("sensitivityBody").innerHTML=rehabScenarios.map(([label,rf])=>`
+      <tr>
+        <th>${label}</th>
+        ${saleScenarios.map(sf=>{
+          const p=scenarioProfit(sf,rf);
+          return `<td class="${p>=0?"sens-positive":"sens-negative"}">${money(p)}</td>`;
+        }).join("")}
+      </tr>`).join("");
+  }
+
+  function calculate(){
+    const [kind,msg]=validate();
+    if(kind==="bad"){status(kind,msg);return}
+    last=compute();
+
+    paintValue($("profitOut"),money(last.profit),true);
+    $("roiCostOut").textContent=pct(last.roiCost);
+    $("cashOut").textContent=money(last.cashRequired);
+    $("cashRoiOut").textContent=pct(last.cashRoi);
+    $("totalCostOut").textContent=money(last.projectCost);
+    $("breakEvenOut").textContent=money(last.breakEven);
+    $("targetPurchaseOut").textContent=money(last.targetPurchase);
+    $("monthlyProfitOut").textContent=money(last.monthlyProfit);
+
+    ["roiCostOut","cashRoiOut","monthlyProfitOut"].forEach(id=>{
+      $(id).classList.remove("positive","negative");
+      const val=id==="roiCostOut"?last.roiCost:id==="cashRoiOut"?last.cashRoi:last.monthlyProfit;
+      if(val>0)$(id).classList.add("positive");
+      if(val<0)$(id).classList.add("negative");
+    });
+
+    $("buyCloseOut").textContent=money(last.buyClose+last.acquisitionFixed);
+    $("rehabTotalOut").textContent=money(last.rehabTotal);
+    $("financeCostOut").textContent=money(last.financeCost);
+    $("holdingCostOut").textContent=money(last.holding);
+    $("sellingCostOut").textContent=money(last.selling);
+    $("netSaleOut").textContent=money(last.netSale);
+    $("loanOut").textContent=money(last.loan);
+
+    $("rule70Out").textContent=money(last.rule70);
+    $("ruleTargetOut").textContent=money(last.targetPurchase);
+
+    $("snapshotBadge").textContent=last.profit>=0?"Projected Profit":"Projected Loss";
+    $("snapshotBadge").style.color=last.profit>=0?"#047857":"#be123c";
+
+    renderBreakdown(last);
+    renderSensitivity();
+    status(kind,msg);
+  }
+
+  function toggleFinancing(){
+    $("loanFields").style.display=$("financingType").value==="loan"?"block":"none";
+    calculate();
+  }
+
+  ids.forEach(id=>{
+    $(id).addEventListener("input",calculate);
+    $(id).addEventListener("change",calculate);
+  });
+  $("financingType").addEventListener("change",toggleFinancing);
+  $("calculateBtn").addEventListener("click",calculate);
+
+  function summaryText(){
+    if(!last) calculate();
+    return [
+      "Utiliverse Fix & Flip Profit Calculator",
+      `Purchase price: ${money(last.purchase)}`,
+      `Expected sale price / ARV: ${money(last.sale)}`,
+      `Renovation + contingency: ${money(last.rehabTotal)}`,
+      `Financing costs: ${money(last.financeCost)}`,
+      `Holding costs: ${money(last.holding)}`,
+      `Selling costs: ${money(last.selling)}`,
+      `Total project cost: ${money(last.projectCost)}`,
+      `Expected profit: ${money(last.profit)}`,
+      `ROI on total cost: ${pct(last.roiCost)}`,
+      `Cash required before sale: ${money(last.cashRequired)}`,
+      `Cash-on-cash ROI: ${pct(last.cashRoi)}`,
+      `Break-even sale price: ${money(last.breakEven)}`,
+      `Target max purchase price: ${money(last.targetPurchase)}`,
+      `70% rule reference: ${money(last.rule70)}`,
+      "",
+      "Planning estimate only. Verify assumptions with qualified local professionals."
+    ].join("\n");
+  }
+
+  async function copySummary(){
+    const b=$("copyBtn"),old=b.innerHTML;
+    try{await navigator.clipboard.writeText(summaryText())}
+    catch{
+      const t=document.createElement("textarea");t.value=summaryText();document.body.appendChild(t);t.select();document.execCommand("copy");t.remove();
+    }
+    b.innerHTML='<i data-lucide="check" class="w-4 h-4"></i>Copied';
+    lucide.createIcons();
+    setTimeout(()=>{b.innerHTML=old;lucide.createIcons()},1200);
+  }
+
+  $("copyBtn").addEventListener("click",copySummary);
+  $("printBtn").addEventListener("click",()=>window.print());
+
+  const toggle=$("themeToggle"),moon=$("moonIcon"),sun=$("sunIcon");
+  function theme(mode){
+    const dark=mode==="dark";
+    document.body.classList.toggle("dark-mode",dark);
+    moon.classList.toggle("hidden",dark);
+    sun.classList.toggle("hidden",!dark);
+    localStorage.setItem("utiliverse-theme",dark?"dark":"light");const mt=document.querySelector('meta[name="theme-color"]');if(mt)mt.setAttribute("content",dark?"#020617":"#f8fafc");
+    lucide.createIcons();
+  }
+  theme(localStorage.getItem("utiliverse-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));
+  toggle.addEventListener("click",()=>theme(document.body.classList.contains("dark-mode")?"light":"dark"));
+
+  toggleFinancing();
+  calculate();
+  lucide.createIcons();
+})();
+</script>
+</body>
+</html>
