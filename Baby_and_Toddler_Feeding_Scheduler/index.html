@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Baby & Toddler Feeding Scheduler – Birth to 24 Months | Utiliverse</title>
+<meta name="description" content="Create a flexible feeding schedule for newborns, babies, and toddlers from birth to 24 months. Plan breast milk, formula, solids, meals, and snacks using age-based guidance.">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/Feeding_Scheduler/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Baby & Toddler Feeding Scheduler – Birth to 24 Months | Utiliverse">
+<meta property="og:description" content="Build a flexible age-based feeding routine for newborns, babies, and toddlers through 24 months.">
+<meta property="og:url" content="https://utiliverse.app/Feeding_Scheduler/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Baby & Toddler Feeding Scheduler | Utiliverse">
+<meta name="twitter:description" content="Free browser-based feeding scheduler for birth through 24 months.">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+:root{
+  --accent:#4f46e5;
+  --accent-strong:#4338ca;
+  --accent-soft:#eef2ff;
+  --accent-border:#a5b4fc;
+  --surface:#ffffff;
+  --surface-2:#f8fafc;
+  --text:#0f172a;
+  --muted:#64748b;
+  --border:#e2e8f0;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.10),transparent 32%),#f8fafc;
+  color:#334155;
+}
+body.dark-mode{
+  --surface:rgba(30,41,59,.72);
+  --surface-2:#0f172a;
+  --text:#f8fafc;
+  --muted:#94a3b8;
+  --border:#334155;
+  --accent:#818cf8;
+  --accent-strong:#a5b4fc;
+  --accent-soft:rgba(49,46,129,.35);
+  --accent-border:#6366f1;
+  background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.14),transparent 32%),#020617!important;
+  color:#f8fafc!important;
+}
+body.dark-mode header{background:rgba(2,6,23,.82)!important;border-color:#1e293b!important}
+body.dark-mode header a{color:#cbd5e1!important}
+body.dark-mode main h1{color:#f8fafc!important}
+.hero-copy{color:#64748b} body.dark-mode .hero-copy,body.dark-mode .helper,body.dark-mode .muted{color:#94a3b8!important}
+.theme-toggle{
+  display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;
+  border:1px solid #cbd5e1;background:#fff;color:#475569;cursor:pointer
+}
+body.dark-mode .theme-toggle{background:#0f172a;border-color:#334155;color:#94a3b8}
+.free-browser-note{color:#64748b;font-size:12px;font-weight:700;white-space:nowrap}
+body.dark-mode .free-browser-note{color:#94a3b8}
+.tool-card,.info-section{
+  background:#fff;border:1px solid #e2e8f0;border-radius:1rem;
+  box-shadow:0 1px 2px rgba(15,23,42,.04)
+}
+body.dark-mode .tool-card,body.dark-mode .info-section{
+  background:rgba(30,41,59,.72)!important;border-color:#334155!important
+}
+.section-head{
+  padding:1rem 1.15rem;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;
+  justify-content:space-between;gap:1rem;flex-wrap:wrap
+}
+body.dark-mode .section-head{border-color:#334155}
+.section-head h2{font-weight:850;color:#0f172a;display:flex;align-items:center;gap:.55rem}
+body.dark-mode .section-head h2{color:#f8fafc}
+.label{display:block;font-size:.79rem;font-weight:800;color:#334155;margin-bottom:.4rem}
+body.dark-mode .label{color:#cbd5e1}
+.field{
+  width:100%;border:1px solid #cbd5e1;background:#fff;color:#0f172a;border-radius:.8rem;
+  padding:.78rem .85rem;outline:none;font-size:1rem
+}
+.field:focus{border-color:#818cf8;box-shadow:0 0 0 3px rgba(99,102,241,.14)}
+body.dark-mode .field{background:#0f172a;border-color:#475569;color:#e2e8f0}
+.helper{font-size:.74rem;line-height:1.5;color:#64748b;margin-top:.38rem}
+.btn-primary,.btn-secondary{
+  display:inline-flex;align-items:center;justify-content:center;gap:.45rem;border-radius:.75rem;font-weight:800
+}
+.btn-primary{background:#4f46e5;color:#fff;padding:.75rem 1rem}
+.btn-primary:hover{background:#4338ca}
+.btn-primary:disabled{opacity:.55;cursor:not-allowed}
+.btn-secondary{background:#fff;color:#334155;border:1px solid #cbd5e1;padding:.68rem .9rem}
+body.dark-mode .btn-secondary{background:#1e293b;color:#e2e8f0;border-color:#475569}
+.status-box{
+  border-radius:.85rem;padding:.85rem .95rem;font-size:.83rem;line-height:1.55;
+  display:flex;gap:.55rem;align-items:flex-start
+}
+.status-box.info{background:#eff6ff;border:1px solid #bfdbfe;color:#1e3a8a}
+.status-box.good{background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46}
+.status-box.warn{background:#fffbeb;border:1px solid #fde68a;color:#92400e}
+.status-box.bad{background:#fef2f2;border:1px solid #fecaca;color:#991b1b}
+body.dark-mode .status-box.info{background:rgba(30,58,138,.22);border-color:#1e40af;color:#bfdbfe}
+body.dark-mode .status-box.good{background:rgba(6,78,59,.22);border-color:#065f46;color:#a7f3d0}
+body.dark-mode .status-box.warn{background:rgba(120,53,15,.22);border-color:#92400e;color:#fde68a}
+body.dark-mode .status-box.bad{background:rgba(127,29,29,.22);border-color:#991b1b;color:#fecaca}
+.summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem}
+.summary-box{background:#f8fafc;border:1px solid #e2e8f0;border-radius:.9rem;padding:.9rem} body.dark-mode .summary-box{background:#0f172a;border-color:#334155}
+.summary-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;font-weight:850;color:var(--muted)}
+.summary-value{font-size:1rem;font-weight:900;color:var(--text);margin-top:.3rem}
+.schedule-list{display:flex;flex-direction:column;gap:.72rem}
+.schedule-item{
+  display:grid;grid-template-columns:88px 44px 1fr;gap:.8rem;align-items:center;
+  border:1px solid #e2e8f0;border-radius:.95rem;padding:.85rem;background:#f8fafc
+}
+body.dark-mode .schedule-item{background:#0f172a;border-color:#334155}
+.schedule-time{font-size:.92rem;font-weight:900;color:var(--text)}
+.schedule-icon{
+  width:42px;height:42px;border-radius:.85rem;display:flex;align-items:center;justify-content:center;
+  background:var(--accent-soft);color:var(--accent-strong);border:1px solid var(--accent-border)
+}
+.schedule-title{font-size:.92rem;font-weight:900;color:var(--text)}
+.schedule-note{font-size:.76rem;line-height:1.45;color:var(--muted);margin-top:.17rem}
+.guidance-card{
+  border:1px solid #bfdbfe;background:#eff6ff;border-radius:.95rem;padding:1rem
+} body.dark-mode .guidance-card{background:rgba(30,58,138,.22);border-color:#1e40af}
+.guidance-card h3{font-weight:900;color:var(--text);display:flex;gap:.5rem;align-items:center}
+.guidance-card p,.guidance-card li{font-size:.8rem;line-height:1.62;color:#475569}
+body.dark-mode .guidance-card p,body.dark-mode .guidance-card li{color:#bfdbfe}
+.guidance-card ul{padding-left:1.1rem;margin-top:.5rem;list-style:disc}
+.safety-strip{
+  display:flex;gap:.7rem;align-items:flex-start;background:#fff7ed;border:1px solid #fed7aa;
+  color:#9a3412;border-radius:1rem;padding:1rem
+}
+body.dark-mode .safety-strip{background:rgba(154,52,18,.17);border-color:#9a3412;color:#fed7aa}
+.info-wrap{max-width:72rem;margin:3.5rem auto 0}
+.info-section{padding:1.5rem}
+.info-section+.info-section{margin-top:1.5rem}
+.info-section h2{font-size:1.65rem;font-weight:800;color:#0f172a;margin-bottom:.9rem}
+.info-section h3{font-size:1.06rem;font-weight:800;color:#1e293b;margin:1.4rem 0 .45rem}
+.info-section p,.info-section li{color:#475569;line-height:1.82;font-size:.98rem}
+body.dark-mode .info-section h2{color:#f8fafc!important} body.dark-mode .info-section h3{color:#e2e8f0!important} body.dark-mode .info-section p,body.dark-mode .info-section li{color:#94a3b8!important}
+.info-section ul{padding-left:1.25rem;list-style:disc}
+.source-link{color:#c2410c;font-weight:800;text-decoration:underline;text-underline-offset:2px}
+body.dark-mode .source-link{color:#fdba74}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-item summary{
+  list-style:none;cursor:pointer;padding:1rem 0;font-weight:800;color:#0f172a;
+  display:flex;justify-content:space-between;gap:1rem
+}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"+"}
+.faq-item[open] summary::after{content:"−"}
+.faq-item p{padding-bottom:1rem;margin:0} body.dark-mode .faq-item{border-color:#334155} body.dark-mode .faq-item summary{color:#e2e8f0}
+.print-only{display:none}
+@media(max-width:800px){
+  .summary-grid{grid-template-columns:1fr}
+  .schedule-item{grid-template-columns:76px 40px 1fr}
+}
+@media(max-width:640px){
+  .free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}
+  .theme-toggle{width:38px;height:38px}
+  .schedule-item{grid-template-columns:70px 1fr}
+  .schedule-icon{display:none}
+}
+@media print{
+  header,footer,.no-print,.info-wrap{display:none!important}
+  body{background:#fff!important;color:#111!important}
+  main{max-width:none!important;padding:0!important}
+  .tool-card{box-shadow:none!important;border-color:#ddd!important}
+  .print-only{display:block!important}
+}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Utiliverse Baby & Toddler Feeding Scheduler",
+  "url":"https://utiliverse.app/Feeding_Scheduler/",
+  "applicationCategory":"HealthApplication",
+  "operatingSystem":"Any",
+  "browserRequirements":"Requires a modern web browser with JavaScript.",
+  "description":"A free browser-based feeding scheduler for newborns, babies, and toddlers from birth to 24 months.",
+  "isAccessibleForFree":true,
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {
+      "@type":"Question",
+      "name":"How often do newborns usually feed?",
+      "acceptedAnswer":{"@type":"Answer","text":"Newborn feeding is cue-led and frequent. Breastfed newborns may feed as often as every 1 to 3 hours and commonly feed 8 to 12 times in 24 hours. Formula-fed newborns commonly start with feeds about every 2 to 3 hours in the first days, with individual needs varying."}
+    },
+    {
+      "@type":"Question",
+      "name":"When can a baby start solid foods?",
+      "acceptedAnswer":{"@type":"Answer","text":"Current guidance recommends introducing complementary foods at about 6 months when the baby is developmentally ready. Introducing solids before 4 months is not recommended."}
+    },
+    {
+      "@type":"Question",
+      "name":"Does the feeding schedule replace hunger and fullness cues?",
+      "acceptedAnswer":{"@type":"Answer","text":"No. The schedule is a planning guide. A child's hunger and fullness cues, growth, medical needs, and clinician guidance take priority over clock times."}
+    },
+    {
+      "@type":"Question",
+      "name":"When can cow's milk replace infant formula?",
+      "acceptedAnswer":{"@type":"Answer","text":"At 12 months, children can generally transition from infant formula to plain, pasteurized whole cow's milk or an appropriate fortified unsweetened dairy alternative. Cow's milk should not replace breast milk or infant formula before 12 months."}
+    },
+    {
+      "@type":"Question",
+      "name":"How often should toddlers eat?",
+      "acceptedAnswer":{"@type":"Answer","text":"A common routine for toddlers is 3 meals plus 2 to 3 snacks, with eating opportunities spaced about every 2 to 3 hours during the day."}
+    }
+  ]
+}
+</script>
+</head>
+
+<!-- SEO TARGET CLUSTER: baby feeding schedule, newborn feeding schedule, infant feeding schedule, toddler meal schedule, 0-24 month feeding routine -->
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT -->
+
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+<header class="sticky top-0 z-50 bg-white/80 border-b border-slate-200">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <a href="https://utiliverse.app" class="flex items-center gap-2 text-sm font-semibold text-slate-600">
+      <i data-lucide="arrow-left" class="w-4 h-4"></i>
+      <span>Back to Utiliverse</span>
+    </a>
+    <div class="flex items-center gap-4">
+      <div class="free-browser-note">100% Free and Browser Based</div>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle light or dark mode">
+        <i id="moonIcon" data-lucide="moon" class="w-4 h-4"></i>
+        <i id="sunIcon" data-lucide="sun" class="w-4 h-4 hidden"></i>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+  <div class="mb-6">
+    <div class="flex items-start justify-between gap-4 flex-wrap">
+      <div>
+<h1 class="text-3xl font-bold text-slate-900 flex items-center gap-3">
+          <i data-lucide="baby" class="w-8 h-8 text-indigo-600"></i>
+          Baby & Toddler Feeding Scheduler
+        </h1>
+        <p class="hero-copy mt-2 text-sm max-w-3xl">
+          Create a flexible feeding routine for newborns, babies, and toddlers from birth through 24 months. Choose an age stage, feeding approach, wake time, and bedtime to build an age-appropriate day plan.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="safety-strip mb-6">
+    <i data-lucide="shield-alert" class="w-5 h-5 flex-none mt-0.5"></i>
+    <div class="text-sm leading-6">
+      <strong>Planning guide, not a medical prescription.</strong>
+      Babies and toddlers vary widely. Hunger/fullness cues, growth, prematurity, medical conditions, allergies, and your child's pediatrician or dietitian take priority over this schedule. Never delay a hungry newborn just to follow a clock.
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 xl:grid-cols-[.85fr_1.15fr] gap-6">
+    <div class="space-y-6">
+      <section class="tool-card overflow-hidden">
+        <div class="section-head">
+          <h2><i data-lucide="sliders-horizontal" class="w-5 h-5" style="color:#4f46e5"></i>Build the Schedule</h2>
+        </div>
+
+        <div class="p-5 space-y-4">
+          <div>
+            <label class="label" for="ageStage">Child's age</label>
+            <select id="ageStage" class="field">
+              <option value="newborn">Newborn • Birth to 4 weeks</option>
+              <option value="1to3">1–3 months</option>
+              <option value="4to5">4–5 months</option>
+              <option value="6to8" selected>6–8 months</option>
+              <option value="9to11">9–11 months</option>
+              <option value="12to18">12–18 months</option>
+              <option value="19to24">19–24 months</option>
+            </select>
+            <div class="helper">Age stage changes the number and type of feeding opportunities shown.</div>
+          </div>
+
+          <div>
+            <label class="label" for="feedingApproach">Feeding approach</label>
+            <select id="feedingApproach" class="field">
+              <option value="breast">Breast milk / nursing</option>
+              <option value="formula">Infant formula</option>
+              <option value="combo" selected>Combination feeding</option>
+            </select>
+            <div class="helper">For children 12 months and older, the schedule shifts toward meals and snacks while still supporting continued breastfeeding if desired.</div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="label" for="wakeTime">Morning wake time</label>
+              <input id="wakeTime" class="field" type="time" value="07:00">
+            </div>
+            <div>
+              <label class="label" for="bedTime">Bedtime</label>
+              <input id="bedTime" class="field" type="time" value="19:30">
+            </div>
+          </div>
+
+          <div id="nightFeedWrap">
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input id="nightFeeds" type="checkbox" class="mt-1 h-4 w-4 accent-orange-600" checked>
+              <span>
+                <span class="label !mb-0">Show overnight feeding reminders</span>
+                <span class="helper block">Especially relevant for newborns and younger infants. The tool will never imply that a medically necessary night feed should be dropped.</span>
+              </span>
+            </label>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+            <button id="generateBtn" type="button" class="btn-primary">
+              <i data-lucide="calendar-plus" class="w-4 h-4"></i>
+              Create Schedule
+            </button>
+            <button id="resetBtn" type="button" class="btn-secondary">
+              <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+              Reset
+            </button>
+          </div>
+
+          <div id="statusArea"></div>
+        </div>
+      </section>
+
+      <section class="tool-card overflow-hidden">
+        <div class="section-head">
+          <h2><i data-lucide="lightbulb" class="w-5 h-5" style="color:#4f46e5"></i>Age-Stage Guidance</h2>
+        </div>
+        <div class="p-5">
+          <div id="guidanceCard" class="guidance-card"></div>
+        </div>
+      </section>
+    </div>
+
+    <div class="space-y-6">
+      <section class="tool-card overflow-hidden">
+        <div class="section-head">
+          <h2><i data-lucide="calendar-days" class="w-5 h-5" style="color:#4f46e5"></i>Your Suggested Routine</h2>
+          <div class="flex gap-2 no-print">
+            <button id="copyBtn" type="button" class="btn-secondary text-sm">
+              <i data-lucide="copy" class="w-4 h-4"></i>Copy
+            </button>
+            <button id="printBtn" type="button" class="btn-secondary text-sm">
+              <i data-lucide="printer" class="w-4 h-4"></i>Print
+            </button>
+          </div>
+        </div>
+
+        <div class="p-5">
+          <div class="print-only mb-4">
+            <h2 style="font-size:22px;font-weight:800">Utiliverse Baby & Toddler Feeding Schedule</h2>
+            <p style="font-size:12px;color:#555">Flexible planning guide — follow your child's cues and clinician guidance.</p>
+          </div>
+
+          <div class="summary-grid mb-5">
+            <div class="summary-box">
+              <div class="summary-label">Age stage</div>
+              <div id="summaryAge" class="summary-value">—</div>
+            </div>
+            <div class="summary-box">
+              <div class="summary-label">Routine type</div>
+              <div id="summaryApproach" class="summary-value">—</div>
+            </div>
+            <div class="summary-box">
+              <div class="summary-label">Daytime opportunities</div>
+              <div id="summaryCount" class="summary-value">—</div>
+            </div>
+          </div>
+
+          <div id="scheduleList" class="schedule-list"></div>
+
+          <div class="mt-5 text-xs leading-5 text-slate-500 muted">
+            Times are approximate. Feed responsively and adjust around naps, daycare, family meals, growth spurts, illness, and your child's individual hunger/fullness cues.
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT -->
+
+  <div class="info-wrap">
+    <section class="info-section">
+      <h2>How the Feeding Scheduler Works</h2>
+      <p>
+        This tool creates a practical daily routine from the child's age stage, feeding approach, wake time, and bedtime. It is intentionally flexible: the clock provides structure, while hunger and fullness cues remain more important than an exact minute-by-minute schedule.
+      </p>
+      <p>
+        During the first months, the schedule centers on breast milk and/or infant formula. Around 6 months, complementary foods can begin when a baby shows developmental readiness. From 12 to 24 months, the routine gradually resembles a family meal pattern with three meals and two to three snacks while breastfeeding can continue if desired.
+      </p>
+    </section>
+
+    <section class="info-section">
+      <h2>Feeding Guidance by Age</h2>
+
+      <h3>Birth to 4 weeks</h3>
+      <p>
+        Newborns feed frequently and should not be placed on a rigid clock-only schedule. Breastfed newborns may want to feed every 1 to 3 hours and commonly feed 8 to 12 times in 24 hours. Formula-fed newborns commonly begin with about 1 to 2 ounces every 2 to 3 hours in the first days, with needs increasing as the baby grows.
+      </p>
+
+      <h3>1 to 5 months</h3>
+      <p>
+        Milk remains the sole source of nutrition for most infants. Feeding intervals often become somewhat longer as babies grow, especially with formula feeding, but individual variation is substantial. Introducing solid foods before 4 months is not recommended.
+      </p>
+
+      <h3>6 to 11 months</h3>
+      <p>
+        Breast milk and/or infant formula remains the main source of nutrition while complementary foods gradually become more important. Solids are generally introduced at about 6 months when the baby is developmentally ready. Start with small amounts and age-appropriate textures, and continue milk feeds.
+      </p>
+
+      <h3>12 to 24 months</h3>
+      <p>
+        Toddlers typically do well with regular meal and snack opportunities spaced through the day. A common rhythm is three meals plus two to three snacks. At 12 months, infant formula can generally transition to plain pasteurized whole cow's milk or an appropriate fortified unsweetened dairy alternative, while breastfeeding can continue.
+      </p>
+    </section>
+
+    <section class="info-section">
+      <h2>Important Safety Notes</h2>
+      <ul>
+        <li>Do not introduce solid foods before 4 months. Around 6 months, look for developmental readiness such as head control, sitting with support, bringing objects to the mouth, and swallowing food rather than pushing it out.</li>
+        <li>Breast milk and/or infant formula should remain the main source of nutrition from 6 through 12 months.</li>
+        <li>Do not use cow's milk as the main drink before 12 months.</li>
+        <li>Do not give honey before 12 months because of the risk of infant botulism.</li>
+        <li>Prepare food in developmentally appropriate textures and avoid common choking hazards. Always supervise eating.</li>
+        <li>Children younger than 24 months should avoid added sugars. Juice is not recommended before 12 months.</li>
+        <li>Talk with the child's clinician about feeding concerns, poor growth, dehydration, persistent vomiting, allergies, prematurity, special medical needs, or difficulty swallowing.</li>
+      </ul>
+    </section>
+
+    <section class="info-section">
+      <h2>Sources & Guidance</h2>
+      <p>
+        The scheduler uses general age-based guidance from the U.S. Centers for Disease Control and Prevention and the American Academy of Pediatrics' HealthyChildren.org. These sources provide broad guidance, not an individualized medical plan.
+      </p>
+      <ul>
+        <li><a class="source-link" href="https://www.cdc.gov/infant-toddler-nutrition/breastfeeding/how-much-and-how-often.html" target="_blank" rel="noopener">CDC: How Much and How Often to Breastfeed</a></li>
+        <li><a class="source-link" href="https://www.cdc.gov/infant-toddler-nutrition/formula-feeding/how-much-and-how-often.html" target="_blank" rel="noopener">CDC: How Much and How Often to Feed Infant Formula</a></li>
+        <li><a class="source-link" href="https://www.cdc.gov/infant-toddler-nutrition/foods-and-drinks/when-what-and-how-to-introduce-solid-foods.html" target="_blank" rel="noopener">CDC: When, What, and How to Introduce Solid Foods</a></li>
+        <li><a class="source-link" href="https://www.cdc.gov/infant-toddler-nutrition/foods-and-drinks/how-much-and-how-often-to-feed.html" target="_blank" rel="noopener">CDC: How Much and How Often to Feed</a></li>
+        <li><a class="source-link" href="https://www.healthychildren.org/English/ages-stages/baby/formula-feeding/Pages/amount-and-schedule-of-formula-feedings.aspx" target="_blank" rel="noopener">HealthyChildren.org: Amount and Schedule of Baby Formula Feedings</a></li>
+      </ul>
+    </section>
+
+    <section class="info-section">
+      <h2>Baby & Toddler Feeding Scheduler FAQ</h2>
+
+      <details class="faq-item">
+        <summary>How often do newborns usually feed?</summary>
+        <p>Newborns feed frequently and responsively. Breastfed newborns may feed as often as every 1 to 3 hours and commonly 8 to 12 times in 24 hours. Formula-fed newborns often feed every 2 to 3 hours in the first days. Individual needs vary.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>When can my baby start solid foods?</summary>
+        <p>Current guidance recommends beginning complementary foods at about 6 months when the baby shows developmental readiness. Introducing solids before 4 months is not recommended.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Should I wake a newborn for feeding?</summary>
+        <p>Young newborns may need to be awakened for feeds, particularly in the first weeks or when weight gain is being monitored. Follow the baby's clinician's advice rather than using this tool to decide when overnight feeds can be dropped.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Does this schedule replace hunger and fullness cues?</summary>
+        <p>No. Clock times are only a planning framework. Feed sooner when a child shows hunger cues and stop when they show fullness cues.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>When can cow's milk replace infant formula?</summary>
+        <p>At 12 months, children can generally transition from infant formula to plain pasteurized whole cow's milk or an appropriate fortified unsweetened dairy alternative. Cow's milk should not replace breast milk or infant formula before 12 months.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>How often should toddlers eat?</summary>
+        <p>A practical routine is three meals plus two to three snacks, with eating opportunities spaced about every 2 to 3 hours during the day.</p>
+      </details>
+    </section>
+
+    <!-- GOOGLE ADSENSE: BOTTOM / AFTER-CONTENT INSERTION POINT -->
+  </div>
+</main>
+
+<footer class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-6 pt-2">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-500">
+    <div>© 2026 Utiliverse. All rights reserved.</div>
+    <div class="font-semibold text-right">100% Free and Browser Based</div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+
+  const profiles = {
+    newborn: {
+      label:"Birth to 4 weeks",
+      daytimeCount:10,
+      mode:"roundclock",
+      guidanceTitle:"Newborn feeding is cue-led and frequent",
+      guidance:[
+        "Breastfed newborns may feed every 1–3 hours and commonly 8–12 times in 24 hours.",
+        "Formula-fed newborns commonly start with about 1–2 oz every 2–3 hours in the first days; needs increase as the baby grows.",
+        "Do not delay a hungry newborn just to stay on schedule.",
+        "Young newborns may need to be awakened for feeds; follow clinician guidance."
+      ]
+    },
+    "1to3": {
+      label:"1–3 months",
+      daytimeCount:8,
+      mode:"roundclock",
+      guidanceTitle:"Milk remains the complete feeding focus",
+      guidance:[
+        "Continue breast milk and/or infant formula as the sole source of nutrition.",
+        "Breastfeeding often remains frequent; formula feeding commonly settles toward longer intervals.",
+        "Growth spurts can temporarily increase feeding frequency.",
+        "Solid foods are not part of this age-stage schedule."
+      ]
+    },
+    "4to5": {
+      label:"4–5 months",
+      daytimeCount:6,
+      mode:"day",
+      guidanceTitle:"Continue milk feeds; solids are not required yet",
+      guidance:[
+        "Breast milk and/or infant formula remains the main nutrition.",
+        "Introducing solids before 4 months is not recommended; most guidance targets about 6 months when developmentally ready.",
+        "Do not rush solids solely to improve sleep.",
+        "Follow hunger/fullness cues rather than forcing a bottle or feeding."
+      ]
+    },
+    "6to8": {
+      label:"6–8 months",
+      daytimeCount:6,
+      mode:"solidsEarly",
+      guidanceTitle:"Milk stays primary while complementary foods begin",
+      guidance:[
+        "Breast milk and/or infant formula remains the main source of nutrition.",
+        "Offer complementary foods around 6 months only when developmental readiness is present.",
+        "Start with small amounts and age-appropriate textures.",
+        "Introduce variety gradually and continue responsive milk feeds."
+      ]
+    },
+    "9to11": {
+      label:"9–11 months",
+      daytimeCount:6,
+      mode:"solidsLater",
+      guidanceTitle:"Build toward regular meals while keeping milk feeds",
+      guidance:[
+        "Continue breast milk and/or infant formula through the first birthday.",
+        "Offer a variety of soft, safe textures and finger foods appropriate for development.",
+        "A regular rhythm of meals plus milk feeds can help build family-meal skills.",
+        "Water can be offered in small amounts with meals."
+      ]
+    },
+    "12to18": {
+      label:"12–18 months",
+      daytimeCount:5,
+      mode:"toddler",
+      guidanceTitle:"Move toward 3 meals and 2–3 snacks",
+      guidance:[
+        "A regular meal-and-snack routine often works well at this age.",
+        "At 12 months, infant formula can generally transition to plain whole cow's milk or an appropriate fortified unsweetened dairy alternative.",
+        "Breastfeeding can continue for as long as parent and child desire.",
+        "Avoid continuous grazing throughout the day."
+      ]
+    },
+    "19to24": {
+      label:"19–24 months",
+      daytimeCount:5,
+      mode:"toddler",
+      guidanceTitle:"Use a predictable family-style meal routine",
+      guidance:[
+        "Aim for 3 meals plus 2–3 snacks at predictable times.",
+        "Offer a variety of family foods in safe sizes and textures.",
+        "Let the child decide how much to eat from the foods offered.",
+        "Avoid added sugars for children younger than 24 months."
+      ]
+    }
+  };
+
+  const approachLabels = {
+    breast:"Breast milk / nursing",
+    formula:"Infant formula",
+    combo:"Combination feeding"
+  };
+
+  function minutesFromTime(v){
+    const [h,m] = v.split(":").map(Number);
+    return h*60+m;
+  }
+
+  function fmt(minutes){
+    minutes = ((minutes % 1440) + 1440) % 1440;
+    let h = Math.floor(minutes/60);
+    const m = minutes % 60;
+    const ap = h >= 12 ? "PM" : "AM";
+    let h12 = h % 12;
+    if(h12 === 0) h12 = 12;
+    return `${h12}:${String(m).padStart(2,"0")} ${ap}`;
+  }
+
+  function spanDay(wake, bed){
+    let end = bed;
+    if(end <= wake) end += 1440;
+    return end - wake;
+  }
+
+  function evenTimes(start,end,count){
+    if(count <= 1) return [start];
+    const step = (end-start)/(count-1);
+    return Array.from({length:count},(_,i)=>Math.round(start+(step*i)));
+  }
+
+  function milkLabel(approach){
+    if(approach === "breast") return {title:"Breast milk / nursing",icon:"baby"};
+    if(approach === "formula") return {title:"Formula feed",icon:"milk"};
+    return {title:"Milk feed",icon:"milk"};
+  }
+
+  function milkNote(age,approach){
+    if(age === "newborn"){
+      if(approach === "breast") return "Feed responsively; newborns may nurse every 1–3 hours.";
+      if(approach === "formula") return "In the first days, many newborns start around 1–2 oz every 2–3 hours; follow cues and clinician advice.";
+      return "Offer breast milk and/or formula responsively. Newborns often feed 8–12 times per 24 hours.";
+    }
+    if(age === "1to3"){
+      return approach === "formula"
+        ? "Feed responsively; many formula-fed infants gradually settle toward roughly 3–4 hour intervals."
+        : "Feed responsively. Frequency can vary from day to day and during growth spurts.";
+    }
+    if(age === "4to5") return "Breast milk and/or infant formula remains the full nutrition focus.";
+    if(age === "6to8" || age === "9to11") return "Breast milk and/or infant formula remains an important source of nutrition.";
+    return "Milk can be offered with meals/snacks as appropriate; breastfeeding can continue if desired.";
+  }
+
+  function event(time,title,note,icon){
+    return {time,title,note,icon};
+  }
+
+  function buildRoundClock(age,approach,wake,showNight){
+    const milk = milkLabel(approach);
+    const interval = age === "newborn"
+      ? (approach === "formula" ? 165 : approach === "breast" ? 150 : 160)
+      : (approach === "formula" ? 210 : approach === "breast" ? 180 : 195);
+
+    const count = Math.ceil(1440/interval);
+    const events = [];
+    for(let i=0;i<count;i++){
+      const t = wake + i*interval;
+      const hour = ((t%1440)+1440)%1440;
+      const isNight = hour < 360 || hour >= 1320;
+      if(!showNight && isNight) continue;
+      events.push(event(t,milk.title,milkNote(age,approach),milk.icon));
+    }
+    return events;
+  }
+
+  function buildDay(age,approach,wake,bed){
+    const p = profiles[age];
+    const milk = milkLabel(approach);
+    const duration = spanDay(wake,bed);
+    const end = wake + duration;
+
+    if(age === "4to5"){
+      return evenTimes(wake,end,p.daytimeCount).map((t,i)=>
+        event(t,milk.title,milkNote(age,approach),milk.icon)
+      );
+    }
+
+    if(age === "6to8"){
+      const times = evenTimes(wake,end,6);
+      return [
+        event(times[0],milk.title,"Start the day with a responsive milk feed.",milk.icon),
+        event(times[1],"Complementary food","Small amount of iron-rich or other age-appropriate soft food; milk remains primary.","utensils"),
+        event(times[2],milk.title,milkNote(age,approach),milk.icon),
+        event(times[3],"Complementary food","Offer a small meal and let hunger/fullness cues guide quantity.","utensils"),
+        event(times[4],milk.title,"Responsive milk feed; adjust around naps and appetite.",milk.icon),
+        event(times[5],milk.title,"Bedtime milk feed if this fits your child's normal routine. Do not put a child to bed with a bottle.",milk.icon)
+      ];
+    }
+
+    if(age === "9to11"){
+      const times = evenTimes(wake,end,6);
+      return [
+        event(times[0],milk.title,"Morning milk feed.",milk.icon),
+        event(times[1],"Breakfast","Soft, safe family foods or other age-appropriate complementary foods.","utensils"),
+        event(times[2],milk.title,"Responsive milk feed between meals.",milk.icon),
+        event(times[3],"Lunch","Offer varied textures and foods the child can safely manage.","utensils"),
+        event(times[4],"Dinner / milk","Family-style meal plus breast milk or formula as desired.","utensils"),
+        event(times[5],milk.title,"Bedtime milk feed if part of the child's routine. Avoid putting a child to bed with a bottle.",milk.icon)
+      ];
+    }
+
+    const times = evenTimes(wake,end,5);
+    const breastExtra = approach === "breast" || approach === "combo";
+    const lastNote = breastExtra
+      ? "Optional nursing can continue before bed if desired; keep meals and snacks as the daytime structure."
+      : "Water can accompany meals. Milk can be served with meals/snacks; avoid continuous sipping all day.";
+
+    return [
+      event(times[0],"Breakfast","Offer a balanced meal and water. Milk can be served with the meal.","sunrise"),
+      event(times[1],"Morning snack","Small snack from familiar food groups; avoid grazing between planned eating times.","apple"),
+      event(times[2],"Lunch","Family-style meal with developmentally safe textures and portions.","utensils"),
+      event(times[3],"Afternoon snack","Offer a simple snack and water.","apple"),
+      event(times[4],"Dinner","Family-style evening meal. "+lastNote,"utensils")
+    ];
+  }
+
+  function renderGuidance(age){
+    const p = profiles[age];
+    $("guidanceCard").innerHTML = `
+      <h3><i data-lucide="heart-handshake" class="w-5 h-5" style="color:#4f46e5"></i>${p.guidanceTitle}</h3>
+      <ul>${p.guidance.map(x=>`<li>${x}</li>`).join("")}</ul>
+    `;
+    lucide.createIcons();
+  }
+
+  function renderSchedule(events, age, approach){
+    const p = profiles[age];
+    $("summaryAge").textContent = p.label;
+    $("summaryApproach").textContent = approachLabels[approach];
+    $("summaryCount").textContent = `${events.length} shown`;
+
+    $("scheduleList").innerHTML = events.map(e=>`
+      <div class="schedule-item">
+        <div class="schedule-time">${fmt(e.time)}</div>
+        <div class="schedule-icon"><i data-lucide="${e.icon}" class="w-5 h-5"></i></div>
+        <div>
+          <div class="schedule-title">${e.title}</div>
+          <div class="schedule-note">${e.note}</div>
+        </div>
+      </div>
+    `).join("");
+    lucide.createIcons();
+  }
+
+  function status(type,msg){
+    const icon = type==="good" ? "circle-check" : type==="bad" ? "circle-alert" : type==="warn" ? "triangle-alert" : "info";
+    $("statusArea").innerHTML = `<div class="status-box ${type}"><i data-lucide="${icon}" class="w-4 h-4 flex-none mt-0.5"></i><div>${msg}</div></div>`;
+    lucide.createIcons();
+  }
+
+  function generate(){
+    const age = $("ageStage").value;
+    const approach = $("feedingApproach").value;
+    const wake = minutesFromTime($("wakeTime").value);
+    const bed = minutesFromTime($("bedTime").value);
+    const showNight = $("nightFeeds").checked;
+    const p = profiles[age];
+
+    let events = [];
+    if(p.mode === "roundclock"){
+      events = buildRoundClock(age,approach,wake,showNight);
+      status("info","This young-infant schedule is intentionally approximate. Feed sooner when your baby shows hunger cues, and follow clinician advice about waking for feeds.");
+    } else {
+      const dur = spanDay(wake,bed);
+      if(dur < 480 || dur > 1080){
+        status("bad","Please choose wake and bedtime values that create a daytime span between 8 and 18 hours.");
+        return;
+      }
+      events = buildDay(age,approach,wake,bed);
+      status("good","Schedule created. Use the times as flexible anchors rather than strict feeding deadlines.");
+    }
+
+    renderGuidance(age);
+    renderSchedule(events,age,approach);
+  }
+
+  function adaptControls(){
+    const age = $("ageStage").value;
+    const young = age === "newborn" || age === "1to3";
+    $("nightFeedWrap").style.display = young ? "block" : "none";
+    if(!young) $("nightFeeds").checked = false;
+    renderGuidance(age);
+  }
+
+  function scheduleText(){
+    const age = $("summaryAge").textContent;
+    const approach = $("summaryApproach").textContent;
+    const rows = [...document.querySelectorAll(".schedule-item")].map(row=>{
+      const t = row.querySelector(".schedule-time")?.textContent || "";
+      const title = row.querySelector(".schedule-title")?.textContent || "";
+      const note = row.querySelector(".schedule-note")?.textContent || "";
+      return `${t} — ${title}\n${note}`;
+    });
+    return [
+      "Utiliverse Baby & Toddler Feeding Schedule",
+      `Age: ${age}`,
+      `Approach: ${approach}`,
+      "",
+      ...rows,
+      "",
+      "Times are approximate. Follow hunger/fullness cues and clinician guidance."
+    ].join("\n");
+  }
+
+  async function copySchedule(){
+    const text = scheduleText();
+    try{
+      await navigator.clipboard.writeText(text);
+    }catch{
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+    }
+    const old = $("copyBtn").innerHTML;
+    $("copyBtn").innerHTML = '<i data-lucide="check" class="w-4 h-4"></i>Copied';
+    lucide.createIcons();
+    setTimeout(()=>{$("copyBtn").innerHTML=old;lucide.createIcons()},1200);
+  }
+
+  function reset(){
+    $("ageStage").value = "6to8";
+    $("feedingApproach").value = "combo";
+    $("wakeTime").value = "07:00";
+    $("bedTime").value = "19:30";
+    $("nightFeeds").checked = true;
+    adaptControls();
+    generate();
+  }
+
+  $("generateBtn").addEventListener("click",generate);
+  $("resetBtn").addEventListener("click",reset);
+  $("copyBtn").addEventListener("click",copySchedule);
+  $("printBtn").addEventListener("click",()=>window.print());
+  $("ageStage").addEventListener("change",()=>{adaptControls();generate()});
+  $("feedingApproach").addEventListener("change",generate);
+  $("wakeTime").addEventListener("change",generate);
+  $("bedTime").addEventListener("change",generate);
+  $("nightFeeds").addEventListener("change",generate);
+
+  const toggle = $("themeToggle");
+  const moon = $("moonIcon");
+  const sun = $("sunIcon");
+
+  function setTheme(mode){
+    const dark = mode === "dark";
+    document.body.classList.toggle("dark-mode",dark);
+    moon.classList.toggle("hidden",dark);
+    sun.classList.toggle("hidden",!dark);
+    localStorage.setItem("utiliverse-theme", dark ? "dark" : "light");
+    lucide.createIcons();
+  }
+
+  setTheme(
+    localStorage.getItem("utiliverse-theme") ||
+    (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+  );
+
+  toggle.addEventListener("click",()=>setTheme(
+    document.body.classList.contains("dark-mode") ? "light" : "dark"
+  ));
+
+  adaptControls();
+  generate();
+  lucide.createIcons();
+})();
+</script>
+</body>
+</html>
