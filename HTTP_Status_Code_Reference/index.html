@@ -56,7 +56,9 @@ header{position:sticky;top:0;z-index:50;background:rgba(2,6,23,.82);backdrop-fil
 
 main{padding:48px 0 72px}
 .eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:#818cf8;font-weight:850}
-h1{font-size:clamp(38px,5vw,58px);line-height:1.04;margin:10px 0 14px;font-weight:900;letter-spacing:-.035em}
+h1{font-size:clamp(38px,5vw,58px);line-height:1.04;margin:0 0 14px;font-weight:900;letter-spacing:-.035em;display:flex;align-items:center;gap:14px}
+.title-icon{width:clamp(36px,5vw,50px);height:clamp(36px,5vw,50px);flex:none;color:#818cf8}
+.title-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .hero p{max-width:900px;color:var(--muted);font-size:18px;line-height:1.72;margin:0}
 .hero-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
 .meta{border:1px solid var(--border);background:rgba(15,23,42,.66);border-radius:999px;padding:7px 10px;color:#cbd5e1;font-size:12px;font-weight:750}
@@ -275,8 +277,7 @@ border, label, or reserved ad space is rendered before approved ad code is added
 <main>
 <div class="container">
   <section class="hero">
-    <div class="eyebrow">Developer reference</div>
-    <h1>HTTP Status Code Reference</h1>
+    <h1><span class="title-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 9 4 12l4 3"/><path d="m16 9 4 3-4 3"/><path d="m14 5-4 14"/></svg></span><span>HTTP Status Code Reference</span></h1>
     <p>Search HTTP response codes by number, name, class, or keyword. Switch between card and table views, show common codes only, and open any response code for an explanation, example, and standards note.</p>
     <div class="hero-meta">
       <span class="meta"><span id="totalCount">64</span> registered codes in this reference</span>
