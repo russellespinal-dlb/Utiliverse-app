@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1786245123035497" crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Utiliverse Updates – Tool, Content &amp; Maintenance Changelog</title>
+<meta name="description" content="See meaningful Utiliverse updates including new tools, major revisions, source maintenance, browser compatibility improvements, and editorial changes.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/Updates.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Utiliverse Updates – Tool, Content &amp; Maintenance Changelog">
+<meta property="og:description" content="See meaningful Utiliverse updates including new tools, major revisions, source maintenance, browser compatibility improvements, and editorial changes.">
+<meta property="og:url" content="https://utiliverse.app/Updates.html">
+<meta name="twitter:card" content="summary">
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --panel:rgba(30,41,59,.72);--panel2:rgba(15,23,42,.70);
+  --border:#334155;--border2:#475569;--text:#f8fafc;--muted:#94a3b8;
+  --indigo:#6366f1;--indigo2:#4f46e5;--green:#34d399;--amber:#fbbf24;--rose:#fb7185
+}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),
+    radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;
+  color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  transition:background .25s ease,color .25s ease
+}
+a{color:inherit} button{font:inherit} button{touch-action:manipulation}
+.container{max-width:1152px;margin:0 auto;padding:0 16px}
+header{position:sticky;top:0;z-index:50;background:rgba(2,6,23,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid #1e293b}
+.header-inner{min-height:65px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.back-link{display:flex;align-items:center;gap:8px;text-decoration:none;color:#cbd5e1;font-size:14px;font-weight:700}
+.back-link:hover{color:#fff}
+.header-right{display:flex;align-items:center;gap:12px}
+.resource-nav{display:flex;align-items:center;gap:14px}
+.resource-nav a{font-size:12px;font-weight:750;text-decoration:none;color:#94a3b8}
+.resource-nav a:hover{color:#fff}
+.free-label{font-size:13px;font-weight:650;color:#64748b;white-space:nowrap}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border:1px solid #334155;background:rgba(15,23,42,.72);color:#94a3b8;border-radius:12px;cursor:pointer;box-shadow:none;appearance:none;-webkit-appearance:none}
+.theme-toggle:hover{color:#fff;background:#1e293b;border-color:#475569}
+.theme-toggle:focus-visible,.btn:focus-visible,a:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
+.theme-toggle svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.theme-hidden{display:none!important}
+main{padding:48px 0 72px}
+.hero{max-width:920px}
+.title-row{display:flex;align-items:center;gap:14px}
+.title-icon{width:46px;height:46px;flex:none;color:#818cf8}
+.title-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+h1{font-size:clamp(38px,5vw,58px);line-height:1.04;margin:0;font-weight:900;letter-spacing:-.035em}
+.hero p{max-width:900px;color:var(--muted);font-size:18px;line-height:1.72;margin:14px 0 0}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.meta{border:1px solid var(--border);background:rgba(15,23,42,.66);border-radius:999px;padding:7px 10px;color:#cbd5e1;font-size:12px;font-weight:750}
+.glass{background:var(--panel);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:20px}
+.section{margin-top:28px;padding:22px}
+.section h2{font-size:26px;line-height:1.25;font-weight:900;margin:0 0 12px}
+.section h3{font-size:18px;line-height:1.4;font-weight:850;margin:24px 0 8px;color:#e2e8f0}
+.section p,.section li{color:#94a3b8;line-height:1.8}
+.section p{margin:0 0 14px}
+.section ul{padding-left:20px;margin:8px 0 0}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+.card{background:var(--panel2);border:1px solid var(--border);border-radius:16px;padding:16px;min-width:0}
+.card h3{margin:0 0 7px;font-size:16px;color:#f8fafc}
+.card p{font-size:13px;line-height:1.65;margin:0;color:#94a3b8}
+.card a{display:inline-flex;margin-top:10px;color:#a5b4fc;font-size:12px;font-weight:850;text-decoration:none}
+.card a:hover{text-decoration:underline}
+.kicker{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#818cf8;font-weight:850;margin-bottom:7px}
+.callout{border:1px solid rgba(99,102,241,.28);background:rgba(99,102,241,.07);border-radius:15px;padding:16px;margin:18px 0}
+.callout strong{color:#c7d2fe}
+.update{border-left:3px solid #6366f1;padding:2px 0 2px 16px;margin:22px 0}
+.update-date{font-size:11px;text-transform:uppercase;letter-spacing:.09em;font-weight:850;color:#818cf8}
+.update h3{margin:5px 0 7px;font-size:18px;color:#f8fafc}
+.update p{margin:0;color:#94a3b8}
+.source-list{display:grid;gap:10px;margin-top:14px}
+.source-item{border:1px solid var(--border);background:var(--panel2);border-radius:13px;padding:13px}
+.source-item strong{display:block;color:#e2e8f0;font-size:13px}
+.source-item span{display:block;color:#64748b;font-size:11px;margin-top:4px;line-height:1.5}
+.btn{min-height:42px;border:1px solid var(--border2);background:#1e293b;color:#f8fafc;border-radius:10px;padding:9px 12px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:7px}
+.btn:hover{background:#334155}
+.btn.primary{background:linear-gradient(135deg,var(--indigo),var(--indigo2));border-color:var(--indigo)}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.article{max-width:900px;margin-top:54px}
+.article h2{font-size:30px;line-height:1.25;font-weight:900;margin:38px 0 13px;color:#fff}
+.article h3{font-size:19px;line-height:1.4;font-weight:850;margin:27px 0 9px;color:#e2e8f0}
+.article p,.article li{color:#94a3b8;line-height:1.84;margin:0 0 15px}
+.article ul{padding-left:20px}
+.article a{color:#a5b4fc;font-weight:800;text-decoration:none}
+.article a:hover{text-decoration:underline}
+.review-box{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;border-top:1px solid var(--border);margin-top:26px;padding-top:16px;color:#64748b;font-size:11px;line-height:1.55}
+footer{border-top:1px solid #1e293b;background:#020617}
+.footer-inner{min-height:90px;display:flex;align-items:center;justify-content:space-between;gap:18px;color:#64748b;font-size:13px}
+.footer-links{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end}
+.footer-links a{text-decoration:none}
+.footer-links a:hover{color:#cbd5e1}
+body.light-mode{--panel:rgba(255,255,255,.92);--panel2:rgba(248,250,252,.96);--border:#dbe3ee;--border2:#cbd5e1;--text:#0f172a;--muted:#475569;background:#f8fafc;color:#0f172a}
+body.light-mode header{background:rgba(255,255,255,.93);border-bottom-color:#e2e8f0}
+body.light-mode .back-link{color:#334155} body.light-mode .back-link:hover{color:#0f172a}
+body.light-mode .resource-nav a{color:#64748b} body.light-mode .resource-nav a:hover{color:#0f172a}
+body.light-mode .theme-toggle{color:#475569;background:#fff;border-color:#cbd5e1}
+body.light-mode .theme-toggle:hover{color:#0f172a;background:#f1f5f9;border-color:#94a3b8}
+body.light-mode .meta{background:#fff;color:#475569}
+body.light-mode .section h3,body.light-mode .card h3,body.light-mode .source-item strong,body.light-mode .update h3{color:#1e293b}
+body.light-mode .section p,body.light-mode .section li,body.light-mode .card p,body.light-mode .update p{color:#475569}
+body.light-mode .callout{background:#eef2ff} body.light-mode .callout strong{color:#4338ca}
+body.light-mode .btn:not(.primary){background:#f1f5f9;color:#334155}
+body.light-mode .btn:not(.primary):hover{background:#e2e8f0}
+body.light-mode .article h2{color:#0f172a} body.light-mode .article h3{color:#1e293b}
+body.light-mode .article p,body.light-mode .article li{color:#475569}
+body.light-mode .article a,body.light-mode .card a{color:#4f46e5}
+body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
+@media(max-width:900px){.grid{grid-template-columns:1fr 1fr}.resource-nav{display:none}}
+@media(max-width:620px){main{padding-top:34px}.grid{grid-template-columns:1fr}.free-label{font-size:10.5px;max-width:130px;white-space:normal;text-align:right;line-height:1.2}.footer-inner{flex-direction:column;align-items:flex-start;padding:22px 0}.footer-links{justify-content:flex-start}}
+@media(max-width:390px){.header-right{gap:6px}.title-icon{width:38px;height:38px}}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Utiliverse Updates", "url": "https://utiliverse.app/Updates.html", "description": "See meaningful Utiliverse updates including new tools, major revisions, source maintenance, browser compatibility improvements, and editorial changes.", "isPartOf": {"@type": "WebSite", "name": "Utiliverse", "url": "https://utiliverse.app/"}}</script>
+
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a class="back-link" href="https://utiliverse.app/"><span aria-hidden="true">←</span><span>Back to Utiliverse</span></a>
+    <nav class="resource-nav" aria-label="Resource navigation">
+      <a href="./Guides.html">Guides</a>
+      <a href="./Updates.html">Updates</a>
+      <a href="./Editorial_Methodology.html">Editorial &amp; Methodology</a>
+    </nav>
+    <div class="header-right">
+      <span class="free-label">100% Free and Browser Based</span>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+        <svg id="moonIcon" class="theme-hidden" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
+        <svg id="sunIcon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- GOOGLE ADSENSE: TOP / ABOVE-CONTENT INSERTION POINT -->
+
+<main><div class="container">
+<section class="hero">
+  <div class="title-row">
+    <span class="title-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/><path d="M4.5 5.5 3 4M19.5 5.5 21 4"/></svg></span>
+    <h1>Utiliverse Updates</h1>
+  </div>
+  <p>A public record of meaningful changes to Utiliverse tools, content, navigation, browser behavior, and source maintenance. This page focuses on changes that affect what visitors can use or understand—not routine internal edits.</p>
+  <div class="hero-meta"><span class="meta">Tool launches</span><span class="meta">Meaningful revisions</span><span class="meta">Source &amp; compatibility maintenance</span></div>
+</section>
+
+<section class="glass section">
+  <div class="kicker">Current development release</div><h2>September 2026</h2>
+  <div class="update"><div class="update-date">September 27, 2026</div><h3>Editorial and maintenance foundation added</h3><p>Added a Guides hub, a public Editorial &amp; Tool Methodology page, and this Updates log so visitors can understand how explanatory content, formulas, sources, external services, and revisions are handled.</p></div>
+  <div class="update"><div class="update-date">September 2026</div><h3>Shared internal-tool design standardized</h3><p>Newer tool pages were brought back to a consistent Utiliverse light/dark visual system with neutral light surfaces, slate dark surfaces, indigo interaction states, consistent title treatment, and removal of category-colored page backgrounds and category pills where they had drifted from the original design.</p></div>
+  <div class="update"><div class="update-date">September 2026</div><h3>HTTP Status Code Reference added</h3><p>Added a searchable HTTP response-code reference with class filters, card and table views, common-code filtering, explanatory examples, copy actions, and registry-state notes.</p></div>
+  <div class="update"><div class="update-date">September 2026</div><h3>New everyday and family utilities added</h3><p>Expanded the directory with the Baby &amp; Toddler Feeding Scheduler, Baby Name Finder, School Supply Planner, Lottery Number Generator, Random Name Generator, general QR Code Generator, and WiFi QR Code Generator.</p></div>
+  <div class="update"><div class="update-date">September 2026</div><h3>Finance analysis expanded</h3><p>Added a Fix &amp; Flip Profit Calculator covering purchase, renovation, financing, holding, and selling costs, along with ROI, break-even, target purchase price, and sensitivity analysis.</p></div>
+  <div class="update"><div class="update-date">September 2026</div><h3>Network-tool reliability improvements</h3><p>Improved the MAC Address Lookup browser workflow by using a browser-compatible primary lookup path with a secondary fallback while preserving locally computable MAC characteristics when external services are unavailable.</p></div>
+</section>
+
+<!-- GOOGLE ADSENSE: MID-PAGE INSERTION POINT -->
+
+<section class="article">
+  <h2>What appears in this log?</h2>
+  <p>The goal of this page is to show ongoing curation without turning every small code edit into a public announcement. New utilities, major formula changes, important source updates, browser compatibility fixes, meaningful accessibility changes, navigation improvements, and corrections belong here.</p>
+  <p>Minor copy edits, formatting cleanup, dependency housekeeping, and changes that do not materially affect a visitor's experience may be omitted.</p>
+  <h2>How dates are used</h2>
+  <p>Dates describe the release or review period for the public-facing change. When a tool depends on a changing external registry, rule set, or service, the individual tool page can also carry its own “Last reviewed” note so visitors do not have to infer freshness from the site-wide log.</p>
+  <h2>Corrections and revisions</h2>
+  <p>If a formula, explanation, source interpretation, or technical behavior is found to be materially incorrect, Utiliverse should correct the page and record a meaningful correction here when the change could affect how users interpret a result.</p>
+  <p>Questions or correction suggestions can be sent through the <a href="./Contact_Info.html">Contact</a> page. The broader review approach is documented in <a href="./Editorial_Methodology.html">Editorial &amp; Tool Methodology</a>.</p>
+  <div class="review-box"><span>Last reviewed: September 27, 2026</span><span>Entries are intended to describe meaningful public-facing changes.</span></div>
+</section>
+</div></main>
+
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT -->
+
+<footer>
+  <div class="container footer-inner">
+    <div>© 2026 Utiliverse. All rights reserved.</div>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="./Guides.html">Guides</a>
+      <a href="./Updates.html">Updates</a>
+      <a href="./Editorial_Methodology.html">Editorial &amp; Methodology</a>
+      <a href="./Privacy_Policy.html">Privacy Policy</a>
+      <a href="./Terms_of_Service.html">Terms of Service</a>
+      <a href="./Contact_Info.html">Contact</a>
+      <a href="./About.html">About</a>
+    </nav>
+  </div>
+</footer>
+
+<script>(() => {
+  "use strict";
+  const $=id=>document.getElementById(id);
+  function applyTheme(theme){
+    const light=theme==="light";
+    document.body.classList.toggle("light-mode",light);
+    $("moonIcon").classList.toggle("theme-hidden",!light);
+    $("sunIcon").classList.toggle("theme-hidden",light);
+    const label=light?"Switch to dark mode":"Switch to light mode";
+    $("themeToggle").setAttribute("aria-label",label);
+    $("themeToggle").title=label;
+    const meta=document.querySelector('meta[name="theme-color"]');
+    if(meta)meta.setAttribute("content",light?"#f8fafc":"#020617");
+  }
+  const saved=localStorage.getItem("utiliverse-theme");
+  const initial=saved==="light"||saved==="dark"?saved:(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");
+  applyTheme(initial);
+  $("themeToggle").addEventListener("click",()=>{
+    const next=document.body.classList.contains("light-mode")?"dark":"light";
+    localStorage.setItem("utiliverse-theme",next);
+    applyTheme(next);
+  });
+})();</script>
+</body>
+</html>
