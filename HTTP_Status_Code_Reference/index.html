@@ -1,1 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1786245123035497" crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>HTTP Status Code Reference – 1xx, 2xx, 3xx, 4xx & 5xx | Utiliverse</title>
+<meta name="description" content="Search and browse HTTP status codes by number, name, class, and keyword. View descriptions, examples, standards notes, common codes, and quick-reference tables for 1xx through 5xx responses.">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+<meta name="theme-color" content="#020617">
+<link rel="canonical" href="https://utiliverse.app/HTTP_Status_Code_Reference/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="HTTP Status Code Reference | Utiliverse">
+<meta property="og:description" content="Search HTTP response codes from 100 through 511 with descriptions, examples, class filters, and standards notes.">
+<meta property="og:url" content="https://utiliverse.app/HTTP_Status_Code_Reference/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTP Status Code Reference | Utiliverse">
+<meta name="twitter:description" content="Free browser-based reference for HTTP 1xx, 2xx, 3xx, 4xx, and 5xx response codes.">
 
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --panel:rgba(30,41,59,.72);--panel2:rgba(15,23,42,.70);
+  --border:#334155;--border2:#475569;--text:#f8fafc;--muted:#94a3b8;
+  --indigo:#6366f1;--indigo2:#4f46e5;--green:#34d399;--amber:#fbbf24;--rose:#fb7185;
+}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),
+    radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;
+  color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  transition:background .25s ease,color .25s ease
+}
+a{color:inherit} button,input,select{font:inherit} button{touch-action:manipulation}
+.container{max-width:1152px;margin:0 auto;padding:0 16px}
+
+header{position:sticky;top:0;z-index:50;background:rgba(2,6,23,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid #1e293b}
+.header-inner{min-height:65px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.back-link{display:flex;align-items:center;gap:8px;text-decoration:none;color:#cbd5e1;font-size:14px;font-weight:700}
+.back-link:hover{color:#fff}
+.header-right{display:flex;align-items:center;gap:12px}
+.free-label{font-size:13px;font-weight:650;color:#64748b;white-space:nowrap}
+.theme-toggle{
+  display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;
+  border:1px solid #334155;background:rgba(15,23,42,.72);color:#94a3b8;border-radius:12px;cursor:pointer;
+  box-shadow:none;appearance:none;-webkit-appearance:none
+}
+.theme-toggle:hover{color:#fff;background:#1e293b;border-color:#475569}
+.theme-toggle:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
+.theme-toggle svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.theme-hidden{display:none!important}
+
+main{padding:48px 0 72px}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:#818cf8;font-weight:850}
+h1{font-size:clamp(38px,5vw,58px);line-height:1.04;margin:10px 0 14px;font-weight:900;letter-spacing:-.035em}
+.hero p{max-width:900px;color:var(--muted);font-size:18px;line-height:1.72;margin:0}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.meta{border:1px solid var(--border);background:rgba(15,23,42,.66);border-radius:999px;padding:7px 10px;color:#cbd5e1;font-size:12px;font-weight:750}
+
+.glass{background:var(--panel);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:20px}
+.tool{margin-top:28px;padding:22px}
+.section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.section-title{font-size:22px;font-weight:850;margin:4px 0 0}
+.small{font-size:12px;color:#64748b;line-height:1.55}
+
+.search-row{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:18px}
+.search-wrap{position:relative}
+.search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:19px;height:19px;color:#64748b;pointer-events:none}
+.search-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.search{
+  width:100%;min-height:50px;background:#0f172a;border:1px solid var(--border2);color:#f8fafc;
+  border-radius:12px;padding:11px 44px 11px 44px;outline:none
+}
+.search:focus{border-color:var(--indigo);box-shadow:0 0 0 3px rgba(99,102,241,.15)}
+.clear-search{position:absolute;right:7px;top:50%;transform:translateY(-50%);width:34px;height:34px;border:0;background:transparent;color:#64748b;border-radius:9px;cursor:pointer;font-size:20px}
+.clear-search:hover{background:#1e293b;color:#fff}
+
+.view-btn{
+  min-height:50px;border:1px solid var(--border2);background:#1e293b;color:#f8fafc;border-radius:12px;
+  padding:10px 14px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:7px
+}
+.view-btn:hover{background:#334155}
+.view-btn svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2}
+
+.filters{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}
+.filter{
+  min-height:38px;border:1px solid var(--border);background:#0f172a;color:#94a3b8;border-radius:999px;
+  padding:8px 12px;font-size:12px;font-weight:800;cursor:pointer
+}
+.filter:hover{border-color:#6366f1;color:#e2e8f0}
+.filter.active{background:rgba(99,102,241,.14);border-color:#818cf8;color:#c7d2fe}
+.controls2{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:13px}
+.check{display:flex;align-items:center;gap:8px;font-size:12px;color:#94a3b8;font-weight:750;cursor:pointer}
+.check input{accent-color:#6366f1;width:16px;height:16px}
+.result-count{font-size:12px;color:#64748b;font-weight:750}
+
+.legend{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-top:16px}
+.legend-item{border:1px solid var(--border);background:var(--panel2);border-radius:12px;padding:10px}
+.legend-code{font-size:16px;font-weight:900}
+.legend-name{font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:.06em;margin-top:2px;font-weight:800}
+.c1{color:#a5b4fc} .c2{color:#6ee7b7} .c3{color:#fde68a} .c4{color:#fda4af} .c5{color:#fb7185}
+
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}
+.code-card{background:var(--panel2);border:1px solid var(--border);border-radius:16px;padding:16px;cursor:pointer;transition:border-color .15s ease,transform .15s ease}
+.code-card:hover{transform:translateY(-1px);border-color:#6366f1}
+.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.code-wrap{display:flex;align-items:center;gap:10px;min-width:0}
+.code-num{font-size:26px;line-height:1;font-weight:950;letter-spacing:-.03em}
+.code-name{font-size:15px;font-weight:850;line-height:1.3}
+.code-summary{color:#94a3b8;font-size:12px;line-height:1.6;margin-top:10px}
+.std-badge{font-size:10px;font-weight:800;color:#cbd5e1;background:#111827;border:1px solid #334155;border-radius:999px;padding:5px 7px;white-space:nowrap}
+.common-star{color:#fbbf24}
+.card-actions{display:flex;gap:7px;margin-top:12px}
+.mini-btn{border:1px solid var(--border);background:#111827;color:#94a3b8;border-radius:9px;padding:7px 9px;font-size:11px;font-weight:800;cursor:pointer}
+.mini-btn:hover{border-color:#6366f1;color:#e2e8f0}
+
+.table-wrap{display:none;margin-top:18px;border:1px solid var(--border);border-radius:15px;overflow:auto;background:var(--panel2)}
+.table-wrap.show{display:block}
+.grid.hidden-view{display:none}
+.status-table{width:100%;border-collapse:collapse;min-width:760px}
+.status-table th,.status-table td{padding:11px 13px;border-top:1px solid rgba(71,85,105,.38);text-align:left}
+.status-table thead th{border-top:0;color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.07em}
+.status-table td{color:#cbd5e1;font-size:12px}
+.status-table tr[data-index]{cursor:pointer}
+.status-table tr[data-index]:hover{background:rgba(99,102,241,.07)}
+.status-table .tc{font-size:15px;font-weight:900}
+
+.empty{display:none;margin-top:18px;border:1px dashed var(--border2);border-radius:16px;padding:28px;text-align:center;color:#94a3b8}
+.empty.show{display:block}
+
+.detail{margin-top:16px;background:linear-gradient(135deg,rgba(99,102,241,.14),rgba(124,58,237,.08));border:1px solid rgba(129,140,248,.35);border-radius:18px;padding:20px}
+.detail-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.detail-code{font-size:clamp(32px,6vw,52px);font-weight:950;letter-spacing:-.035em}
+.detail-name{font-size:20px;font-weight:900;margin-top:4px}
+.detail-class{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#818cf8;font-weight:850;margin-top:6px}
+.detail-summary{font-size:15px;line-height:1.7;color:#cbd5e1;margin:15px 0 0}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.detail-box{background:rgba(15,23,42,.58);border:1px solid var(--border);border-radius:13px;padding:13px}
+.detail-box small{display:block;color:#64748b;text-transform:uppercase;letter-spacing:.07em;font-weight:850;font-size:10px}
+.detail-box p{margin:7px 0 0;color:#94a3b8;font-size:12px;line-height:1.65}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.tag{border:1px solid var(--border);border-radius:999px;padding:5px 8px;font-size:10px;color:#cbd5e1;background:#0f172a}
+.actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:14px}
+.btn{min-height:42px;border:1px solid var(--border2);background:#1e293b;color:#f8fafc;border-radius:10px;padding:9px 12px;font-weight:800;cursor:pointer}
+.btn:hover{background:#334155}
+.btn.primary{background:linear-gradient(135deg,var(--indigo),var(--indigo2));border-color:var(--indigo)}
+.status{font-size:11px;color:#6ee7b7;min-height:16px}
+
+.note{margin-top:14px;padding:12px 13px;background:rgba(99,102,241,.06);border:1px solid rgba(99,102,241,.20);border-radius:12px;color:#94a3b8;font-size:12px;line-height:1.65}
+.note strong{color:#c7d2fe}
+
+.article{max-width:900px;margin-top:64px}
+.article h2{font-size:30px;line-height:1.25;font-weight:900;margin:38px 0 13px;color:#fff}
+.article h3{font-size:19px;line-height:1.4;font-weight:850;margin:27px 0 9px;color:#e2e8f0}
+.article p,.article li{color:#94a3b8;line-height:1.84;margin:0 0 15px}
+.article ul{padding-left:20px}
+.callout{border:1px solid rgba(99,102,241,.28);background:rgba(99,102,241,.07);border-radius:15px;padding:16px;margin:22px 0}
+.callout strong{color:#c7d2fe}
+.source-link{color:#a5b4fc;font-weight:800;text-decoration:none}
+.source-link:hover{text-decoration:underline}
+.faq{border-bottom:1px solid var(--border)}
+.faq summary{list-style:none;cursor:pointer;padding:16px 0;font-weight:800;display:flex;justify-content:space-between;gap:15px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:#818cf8;font-size:20px}
+.faq[open] summary::after{content:"−"}
+
+footer{border-top:1px solid #1e293b;background:#020617}
+.footer-inner{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:14px;color:#64748b;font-size:13px}
+
+/* light */
+body.light-mode{
+  --panel:rgba(255,255,255,.92);--panel2:rgba(248,250,252,.96);--border:#dbe3ee;--border2:#cbd5e1;
+  --text:#0f172a;--muted:#475569;background:#f8fafc;color:#0f172a
+}
+body.light-mode header{background:rgba(255,255,255,.93);border-bottom-color:#e2e8f0}
+body.light-mode .back-link{color:#334155} body.light-mode .back-link:hover{color:#0f172a}
+body.light-mode .theme-toggle{color:#475569;background:#fff;border-color:#cbd5e1}
+body.light-mode .theme-toggle:hover{color:#0f172a;background:#f1f5f9;border-color:#94a3b8}
+body.light-mode .meta,body.light-mode .filter{background:#fff;color:#475569}
+body.light-mode .filter.active{background:#eef2ff;color:#4338ca;border-color:#818cf8}
+body.light-mode .search{background:#fff;color:#0f172a}
+body.light-mode .clear-search:hover{background:#f1f5f9;color:#0f172a}
+body.light-mode .view-btn,body.light-mode .btn,body.light-mode .mini-btn{background:#f1f5f9;color:#334155}
+body.light-mode .view-btn:hover,body.light-mode .btn:hover,body.light-mode .mini-btn:hover{background:#e2e8f0}
+body.light-mode .btn.primary{color:#fff;background:linear-gradient(135deg,var(--indigo),var(--indigo2))}
+body.light-mode .std-badge{background:#fff;color:#475569;border-color:#dbe3ee}
+body.light-mode .code-summary{color:#64748b}
+body.light-mode .status-table td{color:#334155}
+body.light-mode .detail-summary{color:#334155}
+body.light-mode .detail-box{background:#fff}
+body.light-mode .detail-box p{color:#64748b}
+body.light-mode .tag{background:#fff;color:#475569}
+body.light-mode .article h2{color:#0f172a} body.light-mode .article h3{color:#1e293b}
+body.light-mode .article p,body.light-mode .article li{color:#475569}
+body.light-mode .callout{background:#eef2ff} body.light-mode .callout strong{color:#4338ca}
+body.light-mode .source-link{color:#4f46e5}
+body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
+
+@media(max-width:780px){
+  .grid{grid-template-columns:1fr}
+  .legend{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .detail-grid{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+  main{padding-top:34px}
+  .search-row{grid-template-columns:1fr}
+  .view-btn{justify-content:center}
+  .free-label{font-size:10.5px;max-width:130px;white-space:normal;text-align:right;line-height:1.2}
+  .legend{grid-template-columns:1fr 1fr}
+}
+@media(max-width:390px){.header-right{gap:6px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Utiliverse HTTP Status Code Reference",
+  "url":"https://utiliverse.app/HTTP_Status_Code_Reference/",
+  "applicationCategory":"DeveloperApplication",
+  "operatingSystem":"Any",
+  "browserRequirements":"Requires a modern web browser with JavaScript enabled.",
+  "description":"A browser-based HTTP status code reference with searchable 1xx, 2xx, 3xx, 4xx and 5xx codes, descriptions, examples, class filters and standards notes.",
+  "isAccessibleForFree":true,
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"What are HTTP status codes?","acceptedAnswer":{"@type":"Answer","text":"HTTP status codes are three-digit values returned in HTTP responses to indicate the outcome or current state of a request."}},
+    {"@type":"Question","name":"What do the HTTP status code classes mean?","acceptedAnswer":{"@type":"Answer","text":"1xx responses are informational, 2xx indicate success, 3xx indicate redirection, 4xx indicate client errors, and 5xx indicate server errors."}},
+    {"@type":"Question","name":"What is the difference between 401 and 403?","acceptedAnswer":{"@type":"Answer","text":"401 indicates that authentication is required or invalid, while 403 indicates that the server understands the request but refuses to authorize it."}},
+    {"@type":"Question","name":"What is the difference between 301 and 308?","acceptedAnswer":{"@type":"Answer","text":"Both are permanent redirects, but 308 explicitly preserves the request method and body when the redirect is followed."}},
+    {"@type":"Question","name":"What is HTTP 429?","acceptedAnswer":{"@type":"Answer","text":"429 Too Many Requests indicates that the client has exceeded a rate limit. The response may include Retry-After guidance."}}
+  ]
+}
+</script>
+</head>
+
+<body>
+<!--
+SEO TARGET CLUSTER
+Primary: HTTP status code reference
+Secondary: HTTP codes, HTTP response codes, 404 status code, 500 status code,
+301 vs 302, 401 vs 403, 429 too many requests, API status codes
+
+GOOGLE ADSENSE
+Only invisible insertion comments are included. No visible placeholder box,
+border, label, or reserved ad space is rendered before approved ad code is added.
+-->
+
+<header>
+  <div class="container header-inner">
+    <a class="back-link" href="https://utiliverse.app"><span aria-hidden="true">←</span><span>Back to Utiliverse</span></a>
+    <div class="header-right">
+      <span class="free-label">100% Free and Browser Based</span>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+        <svg id="moonIcon" class="theme-hidden" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
+        <svg id="sunIcon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT -->
+
+<main>
+<div class="container">
+  <section class="hero">
+    <div class="eyebrow">Developer reference</div>
+    <h1>HTTP Status Code Reference</h1>
+    <p>Search HTTP response codes by number, name, class, or keyword. Switch between card and table views, show common codes only, and open any response code for an explanation, example, and standards note.</p>
+    <div class="hero-meta">
+      <span class="meta"><span id="totalCount">64</span> registered codes in this reference</span>
+      <span class="meta">1xx through 5xx</span>
+      <span class="meta">Browser-local search & filtering</span>
+    </div>
+  </section>
+
+  <section class="glass tool" aria-labelledby="toolHeading">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow">Lookup & browse</div>
+        <h2 id="toolHeading" class="section-title">Find an HTTP response code</h2>
+      </div>
+      <div class="small">Registry status checked against IANA in September 2026.</div>
+    </div>
+
+    <div class="search-row">
+      <div class="search-wrap">
+        <span class="search-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg></span>
+        <input id="searchInput" class="search" type="search" autocomplete="off" placeholder="Search 404, redirect, cache, authentication, gateway..." aria-label="Search HTTP status codes">
+        <button id="clearSearch" class="clear-search" type="button" aria-label="Clear search" title="Clear search">×</button>
+      </div>
+      <button id="viewToggle" class="view-btn" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16M4 12h16M4 19h16"/></svg>
+        <span>Table View</span>
+      </button>
+    </div>
+
+    <div id="filters" class="filters">
+      <button class="filter active" type="button" data-group="all">All Codes</button>
+      <button class="filter" type="button" data-group="1">1xx Informational</button>
+      <button class="filter" type="button" data-group="2">2xx Success</button>
+      <button class="filter" type="button" data-group="3">3xx Redirection</button>
+      <button class="filter" type="button" data-group="4">4xx Client Error</button>
+      <button class="filter" type="button" data-group="5">5xx Server Error</button>
+    </div>
+
+    <div class="controls2">
+      <label class="check"><input id="commonOnly" type="checkbox">Show common codes only</label>
+      <div id="resultCount" class="result-count"></div>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><div class="legend-code c1">1xx</div><div class="legend-name">Informational</div></div>
+      <div class="legend-item"><div class="legend-code c2">2xx</div><div class="legend-name">Success</div></div>
+      <div class="legend-item"><div class="legend-code c3">3xx</div><div class="legend-name">Redirection</div></div>
+      <div class="legend-item"><div class="legend-code c4">4xx</div><div class="legend-name">Client Error</div></div>
+      <div class="legend-item"><div class="legend-code c5">5xx</div><div class="legend-name">Server Error</div></div>
+    </div>
+
+    <div id="gridView" class="grid"></div>
+
+    <div id="tableView" class="table-wrap">
+      <table class="status-table">
+        <thead><tr><th>Code</th><th>Name</th><th>Class</th><th>Status</th><th>Summary</th></tr></thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <div id="emptyState" class="empty">
+      <strong>No matching status codes.</strong>
+      <div class="small" style="margin-top:5px">Try a code number, a shorter keyword, or another class filter.</div>
+    </div>
+
+    <div id="detailPanel" class="detail" aria-live="polite"></div>
+
+    <div class="note"><strong>Registry note:</strong> 104 Upload Resumption Supported is a temporary IANA registration associated with the resumable-upload draft and is currently listed as expiring November 13, 2026. Status 510 is retained but marked obsoleted; 306 and 418 are listed as unused/reserved in the current registry.</div>
+  </section>
+
+  <p class="small" style="margin-top:14px">Browser-based reference: searching, filtering, view switching, and copying happen locally on this page. No lookup API is required.</p>
+
+  <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT -->
+
+  <section class="article">
+    <h2>How HTTP Status Codes Work</h2>
+    <p>Every HTTP response contains a numeric status code that summarizes what happened to the request. The first digit defines the broad response class: 1xx is informational, 2xx indicates success, 3xx indicates redirection, 4xx represents a client-side request problem, and 5xx represents a server-side failure while handling an apparently valid request.</p>
+
+    <p>This reference focuses on codes in the IANA HTTP Status Code Registry and preserves important registry distinctions such as temporary, obsolete, WebDAV, deprecated, and unused entries. A server can technically emit unregistered or vendor-specific response codes, but those should not be assumed to have interoperable meaning outside the implementation that defines them.</p>
+
+    <h2>Common HTTP Status Code Patterns</h2>
+    <h3>200 vs. 201 vs. 204</h3>
+    <p><strong>200 OK</strong> is the general success response. <strong>201 Created</strong> is more specific when the request creates a new resource. <strong>204 No Content</strong> indicates success when no response body needs to be sent.</p>
+
+    <h3>301 vs. 302 vs. 307 vs. 308</h3>
+    <p><strong>301</strong> and <strong>308</strong> are permanent redirects, while <strong>302</strong> and <strong>307</strong> are temporary. The important method-preservation distinction is that 307 and 308 explicitly preserve the original request method and body when the redirect is followed.</p>
+
+    <h3>401 vs. 403</h3>
+    <p><strong>401 Unauthorized</strong> is primarily an authentication response: credentials are missing, invalid, or otherwise insufficient to establish authentication. <strong>403 Forbidden</strong> means the server understood the request but refuses to authorize it.</p>
+
+    <h3>404 vs. 410</h3>
+    <p><strong>404 Not Found</strong> says the server cannot find a matching resource or chooses not to disclose one. <strong>410 Gone</strong> is more explicit: the resource is known to have been intentionally removed and is expected to remain unavailable.</p>
+
+    <h3>502 vs. 503 vs. 504</h3>
+    <p><strong>502 Bad Gateway</strong> means a gateway received an invalid upstream response. <strong>503 Service Unavailable</strong> is a temporary service-capacity or maintenance condition. <strong>504 Gateway Timeout</strong> means a gateway waited too long for an upstream response.</p>
+
+    <div class="callout"><strong>Primary references:</strong> the status list and registry-state labels are based on the IANA HTTP Status Code Registry. Explanatory phrasing and examples on this page are original Utiliverse summaries informed by the HTTP specifications and MDN's HTTP reference.</div>
+
+    <h2>Practical Uses</h2>
+    <h3>API development</h3>
+    <p>Choose response codes that accurately describe the outcome of an operation so API clients can distinguish success, validation problems, authentication failures, conflicts, throttling, and server failures without parsing human-readable text.</p>
+
+    <h3>Debugging</h3>
+    <p>Browser developer tools, HAR files, command-line clients, reverse proxies, and application logs commonly expose HTTP status codes. Looking up the code is often the fastest way to decide whether to investigate client input, authentication, redirects, cache behavior, application logic, or upstream infrastructure.</p>
+
+    <h3>Redirect and SEO work</h3>
+    <p>Permanent and temporary redirect codes communicate different intent. Method-preserving redirects also matter for APIs and form submissions, where changing POST or PUT into GET can change application behavior.</p>
+
+    <h3>Rate limiting and reliability</h3>
+    <p>Codes such as 429, 502, 503, and 504 are important in resilient clients. Applications often combine them with retry logic, backoff, monitoring, and headers such as Retry-After where appropriate.</p>
+
+    <p><a class="source-link" href="https://www.iana.org/assignments/http-status-codes/" target="_blank" rel="noopener">IANA HTTP Status Code Registry</a> · <a class="source-link" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status" target="_blank" rel="noopener">MDN HTTP response status codes</a></p>
+
+    <h2>HTTP Status Code FAQ</h2>
+    <details class="faq"><summary>What does the first digit of an HTTP status code mean?</summary><p>It identifies the response class: 1xx informational, 2xx success, 3xx redirection, 4xx client error, or 5xx server error.</p></details>
+    <details class="faq"><summary>What is the difference between 401 and 403?</summary><p>401 indicates that authentication is required or invalid. 403 means the server understood the request but refuses to authorize it.</p></details>
+    <details class="faq"><summary>What is the difference between 301 and 308?</summary><p>Both indicate permanent redirection, but 308 explicitly preserves the original request method and body when the redirect is followed.</p></details>
+    <details class="faq"><summary>What does 429 Too Many Requests mean?</summary><p>The client has exceeded a request-rate limit. The response may include Retry-After guidance for a later attempt.</p></details>
+    <details class="faq"><summary>Is 418 I'm a Teapot a standard HTTP status code?</summary><p>The number is historically famous for the teapot joke, but the current core HTTP registry lists 418 as unused. It should not be treated as a portable application protocol signal.</p></details>
+    <details class="faq"><summary>What is HTTP 104?</summary><p>104 Upload Resumption Supported is a temporary IANA registration associated with the current resumable-upload draft. As of September 2026, the registry lists the temporary registration as expiring November 13, 2026 unless it is extended or superseded.</p></details>
+  </section>
+</div>
+</main>
+
+<!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT -->
+
+<footer>
+  <div class="container footer-inner">
+    <span>© 2026 Utiliverse. All rights reserved.</span>
+    <span>100% Free and Browser Based</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  "use strict";
+  const CODES=[{"code":100,"name":"Continue","group":1,"common":true,"status":"Standard","summary":"The client may continue sending the request.","detail":"Used when a client sends request headers first and wants confirmation before transmitting a potentially large request body.","example":"A large upload uses Expect: 100-continue; the server replies 100 before the body is sent.","tags":["expect","upload","request body"]},{"code":101,"name":"Switching Protocols","group":1,"common":true,"status":"Standard","summary":"The server is switching to another protocol requested by the client.","detail":"Sent after the server accepts an Upgrade request. It is commonly associated with protocol transitions such as an HTTP/1.1 connection upgrading to WebSocket.","example":"A WebSocket handshake succeeds and the server returns 101 before switching protocols.","tags":["upgrade","websocket","protocol"]},{"code":102,"name":"Processing","group":1,"common":false,"status":"Legacy WebDAV","summary":"The server has received the request and is still processing it.","detail":"A WebDAV status originally used to reassure a client that a long-running request had not been abandoned. It is retained in the IANA registry through its older WebDAV specification.","example":"A complex WebDAV request takes time and the server indicates that processing is still underway.","tags":["webdav","processing","legacy"]},{"code":103,"name":"Early Hints","group":1,"common":true,"status":"Standard","summary":"The server is sending preliminary response headers before the final response.","detail":"Often used with Link headers so a browser can begin preloading or preconnecting while the origin prepares the final response.","example":"The server sends Link: </app.css>; rel=preload in a 103 response before returning the final 200 response.","tags":["preload","link","performance"]},{"code":104,"name":"Upload Resumption Supported","group":1,"common":false,"status":"Temporary registration","summary":"Indicates support for the resumable-upload mechanism defined by the current IETF draft.","detail":"This is a temporary IANA registration for the resumable-upload work. The registry notes that the temporary registration is scheduled to expire on November 13, 2026 unless extended or replaced.","example":"A resumable upload workflow uses 104 as part of the draft protocol's capability signaling.","tags":["upload","resumable","temporary","draft"]},{"code":200,"name":"OK","group":2,"common":true,"status":"Standard","summary":"The request succeeded.","detail":"The exact meaning depends on the HTTP method. For GET it usually means the requested representation is in the response; for POST it can mean the action completed and a result is returned.","example":"GET /api/users returns 200 with a JSON list of users.","tags":["success","get","post"]},{"code":201,"name":"Created","group":2,"common":true,"status":"Standard","summary":"The request succeeded and created a new resource.","detail":"Common after POST or PUT when a new resource is created. A Location header is often useful for identifying the newly created resource.","example":"POST /api/users creates user 42 and returns 201 with Location: /api/users/42.","tags":["created","post","put","location"]},{"code":202,"name":"Accepted","group":2,"common":true,"status":"Standard","summary":"The request was accepted, but processing is not complete.","detail":"Useful for asynchronous jobs where the server queues work and cannot provide the final outcome in the same response.","example":"POST /reports starts a background report job and returns 202 with a status URL.","tags":["async","queue","background job"]},{"code":203,"name":"Non-Authoritative Information","group":2,"common":false,"status":"Standard","summary":"The response metadata came from a transforming intermediary rather than exactly from the origin.","detail":"Indicates that an intermediary modified or supplied metadata instead of passing the origin response metadata unchanged.","example":"A transforming proxy returns a representation with modified metadata and responds 203.","tags":["proxy","metadata","transform"]},{"code":204,"name":"No Content","group":2,"common":true,"status":"Standard","summary":"The request succeeded and there is no response body to send.","detail":"Common for successful updates or deletions where the client does not need a representation in the response body.","example":"DELETE /api/items/42 succeeds and returns 204 with no message body.","tags":["delete","no body","success"]},{"code":205,"name":"Reset Content","group":2,"common":false,"status":"Standard","summary":"The request succeeded and the client should reset the document view.","detail":"Tells the user agent to reset the document or input view that initiated the request.","example":"A form submission succeeds and the server instructs the client to reset the form view.","tags":["form","reset","success"]},{"code":206,"name":"Partial Content","group":2,"common":true,"status":"Standard","summary":"The server is returning only the requested byte range.","detail":"Used for successful range requests and commonly seen with resumable downloads, media seeking, and large-file transfers.","example":"A video player requests bytes 1000000-1999999 and receives a 206 response.","tags":["range","download","media","bytes"]},{"code":207,"name":"Multi-Status","group":2,"common":false,"status":"WebDAV","summary":"The response contains separate status information for multiple resources or operations.","detail":"A WebDAV response that can describe multiple sub-results inside one response body.","example":"A WebDAV PROPFIND operation returns individual statuses for several resources.","tags":["webdav","multi-status","xml"]},{"code":208,"name":"Already Reported","group":2,"common":false,"status":"WebDAV","summary":"Members of a WebDAV binding have already been reported earlier in the response.","detail":"Helps avoid repeatedly enumerating the same internal members in a DAV multi-status response.","example":"A DAV response references a resource that was already included earlier and uses 208.","tags":["webdav","binding","duplicate"]},{"code":226,"name":"IM Used","group":2,"common":false,"status":"Delta encoding","summary":"The response represents the result of applying instance manipulations to the resource.","detail":"Defined for HTTP delta encoding, where the server returns a transformed or delta representation based on the client's request.","example":"A client requests a delta-encoded representation and the server responds with 226.","tags":["delta","instance manipulation","encoding"]},{"code":300,"name":"Multiple Choices","group":3,"common":false,"status":"Standard","summary":"More than one representation or destination may satisfy the request.","detail":"The server indicates multiple choices for the requested resource and the client or user may select one.","example":"A document endpoint offers separate HTML and PDF alternatives.","tags":["redirect","choices","variants"]},{"code":301,"name":"Moved Permanently","group":3,"common":true,"status":"Standard","summary":"The resource has a new permanent URL.","detail":"Clients should use the URI provided in the Location header for future requests. It is a common permanent redirect for site migrations and canonical URL changes.","example":"https://example.com/old returns 301 Location: https://example.com/new.","tags":["redirect","permanent","seo","location"]},{"code":302,"name":"Found","group":3,"common":true,"status":"Standard","summary":"The resource is temporarily available at another URL.","detail":"A widely used temporary redirect. Historical browser behavior can change POST to GET when following it, so 307 is preferable when method preservation is required.","example":"A temporary campaign URL returns 302 to the current landing page.","tags":["redirect","temporary","location"]},{"code":303,"name":"See Other","group":3,"common":true,"status":"Standard","summary":"The client should retrieve another resource using GET.","detail":"Often used after POST so the browser follows the Location header with a GET request, implementing the Post/Redirect/Get pattern.","example":"After creating an order, POST /orders returns 303 Location: /orders/42.","tags":["redirect","post redirect get","get"]},{"code":304,"name":"Not Modified","group":3,"common":true,"status":"Standard","summary":"The cached representation is still valid and does not need to be retransmitted.","detail":"Returned in response to a conditional request such as If-None-Match or If-Modified-Since when the resource has not changed.","example":"A browser sends If-None-Match and receives 304, so it reuses its cached file.","tags":["cache","etag","conditional"]},{"code":305,"name":"Use Proxy","group":3,"common":false,"status":"Deprecated","summary":"Historically indicated that the resource should be accessed through a proxy.","detail":"This status is retained in the registry but is not used by modern HTTP clients because of security concerns and specification changes.","example":"Historical only; modern applications should not build new behavior around 305.","tags":["proxy","deprecated","historical"]},{"code":306,"name":"Unused","group":3,"common":false,"status":"Unused","summary":"Reserved historical status code with no current meaning.","detail":"The code was used in an earlier HTTP specification and is now marked unused.","example":"Do not emit 306 in new applications.","tags":["unused","reserved","historical"]},{"code":307,"name":"Temporary Redirect","group":3,"common":true,"status":"Standard","summary":"The resource is temporarily elsewhere and the HTTP method must be preserved.","detail":"Unlike common 302 behavior, a client following 307 must not change the request method or body solely because of the redirect.","example":"POST /v1/import returns 307 Location: /v2/import and remains a POST.","tags":["redirect","temporary","method preserving"]},{"code":308,"name":"Permanent Redirect","group":3,"common":true,"status":"Standard","summary":"The resource has permanently moved and the HTTP method must be preserved.","detail":"A permanent redirect similar to 301, but with explicit method and request-body preservation semantics.","example":"PUT /old-resource returns 308 Location: /new-resource and remains a PUT.","tags":["redirect","permanent","method preserving"]},{"code":400,"name":"Bad Request","group":4,"common":true,"status":"Standard","summary":"The server cannot process the request because it is malformed or invalid.","detail":"A general client-error response for syntax problems, invalid framing, or other request problems when a more specific status does not fit.","example":"An API receives malformed JSON and returns 400.","tags":["client error","validation","malformed"]},{"code":401,"name":"Unauthorized","group":4,"common":true,"status":"Standard","summary":"Authentication is required or the supplied credentials are invalid.","detail":"Despite the reason phrase, 401 is about authentication. The response commonly includes WWW-Authenticate describing how the client can authenticate.","example":"GET /account without a valid bearer token returns 401.","tags":["authentication","credentials","www-authenticate"]},{"code":402,"name":"Payment Required","group":4,"common":false,"status":"Reserved","summary":"Reserved for future use and sometimes used by applications for payment-related failures.","detail":"HTTP reserves 402 without defining a general interoperable payment workflow. Some APIs use it privately, but behavior is application-specific.","example":"A private billing API may choose 402 when an account lacks required payment, but clients must follow that API's documentation.","tags":["payment","reserved","billing"]},{"code":403,"name":"Forbidden","group":4,"common":true,"status":"Standard","summary":"The server understood the request but refuses to authorize it.","detail":"Use when authentication may be present but the requester is not permitted to access the resource or perform the action.","example":"A signed-in user without admin rights requests /admin and receives 403.","tags":["authorization","permissions","access"]},{"code":404,"name":"Not Found","group":4,"common":true,"status":"Standard","summary":"The server cannot find the requested resource.","detail":"The server either has no matching resource or is unwilling to disclose that one exists. It is the familiar response for missing pages and endpoints.","example":"GET /products/does-not-exist returns 404.","tags":["missing","route","resource"]},{"code":405,"name":"Method Not Allowed","group":4,"common":true,"status":"Standard","summary":"The resource exists but does not support the request method.","detail":"The response should identify allowed methods in the Allow header when applicable.","example":"POST /static-logo.png returns 405 with Allow: GET, HEAD.","tags":["method","allow","endpoint"]},{"code":406,"name":"Not Acceptable","group":4,"common":true,"status":"Standard","summary":"The server cannot produce a representation acceptable under the request's content-negotiation headers.","detail":"Often associated with Accept or language/encoding negotiation when none of the available representations satisfy the client's preferences.","example":"A client requests only an unsupported media type in Accept and receives 406.","tags":["accept","content negotiation","representation"]},{"code":407,"name":"Proxy Authentication Required","group":4,"common":false,"status":"Standard","summary":"The client must authenticate with an intermediary proxy.","detail":"Similar to 401, but authentication is required by the proxy rather than the origin server.","example":"A corporate forward proxy returns 407 until valid proxy credentials are supplied.","tags":["proxy","authentication","proxy-authenticate"]},{"code":408,"name":"Request Timeout","group":4,"common":true,"status":"Standard","summary":"The server timed out waiting for the client to complete the request.","detail":"Useful when a connection stays open but the client fails to send the complete request within the server's timeout period.","example":"A client opens a connection but sends the request body too slowly and receives 408.","tags":["timeout","client","connection"]},{"code":409,"name":"Conflict","group":4,"common":true,"status":"Standard","summary":"The request conflicts with the current state of the target resource.","detail":"Common for state conflicts, duplicate identifiers, or versioning problems that the client may be able to resolve.","example":"Creating a username that already exists returns 409.","tags":["conflict","state","duplicate"]},{"code":410,"name":"Gone","group":4,"common":true,"status":"Standard","summary":"The resource is intentionally no longer available and is expected to remain unavailable.","detail":"More explicit than 404 when the server knows a resource was permanently removed.","example":"A retired API endpoint returns 410 to indicate that it will not return.","tags":["removed","permanent","resource"]},{"code":411,"name":"Length Required","group":4,"common":false,"status":"Standard","summary":"The server requires a defined Content-Length for this request.","detail":"The client can retry after sending a valid Content-Length header.","example":"A server policy rejects a request with no Content-Length and responds 411.","tags":["content-length","header","request body"]},{"code":412,"name":"Precondition Failed","group":4,"common":true,"status":"Standard","summary":"A condition in the request headers evaluated to false.","detail":"Used with conditional headers such as If-Match to protect against lost updates or to enforce resource-state requirements.","example":"PUT with an outdated If-Match ETag returns 412.","tags":["etag","precondition","conditional"]},{"code":413,"name":"Content Too Large","group":4,"common":true,"status":"Standard","summary":"The request content exceeds the server's accepted size.","detail":"Previously known as Payload Too Large. The server may reject an upload or other request body because it exceeds configured limits.","example":"Uploading a 100 MB file to an endpoint limited to 25 MB returns 413.","tags":["upload","size","payload"]},{"code":414,"name":"URI Too Long","group":4,"common":false,"status":"Standard","summary":"The request URI is longer than the server is willing to process.","detail":"Can result from excessively long query strings, redirect loops that keep appending data, or misuse of GET for large data sets.","example":"A very large query string causes the server to return 414.","tags":["url","uri","query string"]},{"code":415,"name":"Unsupported Media Type","group":4,"common":true,"status":"Standard","summary":"The server does not support the request content format.","detail":"Common when an API expects one Content-Type but the client sends another.","example":"An endpoint expecting application/json receives text/plain and returns 415.","tags":["content-type","media type","api"]},{"code":416,"name":"Range Not Satisfiable","group":4,"common":true,"status":"Standard","summary":"The requested byte range cannot be satisfied for the selected resource.","detail":"Returned when a Range header asks for bytes outside the current representation or otherwise cannot be fulfilled.","example":"A 1 MB file receives Range: bytes=5000000- and returns 416.","tags":["range","bytes","download"]},{"code":417,"name":"Expectation Failed","group":4,"common":false,"status":"Standard","summary":"The server cannot meet an expectation from the request's Expect header.","detail":"Most often associated with an Expect value the server cannot satisfy.","example":"A server that cannot honor the supplied expectation returns 417.","tags":["expect","header","request"]},{"code":418,"name":"Unused","group":4,"common":false,"status":"Reserved / unused","summary":"Reserved as an unused status code in the current core HTTP specification.","detail":"The number is famous for the historical 'I'm a teapot' joke response, but RFC 9110 reserves 418 as unused rather than defining it as a general-purpose HTTP status.","example":"Do not depend on 418 as a portable application protocol signal.","tags":["unused","teapot","historical","reserved"]},{"code":421,"name":"Misdirected Request","group":4,"common":false,"status":"Standard","summary":"The request reached a server that is not able to produce a response for the target authority.","detail":"Can appear with connection reuse and virtual hosting when a request is routed to the wrong server context.","example":"An HTTP/2 connection is reused for an authority the server cannot serve and returns 421.","tags":["http2","authority","routing"]},{"code":422,"name":"Unprocessable Content","group":4,"common":true,"status":"Standard","summary":"The request syntax is valid, but the server cannot process the contained instructions.","detail":"Useful for semantic validation failures where the body parses correctly but the submitted values or operations are unacceptable.","example":"A valid JSON user object contains an impossible date and the API returns 422.","tags":["validation","semantic","api"]},{"code":423,"name":"Locked","group":4,"common":false,"status":"WebDAV","summary":"The requested resource is locked.","detail":"A WebDAV response indicating that the operation cannot proceed because an applicable lock prevents it.","example":"A DAV client attempts to modify a locked document and receives 423.","tags":["webdav","lock","resource"]},{"code":424,"name":"Failed Dependency","group":4,"common":false,"status":"WebDAV","summary":"The request failed because an earlier dependent operation failed.","detail":"Used by WebDAV when one action cannot be completed because another action it depended on did not succeed.","example":"A multi-operation DAV request returns 424 for a step whose prerequisite failed.","tags":["webdav","dependency","multi-status"]},{"code":425,"name":"Too Early","group":4,"common":true,"status":"Standard","summary":"The server is unwilling to process a request that might be replayed.","detail":"Designed to reduce replay risk, especially around TLS early data. The client can retry when the request is no longer considered early data.","example":"A non-idempotent request sent in TLS 0-RTT is rejected with 425.","tags":["tls","0-rtt","replay"]},{"code":426,"name":"Upgrade Required","group":4,"common":true,"status":"Standard","summary":"The server requires the client to switch to another protocol.","detail":"The response normally indicates acceptable protocols using the Upgrade header.","example":"A service requires a protocol upgrade and returns 426 with an Upgrade header.","tags":["upgrade","protocol","header"]},{"code":428,"name":"Precondition Required","group":4,"common":true,"status":"Standard","summary":"The server requires the request to include a precondition.","detail":"Often used to prevent lost updates by requiring conditional headers such as If-Match.","example":"An API requires If-Match on updates and returns 428 when the header is absent.","tags":["precondition","etag","concurrency"]},{"code":429,"name":"Too Many Requests","group":4,"common":true,"status":"Standard","summary":"The client has exceeded a request-rate limit.","detail":"A rate-limiting response. The server may include Retry-After to tell the client when it is appropriate to try again.","example":"An API allows 100 requests per minute and returns 429 after the limit is exceeded.","tags":["rate limit","retry-after","throttle"]},{"code":431,"name":"Request Header Fields Too Large","group":4,"common":true,"status":"Standard","summary":"The request headers are too large for the server to process.","detail":"The problem can apply to the total header block or to one specific field. Large cookies are a common cause.","example":"An oversized Cookie header causes the server to return 431.","tags":["headers","cookies","size"]},{"code":451,"name":"Unavailable For Legal Reasons","group":4,"common":true,"status":"Standard","summary":"Access to the resource is unavailable because of a legal demand or restriction.","detail":"Designed to distinguish legal blocking from ordinary authorization or missing-resource responses.","example":"A provider blocks a resource to comply with a court order and returns 451.","tags":["legal","blocked","restriction"]},{"code":500,"name":"Internal Server Error","group":5,"common":true,"status":"Standard","summary":"The server encountered an unexpected condition and cannot complete the request.","detail":"A generic server-side error when no more specific 5xx response describes the problem.","example":"An uncaught application exception causes the origin to return 500.","tags":["server error","exception","application"]},{"code":501,"name":"Not Implemented","group":5,"common":true,"status":"Standard","summary":"The server does not support the functionality required to fulfill the request.","detail":"Common when the server does not implement the requested method or required capability.","example":"A server that does not implement PATCH may return 501.","tags":["method","unsupported","server"]},{"code":502,"name":"Bad Gateway","group":5,"common":true,"status":"Standard","summary":"A gateway or proxy received an invalid response from an upstream server.","detail":"Frequently seen with reverse proxies, load balancers, and application gateways when the upstream service fails or sends an unusable response.","example":"A reverse proxy cannot obtain a valid response from the application server and returns 502.","tags":["gateway","proxy","upstream"]},{"code":503,"name":"Service Unavailable","group":5,"common":true,"status":"Standard","summary":"The server is temporarily unable to handle the request.","detail":"Often used during maintenance, overload, or temporary capacity problems. Retry-After can provide guidance on when to try again.","example":"A service undergoing maintenance returns 503 Retry-After: 120.","tags":["maintenance","overload","retry-after"]},{"code":504,"name":"Gateway Timeout","group":5,"common":true,"status":"Standard","summary":"A gateway or proxy did not receive a timely response from an upstream server.","detail":"Indicates an upstream timeout rather than a direct timeout waiting for the client.","example":"A proxy waits too long for the origin API and returns 504.","tags":["gateway","timeout","upstream"]},{"code":505,"name":"HTTP Version Not Supported","group":5,"common":true,"status":"Standard","summary":"The server does not support the HTTP version used in the request.","detail":"The server refuses to complete the request because the protocol version is unsupported.","example":"A server receives a request using an unsupported HTTP version and returns 505.","tags":["http version","protocol","unsupported"]},{"code":506,"name":"Variant Also Negotiates","group":5,"common":false,"status":"Transparent content negotiation","summary":"The server detected a configuration error involving content negotiation.","detail":"Defined for transparent content negotiation when the selected variant itself participates in negotiation and creates a circular configuration.","example":"A misconfigured negotiated resource points to another negotiating resource and returns 506.","tags":["negotiation","variant","configuration"]},{"code":507,"name":"Insufficient Storage","group":5,"common":true,"status":"WebDAV","summary":"The server cannot store the representation needed to complete the request.","detail":"A WebDAV status used when the server lacks sufficient storage to complete the operation.","example":"A DAV server cannot save another version because storage is exhausted and returns 507.","tags":["webdav","storage","disk"]},{"code":508,"name":"Loop Detected","group":5,"common":false,"status":"WebDAV","summary":"The server detected an infinite loop while processing the request.","detail":"Used with WebDAV bindings when the server identifies a loop that prevents it from completing the operation.","example":"A recursive DAV binding creates a loop and the server returns 508.","tags":["webdav","loop","binding"]},{"code":510,"name":"Not Extended","group":5,"common":false,"status":"Obsoleted","summary":"An obsolete extension-related status retained in the IANA registry.","detail":"Originally defined for an experimental HTTP extension framework. The registry marks the code as obsoleted.","example":"New applications should not design around 510.","tags":["obsolete","extension","historical"]},{"code":511,"name":"Network Authentication Required","group":5,"common":true,"status":"Standard","summary":"The client must authenticate to gain network access.","detail":"Intended for intercepting network devices such as captive portals, not for normal origin-server authentication.","example":"A public Wi-Fi captive portal intercepts the request and returns 511 until the user signs in.","tags":["captive portal","network","authentication"]}];
+  const $=id=>document.getElementById(id);
+  let group="all";
+  let tableMode=false;
+  let selectedCode=404;
+
+  const groupNames={
+    1:"Informational",2:"Success",3:"Redirection",4:"Client Error",5:"Server Error"
+  };
+
+  function esc(s){
+    return String(s??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;").replaceAll("'","&#039;");
+  }
+
+  function className(g){return `c${g}`}
+
+  function matches(c,q){
+    if(group!=="all" && String(c.group)!==group)return false;
+    if($("commonOnly").checked && !c.common)return false;
+    if(!q)return true;
+    const hay=[
+      c.code,c.name,c.summary,c.detail,c.example,c.status,groupNames[c.group],...(c.tags||[])
+    ].join(" ").toLocaleLowerCase();
+    return hay.includes(q);
+  }
+
+  function filtered(){
+    const q=$("searchInput").value.trim().toLocaleLowerCase();
+    return CODES.filter(c=>matches(c,q));
+  }
+
+  function render(){
+    const list=filtered();
+    $("resultCount").textContent=`${list.length} of ${CODES.length} codes shown`;
+
+    $("gridView").innerHTML=list.map(c=>`
+      <article class="code-card" data-index="${CODES.indexOf(c)}" tabindex="0">
+        <div class="card-head">
+          <div class="code-wrap">
+            <div class="code-num ${className(c.group)}">${c.code}</div>
+            <div>
+              <div class="code-name">${esc(c.name)} ${c.common?'<span class="common-star" title="Commonly encountered">★</span>':""}</div>
+              <div class="small">${esc(groupNames[c.group])}</div>
+            </div>
+          </div>
+          <span class="std-badge">${esc(c.status)}</span>
+        </div>
+        <div class="code-summary">${esc(c.summary)}</div>
+        <div class="card-actions">
+          <button class="mini-btn" type="button" data-open="${c.code}">View Details</button>
+          <button class="mini-btn" type="button" data-copy="${c.code}">Copy Status Line</button>
+        </div>
+      </article>`).join("");
+
+    $("tableBody").innerHTML=list.map(c=>`
+      <tr data-index="${CODES.indexOf(c)}">
+        <td class="tc ${className(c.group)}">${c.code}</td>
+        <td><strong>${esc(c.name)}</strong>${c.common?' <span class="common-star">★</span>':""}</td>
+        <td>${esc(groupNames[c.group])}</td>
+        <td>${esc(c.status)}</td>
+        <td>${esc(c.summary)}</td>
+      </tr>`).join("");
+
+    $("emptyState").classList.toggle("show",list.length===0);
+    if(list.length && !list.some(c=>c.code===selectedCode)) selectedCode=list[0].code;
+    if(list.length) renderDetail(CODES.find(c=>c.code===selectedCode) || list[0]);
+  }
+
+  function renderDetail(c){
+    if(!c)return;
+    selectedCode=c.code;
+    $("detailPanel").innerHTML=`
+      <div class="detail-top">
+        <div>
+          <div class="detail-code ${className(c.group)}">${c.code}</div>
+          <div class="detail-name">${esc(c.name)} ${c.common?'<span class="common-star" title="Commonly encountered">★</span>':""}</div>
+          <div class="detail-class">${esc(groupNames[c.group])} • ${esc(c.status)}</div>
+        </div>
+      </div>
+      <p class="detail-summary">${esc(c.summary)}</p>
+      <div class="detail-grid">
+        <div class="detail-box"><small>What it means</small><p>${esc(c.detail)}</p></div>
+        <div class="detail-box"><small>Example</small><p>${esc(c.example)}</p></div>
+      </div>
+      <div class="tags">${c.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join("")}</div>
+      <div class="actions">
+        <button id="copySelected" class="btn primary" type="button">Copy ${c.code} ${esc(c.name)}</button>
+        <button id="searchRelated" class="btn" type="button">Search “${esc(c.tags[0]||c.name)}”</button>
+        <span id="copyStatus" class="status"></span>
+      </div>`;
+    $("copySelected").onclick=()=>copyStatus(c,$("copySelected"));
+    $("searchRelated").onclick=()=>{
+      $("searchInput").value=c.tags[0]||c.name;
+      group="all";
+      document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x.dataset.group==="all"));
+      render();
+      $("searchInput").focus();
+    };
+  }
+
+  async function copyText(text){
+    if(navigator.clipboard && window.isSecureContext){
+      await navigator.clipboard.writeText(text); return;
+    }
+    const ta=document.createElement("textarea");
+    ta.value=text;ta.style.position="fixed";ta.style.left="-9999px";
+    document.body.appendChild(ta);ta.select();
+    const ok=document.execCommand("copy");ta.remove();
+    if(!ok)throw new Error("copy failed");
+  }
+
+  async function copyStatus(c,btn){
+    const original=btn?.textContent||"";
+    try{
+      await copyText(`${c.code} ${c.name} — ${c.summary}`);
+      if(btn)btn.textContent="Copied";
+      const s=$("copyStatus"); if(s)s.textContent="Copied to clipboard.";
+      setTimeout(()=>{if(btn)btn.textContent=original;if(s)s.textContent=""},1300);
+    }catch{
+      const s=$("copyStatus"); if(s)s.textContent="Copy unavailable.";
+    }
+  }
+
+  $("gridView").addEventListener("click",e=>{
+    const copy=e.target.closest("[data-copy]");
+    if(copy){
+      e.stopPropagation();
+      const c=CODES.find(x=>x.code===Number(copy.dataset.copy));
+      copyStatus(c,copy);
+      return;
+    }
+    const open=e.target.closest("[data-open]");
+    if(open){
+      e.stopPropagation();
+      const c=CODES.find(x=>x.code===Number(open.dataset.open));
+      renderDetail(c);
+      $("detailPanel").scrollIntoView({behavior:"smooth",block:"nearest"});
+      return;
+    }
+    const card=e.target.closest("[data-index]");
+    if(card)renderDetail(CODES[Number(card.dataset.index)]);
+  });
+  $("gridView").addEventListener("keydown",e=>{
+    if(e.key==="Enter"||e.key===" "){
+      const card=e.target.closest("[data-index]");
+      if(card){e.preventDefault();renderDetail(CODES[Number(card.dataset.index)])}
+    }
+  });
+  $("tableBody").addEventListener("click",e=>{
+    const row=e.target.closest("[data-index]");
+    if(row){renderDetail(CODES[Number(row.dataset.index)]);$("detailPanel").scrollIntoView({behavior:"smooth",block:"nearest"})}
+  });
+
+  $("filters").addEventListener("click",e=>{
+    const b=e.target.closest("[data-group]"); if(!b)return;
+    group=b.dataset.group;
+    document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x===b));
+    render();
+  });
+  $("searchInput").addEventListener("input",render);
+  $("commonOnly").addEventListener("change",render);
+  $("clearSearch").onclick=()=>{$("searchInput").value="";render();$("searchInput").focus()};
+
+  $("viewToggle").onclick=()=>{
+    tableMode=!tableMode;
+    $("gridView").classList.toggle("hidden-view",tableMode);
+    $("tableView").classList.toggle("show",tableMode);
+    $("viewToggle").querySelector("span").textContent=tableMode?"Card View":"Table View";
+    $("viewToggle").querySelector("svg").innerHTML=tableMode
+      ? '<rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><rect x="14" y="14" width="6" height="6"/>'
+      : '<path d="M4 5h16M4 12h16M4 19h16"/>';
+  };
+
+  function applyTheme(theme){
+    const light=theme==="light";
+    const moon=$("moonIcon"),sun=$("sunIcon"),toggle=$("themeToggle");
+    document.body.classList.toggle("light-mode",light);
+    moon.classList.toggle("theme-hidden",!light);
+    sun.classList.toggle("theme-hidden",light);
+    const label=light?"Switch to dark mode":"Switch to light mode";
+    toggle.setAttribute("aria-label",label);toggle.title=label;
+    const meta=document.querySelector('meta[name="theme-color"]');
+    if(meta)meta.setAttribute("content",light?"#f8fafc":"#020617");
+  }
+  const saved=localStorage.getItem("utiliverse-theme");
+  const initial=saved==="light"||saved==="dark"?saved:(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");
+  applyTheme(initial);
+  $("themeToggle").onclick=()=>{
+    const next=document.body.classList.contains("light-mode")?"dark":"light";
+    localStorage.setItem("utiliverse-theme",next);applyTheme(next);
+  };
+
+  render();
+})();
+</script>
+</body>
+</html>
