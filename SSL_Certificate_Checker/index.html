@@ -303,6 +303,9 @@
     ]
   }
   </script>
+<style id="u2-styles">
+.u2-related{--u2-bg:#fff;--u2-text:#0f172a;--u2-muted:#475569;--u2-border:#dbe3ee;--u2-link:#4338ca;background:var(--u2-bg);color:var(--u2-text);border:1px solid var(--u2-border);border-radius:18px;padding:24px;margin:32px auto;max-width:1120px;overflow-wrap:anywhere;font-family:Inter,system-ui,sans-serif}.u2-related h2{font-size:25px;line-height:1.3;margin:0 0 16px;color:var(--u2-text);font-weight:800}.u2-related h3{font-size:18px;margin:22px 0 8px;font-weight:750;color:var(--u2-text)}.u2-related p,.u2-related li{font-size:15px;line-height:1.8;color:var(--u2-muted);margin:0 0 12px}.u2-related ul{padding-left:22px;list-style:disc}.u2-related a{color:var(--u2-link);text-decoration:underline;text-underline-offset:3px}.u2-related a:focus-visible{outline:2px solid currentColor;outline-offset:4px}.u2-columns{display:grid;grid-template-columns:1fr 1fr;gap:24px}.u2-review{border-top:1px solid var(--u2-border);padding-top:15px;font-size:12px!important}.u2-related.u2-dark-default{--u2-bg:#0f172a;--u2-text:#f8fafc;--u2-muted:#cbd5e1;--u2-border:#334155;--u2-link:#a5b4fc}html.dark .u2-related,body.dark-mode .u2-related{--u2-bg:#0f172a;--u2-text:#f8fafc;--u2-muted:#cbd5e1;--u2-border:#334155;--u2-link:#a5b4fc}body.light-mode .u2-related{--u2-bg:#fff;--u2-text:#0f172a;--u2-muted:#475569;--u2-border:#dbe3ee;--u2-link:#4338ca}@media(max-width:620px){.u2-related{padding:18px}.u2-columns{grid-template-columns:1fr;gap:0}}
+</style>
 </head>
 
 <!--
@@ -634,7 +637,11 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
       ========================================================= -->
 
     </div>
-  </main>
+  
+<!-- BATCH 2 RELATED CONTENT START -->
+<section class="u2-related" aria-labelledby="u2-heading"><h2 id="u2-heading">Separate certificate problems from HTTP errors</h2><p>Enter the exact public hostname involved in the failure. Compare the returned certificate names, dates, and trust information with the browser’s error. A successful check is evidence about that hostname from the checking service’s perspective.</p><h3>Worked check: a 502 behind a proxy</h3><p>If visitors receive 502 over HTTPS, the browser may already have established TLS with the public proxy. The proxy can still fail when connecting to its origin. A valid certificate on the public hostname does not prove that the private origin has the correct certificate, hostname, or trust chain.</p><h3>Limits and next steps</h3><p>This tool sends the hostname to an external checking API. It does not inspect your private network or your browser’s local trust settings. A service error or timeout is inconclusive; compare the browser details and server logs before changing certificates.</p><p>Record the hostname, check time, observed error, and certificate dates. For an HTTP 502, 503, or 504, follow the gateway guide below. For a redirect to another hostname, check the destination separately.</p><div class="u2-columns"><div><h3>Related guides</h3><ul><li><a href="/Guides/HTTP_502_503_504.html">502 vs 503 vs 504: server and gateway errors</a></li><li><a href="/Guides/HTTP_Redirects.html">301 vs 302 vs 307 vs 308: choosing an HTTP redirect</a></li></ul></div><div><h3>Related tools</h3><ul><li><a href="/HAR_File_Viewer/">HAR File Viewer</a></li></ul><p><a href="/Guides.html">Browse all guides</a></p></div></div><p class="u2-review">Explanatory content reviewed September 28, 2026. <a href="/Editorial_Methodology.html">Methodology</a> · <a href="/Contact_Info.html">Report a correction</a></p></section>
+<!-- BATCH 2 RELATED CONTENT END -->
+</main>
 
   <footer class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-6 pt-2">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-500">
