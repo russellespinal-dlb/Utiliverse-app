@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1786245123035497" crossorigin="anonymous"></script>
+<!-- GOOGLE ADSENSE: SCRIPT INSERTION POINT (inactive) -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Utiliverse Updates – Tool, Content &amp; Maintenance Changelog</title>
@@ -155,7 +155,8 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
 
 <section class="glass section">
   <div class="kicker">Current development release</div><h2>September 2026</h2>
-  <div class="update"><div class="update-date">September 27, 2026</div><h3>Editorial and maintenance foundation added</h3><p>Added a Guides hub, a public Editorial &amp; Tool Methodology page, and this Updates log so visitors can understand how explanatory content, formulas, sources, external services, and revisions are handled.</p></div>
+  <div class="update"><div class="update-date">September 28, 2026</div><h3>Batch 3: six finance guides and richer calculator explanations</h3><p>Launched original guides covering extra mortgage payments, DTI and home affordability, lease money factors, compound interest and APY, rental-property returns, and fix-and-flip costs. Each includes worked examples, assumptions, common mistakes, and sources. The six matching calculators now link to the guides and explain their own input conventions and output limitations. Titles use the matching homepage SVG icons in indigo, with category text removed above them. Pages default to dark mode and retain a light-mode toggle. Corrected a mortgage amortization-table edge case so the final row cannot report more principal than remains owed. Added the guides to the <a href="./Guides.html">Guides hub</a> and sitemap.</p></div>
+<div class="update"><div class="update-date">September 27, 2026</div><h3>Editorial and maintenance foundation added</h3><p>Added a Guides hub, a public Editorial &amp; Tool Methodology page, and this Updates log so visitors can understand how explanatory content, formulas, sources, external services, and revisions are handled.</p></div>
   <div class="update"><div class="update-date">September 2026</div><h3>Shared internal-tool design standardized</h3><p>Newer tool pages were brought back to a consistent Utiliverse light/dark visual system with neutral light surfaces, slate dark surfaces, indigo interaction states, consistent title treatment, and removal of category-colored page backgrounds and category pills where they had drifted from the original design.</p></div>
   <div class="update"><div class="update-date">September 2026</div><h3>HTTP Status Code Reference added</h3><p>Added a searchable HTTP response-code reference with class filters, card and table views, common-code filtering, explanatory examples, copy actions, and registry-state notes.</p></div>
   <div class="update"><div class="update-date">September 2026</div><h3>New everyday and family utilities added</h3><p>Expanded the directory with the Baby &amp; Toddler Feeding Scheduler, Baby Name Finder, School Supply Planner, Lottery Number Generator, Random Name Generator, general QR Code Generator, and WiFi QR Code Generator.</p></div>
@@ -174,7 +175,7 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
   <h2>Corrections and revisions</h2>
   <p>If a formula, explanation, source interpretation, or technical behavior is found to be materially incorrect, Utiliverse should correct the page and record a meaningful correction here when the change could affect how users interpret a result.</p>
   <p>Questions or correction suggestions can be sent through the <a href="./Contact_Info.html">Contact</a> page. The broader review approach is documented in <a href="./Editorial_Methodology.html">Editorial &amp; Tool Methodology</a>.</p>
-  <div class="review-box"><span>Last reviewed: September 27, 2026</span><span>Entries are intended to describe meaningful public-facing changes.</span></div>
+  <div class="review-box"><span>Last reviewed: September 28, 2026</span><span>Entries are intended to describe meaningful public-facing changes.</span></div>
 </section>
 </div></main>
 
@@ -210,7 +211,7 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
     if(meta)meta.setAttribute("content",light?"#f8fafc":"#020617");
   }
   const saved=localStorage.getItem("utiliverse-theme");
-  const initial=saved==="light"||saved==="dark"?saved:(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");
+  const initial=saved==="light"||saved==="dark"?saved:"dark";
   applyTheme(initial);
   $("themeToggle").addEventListener("click",()=>{
     const next=document.body.classList.contains("light-mode")?"dark":"light";

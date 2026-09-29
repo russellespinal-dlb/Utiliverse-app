@@ -311,6 +311,31 @@
     <loc>https://utiliverse.app/Guides.html/</loc>
   </url>
 
+  <!-- HTTP Redirects -->
+  <url>
+    <loc>https://utiliverse.app/Guides/HTTP_Redirects.html</loc>
+  </url>
+
+  <!-- HTTP 401 vs 403 -->
+  <url>
+    <loc>https://utiliverse.app/Guides/HTTP_401_vs_403.html</loc>
+  </url>
+
+  <!-- HTTP 502 vs 503 vs 504 -->
+  <url>
+    <loc>https://utiliverse.app/Guides/HTTP_502_503_504.html</loc>
+  </url>
+
+  <!-- Read Email Headers -->
+  <url>
+    <loc>https://utiliverse.app/Guides/Read_Email_Headers.html</loc>
+  </url>
+
+  <!-- SPF, DKIM and DMARC -->
+  <url>
+    <loc>https://utiliverse.app/Guides/SPF_DKIM_DMARC.html</loc>
+  </url>
+
   <!-- Updates -->
   <url>
     <loc>https://utiliverse.app/Updates.html/</loc>
@@ -340,4 +365,13 @@
   <url>
     <loc>https://utiliverse.app/About.html/</loc>
   </url>
+  <url><loc>https://utiliverse.app/Guides/Mortgage_Extra_Payments.html</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://utiliverse.app/Guides/DTI_and_Home_Affordability.html</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://utiliverse.app/Guides/Lease_Money_Factor_vs_APR.html</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://utiliverse.app/Guides/Compound_Interest_vs_APY.html</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://utiliverse.app/Guides/Cap_Rate_vs_Cash_on_Cash_Return.html</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://utiliverse.app/Guides/Fix_and_Flip_Costs_ROI_70_Percent_Rule.html</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://utiliverse.app/Guides.html</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://utiliverse.app/Updates.html</loc><lastmod>2026-09-28</lastmod></url>
+  <url><loc>https://utiliverse.app/Editorial_Methodology.html</loc><lastmod>2026-09-28</lastmod></url>
 </urlset>
