@@ -1,0 +1,140 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cap Rate vs Cash-on-Cash Return | Utiliverse</title><meta name="description" content="Compare property operating yield with the cash return on your invested equity, using a rental example that separates financing and tax effects."><meta name="robots" content="index,follow"><meta name="theme-color" content="#020617"><link rel="canonical" href="https://utiliverse.app/Guides/Cap_Rate_vs_Cash_on_Cash_Return.html"><meta property="og:type" content="article"><meta property="og:site_name" content="Utiliverse"><meta property="og:title" content="Cap Rate vs Cash-on-Cash Return | Utiliverse"><meta property="og:description" content="Compare property operating yield with the cash return on your invested equity, using a rental example that separates financing and tax effects."><meta property="og:url" content="https://utiliverse.app/Guides/Cap_Rate_vs_Cash_on_Cash_Return.html"><meta property="article:published_time" content="2026-09-28"><meta property="article:modified_time" content="2026-09-28"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Cap Rate vs Cash-on-Cash Return | Utiliverse"><meta name="twitter:description" content="Compare property operating yield with the cash return on your invested equity, using a rental example that separates financing and tax effects."><style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --panel:rgba(30,41,59,.72);--panel2:rgba(15,23,42,.70);
+  --border:#334155;--border2:#475569;--text:#f8fafc;--muted:#94a3b8;
+  --indigo:#6366f1;--indigo2:#4f46e5;--green:#34d399;--amber:#fbbf24;--rose:#fb7185
+}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),
+    radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;
+  color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  transition:background .25s ease,color .25s ease
+}
+a{color:inherit} button{font:inherit} button{touch-action:manipulation}
+.container{max-width:1152px;margin:0 auto;padding:0 16px}
+header{position:sticky;top:0;z-index:50;background:rgba(2,6,23,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid #1e293b}
+.header-inner{min-height:65px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.back-link{display:flex;align-items:center;gap:8px;text-decoration:none;color:#cbd5e1;font-size:14px;font-weight:700}
+.back-link:hover{color:#fff}
+.header-right{display:flex;align-items:center;gap:12px}
+.resource-nav{display:flex;align-items:center;gap:14px}
+.resource-nav a{font-size:12px;font-weight:750;text-decoration:none;color:#94a3b8}
+.resource-nav a:hover{color:#fff}
+.free-label{font-size:13px;font-weight:650;color:#64748b;white-space:nowrap}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border:1px solid #334155;background:rgba(15,23,42,.72);color:#94a3b8;border-radius:12px;cursor:pointer;box-shadow:none;appearance:none;-webkit-appearance:none}
+.theme-toggle:hover{color:#fff;background:#1e293b;border-color:#475569}
+.theme-toggle:focus-visible,.btn:focus-visible,a:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
+.theme-toggle svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.theme-hidden{display:none!important}
+main{padding:48px 0 72px}
+.hero{max-width:920px}
+.title-row{display:flex;align-items:center;gap:14px}
+.title-icon{width:46px;height:46px;flex:none;color:#818cf8}
+.title-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+h1{font-size:clamp(38px,5vw,58px);line-height:1.04;margin:0;font-weight:900;letter-spacing:-.035em}
+.hero p{max-width:900px;color:var(--muted);font-size:18px;line-height:1.72;margin:14px 0 0}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.meta{border:1px solid var(--border);background:rgba(15,23,42,.66);border-radius:999px;padding:7px 10px;color:#cbd5e1;font-size:12px;font-weight:750}
+.glass{background:var(--panel);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:20px}
+.section{margin-top:28px;padding:22px}
+.section h2{font-size:26px;line-height:1.25;font-weight:900;margin:0 0 12px}
+.section h3{font-size:18px;line-height:1.4;font-weight:850;margin:24px 0 8px;color:#e2e8f0}
+.section p,.section li{color:#94a3b8;line-height:1.8}
+.section p{margin:0 0 14px}
+.section ul{padding-left:20px;margin:8px 0 0}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+.card{background:var(--panel2);border:1px solid var(--border);border-radius:16px;padding:16px;min-width:0}
+.card h3{margin:0 0 7px;font-size:16px;color:#f8fafc}
+.card p{font-size:13px;line-height:1.65;margin:0;color:#94a3b8}
+.card a{display:inline-flex;margin-top:10px;color:#a5b4fc;font-size:12px;font-weight:850;text-decoration:none}
+.card a:hover{text-decoration:underline}
+.kicker{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#818cf8;font-weight:850;margin-bottom:7px}
+.callout{border:1px solid rgba(99,102,241,.28);background:rgba(99,102,241,.07);border-radius:15px;padding:16px;margin:18px 0}
+.callout strong{color:#c7d2fe}
+.update{border-left:3px solid #6366f1;padding:2px 0 2px 16px;margin:22px 0}
+.update-date{font-size:11px;text-transform:uppercase;letter-spacing:.09em;font-weight:850;color:#818cf8}
+.update h3{margin:5px 0 7px;font-size:18px;color:#f8fafc}
+.update p{margin:0;color:#94a3b8}
+.source-list{display:grid;gap:10px;margin-top:14px}
+.source-item{border:1px solid var(--border);background:var(--panel2);border-radius:13px;padding:13px}
+.source-item strong{display:block;color:#e2e8f0;font-size:13px}
+.source-item span{display:block;color:#64748b;font-size:11px;margin-top:4px;line-height:1.5}
+.btn{min-height:42px;border:1px solid var(--border2);background:#1e293b;color:#f8fafc;border-radius:10px;padding:9px 12px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:7px}
+.btn:hover{background:#334155}
+.btn.primary{background:linear-gradient(135deg,var(--indigo),var(--indigo2));border-color:var(--indigo)}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.article{max-width:900px;margin-top:54px}
+.article h2{font-size:30px;line-height:1.25;font-weight:900;margin:38px 0 13px;color:#fff}
+.article h3{font-size:19px;line-height:1.4;font-weight:850;margin:27px 0 9px;color:#e2e8f0}
+.article p,.article li{color:#94a3b8;line-height:1.84;margin:0 0 15px}
+.article ul{padding-left:20px}
+.article a{color:#a5b4fc;font-weight:800;text-decoration:none}
+.article a:hover{text-decoration:underline}
+.review-box{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;border-top:1px solid var(--border);margin-top:26px;padding-top:16px;color:#64748b;font-size:11px;line-height:1.55}
+footer{border-top:1px solid #1e293b;background:#020617}
+.footer-inner{min-height:90px;display:flex;align-items:center;justify-content:space-between;gap:18px;color:#64748b;font-size:13px}
+.footer-links{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end}
+.footer-links a{text-decoration:none}
+.footer-links a:hover{color:#cbd5e1}
+body.light-mode{--panel:rgba(255,255,255,.92);--panel2:rgba(248,250,252,.96);--border:#dbe3ee;--border2:#cbd5e1;--text:#0f172a;--muted:#475569;background:#f8fafc;color:#0f172a}
+body.light-mode header{background:rgba(255,255,255,.93);border-bottom-color:#e2e8f0}
+body.light-mode .back-link{color:#334155} body.light-mode .back-link:hover{color:#0f172a}
+body.light-mode .resource-nav a{color:#64748b} body.light-mode .resource-nav a:hover{color:#0f172a}
+body.light-mode .theme-toggle{color:#475569;background:#fff;border-color:#cbd5e1}
+body.light-mode .theme-toggle:hover{color:#0f172a;background:#f1f5f9;border-color:#94a3b8}
+body.light-mode .meta{background:#fff;color:#475569}
+body.light-mode .section h3,body.light-mode .card h3,body.light-mode .source-item strong,body.light-mode .update h3{color:#1e293b}
+body.light-mode .section p,body.light-mode .section li,body.light-mode .card p,body.light-mode .update p{color:#475569}
+body.light-mode .callout{background:#eef2ff} body.light-mode .callout strong{color:#4338ca}
+body.light-mode .btn:not(.primary){background:#f1f5f9;color:#334155}
+body.light-mode .btn:not(.primary):hover{background:#e2e8f0}
+body.light-mode .article h2{color:#0f172a} body.light-mode .article h3{color:#1e293b}
+body.light-mode .article p,body.light-mode .article li{color:#475569}
+body.light-mode .article a,body.light-mode .card a{color:#4f46e5}
+body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
+@media(max-width:900px){.grid{grid-template-columns:1fr 1fr}.resource-nav{display:none}}
+@media(max-width:620px){main{padding-top:34px}.grid{grid-template-columns:1fr}.free-label{font-size:10.5px;max-width:130px;white-space:normal;text-align:right;line-height:1.2}.footer-inner{flex-direction:column;align-items:flex-start;padding:22px 0}.footer-links{justify-content:flex-start}}
+@media(max-width:390px){.header-right{gap:6px}.title-icon{width:38px;height:38px}}
+
+
+.b3-title{display:flex!important;align-items:center;gap:14px;text-align:left}.b3-title>span:last-child{min-width:0;overflow-wrap:anywhere}.b3-icon{display:inline-flex;flex:none;width:42px;height:42px;color:#818cf8}.b3-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.b3-content{max-width:100%;margin:40px 0 16px;padding:clamp(18px,3vw,32px);border:1px solid #334155;border-radius:20px;background:rgba(15,23,42,.7);color:#cbd5e1;line-height:1.8;text-align:left}.b3-content h2{font-size:clamp(24px,3vw,30px);line-height:1.3;color:#f8fafc;font-weight:800;margin:28px 0 12px}.b3-content h2:first-child{margin-top:0}.b3-content h3{font-size:19px;color:#e2e8f0;margin:24px 0 10px}.b3-content p{color:inherit;margin:12px 0}.b3-content ul{list-style:disc;padding-left:23px}.b3-content li{margin:8px 0}.b3-content a,.b3-resources a{color:#a5b4fc;text-decoration:underline;text-underline-offset:3px}.b3-content strong{color:inherit}.b3-content .table-wrap{overflow-x:auto;margin:20px 0}.b3-content table{width:100%;border-collapse:collapse;font-size:14px;line-height:1.6}.b3-content th,.b3-content td{padding:12px;border-bottom:1px solid #475569;text-align:left;color:inherit;min-width:120px}.b3-content th{font-weight:750}.b3-content caption{text-align:left;color:inherit;padding:0 0 10px;font-weight:750}.b3-content .formula{padding:16px;border-left:3px solid #818cf8;background:rgba(99,102,241,.12);overflow-wrap:anywhere}.b3-content .b3-reviewed{font-size:13px;border-top:1px solid #475569;padding-top:16px;margin-top:28px}.b3-resources{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;padding:18px 16px;font:13px/1.6 system-ui}.b3-content details{padding:14px 0;border-top:1px solid #334155}.b3-content summary{font-weight:750;cursor:pointer}.b3-content a:focus-visible,.b3-content summary:focus-visible{outline:2px solid #818cf8;outline-offset:4px}
+body.light-mode .b3-content,body:not(.dark-mode).b3-flip .b3-content{background:#fff;color:#475569;border-color:#dbe3ee}body.light-mode .b3-content h2,body.light-mode .b3-content h3,body:not(.dark-mode).b3-flip .b3-content h2,body:not(.dark-mode).b3-flip .b3-content h3{color:#0f172a}body.light-mode .b3-content a,body.light-mode .b3-resources a,body:not(.dark-mode).b3-flip .b3-content a,body:not(.dark-mode).b3-flip .b3-resources a{color:#4338ca}body.light-mode .b3-icon,body:not(.dark-mode).b3-flip .b3-icon{color:#4f46e5}body.light-mode .b3-content th,body.light-mode .b3-content td,body.light-mode .b3-content details{border-color:#dbe3ee}
+@media(max-width:620px){.b3-icon{width:32px;height:32px}.b3-title{gap:10px}.b3-content{padding:18px}.b3-content h2{font-size:24px}.b3-content table{font-size:13px}}
+
+.guide-main{max-width:1000px}h1{font-size:clamp(30px,4.5vw,48px);line-height:1.15}.hero .b3-title{align-items:flex-start}.hero .b3-icon{margin-top:5px}</style><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Cap Rate vs Cash-on-Cash Return", "description": "Compare property operating yield with the cash return on your invested equity, using a rental example that separates financing and tax effects.", "url": "https://utiliverse.app/Guides/Cap_Rate_vs_Cash_on_Cash_Return.html", "mainEntityOfPage": "https://utiliverse.app/Guides/Cap_Rate_vs_Cash_on_Cash_Return.html", "datePublished": "2026-09-28", "dateModified": "2026-09-28", "author": {"@type": "Organization", "name": "Utiliverse", "url": "https://utiliverse.app/"}, "publisher": {"@type": "Organization", "name": "Utiliverse", "url": "https://utiliverse.app/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does the mortgage payment affect cap rate?", "acceptedAnswer": {"@type": "Answer", "text": "No. This tool calculates cap rate from NOI before financing divided by purchase price. Debt service affects cash flow and cash-on-cash return."}}, {"@type": "Question", "name": "Is cash-on-cash return the total return?", "acceptedAnswer": {"@type": "Answer", "text": "No. It excludes appreciation, principal-paydown equity, sale gains, and income-tax effects from its annual cash-flow numerator."}}]}</script></head><body><header>
+  <div class="container header-inner">
+    <a class="back-link" href="https://utiliverse.app/"><span aria-hidden="true">←</span><span>Back to Utiliverse</span></a>
+    <nav class="resource-nav" aria-label="Resource navigation">
+      <a href="/Guides.html">Guides</a>
+      <a href="/Updates.html">Updates</a>
+      <a href="/Editorial_Methodology.html">Editorial &amp; Methodology</a>
+    </nav>
+    <div class="header-right">
+      <span class="free-label">100% Free and Browser Based</span>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+        <svg id="moonIcon" class="theme-hidden" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
+        <svg id="sunIcon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+      </button>
+    </div>
+  </div>
+</header><!-- GOOGLE ADSENSE: TOP INSERTION POINT; NO VISIBLE PLACEHOLDER -->
+<main><div class="container guide-main"><section class="hero"><div class="b3-title"><span class="b3-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="16" rx="2"/><path d="M8 8h2M14 8h2M8 12h2M14 12h2M10 20v-4h4v4"/></svg></span><h1>Cap Rate vs Cash-on-Cash Return</h1></div><p>Compare property operating yield with the cash return on your invested equity, using a rental example that separates financing and tax effects.</p><p style="font-size:13px">Last reviewed: September 28, 2026 · By Utiliverse</p><div class="actions"><a class="btn primary" href="/Rental_Property_Calculator/">Open Rental Property Calculator</a><a class="btn" href="/Guides.html">All guides</a></div></section><article class="b3-content"><nav aria-label="On this page"><strong>On this page</strong><ul><li><a href="#section-0">Two ratios answer different questions</a></li><li><a href="#section-1">Build NOI before calculating a return</a></li><li><a href="#section-2">Worked example: one property, two financing choices</a></li><li><a href="#section-3">Leverage and a vacancy stress test</a></li><li><a href="#section-4">Common mistakes and limits</a></li></ul></nav><section id="section-0"><h2>Two ratios answer different questions</h2><p>Cap rate compares annual net operating income (NOI) with a property price or value. It describes operating yield before financing and income taxes. Cash-on-cash return compares annual cash flow after debt service with the cash initially invested. It depends on both the property and the way you finance it.</p><div class="formula">Cap rate = annual NOI ÷ property price or value<br>Cash-on-cash return = annual cash flow after debt service ÷ initial cash invested</div><p>State the denominators when comparing deals. This Utiliverse tool uses purchase price for cap rate, and down payment plus closing costs plus initial repairs for cash invested. An analysis using current value or total project cost will produce a different ratio even if NOI is identical.</p></section><section id="section-1"><h2>Build NOI before calculating a return</h2><p>Start with potential rental income, account for vacancy, and subtract operating expenses. Include realistic property taxes, insurance, maintenance, management, association costs, and other operating costs. Mortgage principal and interest are excluded from NOI; debt service is subtracted afterward to find cash flow.</p><p>In this calculator, vacancy reduces rent plus other income, and management is calculated as a percentage of the resulting effective income. Enter the expense fields in their displayed annual units. A roof replacement reserve and routine maintenance should be budgeted deliberately, without counting the same planned spending twice.</p><p>NOI is not taxable income. The <a href="https://www.irs.gov/publications/p527">IRS's residential rental property guidance</a> treats depreciation, interest, repairs, and improvements under tax rules that differ from a cash-return worksheet. A principal payment uses cash but is not the same as an interest expense or depreciation deduction.</p></section><section id="section-2"><h2>Worked example: one property, two financing choices</h2><p>Assume a $300,000 purchase, $2,500 monthly rent, no other income, 5% vacancy, and 8% management. Use annual property tax of $3,600, insurance of $1,200, maintenance of $1,200, other operating costs of $720, and no HOA. Closing costs are $6,000 and initial repairs are $9,000.</p><div class="table-wrap"><table><caption>Annual operating calculation</caption><tbody><tr><th>Potential rent</th><td>$30,000</td></tr><tr><th>Vacancy at 5%</th><td>−$1,500</td></tr><tr><th>Effective income</th><td>$28,500</td></tr><tr><th>Management at 8% of effective income</th><td>−$2,280</td></tr><tr><th>Other operating expenses</th><td>−$6,720</td></tr><tr><th>NOI</th><td>$19,500</td></tr></tbody></table></div><p>Cap rate is $19,500 ÷ $300,000 = 6.5%. With no loan, cash invested is $315,000 and cash-on-cash return is about 6.19%. The two ratios differ because cash invested includes closing and repair costs.</p><p>Now use 25% down and a $225,000 loan at 6% over 30 years. Monthly debt service is about $1,348.99, or $16,187.86 annually. Cash flow is about $3,312.14 annually, or $276.01 monthly. Initial cash is $75,000 + $6,000 + $9,000 = $90,000, producing about 3.68% cash-on-cash return. Cap rate remains 6.5% because financing does not change NOI or purchase price.</p></section><!-- GOOGLE ADSENSE: MID-ARTICLE INSERTION POINT --><section id="section-3"><h2>Leverage and a vacancy stress test</h2><p>Borrowing does not automatically improve cash-on-cash return. It reduces the cash denominator but also introduces debt payments. At these assumptions, the financed cash yield is lower than the unlevered yield. Equity built by principal repayment is a separate benefit; it is not spendable operating cash.</p><p>Raise vacancy from 5% to 10% in the example. Effective income falls $1,500, while percentage-based management falls $120. NOI therefore falls $1,380, to $18,120. With the same loan, annual cash flow falls to about $1,932.14 and cash-on-cash return to about 2.15%. This sensitivity is more informative than calling one cap rate “good” without considering risk.</p></section><section id="section-4"><h2>Common mistakes and limits</h2><ul><li>Subtracting debt service inside NOI and then again from cash flow.</li><li>Comparing a monthly cash amount with an annual return percentage.</li><li>Leaving out initial repairs or closing costs from cash invested.</li><li>Counting projected appreciation or sale proceeds as annual rental cash flow.</li><li>Comparing one property's current rent with another property's optimistic stabilized rent.</li></ul><p>The forecast assumes the entered income, expense growth, financing, and sale assumptions occur. It cannot predict vacancies, major repairs, refinancing, market value, or taxes. The tool does not calculate tax-adjusted returns or a full internal rate of return. Use consistent reserve treatment across properties and check the timing of large capital expenses separately.</p><p>Methodology: the ratios and worked example follow this tool's source formulas. IRS Publication 527 supports the distinction between rental tax accounting and operating cash analysis; it does not set a target cap rate or endorse this investment example.</p></section><h2>Frequently asked questions</h2><details><summary>Does the mortgage payment affect cap rate?</summary><p>No. This tool calculates cap rate from NOI before financing divided by purchase price. Debt service affects cash flow and cash-on-cash return.</p></details><details><summary>Is cash-on-cash return the total return?</summary><p>No. It excludes appreciation, principal-paydown equity, sale gains, and income-tax effects from its annual cash-flow numerator.</p></details><h2>Related tools and guides</h2><ul><li><a href="/Rental_Property_Calculator/">Open Rental Property Calculator</a> — apply these assumptions to your own numbers.</li><li><a href="/Guides/Fix_and_Flip_Costs_ROI_70_Percent_Rule.html">Fix &amp; Flip Costs, ROI, and the 70% Rule</a> · <a href="/Fix_and_Flip_Profit_Calculator/">Fix &amp; Flip Profit Calculator</a></li><li><a href="/Guides/DTI_and_Home_Affordability.html">Debt-to-Income Ratio and Home Affordability Explained</a> · <a href="/Home_Affordability_Calculator/">Home Affordability Calculator</a></li></ul><p>See the <a href="/Editorial_Methodology.html">Editorial &amp; Tool Methodology</a> for our review approach.</p><p class="b3-reviewed">Last reviewed: September 28, 2026 · Utiliverse editorial team. Examples are educational estimates in U.S. dollars unless stated otherwise.</p></article></div></main><!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT --><footer>
+  <div class="container footer-inner">
+    <div>© 2026 Utiliverse. All rights reserved.</div>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="/Guides.html">Guides</a>
+      <a href="/Updates.html">Updates</a>
+      <a href="/Editorial_Methodology.html">Editorial &amp; Methodology</a>
+      <a href="/Privacy_Policy.html">Privacy Policy</a>
+      <a href="/Terms_of_Service.html">Terms of Service</a>
+      <a href="/Contact_Info.html">Contact</a>
+      <a href="/About.html">About</a>
+    </nav>
+  </div>
+</footer><script>(()=>{"use strict";const b=document.body,t=document.getElementById('themeToggle');function apply(v){const light=v==='light';b.classList.toggle('light-mode',light);document.getElementById('moonIcon').classList.toggle('theme-hidden',!light);document.getElementById('sunIcon').classList.toggle('theme-hidden',light);t.setAttribute('aria-label',light?'Switch to dark mode':'Switch to light mode');t.title=t.getAttribute('aria-label');document.querySelector('meta[name="theme-color"]').content=light?'#f8fafc':'#020617'}let saved='dark';try{saved=localStorage.getItem('utiliverse-theme')||'dark'}catch(e){}apply(saved);t.addEventListener('click',()=>{const next=b.classList.contains('light-mode')?'dark':'light';apply(next);try{localStorage.setItem('utiliverse-theme',next)}catch(e){}})})();</script></body></html>
