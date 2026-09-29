@@ -487,12 +487,17 @@ body.dark-mode .sensitivity thead th{
   ]
 }
 </script>
-</head>
+<style>
+.b3-title{display:flex!important;align-items:center;gap:14px;text-align:left}.b3-title>span:last-child{min-width:0;overflow-wrap:anywhere}.b3-icon{display:inline-flex;flex:none;width:42px;height:42px;color:#818cf8}.b3-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.b3-content{max-width:100%;margin:40px 0 16px;padding:clamp(18px,3vw,32px);border:1px solid #334155;border-radius:20px;background:rgba(15,23,42,.7);color:#cbd5e1;line-height:1.8;text-align:left}.b3-content h2{font-size:clamp(24px,3vw,30px);line-height:1.3;color:#f8fafc;font-weight:800;margin:28px 0 12px}.b3-content h2:first-child{margin-top:0}.b3-content h3{font-size:19px;color:#e2e8f0;margin:24px 0 10px}.b3-content p{color:inherit;margin:12px 0}.b3-content ul{list-style:disc;padding-left:23px}.b3-content li{margin:8px 0}.b3-content a,.b3-resources a{color:#a5b4fc;text-decoration:underline;text-underline-offset:3px}.b3-content strong{color:inherit}.b3-content .table-wrap{overflow-x:auto;margin:20px 0}.b3-content table{width:100%;border-collapse:collapse;font-size:14px;line-height:1.6}.b3-content th,.b3-content td{padding:12px;border-bottom:1px solid #475569;text-align:left;color:inherit;min-width:120px}.b3-content th{font-weight:750}.b3-content caption{text-align:left;color:inherit;padding:0 0 10px;font-weight:750}.b3-content .formula{padding:16px;border-left:3px solid #818cf8;background:rgba(99,102,241,.12);overflow-wrap:anywhere}.b3-content .b3-reviewed{font-size:13px;border-top:1px solid #475569;padding-top:16px;margin-top:28px}.b3-resources{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;padding:18px 16px;font:13px/1.6 system-ui}.b3-content details{padding:14px 0;border-top:1px solid #334155}.b3-content summary{font-weight:750;cursor:pointer}.b3-content a:focus-visible,.b3-content summary:focus-visible{outline:2px solid #818cf8;outline-offset:4px}
+body.light-mode .b3-content,body:not(.dark-mode).b3-flip .b3-content{background:#fff;color:#475569;border-color:#dbe3ee}body.light-mode .b3-content h2,body.light-mode .b3-content h3,body:not(.dark-mode).b3-flip .b3-content h2,body:not(.dark-mode).b3-flip .b3-content h3{color:#0f172a}body.light-mode .b3-content a,body.light-mode .b3-resources a,body:not(.dark-mode).b3-flip .b3-content a,body:not(.dark-mode).b3-flip .b3-resources a{color:#4338ca}body.light-mode .b3-icon,body:not(.dark-mode).b3-flip .b3-icon{color:#4f46e5}body.light-mode .b3-content th,body.light-mode .b3-content td,body.light-mode .b3-content details{border-color:#dbe3ee}
+@media(max-width:620px){.b3-icon{width:32px;height:32px}.b3-title{gap:10px}.b3-content{padding:18px}.b3-content h2{font-size:24px}.b3-content table{font-size:13px}}
+</style></head>
 
 <!-- SEO TARGET CLUSTER: fix and flip calculator, house flipping calculator, flip profit calculator, rehab ROI calculator, max purchase price flip -->
 <!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT -->
 
-<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
+<body class="b3-flip dark-mode bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
 <header class="sticky top-0 z-50 bg-white/80 border-b border-slate-200 backdrop-blur">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
     <a href="https://utiliverse.app" class="flex items-center gap-2 text-sm font-semibold text-slate-600">
@@ -511,10 +516,7 @@ body.dark-mode .sensitivity thead th{
 <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
   <div class="mb-6">
     
-    <h1 class="text-3xl font-bold text-slate-900 flex items-center gap-3">
-      <i data-lucide="hammer" class="w-8 h-8" style="color:#6366f1"></i>
-      Fix & Flip Profit Calculator
-    </h1>
+    <h1 class="text-3xl font-bold text-slate-900 flex items-center gap-3 b3-title"><span class="b3-icon" aria-hidden="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M8 17l7-7"/><path d="m14 9 2 2"/><path d="m7 18 2 2"/></svg></span><span>Fix & Flip Profit Calculator</span></h1>
     <p class="mt-2 text-sm max-w-3xl muted">
       Estimate acquisition, renovation, financing, holding, and selling costs for a property flip. See expected profit, ROI, cash required, break-even sale price, target purchase price, and downside/upside scenarios.
     </p>
@@ -875,14 +877,14 @@ body.dark-mode .sensitivity thead th{
 
     <!-- GOOGLE ADSENSE: BOTTOM / AFTER-CONTENT INSERTION POINT -->
   </div>
-</main>
+<section class="b3-content" aria-label="Worked example and methodology"><h2>Distinguish profit, cash required, and ROI</h2><p>Profit subtracts the full project budget from sale price. ROI on cost divides profit by total cost; cash ROI divides profit by modeled cash required before sale. Neither is annualized. The financing option models purchase-based borrowing with simple interest for the full holding period, not a construction draw schedule.</p><h2>Worked example: an all-cash renovation</h2><p>Use $200,000 purchase price and $320,000 expected sale price. Set financing to cash, purchase closing costs to 2%, fixed acquisition costs to $1,000, renovation to $40,000, and contingency to 10%. Hold for six months with $800 total monthly holding costs. Set commission to 5%, selling closing costs to 1%, staging to $2,000, and target profit to $40,000.</p><div class="table-wrap"><table><caption>Complete illustrative project budget</caption><tbody><tr><th>Purchase</th><td>$200,000</td></tr><tr><th>Purchase closing + fixed acquisition</th><td>$5,000</td></tr><tr><th>Renovation + contingency</th><td>$44,000</td></tr><tr><th>Six months of holding</th><td>$4,800</td></tr><tr><th>Selling costs: 6% of sale + staging</th><td>$21,200</td></tr><tr><th>Total cost</th><td>$275,000</td></tr><tr><th>Profit before income tax</th><td>$45,000</td></tr></tbody></table></div><p>ROI on total project cost is $45,000 ÷ $275,000 = 16.36%. The tool's cash-required amount excludes selling costs paid at closing, giving $253,800 and a cash ROI of 17.73%. These are project-period returns. A six-month result does not establish a repeatable annual return.</p><h2>Common mistakes, assumptions, and sources</h2><ul><li>Subtracting loan principal twice. Purchase cost is already included; financing charges are additional costs.</li><li>Calling cash ROI annualized or comparing it directly with a one-year investment yield.</li><li>Leaving taxes, insurance, utilities, or extension fees out of a delayed project.</li><li>Treating the 70% shortcut as a substitute for comparable sales and contractor quotes.</li></ul><p>The loan model uses purchase-price LTV, points on the initial loan, and simple interest on that loan for the full hold. It does not model construction draws, amortization, or a rehab credit line. Cash required is a budget total, not a dated draw schedule or a guarantee that the project can be funded.</p><p>All returns are before income tax. Tax treatment depends on facts; property held mainly for sale to customers in a business is not a capital asset under the rules explained in <a href="https://www.irs.gov/publications/p544">IRS Publication 544</a>. Do not assume a flip receives long-term capital-gain treatment. The budget, ROI formulas, and 70% comparison here are original explanations of the calculator's methodology, not IRS valuation guidance.</p><h2>Read the related guide</h2><p><a href="/Guides/Fix_and_Flip_Costs_ROI_70_Percent_Rule.html">Fix &amp; Flip Costs, ROI, and the 70% Rule</a> expands the example and explains the assumptions.</p><h2>Related tools and guides</h2><ul><li><a href="/Fix_and_Flip_Profit_Calculator/">Open Fix &amp; Flip Profit Calculator</a> — apply these assumptions to your own numbers.</li><li><a href="/Guides/Cap_Rate_vs_Cash_on_Cash_Return.html">Cap Rate vs Cash-on-Cash Return</a> · <a href="/Rental_Property_Calculator/">Rental Property Calculator</a></li><li><a href="/Guides/Compound_Interest_vs_APY.html">Compound Interest vs APY</a> · <a href="/Compound_Interest_Calculator/">Compound Interest Calculator</a></li></ul><p>See the <a href="/Editorial_Methodology.html">Editorial &amp; Tool Methodology</a> for our review approach.</p><p class="b3-reviewed">Last reviewed: September 28, 2026 · Utiliverse editorial team. Examples are educational estimates in U.S. dollars unless stated otherwise.</p></section></main>
 
 <footer class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-6 pt-2">
   <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-500">
     <div>© 2026 Utiliverse. All rights reserved.</div>
     <div class="font-semibold text-right">100% Free and Browser Based</div>
   </div>
-</footer>
+<nav class="b3-resources" aria-label="Resources"><a href="/Guides.html">Guides</a><a href="/Updates.html">Updates</a><a href="/Editorial_Methodology.html">Editorial &amp; Methodology</a><a href="/Privacy_Policy.html">Privacy Policy</a><a href="/Terms_of_Service.html">Terms of Service</a><a href="/Contact_Info.html">Contact</a><a href="/About.html">About</a></nav></footer>
 
 <script>
 (() => {
@@ -1136,7 +1138,7 @@ body.dark-mode .sensitivity thead th{
     localStorage.setItem("utiliverse-theme",dark?"dark":"light");const mt=document.querySelector('meta[name="theme-color"]');if(mt)mt.setAttribute("content",dark?"#020617":"#f8fafc");
     lucide.createIcons();
   }
-  theme(localStorage.getItem("utiliverse-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));
+  theme(localStorage.getItem("utiliverse-theme")||"dark");
   toggle.addEventListener("click",()=>theme(document.body.classList.contains("dark-mode")?"light":"dark"));
 
   toggleFinancing();
