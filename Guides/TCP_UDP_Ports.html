@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TCP and UDP ports: lookup versus reachability | Utiliverse</title><meta name="description" content="Interpret common port numbers without confusing a service assignment with an open port or an application identity."><meta name="robots" content="index,follow"><meta name="theme-color" content="#020617"><link rel="canonical" href="https://utiliverse.app/Guides/TCP_UDP_Ports.html"><meta property="og:type" content="article"><meta property="og:title" content="TCP and UDP ports: lookup versus reachability"><meta property="og:description" content="Interpret common port numbers without confusing a service assignment with an open port or an application identity."><meta property="og:url" content="https://utiliverse.app/Guides/TCP_UDP_Ports.html"><meta property="og:site_name" content="Utiliverse"><meta name="twitter:card" content="summary"><style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --panel:rgba(30,41,59,.72);--panel2:rgba(15,23,42,.70);
+  --border:#334155;--border2:#475569;--text:#f8fafc;--muted:#94a3b8;
+  --indigo:#6366f1;--indigo2:#4f46e5;--green:#34d399;--amber:#fbbf24;--rose:#fb7185
+}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 10% 0%,rgba(99,102,241,.12),transparent 32%),
+    radial-gradient(circle at 90% 15%,rgba(124,58,237,.10),transparent 28%),#020617;
+  color:var(--text);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  transition:background .25s ease,color .25s ease
+}
+a{color:inherit} button{font:inherit} button{touch-action:manipulation}
+.container{max-width:1152px;margin:0 auto;padding:0 16px}
+header{position:sticky;top:0;z-index:50;background:rgba(2,6,23,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid #1e293b}
+.header-inner{min-height:65px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.back-link{display:flex;align-items:center;gap:8px;text-decoration:none;color:#cbd5e1;font-size:14px;font-weight:700}
+.back-link:hover{color:#fff}
+.header-right{display:flex;align-items:center;gap:12px}
+.resource-nav{display:flex;align-items:center;gap:14px}
+.resource-nav a{font-size:12px;font-weight:750;text-decoration:none;color:#94a3b8}
+.resource-nav a:hover{color:#fff}
+.free-label{font-size:13px;font-weight:650;color:#64748b;white-space:nowrap}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border:1px solid #334155;background:rgba(15,23,42,.72);color:#94a3b8;border-radius:12px;cursor:pointer;box-shadow:none;appearance:none;-webkit-appearance:none}
+.theme-toggle:hover{color:#fff;background:#1e293b;border-color:#475569}
+.theme-toggle:focus-visible,.btn:focus-visible,a:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
+.theme-toggle svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.theme-hidden{display:none!important}
+main{padding:48px 0 72px}
+.hero{max-width:920px}
+.title-row{display:flex;align-items:center;gap:14px}
+.title-icon{width:46px;height:46px;flex:none;color:#818cf8}
+.title-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+h1{font-size:clamp(38px,5vw,58px);line-height:1.04;margin:0;font-weight:900;letter-spacing:-.035em}
+.hero p{max-width:900px;color:var(--muted);font-size:18px;line-height:1.72;margin:14px 0 0}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.meta{border:1px solid var(--border);background:rgba(15,23,42,.66);border-radius:999px;padding:7px 10px;color:#cbd5e1;font-size:12px;font-weight:750}
+.glass{background:var(--panel);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--border);border-radius:20px}
+.section{margin-top:28px;padding:22px}
+.section h2{font-size:26px;line-height:1.25;font-weight:900;margin:0 0 12px}
+.section h3{font-size:18px;line-height:1.4;font-weight:850;margin:24px 0 8px;color:#e2e8f0}
+.section p,.section li{color:#94a3b8;line-height:1.8}
+.section p{margin:0 0 14px}
+.section ul{padding-left:20px;margin:8px 0 0}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
+.card{background:var(--panel2);border:1px solid var(--border);border-radius:16px;padding:16px;min-width:0}
+.card h3{margin:0 0 7px;font-size:16px;color:#f8fafc}
+.card p{font-size:13px;line-height:1.65;margin:0;color:#94a3b8}
+.card a{display:inline-flex;margin-top:10px;color:#a5b4fc;font-size:12px;font-weight:850;text-decoration:none}
+.card a:hover{text-decoration:underline}
+.kicker{font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:#818cf8;font-weight:850;margin-bottom:7px}
+.callout{border:1px solid rgba(99,102,241,.28);background:rgba(99,102,241,.07);border-radius:15px;padding:16px;margin:18px 0}
+.callout strong{color:#c7d2fe}
+.update{border-left:3px solid #6366f1;padding:2px 0 2px 16px;margin:22px 0}
+.update-date{font-size:11px;text-transform:uppercase;letter-spacing:.09em;font-weight:850;color:#818cf8}
+.update h3{margin:5px 0 7px;font-size:18px;color:#f8fafc}
+.update p{margin:0;color:#94a3b8}
+.source-list{display:grid;gap:10px;margin-top:14px}
+.source-item{border:1px solid var(--border);background:var(--panel2);border-radius:13px;padding:13px}
+.source-item strong{display:block;color:#e2e8f0;font-size:13px}
+.source-item span{display:block;color:#64748b;font-size:11px;margin-top:4px;line-height:1.5}
+.btn{min-height:42px;border:1px solid var(--border2);background:#1e293b;color:#f8fafc;border-radius:10px;padding:9px 12px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:7px}
+.btn:hover{background:#334155}
+.btn.primary{background:linear-gradient(135deg,var(--indigo),var(--indigo2));border-color:var(--indigo)}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.article{max-width:900px;margin-top:54px}
+.article h2{font-size:30px;line-height:1.25;font-weight:900;margin:38px 0 13px;color:#fff}
+.article h3{font-size:19px;line-height:1.4;font-weight:850;margin:27px 0 9px;color:#e2e8f0}
+.article p,.article li{color:#94a3b8;line-height:1.84;margin:0 0 15px}
+.article ul{padding-left:20px}
+.article a{color:#a5b4fc;font-weight:800;text-decoration:none}
+.article a:hover{text-decoration:underline}
+.review-box{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;border-top:1px solid var(--border);margin-top:26px;padding-top:16px;color:#64748b;font-size:11px;line-height:1.55}
+footer{border-top:1px solid #1e293b;background:#020617}
+.footer-inner{min-height:90px;display:flex;align-items:center;justify-content:space-between;gap:18px;color:#64748b;font-size:13px}
+.footer-links{display:flex;gap:14px;flex-wrap:wrap;justify-content:flex-end}
+.footer-links a{text-decoration:none}
+.footer-links a:hover{color:#cbd5e1}
+body.light-mode{--panel:rgba(255,255,255,.92);--panel2:rgba(248,250,252,.96);--border:#dbe3ee;--border2:#cbd5e1;--text:#0f172a;--muted:#475569;background:#f8fafc;color:#0f172a}
+body.light-mode header{background:rgba(255,255,255,.93);border-bottom-color:#e2e8f0}
+body.light-mode .back-link{color:#334155} body.light-mode .back-link:hover{color:#0f172a}
+body.light-mode .resource-nav a{color:#64748b} body.light-mode .resource-nav a:hover{color:#0f172a}
+body.light-mode .theme-toggle{color:#475569;background:#fff;border-color:#cbd5e1}
+body.light-mode .theme-toggle:hover{color:#0f172a;background:#f1f5f9;border-color:#94a3b8}
+body.light-mode .meta{background:#fff;color:#475569}
+body.light-mode .section h3,body.light-mode .card h3,body.light-mode .source-item strong,body.light-mode .update h3{color:#1e293b}
+body.light-mode .section p,body.light-mode .section li,body.light-mode .card p,body.light-mode .update p{color:#475569}
+body.light-mode .callout{background:#eef2ff} body.light-mode .callout strong{color:#4338ca}
+body.light-mode .btn:not(.primary){background:#f1f5f9;color:#334155}
+body.light-mode .btn:not(.primary):hover{background:#e2e8f0}
+body.light-mode .article h2{color:#0f172a} body.light-mode .article h3{color:#1e293b}
+body.light-mode .article p,body.light-mode .article li{color:#475569}
+body.light-mode .article a,body.light-mode .card a{color:#4f46e5}
+body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
+@media(max-width:900px){.grid{grid-template-columns:1fr 1fr}.resource-nav{display:none}}
+@media(max-width:620px){main{padding-top:34px}.grid{grid-template-columns:1fr}.free-label{font-size:10.5px;max-width:130px;white-space:normal;text-align:right;line-height:1.2}.footer-inner{flex-direction:column;align-items:flex-start;padding:22px 0}.footer-links{justify-content:flex-start}}
+@media(max-width:390px){.header-right{gap:6px}.title-icon{width:38px;height:38px}}
+
+/* Batch 2 article additions */
+.article{max-width:900px;margin:32px auto 0}.hero{margin:auto}.article h2{scroll-margin-top:90px}.article ol{padding-left:24px}.article code{font-size:.9em;overflow-wrap:anywhere}.article pre{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--panel2);border:1px solid var(--border);border-radius:12px;padding:18px;line-height:1.7;color:var(--text)}.table-wrap{overflow-x:auto;margin:20px 0;border:1px solid var(--border);border-radius:12px}table{width:100%;border-collapse:collapse;font-size:14px}caption{text-align:left;padding:14px;font-weight:750}th,td{text-align:left;padding:13px;vertical-align:top;border-top:1px solid var(--border);line-height:1.6}th{background:var(--panel2)}.toc{margin-top:24px;padding:18px;border:1px solid var(--border);border-radius:16px}.toc ul{display:flex;gap:10px 22px;flex-wrap:wrap;list-style:none;padding:0;margin:10px 0}.toc li{margin:0}.article .review-box{color:var(--muted)}.skip-link{position:absolute;left:12px;top:-90px;background:#fff;color:#0f172a;padding:12px;z-index:100}.skip-link:focus{top:8px}.article .source-list a{overflow-wrap:anywhere} @media(max-width:620px){h1{font-size:36px}.title-row{align-items:flex-start}th,td{padding:10px}.article h2{font-size:26px}}
+</style><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "headline": "TCP and UDP ports: lookup versus reachability", "description": "Interpret common port numbers without confusing a service assignment with an open port or an application identity.", "url": "https://utiliverse.app/Guides/TCP_UDP_Ports.html", "mainEntityOfPage": "https://utiliverse.app/Guides/TCP_UDP_Ports.html", "dateModified": "2026-09-29", "author": {"@type": "Organization", "name": "Utiliverse", "url": "https://utiliverse.app/"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Utiliverse", "item": "https://utiliverse.app/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://utiliverse.app/Guides.html"}, {"@type": "ListItem", "position": 3, "name": "TCP and UDP ports: lookup versus reachability", "item": "https://utiliverse.app/Guides/TCP_UDP_Ports.html"}]}]}</script></head><body><a class="skip-link" href="#main">Skip to guide</a><header>
+  <div class="container header-inner">
+    <a class="back-link" href="https://utiliverse.app/"><span aria-hidden="true">←</span><span>Back to Utiliverse</span></a>
+    <nav class="resource-nav" aria-label="Resource navigation">
+      <a href="/Guides.html">Guides</a>
+      <a href="/Updates.html">Updates</a>
+      <a href="/Editorial_Methodology.html">Editorial &amp; Methodology</a>
+    </nav>
+    <div class="header-right">
+      <span class="free-label">Utiliverse Guides</span>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to light mode" title="Switch to light mode">
+        <svg id="moonIcon" class="theme-hidden" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79"></path></svg>
+        <svg id="sunIcon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+      </button>
+    </div>
+  </div>
+</header><!-- GOOGLE ADSENSE: ABOVE-CONTENT INSERTION POINT --><main id="main"><div class="container"><section class="hero"><p><a href="/Guides.html">All guides</a> / Networking</p><h1>TCP and UDP ports: lookup versus reachability</h1><p>Interpret common port numbers without confusing a service assignment with an open port or an application identity.</p><div class="hero-meta"><span class="meta">By Utiliverse</span><span class="meta">Last reviewed: September 29, 2026</span></div></section><article class="article"><nav class="toc" aria-label="On this page"><strong>On this page</strong><ul><li><a href="#meaning">A port number needs a transport and context</a></li><li><a href="#example">Worked example: 443 appears in the reference</a></li><li><a href="#ranges">Ranges describe assignment policy</a></li><li><a href="#workflow">Collect evidence in layers</a></li><li><a href="#limits">Keep service identification separate from access changes</a></li></ul></nav>
+<h2 id="meaning">A port number needs a transport and context</h2><p>A port helps identify a transport endpoint. TCP port 53 and UDP port 53 are separate endpoints even though both are commonly associated with DNS. The <a href="https://www.iana.org/assignments/service-names-port-numbers/">IANA service-name and port registry</a> records assignments by service and transport. A registered name does not prove that the service is running on a particular machine.</p><p>Utiliverse’s Port Checker is a reference lookup. It searches its bundled common-port data by number or service name. It does not connect to a host or scan your network. That distinction matters when interpreting an apparently successful lookup.</p>
+<h2 id="example">Worked example: 443 appears in the reference</h2><p>You enter 443 and see an HTTPS-related entry. This answers a naming question. It does not establish that your server is listening, that a firewall allows the traffic, or that the application behind the listener is healthy. A server may use a different port, and a process can listen on a conventional port while speaking a different protocol.</p><p>For your own service, identify the configured transport and port, confirm the process is listening on the intended interface, and test from the network where users experience the problem. Then check TLS and the HTTP response if applicable. A local success and remote failure can point to different policy or routing conditions.</p>
+<h2 id="ranges">Ranges describe assignment policy</h2><div class="table-wrap"><table><caption>IANA port ranges</caption><tr><th>Range</th><th>Category</th><th>How to use it</th></tr><tr><td>0–1023</td><td>System ports</td><td>Check specific assignments; port 0 is reserved</td></tr><tr><td>1024–49151</td><td>User ports</td><td>Consult service and transport details</td></tr><tr><td>49152–65535</td><td>Dynamic/private ports</td><td>Expect application or operating-system context</td></tr></table></div><p>Do not infer safety from the range. A high-numbered port can carry a legitimate service or unwanted traffic, and a low-numbered port is not automatically trustworthy. The tool’s compact list is not a copy of every registry assignment; an unknown result can simply mean the entry is outside the bundled reference.</p>
+<h2 id="workflow">Collect evidence in layers</h2><ol><li>Write down the intended application, hostname, transport, and destination port.</li><li>Use the reference to understand a conventional service association.</li><li>Check the application’s configured listener and address binding on a system you administer.</li><li>Review routing, network policy, host firewall, and any proxy or load balancer.</li><li>Use an authorized connection test from the affected source network, then inspect application-level behavior.</li></ol><p>For UDP, absence of a reply is especially ambiguous: the service may be quiet, the request may be invalid, or traffic may be filtered. Avoid turning “no response” into a definitive “closed” label without understanding the test method.</p>
+<h2 id="limits">Keep service identification separate from access changes</h2><p>When troubleshooting, prefer the smallest rule or configuration change supported by evidence. Opening broad port ranges can hide the original issue and expose unrelated listeners. Record what changed and test the intended application afterward.</p><p>The reference operates locally using its included data, although the page also loads external libraries. Browser HTTP requests and certificate checks are not substitutes for a general TCP/UDP connectivity test. Use the related tools for the layer they can actually observe.</p>
+<!-- GOOGLE ADSENSE: AFTER-ARTICLE INSERTION POINT --><section class="glass section"><h2>Try the related tools</h2><ul><li><a href="/Port_Checker/">Port Checker</a></li><li><a href="/HTTP_Status_Code_Reference/">HTTP Status Code Reference</a></li><li><a href="/SSL_Certificate_Checker/">SSL Certificate Checker</a></li></ul><h3>Continue reading</h3><ul><li><a href="/Guides/CIDR_and_Subnet_Masks.html">CIDR and subnet masks explained</a></li><li><a href="/Guides/WHOIS_and_RDAP.html">What WHOIS and RDAP data can—and cannot—tell you</a></li><li><a href="/Guides/SSL_Certificates_and_Errors.html">How SSL certificates work and why they fail</a></li><li><a href="/Guides/DNS_and_Network_Troubleshooting.html">DNS, TLS, or HTTP? Troubleshoot the right layer</a></li></ul></section><h2>Sources and review</h2><ul class="source-list"><li><a href="https://www.iana.org/assignments/service-names-port-numbers/">IANA service names and port numbers</a></li></ul><p>Examples are illustrative. Reviewed September 29, 2026 against the listed references and the related tool behavior. <a href="/Editorial_Methodology.html">Methodology</a> · <a href="/Contact_Info.html">Report a correction</a>.</p></article></div></main><footer>
+  <div class="container footer-inner">
+    <div>© 2026 Utiliverse. All rights reserved.</div>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="/Guides.html">Guides</a>
+      <a href="/Updates.html">Updates</a>
+      <a href="/Editorial_Methodology.html">Editorial &amp; Methodology</a>
+      <a href="/Privacy_Policy.html">Privacy Policy</a>
+      <a href="/Terms_of_Service.html">Terms of Service</a>
+      <a href="/Contact_Info.html">Contact</a>
+      <a href="/About.html">About</a>
+    </nav>
+  </div>
+</footer><script>(() => {
+  "use strict";
+  const $=id=>document.getElementById(id);
+  function applyTheme(theme){
+    const light=theme==="light";
+    document.body.classList.toggle("light-mode",light);
+    $("moonIcon").classList.toggle("theme-hidden",!light);
+    $("sunIcon").classList.toggle("theme-hidden",light);
+    const label=light?"Switch to dark mode":"Switch to light mode";
+    $("themeToggle").setAttribute("aria-label",label);
+    $("themeToggle").title=label;
+    const meta=document.querySelector('meta[name="theme-color"]');
+    if(meta)meta.setAttribute("content",light?"#f8fafc":"#020617");
+  }
+  let saved; try { saved=localStorage.getItem("utiliverse-theme"); } catch {}
+  const initial=saved==="light"||saved==="dark"?saved:(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");
+  applyTheme(initial);
+  $("themeToggle").addEventListener("click",()=>{
+    const next=document.body.classList.contains("light-mode")?"dark":"light";
+    try { localStorage.setItem("utiliverse-theme",next); } catch {}
+    applyTheme(next);
+  });
+})();</script></body></html>
