@@ -43,13 +43,53 @@ footer{border-top:1px solid #1e293b;background:#020617}.footer{min-height:82px;d
 body.light-mode{--panel:rgba(255,255,255,.90);--panel2:rgba(248,250,252,.96);--border:#dbe3ee;--border2:#cbd5e1;--text:#0f172a;--muted:#475569;background:#f8fafc;color:#0f172a}
 body.light-mode header{background:rgba(255,255,255,.93);border-bottom-color:#e2e8f0}body.light-mode .back{color:#334155}body.light-mode .back:hover{color:#0f172a}body.light-mode .theme{color:#334155}body.light-mode .theme:hover{color:#0f172a;background:#f1f5f9}body.light-mode .input,body.light-mode .select{background:#fff;color:#0f172a}body.light-mode .btn:not(.primary){background:#f1f5f9;color:#334155}body.light-mode .seg button,body.light-mode .chip{background:#fff;color:#64748b}body.light-mode .zone{background:#f1f5f9}body.light-mode .zone-top,body.light-mode .hm{color:#0f172a}body.light-mode .hour{background:#fff}body.light-mode .hour.work{background:rgba(16,185,129,.06)}body.light-mode .hour.sel{background:#eef2ff}body.light-mode .overlap th,body.light-mode .overlap td{background:#f8fafc}body.light-mode .share-text{color:#334155}body.light-mode .article h2{color:#0f172a}body.light-mode .article h3{color:#1e293b}body.light-mode .article p{color:#475569}body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
 @media(max-width:900px){.controls{grid-template-columns:1fr 1fr}.summary{grid-template-columns:1fr 1fr}}@media(max-width:640px){main{padding-top:34px}.free{font-size:10.5px;max-width:130px;white-space:normal;text-align:right}.controls{grid-template-columns:1fr}.summary{grid-template-columns:1fr 1fr}.add{min-width:100%;width:100%}.footer{flex-direction:column;justify-content:center;text-align:center;padding:18px 0}}
+
+.title-row{display:flex;align-items:center;gap:14px}
+.title-icon{width:46px;height:46px;flex:0 0 auto;color:#818cf8}
+.title-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid var(--border);background:var(--panel2);border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#e2e8f0;margin-bottom:5px}
+.method-card span{display:block;color:#94a3b8;font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:#0f172a;color:#e2e8f0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap}
+.caution-note{border:1px solid rgba(251,191,36,.28);background:rgba(251,191,36,.07);border-radius:14px;padding:16px;color:#fde68a;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#fef3c7}
+.source-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.source-links a{font-size:12px;font-weight:800;color:#a5b4fc;text-decoration:none}
+.source-links a:hover{text-decoration:underline}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid var(--border);background:var(--panel2);border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#e2e8f0;margin-bottom:4px}
+.related-link span{display:block;color:#94a3b8;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+body.light-mode .method-card,body.light-mode .related-link{background:#fff}
+body.light-mode .method-card strong,body.light-mode .related-link strong{color:#1e293b}
+body.light-mode .method-card span,body.light-mode .related-link span{color:#475569}
+body.light-mode .example-box{background:#f8fafc;color:#1e293b}
+body.light-mode .caution-note{background:#fffbeb;border-color:#fde68a;color:#92400e}
+body.light-mode .caution-note strong{color:#78350f}
+body.light-mode .source-links a{color:#4f46e5}
+@media(max-width:700px){
+  .title-icon{width:38px;height:38px}
+  .method-grid,.related-grid{grid-template-columns:1fr}
+}
+
 </style>
-</head>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Time Zone Converter","url":"https://utiliverse.app/Time_Zone_Converter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern browser with JavaScript Intl time-zone support.","description":"Free browser-based multi-zone time converter with DST-aware local-time resolution, ambiguity detection, working-hour overlap comparison and ICS export.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["IANA-style named time-zone conversion","DST-aware conversion","Ambiguous repeated-time detection","Nonexistent skipped-time detection","12-hour and 24-hour formats","Up to eight comparison zones","Working-hour overlap visualization","Copyable meeting-time summary","One-hour ICS export","Browser-reported local time zone detection"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does this converter automatically account for daylight saving time?","acceptedAnswer":{"@type":"Answer","text":"Yes, when the selected IANA time zone and date are supported by the browser. The tool relies on the browser's installed time-zone rules."}},{"@type":"Question","name":"Why can the same local clock time occur twice?","acceptedAnswer":{"@type":"Answer","text":"When clocks move backward, a repeated interval can map to two different UTC instants. The converter exposes Earlier and Later choices when both are valid."}},{"@type":"Question","name":"What happens if I choose a time that did not exist because clocks jumped forward?","acceptedAnswer":{"@type":"Answer","text":"The converter reports that the local time does not exist in the selected zone rather than silently applying an arbitrary offset."}},{"@type":"Question","name":"Are half-hour and 45-minute time zones supported?","acceptedAnswer":{"@type":"Answer","text":"Yes, when the browser supports the selected named time zone."}},{"@type":"Question","name":"How does the tool know my local time zone?","acceptedAnswer":{"@type":"Answer","text":"The initial source zone comes from Intl.DateTimeFormat().resolvedOptions().timeZone. The tool does not request GPS or precise-location permission."}},{"@type":"Question","name":"Can this tool guarantee newly announced government time-zone changes?","acceptedAnswer":{"@type":"Answer","text":"No. Accuracy depends on the time-zone data installed in the browser and operating system, so recently announced changes may require software updates."}},{"@type":"Question","name":"Is the 9-to-5 overlap score a guarantee that a meeting time is convenient?","acceptedAnswer":{"@type":"Answer","text":"No. It is a planning heuristic that counts how many displayed zones fall between 9:00 AM and 4:59 PM local time."}},{"@type":"Question","name":"Does the ICS file preserve each participant's named time zone?","acceptedAnswer":{"@type":"Answer","text":"The generated file stores the selected meeting as UTC start and end timestamps. Calendar applications normally display that instant in the user's own local zone after import."}}]}</script></head>
 <body>
 <header><div class="container header-inner"><a class="back" href="https://utiliverse.app"><span>←</span><span>Back to Utiliverse</span></a><div class="header-right"><span class="free">100% Free and Browser Based</span><button id="themeToggle" class="theme" type="button" aria-label="Switch to light mode"><span id="themeIcon"></span></button></div></div></header>
 
 <main><div class="container">
-<section class="hero"><div class="eyebrow">Time & productivity</div><h1>Time Zone Converter</h1><p>Compare one or many world time zones at a glance, choose an exact local date and time, and find practical overlap for calls, travel, markets, and remote work without manually calculating daylight-saving changes.</p><div class="badges"><span class="badge">DST-aware conversion</span><span class="badge">IANA time zone identifiers</span><span class="badge">400+ zones when supported by your browser</span></div></section>
+<section class="hero">
+<div class="title-row">
+  <span class="title-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/><path d="M12 7v5l3 2"/></svg>
+  </span>
+  <h1>Time Zone Converter</h1>
+</div>
+<p>Compare one or many world time zones at a glance, choose an exact local date and time, and find practical overlap for calls, travel, markets, and remote work without manually calculating daylight-saving changes.</p>
+<div class="badges"><span class="badge">DST-aware conversion</span><span class="badge">IANA time zone identifiers</span><span class="badge">400+ zones when supported by your browser</span></div>
+</section>
 
 <section class="glass converter">
 <div class="head"><div><div class="eyebrow">Convert a local time</div><h2 class="title">Choose the source time and compare zones</h2></div><div class="small">Uses your browser's current Intl / IANA-compatible time-zone data.</div></div>
@@ -97,6 +137,63 @@ body.light-mode header{background:rgba(255,255,255,.93);border-bottom-color:#e2e
 
 <div class="callout"><strong>Accuracy note:</strong> this tool uses the time-zone rules exposed by the visitor's browser and operating system through the JavaScript Internationalization API. The IANA database is updated as governments change civil-time rules, so current browser and OS updates are the best way to receive the newest rule changes.</div>
 
+<h2>How the Converter Resolves a Local Clock Time</h2>
+<p>A time-zone conversion starts with a local calendar date, a local clock time, and a named time zone such as <code>America/New_York</code> or <code>Europe/London</code>. The tool then asks the browser's <code>Intl</code> implementation which UTC offsets are plausible around that date and validates candidate instants by formatting them back into the selected zone.</p>
+
+<div class="method-grid">
+  <div class="method-card"><strong>Named-zone conversion</strong><span>Uses IANA-style time-zone identifiers instead of assuming one permanent UTC offset.</span></div>
+  <div class="method-card"><strong>DST ambiguity check</strong><span>If one local clock reading maps to two real instants, the tool exposes Earlier and Later choices.</span></div>
+  <div class="method-card"><strong>Skipped-time validation</strong><span>If no instant maps back to the requested local time, the tool reports the time as nonexistent instead of silently shifting it.</span></div>
+  <div class="method-card"><strong>Same-instant comparison</strong><span>Every row in the timeline represents the same UTC instant formatted in a different named zone.</span></div>
+</div>
+
+<h3>Worked example: repeated local time</h3>
+<p>When clocks move backward, a local time such as 1:30 AM can occur twice. In that case, the two clock readings look identical but have different UTC offsets and therefore represent different moments.</p>
+<code class="example-box">Example concept:
+01:30 local time → earlier occurrence
+01:30 local time → later occurrence
+Same wall-clock reading, different UTC instants</code>
+
+<h3>Worked example: skipped local time</h3>
+<p>When clocks move forward, part of the local clock can be skipped. A requested time inside that missing interval has no matching instant. The converter flags it instead of inventing an offset.</p>
+
+<h3>Half-hour and 45-minute offsets</h3>
+<p>The converter does not assume that time-zone differences are whole hours. Zones such as <code>Asia/Kolkata</code> and other regions with non-whole-hour offsets are handled through the browser's time-zone data.</p>
+
+<h3>UTC vs. named geographic zones</h3>
+<p>UTC has no daylight-saving transitions. Geographic zones can have historical and future rule changes. A named zone therefore carries more information than a fixed offset such as UTC−5 because the named zone can change offset across dates.</p>
+
+<h3>Historical and future dates</h3>
+<p>The converter can work with historical and future dates only to the extent that the browser and operating system provide the relevant time-zone rules. Governments sometimes announce civil-time changes with little notice, and an older browser or operating system may not yet contain a recently changed rule.</p>
+
+<div class="caution-note">
+<strong>Time-zone accuracy depends on your browser/OS time-zone database.</strong>
+The page does not ship its own independent IANA database. For recently changed government rules, update your browser and operating system and confirm critical schedules against the authoritative organizer, airline, exchange, government notice or calendar source.
+</div>
+
+<h3>How the 9-to-5 overlap score works</h3>
+<p>The green overlap indicator is a planning heuristic only. For each visible instant, the tool counts how many displayed zones fall from 9:00 AM through 4:59 PM local time. It does not know anyone's actual working hours, lunch breaks, holidays, flexible schedules, market sessions or organizational policies.</p>
+
+<h3>International Date Line and calendar-day changes</h3>
+<p>The same instant can fall on different calendar dates in different regions. That is why each timeline cell shows both the local clock time and local date. This matters for Pacific crossings, Asia–Americas coordination, travel and late-night global meetings.</p>
+
+<h3>ICS download behavior</h3>
+<p>The downloaded calendar file stores the selected meeting start and end as UTC timestamps. It creates a generic one-hour event titled “International Meeting.” Calendar applications normally display that UTC instant in the viewer's own local zone after import. The file does not include attendee invitations, conferencing links or recurring-event rules.</p>
+
+<div class="source-links">
+  <a href="https://www.iana.org/time-zones" target="_blank" rel="noopener">IANA Time Zone Database ↗</a>
+  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl" target="_blank" rel="noopener">MDN – JavaScript Intl ↗</a>
+</div>
+
+<h3>Related Utiliverse Tools</h3>
+<div class="related-grid">
+  <a class="related-link" href="../Days_Between_Dates/"><strong>Days Between Dates</strong><span>Calculate calendar-day differences between two dates.</span></a>
+  <a class="related-link" href="../Unit_Currency_Converter/"><strong>Unit &amp; Currency Converter</strong><span>Convert common measurements and latest-available currency rates.</span></a>
+  <a class="related-link" href="../Unix_Timestamp_Converter/"><strong>Unix Timestamp Converter</strong><span>Convert Unix timestamps to human-readable date and time values.</span></a>
+</div>
+
+<p style="margin-top:24px;font-size:12px;color:var(--muted)"><strong>Last reviewed:</strong> October 1, 2026 · DST handling, timeline behavior, ICS export and browser-data limitations reviewed against the current implementation.</p>
+
 <h2>Frequently Asked Questions</h2>
 <details class="faq"><summary>Does this converter automatically account for daylight saving time?</summary><p>Yes, when the selected IANA time zone and date are supported by the browser. The conversion asks the browser's time-zone engine for the local civil time and offset that apply to that instant instead of applying one fixed offset year-round.</p></details>
 <details class="faq"><summary>Why can the same local clock time occur twice?</summary><p>When a region moves its clocks backward, the repeated interval can map to two different instants. The converter detects when both offsets produce the same requested local clock reading and displays an Earlier/Later choice.</p></details>
@@ -106,6 +203,10 @@ body.light-mode header{background:rgba(255,255,255,.93);border-bottom-color:#e2e
 <details class="faq"><summary>Why might a recently changed government time-zone rule look wrong on an older device?</summary><p>Time-zone rules are distributed through browsers, operating systems, and their internationalization libraries. Updating the browser or operating system may be necessary before a newly published rule is reflected.</p></details>
 <details class="faq"><summary>Is UTC the same thing as a city time zone?</summary><p>No. UTC is a global time standard with no daylight-saving changes. Named geographic zones contain historical and future civil-time rules, including offset changes.</p></details>
 <details class="faq"><summary>How many time zones can I compare at once?</summary><p>This Utiliverse layout allows up to eight rows at a time to keep the comparison readable on desktop and mobile.</p></details>
+<details class="faq"><summary>Is the 9-to-5 overlap score a guarantee that a meeting time is convenient?</summary><p>No. It is only a planning heuristic that counts how many displayed zones fall between 9:00 AM and 4:59 PM local time. It does not know anyone's real schedule, holidays or working preferences.</p></details>
+<details class="faq"><summary>Does the ICS file preserve each participant's named time zone?</summary><p>The generated file stores the meeting as a UTC start and end instant. Calendar applications normally display that instant in the user's own local zone after import.</p></details>
+<details class="faq"><summary>Can this tool guarantee newly announced government time-zone changes?</summary><p>No. Accuracy depends on the time-zone data installed in the browser and operating system. Recently announced changes may require software updates before they appear correctly.</p></details>
+<details class="faq"><summary>Why can the date be different in another zone even when the meeting is the same instant?</summary><p>Time zones can place the same UTC instant on different local calendar days, especially across large offsets and the International Date Line.</p></details>
 </section>
 </div></main>
 
