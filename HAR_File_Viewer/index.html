@@ -135,7 +135,38 @@ body.light-mode #harRows tr:hover{
     flex:0 0 auto;
   }
 }
-</style><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse HAR File Viewer & Analyzer","url":"https://utiliverse.app/HAR_File_Viewer/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based HAR file viewer for opening HTTP Archive files and inspecting network requests, status codes, URLs, timings, errors and serialized request details.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Open HAR and compatible JSON files","Count total network requests","Summarize successful and error responses","Display request methods, status codes, URLs and timings","Inspect serialized HAR entry details","Local browser-based file processing"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does HAR stand for?","acceptedAnswer":{"@type":"Answer","text":"HAR stands for HTTP Archive. It is a JSON-based format used to record HTTP network requests and responses from a browser or other compatible debugging tool."}},{"@type":"Question","name":"Can I open a .har file here?","acceptedAnswer":{"@type":"Answer","text":"Yes. Select a HAR file or compatible JSON export using the file picker."}},{"@type":"Question","name":"Does my HAR file leave my computer?","acceptedAnswer":{"@type":"Answer","text":"The parsing in this page runs locally in your browser and does not upload the selected HAR file to a Utiliverse server."}},{"@type":"Question","name":"Can HAR files contain cookies or authentication tokens?","acceptedAnswer":{"@type":"Answer","text":"Yes. HAR files may contain cookies, authorization headers, URLs, query parameters, request bodies and other sensitive data. Review and sanitize a HAR before sharing it."}},{"@type":"Question","name":"Does total request time equal page load time?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. This viewer adds recorded request durations. Multiple browser requests can overlap, so the sum can be longer than the actual elapsed page-load time."}},{"@type":"Question","name":"Can this replace browser DevTools?","acceptedAnswer":{"@type":"Answer","text":"No. It is a lightweight viewer for exported HAR files, not a replacement for the full live Network panel in browser developer tools."}}]}</script><style id="u2-styles">
+
+.har-controls{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;margin-top:16px}
+.har-controls .input{min-height:44px}
+.har-toggle{display:flex;align-items:center;gap:8px;color:#cbd5e1;font-size:.82rem;font-weight:700;white-space:nowrap}
+.har-toggle input{accent-color:#6366f1}
+.privacy-box{margin-top:16px;padding:15px 16px;border:1px solid rgba(251,191,36,.28);background:rgba(251,191,36,.07);border-radius:14px;color:#fde68a;font-size:.82rem;line-height:1.65}
+.privacy-box strong{color:#fef3c7}
+.detail-panel{margin-top:18px;border:1px solid #334155;border-radius:16px;background:rgba(15,23,42,.62);overflow:hidden}
+.detail-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 15px;border-bottom:1px solid #334155}
+.detail-title{font-weight:800;color:#e2e8f0;font-size:.92rem}
+.detail-actions{display:flex;gap:8px;flex-wrap:wrap}
+.detail-code{margin:0;max-height:440px;overflow:auto;padding:16px;color:#cbd5e1;font:12px/1.65 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.redact-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
+.redact-stat{border:1px solid #334155;border-radius:12px;background:rgba(15,23,42,.45);padding:12px}
+.redact-stat strong{display:block;font-size:1.15rem;color:#e2e8f0}
+.redact-stat span{display:block;color:#94a3b8;font-size:.72rem;margin-top:2px}
+.helper-note{font-size:.75rem;color:#94a3b8;line-height:1.6;margin-top:10px}
+body.light-mode .har-toggle{color:#334155}
+body.light-mode .privacy-box{background:#fffbeb;border-color:#fde68a;color:#92400e}
+body.light-mode .privacy-box strong{color:#78350f}
+body.light-mode .detail-panel,body.light-mode .redact-stat{background:#fff;border-color:#dbe3ee}
+body.light-mode .detail-head{border-color:#dbe3ee}
+body.light-mode .detail-title,body.light-mode .redact-stat strong{color:#1e293b}
+body.light-mode .detail-code{color:#334155}
+body.light-mode .redact-stat span,body.light-mode .helper-note{color:#64748b}
+@media(max-width:760px){
+  .har-controls{grid-template-columns:1fr}
+  .har-toggle{white-space:normal}
+  .redact-summary{grid-template-columns:1fr}
+}
+
+</style><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse HAR File Viewer & Analyzer","url":"https://utiliverse.app/HAR_File_Viewer/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based HAR viewer for inspecting requests, status codes, URLs and timings, with local filtering, request-detail viewing and a heuristic sensitive-data redaction helper.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Open HAR and compatible JSON files","Count total network requests","Summarize successful and error responses","Display request methods, status codes, URLs and timings","Filter requests by URL, host, method or status","Inspect serialized HAR entry details","Mask likely secrets in displayed details","Download a separate sanitized HAR copy","Detect common sensitive headers, cookies and parameters","Local browser-based file processing"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does HAR stand for?","acceptedAnswer":{"@type":"Answer","text":"HAR stands for HTTP Archive. It is a JSON-based format used to record HTTP network requests and responses from a browser or other compatible debugging tool."}},{"@type":"Question","name":"Can I open a .har file here?","acceptedAnswer":{"@type":"Answer","text":"Yes. Select a HAR file or compatible JSON export using the file picker."}},{"@type":"Question","name":"Does my HAR file leave my computer?","acceptedAnswer":{"@type":"Answer","text":"The parsing in this page runs locally in your browser and does not upload the selected HAR file to a Utiliverse server."}},{"@type":"Question","name":"Can HAR files contain cookies or authentication tokens?","acceptedAnswer":{"@type":"Answer","text":"Yes. HAR files may contain cookies, authorization headers, URLs, query parameters, request bodies and other sensitive data. Review and sanitize a HAR before sharing it."}},{"@type":"Question","name":"Does total request time equal page load time?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. This viewer adds recorded request durations. Multiple browser requests can overlap, so the sum can be longer than the actual elapsed page-load time."}},{"@type":"Question","name":"Can this replace browser DevTools?","acceptedAnswer":{"@type":"Answer","text":"No. It is a lightweight viewer for exported HAR files, not a replacement for the full live Network panel in browser developer tools."}},{"@type":"Question","name":"What does the HAR redaction helper remove?","acceptedAnswer":{"@type":"Answer","text":"It masks common sensitive headers, cookies, query parameters, form fields and JSON keys such as authorization values, API keys, tokens, passwords, secrets and session identifiers. It is heuristic and may not catch every sensitive value."}},{"@type":"Question","name":"Is a sanitized HAR automatically safe to share?","acceptedAnswer":{"@type":"Answer","text":"No. Always review the sanitized file manually. Secrets can appear under unexpected field names, inside opaque request bodies or in URLs and data that no generic sanitizer can identify reliably."}},{"@type":"Question","name":"Does the viewer change my original HAR file?","acceptedAnswer":{"@type":"Answer","text":"No. The original file stays unchanged. Download Sanitized HAR creates a separate copy in the browser."}}]}</script><style id="u2-styles">
 .u2-related{--u2-bg:#fff;--u2-text:#0f172a;--u2-muted:#475569;--u2-border:#dbe3ee;--u2-link:#4338ca;background:var(--u2-bg);color:var(--u2-text);border:1px solid var(--u2-border);border-radius:18px;padding:24px;margin:32px auto;max-width:1120px;overflow-wrap:anywhere;font-family:Inter,system-ui,sans-serif}.u2-related h2{font-size:25px;line-height:1.3;margin:0 0 16px;color:var(--u2-text);font-weight:800}.u2-related h3{font-size:18px;margin:22px 0 8px;font-weight:750;color:var(--u2-text)}.u2-related p,.u2-related li{font-size:15px;line-height:1.8;color:var(--u2-muted);margin:0 0 12px}.u2-related ul{padding-left:22px;list-style:disc}.u2-related a{color:var(--u2-link);text-decoration:underline;text-underline-offset:3px}.u2-related a:focus-visible{outline:2px solid currentColor;outline-offset:4px}.u2-columns{display:grid;grid-template-columns:1fr 1fr;gap:24px}.u2-review{border-top:1px solid var(--u2-border);padding-top:15px;font-size:12px!important}.u2-related.u2-dark-default{--u2-bg:#0f172a;--u2-text:#f8fafc;--u2-muted:#cbd5e1;--u2-border:#334155;--u2-link:#a5b4fc}html.dark .u2-related,body.dark-mode .u2-related{--u2-bg:#0f172a;--u2-text:#f8fafc;--u2-muted:#cbd5e1;--u2-border:#334155;--u2-link:#a5b4fc}body.light-mode .u2-related{--u2-bg:#fff;--u2-text:#0f172a;--u2-muted:#475569;--u2-border:#dbe3ee;--u2-link:#4338ca}@media(max-width:620px){.u2-related{padding:18px}.u2-columns{grid-template-columns:1fr;gap:0}}
 </style>
 <style id="b4-styles">
@@ -157,7 +188,56 @@ They create no visible boxes or reserved layout space.
 <button id="theme-toggle" type="button" aria-label="Switch to light mode" title="Toggle light/dark mode"><i id="theme-icon" data-lucide="sun" aria-hidden="true"></i></button>
 </div></div></header><!-- GOOGLE ADSENSE: TOP PLACEMENT
      Paste your approved AdSense code here. Invisible insertion point only.
---><main class="max-w-6xl mx-auto px-4 sm:px-6 py-12"><div><h1 class="text-4xl sm:text-5xl font-black mt-2 b4-heading"><svg class="b4-icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"></path><path d="M14 3v5h5"></path><circle cx="11" cy="14" r="3"></circle><path d="m13.2 16.2 2.3 2.3"></path></svg><span>HAR File Viewer &amp; Network Analyzer</span></h1><p class="mt-4 text-lg muted max-w-3xl">Open an HTTP Archive (.har) file locally in your browser to inspect network requests, status codes, URLs, timings, errors and individual request details.</p></div><section class="glass rounded-3xl p-6 sm:p-8 mt-8"><input id="harFile" type="file" accept=".har,.json" class="input w-full rounded-xl p-3"><p class="muted text-xs mt-3 flex items-start gap-2"><i data-lucide="shield-check" class="w-4 h-4 mt-0.5 flex-shrink-0 text-indigo-400"></i><span>Local browser processing: the selected HAR file is read by this page in your browser and is not uploaded to a Utiliverse server.</span></p><div class="grid sm:grid-cols-4 gap-3 mt-5"><div class="glass rounded-xl p-4"><span class="muted text-xs">Requests</span><div id="count" class="text-2xl font-bold mt-1">0</div></div><div class="glass rounded-xl p-4"><span class="muted text-xs">2xx</span><div id="ok" class="text-2xl font-bold mt-1">0</div></div><div class="glass rounded-xl p-4"><span class="muted text-xs">Errors</span><div id="err" class="text-2xl font-bold mt-1">0</div></div><div class="glass rounded-xl p-4"><span class="muted text-xs">Total time</span><div id="time" class="text-2xl font-bold mt-1">0 ms</div></div></div><div class="mt-6 overflow-x-auto"><table class="w-full text-sm"><thead><tr class="text-slate-500 text-xs uppercase"><th class="text-left py-3">Method</th><th class="text-left py-3">Status</th><th class="text-left py-3">URL</th><th class="text-right py-3">Time</th></tr></thead><tbody id="harRows"></tbody></table></div></section><!-- GOOGLE ADSENSE: MID-PAGE / AFTER-ANALYZER PLACEMENT
+--><main class="max-w-6xl mx-auto px-4 sm:px-6 py-12"><div><h1 class="text-4xl sm:text-5xl font-black mt-2 b4-heading"><svg class="b4-icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"></path><path d="M14 3v5h5"></path><circle cx="11" cy="14" r="3"></circle><path d="m13.2 16.2 2.3 2.3"></path></svg><span>HAR File Viewer &amp; Network Analyzer</span></h1><p class="mt-4 text-lg muted max-w-3xl">Open an HTTP Archive (.har) file locally in your browser to inspect network requests, status codes, URLs, timings, errors and individual request details.</p></div><section class="glass rounded-3xl p-6 sm:p-8 mt-8">
+<input id="harFile" type="file" accept=".har,.json" class="input w-full rounded-xl p-3">
+<p class="muted text-xs mt-3 flex items-start gap-2"><i data-lucide="shield-check" class="w-4 h-4 mt-0.5 flex-shrink-0 text-indigo-400"></i><span>Local browser processing: the selected HAR file is read by this page in your browser and is not uploaded to a Utiliverse server.</span></p>
+
+<div class="har-controls">
+  <input id="harSearch" class="input rounded-xl px-4 py-2.5" type="search" placeholder="Filter by URL, host, method or status..." aria-label="Filter HAR requests">
+  <label class="har-toggle"><input id="redactDetails" type="checkbox" checked> Redact likely secrets in request details</label>
+  <button id="downloadSanitized" class="btn" type="button" disabled>Download Sanitized HAR</button>
+</div>
+
+<div class="privacy-box">
+  <strong>HAR files can contain credentials and private data.</strong>
+  This viewer can mask common sensitive headers, cookies, query parameters and JSON/form fields before displaying details or exporting a sanitized copy. Redaction is heuristic and cannot guarantee that every secret or personal value is detected. Always review a HAR before sharing it.
+</div>
+
+<div class="grid sm:grid-cols-4 gap-3 mt-5">
+  <div class="glass rounded-xl p-4"><span class="muted text-xs">Requests</span><div id="count" class="text-2xl font-bold mt-1">0</div></div>
+  <div class="glass rounded-xl p-4"><span class="muted text-xs">2xx</span><div id="ok" class="text-2xl font-bold mt-1">0</div></div>
+  <div class="glass rounded-xl p-4"><span class="muted text-xs">Errors</span><div id="err" class="text-2xl font-bold mt-1">0</div></div>
+  <div class="glass rounded-xl p-4"><span class="muted text-xs">Total time</span><div id="time" class="text-2xl font-bold mt-1">0 ms</div></div>
+</div>
+
+<div class="redact-summary">
+  <div class="redact-stat"><strong id="headerRedactions">0</strong><span>likely sensitive header values detected</span></div>
+  <div class="redact-stat"><strong id="cookieRedactions">0</strong><span>cookie values detected</span></div>
+  <div class="redact-stat"><strong id="paramRedactions">0</strong><span>likely sensitive parameters detected</span></div>
+</div>
+
+<div class="mt-6 overflow-x-auto">
+  <table class="w-full text-sm">
+    <thead><tr class="text-slate-500 text-xs uppercase"><th class="text-left py-3">Method</th><th class="text-left py-3">Status</th><th class="text-left py-3">URL</th><th class="text-right py-3">Time</th></tr></thead>
+    <tbody id="harRows"></tbody>
+  </table>
+</div>
+<div id="emptyFilter" class="muted text-sm py-5 hidden">No requests match this filter.</div>
+
+<div id="detailPanel" class="detail-panel hidden">
+  <div class="detail-head">
+    <div>
+      <div class="detail-title">Selected request details</div>
+      <div id="detailMeta" class="helper-note" style="margin-top:2px"></div>
+    </div>
+    <div class="detail-actions">
+      <button id="copyDetails" class="btn text-xs" type="button">Copy Details</button>
+      <button id="closeDetails" class="btn text-xs" type="button">Close</button>
+    </div>
+  </div>
+  <pre id="detailCode" class="detail-code"></pre>
+</div>
+</section><!-- GOOGLE ADSENSE: MID-PAGE / AFTER-ANALYZER PLACEMENT
      Paste your approved AdSense code here. Invisible insertion point only.
 --><section class="article max-w-4xl mt-16">
 <h2>What Is a HAR File?</h2>
@@ -182,8 +262,24 @@ They create no visible boxes or reserved layout space.
 <p>When troubleshooting an intermittent issue, start the network capture before reproducing the problem so the relevant requests are included in the archive.</p>
 
 <h2>HAR File Privacy and Security</h2>
-<p>HAR files can contain sensitive diagnostic information. Depending on the capture, that may include cookies, authorization headers, query parameters, request bodies, email addresses, internal hostnames, account identifiers or session tokens. Treat HAR exports like sensitive support files.</p>
-<p>This viewer reads the selected file locally using browser JavaScript and does not contain code that uploads the HAR to a Utiliverse server. Local processing reduces unnecessary transmission of the file, but it does not make a HAR safe to share with other people. Review and sanitize sensitive information before sending a HAR to a support team, vendor or public forum.</p>
+<p>HAR files can contain sensitive diagnostic information. Depending on the capture, that may include cookies, <code>Authorization</code> headers, bearer tokens, API keys, query parameters, form values, request bodies, email addresses, internal hostnames, account identifiers or session tokens. Treat HAR exports like sensitive support files.</p>
+<p>This viewer reads the selected file locally using browser JavaScript and does not upload the HAR to a Utiliverse server. The redaction helper masks common credential-like fields in the on-screen detail view and can create a sanitized HAR copy for review before sharing.</p>
+
+<div class="privacy-box">
+<strong>Redaction is a helper, not a guarantee.</strong>
+The sanitizer looks for common names such as Authorization, Cookie, Set-Cookie, API keys, access tokens, passwords, secrets, sessions, JWT-like fields and similar query/form/JSON keys. A HAR may still contain sensitive values under unexpected names or inside opaque request bodies. Review the sanitized copy manually before sending it anywhere.
+</div>
+
+<h3>What the sanitizer checks</h3>
+<ul>
+<li>Request and response headers commonly used for authentication or session state.</li>
+<li>HAR cookie arrays and <code>Cookie</code>/<code>Set-Cookie</code> header values.</li>
+<li>Query-string and form parameter names that look like tokens, keys, passwords, secrets or session identifiers.</li>
+<li>JSON request bodies where sensitive-looking object keys can be identified.</li>
+<li>Matching sensitive query parameters embedded directly in request URLs.</li>
+</ul>
+
+<p>The sanitizer deliberately does not delete entire requests or rewrite arbitrary free-form text because doing so could destroy useful debugging context. When a body cannot be parsed safely, the viewer leaves it intact and relies on the warning above so you can review it manually.</p>
 
 <h2>Common HAR Troubleshooting Uses</h2>
 <ul>
@@ -198,6 +294,11 @@ They create no visible boxes or reserved layout space.
 <h3>HAR viewer vs. browser DevTools</h3>
 <p>Browser DevTools remains the richer environment for live network debugging because it can provide filters, initiator information, waterfall timing, live captures and other diagnostics. A standalone HAR analyzer is useful when you already have an exported archive and want a quick browser-based view without recreating the original session.</p>
 
+<h3>Redaction workflow before sharing a HAR</h3>
+<p>A practical workflow is: reproduce the issue, export the HAR, open it locally here, keep the redaction option enabled while inspecting entries, download a sanitized copy, then manually review that sanitized file before sharing it. If the support recipient does not need request bodies or certain private endpoints, consider removing those requests entirely in a dedicated text editor or capture a narrower session.</p>
+
+<p class="muted" style="font-size:12px"><strong>Last reviewed:</strong> September 30, 2026 · Viewer behavior, privacy guidance and redaction logic reviewed against the current implementation.</p>
+
 <h2>HAR File Viewer FAQ</h2>
 <details class="faq"><summary>What does HAR stand for?</summary><p class="muted">HAR stands for HTTP Archive. It is a JSON-based format used to record HTTP network requests and responses from a browser or other compatible debugging tool.</p></details>
 <details class="faq"><summary>Can I open a .har file here?</summary><p class="muted">Yes. Select a HAR file or compatible JSON export using the file picker above.</p></details>
@@ -207,13 +308,301 @@ They create no visible boxes or reserved layout space.
 <details class="faq"><summary>What do 4xx and 5xx responses mean?</summary><p class="muted">4xx responses generally indicate a client or request problem, while 5xx responses generally indicate that the server could not complete the request.</p></details>
 <details class="faq"><summary>Does total request time equal page load time?</summary><p class="muted">Not necessarily. This viewer adds recorded request durations. Multiple browser requests can overlap, so the sum can be longer than the actual elapsed page-load time.</p></details>
 <details class="faq"><summary>Can this replace browser DevTools?</summary><p class="muted">No. It is a lightweight viewer for exported HAR files, not a replacement for the full live Network panel in browser developer tools.</p></details>
+<details class="faq"><summary>What does the HAR redaction helper remove?</summary><p class="muted">It masks common sensitive headers, cookies, query parameters, form fields and JSON keys such as authorization values, API keys, tokens, passwords, secrets and session identifiers. It is heuristic and may not catch every sensitive value.</p></details>
+<details class="faq"><summary>Is a sanitized HAR automatically safe to share?</summary><p class="muted">No. Always review the sanitized file manually. Secrets can appear under unexpected field names, inside opaque request bodies or in URLs and data that no generic sanitizer can identify reliably.</p></details>
+<details class="faq"><summary>Does the viewer change my original HAR file?</summary><p class="muted">No. The original file stays unchanged. The Download Sanitized HAR button creates a separate copy in your browser.</p></details>
 </section><!-- GOOGLE ADSENSE: PRE-FOOTER PLACEMENT
      Paste your approved AdSense code here. Invisible insertion point only.
 -->
 <!-- BATCH 2 RELATED CONTENT START -->
 <section class="u2-related u2-dark-default" aria-labelledby="u2-heading"><h2 id="u2-heading">Use a capture to answer one network question</h2><p>Record the failing operation in your browser’s Network panel, preserving the log when navigation matters. Export a sanitized HAR, review it for private values, and open it here. This viewer reads the selected file in your browser.</p><h3>Worked check: a successful response after a failure</h3><p>A sequence of 302 → 200 may be a redirect to a login form, not a successful API call. Select the rows to inspect recorded URLs, headers, and methods. Compare the destination with the operation you intended to perform.</p><h3>Understand timing and missing data</h3><p>The total time shown is the sum of request durations. Requests can overlap, so it is not elapsed page-load time. A status of zero or a missing status is not a server-issued HTTP code. Stripped headers and omitted request bodies cannot be reconstructed by this viewer.</p><p>HAR files may contain cookies, credentials, query values, and form data. Sanitized exports still deserve review before sharing. A saved browser capture does not expose private service-to-service requests or explain which backend dependency failed.</p><div class="u2-columns"><div><h3>Related guides</h3><ul><li><a href="/Guides/DNS_and_Network_Troubleshooting.html">DNS, TLS, or HTTP? Troubleshoot the right layer</a></li><li><a href="/Guides/HTTP_Redirects.html">301 vs 302 vs 307 vs 308: choosing an HTTP redirect</a></li><li><a href="/Guides/HTTP_401_vs_403.html">401 vs 403: authentication and access errors</a></li><li><a href="/Guides/HTTP_502_503_504.html">502 vs 503 vs 504: server and gateway errors</a></li></ul></div><div><h3>Related tools</h3><ul><li><a href="/SSL_Certificate_Checker/">SSL Certificate Checker</a></li></ul><p><a href="/Guides.html">Browse all guides</a></p></div></div><h3>Sources</h3><ul><li><a href="https://developers.google.com/speed/public-dns/docs/troubleshooting">Google Public DNS troubleshooting</a></li><li><a href="https://developer.chrome.com/docs/devtools/network/reference">Chrome Network reference</a></li></ul><p class="u2-review">Explanatory content reviewed September 29, 2026. <a href="/Editorial_Methodology.html">Methodology</a> · <a href="/Contact_Info.html">Report a correction</a></p></section>
 <!-- BATCH 2 RELATED CONTENT END -->
-</main><script>document.getElementById('harFile').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text()),entries=d.log&&Array.isArray(d.log.entries)?d.log.entries:[];document.getElementById('count').textContent=entries.length;document.getElementById('ok').textContent=entries.filter(x=>x.response?.status>=200&&x.response.status<300).length;document.getElementById('err').textContent=entries.filter(x=>x.response?.status>=400).length;document.getElementById('time').textContent=Math.round(entries.reduce((a,x)=>a+(x.time||0),0))+' ms';const body=document.getElementById('harRows');body.innerHTML='';entries.forEach((x,i)=>{const tr=document.createElement('tr');tr.className='border-t border-slate-800 hover:bg-indigo-500/5 cursor-pointer';[x.request?.method||'',x.response?.status??'',x.request?.url||'',Math.round(x.time||0)+' ms'].forEach((value,column)=>{const td=document.createElement('td');td.className=column===2?'py-3 max-w-xl truncate':column===3?'py-3 text-right':'py-3';td.textContent=String(value);tr.appendChild(td)});tr.onclick=()=>alert(JSON.stringify(x,null,2));body.appendChild(tr)})}catch(err){alert('Could not read this HAR/JSON file: '+err.message)}});</script><footer class="border-t border-slate-800 bg-slate-950"><div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500"><span>© <span id="year"></span> Utiliverse. All rights reserved.</span><span>Tools are designed for browser-based use.</span></div><nav class="b4-nav b4-dark" aria-label="Resources and site information"><a href="/Guides.html">Guides</a><a href="/Updates.html">Updates</a><a href="/Editorial_Methodology.html">Editorial &amp; Methodology</a><a href="/About.html">About</a><a href="/Privacy_Policy.html">Privacy Policy</a><a href="/Terms_of_Service.html">Terms</a><a href="/Contact_Info.html">Contact</a></nav></footer><script>document.getElementById('year').textContent=new Date().getFullYear();lucide.createIcons();
+</main><script>
+(() => {
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+  let harData = null;
+  let entries = [];
+  let selectedEntry = null;
+
+  const SENSITIVE_HEADER = /^(authorization|proxy-authorization|cookie|set-cookie|x-api-key|api-key|x-auth-token|x-access-token|x-csrf-token|csrf-token)$/i;
+  const SENSITIVE_NAME = /(password|passwd|pwd|secret|token|access[_-]?token|refresh[_-]?token|id[_-]?token|api[_-]?key|apikey|session|sessionid|jwt|bearer|authorization|auth[_-]?code|client[_-]?secret|private[_-]?key|csrf)/i;
+  const MASK = "[REDACTED]";
+
+  function deepClone(value){
+    return JSON.parse(JSON.stringify(value));
+  }
+
+  function redactObject(value, stats){
+    if(Array.isArray(value)){
+      return value.map(item => redactObject(item, stats));
+    }
+    if(value && typeof value === "object"){
+      const out = {};
+      Object.entries(value).forEach(([key,val]) => {
+        if(SENSITIVE_NAME.test(key)){
+          out[key] = MASK;
+          stats.params++;
+        }else{
+          out[key] = redactObject(val, stats);
+        }
+      });
+      return out;
+    }
+    return value;
+  }
+
+  function sanitizeHeaders(headers, stats){
+    if(!Array.isArray(headers)) return headers;
+    return headers.map(h => {
+      const copy = {...h};
+      if(SENSITIVE_HEADER.test(String(copy.name || "")) || SENSITIVE_NAME.test(String(copy.name || ""))){
+        copy.value = MASK;
+        stats.headers++;
+      }
+      return copy;
+    });
+  }
+
+  function sanitizeCookies(cookies, stats){
+    if(!Array.isArray(cookies)) return cookies;
+    return cookies.map(c => {
+      const copy = {...c};
+      if("value" in copy){
+        copy.value = MASK;
+        stats.cookies++;
+      }
+      return copy;
+    });
+  }
+
+  function sanitizeParams(params, stats){
+    if(!Array.isArray(params)) return params;
+    return params.map(p => {
+      const copy = {...p};
+      if(SENSITIVE_NAME.test(String(copy.name || ""))){
+        copy.value = MASK;
+        stats.params++;
+      }
+      return copy;
+    });
+  }
+
+  function sanitizeUrl(url, stats){
+    if(!url) return url;
+    try{
+      const parsed = new URL(url);
+      [...parsed.searchParams.keys()].forEach(key => {
+        if(SENSITIVE_NAME.test(key)){
+          parsed.searchParams.set(key, MASK);
+          stats.params++;
+        }
+      });
+      return parsed.toString();
+    }catch{
+      return url;
+    }
+  }
+
+  function sanitizePostData(postData, stats){
+    if(!postData || typeof postData !== "object") return postData;
+    const copy = deepClone(postData);
+    copy.params = sanitizeParams(copy.params, stats);
+
+    if(typeof copy.text === "string" && copy.text){
+      const mime = String(copy.mimeType || "").toLowerCase();
+
+      if(mime.includes("json") || /^[\s]*[\[{]/.test(copy.text)){
+        try{
+          const parsed = JSON.parse(copy.text);
+          copy.text = JSON.stringify(redactObject(parsed, stats), null, 2);
+          return copy;
+        }catch{}
+      }
+
+      if(mime.includes("application/x-www-form-urlencoded")){
+        try{
+          const form = new URLSearchParams(copy.text);
+          [...form.keys()].forEach(key => {
+            if(SENSITIVE_NAME.test(key)){
+              form.set(key, MASK);
+              stats.params++;
+            }
+          });
+          copy.text = form.toString();
+        }catch{}
+      }
+    }
+    return copy;
+  }
+
+  function sanitizeEntry(entry, stats={headers:0,cookies:0,params:0}){
+    const copy = deepClone(entry);
+
+    if(copy.request){
+      copy.request.url = sanitizeUrl(copy.request.url, stats);
+      copy.request.headers = sanitizeHeaders(copy.request.headers, stats);
+      copy.request.cookies = sanitizeCookies(copy.request.cookies, stats);
+      copy.request.queryString = sanitizeParams(copy.request.queryString, stats);
+      copy.request.postData = sanitizePostData(copy.request.postData, stats);
+    }
+
+    if(copy.response){
+      copy.response.headers = sanitizeHeaders(copy.response.headers, stats);
+      copy.response.cookies = sanitizeCookies(copy.response.cookies, stats);
+    }
+
+    return copy;
+  }
+
+  function sanitizeHar(data){
+    const copy = deepClone(data);
+    const stats = {headers:0,cookies:0,params:0};
+    if(copy.log && Array.isArray(copy.log.entries)){
+      copy.log.entries = copy.log.entries.map(entry => sanitizeEntry(entry, stats));
+    }
+    return {data:copy, stats};
+  }
+
+  function updateRedactionStats(){
+    if(!harData){
+      $("headerRedactions").textContent = "0";
+      $("cookieRedactions").textContent = "0";
+      $("paramRedactions").textContent = "0";
+      return;
+    }
+    const {stats} = sanitizeHar(harData);
+    $("headerRedactions").textContent = stats.headers;
+    $("cookieRedactions").textContent = stats.cookies;
+    $("paramRedactions").textContent = stats.params;
+  }
+
+  function renderRows(){
+    const body = $("harRows");
+    body.innerHTML = "";
+
+    const q = ($("harSearch").value || "").toLowerCase().trim();
+    const filtered = entries.filter(x => {
+      if(!q) return true;
+      let host = "";
+      try{ host = new URL(x.request?.url || "").host; }catch{}
+      const hay = [
+        x.request?.method || "",
+        x.response?.status ?? "",
+        x.request?.url || "",
+        host
+      ].join(" ").toLowerCase();
+      return hay.includes(q);
+    });
+
+    $("emptyFilter").classList.toggle("hidden", filtered.length > 0);
+
+    filtered.forEach((x) => {
+      const tr = document.createElement("tr");
+      tr.className = "border-t border-slate-800 hover:bg-indigo-500/5 cursor-pointer";
+
+      [x.request?.method || "", x.response?.status ?? "", x.request?.url || "", Math.round(x.time || 0) + " ms"].forEach((value,column) => {
+        const td = document.createElement("td");
+        td.className = column===2 ? "py-3 max-w-xl truncate" : column===3 ? "py-3 text-right" : "py-3";
+        td.textContent = String(value);
+        tr.appendChild(td);
+      });
+
+      tr.addEventListener("click", () => showDetails(x));
+      body.appendChild(tr);
+    });
+  }
+
+  function showDetails(entry){
+    selectedEntry = entry;
+    const redact = $("redactDetails").checked;
+    const shown = redact ? sanitizeEntry(entry) : deepClone(entry);
+    $("detailCode").textContent = JSON.stringify(shown, null, 2);
+    $("detailMeta").textContent =
+      `${entry.request?.method || ""} ${entry.response?.status ?? ""} · ${redact ? "likely secrets redacted" : "raw HAR entry shown"}`;
+    $("detailPanel").classList.remove("hidden");
+  }
+
+  $("harFile").addEventListener("change", async e => {
+    const f = e.target.files[0];
+    if(!f) return;
+
+    try{
+      const parsed = JSON.parse(await f.text());
+      if(!parsed.log || !Array.isArray(parsed.log.entries)){
+        throw new Error("No log.entries array was found.");
+      }
+
+      harData = parsed;
+      entries = parsed.log.entries;
+      selectedEntry = null;
+
+      $("count").textContent = entries.length;
+      $("ok").textContent = entries.filter(x => x.response?.status >= 200 && x.response.status < 300).length;
+      $("err").textContent = entries.filter(x => x.response?.status >= 400).length;
+      $("time").textContent = Math.round(entries.reduce((a,x) => a + (x.time || 0), 0)) + " ms";
+      $("downloadSanitized").disabled = false;
+      $("detailPanel").classList.add("hidden");
+
+      updateRedactionStats();
+      renderRows();
+    }catch(err){
+      harData = null;
+      entries = [];
+      $("downloadSanitized").disabled = true;
+      updateRedactionStats();
+      renderRows();
+      alert("Could not read this HAR/JSON file: " + err.message);
+    }
+  });
+
+  $("harSearch").addEventListener("input", renderRows);
+
+  $("redactDetails").addEventListener("change", () => {
+    if(selectedEntry) showDetails(selectedEntry);
+  });
+
+  $("closeDetails").addEventListener("click", () => {
+    selectedEntry = null;
+    $("detailPanel").classList.add("hidden");
+    $("detailCode").textContent = "";
+  });
+
+  $("copyDetails").addEventListener("click", async () => {
+    const value = $("detailCode").textContent;
+    if(!value) return;
+    try{
+      await navigator.clipboard.writeText(value);
+    }catch{
+      const ta = document.createElement("textarea");
+      ta.value = value;
+      ta.style.position = "fixed";
+      ta.style.left = "-9999px";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+    }
+  });
+
+  $("downloadSanitized").addEventListener("click", () => {
+    if(!harData) return;
+    const {data} = sanitizeHar(harData);
+    const blob = new Blob([JSON.stringify(data, null, 2)], {type:"application/json"});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    const sourceName = $("harFile").files?.[0]?.name || "capture.har";
+    const base = sourceName.replace(/\.(har|json)$/i, "");
+    a.href = url;
+    a.download = base + ".sanitized.har";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  });
+})();
+</script><footer class="border-t border-slate-800 bg-slate-950"><div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500"><span>© <span id="year"></span> Utiliverse. All rights reserved.</span><span>100% Free and Browser Based</span></div><nav class="b4-nav b4-dark" aria-label="Resources and site information"><a href="/Guides.html">Guides</a><a href="/Updates.html">Updates</a><a href="/Editorial_Methodology.html">Editorial &amp; Methodology</a><a href="/About.html">About</a><a href="/Privacy_Policy.html">Privacy Policy</a><a href="/Terms_of_Service.html">Terms</a><a href="/Contact_Info.html">Contact</a></nav></footer><script>document.getElementById('year').textContent=new Date().getFullYear();lucide.createIcons();
 (function(){
   const toggle = document.getElementById("theme-toggle");
   const icon = document.getElementById("theme-icon");
