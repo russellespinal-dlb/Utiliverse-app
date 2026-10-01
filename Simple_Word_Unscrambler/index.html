@@ -427,11 +427,45 @@
             .theme-toggle{width:38px;height:38px;flex-basis:38px}
         }
 
+    
+        .title-row{display:flex;align-items:center;justify-content:center;gap:14px}
+        .title-icon{width:46px;height:46px;flex:0 0 auto;color:#6366f1}
+        .title-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+        .source-box{margin-top:18px;padding:16px;border:1px solid #dbe3ee;border-radius:14px;background:#f8fafc;color:#475569;font-size:13px;line-height:1.7}
+        .source-box strong{color:#1e293b}
+        .source-box a{color:#4f46e5;font-weight:700;text-decoration:none}
+        .source-box a:hover{text-decoration:underline}
+        .option-check{display:flex;gap:9px;align-items:flex-start;font-size:13px;line-height:1.5;color:#475569}
+        .option-check input{margin-top:3px;accent-color:#6366f1}
+        .method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+        .method-card{border:1px solid #dbe3ee;border-radius:14px;background:#f8fafc;padding:15px}
+        .method-card strong{display:block;color:#1e293b;margin-bottom:5px}
+        .method-card span{display:block;color:#475569;font-size:13px;line-height:1.65}
+        .related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+        .related-link{display:block;border:1px solid #dbe3ee;background:#fff;border-radius:14px;padding:15px;text-decoration:none}
+        .related-link strong{display:block;color:#1e293b;margin-bottom:4px}
+        .related-link span{display:block;color:#64748b;font-size:12px;line-height:1.55}
+        .related-link:hover{border-color:#818cf8}
+        body.dark-mode .source-box,
+        body.dark-mode .method-card,
+        body.dark-mode .related-link{background:#0f172a;border-color:#334155;color:#cbd5e1}
+        body.dark-mode .source-box strong,
+        body.dark-mode .method-card strong,
+        body.dark-mode .related-link strong{color:#f8fafc}
+        body.dark-mode .source-box a{color:#a5b4fc}
+        body.dark-mode .method-card span,
+        body.dark-mode .related-link span,
+        body.dark-mode .option-check{color:#94a3b8}
+        @media(max-width:700px){
+            .title-icon{width:38px;height:38px}
+            .method-grid,.related-grid{grid-template-columns:1fr}
+        }
+
     </style>
 
     <!-- Structured Data -->
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Simple Word Unscrambler","url":"https://utiliverse.app/Simple_Word_Unscrambler/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled and an internet connection to load the word dictionary.","description":"Free browser-based word unscrambler and anagram solver that finds English words that can be formed from a supplied set of letters.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Find dictionary words from scrambled letters","Respect repeated-letter counts","Minimum word length filter","Selectable maximum result count","Longest words shown first","Copy displayed results to clipboard","Example letter sets","Browser-side matching after dictionary download"]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does the Word Unscrambler do?","acceptedAnswer":{"@type":"Answer","text":"It checks a downloaded English word list and returns words that can be formed using only the letters you entered, without using any letter more times than it appears in your input."}},{"@type":"Question","name":"Do results have to use every letter I enter?","acceptedAnswer":{"@type":"Answer","text":"No. Results may use some or all of the available letters, as long as they meet the selected minimum length and do not require extra letters."}},{"@type":"Question","name":"Can I limit how many results are displayed?","acceptedAnswer":{"@type":"Answer","text":"Yes. The result-count menu lets you display 5 through 50 words or choose All Possible Words."}},{"@type":"Question","name":"How are the results sorted?","acceptedAnswer":{"@type":"Answer","text":"Matching words are sorted by length from longest to shortest, then alphabetically when two words have the same length."}},{"@type":"Question","name":"Will it use letters I did not enter?","acceptedAnswer":{"@type":"Answer","text":"No. A result is only accepted when every letter in that word can be supplied by your input, including repeated-letter counts."}},{"@type":"Question","name":"Why might a valid word be missing?","acceptedAnswer":{"@type":"Answer","text":"Results depend on the word list loaded by the tool. Proper nouns, uncommon terms, regional words, newly coined words or words absent from that dictionary may not appear."}},{"@type":"Question","name":"Are my letters sent to a server for matching?","acceptedAnswer":{"@type":"Answer","text":"The matching logic runs in your browser after the page downloads its English word list from GitHub. Your entered letter string is not submitted to a Utiliverse word-solving server by this tool."}},{"@type":"Question","name":"Can I use the results for word games?","acceptedAnswer":{"@type":"Answer","text":"Yes, but different games use different official dictionaries and rules. Always verify a suggested word against the rules and accepted word list for the specific game."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Simple Word Unscrambler","url":"https://utiliverse.app/Simple_Word_Unscrambler/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled and an internet connection to load the word dictionary.","description":"Free browser-based word unscrambler and anagram solver using the first20hours/google-10000-english common-English word list, with minimum-length, result-limit and exact-anagram filters.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Find dictionary words from scrambled letters","Respect repeated-letter counts","Exact anagrams only option","Minimum word length filter","Selectable maximum result count","Longest words shown first","Copy displayed results to clipboard","Example letter sets","Transparent dictionary source disclosure","Browser-side matching after dictionary download"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does the Word Unscrambler do?","acceptedAnswer":{"@type":"Answer","text":"It checks a downloaded English word list and returns words that can be formed using only the letters you entered, without using any letter more times than it appears in your input."}},{"@type":"Question","name":"Do results have to use every letter I enter?","acceptedAnswer":{"@type":"Answer","text":"No. Results may use some or all of the available letters, as long as they meet the selected minimum length and do not require extra letters."}},{"@type":"Question","name":"Can I limit how many results are displayed?","acceptedAnswer":{"@type":"Answer","text":"Yes. The result-count menu lets you display 5 through 50 words or choose All Possible Words."}},{"@type":"Question","name":"How are the results sorted?","acceptedAnswer":{"@type":"Answer","text":"Matching words are sorted by length from longest to shortest, then alphabetically when two words have the same length."}},{"@type":"Question","name":"Will it use letters I did not enter?","acceptedAnswer":{"@type":"Answer","text":"No. A result is only accepted when every letter in that word can be supplied by your input, including repeated-letter counts."}},{"@type":"Question","name":"Why might a valid word be missing?","acceptedAnswer":{"@type":"Answer","text":"Results depend on the word list loaded by the tool. Proper nouns, uncommon terms, regional words, newly coined words or words absent from that dictionary may not appear."}},{"@type":"Question","name":"Are my letters sent to a server for matching?","acceptedAnswer":{"@type":"Answer","text":"The matching logic runs in your browser after the page downloads its English word list from GitHub. Your entered letter string is not submitted to a Utiliverse word-solving server by this tool."}},{"@type":"Question","name":"Can I use the results for word games?","acceptedAnswer":{"@type":"Answer","text":"Yes, but different games use different official dictionaries and rules. Always verify a suggested word against the rules and accepted word list for the specific game."}},{"@type":"Question","name":"What does Exact anagrams only do?","acceptedAnswer":{"@type":"Answer","text":"It requires every cleaned input letter to be used exactly once in the result. Without that option, shorter words made from some of the letters are also allowed."}},{"@type":"Question","name":"Which dictionary does this tool use?","acceptedAnswer":{"@type":"Answer","text":"It loads google-10000-english-no-swears.txt from the first20hours/google-10000-english GitHub repository. It is a common-English frequency list, not an official word-game dictionary."}},{"@type":"Question","name":"Is the dictionary version pinned?","acceptedAnswer":{"@type":"Answer","text":"No. The page currently loads the repository's master branch, so available results could change if the upstream file changes."}}]}</script>
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans antialiased min-h-screen flex flex-col">
 <!--
@@ -472,7 +506,12 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 
         <!-- Hero Section -->
         <section class="text-center max-w-3xl mx-auto">
-            <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">Word Unscrambler &amp; Anagram Solver</h1>
+            <div class="title-row mb-4">
+                <span class="title-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="M4 7h6M14 7h6M7 4v6M17 4v6"/><path d="M5 17h14"/><path d="M8 14l-3 3 3 3M16 14l3 3-3 3"/></svg>
+                </span>
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">Word Unscrambler &amp; Anagram Solver</h1>
+            </div>
             <p class="text-lg text-slate-600 mb-4">
                 Enter jumbled letters and find English words that can be formed from them. Filter by minimum word length, limit the number of results, and copy matching words with one click.
             </p>
@@ -585,6 +624,10 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
                             </select>
                             <p class="text-xs text-slate-500 mt-1">Limit the maximum number of results displayed.</p>
                         </div>
+                        <label class="option-check pt-2">
+                            <input id="exact-anagrams" type="checkbox">
+                            <span><strong>Exact anagrams only</strong><br>Require every entered letter to be used exactly once in each result.</span>
+                        </label>
                     </div>
                 </div>
 
@@ -594,8 +637,13 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
                         <i data-lucide="info" class="w-4 h-4 mr-1"></i> How it works
                     </h4>
                     <p class="text-xs text-indigo-700 leading-relaxed">
-                        The tool downloads a common-English word list, then checks it locally in your browser. Results may use some or all of your letters, but they cannot use a letter more times than it appears in your input.
+                        The tool downloads <strong>google-10000-english-no-swears.txt</strong> from the public first20hours/google-10000-english GitHub repository, then checks it locally in your browser. This is a common-English frequency list, not an official word-game dictionary.
                     </p>
+                    <div class="source-box">
+                        <strong>Dictionary source:</strong><br>
+                        first20hours/google-10000-english · <code>google-10000-english-no-swears.txt</code><br>
+                        <a href="https://github.com/first20hours/google-10000-english" target="_blank" rel="noopener">View source repository ↗</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -608,59 +656,61 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
         <!-- SEO Content Section -->
         <article class="w-full max-w-4xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 p-8 sm:p-12 prose prose-slate max-w-none">
             <h2 class="text-3xl font-extrabold text-slate-900 mb-6">How the Word Unscrambler Works</h2>
-            
-            <p class="text-slate-600 mb-6 leading-relaxed">
-                Enter a set of letters and the tool compares them with the downloaded English word list. A candidate is accepted only when every letter in that word can be supplied by your input, including repeated-letter counts. Results do not have to use every letter you entered, which is why shorter words may appear alongside full-length anagrams.
-            </p>
+            <p class="text-slate-600 mb-6 leading-relaxed">The tool compares your letters against a downloaded word list. A candidate is accepted only when every required letter can be supplied by your input, including repeated-letter counts. By default, results may use only some of your letters. Turn on <strong>Exact anagrams only</strong> when every entered letter must be used exactly once.</p>
 
-            <p class="text-slate-600 mb-6 leading-relaxed">
-                Use the minimum-length slider to hide very short matches, then choose how many results to display. The result menu supports 5 through 50 displayed words or an All Possible Words option. Matches are sorted by length from longest to shortest and alphabetically within the same length.
-            </p>
+            <div class="method-grid">
+                <div class="method-card"><strong>Letter-count matching</strong><span>A result cannot use any letter more times than it appears in your input.</span></div>
+                <div class="method-card"><strong>Exact-anagram mode</strong><span>Requires the result length to equal the cleaned input length, so all available letters must be consumed.</span></div>
+                <div class="method-card"><strong>Sorting</strong><span>Results are ordered longest to shortest, then alphabetically within the same length.</span></div>
+                <div class="method-card"><strong>Local matching</strong><span>After the dictionary downloads, matching runs in your browser; entered letters are not sent to a Utiliverse word-solving endpoint.</span></div>
+            </div>
 
-            <p class="text-slate-600 mb-6 leading-relaxed">
-                The tool is also useful when you want to explore the structure of a set of letters rather than solve one specific puzzle. Because results are sorted with longer words first, you can quickly spot the most complete matches before scanning shorter alternatives. That makes the Unscrambler helpful for vocabulary practice, classroom activities, brainstorming, spelling exercises, and anyone curious about how many recognizable English words can be formed from a single collection of letters.
-            </p>
+            <h3 class="text-2xl font-bold text-slate-900 mt-10 mb-4">Dictionary Source and Coverage</h3>
+            <p class="text-slate-600 mb-6 leading-relaxed">This tool uses <strong>google-10000-english-no-swears.txt</strong> from the public <strong>first20hours/google-10000-english</strong> GitHub repository. It is a compact common-English frequency list intended for broad everyday coverage. It is not an official Scrabble, Words With Friends, crossword, or dictionary-publisher word list.</p>
+
+            <div class="source-box">
+                <strong>Current dictionary file used by this page:</strong><br>
+                <code>https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english-no-swears.txt</code><br><br>
+                The page currently loads the repository's <code>master</code> branch rather than a pinned commit. That means results could change if the upstream file changes. A pinned commit or reviewed local copy would be more reproducible.
+            </div>
+
+            <p class="text-slate-600 mb-6 leading-relaxed">A missing result therefore does not necessarily mean a word is invalid. Proper nouns, technical vocabulary, regional terms, rare words, newer coinages, inflections, game-specific entries, and words absent from this list may not appear.</p>
+
+            <h3 class="text-2xl font-bold text-slate-900 mt-10 mb-4">Exact Anagrams vs. Words Made From Your Letters</h3>
+            <p class="text-slate-600 mb-6 leading-relaxed">These are related but different tasks. If you enter <code>LISTEN</code>, normal mode can return shorter words because they can be made from some of the available letters. Exact-anagram mode filters for six-letter results that use all six letters, such as <code>SILENT</code> if that word is present in the loaded dictionary.</p>
 
             <h3 class="text-2xl font-bold text-slate-900 mt-10 mb-4">How to Use the Word Unscrambler</h3>
-<p class="text-slate-600 mb-6 leading-relaxed">Type or paste letters into the input box. Non-letter characters are ignored during matching. Choose the minimum word length and the maximum number of results, then select <strong>Unscramble Now</strong>. The longest matching words appear first. Use <strong>Copy Words to Clipboard</strong> to copy the displayed list.</p>
-<h3 class="text-2xl font-bold text-slate-900 mt-10 mb-4">Using the Tool for Word Games</h3>
-            
-            <p class="text-slate-600 mb-6 leading-relaxed">
-                Word unscramblers can be useful for anagrams, classroom exercises and word games. Enter the letters available to you, review the returned matches, and verify any candidate against the rules and official word list for the specific game you are playing. 
-            </p>
+            <ol class="text-slate-600 mb-6 leading-relaxed">
+                <li>Type or paste your available letters. Non-letter characters are removed.</li>
+                <li>Choose the minimum word length.</li>
+                <li>Choose how many results to display.</li>
+                <li>Enable <strong>Exact anagrams only</strong> if every input letter must be used.</li>
+                <li>Select <strong>Unscramble Now</strong>.</li>
+                <li>Use <strong>Copy Words to Clipboard</strong> to copy the displayed results.</li>
+            </ol>
 
-            <p class="text-slate-600 mb-6 leading-relaxed">
-                To use the tool effectively for gaming, simply enter your available tiles into the text box. After the dictionary has loaded, the browser evaluates the available word list against your letters and presents matching entries. Use the "Minimum Word Length" slider to filter out two-letter words if you're specifically hunting for a high-scoring 5 or 6-letter play.
-            </p>
+            <h3 class="text-2xl font-bold text-slate-900 mt-10 mb-4">Using Results for Word Games</h3>
+            <p class="text-slate-600 mb-6 leading-relaxed">Treat results as suggestions, not official rulings. Different games can use different dictionaries, accepted inflections, and scoring rules. Verify a candidate against the official rules or accepted word list for the game you are playing.</p>
 
-            <p class="text-slate-600 mb-6 leading-relaxed">
-                A useful strategy is to run the same rack more than once with different minimum lengths. Start with longer words to identify potential high-value plays, then lower the minimum length to uncover flexible backup options that may fit tighter board spaces. The results can help you notice letter patterns, common prefixes and suffixes, and combinations that are easy to miss when you are under time pressure. Always compare suggestions with the rules and accepted dictionary for the specific game you are playing.
-            </p>
+            <h3 class="text-2xl font-bold text-slate-900 mt-10 mb-4">Worked Example</h3>
+            <p class="text-slate-600 mb-6 leading-relaxed">With <code>ACT</code> and exact-anagram mode off, the tool may return shorter matches as well as three-letter words. With exact-anagram mode on, only three-letter matches using A, C, and T exactly once qualify. Repeated letters are also respected: an input containing one E cannot produce a word that needs two E characters.</p>
 
-            <h2 class="text-3xl font-extrabold text-slate-900 mt-12 mb-6">Creative Uses for an Unscrambler</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div>
-                    <h4 class="text-lg font-bold text-slate-900 mb-2">1. Solving Anagrams</h4>
-                    <p class="text-sm text-slate-600 mb-6">Input any word to discover if its letters can be rearranged into completely different, equally valid words (e.g., discovering that LISTEN unskrambles into SILENT).</p>
-                    
-                    <h4 class="text-lg font-bold text-slate-900 mb-2">2. Crossword Puzzle Assistance</h4>
-                    <p class="text-sm text-slate-600 mb-6">When you have a few known letters of a word and are missing the rest, unskrambling can help generate potential candidates that fit your remaining puzzle squares.</p>
-                    
-                    <h4 class="text-lg font-bold text-slate-900 mb-2">3. Educational Vocabulary Building</h4>
-                    <p class="text-sm text-slate-600 mb-6">Teachers can demonstrate how root letters form the basis of multiple smaller words, helping younger students recognize common spelling patterns.</p>
-                </div>
-                <div>
-                    <h4 class="text-lg font-bold text-slate-900 mb-2">4. Cryptogram Decoding</h4>
-                    <p class="text-sm text-slate-600 mb-6">If you are working on a cipher or logic puzzle that involves jumbled text blocks, using an unscrambler helps brute-force potential solutions quickly.</p>
-                    
-                    <h4 class="text-lg font-bold text-slate-900 mb-2">5. Name Generators</h4>
-                    <p class="text-sm text-slate-600 mb-6">Enter your first and last name to see what hidden words lie within. This is often used by writers creating clever pseudonyms or character aliases.</p>
-                    
-                    <h4 class="text-lg font-bold text-slate-900 mb-2">6. Spelling Verification</h4>
-                    <p class="text-sm text-slate-600 mb-6">If you know the letters a word contains but can't quite remember the correct spelling order, dumping the letters into the unscrambler will quickly reveal the proper spelling.</p>
-                </div>
+            <h3 class="text-2xl font-bold text-slate-900 mt-10 mb-4">Limitations</h3>
+            <ul class="text-slate-600 mb-6 leading-relaxed">
+                <li>The dictionary is limited to the loaded common-English list.</li>
+                <li>The tool does not understand game-board positions, blank tiles, wildcard characters, scores, crossword patterns, or definitions.</li>
+                <li>It does not rank words by frequency, difficulty, score, or meaning.</li>
+                <li>The current input cleaner accepts A–Z letters; spaces, punctuation, accents, and other characters are removed.</li>
+            </ul>
+
+            <h3 class="text-2xl font-bold text-slate-900 mt-10 mb-4">Related Utiliverse Tools</h3>
+            <div class="related-grid">
+                <a class="related-link" href="../Word_Counter/"><strong>Word Counter</strong><span>Count words, characters and reading-time information.</span></a>
+                <a class="related-link" href="../Random_String_Generator/"><strong>Random String Generator</strong><span>Create configurable random strings for testing and examples.</span></a>
+                <a class="related-link" href="../Text_Compare/"><strong>Text Compare</strong><span>Compare two pieces of text and inspect their differences.</span></a>
             </div>
+
+            <p class="text-slate-500 mt-8" style="font-size:12px"><strong>Last reviewed:</strong> September 30, 2026 · Dictionary source, matching behavior and limitations reviewed against the current page implementation.</p>
         </article>
 
         <!-- FAQ Section -->
@@ -738,6 +788,27 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
                         </span>
                     </summary>
                     <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">Yes, but different games use different official dictionaries and rules. Always verify a suggested word against the rules and accepted word list for the specific game.</div>
+                </details>
+                <details class="group bg-white rounded-xl border border-slate-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+                    <summary class="flex items-center justify-between p-6 cursor-pointer bg-white hover:bg-slate-50 transition-colors">
+                        <h3 class="text-base font-bold text-slate-900">What does Exact anagrams only do?</h3>
+                        <span class="transition duration-300 group-open:-rotate-180 text-indigo-600"><i data-lucide="chevron-down" class="w-5 h-5"></i></span>
+                    </summary>
+                    <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">It requires every cleaned input letter to be used exactly once in the result. Without that option, shorter words made from some of your letters are also allowed.</div>
+                </details>
+                <details class="group bg-white rounded-xl border border-slate-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+                    <summary class="flex items-center justify-between p-6 cursor-pointer bg-white hover:bg-slate-50 transition-colors">
+                        <h3 class="text-base font-bold text-slate-900">Which dictionary does this tool use?</h3>
+                        <span class="transition duration-300 group-open:-rotate-180 text-indigo-600"><i data-lucide="chevron-down" class="w-5 h-5"></i></span>
+                    </summary>
+                    <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">It loads google-10000-english-no-swears.txt from the first20hours/google-10000-english GitHub repository. It is a common-English frequency list, not an official word-game dictionary.</div>
+                </details>
+                <details class="group bg-white rounded-xl border border-slate-200 overflow-hidden [&_summary::-webkit-details-marker]:hidden">
+                    <summary class="flex items-center justify-between p-6 cursor-pointer bg-white hover:bg-slate-50 transition-colors">
+                        <h3 class="text-base font-bold text-slate-900">Is the dictionary version pinned?</h3>
+                        <span class="transition duration-300 group-open:-rotate-180 text-indigo-600"><i data-lucide="chevron-down" class="w-5 h-5"></i></span>
+                    </summary>
+                    <div class="px-6 pb-6 text-slate-600 text-sm leading-relaxed border-t border-slate-100 pt-4">No. The page currently loads the repository's master branch, so available results could change if the upstream file changes.</div>
                 </details>            </div>
         </section>
 
@@ -768,6 +839,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
         const charCountBadge = document.getElementById('char-count-badge');
         
         const selectResultsCount = document.getElementById('select-results-count');
+        const exactAnagrams = document.getElementById('exact-anagrams');
         const btnUnscramble = document.getElementById('btn-unscramble');
         const btnReset = document.getElementById('btn-reset');
         const btnCopyAll = document.getElementById('btn-copy-all');
@@ -865,7 +937,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
         function unscrambleLetters() {
             const cleanText = inputEl.value.replace(/[^a-zA-Z]/g, '').toUpperCase();
             if (!cleanText) {
-                showToast("Please enter letters to unskramble.", "warning");
+                showToast("Please enter letters to unscramble.", "warning");
                 inputEl.focus();
                 return;
             }
@@ -879,7 +951,11 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
             
             for (let i = 0; i < dictionary.length; i++) {
                 const word = dictionary[i];
-                if (word.length >= minLength && word.length <= cleanText.length) {
+                const lengthAllowed = exactAnagrams.checked
+                    ? word.length === cleanText.length
+                    : (word.length >= minLength && word.length <= cleanText.length);
+
+                if (lengthAllowed && word.length >= minLength) {
                     if (canFormWord(word, cleanText)) {
                         foundWords.push(word);
                     }
@@ -942,6 +1018,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
             inputEl.value = '';
             lengthSlider.value = "3";
             selectResultsCount.value = "20";
+            exactAnagrams.checked = false;
             resultsContainer.classList.add('hidden');
             currentValidWords = [];
             handleInput();
@@ -979,6 +1056,9 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
         // Event Listeners
         inputEl.addEventListener('input', handleInput);
         lengthSlider.addEventListener('input', updateSliderLabel);
+        exactAnagrams.addEventListener('change', () => {
+            if (!resultsContainer.classList.contains('hidden') && inputEl.value) unscrambleLetters();
+        });
         btnUnscramble.addEventListener('click', unscrambleLetters);
         btnReset.addEventListener('click', resetTool);
         
