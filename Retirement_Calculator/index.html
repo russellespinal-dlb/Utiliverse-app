@@ -1460,11 +1460,41 @@ body.light-mode .free-browser-note{color:#64748b}
     #theme-toggle{width:38px;height:38px;flex:0 0 auto}
 }
 
+
+/* Retirement calculator editorial-strengthening additions */
+.title-row{display:flex;align-items:center;gap:14px}
+.title-icon{width:46px;height:46px;flex:0 0 auto;color:#818cf8}
+.title-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.methodology-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:18px 0}
+.methodology-card{border:1px solid #334155;background:rgba(15,23,42,.55);border-radius:14px;padding:16px}
+.methodology-card strong{display:block;color:#e2e8f0;margin-bottom:5px;font-size:14px}
+.methodology-card span{display:block;color:#94a3b8;font-size:12px;line-height:1.65}
+.planning-note{border:1px solid rgba(99,102,241,.30);background:rgba(99,102,241,.08);border-radius:14px;padding:16px;color:#cbd5e1;font-size:13px;line-height:1.75;margin:18px 0}
+.planning-note strong{color:#f8fafc}
+.source-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.source-links a{color:#a5b4fc;font-size:12px;font-weight:800;text-decoration:none}
+.source-links a:hover{text-decoration:underline}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid #334155;background:rgba(15,23,42,.55);border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#e2e8f0;margin-bottom:4px}
+.related-link span{display:block;color:#94a3b8;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+body.light-mode .methodology-card,body.light-mode .related-link{background:#fff;border-color:#dbe3ee}
+body.light-mode .methodology-card strong,body.light-mode .related-link strong{color:#1e293b}
+body.light-mode .methodology-card span,body.light-mode .related-link span{color:#475569}
+body.light-mode .planning-note{background:#eef2ff;border-color:#c7d2fe;color:#475569}
+body.light-mode .planning-note strong{color:#1e293b}
+body.light-mode .source-links a{color:#4f46e5}
+@media(max-width:700px){
+  .title-icon{width:38px;height:38px}
+  .methodology-grid,.related-grid{grid-template-columns:1fr}
+}
+
 </style>
 
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Retirement Calculator","url":"https://utiliverse.app/Retirement_Calculator/","applicationCategory":"FinanceApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based retirement calculator for estimating a retirement savings target, projected savings, monthly contribution needs and retirement income.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Retirement savings goal estimate","Projected savings at retirement","Estimated monthly contribution needed","Retirement income target","Other retirement income adjustment","Investment return and inflation assumptions","Retirement-period modeling","Pre-retirement savings projection table"]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much money do I need to retire?","acceptedAnswer":{"@type":"Answer","text":"There is no single amount for everyone. This calculator estimates a target from your projected final income, income-replacement target, other retirement income, retirement period, investment-return assumption and inflation assumption."}},{"@type":"Question","name":"How does other retirement income affect the estimate?","acceptedAnswer":{"@type":"Answer","text":"Expected monthly income such as Social Security, a pension or an annuity is subtracted from the target retirement income before estimating the amount the investment portfolio needs to provide."}},{"@type":"Question","name":"What investment return should I use?","acceptedAnswer":{"@type":"Answer","text":"No return is guaranteed. Use an assumption appropriate for your planning scenario and compare multiple return assumptions rather than relying on one optimistic value."}},{"@type":"Question","name":"How does inflation affect the calculation?","acceptedAnswer":{"@type":"Answer","text":"The calculator combines the investment-return and inflation assumptions into a simplified real-return estimate when calculating the retirement savings target."}},{"@type":"Question","name":"What does estimated monthly saving needed mean?","acceptedAnswer":{"@type":"Answer","text":"It is the approximate monthly contribution required from now until retirement to reach the modeled retirement savings target, after accounting for the projected growth of current savings."}},{"@type":"Question","name":"Can I retire earlier if I save more?","acceptedAnswer":{"@type":"Answer","text":"Potentially. A higher contribution can increase projected savings, while changing retirement age also changes the number of saving years and the length of the modeled retirement period."}},{"@type":"Question","name":"Does the calculator include taxes, investment fees or required minimum distributions?","acceptedAnswer":{"@type":"Answer","text":"No. This simplified calculator does not model income taxes, investment fees, account-specific tax treatment, required minimum distributions, healthcare costs or detailed Social Security rules."}},{"@type":"Question","name":"Are the retirement results guaranteed?","acceptedAnswer":{"@type":"Answer","text":"No. The results are educational estimates based on the assumptions entered. Actual returns, inflation, spending, taxes, longevity and retirement income can differ."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How much money do I need to retire?","acceptedAnswer":{"@type":"Answer","text":"There is no single amount for everyone. This calculator estimates a target from your projected final income, income-replacement target, other retirement income, retirement period, investment-return assumption and inflation assumption."}},{"@type":"Question","name":"How does other retirement income affect the estimate?","acceptedAnswer":{"@type":"Answer","text":"Expected monthly income such as Social Security, a pension or an annuity is subtracted from the target retirement income before estimating the amount the investment portfolio needs to provide."}},{"@type":"Question","name":"What investment return should I use?","acceptedAnswer":{"@type":"Answer","text":"No return is guaranteed. Use an assumption appropriate for your planning scenario and compare multiple return assumptions rather than relying on one optimistic value."}},{"@type":"Question","name":"How does inflation affect the calculation?","acceptedAnswer":{"@type":"Answer","text":"The calculator combines the investment-return and inflation assumptions into a simplified real-return estimate when calculating the retirement savings target."}},{"@type":"Question","name":"What does estimated monthly saving needed mean?","acceptedAnswer":{"@type":"Answer","text":"It is the approximate monthly contribution required from now until retirement to reach the modeled retirement savings target, after accounting for the projected growth of current savings."}},{"@type":"Question","name":"Can I retire earlier if I save more?","acceptedAnswer":{"@type":"Answer","text":"Potentially. A higher contribution can increase projected savings, while changing retirement age also changes the number of saving years and the length of the modeled retirement period."}},{"@type":"Question","name":"Does the calculator include taxes, investment fees or required minimum distributions?","acceptedAnswer":{"@type":"Answer","text":"No. This simplified calculator does not model income taxes, investment fees, account-specific tax treatment, required minimum distributions, healthcare costs or detailed Social Security rules."}},{"@type":"Question","name":"Are the retirement results guaranteed?","acceptedAnswer":{"@type":"Answer","text":"No. The results are educational estimates based on the assumptions entered. Actual returns, inflation, spending, taxes, longevity and retirement income can differ."}},{"@type":"Question","name":"What is the difference between nominal and real return?","acceptedAnswer":{"@type":"Answer","text":"A nominal return is the return before adjusting for inflation. A real return adjusts for inflation and is closer to a purchasing-power growth rate. This calculator uses the nominal return for pre-retirement savings growth and a simplified real-return calculation when estimating the retirement savings target."}},{"@type":"Question","name":"How should I account for investment fees?","acceptedAnswer":{"@type":"Answer","text":"The calculator does not subtract investment or plan fees automatically. Because fees reduce the return left in your account, one way to test their effect is to compare your baseline scenario with a lower investment-return assumption."}},{"@type":"Question","name":"Where should I get a Social Security estimate?","acceptedAnswer":{"@type":"Answer","text":"For a personalized estimate, use the Social Security Administration's official tools based on your earnings record and claiming age, then enter that estimate in the other monthly retirement income field."}}]}</script>
 </head>
 
 
@@ -1524,15 +1554,12 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 
 <section class="page-header">
 
-    <div class="eyebrow">
-        Retirement Planning
+    <div class="title-row">
+        <span class="title-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M5 10h14v8H5z"/><path d="M8 10V7h8v3"/><circle cx="12" cy="14" r="2"/><path d="M4 18h16"/></svg>
+        </span>
+        <h1>Retirement Calculator</h1>
     </div>
-
-
-    <h1>
-        Retirement Calculator
-    </h1>
-
 
     <p class="subtitle">
 
@@ -2466,6 +2493,91 @@ financial flexibility.
 </p>
 
 
+
+<h3>
+    Nominal return, inflation and real return
+</h3>
+
+<p>
+The investment-return field is a <strong>nominal</strong> annual return assumption. The calculator uses that nominal rate to project the growth of current savings and future contributions before retirement. For the retirement-spending target, it then combines the investment-return and inflation assumptions into a simplified <strong>real return</strong>: (1 + nominal return) ÷ (1 + inflation) − 1. This helps express the retirement-income calculation in purchasing-power terms, but it remains a simplified model rather than a forecast of actual year-by-year markets or inflation.
+</p>
+
+<div class="methodology-grid">
+    <div class="methodology-card">
+        <strong>Accumulation phase</strong>
+        <span>Current savings and annual contributions grow at the nominal investment-return assumption until the planned retirement age.</span>
+    </div>
+    <div class="methodology-card">
+        <strong>Retirement target</strong>
+        <span>The savings target uses the simplified real-return annuity approach shown above over the number of retirement years entered.</span>
+    </div>
+    <div class="methodology-card">
+        <strong>Other retirement income</strong>
+        <span>The amount entered for Social Security, pension or annuity income is treated as a fixed monthly amount and reduces the income the portfolio needs to provide.</span>
+    </div>
+    <div class="methodology-card">
+        <strong>Contribution timing</strong>
+        <span>The projection assumes annual contributions and annual compounding. Real accounts may receive contributions each pay period and experience returns throughout the year.</span>
+    </div>
+</div>
+
+<h3>
+    What this simplified model does not include
+</h3>
+
+<p>
+The calculator intentionally leaves out several factors that can materially affect a real retirement plan. It does not model investment fees, taxes, account-specific tax treatment, healthcare costs, required minimum distributions, contribution limits, employer-plan rules, changes in Social Security benefits, or different asset allocations over time. It also assumes a smooth annual return instead of modeling the actual sequence of positive and negative market years.
+</p>
+
+<p>
+That last point matters because two portfolios can earn the same average return but experience very different outcomes when withdrawals begin at different points in the market cycle. Market losses near the start of retirement can put more pressure on a portfolio that is simultaneously funding withdrawals. Use the calculator as a scenario tool, not as a promise that a steady return will occur every year.
+</p>
+
+<div class="planning-note">
+    <strong>Fees and taxes are not built into the return field automatically.</strong>
+    Investment fees reduce the return that remains in your account, and taxes can affect what you actually have available to spend. Investor.gov notes that even relatively small ongoing fees can have a significant long-term effect on a portfolio. If you want a more conservative scenario, consider testing a lower return assumption that reflects the costs you expect to bear.
+</div>
+
+<h3>
+    Worked example using the default inputs
+</h3>
+
+<p>
+With the calculator's current default example — age 35, retirement at 65, planning through age 90, $75,000 of current income growing 3% per year, a 75% income-replacement target, $50,000 already saved, $7,500 contributed each year, a 7% nominal return assumption, 3% inflation and $2,000 per month of other retirement income — the model estimates a required retirement savings target of about <strong>$1,779,858</strong>. Under the same assumptions, existing savings plus the entered annual contributions are projected to grow to about <strong>$1,089,069</strong> by retirement.
+</p>
+
+<p>
+The calculator's separate “estimated monthly saving needed” figure is based on the contribution required to reach the modeled target after first projecting the growth of current savings. In this default scenario, that figure is approximately <strong>$1,234 per month</strong>. The result is especially sensitive to the return, inflation, retirement age, planning age and retirement-income assumptions, so changing one input at a time is a useful way to see what drives the result.
+</p>
+
+<h3>
+    Social Security and other retirement income
+</h3>
+
+<p>
+The “other monthly retirement income” field is intentionally generic. If you plan to include Social Security, use a personalized estimate rather than assuming that today's benefit amount will automatically apply in the future. The Social Security Administration provides retirement estimates based on your earnings record and lets you compare different claiming ages. Pension and annuity amounts should likewise be based on the plan or contract information available to you.
+</p>
+
+<div class="source-links">
+    <a href="https://www.ssa.gov/prepare/get-benefits-estimate" target="_blank" rel="noopener">Social Security Administration benefit estimate ↗</a>
+    <a href="https://www.investor.gov/introduction-investing/general-resources/news-alerts/alerts-bulletins/investor-bulletins/updated" target="_blank" rel="noopener">Investor.gov: How fees affect a portfolio ↗</a>
+    <a href="https://www.finra.org/investors/investing/investing-basics/risk" target="_blank" rel="noopener">FINRA: Understanding investment risk ↗</a>
+</div>
+
+<h3>
+    Related Utiliverse tools
+</h3>
+
+<div class="related-grid">
+    <a class="related-link" href="../Compound_Interest_Calculator/"><strong>Compound Interest Calculator</strong><span>Explore how rate, time and recurring contributions affect long-term growth.</span></a>
+    <a class="related-link" href="../Salary_Calculator/"><strong>Salary Calculator</strong><span>Convert hourly, weekly, monthly and annual gross pay for planning scenarios.</span></a>
+    <a class="related-link" href="../Home_Affordability_Calculator/"><strong>Home Affordability Calculator</strong><span>Compare income, debt and housing-cost assumptions for another long-term financial goal.</span></a>
+</div>
+
+<p style="margin-top:24px;font-size:12px;color:var(--muted);">
+    <strong>Last reviewed:</strong> September 30, 2026 · Calculator logic, assumptions and reference links reviewed against the current implementation.
+</p>
+
 <div class="quick-facts">
 
     <div class="fact">
@@ -2589,6 +2701,26 @@ financial flexibility.
         <span>Are the retirement results guaranteed?</span><span class="faq-icon">+</span>
     </button>
     <div class="faq-answer">No. The results are educational estimates based on the assumptions entered. Actual investment returns, inflation, spending, taxes, longevity and retirement income can differ.</div>
+</div>
+<div class="faq-item">
+    <button class="faq-button" onclick="toggleFAQ(this)" type="button" aria-expanded="false">
+        <span>What is the difference between nominal and real return?</span><span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">A nominal return is the return before adjusting for inflation. A real return adjusts for inflation and is closer to a purchasing-power growth rate. This calculator uses the nominal return for pre-retirement savings growth and a simplified real-return calculation when estimating the retirement savings target.</div>
+</div>
+
+<div class="faq-item">
+    <button class="faq-button" onclick="toggleFAQ(this)" type="button" aria-expanded="false">
+        <span>How should I account for investment fees?</span><span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">The calculator does not subtract investment or plan fees automatically. Because fees reduce the return left in your account, one way to test their effect is to compare your baseline scenario with a lower investment-return assumption.</div>
+</div>
+
+<div class="faq-item">
+    <button class="faq-button" onclick="toggleFAQ(this)" type="button" aria-expanded="false">
+        <span>Where should I get a Social Security estimate?</span><span class="faq-icon">+</span>
+    </button>
+    <div class="faq-answer">For a personalized estimate, use the Social Security Administration's official tools based on your earnings record and claiming age. You can then enter that estimate in the calculator's other monthly retirement income field.</div>
 </div>
 
 </section>
