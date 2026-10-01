@@ -162,10 +162,36 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
 body.light-mode .local-processing-note{color:#64748b}
 @media(max-width:560px){.password-input,.generated input{font-size:16px}}
 
+
+.title-row{display:flex;align-items:center;gap:14px}
+.title-icon{width:46px;height:46px;flex:0 0 auto;color:#818cf8}
+.title-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:16px 0}
+.method-card{background:var(--panel2);border:1px solid var(--border);border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#e2e8f0;margin-bottom:5px;font-size:13px}
+.method-card span{display:block;color:#94a3b8;font-size:11px;line-height:1.65}
+.security-note{border:1px solid rgba(99,102,241,.28);background:rgba(99,102,241,.07);border-radius:15px;padding:16px;margin:20px 0;color:#cbd5e1;font-size:13px;line-height:1.75}
+.security-note strong{color:#f8fafc}
+.source-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.source-links a{font-size:12px;font-weight:800;color:#a5b4fc;text-decoration:none}
+.source-links a:hover{text-decoration:underline}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;background:var(--panel2);border:1px solid var(--border);border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#e2e8f0;margin-bottom:4px}
+.related-link span{display:block;color:#94a3b8;font-size:11px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+body.light-mode .method-card,body.light-mode .related-link{background:#fff}
+body.light-mode .method-card strong,body.light-mode .related-link strong{color:#1e293b}
+body.light-mode .method-card span,body.light-mode .related-link span{color:#475569}
+body.light-mode .security-note{background:#eef2ff;color:#475569}
+body.light-mode .security-note strong{color:#1e293b}
+body.light-mode .source-links a{color:#4f46e5}
+@media(max-width:700px){.title-icon{width:38px;height:38px}.method-grid,.related-grid{grid-template-columns:1fr}}
+
 </style>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Password Strength Analyzer","url":"https://utiliverse.app/Password_Strength_Analyzer/","applicationCategory":"SecurityApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled. Secure password generation requires the Web Crypto API.","description":"Free browser-based password strength checker with heuristic scoring, entropy estimates, predictable-pattern detection, illustrative offline crack times, recommendations and secure password generation.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Local password analysis","Heuristic strength score","Estimated entropy","Character-pool estimate","Common-password detection","Sequence detection","Keyboard-pattern detection","Repeated-character and repeated-chunk detection","Year-like pattern detection","Illustrative offline crack-time scenarios","Password improvement recommendations","Web Crypto password generator","Adjustable 12 to 64 character generation","Optional ambiguous-character inclusion","Copy generated password"]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does Utiliverse receive the password I type?","acceptedAnswer":{"@type":"Answer","text":"No. The analyzer runs locally in your browser and does not send the entered password to a Utiliverse server or external password-checking API."}},{"@type":"Question","name":"How is the strength score calculated?","acceptedAnswer":{"@type":"Answer","text":"The score combines password length, estimated search-space entropy, character variety, common-password detection, repetition, simple sequences, keyboard patterns, year/date-like fragments, and repeated chunks. It is a heuristic rather than a formal security proof."}},{"@type":"Question","name":"Are the crack-time estimates accurate?","acceptedAnswer":{"@type":"Answer","text":"They are illustrative estimates. Actual attack time depends on the password hash, attacker hardware, dictionary strategy, leaked data, password predictability, and many other factors."}},{"@type":"Question","name":"Does this check whether my password was leaked?","acceptedAnswer":{"@type":"Answer","text":"No. The page deliberately avoids sending password material or a derived hash to an external breach service. It checks only a small built-in list of extremely common passwords and patterns."}},{"@type":"Question","name":"How long should a password be?","acceptedAnswer":{"@type":"Answer","text":"There is no single magic length, but longer unique passwords generally provide much better guessing resistance. Randomly generated passwords of substantial length or well-constructed random passphrases are strong choices."}},{"@type":"Question","name":"Are symbols required for a strong password?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. Symbols expand the possible character pool, but length and unpredictability matter more than satisfying a cosmetic complexity rule. A long random password can be strong even when a particular site limits symbols."}},{"@type":"Question","name":"Is the password generator secure?","acceptedAnswer":{"@type":"Answer","text":"The generator uses crypto.getRandomValues when the browser provides it. That API is designed for cryptographically strong random values. The page will warn if a secure random source is unavailable."}},{"@type":"Question","name":"Should I reuse a strong password on multiple sites?","acceptedAnswer":{"@type":"Answer","text":"No. Reuse turns one compromised account into a risk for other accounts. Use a unique password for every important service and store those passwords in a reputable password manager."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does Utiliverse receive the password I type?","acceptedAnswer":{"@type":"Answer","text":"No. The analyzer runs locally in your browser and does not send the entered password to a Utiliverse server or external password-checking API."}},{"@type":"Question","name":"How is the strength score calculated?","acceptedAnswer":{"@type":"Answer","text":"The score combines password length, estimated search-space entropy, character variety, common-password detection, repetition, simple sequences, keyboard patterns, year/date-like fragments, and repeated chunks. It is a heuristic rather than a formal security proof."}},{"@type":"Question","name":"Are the crack-time estimates accurate?","acceptedAnswer":{"@type":"Answer","text":"They are illustrative estimates. Actual attack time depends on the password hash, attacker hardware, dictionary strategy, leaked data, password predictability, and many other factors."}},{"@type":"Question","name":"Does this check whether my password was leaked?","acceptedAnswer":{"@type":"Answer","text":"No. The page deliberately avoids sending password material or a derived hash to an external breach service. It checks only a small built-in list of extremely common passwords and patterns."}},{"@type":"Question","name":"How long should a password be?","acceptedAnswer":{"@type":"Answer","text":"There is no single magic length, but longer unique passwords generally provide much better guessing resistance. Randomly generated passwords of substantial length or well-constructed random passphrases are strong choices."}},{"@type":"Question","name":"Are symbols required for a strong password?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. Symbols expand the possible character pool, but length and unpredictability matter more than satisfying a cosmetic complexity rule. A long random password can be strong even when a particular site limits symbols."}},{"@type":"Question","name":"Is the password generator secure?","acceptedAnswer":{"@type":"Answer","text":"The generator uses crypto.getRandomValues when the browser provides it. That API is designed for cryptographically strong random values. The page will warn if a secure random source is unavailable."}},{"@type":"Question","name":"Should I reuse a strong password on multiple sites?","acceptedAnswer":{"@type":"Answer","text":"No. Reuse turns one compromised account into a risk for other accounts. Use a unique password for every important service and store those passwords in a reputable password manager."}},{"@type":"Question","name":"Does a 100 / 100 score mean the password is safe?","acceptedAnswer":{"@type":"Answer","text":"No. The score reflects only this tool's local heuristic. It cannot detect password reuse, phishing, malware, breach exposure, server-side password storage quality or future compromise."}},{"@type":"Question","name":"Why does the tool show crack-time scenarios instead of one exact crack time?","acceptedAnswer":{"@type":"Answer","text":"Attack speed varies enormously depending on the password-storage algorithm, attacker hardware, breach data and guessing strategy. The table therefore shows illustrative arithmetic at several assumed guess rates rather than claiming to predict a real attack."}},{"@type":"Question","name":"Should I use a passkey instead of a password?","acceptedAnswer":{"@type":"Answer","text":"If a service supports passkeys, they can be a strong option because they are designed to resist phishing and do not require a reusable shared password. Passwords are still needed for services that do not support passkeys."}},{"@type":"Question","name":"What does NIST recommend for password length?","acceptedAnswer":{"@type":"Answer","text":"NIST's current public guidance recommends at least 15 characters when a password is needed, along with using a password manager and multi-factor authentication. Individual services may impose different requirements."}}]}</script>
 </head>
 
 <body>
@@ -202,9 +228,13 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 <main>
 <div class="container">
   <section class="hero">
-    <div class="eyebrow">Crypto & security utility</div>
-    <h1>Password Strength Checker &amp; Analyzer</h1>
-    <p>Check password length, estimated entropy, predictable patterns, heuristic strength, and illustrative offline crack resistance—without sending the password to a server.</p>
+    <div class="title-row">
+      <span class="title-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14v2"/></svg>
+      </span>
+      <h1>Password Strength Checker &amp; Analyzer</h1>
+    </div>
+    <p>Check password length, estimated entropy, predictable patterns, heuristic strength, and illustrative offline guessing scenarios—without sending the password to a server.</p>
     <div class="badges">
       <span class="badge">Local browser analysis</span>
       <span class="badge">Entropy & crack-time estimates</span>
@@ -251,10 +281,10 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
       </section>
 
       <section class="panel">
-        <h3>Estimated offline guessing time</h3>
-        <div class="panel-sub">Illustrative only. Real attack speed depends heavily on the password hash and attack strategy.</div>
+        <h3>Illustrative offline guessing scenarios</h3>
+        <div class="panel-sub">Scenario math only—not a prediction. Real attackers use dictionaries, leaked-password data, rules, hardware and hash-specific optimizations.</div>
         <table class="crack-table">
-          <thead><tr><th>Scenario</th><th>Guess rate</th><th>Estimated time</th></tr></thead>
+          <thead><tr><th>Scenario assumption</th><th>Guess rate</th><th>Illustrative time</th></tr></thead>
           <tbody>
             <tr><td>Slow hash</td><td>1,000/sec</td><td id="crackSlow">—</td></tr>
             <tr><td>Fast hash / GPU</td><td>1 billion/sec</td><td id="crackFast">—</td></tr>
@@ -291,7 +321,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
       </div>
 
       <div class="range-row">
-        <input id="generatorLength" class="range" type="range" min="12" max="64" step="1" value="20">
+        <input id="generatorLength" class="range" type="range" min="15" max="64" step="1" value="20">
         <span id="generatorLengthValue" class="range-value">20 chars</span>
       </div>
 
@@ -352,6 +382,41 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 
     <p>Long passphrases can also be strong when their words are chosen with sufficient randomness rather than as a familiar sentence or quotation. A phrase consisting of several independently selected random words can be both memorable and resistant to guessing. The exact number of words needed depends on how the words were chosen and the size of the word list. Simply adding punctuation to a famous quotation does not transform it into a random passphrase.</p>
 
+    <h2>How to Interpret the Score and Crack-Time Scenarios</h2>
+    <p>The displayed score is a Utiliverse heuristic, not a certification that a password is safe. NIST notes that estimating entropy for user-chosen passwords is difficult because people do not choose characters uniformly at random. This tool therefore combines a simple search-space estimate with local penalties for common values, sequences, keyboard walks, repeated chunks, year-like fragments and limited variety.</p>
+
+    <div class="method-grid">
+      <div class="method-card"><strong>Entropy estimate</strong><span>Starts with length × log2(character-pool size), then applies local heuristic penalties for obvious predictability.</span></div>
+      <div class="method-card"><strong>Guess-time scenarios</strong><span>Convert the adjusted bit estimate into arithmetic examples at 1,000, 1 billion and 1 trillion guesses per second.</span></div>
+      <div class="method-card"><strong>Local common-password check</strong><span>Checks only a small built-in list. A “No match” result does not mean the password has never appeared in a breach.</span></div>
+      <div class="method-card"><strong>Generator</strong><span>Uses <code>crypto.getRandomValues()</code> and guarantees at least one character from every selected character group.</span></div>
+    </div>
+
+    <p>The crack-time numbers should be read as <strong>illustrative scenarios only</strong>. They assume a brute-force-style search over the tool's adjusted search space. Real attacks can be dramatically faster when a password appears in a leak, follows a common pattern, is based on personal information, or is protected by a fast password hash. They can also be much slower when the service uses a modern password-specific hashing scheme with an appropriate work factor and rate limiting.</p>
+
+    <div class="security-note">
+      <strong>A strong password is only one layer.</strong>
+      Current NIST consumer guidance recommends using multi-factor authentication, using a password manager, and—when a password is needed—making it at least 15 characters. NIST also recommends against forcing users to satisfy arbitrary composition rules such as “must contain one uppercase, one number and one symbol.” Passkeys are a strong option where supported because they can reduce phishing risk and remove the need to create a reusable password.
+    </div>
+
+    <h3>What this analyzer cannot tell you</h3>
+    <ul>
+      <li>It cannot determine whether a password has been exposed in a breach, because it does not query a breach database.</li>
+      <li>It cannot know whether you reuse the same password on another service.</li>
+      <li>It cannot measure the password-storage algorithm or work factor used by the website where you plan to use the password.</li>
+      <li>It cannot protect against phishing, malware, keyloggers, screen capture or a compromised browser/operating system.</li>
+      <li>It cannot guarantee that a high-scoring password will remain secret.</li>
+    </ul>
+
+    <h3>Password managers, MFA and passkeys</h3>
+    <p>A reputable password manager can generate and store a different long password for each site, reducing the need to memorize many credentials and helping prevent password reuse. Multi-factor authentication adds another barrier if a password is stolen. Where a service supports passkeys, they are worth considering because modern passkey authentication is designed to resist phishing and does not rely on a reusable shared password.</p>
+
+    <div class="source-links">
+      <a href="https://pages.nist.gov/800-63-4/sp800-63b.html" target="_blank" rel="noopener">NIST SP 800-63B-4 – Authentication & Authenticator Management ↗</a>
+      <a href="https://www.nist.gov/cybersecurity-and-privacy/how-do-i-create-good-password" target="_blank" rel="noopener">NIST – How Do I Create a Good Password? ↗</a>
+      <a href="https://pages.nist.gov/800-63-FAQ/" target="_blank" rel="noopener">NIST Digital Identity Guidelines FAQ ↗</a>
+    </div>
+
     <h2>Practical Use Cases</h2>
     <h3>Reviewing a password policy</h3>
     <p>Administrators and developers can use the analyzer to understand why rigid rules such as “one uppercase, one number, one symbol” do not automatically create strong passwords. A short password can satisfy all of those requirements and remain easy to guess. Modern policies generally benefit from allowing substantial length, blocking known-compromised choices, supporting password managers, and avoiding unnecessary composition rules that encourage predictable substitutions.</p>
@@ -364,6 +429,15 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 
     <div class="callout"><strong>Important:</strong> a high score does not prove that a password is safe. A strong password must also be unique to the account, kept secret, and protected by secure account practices such as multi-factor authentication where available. If a password has already been exposed, replace it regardless of its score.</div>
 
+    <h3>Related Utiliverse Tools</h3>
+    <div class="related-grid">
+      <a class="related-link" href="../Random_String_Generator/"><strong>Random String Generator</strong><span>Create cryptographically random strings and tokens in your browser.</span></a>
+      <a class="related-link" href="../Hash_Generator/"><strong>SHA Hash Generator</strong><span>Generate SHA-256, SHA-384, SHA-512 or legacy SHA-1 hashes locally.</span></a>
+      <a class="related-link" href="../SSL_Certificate_Checker/"><strong>SSL Certificate Checker</strong><span>Inspect certificate validity, issuer information and common TLS details.</span></a>
+    </div>
+
+    <p style="margin-top:24px;font-size:12px" class="muted"><strong>Last reviewed:</strong> September 30, 2026 · Password guidance and explanatory content reviewed against current NIST publications.</p>
+
     <h2>Frequently Asked Questions</h2>
     <details class="faq"><summary>Does Utiliverse receive the password I type?</summary><p>No. The analyzer runs locally in your browser and does not send the entered password to a Utiliverse server or external password-checking API.</p></details>
     <details class="faq"><summary>How is the strength score calculated?</summary><p>The score combines password length, estimated search-space entropy, character variety, common-password detection, repetition, simple sequences, keyboard patterns, year/date-like fragments, and repeated chunks. It is a heuristic rather than a formal security proof.</p></details>
@@ -373,6 +447,10 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
     <details class="faq"><summary>Are symbols required for a strong password?</summary><p>Not necessarily. Symbols expand the possible character pool, but length and unpredictability matter more than satisfying a cosmetic complexity rule. A long random password can be strong even when a particular site limits symbols.</p></details>
     <details class="faq"><summary>Is the password generator secure?</summary><p>The generator uses <code>crypto.getRandomValues</code> when the browser provides it. That API is designed for cryptographically strong random values. The page will warn if a secure random source is unavailable.</p></details>
     <details class="faq"><summary>Should I reuse a strong password on multiple sites?</summary><p>No. Reuse turns one compromised account into a risk for other accounts. Use a unique password for every important service and store those passwords in a reputable password manager.</p></details>
+    <details class="faq"><summary>Does a 100 / 100 score mean the password is safe?</summary><p>No. The score reflects only this tool's local heuristic. It cannot detect password reuse, phishing, malware, breach exposure, server-side password storage quality or future compromise.</p></details>
+    <details class="faq"><summary>Why does the tool show crack-time scenarios instead of one exact crack time?</summary><p>Attack speed varies enormously depending on the password-storage algorithm, attacker hardware, breach data and guessing strategy. The table therefore shows illustrative arithmetic at several assumed guess rates rather than claiming to predict a real attack.</p></details>
+    <details class="faq"><summary>Should I use a passkey instead of a password?</summary><p>If the service supports passkeys, they can be a strong option because they are designed to resist phishing and do not require you to create or reuse a shared password. You may still need passwords for services that do not support passkeys.</p></details>
+    <details class="faq"><summary>What does NIST recommend for password length?</summary><p>NIST's current public guidance recommends at least 15 characters when you must create a password, along with using a password manager and multi-factor authentication. Individual services may impose different requirements.</p></details>
   </section>
 </div>
 </main>
@@ -570,8 +648,8 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
     const r = [];
     const c = a.checks;
 
-    if (a.length < 12) r.push(["Increase the length","Aim for at least 12–16 characters when the service permits it. Length has a major impact on guessing resistance."]);
-    else if (a.length < 16) r.push(["Consider a little more length","Sixteen or more characters gives substantially more room for unpredictability, especially for generated passwords."]);
+    if (a.length < 15) r.push(["Increase the length","When the service permits it, aim for at least 15 characters for a user-created password. Length and uniqueness matter more than satisfying cosmetic composition rules."]);
+    else if (a.length < 20) r.push(["Consider a little more length","More length can add meaningful guessing resistance, especially for generated passwords, as long as the value remains unique and unpredictable."]);
     if (c.common) r.push(["Replace this common password","This exact value appears in the tool's local common-password list and should not be used."]);
     if (c.sequence) r.push(["Remove obvious sequences","Avoid runs such as abcd, 1234, or their reverse forms. Attackers test them early."]);
     if (c.keyboard) r.push(["Avoid keyboard walks","Patterns such as qwerty, asdfgh, and 1q2w3e are highly predictable."]);
