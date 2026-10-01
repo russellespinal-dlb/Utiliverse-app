@@ -175,22 +175,44 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
   .row{grid-template-columns:100px 1fr}
 }
 @media(max-width:390px){.lookup-row{grid-template-columns:1fr}.header-right{gap:6px}}
+
+.title-row{display:flex;align-items:center;gap:14px}
+.title-icon{width:46px;height:46px;flex:0 0 auto;color:#818cf8}
+.title-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid var(--border);background:var(--panel2);border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#e2e8f0;margin-bottom:5px}
+.method-card span{display:block;color:#94a3b8;font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:#0f172a;color:#e2e8f0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.caution-note{border:1px solid rgba(251,191,36,.28);background:rgba(251,191,36,.07);border-radius:14px;padding:16px;color:#fde68a;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#fef3c7}
+.source-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.source-links a{font-size:12px;font-weight:800;color:#a5b4fc;text-decoration:none}
+.source-links a:hover{text-decoration:underline}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid var(--border);background:var(--panel2);border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#e2e8f0;margin-bottom:4px}
+.related-link span{display:block;color:#94a3b8;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+body.light-mode .method-card,body.light-mode .related-link{background:#fff}
+body.light-mode .method-card strong,body.light-mode .related-link strong{color:#1e293b}
+body.light-mode .method-card span,body.light-mode .related-link span{color:#475569}
+body.light-mode .example-box{background:#f8fafc;color:#1e293b}
+body.light-mode .caution-note{background:#fffbeb;border-color:#fde68a;color:#92400e}
+body.light-mode .caution-note strong{color:#78350f}
+body.light-mode .source-links a{color:#4f46e5}
+@media(max-width:700px){
+  .title-icon{width:38px;height:38px}
+  .method-grid,.related-grid{grid-template-columns:1fr}
+}
+
 </style>
 
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse IP Address Lookup","url":"https://utiliverse.app/IP_Address_Lookup/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript and network access enabled.","description":"Look up IPv4 and IPv6 geolocation, ISP/organization, ASN, network, timezone and related IP metadata.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse IP Address Lookup","url":"https://utiliverse.app/IP_Address_Lookup/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript and network access enabled.","description":"Free browser-based IPv4 and IPv6 lookup using ipapi.co for approximate geolocation, ASN, organization, network range, timezone and related metadata, with explicit provider and accuracy limitations.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["IPv4 validation","IPv6 validation","Private and special-address rejection","Approximate IP geolocation","ASN and organization lookup","CIDR network range display","Timezone and UTC offset display","Approximate map link","RDAP lookup link","Copyable summary and JSON","Third-party provider disclosure","Geolocation accuracy limitations"]}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"What information can an IP lookup show?","acceptedAnswer":{"@type":"Answer","text":"Depending on the data available for an address, this tool can show approximate city, region, country, postal code, latitude and longitude, timezone, network range, ASN, organization, currency, languages and related country metadata."}},
-{"@type":"Question","name":"Is IP geolocation an exact physical location?","acceptedAnswer":{"@type":"Answer","text":"No. IP geolocation is approximate and should not be interpreted as a precise home, street or device location. Accuracy varies by provider, network type, ISP architecture, VPN usage and address allocation."}},
-{"@type":"Question","name":"Does this tool support IPv6?","acceptedAnswer":{"@type":"Answer","text":"Yes. The lookup service supports both IPv4 and IPv6 addresses."}},
-{"@type":"Question","name":"Can I use the tool to find my public IP address?","acceptedAnswer":{"@type":"Answer","text":"Yes. The My Public IP button asks the external lookup service to return the public IP address it sees for your connection and its associated metadata."}},
-{"@type":"Question","name":"Can an IP lookup identify a person?","acceptedAnswer":{"@type":"Answer","text":"Not by itself. Public IP geolocation generally identifies network and approximate geographic information rather than the identity of the individual using the connection."}},
-{"@type":"Question","name":"Why can a VPN or mobile connection show a different city?","acceptedAnswer":{"@type":"Answer","text":"A VPN may expose the VPN server's IP instead of the user's ordinary public IP. Mobile carriers and large ISPs may route traffic through gateways located away from the device's actual location."}},
-{"@type":"Question","name":"What are ASN and network range?","acceptedAnswer":{"@type":"Answer","text":"An Autonomous System Number identifies a network operated under a common routing policy. A network range is the CIDR block associated with the returned IP allocation when that information is available."}},
-{"@type":"Question","name":"Is the lookup performed entirely offline?","acceptedAnswer":{"@type":"Answer","text":"No. Unlike local text utilities, IP geolocation requires current external network data. This page sends the queried IP address to the third-party geolocation provider ipapi.co and receives the lookup result."}}
-]}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What information can an IP lookup show?","acceptedAnswer":{"@type":"Answer","text":"Depending on the data available for an address, this tool can show approximate city, region, country, postal code, latitude and longitude, timezone, network range, ASN, organization, currency, languages and related country metadata."}},{"@type":"Question","name":"Is IP geolocation an exact physical location?","acceptedAnswer":{"@type":"Answer","text":"No. IP geolocation is approximate and should not be interpreted as a precise home, street or device location. Accuracy varies by provider, network type, ISP architecture, VPN usage and address allocation."}},{"@type":"Question","name":"Does this tool support IPv6?","acceptedAnswer":{"@type":"Answer","text":"Yes. The lookup service supports both IPv4 and IPv6 addresses."}},{"@type":"Question","name":"Can I use the tool to find my public IP address?","acceptedAnswer":{"@type":"Answer","text":"Yes. The My Public IP button asks the external lookup service to return the public IP address it sees for your connection and its associated metadata."}},{"@type":"Question","name":"Can an IP lookup identify a person?","acceptedAnswer":{"@type":"Answer","text":"Not by itself. Public IP geolocation generally identifies network and approximate geographic information rather than the identity of the individual using the connection."}},{"@type":"Question","name":"Why can a VPN or mobile connection show a different city?","acceptedAnswer":{"@type":"Answer","text":"A VPN may expose the VPN server's IP instead of the user's ordinary public IP. Mobile carriers and large ISPs may route traffic through gateways located away from the device's actual location."}},{"@type":"Question","name":"What are ASN and network range?","acceptedAnswer":{"@type":"Answer","text":"An Autonomous System Number identifies a network operated under a common routing policy. A network range is the CIDR block associated with the returned IP allocation when that information is available."}},{"@type":"Question","name":"Is the lookup performed entirely offline?","acceptedAnswer":{"@type":"Answer","text":"No. Unlike local text utilities, IP geolocation requires current external network data. This page sends the queried IP address to the third-party geolocation provider ipapi.co and receives the lookup result."}},{"@type":"Question","name":"Is the latitude and longitude an exact device coordinate?","acceptedAnswer":{"@type":"Answer","text":"No. It is an approximate coordinate associated with the provider's IP geolocation record and may represent a city, ISP gateway, hosting facility or regional network point."}},{"@type":"Question","name":"Can many users share one public IP address?","acceptedAnswer":{"@type":"Answer","text":"Yes. Home routers, enterprise gateways, carrier-grade NAT and mobile networks can allow multiple devices or subscribers to share one public address."}},{"@type":"Question","name":"Why can RDAP and geolocation show different organizations or locations?","acceptedAnswer":{"@type":"Answer","text":"RDAP describes registration and allocation information, while geolocation estimates where an address is being used or routed. They are different data sets and can legitimately disagree."}},{"@type":"Question","name":"Can IP geolocation be used by itself to block or accuse a user?","acceptedAnswer":{"@type":"Answer","text":"It should not be the only signal. VPNs, proxies, mobile routing, cloud services, travel and shared addresses can make IP-based conclusions misleading."}}]}
 </script>
 </head>
 
@@ -213,8 +235,12 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
 <main>
 <div class="container">
   <section class="hero">
-    <div class="eyebrow">Network & DNS utility</div>
-    <h1>IP Address Lookup</h1>
+    <div class="title-row">
+      <span class="title-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M3 12h6M15 12h6M12 3v6M12 15v6"/><circle cx="3" cy="12" r="1.5"/><circle cx="21" cy="12" r="1.5"/><circle cx="12" cy="3" r="1.5"/><circle cx="12" cy="21" r="1.5"/></svg>
+      </span>
+      <h1>IP Address Lookup</h1>
+    </div>
     <p>Look up an IPv4 or IPv6 address to see its approximate geographic assignment, network range, ASN, organization, timezone, coordinates, currency, and other useful network metadata.</p>
     <div class="badges">
       <span class="badge">IPv4 & IPv6</span>
@@ -300,7 +326,7 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
     </div>
 
     <div class="privacy-note">
-      <strong>Data source & privacy:</strong> this tool uses the third-party IP geolocation service <a href="https://ipapi.co/" target="_blank" rel="noopener noreferrer">ipapi.co</a>. The IP address you look up is sent to that provider so it can return current geolocation and network metadata. Selecting <strong>My Public IP</strong> also allows the provider to see and return the public IP address associated with your connection.
+      <strong>Data source & privacy:</strong> this tool uses the third-party IP geolocation service <a href="https://ipapi.co/" target="_blank" rel="noopener noreferrer">ipapi.co</a>. A target IP address is sent to that provider so it can return geolocation and network metadata. Selecting <strong>My Public IP</strong> sends a request without a target address, allowing the provider to see and return the public IP address associated with your connection. Do not enter an address here if you are not comfortable sending that address to the provider. Results are provider data and can be incomplete, stale, or approximate.
     </div>
   </section>
 
@@ -333,6 +359,63 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
     <h3>Using the “My Public IP” option</h3>
     <p>The My Public IP button sends a request without specifying a target address. The geolocation provider then sees the public source address of the request and returns information for that IP. If you are behind a home router, the result is usually the Internet-facing public address rather than a private address such as <code>192.168.x.x</code> used inside your local network. If you are connected through a VPN, proxy, corporate gateway, carrier-grade NAT, or privacy relay, the returned address may belong to that intermediary instead.</p>
 
+    <h2>How to Interpret an IP Lookup Result</h2>
+    <p>An IP lookup combines several different kinds of information: geolocation estimates, routing/network ownership data, and country-level metadata. Those fields should not all be interpreted the same way. A city or coordinate is an estimate from the provider's geolocation database, while an ASN and network range describe routing or allocation context rather than a person's physical location.</p>
+
+    <div class="method-grid">
+      <div class="method-card"><strong>Approximate geolocation</strong><span>City, region, postal code and coordinates are database estimates associated with the IP record, not GPS measurements.</span></div>
+      <div class="method-card"><strong>ASN / organization</strong><span>The ASN identifies a routing domain. The organization field may name an ISP, cloud provider, carrier, enterprise network or hosting company rather than the end user.</span></div>
+      <div class="method-card"><strong>Network range</strong><span>The returned CIDR block describes a network allocation or routed prefix. It does not mean every address in the block has the same user or exact location.</span></div>
+      <div class="method-card"><strong>External provider dependency</strong><span>The lookup is not offline. The queried IP is sent to ipapi.co, and the tool displays the provider's response.</span></div>
+    </div>
+
+    <h3>Worked example: residential or mobile IP</h3>
+    <p>A residential or mobile address might return a nearby city, the ISP or carrier ASN, and coordinates near a routing hub. That does not establish where the subscriber's home or phone is physically located.</p>
+
+    <h3>Worked example: VPN or proxy</h3>
+    <p>If a user connects through a VPN, the public IP seen by websites normally belongs to the VPN exit server. An IP lookup therefore reports the VPN provider's network and approximate exit location rather than the user's ordinary ISP address.</p>
+
+    <h3>Worked example: cloud or CDN address</h3>
+    <p>A cloud or content-delivery address may be announced by a large network and routed through anycast or edge infrastructure. The returned city can describe a provider record rather than the exact physical machine that handled a request.</p>
+
+    <h3>ASN, organization and end user are different concepts</h3>
+    <p>An ASN represents a network operated under a routing policy. The organization name commonly identifies the network operator. Neither field should be treated as the identity of the person, household or business currently using one specific IP address.</p>
+
+    <h3>CIDR network ranges</h3>
+    <p>A network such as <code>203.0.113.0/24</code> represents a block of addresses under CIDR notation. The prefix length describes how much of the address identifies the network. A returned block is useful for routing and allocation context, but geolocation should not be generalized blindly to every address inside the block.</p>
+
+    <h3>RDAP vs. geolocation</h3>
+    <p>The RDAP link and the geolocation result answer different questions. RDAP is designed for registration and allocation information from Internet registries and related data sources. Geolocation estimates where an address appears to be used or routed. They may legitimately show different organization names, contacts or locations.</p>
+
+    <h3>Carrier-grade NAT, shared addressing and mobile routing</h3>
+    <p>Many users can share one public IPv4 address through carrier-grade NAT or large gateway systems. Mobile providers can also route traffic through centralized gateways far from the device. In those cases, the public IP result describes the shared network exit point rather than a unique subscriber device.</p>
+
+    <h3>IP data is only one security signal</h3>
+    <p>An unfamiliar country, ASN or hosting provider can be useful context during log review, but IP metadata alone should not determine whether a login or request is malicious. VPNs, proxies, cloud services, travel, mobile routing and reused addresses can all produce legitimate-looking or misleading location changes.</p>
+
+    <div class="caution-note">
+      <strong>Do not use IP geolocation as proof of identity or exact location.</strong>
+      It should not be used by itself to identify a person, determine a home address, make high-stakes access decisions, or infer that activity is malicious. Combine it with stronger authentication, application logs, device information, user confirmation and other appropriate evidence.
+    </div>
+
+    <h3>Provider freshness and field availability</h3>
+    <p>Geolocation and network databases change as addresses are reassigned, routed differently or updated by providers. A field can be missing, stale or disagree with another lookup service. The tool intentionally displays “Not available” when the provider does not return a value rather than inventing one.</p>
+
+    <div class="source-links">
+      <a href="https://ipapi.co/" target="_blank" rel="noopener">ipapi.co – Geolocation provider ↗</a>
+      <a href="https://www.arin.net/resources/registry/whois/rdap/" target="_blank" rel="noopener">ARIN – RDAP overview ↗</a>
+      <a href="https://www.iana.org/assignments/iana-ipv4-special-registry/iana-ipv4-special-registry.xhtml" target="_blank" rel="noopener">IANA – IPv4 special-purpose registry ↗</a>
+    </div>
+
+    <h3>Related Utiliverse Tools</h3>
+    <div class="related-grid">
+      <a class="related-link" href="../WHOIS_Lookup/"><strong>WHOIS / RDAP Lookup</strong><span>Inspect registration and allocation data for domains and IP resources.</span></a>
+      <a class="related-link" href="../IP_Subnet_Calculator/"><strong>IP Subnet Calculator</strong><span>Work with CIDR prefixes, network ranges and address counts.</span></a>
+      <a class="related-link" href="../Port_Checker/"><strong>Port Checker</strong><span>Check whether a TCP port is reachable on a public host.</span></a>
+    </div>
+
+    <p style="margin-top:24px;font-size:12px;color:var(--muted)"><strong>Last reviewed:</strong> October 1, 2026 · IP validation, provider disclosure, geolocation limitations and network terminology reviewed against the current implementation.</p>
+
     <h2>Practical Use Cases</h2>
     <h3>Investigating web and application logs</h3>
     <p>Administrators often encounter unfamiliar addresses in web-server, authentication, firewall, or application logs. An IP lookup can provide context by showing the approximate region, network organization, ASN, and allocation block. That context can help distinguish a hosting provider from a residential ISP or identify traffic associated with a known cloud network. It should be one signal among many; geolocation alone does not establish whether traffic is legitimate or malicious.</p>
@@ -360,6 +443,10 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
     <details class="faq"><summary>What is an ASN?</summary><p>An Autonomous System Number identifies a network or group of networks operated under a common Internet routing policy. ISPs, cloud providers, universities, large businesses, and CDNs commonly operate autonomous systems.</p></details>
     <details class="faq"><summary>Why might the organization differ from the company or person using the IP?</summary><p>The returned organization often identifies the ISP, hosting company, cloud network, or routing organization that controls the address block rather than the individual customer using a particular address.</p></details>
     <details class="faq"><summary>Does Utiliverse perform the lookup without contacting another service?</summary><p>No. Current geolocation and ASN information requires an external data source. This page sends the target IP address to ipapi.co and displays the metadata returned by that provider.</p></details>
+    <details class="faq"><summary>Is the latitude and longitude an exact device coordinate?</summary><p>No. It is an approximate coordinate associated with the provider's IP geolocation record and may represent a city, ISP gateway, hosting facility or regional network point.</p></details>
+    <details class="faq"><summary>Can many users share one public IP address?</summary><p>Yes. Home routers, enterprise gateways, carrier-grade NAT and mobile networks can allow multiple devices or subscribers to share one public address.</p></details>
+    <details class="faq"><summary>Why can RDAP and geolocation show different organizations or locations?</summary><p>RDAP describes registration and allocation information, while geolocation estimates where an address is being used or routed. They are different data sets and can legitimately disagree.</p></details>
+    <details class="faq"><summary>Can IP geolocation be used by itself to block or accuse a user?</summary><p>It should not be the only signal. VPNs, proxies, mobile routing, cloud services, travel and shared addresses can make IP-based conclusions misleading. Use stronger authentication and additional evidence for security decisions.</p></details>
   </section>
 </div>
 </main>
