@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#020617">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Currency & Unit Converter – Live Exchange Rates | Utiliverse</title>
+<title>Currency & Unit Converter – Latest Exchange Rates | Utiliverse</title>
 
 <meta name="description" content="Free currency and unit converter with latest available exchange rates. Convert USD, DOP, EUR, GBP, CAD and many currencies, plus length, weight, temperature, area, volume, speed and digital storage.">
 
@@ -16,11 +16,11 @@
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Utiliverse">
-<meta property="og:title" content="Currency & Unit Converter – Live Exchange Rates | Utiliverse">
+<meta property="og:title" content="Currency & Unit Converter – Latest Available Exchange Rates | Utiliverse">
 <meta property="og:description" content="Convert currencies with latest available exchange-rate data and instantly convert common measurement units.">
 <meta property="og:url" content="https://utiliverse.app/Unit_Currency_Converter/">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Currency & Unit Converter – Live Exchange Rates | Utiliverse">
+<meta name="twitter:title" content="Currency & Unit Converter – Latest Available Exchange Rates | Utiliverse">
 <meta name="twitter:description" content="Free browser-based currency and measurement converter for exchange rates and common units.">
 
 <script src="https://cdn.tailwindcss.com"></script>
@@ -336,10 +336,43 @@ body.light-mode .processing-note{color:#64748b}
   #currencyResult,#unitResult{font-size:2rem!important}
 }
 
+
+.title-row{display:flex;align-items:center;gap:14px}
+.title-icon{width:46px;height:46px;flex:0 0 auto;color:#818cf8}
+.title-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.rate-source-box{margin-top:12px;padding:12px 14px;border:1px solid #334155;background:rgba(15,23,42,.56);border-radius:12px;color:#94a3b8;font-size:12px;line-height:1.6}
+.rate-source-box a{color:#a5b4fc;font-weight:800;text-decoration:none}
+.rate-source-box a:hover{text-decoration:underline}
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid #334155;background:rgba(15,23,42,.55);border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#e2e8f0;margin-bottom:5px}
+.method-card span{display:block;color:#94a3b8;font-size:13px;line-height:1.65}
+.info-note{border:1px solid rgba(99,102,241,.28);background:rgba(99,102,241,.07);border-radius:14px;padding:16px;color:#cbd5e1;line-height:1.7;margin:18px 0}
+.info-note strong{color:#f8fafc}
+.caution-note{border:1px solid rgba(251,191,36,.28);background:rgba(251,191,36,.07);border-radius:14px;padding:16px;color:#fde68a;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#fef3c7}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid #334155;background:rgba(15,23,42,.55);border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#e2e8f0;margin-bottom:4px}
+.related-link span{display:block;color:#94a3b8;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+body.light-mode .rate-source-box,body.light-mode .method-card,body.light-mode .related-link{background:#fff;border-color:#dbe3ee;color:#475569}
+body.light-mode .rate-source-box a{color:#4f46e5}
+body.light-mode .method-card strong,body.light-mode .related-link strong{color:#1e293b}
+body.light-mode .method-card span,body.light-mode .related-link span{color:#475569}
+body.light-mode .info-note{background:#eef2ff;color:#475569}
+body.light-mode .info-note strong{color:#1e293b}
+body.light-mode .caution-note{background:#fffbeb;border-color:#fde68a;color:#92400e}
+body.light-mode .caution-note strong{color:#78350f}
+@media(max-width:700px){
+  .title-icon{width:38px;height:38px}
+  .method-grid,.related-grid{grid-template-columns:1fr}
+}
+
 </style>
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Currency & Unit Converter","url":"https://utiliverse.app/Unit_Currency_Converter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled. Currency conversions require internet access to retrieve exchange-rate data.","description":"Free browser-based currency and unit converter with latest available exchange-rate data and conversions for length, weight, temperature, area, volume, speed and digital storage.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["International currency conversion","USD to DOP and DOP to USD conversion","Searchable country and currency directory","Latest available exchange-rate data","Currency swap control","Length conversion","Weight conversion","Temperature conversion","Area conversion","Volume conversion","Speed conversion","1024-based digital storage conversion"]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does the currency converter calculate exchange rates?","acceptedAnswer":{"@type":"Answer","text":"The converter requests the latest available rate data for the selected source currency from an online exchange-rate service and uses the returned destination-currency rate to calculate the conversion."}},{"@type":"Question","name":"Can I convert US dollars to Dominican pesos?","acceptedAnswer":{"@type":"Answer","text":"Yes. USD and DOP are included. The page defaults to USD as the source and DOP as the destination when it first loads."}},{"@type":"Question","name":"Are the exchange rates the same as the rate my bank will charge?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. The displayed rate is an informational market-rate estimate from the data provider. Banks, card issuers, transfer services and exchange offices may use different rates and add spreads or fees."}},{"@type":"Question","name":"How current are the currency rates?","acceptedAnswer":{"@type":"Answer","text":"The page displays the data date supplied by the exchange-rate service when available. Currency markets can move after that data was published, so verify important transactions with the provider handling the payment."}},{"@type":"Question","name":"Which unit categories are supported?","acceptedAnswer":{"@type":"Answer","text":"The Unit Converter supports length, weight, temperature, area, volume, speed and digital storage."}},{"@type":"Question","name":"How are digital storage units calculated?","acceptedAnswer":{"@type":"Answer","text":"This version uses 1024-based factors: 1 kilobyte is treated as 1024 bytes, 1 megabyte as 1024 kilobytes, and so on."}},{"@type":"Question","name":"Are unit conversions processed locally?","acceptedAnswer":{"@type":"Answer","text":"Yes. Measurement-unit conversions are calculated directly in your browser. Currency conversion additionally contacts an external exchange-rate service to retrieve rate data."}},{"@type":"Question","name":"Does Utiliverse execute currency exchanges or charge conversion fees?","acceptedAnswer":{"@type":"Answer","text":"No. This tool only calculates informational estimates and does not buy, sell, transfer or exchange money."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Currency & Unit Converter","url":"https://utiliverse.app/Unit_Currency_Converter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled. Currency conversions require internet access to retrieve exchange-rate data.","description":"Free browser-based currency and unit converter with latest available ExchangeRate-API rate data, provider/date disclosure, and local conversions for length, weight, temperature, area, volume, speed and decimal/binary digital storage.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["International currency conversion","USD to DOP and DOP to USD conversion","Searchable country and currency directory","Latest available ExchangeRate-API data","Rate provider and data-date disclosure","Browser retrieval timestamp","Currency swap control","Length conversion","Weight conversion","Temperature conversion","Area conversion","Volume conversion","Speed conversion","Decimal KB MB GB TB conversion","Binary KiB MiB GiB TiB conversion"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does the currency converter calculate exchange rates?","acceptedAnswer":{"@type":"Answer","text":"The converter requests the latest available rate data for the selected source currency from an online exchange-rate service and uses the returned destination-currency rate to calculate the conversion."}},{"@type":"Question","name":"Can I convert US dollars to Dominican pesos?","acceptedAnswer":{"@type":"Answer","text":"Yes. USD and DOP are included. The page defaults to USD as the source and DOP as the destination when it first loads."}},{"@type":"Question","name":"Are the exchange rates the same as the rate my bank will charge?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. The displayed rate is an informational market-rate estimate from the data provider. Banks, card issuers, transfer services and exchange offices may use different rates and add spreads or fees."}},{"@type":"Question","name":"How current are the currency rates?","acceptedAnswer":{"@type":"Answer","text":"The page displays the data date supplied by the exchange-rate service when available. Currency markets can move after that data was published, so verify important transactions with the provider handling the payment."}},{"@type":"Question","name":"Which unit categories are supported?","acceptedAnswer":{"@type":"Answer","text":"The Unit Converter supports length, weight, temperature, area, volume, speed and digital storage."}},{"@type":"Question","name":"How are digital storage units calculated?","acceptedAnswer":{"@type":"Answer","text":"This version supports both decimal and binary storage units. KB, MB, GB and TB use powers of 1000; KiB, MiB, GiB and TiB use powers of 1024."}},{"@type":"Question","name":"Are unit conversions processed locally?","acceptedAnswer":{"@type":"Answer","text":"Yes. Measurement-unit conversions are calculated directly in your browser. Currency conversion additionally contacts an external exchange-rate service to retrieve rate data."}},{"@type":"Question","name":"Does Utiliverse execute currency exchanges or charge conversion fees?","acceptedAnswer":{"@type":"Answer","text":"No. This tool only calculates informational estimates and does not buy, sell, transfer or exchange money."}},{"@type":"Question","name":"Which exchange-rate provider does the converter use?","acceptedAnswer":{"@type":"Answer","text":"The current implementation requests its currency rate table from ExchangeRate-API. The provider link, rate-data date and browser retrieval time are shown with the result."}},{"@type":"Question","name":"Is the rate a real-time tradable quote?","acceptedAnswer":{"@type":"Answer","text":"No. It is the latest rate data returned by the provider to this page. It should not be treated as a streaming FX quote or a guaranteed rate available from a bank, card issuer or transfer provider."}},{"@type":"Question","name":"What is the difference between GB and GiB?","acceptedAnswer":{"@type":"Answer","text":"GB is decimal in this tool: 1 GB = 1,000,000,000 bytes. GiB is binary: 1 GiB = 1,073,741,824 bytes. The unit converter includes both systems."}}]}</script>
 
 </head>
 
@@ -410,17 +443,14 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 
   <div class="max-w-3xl">
 
-    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-semibold mb-5">
-
-      <i data-lucide="refresh-cw" class="w-4 h-4"></i>
-
-      Currency Rates + Unit Conversion
-
+    <div class="title-row">
+      <span class="title-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M4 7h10M10 3l4 4-4 4"/><path d="M20 17H10M14 13l-4 4 4 4"/></svg>
+      </span>
+      <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight">
+        Currency &amp; Unit Converter
+      </h1>
     </div>
-
-    <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight">
-      Currency &amp; Unit Converter
-    </h1>
 
     <p class="mt-4 text-lg text-slate-400 leading-relaxed">
 
@@ -605,6 +635,12 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
           class="text-xs text-slate-500 mt-2"
         ></div>
 
+        <div class="rate-source-box">
+          <strong>Rate source:</strong>
+          <a href="https://www.exchangerate-api.com" target="_blank" rel="noopener">ExchangeRate-API ↗</a>
+          <span id="rateRetrieved"></span>
+        </div>
+
       </div>
 
 
@@ -722,7 +758,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 
   </div>
 
-  <p class="processing-note mt-4 max-w-4xl">Measurement conversions are calculated locally in your browser. Currency conversion sends the selected currency codes to the exchange-rate service so the page can retrieve the latest available rate data; Utiliverse does not execute a financial transaction.</p>
+  <p class="processing-note mt-4 max-w-4xl">Measurement conversions are calculated locally in your browser. Currency conversion sends the selected source currency code to ExchangeRate-API so the page can retrieve the provider's latest available rate table. The provider's open/public data may update on a schedule rather than continuously tick-by-tick. Utiliverse does not execute a financial transaction.</p>
 
   <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
        Paste approved Google AdSense code here after approval.
@@ -794,11 +830,10 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
       </p>
 
       <p>
-        The digital-storage category in this version uses 1024-based factors:
-        1 kilobyte is treated as 1,024 bytes, 1 megabyte as 1,024 kilobytes,
-        1 gigabyte as 1,024 megabytes and 1 terabyte as 1,024 gigabytes.
-        This is a binary-style convention, so results may differ from products
-        that use decimal 1,000-based storage units.
+        The digital-storage category distinguishes decimal and binary units.
+        KB, MB, GB and TB use powers of 1,000, while KiB, MiB, GiB and TiB use
+        powers of 1,024. This avoids treating a 1024-byte kibibyte as though it
+        were the same unit as a 1000-byte kilobyte.
       </p>
 
       <p>
@@ -859,6 +894,56 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
   </section>
 
 
+  <section class="max-w-4xl mx-auto mt-16">
+    <h2 class="text-3xl sm:text-4xl font-bold">How the Rates and Unit Calculations Work</h2>
+
+    <div class="method-grid">
+      <div class="method-card"><strong>Currency source</strong><span>The selected base currency is requested from ExchangeRate-API and the destination rate returned by that provider is used directly.</span></div>
+      <div class="method-card"><strong>Rate freshness</strong><span>The result shows the provider's rate-data date when supplied, plus the time this browser retrieved the response. Those are different timestamps.</span></div>
+      <div class="method-card"><strong>Unit conversions</strong><span>Measurement units are converted locally using fixed factors stored in this page. Temperature uses formula-based Celsius, Fahrenheit and Kelvin conversion.</span></div>
+      <div class="method-card"><strong>Rounding</strong><span>The display uses up to eight decimal places. The underlying JavaScript calculation may retain more floating-point precision than is shown.</span></div>
+    </div>
+
+    <h3 class="text-2xl font-bold mt-10 mb-4">Exchange-rate source and update frequency</h3>
+    <p class="text-slate-400 leading-8">The current implementation requests <code>api.exchangerate-api.com/v4/latest/&lt;base&gt;</code>. ExchangeRate-API identifies its open-access service as rate-limited and updated on a scheduled basis rather than as a streaming foreign-exchange quote. The page therefore uses the phrase <strong>latest available rate</strong> instead of implying that the number is a real-time executable market price.</p>
+
+    <div class="info-note">
+      <strong>Two timestamps matter.</strong> “Rate data date” describes the date supplied with the provider's rate table. “Retrieved” tells you when your browser fetched that table during this session. A recently retrieved response can still contain rate data whose effective date is earlier.
+    </div>
+
+    <h3 class="text-2xl font-bold mt-10 mb-4">Market rates vs. the rate you actually pay</h3>
+    <p class="text-slate-400 leading-8">A currency conversion here is an informational estimate. A bank, card network, ATM, remittance provider, hotel, merchant or cash-exchange service can apply a different exchange rate, spread, service fee, foreign-transaction fee or rounding rule. The provider handling the transaction is the authoritative source for the final amount charged or received.</p>
+
+    <h3 class="text-2xl font-bold mt-10 mb-4">Fixed unit factors used by the calculator</h3>
+    <p class="text-slate-400 leading-8">Most unit categories convert through a common base unit. For example, length values are normalized through meters and weight values through kilograms. Temperature is different because Fahrenheit and Celsius require both scaling and an offset, so it is converted through Celsius with explicit formulas.</p>
+
+    <h3 class="text-2xl font-bold mt-10 mb-4">Decimal vs. binary digital storage</h3>
+    <p class="text-slate-400 leading-8">The original version used “kilobyte,” “megabyte,” “gigabyte” and “terabyte” labels with 1024-based factors. This strengthened version distinguishes both systems: decimal KB/MB/GB/TB use powers of 1000, while binary KiB/MiB/GiB/TiB use powers of 1024. That makes comparisons with drive manufacturers, operating systems and technical documentation clearer.</p>
+
+    <div class="caution-note">
+      <strong>Currency availability can differ from the directory.</strong>
+      The page's country/currency directory is maintained in the HTML, while the rate provider controls which codes its endpoint currently returns. A listed currency can therefore be unavailable from the provider at a particular time; the converter will show an error instead of inventing a rate.
+    </div>
+
+    <h3 class="text-2xl font-bold mt-10 mb-4">Worked examples</h3>
+    <p class="text-slate-400 leading-8"><strong>Currency:</strong> if the provider returns 60.25 DOP for 1 USD, entering 100 USD produces an informational estimate of 6,025 DOP before any bank spread or transaction fee.</p>
+    <p class="text-slate-400 leading-8"><strong>Temperature:</strong> 0°C converts to 32°F because the tool applies °F = °C × 9/5 + 32.</p>
+    <p class="text-slate-400 leading-8"><strong>Storage:</strong> 1 GB in the decimal system equals 1,000,000,000 bytes, while 1 GiB equals 1,073,741,824 bytes.</p>
+
+    <h3 class="text-2xl font-bold mt-10 mb-4">References</h3>
+    <p class="text-slate-400 leading-8"><a class="text-indigo-300 font-semibold hover:underline" href="https://www.exchangerate-api.com/docs/free" target="_blank" rel="noopener">ExchangeRate-API open-access documentation ↗</a> · <a class="text-indigo-300 font-semibold hover:underline" href="https://www.exchangerate-api.com/docs/supported-currencies" target="_blank" rel="noopener">Supported currencies ↗</a></p>
+
+    <h3 class="text-2xl font-bold mt-10 mb-4">Related Utiliverse Tools</h3>
+    <div class="related-grid">
+      <a class="related-link" href="../Scientific_Calculator/"><strong>Scientific Calculator</strong><span>Handle general arithmetic, powers, roots and scientific calculations.</span></a>
+      <a class="related-link" href="../Time_Zone_Converter/"><strong>Time Zone Converter</strong><span>Compare dates and times across locations and time zones.</span></a>
+      <a class="related-link" href="../Salary_Calculator/"><strong>Salary Calculator</strong><span>Compare hourly, weekly, monthly and annual gross pay.</span></a>
+    </div>
+
+    <p class="text-slate-500 mt-8" style="font-size:12px"><strong>Last reviewed:</strong> September 30, 2026 · Exchange-rate provider behavior, unit factors and explanatory content reviewed against the current implementation.</p>
+  </section>
+
+
   <!-- =====================================================
        FAQ
   ====================================================== -->
@@ -890,7 +975,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
       </details>
       <details class="glass rounded-xl p-5">
         <summary class="cursor-pointer font-semibold">How are digital storage units calculated?</summary>
-        <p class="mt-3 text-slate-400 leading-7">This version uses 1024-based factors: 1 kilobyte is treated as 1024 bytes, 1 megabyte as 1024 kilobytes, and so on.</p>
+        <p class="mt-3 text-slate-400 leading-7">This version supports both systems: KB, MB, GB and TB use powers of 1000, while KiB, MiB, GiB and TiB use powers of 1024.</p>
       </details>
       <details class="glass rounded-xl p-5">
         <summary class="cursor-pointer font-semibold">Are unit conversions processed locally?</summary>
@@ -899,6 +984,18 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
       <details class="glass rounded-xl p-5">
         <summary class="cursor-pointer font-semibold">Does Utiliverse execute currency exchanges or charge conversion fees?</summary>
         <p class="mt-3 text-slate-400 leading-7">No. This tool only calculates informational estimates and does not buy, sell, transfer or exchange money.</p>
+      </details>
+      <details class="glass rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold">Which exchange-rate provider does the converter use?</summary>
+        <p class="mt-3 text-slate-400 leading-7">The current implementation requests its currency rate table from ExchangeRate-API. The provider link, rate-data date and browser retrieval time are shown with the result.</p>
+      </details>
+      <details class="glass rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold">Is the rate a real-time tradable quote?</summary>
+        <p class="mt-3 text-slate-400 leading-7">No. It is the latest rate data returned by the provider to this page. It should not be treated as a streaming FX quote or a guaranteed rate available from a bank, card issuer or transfer provider.</p>
+      </details>
+      <details class="glass rounded-xl p-5">
+        <summary class="cursor-pointer font-semibold">What is the difference between GB and GiB?</summary>
+        <p class="mt-3 text-slate-400 leading-7">GB is decimal in this tool: 1 GB = 1,000,000,000 bytes. GiB is binary: 1 GiB = 1,073,741,824 bytes. The unit converter includes both systems.</p>
       </details>
     </div>
   </section>
@@ -1349,6 +1446,9 @@ async function convertCurrency() {
     status.textContent =
       "Same-currency conversion.";
 
+    const retrievedEl = document.getElementById("rateRetrieved");
+    if (retrievedEl) retrievedEl.textContent = " · No external rate needed";
+
     return;
 
   }
@@ -1365,7 +1465,8 @@ async function convertCurrency() {
       from,
       to,
       cached.rate,
-      cached.date
+      cached.date,
+      cached.retrievedAt
     );
 
     return;
@@ -1381,6 +1482,9 @@ async function convertCurrency() {
     "Retrieving latest available exchange rate...";
 
   status.textContent = "";
+
+  const retrievedEl = document.getElementById("rateRetrieved");
+  if (retrievedEl) retrievedEl.textContent = " · Retrieving…";
 
 
   try {
@@ -1420,9 +1524,12 @@ async function convertCurrency() {
     const rateDate =
       data.date || new Date().toISOString().slice(0,10);
 
+    const retrievedAt = new Date();
+
     rateCache[cacheKey] = {
       rate,
-      date: rateDate
+      date: rateDate,
+      retrievedAt: retrievedAt.toISOString()
     };
 
     lastRateUpdate = rateDate;
@@ -1437,7 +1544,8 @@ async function convertCurrency() {
       from,
       to,
       rate,
-      rateDate
+      rateDate,
+      retrievedAt.toISOString()
     );
 
   } catch (err) {
@@ -1459,6 +1567,8 @@ async function convertCurrency() {
       "Unable to retrieve the exchange rate.";
 
     error.classList.remove("hidden");
+    const retrievedEl = document.getElementById("rateRetrieved");
+    if (retrievedEl) retrievedEl.textContent = " · Retrieval failed";
 
   }
 
@@ -1474,7 +1584,8 @@ function displayCurrencyResult(
   from,
   to,
   rate,
-  rateDate = lastRateUpdate
+  rateDate = lastRateUpdate,
+  retrievedAt = null
 ) {
 
   const converted =
@@ -1493,6 +1604,15 @@ function displayCurrencyResult(
       rateDate
         ? `Rate data date: ${rateDate}.`
         : "Latest available rate retrieved.";
+
+  const retrievedEl = document.getElementById("rateRetrieved");
+  if (retrievedEl) {
+    const when = retrievedAt ? new Date(retrievedAt) : new Date();
+    const readable = Number.isNaN(when.getTime())
+      ? ""
+      : when.toLocaleString([], {dateStyle:"medium", timeStyle:"short"});
+    retrievedEl.textContent = readable ? ` · Retrieved ${readable}` : "";
+  }
 
 }
 
@@ -1746,27 +1866,47 @@ const units = {
   digital: {
 
     byte: {
-      name:"Bytes",
+      name:"Bytes (B)",
       factor:1
     },
 
     kilobyte: {
-      name:"Kilobytes (1024 B)",
-      factor:1024
+      name:"Kilobytes (KB, 1000 B)",
+      factor:1000
     },
 
     megabyte: {
-      name:"Megabytes (1024² B)",
-      factor:1048576
+      name:"Megabytes (MB, 1000² B)",
+      factor:1000000
     },
 
     gigabyte: {
-      name:"Gigabytes (1024³ B)",
-      factor:1073741824
+      name:"Gigabytes (GB, 1000³ B)",
+      factor:1000000000
     },
 
     terabyte: {
-      name:"Terabytes (1024⁴ B)",
+      name:"Terabytes (TB, 1000⁴ B)",
+      factor:1000000000000
+    },
+
+    kibibyte: {
+      name:"Kibibytes (KiB, 1024 B)",
+      factor:1024
+    },
+
+    mebibyte: {
+      name:"Mebibytes (MiB, 1024² B)",
+      factor:1048576
+    },
+
+    gibibyte: {
+      name:"Gibibytes (GiB, 1024³ B)",
+      factor:1073741824
+    },
+
+    tebibyte: {
+      name:"Tebibytes (TiB, 1024⁴ B)",
       factor:1099511627776
     }
 
