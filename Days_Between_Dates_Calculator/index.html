@@ -39,9 +39,36 @@ body.light-mode .theme-toggle{background:#fff;border-color:#cbd5e1;color:#475569
 body.light-mode .theme-toggle:hover{background:#f1f5f9;border-color:#94a3b8;color:#0f172a}
 .local-processing-note{font-size:12px;line-height:1.65;color:#94a3b8;margin-top:14px}
 body.light-mode .local-processing-note{color:#64748b}
+
+.title-row{display:flex;align-items:center;gap:14px}
+.title-icon{width:46px;height:46px;flex:0 0 auto;color:#818cf8}
+.title-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid var(--border);background:var(--panel2);border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#e2e8f0;margin-bottom:5px}
+.method-card span{display:block;color:#94a3b8;font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:#0f172a;color:#e2e8f0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap}
+.caution-note{border:1px solid rgba(251,191,36,.28);background:rgba(251,191,36,.07);border-radius:14px;padding:16px;color:#fde68a;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#fef3c7}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid var(--border);background:var(--panel2);border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#e2e8f0;margin-bottom:4px}
+.related-link span{display:block;color:#94a3b8;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+body.light-mode .method-card,body.light-mode .related-link{background:#fff}
+body.light-mode .method-card strong,body.light-mode .related-link strong{color:#1e293b}
+body.light-mode .method-card span,body.light-mode .related-link span{color:#475569}
+body.light-mode .example-box{background:#f8fafc;color:#1e293b}
+body.light-mode .caution-note{background:#fffbeb;border-color:#fde68a;color:#92400e}
+body.light-mode .caution-note strong{color:#78350f}
+@media(max-width:700px){
+  .title-icon{width:38px;height:38px}
+  .method-grid,.related-grid{grid-template-columns:1fr}
+}
+
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Days Between Dates Calculator","url":"https://utiliverse.app/Days_Between_Dates/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based days between dates calculator with elapsed and inclusive counting, weeks and days, weekdays, weekends, leap-day counting and exact calendar span.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Elapsed calendar-day difference","Inclusive start-and-end date counting","Weeks and remaining days","Exact years-months-days calendar span","Monday-through-Friday weekday count","Saturday-and-Sunday weekend count","Leap-day count","Signed date direction","Quick 7, 30, 90 and 365 day ranges","DST-safe date-only arithmetic","Copyable result summary"]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does the calculator count days between two dates?","acceptedAnswer":{"@type":"Answer","text":"By default it calculates the absolute calendar-day difference between the selected dates. The same date has a difference of zero; consecutive dates have a difference of one day."}},{"@type":"Question","name":"What does “Count both start and end dates” mean?","acceptedAnswer":{"@type":"Answer","text":"It switches to inclusive counting. January 1 through January 2 contains two calendar dates inclusively, even though only one elapsed day separates those dates."}},{"@type":"Question","name":"Does daylight saving time affect the result?","acceptedAnswer":{"@type":"Answer","text":"No. The calculator performs date-only calendar arithmetic rather than subtracting local-midnight timestamps, so a 23-hour or 25-hour local day does not change the calendar-day difference."}},{"@type":"Question","name":"What if the end date is before the start date?","acceptedAnswer":{"@type":"Answer","text":"The main total still shows the absolute number of days between the dates. The Direction section identifies that the end date is earlier and displays the signed difference."}},{"@type":"Question","name":"Are public holidays excluded from the weekday count?","acceptedAnswer":{"@type":"Answer","text":"No. Weekdays mean Monday through Friday only. Public holidays and organization-specific non-working days are not included."}},{"@type":"Question","name":"How are leap years handled?","acceptedAnswer":{"@type":"Answer","text":"The tool follows Gregorian rules: years divisible by four are leap years, except century years unless they are also divisible by 400. It separately reports February 29 dates included in the counted range."}},{"@type":"Question","name":"Why can calendar span differ from simply dividing days by 30 or 365?","acceptedAnswer":{"@type":"Answer","text":"Months and years do not have fixed lengths. Calendar span counts complete calendar years and months first, then calculates the remaining days."}},{"@type":"Question","name":"Is the weekday total the same as a legal or banking business-day count?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. The tool uses a simple Monday-through-Friday definition. Legal, banking, shipping and payroll calendars may exclude specific holidays or use jurisdiction-specific rules."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Days Between Dates Calculator","url":"https://utiliverse.app/Days_Between_Dates/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based days-between-dates calculator using date-only proleptic Gregorian arithmetic, with elapsed and inclusive counting, weeks and days, weekdays, weekends, leap-day counting, signed direction and calendar span.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Elapsed calendar-day difference","Inclusive start-and-end date counting","Weeks and remaining days","Exact years-months-days calendar span","Monday-through-Friday weekday count","Saturday-and-Sunday weekend count","Leap-day count","Signed date direction","Quick 7, 30, 90 and 365 day ranges","DST-safe date-only arithmetic","Proleptic Gregorian date handling","Copyable result summary"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does the calculator count days between two dates?","acceptedAnswer":{"@type":"Answer","text":"By default it calculates the absolute calendar-day difference between the selected dates. The same date has a difference of zero; consecutive dates have a difference of one day."}},{"@type":"Question","name":"What does “Count both start and end dates” mean?","acceptedAnswer":{"@type":"Answer","text":"It switches to inclusive counting. January 1 through January 2 contains two calendar dates inclusively, even though only one elapsed day separates those dates."}},{"@type":"Question","name":"Does daylight saving time affect the result?","acceptedAnswer":{"@type":"Answer","text":"No. The calculator performs date-only calendar arithmetic rather than subtracting local-midnight timestamps, so a 23-hour or 25-hour local day does not change the calendar-day difference."}},{"@type":"Question","name":"What if the end date is before the start date?","acceptedAnswer":{"@type":"Answer","text":"The main total still shows the absolute number of days between the dates. The Direction section identifies that the end date is earlier and displays the signed difference."}},{"@type":"Question","name":"Are public holidays excluded from the weekday count?","acceptedAnswer":{"@type":"Answer","text":"No. Weekdays mean Monday through Friday only. Public holidays and organization-specific non-working days are not included."}},{"@type":"Question","name":"How are leap years handled?","acceptedAnswer":{"@type":"Answer","text":"The tool follows Gregorian rules: years divisible by four are leap years, except century years unless they are also divisible by 400. It separately reports February 29 dates included in the counted range."}},{"@type":"Question","name":"Why can calendar span differ from simply dividing days by 30 or 365?","acceptedAnswer":{"@type":"Answer","text":"Months and years do not have fixed lengths. Calendar span counts complete calendar years and months first, then calculates the remaining days."}},{"@type":"Question","name":"Is the weekday total the same as a legal or banking business-day count?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. The tool uses a simple Monday-through-Friday definition. Legal, banking, shipping and payroll calendars may exclude specific holidays or use jurisdiction-specific rules."}},{"@type":"Question","name":"Why does the calculator use the Gregorian calendar for very old dates?","acceptedAnswer":{"@type":"Answer","text":"The tool uses proleptic Gregorian rules consistently for years 0001 through 9999. It does not reconstruct historical Julian-calendar use or country-specific adoption dates."}},{"@type":"Question","name":"Why does inclusive counting add one day?","acceptedAnswer":{"@type":"Answer","text":"Elapsed counting measures the number of day boundaries crossed. Inclusive counting counts the calendar dates themselves, so both endpoints are included and one is added to the absolute elapsed difference."}},{"@type":"Question","name":"Does the calendar-span result always add back to the same total days?","acceptedAnswer":{"@type":"Answer","text":"Years and months are calendar units with variable lengths. The displayed years-months-days span is not produced by dividing total days by fixed 365- and 30-day assumptions."}},{"@type":"Question","name":"Can I use the result for a legal filing or contract deadline?","acceptedAnswer":{"@type":"Answer","text":"Use caution. The calculator provides calendar arithmetic only. Legal or contractual rules may exclude weekends or holidays or define how endpoints are counted, so the governing rule should control."}}]}</script>
 </head>
 <body>
 <!--
@@ -61,7 +88,16 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
      This comment is intentionally invisible and reserves no space.
 -->
 <main><div class="container">
-<section class="hero"><div class="eyebrow">Date & time utility</div><h1>Days Between Dates Calculator &amp; Date Difference</h1><p>Calculate elapsed or inclusive calendar days between two dates, then break the range into weeks, weekdays, weekends, leap days, and an exact years-months-days calendar span.</p><div class="badges"><span class="badge">DST-safe date arithmetic</span><span class="badge">Inclusive or elapsed counting</span><span class="badge">Weekday & weekend breakdown</span></div></section>
+<section class="hero">
+<div class="title-row">
+  <span class="title-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 9h18"/><path d="M8 13h3M13 13h3M8 17h3M13 17h3"/></svg>
+  </span>
+  <h1>Days Between Dates Calculator &amp; Date Difference</h1>
+</div>
+<p>Calculate elapsed or inclusive calendar days between two dates, then break the range into weeks, weekdays, weekends, leap days, and an exact years-months-days calendar span.</p>
+<div class="badges"><span class="badge">DST-safe date arithmetic</span><span class="badge">Inclusive or elapsed counting</span><span class="badge">Weekday &amp; weekend breakdown</span></div>
+</section>
 <section class="glass calculator" aria-labelledby="calculatorHeading">
 <div class="section-head"><div><div class="eyebrow">Date difference</div><h2 id="calculatorHeading" class="section-title">Choose two calendar dates</h2></div><div class="small">No time zone is required because this compares calendar dates, not clock times.</div></div>
 <div class="date-grid"><div class="field"><label for="startDate">Start date</label><input id="startDate" class="input" type="date" min="0001-01-01" max="9999-12-31"><div class="date-actions"><button class="text-btn" id="startToday" type="button">Use today</button></div></div><div class="swap-wrap"><button id="swapBtn" class="icon-btn" type="button" aria-label="Swap start and end dates" title="Swap dates">⇄</button></div><div class="field"><label for="endDate">End date</label><input id="endDate" class="input" type="date" min="0001-01-01" max="9999-12-31"><div class="date-actions"><button class="text-btn" id="endToday" type="button">Use today</button></div></div></div>
@@ -88,6 +124,52 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 <h3>Weekday and weekend counting</h3>
 <p>The calculator separately counts Monday through Friday as weekdays and Saturday and Sunday as weekend days. Under standard elapsed counting, the earlier boundary date is excluded and the later boundary date is included so the weekday-plus-weekend total matches the displayed elapsed-day count. With inclusive counting enabled, both endpoint dates are included.</p>
 <p>The weekday figure is not a country-specific business-day calendar. Public holidays, company closures, regional observances, and personal work schedules are not included. A Monday-to-Friday count is useful for rough planning, but payroll, legal, banking, shipping, or compliance deadlines may require an official holiday calendar or organization-specific rules.</p>
+<h2>Methodology and Counting Rules</h2>
+<p>The calculator treats each input as a calendar date, not as a timestamp. Internally it maps the year, month and day to a serial Gregorian day number and compares those day numbers. This avoids errors caused by local-midnight timestamp subtraction during daylight-saving changes.</p>
+
+<div class="method-grid">
+  <div class="method-card"><strong>Elapsed counting</strong><span>Default mode measures the number of calendar-day boundaries between the two dates. The same date is 0 days; consecutive dates are 1 day apart.</span></div>
+  <div class="method-card"><strong>Inclusive counting</strong><span>When enabled, both endpoint dates are included. Consecutive dates therefore count as 2 calendar dates.</span></div>
+  <div class="method-card"><strong>Weekdays and weekends</strong><span>Weekdays mean Monday through Friday only; weekends mean Saturday and Sunday. Public holidays are not excluded.</span></div>
+  <div class="method-card"><strong>Calendar span</strong><span>Years and months are counted as real calendar units first, then remaining days are calculated. It is not total days divided by 365 or 30.</span></div>
+</div>
+
+<h3>Worked example: elapsed vs. inclusive</h3>
+<code class="example-box">Start: January 1
+End: January 2
+
+Elapsed difference: 1 day
+Inclusive count: 2 calendar dates</code>
+
+<h3>Worked example: leap year</h3>
+<p>February 28, 2024 through March 1, 2024 crosses February 29 because 2024 is a leap year. The elapsed difference is 2 days. The leap-day counter reports February 29 when it falls inside the counted range according to the selected counting method.</p>
+
+<h3>Worked example: reversed dates</h3>
+<p>If the end date comes before the start date, the main result still shows the absolute distance between the two dates. The Direction card separately shows whether the signed difference is positive, negative or zero.</p>
+
+<h3>Why the result is DST-safe</h3>
+<p>A local date can begin on a 23-hour, 24-hour or 25-hour civil day depending on daylight-saving transitions. Because this calculator never relies on “midnight-to-midnight milliseconds ÷ 86,400,000,” those clock-length changes do not alter the calendar-day result.</p>
+
+<h3>Weekdays are not business days</h3>
+<p>The weekday count is intentionally simple: Monday through Friday. It does not remove public holidays, bank holidays, market closures, shipping holidays or organization-specific days off.</p>
+
+<div class="caution-note">
+<strong>Legal, payroll, banking and contractual deadlines can use special counting rules.</strong>
+Some rules exclude weekends, holidays, the first day, the last day, or use jurisdiction-specific calendars. Use the applicable official rule or agreement when a deadline has legal or financial consequences.
+</div>
+
+<h3>Historical calendar limitation</h3>
+<p>The calculator uses the proleptic Gregorian calendar for all supported years from 0001 through 9999. That means it extends modern Gregorian leap-year rules backward before historical adoption dates. It is not intended to reconstruct Julian-calendar usage or country-specific historical calendar transitions.</p>
+
+<h3>Related Utiliverse Tools</h3>
+<div class="related-grid">
+  <a class="related-link" href="../Time_Zone_Converter/"><strong>Time Zone Converter</strong><span>Compare one instant across multiple IANA time zones and DST rules.</span></a>
+  <a class="related-link" href="../Age_Calculator/"><strong>Age Calculator</strong><span>Calculate age and calendar span from a birth date to another date.</span></a>
+  <a class="related-link" href="../Unix_Timestamp_Converter/"><strong>Unix Timestamp Converter</strong><span>Convert Unix timestamps to readable dates and times.</span></a>
+</div>
+
+<p style="margin-top:24px;font-size:12px;color:var(--muted)"><strong>Last reviewed:</strong> October 1, 2026 · Date arithmetic, inclusive-count logic, weekday/weekend counting and leap-year handling reviewed against the current implementation.</p>
+
 <h2>Practical Use Cases</h2>
 <h3>Project schedules and deadlines</h3><p>Project managers, freelancers, students, and developers can compare a start date with a delivery date to understand the exact calendar span. The weekday count gives a quick view of how much of that period falls on conventional Monday-to-Friday workdays, while the total-day count remains useful for continuous schedules and service windows.</p>
 <h3>Travel, reservations, and event planning</h3><p>Travel plans often involve both elapsed nights and inclusive calendar dates. A trip beginning on June 1 and ending on June 5 has four elapsed days between the dates, while the traveler touches five calendar dates when both endpoints are included. Seeing both methods helps avoid confusion when comparing itineraries, rental periods, camps, conferences, or multi-day events.</p>
@@ -104,6 +186,10 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 <details class="faq"><summary>How are leap years handled?</summary><p>The tool follows Gregorian rules: years divisible by four are leap years, except century years unless they are also divisible by 400. It separately reports February 29 dates included in the counted range.</p></details>
 <details class="faq"><summary>Why can calendar span differ from simply dividing days by 30 or 365?</summary><p>Months and years do not have fixed lengths. Calendar span counts complete calendar years and months first, then calculates the remaining days.</p></details>
 <details class="faq"><summary>Is the weekday total the same as a legal or banking business-day count?</summary><p>Not necessarily. The tool uses a simple Monday-through-Friday definition. Legal, banking, shipping, and payroll calendars may exclude specific holidays or use jurisdiction-specific rules.</p></details>
+<details class="faq"><summary>Why does the calculator use the Gregorian calendar for very old dates?</summary><p>The tool uses proleptic Gregorian rules consistently for years 0001 through 9999. It does not reconstruct historical Julian-calendar use or country-specific adoption dates.</p></details>
+<details class="faq"><summary>Why does inclusive counting add one day?</summary><p>Elapsed counting measures the number of day boundaries crossed. Inclusive counting counts the calendar dates themselves, so both endpoints are included and one is added to the absolute elapsed difference.</p></details>
+<details class="faq"><summary>Does the calendar-span result always add back to the same total days?</summary><p>Yes for the same date pair and counting direction, but years and months are calendar units with variable lengths. The displayed years-months-days span is not produced by dividing total days by fixed 365- and 30-day assumptions.</p></details>
+<details class="faq"><summary>Can I use the result for a legal filing or contract deadline?</summary><p>Use caution. The calculator provides calendar arithmetic only. Legal or contractual rules may exclude weekends or holidays or define how endpoints are counted, so the governing rule should control.</p></details>
 </section></div></main>
 <!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
      Paste approved Google AdSense code here after approval.
