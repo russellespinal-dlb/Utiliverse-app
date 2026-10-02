@@ -155,10 +155,33 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
 body.light-mode .local-processing-note{color:#64748b}
 @media(max-width:560px){.time-input,.period-select{font-size:16px}}
 
+
+.title-row{display:flex;align-items:center;gap:14px}
+.title-icon{width:44px;height:44px;flex:0 0 auto;color:#818cf8}
+.title-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid var(--border);background:var(--panel2);border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#e2e8f0;margin-bottom:5px}
+.method-card span{display:block;color:#94a3b8;font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:#0f172a;color:#e2e8f0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.caution-note{border:1px solid rgba(251,191,36,.28);background:rgba(251,191,36,.07);border-radius:14px;padding:16px;color:#fde68a;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#fef3c7}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid var(--border);background:var(--panel2);border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#e2e8f0;margin-bottom:4px}
+.related-link span{display:block;color:#94a3b8;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+body.light-mode .method-card strong,body.light-mode .related-link strong{color:#1e293b}
+body.light-mode .method-card span,body.light-mode .related-link span{color:#475569}
+body.light-mode .example-box{background:#f8fafc;color:#1e293b}
+body.light-mode .caution-note{background:#fffbeb;border-color:#fde68a;color:#92400e}
+body.light-mode .caution-note strong{color:#78350f}
+@media(max-width:700px){.title-icon{width:36px;height:36px}.method-grid,.related-grid{grid-template-columns:1fr}}
+
 </style>
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Military Time Converter","url":"https://utiliverse.app/Military_Time_Converter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based military time converter for converting 24-hour military time to 12-hour AM/PM time and regular time back to military HHMM and HH:MM notation.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Military time to regular time","Regular time to military time","HHMM input","HH:MM input","AM and PM conversion","Midnight and noon handling","Minutes-after-midnight calculation","24-hour reference table","Quick example times","Copyable result","Browser-local calculation"]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is 1300 military time?","acceptedAnswer":{"@type":"Answer","text":"1300 is 1:00 PM. For afternoon military times above 1200, subtract 12 from the hour."}},{"@type":"Question","name":"What is 0000 in regular time?","acceptedAnswer":{"@type":"Answer","text":"0000 is 12:00 AM, or midnight."}},{"@type":"Question","name":"What is 1200 in regular time?","acceptedAnswer":{"@type":"Answer","text":"1200 is 12:00 PM, or noon."}},{"@type":"Question","name":"What is 8:30 PM in military time?","acceptedAnswer":{"@type":"Answer","text":"8:30 PM converts to 2030 military time, or 20:30 on a colon-separated 24-hour clock."}},{"@type":"Question","name":"Do I need to enter the colon?","acceptedAnswer":{"@type":"Answer","text":"No. Military \u2192 Regular mode accepts both four-digit forms such as 1730 and colon forms such as 17:30."}},{"@type":"Question","name":"Why does military time use leading zeros?","acceptedAnswer":{"@type":"Answer","text":"Leading zeros keep compact times at four digits and make morning hours less ambiguous. For example, 7:05 AM is written 0705."}},{"@type":"Question","name":"Is 2400 valid?","acceptedAnswer":{"@type":"Answer","text":"It is sometimes used to mark the end of a day in schedules, but standard clock notation uses 0000 for midnight. This converter accepts times from 0000 through 2359."}},{"@type":"Question","name":"Does this convert time zones too?","acceptedAnswer":{"@type":"Answer","text":"No. It changes only the display format between 24-hour and 12-hour notation."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Military Time Converter","url":"https://utiliverse.app/Military_Time_Converter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based military time converter for converting 24-hour clock values to 12-hour AM/PM notation and back, with HHMM and HH:MM input, midnight/noon handling, minutes-after-midnight statistics, copy support, and documented date/time-zone limitations.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Military time to regular time","Regular time to military time","Compact numeric input with left-padding","HH:MM input","AM and PM conversion","Midnight and noon handling","Rejects invalid hours and minutes","Rejects 2400 as a clock input","Minutes-after-midnight calculation","24-hour reference table","Quick example times","Copyable result with fallback","Browser-local calculation","No time-zone or date conversion"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is 1300 military time?","acceptedAnswer":{"@type":"Answer","text":"1300 is 1:00 PM. For afternoon military times above 1200, subtract 12 from the hour."}},{"@type":"Question","name":"What is 0000 in regular time?","acceptedAnswer":{"@type":"Answer","text":"0000 is 12:00 AM, or midnight."}},{"@type":"Question","name":"What is 1200 in regular time?","acceptedAnswer":{"@type":"Answer","text":"1200 is 12:00 PM, or noon."}},{"@type":"Question","name":"What is 8:30 PM in military time?","acceptedAnswer":{"@type":"Answer","text":"8:30 PM converts to 2030 military time, or 20:30 on a colon-separated 24-hour clock."}},{"@type":"Question","name":"Do I need to enter the colon?","acceptedAnswer":{"@type":"Answer","text":"No. Military → Regular mode accepts both four-digit forms such as 1730 and colon forms such as 17:30."}},{"@type":"Question","name":"Why does military time use leading zeros?","acceptedAnswer":{"@type":"Answer","text":"Leading zeros keep compact times at four digits and make morning hours less ambiguous. For example, 7:05 AM is written 0705."}},{"@type":"Question","name":"Is 2400 valid?","acceptedAnswer":{"@type":"Answer","text":"It is sometimes used to mark the end of a day in schedules, but standard clock notation uses 0000 for midnight. This converter accepts times from 0000 through 2359."}},{"@type":"Question","name":"Does this convert time zones too?","acceptedAnswer":{"@type":"Answer","text":"No. It changes only the display format between 24-hour and 12-hour notation."}},{"@type":"Question","name":"Can I enter 930 instead of 0930?","acceptedAnswer":{"@type":"Answer","text":"Yes. Compact numeric input is padded on the left, so 930 is interpreted as 0930 and converts to 9:30 AM."}},{"@type":"Question","name":"Can I enter seconds?","acceptedAnswer":{"@type":"Answer","text":"No. This converter works at minute precision and accepts hour/minute values only."}},{"@type":"Question","name":"Why does the converter reject 2400?","acceptedAnswer":{"@type":"Answer","text":"2400 can be used as an end-of-day scheduling notation, but this converter does not track dates. It accepts 0000 through 2359 as clock values so it does not silently erase a possible date-boundary distinction."}},{"@type":"Question","name":"Does military time by itself identify a unique moment?","acceptedAnswer":{"@type":"Answer","text":"No. A four-digit time such as 1800 does not include a date, time zone, UTC offset, or military zone letter. Keep that context when it matters."}},{"@type":"Question","name":"What does minutes after midnight mean?","acceptedAnswer":{"@type":"Answer","text":"It is the number of whole minutes since 00:00 on the same clock day. For example, 17:30 is 1,050 minutes after midnight."}}]}</script>
 </head>
 
 <body>
@@ -195,8 +218,12 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 <main>
 <div class="container">
   <section class="hero">
-    <div class="eyebrow">Time utility</div>
-    <h1>Military Time Converter – 24 Hour to AM/PM</h1>
+    <div class="title-row">
+      <span class="title-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/><path d="M7 3 5 5M17 3l2 2"/></svg>
+      </span>
+      <h1>Military Time Converter – 24 Hour to AM/PM</h1>
+    </div>
     <p>Convert military 24-hour time to regular 12-hour AM/PM time—or convert regular time back to military time—in compact HHMM or colon-separated HH:MM format.</p>
     <div class="badges">
       <span class="badge">Military ⇄ Regular time</span>
@@ -277,7 +304,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 
     <div class="note"><strong>Military-time note:</strong> this tool uses the common numeric 24-hour clock convention from 0000 through 2359. “2400” is sometimes used operationally to mean the end of a day, but it is not accepted here as a standard clock time because 00:00 represents midnight at the start of the next day.</div>
   </section>
-  <p class="local-processing-note">Browser-based calculation: time parsing, format conversion, statistics, and the reference-table highlight are handled locally on this page and the time you enter is not submitted to a Utiliverse server.</p>
+  <p class="local-processing-note">Browser-based calculation: time parsing, format conversion, statistics, and reference-table highlighting are handled locally by this tool and the time you enter is not submitted to a Utiliverse processing server. The page itself still loads interface and advertising resources from external providers.</p>
 
   <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
        Paste approved Google AdSense code here after approval.
@@ -314,6 +341,51 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
     <h3>Military time versus civilian 24-hour time</h3>
     <p>The underlying hours and minutes are the same. The biggest visual difference is formatting. Military contexts commonly write four digits without a colon, such as 1845. Civilian 24-hour clocks often use a colon, such as 18:45. The converter displays both so you can move easily between schedules, travel information, healthcare records, logistics, and everyday AM/PM time.</p>
 
+
+    <h2>Conversion Methodology and Important Limits</h2>
+    <p>The converter first parses the entered clock time into a 24-hour hour-and-minute pair. From that normalized pair it generates four-digit military notation, colon-separated 24-hour notation, 12-hour AM/PM notation, minutes after midnight, and the highlighted hour in the reference table.</p>
+
+    <div class="method-grid">
+      <div class="method-card"><strong>Military → Regular</strong><span>Accepts numeric compact input or an hour/minute value separated by a colon, validates hours 0–23 and minutes 0–59, then converts the hour to AM/PM notation.</span></div>
+      <div class="method-card"><strong>Regular → Military</strong><span>Accepts an hour from 1–12 with optional minutes plus a separate AM/PM choice. Midnight hour 12 AM becomes 00; PM hours 1–11 add 12.</span></div>
+      <div class="method-card"><strong>Minutes after midnight</strong><span>Calculated as <code>hour × 60 + minute</code>, producing values from 0 at 00:00 through 1,439 at 23:59.</span></div>
+      <div class="method-card"><strong>Reference highlighting</strong><span>The hourly reference table highlights the row matching the normalized 24-hour hour. Minutes do not change which hourly row is highlighted.</span></div>
+    </div>
+
+    <h3>Worked examples around midnight and noon</h3>
+    <code class="example-box">0000 → 12:00 AM
+0030 → 12:30 AM
+1200 → 12:00 PM
+1230 → 12:30 PM
+1300 → 1:00 PM
+2359 → 11:59 PM</code>
+
+    <h3>Compact input is normalized</h3>
+    <p>The military-time parser accepts one to four numeric digits and pads shorter compact entries on the left before interpreting them. For example, <code>30</code> becomes <code>0030</code> and <code>930</code> becomes <code>0930</code>. Colon input such as <code>9:30</code> is also accepted. Output military time is always padded to four digits.</p>
+
+    <h3>This converter uses minute precision only</h3>
+    <p>Seconds are not accepted or displayed. Inputs such as <code>17:30:45</code> are outside the current parser. If you are working with logs, timestamps, aviation records, or scientific data that include seconds, preserve those values separately.</p>
+
+    <h3>2400 is treated as a day-boundary notation, not a clock input</h3>
+    <p>The calculator accepts normalized clock times from 0000 through 2359. Some schedules use 2400 to label the end of a calendar day, but 2400 and 0000 can refer to opposite sides of a date boundary. Because this tool does not track dates, it intentionally avoids silently converting 2400 to 0000.</p>
+
+    <h3>No date, time-zone, or UTC-offset conversion</h3>
+    <p>The result changes only the notation used to display the same local clock reading. It does not know a date, location, daylight-saving rule, UTC offset, or military time-zone letter. A value such as 1800 remains the same clock reading; only its display changes to 6:00 PM.</p>
+
+    <div class="caution-note"><strong>For operational schedules, preserve the original date and time-zone context.</strong> A four-digit military time by itself does not identify a unique moment worldwide. When ambiguity matters, keep the source date, zone, UTC offset, or other scheduling context with the converted time.</div>
+
+    <h3>Day-period labels are descriptive only</h3>
+    <p>The Midnight, Morning, Afternoon, Evening, and Night tag is a convenience label generated from the hour. Those labels do not change the conversion result and should not be treated as formal military or scheduling terminology.</p>
+
+    <h3>Related Utiliverse Tools</h3>
+    <div class="related-grid">
+      <a class="related-link" href="../Time_Tracking_Suite/"><strong>Time Tracking Suite</strong><span>Use a stopwatch, countdown timer, and 25/5 Pomodoro timer.</span></a>
+      <a class="related-link" href="../Date_Calculator/"><strong>Date Calculator</strong><span>Work with date differences and calendar intervals when a date matters alongside a time.</span></a>
+      <a class="related-link" href="../Unit_Currency_Converter/"><strong>Unit Converter</strong><span>Convert common measurement units in another browser-based utility.</span></a>
+    </div>
+
+    <p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 2, 2026 · 24-hour parsing, AM/PM conversion, midnight/noon handling, compact-input normalization, copy behavior, and reference-table logic reviewed against the current implementation.</p>
+
     <h2>Practical Use Cases</h2>
     <h3>Travel and transportation</h3>
     <p>Airlines, rail systems, transit schedules, and international timetables frequently use the 24-hour clock. A traveler accustomed to AM/PM notation can quickly convert 18:20 to 6:20 PM or verify that 07:05 means 7:05 AM.</p>
@@ -341,6 +413,11 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
     <details class="faq"><summary>Why does military time use leading zeros?</summary><p>Leading zeros keep compact times at four digits and make morning hours less ambiguous. For example, 7:05 AM is written 0705.</p></details>
     <details class="faq"><summary>Is 2400 valid?</summary><p>It is sometimes used to mark the end of a day in schedules, but standard clock notation uses 0000 for midnight. This converter accepts times from 0000 through 2359.</p></details>
     <details class="faq"><summary>Does this convert time zones too?</summary><p>No. It changes only the display format between 24-hour and 12-hour notation.</p></details>
+    <details class="faq"><summary>Can I enter 930 instead of 0930?</summary><p>Yes. Compact numeric input is padded on the left, so 930 is interpreted as 0930 and converts to 9:30 AM.</p></details>
+    <details class="faq"><summary>Can I enter seconds?</summary><p>No. This converter works at minute precision and accepts hour/minute values only.</p></details>
+    <details class="faq"><summary>Why does the converter reject 2400?</summary><p>2400 can be used as an end-of-day scheduling notation, but this converter does not track dates. It accepts 0000 through 2359 as clock values so it does not silently erase a possible date-boundary distinction.</p></details>
+    <details class="faq"><summary>Does military time by itself identify a unique moment?</summary><p>No. A four-digit time such as 1800 does not include a date, time zone, UTC offset, or military zone letter. Keep that context when it matters.</p></details>
+    <details class="faq"><summary>What does “minutes after midnight” mean?</summary><p>It is the number of whole minutes since 00:00 on the same clock day. For example, 17:30 is 1,050 minutes after midnight.</p></details>
   </section>
 </div>
 </main>
