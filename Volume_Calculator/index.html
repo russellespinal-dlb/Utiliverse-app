@@ -92,9 +92,36 @@ body.light-mode .formula-box{border-color:#e2e8f0;background:#f8fafc}
   #theme-toggle{width:38px;height:38px;flex:0 0 auto}
 }
 
+
+.title-row{display:flex;align-items:center;gap:14px}
+.title-icon{width:44px;height:44px;flex:0 0 auto;color:#818cf8}
+.title-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid #334155;background:rgba(15,23,42,.58);border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#e2e8f0;margin-bottom:5px}
+.method-card span{display:block;color:#94a3b8;font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid #334155;background:#0f172a;color:#e2e8f0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.caution-note{border:1px solid rgba(251,191,36,.28);background:rgba(251,191,36,.07);border-radius:14px;padding:16px;color:#fde68a;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#fef3c7}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid #334155;background:rgba(15,23,42,.55);border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#e2e8f0;margin-bottom:4px}
+.related-link span{display:block;color:#94a3b8;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+body.light-mode .method-card,body.light-mode .related-link{background:#fff;border-color:#dbe3ee}
+body.light-mode .method-card strong,body.light-mode .related-link strong{color:#1e293b}
+body.light-mode .method-card span,body.light-mode .related-link span{color:#475569}
+body.light-mode .example-box{background:#f8fafc;color:#1e293b;border-color:#dbe3ee}
+body.light-mode .caution-note{background:#fffbeb;border-color:#fde68a;color:#92400e}
+body.light-mode .caution-note strong{color:#78350f}
+@media(max-width:700px){
+  .title-icon{width:36px;height:36px}
+  .method-grid,.related-grid{grid-template-columns:1fr}
+}
+
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Volume Calculator","url":"https://utiliverse.app/Volume_Calculator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based volume calculator for rectangular prisms, cylinders, spheres and cones.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Rectangular prism volume","Cube volume","Cylinder volume","Sphere volume","Cone volume","Decimal dimension support","Local browser calculations"]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What shapes can this volume calculator calculate?","acceptedAnswer":{"@type":"Answer","text":"This calculator supports rectangular prisms and cubes, cylinders, spheres and cones."}},{"@type":"Question","name":"What units should I use?","acceptedAnswer":{"@type":"Answer","text":"You can use any consistent length unit, such as inches, feet, centimeters or meters. Use the same unit for every dimension in one calculation. The result is returned in that unit cubed."}},{"@type":"Question","name":"What is the formula for a rectangular prism?","acceptedAnswer":{"@type":"Answer","text":"Volume equals length multiplied by width multiplied by height: V = l \u00d7 w \u00d7 h."}},{"@type":"Question","name":"What is the formula for a cylinder?","acceptedAnswer":{"@type":"Answer","text":"Cylinder volume is V = \u03c0r\u00b2h, where r is the radius and h is the height."}},{"@type":"Question","name":"What is the formula for a sphere?","acceptedAnswer":{"@type":"Answer","text":"Sphere volume is V = 4/3 \u00d7 \u03c0r\u00b3, where r is the radius."}},{"@type":"Question","name":"What is the formula for a cone?","acceptedAnswer":{"@type":"Answer","text":"Cone volume is V = 1/3 \u00d7 \u03c0r\u00b2h, where r is the radius and h is the height."}},{"@type":"Question","name":"Can I enter decimal measurements?","acceptedAnswer":{"@type":"Answer","text":"Yes. The dimension fields accept decimal values, which is useful for measurements such as 2.5 feet or 7.25 centimeters."}},{"@type":"Question","name":"Are my measurements saved or uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. The volume calculations run locally in your browser and the measurements are not submitted to a Utiliverse server by this tool."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Volume Calculator","url":"https://utiliverse.app/Volume_Calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based volume calculator for rectangular prisms, cubes, cylinders, spheres and cones, with radius and perpendicular-height guidance, unit consistency notes, and geometric-model limitations.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Rectangular prism volume","Cube volume","Cylinder volume","Sphere volume","Cone volume","Decimal dimension support","Zero-dimension support","Negative-dimension validation","Radius and diameter guidance","Perpendicular-height guidance for cones","Up to four decimal places displayed","Local browser calculations"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What shapes can this volume calculator calculate?","acceptedAnswer":{"@type":"Answer","text":"This calculator supports rectangular prisms and cubes, cylinders, spheres and cones."}},{"@type":"Question","name":"What units should I use?","acceptedAnswer":{"@type":"Answer","text":"You can use any consistent length unit, such as inches, feet, centimeters or meters. Use the same unit for every dimension in one calculation. The result is returned in that unit cubed."}},{"@type":"Question","name":"What is the formula for a rectangular prism?","acceptedAnswer":{"@type":"Answer","text":"Volume equals length multiplied by width multiplied by height: V = l × w × h."}},{"@type":"Question","name":"What is the formula for a cylinder?","acceptedAnswer":{"@type":"Answer","text":"Cylinder volume is V = πr²h, where r is the radius and h is the height."}},{"@type":"Question","name":"What is the formula for a sphere?","acceptedAnswer":{"@type":"Answer","text":"Sphere volume is V = 4/3 × πr³, where r is the radius."}},{"@type":"Question","name":"What is the formula for a cone?","acceptedAnswer":{"@type":"Answer","text":"Cone volume is V = 1/3 × πr²h, where r is the radius and h is the height."}},{"@type":"Question","name":"Can I enter decimal measurements?","acceptedAnswer":{"@type":"Answer","text":"Yes. The dimension fields accept decimal values, which is useful for measurements such as 2.5 feet or 7.25 centimeters."}},{"@type":"Question","name":"Are my measurements saved or uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. The volume calculations run locally in your browser and the measurements are not submitted to a Utiliverse server by this tool."}},{"@type":"Question","name":"Should I enter radius or diameter?","acceptedAnswer":{"@type":"Answer","text":"Enter the radius for cylinders, spheres and cones. If you know the diameter, divide it by two first."}},{"@type":"Question","name":"Can I use slant height for a cone?","acceptedAnswer":{"@type":"Answer","text":"No. The cone formula in this calculator requires the perpendicular height from the base plane to the apex, not the slant height along the side."}},{"@type":"Question","name":"What happens if one dimension is zero?","acceptedAnswer":{"@type":"Answer","text":"The calculator accepts zero as a valid non-negative dimension, and the resulting volume is zero."}},{"@type":"Question","name":"Why does the result say cubic units?","acceptedAnswer":{"@type":"Answer","text":"The calculator does not know which length unit you chose. If every dimension is in meters, the result is cubic meters; if every dimension is in inches, the result is cubic inches."}},{"@type":"Question","name":"Does this calculate the usable capacity of a real container?","acceptedAnswer":{"@type":"Answer","text":"It calculates the ideal geometric volume. Wall thickness, rounded corners, tapers, internal components, and manufacturing tolerances can make real usable capacity different."}}]}</script>
 </head>
 <body>
 <!--
@@ -127,8 +154,12 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 -->
 <main class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
 <div class="max-w-3xl">
-<p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Geometry</p>
-<h1 class="text-4xl sm:text-5xl font-black mt-2">Volume Calculator</h1>
+<div class="title-row">
+  <span class="title-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></svg>
+  </span>
+  <h1 class="text-4xl sm:text-5xl font-black">Volume Calculator</h1>
+</div>
 <p class="mt-4 text-lg muted">Calculate the volume of rectangular prisms, cylinders, spheres and cones using your own dimensions.</p>
 </div>
 
@@ -165,7 +196,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
     <div class="mt-2 text-xl font-bold text-indigo-400" id="res_cone" aria-live="polite">--</div>
   </div>
 </section>
-<p class="local-processing-note mt-4">Browser-based calculation: the dimensions you enter are calculated locally on this page and are not submitted to a Utiliverse server.</p>
+<p class="local-processing-note mt-4">Browser-based calculation: the dimensions you enter are processed locally by this calculator and are not submitted to a Utiliverse processing server. The page itself still loads interface and advertising resources from external providers.</p>
 
 <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
      Paste approved Google AdSense code here after approval.
@@ -199,6 +230,59 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 <h3>Using Consistent Units</h3>
 <p>This calculator does not convert units automatically. Use the same unit for every dimension in a calculation. Mixing feet and inches, for example, produces a meaningless result unless you convert them to one common unit first. The output is labeled “cubic units” because the specific unit depends on what you entered.</p>
 
+
+<h2>Calculation Methodology and Shape Assumptions</h2>
+<p>The calculator applies standard geometric formulas directly in JavaScript using the dimensions you provide. Results are displayed with up to four decimal places and labeled as cubic units because the page does not assume a particular measurement system.</p>
+
+<div class="method-grid">
+  <div class="method-card"><strong>Rectangular prism</strong><span>Uses <code>length × width × height</code>. A cube is the special case where all three dimensions are equal.</span></div>
+  <div class="method-card"><strong>Cylinder</strong><span>Uses <code>πr²h</code>. Enter the radius, not the diameter, and use the perpendicular height.</span></div>
+  <div class="method-card"><strong>Sphere</strong><span>Uses <code>4/3 × πr³</code>. Only the radius is required.</span></div>
+  <div class="method-card"><strong>Cone</strong><span>Uses <code>1/3 × πr²h</code>. The height must be perpendicular to the circular base; slant height is not used.</span></div>
+</div>
+
+<h3>Worked example: rectangular prism</h3>
+<code class="example-box">Length = 4
+Width = 3
+Height = 2
+
+V = 4 × 3 × 2
+V = 24 cubic units</code>
+
+<h3>Worked example: cylinder</h3>
+<code class="example-box">Radius = 2
+Height = 5
+
+V = π × 2² × 5
+V = 20π
+V ≈ 62.8319 cubic units</code>
+
+<h3>Radius and diameter are not interchangeable</h3>
+<p>The cylinder, sphere and cone calculators expect a radius. If your measurement is a diameter, divide it by two before entering it. Entering the full diameter as the radius can greatly overstate the volume because radius is squared or cubed in these formulas.</p>
+
+<h3>Use perpendicular height for cylinders and cones</h3>
+<p>Height means the perpendicular distance from one base plane to the opposite end or apex. A cone's slant height is longer than its perpendicular height and should not be entered into the height field unless it happens to be equal in a special case.</p>
+
+<h3>Zero dimensions and negative dimensions</h3>
+<p>A zero dimension is accepted and produces a volume of zero, which is mathematically consistent for a collapsed shape. Negative dimensions are rejected because the calculator treats dimensions as physical lengths rather than signed coordinates.</p>
+
+<h3>Units must stay consistent</h3>
+<p>If dimensions are entered in centimeters, the result is cubic centimeters; if they are entered in feet, the result is cubic feet. Mixing units such as feet and inches in the same calculation produces a result that has no meaningful single cubic unit until the dimensions are converted to one common unit first.</p>
+
+<div class="caution-note"><strong>This calculator models ideal geometric solids.</strong> Real containers and objects may have wall thickness, rounded corners, tapered sides, irregular surfaces, internal obstructions, or manufacturing tolerances that reduce usable capacity.</div>
+
+<h3>Precision and π</h3>
+<p>Circular-shape calculations use JavaScript's <code>Math.PI</code>. The displayed result is rounded to at most four decimal places. JavaScript Number arithmetic is suitable for ordinary geometry calculations, but extremely large or unusually precise measurements can eventually encounter floating-point limitations.</p>
+
+<h3>Related Utiliverse Tools</h3>
+<div class="related-grid">
+  <a class="related-link" href="../Unit_Currency_Converter/"><strong>Unit Converter</strong><span>Convert compatible measurement units before or after a volume calculation.</span></a>
+  <a class="related-link" href="../Scientific_Calculator/"><strong>Scientific Calculator</strong><span>Handle powers, roots, π-based formulas and general scientific calculations.</span></a>
+  <a class="related-link" href="../Fraction_Calculator/"><strong>Fraction Calculator</strong><span>Work with fractional dimensions and mixed-number measurements.</span></a>
+</div>
+
+<p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 2, 2026 · Shape formulas, radius/height assumptions, zero and negative dimensions, result formatting, and browser-side calculation reviewed against the current implementation.</p>
+
 <h3>Common Uses for Volume Calculations</h3>
 <p>Volume calculations can help estimate container capacity, room or box space, material quantities, tank dimensions, concrete forms, science problems, packaging, landscaping and other three-dimensional measurements. For liquid capacity or material purchasing, you may still need to convert the cubic result into liters, gallons, cubic yards or another practical unit.</p>
 
@@ -210,7 +294,11 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 <details class="faq"><summary>What is the formula for a sphere?</summary><p class="muted">Sphere volume is V = 4/3 × πr³, where r is the radius.</p></details>
 <details class="faq"><summary>What is the formula for a cone?</summary><p class="muted">Cone volume is V = 1/3 × πr²h, where r is the radius and h is the height.</p></details>
 <details class="faq"><summary>Can I enter decimal measurements?</summary><p class="muted">Yes. The dimension fields accept decimal values, which is useful for measurements such as 2.5 feet or 7.25 centimeters.</p></details>
-<details class="faq"><summary>Are my measurements saved or uploaded?</summary><p class="muted">No. The volume calculations run locally in your browser and the measurements are not submitted to a Utiliverse server by this tool.</p></details>
+<details class="faq"><summary>Are my measurements saved or uploaded?</summary><p class="muted">No. The volume calculations run locally in your browser and the measurements are not submitted to a Utiliverse server by this tool.</p></details><details class="faq"><summary>Should I enter radius or diameter?</summary><p class="muted">Enter the radius for cylinders, spheres and cones. If you know the diameter, divide it by two first.</p></details>
+<details class="faq"><summary>Can I use slant height for a cone?</summary><p class="muted">No. The cone formula in this calculator requires the perpendicular height from the base plane to the apex, not the slant height along the side.</p></details>
+<details class="faq"><summary>What happens if one dimension is zero?</summary><p class="muted">The calculator accepts zero as a valid non-negative dimension, and the resulting volume is zero.</p></details>
+<details class="faq"><summary>Why does the result say cubic units?</summary><p class="muted">The calculator does not know which length unit you chose. If every dimension is in meters, the result is cubic meters; if every dimension is in inches, the result is cubic inches.</p></details>
+<details class="faq"><summary>Does this calculate the usable capacity of a real container?</summary><p class="muted">It calculates the ideal geometric volume. Wall thickness, rounded corners, tapers, internal components, and manufacturing tolerances can make real usable capacity different.</p></details>
 </section>
 </main>
 <!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
