@@ -187,10 +187,33 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
 body.light-mode .local-processing-note{color:#64748b}
 @media(max-width:560px){textarea{font-size:16px}}
 
+
+.title-row{display:flex;align-items:center;gap:14px}
+.title-icon{width:44px;height:44px;flex:0 0 auto;color:#818cf8}
+.title-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid var(--border);background:var(--panel2);border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#e2e8f0;margin-bottom:5px}
+.method-card span{display:block;color:#94a3b8;font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:#0f172a;color:#e2e8f0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.caution-note{border:1px solid rgba(251,191,36,.28);background:rgba(251,191,36,.07);border-radius:14px;padding:16px;color:#fde68a;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#fef3c7}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid var(--border);background:var(--panel2);border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#e2e8f0;margin-bottom:4px}
+.related-link span{display:block;color:#94a3b8;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+body.light-mode .method-card strong,body.light-mode .related-link strong{color:#1e293b}
+body.light-mode .method-card span,body.light-mode .related-link span{color:#475569}
+body.light-mode .example-box{background:#f8fafc;color:#1e293b}
+body.light-mode .caution-note{background:#fffbeb;border-color:#fde68a;color:#92400e}
+body.light-mode .caution-note strong{color:#78350f}
+@media(max-width:700px){.title-icon{width:36px;height:36px}.method-grid,.related-grid{grid-template-columns:1fr}}
+
 </style>
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Case Converter","url":"https://utiliverse.app/Case_Converter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based case converter for uppercase, lowercase, title case, sentence case, capitalized case, alternating case, inverse case and common developer naming conventions.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["UPPERCASE","lowercase","Title Case","Sentence case","Capitalized Case","Alternating case","Inverse case","camelCase","PascalCase","snake_case","kebab-case","CONSTANT_CASE","dot.case","path/case","Header-Case","Trim line edges","Collapse repeated spaces","Character, word, line and sentence statistics","Copy output","Download UTF-8 TXT"]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What text case formats does this converter support?","acceptedAnswer":{"@type":"Answer","text":"It supports uppercase, lowercase, title case, sentence case, capitalized case, alternating case, inverse case, camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, dot.case, path/case, and Header-Case."}},{"@type":"Question","name":"What is the difference between Title Case and Capitalized Case?","acceptedAnswer":{"@type":"Answer","text":"Title Case keeps common short English function words lowercase when they appear in the middle of a heading, while Capitalized Case simply capitalizes the first letter of every detected word."}},{"@type":"Question","name":"Does sentence case know which words are proper nouns?","acceptedAnswer":{"@type":"Answer","text":"No. Sentence case can identify likely sentence starts, but it cannot reliably infer names, acronyms, brands, or specialized capitalization from plain text alone. Review those items after conversion."}},{"@type":"Question","name":"Will punctuation and line breaks be preserved?","acceptedAnswer":{"@type":"Answer","text":"They are preserved by natural-language modes such as uppercase, lowercase, title case, sentence case, capitalized case, alternating case, and inverse case. Identifier modes intentionally normalize separators and punctuation."}},{"@type":"Question","name":"Does the tool support accented and non-English letters?","acceptedAnswer":{"@type":"Answer","text":"It uses Unicode-aware matching and JavaScript's built-in case conversion, so many non-ASCII letters are supported. Locale-specific capitalization rules can still differ, so important multilingual text should be reviewed."}},{"@type":"Question","name":"What do \u201cTrim line edges\u201d and \u201cCollapse repeated spaces\u201d do?","acceptedAnswer":{"@type":"Answer","text":"Trim line edges removes whitespace from the beginning and end of each line. Collapse repeated spaces reduces consecutive spaces or tabs inside a line to one space. Neither option removes line breaks."}},{"@type":"Question","name":"Is kebab-case output automatically safe as a URL slug?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. Kebab case is a naming format, not a complete slug-validation system. A publishing platform may require additional transliteration, reserved-character rules, normalization, length limits, or uniqueness checks."}},{"@type":"Question","name":"Can I save the converted result?","acceptedAnswer":{"@type":"Answer","text":"Yes. Use Copy Output to place the result on the clipboard or Download TXT to save the current converted output as a UTF-8 plain-text file."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Case Converter","url":"https://utiliverse.app/Case_Converter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based case converter for natural-language capitalization and developer naming styles, with Unicode-aware tokenization, optional whitespace preprocessing, text statistics, clipboard fallback, UTF-8 TXT download, and documented locale and identifier limitations.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["UPPERCASE","lowercase","Title Case","Sentence case","Capitalized Case","Alternating case","Inverse case","camelCase","PascalCase","snake_case","kebab-case","CONSTANT_CASE","dot.case","path/case","Header-Case","Trim line edges","Collapse repeated spaces","Unicode-aware tokenization","Character, word, line and sentence statistics","Copy output with clipboard fallback","Download UTF-8 TXT","Browser-local processing"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What text case formats does this converter support?","acceptedAnswer":{"@type":"Answer","text":"It supports uppercase, lowercase, title case, sentence case, capitalized case, alternating case, inverse case, camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, dot.case, path/case, and Header-Case."}},{"@type":"Question","name":"What is the difference between Title Case and Capitalized Case?","acceptedAnswer":{"@type":"Answer","text":"Title Case keeps common short English function words lowercase when they appear in the middle of a heading, while Capitalized Case simply capitalizes the first letter of every detected word."}},{"@type":"Question","name":"Does sentence case know which words are proper nouns?","acceptedAnswer":{"@type":"Answer","text":"No. Sentence case can identify likely sentence starts, but it cannot reliably infer names, acronyms, brands, or specialized capitalization from plain text alone. Review those items after conversion."}},{"@type":"Question","name":"Will punctuation and line breaks be preserved?","acceptedAnswer":{"@type":"Answer","text":"They are preserved by natural-language modes such as uppercase, lowercase, title case, sentence case, capitalized case, alternating case, and inverse case. Identifier modes intentionally normalize separators and punctuation."}},{"@type":"Question","name":"Does the tool support accented and non-English letters?","acceptedAnswer":{"@type":"Answer","text":"It uses Unicode-aware matching and JavaScript's built-in case conversion, so many non-ASCII letters are supported. Locale-specific capitalization rules can still differ, so important multilingual text should be reviewed."}},{"@type":"Question","name":"What do “Trim line edges” and “Collapse repeated spaces” do?","acceptedAnswer":{"@type":"Answer","text":"Trim line edges removes whitespace from the beginning and end of each line. Collapse repeated spaces reduces consecutive spaces or tabs inside a line to one space. Neither option removes line breaks."}},{"@type":"Question","name":"Is kebab-case output automatically safe as a URL slug?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. Kebab case is a naming format, not a complete slug-validation system. A publishing platform may require additional transliteration, reserved-character rules, normalization, length limits, or uniqueness checks."}},{"@type":"Question","name":"Can I save the converted result?","acceptedAnswer":{"@type":"Answer","text":"Yes. Use Copy Output to place the result on the clipboard or Download TXT to save the current converted output as a UTF-8 plain-text file."}},{"@type":"Question","name":"Will camelCase preserve punctuation from my original text?","acceptedAnswer":{"@type":"Answer","text":"No. Identifier modes tokenize letters and numbers, remove punctuation separators, and rebuild the result according to the selected naming convention."}},{"@type":"Question","name":"Why can Sentence case change brand names or acronyms?","acceptedAnswer":{"@type":"Answer","text":"Sentence case lowercases the full input before capitalizing likely sentence starts. It cannot infer which words should retain special capitalization."}},{"@type":"Question","name":"Does alternating case count spaces and punctuation in its pattern?","acceptedAnswer":{"@type":"Answer","text":"No. The lower/upper pattern advances only when a Unicode letter is encountered. Non-letter characters remain unchanged and do not consume a step."}},{"@type":"Question","name":"Can I safely use kebab-case output as a filename everywhere?","acceptedAnswer":{"@type":"Answer","text":"Not automatically. Operating systems and applications can impose reserved characters, reserved names, normalization rules, path-length limits, or other restrictions that this tool does not validate."}},{"@type":"Question","name":"Why can the sentence count differ from a grammar-aware editor?","acceptedAnswer":{"@type":"Answer","text":"The tool uses a lightweight punctuation-based estimate. Abbreviations, decimals, unusual punctuation, and incomplete sentences can produce different counts from language-aware software."}}]}</script>
 </head>
 
 <body>
@@ -227,8 +250,12 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 <main>
 <div class="container">
   <section class="hero">
-    <div class="eyebrow">Text utility</div>
-    <h1>Case Converter – Uppercase, Lowercase &amp; More</h1>
+    <div class="title-row">
+      <span class="title-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M4 18 8 6h2l4 12M5.5 14h7"/><path d="M15 10h5M17.5 7.5V15"/><path d="M15 18h5"/></svg>
+      </span>
+      <h1>Case Converter – Uppercase, Lowercase &amp; More</h1>
+    </div>
     <p>Convert text instantly between 15 writing and developer naming styles, including UPPERCASE, lowercase, Title Case, Sentence case, camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, and more.</p>
     <div class="badges">
       <span class="badge">15 case styles</span>
@@ -243,7 +270,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
         <div class="eyebrow">Convert text case</div>
         <h2 id="toolHeading" class="section-title">Paste text, then choose a case</h2>
       </div>
-      <div class="small">Your text is transformed locally by JavaScript and is not submitted to a Utiliverse conversion server.</div>
+      <div class="small">Your text is transformed locally by JavaScript and is not submitted to a Utiliverse conversion server. The page itself may still load interface and advertising resources from external providers.</div>
     </div>
 
     <div class="editor-grid">
@@ -314,7 +341,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
       <div id="modeDescription" class="preview-code">UPPERCASE converts cased letters to uppercase while preserving punctuation, spaces and line breaks.</div>
     </div>
   </section>
-  <p class="local-processing-note">Browser-based processing: case conversion, text statistics, copying, and TXT generation are handled locally by this page and your text is not submitted to a Utiliverse conversion server.</p>
+  <p class="local-processing-note">Browser-based processing: case conversion, preprocessing, text statistics, copying, and TXT generation are handled locally by this tool and your text is not submitted to a Utiliverse conversion server. The page itself still loads interface and advertising resources from external providers.</p>
 
   <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
        Paste approved Google AdSense code here after approval.
@@ -345,6 +372,72 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
     <h3>Unicode and language considerations</h3>
     <p>Modern JavaScript case conversion understands far more than ASCII, and this tool uses Unicode-aware token matching for its identifier transformations. Accented Latin letters and many characters from other writing systems are therefore handled more reliably than with an A–Z-only regular expression. Even so, capitalization rules are language-dependent. Turkish dotted and dotless I, German sharp S, Greek sigma forms, and scripts without upper/lower case distinctions are examples of why one universal casing algorithm cannot perfectly match every locale or editorial rule. Review important multilingual text after conversion.</p>
 
+
+    <h2>Transformation Methodology and Important Limits</h2>
+    <p>The converter uses two broad approaches. Natural-language modes preserve the original text structure and change letter case in place, while identifier modes tokenize the input into words and numbers, normalize separators, and rebuild the result in a developer-oriented naming style.</p>
+
+    <div class="method-grid">
+      <div class="method-card"><strong>Natural-language modes</strong><span>UPPERCASE, lowercase, Title Case, Sentence case, Capitalized Case, alternating case, and inverse case preserve punctuation and line breaks.</span></div>
+      <div class="method-card"><strong>Identifier modes</strong><span>camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, dot.case, path/case, and Header-Case tokenize and normalize the input rather than preserving punctuation.</span></div>
+      <div class="method-card"><strong>Preprocessing</strong><span>Trim line edges and Collapse repeated spaces run before the selected case transformation. Both preserve line breaks.</span></div>
+      <div class="method-card"><strong>Statistics</strong><span>Character counts use Unicode-aware iteration; word counts use the same Unicode-aware token pattern used by identifier processing.</span></div>
+    </div>
+
+    <h3>Worked example: natural-language conversion</h3>
+    <code class="example-box">Input:
+hello WORLD! this is Utiliverse.
+
+Sentence case:
+Hello world! This is utiliverse.
+
+Title Case:
+Hello World! This Is Utiliverse.</code>
+
+    <h3>Worked example: identifier conversion</h3>
+    <code class="example-box">Input:
+Customer order: #42
+
+camelCase:
+customerOrder42
+
+snake_case:
+customer_order_42
+
+kebab-case:
+customer-order-42</code>
+
+    <h3>Title Case is a practical English rule set, not a style-guide engine</h3>
+    <p>The tool lowercases a built-in set of common English function words when they appear in the middle of a title. It does not know AP, Chicago, APA, MLA, or a publisher-specific house style, and it does not preserve every intentional capitalization choice. Brand names, acronyms, and specialized terms should be reviewed afterward.</p>
+
+    <h3>Sentence case deliberately lowercases first</h3>
+    <p>Sentence case converts the entire input to lowercase and then capitalizes the first detected letter at the start of the text, after <code>.</code>, <code>!</code>, or <code>?</code>, and after line breaks. That means names, acronyms, product names, and intentionally capitalized words can be changed.</p>
+
+    <h3>Identifier modes remove punctuation and apostrophes</h3>
+    <p>Developer-style modes extract Unicode letter/number tokens, remove apostrophes inside those tokens, split some ASCII camel-case boundaries, and then rebuild the identifier. Symbols such as <code>#</code>, <code>:</code>, commas, parentheses, and other punctuation are therefore not preserved.</p>
+
+    <h3>Existing camelCase and acronym splitting is intentionally limited</h3>
+    <p>The identifier tokenizer includes ASCII-oriented rules that split patterns such as <code>customerOrder</code> and many acronym-to-word transitions such as <code>XMLParser</code>. Those boundary rules are not fully locale-aware and do not attempt sophisticated linguistic segmentation for every script.</p>
+
+    <h3>Unicode support is broad, but locale rules can differ</h3>
+    <p>The converter uses Unicode property matching and JavaScript case conversion, which supports many non-ASCII letters. However, casing can be language-specific. Turkish I, German ß, Greek sigma forms, and scripts without upper/lower distinctions can behave differently from a locale-specific editor.</p>
+
+    <h3>Alternating case ignores non-letter characters</h3>
+    <p>The alternating pattern advances only when a Unicode letter is encountered. Spaces, numbers, punctuation, and symbols remain in place and do not consume a position in the lower/upper sequence.</p>
+
+    <div class="caution-note"><strong>Identifier output is not automatically safe for code, URLs, filenames, or databases.</strong> A target platform may impose reserved words, normalization rules, maximum lengths, ASCII-only requirements, filesystem restrictions, or uniqueness constraints that this converter does not validate.</div>
+
+    <h3>Sentence and word counts are lightweight estimates</h3>
+    <p>Word counts come from Unicode letter/number token matching. Sentence counts look for runs of <code>.</code>, <code>!</code>, or <code>?</code> followed by whitespace or the end of the text; if none are found but words exist, the tool reports one sentence. Abbreviations, decimals, and unusual punctuation can therefore affect the estimate.</p>
+
+    <h3>Related Utiliverse Tools</h3>
+    <div class="related-grid">
+      <a class="related-link" href="../Word_Counter/"><strong>Word Counter</strong><span>Count words, characters, whitespace-free characters, and sentence estimates.</span></a>
+      <a class="related-link" href="../Text_Compare/"><strong>Text Compare</strong><span>Compare the original and converted versions side by side.</span></a>
+      <a class="related-link" href="../Random_String_Generator/"><strong>Random String Generator</strong><span>Create sample identifiers and test strings for development workflows.</span></a>
+    </div>
+
+    <p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 2, 2026 · Preprocessing, Unicode tokenization, title and sentence casing, identifier normalization, statistics, clipboard fallback, and TXT download reviewed against the current implementation.</p>
+
     <h2>Practical Use Cases</h2>
     <h3>Cleaning headings and copied text</h3>
     <p>Text copied from PDFs, spreadsheets, emails, older systems, or forms often arrives in ALL CAPS or inconsistent mixed case. Lowercase, sentence case, and title case can quickly create a cleaner starting point without manually editing every word. The character, word, line, and sentence counters also provide a quick view of the amount of text being processed.</p>
@@ -372,6 +465,11 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
     <details class="faq"><summary>What do “Trim line edges” and “Collapse repeated spaces” do?</summary><p>Trim line edges removes whitespace from the beginning and end of each line. Collapse repeated spaces reduces consecutive spaces or tabs inside a line to one space. Neither option removes line breaks.</p></details>
     <details class="faq"><summary>Is kebab-case output automatically safe as a URL slug?</summary><p>Not necessarily. Kebab case is a naming format, not a complete slug-validation system. A publishing platform may require additional transliteration, reserved-character rules, normalization, length limits, or uniqueness checks.</p></details>
     <details class="faq"><summary>Can I save the converted result?</summary><p>Yes. Use Copy Output to place the result on the clipboard or Download TXT to save the current converted output as a UTF-8 plain-text file.</p></details>
+    <details class="faq"><summary>Will camelCase preserve punctuation from my original text?</summary><p>No. Identifier modes tokenize letters and numbers, remove punctuation separators, and rebuild the result according to the selected naming convention.</p></details>
+    <details class="faq"><summary>Why can Sentence case change brand names or acronyms?</summary><p>Sentence case lowercases the full input before capitalizing likely sentence starts. It cannot infer which words should retain special capitalization.</p></details>
+    <details class="faq"><summary>Does alternating case count spaces and punctuation in its pattern?</summary><p>No. The lower/upper pattern advances only when a Unicode letter is encountered. Non-letter characters remain unchanged and do not consume a step.</p></details>
+    <details class="faq"><summary>Can I safely use kebab-case output as a filename everywhere?</summary><p>Not automatically. Operating systems and applications can impose reserved characters, reserved names, normalization rules, path-length limits, or other restrictions that this tool does not validate.</p></details>
+    <details class="faq"><summary>Why can the sentence count differ from a grammar-aware editor?</summary><p>The tool uses a lightweight punctuation-based estimate. Abbreviations, decimals, unusual punctuation, and incomplete sentences can produce different counts from language-aware software.</p></details>
   </section>
 </div>
 </main>
