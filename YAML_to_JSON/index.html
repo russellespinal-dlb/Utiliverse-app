@@ -129,9 +129,36 @@ body.light-mode .formula-box{border-color:#e2e8f0;background:#f8fafc}
   #yaml,#json{font-size:16px!important}
 }
 
+
+.title-row{display:flex;align-items:center;gap:14px}
+.title-icon{width:44px;height:44px;flex:0 0 auto;color:#818cf8}
+.title-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid #334155;background:rgba(15,23,42,.58);border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#e2e8f0;margin-bottom:5px}
+.method-card span{display:block;color:#94a3b8;font-size:13px;line-height:1.65}
+.caution-note{border:1px solid rgba(251,191,36,.28);background:rgba(251,191,36,.07);border-radius:14px;padding:16px;color:#fde68a;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#fef3c7}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid #334155;background:#0f172a;color:#e2e8f0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid #334155;background:rgba(15,23,42,.55);border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#e2e8f0;margin-bottom:4px}
+.related-link span{display:block;color:#94a3b8;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+body.light-mode .method-card,body.light-mode .related-link{background:#fff;border-color:#dbe3ee}
+body.light-mode .method-card strong,body.light-mode .related-link strong{color:#1e293b}
+body.light-mode .method-card span,body.light-mode .related-link span{color:#475569}
+body.light-mode .caution-note{background:#fffbeb;border-color:#fde68a;color:#92400e}
+body.light-mode .caution-note strong{color:#78350f}
+body.light-mode .example-box{background:#f8fafc;color:#1e293b;border-color:#dbe3ee}
+@media(max-width:700px){
+  .title-icon{width:36px;height:36px}
+  .method-grid,.related-grid{grid-template-columns:1fr}
+}
+
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse YAML to JSON Converter","url":"https://utiliverse.app/YAML_to_JSON/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled. The page loads the js-yaml parser from a public CDN.","description":"Free browser-based YAML to JSON converter that parses YAML, reports syntax errors and produces formatted JSON output.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Live YAML parsing","Formatted JSON output","YAML syntax error feedback","Nested objects and arrays","Example YAML loader","Copy JSON output","Clear input and output","Browser-side conversion"]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the YAML to JSON conversion performed locally?","acceptedAnswer":{"@type":"Answer","text":"Yes. The YAML text is parsed and the JSON result is generated in your browser. The page loads the js-yaml library and interface resources from public CDNs, but this tool does not submit your YAML to a Utiliverse conversion server."}},{"@type":"Question","name":"Can nested YAML be converted?","acceptedAnswer":{"@type":"Answer","text":"Yes. Valid nested mappings, lists and scalar values supported by the js-yaml parser are converted into the corresponding JavaScript data structure and then formatted as JSON."}},{"@type":"Question","name":"Does the JSON output get formatted?","acceptedAnswer":{"@type":"Answer","text":"Yes. The output uses two-space indentation so objects and arrays are easier to read."}},{"@type":"Question","name":"What happens if my YAML is invalid?","acceptedAnswer":{"@type":"Answer","text":"The status area shows the parser error. The most recent valid JSON output is left in place so a parsing error does not silently replace it with misleading data."}},{"@type":"Question","name":"What happens with an empty or comment-only YAML document?","acceptedAnswer":{"@type":"Answer","text":"An empty input clears the output. A YAML document containing only comments or otherwise parsing to no value is represented as JSON null."}},{"@type":"Question","name":"Can I copy the converted JSON?","acceptedAnswer":{"@type":"Answer","text":"Yes. Use the Copy button. The page reports whether copying succeeded or whether clipboard access was unavailable."}},{"@type":"Question","name":"Does YAML support features that JSON does not?","acceptedAnswer":{"@type":"Answer","text":"Yes. YAML supports comments and additional syntax such as anchors, aliases and type handling. The parser resolves supported YAML constructs before the result is serialized to JSON, so the JSON representation may not preserve YAML-specific syntax."}},{"@type":"Question","name":"Should I paste passwords, API keys or secrets into the converter?","acceptedAnswer":{"@type":"Answer","text":"Avoid placing real secrets into any webpage unless you trust the full environment. This converter performs the conversion in the browser, but the page still loads JavaScript libraries from public CDNs."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse YAML to JSON Converter","url":"https://utiliverse.app/YAML_to_JSON/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled. The page loads the js-yaml parser from a public CDN.","description":"Free browser-based YAML to JSON converter using js-yaml 4.1.0, with live parsing, formatted JSON output, parser error feedback, clipboard support and documented YAML-to-JSON type limitations.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Live YAML parsing","Formatted two-space JSON output","YAML syntax error feedback","Nested objects and arrays","YAML anchor and alias resolution","Example YAML loader","Copy JSON output with clipboard fallback","Clear input and output","Browser-side conversion","YAML-specific type and precision guidance","Single-document YAML parsing"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the YAML to JSON conversion performed locally?","acceptedAnswer":{"@type":"Answer","text":"Yes. The YAML text is parsed and the JSON result is generated in your browser. The page loads the js-yaml library and interface resources from public CDNs, but this tool does not submit your YAML to a Utiliverse conversion server."}},{"@type":"Question","name":"Can nested YAML be converted?","acceptedAnswer":{"@type":"Answer","text":"Yes. Valid nested mappings, lists and scalar values supported by the js-yaml parser are converted into the corresponding JavaScript data structure and then formatted as JSON."}},{"@type":"Question","name":"Does the JSON output get formatted?","acceptedAnswer":{"@type":"Answer","text":"Yes. The output uses two-space indentation so objects and arrays are easier to read."}},{"@type":"Question","name":"What happens if my YAML is invalid?","acceptedAnswer":{"@type":"Answer","text":"The status area shows the parser error. The most recent valid JSON output is left in place so a parsing error does not silently replace it with misleading data."}},{"@type":"Question","name":"What happens with an empty or comment-only YAML document?","acceptedAnswer":{"@type":"Answer","text":"An empty input clears the output. A YAML document containing only comments or otherwise parsing to no value is represented as JSON null."}},{"@type":"Question","name":"Can I copy the converted JSON?","acceptedAnswer":{"@type":"Answer","text":"Yes. Use the Copy button. The page reports whether copying succeeded or whether clipboard access was unavailable."}},{"@type":"Question","name":"Does YAML support features that JSON does not?","acceptedAnswer":{"@type":"Answer","text":"Yes. YAML supports comments and additional syntax such as anchors, aliases and type handling. The parser resolves supported YAML constructs before the result is serialized to JSON, so the JSON representation may not preserve YAML-specific syntax."}},{"@type":"Question","name":"Should I paste passwords, API keys or secrets into the converter?","acceptedAnswer":{"@type":"Answer","text":"Avoid placing real secrets into any webpage unless you trust the full environment. This converter performs the conversion in the browser, but the page still loads JavaScript libraries from public CDNs."}},{"@type":"Question","name":"Does the converter preserve YAML comments and anchors?","acceptedAnswer":{"@type":"Answer","text":"No. Comments and presentation formatting are not represented in JSON. Supported anchors and aliases are resolved into the parsed data structure rather than preserved as YAML syntax."}},{"@type":"Question","name":"What happens to YAML .nan or .inf values?","acceptedAnswer":{"@type":"Answer","text":"Those values can become non-finite JavaScript numbers. JSON.stringify serializes non-finite numbers such as NaN and Infinity as null, so review special numeric values carefully."}},{"@type":"Question","name":"Can very large YAML integers lose precision?","acceptedAnswer":{"@type":"Answer","text":"Yes. Extremely large integers can exceed JavaScript's exact integer precision. Quote a value in YAML when exact digits must be preserved as text."}},{"@type":"Question","name":"Can I convert a multi-document YAML stream?","acceptedAnswer":{"@type":"Answer","text":"This page uses jsyaml.load(), which is designed for one YAML document. Multi-document streams should be handled with tooling that explicitly supports loading multiple YAML documents."}}]}</script>
 </head>
 <body>
 <!--
@@ -166,8 +193,12 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 -->
 <main class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
 <div class="max-w-3xl">
-<p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Developer utility</p>
-<h1 class="text-4xl sm:text-5xl font-black mt-2">YAML to JSON Converter &amp; Formatter</h1>
+<div class="title-row">
+  <span class="title-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><path d="M5 4h5v5H5z"/><path d="M14 15h5v5h-5z"/><path d="M10 6.5h4a3 3 0 0 1 3 3v2"/><path d="m15 9 2.5 2.5L20 9"/><path d="M14 17.5h-4a3 3 0 0 1-3-3v-2"/><path d="m9 15-2.5-2.5L4 15"/></svg>
+  </span>
+  <h1 class="text-4xl sm:text-5xl font-black">YAML to JSON Converter &amp; Formatter</h1>
+</div>
 <p class="mt-4 text-lg muted leading-relaxed">Convert YAML configuration and structured data into formatted JSON with live parsing feedback directly in your browser.</p>
 </div>
 <section class="glass rounded-3xl p-5 sm:p-8 mt-8">
@@ -192,7 +223,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 <button class="btn" onclick="clearAll()">Clear</button>
 </div>
 </section>
-<p class="local-processing-note mt-4">Browser-based conversion: YAML parsing and JSON generation happen on this page and your entered YAML is not submitted to a Utiliverse conversion server. The page loads js-yaml and interface libraries from public CDNs.</p>
+<p class="local-processing-note mt-4">Browser-based conversion: YAML parsing and JSON generation happen locally in this tool and your entered YAML is not submitted to a Utiliverse conversion server. The page still loads js-yaml, interface libraries and advertising resources from external providers, so avoid pasting production secrets into any webpage unless you trust the full environment.</p>
 
 <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
      Paste approved Google AdSense code here after approval.
@@ -209,6 +240,71 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 </div>
 <p>YAML is popular for configuration because it is compact and comfortable for humans to edit. JSON is equally important when structured data needs to move between browser applications, APIs, automation scripts, and services that expect a standardized JSON document.</p>
 <p>Use this converter when you receive configuration in YAML but need a JSON representation for a web application, API request, test fixture, data inspection workflow, or another development tool. Converting in the browser keeps the workflow quick and avoids needless copy-and-paste between multiple services.</p>
+
+<h2>Conversion Methodology and Important YAML Differences</h2>
+<p>This page uses <strong>js-yaml 4.1.0</strong> to parse the YAML text into a JavaScript value. That parsed value is then serialized with <code>JSON.stringify(value, null, 2)</code>. The output therefore represents the parsed data structure—not the original YAML formatting or syntax.</p>
+
+<div class="method-grid">
+  <div class="method-card"><strong>Live parsing</strong><span>The converter runs after every input change. Valid YAML replaces the JSON output; invalid YAML reports an error while leaving the last valid output in place.</span></div>
+  <div class="method-card"><strong>Two-space JSON formatting</strong><span>Objects and arrays are serialized with two-space indentation for readability.</span></div>
+  <div class="method-card"><strong>YAML-specific syntax is resolved</strong><span>Comments, anchors, aliases and YAML presentation details are not preserved as YAML syntax in the generated JSON.</span></div>
+  <div class="method-card"><strong>One parsed document</strong><span>The page calls <code>jsyaml.load()</code>, which is intended for a single YAML document rather than a multi-document YAML stream.</span></div>
+</div>
+
+<h3>Worked example: mapping and list</h3>
+<code class="example-box">YAML
+name: Utiliverse
+free: true
+features:
+  - calculators
+  - converters
+
+JSON
+{
+  "name": "Utiliverse",
+  "free": true,
+  "features": [
+    "calculators",
+    "converters"
+  ]
+}</code>
+
+<h3>Anchors and aliases are resolved, not preserved</h3>
+<p>YAML can define an anchor once and reuse it with aliases. After parsing, JSON contains the resulting values rather than YAML anchor or alias notation. This is useful when you need the resolved structure, but it means the conversion is not reversible back to the original YAML formatting.</p>
+
+<code class="example-box">YAML
+defaults: &defaults
+  retries: 3
+service:
+  <<: *defaults
+  enabled: true
+
+JSON represents the resolved object values.
+The &defaults and *defaults syntax itself is not preserved.</code>
+
+<h3>YAML scalar types can change representation in JSON</h3>
+<p>The YAML parser can interpret supported scalar syntax as numbers, booleans, null values, timestamps or other JavaScript values. JSON supports a smaller set of data types. In particular, values that become non-finite JavaScript numbers such as YAML <code>.nan</code> or <code>.inf</code> are serialized by <code>JSON.stringify</code> as <code>null</code>. Timestamp-like values parsed as JavaScript dates can serialize as ISO-style strings.</p>
+
+<div class="caution-note"><strong>Always review type-sensitive configuration after conversion.</strong> A syntactically valid conversion can still change how a YAML-specific value is represented in JSON. This matters when an application distinguishes strings from numbers, timestamps, null values or special numeric values.</div>
+
+<h3>Large integers and JavaScript number precision</h3>
+<p>The parser and serializer operate through JavaScript values. Extremely large YAML integers can exceed JavaScript's exact integer precision, so a large numeric identifier may not survive as the exact decimal number you typed. If exact digits matter, quote the value in YAML so it is treated as a string.</p>
+
+<h3>Comments and formatting are intentionally lost</h3>
+<p>JSON has no comment syntax in its standard data model. YAML comments, indentation style, quote style, blank lines and other presentation choices are therefore not represented in the generated JSON. Keep the original YAML when those details are important for documentation or maintenance.</p>
+
+<h3>Invalid YAML and stale output</h3>
+<p>When parsing fails, the status area shows the parser error but the converter intentionally leaves the last valid JSON output visible. This is useful for comparison while fixing YAML, but remember that the visible JSON may belong to an earlier valid version until the status returns to <strong>Conversion complete</strong>.</p>
+
+<h3>Related Utiliverse Tools</h3>
+<div class="related-grid">
+  <a class="related-link" href="../JSON_Formatter/"><strong>JSON Formatter</strong><span>Validate, format and inspect JSON after conversion.</span></a>
+  <a class="related-link" href="../JSON_to_CSV/"><strong>JSON to CSV Converter</strong><span>Convert suitable JSON structures into tabular CSV output.</span></a>
+  <a class="related-link" href="../Text_Compare/"><strong>Text Compare</strong><span>Compare configuration or structured-text versions side by side.</span></a>
+</div>
+
+<p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 1, 2026 · js-yaml parsing, JSON serialization, error handling, clipboard behavior and YAML-specific type limitations reviewed against the current implementation.</p>
+
 <h3>Common use cases</h3>
 <ul>
 <li>Convert deployment or application configuration into JSON for tooling.</li>
@@ -239,7 +335,10 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 <details class="faq"><summary>What happens with an empty or comment-only YAML document?</summary><p class="muted">An empty input clears the output. A YAML document containing only comments or otherwise parsing to no value is represented as JSON null.</p></details>
 <details class="faq"><summary>Can I copy the converted JSON?</summary><p class="muted">Yes. Use the Copy button. The page reports whether copying succeeded or whether clipboard access was unavailable.</p></details>
 <details class="faq"><summary>Does YAML support features that JSON does not?</summary><p class="muted">Yes. YAML supports comments and additional syntax such as anchors, aliases and type handling. The parser resolves supported YAML constructs before the result is serialized to JSON, so the JSON representation may not preserve YAML-specific syntax.</p></details>
-<details class="faq"><summary>Should I paste passwords, API keys or secrets into the converter?</summary><p class="muted">Avoid placing real secrets into any webpage unless you trust the full environment. This converter performs the conversion in the browser, but the page still loads JavaScript libraries from public CDNs.</p></details>
+<details class="faq"><summary>Should I paste passwords, API keys or secrets into the converter?</summary><p class="muted">Avoid placing real secrets into any webpage unless you trust the full environment. This converter performs the conversion in the browser, but the page still loads JavaScript libraries from public CDNs.</p></details><details class="faq"><summary>Does the converter preserve YAML comments and anchors?</summary><p class="muted">No. Comments and presentation formatting are not represented in JSON. Supported anchors and aliases are resolved into the parsed data structure rather than preserved as YAML syntax.</p></details>
+<details class="faq"><summary>What happens to YAML .nan or .inf values?</summary><p class="muted">Those values can become non-finite JavaScript numbers. JSON.stringify serializes non-finite numbers such as NaN and Infinity as null, so review special numeric values carefully.</p></details>
+<details class="faq"><summary>Can very large YAML integers lose precision?</summary><p class="muted">Yes. Extremely large integers can exceed JavaScript's exact integer precision. Quote a value in YAML when exact digits must be preserved as text.</p></details>
+<details class="faq"><summary>Can I convert a multi-document YAML stream?</summary><p class="muted">This page uses jsyaml.load(), which is designed for one YAML document. Multi-document streams should be handled with tooling that explicitly supports loading multiple YAML documents.</p></details>
 </section>
 </main>
 <script>
@@ -282,7 +381,19 @@ async function copyOut() {
     await navigator.clipboard.writeText(output);
     status.textContent = 'JSON copied to clipboard';
   } catch (err) {
-    status.textContent = 'Unable to copy automatically. Select the JSON and copy it manually.';
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = output;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+      status.textContent = 'JSON copied to clipboard';
+    } catch (fallbackErr) {
+      status.textContent = 'Unable to copy automatically. Select the JSON and copy it manually.';
+    }
   }
 }
 
