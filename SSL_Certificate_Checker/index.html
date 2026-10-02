@@ -263,45 +263,35 @@
       .mobile-stack{width:100%}
       .mobile-stack .btn-primary,.mobile-stack .btn-secondary{width:100%}
     }
-  </style>
+  
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid #dbe3ee;background:#fff;border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#0f172a;margin-bottom:5px}
+.method-card span{display:block;color:#475569;font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid #dbe3ee;background:#f8fafc;color:#0f172a;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.caution-note{border:1px solid #fde68a;background:#fffbeb;border-radius:14px;padding:16px;color:#92400e;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#78350f}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid #dbe3ee;background:#fff;border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#0f172a;margin-bottom:4px}
+.related-link span{display:block;color:#475569;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+body.dark-mode .method-card,body.dark-mode .related-link{background:#0f172a;border-color:#334155}
+body.dark-mode .method-card strong,body.dark-mode .related-link strong{color:#e2e8f0}
+body.dark-mode .method-card span,body.dark-mode .related-link span{color:#94a3b8}
+body.dark-mode .example-box{background:#0f172a;color:#e2e8f0;border-color:#334155}
+body.dark-mode .caution-note{background:rgba(120,53,15,.24);border-color:#92400e;color:#fde68a}
+body.dark-mode .caution-note strong{color:#fef3c7}
+@media(max-width:700px){.method-grid,.related-grid{grid-template-columns:1fr}}
+
+</style>
 
   <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"WebApplication",
-    "name":"Utiliverse SSL Certificate Checker",
-    "url":"https://utiliverse.app/SSL_Certificate_Checker/",
-    "applicationCategory":"DeveloperApplication",
-    "operatingSystem":"Any",
-    "browserRequirements":"Requires a modern web browser with JavaScript enabled.",
-    "description":"Free online SSL/TLS certificate checker for inspecting certificate validity, expiration, issuer, subject, SAN coverage, TLS protocol, cipher and trust status.",
-    "isAccessibleForFree":true,
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
-    "featureList":[
-      "SSL certificate expiration check",
-      "Certificate validity and authorization status",
-      "Issuer and subject information",
-      "Subject Alternative Name display",
-      "TLS protocol and cipher information",
-      "Custom TLS port support",
-      "Copyable certificate report"
-    ]
-  }
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse SSL Certificate Checker","url":"https://utiliverse.app/SSL_Certificate_Checker/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based SSL/TLS certificate checker interface for public hostnames and custom ports, showing expiration, issuer, subject, SANs, authorization status, negotiated TLS protocol and cipher from a remote live certificate lookup.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Public hostname normalization","Custom TLS port validation from 1 through 65535","SSL/TLS certificate expiration check","Days-until-expiry display","Certificate authorization/trust result from remote checker","Issuer and subject information","Subject Alternative Name display","Negotiated TLS protocol","Negotiated cipher information","30-day and 14-day expiry warning thresholds","Copyable certificate report with clipboard fallback","Remote live TLS lookup","Rate-limit and lookup-error handling","Public-endpoint privacy guidance"]}
   </script>
 
   <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {"@type":"Question","name":"What does an SSL certificate checker do?","acceptedAnswer":{"@type":"Answer","text":"An SSL certificate checker connects to a public TLS-enabled hostname and reports information about the certificate presented by that service, such as its validity period, issuer, subject, hostname coverage and trust status."}},
-      {"@type":"Question","name":"What port should I use for an HTTPS website?","acceptedAnswer":{"@type":"Answer","text":"Port 443 is the standard port for HTTPS and is the correct choice for most public websites. Use another port only when the TLS-enabled service is intentionally configured on a custom port."}},
-      {"@type":"Question","name":"What does days remaining mean?","acceptedAnswer":{"@type":"Answer","text":"Days remaining is the approximate number of full days between the current time and the certificate's expiration time. A low value is a reminder to verify renewal and deployment before the certificate expires."}},
-      {"@type":"Question","name":"What are Subject Alternative Names?","acceptedAnswer":{"@type":"Answer","text":"Subject Alternative Names, or SANs, are the hostnames covered by the certificate. Modern hostname validation primarily relies on SAN entries rather than only the certificate common name."}},
-      {"@type":"Question","name":"Why can a certificate be untrusted even if it has not expired?","acceptedAnswer":{"@type":"Answer","text":"Expiration is only one part of certificate validation. Trust can also fail because of a missing intermediate certificate, an untrusted issuer, a hostname mismatch or another validation problem."}},
-      {"@type":"Question","name":"Does this tool upload private keys or certificate files?","acceptedAnswer":{"@type":"Answer","text":"No private key or certificate file is requested. The hostname and port you enter are sent to the lookup service so it can connect to that public endpoint and return the certificate information."}}
-    ]
-  }
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does an SSL certificate checker do?","acceptedAnswer":{"@type":"Answer","text":"An SSL certificate checker connects to a public TLS-enabled hostname and reports information about the certificate presented by that service, such as its validity period, issuer, subject, hostname coverage and trust status."}},{"@type":"Question","name":"What port should I use for an HTTPS website?","acceptedAnswer":{"@type":"Answer","text":"Port 443 is the standard port for HTTPS and is the correct choice for most public websites. Use another port only when the TLS-enabled service is intentionally configured on a custom port."}},{"@type":"Question","name":"What does days remaining mean?","acceptedAnswer":{"@type":"Answer","text":"Days remaining is the approximate number of full days between the current time and the certificate's expiration time. A low value is a reminder to verify renewal and deployment before the certificate expires."}},{"@type":"Question","name":"What are Subject Alternative Names?","acceptedAnswer":{"@type":"Answer","text":"Subject Alternative Names, or SANs, are the hostnames covered by the certificate. Modern hostname validation primarily relies on SAN entries rather than only the certificate common name."}},{"@type":"Question","name":"Why can a certificate be untrusted even if it has not expired?","acceptedAnswer":{"@type":"Answer","text":"Expiration is only one part of certificate validation. Trust can also fail because of a missing intermediate certificate, an untrusted issuer, a hostname mismatch or another validation problem."}},{"@type":"Question","name":"Does this tool upload private keys or certificate files?","acceptedAnswer":{"@type":"Answer","text":"No private key or certificate file is requested. The hostname and port you enter are sent to the lookup service so it can connect to that public endpoint and return the certificate information."}},{"@type":"Question","name":"Does the TLS protocol shown mean that is the only protocol the server supports?","acceptedAnswer":{"@type":"Answer","text":"No. It is the protocol negotiated by the remote checker for that connection. A server can support additional TLS versions and cipher suites that are not enumerated here."}},{"@type":"Question","name":"Can different users see a different certificate for the same hostname?","acceptedAnswer":{"@type":"Answer","text":"Yes. CDNs, load balancers, geographic routing, SNI configuration, or inconsistent deployments can cause different endpoints to present different certificates."}},{"@type":"Question","name":"Does Authorized mean every browser will trust the certificate?","acceptedAnswer":{"@type":"Answer","text":"No. It is the validation result reported by the remote checking service. Local enterprise trust stores, private certificate authorities, or platform differences can produce different results elsewhere."}},{"@type":"Question","name":"Can this check private or internal hostnames?","acceptedAnswer":{"@type":"Answer","text":"No. The page is designed for public endpoints and intentionally rejects localhost and ordinary single-label internal names. Do not submit confidential infrastructure names to the external lookup service."}},{"@type":"Question","name":"Does an API timeout or rate-limit response mean the certificate is bad?","acceptedAnswer":{"@type":"Answer","text":"No. A service or network failure means the lookup was inconclusive. Retry later or verify the endpoint with another trusted certificate or TLS diagnostic tool."}}]}
   </script>
 <style id="u2-styles">
 .u2-related{--u2-bg:#fff;--u2-text:#0f172a;--u2-muted:#475569;--u2-border:#dbe3ee;--u2-link:#4338ca;background:var(--u2-bg);color:var(--u2-text);border:1px solid var(--u2-border);border-radius:18px;padding:24px;margin:32px auto;max-width:1120px;overflow-wrap:anywhere;font-family:Inter,system-ui,sans-serif}.u2-related h2{font-size:25px;line-height:1.3;margin:0 0 16px;color:var(--u2-text);font-weight:800}.u2-related h3{font-size:18px;margin:22px 0 8px;font-weight:750;color:var(--u2-text)}.u2-related p,.u2-related li{font-size:15px;line-height:1.8;color:var(--u2-muted);margin:0 0 12px}.u2-related ul{padding-left:22px;list-style:disc}.u2-related a{color:var(--u2-link);text-decoration:underline;text-underline-offset:3px}.u2-related a:focus-visible{outline:2px solid currentColor;outline-offset:4px}.u2-columns{display:grid;grid-template-columns:1fr 1fr;gap:24px}.u2-review{border-top:1px solid var(--u2-border);padding-top:15px;font-size:12px!important}.u2-related.u2-dark-default{--u2-bg:#0f172a;--u2-text:#f8fafc;--u2-muted:#cbd5e1;--u2-border:#334155;--u2-link:#a5b4fc}html.dark .u2-related,body.dark-mode .u2-related{--u2-bg:#0f172a;--u2-text:#f8fafc;--u2-muted:#cbd5e1;--u2-border:#334155;--u2-link:#a5b4fc}body.light-mode .u2-related{--u2-bg:#fff;--u2-text:#0f172a;--u2-muted:#475569;--u2-border:#dbe3ee;--u2-link:#4338ca}@media(max-width:620px){.u2-related{padding:18px}.u2-columns{grid-template-columns:1fr;gap:0}}
@@ -485,7 +475,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
           </div>
 
           <p class="text-xs text-slate-500 mt-5 leading-relaxed">
-            This page is a browser-based interface, but the live TLS inspection itself must be performed by a network service because browsers do not expose arbitrary remote certificate handshakes to page JavaScript. The hostname and port you enter are sent to the third-party lookup endpoint used by this tool. Do not enter private/internal hostnames or confidential infrastructure names.
+            This page is a browser-based interface, but the live TLS inspection itself must be performed by a network service because browsers do not expose arbitrary remote certificate handshakes to page JavaScript. The hostname and port you enter are sent to the third-party lookup endpoint used by this tool. Do not enter private/internal hostnames or confidential infrastructure names. The page itself may also load interface resources from CDNs and advertising resources from external providers.
           </p>
         </div>
       </div>
@@ -548,6 +538,64 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
         <p>
           The protocol and cipher fields show what the checker negotiated during its connection. These values confirm that TLS is working and provide a quick technical snapshot of the session. They are not a complete cipher-suite or protocol audit because a server can support many combinations even though one connection negotiates only one. For deeper testing, use a dedicated TLS scanner that enumerates supported protocol versions, cipher suites, and related server settings.
         </p>
+
+
+        <h2 class="mt-8">Check Methodology, Interpretation, and Important Limits</h2>
+        <p>This page does not read a remote server certificate directly from browser JavaScript. Instead, it normalizes the hostname, validates the public host and TCP port, then sends that target to the configured certificate-checking API. The remote service performs the TLS connection and returns the certificate and negotiated-session data displayed here.</p>
+
+        <div class="method-grid">
+          <div class="method-card"><strong>Hostname normalization</strong><span>Full URLs are reduced to their hostname. Paths, query strings, fragments, schemes, and a normal hostname port suffix are removed before the check.</span></div>
+          <div class="method-card"><strong>Port handling</strong><span>Port 443 is treated as the standard HTTPS target. A custom port from 1 through 65535 is appended to the target sent to the lookup API.</span></div>
+          <div class="method-card"><strong>Certificate fields</strong><span>The interface displays the validity dates, subject, issuer, authorization result, Subject Alternative Names, protocol and negotiated cipher returned by the remote checker.</span></div>
+          <div class="method-card"><strong>Status banner</strong><span>The page classifies results using returned authorization, expiration state and days remaining, with warning thresholds at 30 days and 14 days.</span></div>
+        </div>
+
+        <h3>Worked example: why an unexpired certificate can still be a problem</h3>
+        <code class="example-box">Certificate valid-to date: 90 days away
+Expired: No
+Authorized: No
+
+Interpretation:
+The certificate is not expired,
+but the remote TLS check did not validate it as authorized/trusted.
+
+Possible causes can include:
+• hostname mismatch
+• missing intermediate certificate
+• untrusted/self-signed issuer
+• another certificate-chain validation problem</code>
+
+        <h3>“Authorized” is the checking service's validation result</h3>
+        <p>The trust/authorization field reflects what the remote checking service reported for its connection. It is not a universal statement about every browser, device, operating system, enterprise trust store, or private certificate authority. A certificate trusted on one managed device can still be untrusted by the public checker, and the reverse can also occur in unusual local environments.</p>
+
+        <h3>One TLS handshake does not enumerate the server's full configuration</h3>
+        <p>The protocol and cipher fields describe the single connection negotiated by the remote checker. A server may support several TLS versions and many cipher suites even though one connection reports only one protocol and one cipher. Use a dedicated TLS scanner when you need full protocol and cipher-suite enumeration.</p>
+
+        <h3>SAN display is coverage data, not an independent hostname-verification engine</h3>
+        <p>The page displays Subject Alternative Names returned by the lookup service, but it does not independently reimplement wildcard matching or RFC service-identity verification in browser code. The remote service's authorization result remains the primary validation signal shown by this tool.</p>
+
+        <h3>Days remaining is approximate</h3>
+        <p>The tool displays the days-until-expiry value returned by the remote service. The exact boundary can differ slightly depending on the service clock, certificate expiration timestamp, time zone presentation, and whether the API rounds or truncates partial days.</p>
+
+        <h3>Public endpoint only</h3>
+        <p>The hostname validator intentionally rejects <code>localhost</code> and ordinary single-label internal hostnames. The configured API is intended for public endpoints. Private networks, internal DNS zones, VPN-only services, split-horizon names, and certificates reachable only from your own environment are outside this tool's scope.</p>
+
+        <h3>CDNs, load balancers, and multi-node services can vary</h3>
+        <p>A public hostname may resolve to different edges or backend paths depending on geography, DNS response, load balancing, SNI routing, or deployment state. This check shows what the remote service observed on that request. It does not prove that every node behind the hostname is serving the same certificate.</p>
+
+        <h3>Rate limits and service failures are not certificate verdicts</h3>
+        <p>The checker can report API rate limits, HTTP errors, timeouts, and network failures. Those conditions mean the lookup could not be completed reliably; they should not be interpreted as proof that the target certificate is invalid.</p>
+
+        <div class="caution-note"><strong>Use this as a live spot check, not a complete TLS security audit.</strong> Certificate validity is only one layer. Revocation behavior, protocol support, cipher-suite exposure, HSTS, HTTP security headers, application security, DNS, patching, and endpoint consistency require separate checks.</div>
+
+        <h3>Related Utiliverse Tools</h3>
+        <div class="related-grid">
+          <a class="related-link" href="../Email_DNS_Checker/"><strong>Email DNS Checker</strong><span>Inspect MX, SPF, DKIM and DMARC posture for a public mail domain.</span></a>
+          <a class="related-link" href="../HAR_File_Viewer/"><strong>HAR File Viewer</strong><span>Review browser network requests and HTTP failures when TLS is only one part of the incident.</span></a>
+          <a class="related-link" href="../IP_Address_Lookup/"><strong>IP Address Lookup</strong><span>Inspect public IP information separately from certificate details.</span></a>
+        </div>
+
+        <p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 2, 2026 · Host normalization, port validation, external lookup behavior, authorization/expiration interpretation, SAN display, TLS protocol/cipher reporting, copy fallback, rate-limit handling, and theme behavior reviewed against the current implementation.</p>
 
         <h2 class="mt-8">Practical Use Cases for a Domain Certificate Checker</h2>
 
@@ -629,6 +677,30 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
           <summary>Is a valid SSL certificate the same as a full security audit?</summary>
           <p>No. Certificate validity is only one part of web security. A complete review can also include TLS versions and cipher suites, security headers, DNS, application vulnerabilities, software patching, authentication, cookies, revocation behavior and server configuration.</p>
         </details>
+        <details class="faq-item">
+          <summary>Does the TLS protocol shown mean that is the only protocol the server supports?</summary>
+          <p>No. It is the protocol negotiated by the remote checker for that connection. A server can support additional TLS versions and cipher suites that are not enumerated here.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Can different users see a different certificate for the same hostname?</summary>
+          <p>Yes. CDNs, load balancers, geographic routing, SNI configuration, or inconsistent deployments can cause different endpoints to present different certificates.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Does “Authorized” mean every browser will trust the certificate?</summary>
+          <p>No. It is the validation result reported by the remote checking service. Local enterprise trust stores, private certificate authorities, or platform differences can produce different results elsewhere.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Can this check private or internal hostnames?</summary>
+          <p>No. The page is designed for public endpoints and intentionally rejects localhost and ordinary single-label internal names. Do not submit confidential infrastructure names to the external lookup service.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Does an API timeout or rate-limit response mean the certificate is bad?</summary>
+          <p>No. A service or network failure means the lookup was inconclusive. Retry later or verify the endpoint with another trusted certificate or TLS diagnostic tool.</p>
+        </details>
       </section>
 
       <!-- =========================================================
@@ -640,7 +712,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
     </div>
   
 <!-- BATCH 2 RELATED CONTENT START -->
-<section class="u2-related" aria-labelledby="u2-heading"><h2 id="u2-heading">Separate certificate problems from HTTP errors</h2><p>Enter the exact public hostname involved in the failure. Compare the returned certificate names, dates, and trust information with the browser’s error. A successful check is evidence about that hostname from the checking service’s perspective.</p><h3>Worked check: a 502 behind a proxy</h3><p>If visitors receive 502 over HTTPS, the browser may already have established TLS with the public proxy. The proxy can still fail when connecting to its origin. A valid certificate on the public hostname does not prove that the private origin has the correct certificate, hostname, or trust chain.</p><h3>Limits and next steps</h3><p>This tool sends the hostname to an external checking API. It does not inspect your private network or your browser’s local trust settings. A service error or timeout is inconclusive; compare the browser details and server logs before changing certificates.</p><p>Record the hostname, check time, observed error, and certificate dates. For an HTTP 502, 503, or 504, follow the gateway guide below. For a redirect to another hostname, check the destination separately.</p><div class="u2-columns"><div><h3>Related guides</h3><ul><li><a href="/Guides/SSL_Certificates_and_Errors.html">How SSL certificates work and why they fail</a></li><li><a href="/Guides/HTTP_502_503_504.html">502 vs 503 vs 504: server and gateway errors</a></li><li><a href="/Guides/HTTP_Redirects.html">301 vs 302 vs 307 vs 308: choosing an HTTP redirect</a></li></ul></div><div><h3>Related tools</h3><ul><li><a href="/HAR_File_Viewer/">HAR File Viewer</a></li></ul><p><a href="/Guides.html">Browse all guides</a></p></div></div><h3>Sources</h3><ul><li><a href="https://www.rfc-editor.org/rfc/rfc9525.html">TLS service identity</a></li><li><a href="https://letsencrypt.org/docs/faq/">Let’s Encrypt FAQ</a></li></ul><p class="u2-review">Explanatory content reviewed September 29, 2026. <a href="/Editorial_Methodology.html">Methodology</a> · <a href="/Contact_Info.html">Report a correction</a></p></section>
+<section class="u2-related" aria-labelledby="u2-heading"><h2 id="u2-heading">Separate certificate problems from HTTP errors</h2><p>Enter the exact public hostname involved in the failure. Compare the returned certificate names, dates, and trust information with the browser’s error. A successful check is evidence about that hostname from the checking service’s perspective.</p><h3>Worked check: a 502 behind a proxy</h3><p>If visitors receive 502 over HTTPS, the browser may already have established TLS with the public proxy. The proxy can still fail when connecting to its origin. A valid certificate on the public hostname does not prove that the private origin has the correct certificate, hostname, or trust chain.</p><h3>Limits and next steps</h3><p>This tool sends the hostname to an external checking API. It does not inspect your private network or your browser’s local trust settings. A service error or timeout is inconclusive; compare the browser details and server logs before changing certificates.</p><p>Record the hostname, check time, observed error, and certificate dates. For an HTTP 502, 503, or 504, follow the gateway guide below. For a redirect to another hostname, check the destination separately.</p><div class="u2-columns"><div><h3>Related guides</h3><ul><li><a href="/Guides/SSL_Certificates_and_Errors.html">How SSL certificates work and why they fail</a></li><li><a href="/Guides/HTTP_502_503_504.html">502 vs 503 vs 504: server and gateway errors</a></li><li><a href="/Guides/HTTP_Redirects.html">301 vs 302 vs 307 vs 308: choosing an HTTP redirect</a></li></ul></div><div><h3>Related tools</h3><ul><li><a href="/HAR_File_Viewer/">HAR File Viewer</a></li></ul><p><a href="/Guides.html">Browse all guides</a></p></div></div><h3>Sources</h3><ul><li><a href="https://www.rfc-editor.org/rfc/rfc9525.html">TLS service identity</a></li><li><a href="https://letsencrypt.org/docs/faq/">Let’s Encrypt FAQ</a></li></ul><p class="u2-review">Explanatory content reviewed October 2, 2026. <a href="/Editorial_Methodology.html">Methodology</a> · <a href="/Contact_Info.html">Report a correction</a></p></section>
 <!-- BATCH 2 RELATED CONTENT END -->
 </main>
 
