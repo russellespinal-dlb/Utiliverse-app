@@ -188,10 +188,33 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
 body.light-mode .local-processing-note{color:#64748b}
 @media(max-width:560px){textarea,.select{font-size:16px}}
 
+
+.title-row{display:flex;align-items:center;gap:14px}
+.title-icon{width:44px;height:44px;flex:0 0 auto;color:#818cf8}
+.title-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid var(--border);background:var(--panel2);border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#e2e8f0;margin-bottom:5px}
+.method-card span{display:block;color:#94a3b8;font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:#0f172a;color:#e2e8f0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.caution-note{border:1px solid rgba(251,191,36,.28);background:rgba(251,191,36,.07);border-radius:14px;padding:16px;color:#fde68a;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#fef3c7}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid var(--border);background:var(--panel2);border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#e2e8f0;margin-bottom:4px}
+.related-link span{display:block;color:#94a3b8;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+body.light-mode .method-card strong,body.light-mode .related-link strong{color:#1e293b}
+body.light-mode .method-card span,body.light-mode .related-link span{color:#475569}
+body.light-mode .example-box{background:#f8fafc;color:#1e293b}
+body.light-mode .caution-note{background:#fffbeb;border-color:#fde68a;color:#92400e}
+body.light-mode .caution-note strong{color:#78350f}
+@media(max-width:700px){.title-icon{width:36px;height:36px}.method-grid,.related-grid{grid-template-columns:1fr}}
+
 </style>
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Text to Morse Code Converter","url":"https://utiliverse.app/Text_to_Morse_Code/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled. Audio playback requires Web Audio API support.","description":"Free browser-based Morse code converter for encoding text, decoding Morse, playing timed Morse audio, copying results and downloading text files.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Text to International Morse code","Morse code to text","Slash or three-space word separators","5 to 40 WPM playback speed","300 to 1000 Hz tone frequency","Web Audio API playback","Unsupported-character count","Morse token and signal statistics","Morse code reference chart","Copy output","Download UTF-8 TXT","Swap conversion direction"]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What Morse code standard does this tool use?","acceptedAnswer":{"@type":"Answer","text":"It uses common International Morse code mappings for the English alphabet A\u2013Z, digits 0\u20139, and widely used punctuation marks."}},{"@type":"Question","name":"How are spaces between words represented?","acceptedAnswer":{"@type":"Answer","text":"Text-to-Morse mode can use either a slash or three spaces between words. Morse-to-Text mode understands both formats."}},{"@type":"Question","name":"Can I convert Morse code back into text?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose Morse \u2192 Text, enter each Morse character separated by a space, and use a slash or multiple spaces between words."}},{"@type":"Question","name":"Can I listen to the Morse code?","acceptedAnswer":{"@type":"Answer","text":"Yes. Play Morse generates tones using the browser's Web Audio API. You can adjust speed from 5 to 40 WPM and pitch from 300 to 1000 Hz."}},{"@type":"Question","name":"What happens to characters that do not have a mapping?","acceptedAnswer":{"@type":"Answer","text":"When encoding text, unsupported non-whitespace characters are omitted and counted. When decoding, unknown Morse tokens are displayed as a question mark."}},{"@type":"Question","name":"Does the audio player use standard Morse timing?","acceptedAnswer":{"@type":"Answer","text":"It uses the conventional 1:3 dot-to-dash ratio with one-unit element gaps, three-unit letter gaps, and seven-unit word gaps. Speed is derived from the PARIS WPM convention."}},{"@type":"Question","name":"Is my text sent to a server?","acceptedAnswer":{"@type":"Answer","text":"No. The translation, decoding, statistics, audio generation, clipboard operation, and TXT-file generation are performed in your browser."}},{"@type":"Question","name":"Can I save my Morse code?","acceptedAnswer":{"@type":"Answer","text":"Yes. Use Copy Output for the clipboard or Download TXT to save the current converted result as a UTF-8 text file."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Text to Morse Code Converter","url":"https://utiliverse.app/Text_to_Morse_Code_Converter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled. Audio playback requires Web Audio API support.","description":"Free browser-based text to Morse code converter and Morse decoder with International Morse mappings, slash or multi-space word separators, Web Audio playback, WPM and pitch controls, copy fallback, UTF-8 TXT download, and documented mapping/audio limitations.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Text to International Morse code","Morse code to text","Slash or three-space word separators","Unicode dot and dash normalization","5 to 40 WPM playback speed","300 to 1000 Hz tone frequency","Web Audio API playback","PARIS-based timing","Unsupported-character count","Unknown Morse tokens shown as question marks","Morse token and signal statistics","Morse code reference chart","Copy output with fallback","Download UTF-8 TXT","Swap conversion direction","Browser-local processing"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What Morse code standard does this tool use?","acceptedAnswer":{"@type":"Answer","text":"It uses common International Morse code mappings for the English alphabet A–Z, digits 0–9, and widely used punctuation marks."}},{"@type":"Question","name":"How are spaces between words represented?","acceptedAnswer":{"@type":"Answer","text":"Text-to-Morse mode can use either a slash or three spaces between words. Morse-to-Text mode understands both formats."}},{"@type":"Question","name":"Can I convert Morse code back into text?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose Morse → Text, enter each Morse character separated by a space, and use a slash or multiple spaces between words."}},{"@type":"Question","name":"Can I listen to the Morse code?","acceptedAnswer":{"@type":"Answer","text":"Yes. Play Morse generates tones using the browser's Web Audio API. You can adjust speed from 5 to 40 WPM and pitch from 300 to 1000 Hz."}},{"@type":"Question","name":"What happens to characters that do not have a mapping?","acceptedAnswer":{"@type":"Answer","text":"When encoding text, unsupported non-whitespace characters are omitted and counted. When decoding, unknown Morse tokens are displayed as a question mark."}},{"@type":"Question","name":"Does the audio player use standard Morse timing?","acceptedAnswer":{"@type":"Answer","text":"It uses the conventional 1:3 dot-to-dash ratio with one-unit element gaps, three-unit letter gaps, and seven-unit word gaps. Speed is derived from the PARIS WPM convention."}},{"@type":"Question","name":"Is my text sent to a server?","acceptedAnswer":{"@type":"Answer","text":"No. The translation, decoding, statistics, audio generation, clipboard operation, and TXT-file generation are performed in your browser."}},{"@type":"Question","name":"Can I save my Morse code?","acceptedAnswer":{"@type":"Answer","text":"Yes. Use Copy Output for the clipboard or Download TXT to save the current converted result as a UTF-8 text file."}},{"@type":"Question","name":"Does the converter support accented letters or prosigns?","acceptedAnswer":{"@type":"Answer","text":"Not comprehensively. The built-in table focuses on A–Z, digits 0–9, and the punctuation shown in the reference chart. Accented letters, procedural signals, and national extensions may require a specialized mapping."}},{"@type":"Question","name":"Does this player use Farnsworth timing?","acceptedAnswer":{"@type":"Answer","text":"No. The selected WPM controls the standard dot, dash, letter-gap, and word-gap timing together. It does not independently stretch spacing for Farnsworth practice."}},{"@type":"Question","name":"Why might audio not play immediately?","acceptedAnswer":{"@type":"Answer","text":"Some browsers suspend Web Audio until the user interacts with the page, and device audio settings or browser policies can also affect playback."}},{"@type":"Question","name":"What Unicode Morse symbols are normalized?","acceptedAnswer":{"@type":"Answer","text":"Bullets and middle dots are normalized to periods, while en dash, em dash, and minus-sign characters are normalized to hyphens. Other lookalike symbols are not guaranteed to be recognized."}},{"@type":"Question","name":"Does the TXT download include WPM or pitch settings?","acceptedAnswer":{"@type":"Answer","text":"No. The downloaded file contains only the current converted text or Morse output. Playback speed and tone frequency are not embedded in the file."}}]}</script>
 </head>
 
 <body>
@@ -228,8 +251,12 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 <main>
 <div class="container">
   <section class="hero">
-    <div class="eyebrow">Text utility</div>
-    <h1>Text to Morse Code Converter &amp; Morse Translator</h1>
+    <div class="title-row">
+      <span class="title-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><path d="M10 12h4M17 12h2"/><path d="M5 7v-2M5 19v-2M12 8V5M12 19v-3"/></svg>
+      </span>
+      <h1>Text to Morse Code Converter &amp; Morse Translator</h1>
+    </div>
     <p>Encode text into International Morse code, decode Morse back into readable text, and play timed Morse audio with adjustable speed and tone—all directly in your browser.</p>
     <div class="badges">
       <span class="badge">Text ⇄ Morse</span>
@@ -328,7 +355,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 
     <div class="note"><strong>Audio timing:</strong> playback uses a standard Morse timing ratio: dot = 1 unit, dash = 3 units, gap inside a character = 1 unit, gap between letters = 3 units, and gap between words = 7 units. WPM timing is based on the common PARIS standard.</div>
   </section>
-  <p class="local-processing-note">Browser-based processing: encoding, decoding, statistics, audio generation, clipboard copying, and TXT creation are handled locally on this page and your text is not submitted to a Utiliverse server.</p>
+  <p class="local-processing-note">Browser-based processing: encoding, decoding, statistics, audio generation, clipboard copying, and TXT creation are handled locally by this tool and your text is not submitted to a Utiliverse processing server. The page itself still loads interface and advertising resources from external providers.</p>
 
   <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
        Paste approved Google AdSense code here after approval.
@@ -362,6 +389,61 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 
     <p>Morse systems can include procedural signals, accented characters, and national extensions beyond the basic international alphabet. Those extensions are not universal across every operating context. This general-purpose converter therefore focuses on the widely recognized International Morse alphabet and punctuation rather than pretending that every Unicode character has a single standardized Morse equivalent.</p>
 
+
+    <h2>Conversion Methodology and Important Limits</h2>
+    <p>The converter uses a fixed lookup table for letters A–Z, digits 0–9, and the punctuation shown in the built-in reference chart. Text-to-Morse mode uppercases each source character for lookup, while Morse-to-Text mode reverses the same table after normalizing a few common dot-and-dash lookalikes.</p>
+
+    <div class="method-grid">
+      <div class="method-card"><strong>Text → Morse</strong><span>Supported characters are mapped to ASCII periods and hyphens. Letter codes are separated by spaces, and words use either a slash or three spaces depending on your setting.</span></div>
+      <div class="method-card"><strong>Morse → Text</strong><span>Tokens are separated by whitespace. A slash or two-or-more spaces marks a word boundary. Unknown Morse tokens become <code>?</code>.</span></div>
+      <div class="method-card"><strong>Unsupported text</strong><span>Characters with no mapping are omitted during encoding and counted in the Unsupported statistic rather than guessed.</span></div>
+      <div class="method-card"><strong>Audio</strong><span>Playback uses the Web Audio API with a sine oscillator. Dot/dash timing follows the 1:3 ratio and PARIS-based unit timing.</span></div>
+    </div>
+
+    <h3>Worked example: SOS</h3>
+    <code class="example-box">Text:
+SOS
+
+Morse:
+... --- ...
+
+Timing pattern:
+S = dot dot dot
+O = dash dash dash
+S = dot dot dot</code>
+
+    <h3>Written separators are conventions, not transmitted symbols</h3>
+    <p>A slash in written Morse is a visual word separator. It is not itself transmitted as a literal slash when representing an ordinary space between words. During playback, the tool turns word boundaries into a seven-unit silence.</p>
+
+    <h3>Unicode dots and dashes are normalized selectively</h3>
+    <p>The decoder converts bullets and middle dots to <code>.</code>, and en dash, em dash, and minus-sign characters to <code>-</code>. Other Unicode symbols are not automatically interpreted as Morse. Standard ASCII period and hyphen characters remain the safest input.</p>
+
+    <h3>Accented letters, prosigns, and national extensions</h3>
+    <p>The mapping intentionally focuses on the English alphabet, digits, and common punctuation in the reference chart. It does not include every accented letter, prosign, procedural signal, or national Morse extension. If your operating context requires those symbols, use a tool or codebook that implements that exact specification.</p>
+
+    <h3>Audio speed and PARIS timing</h3>
+    <p>Playback derives one timing unit from <code>1.2 ÷ WPM</code> seconds. At 20 WPM, one unit is approximately 0.06 seconds. A dot lasts one unit, a dash three, the gap inside a character one, the gap between letters three, and the gap between words seven. The frequency control changes only pitch, not the symbol timing.</p>
+
+    <h3>This is not Farnsworth timing</h3>
+    <p>The current player applies the selected WPM uniformly to signal and spacing timing. It does not separately slow inter-character or inter-word spacing while keeping character speed high, which is the idea behind Farnsworth training.</p>
+
+    <h3>Audio playback depends on browser behavior</h3>
+    <p>Web Audio playback can be unavailable or suspended until the user interacts with the page. Device volume, browser audio policies, sleep, power-saving modes, and background-tab behavior can affect whether you hear playback as expected. The tool does not transmit radio-frequency Morse or key external hardware.</p>
+
+    <div class="caution-note"><strong>Do not treat generated Morse as an emergency-communications guarantee.</strong> This page is designed for learning, translation, puzzles, and practice. Operational communications may require specific procedures, prosigns, timing practices, radio equipment, licensing rules, or organization-specific conventions.</div>
+
+    <h3>Download and copy behavior</h3>
+    <p>Copy Output writes the current converted result to the clipboard with a fallback for browsers that do not expose the modern Clipboard API. Download TXT saves the current output as a local UTF-8 text file. Neither action adds metadata describing the selected WPM, pitch, or conversion mode.</p>
+
+    <h3>Related Utiliverse Tools</h3>
+    <div class="related-grid">
+      <a class="related-link" href="../Word_Counter/"><strong>Word Counter</strong><span>Count words and characters in source or decoded text.</span></a>
+      <a class="related-link" href="../Text_Compare/"><strong>Text Compare</strong><span>Compare two text or Morse strings and inspect differences.</span></a>
+      <a class="related-link" href="../Typing_Lab/"><strong>Typing Test</strong><span>Practice timed text entry and compare WPM and accuracy.</span></a>
+    </div>
+
+    <p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 2, 2026 · Character mapping, separator handling, Unicode normalization, unsupported-character behavior, Web Audio timing, copy fallback, and TXT download logic reviewed against the current implementation.</p>
+
     <h2>Practical Use Cases</h2>
     <h3>Learning and practicing Morse code</h3>
     <p>Students can type a phrase, inspect its Morse translation, and then use the audio player to hear the timing. The reference chart provides quick access to individual character mappings, while adjustable WPM allows practice to start slowly and increase as recognition improves. Reversing the direction is useful for self-testing: enter Morse from memory and confirm the decoded result.</p>
@@ -386,6 +468,11 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
     <details class="faq"><summary>Does the audio player use standard Morse timing?</summary><p>It uses the conventional 1:3 dot-to-dash ratio with one-unit element gaps, three-unit letter gaps, and seven-unit word gaps. Speed is derived from the PARIS WPM convention.</p></details>
     <details class="faq"><summary>Is my text sent to a server?</summary><p>No. The translation, decoding, statistics, audio generation, clipboard operation, and TXT-file generation are performed in your browser.</p></details>
     <details class="faq"><summary>Can I save my Morse code?</summary><p>Yes. Use Copy Output for the clipboard or Download TXT to save the current converted result as a UTF-8 text file.</p></details>
+    <details class="faq"><summary>Does the converter support accented letters or prosigns?</summary><p>Not comprehensively. The built-in table focuses on A–Z, digits 0–9, and the punctuation shown in the reference chart. Accented letters, procedural signals, and national extensions may require a specialized mapping.</p></details>
+    <details class="faq"><summary>Does this player use Farnsworth timing?</summary><p>No. The selected WPM controls the standard dot, dash, letter-gap, and word-gap timing together. It does not independently stretch spacing for Farnsworth practice.</p></details>
+    <details class="faq"><summary>Why might audio not play immediately?</summary><p>Some browsers suspend Web Audio until the user interacts with the page, and device audio settings or browser policies can also affect playback.</p></details>
+    <details class="faq"><summary>What Unicode Morse symbols are normalized?</summary><p>Bullets and middle dots are normalized to periods, while en dash, em dash, and minus-sign characters are normalized to hyphens. Other lookalike symbols are not guaranteed to be recognized.</p></details>
+    <details class="faq"><summary>Does the TXT download include WPM or pitch settings?</summary><p>No. The downloaded file contains only the current converted text or Morse output. Playback speed and tone frequency are not embedded in the file.</p></details>
   </section>
 </div>
 </main>
