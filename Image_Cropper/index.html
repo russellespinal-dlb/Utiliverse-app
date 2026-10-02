@@ -217,22 +217,43 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
   .free-label{font-size:10.5px;max-width:130px;white-space:normal;text-align:right;line-height:1.2}
 }
 @media(max-width:390px){.meta-grid{grid-template-columns:1fr}.header-right{gap:6px}}
+
+.title-row{display:flex;align-items:center;gap:14px}
+.title-icon{width:44px;height:44px;flex:0 0 auto;color:#818cf8}
+.title-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border:1px solid #334155;background:rgba(15,23,42,.72);color:#94a3b8;border-radius:12px;cursor:pointer;box-shadow:none;appearance:none;-webkit-appearance:none;transition:color .15s ease,background .15s ease,border-color .15s ease}
+.theme-toggle:hover{color:#fff;background:#1e293b;border-color:#475569}
+.theme-toggle:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
+body.light-mode .theme-toggle{color:#475569;background:#fff;border-color:#cbd5e1}
+body.light-mode .theme-toggle:hover{color:#0f172a;background:#f1f5f9;border-color:#94a3b8}
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid var(--border);background:var(--panel2);border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#e2e8f0;margin-bottom:5px}
+.method-card span{display:block;color:#94a3b8;font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:#0f172a;color:#e2e8f0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.caution-note{border:1px solid rgba(251,191,36,.28);background:rgba(251,191,36,.07);border-radius:14px;padding:16px;color:#fde68a;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#fef3c7}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid var(--border);background:var(--panel2);border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#e2e8f0;margin-bottom:4px}
+.related-link span{display:block;color:#94a3b8;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+.local-processing-note{font-size:12px;line-height:1.65;color:#94a3b8;margin-top:14px}
+body.light-mode .local-processing-note{color:#64748b}
+body.light-mode .method-card strong,body.light-mode .related-link strong{color:#1e293b}
+body.light-mode .method-card span,body.light-mode .related-link span{color:#475569}
+body.light-mode .example-box{background:#f8fafc;color:#1e293b}
+body.light-mode .caution-note{background:#fffbeb;border-color:#fde68a;color:#92400e}
+body.light-mode .caution-note strong{color:#78350f}
+@media(max-width:700px){.title-icon{width:36px;height:36px}.method-grid,.related-grid{grid-template-columns:1fr}}
+
 </style>
 
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Image Cropper","url":"https://utiliverse.app/Image_Cropper/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript and Canvas support.","description":"Crop browser-readable image files locally and export the crop as PNG, JPEG, or WebP.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Image Cropper","url":"https://utiliverse.app/Image_Cropper/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript and Canvas support.","description":"Free browser-based image cropper with drag-and-resize crop selection, exact source-pixel coordinates, aspect-ratio presets, PNG/JPEG/WebP export, maximum-dimension resizing, transparency handling and local Canvas processing.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Drag and resize crop selection","Exact X, Y, width and height source-pixel controls","Free and Original aspect ratios","1:1, 4:3, 3:2, 16:9 and 9:16 presets","Browser-decoded image input","Clipboard image paste","Drag-and-drop file loading","PNG export","JPEG export","WebP export","JPEG and WebP quality control","Original-size export","4096, 2048, 1024 and 512 pixel maximum dimensions","JPEG transparency flattened to white","Static-frame export for animated images","Canvas rasterization of vector inputs","Browser-local processing","Download and manual-save fallbacks"]}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"What image formats can the cropper open?","acceptedAnswer":{"@type":"Answer","text":"It accepts any image format the current browser can decode. Commonly supported formats include JPEG, PNG, WebP, GIF, SVG, BMP, and often AVIF. HEIC, HEIF, TIFF, and some camera RAW formats depend on browser support and may not open."}},
-{"@type":"Question","name":"Does cropping upload my image?","acceptedAnswer":{"@type":"Answer","text":"No. Image decoding, crop selection, preview, and export are performed in the browser."}},
-{"@type":"Question","name":"Can I choose a fixed aspect ratio?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool includes Free, Original, 1:1, 4:3, 3:2, 16:9, and 9:16 crop modes."}},
-{"@type":"Question","name":"Can I enter exact crop dimensions?","acceptedAnswer":{"@type":"Answer","text":"Yes. X, Y, width, and height fields let you enter the crop rectangle in source-image pixels."}},
-{"@type":"Question","name":"Which formats can I export?","acceptedAnswer":{"@type":"Answer","text":"The crop can be exported as PNG, JPEG, or WebP using the browser Canvas API."}},
-{"@type":"Question","name":"What happens to animated GIFs?","acceptedAnswer":{"@type":"Answer","text":"The browser renders an image frame onto the canvas, so exported crops are static and do not preserve GIF animation."}},
-{"@type":"Question","name":"Does cropping reduce image quality?","acceptedAnswer":{"@type":"Answer","text":"PNG export is lossless. JPEG and WebP quality can be adjusted. If Original crop size is selected, the crop uses the source image's pixel dimensions."}},
-{"@type":"Question","name":"Can I crop a transparent image?","acceptedAnswer":{"@type":"Answer","text":"Yes. PNG and WebP can preserve transparency. JPEG does not support transparency, so transparent areas are filled with white."}}
-]}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What image formats can the cropper open?","acceptedAnswer":{"@type":"Answer","text":"It accepts any image format the current browser can decode. Commonly supported formats include JPEG, PNG, WebP, GIF, SVG, BMP, and often AVIF. HEIC, HEIF, TIFF, and some camera RAW formats depend on browser support and may not open."}},{"@type":"Question","name":"Does cropping upload my image?","acceptedAnswer":{"@type":"Answer","text":"No. Image decoding, crop selection, preview, and export are performed in the browser."}},{"@type":"Question","name":"Can I choose a fixed aspect ratio?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool includes Free, Original, 1:1, 4:3, 3:2, 16:9, and 9:16 crop modes."}},{"@type":"Question","name":"Can I enter exact crop dimensions?","acceptedAnswer":{"@type":"Answer","text":"Yes. X, Y, width, and height fields let you enter the crop rectangle in source-image pixels."}},{"@type":"Question","name":"Which formats can I export?","acceptedAnswer":{"@type":"Answer","text":"The crop can be exported as PNG, JPEG, or WebP using the browser Canvas API."}},{"@type":"Question","name":"What happens to animated GIFs?","acceptedAnswer":{"@type":"Answer","text":"The browser renders an image frame onto the canvas, so exported crops are static and do not preserve GIF animation."}},{"@type":"Question","name":"Does cropping reduce image quality?","acceptedAnswer":{"@type":"Answer","text":"PNG export is lossless. JPEG and WebP quality can be adjusted. If Original crop size is selected, the crop uses the source image's pixel dimensions."}},{"@type":"Question","name":"Can I crop a transparent image?","acceptedAnswer":{"@type":"Answer","text":"Yes. PNG and WebP can preserve transparency. JPEG does not support transparency, so transparent areas are filled with white."}},{"@type":"Question","name":"Does the preview resolution affect the downloaded image?","acceptedAnswer":{"@type":"Answer","text":"No. The preview may be scaled down for display, while export uses the source crop dimensions unless you choose a maximum output dimension."}},{"@type":"Question","name":"Will EXIF, GPS, or camera metadata be preserved?","acceptedAnswer":{"@type":"Answer","text":"Not intentionally. The browser decodes the image to pixels and Canvas creates a newly encoded PNG, JPEG, or WebP, so original file metadata should not be assumed to survive."}},{"@type":"Question","name":"What happens when I crop an SVG?","acceptedAnswer":{"@type":"Answer","text":"The browser renders the SVG and the cropper exports raster pixels as PNG, JPEG, or WebP. Editable SVG vector structure is not preserved."}},{"@type":"Question","name":"Why can a very large image fail to export?","acceptedAnswer":{"@type":"Answer","text":"Browsers and devices have memory and maximum-canvas limits. A large source or crop can exceed those limits even when the image format is supported."}},{"@type":"Question","name":"Does 16:9 always export at 1920×1080?","acceptedAnswer":{"@type":"Answer","text":"No. The preset controls only the crop's proportions. Export pixel dimensions depend on the selected crop and the maximum output setting."}}]}
 </script>
 </head>
 
@@ -255,8 +276,12 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
 <main>
 <div class="container">
   <section class="hero">
-    <div class="eyebrow">Image utility</div>
-    <h1>Image Cropper</h1>
+    <div class="title-row">
+      <span class="title-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M18 22V8a2 2 0 0 0-2-2H2"/></svg>
+      </span>
+      <h1>Image Cropper</h1>
+    </div>
     <p>Upload an image, drag and resize the crop area, choose an aspect ratio or enter exact pixel dimensions, preview the result, and export the crop as PNG, JPEG, or WebP—all in your browser.</p>
     <div class="badges">
       <span class="badge">Browser-readable image formats</span>
@@ -271,7 +296,7 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
         <div class="eyebrow">Local image editor</div>
         <h2 id="toolHeading" class="section-title">Crop an image</h2>
       </div>
-      <div class="small">Your image stays on your device. Nothing is uploaded to Utiliverse.</div>
+      <div class="small">Your image is decoded, cropped, previewed, and exported locally in your browser. It is not uploaded to a Utiliverse processing server.</div>
     </div>
 
     <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Choose or drop an image">
@@ -396,6 +421,7 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
 
     <div class="note"><strong>Format note:</strong> “any format” on the web ultimately depends on what the browser can decode. This tool deliberately avoids uploading images to a conversion server. If your browser cannot open HEIC/HEIF, TIFF, RAW, or another specialized format, convert it to PNG/JPEG/WebP first or use a browser that supports that format. Animated GIFs are exported as a static cropped frame.</div>
   </section>
+  <p class="local-processing-note">Browser-based processing: image decoding, crop selection, preview rendering, resizing, encoding, and download preparation are performed locally by this tool. Your source image is not submitted to a Utiliverse processing server. The page itself still loads interface and advertising resources from external providers.</p>
 
   <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
        Paste approved Google AdSense code here after approval.
@@ -433,6 +459,76 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
 
     <p>Downscaling is particularly useful for avatars, web uploads, messaging, and thumbnails. It also reduces memory usage when cropping very large photographs. The browser still has to decode the source image first, so extremely large images may be limited by the memory and canvas restrictions of the device.</p>
 
+
+    <h2>Crop Methodology, Export Behavior, and Important Limits</h2>
+    <p>The cropper stores the selected rectangle as normalized coordinates from 0 to 1 relative to the source image. When a crop is rendered or exported, those normalized values are converted back into the image's original pixel coordinates, rounded to whole pixels, and passed to the Canvas <code>drawImage()</code> operation.</p>
+
+    <div class="method-grid">
+      <div class="method-card"><strong>Display canvas</strong><span>The source image is scaled down only for the on-page editing view. The visual canvas can be smaller than the original image, while crop coordinates still map back to the source's natural pixel dimensions.</span></div>
+      <div class="method-card"><strong>Crop rectangle</strong><span>X, Y, width, and height are clamped so the crop remains inside the source image. Exact pixel fields and pointer dragging update the same normalized crop state.</span></div>
+      <div class="method-card"><strong>Aspect-ratio lock</strong><span>Preset ratios reshape the crop using the relationship between normalized crop size and the source image's width-to-height ratio.</span></div>
+      <div class="method-card"><strong>Export size</strong><span>Original Crop Size keeps the source crop dimensions. A maximum-dimension setting scales the crop down proportionally so its longest side does not exceed the selected limit.</span></div>
+    </div>
+
+    <h3>Worked example: exact source-pixel crop</h3>
+    <code class="example-box">Source image: 4000 × 3000 px
+Crop rectangle:
+X = 1000
+Y = 500
+Width = 2000
+Height = 1500
+
+Original-size export:
+2000 × 1500 px
+
+Max 1024 px export:
+1024 × 768 px</code>
+
+    <h3>The preview is not the final export resolution</h3>
+    <p>The preview renderer caps the displayed crop to a maximum working dimension for responsiveness. Export uses the full source crop unless you select a maximum output dimension. A small-looking preview therefore does not mean the downloaded image has been reduced to preview resolution.</p>
+
+    <h3>Aspect ratio controls shape, not pixel count</h3>
+    <p>A 1:1 crop is square, but it can still export as 3000×3000, 1024×1024, or another square size depending on the selected area and maximum export setting. Likewise, 16:9 controls proportion rather than guaranteeing 1920×1080.</p>
+
+    <h3>JPEG transparency is flattened to white</h3>
+    <p>Before JPEG export, the output canvas is filled with white and the cropped image is drawn over it. PNG can preserve alpha transparency, and WebP can preserve transparency when the browser's encoder supports it.</p>
+
+    <h3>Canvas export creates a newly encoded raster image</h3>
+    <p>The browser decodes the source image into pixels and the tool creates a new PNG, JPEG, or WebP from those pixels. Metadata from the original file—such as EXIF fields, GPS data, camera metadata, embedded color-profile details, or other container-specific metadata—is not intentionally copied into the exported file by this implementation.</p>
+
+    <h3>Animated and vector inputs become static raster output</h3>
+    <p>Animated formats such as GIF are drawn as a browser-decoded frame and exported as a still image. SVG files are rendered by the browser and then rasterized through Canvas when exported. The output is therefore PNG, JPEG, or WebP pixels rather than editable vector content or preserved animation.</p>
+
+    <h3>Browser decoding determines what can be opened</h3>
+    <p>The file picker accepts a broad set of image types, but actual support depends on the current browser and operating system. The tool does not bundle a HEIC, TIFF, RAW, or other specialist decoder. If the browser cannot decode the file, the cropper cannot process it locally.</p>
+
+    <h3>Very large images can hit browser limits</h3>
+    <p>Large camera images require the browser to decode the full source and may also require a large export canvas. Browser memory, GPU limits, maximum canvas dimensions, and device resources can prevent preview or export even when the file format itself is supported.</p>
+
+    <div class="caution-note"><strong>Keep the original file when metadata, animation, vectors, or archival fidelity matter.</strong> Cropping through Canvas is appropriate for visual output, but it should not be treated as a metadata-preserving or format-preserving archival workflow.</div>
+
+    <h3>Download fallbacks</h3>
+    <p>On browsers that expose the File System Access API, the tool can offer a save-file picker. Otherwise it requests a normal browser download. If that is blocked by an embedded preview or browser restriction, it exposes the cropped image directly so you can save it manually.</p>
+
+    <h3>Common mistakes</h3>
+    <ul>
+      <li>Assuming the on-screen preview resolution is the same as the exported resolution.</li>
+      <li>Expecting a ratio preset such as 16:9 to force one specific pixel size.</li>
+      <li>Exporting transparency to JPEG and expecting transparent pixels to remain transparent.</li>
+      <li>Expecting GIF animation or SVG vector structure to survive Canvas export.</li>
+      <li>Assuming image metadata is preserved after a new file is encoded.</li>
+      <li>Trying to open a format the current browser cannot decode.</li>
+    </ul>
+
+    <h3>Related Utiliverse Tools</h3>
+    <div class="related-grid">
+      <a class="related-link" href="../Image_Resizer/"><strong>Image Resizer</strong><span>Resize full images when you do not need to remove outer areas.</span></a>
+      <a class="related-link" href="../Image_Converter/"><strong>Image Converter</strong><span>Convert supported images between common web-friendly formats.</span></a>
+      <a class="related-link" href="../Screen_Color_Tester/"><strong>Screen Color Tester</strong><span>Display full-screen colors for display checks and visual testing.</span></a>
+    </div>
+
+    <p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 2, 2026 · Browser decoding, normalized crop coordinates, aspect-ratio math, source-pixel mapping, preview scaling, export resizing, transparency handling, Canvas encoding, download fallbacks, and browser-memory limitations reviewed against the current implementation.</p>
+
     <h2>Practical Use Cases</h2>
     <h3>Profile photos and avatars</h3>
     <p>Use the 1:1 ratio to make a square profile image and position the subject inside the crop. You can then export at a smaller maximum dimension such as 512 or 1024 pixels for a clean avatar without keeping the full camera resolution.</p>
@@ -460,6 +556,11 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
     <details class="faq"><summary>Will animated GIFs remain animated?</summary><p>No. Canvas export produces a static image frame, so GIF animation is not preserved.</p></details>
     <details class="faq"><summary>Can transparency be preserved?</summary><p>Yes with PNG and WebP. JPEG does not support transparency, so transparent pixels are filled with white.</p></details>
     <details class="faq"><summary>Can the cropped image be resized?</summary><p>Yes. Choose Original crop size or set a maximum longest dimension of 4096, 2048, 1024, or 512 pixels.</p></details>
+    <details class="faq"><summary>Does the preview resolution affect the downloaded image?</summary><p>No. The preview may be scaled down for display, while export uses the source crop dimensions unless you choose a maximum output dimension.</p></details>
+    <details class="faq"><summary>Will EXIF, GPS, or camera metadata be preserved?</summary><p>Not intentionally. The browser decodes the image to pixels and Canvas creates a newly encoded PNG, JPEG, or WebP, so original file metadata should not be assumed to survive.</p></details>
+    <details class="faq"><summary>What happens when I crop an SVG?</summary><p>The browser renders the SVG and the cropper exports raster pixels as PNG, JPEG, or WebP. Editable SVG vector structure is not preserved.</p></details>
+    <details class="faq"><summary>Why can a very large image fail to export?</summary><p>Browsers and devices have memory and maximum-canvas limits. A large source or crop can exceed those limits even when the image format is supported.</p></details>
+    <details class="faq"><summary>Does 16:9 always export at 1920×1080?</summary><p>No. The preset controls only the crop's proportions. Export pixel dimensions depend on the selected crop and the maximum output setting.</p></details>
   </section>
 </div>
 </main>
@@ -471,7 +572,7 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
 
 <footer>
   <div class="container footer-inner">
-    <span>© <span id="year"></span> Utiliverse. All rights reserved.</span>
+    <span>© 2026 Utiliverse. All rights reserved.</span>
     <span>100% Free and Browser Based</span>
   </div>
 </footer>
@@ -515,7 +616,6 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
     localStorage.setItem("utiliverse-theme", next);
     applyTheme(next);
   });
-  $("year").textContent = new Date().getFullYear();
 
   function formatBytes(bytes) {
     if (!Number.isFinite(bytes)) return "—";
