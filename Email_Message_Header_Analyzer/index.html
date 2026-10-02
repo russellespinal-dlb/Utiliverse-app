@@ -152,10 +152,37 @@
             }
         }
 
-    </style>
+    
+.title-row{display:flex;align-items:center;justify-content:center;gap:14px}
+.title-icon{width:46px;height:46px;flex:0 0 auto;color:#818cf8}
+.title-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid #cbd5e1;background:#fff;border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#1e293b;margin-bottom:5px}
+.method-card span{display:block;color:#64748b;font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid #cbd5e1;background:#f8fafc;color:#1e293b;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.caution-note{border:1px solid #fde68a;background:#fffbeb;border-radius:14px;padding:16px;color:#92400e;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#78350f}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid #cbd5e1;background:#fff;border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#1e293b;margin-bottom:4px}
+.related-link span{display:block;color:#64748b;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+html.dark .method-card,html.dark .related-link{background:#0f172a;border-color:#334155}
+html.dark .method-card strong,html.dark .related-link strong{color:#e2e8f0}
+html.dark .method-card span,html.dark .related-link span{color:#94a3b8}
+html.dark .example-box{background:#0f172a;border-color:#334155;color:#e2e8f0}
+html.dark .caution-note{background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.28);color:#fde68a}
+html.dark .caution-note strong{color:#fef3c7}
+@media(max-width:700px){
+  .title-icon{width:38px;height:38px}
+  .method-grid,.related-grid{grid-template-columns:1fr}
+}
+
+</style>
 
     <!-- WebApplication Structured Data -->
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Email Header Analyzer","url":"https://utiliverse.app/Email_Message_Header_Analyzer/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based email header analyzer that parses raw message headers, reconstructs delivery hops and delays, and reads recorded SPF, DKIM and DMARC authentication results.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Raw email header parsing","Received hop reconstruction","Per-hop delay analysis","SPF result parsing","DKIM result parsing","DMARC result parsing","Message metadata summary"]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Email Header Analyzer","url":"https://utiliverse.app/Email_Message_Header_Analyzer/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based email header analyzer that parses raw message headers, reconstructs Received hops and approximate delays, and displays recorded SPF, DKIM and DMARC verdicts without claiming independent authentication verification.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Raw email header parsing","RFC-style folded-line unfolding","Received hop reconstruction","Approximate per-hop delay analysis","Recorded SPF result parsing","Recorded DKIM result parsing","Recorded DMARC result parsing","Message metadata summary","All parsed headers view","Browser-based local header parsing","Authentication trust-boundary guidance"]}</script>
 <style id="u2-styles">
 .u2-related{--u2-bg:#fff;--u2-text:#0f172a;--u2-muted:#475569;--u2-border:#dbe3ee;--u2-link:#4338ca;background:var(--u2-bg);color:var(--u2-text);border:1px solid var(--u2-border);border-radius:18px;padding:24px;margin:32px auto;max-width:1120px;overflow-wrap:anywhere;font-family:Inter,system-ui,sans-serif}.u2-related h2{font-size:25px;line-height:1.3;margin:0 0 16px;color:var(--u2-text);font-weight:800}.u2-related h3{font-size:18px;margin:22px 0 8px;font-weight:750;color:var(--u2-text)}.u2-related p,.u2-related li{font-size:15px;line-height:1.8;color:var(--u2-muted);margin:0 0 12px}.u2-related ul{padding-left:22px;list-style:disc}.u2-related a{color:var(--u2-link);text-decoration:underline;text-underline-offset:3px}.u2-related a:focus-visible{outline:2px solid currentColor;outline-offset:4px}.u2-columns{display:grid;grid-template-columns:1fr 1fr;gap:24px}.u2-review{border-top:1px solid var(--u2-border);padding-top:15px;font-size:12px!important}.u2-related.u2-dark-default{--u2-bg:#0f172a;--u2-text:#f8fafc;--u2-muted:#cbd5e1;--u2-border:#334155;--u2-link:#a5b4fc}html.dark .u2-related,body.dark-mode .u2-related{--u2-bg:#0f172a;--u2-text:#f8fafc;--u2-muted:#cbd5e1;--u2-border:#334155;--u2-link:#a5b4fc}body.light-mode .u2-related{--u2-bg:#fff;--u2-text:#0f172a;--u2-muted:#475569;--u2-border:#dbe3ee;--u2-link:#4338ca}@media(max-width:620px){.u2-related{padding:18px}.u2-columns{grid-template-columns:1fr;gap:0}}
 </style>
@@ -184,9 +211,14 @@
         
         <!-- Hero Section -->
         <div class="text-center mb-10">
-            <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-4 tracking-tight">
-                Email Header <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-brand-700 dark:from-brand-400 dark:to-brand-600">Analyzer</span>
-            </h1>
+            <div class="title-row mb-4">
+                <span class="title-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/><path d="M15 17h4M17 15v4"/></svg>
+                </span>
+                <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                    Email Header <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-brand-700 dark:from-brand-400 dark:to-brand-600">Analyzer</span>
+                </h1>
+            </div>
             <p class="text-base md:text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
                 Paste raw email headers to trace delivery hops and delays, inspect message metadata, and read recorded SPF, DKIM and DMARC authentication results instantly in your browser.
             </p>
@@ -210,7 +242,7 @@
                 <textarea id="rawHeaders" rows="8" class="w-full font-mono text-xs md:text-sm p-4 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl focus:ring-2 focus:ring-brand-500 focus:outline-none text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-600 transition-all resize-y" placeholder="Received: from mail.example.com (mail.example.com [192.0.2.1])..."></textarea>
                 <p class="privacy-note mt-2 flex items-start gap-2">
                     <i data-lucide="shield-check" class="w-4 h-4 mt-0.5 flex-shrink-0 text-brand-500"></i>
-                    <span>Browser-based analysis: the header text you paste is processed locally by this tool and is not submitted to a Utiliverse server.</span>
+                    <span>Browser-based analysis: the header text you paste is processed locally by this tool and is not submitted to a Utiliverse server by the analyzer code. The page still loads interface libraries and advertising code from external providers, so use care with sensitive message metadata.</span>
                 </p>
             </div>
 
@@ -348,6 +380,94 @@
         <!-- Comprehensive Educational Article -->
         <article class="prose prose-slate dark:prose-invert max-w-4xl mx-auto mb-20 bg-white dark:bg-slate-900 p-8 md:p-12 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-sm">
             <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mb-6">
+                How the Email Header Analyzer Works
+            </h2>
+
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                The analyzer unfolds continued header lines, separates recognized <code>Header-Name: value</code> pairs, reconstructs detected <strong>Received</strong> entries, and reads authentication verdict strings already present in the message. It is a parser and visualization tool rather than an independent mail-security verifier.
+            </p>
+
+            <div class="method-grid">
+                <div class="method-card"><strong>Header parsing</strong><span>Folded lines are unfolded first, then standard header-name/value pairs are collected from the pasted text.</span></div>
+                <div class="method-card"><strong>Hop reconstruction</strong><span>Detected Received lines are reversed so the earliest detected relay appears first, then timestamps are compared for approximate per-hop delay.</span></div>
+                <div class="method-card"><strong>Authentication display</strong><span>The tool looks for recorded SPF, DKIM and DMARC pass/fail strings. It does not rerun DNS checks or cryptographic verification.</span></div>
+                <div class="method-card"><strong>Local parsing</strong><span>The header text stays in the browser for analyzer processing, although the page itself loads external interface and advertising resources.</span></div>
+            </div>
+
+            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mt-8 mb-4">
+                Authentication results are recorded evidence, not a fresh verification
+            </h3>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                A displayed PASS means the pasted header contains a matching recorded verdict such as <code>spf=pass</code>, <code>dkim=pass</code>, or <code>dmarc=pass</code>. The analyzer does not query current DNS records, recalculate SPF authorization, retrieve a DKIM public key, verify the message body/signature, or evaluate the current DMARC policy independently.
+            </p>
+
+            <div class="caution-note">
+                <strong>Do not treat a PASS result as proof that a message is safe.</strong>
+                Authentication can be valid for malicious mail, forwarding and mailing-list behavior can complicate results, and header text can be copied or forged outside the trust boundary of the receiving system. Use the original received message and your normal security tooling for incident decisions.
+            </div>
+
+            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mt-8 mb-4">
+                Trust the receiving system's Authentication-Results boundary
+            </h3>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                Authentication-Results is most useful when it was added by infrastructure you trust. This analyzer cannot determine whether an arbitrary Authentication-Results line was inserted by a legitimate receiver or supplied as untrusted message content. Keep the original message intact when investigating suspected spoofing or phishing.
+            </p>
+
+            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mt-8 mb-4">
+                Received-hop delays are estimates
+            </h3>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                The current parser extracts a timestamp from the end of each detected Received line and compares adjacent parsed times. That interval can include queueing, filtering, retries, antivirus processing, policy checks and clock differences; it is not the same thing as pure network latency. If a timestamp cannot be parsed, that hop's time is shown as unavailable.
+            </p>
+
+            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mt-8 mb-4">
+                Simplified hop-field extraction
+            </h3>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                The From, By and protocol columns use lightweight pattern matching against the Received text. Real-world Received headers can contain comments, bracketed IPs, identifiers, TLS details and vendor-specific syntax, so some complex lines may be summarized imperfectly even when the raw header itself is valid.
+            </p>
+
+            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mt-8 mb-4">
+                Multiple authentication headers
+            </h3>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                A message can contain more than one Authentication-Results or ARC-Authentication-Results field. The current summary uses the first matching Authentication-Results field it finds, or the first ARC-Authentication-Results field if a standard Authentication-Results field is absent. Review the All Headers tab when several authentication fields exist.
+            </p>
+
+            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mt-8 mb-4">
+                Worked examples
+            </h3>
+            <code class="example-box">Authentication-Results: mx.example;
+  spf=pass;
+  dkim=pass;
+  dmarc=pass
+
+Analyzer output:
+SPF: PASS
+DKIM: PASS
+DMARC: PASS
+
+Meaning: recorded pass verdicts were found in the pasted header.
+It is not an independent re-verification.</code>
+
+            <code class="example-box">Received hop A: 10:00:10 -0400
+Received hop B: 10:04:10 -0400
+
+Approximate hop interval: 4 minutes
+Possible causes include queueing or processing, not only network transit.</code>
+
+            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mt-8 mb-4">
+                Related Utiliverse Tools
+            </h3>
+            <div class="related-grid">
+                <a class="related-link" href="../Email_DNS_Checker/"><strong>Email DNS Checker</strong><span>Inspect SPF, DKIM and DMARC-related DNS records separately from a pasted message header.</span></a>
+                <a class="related-link" href="../WHOIS_Lookup/"><strong>WHOIS / RDAP Lookup</strong><span>Review registration and allocation data for domains and Internet resources.</span></a>
+                <a class="related-link" href="../IP_Address_Lookup/"><strong>IP Address Lookup</strong><span>Inspect approximate network, ASN and geolocation metadata for an IP found in a header.</span></a>
+            </div>
+
+            <p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 1, 2026 · Header unfolding, hop reconstruction, delay calculation, authentication parsing and privacy wording reviewed against the current implementation.</p>
+
+            <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mb-6">
                 How to Analyze Email Headers, Delivery Hops, SPF, DKIM and DMARC
             </h2>
 
@@ -433,7 +553,7 @@
 
     
 <!-- BATCH 2 RELATED CONTENT START -->
-<section class="u2-related" aria-labelledby="u2-heading"><h2 id="u2-heading">Turn a header report into a useful investigation</h2><p>Copy full headers from the original received message. Use the analyzer to organize the fields and delivery hops, then compare its output with the raw source. Start by choosing one question: delivery delay, identity mismatch, or a recorded authentication failure.</p><h3>Worked check: four minutes between hops</h3><p>If adjacent Received entries show 10:00:10 and 10:04:10 in the same timezone, the recorded interval is four minutes. That can include queueing and processing; it is not automatically network travel time. Verify clock and timezone differences before escalating to the mail operator.</p><h3>Know the trust boundary</h3><p>The analyzer parses recorded authentication results; it does not cryptographically verify DKIM or repeat the receiving server’s original SPF check. Trust results from your receiving infrastructure, not arbitrary text inserted in a message. A passing result also does not make an attachment safe.</p><p>For a DNS follow-up, take the signing domain and selector from the original message. Keep an unmodified original privately and redact personal information in any copy you share.</p><div class="u2-columns"><div><h3>Related guides</h3><ul><li><a href="/Guides/Read_Email_Headers.html">How to read an email header: hops, identity, and trust</a></li><li><a href="/Guides/SPF_DKIM_DMARC.html">SPF vs DKIM vs DMARC: records, signatures, and alignment</a></li></ul></div><div><h3>Related tools</h3><ul><li><a href="/Email_DNS_Checker/">Email DNS Checker</a></li></ul><p><a href="/Guides.html">Browse all guides</a></p></div></div><p class="u2-review">Explanatory content reviewed September 28, 2026. <a href="/Editorial_Methodology.html">Methodology</a> · <a href="/Contact_Info.html">Report a correction</a></p></section>
+<section class="u2-related" aria-labelledby="u2-heading"><h2 id="u2-heading">Turn a header report into a useful investigation</h2><p>Copy full headers from the original received message. Use the analyzer to organize the fields and delivery hops, then compare its output with the raw source. Start by choosing one question: delivery delay, identity mismatch, or a recorded authentication failure.</p><h3>Worked check: four minutes between hops</h3><p>If adjacent Received entries show 10:00:10 and 10:04:10 in the same timezone, the recorded interval is four minutes. That can include queueing and processing; it is not automatically network travel time. Verify clock and timezone differences before escalating to the mail operator.</p><h3>Know the trust boundary</h3><p>The analyzer parses recorded authentication results; it does not cryptographically verify DKIM or repeat the receiving server’s original SPF check. Trust results from your receiving infrastructure, not arbitrary text inserted in a message. A passing result also does not make an attachment safe.</p><p>For a DNS follow-up, take the signing domain and selector from the original message. Keep an unmodified original privately and redact personal information in any copy you share.</p><div class="u2-columns"><div><h3>Related guides</h3><ul><li><a href="/Guides/Read_Email_Headers.html">How to read an email header: hops, identity, and trust</a></li><li><a href="/Guides/SPF_DKIM_DMARC.html">SPF vs DKIM vs DMARC: records, signatures, and alignment</a></li></ul></div><div><h3>Related tools</h3><ul><li><a href="/Email_DNS_Checker/">Email DNS Checker</a></li></ul><p><a href="/Guides.html">Browse all guides</a></p></div></div><p class="u2-review">Explanatory content reviewed October 1, 2026. <a href="/Editorial_Methodology.html">Methodology</a> · <a href="/Contact_Info.html">Report a correction</a></p></section>
 <!-- BATCH 2 RELATED CONTENT END -->
 </main>
 
@@ -592,15 +712,17 @@
         function parseAuth(headers) {
             const authHeader = getHeaderValue(headers, 'Authentication-Results') || getHeaderValue(headers, 'ARC-Authentication-Results') || '';
             const receivedSpf = getHeaderValue(headers, 'Received-SPF') || '';
+            const authLower = authHeader.toLowerCase();
+            const receivedSpfLower = receivedSpf.toLowerCase();
 
             // SPF Check
             const spfElem = document.getElementById('spfStatus');
             const spfDet = document.getElementById('spfDetails');
-            if (authHeader.includes('spf=pass') || receivedSpf.toLowerCase().startsWith('pass')) {
+            if (authLower.includes('spf=pass') || receivedSpfLower.startsWith('pass')) {
                 spfElem.className = 'text-lg font-bold text-emerald-500';
                 spfElem.textContent = 'PASS';
-                spfDet.textContent = receivedSpf || 'SPF verification passed successfully.';
-            } else if (authHeader.includes('spf=fail') || receivedSpf.toLowerCase().startsWith('fail')) {
+                spfDet.textContent = receivedSpf || 'Recorded SPF result: pass.';
+            } else if (authLower.includes('spf=fail') || receivedSpfLower.startsWith('fail')) {
                 spfElem.className = 'text-lg font-bold text-rose-500';
                 spfElem.textContent = 'FAIL';
                 spfDet.textContent = receivedSpf || 'SPF validation failed.';
@@ -613,14 +735,14 @@
             // DKIM Check
             const dkimElem = document.getElementById('dkimStatus');
             const dkimDet = document.getElementById('dkimDetails');
-            if (authHeader.includes('dkim=pass')) {
+            if (authLower.includes('dkim=pass')) {
                 dkimElem.className = 'text-lg font-bold text-emerald-500';
                 dkimElem.textContent = 'PASS';
-                dkimDet.textContent = 'Cryptographic DKIM signature verified.';
-            } else if (authHeader.includes('dkim=fail')) {
+                dkimDet.textContent = 'Recorded DKIM result: pass.';
+            } else if (authLower.includes('dkim=fail')) {
                 dkimElem.className = 'text-lg font-bold text-rose-500';
                 dkimElem.textContent = 'FAIL';
-                dkimDet.textContent = 'DKIM signature present but verification failed.';
+                dkimDet.textContent = 'Recorded DKIM result: fail.';
             } else {
                 dkimElem.className = 'text-lg font-bold text-slate-500';
                 dkimElem.textContent = 'NONE';
@@ -630,14 +752,14 @@
             // DMARC Check
             const dmarcElem = document.getElementById('dmarcStatus');
             const dmarcDet = document.getElementById('dmarcDetails');
-            if (authHeader.includes('dmarc=pass')) {
+            if (authLower.includes('dmarc=pass')) {
                 dmarcElem.className = 'text-lg font-bold text-emerald-500';
                 dmarcElem.textContent = 'PASS';
-                dmarcDet.textContent = 'DMARC alignment verified.';
-            } else if (authHeader.includes('dmarc=fail')) {
+                dmarcDet.textContent = 'Recorded DMARC result: pass.';
+            } else if (authLower.includes('dmarc=fail')) {
                 dmarcElem.className = 'text-lg font-bold text-rose-500';
                 dmarcElem.textContent = 'FAIL';
-                dmarcDet.textContent = 'DMARC alignment policy failed.';
+                dmarcDet.textContent = 'Recorded DMARC result: fail.';
             } else {
                 dmarcElem.className = 'text-lg font-bold text-slate-500';
                 dmarcElem.textContent = 'NONE';
@@ -704,7 +826,11 @@ Message-ID: <CABvW=1234567890_test@mail.gmail.com>`;
             { q: "What is the difference between SPF, DKIM, and DMARC?", a: "SPF evaluates sending-server authorization, DKIM uses a cryptographic signature to support message integrity and domain identity, and DMARC evaluates alignment using SPF and/or DKIM for the visible From domain." },
             { q: "How are email hop delays calculated?", a: "The analyzer reads timestamps from consecutive Received headers, places detected hops in chronological order, and calculates the approximate time difference between each hop." },
             { q: "Does this tool independently verify DKIM signatures?", a: "No. It reads DKIM verdicts already present in Authentication-Results. Independent DKIM verification would require additional message content and DNS-based signature validation." },
-            { q: "Are my pasted email headers uploaded?", a: "The parsing logic in this page runs in your browser and does not post the pasted header text to a Utiliverse server. Headers can still contain sensitive metadata, so use appropriate care with private information." }
+            { q: "Are my pasted email headers uploaded?", a: "The parsing logic in this page runs in your browser and does not post the pasted header text to a Utiliverse server. The page still loads external interface and advertising resources, and headers can contain sensitive metadata, so use appropriate care with private information." },
+            { q: "Does a DKIM PASS mean this tool verified the signature itself?", a: "No. The analyzer displays a DKIM pass verdict already recorded in the pasted Authentication-Results field. It does not retrieve the DKIM public key or cryptographically verify the message body and signature." },
+            { q: "Can an Authentication-Results line be forged?", a: "Header text outside your receiving system's trust boundary can be manipulated. Give the most weight to Authentication-Results added by receiving infrastructure you trust and keep the original received message for investigation." },
+            { q: "Why can an email hop show a long delay?", a: "The time between Received entries can include queueing, filtering, retries, malware scanning, policy processing, clock differences, and transport time. It should not be interpreted as pure network latency." },
+            { q: "What if a message contains multiple Authentication-Results headers?", a: "The current summary uses the first standard Authentication-Results field it finds, or the first ARC-Authentication-Results field if no standard field is present. Review the All Headers tab to inspect additional authentication fields." }
         ];
 
         const faqContainer = document.getElementById('faq-container');
