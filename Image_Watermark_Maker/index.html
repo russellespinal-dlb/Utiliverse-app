@@ -218,22 +218,43 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
   .free-label{font-size:10.5px;max-width:130px;white-space:normal;text-align:right;line-height:1.2}
 }
 @media(max-width:390px){.meta-grid{grid-template-columns:1fr}.header-right{gap:6px}}
+
+.title-row{display:flex;align-items:center;gap:14px}
+.title-icon{width:44px;height:44px;flex:0 0 auto;color:#818cf8}
+.title-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border:1px solid #334155;background:rgba(15,23,42,.72);color:#94a3b8;border-radius:12px;cursor:pointer;box-shadow:none;appearance:none;-webkit-appearance:none;transition:color .15s ease,background .15s ease,border-color .15s ease}
+.theme-toggle:hover{color:#fff;background:#1e293b;border-color:#475569}
+.theme-toggle:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
+body.light-mode .theme-toggle{color:#475569;background:#fff;border-color:#cbd5e1}
+body.light-mode .theme-toggle:hover{color:#0f172a;background:#f1f5f9;border-color:#94a3b8}
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid var(--border);background:var(--panel2);border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#e2e8f0;margin-bottom:5px}
+.method-card span{display:block;color:#94a3b8;font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:#0f172a;color:#e2e8f0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.caution-note{border:1px solid rgba(251,191,36,.28);background:rgba(251,191,36,.07);border-radius:14px;padding:16px;color:#fde68a;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#fef3c7}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid var(--border);background:var(--panel2);border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#e2e8f0;margin-bottom:4px}
+.related-link span{display:block;color:#94a3b8;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+.local-processing-note{font-size:12px;line-height:1.65;color:#94a3b8;margin-top:14px}
+body.light-mode .local-processing-note{color:#64748b}
+body.light-mode .method-card strong,body.light-mode .related-link strong{color:#1e293b}
+body.light-mode .method-card span,body.light-mode .related-link span{color:#475569}
+body.light-mode .example-box{background:#f8fafc;color:#1e293b}
+body.light-mode .caution-note{background:#fffbeb;border-color:#fde68a;color:#92400e}
+body.light-mode .caution-note strong{color:#78350f}
+@media(max-width:700px){.title-icon{width:36px;height:36px}.method-grid,.related-grid{grid-template-columns:1fr}}
+
 </style>
 
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Image Watermark Maker","url":"https://utiliverse.app/Image_Watermark_Maker/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript and Canvas support.","description":"Add text or logo watermarks to browser-readable images locally and export PNG, JPEG, or WebP.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Image Watermark Maker","url":"https://utiliverse.app/Image_Watermark_Maker/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript and Canvas support.","description":"Free browser-based image watermark maker for text and logo watermarks with opacity, rotation, nine-position placement, edge margins, tiled repetition, PNG/JPEG/WebP export, optional output resizing and local Canvas processing.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Text watermarks","Logo and image watermarks","Font family and weight controls","Text and outline colors","Text outline option","Text size as percentage of image width","Logo size as percentage of image width","Opacity control","Rotation from -180 to 180 degrees","Nine-position placement grid","Edge margin control","Repeated/tiled watermark pattern","PNG export","JPEG export","WebP export","JPEG and WebP quality control","Original-size export","4096, 2048, 1024 and 512 pixel maximum dimensions","JPEG transparency flattened to white","Static raster export for animated/vector inputs","Browser-local processing","Browser save-picker, download and manual-save fallbacks"]}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"Does the watermark tool upload my image?","acceptedAnswer":{"@type":"Answer","text":"No. The source image, watermark, preview, and export are processed locally in your browser."}},
-{"@type":"Question","name":"Can I add a text watermark?","acceptedAnswer":{"@type":"Answer","text":"Yes. You can set custom text, font, weight, color, size, opacity, rotation, position, margin, outline, and tiled repetition."}},
-{"@type":"Question","name":"Can I use a logo as the watermark?","acceptedAnswer":{"@type":"Answer","text":"Yes. Upload a browser-readable logo or graphic and adjust its size, opacity, rotation, position, margin, or tiled repetition."}},
-{"@type":"Question","name":"Which source image formats are supported?","acceptedAnswer":{"@type":"Answer","text":"Any image format the browser can decode can be used. Common formats include JPEG, PNG, WebP, GIF, SVG, BMP, and AVIF. HEIC, HEIF, TIFF, and RAW support varies by browser."}},
-{"@type":"Question","name":"Which output formats are available?","acceptedAnswer":{"@type":"Answer","text":"Watermarked images can be exported as PNG, JPEG, or WebP."}},
-{"@type":"Question","name":"Can the watermark repeat across the whole image?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enable Repeat / Tile Watermark to draw the watermark across the image instead of at one position."}},
-{"@type":"Question","name":"Can I control watermark transparency?","acceptedAnswer":{"@type":"Answer","text":"Yes. The opacity control ranges from subtle transparent marks to fully opaque watermarks."}},
-{"@type":"Question","name":"What happens if automatic download is blocked?","acceptedAnswer":{"@type":"Answer","text":"The generated watermarked image is shown on the page so it can be right-clicked and saved with Save Image As."}}
-]}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does the watermark tool upload my image?","acceptedAnswer":{"@type":"Answer","text":"No. The source image, watermark, preview, and export are processed locally in your browser."}},{"@type":"Question","name":"Can I add a text watermark?","acceptedAnswer":{"@type":"Answer","text":"Yes. You can set custom text, font, weight, color, size, opacity, rotation, position, margin, outline, and tiled repetition."}},{"@type":"Question","name":"Can I use a logo as the watermark?","acceptedAnswer":{"@type":"Answer","text":"Yes. Upload a browser-readable logo or graphic and adjust its size, opacity, rotation, position, margin, or tiled repetition."}},{"@type":"Question","name":"Which source image formats are supported?","acceptedAnswer":{"@type":"Answer","text":"Any image format the browser can decode can be used. Common formats include JPEG, PNG, WebP, GIF, SVG, BMP, and AVIF. HEIC, HEIF, TIFF, and RAW support varies by browser."}},{"@type":"Question","name":"Which output formats are available?","acceptedAnswer":{"@type":"Answer","text":"Watermarked images can be exported as PNG, JPEG, or WebP."}},{"@type":"Question","name":"Can the watermark repeat across the whole image?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enable Repeat / Tile Watermark to draw the watermark across the image instead of at one position."}},{"@type":"Question","name":"Can I control watermark transparency?","acceptedAnswer":{"@type":"Answer","text":"Yes. The opacity control ranges from subtle transparent marks to fully opaque watermarks."}},{"@type":"Question","name":"What happens if automatic download is blocked?","acceptedAnswer":{"@type":"Answer","text":"The generated watermarked image is shown on the page so it can be right-clicked and saved with Save Image As."}},{"@type":"Question","name":"Does the preview resolution affect the final watermark size?","acceptedAnswer":{"@type":"Answer","text":"No. The preview is scaled to fit the page, while export renders the source image and watermark again at the selected output dimensions."}},{"@type":"Question","name":"Will EXIF, GPS, or camera metadata be preserved?","acceptedAnswer":{"@type":"Answer","text":"Not intentionally. The Canvas workflow creates a newly encoded PNG, JPEG, or WebP and does not copy the source file's original metadata fields."}},{"@type":"Question","name":"What happens if I use an SVG logo?","acceptedAnswer":{"@type":"Answer","text":"The browser renders the SVG logo to pixels before Canvas composition. The exported PNG, JPEG, or WebP does not preserve editable SVG vector structure."}},{"@type":"Question","name":"Why can a very large image fail to save?","acceptedAnswer":{"@type":"Answer","text":"Browsers and devices have memory and maximum-Canvas limits. Large images can exceed those limits, especially at Original Size."}},{"@type":"Question","name":"Does a watermark prevent someone from copying my image?","acceptedAnswer":{"@type":"Answer","text":"No. A visible watermark can identify ownership and discourage casual reuse, but it cannot prevent screenshots, cropping, retouching, or other editing."}}]}
 </script>
 </head>
 
@@ -256,8 +277,12 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
 <main>
 <div class="container">
   <section class="hero">
-    <div class="eyebrow">Image utility</div>
-    <h1>Image Watermark Maker</h1>
+    <div class="title-row">
+      <span class="title-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 15l3-3 2 2 3-4 2 3"/><path d="M8 8h8M12 6v4"/></svg>
+      </span>
+      <h1>Image Watermark Maker</h1>
+    </div>
     <p>Add a custom text or logo watermark to an image, control its position, size, opacity, rotation, outline, or repeated pattern, preview the result instantly, and export the finished image in your browser.</p>
     <div class="badges">
       <span class="badge">Text & logo watermarks</span>
@@ -272,7 +297,7 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
         <div class="eyebrow">Local watermark editor</div>
         <h2 id="toolHeading" class="section-title">Add a watermark to an image</h2>
       </div>
-      <div class="small">Your source image and watermark stay in the browser and are not uploaded to Utiliverse.</div>
+      <div class="small">Your source image, optional logo, preview, and export are processed locally in your browser and are not uploaded to a Utiliverse processing server.</div>
     </div>
 
     <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Choose or drop a source image">
@@ -474,6 +499,7 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
 
     <div class="note"><strong>Format note:</strong> source-image support depends on what your browser can decode. Animated GIFs are rendered as a static image when exported. PNG and WebP can preserve transparency; JPEG cannot, so transparent areas are filled with white.</div>
   </section>
+  <p class="local-processing-note">Browser-based processing: source-image and logo decoding, watermark composition, preview rendering, resizing, encoding, and download preparation are performed locally by this tool. Your source image and logo are not submitted to a Utiliverse processing server. The page itself still loads interface and advertising resources from external providers.</p>
 
   <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
        Paste approved Google AdSense code here after approval.
@@ -521,6 +547,77 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
 
     <p>For valuable work, watermarking can be one part of a broader workflow that also includes retaining original files, publishing appropriate copyright information, keeping creation records, and distributing only the resolution necessary for the intended use.</p>
 
+
+    <h2>Watermark Methodology, Export Behavior, and Important Limits</h2>
+    <p>The editor composites the decoded source image and the selected text or logo watermark onto an HTML Canvas. The live preview is scaled down for the interface, while the saved image is rendered again at the chosen output dimensions using the same watermark settings.</p>
+
+    <div class="method-grid">
+      <div class="method-card"><strong>Text watermark sizing</strong><span>Text size is a percentage of the output canvas width. The selected font family and weight are applied through the browser's Canvas text renderer.</span></div>
+      <div class="method-card"><strong>Logo watermark sizing</strong><span>Logo width is a percentage of the output image width, while logo height follows the logo image's decoded aspect ratio.</span></div>
+      <div class="method-card"><strong>Single placement</strong><span>The nine-position grid uses the watermark's center point plus an edge margin expressed as a percentage of output width and height.</span></div>
+      <div class="method-card"><strong>Tiled placement</strong><span>Repeat mode spaces watermarks across the canvas using dimensions derived from the rendered text or logo size, alternating row offsets for a staggered pattern.</span></div>
+    </div>
+
+    <h3>Worked example: logo watermark scaling</h3>
+    <code class="example-box">Source/export width: 2000 px
+Logo size setting: 20% width
+
+Rendered logo width:
+2000 × 0.20 = 400 px
+
+If the logo image is 800 × 400,
+its 2:1 aspect ratio is preserved,
+so the rendered watermark becomes:
+400 × 200 px</code>
+
+    <h3>The preview is only a scaled representation</h3>
+    <p>The live preview fits within a working area capped by the page layout. The final export is rendered separately at the original source dimensions or the selected maximum dimension. A watermark that looks small on screen is therefore scaled proportionally when the full-resolution image is generated.</p>
+
+    <h3>Text size is relative to image width</h3>
+    <p>Text size is calculated from the output width, not from a fixed point size. This helps a watermark keep roughly the same visual proportion across small and large images, but the same percentage can still look different depending on the selected font, text length, and composition.</p>
+
+    <h3>Rotation happens around the watermark center</h3>
+    <p>The editor translates the Canvas origin to the watermark center, rotates the drawing context, then draws the text or logo. The nine placement choices therefore represent the unrotated watermark's center position; a large rotated watermark can visually extend closer to an edge than its nominal margin suggests.</p>
+
+    <h3>JPEG transparency is flattened to white</h3>
+    <p>When JPEG is selected for export, the output canvas is filled with white before the source image and watermark are drawn. PNG can preserve alpha transparency, and WebP can preserve transparency when supported by the browser's encoder.</p>
+
+    <h3>Canvas export creates a newly encoded raster file</h3>
+    <p>The browser decodes the source and optional logo into pixels and then encodes a new PNG, JPEG, or WebP. Original file metadata such as EXIF fields, GPS coordinates, camera data, ICC profile details, and other container-specific metadata is not intentionally copied by this implementation.</p>
+
+    <h3>Animated and vector sources become raster output</h3>
+    <p>Animated image formats such as GIF are exported as a static rendered image rather than preserving frame animation. SVG source images or SVG logos are rendered by the browser and composited as pixels, so the final PNG, JPEG, or WebP does not preserve editable vector structure.</p>
+
+    <h3>Maximum dimension changes output resolution</h3>
+    <p>Original Size keeps the decoded source dimensions. The 4096, 2048, 1024, and 512 settings scale the entire image down proportionally so its longest side does not exceed the selected value. The watermark is then drawn at that output size, preserving its relative percentage-based scale.</p>
+
+    <h3>Very large images can exceed browser limits</h3>
+    <p>The browser must decode the source image and allocate Canvas memory for preview and export. Large images can exceed available RAM, GPU resources, or maximum Canvas dimensions, especially on mobile devices. In that case the tool reports that the image is too large to export at the selected size.</p>
+
+    <div class="caution-note"><strong>A visible watermark is a deterrent, not copy protection.</strong> It can communicate ownership or discourage casual reuse, but it does not prevent screenshots, cropping, inpainting, retouching, or other editing. Keep original files and ownership records when provenance matters.</div>
+
+    <h3>Download fallbacks</h3>
+    <p>Where supported, the tool first offers the browser's save-file picker. Otherwise it requests a normal browser download. If automatic saving is blocked, the generated image is displayed on the page so it can be saved manually with the browser's image-saving controls.</p>
+
+    <h3>Common mistakes</h3>
+    <ul>
+      <li>Assuming the preview resolution is the same as the exported image resolution.</li>
+      <li>Using very low opacity on a busy image and expecting the mark to remain readable everywhere.</li>
+      <li>Exporting a transparent composition as JPEG and expecting transparency to remain.</li>
+      <li>Expecting GIF animation or SVG vector structure to survive Canvas export.</li>
+      <li>Assuming original EXIF, GPS, or other image metadata is preserved.</li>
+      <li>Relying on one small corner watermark when the image can easily be cropped.</li>
+    </ul>
+
+    <h3>Related Utiliverse Tools</h3>
+    <div class="related-grid">
+      <a class="related-link" href="../Image_Cropper/"><strong>Image Cropper</strong><span>Crop an image before applying a text or logo watermark.</span></a>
+      <a class="related-link" href="../Image_Dimension_Finder/"><strong>Image Dimension Finder</strong><span>Check source dimensions, aspect ratio, megapixels, and related measurements.</span></a>
+      <a class="related-link" href="../Image_Resizer/"><strong>Image Resizer</strong><span>Resize images to a target resolution before or after watermarking.</span></a>
+    </div>
+
+    <p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 2, 2026 · Text and logo scaling, nine-position placement, tiled spacing, rotation, opacity, preview scaling, export resizing, transparency handling, Canvas encoding, browser save fallbacks, and large-image limitations reviewed against the current implementation.</p>
+
     <h2>Practical Use Cases</h2>
     <h3>Photography proofs</h3>
     <p>Photographers can place a semi-transparent studio name or PROOF label across preview images before clients choose final photographs. Repeated diagonal watermarks make it harder to remove the identification simply by cropping a corner.</p>
@@ -548,6 +645,11 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
     <details class="faq"><summary>Which source image formats work?</summary><p>Any image format your browser can decode can work. JPEG, PNG, WebP, GIF, SVG, BMP, and AVIF are common; HEIC/HEIF and TIFF support varies.</p></details>
     <details class="faq"><summary>Which output formats can I save?</summary><p>PNG, JPEG, and WebP are available. PNG and WebP can preserve transparency, while JPEG fills transparent regions with white.</p></details>
     <details class="faq"><summary>What if my browser blocks the download?</summary><p>The finished watermarked image is displayed on the page so you can right-click it and choose Save Image As.</p></details>
+    <details class="faq"><summary>Does the preview resolution affect the final watermark size?</summary><p>No. The preview is scaled to fit the page, while export renders the source image and watermark again at the selected output dimensions.</p></details>
+    <details class="faq"><summary>Will EXIF, GPS, or camera metadata be preserved?</summary><p>Not intentionally. The Canvas workflow creates a newly encoded PNG, JPEG, or WebP and does not copy the source file's original metadata fields.</p></details>
+    <details class="faq"><summary>What happens if I use an SVG logo?</summary><p>The browser renders the SVG logo to pixels before Canvas composition. The exported PNG, JPEG, or WebP does not preserve editable SVG vector structure.</p></details>
+    <details class="faq"><summary>Why can a very large image fail to save?</summary><p>Browsers and devices have memory and maximum-Canvas limits. Large images can exceed those limits, especially at Original Size.</p></details>
+    <details class="faq"><summary>Does a watermark prevent someone from copying my image?</summary><p>No. A visible watermark can identify ownership and discourage casual reuse, but it cannot prevent screenshots, cropping, retouching, or other editing.</p></details>
   </section>
 </div>
 </main>
@@ -559,7 +661,7 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
 
 <footer>
   <div class="container footer-inner">
-    <span>© <span id="year"></span> Utiliverse. All rights reserved.</span>
+    <span>© 2026 Utiliverse. All rights reserved.</span>
     <span>100% Free and Browser Based</span>
   </div>
 </footer>
@@ -599,7 +701,6 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
     localStorage.setItem("utiliverse-theme", next);
     applyTheme(next);
   });
-  $("year").textContent = new Date().getFullYear();
 
   function formatBytes(bytes) {
     if (!Number.isFinite(bytes)) return "—";
