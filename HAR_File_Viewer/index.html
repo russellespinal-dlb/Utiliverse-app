@@ -166,7 +166,74 @@ body.light-mode .redact-stat span,body.light-mode .helper-note{color:#64748b}
   .redact-summary{grid-template-columns:1fr}
 }
 
-</style><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse HAR File Viewer & Analyzer","url":"https://utiliverse.app/HAR_File_Viewer/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based HAR viewer for inspecting requests, status codes, URLs and timings, with local filtering, request-detail viewing and a heuristic sensitive-data redaction helper.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Open HAR and compatible JSON files","Count total network requests","Summarize successful and error responses","Display request methods, status codes, URLs and timings","Filter requests by URL, host, method or status","Inspect serialized HAR entry details","Mask likely secrets in displayed details","Download a separate sanitized HAR copy","Detect common sensitive headers, cookies and parameters","Local browser-based file processing"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does HAR stand for?","acceptedAnswer":{"@type":"Answer","text":"HAR stands for HTTP Archive. It is a JSON-based format used to record HTTP network requests and responses from a browser or other compatible debugging tool."}},{"@type":"Question","name":"Can I open a .har file here?","acceptedAnswer":{"@type":"Answer","text":"Yes. Select a HAR file or compatible JSON export using the file picker."}},{"@type":"Question","name":"Does my HAR file leave my computer?","acceptedAnswer":{"@type":"Answer","text":"The parsing in this page runs locally in your browser and does not upload the selected HAR file to a Utiliverse server."}},{"@type":"Question","name":"Can HAR files contain cookies or authentication tokens?","acceptedAnswer":{"@type":"Answer","text":"Yes. HAR files may contain cookies, authorization headers, URLs, query parameters, request bodies and other sensitive data. Review and sanitize a HAR before sharing it."}},{"@type":"Question","name":"Does total request time equal page load time?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. This viewer adds recorded request durations. Multiple browser requests can overlap, so the sum can be longer than the actual elapsed page-load time."}},{"@type":"Question","name":"Can this replace browser DevTools?","acceptedAnswer":{"@type":"Answer","text":"No. It is a lightweight viewer for exported HAR files, not a replacement for the full live Network panel in browser developer tools."}},{"@type":"Question","name":"What does the HAR redaction helper remove?","acceptedAnswer":{"@type":"Answer","text":"It masks common sensitive headers, cookies, query parameters, form fields and JSON keys such as authorization values, API keys, tokens, passwords, secrets and session identifiers. It is heuristic and may not catch every sensitive value."}},{"@type":"Question","name":"Is a sanitized HAR automatically safe to share?","acceptedAnswer":{"@type":"Answer","text":"No. Always review the sanitized file manually. Secrets can appear under unexpected field names, inside opaque request bodies or in URLs and data that no generic sanitizer can identify reliably."}},{"@type":"Question","name":"Does the viewer change my original HAR file?","acceptedAnswer":{"@type":"Answer","text":"No. The original file stays unchanged. Download Sanitized HAR creates a separate copy in the browser."}}]}</script><style id="u2-styles">
+
+.har-method-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin:18px 0;
+}
+.har-method-card{
+  border:1px solid #334155;
+  background:rgba(15,23,42,.58);
+  border-radius:14px;
+  padding:15px;
+}
+.har-method-card strong{
+  display:block;
+  color:#e2e8f0;
+  margin-bottom:5px;
+}
+.har-method-card span{
+  display:block;
+  color:#94a3b8;
+  font-size:13px;
+  line-height:1.65;
+}
+.har-caution{
+  border:1px solid rgba(251,191,36,.28);
+  background:rgba(251,191,36,.07);
+  border-radius:14px;
+  padding:16px;
+  color:#fde68a;
+  line-height:1.7;
+  margin:18px 0;
+}
+.har-caution strong{color:#fef3c7}
+.har-example{
+  display:block;
+  margin:12px 0;
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid #334155;
+  background:#0f172a;
+  color:#e2e8f0;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+body.light-mode .har-method-card{
+  background:#fff;
+  border-color:#dbe3ee;
+}
+body.light-mode .har-method-card strong{color:#1e293b}
+body.light-mode .har-method-card span{color:#475569}
+body.light-mode .har-caution{
+  background:#fffbeb;
+  border-color:#fde68a;
+  color:#92400e;
+}
+body.light-mode .har-caution strong{color:#78350f}
+body.light-mode .har-example{
+  background:#f8fafc;
+  color:#1e293b;
+  border-color:#dbe3ee;
+}
+@media(max-width:700px){
+  .har-method-grid{grid-template-columns:1fr}
+}
+
+</style><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse HAR File Viewer & Analyzer","url":"https://utiliverse.app/HAR_File_Viewer/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based HAR viewer for inspecting HTTP Archive requests, statuses, URLs and timings, with local filtering, request-detail viewing, heuristic sensitive-data redaction, JSON response-body redaction and sanitized-copy export.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Open HAR and compatible JSON files","Validate log.entries structure","Count total network requests","Summarize 2xx responses and HTTP 4xx/5xx errors","Display request methods, status codes, URLs and timings","Filter requests by URL, host, method or status","Inspect serialized HAR entry details","Mask likely secrets in displayed details","Redact common sensitive headers and cookies","Redact sensitive request query, form and JSON fields","Redact matching request and redirect URL parameters","Attempt sensitive-key redaction in readable JSON response bodies","Download a separate sanitized HAR copy","Local browser-based file processing","Original HAR file remains unchanged"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does HAR stand for?","acceptedAnswer":{"@type":"Answer","text":"HAR stands for HTTP Archive. It is a JSON-based format used to record HTTP network requests and responses from a browser or other compatible debugging tool."}},{"@type":"Question","name":"Can I open a .har file here?","acceptedAnswer":{"@type":"Answer","text":"Yes. Select a HAR file or compatible JSON export using the file picker."}},{"@type":"Question","name":"Does my HAR file leave my computer?","acceptedAnswer":{"@type":"Answer","text":"The parsing in this page runs locally in your browser and does not upload the selected HAR file to a Utiliverse server."}},{"@type":"Question","name":"Can HAR files contain cookies or authentication tokens?","acceptedAnswer":{"@type":"Answer","text":"Yes. HAR files may contain cookies, authorization headers, URLs, query parameters, request bodies and other sensitive data. Review and sanitize a HAR before sharing it."}},{"@type":"Question","name":"Does total request time equal page load time?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. This viewer adds recorded request durations. Multiple browser requests can overlap, so the sum can be longer than the actual elapsed page-load time."}},{"@type":"Question","name":"Can this replace browser DevTools?","acceptedAnswer":{"@type":"Answer","text":"No. It is a lightweight viewer for exported HAR files, not a replacement for the full live Network panel in browser developer tools."}},{"@type":"Question","name":"What does the HAR redaction helper remove?","acceptedAnswer":{"@type":"Answer","text":"It masks common sensitive headers, cookies, query parameters, form fields and JSON keys such as authorization values, API keys, tokens, passwords, secrets and session identifiers. It is heuristic and may not catch every sensitive value."}},{"@type":"Question","name":"Is a sanitized HAR automatically safe to share?","acceptedAnswer":{"@type":"Answer","text":"No. Always review the sanitized file manually. Secrets can appear under unexpected field names, inside opaque request bodies or in URLs and data that no generic sanitizer can identify reliably."}},{"@type":"Question","name":"Does the viewer change my original HAR file?","acceptedAnswer":{"@type":"Answer","text":"No. The original file stays unchanged. Download Sanitized HAR creates a separate copy in the browser."}},{"@type":"Question","name":"Does the sanitizer inspect response bodies?","acceptedAnswer":{"@type":"Answer","text":"When a response body is stored as readable JSON text, the sanitizer attempts to mask values under sensitive-looking keys. Arbitrary text, HTML, XML, binary or opaque response content is not generically sanitized."}},{"@type":"Question","name":"Why is status 0 not counted as an HTTP error?","acceptedAnswer":{"@type":"Answer","text":"Status 0 is not a server-issued HTTP status code. It can appear when a request is incomplete, blocked, cancelled, unavailable to the capture, or represented differently by the exporting tool."}},{"@type":"Question","name":"Can a very large HAR file fail to open?","acceptedAnswer":{"@type":"Answer","text":"Yes. The viewer loads the full archive into browser memory and may create additional copies for redaction and sanitized download, so very large captures can exceed available memory."}}]}</script><style id="u2-styles">
 .u2-related{--u2-bg:#fff;--u2-text:#0f172a;--u2-muted:#475569;--u2-border:#dbe3ee;--u2-link:#4338ca;background:var(--u2-bg);color:var(--u2-text);border:1px solid var(--u2-border);border-radius:18px;padding:24px;margin:32px auto;max-width:1120px;overflow-wrap:anywhere;font-family:Inter,system-ui,sans-serif}.u2-related h2{font-size:25px;line-height:1.3;margin:0 0 16px;color:var(--u2-text);font-weight:800}.u2-related h3{font-size:18px;margin:22px 0 8px;font-weight:750;color:var(--u2-text)}.u2-related p,.u2-related li{font-size:15px;line-height:1.8;color:var(--u2-muted);margin:0 0 12px}.u2-related ul{padding-left:22px;list-style:disc}.u2-related a{color:var(--u2-link);text-decoration:underline;text-underline-offset:3px}.u2-related a:focus-visible{outline:2px solid currentColor;outline-offset:4px}.u2-columns{display:grid;grid-template-columns:1fr 1fr;gap:24px}.u2-review{border-top:1px solid var(--u2-border);padding-top:15px;font-size:12px!important}.u2-related.u2-dark-default{--u2-bg:#0f172a;--u2-text:#f8fafc;--u2-muted:#cbd5e1;--u2-border:#334155;--u2-link:#a5b4fc}html.dark .u2-related,body.dark-mode .u2-related{--u2-bg:#0f172a;--u2-text:#f8fafc;--u2-muted:#cbd5e1;--u2-border:#334155;--u2-link:#a5b4fc}body.light-mode .u2-related{--u2-bg:#fff;--u2-text:#0f172a;--u2-muted:#475569;--u2-border:#dbe3ee;--u2-link:#4338ca}@media(max-width:620px){.u2-related{padding:18px}.u2-columns{grid-template-columns:1fr;gap:0}}
 </style>
 <style id="b4-styles">
@@ -190,7 +257,7 @@ They create no visible boxes or reserved layout space.
      Paste your approved AdSense code here. Invisible insertion point only.
 --><main class="max-w-6xl mx-auto px-4 sm:px-6 py-12"><div><h1 class="text-4xl sm:text-5xl font-black mt-2 b4-heading"><svg class="b4-icon" aria-hidden="true" viewbox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"></path><path d="M14 3v5h5"></path><circle cx="11" cy="14" r="3"></circle><path d="m13.2 16.2 2.3 2.3"></path></svg><span>HAR File Viewer &amp; Network Analyzer</span></h1><p class="mt-4 text-lg muted max-w-3xl">Open an HTTP Archive (.har) file locally in your browser to inspect network requests, status codes, URLs, timings, errors and individual request details.</p></div><section class="glass rounded-3xl p-6 sm:p-8 mt-8">
 <input id="harFile" type="file" accept=".har,.json" class="input w-full rounded-xl p-3">
-<p class="muted text-xs mt-3 flex items-start gap-2"><i data-lucide="shield-check" class="w-4 h-4 mt-0.5 flex-shrink-0 text-indigo-400"></i><span>Local browser processing: the selected HAR file is read by this page in your browser and is not uploaded to a Utiliverse server.</span></p>
+<p class="muted text-xs mt-3 flex items-start gap-2"><i data-lucide="shield-check" class="w-4 h-4 mt-0.5 flex-shrink-0 text-indigo-400"></i><span>Local browser processing: the selected HAR file is read by this viewer in your browser and is not uploaded to a Utiliverse processing server. The page itself still loads interface and advertising resources from external providers.</span></p>
 
 <div class="har-controls">
   <input id="harSearch" class="input rounded-xl px-4 py-2.5" type="search" placeholder="Filter by URL, host, method or status..." aria-label="Filter HAR requests">
@@ -267,7 +334,7 @@ They create no visible boxes or reserved layout space.
 
 <div class="privacy-box">
 <strong>Redaction is a helper, not a guarantee.</strong>
-The sanitizer looks for common names such as Authorization, Cookie, Set-Cookie, API keys, access tokens, passwords, secrets, sessions, JWT-like fields and similar query/form/JSON keys. A HAR may still contain sensitive values under unexpected names or inside opaque request bodies. Review the sanitized copy manually before sending it anywhere.
+The sanitizer looks for common names such as Authorization, Cookie, Set-Cookie, API keys, access tokens, passwords, secrets, sessions, JWT-like fields and similar query/form/JSON keys. When response content is stored as readable JSON text, it also attempts key-based redaction there. A HAR may still contain sensitive values under unexpected names or inside opaque request bodies. Review the sanitized copy manually before sending it anywhere.
 </div>
 
 <h3>What the sanitizer checks</h3>
@@ -275,12 +342,50 @@ The sanitizer looks for common names such as Authorization, Cookie, Set-Cookie, 
 <li>Request and response headers commonly used for authentication or session state.</li>
 <li>HAR cookie arrays and <code>Cookie</code>/<code>Set-Cookie</code> header values.</li>
 <li>Query-string and form parameter names that look like tokens, keys, passwords, secrets or session identifiers.</li>
-<li>JSON request bodies where sensitive-looking object keys can be identified.</li>
+<li>JSON request bodies and readable JSON response bodies where sensitive-looking object keys can be identified.</li>
 <li>Matching sensitive query parameters embedded directly in request URLs.</li>
 </ul>
 
 <p>The sanitizer deliberately does not delete entire requests or rewrite arbitrary free-form text because doing so could destroy useful debugging context. When a body cannot be parsed safely, the viewer leaves it intact and relies on the warning above so you can review it manually.</p>
 
+
+<h2>How This Viewer Interprets a HAR</h2>
+<p>The viewer expects a JSON object containing <code>log.entries</code>. It does not attempt to repair malformed captures or reconstruct data that was not exported. Each table row is based on one HAR entry's request method, response status, URL and recorded <code>time</code> value.</p>
+
+<div class="har-method-grid">
+  <div class="har-method-card"><strong>2xx count</strong><span>The success card counts response status codes from 200 through 299. Redirects, status 0 and missing status values are not included in that number.</span></div>
+  <div class="har-method-card"><strong>Error count</strong><span>The error card counts status codes of 400 or higher. A status of 0 or a missing value is not treated as an HTTP error because it is not a server-issued HTTP status code.</span></div>
+  <div class="har-method-card"><strong>Total time</strong><span>The displayed total adds the HAR entry durations. Since requests can overlap, this sum is not the same as elapsed page-load time or a browser waterfall duration.</span></div>
+  <div class="har-method-card"><strong>Filtering</strong><span>The search filter matches method, status, full URL and parsed hostname. It does not search headers, request bodies or response bodies.</span></div>
+</div>
+
+<h3>What redaction now covers</h3>
+<p>The sanitizer masks common sensitive request and response headers, cookie-array values, matching query/form parameters, sensitive query parameters embedded in request and redirect URLs, and recognizable sensitive keys in JSON request bodies. It also attempts the same key-based redaction for JSON response bodies when the response content is stored as readable JSON text.</p>
+
+<h3>What redaction still does not guarantee</h3>
+<p>Arbitrary free-form text, HTML, XML, binary data, base64 payloads, unexpected parameter names, email addresses, internal hostnames, account numbers, or secrets embedded inside opaque strings may remain unchanged. The helper also does not know which business-specific fields your organization considers confidential.</p>
+
+<div class="har-caution"><strong>A sanitized HAR is still a sensitive support artifact until you review it.</strong> Open the generated copy in a text editor or trusted inspection tool and check URLs, request bodies, response bodies, headers, cookies, hostnames and identifiers before sending it outside your organization.</div>
+
+<h3>Large captures and browser memory</h3>
+<p>The viewer parses the entire HAR into browser memory, creates deep copies during redaction, and serializes a complete second copy when downloading a sanitized file. Very large captures can therefore be slow or exceed the memory available to a browser tab, especially on mobile devices.</p>
+
+<h3>Original file integrity</h3>
+<p>The original selected file is never rewritten by this page. Filtering, detail redaction and sanitization operate on in-memory copies. Download Sanitized HAR creates a separate file, preserving the original capture for private troubleshooting or comparison.</p>
+
+<h3>Worked examples</h3>
+<code class="har-example">Status summary:
+200 → counted as 2xx
+302 → not counted as 2xx or error
+404 → counted as error
+0   → not counted as an HTTP error</code>
+
+<code class="har-example">Timing example:
+Request A: 900 ms
+Request B: 700 ms
+Displayed total: 1,600 ms
+
+If the two requests overlapped, actual elapsed time can be much less than 1,600 ms.</code>
 <h2>Common HAR Troubleshooting Uses</h2>
 <ul>
 <li>Find 4xx and 5xx responses during a bug investigation.</li>
@@ -297,7 +402,7 @@ The sanitizer looks for common names such as Authorization, Cookie, Set-Cookie, 
 <h3>Redaction workflow before sharing a HAR</h3>
 <p>A practical workflow is: reproduce the issue, export the HAR, open it locally here, keep the redaction option enabled while inspecting entries, download a sanitized copy, then manually review that sanitized file before sharing it. If the support recipient does not need request bodies or certain private endpoints, consider removing those requests entirely in a dedicated text editor or capture a narrower session.</p>
 
-<p class="muted" style="font-size:12px"><strong>Last reviewed:</strong> September 30, 2026 · Viewer behavior, privacy guidance and redaction logic reviewed against the current implementation.</p>
+<p class="muted" style="font-size:12px"><strong>Last reviewed:</strong> October 1, 2026 · Viewer behavior, privacy guidance and redaction logic reviewed against the current implementation.</p>
 
 <h2>HAR File Viewer FAQ</h2>
 <details class="faq"><summary>What does HAR stand for?</summary><p class="muted">HAR stands for HTTP Archive. It is a JSON-based format used to record HTTP network requests and responses from a browser or other compatible debugging tool.</p></details>
@@ -310,12 +415,14 @@ The sanitizer looks for common names such as Authorization, Cookie, Set-Cookie, 
 <details class="faq"><summary>Can this replace browser DevTools?</summary><p class="muted">No. It is a lightweight viewer for exported HAR files, not a replacement for the full live Network panel in browser developer tools.</p></details>
 <details class="faq"><summary>What does the HAR redaction helper remove?</summary><p class="muted">It masks common sensitive headers, cookies, query parameters, form fields and JSON keys such as authorization values, API keys, tokens, passwords, secrets and session identifiers. It is heuristic and may not catch every sensitive value.</p></details>
 <details class="faq"><summary>Is a sanitized HAR automatically safe to share?</summary><p class="muted">No. Always review the sanitized file manually. Secrets can appear under unexpected field names, inside opaque request bodies or in URLs and data that no generic sanitizer can identify reliably.</p></details>
-<details class="faq"><summary>Does the viewer change my original HAR file?</summary><p class="muted">No. The original file stays unchanged. The Download Sanitized HAR button creates a separate copy in your browser.</p></details>
+<details class="faq"><summary>Does the viewer change my original HAR file?</summary><p class="muted">No. The original file stays unchanged. The Download Sanitized HAR button creates a separate copy in your browser.</p></details><details class="faq"><summary>Does the sanitizer inspect response bodies?</summary><p class="muted">When a response body is stored as readable JSON text, the sanitizer attempts to mask values under sensitive-looking keys. Arbitrary text, HTML, XML, binary or opaque response content is not generically sanitized.</p></details>
+<details class="faq"><summary>Why is status 0 not counted as an HTTP error?</summary><p class="muted">Status 0 is not a server-issued HTTP status code. It can appear when a request is incomplete, blocked, cancelled, unavailable to the capture, or represented differently by the exporting tool.</p></details>
+<details class="faq"><summary>Can a very large HAR file fail to open?</summary><p class="muted">Yes. The viewer loads the full archive into browser memory and may create additional copies for redaction and sanitized download, so very large captures can exceed available memory.</p></details>
 </section><!-- GOOGLE ADSENSE: PRE-FOOTER PLACEMENT
      Paste your approved AdSense code here. Invisible insertion point only.
 -->
 <!-- BATCH 2 RELATED CONTENT START -->
-<section class="u2-related u2-dark-default" aria-labelledby="u2-heading"><h2 id="u2-heading">Use a capture to answer one network question</h2><p>Record the failing operation in your browser’s Network panel, preserving the log when navigation matters. Export a sanitized HAR, review it for private values, and open it here. This viewer reads the selected file in your browser.</p><h3>Worked check: a successful response after a failure</h3><p>A sequence of 302 → 200 may be a redirect to a login form, not a successful API call. Select the rows to inspect recorded URLs, headers, and methods. Compare the destination with the operation you intended to perform.</p><h3>Understand timing and missing data</h3><p>The total time shown is the sum of request durations. Requests can overlap, so it is not elapsed page-load time. A status of zero or a missing status is not a server-issued HTTP code. Stripped headers and omitted request bodies cannot be reconstructed by this viewer.</p><p>HAR files may contain cookies, credentials, query values, and form data. Sanitized exports still deserve review before sharing. A saved browser capture does not expose private service-to-service requests or explain which backend dependency failed.</p><div class="u2-columns"><div><h3>Related guides</h3><ul><li><a href="/Guides/DNS_and_Network_Troubleshooting.html">DNS, TLS, or HTTP? Troubleshoot the right layer</a></li><li><a href="/Guides/HTTP_Redirects.html">301 vs 302 vs 307 vs 308: choosing an HTTP redirect</a></li><li><a href="/Guides/HTTP_401_vs_403.html">401 vs 403: authentication and access errors</a></li><li><a href="/Guides/HTTP_502_503_504.html">502 vs 503 vs 504: server and gateway errors</a></li></ul></div><div><h3>Related tools</h3><ul><li><a href="/SSL_Certificate_Checker/">SSL Certificate Checker</a></li></ul><p><a href="/Guides.html">Browse all guides</a></p></div></div><h3>Sources</h3><ul><li><a href="https://developers.google.com/speed/public-dns/docs/troubleshooting">Google Public DNS troubleshooting</a></li><li><a href="https://developer.chrome.com/docs/devtools/network/reference">Chrome Network reference</a></li></ul><p class="u2-review">Explanatory content reviewed September 29, 2026. <a href="/Editorial_Methodology.html">Methodology</a> · <a href="/Contact_Info.html">Report a correction</a></p></section>
+<section class="u2-related u2-dark-default" aria-labelledby="u2-heading"><h2 id="u2-heading">Use a capture to answer one network question</h2><p>Record the failing operation in your browser’s Network panel, preserving the log when navigation matters. Export a sanitized HAR, review it for private values, and open it here. This viewer reads the selected file in your browser.</p><h3>Worked check: a successful response after a failure</h3><p>A sequence of 302 → 200 may be a redirect to a login form, not a successful API call. Select the rows to inspect recorded URLs, headers, and methods. Compare the destination with the operation you intended to perform.</p><h3>Understand timing and missing data</h3><p>The total time shown is the sum of request durations. Requests can overlap, so it is not elapsed page-load time. A status of zero or a missing status is not a server-issued HTTP code. Stripped headers and omitted request bodies cannot be reconstructed by this viewer.</p><p>HAR files may contain cookies, credentials, query values, and form data. Sanitized exports still deserve review before sharing. A saved browser capture does not expose private service-to-service requests or explain which backend dependency failed.</p><div class="u2-columns"><div><h3>Related guides</h3><ul><li><a href="/Guides/DNS_and_Network_Troubleshooting.html">DNS, TLS, or HTTP? Troubleshoot the right layer</a></li><li><a href="/Guides/HTTP_Redirects.html">301 vs 302 vs 307 vs 308: choosing an HTTP redirect</a></li><li><a href="/Guides/HTTP_401_vs_403.html">401 vs 403: authentication and access errors</a></li><li><a href="/Guides/HTTP_502_503_504.html">502 vs 503 vs 504: server and gateway errors</a></li></ul></div><div><h3>Related tools</h3><ul><li><a href="/SSL_Certificate_Checker/">SSL Certificate Checker</a></li></ul><p><a href="/Guides.html">Browse all guides</a></p></div></div><h3>Sources</h3><ul><li><a href="https://developers.google.com/speed/public-dns/docs/troubleshooting">Google Public DNS troubleshooting</a></li><li><a href="https://developer.chrome.com/docs/devtools/network/reference">Chrome Network reference</a></li></ul><p class="u2-review">Explanatory content reviewed October 1, 2026. <a href="/Editorial_Methodology.html">Methodology</a> · <a href="/Contact_Info.html">Report a correction</a></p></section>
 <!-- BATCH 2 RELATED CONTENT END -->
 </main><script>
 (() => {
@@ -451,6 +558,20 @@ The sanitizer looks for common names such as Authorization, Cookie, Set-Cookie, 
     if(copy.response){
       copy.response.headers = sanitizeHeaders(copy.response.headers, stats);
       copy.response.cookies = sanitizeCookies(copy.response.cookies, stats);
+
+      if(copy.response.redirectURL){
+        copy.response.redirectURL = sanitizeUrl(copy.response.redirectURL, stats);
+      }
+
+      if(copy.response.content && typeof copy.response.content.text === "string" && copy.response.content.text){
+        const mime = String(copy.response.content.mimeType || "").toLowerCase();
+        if(mime.includes("json") || /^[\s]*[\[{]/.test(copy.response.content.text)){
+          try{
+            const parsed = JSON.parse(copy.response.content.text);
+            copy.response.content.text = JSON.stringify(redactObject(parsed, stats), null, 2);
+          }catch{}
+        }
+      }
     }
 
     return copy;
