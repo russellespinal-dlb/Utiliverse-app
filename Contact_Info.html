@@ -111,6 +111,22 @@
     .footer-links{justify-content:center}
   }
 
+
+  .help-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px}
+  .help-card{background:rgba(15,23,42,.60);border:1px solid #334155;border-radius:14px;padding:16px}
+  .help-card h3{margin:0 0 7px;color:#e2e8f0;font-size:1rem;font-weight:800}
+  .help-card p,.help-card li{color:#94a3b8;font-size:.88rem;line-height:1.65}
+  .help-card ul{padding-left:18px;margin:8px 0 0}
+  .safety-note{margin-top:18px;padding:14px 16px;border:1px solid rgba(251,191,36,.30);background:rgba(251,191,36,.07);border-radius:14px;color:#fde68a;font-size:.88rem;line-height:1.65}
+  .safety-note strong{color:#fef3c7}
+  .contact-meta{margin-top:16px;padding-top:16px;border-top:1px solid #334155;color:#94a3b8;font-size:.83rem;line-height:1.65}
+  body.light-mode .help-card{background:#fff;border-color:#dbe3ee}
+  body.light-mode .help-card h3{color:#1e293b}
+  body.light-mode .help-card p,body.light-mode .help-card li{color:#475569}
+  body.light-mode .safety-note{background:#fffbeb;border-color:#fde68a;color:#92400e}
+  body.light-mode .safety-note strong{color:#78350f}
+  body.light-mode .contact-meta{border-color:#e2e8f0;color:#64748b}
+  @media(max-width:640px){.help-grid{grid-template-columns:1fr}}
 </style>
 <script type="application/ld+json">
 {
@@ -118,7 +134,7 @@
   "@type": "ContactPage",
   "name": "Contact Utiliverse",
   "url": "https://utiliverse.app/Contact_Info.html",
-  "description": "Contact Utiliverse for tool suggestions, bug reports, general inquiries, and business or advertising opportunities.",
+  "description": "Contact Utiliverse for tool suggestions, bug reports, content corrections, privacy questions, general inquiries, and business or advertising opportunities.",
   "isPartOf": {
     "@type": "WebSite",
     "name": "Utiliverse",
@@ -170,6 +186,8 @@
         <option>General Inquiry</option>
         <option>Tool Suggestion</option>
         <option>Bug Report</option>
+        <option>Content Correction</option>
+        <option>Privacy / Data Question</option>
         <option>Business / Advertising</option>
       </select>
     </div>
@@ -200,9 +218,17 @@
     </button>
   </form>
 
-<section class="mt-8 text-slate-400 text-sm leading-7" aria-labelledby="contact-help-heading">
-  <h2 id="contact-help-heading" class="text-xl font-bold text-slate-200 mb-2">What can you contact us about?</h2>
-  <p>Use this page to send Utiliverse a new tool suggestion, report a problem with an existing utility, ask a general question, or reach out about business and advertising opportunities.</p>
+<section class="mt-10 text-slate-400 text-sm leading-7" aria-labelledby="contact-help-heading">
+  <h2 id="contact-help-heading" class="text-2xl font-bold text-slate-200 mb-2">What can you contact us about?</h2>
+  <p>Use this page to suggest a new tool, report a bug, flag a content or calculation issue, ask a privacy question, send a general inquiry, or reach out about business and advertising opportunities.</p>
+  <div class="help-grid">
+    <div class="help-card"><h3>Reporting a tool problem</h3><p>The most useful bug reports include:</p><ul><li>The tool name or page URL.</li><li>Your browser and device type.</li><li>The steps that produced the problem.</li><li>What you expected and what happened instead.</li><li>Any visible error message, copied exactly when possible.</li></ul></div>
+    <div class="help-card"><h3>Reporting a content or calculation issue</h3><p>If you believe a formula, explanation, source link, assumption, or result is incorrect, tell us which page and which part you are referring to.</p></div>
+    <div class="help-card"><h3>Tool suggestions</h3><p>Describe the task you want the utility to solve, the inputs you would provide, and the result you would want the tool to produce.</p></div>
+    <div class="help-card"><h3>Privacy and data questions</h3><p>You can ask how a specific Utiliverse tool processes information or which third-party service a feature uses. See the Privacy Policy for current site-wide disclosures.</p></div>
+  </div>
+  <div class="safety-note"><strong>Please do not send sensitive secrets through this form.</strong> Do not include passwords, private keys, authentication tokens, payment-card details, government identification numbers, medical records, or other highly sensitive information. Redact confidential values before pasting logs, headers, URLs, or error output.</div>
+  <div class="contact-meta">Utiliverse reviews messages for support, corrections, tool suggestions, privacy questions, and site operations. Response time can vary by message type and volume, and submitting the form does not create a service-level or response-time guarantee.</div>
 </section>
 </main>
 <footer class="border-t border-slate-800 bg-slate-950 mt-12">
@@ -214,6 +240,8 @@
       <a href="https://utiliverse.app/Privacy_Policy.html">Privacy Policy</a>
       <a href="https://utiliverse.app/Terms_of_Service.html">Terms of Service</a>
       <a href="https://utiliverse.app/About.html">About</a>
+      <a href="https://utiliverse.app/Guides.html">Guides</a>
+      <a href="https://utiliverse.app/Editorial_Methodology.html">Editorial &amp; Methodology</a>
     </nav>
   </div>
 </footer>

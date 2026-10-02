@@ -60,6 +60,13 @@
     background:#f1f5f9;
     color:#0f172a;
   }
+
+.privacy-summary{border:1px solid #334155;background:rgba(15,23,42,.62);border-radius:16px;padding:18px 20px;margin:0 0 28px}
+.privacy-summary strong{color:#f8fafc}
+.privacy-summary p{margin:0;color:#cbd5e1;line-height:1.7}
+body.light-mode .privacy-summary{background:#fff;border-color:#dbe3ee}
+body.light-mode .privacy-summary strong{color:#0f172a}
+body.light-mode .privacy-summary p{color:#475569}
 </style>
 <style id="b4-styles">
 /* Batch 4: scoped title, editorial and footer additions */
@@ -83,7 +90,8 @@
 </header>
 <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12 article">
   <h1 class="text-4xl font-black mb-2">Privacy Policy</h1>
-  <p class="text-sm text-slate-500 mb-8">Last Updated: September 29, 2026</p>
+  <p class="text-sm text-slate-500 mb-8">Last Updated: October 1, 2026</p>
+  <div class="privacy-summary"><p><strong>Plain-language summary:</strong> many Utiliverse tools process inputs locally in your browser. Some features need outside services—for example contact-form delivery, spam protection, IP/network lookups, DNS/RDAP/certificate lookups, and currency-rate retrieval. When a tool uses an external provider, the relevant lookup value or technical request data may be sent to that provider. Advertising services may also use cookies, IP addresses, or similar identifiers when Google ad code is active.</p></div>
 
   <h2>1. Information We Collect</h2>
   <p>At Utiliverse, we believe in minimizing data collection. Many of our utility tools are designed to execute entirely within your web browser. For example, text-processing inputs, image-processing inputs, and typing-test inputs are generally processed locally by the tool and are not intentionally transmitted to or stored on a Utiliverse application server unless a specific tool clearly states that it uses an external service.</p>
@@ -97,14 +105,16 @@
     <li><strong>Resend:</strong> Contact-form submissions are transmitted through Resend so the message can be delivered by email. The submitted name, email address, subject, and message may therefore be processed by Resend as part of email delivery.</li>
     <li><strong>Google / Gmail:</strong> Contact-form messages may be delivered to and stored in a Utiliverse-managed Gmail mailbox. Google may process those emails in accordance with its own privacy practices.</li>
     <li><strong>Networking lookup providers:</strong> Email DNS queries are sent to Google Public DNS; WHOIS/RDAP queries use rdap.org and the relevant registration-data service; certificate checks send the hostname to api.domainee.dev; MAC vendor lookups send the entered address or prefix to MACLookup.app and may use macadress.com as a fallback. These providers receive the submitted lookup value and normal connection information. Address calculations and port-reference lookups do not themselves require submitting the input to a lookup service.</li>
-    <li><strong>Financial Data Providers:</strong> Tools requiring live information, such as currency exchange rates, may request data from third-party financial APIs.</li>
+    <li><strong>IP geolocation:</strong> the IP Address Lookup tool uses <a href="https://ipapi.co/" class="text-indigo-400 hover:underline" target="_blank" rel="noopener noreferrer">ipapi.co</a>. The IP address being looked up is sent to that provider. The “My Public IP” option allows the provider to see and return the public IP address associated with the request.</li>
+    <li><strong>Currency exchange data:</strong> the Unit &amp; Currency Converter requests the latest available rate table from <a href="https://www.exchangerate-api.com/" class="text-indigo-400 hover:underline" target="_blank" rel="noopener noreferrer">ExchangeRate-API</a>. The selected base currency code and normal connection information are sent as part of that request.</li>
+    <li><strong>Financial Data Providers:</strong> Other tools that require current financial information may request data from third-party APIs when clearly disclosed on the relevant page.</li>
     <li><strong>Content Delivery Networks (CDNs):</strong> Some pages may load JavaScript libraries, fonts, or other resources from third-party content-delivery networks.</li>
   </ul>
-  <p>Third-party providers may receive connection, technical, and submitted information as necessary to provide their services and may process that information under their own privacy policies. Utiliverse does not control the privacy practices of independent third-party services.</p>
+  <p>Third-party providers may receive connection, technical, and submitted information as necessary to provide their services and may process that information under their own privacy policies. Utiliverse does not control the privacy practices of independent third-party services. A tool that performs its main calculation locally may still load page resources such as libraries, advertising code, or security services from external domains.</p>
   <p>For additional information, you may review the privacy information published by
     <a href="https://www.cloudflare.com/privacypolicy/" class="text-indigo-400 hover:underline" target="_blank" rel="noopener noreferrer">Cloudflare</a>,
     <a href="https://resend.com/legal/privacy-policy" class="text-indigo-400 hover:underline" target="_blank" rel="noopener noreferrer">Resend</a>, and
-    <a href="https://policies.google.com/privacy" class="text-indigo-400 hover:underline" target="_blank" rel="noopener noreferrer">Google</a>.
+    <a href="https://policies.google.com/privacy" class="text-indigo-400 hover:underline" target="_blank" rel="noopener noreferrer">Google</a>, <a href="https://ipapi.co/privacy/" class="text-indigo-400 hover:underline" target="_blank" rel="noopener noreferrer">ipapi.co</a>, and <a href="https://www.exchangerate-api.com/terms" class="text-indigo-400 hover:underline" target="_blank" rel="noopener noreferrer">ExchangeRate-API</a>.
   </p>
 
 
@@ -114,8 +124,9 @@
   <p>Contact-form information is used for purposes such as responding to inquiries, reviewing bug reports or tool suggestions, handling business or advertising communications, preventing abuse, and maintaining records reasonably necessary for follow-up and site operations.</p>
 
   <h2>4. Advertising, Cookies, and Similar Technologies</h2>
-  <p>Utiliverse may use third-party advertising services, including Google AdSense, to display advertisements on the website. When advertising services are enabled, third-party vendors, including Google, may place and read cookies on your browser or use technologies such as web beacons, IP addresses, or other identifiers to collect information as a result of ad serving on Utiliverse.</p>
-  <p>Google and its advertising partners may use advertising cookies to serve ads based on a user's prior visits to Utiliverse and/or other websites. Google's use of advertising cookies enables Google and its partners to serve ads to users based on visits to Utiliverse and other sites on the Internet.</p>
+  <p>Utiliverse may use third-party advertising services, including Google AdSense. Google advertising code may be present on some pages for site verification, configuration, or ad serving even when an advertisement is not displayed on every page view. When Google or another advertising service receives a request from the page, the provider may receive normal connection information such as IP address, browser information, and page/request details.</p>
+  <p>When ad serving is enabled, third-party vendors, including Google, may place and read cookies on your browser or use technologies such as web beacons, IP addresses, or other identifiers to collect information as a result of ad serving on Utiliverse. Google and its advertising partners may use advertising cookies to serve ads based on a user's prior visits to Utiliverse and/or other websites, subject to the applicable Google settings, consent controls, and publisher policies.</p>
+  <p>Third parties may place and read cookies on users' browsers, or use web beacons, IP addresses, or other identifiers to collect information as a result of ad serving on this website.</p>
   <p>For more information about how Google uses information from websites and apps that use Google services, visit
     <a href="https://policies.google.com/technologies/partner-sites" class="text-indigo-400 hover:underline" target="_blank" rel="noopener noreferrer">How Google uses information from sites or apps that use our services</a>.
   </p>
@@ -129,12 +140,19 @@
   <p>Where required by applicable law, Utiliverse may present a consent message or other privacy controls before certain advertising or storage technologies are used. These controls may allow you to make choices about personalized advertising, cookies, or related data processing. Your available choices can vary depending on your location, browser, device, and the services enabled on the site.</p>
   <p>You can also use your browser settings to block, delete, or limit cookies. Restricting cookies may affect the behavior of some website features or third-party services.</p>
 
-  <h2>6. Data Retention</h2>
+  <h2>6. Sensitive Information and Lookup Inputs</h2>
+  <p>Some Utiliverse tools accept technical values such as IP addresses, domain names, email-domain records, certificate hostnames, MAC addresses, HTTP headers, HAR files, or other diagnostic data. Before using a tool, review the notice on that page to determine whether the input stays in your browser or is sent to an external provider.</p>
+  <p>Do not submit passwords, private keys, authentication tokens, payment-card information, government identification numbers, medical records, or other highly sensitive information to a Utiliverse contact form or external lookup tool unless the page specifically states that the workflow is designed for that data. When sharing logs, URLs, headers, HAR files, or troubleshooting output, redact confidential values first.</p>
+
+  <h2>7. Data Retention</h2>
   <p>Utiliverse does not require user accounts or persistent database profiles for its standard utility tools. Information processed only inside your browser is not retained by Utiliverse after the page is closed unless a particular tool explicitly uses browser storage for a feature such as saved preferences.</p>
   <p>Contact-form submissions may remain in the receiving email mailbox and may also appear in limited delivery, security, or operational records maintained by service providers such as Cloudflare, Resend, or Google. Utiliverse may retain contact messages for as long as reasonably necessary to respond, maintain correspondence history, investigate abuse or technical issues, comply with applicable obligations, or support legitimate business and site-operational needs. Messages that are no longer needed may be deleted in the ordinary course of mailbox and account management.</p>
   <p>Server or network logs retained for security, reliability, abuse prevention, or operational purposes may be kept for a limited period consistent with those purposes and the practices of the infrastructure providers involved.</p>
 
-  <h2>7. Changes to This Policy</h2>
+  <h2>8. Privacy Questions and Corrections</h2>
+  <p>If you have a question about how a specific Utiliverse feature handles data, or believe a privacy disclosure is inaccurate or outdated, you can use the <a href="https://utiliverse.app/Contact_Info.html" class="text-indigo-400 hover:underline">Contact page</a> and select the privacy or correction-related subject that best fits your message.</p>
+
+  <h2>9. Changes to This Policy</h2>
   <p>We may update this Privacy Policy periodically to reflect changes to Utiliverse, third-party services, advertising practices, legal requirements, or privacy controls. Any updated version will be posted on this page with a revised "Last Updated" date.</p>
 </main>
 <footer class="border-t border-slate-800 bg-slate-950 mt-12">
@@ -146,6 +164,7 @@
       <a href="https://utiliverse.app/Terms_of_Service.html" class="hover:text-white transition">Terms of Service</a>
       <a href="https://utiliverse.app/Contact_Info.html" class="hover:text-white transition">Contact</a>
       <a href="https://utiliverse.app/About.html" class="hover:text-white transition">About</a>
+      <a href="https://utiliverse.app/Editorial_Methodology.html" class="hover:text-white transition">Editorial &amp; Methodology</a>
     </nav>
   </div>
 <nav class="b4-nav b4-dark" aria-label="Resources and site information"><a href="/Guides.html">Guides</a><a href="/Updates.html">Updates</a><a href="/Editorial_Methodology.html">Editorial &amp; Methodology</a><a href="/Privacy_Policy.html">Privacy Policy</a></nav></footer>
