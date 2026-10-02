@@ -149,7 +149,36 @@ body.light-mode #swatch{
     flex:0 0 auto;
   }
 }
-</style><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse HEX to RGB Converter","url":"https://utiliverse.app/HEX_to_RGB/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based HEX to RGB color converter with RGB, HSL, CSS output, individual color channels and a live color preview.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Convert six-digit HEX colors to RGB","Convert HEX colors to HSL","Generate CSS color syntax","Display red, green and blue channel values","Live color preview","Native color picker","Copy converted color values"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a HEX color code?","acceptedAnswer":{"@type":"Answer","text":"A HEX color code is a hexadecimal representation of red, green and blue channels. A six-digit code uses the format #RRGGBB."}},{"@type":"Question","name":"What is RGB?","acceptedAnswer":{"@type":"Answer","text":"RGB represents a color using red, green and blue channel values from 0 through 255."}},{"@type":"Question","name":"How do I convert HEX to RGB manually?","acceptedAnswer":{"@type":"Answer","text":"Split the six-digit HEX value into red, green and blue pairs, then convert each pair from hexadecimal to decimal. For example, #FF5733 becomes rgb(255, 87, 51)."}},{"@type":"Question","name":"Does this converter support three-digit HEX colors?","acceptedAnswer":{"@type":"Answer","text":"This version accepts six-digit HEX values such as #FF5733. Three-digit shorthand colors are not currently accepted."}},{"@type":"Question","name":"Does this tool also show HSL?","acceptedAnswer":{"@type":"Answer","text":"Yes. A valid six-digit HEX color is converted to both RGB and HSL, along with the individual RGB channels."}},{"@type":"Question","name":"Does the converter support alpha transparency?","acceptedAnswer":{"@type":"Answer","text":"No. The current converter focuses on opaque six-digit HEX colors and their RGB and HSL equivalents."}}]}</script></head><body><!--
+
+.title-row{display:flex;align-items:center;gap:14px}
+.title-icon{width:44px;height:44px;flex:0 0 auto;color:#818cf8}
+.title-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.validation-msg{min-height:1.25rem;margin-top:.55rem;font-size:.78rem;color:#fca5a5}
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid #334155;background:rgba(15,23,42,.58);border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#e2e8f0;margin-bottom:5px}
+.method-card span{display:block;color:#94a3b8;font-size:13px;line-height:1.65}
+.caution-note{border:1px solid rgba(251,191,36,.28);background:rgba(251,191,36,.07);border-radius:14px;padding:16px;color:#fde68a;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#fef3c7}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid #334155;background:#0f172a;color:#e2e8f0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid #334155;background:rgba(15,23,42,.55);border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#e2e8f0;margin-bottom:4px}
+.related-link span{display:block;color:#94a3b8;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+body.light-mode .method-card,body.light-mode .related-link{background:#fff;border-color:#dbe3ee}
+body.light-mode .method-card strong,body.light-mode .related-link strong{color:#1e293b}
+body.light-mode .method-card span,body.light-mode .related-link span{color:#475569}
+body.light-mode .caution-note{background:#fffbeb;border-color:#fde68a;color:#92400e}
+body.light-mode .caution-note strong{color:#78350f}
+body.light-mode .example-box{background:#f8fafc;color:#1e293b;border-color:#dbe3ee}
+body.light-mode .validation-msg{color:#b91c1c}
+@media(max-width:700px){
+  .title-icon{width:36px;height:36px}
+  .method-grid,.related-grid{grid-template-columns:1fr}
+}
+
+</style><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse HEX to RGB Converter","url":"https://utiliverse.app/HEX_to_RGB/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based six-digit HEX color converter with RGB, rounded HSL, CSS output, individual color channels, live preview, input validation and copy support.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Convert six-digit HEX colors to RGB","Convert HEX colors to rounded HSL","Generate CSS color syntax","Display red, green and blue channel values","Live color preview","Native color picker","Validate six-digit HEX input","Normalize valid HEX input to uppercase","Copy converted color values with clipboard fallback","Browser-local color conversion"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a HEX color code?","acceptedAnswer":{"@type":"Answer","text":"A HEX color code is a hexadecimal representation of red, green and blue channels. A six-digit code uses the format #RRGGBB."}},{"@type":"Question","name":"What is RGB?","acceptedAnswer":{"@type":"Answer","text":"RGB represents a color using red, green and blue channel values from 0 through 255."}},{"@type":"Question","name":"How do I convert HEX to RGB manually?","acceptedAnswer":{"@type":"Answer","text":"Split the six-digit HEX value into red, green and blue pairs, then convert each pair from hexadecimal to decimal. For example, #FF5733 becomes rgb(255, 87, 51)."}},{"@type":"Question","name":"Does this converter support three-digit HEX colors?","acceptedAnswer":{"@type":"Answer","text":"This version accepts six-digit HEX values such as #FF5733. Three-digit shorthand colors are not currently accepted."}},{"@type":"Question","name":"Does this tool also show HSL?","acceptedAnswer":{"@type":"Answer","text":"Yes. A valid six-digit HEX color is converted to both RGB and HSL, along with the individual RGB channels."}},{"@type":"Question","name":"Does the converter support alpha transparency?","acceptedAnswer":{"@type":"Answer","text":"No. The current converter focuses on opaque six-digit HEX colors and their RGB and HSL equivalents."}},{"@type":"Question","name":"Why can HSL values differ slightly between color tools?","acceptedAnswer":{"@type":"Answer","text":"This converter rounds hue, saturation and lightness to whole numbers for display. Other tools may show additional decimal precision while representing effectively the same color."}},{"@type":"Question","name":"What happens if I enter an invalid HEX value?","acceptedAnswer":{"@type":"Answer","text":"The converter shows a validation message and clears the converted outputs until a valid six-digit value such as #6366F1 is entered."}},{"@type":"Question","name":"Can this tool calibrate my monitor or predict print color?","acceptedAnswer":{"@type":"Answer","text":"No. It converts digital color values only. Accurate monitor calibration, print proofing and color-managed production workflows require dedicated hardware and software."}}]}</script></head><body><!--
 SEO TARGET CLUSTER
 Primary: HEX to RGB converter
 Secondary: hex color converter, hexadecimal to RGB, RGB color values,
@@ -164,7 +193,7 @@ They create no visible boxes or reserved layout space.
 <button id="theme-toggle" type="button" aria-label="Switch to light mode" title="Toggle light/dark mode"><i id="theme-icon" data-lucide="sun" aria-hidden="true"></i></button>
 </div></div></header><!-- GOOGLE ADSENSE: TOP PLACEMENT
      Paste your approved AdSense code here. Invisible insertion point only.
---><main class="max-w-6xl mx-auto px-4 sm:px-6 py-12"><div class="max-w-3xl"><p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Color utility</p><h1 class="text-4xl sm:text-5xl font-black mt-2">HEX to RGB Converter & CSS Color Tool</h1><p class="mt-4 text-lg muted">Convert a six-digit HEX color code to RGB, HSL and CSS-ready values instantly, with individual red, green and blue channels plus a live color preview.</p></div><section class="glass rounded-3xl p-6 sm:p-8 mt-8"><div class="grid lg:grid-cols-[300px_1fr] gap-7"><div><label class="font-semibold">HEX color</label><div class="flex gap-2 mt-2"><input id="hex" value="#6366F1" class="input w-full rounded-xl px-4 py-3 font-mono"><input id="picker" type="color" value="#6366F1" class="w-14 h-12 rounded-xl bg-transparent"></div><div id="swatch" class="h-40 rounded-2xl mt-5 border border-slate-700"></div></div><div class="grid sm:grid-cols-2 gap-4"><div class="glass rounded-xl p-4"><span class="muted text-xs">RGB</span><div id="rgb" class="font-mono text-lg mt-2">—</div></div><div class="glass rounded-xl p-4"><span class="muted text-xs">HSL</span><div id="hsl" class="font-mono text-lg mt-2">—</div></div><div class="glass rounded-xl p-4 sm:col-span-2"><span class="muted text-xs">CSS</span><div id="css" class="font-mono text-lg mt-2">—</div></div><div class="glass rounded-xl p-4"><span class="muted text-xs">Red</span><div id="r" class="font-mono text-lg mt-2">—</div></div><div class="glass rounded-xl p-4"><span class="muted text-xs">Green</span><div id="g" class="font-mono text-lg mt-2">—</div></div><div class="glass rounded-xl p-4"><span class="muted text-xs">Blue</span><div id="b" class="font-mono text-lg mt-2">—</div></div></div></div><div class="flex gap-3 mt-6"><button class="btn primary" onclick="copyAll()">Copy Values</button><button class="btn" onclick="setHex('#FF3B30')">Example Red</button></div><p class="muted text-xs mt-4 flex items-start gap-2"><i data-lucide="shield-check" class="w-4 h-4 mt-0.5 flex-shrink-0 text-indigo-400"></i><span>Browser-based conversion: color values are calculated locally on this page and are not sent to a Utiliverse server.</span></p></section><!-- GOOGLE ADSENSE: MID-PAGE / AFTER-CONVERTER PLACEMENT
+--><main class="max-w-6xl mx-auto px-4 sm:px-6 py-12"><div class="max-w-3xl"><div class="title-row"><span class="title-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="2"/><circle cx="16" cy="8" r="2"/><circle cx="12" cy="15" r="2"/><path d="M12 3a9 9 0 1 0 0 18h2a2 2 0 0 0 0-4h-1"/></svg></span><h1 class="text-4xl sm:text-5xl font-black">HEX to RGB Converter & CSS Color Tool</h1></div><p class="mt-4 text-lg muted">Convert a six-digit HEX color code to RGB, HSL and CSS-ready values instantly, with individual red, green and blue channels plus a live color preview.</p></div><section class="glass rounded-3xl p-6 sm:p-8 mt-8"><div class="grid lg:grid-cols-[300px_1fr] gap-7"><div><label class="font-semibold">HEX color</label><div class="flex gap-2 mt-2"><input id="hex" value="#6366F1" class="input w-full rounded-xl px-4 py-3 font-mono" aria-describedby="hexValidation"><input id="picker" type="color" value="#6366F1" class="w-14 h-12 rounded-xl bg-transparent"></div><div id="hexValidation" class="validation-msg" role="status" aria-live="polite"></div><div id="swatch" class="h-40 rounded-2xl mt-5 border border-slate-700"></div></div><div class="grid sm:grid-cols-2 gap-4"><div class="glass rounded-xl p-4"><span class="muted text-xs">RGB</span><div id="rgb" class="font-mono text-lg mt-2">—</div></div><div class="glass rounded-xl p-4"><span class="muted text-xs">HSL</span><div id="hsl" class="font-mono text-lg mt-2">—</div></div><div class="glass rounded-xl p-4 sm:col-span-2"><span class="muted text-xs">CSS</span><div id="css" class="font-mono text-lg mt-2">—</div></div><div class="glass rounded-xl p-4"><span class="muted text-xs">Red</span><div id="r" class="font-mono text-lg mt-2">—</div></div><div class="glass rounded-xl p-4"><span class="muted text-xs">Green</span><div id="g" class="font-mono text-lg mt-2">—</div></div><div class="glass rounded-xl p-4"><span class="muted text-xs">Blue</span><div id="b" class="font-mono text-lg mt-2">—</div></div></div></div><div class="flex gap-3 mt-6"><button class="btn primary" onclick="copyAll()">Copy Values</button><button class="btn" onclick="setHex('#FF3B30')">Example Red</button></div><p class="muted text-xs mt-4 flex items-start gap-2"><i data-lucide="shield-check" class="w-4 h-4 mt-0.5 flex-shrink-0 text-indigo-400"></i><span>Browser-based conversion: color values are calculated locally by this tool and are not sent to a Utiliverse processing server. The page itself still loads interface and advertising resources from external providers.</span></p></section><!-- GOOGLE ADSENSE: MID-PAGE / AFTER-CONVERTER PLACEMENT
      Paste your approved AdSense code here. Invisible insertion point only.
 --><section class="article max-w-4xl mt-16">
 <h2>How to Convert HEX to RGB</h2>
@@ -192,6 +221,48 @@ They create no visible boxes or reserved layout space.
 <li>Document consistent brand colors across design and development teams.</li>
 </ul>
 
+
+<h2>Conversion Methodology and Limitations</h2>
+<p>The converter validates a six-digit <code>#RRGGBB</code> value, parses the hexadecimal number into separate red, green and blue 8-bit channels, then derives HSL from the normalized RGB values. The CSS output uses the original six-digit HEX value directly.</p>
+
+<div class="method-grid">
+  <div class="method-card"><strong>HEX → RGB</strong><span>Each two-digit HEX pair is interpreted as a base-16 number from 00 through FF and converted to a decimal channel value from 0 through 255.</span></div>
+  <div class="method-card"><strong>RGB → HSL</strong><span>RGB channels are normalized to 0–1, then maximum/minimum channel values are used to derive hue, saturation and lightness.</span></div>
+  <div class="method-card"><strong>Rounded HSL display</strong><span>Hue, saturation and lightness are rounded to whole-number display values, so the HSL text is a practical approximation of the same color rather than an unlimited-precision representation.</span></div>
+  <div class="method-card"><strong>Opaque six-digit input only</strong><span>This version accepts #RRGGBB values. Three-digit shorthand, four/eight-digit alpha HEX, named colors and CSS functional input are intentionally outside the current parser.</span></div>
+</div>
+
+<h3>Worked example: #6366F1</h3>
+<code class="example-box">HEX: #6366F1
+Red:   0x63 = 99
+Green: 0x66 = 102
+Blue:  0xF1 = 241
+RGB: rgb(99, 102, 241)</code>
+
+<h3>Why HSL may look slightly rounded</h3>
+<p>The converter rounds HSL hue, saturation and lightness to whole numbers for readability. If another color tool shows decimal HSL values, both outputs can still describe effectively the same color even though the text is not identical.</p>
+
+<h3>HEX and RGB do not define exact physical appearance</h3>
+<p>HEX and RGB specify digital channel values, not a guaranteed physical light output. The same numerical color can look different across monitors, phones and browsers because of display gamut, brightness, white point, color profiles, HDR behavior, calibration and surrounding colors.</p>
+
+<div class="caution-note"><strong>Do not use this converter as a color-calibration or print-proofing instrument.</strong> It is designed for digital color-code conversion. Brand-critical print, accessibility, prepress and calibrated-display workflows may require dedicated color-management tools.</div>
+
+<h3>Common input mistakes</h3>
+<ul>
+  <li>Entering a three-digit shorthand such as <code>#F53</code> instead of a six-digit value such as <code>#FF5533</code>.</li>
+  <li>Omitting the leading <code>#</code>.</li>
+  <li>Entering alpha transparency such as <code>#6366F180</code>, which this version does not accept.</li>
+  <li>Assuming two screens will render the same RGB triplet identically.</li>
+</ul>
+
+<h3>Related Utiliverse Tools</h3>
+<div class="related-grid">
+  <a class="related-link" href="../Screen_Color_Tester/"><strong>Screen Color Tester</strong><span>Display solid fullscreen colors and generate solid-color PNG test images.</span></a>
+  <a class="related-link" href="../Image_Converter/"><strong>Image Converter &amp; Resizer</strong><span>Convert and resize image files for web and graphics workflows.</span></a>
+  <a class="related-link" href="../Scientific_Calculator/"><strong>Scientific Calculator</strong><span>Handle general numeric calculations when working with formulas and transformations.</span></a>
+</div>
+
+<p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 1, 2026 · HEX validation, RGB channel parsing, HSL conversion, copy behavior and display limitations reviewed against the current implementation.</p>
 <h2>Working With Web and Brand Colors</h2>
 <p>Design systems often store brand colors as HEX codes because they are compact and familiar. Other development tools may expose RGB or HSL instead. Converting between formats helps teams confirm that two differently written values represent the same color and reduces errors during design handoff.</p>
 <p>A live swatch is useful for visually confirming that the entered code is the color you expected. Keep in mind that the same numerical color can still appear different across displays because of brightness, calibration, color profiles and surrounding colors.</p>
@@ -210,12 +281,108 @@ They create no visible boxes or reserved layout space.
 <details class="faq"><summary>Does this tool also show HSL?</summary><p class="muted">Yes. A valid six-digit HEX color is converted to both RGB and HSL, along with the individual RGB channels.</p></details>
 <details class="faq"><summary>Can I copy the converted values?</summary><p class="muted">Yes. The Copy Values button copies the current HEX, RGB and HSL values.</p></details>
 <details class="faq"><summary>Does the converter support alpha transparency?</summary><p class="muted">No. The current converter focuses on opaque six-digit HEX colors and their RGB and HSL equivalents.</p></details>
-<details class="faq"><summary>Why can the same HEX color look different on two screens?</summary><p class="muted">Display calibration, brightness, color profiles and viewing conditions can change how the same numerical color is perceived.</p></details>
+<details class="faq"><summary>Why can the same HEX color look different on two screens?</summary><p class="muted">Display calibration, brightness, color profiles and viewing conditions can change how the same numerical color is perceived.</p></details><details class="faq"><summary>Why can HSL values differ slightly between color tools?</summary><p class="muted">This converter rounds hue, saturation and lightness to whole numbers for display. Other tools may show additional decimal precision while representing effectively the same color.</p></details>
+<details class="faq"><summary>What happens if I enter an invalid HEX value?</summary><p class="muted">The converter now shows a validation message and clears the converted outputs until a valid six-digit value such as #6366F1 is entered.</p></details>
+<details class="faq"><summary>Can this tool calibrate my monitor or predict print color?</summary><p class="muted">No. It converts digital color values only. Accurate monitor calibration, print proofing and color-managed production workflows require dedicated hardware and software.</p></details>
 </section><!-- GOOGLE ADSENSE: PRE-FOOTER PLACEMENT
      Paste your approved AdSense code here. Invisible insertion point only.
---></main><script>const hx=document.getElementById('hex'),pk=document.getElementById('picker');function valid(v){return /^#[0-9a-fA-F]{6}$/.test(v)}function run(v){if(!valid(v))return;pk.value=v;const n=parseInt(v.slice(1),16),r=n>>16&255,g=n>>8&255,b=n&255;document.getElementById('swatch').style.background=v;document.getElementById('rgb').textContent=`rgb(${r}, ${g}, ${b})`;document.getElementById('css').textContent=`color: ${v};`;document.getElementById('r').textContent=r;document.getElementById('g').textContent=g;document.getElementById('b').textContent=b;let rr=r/255,gg=g/255,bb=b/255,max=Math.max(rr,gg,bb),min=Math.min(rr,gg,bb),h=0,s,l=(max+min)/2;if(max!==min){let d=max-min;s=l>.5?d/(2-max-min):d/(max+min);h=max===rr?(gg-bb)/d+(gg<bb?6:0):max===gg?(bb-rr)/d+2:(rr-gg)/d+4;h*=60}s=Math.round(s*100);document.getElementById('hsl').textContent=`hsl(${Math.round(h)}, ${s}%, ${Math.round(l*100)}%)`}function copyAll(){navigator.clipboard.writeText(`HEX: ${hx.value}
+--></main><script>
+const hx = document.getElementById('hex');
+const pk = document.getElementById('picker');
+const validation = document.getElementById('hexValidation');
+
+function valid(v){
+  return /^#[0-9a-fA-F]{6}$/.test(v);
+}
+
+function clearOutputs(){
+  ['rgb','hsl','css','r','g','b'].forEach(id => {
+    document.getElementById(id).textContent = '—';
+  });
+  document.getElementById('swatch').style.background = 'transparent';
+}
+
+function run(v){
+  const value = String(v || '').trim();
+
+  if(!valid(value)){
+    validation.textContent = 'Enter a six-digit HEX color such as #6366F1.';
+    hx.setAttribute('aria-invalid','true');
+    clearOutputs();
+    return;
+  }
+
+  validation.textContent = '';
+  hx.removeAttribute('aria-invalid');
+
+  const normalized = value.toUpperCase();
+  if(hx.value !== normalized) hx.value = normalized;
+  pk.value = normalized;
+
+  const n = parseInt(normalized.slice(1),16);
+  const r = n >> 16 & 255;
+  const g = n >> 8 & 255;
+  const b = n & 255;
+
+  document.getElementById('swatch').style.background = normalized;
+  document.getElementById('rgb').textContent = `rgb(${r}, ${g}, ${b})`;
+  document.getElementById('css').textContent = `color: ${normalized};`;
+  document.getElementById('r').textContent = r;
+  document.getElementById('g').textContent = g;
+  document.getElementById('b').textContent = b;
+
+  const rr = r/255, gg = g/255, bb = b/255;
+  const max = Math.max(rr,gg,bb), min = Math.min(rr,gg,bb);
+  let h = 0, s = 0;
+  const l = (max+min)/2;
+
+  if(max !== min){
+    const d = max-min;
+    s = l > .5 ? d/(2-max-min) : d/(max+min);
+    h = max === rr
+      ? (gg-bb)/d + (gg<bb ? 6 : 0)
+      : max === gg
+        ? (bb-rr)/d + 2
+        : (rr-gg)/d + 4;
+    h *= 60;
+  }
+
+  document.getElementById('hsl').textContent =
+    `hsl(${Math.round(h)}, ${Math.round(s*100)}%, ${Math.round(l*100)}%)`;
+}
+
+async function copyAll(){
+  if(!valid(hx.value)) return;
+  const value = `HEX: ${hx.value}
 ${document.getElementById('rgb').textContent}
-${document.getElementById('hsl').textContent}`)}function setHex(v){hx.value=v;run(v)}hx.addEventListener('input',()=>run(hx.value));pk.addEventListener('input',()=>{hx.value=pk.value;run(pk.value)});run(hx.value)</script><footer class="border-t border-slate-800 bg-slate-950"><div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500"><span>© <span id="year"></span> Utiliverse. All rights reserved.</span><span>Tools are designed for browser-based use.</span></div></footer><script>document.getElementById('year').textContent=new Date().getFullYear();lucide.createIcons();
+${document.getElementById('hsl').textContent}`;
+
+  try{
+    await navigator.clipboard.writeText(value);
+  }catch{
+    const ta = document.createElement('textarea');
+    ta.value = value;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    ta.remove();
+  }
+}
+
+function setHex(v){
+  hx.value = v;
+  run(v);
+}
+
+hx.addEventListener('input', () => run(hx.value));
+pk.addEventListener('input', () => {
+  hx.value = pk.value.toUpperCase();
+  run(pk.value);
+});
+run(hx.value);
+</script><footer class="border-t border-slate-800 bg-slate-950"><div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500"><span>© <span id="year"></span> Utiliverse. All rights reserved.</span><span class="font-bold whitespace-nowrap">100% Free and Browser Based</span></div></footer><script>document.getElementById('year').textContent=new Date().getFullYear();lucide.createIcons();
 (function(){
   const toggle = document.getElementById("theme-toggle");
   const icon = document.getElementById("theme-icon");
