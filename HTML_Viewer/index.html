@@ -345,10 +345,13 @@
       }
     }
 
-  </style>
+  
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}.method-card{border:1px solid #cbd5e1;background:#fff;border-radius:14px;padding:15px}.method-card strong{display:block;color:#1e293b;margin-bottom:5px}.method-card span{display:block;color:#64748b;font-size:13px;line-height:1.65}.warning-box{margin-top:16px;padding:15px 16px;border:1px solid #fde68a;background:#fffbeb;border-radius:14px;color:#92400e;font-size:.86rem;line-height:1.7}.warning-box strong{color:#78350f}.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid #cbd5e1;background:#f8fafc;color:#1e293b;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}.related-link{display:block;border:1px solid #cbd5e1;background:#fff;border-radius:14px;padding:15px;text-decoration:none}.related-link strong{display:block;color:#1e293b;margin-bottom:4px}.related-link span{display:block;color:#64748b;font-size:12px;line-height:1.55}.related-link:hover{border-color:#818cf8}body.dark-mode .method-card,body.dark-mode .related-link{background:#0f172a;border-color:#334155}body.dark-mode .method-card strong,body.dark-mode .related-link strong{color:#e2e8f0}body.dark-mode .method-card span,body.dark-mode .related-link span{color:#94a3b8}body.dark-mode .warning-box{background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.28);color:#fde68a}body.dark-mode .warning-box strong{color:#fef3c7}body.dark-mode .example-box{background:#0f172a;color:#e2e8f0;border-color:#334155}@media(max-width:700px){.method-grid,.related-grid{grid-template-columns:1fr}}
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse HTML Viewer & Formatter","url":"https://utiliverse.app/HTML_Viewer/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based HTML viewer, formatter, beautifier and minifier with live preview, copy and clear controls.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Live HTML preview","HTML beautifier and formatter","Lightweight HTML minifier","Copy HTML to clipboard","Clear editor","Sandboxed iframe preview","Browser-based code processing"]}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does the HTML Viewer & Formatter do?","acceptedAnswer":{"@type":"Answer","text":"It lets you enter HTML, see a live browser preview, beautify the markup for readability, minify it for a more compact representation, clear the editor, and copy the current code to your clipboard."}},{"@type":"Question","name":"Does the preview run JavaScript?","acceptedAnswer":{"@type":"Answer","text":"Yes. The preview iframe currently uses a sandbox that allows scripts and modal dialogs. Small JavaScript examples can run, although sandbox restrictions can make some browser features behave differently from a normal deployed page."}},{"@type":"Question","name":"Is the HTML I enter uploaded to Utiliverse?","acceptedAnswer":{"@type":"Answer","text":"The editor and preview operate in the browser and the entered HTML is assigned to the iframe through srcdoc. External resources referenced by the HTML may still be requested by the browser."}},{"@type":"Question","name":"What is the difference between Beautify and Minify?","acceptedAnswer":{"@type":"Answer","text":"Beautify adds indentation and line breaks to make markup easier to read. Minify removes comments, line breaks, spacing between tags, and repeated whitespace to make the source more compact."}},{"@type":"Question","name":"Can this tool validate whether my HTML is standards-compliant?","acceptedAnswer":{"@type":"Answer","text":"No. The preview can reveal obvious rendering problems, but it is not a formal HTML validator."}},{"@type":"Question","name":"Can I use this instead of a full code editor or browser DevTools?","acceptedAnswer":{"@type":"Answer","text":"It is best for quick HTML experiments, formatting, minification and small previews. Larger projects still benefit from a full development environment and browser DevTools."}}]}</script>
+</style>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse HTML Viewer & Formatter","url":"https://utiliverse.app/HTML_Viewer/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based HTML viewer, beautifier, lightweight minifier and live srcdoc preview with sandboxed script execution, clipboard fallback and documented preview/security limitations.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Live HTML preview with iframe srcdoc","Sandboxed preview with scripts and modal dialogs allowed","HTML beautifier using JS Beautify","Lightweight regex-based HTML minifier","Copy HTML with clipboard fallback","Clear editor","Browser-based code processing","External-resource request disclosure","Untrusted-script warning","HTML validation limitation guidance"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does the HTML Viewer & Formatter do?","acceptedAnswer":{"@type":"Answer","text":"It lets you enter HTML, see a live browser preview, beautify the markup for readability, minify it for a more compact representation, clear the editor, and copy the current code to your clipboard."}},{"@type":"Question","name":"Does the preview run JavaScript?","acceptedAnswer":{"@type":"Answer","text":"Yes. The preview iframe currently uses a sandbox that allows scripts and modal dialogs. Small JavaScript examples can run, although sandbox restrictions can make some browser features behave differently from a normal deployed page."}},{"@type":"Question","name":"Is the HTML I enter uploaded to Utiliverse?","acceptedAnswer":{"@type":"Answer","text":"The editor and preview operate in the browser and the entered HTML is assigned to the iframe through srcdoc. External resources referenced by the HTML may still be requested by the browser."}},{"@type":"Question","name":"What is the difference between Beautify and Minify?","acceptedAnswer":{"@type":"Answer","text":"Beautify adds indentation and line breaks to make markup easier to read. Minify removes comments, line breaks, spacing between tags, and repeated whitespace to make the source more compact."}},{"@type":"Question","name":"Can this tool validate whether my HTML is standards-compliant?","acceptedAnswer":{"@type":"Answer","text":"No. The preview can reveal obvious rendering problems, but it is not a formal HTML validator."}},{"@type":"Question","name":"Can I use this instead of a full code editor or browser DevTools?","acceptedAnswer":{"@type":"Answer","text":"It is best for quick HTML experiments, formatting, minification and small previews. Larger projects still benefit from a full development environment and browser DevTools."}},{"@type":"Question","name":"Is the preview safe for completely untrusted HTML?","acceptedAnswer":{"@type":"Answer","text":"No. The iframe is sandboxed, but scripts are allowed and external network requests can still occur. Treat the tool as a development preview for code you trust, not as a security-analysis sandbox."}},{"@type":"Question","name":"Can Minify change how some HTML behaves?","acceptedAnswer":{"@type":"Answer","text":"Yes. The current minifier uses simple regular expressions and can alter meaningful whitespace inside elements such as pre, textarea, script, style, or templates. Review the result before using it in production."}},{"@type":"Question","name":"Does Beautify validate my HTML?","acceptedAnswer":{"@type":"Answer","text":"No. Beautify only reformats the source. Invalid markup can still be formatted and may still render because browsers often recover from malformed HTML."}},{"@type":"Question","name":"Can very large HTML make the viewer slow?","acceptedAnswer":{"@type":"Answer","text":"Yes. Large documents, expensive scripts, or heavy external resources can slow the browser because the preview updates from the current editor contents and the tool does not impose a strict execution or size limit."}}]}</script>
 </head>
 
 <!--
@@ -460,6 +463,8 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 
     </div>
 
+    <div class="warning-box"><strong>Preview untrusted HTML carefully.</strong> The live preview can execute JavaScript because the iframe sandbox currently allows scripts and modal dialogs. HTML you paste can also reference external scripts, images, fonts, stylesheets, APIs, or other URLs that your browser may request. Do not paste untrusted code, credentials, private tokens, or confidential URLs unless you understand the risks.</div>
+
 
     <!-- =========================================================
          GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
@@ -498,6 +503,41 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
           <li><strong>Live Preview:</strong> render the current markup inside the sandboxed preview frame as you type.</li>
         </ul>
         <p>The editor and formatting actions run in your browser. If the HTML you preview references external scripts, images, stylesheets, fonts, APIs, or other URLs, your browser may contact those external services while rendering the preview.</p>
+      </section>
+
+      <section class="info-section" aria-labelledby="html-viewer-methodology">
+        <h2 id="html-viewer-methodology">How the HTML Viewer Works and Where It Has Limits</h2>
+        <p>The editor keeps your HTML in the page and assigns it to the preview iframe through <code>srcdoc</code>. The preview is sandboxed with <code>allow-scripts allow-modals</code>, so inline JavaScript can run and dialogs can open, but the iframe still operates under browser sandbox restrictions that differ from a normal deployed page.</p>
+        <div class="method-grid">
+          <div class="method-card"><strong>Live preview</strong><span>The current editor contents are written directly to the iframe's <code>srcdoc</code> whenever the input changes.</span></div>
+          <div class="method-card"><strong>Beautify</strong><span>Formatting uses JS Beautify 1.14.9 loaded from cdnjs to add indentation and line breaks for readability.</span></div>
+          <div class="method-card"><strong>Minify</strong><span>The minifier is a small regex-based cleanup routine. It removes comments, line breaks, spacing between tags and repeated whitespace.</span></div>
+          <div class="method-card"><strong>Copy</strong><span>The Copy action uses the browser Clipboard API, with a fallback added for environments where direct clipboard access is unavailable.</span></div>
+        </div>
+        <h3>Sandboxed preview does not mean no external network activity</h3>
+        <p>The sandbox restricts capabilities, but it does not stop every external request. If your HTML includes remote images, fonts, scripts, stylesheets, videos, API calls, or other URLs, the browser may attempt to contact those origins. CORS, Content Security Policy, mixed-content blocking, authentication, and server availability can still affect what loads.</p>
+        <h3>The preview can run JavaScript</h3>
+        <p>Because <code>allow-scripts</code> is enabled, JavaScript inside the preview can execute. The tool is therefore appropriate for code you trust and want to experiment with, but it should not be treated as a secure malware-analysis sandbox for arbitrary HTML or scripts.</p>
+        <h3>The minifier is intentionally lightweight</h3>
+        <p>The current minifier uses regular expressions rather than a full HTML parser. That makes it quick for ordinary snippets, but it can change whitespace that is meaningful inside elements such as <code>&lt;pre&gt;</code>, <code>&lt;textarea&gt;</code>, inline scripts, styles, templates, or other whitespace-sensitive content. Use a production-grade HTML minifier when preserving those semantics matters.</p>
+        <h3>Beautifying and minifying do not validate HTML</h3>
+        <p>A page can beautify successfully and still contain invalid or nonconforming markup. The browser may also recover from malformed HTML and render something that appears correct. Use a dedicated standards validator and accessibility checker when correctness matters.</p>
+        <h3>Large or script-heavy previews</h3>
+        <p>The preview updates whenever the editor changes. Very large documents, heavy inline scripts, large external assets, or code that performs expensive work can make the browser tab sluggish. The tool does not impose a hard file-size limit or execution timeout.</p>
+        <h3>Worked examples</h3>
+        <code class="example-box">&lt;h1&gt;Hello&lt;/h1&gt;
+&lt;p&gt;World&lt;/p&gt;
+
+Beautify: adds readable indentation and line breaks.
+Minify: &lt;h1&gt;Hello&lt;/h1&gt;&lt;p&gt;World&lt;/p&gt;</code>
+        <code class="example-box">&lt;script&gt;alert('Hello')&lt;/script&gt;
+
+Result: the script can run in the preview because allow-scripts and allow-modals are enabled.</code>
+        <h3>Common mistakes</h3>
+        <ul><li>Assuming a successful preview means the HTML is standards-valid.</li><li>Minifying whitespace-sensitive markup without reviewing the result.</li><li>Pasting untrusted HTML that contains scripts or remote-resource URLs.</li><li>Expecting the preview sandbox to behave exactly like a deployed top-level page.</li><li>Assuming a blocked external resource proves the HTML itself is wrong.</li></ul>
+        <h3>Related Utiliverse Tools</h3>
+        <div class="related-grid"><a class="related-link" href="../JSON_Formatter/"><strong>JSON Formatter</strong><span>Validate, format and inspect JSON used by web applications and APIs.</span></a><a class="related-link" href="../YAML_to_JSON/"><strong>YAML to JSON Converter</strong><span>Convert YAML configuration into formatted JSON in the browser.</span></a><a class="related-link" href="../HAR_File_Viewer/"><strong>HAR File Viewer</strong><span>Inspect exported browser network requests and troubleshoot HTTP behavior.</span></a></div>
+        <p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 2, 2026 · Preview sandbox behavior, external-resource requests, beautify/minify logic, clipboard handling and browser limitations reviewed against the current implementation.</p>
       </section>
 
       <section class="info-section" aria-labelledby="html-viewer-use-cases">
@@ -570,6 +610,10 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
           <summary>7. Can I use this instead of a full code editor or browser DevTools?</summary>
           <p>It is best for quick HTML experiments, formatting, and small previews. Larger projects still benefit from a full editor, source control, a local development environment, browser DevTools, automated tests, accessibility checks, and production testing.</p>
         </details>
+        <details class="faq-item"><summary>8. Is the preview safe for completely untrusted HTML?</summary><p>No. The iframe is sandboxed, but scripts are allowed and external network requests can still occur. Treat the tool as a development preview for code you trust, not as a security-analysis sandbox.</p></details>
+        <details class="faq-item"><summary>9. Can Minify change how some HTML behaves?</summary><p>Yes. The current minifier uses simple regular expressions and can alter meaningful whitespace inside elements such as pre, textarea, script, style, or templates. Review the result before using it in production.</p></details>
+        <details class="faq-item"><summary>10. Does Beautify validate my HTML?</summary><p>No. Beautify only reformats the source. Invalid markup can still be formatted and may still render because browsers often recover from malformed HTML.</p></details>
+        <details class="faq-item"><summary>11. Can very large HTML make the viewer slow?</summary><p>Yes. Large documents, expensive scripts, or heavy external resources can slow the browser because the preview updates from the current editor contents and the tool does not impose a strict execution or size limit.</p></details>
       </section>
     </div>
 
@@ -653,9 +697,27 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
       htmlInput.focus();
     }
 
-    function copyCode() {
+    async function copyCode() {
       if (!htmlInput.value) return;
-      navigator.clipboard.writeText(htmlInput.value).then(() => {
+      let copied = false;
+      try {
+        await navigator.clipboard.writeText(htmlInput.value);
+        copied = true;
+      } catch (err) {
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = htmlInput.value;
+          ta.style.position = 'fixed';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          copied = document.execCommand('copy');
+          ta.remove();
+        } catch (fallbackErr) {
+          copied = false;
+        }
+      }
+      if (copied) {
         const copyBtn = document.getElementById('copyBtn');
         const originalContent = copyBtn.innerHTML;
         copyBtn.innerHTML = `<i data-lucide="check" class="w-4 h-4 text-emerald-600"></i> <span class="text-emerald-600">Copied!</span>`;
@@ -664,7 +726,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
           copyBtn.innerHTML = originalContent;
           lucide.createIcons();
         }, 2000);
-      });
+      }
     }
 
     /* =========================================================
