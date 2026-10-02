@@ -164,10 +164,37 @@
             }
         }
 
-    </style>
+    
+.title-row{display:flex;align-items:center;justify-content:center;gap:14px}
+.title-icon{width:46px;height:46px;flex:0 0 auto;color:#818cf8}
+.title-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid #cbd5e1;background:#fff;border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#1e293b;margin-bottom:5px}
+.method-card span{display:block;color:#64748b;font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid #cbd5e1;background:#f8fafc;color:#1e293b;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.caution-note{border:1px solid #fde68a;background:#fffbeb;border-radius:14px;padding:16px;color:#92400e;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#78350f}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid #cbd5e1;background:#fff;border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#1e293b;margin-bottom:4px}
+.related-link span{display:block;color:#64748b;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+html.dark .method-card,html.dark .related-link{background:#0f172a;border-color:#334155}
+html.dark .method-card strong,html.dark .related-link strong{color:#e2e8f0}
+html.dark .method-card span,html.dark .related-link span{color:#94a3b8}
+html.dark .example-box{background:#0f172a;border-color:#334155;color:#e2e8f0}
+html.dark .caution-note{background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.28);color:#fde68a}
+html.dark .caution-note strong{color:#fef3c7}
+@media(max-width:700px){
+  .title-icon{width:38px;height:38px}
+  .method-grid,.related-grid{grid-template-columns:1fr}
+}
+
+</style>
 
     <!-- SEO Structured Data -->
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Fraction Calculator","url":"https://utiliverse.app/Fraction_Calculator/","applicationCategory":"EducationalApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free online fraction calculator for adding, subtracting, multiplying and dividing fractions and mixed numbers, plus decimal-to-fraction and fraction-to-decimal conversion.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Add fractions","Subtract fractions","Multiply fractions","Divide fractions","Mixed number calculations","Simplified fraction results","Decimal to fraction conversion","Fraction to decimal conversion"]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Fraction Calculator","url":"https://utiliverse.app/Fraction_Calculator/","applicationCategory":"EducationalApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based fraction calculator for exact integer fraction arithmetic, mixed-number calculations, simplification, decimal-to-fraction conversion and fraction-to-decimal conversion, with documented finite-precision limits.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Add fractions","Subtract fractions","Multiply fractions","Divide fractions","Mixed number calculations","Greatest-common-divisor simplification","Simplified fraction results","Decimal to fraction conversion from finite typed digits","Fraction to decimal conversion","Decimal display rounded to at most 8 places","Division-by-zero validation","Negative value handling"]}</script>
 </head>
 <!--
 SEO TARGET CLUSTER
@@ -205,7 +232,12 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
         
         <!-- Hero Section -->
         <div class="text-center mb-10 animate-fade-in">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white mb-6 tracking-tight leading-tight">Fraction Calculator <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-brand-700 dark:from-brand-400 dark:to-brand-600">& Decimal Converter</span></h1>
+            <div class="title-row mb-6">
+                <span class="title-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><circle cx="7" cy="7" r="2"/><circle cx="17" cy="17" r="2"/><path d="M6 18 18 6"/><path d="M4 12h16"/></svg>
+                </span>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">Fraction Calculator <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-brand-700 dark:from-brand-400 dark:to-brand-600">& Decimal Converter</span></h1>
+            </div>
             <p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">Use this free online fraction calculator to add, subtract, multiply or divide fractions and mixed numbers, simplify the result, and convert between fractions and decimals.</p>
         </div>
 
@@ -384,6 +416,82 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 
         <!-- SEO Article Content -->
         <article class="prose prose-slate dark:prose-invert prose-lg md:prose-xl max-w-4xl mx-auto mb-24 bg-white dark:bg-slate-900 p-8 md:p-14 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-800 transition-colors">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-8 leading-tight">
+                How the Fraction Calculator Works
+            </h2>
+
+            <p class="lead text-xl text-slate-600 dark:text-slate-300 mb-8">
+                Fraction arithmetic is performed with integer numerators and denominators, then reduced to lowest terms using the greatest common divisor. Mixed numbers are converted to improper fractions internally before the selected operation is applied.
+            </p>
+
+            <div class="method-grid">
+                <div class="method-card"><strong>Exact fraction arithmetic</strong><span>Add, subtract, multiply and divide operations use integer numerators and denominators before simplification.</span></div>
+                <div class="method-card"><strong>GCD simplification</strong><span>The result is reduced by dividing numerator and denominator by their greatest common divisor.</span></div>
+                <div class="method-card"><strong>Decimal display</strong><span>Non-integer decimal equivalents are rounded for display to at most 8 decimal places.</span></div>
+                <div class="method-card"><strong>Finite decimal conversion</strong><span>Decimal-to-fraction conversion uses the exact finite digits typed and does not infer an infinite repeating pattern.</span></div>
+            </div>
+
+            <h3 class="text-2xl font-bold mt-12 mb-6 text-slate-800 dark:text-slate-100 border-b pb-2 border-slate-200 dark:border-slate-800">
+                Worked example: mixed-number addition
+            </h3>
+            <p>Entering 1 1/2 + 2 1/4 converts the mixed numbers to 3/2 and 9/4 internally. The common-denominator calculation gives 6/4 + 9/4 = 15/4, which is displayed as 3 3/4 and 3.75.</p>
+            <code class="example-box">1 1/2 + 2 1/4
+3/2 + 9/4
+6/4 + 9/4
+15/4 = 3 3/4 = 3.75</code>
+
+            <h3 class="text-2xl font-bold mt-12 mb-6 text-slate-800 dark:text-slate-100 border-b pb-2 border-slate-200 dark:border-slate-800">
+                Worked example: decimal to fraction
+            </h3>
+            <p>Entering 3.125 uses the three typed decimal places to create 3125/1000. The calculator then simplifies the fraction to 25/8, which is also 3 1/8.</p>
+            <code class="example-box">3.125
+= 3125/1000
+= 25/8
+= 3 1/8</code>
+
+            <h3 class="text-2xl font-bold mt-12 mb-6 text-slate-800 dark:text-slate-100 border-b pb-2 border-slate-200 dark:border-slate-800">
+                Repeating decimals are not inferred
+            </h3>
+            <p>If you enter 0.333, the calculator converts exactly those three digits, producing 333/1000. It does not assume you meant the repeating value 0.3333… = 1/3.</p>
+
+            <h3 class="text-2xl font-bold mt-12 mb-6 text-slate-800 dark:text-slate-100 border-b pb-2 border-slate-200 dark:border-slate-800">
+                Negative values and denominator signs
+            </h3>
+            <p>The calculator accepts negative whole numbers, numerators and denominators. Internally it normalizes the sign so the denominator is positive and the sign is carried by the numerator. For mixed-number entry, the current logic treats the combined sign based on the signs present in the whole, numerator and denominator fields.</p>
+
+            <h3 class="text-2xl font-bold mt-12 mb-6 text-slate-800 dark:text-slate-100 border-b pb-2 border-slate-200 dark:border-slate-800">
+                Division by zero
+            </h3>
+            <p>A denominator of zero is rejected because a fraction with denominator zero is undefined. Division by a second fraction whose numerator is zero is also blocked because that would amount to division by zero.</p>
+
+            <h3 class="text-2xl font-bold mt-12 mb-6 text-slate-800 dark:text-slate-100 border-b pb-2 border-slate-200 dark:border-slate-800">
+                Precision and large-number limits
+            </h3>
+            <p>The calculator uses JavaScript Number arithmetic for entered values and decimal conversion. For ordinary classroom, recipe and measurement values this is appropriate, but extremely large integers or very long decimal inputs can exceed exact integer precision or introduce floating-point rounding behavior.</p>
+
+            <div class="caution-note"><strong>For exact work with extremely large integers or long decimal expansions, use an arbitrary-precision math system.</strong> JavaScript Number values are finite-precision, and this page is designed for practical fraction calculations rather than unlimited-precision symbolic mathematics.</div>
+
+            <h3 class="text-2xl font-bold mt-12 mb-6 text-slate-800 dark:text-slate-100 border-b pb-2 border-slate-200 dark:border-slate-800">
+                Common input mistakes
+            </h3>
+            <ul>
+                <li>Entering 0 as a denominator.</li>
+                <li>Typing a repeating decimal as a shortened finite value and expecting the exact repeating fraction.</li>
+                <li>Forgetting that a mixed number such as 2 1/3 is not the same as 2/3.</li>
+                <li>Using extremely large values that exceed exact JavaScript integer precision.</li>
+            </ul>
+
+            <h3 class="text-2xl font-bold mt-12 mb-6 text-slate-800 dark:text-slate-100 border-b pb-2 border-slate-200 dark:border-slate-800">
+                Related Utiliverse Tools
+            </h3>
+            <div class="related-grid">
+                <a class="related-link" href="../Percentage_Calculator/"><strong>Percentage Calculator</strong><span>Calculate common percentage, ratio, increase and decrease problems.</span></a>
+                <a class="related-link" href="../Scientific_Calculator/"><strong>Scientific Calculator</strong><span>Handle powers, roots, logarithms, trigonometry and general arithmetic.</span></a>
+                <a class="related-link" href="../Unit_Currency_Converter/"><strong>Unit &amp; Currency Converter</strong><span>Convert measurements and latest-available currency rates.</span></a>
+            </div>
+
+            <p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 1, 2026 · Fraction arithmetic, mixed-number handling, simplification, decimal conversion and display precision reviewed against the current implementation.</p>
+
             <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-8 leading-tight">
                 How to Use the Fraction Calculator
             </h2>
@@ -733,7 +841,11 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
             { q: "How do I convert a decimal to a fraction?", a: "Write the decimal as an integer over a power of 10 based on the number of decimal places, then reduce the fraction. For example, 0.75 = 75/100 = 3/4." },
             { q: "How do I convert a fraction to a decimal?", a: "Divide the numerator by the denominator. For example, 3/4 equals 0.75 and 5/8 equals 0.625." },
             { q: "What does simplest form mean?", a: "A fraction is in simplest form when the numerator and denominator have no common factor greater than one. For example, 12/18 reduces to 2/3." },
-            { q: "Can this calculator convert repeating decimals exactly?", a: "The decimal-to-fraction tool converts the finite decimal digits you enter. Infinite repeating decimals such as 0.333... require special repeating-decimal logic and are not inferred automatically from a finite typed value." }
+            { q: "Can this calculator convert repeating decimals exactly?", a: "The decimal-to-fraction tool converts the finite decimal digits you enter. Infinite repeating decimals such as 0.333... require special repeating-decimal logic and are not inferred automatically from a finite typed value." },
+            { q: "How many decimal places are shown for fraction results?", a: "Non-integer decimal equivalents are rounded for display to at most 8 decimal places. The simplified fraction remains the exact fraction result produced by the calculator's integer arithmetic." },
+            { q: "How are negative denominators handled?", a: "The calculator normalizes the sign so the denominator is positive and the sign is carried by the numerator in the final result." },
+            { q: "Can very large numbers lose precision?", a: "Yes. The tool uses JavaScript Number values, so extremely large integers or very long decimal inputs can exceed exact integer precision or show floating-point rounding effects." },
+            { q: "Why is dividing by a fraction with numerator zero blocked?", a: "Dividing by a fraction such as 0/5 is equivalent to dividing by zero, which is mathematically undefined." }
         ];
 
         const faqContainer = document.getElementById('faq-container');
