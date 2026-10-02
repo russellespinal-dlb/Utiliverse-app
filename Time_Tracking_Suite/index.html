@@ -104,9 +104,34 @@ body.light-mode .local-processing-note{color:#64748b}
   .time-display{font-size:2.35rem!important}
 }
 
+
+.title-row{display:flex;align-items:center;gap:14px}
+.title-icon{width:44px;height:44px;flex:0 0 auto;color:#818cf8}
+.title-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid #334155;background:rgba(15,23,42,.58);border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#e2e8f0;margin-bottom:5px}
+.method-card span{display:block;color:#94a3b8;font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid #334155;background:#0f172a;color:#e2e8f0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.caution-note{border:1px solid rgba(251,191,36,.28);background:rgba(251,191,36,.07);border-radius:14px;padding:16px;color:#fde68a;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#fef3c7}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid #334155;background:rgba(15,23,42,.55);border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#e2e8f0;margin-bottom:4px}
+.related-link span{display:block;color:#94a3b8;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+.status-note{min-height:1.25rem;font-size:.8rem;line-height:1.5;color:#94a3b8;text-align:center}
+body.light-mode .method-card,body.light-mode .related-link{background:#fff;border-color:#dbe3ee}
+body.light-mode .method-card strong,body.light-mode .related-link strong{color:#1e293b}
+body.light-mode .method-card span,body.light-mode .related-link span,body.light-mode .status-note{color:#475569}
+body.light-mode .example-box{background:#f8fafc;color:#1e293b;border-color:#dbe3ee}
+body.light-mode .caution-note{background:#fffbeb;border-color:#fde68a;color:#92400e}
+body.light-mode .caution-note strong{color:#78350f}
+@media(max-width:700px){.title-icon{width:36px;height:36px}.method-grid,.related-grid{grid-template-columns:1fr}}
+
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Time Tracking Suite","url":"https://utiliverse.app/Time_Tracking_Suite/","applicationCategory":"ProductivityApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based stopwatch, countdown timer and Pomodoro timer with cumulative laps, pause and resume controls, and timestamp-based time calculations.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Online stopwatch","Cumulative stopwatch lap timestamps","Pause and resume stopwatch","Custom countdown timer","Pause and resume countdown","25-minute Pomodoro work timer","5-minute Pomodoro break timer","Automatic Pomodoro mode switching after an interval","Timestamp-based elapsed and remaining time calculations"]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does the timer keep accurate time if I switch browser tabs?","acceptedAnswer":{"@type":"Answer","text":"The stopwatch, countdown and Pomodoro calculations use timestamps based on Date.now(). A background tab may refresh visually less often, but the displayed time corrects from the system clock when JavaScript runs again."}},{"@type":"Question","name":"What happens when the countdown reaches zero?","acceptedAnswer":{"@type":"Answer","text":"The countdown stops at zero and its Start button returns to the ready state. This version does not play an alarm sound."}},{"@type":"Question","name":"Can I pause and resume the countdown timer?","acceptedAnswer":{"@type":"Answer","text":"Yes. Pausing stores the remaining duration, and Resume continues from that stored amount."}},{"@type":"Question","name":"How many stopwatch laps can I record?","acceptedAnswer":{"@type":"Answer","text":"The page does not impose a fixed lap count. Lap entries remain in the scrollable list while the page stays open, subject to available browser memory."}},{"@type":"Question","name":"What does each stopwatch lap represent?","acceptedAnswer":{"@type":"Answer","text":"Each lap records the total elapsed stopwatch time when the Lap button is pressed. It is a cumulative timestamp rather than the split time since the previous lap."}},{"@type":"Question","name":"Can I pause and resume the stopwatch?","acceptedAnswer":{"@type":"Answer","text":"Yes. Pausing stores the elapsed time, and starting again continues from that stored value."}},{"@type":"Question","name":"Can I switch Pomodoro modes while the timer is running?","acceptedAnswer":{"@type":"Answer","text":"No. The Work and Break mode buttons are ignored while the Pomodoro timer is running. Pause or reset before switching modes manually."}},{"@type":"Question","name":"What happens when a Pomodoro interval reaches zero?","acceptedAnswer":{"@type":"Answer","text":"The interval stops and switches to the opposite mode. Work switches to a 5-minute Break and Break switches to a 25-minute Work interval. The next interval does not start automatically."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Time Tracking Suite","url":"https://utiliverse.app/Time_Tracking_Suite/","applicationCategory":"ProductivityApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based stopwatch, countdown timer and 25/5 Pomodoro timer with cumulative laps, pause and resume controls, timestamp-based time calculations, visual completion status, and documented browser timing limitations.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Online stopwatch","Cumulative stopwatch lap timestamps","Pause and resume stopwatch","Custom countdown timer","Countdown input normalization","Pause and resume countdown","Visual countdown completion status","25-minute Pomodoro work timer","5-minute Pomodoro break timer","Automatic Pomodoro mode switching after an interval","Manual start of the next Pomodoro interval","Visual Pomodoro status messages","Timestamp-based elapsed and remaining time calculations","Browser-local timer state","No audio or notification alarm"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does the timer keep accurate time if I switch browser tabs?","acceptedAnswer":{"@type":"Answer","text":"The stopwatch, countdown and Pomodoro calculations use timestamps based on Date.now(). A background tab may refresh visually less often, but the displayed time corrects from the system clock when JavaScript runs again."}},{"@type":"Question","name":"What happens when the countdown reaches zero?","acceptedAnswer":{"@type":"Answer","text":"The countdown stops at zero and its Start button returns to the ready state. This version does not play an alarm sound."}},{"@type":"Question","name":"Can I pause and resume the countdown timer?","acceptedAnswer":{"@type":"Answer","text":"Yes. Pausing stores the remaining duration, and Resume continues from that stored amount."}},{"@type":"Question","name":"How many stopwatch laps can I record?","acceptedAnswer":{"@type":"Answer","text":"The page does not impose a fixed lap count. Lap entries remain in the scrollable list while the page stays open, subject to available browser memory."}},{"@type":"Question","name":"What does each stopwatch lap represent?","acceptedAnswer":{"@type":"Answer","text":"Each lap records the total elapsed stopwatch time when the Lap button is pressed. It is a cumulative timestamp rather than the split time since the previous lap."}},{"@type":"Question","name":"Can I pause and resume the stopwatch?","acceptedAnswer":{"@type":"Answer","text":"Yes. Pausing stores the elapsed time, and starting again continues from that stored value."}},{"@type":"Question","name":"Can I switch Pomodoro modes while the timer is running?","acceptedAnswer":{"@type":"Answer","text":"No. The Work and Break mode buttons are ignored while the Pomodoro timer is running. Pause or reset before switching modes manually."}},{"@type":"Question","name":"What happens when a Pomodoro interval reaches zero?","acceptedAnswer":{"@type":"Answer","text":"The interval stops and switches to the opposite mode. Work switches to a 5-minute Break and Break switches to a 25-minute Work interval. The next interval does not start automatically."}},{"@type":"Question","name":"Does the suite play an alarm or send a notification?","acceptedAnswer":{"@type":"Answer","text":"No. This version provides visual status updates only. It does not play audio, vibrate the device, or send browser notifications."}},{"@type":"Question","name":"Will my timers survive a page reload?","acceptedAnswer":{"@type":"Answer","text":"No. Stopwatch state, countdown state, Pomodoro state and lap history are kept only in the current page session and reset when the page is reloaded or closed."}},{"@type":"Question","name":"Can changing my device clock affect a running timer?","acceptedAnswer":{"@type":"Answer","text":"Yes. The timers use Date.now(), which follows the system clock. A manual clock change or significant operating-system time correction can affect elapsed or remaining time."}},{"@type":"Question","name":"Are stopwatch laps split times?","acceptedAnswer":{"@type":"Answer","text":"No. Each lap is the total elapsed stopwatch time when Lap is pressed. To find a split interval, subtract the previous cumulative lap from the current one."}},{"@type":"Question","name":"Can I use this for precision-critical timing?","acceptedAnswer":{"@type":"Answer","text":"No. Browser scheduling, device sleep, background throttling and system clock changes make this tool unsuitable for safety-critical, legal, medical, laboratory or other precision-critical timing."}}]}</script>
 </head>
 <body>
 <!--
@@ -139,8 +164,12 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 -->
 <main class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
 <div class="max-w-3xl">
-<p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Productivity</p>
-<h1 class="text-4xl sm:text-5xl font-black mt-2">Online Stopwatch, Countdown Timer &amp; Pomodoro</h1>
+<div class="title-row">
+  <span class="title-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6M12 2v3"/></svg>
+  </span>
+  <h1 class="text-4xl sm:text-5xl font-black">Online Stopwatch, Countdown Timer &amp; Pomodoro</h1>
+</div>
 <p class="mt-4 text-lg muted">Track elapsed time, run custom countdowns, record cumulative laps, and use a 25-minute work / 5-minute break Pomodoro timer directly in your browser.</p>
 </div>
 
@@ -186,6 +215,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
       <button id="tm-start-btn" class="btn primary" onclick="tmToggle()">Start</button>
       <button class="btn" onclick="tmReset()">Reset</button>
     </div>
+    <div id="tm-status" class="status-note" role="status" aria-live="polite"></div>
   </div>
 
   <!-- Pomodoro Card -->
@@ -205,9 +235,10 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
       <button id="pm-start-btn" class="btn primary" onclick="pmToggle()">Start</button>
       <button class="btn" onclick="pmReset()">Reset</button>
     </div>
+    <div id="pm-status" class="status-note" role="status" aria-live="polite">Work mode · 25 minutes</div>
   </div>
 </section>
-<p class="local-processing-note">Browser-based timing: stopwatch, countdown, Pomodoro state and lap entries are handled locally on this page and are not submitted to a Utiliverse server. Timers reset if the page is reloaded or closed.</p>
+<p class="local-processing-note">Browser-based timing: stopwatch, countdown, Pomodoro state and lap entries are handled locally by this tool and are not submitted to a Utiliverse processing server. Timers and lap history reset if the page is reloaded or closed. The page itself still loads interface and advertising resources from external providers.</p>
 
 <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
      Paste approved Google AdSense code here after approval.
@@ -222,6 +253,49 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 <h3>Precision Measurement with Stopwatches and Countdowns</h3>
 <p>The stopwatch measures elapsed time and lets you save cumulative lap timestamps without stopping the clock. The countdown timer accepts hours, minutes and seconds, can be paused and resumed, and stops at zero. These modes are useful for practice sessions, study blocks, workouts, presentations, troubleshooting, cooking, meetings and other everyday timing tasks.</p>
 
+
+
+<h2>Timing Methodology and Important Limitations</h2>
+<p>The stopwatch, countdown, and Pomodoro modes use timestamps from <code>Date.now()</code> instead of assuming every scheduled callback fires exactly on time. This helps the displayed time recover when the browser delays visual updates in a background tab, but it does not turn a web page into a precision timing instrument.</p>
+
+<div class="method-grid">
+  <div class="method-card"><strong>Stopwatch</strong><span>Elapsed time equals previously stored elapsed milliseconds plus the difference between the current timestamp and the latest start timestamp.</span></div>
+  <div class="method-card"><strong>Countdown</strong><span>The timer stores a target timestamp. Pausing converts the target back into remaining milliseconds, and Resume creates a new target from that stored amount.</span></div>
+  <div class="method-card"><strong>Pomodoro</strong><span>Work is fixed at 25 minutes and Break at 5 minutes. Finishing one interval switches mode but intentionally does not auto-start the next interval.</span></div>
+  <div class="method-card"><strong>Visual refresh</strong><span>The stopwatch requests updates about every 10 ms, while countdown and Pomodoro request updates about every 100 ms. Actual callback timing depends on the browser and device.</span></div>
+</div>
+
+<h3>Stopwatch laps are cumulative timestamps</h3>
+<p>Each Lap entry records the total stopwatch time at the moment you press Lap. It is not the split duration since the previous lap. For example, laps at 00:00:12.00 and 00:00:20.00 imply an eight-second interval between those checkpoints, but the list itself displays 12 and 20 seconds.</p>
+
+<h3>Countdown inputs are normalized</h3>
+<p>Hours are clamped from 0 through 99. Minutes and seconds are clamped from 0 through 59. Starting a timer with a total duration of zero does nothing. Once the countdown begins, the input fields clear while the remaining duration is kept internally.</p>
+
+<h3>Worked example: pause and resume</h3>
+<code class="example-box">Countdown set to 10:00
+After 3:15 → Pause
+Stored remaining time ≈ 6:45
+Resume → new target timestamp is created 6:45 into the future</code>
+
+<h3>Background tabs, sleep, and power saving</h3>
+<p>Browsers can throttle timers in background tabs, on mobile devices, or during power-saving modes. The timestamp-based approach lets the displayed value correct itself when JavaScript runs again, but visual updates may appear to pause or jump. If the device sleeps completely, the timer display cannot update until the page resumes.</p>
+
+<h3>System clock changes can affect these timers</h3>
+<p><code>Date.now()</code> follows the device's system clock. A manual clock adjustment or a significant operating-system time correction while a timer is active can change the calculated elapsed or remaining time. For most everyday productivity uses this is uncommon, but it matters when precision is critical.</p>
+
+<h3>No alarm, notification, or persistent history</h3>
+<p>This version does not play a sound, send a notification, vibrate the device, or keep timer/lap history after reload. Keep the page visible if you need a visual cue when a countdown or Pomodoro interval finishes.</p>
+
+<div class="caution-note"><strong>Do not use this browser timer for safety-critical or precision-critical timing.</strong> It is intended for productivity, practice, study, workouts, presentations, and everyday tasks—not medication timing, emergency procedures, laboratory calibration, legal timing requirements, or other situations where missed or delayed alerts could cause harm.</div>
+
+<h3>Related Utiliverse Tools</h3>
+<div class="related-grid">
+  <a class="related-link" href="../Typing_Lab/"><strong>Typing Test</strong><span>Run timed typing sessions and compare WPM and accuracy.</span></a>
+  <a class="related-link" href="../Date_Calculator/"><strong>Date Calculator</strong><span>Calculate date differences and calendar intervals for planning.</span></a>
+  <a class="related-link" href="../Random_Number_Generator/"><strong>Random Number Generator</strong><span>Generate randomized values for drills, games, or testing workflows.</span></a>
+</div>
+
+<p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 2, 2026 · Timestamp calculations, pause/resume state, lap behavior, countdown input limits, Pomodoro mode switching, and browser timing limitations reviewed against the current implementation.</p>
 
 <h3>Quick Start</h3>
 <ul>
@@ -253,7 +327,11 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 <details class="faq"><summary>What does each stopwatch lap represent?</summary><p class="muted">Each lap records the total elapsed stopwatch time when you press Lap. It is a cumulative timestamp rather than the split time since the previous lap.</p></details>
 <details class="faq"><summary>Can I pause and resume the stopwatch?</summary><p class="muted">Yes. Pausing stores the elapsed time, and starting again continues from that stored value.</p></details>
 <details class="faq"><summary>Can I switch Pomodoro modes while the timer is running?</summary><p class="muted">No. The Work and Break mode buttons are ignored while the Pomodoro timer is running. Pause or reset before switching modes manually.</p></details>
-<details class="faq"><summary>What happens when a Pomodoro interval reaches zero?</summary><p class="muted">The interval stops and switches to the opposite mode. Work switches to a 5-minute Break and Break switches to a 25-minute Work interval. The next interval does not start automatically.</p></details>
+<details class="faq"><summary>What happens when a Pomodoro interval reaches zero?</summary><p class="muted">The interval stops and switches to the opposite mode. Work switches to a 5-minute Break and Break switches to a 25-minute Work interval. The next interval does not start automatically.</p></details><details class="faq"><summary>Does the suite play an alarm or send a notification?</summary><p class="muted">No. This version provides visual status updates only. It does not play audio, vibrate the device, or send browser notifications.</p></details>
+<details class="faq"><summary>Will my timers survive a page reload?</summary><p class="muted">No. Stopwatch state, countdown state, Pomodoro state and lap history are kept only in the current page session and reset when the page is reloaded or closed.</p></details>
+<details class="faq"><summary>Can changing my device clock affect a running timer?</summary><p class="muted">Yes. The timers use Date.now(), which follows the system clock. A manual clock change or significant operating-system time correction can affect elapsed or remaining time.</p></details>
+<details class="faq"><summary>Are stopwatch laps split times?</summary><p class="muted">No. Each lap is the total elapsed stopwatch time when Lap is pressed. To find a split interval, subtract the previous cumulative lap from the current one.</p></details>
+<details class="faq"><summary>Can I use this for precision-critical timing?</summary><p class="muted">No. Browser scheduling, device sleep, background throttling and system clock changes make this tool unsuitable for safety-critical, legal, medical, laboratory or other precision-critical timing.</p></details>
 </section>
 </main>
 <!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
@@ -393,6 +471,7 @@ function tmUpdate() {
     clearInterval(tmInterval);
     document.getElementById('tm-display').innerText = '00:00:00';
     document.getElementById('tm-start-btn').innerText = 'Start';
+    document.getElementById('tm-status').textContent = 'Countdown complete.';
     tmRunning = false;
     tmTotalMs = 0;
     return;
@@ -419,6 +498,7 @@ function tmToggle() {
     tmTotalMs = Math.max(0, tmTargetTime - Date.now());
     tmRunning = false;
     btn.innerText = 'Resume';
+    document.getElementById('tm-status').textContent = 'Countdown paused.';
   } else {
     if (tmTotalMs === 0) {
       tmTotalMs = ((h * 3600) + (m * 60) + s) * 1000;
@@ -429,6 +509,7 @@ function tmToggle() {
     tmInterval = setInterval(tmUpdate, 100);
     tmRunning = true;
     btn.innerText = 'Pause';
+    document.getElementById('tm-status').textContent = 'Countdown running.';
     // Clear inputs once started visually
     document.getElementById('tm-h').value = '';
     document.getElementById('tm-m').value = '';
@@ -446,6 +527,7 @@ function tmReset() {
   document.getElementById('tm-h').value = '';
   document.getElementById('tm-m').value = '';
   document.getElementById('tm-s').value = '';
+  document.getElementById('tm-status').textContent = '';
 }
 
 
@@ -471,8 +553,10 @@ function pmUpdate() {
     document.getElementById('pm-display').innerText = '00:00';
     document.getElementById('pm-start-btn').innerText = 'Start';
     pmRunning = false;
+    const completedMode = pmMode === 'work' ? 'Work' : 'Break';
     // Auto toggle mode
     pmSetMode(pmMode === 'work' ? 'break' : 'work');
+    document.getElementById('pm-status').textContent = `${completedMode} interval complete. Next mode is ${pmMode === 'work' ? 'Work' : 'Break'}; press Start when ready.`;
     return;
   }
   document.getElementById('pm-display').innerText = pmFormat(remaining);
@@ -485,11 +569,13 @@ function pmToggle() {
     pmRemainingMs = Math.max(0, pmTargetTime - Date.now());
     pmRunning = false;
     btn.innerText = 'Resume';
+    document.getElementById('pm-status').textContent = `${pmMode === 'work' ? 'Work' : 'Break'} interval paused.`;
   } else {
     pmTargetTime = Date.now() + pmRemainingMs;
     pmInterval = setInterval(pmUpdate, 100);
     pmRunning = true;
     btn.innerText = 'Pause';
+    document.getElementById('pm-status').textContent = `${pmMode === 'work' ? 'Work' : 'Break'} interval running.`;
     pmUpdate();
   }
 }
@@ -499,6 +585,7 @@ function pmReset() {
   pmRunning = false;
   pmSetMode(pmMode); 
   document.getElementById('pm-start-btn').innerText = 'Start';
+  document.getElementById('pm-status').textContent = `${pmMode === 'work' ? 'Work' : 'Break'} mode · ${pmMode === 'work' ? '25' : '5'} minutes`;
 }
 
 function pmSetMode(mode) {
@@ -506,6 +593,8 @@ function pmSetMode(mode) {
   pmMode = mode;
   pmRemainingMs = (mode === 'work' ? 25 : 5) * 60 * 1000;
   document.getElementById('pm-display').innerText = pmFormat(pmRemainingMs);
+  const status = document.getElementById('pm-status');
+  if(status) status.textContent = `${mode === 'work' ? 'Work' : 'Break'} mode · ${mode === 'work' ? '25' : '5'} minutes`;
 }
 </script>
 </body>
