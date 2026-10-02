@@ -89,9 +89,36 @@ body.light-mode #theme-toggle:hover{background:#f1f5f9;border-color:#94a3b8;colo
   #theme-toggle{width:38px;height:38px;flex:0 0 auto}
 }
 
+
+.title-row{display:flex;align-items:center;gap:14px}
+.title-icon{width:44px;height:44px;flex:0 0 auto;color:#818cf8}
+.title-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid #334155;background:rgba(15,23,42,.58);border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#e2e8f0;margin-bottom:5px}
+.method-card span{display:block;color:#94a3b8;font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid #334155;background:#0f172a;color:#e2e8f0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.caution-note{border:1px solid rgba(251,191,36,.28);background:rgba(251,191,36,.07);border-radius:14px;padding:16px;color:#fde68a;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#fef3c7}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid #334155;background:rgba(15,23,42,.55);border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#e2e8f0;margin-bottom:4px}
+.related-link span{display:block;color:#94a3b8;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+body.light-mode .method-card,body.light-mode .related-link{background:#fff;border-color:#dbe3ee}
+body.light-mode .method-card strong,body.light-mode .related-link strong{color:#1e293b}
+body.light-mode .method-card span,body.light-mode .related-link span{color:#475569}
+body.light-mode .example-box{background:#f8fafc;color:#1e293b;border-color:#dbe3ee}
+body.light-mode .caution-note{background:#fffbeb;border-color:#fde68a;color:#92400e}
+body.light-mode .caution-note strong{color:#78350f}
+@media(max-width:700px){
+  .title-icon{width:36px;height:36px}
+  .method-grid,.related-grid{grid-template-columns:1fr}
+}
+
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Percentage Calculator","url":"https://utiliverse.app/Percent_Calculator","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based percentage calculator for X percent of Y, percentage ratios, and percentage increase or decrease.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Calculate X percent of Y","Find what percentage X is of Y","Calculate percentage increase","Calculate percentage decrease","Supports decimal and negative numeric inputs","Browser-based calculations"]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a percentage?","acceptedAnswer":{"@type":"Answer","text":"A percentage expresses a number or ratio as a fraction of 100. For example, 25% means 25 out of 100, or 0.25 as a decimal."}},{"@type":"Question","name":"How do I calculate X percent of Y?","acceptedAnswer":{"@type":"Answer","text":"Divide X by 100 and multiply by Y. For example, 20% of 150 is 0.20 \u00d7 150 = 30."}},{"@type":"Question","name":"How do I find what percentage X is of Y?","acceptedAnswer":{"@type":"Answer","text":"Divide X by Y and multiply by 100. For example, 30 is 20% of 150 because 30 \u00f7 150 \u00d7 100 = 20%."}},{"@type":"Question","name":"How do I calculate percentage increase or decrease?","acceptedAnswer":{"@type":"Answer","text":"Subtract the original value from the new value, divide by the absolute value of the original value, and multiply by 100. A positive result indicates an increase and a negative result indicates a decrease."}},{"@type":"Question","name":"Can percentage change be calculated when the starting value is zero?","acceptedAnswer":{"@type":"Answer","text":"No. Percentage change is undefined when the original value is zero because the calculation requires division by the original value."}},{"@type":"Question","name":"Can I use decimal values in this calculator?","acceptedAnswer":{"@type":"Answer","text":"Yes. The calculator accepts numeric decimal values and displays results with up to four decimal places."}},{"@type":"Question","name":"Does this percentage calculator save my calculations?","acceptedAnswer":{"@type":"Answer","text":"No. The calculations are performed in JavaScript in your browser and this page does not save or submit the entered values to a Utiliverse server."}},{"@type":"Question","name":"What is the difference between percentage and percentage points?","acceptedAnswer":{"@type":"Answer","text":"Percentage describes a relative amount out of 100, while percentage points describe the arithmetic difference between two percentage values. Moving from 20% to 25% is an increase of 5 percentage points, or a 25% relative increase."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Percentage Calculator","url":"https://utiliverse.app/Percentage_Calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based percentage calculator for X percent of Y, percentage ratios, and percentage increase or decrease, with documented zero-baseline, negative-value, and precision limitations.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Calculate X percent of Y","Find what percentage X is of Y","Calculate percentage increase","Calculate percentage decrease","Supports decimal and negative numeric inputs","Undefined-zero denominator handling","Up to four decimal places displayed","Browser-based calculations","Percentage vs percentage-points guidance","Negative-baseline interpretation guidance"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a percentage?","acceptedAnswer":{"@type":"Answer","text":"A percentage expresses a number or ratio as a fraction of 100. For example, 25% means 25 out of 100, or 0.25 as a decimal."}},{"@type":"Question","name":"How do I calculate X percent of Y?","acceptedAnswer":{"@type":"Answer","text":"Divide X by 100 and multiply by Y. For example, 20% of 150 is 0.20 × 150 = 30."}},{"@type":"Question","name":"How do I find what percentage X is of Y?","acceptedAnswer":{"@type":"Answer","text":"Divide X by Y and multiply by 100. For example, 30 is 20% of 150 because 30 ÷ 150 × 100 = 20%."}},{"@type":"Question","name":"How do I calculate percentage increase or decrease?","acceptedAnswer":{"@type":"Answer","text":"Subtract the original value from the new value, divide by the absolute value of the original value, and multiply by 100. A positive result indicates an increase and a negative result indicates a decrease."}},{"@type":"Question","name":"Can percentage change be calculated when the starting value is zero?","acceptedAnswer":{"@type":"Answer","text":"No. Percentage change is undefined when the original value is zero because the calculation requires division by the original value."}},{"@type":"Question","name":"Can I use decimal values in this calculator?","acceptedAnswer":{"@type":"Answer","text":"Yes. The calculator accepts numeric decimal values and displays results with up to four decimal places."}},{"@type":"Question","name":"Does this percentage calculator save my calculations?","acceptedAnswer":{"@type":"Answer","text":"No. The calculations are performed in JavaScript in your browser and this page does not save or submit the entered values to a Utiliverse server."}},{"@type":"Question","name":"What is the difference between percentage and percentage points?","acceptedAnswer":{"@type":"Answer","text":"Percentage describes a relative amount out of 100, while percentage points describe the arithmetic difference between two percentage values. Moving from 20% to 25% is an increase of 5 percentage points, or a 25% relative increase."}},{"@type":"Question","name":"How does the calculator handle negative starting values?","acceptedAnswer":{"@type":"Answer","text":"Percentage change divides by the absolute value of the starting number. This keeps the sign tied to the direction of change, but negative baselines can be unintuitive and should be interpreted together with the original and new values."}},{"@type":"Question","name":"Why can displayed results be rounded?","acceptedAnswer":{"@type":"Answer","text":"The calculator displays up to four decimal places for readability. The underlying JavaScript calculation may contain additional floating-point precision."}},{"@type":"Question","name":"Is this suitable for accounting or regulatory calculations?","acceptedAnswer":{"@type":"Answer","text":"It is useful for everyday percentage calculations and planning. Work that requires exact decimal arithmetic, formal rounding rules, or regulatory compliance should use software designed for those requirements."}}]}</script>
 </head>
 <body>
 <!--
@@ -124,8 +151,12 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 -->
 <main class="max-w-6xl mx-auto px-4 sm:px-6 py-12">
 <div class="max-w-3xl">
-<p class="text-xs uppercase tracking-widest text-indigo-400 font-bold">Mathematics</p>
-<h1 class="text-4xl sm:text-5xl font-black mt-2">Percentage Calculator</h1>
+<div class="title-row">
+  <span class="title-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/><path d="M6 18 18 6"/></svg>
+  </span>
+  <h1 class="text-4xl sm:text-5xl font-black">Percentage Calculator</h1>
+</div>
 <p class="mt-4 text-lg muted">Calculate X% of Y, find what percentage one number is of another, and measure percentage increase or decrease instantly.</p>
 </div>
 
@@ -163,7 +194,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
     <div class="mt-2 text-xl font-bold text-indigo-400" id="res3">--</div>
   </div>
 </section>
-<p class="text-xs muted mt-4">Browser-based calculation: the numbers you enter are calculated on this page and are not submitted to a Utiliverse server.</p>
+<p class="text-xs muted mt-4">Browser-based calculation: the numbers you enter are processed locally by this calculator and are not submitted to a Utiliverse processing server. The page itself still loads interface and advertising resources from external providers.</p>
 
 <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-CALCULATOR INSERTION POINT
      Paste approved Google AdSense code here after approval.
@@ -181,6 +212,53 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 
 <h3>3. Percentage change from X to Y</h3>
 <p>Use this to measure how much a value increased or decreased relative to the starting value. This calculator uses <strong>((Y − X) ÷ |X|) × 100</strong>. A positive result indicates an increase and a negative result indicates a decrease. If the starting value is zero, percentage change is undefined because the formula would require division by zero.</p>
+
+
+<h2>Calculation Methodology and Important Edge Cases</h2>
+<p>The three calculators use standard arithmetic formulas directly in JavaScript. Results are displayed with up to four decimal places, while the internal calculation uses the browser's full JavaScript Number precision.</p>
+
+<div class="method-grid">
+  <div class="method-card"><strong>X% of Y</strong><span>Calculates <code>(X ÷ 100) × Y</code>. Both X and Y may be positive, negative, or decimal values.</span></div>
+  <div class="method-card"><strong>X is what % of Y</strong><span>Calculates <code>(X ÷ Y) × 100</code>. Y cannot be zero because that would require division by zero.</span></div>
+  <div class="method-card"><strong>Percentage change</strong><span>Calculates <code>((Y − X) ÷ |X|) × 100</code>. Using the absolute value of X keeps the sign of the result tied to the direction of change.</span></div>
+  <div class="method-card"><strong>Displayed precision</strong><span>Results are formatted with up to four decimal places for readability. Very small differences may therefore be rounded in the displayed output.</span></div>
+</div>
+
+<h3>Worked example: 15% of 200</h3>
+<code class="example-box">15% of 200
+= (15 ÷ 100) × 200
+= 0.15 × 200
+= 30</code>
+
+<h3>Worked example: 45 is what percent of 60?</h3>
+<code class="example-box">45 ÷ 60 × 100
+= 0.75 × 100
+= 75%</code>
+
+<h3>Worked example: change from 80 to 100</h3>
+<code class="example-box">(100 − 80) ÷ |80| × 100
+= 20 ÷ 80 × 100
+= 25%</code>
+
+<h3>Starting from zero is undefined for percentage change</h3>
+<p>Changing from 0 to 10 is an increase in absolute terms, but the percentage-change formula is undefined because it would divide by zero. The calculator therefore returns an invalid-input message for that case instead of inventing a percentage.</p>
+
+<h3>Negative starting values need careful interpretation</h3>
+<p>The calculator uses the absolute value of the starting number in the denominator. This makes the direction of the result follow the arithmetic change from X to Y, but percentages involving negative baselines can be unintuitive in accounting, economics, growth analysis, and other domains. In those cases, also report the original and new values rather than relying on the percentage alone.</p>
+
+<div class="caution-note"><strong>Percentage change and percentage-point change are different.</strong> A rate moving from 20% to 25% rises by 5 percentage points, but the relative percentage increase is 25%.</div>
+
+<h3>Large values and floating-point precision</h3>
+<p>The calculator uses JavaScript Number arithmetic. That is suitable for ordinary percentage work, but extremely large values or very long decimal inputs can exceed exact binary floating-point precision. For accounting, regulatory, or high-precision scientific work, use software designed for decimal or arbitrary-precision arithmetic.</p>
+
+<h3>Related Utiliverse Tools</h3>
+<div class="related-grid">
+  <a class="related-link" href="../Fraction_Calculator/"><strong>Fraction Calculator</strong><span>Calculate and simplify fractions, mixed numbers, and decimal conversions.</span></a>
+  <a class="related-link" href="../Scientific_Calculator/"><strong>Scientific Calculator</strong><span>Handle powers, roots, trigonometry, logarithms, and general numeric calculations.</span></a>
+  <a class="related-link" href="../Salary_Calculator/"><strong>Salary Calculator</strong><span>Convert hourly, weekly, monthly, and annual gross pay.</span></a>
+</div>
+
+<p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 2, 2026 · Percentage formulas, zero-denominator handling, negative-value behavior, formatting precision, and browser-side calculation reviewed against the current implementation.</p>
 
 <h2>Common Uses for Percentage Calculations</h2>
 <ul>
@@ -203,7 +281,9 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 <details class="faq"><summary>Can I calculate percentage change when the starting value is zero?</summary><p class="muted">No. Percentage change is undefined when the original value is zero because the formula requires division by the starting value.</p></details>
 <details class="faq"><summary>Can I use decimal values?</summary><p class="muted">Yes. The calculator accepts decimal numeric inputs and displays results with up to four decimal places.</p></details>
 <details class="faq"><summary>Does this calculator save my numbers?</summary><p class="muted">No. The calculations are performed in JavaScript in your browser, and this page does not save or submit the entered values to a Utiliverse server.</p></details>
-<details class="faq"><summary>What is the difference between percentage and percentage points?</summary><p class="muted">Percentage describes a relative amount out of 100. Percentage points describe the arithmetic difference between two percentage values. Moving from 20% to 25% is a gain of 5 percentage points, but a 25% relative increase.</p></details>
+<details class="faq"><summary>What is the difference between percentage and percentage points?</summary><p class="muted">Percentage describes a relative amount out of 100. Percentage points describe the arithmetic difference between two percentage values. Moving from 20% to 25% is a gain of 5 percentage points, but a 25% relative increase.</p></details><details class="faq"><summary>How does the calculator handle negative starting values?</summary><p class="muted">Percentage change divides by the absolute value of the starting number. This keeps the sign tied to the direction of change, but negative baselines can be unintuitive and should be interpreted together with the original and new values.</p></details>
+<details class="faq"><summary>Why can displayed results be rounded?</summary><p class="muted">The calculator displays up to four decimal places for readability. The underlying JavaScript calculation may contain additional floating-point precision.</p></details>
+<details class="faq"><summary>Is this suitable for accounting or regulatory calculations?</summary><p class="muted">It is useful for everyday percentage calculations and planning. Work that requires exact decimal arithmetic, formal rounding rules, or regulatory compliance should use software designed for those requirements.</p></details>
 </section>
 </main>
 <!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT
@@ -249,7 +329,8 @@ function calc2() {
   const x = parseFloat(document.getElementById('v2_x').value);
   const y = parseFloat(document.getElementById('v2_y').value);
   const res = document.getElementById('res2');
-  if(isNaN(x) || isNaN(y) || y === 0) { res.innerText = "Invalid input"; return; }
+  if(isNaN(x) || isNaN(y)) { res.innerText = "Enter valid numbers"; return; }
+  if(y === 0) { res.innerText = "Undefined: Y cannot be 0"; return; }
   res.innerText = ((x / y) * 100).toLocaleString('en-US', {maximumFractionDigits:4}) + '%';
 }
 
@@ -257,7 +338,8 @@ function calc3() {
   const x = parseFloat(document.getElementById('v3_x').value);
   const y = parseFloat(document.getElementById('v3_y').value);
   const res = document.getElementById('res3');
-  if(isNaN(x) || isNaN(y) || x === 0) { res.innerText = "Invalid input"; return; }
+  if(isNaN(x) || isNaN(y)) { res.innerText = "Enter valid numbers"; return; }
+  if(x === 0) { res.innerText = "Undefined: starting value cannot be 0"; return; }
   const change = ((y - x) / Math.abs(x)) * 100;
   res.innerText = change > 0 ? `+${change.toLocaleString('en-US', {maximumFractionDigits:4})}%` : `${change.toLocaleString('en-US', {maximumFractionDigits:4})}%`;
 }
