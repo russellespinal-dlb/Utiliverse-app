@@ -701,11 +701,38 @@ body.light-mode .local-processing-note{color:#64748b}
     .theme-toggle{width:38px;height:38px;flex-basis:38px}
 }
 
+
+.title-row{display:flex;align-items:center;gap:14px}
+.title-icon{width:46px;height:46px;flex:0 0 auto;color:#818cf8}
+.title-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid #334155;background:rgba(15,23,42,.58);border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#e2e8f0;margin-bottom:5px}
+.method-card span{display:block;color:#94a3b8;font-size:13px;line-height:1.65}
+.caution-note{border:1px solid rgba(251,191,36,.28);background:rgba(251,191,36,.07);border-radius:14px;padding:16px;color:#fde68a;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#fef3c7}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid #334155;background:#0f172a;color:#e2e8f0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid #334155;background:rgba(15,23,42,.55);border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#e2e8f0;margin-bottom:4px}
+.related-link span{display:block;color:#94a3b8;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+body.light-mode .method-card,body.light-mode .related-link{background:#fff;border-color:#dbe3ee}
+body.light-mode .method-card strong,body.light-mode .related-link strong{color:#1e293b}
+body.light-mode .method-card span,body.light-mode .related-link span{color:#475569}
+body.light-mode .caution-note{background:#fffbeb;border-color:#fde68a;color:#92400e}
+body.light-mode .caution-note strong{color:#78350f}
+body.light-mode .example-box{background:#f8fafc;color:#1e293b;border-color:#dbe3ee}
+@media(max-width:700px){
+  .title-icon{width:38px;height:38px}
+  .method-grid,.related-grid{grid-template-columns:1fr}
+}
+
 </style>
 
 <!-- SEO Structured Data -->
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Screen Color Tester","url":"https://utiliverse.app/Screen_Color_Tester/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based screen color tester and fullscreen color utility with preset and custom colors, HEX/RGB values, a screen timer and solid-color PNG export.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Fullscreen solid-color display","Preset screen colors","Custom color spectrum and hue controls","Six-digit HEX color input","HEX and RGB color values","Visual display inspection aid","Fullscreen exit timer","Custom-size PNG color image export","Mobile fullscreen fallback"]}</script>
-<script type="application/ld+json" id="faqSchema">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What can I use a black screen for?","acceptedAnswer":{"@type":"Answer","text":"A black fullscreen display can be used for basic display inspection, dark-room viewing, presentations, photography or video work, ambient backgrounds, and other situations where a uniform dark surface is useful."}},{"@type":"Question","name":"Can I make the selected color fullscreen?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool uses the browser Fullscreen API where available and a viewport-filling fallback on browsers that do not provide normal element fullscreen."}},{"@type":"Question","name":"Can I download the selected color as an image?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter the desired width and height and select Download PNG. The solid-color image is generated in the browser."}},{"@type":"Question","name":"Can I enter my own HEX color?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter a six-digit HEX value such as #6366F1, or use the spectrum and hue controls to create a custom color."}},{"@type":"Question","name":"Can this tool help test a monitor or phone screen?","acceptedAnswer":{"@type":"Answer","text":"Yes. Uniform colors can make isolated pixels, uneven brightness, color tint, edge glow, banding, or other visible inconsistencies easier to notice. It is a visual inspection aid, not professional calibration or hardware diagnostics."}},{"@type":"Question","name":"What color sequence should I use for a quick visual screen check?","acceptedAnswer":{"@type":"Answer","text":"A practical sequence is black, white, red, green, and blue, followed by a neutral gray such as #808080. Different uniform fields can make different visible display irregularities easier to notice."}},{"@type":"Question","name":"Can this tool tell me whether a pixel is dead or stuck?","acceptedAnswer":{"@type":"Answer","text":"The tool can help reveal a pixel that behaves differently across several full-screen colors, but it cannot definitively diagnose the cause or replace manufacturer diagnostics."}},{"@type":"Question","name":"What does the screen timer do?","acceptedAnswer":{"@type":"Answer","text":"The timer counts down for the selected number of minutes and exits the fullscreen color view when the timer reaches zero."}},{"@type":"Question","name":"Are my selected colors uploaded to Utiliverse?","acceptedAnswer":{"@type":"Answer","text":"No. Color selection, fullscreen display, HEX/RGB conversion, and PNG generation are performed in your browser by this tool. The page does load interface libraries from public CDNs."}},{"@type":"Question","name":"Why can the same HEX color look different on two screens?","acceptedAnswer":{"@type":"Answer","text":"Displays can differ in brightness, contrast, panel technology, calibration, and color profiles, so the same digital color value can appear different across devices."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Screen Color Tester","url":"https://utiliverse.app/Screen_Color_Tester/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based screen color tester for fullscreen visual inspection, HEX/RGB color viewing, timer-assisted screen checks and solid-color PNG generation, with clear display-rendering and diagnostic limitations.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Fullscreen solid-color display","Preset screen colors","Custom color spectrum and hue controls","Six-digit HEX color input","HEX and RGB color values","Visual display inspection aid","Fullscreen exit timer","Custom-size PNG color image export","Mobile fullscreen fallback","Visual dead/stuck pixel inspection aid","Display uniformity inspection aid","OLED/LCD behavior guidance","Local solid-color PNG generation","Display-rendering limitation disclosure"]}</script>
+<script type="application/ld+json" id="faqSchema">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What can I use a black screen for?","acceptedAnswer":{"@type":"Answer","text":"A black fullscreen display can be used for basic display inspection, dark-room viewing, presentations, photography or video work, ambient backgrounds, and other situations where a uniform dark surface is useful."}},{"@type":"Question","name":"Can I make the selected color fullscreen?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool uses the browser Fullscreen API where available and a viewport-filling fallback on browsers that do not provide normal element fullscreen."}},{"@type":"Question","name":"Can I download the selected color as an image?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter the desired width and height and select Download PNG. The solid-color image is generated in the browser."}},{"@type":"Question","name":"Can I enter my own HEX color?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter a six-digit HEX value such as #6366F1, or use the spectrum and hue controls to create a custom color."}},{"@type":"Question","name":"Can this tool help test a monitor or phone screen?","acceptedAnswer":{"@type":"Answer","text":"Yes. Uniform colors can make isolated pixels, uneven brightness, color tint, edge glow, banding, or other visible inconsistencies easier to notice. It is a visual inspection aid, not professional calibration or hardware diagnostics."}},{"@type":"Question","name":"What color sequence should I use for a quick visual screen check?","acceptedAnswer":{"@type":"Answer","text":"A practical sequence is black, white, red, green, and blue, followed by a neutral gray such as #808080. Different uniform fields can make different visible display irregularities easier to notice."}},{"@type":"Question","name":"Can this tool tell me whether a pixel is dead or stuck?","acceptedAnswer":{"@type":"Answer","text":"The tool can help reveal a pixel that behaves differently across several full-screen colors, but it cannot definitively diagnose the cause or replace manufacturer diagnostics."}},{"@type":"Question","name":"What does the screen timer do?","acceptedAnswer":{"@type":"Answer","text":"The timer counts down for the selected number of minutes and exits the fullscreen color view when the timer reaches zero."}},{"@type":"Question","name":"Are my selected colors uploaded to Utiliverse?","acceptedAnswer":{"@type":"Answer","text":"No. Color selection, fullscreen display, HEX/RGB conversion, and PNG generation are performed in your browser by this tool. The page does load interface libraries from public CDNs."}},{"@type":"Question","name":"Why can the same HEX color look different on two screens?","acceptedAnswer":{"@type":"Answer","text":"Displays can differ in brightness, contrast, panel technology, calibration, and color profiles, so the same digital color value can appear different across devices."}},{"@type":"Question","name":"Can this tool calibrate my monitor?","acceptedAnswer":{"@type":"Answer","text":"No. It displays requested digital colors for visual inspection but does not measure the panel, create an ICC profile or replace calibration hardware."}},{"@type":"Question","name":"Can a black screen test distinguish OLED from LCD?","acceptedAnswer":{"@type":"Answer","text":"Not reliably by itself. OLED and LCD technologies often behave differently on black, but the tool does not identify panel technology and visual observations can be affected by brightness, local dimming and display settings."}},{"@type":"Question","name":"Can leaving a test color onscreen cause image retention?","acceptedAnswer":{"@type":"Answer","text":"Long static bright images can contribute to temporary retention or wear on some displays. Use test screens only as long as needed and follow the display manufacturer's guidance."}},{"@type":"Question","name":"Why might fullscreen behave differently on iPhone or iPad?","acceptedAnswer":{"@type":"Answer","text":"Some mobile browsers do not provide the standard element Fullscreen API, so this tool uses a viewport-filling overlay fallback. Browser and operating-system UI can still differ by device."}},{"@type":"Question","name":"Is the timer perfectly precise?","acceptedAnswer":{"@type":"Answer","text":"No. It is a convenience timer. Background throttling, device sleep or browser power-saving behavior can affect timer execution."}}]}</script>
 
 </head>
 
@@ -775,18 +802,15 @@ title="Switch light/dark mode"
 
 <div class="max-w-3xl">
 
-<div class="color-badge mb-5">
-
-<span class="badge-dot" id="badgeDot" style="background:#000000"></span>
-
-Screen Color Tester
-
+<div class="title-row">
+  <span class="title-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/><circle cx="8" cy="10" r="1.5"/><circle cx="12" cy="10" r="1.5"/><circle cx="16" cy="10" r="1.5"/></svg>
+  </span>
+  <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-tight">
+    Screen Color Tester &amp;
+    <span class="gradient-text">Fullscreen Color Tool</span>
+  </h1>
 </div>
-
-<h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-tight">
-Screen Color Tester &amp;
-<span class="gradient-text">Fullscreen Color Tool</span>
-</h1>
 
 <p class="mt-5 text-lg text-slate-400 leading-relaxed max-w-2xl">
 
@@ -1114,7 +1138,7 @@ class="timer-display text-center mt-4 text-indigo-400"
 </div>
 
 
-<p class="local-processing-note mt-4">Core color selection, HEX/RGB conversion, fullscreen display and PNG generation run in your browser and are not submitted to a Utiliverse processing server. The page loads interface libraries from public CDNs.</p>
+<p class="local-processing-note mt-4">Core color selection, HEX/RGB conversion, fullscreen display, timer behavior and PNG generation run in your browser and are not submitted to a Utiliverse processing server. The page does load interface libraries from public CDNs, and the browser/device ultimately determines how the selected digital color is rendered on the physical display.</p>
 
 <!-- ========================= COLOR INFO ========================= -->
 
@@ -1160,6 +1184,65 @@ RGB:
      Paste approved Google AdSense code here after approval.
      This comment is intentionally invisible and reserves no space.
 -->
+
+<section class="mt-14 max-w-4xl content-area">
+<h2 class="text-3xl sm:text-4xl font-black text-white mb-4">How to Interpret a Screen Color Test</h2>
+<p>This tool sends a uniform digital color value to the browser and display. That makes it useful for visual inspection, comparison, fullscreen backgrounds, and image generation, but it does not measure the panel or calibrate the hardware.</p>
+
+<div class="method-grid">
+  <div class="method-card"><strong>Digital color value</strong><span>HEX and RGB describe the requested color numerically. The tool converts between those values and displays the result onscreen.</span></div>
+  <div class="method-card"><strong>Physical display output</strong><span>Actual appearance depends on brightness, contrast, panel technology, color profile, operating system, browser, display mode and device calibration.</span></div>
+  <div class="method-card"><strong>Visual inspection</strong><span>Uniform fullscreen colors can make some visible defects easier to notice, but the tool does not electrically test pixels or diagnose hardware.</span></div>
+  <div class="method-card"><strong>PNG export</strong><span>The downloaded PNG is generated locally as a solid-color raster image using the chosen dimensions and selected digital color.</span></div>
+</div>
+
+<h3>Dead pixels, stuck pixels and display uniformity</h3>
+<p>Black, white, red, green and blue are useful visual fields because a pixel or region that behaves differently can stand out more clearly against a uniform background. However, a single observation cannot definitively identify the cause. A dark point may be a dead subpixel, dirt, coating damage or another issue; a bright point may be stuck or affected by panel behavior.</p>
+
+<div class="caution-note"><strong>This is a visual inspection aid, not a diagnostic or calibration instrument.</strong> Do not use it as the sole basis for warranty, repair, medical, safety-critical or professional color decisions. Manufacturer diagnostics or calibrated measurement hardware are more appropriate when accuracy matters.</div>
+
+<h3>Why the same HEX value can look different on two devices</h3>
+<p>A HEX value such as <code>#6366F1</code> specifies an RGB triplet, not an exact physical light output. Two screens can render that same value differently because of panel gamut, white point, brightness, contrast, gamma, HDR behavior, color management and calibration.</p>
+
+<h3>OLED and LCD behavior</h3>
+<p>On many OLED displays, black pixels can emit very little or no light, while LCD panels use a backlight and may still show glow or leakage in dark scenes. That means a fullscreen black test can reveal different characteristics depending on panel technology. The tool does not identify the display type automatically.</p>
+
+<h3>Burn-in and image retention</h3>
+<p>A solid color can help make retention or burn-in patterns easier to notice, but this tool does not determine whether an observed pattern is temporary image retention or permanent panel wear. Avoid leaving bright static test screens displayed longer than necessary, especially on displays susceptible to retention.</p>
+
+<h3>Fullscreen behavior on mobile browsers</h3>
+<p>Desktop and many Android browsers can use the native Fullscreen API. Some mobile browsers, especially on iPhone and iPad, may not allow standard element fullscreen, so the tool uses a body-level viewport-filling overlay fallback. Browser chrome or operating-system UI can still behave differently across devices.</p>
+
+<h3>Timer behavior</h3>
+<p>The timer is a convenience feature that exits the fullscreen color view after the selected number of minutes. It is not a precision timing instrument, and background-tab throttling, device sleep or browser power-saving behavior can affect timer execution.</p>
+
+<h3>PNG export dimensions</h3>
+<p>The tool accepts width and height values from 1 through 12,000 pixels and generates a solid PNG locally with the current color. Very large dimensions require more browser memory and can fail on devices with limited resources.</p>
+
+<h3>Worked examples</h3>
+<code class="example-box">Quick screen check:
+Black → White → Red → Green → Blue → Gray
+Look for pixels or regions that behave differently across multiple fields.</code>
+
+<code class="example-box">Custom color:
+HEX #6366F1
+RGB rgb(99, 102, 241)
+Same digital value, but visual appearance can vary by display.</code>
+
+<code class="example-box">Image export:
+Color: #000000
+Size: 1920 × 1080
+Result: locally generated solid-black PNG</code>
+
+<h3>Related Utiliverse Tools</h3>
+<div class="related-grid">
+  <a class="related-link" href="../HEX_to_RGB/"><strong>HEX to RGB</strong><span>Convert HEX colors to RGB, HSL and CSS values.</span></a>
+  <a class="related-link" href="../Image_Converter/"><strong>Image Converter &amp; Resizer</strong><span>Convert and resize images after generating a color test image.</span></a>
+  <a class="related-link" href="../Scientific_Calculator/"><strong>Scientific Calculator</strong><span>Handle general numeric calculations and formulas.</span></a>
+</div>
+
+<p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 1, 2026 · Fullscreen behavior, visual-test limitations, PNG export, timer behavior and color-rendering caveats reviewed against the current implementation.</p>
+</section>
 
 <!-- ========================= COLOR DIRECTORY ========================= -->
 
@@ -1241,6 +1324,14 @@ class="content-area"
 
 </section>
 
+
+<section class="mt-16 max-w-4xl">
+  <h2 class="text-3xl font-black mb-4">Screen Testing Limitations &amp; Common Questions</h2>
+  <div class="faq-item"><div class="faq-question">Can this tool calibrate my monitor?</div><div class="faq-answer">No. It displays digital colors for visual inspection but does not measure the panel, create an ICC profile, or replace calibration hardware.</div></div>
+  <div class="faq-item"><div class="faq-question">Can leaving a bright test color onscreen cause image retention?</div><div class="faq-answer">Long static bright images can contribute to temporary retention or wear on some displays. Use test screens only as long as needed and follow the display manufacturer's guidance.</div></div>
+  <div class="faq-item"><div class="faq-question">Why can fullscreen behave differently on iPhone or iPad?</div><div class="faq-answer">Some mobile browsers do not provide the standard element Fullscreen API, so the tool uses a viewport-filling overlay fallback. Browser and operating-system UI can still differ by device.</div></div>
+  <div class="faq-item"><div class="faq-question">Is the fullscreen timer perfectly precise?</div><div class="faq-answer">No. It is a convenience timer. Background throttling, device sleep, or browser power-saving behavior can affect timer execution.</div></div>
+</section>
 
 <!-- ========================= FAQ ========================= -->
 
