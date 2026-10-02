@@ -185,22 +185,43 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
   .free-label{font-size:10.5px;max-width:130px;white-space:normal;text-align:right;line-height:1.2}
 }
 @media(max-width:390px){.stats,.print-grid{grid-template-columns:1fr}.header-right{gap:6px}}
+
+.title-row{display:flex;align-items:center;gap:14px}
+.title-icon{width:44px;height:44px;flex:0 0 auto;color:#818cf8}
+.title-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.theme-toggle{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;padding:0;border:1px solid #334155;background:rgba(15,23,42,.72);color:#94a3b8;border-radius:12px;cursor:pointer;box-shadow:none;appearance:none;-webkit-appearance:none;transition:color .15s ease,background .15s ease,border-color .15s ease}
+.theme-toggle:hover{color:#fff;background:#1e293b;border-color:#475569}
+.theme-toggle:focus-visible{outline:2px solid var(--indigo);outline-offset:3px}
+body.light-mode .theme-toggle{color:#475569;background:#fff;border-color:#cbd5e1}
+body.light-mode .theme-toggle:hover{color:#0f172a;background:#f1f5f9;border-color:#94a3b8}
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid var(--border);background:var(--panel2);border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#e2e8f0;margin-bottom:5px}
+.method-card span{display:block;color:#94a3b8;font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:#0f172a;color:#e2e8f0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.caution-note{border:1px solid rgba(251,191,36,.28);background:rgba(251,191,36,.07);border-radius:14px;padding:16px;color:#fde68a;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#fef3c7}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid var(--border);background:var(--panel2);border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#e2e8f0;margin-bottom:4px}
+.related-link span{display:block;color:#94a3b8;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+.local-processing-note{font-size:12px;line-height:1.65;color:#94a3b8;margin-top:14px}
+body.light-mode .local-processing-note{color:#64748b}
+body.light-mode .method-card strong,body.light-mode .related-link strong{color:#1e293b}
+body.light-mode .method-card span,body.light-mode .related-link span{color:#475569}
+body.light-mode .example-box{background:#f8fafc;color:#1e293b}
+body.light-mode .caution-note{background:#fffbeb;border-color:#fde68a;color:#92400e}
+body.light-mode .caution-note strong{color:#78350f}
+@media(max-width:700px){.title-icon{width:36px;height:36px}.method-grid,.related-grid{grid-template-columns:1fr}}
+
 </style>
 
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Image Dimension Finder","url":"https://utiliverse.app/Image_Dimension_Finder/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript and image decoding support.","description":"Inspect image width, height, aspect ratio, megapixels, orientation, file type, file size, transparency, and print-size estimates locally in the browser.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Image Dimension Finder","url":"https://utiliverse.app/Image_Dimension_Finder/","applicationCategory":"MultimediaApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript and image decoding support.","description":"Free browser-based image dimension finder for decoded width and height, simplified and decimal aspect ratio, megapixels, orientation, file size, practical transparency detection, approximate raw RGBA memory and print-size estimates.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Decoded image width and height","Simplified aspect ratio","Decimal aspect ratio","Megapixel calculation","Total pixel count","Landscape, portrait or square orientation","Browser-provided file type reporting","File size reporting","Approximate raw RGBA memory estimate","Practical transparency detection from rendered Canvas pixels","72 PPI print-size estimate","96 PPI print-size estimate","150 PPI print-size estimate","300 PPI print-size estimate","Drag-and-drop image loading","Clipboard image paste","Copyable summary with fallback","Browser-local image analysis","No EXIF or embedded DPI parsing"]}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"How do I find an image's dimensions?","acceptedAnswer":{"@type":"Answer","text":"Choose, drop, or paste an image. The tool reads the browser-decoded image width and height and displays them in pixels."}},
-{"@type":"Question","name":"What image formats are supported?","acceptedAnswer":{"@type":"Answer","text":"The tool accepts any image format the current browser can decode. Common formats include JPEG, PNG, WebP, GIF, SVG, BMP, and AVIF. HEIC, HEIF, TIFF, and RAW support varies by browser."}},
-{"@type":"Question","name":"Does the tool upload my image?","acceptedAnswer":{"@type":"Answer","text":"No. The image is read and analyzed locally in your browser."}},
-{"@type":"Question","name":"What is image aspect ratio?","acceptedAnswer":{"@type":"Answer","text":"Aspect ratio is the proportional relationship between width and height, such as 16:9, 4:3, 3:2, or 1:1."}},
-{"@type":"Question","name":"How are megapixels calculated?","acceptedAnswer":{"@type":"Answer","text":"Megapixels are calculated by multiplying width by height and dividing the total number of pixels by one million."}},
-{"@type":"Question","name":"Can the tool detect transparency?","acceptedAnswer":{"@type":"Answer","text":"For browser-readable raster images, the tool samples the rendered image for pixels with alpha transparency. SVG and other rendered formats are also analyzed after browser rendering."}},
-{"@type":"Question","name":"What do the print-size estimates mean?","acceptedAnswer":{"@type":"Answer","text":"They divide the pixel dimensions by a chosen pixels-per-inch value such as 300 PPI. Actual print quality depends on the image and printer."}},
-{"@type":"Question","name":"Can I copy the image metadata?","acceptedAnswer":{"@type":"Answer","text":"Yes. Copy Summary creates a text summary of the image dimensions, aspect ratio, file information, and related measurements."}}
-]}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I find an image's dimensions?","acceptedAnswer":{"@type":"Answer","text":"Choose, drop, or paste an image. The tool reads the browser-decoded image width and height and displays them in pixels."}},{"@type":"Question","name":"What image formats are supported?","acceptedAnswer":{"@type":"Answer","text":"The tool accepts any image format the current browser can decode. Common formats include JPEG, PNG, WebP, GIF, SVG, BMP, and AVIF. HEIC, HEIF, TIFF, and RAW support varies by browser."}},{"@type":"Question","name":"Does the tool upload my image?","acceptedAnswer":{"@type":"Answer","text":"No. The image is read and analyzed locally in your browser."}},{"@type":"Question","name":"What is image aspect ratio?","acceptedAnswer":{"@type":"Answer","text":"Aspect ratio is the proportional relationship between width and height, such as 16:9, 4:3, 3:2, or 1:1."}},{"@type":"Question","name":"How are megapixels calculated?","acceptedAnswer":{"@type":"Answer","text":"Megapixels are calculated by multiplying width by height and dividing the total number of pixels by one million."}},{"@type":"Question","name":"Can the tool detect transparency?","acceptedAnswer":{"@type":"Answer","text":"For browser-readable raster images, the tool samples the rendered image for pixels with alpha transparency. SVG and other rendered formats are also analyzed after browser rendering."}},{"@type":"Question","name":"What do the print-size estimates mean?","acceptedAnswer":{"@type":"Answer","text":"They divide the pixel dimensions by a chosen pixels-per-inch value such as 300 PPI. Actual print quality depends on the image and printer."}},{"@type":"Question","name":"Can I copy the image metadata?","acceptedAnswer":{"@type":"Answer","text":"Yes. Copy Summary creates a text summary of the image dimensions, aspect ratio, file information, and related measurements."}},{"@type":"Question","name":"Does the preview size change the reported image dimensions?","acceptedAnswer":{"@type":"Answer","text":"No. The preview is visually scaled to fit the page, while the reported width and height come from the browser-decoded source image."}},{"@type":"Question","name":"Does this read EXIF, GPS, or embedded DPI metadata?","acceptedAnswer":{"@type":"Answer","text":"No. This tool focuses on decoded pixel dimensions and derived measurements. It does not parse EXIF, GPS, ICC profile, camera, or embedded DPI/PPI metadata."}},{"@type":"Question","name":"How reliable is transparency detection?","acceptedAnswer":{"@type":"Answer","text":"It is a practical indicator based on a rendered Canvas sample capped at 800 pixels on the longest side. It is not a forensic scan of every original source pixel."}},{"@type":"Question","name":"Is the detected file type guaranteed to match the actual binary format?","acceptedAnswer":{"@type":"Answer","text":"No. The displayed type uses the browser-provided MIME type when available or the filename extension otherwise; the tool does not inspect file signatures."}},{"@type":"Question","name":"Is the raw RGBA memory estimate the image's real browser memory usage?","acceptedAnswer":{"@type":"Answer","text":"No. It is simply width × height × 4 bytes. Real browser memory can differ because of decoding, temporary buffers, metadata, color conversion, and other runtime overhead."}}]}
 </script>
 </head>
 
@@ -223,8 +244,12 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
 <main>
 <div class="container">
   <section class="hero">
-    <div class="eyebrow">Image utility</div>
-    <h1>Image Dimension Finder</h1>
+    <div class="title-row">
+      <span class="title-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 16l3-3 2 2 3-4 2 3"/><path d="M7 2v4M17 18v4M2 7h4M18 17h4"/></svg>
+      </span>
+      <h1>Image Dimension Finder</h1>
+    </div>
     <p>Upload, drop, or paste an image to instantly inspect its width, height, aspect ratio, orientation, megapixels, file size, format, transparency, and useful print-size estimates.</p>
     <div class="badges">
       <span class="badge">Width × Height in pixels</span>
@@ -239,7 +264,7 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
         <div class="eyebrow">Image metadata</div>
         <h2 id="toolHeading" class="section-title">Find image dimensions</h2>
       </div>
-      <div class="small">The selected image is analyzed locally and is not uploaded to Utiliverse.</div>
+      <div class="small">The selected image is decoded and analyzed locally in your browser and is not uploaded to a Utiliverse processing server.</div>
     </div>
 
     <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Choose or drop an image">
@@ -305,6 +330,7 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
 
     <div class="note"><strong>Format note:</strong> “any image format” in a browser means any format the browser can decode. Standard PNG, JPEG, WebP, GIF, SVG, BMP, and AVIF commonly work in modern browsers. Specialized formats such as HEIC/HEIF, TIFF, or camera RAW may require conversion first.</div>
   </section>
+  <p class="local-processing-note">Browser-based processing: image reading, browser decoding, dimension analysis, transparency sampling, print-size calculations, summary generation, and clipboard preparation are performed locally by this tool. Your image is not submitted to a Utiliverse processing server. The page itself still loads interface and advertising resources from external providers.</p>
 
   <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
        Paste approved Google AdSense code here after approval.
@@ -350,6 +376,67 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
 
     <p>The tool displays approximate sizes at 72, 96, 150, and 300 PPI. These are calculations based solely on pixel dimensions. They do not read or enforce a DPI/PPI metadata tag embedded in the image, and they do not guarantee a particular print quality.</p>
 
+
+    <h2>Measurement Methodology and Important Limits</h2>
+    <p>The finder reports the dimensions exposed by the browser after it decodes the selected image. Width and height come from the image element's <code>naturalWidth</code> and <code>naturalHeight</code>, then the tool derives aspect ratio, orientation, megapixels, total pixels, rough RGBA memory, transparency, and print-size estimates from those decoded dimensions.</p>
+
+    <div class="method-grid">
+      <div class="method-card"><strong>Dimensions</strong><span>Width and height are the browser-decoded source dimensions in pixels, not the CSS size of the preview shown on the page.</span></div>
+      <div class="method-card"><strong>Aspect ratio</strong><span>The tool simplifies width and height with their greatest common divisor and also displays the decimal width ÷ height ratio.</span></div>
+      <div class="method-card"><strong>Megapixels</strong><span>Calculated as <code>width × height ÷ 1,000,000</code>. This measures pixel count, not optical quality or sharpness.</span></div>
+      <div class="method-card"><strong>Raw RGBA estimate</strong><span>Approximated as four bytes per decoded pixel. This is a simple pixel-buffer estimate, not total browser memory use.</span></div>
+    </div>
+
+    <h3>Worked example: 4000 × 3000 image</h3>
+    <code class="example-box">Width: 4000 px
+Height: 3000 px
+
+Aspect ratio:
+4000:3000 → 4:3
+
+Megapixels:
+4000 × 3000 ÷ 1,000,000
+= 12 MP
+
+Approx. raw RGBA buffer:
+12,000,000 × 4 bytes
+≈ 48,000,000 bytes</code>
+
+    <h3>Preview size is not source size</h3>
+    <p>The preview image is constrained to fit the browser interface, but the reported dimensions come from the decoded source image. A 6000-pixel-wide photo may therefore appear only a few hundred CSS pixels wide on screen while still reporting its full decoded width.</p>
+
+    <h3>Aspect-ratio simplification is mathematical</h3>
+    <p>The finder computes the greatest common divisor of the decoded width and height. A 1920×1080 image simplifies to 16:9, while unusual dimensions can produce less familiar ratios such as 683:512. That does not mean the image was created for a standard media format; it is simply the exact reduced integer ratio.</p>
+
+    <h3>Transparency detection uses a scaled rendered sample</h3>
+    <p>To keep analysis practical, the tool renders the image to a Canvas with a maximum side of 800 pixels and scans the resulting alpha channel. If any sampled rendered pixel has alpha below 255, the result is “Yes.” Because very large images may be downscaled before scanning, this is a practical indicator rather than a forensic test of every original pixel.</p>
+
+    <h3>SVG and animated formats are measured after browser rendering</h3>
+    <p>For SVG and similar browser-rendered formats, the dimensions reflect the rendered image dimensions exposed by the browser. Animated image formats are inspected as image resources; the tool does not analyze frame-by-frame dimensions, timing, or animation metadata.</p>
+
+    <h3>Print-size estimates are arithmetic only</h3>
+    <p>The 72, 96, 150, and 300 PPI cards divide pixel width and height by the selected pixels-per-inch value. They do not read embedded DPI/PPI metadata and they do not guarantee print quality, sharpness, or printer-specific output.</p>
+
+    <h3>File type is not content-forensically verified</h3>
+    <p>The displayed type comes from the browser-provided MIME type when available, otherwise from the filename extension. The tool does not inspect binary file signatures to prove the file's actual container format.</p>
+
+    <h3>File size and raw memory are different measurements</h3>
+    <p>File size is the number of bytes in the selected file object. The RGBA estimate is based on four bytes per decoded pixel. Compression, metadata, browser decoding structures, color conversion, temporary canvases, and other runtime allocations can make actual memory use very different.</p>
+
+    <div class="caution-note"><strong>Do not treat these results as a complete metadata inspection.</strong> The tool does not parse EXIF, GPS, ICC profiles, camera settings, frame metadata, or embedded DPI tags. It focuses on decoded pixel dimensions and a small set of derived measurements.</div>
+
+    <h3>Browser decoding determines format support</h3>
+    <p>The file picker is intentionally broad, but the browser still has to decode the selected file. HEIC/HEIF, TIFF, camera RAW, and less common formats can fail in browsers that do not support them even when the file extension is accepted by the picker.</p>
+
+    <h3>Related Utiliverse Tools</h3>
+    <div class="related-grid">
+      <a class="related-link" href="../Image_Cropper/"><strong>Image Cropper</strong><span>Crop an image with aspect-ratio presets and exact source-pixel controls.</span></a>
+      <a class="related-link" href="../Image_Resizer/"><strong>Image Resizer</strong><span>Resize images after checking their current pixel dimensions.</span></a>
+      <a class="related-link" href="../Image_Converter/"><strong>Image Converter</strong><span>Convert browser-readable images to common web-friendly formats.</span></a>
+    </div>
+
+    <p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 2, 2026 · Browser-decoded dimensions, aspect-ratio reduction, megapixel calculation, RGBA memory estimate, transparency sampling, print-size arithmetic, MIME/extension reporting, copy fallback, and browser-format limitations reviewed against the current implementation.</p>
+
     <h2>Practical Use Cases</h2>
     <h3>Checking website image requirements</h3>
     <p>Web forms and content-management systems often require an image to be at least a certain width or to match a particular aspect ratio. The dimension finder lets you verify the file before uploading it to the site.</p>
@@ -377,6 +464,11 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
     <details class="faq"><summary>Can this detect transparent pixels?</summary><p>Yes. The browser-rendered image is sampled for alpha values below full opacity.</p></details>
     <details class="faq"><summary>What do the 72, 96, 150, and 300 PPI sizes mean?</summary><p>They show how large the image would be mathematically if its pixels were distributed at that many pixels per inch.</p></details>
     <details class="faq"><summary>Can I copy the results?</summary><p>Yes. Copy Summary copies the main dimensions, aspect ratio, file information, orientation, megapixels, and related measurements.</p></details>
+    <details class="faq"><summary>Does the preview size change the reported image dimensions?</summary><p>No. The preview is visually scaled to fit the page, while the reported width and height come from the browser-decoded source image.</p></details>
+    <details class="faq"><summary>Does this read EXIF, GPS, or embedded DPI metadata?</summary><p>No. This tool focuses on decoded pixel dimensions and derived measurements. It does not parse EXIF, GPS, ICC profile, camera, or embedded DPI/PPI metadata.</p></details>
+    <details class="faq"><summary>How reliable is transparency detection?</summary><p>It is a practical indicator based on a rendered Canvas sample capped at 800 pixels on the longest side. It is not a forensic scan of every original source pixel.</p></details>
+    <details class="faq"><summary>Is the detected file type guaranteed to match the actual binary format?</summary><p>No. The displayed type uses the browser-provided MIME type when available or the filename extension otherwise; the tool does not inspect file signatures.</p></details>
+    <details class="faq"><summary>Is the raw RGBA memory estimate the image's real browser memory usage?</summary><p>No. It is simply width × height × 4 bytes. Real browser memory can differ because of decoding, temporary buffers, metadata, color conversion, and other runtime overhead.</p></details>
   </section>
 </div>
 </main>
@@ -388,7 +480,7 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
 
 <footer>
   <div class="container footer-inner">
-    <span>© <span id="year"></span> Utiliverse. All rights reserved.</span>
+    <span>© 2026 Utiliverse. All rights reserved.</span>
     <span>100% Free and Browser Based</span>
   </div>
 </footer>
@@ -418,7 +510,6 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
     localStorage.setItem("utiliverse-theme", next);
     applyTheme(next);
   });
-  $("year").textContent = new Date().getFullYear();
 
   function gcd(a,b) {
     a = Math.abs(Math.round(a));
