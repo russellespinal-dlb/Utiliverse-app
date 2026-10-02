@@ -168,10 +168,33 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
 body.light-mode .local-processing-note{color:#64748b}
 @media(max-width:560px){.value-input,.unit-select,.precision-select{font-size:16px}}
 
+
+.title-row{display:flex;align-items:center;gap:14px}
+.title-icon{width:44px;height:44px;flex:0 0 auto;color:#818cf8}
+.title-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid var(--border);background:var(--panel2);border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#e2e8f0;margin-bottom:5px}
+.method-card span{display:block;color:#94a3b8;font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:#0f172a;color:#e2e8f0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.caution-note{border:1px solid rgba(251,191,36,.28);background:rgba(251,191,36,.07);border-radius:14px;padding:16px;color:#fde68a;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#fef3c7}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid var(--border);background:var(--panel2);border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#e2e8f0;margin-bottom:4px}
+.related-link span{display:block;color:#94a3b8;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+body.light-mode .method-card strong,body.light-mode .related-link strong{color:#1e293b}
+body.light-mode .method-card span,body.light-mode .related-link span{color:#475569}
+body.light-mode .example-box{background:#f8fafc;color:#1e293b}
+body.light-mode .caution-note{background:#fffbeb;border-color:#fde68a;color:#92400e}
+body.light-mode .caution-note strong{color:#78350f}
+@media(max-width:700px){.title-icon{width:36px;height:36px}.method-grid,.related-grid{grid-template-columns:1fr}}
+
 </style>
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Time Unit Converter","url":"https://utiliverse.app/Time_Unit_Converter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based time unit converter for milliseconds, seconds, minutes, hours, days, weeks, average Gregorian months, years, decades and centuries.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Milliseconds conversion","Seconds conversion","Minutes conversion","Hours conversion","Days conversion","Weeks conversion","Average Gregorian months","Average Gregorian years","Decades","Centuries","Live all-units conversion table","4, 6, 8 or 12 significant-digit display precision","Swap source and destination units","Copy conversion result","Browser-local calculations"]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which time units are supported?","acceptedAnswer":{"@type":"Answer","text":"Milliseconds, seconds, minutes, hours, days, weeks, average Gregorian months, average Gregorian years, decades, and centuries."}},{"@type":"Question","name":"How many milliseconds are in one second?","acceptedAnswer":{"@type":"Answer","text":"Exactly 1,000 milliseconds are used per second."}},{"@type":"Question","name":"How many days are in one month in this converter?","acceptedAnswer":{"@type":"Answer","text":"An average month is 30.436875 days because the converter uses the 365.2425-day average Gregorian year divided by 12."}},{"@type":"Question","name":"How many days are in one year?","acceptedAnswer":{"@type":"Answer","text":"For unit conversion, the tool uses 365.2425 days per average Gregorian year. An individual calendar year still has either 365 or 366 days."}},{"@type":"Question","name":"Why doesn't one month always equal 30 or 31 days?","acceptedAnswer":{"@type":"Answer","text":"Actual calendar months have variable lengths. This converter uses a stated average so month-based duration conversions remain internally consistent."}},{"@type":"Question","name":"Can I convert negative or decimal durations?","acceptedAnswer":{"@type":"Answer","text":"Yes. The numeric input supports decimal and negative values, and browsers commonly accept scientific notation as well."}},{"@type":"Question","name":"Is this appropriate for finding the time between two dates?","acceptedAnswer":{"@type":"Answer","text":"Not when exact calendar boundaries matter. Use a date-difference calculator for two actual dates because months, leap years, and calendar positions affect the exact interval."}},{"@type":"Question","name":"Are my conversion values uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. The calculation is performed entirely in JavaScript in your browser."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Time Unit Converter","url":"https://utiliverse.app/Time_Unit_Converter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based time unit converter for milliseconds, seconds, minutes, hours, days, weeks, average Gregorian months and years, decades and centuries, with configurable significant-digit display, all-units comparison, copy support and documented calendar and floating-point limitations.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Milliseconds conversion","Seconds conversion","Minutes conversion","Hours conversion","Days conversion","Weeks conversion","Average Gregorian months","Average Gregorian years","Decades","Centuries","Live all-units conversion table","4, 6, 8 or 12 significant-digit display precision","Scientific notation for extreme scales","Swap source and destination units","Copy conversion result with up to 15 significant digits","Negative duration support","Finite-range overflow feedback","Browser-local calculations","Calendar arithmetic limitation guidance"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Which time units are supported?","acceptedAnswer":{"@type":"Answer","text":"Milliseconds, seconds, minutes, hours, days, weeks, average Gregorian months, average Gregorian years, decades, and centuries."}},{"@type":"Question","name":"How many milliseconds are in one second?","acceptedAnswer":{"@type":"Answer","text":"Exactly 1,000 milliseconds are used per second."}},{"@type":"Question","name":"How many days are in one month in this converter?","acceptedAnswer":{"@type":"Answer","text":"An average month is 30.436875 days because the converter uses the 365.2425-day average Gregorian year divided by 12."}},{"@type":"Question","name":"How many days are in one year?","acceptedAnswer":{"@type":"Answer","text":"For unit conversion, the tool uses 365.2425 days per average Gregorian year. An individual calendar year still has either 365 or 366 days."}},{"@type":"Question","name":"Why doesn't one month always equal 30 or 31 days?","acceptedAnswer":{"@type":"Answer","text":"Actual calendar months have variable lengths. This converter uses a stated average so month-based duration conversions remain internally consistent."}},{"@type":"Question","name":"Can I convert negative or decimal durations?","acceptedAnswer":{"@type":"Answer","text":"Yes. The numeric input supports decimal and negative values, and browsers commonly accept scientific notation as well."}},{"@type":"Question","name":"Is this appropriate for finding the time between two dates?","acceptedAnswer":{"@type":"Answer","text":"Not when exact calendar boundaries matter. Use a date-difference calculator for two actual dates because months, leap years, and calendar positions affect the exact interval."}},{"@type":"Question","name":"Are my conversion values uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. The calculation is performed entirely in JavaScript in your browser."}},{"@type":"Question","name":"Does changing display precision change the conversion?","acceptedAnswer":{"@type":"Answer","text":"No. The precision selector only changes how many significant digits are shown. The conversion factors and underlying JavaScript calculation remain the same."}},{"@type":"Question","name":"Why can very large or very small results use scientific notation?","acceptedAnswer":{"@type":"Answer","text":"The formatter switches to scientific notation for values at or above 10^12 and for non-zero values below 10^-6 so extreme scales remain readable."}},{"@type":"Question","name":"Can extremely large values overflow?","acceptedAnswer":{"@type":"Answer","text":"Yes. The converter uses JavaScript Number arithmetic. Values beyond its finite range can overflow to infinity, and the tool reports that the result is outside the finite numeric range."}},{"@type":"Question","name":"Why can copied values show more digits than the screen?","acceptedAnswer":{"@type":"Answer","text":"The screen follows the selected 4, 6, 8, or 12 significant-digit setting. Copy Result uses up to 15 significant digits to preserve more numeric detail in the copied equation."}},{"@type":"Question","name":"Do negative duration values work?","acceptedAnswer":{"@type":"Answer","text":"Yes. Negative values are converted mathematically using the same factors. Whether a negative duration is meaningful depends on the context where the value came from."}},{"@type":"Question","name":"Does this account for daylight saving time or leap seconds?","acceptedAnswer":{"@type":"Answer","text":"No. This is a fixed-factor duration converter. It does not model time zones, daylight-saving changes, leap seconds, or date boundaries."}}]}</script>
 </head>
 
 <body>
@@ -208,8 +231,12 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 <main>
 <div class="container">
   <section class="hero">
-    <div class="eyebrow">Time utility</div>
-    <h1>Time Unit Converter – Seconds, Minutes, Hours &amp; More</h1>
+    <div class="title-row">
+      <span class="title-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="12" r="5"/><path d="M9 9v3l2 1.5M16 5h4M18 5v14M15 19h6"/></svg>
+      </span>
+      <h1>Time Unit Converter – Seconds, Minutes, Hours &amp; More</h1>
+    </div>
     <p>Convert durations instantly between milliseconds, seconds, minutes, hours, days, weeks, average months, years, decades, and centuries with a complete all-units breakdown.</p>
     <div class="badges">
       <span class="badge">Milliseconds → Centuries</span>
@@ -288,7 +315,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 
     <div class="note"><strong>Conversion basis:</strong> 1 minute = 60 seconds, 1 hour = 60 minutes, 1 day = 24 hours, and 1 week = 7 days. For longer calendar-named durations, this converter uses the average Gregorian year of <strong>365.2425 days</strong>; one average month is one-twelfth of that year, one decade is 10 years, and one century is 100 years.</div>
   </section>
-  <p class="local-processing-note">Browser-based calculation: time-unit conversions and formatting are performed locally on this page and the values you enter are not submitted to a Utiliverse server.</p>
+  <p class="local-processing-note">Browser-based calculation: time-unit conversions and formatting are performed locally by this tool and the values you enter are not submitted to a Utiliverse processing server. The page itself still loads interface and advertising resources from external providers.</p>
 
   <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
        Paste approved Google AdSense code here after approval.
@@ -322,6 +349,67 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 
     <p>Very small or very large results may be displayed in scientific notation. This is especially useful when converting milliseconds to centuries or centuries to milliseconds, where the scale difference can produce many leading zeros or very large integers. Internally, the page uses JavaScript Number arithmetic; the formatting choice affects the display but not the underlying conversion factor used for the calculation.</p>
 
+
+    <h2>Conversion Methodology and Important Limits</h2>
+    <p>The converter uses one numeric factor for each supported unit. A source value is first converted to seconds, then divided by the destination unit's number of seconds. The all-units table uses the same factor model, so every displayed row is derived from the same source duration.</p>
+
+    <div class="method-grid">
+      <div class="method-card"><strong>Exact short-unit factors</strong><span>Milliseconds, seconds, minutes, hours, days, and seven-day weeks use fixed factors: 1,000 ms = 1 s, 60 s = 1 min, 60 min = 1 hr, 24 hr = 1 day, and 7 days = 1 week.</span></div>
+      <div class="method-card"><strong>Average calendar-named units</strong><span>One average Gregorian year is 365.2425 days. One average month is exactly one-twelfth of that model year: 30.436875 days.</span></div>
+      <div class="method-card"><strong>Decades and centuries</strong><span>A decade is modeled as 10 average Gregorian years and a century as 100 average Gregorian years.</span></div>
+      <div class="method-card"><strong>Display precision</strong><span>The precision selector controls significant digits shown on screen. It does not change the conversion factors or the underlying JavaScript calculation.</span></div>
+    </div>
+
+    <h3>Worked example: 2.5 hours to minutes</h3>
+    <code class="example-box">2.5 hours
+= 2.5 × 3,600 seconds
+= 9,000 seconds
+
+9,000 ÷ 60
+= 150 minutes</code>
+
+    <h3>Worked example: one average month</h3>
+    <code class="example-box">365.2425 average days per year ÷ 12
+= 30.436875 days per average month
+
+30.436875 × 86,400
+= 2,629,746 seconds</code>
+
+    <h3>This is duration conversion, not calendar arithmetic</h3>
+    <p>Converting one average month to days is different from adding one calendar month to a date. A real month can contain 28, 29, 30, or 31 days, and a real date interval can cross leap days or daylight-saving transitions. Use a calendar-aware date calculator when the starting and ending dates matter.</p>
+
+    <h3>No time-zone, DST, or leap-second modeling</h3>
+    <p>The tool treats durations as numeric quantities. It does not know a time zone, UTC offset, daylight-saving rule, date boundary, or leap second. Those concepts affect civil timestamps and calendar arithmetic, not the fixed-factor duration model used here.</p>
+
+    <h3>Negative values are mathematically accepted</h3>
+    <p>The input accepts negative durations because multiplication and division by unit factors are mathematically valid for signed values. Whether a negative duration makes sense depends on the context. For elapsed-time reporting, deadlines, billing, or scientific measurements, interpret the sign according to the system that produced the value.</p>
+
+    <h3>Significant digits versus copied precision</h3>
+    <p>The on-screen formatter uses 4, 6, 8, or 12 significant digits. Very large values at or above 10<sup>12</sup>, and very small non-zero values below 10<sup>−6</sup>, are displayed in scientific notation. The Copy Result action separately serializes the source and converted values with up to 15 significant digits so the copied equation can retain more numeric detail than a low-precision screen setting.</p>
+
+    <h3>JavaScript Number limitations</h3>
+    <p>Calculations use JavaScript's IEEE-754 Number type. Ordinary duration conversions are well within its useful range, but extremely large values can overflow to infinity and very small values can lose precision or underflow toward zero. Decimal fractions can also carry tiny binary floating-point differences even when the displayed result looks exact.</p>
+
+    <div class="caution-note"><strong>Do not use average months or years for contractual or calendar-exact deadlines.</strong> The 365.2425-day year and 30.436875-day month are documented conversion conventions, not substitutes for counting actual calendar dates.</div>
+
+    <h3>Common mistakes</h3>
+    <ul>
+      <li>Using an average month when the exact start and end dates are known.</li>
+      <li>Assuming changing display precision changes the mathematical conversion.</li>
+      <li>Reading a scientific-notation result as though it were a rounded whole number.</li>
+      <li>Mixing duration conversion with time-zone or daylight-saving calculations.</li>
+      <li>Assuming a negative duration is invalid in every context.</li>
+    </ul>
+
+    <h3>Related Utiliverse Tools</h3>
+    <div class="related-grid">
+      <a class="related-link" href="../Time_Tracking_Suite/"><strong>Time Tracking Suite</strong><span>Measure elapsed time or run countdown and Pomodoro timers.</span></a>
+      <a class="related-link" href="../Military_Time_Converter/"><strong>Military Time Converter</strong><span>Convert 24-hour clock notation to AM/PM format and back.</span></a>
+      <a class="related-link" href="../Date_Calculator/"><strong>Date Calculator</strong><span>Use calendar-aware arithmetic when actual dates and month lengths matter.</span></a>
+    </div>
+
+    <p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 2, 2026 · Unit factors, average Gregorian assumptions, significant-digit formatting, copy precision, negative-value handling, and browser-side Number arithmetic reviewed against the current implementation.</p>
+
     <h2>Practical Use Cases</h2>
     <h3>Programming and API development</h3>
     <p>Software often represents timeouts, cache durations, animation delays, polling intervals, and timestamps in milliseconds or seconds. Documentation or configuration may use minutes, hours, or days instead. A developer can quickly convert a 900,000-millisecond timeout into 15 minutes or verify that 86,400,000 milliseconds equals one day before placing the value into code or an environment setting.</p>
@@ -349,6 +437,12 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
     <details class="faq"><summary>Can I convert negative or decimal durations?</summary><p>Yes. The numeric input supports decimal and negative values, and browsers commonly accept scientific notation as well.</p></details>
     <details class="faq"><summary>Is this appropriate for finding the time between two dates?</summary><p>Not when exact calendar boundaries matter. Use a date-difference calculator for two actual dates because months, leap years, and calendar positions affect the exact interval.</p></details>
     <details class="faq"><summary>Are my conversion values uploaded?</summary><p>No. The calculation is performed entirely in JavaScript in your browser.</p></details>
+    <details class="faq"><summary>Does changing display precision change the conversion?</summary><p>No. The precision selector only changes how many significant digits are shown. The conversion factors and underlying JavaScript calculation remain the same.</p></details>
+    <details class="faq"><summary>Why can very large or very small results use scientific notation?</summary><p>The formatter switches to scientific notation for values at or above 10^12 and for non-zero values below 10^-6 so extreme scales remain readable.</p></details>
+    <details class="faq"><summary>Can extremely large values overflow?</summary><p>Yes. The converter uses JavaScript Number arithmetic. Values beyond its finite range can overflow to infinity, and the tool now reports that the result is outside the finite numeric range.</p></details>
+    <details class="faq"><summary>Why can copied values show more digits than the screen?</summary><p>The screen follows the selected 4, 6, 8, or 12 significant-digit setting. Copy Result uses up to 15 significant digits to preserve more numeric detail in the copied equation.</p></details>
+    <details class="faq"><summary>Do negative duration values work?</summary><p>Yes. Negative values are converted mathematically using the same factors. Whether a negative duration is meaningful depends on the context where the value came from.</p></details>
+    <details class="faq"><summary>Does this account for daylight saving time or leap seconds?</summary><p>No. This is a fixed-factor duration converter. It does not model time zones, daylight-saving changes, leap seconds, or date boundaries.</p></details>
   </section>
 </div>
 </main>
@@ -482,8 +576,9 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 
     $("resultInput").value = formatted;
     $("resultValue").textContent = `${formatted} ${to.symbol}`;
-    $("resultEquation").textContent =
-      `${formatNumber(value)} ${pluralLabel(from,value)} = ${formatted} ${pluralLabel(to,result)}`;
+    $("resultEquation").textContent = Number.isFinite(result)
+      ? `${formatNumber(value)} ${pluralLabel(from,value)} = ${formatted} ${pluralLabel(to,result)}`
+      : "Result exceeds the finite numeric range supported by this browser calculation.";
 
     $("conversionTable").innerHTML = UNITS.map(u => {
       const converted = convert(value, fromKey, u.key);
@@ -555,6 +650,12 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
     const from = unitMap[$("fromUnit").value];
     const to = unitMap[$("toUnit").value];
     const result = convert(value, from.key, to.key);
+
+    if (!Number.isFinite(result)) {
+      $("status").textContent = "Result is outside the finite numeric range.";
+      return;
+    }
+
     const text = `${rawCopyNumber(value)} ${from.symbol} = ${rawCopyNumber(result)} ${to.symbol}`;
 
     try {
