@@ -222,35 +222,37 @@ body.dark-mode .source-link{color:#93c5fd}
   .copy-line{grid-column:2;justify-self:start}
   .ball{width:38px;height:38px}
 }
+
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid #dbe3ee;background:#fff;border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#0f172a;margin-bottom:5px}
+.method-card span{display:block;color:#475569;font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid #dbe3ee;background:#f8fafc;color:#0f172a;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.caution-note{border:1px solid #fde68a;background:#fffbeb;border-radius:14px;padding:16px;color:#92400e;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#78350f}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid #dbe3ee;background:#fff;border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#0f172a;margin-bottom:4px}
+.related-link span{display:block;color:#475569;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+.local-processing-note{font-size:.78rem;line-height:1.6;color:#64748b;margin-top:14px}
+body.dark-mode .method-card,body.dark-mode .related-link{background:#0f172a;border-color:#334155}
+body.dark-mode .method-card strong,body.dark-mode .related-link strong{color:#e2e8f0}
+body.dark-mode .method-card span,body.dark-mode .related-link span{color:#94a3b8}
+body.dark-mode .example-box{background:#0f172a;color:#e2e8f0;border-color:#334155}
+body.dark-mode .caution-note{background:rgba(120,53,15,.24);border-color:#92400e;color:#fde68a}
+body.dark-mode .caution-note strong{color:#fef3c7}
+body.dark-mode .local-processing-note{color:#94a3b8}
+@media(max-width:700px){.method-grid,.related-grid{grid-template-columns:1fr}}
+
 </style>
 
 <script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"WebApplication",
-  "name":"Utiliverse Lottery Number Generator",
-  "url":"https://utiliverse.app/Lottery_Number_Generator/",
-  "applicationCategory":"UtilitiesApplication",
-  "operatingSystem":"Any",
-  "browserRequirements":"Requires a modern browser with JavaScript and Web Crypto.",
-  "description":"A free browser-based random lottery number generator with popular presets, custom number ranges, bonus-ball pools, batch lines, exclusions, and cryptographically strong randomization.",
-  "isAccessibleForFree":true,
-  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Lottery Number Generator","url":"https://utiliverse.app/Lottery_Number_Generator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern browser with JavaScript and Web Crypto.","description":"Free browser-based lottery number generator with popular presets, custom main and bonus pools, main-number exclusions, Web Crypto rejection sampling, partial Fisher-Yates unique draws, 1–50 line batches, optional sorting, duplicate-line avoidance, copying, and browser-local recent history.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Powerball preset","Mega Millions preset","EuroMillions preset","UK Lotto preset","Lotto 6/49 preset","Lotto America preset","Custom lottery draw","Main-number count from 1 to 20","Bonus-number count from 1 to 10","Custom integer ranges up to 1,000,000 values","Main-number exclusion list","Independent bonus-number pool","Web Crypto random generation","Modulo-bias avoidance through rejection sampling","Partial Fisher-Yates unique drawing","Generate 1 to 50 lines","Optional numeric sorting","Duplicate full-line avoidance","Copy individual lines","Copy full batch","Five-batch browser-local recent history","No external random-number API required"]}
 </script>
 
 <script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"FAQPage",
-  "mainEntity":[
-    {"@type":"Question","name":"Can a lottery number generator predict winning numbers?","acceptedAnswer":{"@type":"Answer","text":"No. Lottery drawings are random. A random number generator can create quick-pick style combinations, but it cannot predict or improve the probability of a future draw."}},
-    {"@type":"Question","name":"How are the random numbers generated?","acceptedAnswer":{"@type":"Answer","text":"The tool uses the browser Web Crypto API and rejection sampling to select unbiased random values, then draws without replacement so main numbers do not repeat within a line."}},
-    {"@type":"Question","name":"Can I generate multiple lottery lines at once?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool can generate between 1 and 50 random lines in one batch."}},
-    {"@type":"Question","name":"Can I use a custom lottery format?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose Custom Draw and set the main number count and range, plus an optional separate bonus-number pool."}},
-    {"@type":"Question","name":"Does excluding numbers improve my lottery odds?","acceptedAnswer":{"@type":"Answer","text":"No. Exclusions only reflect personal preference. They do not make a remaining combination more likely to be drawn."}}
-  ]
-}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can a lottery number generator predict winning numbers?","acceptedAnswer":{"@type":"Answer","text":"No. Lottery drawings are random. A random number generator can create quick-pick style combinations, but it cannot predict or improve the probability of a future draw."}},{"@type":"Question","name":"How are the random numbers generated?","acceptedAnswer":{"@type":"Answer","text":"The tool uses the browser Web Crypto API and rejection sampling to select unbiased random values, then draws without replacement so main numbers do not repeat within a line."}},{"@type":"Question","name":"Can I generate multiple lottery lines at once?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool can generate between 1 and 50 random lines in one batch."}},{"@type":"Question","name":"Can I use a custom lottery format?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose Custom Draw and set the main number count and range, plus an optional separate bonus-number pool."}},{"@type":"Question","name":"Does excluding numbers improve my lottery odds?","acceptedAnswer":{"@type":"Answer","text":"No. Exclusions only reflect personal preference. They do not make a remaining combination more likely to be drawn."}},{"@type":"Question","name":"Can the same number appear as both a main number and a bonus number?","acceptedAnswer":{"@type":"Answer","text":"Yes, when the ranges overlap. Main and bonus values are drawn from separate pools, with uniqueness enforced within each pool."}},{"@type":"Question","name":"Do exclusions also remove numbers from the bonus pool?","acceptedAnswer":{"@type":"Answer","text":"No. The current exclusion field applies only to the main-number pool."}},{"@type":"Question","name":"What happens if there are not enough distinct lines for my batch?","acceptedAnswer":{"@type":"Answer","text":"The generator retries exact duplicate lines up to a fixed attempt ceiling and returns the unique lines found with a warning if it cannot reach the requested count."}},{"@type":"Question","name":"Does sorting a line change its odds?","acceptedAnswer":{"@type":"Answer","text":"No. Sorting changes only the displayed order after the numbers are selected."}},{"@type":"Question","name":"How much history is stored?","acceptedAnswer":{"@type":"Answer","text":"Up to five recent batches are stored locally, with at most 10 lines saved per batch and up to three displayed in the history panel."}}]}
 </script>
 </head>
 
@@ -442,7 +444,9 @@ body.dark-mode .source-link{color:#93c5fd}
     </div>
   </div>
 
-  <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT -->
+  <p class="local-processing-note">Browser-based generation: preset loading, range validation, exclusions, Web Crypto random selection, duplicate-line checks, sorting, history, copying, and theme handling are performed locally in this page. Your generated number lines are not submitted to a Utiliverse processing server. The last five generation batches are stored only in this browser's localStorage. The page itself still loads interface and advertising resources from external providers.</p>
+
+<!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT -->
 
   <div class="info-wrap">
     <section class="info-section">
@@ -463,6 +467,7 @@ body.dark-mode .source-link{color:#93c5fd}
       <p>
         Lottery rules can change. Before using a preset on an actual ticket, confirm the current game format with the official lottery in your jurisdiction.
       </p>
+      <p style="font-size:12px;color:#64748b"><strong>Tool implementation reviewed:</strong> October 3, 2026. The preset values shown on this page are embedded convenience settings and should still be checked against the official operator before play.</p>
       <ul>
         <li><a class="source-link" href="https://www.powerball.com/" target="_blank" rel="noopener">Official Powerball</a></li>
         <li><a class="source-link" href="https://www.megamillions.com/" target="_blank" rel="noopener">Official Mega Millions</a></li>
@@ -481,7 +486,103 @@ body.dark-mode .source-link{color:#93c5fd}
       </p>
     </section>
 
+    
     <section class="info-section">
+      <h2>Generation Methodology, Randomness, and Important Limits</h2>
+      <p>The generator validates the selected ranges, builds an eligible number pool, and then uses the browser's Web Crypto API to select values. Main numbers are drawn without replacement, so a main number cannot repeat inside one line. Bonus numbers are drawn from a separate pool and are also unique within that bonus set.</p>
+
+      <div class="method-grid">
+        <div class="method-card"><strong>Random integer source</strong><span><code>crypto.getRandomValues()</code> supplies 32-bit values. Rejection sampling removes modulo bias before an index is chosen.</span></div>
+        <div class="method-card"><strong>Unique drawing</strong><span>The tool uses a partial Fisher–Yates shuffle and only performs as many swaps as the requested number of picks.</span></div>
+        <div class="method-card"><strong>Main exclusions</strong><span>The exclusion box removes numbers only from the main-number pool. Bonus-ball values are not filtered by that field.</span></div>
+        <div class="method-card"><strong>Batch duplicate control</strong><span>When enabled, duplicate checking compares the complete main+bonus line and retries an identical full line within the same batch.</span></div>
+      </div>
+
+      <h3>Worked example: main-number exclusions</h3>
+      <code class="example-box">Custom main range:
+1–10
+
+Main picks:
+5
+
+Excluded:
+4, 7
+
+Eligible main pool:
+1, 2, 3, 5, 6, 8, 9, 10
+
+The generator draws 5 unique values
+from those 8 eligible numbers.</code>
+
+      <h3>Worked example: separate bonus pool</h3>
+      <code class="example-box">Main pool:
+1–5, choose 2
+
+Bonus pool:
+1–3, choose 1
+
+Possible line:
+Main: 1, 4
+Bonus: 1
+
+This is valid because the main and bonus
+pools are generated independently.</code>
+
+      <h3>Web Crypto does not predict lottery results</h3>
+      <p>The random source is designed to generate unbiased values from the configured pool. It does not analyze past drawings, identify hot or cold numbers, forecast future results, or make one valid lottery combination more likely than another in a fair independent draw.</p>
+
+      <h3>Rejection sampling avoids modulo bias</h3>
+      <p>The <code>randomBelow()</code> helper draws an unsigned 32-bit value and rejects values above the largest even multiple of the requested range size. The remaining value is reduced with modulo only after that rejection step, giving each possible array index equal probability.</p>
+
+      <h3>Unique numbers use a partial Fisher–Yates shuffle</h3>
+      <p>The tool builds the eligible integer pool, then swaps a randomly selected remaining value into each required position. It stops after the requested count rather than shuffling the entire pool, which is efficient while still preventing duplicates inside that pool.</p>
+
+      <h3>Main and bonus pools are independent</h3>
+      <p>A number can legally appear once in the main set and also once in the bonus set if the configured ranges overlap. The implementation prevents duplicates within each individual pool, not across the two different pools.</p>
+
+      <h3>Exclusions apply only to main numbers</h3>
+      <p>The exclusion field is parsed with commas, spaces, or semicolons and applied only when building the main pool. It does not remove matching values from the bonus pool. Exclusions are a preference feature and do not improve the odds of the remaining combinations.</p>
+
+      <h3>Editing preset values changes the tool to Custom Draw</h3>
+      <p>If you manually change the main count/range, bonus count/range, or bonus-enabled setting while a named preset is active, the interface switches to Custom Draw. This prevents the page from implying that your modified settings still match the named lottery preset.</p>
+
+      <h3>Custom ranges have explicit limits</h3>
+      <p>The main count must be 1–20 and the bonus count 1–10. Each number range can span at most 1,000,000 integer values, and batch size must be 1–50 lines. The main range must contain enough non-excluded values to satisfy the requested main count.</p>
+
+      <h3>Duplicate-line avoidance is retry-based</h3>
+      <p>With Avoid duplicate lines enabled, the generator stores a key made from the complete main and bonus number arrays and retries exact duplicates. The attempt ceiling is <code>max(500, line count × 50)</code>. If the current settings allow too few distinct combinations, the tool returns the unique lines it found and shows a warning instead of looping indefinitely.</p>
+
+      <h3>Sorting changes display order only</h3>
+      <p>When Sort each line is enabled, main and bonus values are sorted numerically after they are drawn. Sorting does not change which values were selected or the probability of the line.</p>
+
+      <h3>Recent history is browser-local and intentionally limited</h3>
+      <p>The tool stores up to five recent batches under <code>utiliverse-lottery-generator-history-v1</code>. Each saved batch keeps at most the first 10 generated lines, while the history panel displays up to three of those lines plus a “more lines” summary. Clearing history removes that localStorage entry.</p>
+
+      <h3>Preset matrices can change over time</h3>
+      <p>The named presets are convenience settings embedded in this version of the page. Lottery operators can change game matrices, bonus ranges, drawing rules, or game names. Before using a generated line on an actual ticket, verify the current rules with the official lottery operator.</p>
+
+      <div class="caution-note"><strong>This tool is for random number generation, not gambling advice or prediction.</strong> Generating more lines, excluding numbers, sorting picks, or using cryptographic randomness does not change the probability assigned by the lottery to any valid individual line. Follow applicable age, purchase, and gaming rules where you play.</div>
+
+      <h3>Common mistakes</h3>
+      <ul>
+        <li>Assuming random or cryptographic means predictive.</li>
+        <li>Expecting excluded main numbers to be removed from the bonus pool too.</li>
+        <li>Assuming the same numeric value cannot appear in both main and bonus pools.</li>
+        <li>Editing a named preset but continuing to treat it as the official game matrix.</li>
+        <li>Requesting more unique lines than the configured combination space can easily provide.</li>
+      </ul>
+
+      <h3>Related Utiliverse Tools</h3>
+      <div class="related-grid">
+        <a class="related-link" href="../Random_Number_Generator/"><strong>Random Number Generator</strong><span>Generate general-purpose random integers outside lottery-style without-replacement presets.</span></a>
+        <a class="related-link" href="../Random_Name_Generator/"><strong>Random Name Generator</strong><span>Create random first, last, or full names for brainstorming and test data.</span></a>
+        <a class="related-link" href="../Random_String_Generator/"><strong>Random String Generator</strong><span>Create random text strings, tokens, and character combinations.</span></a>
+      </div>
+
+      <p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 3, 2026 · Preset loading, validation limits, main-number exclusions, Web Crypto rejection sampling, partial Fisher–Yates drawing, independent bonus pool behavior, sorting, duplicate-line retry ceiling, history localStorage, copy behavior, and theme handling reviewed against the current implementation.</p>
+    </section>
+
+<section class="info-section">
       <h2>Lottery Number Generator FAQ</h2>
       <details class="faq-item">
         <summary>Can this tool predict winning lottery numbers?</summary>
@@ -506,6 +607,30 @@ body.dark-mode .source-link{color:#93c5fd}
       <details class="faq-item">
         <summary>Are my generated lines saved?</summary>
         <p>The tool keeps only the five most recent generated batches in local browser storage. You can clear that history at any time.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can the same number appear as both a main number and a bonus number?</summary>
+        <p>Yes, if the main and bonus ranges overlap. They are separate pools, so uniqueness is enforced within each pool rather than across both pools together.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Do exclusions also remove numbers from the bonus pool?</summary>
+        <p>No. The exclusion field applies only to the main-number pool in the current implementation.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>What happens if there are not enough distinct lines for my batch?</summary>
+        <p>With duplicate-line avoidance enabled, the generator retries exact duplicate lines up to a fixed attempt ceiling. If it cannot reach the requested count, it returns the unique lines found and shows a warning.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Does sorting a line change its odds?</summary>
+        <p>No. Sorting only changes the displayed order of the numbers after selection.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>How much history is stored?</summary>
+        <p>The tool keeps up to five recent batches, stores at most 10 lines per batch, and displays up to three saved lines from each batch in the history panel.</p>
       </details>
     </section>
 
