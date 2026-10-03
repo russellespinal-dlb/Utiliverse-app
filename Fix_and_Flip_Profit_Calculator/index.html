@@ -457,35 +457,32 @@ body.dark-mode .sensitivity thead th{
   color:#94a3b8!important;
 }
 
+
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid #dbe3ee;background:#fff;border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#0f172a;margin-bottom:5px}
+.method-card span{display:block;color:#475569;font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid #dbe3ee;background:#f8fafc;color:#0f172a;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.caution-note{border:1px solid #fde68a;background:#fffbeb;border-radius:14px;padding:16px;color:#92400e;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#78350f}
+.local-processing-note{font-size:.78rem;line-height:1.6;color:#64748b;margin-top:14px}
+body.dark-mode .method-card{background:#0f172a;border-color:#334155}
+body.dark-mode .method-card strong{color:#e2e8f0}
+body.dark-mode .method-card span{color:#94a3b8}
+body.dark-mode .example-box{background:#0f172a;color:#e2e8f0;border-color:#334155}
+body.dark-mode .caution-note{background:rgba(120,53,15,.24);border-color:#92400e;color:#fde68a}
+body.dark-mode .caution-note strong{color:#fef3c7}
+body.dark-mode .local-processing-note{color:#94a3b8}
+@media(max-width:700px){.method-grid{grid-template-columns:1fr}}
+
 </style>
 
 <script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"WebApplication",
-  "name":"Utiliverse Fix & Flip Profit Calculator",
-  "url":"https://utiliverse.app/Fix_and_Flip_Profit_Calculator/",
-  "applicationCategory":"FinanceApplication",
-  "operatingSystem":"Any",
-  "browserRequirements":"Requires a modern web browser with JavaScript.",
-  "description":"A free browser-based fix-and-flip calculator for purchase price, renovation costs, financing, holding costs, selling costs, profit, ROI, cash required, break-even sale price, target purchase price, and sensitivity analysis.",
-  "isAccessibleForFree":true,
-  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Fix & Flip Profit Calculator","url":"https://utiliverse.app/Fix_and_Flip_Profit_Calculator/","applicationCategory":"FinanceApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript.","description":"Free browser-based fix-and-flip profit calculator for purchase price, acquisition closing costs, renovation contingency, purchase-based financing, simple interest, holding expenses, selling costs, project profit, ROI, cash required, break-even sale price, target purchase price, 70% rule reference, and profit sensitivity.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Purchase price and ARV inputs","Purchase closing-cost percentage","Fixed acquisition costs","Renovation budget","Rehab contingency percentage","Cash or loan financing","Purchase-price LTV","Simple annual interest over holding period","Loan points and other financing fees","Monthly property tax, insurance, utilities, HOA and other holding costs","Agent commission and seller closing-cost percentages","Staging and marketing costs","Estimated project profit","ROI on total project cost","Modeled cash required before sale","Cash-on-cash ROI","Break-even sale price","Target maximum purchase price","Profit per holding month","70% rule reference","Sale-price and rehab sensitivity table","Copyable summary","Printable estimate","Browser-local calculations"]}
 </script>
 
 <script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"FAQPage",
-  "mainEntity":[
-    {"@type":"Question","name":"How do I calculate profit on a fix-and-flip project?","acceptedAnswer":{"@type":"Answer","text":"Estimated profit is the expected sale price minus acquisition cost, purchase closing costs, renovation and contingency, financing costs, holding costs, and selling costs."}},
-    {"@type":"Question","name":"What costs should a house flip calculator include?","acceptedAnswer":{"@type":"Answer","text":"A useful estimate should include purchase price, purchase closing costs, renovation, contingency, financing fees and interest, property taxes, insurance, utilities, HOA or other holding costs, selling commission, seller closing costs, and marketing or staging costs when applicable."}},
-    {"@type":"Question","name":"What is the 70 percent rule for house flipping?","acceptedAnswer":{"@type":"Answer","text":"The 70 percent rule is a rough investor heuristic that estimates a maximum purchase price as 70 percent of after-repair value minus renovation costs. It is not a universal rule and does not replace a complete project analysis."}},
-    {"@type":"Question","name":"What is break-even sale price?","acceptedAnswer":{"@type":"Answer","text":"Break-even sale price is the estimated sale price at which net proceeds after percentage-based selling costs equal total project costs, producing approximately zero profit."}},
-    {"@type":"Question","name":"Does this calculator guarantee a real estate investment return?","acceptedAnswer":{"@type":"Answer","text":"No. The calculator provides estimates based on the inputs entered. Actual renovation costs, property values, financing, taxes, timelines, closing costs, and sale proceeds may differ."}}
-  ]
-}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate profit on a fix-and-flip project?","acceptedAnswer":{"@type":"Answer","text":"Estimated profit is the expected sale price minus acquisition cost, purchase closing costs, renovation and contingency, financing costs, holding costs, and selling costs."}},{"@type":"Question","name":"What costs should a house flip calculator include?","acceptedAnswer":{"@type":"Answer","text":"A useful estimate should include purchase price, purchase closing costs, renovation, contingency, financing fees and interest, property taxes, insurance, utilities, HOA or other holding costs, selling commission, seller closing costs, and marketing or staging costs when applicable."}},{"@type":"Question","name":"What is the 70 percent rule for house flipping?","acceptedAnswer":{"@type":"Answer","text":"The 70 percent rule is a rough investor heuristic that estimates a maximum purchase price as 70 percent of after-repair value minus renovation costs. It is not a universal rule and does not replace a complete project analysis."}},{"@type":"Question","name":"What is break-even sale price?","acceptedAnswer":{"@type":"Answer","text":"Break-even sale price is the estimated sale price at which net proceeds after percentage-based selling costs equal total project costs, producing approximately zero profit."}},{"@type":"Question","name":"Does this calculator guarantee a real estate investment return?","acceptedAnswer":{"@type":"Answer","text":"No. The calculator provides estimates based on the inputs entered. Actual renovation costs, property values, financing, taxes, timelines, closing costs, and sale proceeds may differ."}},{"@type":"Question","name":"How is loan interest modeled?","acceptedAnswer":{"@type":"Answer","text":"The calculator uses simple interest on the full purchase-based loan amount for the entire holding period and does not model rehab draws, amortization or declining principal."}},{"@type":"Question","name":"Does Cash Required Before Sale include selling costs?","acceptedAnswer":{"@type":"Answer","text":"No. Selling costs are modeled as paid from sale proceeds, so they are excluded from the pre-sale cash-required estimate."}},{"@type":"Question","name":"Is Cash-on-Cash ROI annualized?","acceptedAnswer":{"@type":"Answer","text":"No. It is project-period profit divided by modeled cash required before sale."}},{"@type":"Question","name":"What does the sensitivity table change?","acceptedAnswer":{"@type":"Answer","text":"It changes sale price across five scenarios and base renovation cost across three scenarios while leaving the other assumptions unchanged."}},{"@type":"Question","name":"Why can the break-even sale price differ from total project cost?","acceptedAnswer":{"@type":"Answer","text":"Because commission and seller closing costs are modeled as percentages of the sale price, break-even is solved after accounting for those percentage deductions."}}]}
 </script>
 <style>
 .b3-title{display:flex!important;align-items:center;gap:14px;text-align:left}.b3-title>span:last-child{min-width:0;overflow-wrap:anywhere}.b3-icon{display:inline-flex;flex:none;width:42px;height:42px;color:#818cf8}.b3-icon svg{width:100%;height:100%;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
@@ -791,7 +788,9 @@ body.light-mode .b3-content,body:not(.dark-mode).b3-flip .b3-content{background:
     </div>
   </div>
 
-  <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT -->
+  <p class="local-processing-note">Browser-based calculation: acquisition, renovation, financing, holding, selling-cost, profit, ROI, break-even, target-purchase, sensitivity, copy, print, and theme calculations are performed locally in this page. The financial assumptions you enter are not submitted to a Utiliverse processing server. The page itself still loads interface and advertising resources from external providers.</p>
+
+<!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT -->
 
   <div class="info-wrap">
     <section class="info-section">
@@ -841,7 +840,105 @@ body.light-mode .b3-content,body:not(.dark-mode).b3-flip .b3-content{background:
       </p>
     </section>
 
+    
     <section class="info-section">
+      <h2>Calculation Methodology, Assumptions, and Important Limits</h2>
+      <p>The calculator treats the project as a single estimated purchase-and-resale cycle. It adds modeled acquisition, renovation, financing, holding, and selling costs to the purchase price, then compares that total with the expected sale price. All results are estimates derived from the values entered on this page.</p>
+
+      <div class="method-grid">
+        <div class="method-card"><strong>Expected profit</strong><span><code>sale price − total modeled project cost</code>.</span></div>
+        <div class="method-card"><strong>ROI on total cost</strong><span><code>profit ÷ total project cost × 100</code>.</span></div>
+        <div class="method-card"><strong>Cash-on-cash ROI</strong><span><code>profit ÷ modeled cash required before sale × 100</code>.</span></div>
+        <div class="method-card"><strong>Break-even sale price</strong><span>Solves for the sale price where proceeds after percentage selling costs equal fixed modeled costs.</span></div>
+      </div>
+
+      <h3>Worked example: financed purchase</h3>
+      <code class="example-box">Purchase price: $220,000
+Loan: 80% of purchase = $176,000
+Interest rate: 11% annually
+Holding period: 6 months
+
+Simple interest:
+176,000 × 0.11 × (6 ÷ 12)
+= $9,680
+
+Points at 2%:
+176,000 × 0.02
+= $3,520
+
+Other financing fees:
+$750
+
+Modeled financing cost:
+9,680 + 3,520 + 750
+= $13,950</code>
+
+      <h3>Worked example: selling costs</h3>
+      <code class="example-box">Expected sale price: $350,000
+Agent commission: 5%
+Seller closing costs: 2%
+Staging / marketing: $2,500
+
+Percentage selling costs:
+350,000 × 7%
+= $24,500
+
+Total modeled selling costs:
+24,500 + 2,500
+= $27,000</code>
+
+      <h3>Purchase closing costs are percentage-based</h3>
+      <p>The calculator multiplies the purchase price by the entered Purchase Closing Costs percentage, then adds Other Acquisition Costs as a separate fixed amount. It does not automatically itemize title, escrow, attorney, transfer, inspection, appraisal, recording, or lender charges.</p>
+
+      <h3>Rehab contingency applies only to the base renovation budget</h3>
+      <p>Contingency is calculated as <code>renovation budget × contingency %</code>. The result is then added to the base renovation budget. It does not apply to acquisition, financing, holding, or selling costs.</p>
+
+      <h3>The financing model is intentionally simplified</h3>
+      <p>For loan financing, the initial loan amount is <code>purchase price × LTV</code>. Points are charged on that loan amount, and interest is modeled as simple interest on the full initial loan for the entire holding period. The model does not simulate rehabilitation draws, declining principal, amortization, interest-only monthly payment schedules, interest reserves, extension fees, minimum-interest clauses, or staged lender funding.</p>
+
+      <h3>Cash Required Before Sale excludes modeled selling costs</h3>
+      <p>The cash-required figure includes purchase equity, acquisition costs, renovation, financing costs, and holding costs. It intentionally does not include selling costs because those are modeled as paid from sale proceeds at closing. This is a budget estimate, not a month-by-month cash-flow schedule.</p>
+
+      <h3>Cash-on-cash ROI can rise with leverage while risk also rises</h3>
+      <p>Because the denominator is modeled cash required before sale, using debt can reduce the cash denominator and increase the displayed cash-on-cash ROI. That does not mean leverage improves the underlying project economics; financing costs, default risk, extension risk, and liquidity needs still matter.</p>
+
+      <h3>Break-even sale price includes percentage selling costs algebraically</h3>
+      <p>The calculator first totals fixed modeled costs before sale, including staging, then divides by <code>1 − selling-cost percentage</code>. This is why break-even is not simply equal to total cost when commission and seller closing costs are entered as percentages of the sale price.</p>
+
+      <h3>Target Max Purchase is a back-solved estimate</h3>
+      <p>The tool solves approximately for the purchase price that would leave the entered target profit after the other assumptions. Because purchase closing costs, loan points, and simple interest are functions of purchase price, those factors are included in the purchase-price coefficient. Renovation, holding, staging, fixed acquisition costs, and other financing fees are treated as fixed under the entered assumptions.</p>
+
+      <h3>The 70% rule intentionally ignores many modeled costs</h3>
+      <p>The reference is exactly <code>70% × expected sale price − base renovation budget</code>. It does not subtract contingency, financing, taxes, insurance, utilities, HOA, selling commission, seller closing costs, staging, or other acquisition/holding costs. It is therefore shown only as a rough comparison.</p>
+
+      <h3>Sensitivity analysis changes only sale price and base rehab</h3>
+      <p>The sensitivity table recalculates profit for sale-price scenarios of −10%, −5%, base, +5%, and +10%, combined with rehab scenarios of −10%, base, and +10%. Other assumptions—including holding period, financing rates, closing-cost percentages, monthly expenses, and staging—remain unchanged.</p>
+
+      <h3>Profit per Holding Month is not annualized</h3>
+      <p>If the holding period is greater than zero, the tool divides total estimated profit by the entered number of months. If the holding period is zero, it displays the full project profit instead. This metric is a simple average and should not be interpreted as an annualized return or time-weighted investment performance measure.</p>
+
+      <h3>All displayed money values are rounded to whole dollars</h3>
+      <p>The underlying JavaScript calculations use Number arithmetic, while the visible currency output uses U.S. dollar formatting with zero decimal places. Percentage outputs are shown to one decimal place. Small differences can therefore be hidden by display rounding.</p>
+
+      <h3>Negative numeric inputs can still enter the calculation if HTML validation is bypassed</h3>
+      <p>The page validates purchase price, expected sale price, holding period, and percentage inputs for key limits, but most fixed-dollar fields rely on their HTML <code>min="0"</code> controls rather than explicit JavaScript rejection. Normal browser use prevents many negative entries, but the calculator should still be treated as an estimation interface rather than a hardened accounting system.</p>
+
+      <div class="caution-note"><strong>This calculator is for planning, not an investment recommendation, appraisal, tax opinion, or financing commitment.</strong> Verify comparable sales, contractor bids, permits, insurance, property taxes, title/closing charges, lender terms, commissions, concessions, and tax treatment with qualified local professionals before committing capital.</div>
+
+      <h3>Common mistakes</h3>
+      <ul>
+        <li>Using an optimistic ARV without support from current comparable sales.</li>
+        <li>Modeling lender interest on a draw schedule when this calculator uses the full initial purchase loan for the full hold.</li>
+        <li>Forgetting that delays increase both holding costs and modeled interest.</li>
+        <li>Treating cash-on-cash ROI as annualized performance.</li>
+        <li>Using the 70% rule as a substitute for a complete project budget.</li>
+        <li>Assuming a profitable sensitivity cell includes a change in project duration or financing terms when it changes only sale price and rehab.</li>
+      </ul>
+
+      <p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 3, 2026 · Purchase/closing math, rehab contingency, simple-interest financing, holding costs, selling costs, total project cost, profit, ROI, cash required, break-even algebra, target-purchase back-solve, 70% reference, sensitivity scenarios, copy/print behavior, and theme handling reviewed against the current implementation.</p>
+    </section>
+
+<section class="info-section">
       <h2>Fix & Flip Profit Calculator FAQ</h2>
 
       <details class="faq-item">
@@ -873,11 +970,35 @@ body.light-mode .b3-content,body:not(.dark-mode).b3-flip .b3-content{background:
         <summary>Does this calculator guarantee an investment return?</summary>
         <p>No. It is a planning calculator. Actual property value, contractor costs, loan terms, taxes, permits, repairs, timeline, transaction costs, and market conditions can differ from the assumptions entered.</p>
       </details>
+      <details class="faq-item">
+        <summary>How is loan interest modeled?</summary>
+        <p>The tool uses simple interest on the full purchase-based loan amount for the entire holding period. It does not model rehab draws, amortization, declining principal, interest reserves, or lender extension terms.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Does Cash Required Before Sale include selling costs?</summary>
+        <p>No. The current model treats percentage selling costs and staging as paid from sale proceeds, so they are excluded from the pre-sale cash-required figure.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Is Cash-on-Cash ROI annualized?</summary>
+        <p>No. It is estimated project profit divided by modeled cash required before sale for the project period.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>What does the sensitivity table change?</summary>
+        <p>It changes expected sale price by −10%, −5%, 0%, +5%, and +10%, and base renovation cost by −10%, 0%, and +10%. All other assumptions remain unchanged.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Why can the break-even sale price differ from total project cost?</summary>
+        <p>Because agent commission and seller closing costs are modeled as percentages of the sale price, the calculator solves break-even after accounting for those percentage-based deductions.</p>
+      </details>
     </section>
 
     <!-- GOOGLE ADSENSE: BOTTOM / AFTER-CONTENT INSERTION POINT -->
   </div>
-<section class="b3-content" aria-label="Worked example and methodology"><h2>Distinguish profit, cash required, and ROI</h2><p>Profit subtracts the full project budget from sale price. ROI on cost divides profit by total cost; cash ROI divides profit by modeled cash required before sale. Neither is annualized. The financing option models purchase-based borrowing with simple interest for the full holding period, not a construction draw schedule.</p><h2>Worked example: an all-cash renovation</h2><p>Use $200,000 purchase price and $320,000 expected sale price. Set financing to cash, purchase closing costs to 2%, fixed acquisition costs to $1,000, renovation to $40,000, and contingency to 10%. Hold for six months with $800 total monthly holding costs. Set commission to 5%, selling closing costs to 1%, staging to $2,000, and target profit to $40,000.</p><div class="table-wrap"><table><caption>Complete illustrative project budget</caption><tbody><tr><th>Purchase</th><td>$200,000</td></tr><tr><th>Purchase closing + fixed acquisition</th><td>$5,000</td></tr><tr><th>Renovation + contingency</th><td>$44,000</td></tr><tr><th>Six months of holding</th><td>$4,800</td></tr><tr><th>Selling costs: 6% of sale + staging</th><td>$21,200</td></tr><tr><th>Total cost</th><td>$275,000</td></tr><tr><th>Profit before income tax</th><td>$45,000</td></tr></tbody></table></div><p>ROI on total project cost is $45,000 ÷ $275,000 = 16.36%. The tool's cash-required amount excludes selling costs paid at closing, giving $253,800 and a cash ROI of 17.73%. These are project-period returns. A six-month result does not establish a repeatable annual return.</p><h2>Common mistakes, assumptions, and sources</h2><ul><li>Subtracting loan principal twice. Purchase cost is already included; financing charges are additional costs.</li><li>Calling cash ROI annualized or comparing it directly with a one-year investment yield.</li><li>Leaving taxes, insurance, utilities, or extension fees out of a delayed project.</li><li>Treating the 70% shortcut as a substitute for comparable sales and contractor quotes.</li></ul><p>The loan model uses purchase-price LTV, points on the initial loan, and simple interest on that loan for the full hold. It does not model construction draws, amortization, or a rehab credit line. Cash required is a budget total, not a dated draw schedule or a guarantee that the project can be funded.</p><p>All returns are before income tax. Tax treatment depends on facts; property held mainly for sale to customers in a business is not a capital asset under the rules explained in <a href="https://www.irs.gov/publications/p544">IRS Publication 544</a>. Do not assume a flip receives long-term capital-gain treatment. The budget, ROI formulas, and 70% comparison here are original explanations of the calculator's methodology, not IRS valuation guidance.</p><h2>Read the related guide</h2><p><a href="/Guides/Fix_and_Flip_Costs_ROI_70_Percent_Rule.html">Fix &amp; Flip Costs, ROI, and the 70% Rule</a> expands the example and explains the assumptions.</p><h2>Related tools and guides</h2><ul><li><a href="/Fix_and_Flip_Profit_Calculator/">Open Fix &amp; Flip Profit Calculator</a> — apply these assumptions to your own numbers.</li><li><a href="/Guides/Cap_Rate_vs_Cash_on_Cash_Return.html">Cap Rate vs Cash-on-Cash Return</a> · <a href="/Rental_Property_Calculator/">Rental Property Calculator</a></li><li><a href="/Guides/Compound_Interest_vs_APY.html">Compound Interest vs APY</a> · <a href="/Compound_Interest_Calculator/">Compound Interest Calculator</a></li></ul><p>See the <a href="/Editorial_Methodology.html">Editorial &amp; Tool Methodology</a> for our review approach.</p><p class="b3-reviewed">Last reviewed: September 28, 2026 · Utiliverse editorial team. Examples are educational estimates in U.S. dollars unless stated otherwise.</p></section></main>
+<section class="b3-content" aria-label="Worked example and methodology"><h2>Distinguish profit, cash required, and ROI</h2><p>Profit subtracts the full project budget from sale price. ROI on cost divides profit by total cost; cash ROI divides profit by modeled cash required before sale. Neither is annualized. The financing option models purchase-based borrowing with simple interest for the full holding period, not a construction draw schedule.</p><h2>Worked example: an all-cash renovation</h2><p>Use $200,000 purchase price and $320,000 expected sale price. Set financing to cash, purchase closing costs to 2%, fixed acquisition costs to $1,000, renovation to $40,000, and contingency to 10%. Hold for six months with $800 total monthly holding costs. Set commission to 5%, selling closing costs to 1%, staging to $2,000, and target profit to $40,000.</p><div class="table-wrap"><table><caption>Complete illustrative project budget</caption><tbody><tr><th>Purchase</th><td>$200,000</td></tr><tr><th>Purchase closing + fixed acquisition</th><td>$5,000</td></tr><tr><th>Renovation + contingency</th><td>$44,000</td></tr><tr><th>Six months of holding</th><td>$4,800</td></tr><tr><th>Selling costs: 6% of sale + staging</th><td>$21,200</td></tr><tr><th>Total cost</th><td>$275,000</td></tr><tr><th>Profit before income tax</th><td>$45,000</td></tr></tbody></table></div><p>ROI on total project cost is $45,000 ÷ $275,000 = 16.36%. The tool's cash-required amount excludes selling costs paid at closing, giving $253,800 and a cash ROI of 17.73%. These are project-period returns. A six-month result does not establish a repeatable annual return.</p><h2>Common mistakes, assumptions, and sources</h2><ul><li>Subtracting loan principal twice. Purchase cost is already included; financing charges are additional costs.</li><li>Calling cash ROI annualized or comparing it directly with a one-year investment yield.</li><li>Leaving taxes, insurance, utilities, or extension fees out of a delayed project.</li><li>Treating the 70% shortcut as a substitute for comparable sales and contractor quotes.</li></ul><p>The loan model uses purchase-price LTV, points on the initial loan, and simple interest on that loan for the full hold. It does not model construction draws, amortization, or a rehab credit line. Cash required is a budget total, not a dated draw schedule or a guarantee that the project can be funded.</p><p>All returns are before income tax. Tax treatment depends on facts; property held mainly for sale to customers in a business is not a capital asset under the rules explained in <a href="https://www.irs.gov/publications/p544">IRS Publication 544</a>. Do not assume a flip receives long-term capital-gain treatment. The budget, ROI formulas, and 70% comparison here are original explanations of the calculator's methodology, not IRS valuation guidance.</p><h2>Read the related guide</h2><p><a href="/Guides/Fix_and_Flip_Costs_ROI_70_Percent_Rule.html">Fix &amp; Flip Costs, ROI, and the 70% Rule</a> expands the example and explains the assumptions.</p><h2>Related tools and guides</h2><ul><li><a href="/Fix_and_Flip_Profit_Calculator/">Open Fix &amp; Flip Profit Calculator</a> — apply these assumptions to your own numbers.</li><li><a href="/Guides/Cap_Rate_vs_Cash_on_Cash_Return.html">Cap Rate vs Cash-on-Cash Return</a> · <a href="/Rental_Property_Calculator/">Rental Property Calculator</a></li><li><a href="/Guides/Compound_Interest_vs_APY.html">Compound Interest vs APY</a> · <a href="/Compound_Interest_Calculator/">Compound Interest Calculator</a></li></ul><p>See the <a href="/Editorial_Methodology.html">Editorial &amp; Tool Methodology</a> for our review approach.</p><p class="b3-reviewed">Last reviewed: October 3, 2026 · Utiliverse editorial team. Examples are educational estimates in U.S. dollars unless stated otherwise.</p></section></main>
 
 <footer class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-6 pt-2">
   <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-500">
