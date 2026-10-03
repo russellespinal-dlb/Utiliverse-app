@@ -42,12 +42,36 @@ body.dark-mode .result-box{background:#0f172a;border-color:#334155}.result-label
 .hidden-important{display:none!important}.info-wrap{max-width:72rem;margin:3.5rem auto 0}.info-section{padding:1.5rem}.info-section+.info-section{margin-top:1.5rem}.info-section h2{font-size:1.65rem;font-weight:800;color:#0f172a;margin-bottom:.9rem}.info-section h3{font-size:1.06rem;font-weight:800;color:#1e293b;margin:1.4rem 0 .45rem}.info-section p{color:#475569;line-height:1.82;font-size:.98rem;margin:.8rem 0}body.dark-mode .info-section h2{color:#f8fafc!important}body.dark-mode .info-section h3{color:#e2e8f0!important}body.dark-mode .info-section p{color:#94a3b8!important}
 .faq-item{border-bottom:1px solid #e2e8f0}.faq-item summary{list-style:none;cursor:pointer;padding:1rem 0;font-weight:800;color:#0f172a;display:flex;justify-content:space-between;gap:1rem}.faq-item summary::-webkit-details-marker{display:none}.faq-item summary::after{content:"+"}.faq-item[open] summary::after{content:"−"}.faq-item p{padding-bottom:1rem;margin:0}body.dark-mode .faq-item{border-color:#334155}body.dark-mode .faq-item summary{color:#e2e8f0}
 @media(max-width:700px){.result-grid,.ns-grid{grid-template-columns:1fr}}@media(max-width:640px){.free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}.theme-toggle{width:38px;height:38px}}
+
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid #dbe3ee;background:#fff;border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#0f172a;margin-bottom:5px}
+.method-card span{display:block;color:#475569;font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid #dbe3ee;background:#f8fafc;color:#0f172a;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.caution-note{border:1px solid #fde68a;background:#fffbeb;border-radius:14px;padding:16px;color:#92400e;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#78350f}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid #dbe3ee;background:#fff;border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#0f172a;margin-bottom:4px}
+.related-link span{display:block;color:#475569;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+.local-processing-note{font-size:.78rem;line-height:1.6;color:#64748b;margin-top:14px}
+body.dark-mode .method-card,body.dark-mode .related-link{background:#0f172a;border-color:#334155}
+body.dark-mode .method-card strong,body.dark-mode .related-link strong{color:#e2e8f0}
+body.dark-mode .method-card span,body.dark-mode .related-link span{color:#94a3b8}
+body.dark-mode .example-box{background:#0f172a;color:#e2e8f0;border-color:#334155}
+body.dark-mode .caution-note{background:rgba(120,53,15,.24);border-color:#92400e;color:#fde68a}
+body.dark-mode .caution-note strong{color:#fef3c7}
+body.dark-mode .local-processing-note{color:#94a3b8}
+@media(max-width:700px){.method-grid,.related-grid{grid-template-columns:1fr}}
+
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse WHOIS Lookup","url":"https://utiliverse.app/WHOIS_Lookup/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript and internet access.","description":"Free WHOIS and RDAP lookup for registrar, registration dates, expiration, status, nameservers and DNSSEC.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse WHOIS Lookup","url":"https://utiliverse.app/WHOIS_Lookup/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript and internet access.","description":"Free browser-based WHOIS/RDAP lookup for live domain registration data including registrar, registration/expiration/update events, domain-age estimate, EPP status values, nameservers, registry-level DNSSEC information, registry handle, selected public entity data and raw RDAP JSON.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Normalize full URLs to hostnames","Live RDAP lookup through rdap.org","Registrar name extraction","IANA registrar ID extraction when available","Registration date","Expiration date","Last-updated event","Approximate domain age","Approximate days until/after reported expiration","EPP/RDAP status display","Nameserver delegation display","Registry-level DNSSEC delegationSigned display","Registry handle display","Selected public entity display","Raw RDAP JSON viewer","Copyable summary and raw JSON","No local lookup history"]}</script>
 <style id="b4-styles">
 /* Batch 4: scoped title, editorial and footer additions */
 .b4-heading{display:flex;align-items:center;gap:14px}.b4-heading .b4-icon{width:36px;height:36px;flex:none;color:#6366f1;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.b4-box,.b4-nav{--b4-text:#0f172a;--b4-muted:#475569;--b4-bg:#fff;--b4-border:#dbe3ee;--b4-link:#4338ca;color:var(--b4-text)}.b4-dark{--b4-text:#f8fafc;--b4-muted:#cbd5e1;--b4-bg:#0f172a;--b4-border:#334155;--b4-link:#a5b4fc}.b4-box{background:var(--b4-bg);border:1px solid var(--b4-border);border-radius:18px;padding:24px;margin:30px auto;max-width:1100px;overflow-wrap:anywhere}.b4-box h2{font-size:25px;font-weight:800;margin:0 0 16px;color:var(--b4-text)}.b4-box h3{font-size:18px;font-weight:750;margin:20px 0 8px;color:var(--b4-text)}.b4-box p,.b4-box li{font-size:15px;line-height:1.8;color:var(--b4-muted);margin:0 0 12px}.b4-box ul,.b4-box ol{padding-left:22px}.b4-box ul{list-style:disc}.b4-box a,.b4-nav a{color:var(--b4-link);text-decoration:underline;text-underline-offset:3px}.b4-box a:focus-visible,.b4-nav a:focus-visible{outline:2px solid currentColor;outline-offset:4px}.b4-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 20px;max-width:1152px;margin:0 auto;padding:20px 16px;font:600 13px/1.7 system-ui,sans-serif}.b4-review{font-size:12px!important;border-top:1px solid var(--b4-border);padding-top:16px}body.light-mode .b4-box,body.light-mode .b4-nav{--b4-text:#0f172a;--b4-muted:#475569;--b4-bg:#fff;--b4-border:#dbe3ee;--b4-link:#4338ca}body.dark-mode .b4-box,body.dark-mode .b4-nav,html.dark .b4-box,html.dark .b4-nav{--b4-text:#f8fafc;--b4-muted:#cbd5e1;--b4-bg:#0f172a;--b4-border:#334155;--b4-link:#a5b4fc}@media(max-width:620px){.b4-heading{align-items:flex-start}.b4-heading .b4-icon{width:30px;height:30px}.b4-box{padding:18px}}
 </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is WHOIS?","acceptedAnswer":{"@type":"Answer","text":"WHOIS is the traditional protocol and common term for querying registration information about domains, IP addresses and autonomous systems."}},{"@type":"Question","name":"What is RDAP?","acceptedAnswer":{"@type":"Answer","text":"RDAP is the Registration Data Access Protocol, a structured HTTPS/JSON successor to traditional WHOIS."}},{"@type":"Question","name":"Why is the registrant name hidden?","acceptedAnswer":{"@type":"Answer","text":"Registries and registrars can redact personal information because of privacy law, contractual policy and privacy-protection services."}},{"@type":"Question","name":"Can I check when a domain expires?","acceptedAnswer":{"@type":"Answer","text":"Yes, when the RDAP response includes an expiration event."}},{"@type":"Question","name":"Can I see the registrar?","acceptedAnswer":{"@type":"Answer","text":"Usually, when the RDAP response includes an entity whose role identifies it as the registrar."}},{"@type":"Question","name":"Does this show DNS records?","acceptedAnswer":{"@type":"Answer","text":"No. It can show delegated nameservers and registry-level DNSSEC information, but it is not a full DNS record lookup."}},{"@type":"Question","name":"Why can a lookup fail?","acceptedAnswer":{"@type":"Answer","text":"The domain may be unregistered, the queried hostname may be a subdomain rather than the registrable name, the registry may be unavailable or rate-limiting, or the TLD may not expose compatible public RDAP data through this path."}},{"@type":"Question","name":"Does Utiliverse save my lookup history?","acceptedAnswer":{"@type":"Answer","text":"No local lookup history is saved by this standalone page. The requested domain is sent to the external RDAP service to obtain live registration data."}},{"@type":"Question","name":"Does a failed lookup mean the domain is available to register?","acceptedAnswer":{"@type":"Answer","text":"No. A failed or not-found RDAP response is not definitive proof of registration availability."}},{"@type":"Question","name":"Can I look up a subdomain such as shop.example.com?","acceptedAnswer":{"@type":"Answer","text":"You can try, but RDAP normally describes the registrable parent domain and this tool does not automatically reduce arbitrary subdomains to that parent."}},{"@type":"Question","name":"Is the displayed domain age exact?","acceptedAnswer":{"@type":"Answer","text":"No. It is an approximation derived from the reported registration event and the current browser clock."}},{"@type":"Question","name":"Does Signed / enabled mean DNSSEC is fully valid right now?","acceptedAnswer":{"@type":"Answer","text":"No. It reflects the RDAP delegationSigned field and is not a live end-to-end DNSSEC validation."}},{"@type":"Question","name":"Are the displayed nameservers the same as a full DNS lookup?","acceptedAnswer":{"@type":"Answer","text":"No. They are nameserver delegation values returned by RDAP, not a live query of all DNS record types."}}]}</script>
 </head>
 <!-- SEO TARGET CLUSTER: WHOIS lookup, RDAP lookup, domain registrar checker, domain expiration checker, domain age checker, nameserver lookup -->
 <!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT -->
@@ -95,6 +119,8 @@ body.dark-mode .result-box{background:#0f172a;border-color:#334155}.result-label
 </div></section>
 </div></div>
 
+<p class="local-processing-note">Browser-based interface: domain normalization, date/age formatting, registrar extraction, DNSSEC interpretation, nameserver rendering, raw-JSON display, and copy actions are handled locally in this page. The domain you request is sent to the external RDAP service at rdap.org to obtain live registration data. The page itself also loads interface and advertising resources from external providers.</p>
+
 <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT -->
 
 <div class="info-wrap">
@@ -109,6 +135,91 @@ body.dark-mode .result-box{background:#0f172a;border-color:#334155}.result-label
 <h3>Check nameserver delegation</h3><p>The nameserver list shows DNS servers delegated for the domain by the registry. This is useful when checking a DNS-provider migration or registrar configuration.</p>
 <h3>Check DNSSEC</h3><p>When secure-DNS information is returned, the tool reports whether the registry delegation is signed. This is a registry-level indicator and not a complete end-to-end DNSSEC validation test.</p>
 <h3>View raw RDAP JSON</h3><p>Use Raw RDAP to inspect the complete structured response, including registry-specific fields, notices, links, entities, and remarks that may not appear in the summary cards.</p>
+
+<h2 class="mt-8">Lookup Methodology, RDAP Interpretation, and Important Limits</h2>
+<p>The tool normalizes the entered value to a hostname, performs a basic domain-format check, then requests <code>https://rdap.org/domain/&lt;domain&gt;</code> with an RDAP/JSON Accept header. The returned structured JSON is summarized into registrar, registration events, nameservers, DNSSEC, status codes, registry handle, and selected entity information.</p>
+
+<div class="method-grid">
+  <div class="method-card"><strong>Input normalization</strong><span>Full URLs are reduced to the hostname, a trailing dot is removed, and a leading <code>www.</code> is stripped before the request.</span></div>
+  <div class="method-card"><strong>Validation</strong><span>The page requires a non-empty hostname no longer than 253 characters, containing at least one dot and no whitespace.</span></div>
+  <div class="method-card"><strong>Registrar extraction</strong><span>The code searches RDAP entities whose roles include <code>registrar</code>, then reads the vCard full name/organization plus an IANA public identifier when available.</span></div>
+  <div class="method-card"><strong>Event extraction</strong><span>Registration, expiration, and last-update dates are selected from RDAP event actions using a small set of recognized labels.</span></div>
+</div>
+
+<h3>Worked example: URL normalization</h3>
+<code class="example-box">Input:
+https://www.example.com/path/page?x=1
+
+Normalized hostname:
+example.com
+
+RDAP request:
+https://rdap.org/domain/example.com</code>
+
+<h3>Worked example: domain age and expiry wording</h3>
+<code class="example-box">If registration date = Jan 1, 2020
+and today is roughly Oct 3, 2026:
+
+Displayed age:
+Approximately 6 years 9 months old
+
+If expiration is 20 days in the future:
+
+Displayed expiry note:
+About 20 days remaining</code>
+
+<h3>RDAP is live external data, not a local registry database</h3>
+<p>The page does not ship with registration records. Every lookup depends on rdap.org and the authoritative registry/registrar RDAP services behind it. Network failures, rate limits, unsupported top-level domains, registry outages, or policy restrictions can therefore make a valid domain lookup fail.</p>
+
+<h3>A 404 response does not conclusively prove a domain is available</h3>
+<p>The tool reports a 404 as “not found,” but that can mean the domain is unregistered, the queried hostname is not the registrable domain, the registry does not expose a compatible public record through this path, or the RDAP service cannot resolve the request. Do not treat a failed lookup as proof that a domain can be registered.</p>
+
+<h3>Subdomains are not usually separate registration objects</h3>
+<p>The normalizer removes a leading <code>www.</code>, but it does not calculate the public suffix or automatically reduce arbitrary subdomains such as <code>shop.example.com</code> to the registrable parent <code>example.com</code>. If a subdomain lookup fails, try the registered parent domain.</p>
+
+<h3>Registrar and entity data may be incomplete or redacted</h3>
+<p>The implementation looks for a registrar role in the returned RDAP entities and then reads selected vCard fields. If those fields are absent, redacted, represented differently, or omitted by policy, the page shows “Not provided.” Missing public contact data should not be interpreted as proof that no registrant or organization exists.</p>
+
+<h3>Event labels vary between RDAP servers</h3>
+<p>The page recognizes several common event-action labels for registration, expiration, and last update. RDAP servers can return additional or differently worded events that remain visible in Raw RDAP but may not appear in the summary cards.</p>
+
+<h3>Domain age is an approximation</h3>
+<p>Age is calculated from the reported registration event using the current browser clock. Years use 365.25 days and remaining months use approximately 30.44 days. The result is a readable estimate, not a legal or registry-defined age calculation.</p>
+
+<h3>Expiration timing is also approximate</h3>
+<p>The tool compares the returned expiration timestamp with the current browser time and rounds the absolute difference to whole days. Registry grace periods, renewal processing, auto-renew behavior, redemption states, and billing status are not inferred from that number.</p>
+
+<h3>DNSSEC reporting is registry-level only</h3>
+<p>The summary checks the RDAP <code>secureDNS.delegationSigned</code> field. “Signed / enabled” means the delegation is reported as signed by RDAP; it is not a live cryptographic validation of the domain's full DNSSEC chain or current DNS answers.</p>
+
+<h3>Nameservers are delegation data, not full DNS records</h3>
+<p>The nameserver section displays RDAP nameserver objects returned for the registration. It does not query A, AAAA, MX, TXT, CNAME, NS glue, or other live DNS records, and it does not prove that the delegated servers are reachable.</p>
+
+<h3>Status codes require context</h3>
+<p>RDAP can return EPP-style status values describing locks or lifecycle states. This page displays the strings as returned but does not independently interpret every possible status into an operational recommendation. Review the raw record and registrar documentation when a transfer, renewal, or update is blocked.</p>
+
+<h3>Raw RDAP is the most complete view available in this page</h3>
+<p>The summary intentionally selects only a subset of the response. Notices, links, remarks, redaction information, additional entities, registry-specific properties, and other fields can remain only in the Raw RDAP JSON panel.</p>
+
+<div class="caution-note"><strong>Registration data is evidence, not a trust score.</strong> Domain age, registrar name, nameservers, DNSSEC status, or a familiar organization name do not prove that a website is safe, legitimate, currently controlled by the same owner, or free of malicious content.</div>
+
+<h3>Common mistakes</h3>
+<ul>
+  <li>Assuming a failed RDAP lookup means a domain is available to register.</li>
+  <li>Looking up a deep subdomain instead of the registrable parent domain.</li>
+  <li>Treating a reported expiration date as proof that renewal has or has not been paid.</li>
+  <li>Assuming old domain age proves reputation or continuous ownership.</li>
+  <li>Confusing registry nameservers with a complete live DNS-record check.</li>
+</ul>
+
+<h3>Related Utiliverse Tools</h3>
+<div class="related-grid">
+  <a class="related-link" href="../SSL_Certificate_Checker/"><strong>SSL Certificate Checker</strong><span>Inspect the certificate served by a public TLS endpoint separately from registration data.</span></a>
+  <a class="related-link" href="../Email_DNS_Checker/"><strong>Email DNS Checker</strong><span>Check MX, SPF, DKIM, and DMARC records for a domain's email configuration.</span></a>
+  <a class="related-link" href="../IP_Address_Lookup/"><strong>IP Address Lookup</strong><span>Inspect public IP information separately from WHOIS/RDAP domain registration details.</span></a>
+</div>
+
+<p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 3, 2026 · Host normalization, validation, rdap.org request behavior, registrar/entity extraction, event parsing, domain-age/expiry calculations, DNSSEC interpretation, nameserver rendering, raw JSON, copy fallback, and theme behavior reviewed against the current implementation.</p>
 <h2 class="mt-8">Practical Uses</h2>
 <h3>Domain renewal checks</h3><p>Use the reported expiration date as a quick reference when reviewing renewal schedules, while confirming final renewal status in the registrar account.</p>
 <h3>Registrar identification</h3><p>Find the registrar managing a domain when ownership records are old, several registrars are used, or a website was inherited from another administrator.</p>
@@ -126,10 +237,15 @@ body.dark-mode .result-box{background:#0f172a;border-color:#334155}.result-label
 <details class="faq-item"><summary>Does this show DNS records?</summary><p>It typically shows delegated nameservers and sometimes DNSSEC information, but it is not a complete A, AAAA, MX, TXT, or CNAME lookup.</p></details>
 <details class="faq-item"><summary>Why can a lookup fail?</summary><p>The domain may not exist, the registry may be unavailable or rate-limiting requests, or the top-level domain may not expose compatible public RDAP data.</p></details>
 <details class="faq-item"><summary>Does Utiliverse save my lookup history?</summary><p>This standalone page does not save a local lookup history. The requested domain is sent to the public RDAP service to obtain live registration data.</p></details>
+<details class="faq-item"><summary>Does a failed lookup mean the domain is available to register?</summary><p>No. A failed or not-found RDAP response is not definitive proof of availability. Confirm availability with an accredited registrar.</p></details>
+<details class="faq-item"><summary>Can I look up a subdomain such as shop.example.com?</summary><p>You can try, but RDAP normally describes the registrable parent domain. This tool strips a leading www but does not automatically reduce arbitrary subdomains to the parent registration.</p></details>
+<details class="faq-item"><summary>Is the displayed domain age exact?</summary><p>No. It is an approximation calculated from the reported registration event using the browser clock and average year/month lengths.</p></details>
+<details class="faq-item"><summary>Does “Signed / enabled” mean DNSSEC is fully valid right now?</summary><p>No. It reflects the RDAP delegationSigned field and is not a live end-to-end DNSSEC validation.</p></details>
+<details class="faq-item"><summary>Are the displayed nameservers the same as a full DNS lookup?</summary><p>No. They are registration/delegation nameservers from RDAP. This tool does not query current A, AAAA, MX, TXT, CNAME, or other DNS records.</p></details>
 </section>
 <!-- GOOGLE ADSENSE: BOTTOM / AFTER-CONTENT INSERTION POINT -->
 </div>
-<section class="b4-box" aria-labelledby="b4-review-heading"><h2 id="b4-review-heading">Use RDAP evidence to answer a specific question</h2><p>If a registration record reports an expiry in 20 days, confirm renewal in the managing registrar account. A returned date does not prove payment status or successful auto-renewal. Keep the event label and lookup timestamp with your notes.</p><h3>What remains unknown</h3><p>Public registrant data can be redacted. A not-found response does not conclusively establish availability, and a familiar registrar or old creation date does not establish website trust. Nameserver delegation is separate from a current DNS answer.</p><p>The browser queries an external RDAP service. It does not access your registrar account or change a domain. For subdomains, identify the registered parent name rather than assuming every hostname has its own registration record.</p><h3>Related guides</h3><ul><li><a href="/Guides/WHOIS_and_RDAP.html">What WHOIS and RDAP data can—and cannot—tell you</a></li><li><a href="/Guides/DNS_and_Network_Troubleshooting.html">DNS, TLS, or HTTP? Troubleshoot the right layer</a></li></ul><h3>Related tools</h3><ul><li><a href="/SSL_Certificate_Checker/">SSL Certificate Checker</a></li><li><a href="/Email_DNS_Checker/">Email DNS Checker</a></li></ul><h3>Sources</h3><ul><li><a href="https://www.icann.org/en/announcements/details/icann-update-launching-rdap-sunsetting-whois-27-01-2025-en">ICANN RDAP transition</a></li><li><a href="https://www.icann.org/en/contracted-parties/registry-operators/registration-data-access-protocol/information-for-rdap-users-31-08-2018-en">ICANN RDAP user information</a></li></ul><p class="b4-review">Explanatory content reviewed September 29, 2026. <a href="/Editorial_Methodology.html">Methodology</a> · <a href="/Contact_Info.html">Corrections</a>.</p></section>
+<section class="b4-box" aria-labelledby="b4-review-heading"><h2 id="b4-review-heading">Use RDAP evidence to answer a specific question</h2><p>If a registration record reports an expiry in 20 days, confirm renewal in the managing registrar account. A returned date does not prove payment status or successful auto-renewal. Keep the event label and lookup timestamp with your notes.</p><h3>What remains unknown</h3><p>Public registrant data can be redacted. A not-found response does not conclusively establish availability, and a familiar registrar or old creation date does not establish website trust. Nameserver delegation is separate from a current DNS answer.</p><p>The browser queries an external RDAP service. It does not access your registrar account or change a domain. For subdomains, identify the registered parent name rather than assuming every hostname has its own registration record.</p><h3>Related guides</h3><ul><li><a href="/Guides/WHOIS_and_RDAP.html">What WHOIS and RDAP data can—and cannot—tell you</a></li><li><a href="/Guides/DNS_and_Network_Troubleshooting.html">DNS, TLS, or HTTP? Troubleshoot the right layer</a></li></ul><h3>Related tools</h3><ul><li><a href="/SSL_Certificate_Checker/">SSL Certificate Checker</a></li><li><a href="/Email_DNS_Checker/">Email DNS Checker</a></li></ul><h3>Sources</h3><ul><li><a href="https://www.icann.org/en/announcements/details/icann-update-launching-rdap-sunsetting-whois-27-01-2025-en">ICANN RDAP transition</a></li><li><a href="https://www.icann.org/en/contracted-parties/registry-operators/registration-data-access-protocol/information-for-rdap-users-31-08-2018-en">ICANN RDAP user information</a></li></ul><p class="b4-review">Explanatory content reviewed October 3, 2026. <a href="/Editorial_Methodology.html">Methodology</a> · <a href="/Contact_Info.html">Corrections</a>.</p></section>
 </main>
 
 <footer class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-6 pt-2"><div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-500"><div>© 2026 Utiliverse. All rights reserved.</div><div class="font-semibold text-right">100% Free and Browser Based</div></div><nav class="b4-nav" aria-label="Resources and site information"><a href="/Guides.html">Guides</a><a href="/Updates.html">Updates</a><a href="/Editorial_Methodology.html">Editorial &amp; Methodology</a><a href="/About.html">About</a><a href="/Privacy_Policy.html">Privacy Policy</a><a href="/Terms_of_Service.html">Terms</a><a href="/Contact_Info.html">Contact</a></nav></footer>
