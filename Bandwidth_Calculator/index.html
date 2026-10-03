@@ -43,8 +43,32 @@ body.dark-mode .solve-btn{background:#0f172a;border-color:#475569;color:#cbd5e1}
 .hidden-important{display:none!important}
 @media(max-width:700px){.solve-grid{grid-template-columns:1fr}.quick-grid{grid-template-columns:repeat(2,1fr)}.time-grid{grid-template-columns:repeat(2,1fr)}.summary-grid{grid-template-columns:1fr}}
 @media(max-width:640px){.free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}.theme-toggle{width:38px;height:38px}.result-value{font-size:1.65rem}}
+
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid #dbe3ee;background:#fff;border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#0f172a;margin-bottom:5px}
+.method-card span{display:block;color:#475569;font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid #dbe3ee;background:#f8fafc;color:#0f172a;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.caution-note{border:1px solid #fde68a;background:#fffbeb;border-radius:14px;padding:16px;color:#92400e;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#78350f}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid #dbe3ee;background:#fff;border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#0f172a;margin-bottom:4px}
+.related-link span{display:block;color:#475569;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+.local-processing-note{font-size:.78rem;line-height:1.6;color:#64748b;margin-top:14px}
+body.dark-mode .method-card,body.dark-mode .related-link{background:#0f172a;border-color:#334155}
+body.dark-mode .method-card strong,body.dark-mode .related-link strong{color:#e2e8f0}
+body.dark-mode .method-card span,body.dark-mode .related-link span{color:#94a3b8}
+body.dark-mode .example-box{background:#0f172a;color:#e2e8f0;border-color:#334155}
+body.dark-mode .caution-note{background:rgba(120,53,15,.24);border-color:#92400e;color:#fde68a}
+body.dark-mode .caution-note strong{color:#fef3c7}
+body.dark-mode .local-processing-note{color:#94a3b8}
+@media(max-width:700px){.method-grid,.related-grid{grid-template-columns:1fr}}
+
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Bandwidth Calculator","url":"https://utiliverse.app/Bandwidth_Calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Bandwidth Calculator","url":"https://utiliverse.app/Bandwidth_Calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based bandwidth calculator for transfer time, transferable file size, and required nominal bandwidth with decimal and binary storage units, bit/byte speed units, adjustable efficiency, quick speed presets and copyable results.","featureList":["Calculate transfer time","Calculate transferable file size","Calculate required bandwidth","Decimal B, KB, MB, GB and TB units","Binary KiB, MiB, GiB and TiB units","Kbps, Mbps, Gbps and Tbps speed units","KB/s, MB/s and GB/s byte-rate units","50% through 100% efficiency assumptions","Quick bandwidth presets","Days, hours, minutes and seconds transfer windows","Effective speed summary","Byte-rate summary","Copyable result with clipboard fallback","Browser-local calculations"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the transfer-time formula?","acceptedAnswer":{"@type":"Answer","text":"Transfer time equals file size in bits divided by effective bandwidth in bits per second."}},{"@type":"Question","name":"Why is my real transfer slower?","acceptedAnswer":{"@type":"Answer","text":"Protocol overhead, congestion, retransmissions, storage speed, Wi-Fi conditions, server limits, VPNs and hardware bottlenecks can reduce throughput."}},{"@type":"Question","name":"What is the difference between Mbps and MB/s?","acceptedAnswer":{"@type":"Answer","text":"Mbps is megabits per second, while MB/s is megabytes per second. Eight bits equal one byte."}},{"@type":"Question","name":"Can I calculate upload time?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter your upload bandwidth instead of your download bandwidth."}},{"@type":"Question","name":"Can I calculate required internet speed?","acceptedAnswer":{"@type":"Answer","text":"Yes. Select Bandwidth, enter the file size and desired transfer time, and the calculator estimates the nominal speed required under the selected efficiency assumption."}},{"@type":"Question","name":"Should I use 100% efficiency?","acceptedAnswer":{"@type":"Answer","text":"Use 100% only for a theoretical best case. Lower values are generally more useful for practical planning."}},{"@type":"Question","name":"Does this tool test my internet speed?","acceptedAnswer":{"@type":"Answer","text":"No. It calculates from values you enter and does not perform a live speed test."}},{"@type":"Question","name":"What is the difference between GB and GiB?","acceptedAnswer":{"@type":"Answer","text":"GB is decimal with 1,000,000,000 bytes, while GiB is binary with 1,073,741,824 bytes."}},{"@type":"Question","name":"How does the efficiency setting affect required bandwidth?","acceptedAnswer":{"@type":"Answer","text":"The required payload rate is divided by the selected efficiency, so lower efficiency requires a higher nominal link speed."}},{"@type":"Question","name":"Can I enter more than 60 minutes or more than 24 hours?","acceptedAnswer":{"@type":"Answer","text":"Yes. Each time field is converted to seconds independently and the values are added."}},{"@type":"Question","name":"Why can a 1 Gbps connection transfer slower than the theoretical result?","acceptedAnswer":{"@type":"Answer","text":"End-to-end performance can be limited by storage, overhead, congestion, Wi-Fi, packet loss, VPNs, CPU, server performance or competing traffic."}},{"@type":"Question","name":"Does the transferable file-size result use GB or GiB?","acceptedAnswer":{"@type":"Answer","text":"The output formatter uses decimal B, KB, MB, GB and TB units."}}]}</script>
 </head>
 <!-- SEO TARGET CLUSTER: bandwidth calculator, transfer time calculator, required bandwidth calculator, Mbps calculator, Gbps calculator -->
 <!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT -->
@@ -92,6 +116,8 @@ body.dark-mode .solve-btn{background:#0f172a;border-color:#475569;color:#cbd5e1}
 </table></div></section>
 </div></div>
 
+<p class="local-processing-note">Browser-based calculation: unit conversion, efficiency adjustment, transfer-time math, transferable-size estimates, required-bandwidth estimates, result formatting, and copy preparation are handled locally by this tool. The values you enter are not submitted to a Utiliverse processing server. The page itself still loads interface and advertising resources from external providers.</p>
+
 <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT -->
 
 <div class="info-wrap">
@@ -104,6 +130,96 @@ body.dark-mode .solve-btn{background:#0f172a;border-color:#475569;color:#cbd5e1}
 <h3>Understand Mbps and MB/s</h3><p>Mbps means megabits per second, while MB/s means megabytes per second. Because eight bits equal one byte, 800 Mbps is 100 MB/s in a theoretical best case.</p>
 <h3>Understand GB and GiB</h3><p>GB uses decimal units based on powers of 1,000. GiB uses binary units based on powers of 1,024. Choosing the unit that matches the number shown by your operating system or application improves accuracy.</p>
 <h3>Use the efficiency setting</h3><p>Real throughput is often lower than the advertised line rate because of protocol overhead, congestion, retransmissions, Wi-Fi quality, storage limits, VPN encryption, and server-side bottlenecks. Eighty percent is a useful general planning estimate, while lower values can model less favorable conditions.</p>
+
+<h2 class="mt-8">Calculation Methodology, Unit Conventions, and Important Limits</h2>
+<p>The calculator converts file sizes to bits and transfer speeds to bits per second before solving the selected relationship. The efficiency setting is then applied as a simple multiplier to model usable throughput below the nominal link rate.</p>
+
+<div class="method-grid">
+  <div class="method-card"><strong>Transfer time</strong><span><code>file bits ÷ (nominal bps × efficiency)</code>.</span></div>
+  <div class="method-card"><strong>Transferable file size</strong><span><code>nominal bps × efficiency × elapsed seconds</code>, then converted from bits to a readable decimal byte unit.</span></div>
+  <div class="method-card"><strong>Required bandwidth</strong><span><code>file bits ÷ elapsed seconds ÷ efficiency</code>. Lower assumed efficiency therefore requires a higher nominal link rate.</span></div>
+  <div class="method-card"><strong>Byte-rate summary</strong><span>The effective bit rate is divided by 8 and displayed as decimal B/s, KB/s, MB/s, GB/s, or TB/s.</span></div>
+</div>
+
+<h3>Worked example: transfer time</h3>
+<code class="example-box">File: 1 GB
+1 GB = 8,000,000,000 bits
+
+Link: 100 Mbps
+Efficiency: 80%
+
+Effective rate:
+100,000,000 × 0.80
+= 80,000,000 bits/s
+
+Transfer time:
+8,000,000,000 ÷ 80,000,000
+= 100 seconds
+= 1 min 40 sec</code>
+
+<h3>Worked example: required bandwidth</h3>
+<code class="example-box">File: 100 GB
+Time window: 1 hour
+Efficiency: 80%
+
+File bits:
+100 × 8,000,000,000
+= 800,000,000,000 bits
+
+Payload rate required:
+800,000,000,000 ÷ 3,600
+≈ 222.222 Mbps
+
+Nominal bandwidth required:
+222.222 ÷ 0.80
+≈ 277.778 Mbps</code>
+
+<h3>Decimal and binary file-size units are intentionally different</h3>
+<p><code>KB</code>, <code>MB</code>, <code>GB</code>, and <code>TB</code> use powers of 1,000. <code>KiB</code>, <code>MiB</code>, <code>GiB</code>, and <code>TiB</code> use powers of 1,024. For example, 1 GB is 8,000,000,000 bits, while 1 GiB is 8,589,934,592 bits. Choosing the wrong unit can produce a noticeable difference for large transfers.</p>
+
+<h3>Bits and bytes are not interchangeable</h3>
+<p>Network speeds such as Mbps and Gbps are bits per second. Units written as KB/s, MB/s, and GB/s are bytes per second and are multiplied by eight internally to convert them to bits per second. A theoretical 100 MB/s therefore corresponds to 800 Mbps.</p>
+
+<h3>The efficiency setting is a planning factor, not a protocol simulator</h3>
+<p>The selected 50–100% efficiency is applied uniformly to the nominal speed. The calculator does not separately model Ethernet framing, TCP/IP overhead, TLS, Wi-Fi retransmissions, packet loss, VPN encapsulation, storage latency, congestion control, or application behavior. Use efficiency as a broad planning assumption rather than a measured networking model.</p>
+
+<h3>Required Bandwidth reports the nominal speed needed</h3>
+<p>In Bandwidth mode, the tool first calculates the payload rate necessary to finish within the entered time and then divides by the selected efficiency. The result is therefore the nominal line rate you would need under that efficiency assumption, not merely the net payload throughput.</p>
+
+<h3>Transferable-size output uses decimal display units</h3>
+<p>Even if a speed was entered in a binary-looking storage context, the result formatter reports transferable data as B, KB, MB, GB, or TB using decimal byte units. It does not switch the output automatically to KiB, MiB, GiB, or TiB.</p>
+
+<h3>Time fields are additive and are not normalized before calculation</h3>
+<p>Days, hours, minutes, and seconds are simply converted to seconds and added together. Entering 90 minutes is valid and is treated as 5,400 seconds; the tool does not force minutes below 60 or hours below 24.</p>
+
+<h3>Negative and invalid inputs are normalized to zero</h3>
+<p>The numeric helper accepts finite values greater than or equal to zero. Negative or invalid values become zero. A zero effective speed or zero transfer window can therefore produce an unavailable result rather than Infinity.</p>
+
+<h3>Displayed duration is rounded to the nearest whole second above one second</h3>
+<p>Transfer durations below one second are shown to three decimal places. At one second or longer, the formatter rounds to the nearest whole second and then expresses the result as days, hours, minutes, and seconds. This display rounding does not change the underlying calculation.</p>
+
+<h3>The reference table is theoretical and illustrative</h3>
+<p>The common-bandwidth table uses simple line-rate arithmetic for a decimal 1 GB transfer. Labels such as DSL, 4G LTE, 5G, cable, fiber, USB, and Thunderbolt are examples only; real throughput varies widely by implementation, radio conditions, hardware, storage, server performance, and protocol overhead.</p>
+
+<div class="caution-note"><strong>Use measured end-to-end throughput when planning important transfers.</strong> A 1 Gbps network adapter does not guarantee a sustained 1 Gbps file copy. The slowest component—source storage, destination storage, Wi-Fi, WAN uplink, VPN, server, protocol, CPU, or competing traffic—can determine the real transfer rate.</div>
+
+<h3>Common mistakes</h3>
+<ul>
+  <li>Entering MB/s as Mbps and getting an eight-times difference.</li>
+  <li>Using GB when the source application reports GiB.</li>
+  <li>Using advertised download speed when estimating an upload.</li>
+  <li>Assuming 100% efficiency is realistic for every end-to-end transfer.</li>
+  <li>Treating the connection labels in the reference table as guaranteed real-world speeds.</li>
+</ul>
+
+<h3>Related Utiliverse Tools</h3>
+<div class="related-grid">
+  <a class="related-link" href="../Time_Unit_Converter/"><strong>Time Unit Converter</strong><span>Convert transfer windows between seconds, minutes, hours, days, and other time units.</span></a>
+  <a class="related-link" href="../File_Hash_Generator/"><strong>File Hash Generator</strong><span>Verify large files after a network or storage transfer by comparing checksums.</span></a>
+  <a class="related-link" href="../Unit_Currency_Converter/"><strong>Unit & Currency Converter</strong><span>Handle other general unit conversions outside the bandwidth-specific formulas used here.</span></a>
+</div>
+
+<p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 3, 2026 · Decimal/binary size factors, bit/byte speed factors, efficiency math, transfer-time/file-size/required-bandwidth formulas, duration formatting, copy fallback, reference-table assumptions, and theme behavior reviewed against the current implementation.</p>
 <h2 class="mt-8">Practical Uses</h2>
 <h3>Cloud backups</h3><p>Enter the amount of data and your measured upload speed to estimate how long a backup may take. Residential upload speed can be much lower than download speed, so use the correct direction.</p>
 <h3>Large downloads</h3><p>Estimate download times for operating-system images, games, media files, backups, datasets, or software installers.</p>
@@ -120,6 +236,11 @@ body.dark-mode .solve-btn{background:#0f172a;border-color:#475569;color:#cbd5e1}
 <details class="faq-item"><summary>Can I calculate required internet speed?</summary><p>Yes. Select Bandwidth, enter the file size and desired transfer time, and the calculator estimates the required speed.</p></details>
 <details class="faq-item"><summary>Should I use 100% efficiency?</summary><p>Use 100% only for a theoretical best case. A lower value is normally more realistic for planning.</p></details>
 <details class="faq-item"><summary>Does this tool test my internet speed?</summary><p>No. It calculates from the values you enter; it does not perform a live speed test.</p></details>
+<details class="faq-item"><summary>What is the difference between GB and GiB?</summary><p>GB is decimal: 1 GB equals 1,000,000,000 bytes. GiB is binary: 1 GiB equals 1,073,741,824 bytes.</p></details>
+<details class="faq-item"><summary>How does the efficiency setting affect required bandwidth?</summary><p>Required Bandwidth divides the necessary payload rate by the selected efficiency. For example, at 80% efficiency the nominal link must be faster than the net payload rate.</p></details>
+<details class="faq-item"><summary>Can I enter more than 60 minutes or more than 24 hours?</summary><p>Yes. The time fields are converted independently to seconds and added together; they do not need to be normalized first.</p></details>
+<details class="faq-item"><summary>Why can a 1 Gbps connection transfer slower than the calculator's theoretical result?</summary><p>Storage speed, protocol overhead, congestion, Wi-Fi conditions, packet loss, VPNs, CPU limits, server performance, and competing traffic can all reduce end-to-end throughput.</p></details>
+<details class="faq-item"><summary>Does the transferable file-size result use GB or GiB?</summary><p>The result formatter uses decimal B, KB, MB, GB, and TB units. It does not automatically switch to binary KiB, MiB, GiB, or TiB.</p></details>
 </section>
 
 <!-- GOOGLE ADSENSE: BOTTOM / AFTER-CONTENT INSERTION POINT -->
