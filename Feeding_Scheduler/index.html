@@ -169,55 +169,45 @@ body.dark-mode .source-link{color:#fdba74}
   .tool-card{box-shadow:none!important;border-color:#ddd!important}
   .print-only{display:block!important}
 }
+
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid #dbe3ee;background:#fff;border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#0f172a;margin-bottom:5px}
+.method-card span{display:block;color:#475569;font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid #dbe3ee;background:#f8fafc;color:#0f172a;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.caution-note{border:1px solid #fde68a;background:#fffbeb;border-radius:14px;padding:16px;color:#92400e;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#78350f}
+.source-box{border:1px solid #dbeafe;background:#eff6ff;border-radius:14px;padding:16px;margin-top:18px}
+.source-box strong{display:block;color:#1e3a8a;margin-bottom:6px}
+.source-box p{margin:.4rem 0!important;color:#1e40af!important;font-size:.9rem!important;line-height:1.65!important}
+.source-box a{color:#1d4ed8;text-decoration:underline;text-underline-offset:2px}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid #dbe3ee;background:#fff;border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#0f172a;margin-bottom:4px}
+.related-link span{display:block;color:#475569;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+.local-processing-note{font-size:.78rem;line-height:1.6;color:#64748b;margin-top:14px}
+body.dark-mode .method-card,body.dark-mode .related-link{background:#0f172a;border-color:#334155}
+body.dark-mode .method-card strong,body.dark-mode .related-link strong{color:#e2e8f0}
+body.dark-mode .method-card span,body.dark-mode .related-link span{color:#94a3b8}
+body.dark-mode .example-box{background:#0f172a;color:#e2e8f0;border-color:#334155}
+body.dark-mode .caution-note{background:rgba(120,53,15,.24);border-color:#92400e;color:#fde68a}
+body.dark-mode .caution-note strong{color:#fef3c7}
+body.dark-mode .source-box{background:rgba(30,58,138,.22);border-color:#1e40af}
+body.dark-mode .source-box strong{color:#bfdbfe}
+body.dark-mode .source-box p{color:#bfdbfe!important}
+body.dark-mode .source-box a{color:#c7d2fe}
+body.dark-mode .local-processing-note{color:#94a3b8}
+@media(max-width:700px){.method-grid,.related-grid{grid-template-columns:1fr}}
+
 </style>
 
 <script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"WebApplication",
-  "name":"Utiliverse Baby & Toddler Feeding Scheduler",
-  "url":"https://utiliverse.app/Feeding_Scheduler/",
-  "applicationCategory":"HealthApplication",
-  "operatingSystem":"Any",
-  "browserRequirements":"Requires a modern web browser with JavaScript.",
-  "description":"A free browser-based feeding scheduler for newborns, babies, and toddlers from birth to 24 months.",
-  "isAccessibleForFree":true,
-  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Baby & Toddler Feeding Scheduler","url":"https://utiliverse.app/Feeding_Scheduler/","applicationCategory":"HealthApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript.","description":"Free browser-based baby and toddler feeding scheduler from birth through 24 months with age-stage routines, breast milk/formula/combination labels, wake and bedtime anchors, optional young-infant overnight reminders, complementary-food and toddler meal/snack templates, copy/print support, and CDC-informed safety guidance.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Birth to 4 weeks profile","1–3 month profile","4–5 month profile","6–8 month profile","9–11 month profile","12–18 month profile","19–24 month profile","Breast milk / nursing label","Infant formula label","Combination feeding label","Wake-time and bedtime planning","Young-infant around-the-clock interval template","Optional overnight reminder display","Evenly spaced daytime schedule anchors","Complementary-food routine templates","Three-meal and two-snack toddler template","Age-stage guidance card","Copyable schedule","Printable schedule","Browser-local calculations","CDC-informed feeding and safety limitations"]}
 </script>
 
 <script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"FAQPage",
-  "mainEntity":[
-    {
-      "@type":"Question",
-      "name":"How often do newborns usually feed?",
-      "acceptedAnswer":{"@type":"Answer","text":"Newborn feeding is cue-led and frequent. Breastfed newborns may feed as often as every 1 to 3 hours and commonly feed 8 to 12 times in 24 hours. Formula-fed newborns commonly start with feeds about every 2 to 3 hours in the first days, with individual needs varying."}
-    },
-    {
-      "@type":"Question",
-      "name":"When can a baby start solid foods?",
-      "acceptedAnswer":{"@type":"Answer","text":"Current guidance recommends introducing complementary foods at about 6 months when the baby is developmentally ready. Introducing solids before 4 months is not recommended."}
-    },
-    {
-      "@type":"Question",
-      "name":"Does the feeding schedule replace hunger and fullness cues?",
-      "acceptedAnswer":{"@type":"Answer","text":"No. The schedule is a planning guide. A child's hunger and fullness cues, growth, medical needs, and clinician guidance take priority over clock times."}
-    },
-    {
-      "@type":"Question",
-      "name":"When can cow's milk replace infant formula?",
-      "acceptedAnswer":{"@type":"Answer","text":"At 12 months, children can generally transition from infant formula to plain, pasteurized whole cow's milk or an appropriate fortified unsweetened dairy alternative. Cow's milk should not replace breast milk or infant formula before 12 months."}
-    },
-    {
-      "@type":"Question",
-      "name":"How often should toddlers eat?",
-      "acceptedAnswer":{"@type":"Answer","text":"A common routine for toddlers is 3 meals plus 2 to 3 snacks, with eating opportunities spaced about every 2 to 3 hours during the day."}
-    }
-  ]
-}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How often do newborns usually feed?","acceptedAnswer":{"@type":"Answer","text":"Newborn feeding is cue-led and frequent. Breastfed newborns may feed as often as every 1 to 3 hours and commonly feed 8 to 12 times in 24 hours. Formula-fed newborns commonly start with feeds about every 2 to 3 hours in the first days, with individual needs varying."}},{"@type":"Question","name":"When can a baby start solid foods?","acceptedAnswer":{"@type":"Answer","text":"Current guidance recommends introducing complementary foods at about 6 months when the baby is developmentally ready. Introducing solids before 4 months is not recommended."}},{"@type":"Question","name":"Does the feeding schedule replace hunger and fullness cues?","acceptedAnswer":{"@type":"Answer","text":"No. The schedule is a planning guide. A child's hunger and fullness cues, growth, medical needs, and clinician guidance take priority over clock times."}},{"@type":"Question","name":"When can cow's milk replace infant formula?","acceptedAnswer":{"@type":"Answer","text":"At 12 months, children can generally transition from infant formula to plain, pasteurized whole cow's milk or an appropriate fortified unsweetened dairy alternative. Cow's milk should not replace breast milk or infant formula before 12 months."}},{"@type":"Question","name":"How often should toddlers eat?","acceptedAnswer":{"@type":"Answer","text":"A common routine for toddlers is 3 meals plus 2 to 3 snacks, with eating opportunities spaced about every 2 to 3 hours during the day."}},{"@type":"Question","name":"Does the overnight toggle mean my baby can safely skip night feeds?","acceptedAnswer":{"@type":"Answer","text":"No. It only hides or shows overnight reminders. Feeding cues, growth, age and clinician guidance should determine whether a young infant needs overnight feeding or waking."}},{"@type":"Question","name":"Does the scheduler calculate ounces or calories?","acceptedAnswer":{"@type":"Answer","text":"No. It creates approximate feeding opportunities and does not calculate milk volume, calories, nutrients, fluid needs or growth requirements."}},{"@type":"Question","name":"Why are older-baby and toddler times evenly spaced?","acceptedAnswer":{"@type":"Answer","text":"The implementation divides the selected wake-to-bedtime span into equal intervals and does not know naps, daycare timing, family meals or actual appetite."}},{"@type":"Question","name":"Can I use the schedule for a premature baby or a child with feeding difficulties?","acceptedAnswer":{"@type":"Answer","text":"Only as a general organizational aid if the child's healthcare team agrees; medical feeding needs require individualized guidance."}},{"@type":"Question","name":"Why does the 12–24 month schedule still let me select Infant formula?","acceptedAnswer":{"@type":"Answer","text":"The selector remains available for continuity, but the toddler schedule is meal-and-snack based and does not create formula-feed events."}}]}
 </script>
 </head>
 
@@ -387,7 +377,9 @@ body.dark-mode .source-link{color:#fdba74}
     </div>
   </div>
 
-  <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT -->
+  <p class="local-processing-note">Browser-based planning: age-stage selection, wake/bedtime arithmetic, event spacing, age-specific routine construction, guidance rendering, copy/print preparation, reset, and theme handling are performed locally in this page. The age, feeding approach, and times you enter are not submitted to a Utiliverse processing server. The page itself still loads interface and advertising resources from external providers.</p>
+
+<!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT -->
 
   <div class="info-wrap">
     <section class="info-section">
@@ -428,7 +420,7 @@ body.dark-mode .source-link{color:#fdba74}
       <h2>Important Safety Notes</h2>
       <ul>
         <li>Do not introduce solid foods before 4 months. Around 6 months, look for developmental readiness such as head control, sitting with support, bringing objects to the mouth, and swallowing food rather than pushing it out.</li>
-        <li>Breast milk and/or infant formula should remain the main source of nutrition from 6 through 12 months.</li>
+        <li>From 6 through 12 months, breast milk and/or infant formula remains a main source of nutrition while complementary foods gradually become more important.</li>
         <li>Do not use cow's milk as the main drink before 12 months.</li>
         <li>Do not give honey before 12 months because of the risk of infant botulism.</li>
         <li>Prepare food in developmentally appropriate textures and avoid common choking hazards. Always supervise eating.</li>
@@ -451,7 +443,117 @@ body.dark-mode .source-link{color:#fdba74}
       </ul>
     </section>
 
+    
     <section class="info-section">
+      <h2>Schedule Methodology, Health Guidance, and Important Limits</h2>
+      <p>The scheduler is a clock-based planning aid, not a feeding prescription. It chooses one of several built-in age profiles, then creates either an around-the-clock milk pattern for younger infants or an evenly spaced daytime routine for older babies and toddlers. Hunger/fullness cues, growth, prematurity, medical conditions, feeding skill, and clinician advice take priority over the generated times.</p>
+
+      <div class="method-grid">
+        <div class="method-card"><strong>Birth–3 months</strong><span>The tool uses fixed planning intervals that vary by feeding approach and repeats them across 24 hours from the selected wake time.</span></div>
+        <div class="method-card"><strong>4–24 months</strong><span>The tool spaces a fixed number of opportunities evenly between the selected wake time and bedtime.</span></div>
+        <div class="method-card"><strong>Overnight reminder toggle</strong><span>For birth–3 months, the checkbox hides or shows entries that fall before 6:00 AM or at/after 10:00 PM; it does not determine whether a feed is medically necessary.</span></div>
+        <div class="method-card"><strong>Schedule count</strong><span>The displayed “Daytime opportunities” value is simply the number of generated entries currently shown, not a clinical feeding target.</span></div>
+      </div>
+
+      <h3>Worked example: 6–8 months</h3>
+      <code class="example-box">Wake time: 7:00 AM
+Bedtime: 7:30 PM
+Age: 6–8 months
+
+The tool creates 6 evenly spaced anchors:
+1. Morning milk
+2. Complementary food
+3. Milk
+4. Complementary food
+5. Milk
+6. Bedtime milk
+
+The spacing is mathematical.
+It does not mean a child must wait
+until the next listed time to eat.</code>
+
+      <h3>Worked example: young-infant interval logic</h3>
+      <code class="example-box">Age: Newborn
+Approach: Formula
+Planning interval used by this tool: 165 minutes
+
+If the first anchor is 7:00 AM:
+7:00 AM
+9:45 AM
+12:30 PM
+3:15 PM
+...
+
+These are approximate planning anchors only.
+Follow hunger cues and clinician guidance.</code>
+
+      <h3>Newborn feeding should remain responsive</h3>
+      <p>Current CDC guidance says newborns receiving breast milk may want to feed as often as every 1–3 hours, and most breastfed babies feed about 8–12 times in 24 hours. CDC also says formula-fed newborns in the first days may start with 1–2 ounces every 2–3 hours and commonly feed 8–12 times in 24 hours. The scheduler's fixed young-infant intervals are therefore simplifications for routine planning, not minimum waiting periods.</p>
+
+      <h3>Some newborns may need to be awakened to feed</h3>
+      <p>CDC notes that some newborns can be sleepy and may need to be awakened to feed during the early weeks. Whether to wake a baby, and how long they can safely sleep between feeds, depends on age, birth history, growth, milk transfer, and clinical guidance. The overnight toggle must never be used to decide that a night feed can be dropped.</p>
+
+      <h3>Solids are generally introduced around 6 months when developmentally ready</h3>
+      <p>CDC states that foods other than breast milk or infant formula can begin at about 6 months, while introducing solids before 4 months is not recommended. Developmental readiness matters; examples include head and neck control, sitting alone or with support, opening for food, swallowing rather than pushing food out, and bringing objects to the mouth.</p>
+
+      <h3>Milk remains important through the first year</h3>
+      <p>From 6–12 months, breast milk and/or infant formula continues to be a main source of nutrition while complementary foods gradually become a larger part of the diet. The 6–11 month schedules therefore keep multiple milk feeds in the routine rather than replacing them with meals.</p>
+
+      <h3>Toddler schedules are built as five daytime anchors</h3>
+      <p>For 12–24 months, the current implementation always creates breakfast, morning snack, lunch, afternoon snack, and dinner. CDC guidance supports regular eating opportunities and describes a common pattern of roughly 3 meals plus 2–3 snacks, with something to eat or drink about every 2–3 hours. The tool's five anchors are one practical template, not the only appropriate pattern.</p>
+
+      <h3>Cow's milk or fortified dairy alternatives begin at 12 months, not before</h3>
+      <p>CDC currently says plain, pasteurized, unsweetened whole cow's milk or fortified, unsweetened dairy alternatives can be introduced at 12 months. They should not replace breast milk or infant formula before 12 months. The scheduler does not calculate milk ounces or dairy servings.</p>
+
+      <h3>The feeding-approach selector has less effect after 12 months</h3>
+      <p>For toddler profiles, the actual generated schedule is meal-and-snack based. The Breast milk / nursing and Combination selections only change the dinner note to mention optional continued nursing; choosing Infant formula does not create formula-feed events in the 12–24 month schedule. The summary still displays the selected approach, so interpret it as a preference label rather than a toddler formula recommendation.</p>
+
+      <h3>Older-baby schedules are evenly spaced, not nap-aware</h3>
+      <p>The 4–24 month routines use <code>evenTimes()</code> to spread a fixed number of events evenly between the selected wake and bedtime. The tool does not know nap times, daycare schedules, medication timing, therapy sessions, school routines, or family meal timing. Adjust the anchors around the child's actual day.</p>
+
+      <h3>Wake and bedtime can cross midnight</h3>
+      <p>If bedtime is earlier than or equal to wake time, the scheduler treats bedtime as occurring on the following day by adding 24 hours. For 4–24 month profiles, the calculated daytime span must be between 8 and 18 hours. No calendar date, time zone, or daylight-saving logic is used.</p>
+
+      <h3>No intake-volume or calorie calculation is performed</h3>
+      <p>The scheduler does not calculate ounces of breast milk or formula, calories, protein, iron, vitamin D, dairy servings, fluid requirements, or growth percentiles. It also does not account for fortified feeds, tube feeding, thickened liquids, specialized formulas, or prescribed nutrition plans.</p>
+
+      <h3>Food texture and choking safety are outside the clock algorithm</h3>
+      <p>The generated times do not determine whether a food is developmentally safe. CDC recommends age-appropriate textures and close supervision during eating. Foods should be prepared in forms the child can safely manage, and common choking hazards require special preparation or avoidance.</p>
+
+      <h3>Honey, juice, added sugar, and caffeine require age-specific caution</h3>
+      <p>CDC advises no honey before 12 months, no fruit or vegetable juice before 12 months, and no added sugars for children younger than 24 months. CDC also says children younger than 24 months should avoid caffeinated drinks. These safety rules are not automatically enforced by the schedule entries.</p>
+
+      <div class="caution-note"><strong>Seek individualized care when feeding is not going smoothly.</strong> Contact the child's healthcare professional for poor growth, dehydration concerns, persistent vomiting, coughing or choking with feeds, swallowing difficulty, prematurity-related feeding plans, suspected food allergy, or uncertainty about how much the child is taking. Urgent breathing difficulty or severe allergic symptoms require immediate medical attention.</div>
+
+      <div class="source-box">
+        <strong>Current authoritative guidance reviewed for this page</strong>
+        <p><a href="https://www.cdc.gov/infant-toddler-nutrition/breastfeeding/how-much-and-how-often.html" target="_blank" rel="noopener noreferrer">CDC — How Much and How Often to Breastfeed</a>: newborn frequency, responsive feeding, and waking some sleepy newborns.</p>
+        <p><a href="https://www.cdc.gov/infant-toddler-nutrition/formula-feeding/how-much-and-how-often.html" target="_blank" rel="noopener noreferrer">CDC — How Much and How Often to Feed Infant Formula</a>: first-days formula amounts/frequency and 12-month transition guidance.</p>
+        <p><a href="https://www.cdc.gov/infant-toddler-nutrition/foods-and-drinks/when-what-and-how-to-introduce-solid-foods.html" target="_blank" rel="noopener noreferrer">CDC — When, What, and How to Introduce Solid Foods</a>: around-6-month timing and developmental readiness.</p>
+        <p><a href="https://www.cdc.gov/infant-toddler-nutrition/foods-and-drinks/how-much-and-how-often-to-feed.html" target="_blank" rel="noopener noreferrer">CDC — How Much and How Often to Feed</a>: 6–12 month milk priority and meal/snack rhythm.</p>
+        <p><a href="https://www.cdc.gov/infant-toddler-nutrition/foods-and-drinks/foods-and-drinks-to-avoid-or-limit.html" target="_blank" rel="noopener noreferrer">CDC — Foods and Drinks to Avoid or Limit</a>: honey, juice, added sugar, caffeine, and cow's milk age limits.</p>
+      </div>
+
+      <h3>Common mistakes</h3>
+      <ul>
+        <li>Waiting for the next scheduled time when a baby is showing clear hunger cues.</li>
+        <li>Using the overnight toggle to decide that a young infant no longer needs night feeding.</li>
+        <li>Starting solids because the clock says 6 months without checking developmental readiness.</li>
+        <li>Assuming a five-event toddler template is a required number of eating opportunities for every child.</li>
+        <li>Using the schedule to estimate ounces, calories, or growth needs when the tool does not calculate them.</li>
+      </ul>
+
+      <h3>Related Utiliverse Tools</h3>
+      <div class="related-grid">
+        <a class="related-link" href="../Sleep_Calculator/"><strong>Sleep Calculator</strong><span>Plan approximate sleep timing separately from feeding needs and hunger cues.</span></a>
+        <a class="related-link" href="../Time_Unit_Converter/"><strong>Time Unit Converter</strong><span>Convert intervals and durations when comparing feeding or routine timing.</span></a>
+        <a class="related-link" href="../Date_Calculator/"><strong>Date Calculator</strong><span>Work with calendar dates when tracking age milestones or appointment intervals.</span></a>
+      </div>
+
+      <p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 3, 2026 · Age profiles, young-infant interval logic, overnight filtering, daytime spacing, complementary-food scheduling, toddler meal/snack template, CDC feeding guidance, copy/print/reset behavior, and theme handling reviewed against the current implementation.</p>
+    </section>
+
+<section class="info-section">
       <h2>Baby & Toddler Feeding Scheduler FAQ</h2>
 
       <details class="faq-item">
@@ -482,6 +584,30 @@ body.dark-mode .source-link{color:#fdba74}
       <details class="faq-item">
         <summary>How often should toddlers eat?</summary>
         <p>A practical routine is three meals plus two to three snacks, with eating opportunities spaced about every 2 to 3 hours during the day.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does the overnight toggle mean my baby can safely skip night feeds?</summary>
+        <p>No. It only hides or shows overnight reminders in the generated routine. Whether a young infant needs to be awakened or fed overnight should be based on feeding cues, growth, age, and clinician guidance.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Does the scheduler calculate ounces or calories?</summary>
+        <p>No. It creates approximate feeding opportunities only. It does not calculate milk volume, calories, nutrients, fluid needs, or growth requirements.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Why are older-baby and toddler times evenly spaced?</summary>
+        <p>The implementation divides the selected wake-to-bedtime span into equal intervals. It does not know naps, daycare timing, family meals, or the child's actual appetite pattern.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Can I use the schedule for a premature baby or a child with feeding difficulties?</summary>
+        <p>Only as a general organizational aid if the child's healthcare team agrees. Prematurity, poor growth, swallowing problems, allergies, tube feeding, specialized formula, or other medical needs require individualized guidance.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Why does the 12–24 month schedule still let me select Infant formula?</summary>
+        <p>The selector remains available for continuity, but the toddler schedule itself is meal-and-snack based and does not create formula-feed events. CDC says infant formula can generally transition at 12 months to plain whole cow's milk or an appropriate fortified unsweetened dairy alternative.</p>
       </details>
     </section>
 
