@@ -79,9 +79,33 @@
 
     @media (min-width:640px){.info-section{padding:2rem}}
     @media (max-width:640px){.free-browser-note{max-width:118px;white-space:normal;text-align:right;font-size:10px;line-height:1.2}.theme-toggle{width:38px;height:38px;flex:0 0 auto}.summary-grid{grid-template-columns:1fr}.file-row{grid-template-columns:minmax(0,1fr) 44px}.file-size{grid-column:1/2;text-align:left}.file-row .remove-cell{grid-column:2;grid-row:1/3}}
-  </style>
+  
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid #dbe3ee;background:#fff;border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#0f172a;margin-bottom:5px}
+.method-card span{display:block;color:#475569;font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid #dbe3ee;background:#f8fafc;color:#0f172a;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.caution-note{border:1px solid #fde68a;background:#fffbeb;border-radius:14px;padding:16px;color:#92400e;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#78350f}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid #dbe3ee;background:#fff;border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#0f172a;margin-bottom:4px}
+.related-link span{display:block;color:#475569;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+.local-processing-note{font-size:.78rem;line-height:1.6;color:#64748b;margin-top:14px}
+body.dark-mode .method-card,body.dark-mode .related-link{background:#0f172a;border-color:#334155}
+body.dark-mode .method-card strong,body.dark-mode .related-link strong{color:#e2e8f0}
+body.dark-mode .method-card span,body.dark-mode .related-link span{color:#94a3b8}
+body.dark-mode .example-box{background:#0f172a;color:#e2e8f0;border-color:#334155}
+body.dark-mode .caution-note{background:rgba(120,53,15,.24);border-color:#92400e;color:#fde68a}
+body.dark-mode .caution-note strong{color:#fef3c7}
+body.dark-mode .local-processing-note{color:#94a3b8}
+@media(max-width:700px){.method-grid,.related-grid{grid-template-columns:1fr}}
 
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse ZIP Creator & ZIP/RAR Extractor","url":"https://utiliverse.app/Archive_Creator_Extractor/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript and WebAssembly enabled.","description":"Create ZIP archives and extract ZIP or RAR files directly in the browser, with direct-to-disk ZIP writing on supported browsers.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Create ZIP archives","Stream large ZIP archives directly to disk on supported browsers","Extract ZIP files","Extract RAR files","Add files and folders","Choose ZIP compression level","Save extracted files to a folder when supported","Browser-based archive processing"]}</script>
+</style>
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse ZIP Creator & ZIP/RAR Extractor","url":"https://utiliverse.app/Archive_Creator_Extractor/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript and WebAssembly enabled.","description":"Free browser-based ZIP creator and ZIP/RAR extractor with ZIP64 support, configurable compression, folder preservation, direct-to-disk ZIP writing on compatible browsers, path normalization, optional RAR passwords and local archive processing.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Create ZIP archives","ZIP64 archive support","Store, fast, normal and maximum ZIP compression levels","Add individual files","Add folders with relative path preservation","Direct-to-disk ZIP writing with File System Access API","Browser-memory ZIP fallback","Extract ZIP files","Extract RAR and RAR5 files","Optional RAR password input","Normalized extracted paths","Individual extracted-file downloads","Save extracted files to a folder when supported","Large-file workload guidance","Browser-local archive processing"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can this tool create RAR files?","acceptedAnswer":{"@type":"Answer","text":"No. This version creates ZIP files and extracts ZIP or RAR archives."}},{"@type":"Question","name":"Can it create a ZIP from a 735 MB DMG?","acceptedAnswer":{"@type":"Answer","text":"On a compatible desktop browser, direct-to-disk ZIP creation is more reliable for large inputs, but success still depends on storage, browser limits, device resources and the source file."}},{"@type":"Question","name":"Can it unzip ZIP files?","acceptedAnswer":{"@type":"Answer","text":"Yes. ZIP archives can be read and extracted directly in the browser."}},{"@type":"Question","name":"Can it unrar RAR files?","acceptedAnswer":{"@type":"Answer","text":"Yes. RAR and RAR5 archives can be extracted through the browser RAR engine, including password-protected RAR files when the correct password is supplied."}},{"@type":"Question","name":"Are my source files uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Selected files are processed locally by browser-side archive libraries rather than uploaded to a Utiliverse processing server."}},{"@type":"Question","name":"Can I preserve folders inside a ZIP?","acceptedAnswer":{"@type":"Answer","text":"Yes. Folder selection preserves browser-provided relative paths inside the archive."}},{"@type":"Question","name":"Why can very large extraction still fail?","acceptedAnswer":{"@type":"Answer","text":"Extracted files are represented as browser-managed Blobs, so very large decompressed data sets can exceed the memory available to the tab."}},{"@type":"Question","name":"What happens if two selected files have the same archive path?","acceptedAnswer":{"@type":"Answer","text":"The later selection replaces the earlier file at that same normalized archive path."}},{"@type":"Question","name":"Does Maximum compression always make the smallest ZIP?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. Already-compressed files may shrink very little, so a higher compression level can take more CPU time without meaningful savings."}},{"@type":"Question","name":"Does extraction make files safe to open?","acceptedAnswer":{"@type":"Answer","text":"No. Extraction only unpacks the files; malicious content remains malicious after extraction."}},{"@type":"Question","name":"Can encrypted ZIP files be opened with the password field?","acceptedAnswer":{"@type":"Answer","text":"The visible password field is passed to the RAR extraction path. This implementation does not provide a dedicated ZIP-password workflow."}},{"@type":"Question","name":"How does the tool decide whether an archive is ZIP or RAR?","acceptedAnswer":{"@type":"Answer","text":"Files ending in .rar use the RAR engine, while accepted ZIP files use the ZIP extraction path. The page does not perform full binary signature forensics first."}}]}</script>
 </head>
 
 <!--
@@ -176,6 +200,8 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
     </div>
   </section>
 
+  <p class="local-processing-note">Browser-based archive processing: selected files, archive creation, extraction, path normalization, progress reporting, and save preparation are handled locally by browser-side libraries. Source files are not uploaded to a Utiliverse processing server. The page itself loads archive libraries, interface resources, and advertising resources from external providers.</p>
+
   <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT -->
 
   <div class="info-wrap">
@@ -198,6 +224,68 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
       <h3>Privacy and browser limits</h3>
       <p>The source files you select are not sent to a Utiliverse upload endpoint. Compression and extraction run in your browser. The page does load its JavaScript/WebAssembly archive libraries from public CDNs. Direct-to-disk ZIP creation is the lowest-memory path available in this browser tool, but no browser-based utility can guarantee an unlimited file size: available RAM, storage space, browser limits, filesystem limits, and device performance still apply.</p>
     </section>
+
+    <section class="info-section">
+      <h2>Archive Methodology, Security Boundaries, and Important Limits</h2>
+      <p>The tool uses zip.js for ZIP creation and ZIP extraction, and a browser RAR engine for RAR extraction. ZIP creation can either stream directly to a user-selected file when the File System Access API is available or fall back to building a Blob in browser memory. ZIP and RAR extraction produce browser-managed Blob objects for the extracted files before they are downloaded or written to a selected folder.</p>
+
+      <div class="method-grid">
+        <div class="method-card"><strong>ZIP creation</strong><span>Each selected file is added with its stored relative path, chosen compression level, and last-modified date. ZIP64 is enabled so the library can represent large archives when the browser and filesystem can handle them.</span></div>
+        <div class="method-card"><strong>Direct-to-disk path</strong><span>When <code>showSaveFilePicker</code> is available, the ZIP writer targets the writable file handle directly instead of assembling the complete finished archive as one Blob first.</span></div>
+        <div class="method-card"><strong>ZIP extraction</strong><span>Non-directory entries are read one at a time through zip.js, normalized to safe relative paths, and returned as Blobs.</span></div>
+        <div class="method-card"><strong>RAR extraction</strong><span>RAR entries are opened through the RAR library, optional password support is passed to the archive engine, and each extracted file becomes a Blob in browser memory.</span></div>
+      </div>
+
+      <h3>Worked example: why direct-to-disk matters</h3>
+      <code class="example-box">Source files: 800 MB total
+
+Direct-to-disk mode:
+files → ZIP writer → chosen file on disk
+The completed 800+ MB archive does not need to exist as one finished Blob first.
+
+Memory fallback:
+files → ZIP writer → in-memory Blob → browser download
+This can require much more browser-managed memory and is more likely to fail on large inputs.</code>
+
+      <h3>Compression level does not guarantee a smaller file</h3>
+      <p>Store-only uses no compression, while levels 3, 6, and 9 request progressively stronger DEFLATE compression. Already-compressed formats such as JPEG, MP4, MP3, many DMG files, and existing archives may shrink very little. Maximum compression can therefore increase CPU time without producing meaningful savings.</p>
+
+      <h3>Duplicate archive paths replace earlier selections</h3>
+      <p>The create list is stored in a JavaScript <code>Map</code> keyed by the normalized archive path. If two selected files resolve to the same stored path, the later selection replaces the earlier one in the list rather than creating duplicate entries with the same path.</p>
+
+      <h3>Folder preservation depends on browser-provided relative paths</h3>
+      <p>Folder selection uses the browser's <code>webkitRelativePath</code> value when available. This preserves the selected folder hierarchy inside the ZIP, but support for folder pickers and relative-path metadata varies by browser.</p>
+
+      <h3>Archive paths are normalized before use</h3>
+      <p>The path sanitizer converts backslashes to forward slashes and removes empty components, <code>.</code>, and <code>..</code> segments. This reduces parent-directory traversal risk when showing or writing extracted entries. It is still important to review unfamiliar archives before saving their contents.</p>
+
+      <h3>Extraction is not streamed directly to disk entry-by-entry in all cases</h3>
+      <p>ZIP and RAR extraction currently creates Blob objects for extracted files in browser-managed memory. The Save to Folder action writes those already-extracted Blobs afterward. That means extremely large extracted data sets can exhaust browser memory even when the source archive itself opens successfully.</p>
+
+      <h3>Password handling is limited to the archive engine's supported formats</h3>
+      <p>The visible password field is passed to the RAR extraction library. The interface does not provide a separate password workflow for encrypted ZIP files. A password-protected or unsupported ZIP may therefore fail to extract depending on what the ZIP library can decode through this implementation.</p>
+
+      <h3>Archive type is selected mainly by filename extension</h3>
+      <p>The extractor accepts files named with <code>.zip</code> or <code>.rar</code>. It then chooses the RAR path only when the filename ends in <code>.rar</code>; otherwise it uses ZIP extraction. The page does not perform full forensic file-signature detection before choosing the extraction engine.</p>
+
+      <h3>Large-file thresholds are guidance, not hard limits</h3>
+      <p>The 250 MB and 1 GB messages are user guidance based on the current implementation's memory behavior. They are not guaranteed browser limits. A smaller archive can still fail on a constrained device, while a larger archive can succeed on a capable desktop with sufficient memory, storage, and direct-to-disk support.</p>
+
+      <div class="caution-note"><strong>Archives can contain untrusted files.</strong> Extraction does not make the contents safe to open. Executables, scripts, documents, installers, and other extracted files can still be malicious. Scan and verify files from untrusted sources before opening them.</div>
+
+      <h3>Save-to-folder and automatic-download behavior varies by browser</h3>
+      <p>Direct ZIP creation uses the File System Access API when available. Extracted-folder saving uses <code>showDirectoryPicker</code>. Browsers without those APIs fall back to standard downloads, and multiple extracted-file downloads can trigger permission prompts or browser blocking.</p>
+
+      <h3>Related Utiliverse Tools</h3>
+      <div class="related-grid">
+        <a class="related-link" href="../File_Hash_Generator/"><strong>File Hash Generator</strong><span>Generate checksums to verify files before or after packaging them into an archive.</span></a>
+        <a class="related-link" href="../Image_Converter/"><strong>Image Converter</strong><span>Convert image files before archiving them when format compatibility matters.</span></a>
+        <a class="related-link" href="../PDF_Conversion_Toolkit/"><strong>PDF Conversion Toolkit</strong><span>Prepare PDF-related files before grouping them into a ZIP archive.</span></a>
+      </div>
+
+      <p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 2, 2026 · ZIP creation, ZIP64 use, compression levels, direct-to-disk writing, folder-path preservation, path sanitization, ZIP/RAR extraction, password handling, Blob memory behavior, save-folder support, and theme behavior reviewed against the current implementation.</p>
+    </section>
+
     <section class="info-section"><h2>Archive Tool FAQ</h2>
       <details class="faq-item"><summary>Can this tool create RAR files?</summary><p>No. This version creates ZIP files and extracts ZIP or RAR archives. RAR creation was removed because the browser extraction engine does not provide a dependable RAR-writing path.</p></details>
       <details class="faq-item"><summary>Can it create a ZIP from a 735 MB DMG?</summary><p>On a compatible Chromium-based desktop browser, the direct-to-disk ZIP path is designed to handle large inputs more reliably because the finished ZIP is streamed to the chosen file instead of being assembled completely in page memory. Actual success still depends on free disk space, browser limits, device resources, and the source file.</p></details>
@@ -207,6 +295,11 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
       <details class="faq-item"><summary>Are my source files uploaded?</summary><p>No. Selected source files and archives are processed locally by the browser-side archive libraries rather than uploaded to a Utiliverse server.</p></details>
       <details class="faq-item"><summary>Can I preserve folders inside a ZIP?</summary><p>Yes. Folder selection preserves relative paths during ZIP creation, and Save to Folder can recreate extracted subfolders on supported browsers.</p></details>
       <details class="faq-item"><summary>Why can very large extraction still fail?</summary><p>Extraction may hold one or more decompressed files in browser-managed memory before they are downloaded or saved. Very large archives can therefore exceed the memory available to the tab even though ZIP creation can stream directly to disk.</p></details>
+      <details class="faq-item"><summary>What happens if two selected files have the same archive path?</summary><p>The create list is keyed by normalized archive path, so the later selection replaces the earlier file at that same path.</p></details>
+      <details class="faq-item"><summary>Does Maximum compression always make the smallest ZIP?</summary><p>Not necessarily. Already-compressed files may shrink very little, so a higher compression level can take more CPU time without meaningful size savings.</p></details>
+      <details class="faq-item"><summary>Does extraction make files safe to open?</summary><p>No. Archive extraction only unpacks the files. Executables, scripts, documents, installers, and other extracted content can still be malicious.</p></details>
+      <details class="faq-item"><summary>Can encrypted ZIP files be opened with the password field?</summary><p>The visible password field is passed to the RAR extraction path. Encrypted ZIP support depends on the ZIP library and this implementation does not provide a dedicated ZIP-password workflow.</p></details>
+      <details class="faq-item"><summary>How does the tool decide whether an archive is ZIP or RAR?</summary><p>The selected filename must end in .zip or .rar. Files ending in .rar use the RAR engine; the other accepted archive path uses ZIP extraction. The tool does not perform full file-signature forensics first.</p></details>
     </section>
     <!-- GOOGLE ADSENSE: BOTTOM / AFTER-CONTENT INSERTION POINT -->
   </div>
