@@ -197,32 +197,43 @@
       .recommendation{grid-template-columns:auto 1fr}
       .rec-badge{grid-column:2}
     }
-  </style>
+  
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid #dbe3ee;background:#fff;border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#0f172a;margin-bottom:5px}
+.method-card span{display:block;color:#475569;font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid #dbe3ee;background:#f8fafc;color:#0f172a;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.caution-note{border:1px solid #fde68a;background:#fffbeb;border-radius:14px;padding:16px;color:#92400e;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#78350f}
+.source-box{border:1px solid #dbeafe;background:#eff6ff;border-radius:14px;padding:16px;margin-top:18px}
+.source-box strong{display:block;color:#1e3a8a;margin-bottom:6px}
+.source-box p{margin:.4rem 0!important;color:#1e40af!important;font-size:.9rem!important;line-height:1.65!important}
+.source-box a{color:#1d4ed8;text-decoration:underline;text-underline-offset:2px}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid #dbe3ee;background:#fff;border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#0f172a;margin-bottom:4px}
+.related-link span{display:block;color:#475569;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+.local-processing-note{font-size:.78rem;line-height:1.6;color:#64748b;margin-top:14px}
+body.dark-mode .method-card,body.dark-mode .related-link{background:#0f172a;border-color:#334155}
+body.dark-mode .method-card strong,body.dark-mode .related-link strong{color:#e2e8f0}
+body.dark-mode .method-card span,body.dark-mode .related-link span{color:#94a3b8}
+body.dark-mode .example-box{background:#0f172a;color:#e2e8f0;border-color:#334155}
+body.dark-mode .caution-note{background:rgba(120,53,15,.24);border-color:#92400e;color:#fde68a}
+body.dark-mode .caution-note strong{color:#fef3c7}
+body.dark-mode .source-box{background:rgba(30,58,138,.22);border-color:#1e40af}
+body.dark-mode .source-box strong{color:#bfdbfe}
+body.dark-mode .source-box p{color:#bfdbfe!important}
+body.dark-mode .source-box a{color:#c7d2fe}
+body.dark-mode .local-processing-note{color:#94a3b8}
+@media(max-width:700px){.method-grid,.related-grid{grid-template-columns:1fr}}
+
+</style>
 
   <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"WebApplication",
-    "name":"Utiliverse Sleep Calculator",
-    "url":"https://utiliverse.app/Sleep_Calculator/",
-    "applicationCategory":"HealthApplication",
-    "operatingSystem":"Any",
-    "browserRequirements":"Requires a modern web browser with JavaScript enabled.",
-    "description":"Free sleep calculator for estimating bedtime, wake time, sleep cycles, fall-asleep time and recommended sleep windows.",
-    "isAccessibleForFree":true,
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
-    "featureList":[
-      "Calculate bedtime from wake time",
-      "Calculate wake time from bedtime",
-      "Adjust time to fall asleep",
-      "Adjust estimated sleep-cycle length",
-      "Show several recommended sleep windows",
-      "Age-based sleep-duration guidance",
-      "12-hour and 24-hour time display",
-      "Browser-based calculations"
-    ]
-  }
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Sleep Calculator","url":"https://utiliverse.app/Sleep_Calculator/","applicationCategory":"HealthApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based sleep schedule calculator for estimating bedtimes or wake times using adjustable 80–110 minute cycle assumptions, fall-asleep delay, CDC age-duration guidance, 12/24-hour display and transparent planning limitations.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Calculate bedtime from required wake time","Calculate wake time from planned bedtime","Adjust time to fall asleep from 5 to 60 minutes","Adjust estimated sleep-cycle length from 80 to 110 minutes","Generate 7, 6, 5 and 4-cycle planning options","CDC-based teen and adult sleep-duration guidance","Teen 13–17 guidance","Adult 18–60 minimum guidance","Adult 61–64 guidance","Older adult 65+ guidance","12-hour and 24-hour time display","Midnight clock wrapping","Copyable recommendations with clipboard fallback","Browser-local calculations","Educational sleep-cycle limitations"]}
   </script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are sleep cycles exactly 90 minutes?","acceptedAnswer":{"@type":"Answer","text":"No. Sleep-cycle length varies. The 90-minute value is only a planning estimate, and the tool allows 80–110 minute assumptions."}},{"@type":"Question","name":"How much time should I allow to fall asleep?","acceptedAnswer":{"@type":"Answer","text":"Use your own typical experience when possible. The tool provides selectable planning values from 5 to 60 minutes."}},{"@type":"Question","name":"Can this calculator tell me the exact best time to wake up?","acceptedAnswer":{"@type":"Answer","text":"No. It provides scheduling estimates based on a simplified cycle model and cannot predict sleep stages precisely from clock time."}},{"@type":"Question","name":"Should I choose a shorter option because it ends at a cycle boundary?","acceptedAnswer":{"@type":"Answer","text":"Not necessarily. Adequate total sleep and sleep quality matter more than matching an estimated cycle boundary."}},{"@type":"Question","name":"Can I calculate backward from my alarm time?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose When Should I Sleep and enter your required wake-up time."}},{"@type":"Question","name":"Can I calculate forward from bedtime?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose When Should I Wake and enter your planned bedtime."}},{"@type":"Question","name":"Does the tool account for time spent falling asleep?","acceptedAnswer":{"@type":"Answer","text":"Yes. The selected initial sleep-onset delay is added or subtracted in the schedule calculation."}},{"@type":"Question","name":"Is this a medical sleep assessment?","acceptedAnswer":{"@type":"Answer","text":"No. It is a scheduling calculator and does not diagnose sleep adequacy or sleep disorders."}},{"@type":"Question","name":"Where do the age-based sleep ranges come from?","acceptedAnswer":{"@type":"Answer","text":"The page uses CDC-published sleep-duration guidance for ages 13–17, 18–60, 61–64, and 65+."}},{"@type":"Question","name":"Why does the calculator allow cycle lengths from 80 to 110 minutes?","acceptedAnswer":{"@type":"Answer","text":"Sleep cycles vary. NHLBI notes that cycles generally restart about every 80–100 minutes; the wider selector is provided for planning sensitivity, not clinical precision."}},{"@type":"Question","name":"Does the calculator account for waking during the night?","acceptedAnswer":{"@type":"Answer","text":"No. It models initial sleep-onset delay and estimated cycle duration, not later awakenings or fragmented sleep."}},{"@type":"Question","name":"Does it handle daylight-saving time or time zones?","acceptedAnswer":{"@type":"Answer","text":"No. It uses clock-minute arithmetic only and does not use a calendar date, time zone, daylight-saving transition, or jet-lag model."}},{"@type":"Question","name":"Why are the results always shown for 7, 6, 5, and 4 cycles?","acceptedAnswer":{"@type":"Answer","text":"That is the current implementation's fixed planning set; it is not a measurement of actual completed sleep cycles."}}]}</script>
 </head>
 
 <!--
@@ -341,8 +352,9 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
             <div>
               <label class="label" for="ageGroup">Age group</label>
               <select id="ageGroup" class="field">
-                <option value="teen">Teen (14–17)</option>
-                <option value="adult" selected>Adult (18–64)</option>
+                <option value="teen">Teen (13–17)</option>
+                <option value="adult" selected>Adult (18–60)</option>
+                <option value="adult61">Adult (61–64)</option>
                 <option value="older">Older adult (65+)</option>
               </select>
             </div>
@@ -414,6 +426,8 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
     </div>
   </div>
 
+  <p class="local-processing-note">Browser-based calculation: target-time arithmetic, sleep-onset adjustments, cycle estimates, age-guide labels, time formatting, and copied results are handled locally by this tool. The times you enter are not submitted to a Utiliverse processing server. The page itself still loads interface and advertising resources from external providers.</p>
+
   <!-- =========================================================
        GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
        Paste approved Google AdSense code here after approval.
@@ -462,7 +476,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 
       <h3>Use the age guidance as a broad reference</h3>
       <p>
-        The age selector displays a general nightly sleep-duration range for teens, adults, or older adults. Individual sleep needs can vary, and health conditions, medications, work schedules, pregnancy, sleep debt, or other circumstances can change what is appropriate. The age guidance is intended to help interpret the options rather than diagnose sleep adequacy.
+        The age selector displays CDC-based duration guidance for teens and adults. The current groups are Teen (13–17), Adult (18–60), Adult (61–64), and Older adult (65+). Individual sleep needs can vary, and health conditions, medications, work schedules, pregnancy, sleep debt, or other circumstances can change what is appropriate. The age guidance is intended to help interpret the options rather than diagnose sleep adequacy.
       </p>
 
       <h3>Switch between 12-hour and 24-hour time</h3>
@@ -486,6 +500,79 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
       <p>
         If two suggested times are available, the option that provides adequate overall sleep is usually more useful than a shorter option chosen solely because it appears to line up with a cycle boundary. Time in bed is also not identical to time asleep because awakenings and the time needed to fall asleep can reduce actual sleep duration.
       </p>
+
+
+      <h2 class="mt-8">Calculation Methodology, Health Guidance, and Important Limits</h2>
+      <p>The calculator generates four planning options corresponding to 7, 6, 5, and 4 estimated sleep cycles. For each option, total estimated time asleep is <code>cycle count × selected cycle length</code>. In bedtime mode, that duration and the selected fall-asleep delay are subtracted from the required wake time. In wake-time mode, the delay and estimated sleep duration are added to the planned bedtime.</p>
+
+      <div class="method-grid">
+        <div class="method-card"><strong>Bedtime mode</strong><span><code>wake time − estimated sleep duration − fall-asleep delay</code>.</span></div>
+        <div class="method-card"><strong>Wake-time mode</strong><span><code>bedtime + fall-asleep delay + estimated sleep duration</code>.</span></div>
+        <div class="method-card"><strong>Cycle options</strong><span>The current implementation always generates 7, 6, 5, and 4 estimated cycles using the selected 80–110 minute planning value.</span></div>
+        <div class="method-card"><strong>Clock handling</strong><span>Results wrap across midnight using a 24-hour, 1,440-minute clock. No calendar date or time zone is attached.</span></div>
+      </div>
+
+      <h3>Worked example: calculating a bedtime</h3>
+      <code class="example-box">Required wake time: 7:00 AM
+Fall-asleep estimate: 15 minutes
+Cycle estimate: 90 minutes
+6 estimated cycles: 6 × 90 = 540 minutes = 9 hours
+
+7:00 AM − 9 hours − 15 minutes
+= 9:45 PM suggested in-bed time</code>
+
+      <h3>Worked example: calculating a wake time</h3>
+      <code class="example-box">Planned bedtime: 11:00 PM
+Fall-asleep estimate: 15 minutes
+Cycle estimate: 90 minutes
+5 estimated cycles: 5 × 90 = 450 minutes = 7 hours 30 minutes
+
+11:00 PM + 15 minutes + 7 hours 30 minutes
+= 6:45 AM estimated wake time</code>
+
+      <h3>Sleep cycles are not fixed 90-minute timers</h3>
+      <p>The 90-minute default is a planning simplification, not a biological rule. The National Heart, Lung, and Blood Institute explains that people cycle through REM and non-REM sleep and that a cycle typically starts over roughly every 80 to 100 minutes, with cycle structure changing across the night. This calculator therefore lets you vary the estimate from 80 to 110 minutes and should not be used to predict exact sleep-stage transitions.</p>
+
+      <h3>Age guidance is duration guidance, not a diagnosis</h3>
+      <p>The age labels now follow CDC-published duration guidance used by this page: ages 13–17, 8–10 hours per 24 hours; ages 18–60, 7 or more hours per night; ages 61–64, 7–9 hours; and ages 65+, 7–8 hours. These ranges help interpret the displayed options but do not account for individual medical needs, naps, pregnancy, medications, shift work, sleep debt, or a clinician's personalized recommendation.</p>
+
+      <h3>The 18–60 guide is a minimum rather than a closed range</h3>
+      <p>Because CDC lists 7 or more hours for adults ages 18–60, the tool now labels any generated option of at least 7 hours as meeting the minimum guide instead of treating 9 hours as a hard upper boundary for this age group.</p>
+
+      <h3>Time in bed is not the same as time asleep</h3>
+      <p>The selected fall-asleep delay accounts only for the expected time before initial sleep. It does not model awakenings during the night, periods of wakefulness after sleep onset, fragmented sleep, or early awakening. Actual sleep duration can therefore be shorter than the calculator's estimated time asleep.</p>
+
+      <h3>Ranking favors longer cycle-count options, not personalized sleep quality</h3>
+      <p>The result order is always 7 cycles first, then 6, 5, and 4. The ranking is not based on wearable data, medical history, sleep efficiency, chronotype, circadian phase, or measured sleep stages. The age badge is a simple comparison between the estimated time asleep and the selected age-duration guide.</p>
+
+      <h3>No date, daylight-saving, or time-zone logic is applied</h3>
+      <p>The calculator works on clock minutes only and wraps values across midnight. It does not know the calendar date, daylight-saving transitions, time-zone changes, travel direction, or jet lag. For nights that cross a clock change, manually account for the actual elapsed time.</p>
+
+      <div class="caution-note"><strong>This calculator is for schedule planning, not medical assessment.</strong> Do not use cycle timing to intentionally restrict sleep or to decide that a short night is adequate because it ends near an estimated cycle boundary. If sleep problems are persistent, affect daytime functioning, or involve concerning symptoms such as loud snoring or breathing pauses, seek guidance from a qualified healthcare professional.</div>
+
+      <div class="source-box">
+        <strong>Authoritative references used for this page</strong>
+        <p><a href="https://www.cdc.gov/sleep/about/index.html" target="_blank" rel="noopener noreferrer">CDC — About Sleep</a>: age-based recommended sleep duration and guidance to discuss sleep problems with a healthcare provider.</p>
+        <p><a href="https://www.nhlbi.nih.gov/health/sleep/stages-of-sleep" target="_blank" rel="noopener noreferrer">NHLBI/NIH — Sleep Phases and Stages</a>: REM/non-REM stages and the observation that sleep cycles generally restart about every 80–100 minutes rather than on one exact fixed schedule.</p>
+      </div>
+
+      <h3>Common mistakes</h3>
+      <ul>
+        <li>Treating a 90-minute cycle as exact for every person and every part of the night.</li>
+        <li>Choosing a shorter option solely because it appears to end at a cycle boundary.</li>
+        <li>Assuming the age badge proves that a particular schedule is healthy for an individual.</li>
+        <li>Forgetting that nighttime awakenings can reduce actual sleep below the displayed estimate.</li>
+        <li>Using clock-time results across a daylight-saving or time-zone change without adjusting elapsed time.</li>
+      </ul>
+
+      <h3>Related Utiliverse Tools</h3>
+      <div class="related-grid">
+        <a class="related-link" href="../Time_Tracking_Suite/"><strong>Time Tracking Suite</strong><span>Use stopwatch, countdown, and Pomodoro timers for general time planning.</span></a>
+        <a class="related-link" href="../Time_Unit_Converter/"><strong>Time Unit Converter</strong><span>Convert durations between minutes, hours, days, weeks, and other time units.</span></a>
+        <a class="related-link" href="../Date_Calculator/"><strong>Date Calculator</strong><span>Use calendar-aware date calculations when a task depends on specific dates rather than clock time alone.</span></a>
+      </div>
+
+      <p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 3, 2026 · Calculation logic, CDC age-duration guidance, NHLBI sleep-cycle framing, midnight wrapping, fall-asleep assumptions, copy fallback, and theme behavior reviewed against the current implementation.</p>
 
       <h2 class="mt-8">Practical Uses for a Sleep Calculator</h2>
 
@@ -557,6 +644,30 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
         <summary>Is this a medical sleep assessment?</summary>
         <p>No. It is a scheduling calculator. Persistent difficulty sleeping, excessive daytime sleepiness, loud snoring, breathing pauses during sleep, or other concerning symptoms should be discussed with a qualified healthcare professional.</p>
       </details>
+      <details class="faq-item">
+        <summary>Where do the age-based sleep ranges come from?</summary>
+        <p>The page uses CDC-published sleep-duration guidance: ages 13–17, 8–10 hours; ages 18–60, 7 or more hours; ages 61–64, 7–9 hours; and ages 65+, 7–8 hours.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Why does the calculator allow cycle lengths from 80 to 110 minutes?</summary>
+        <p>Sleep cycles are not one fixed length. NHLBI notes that sleep cycles generally restart about every 80–100 minutes, and the wider selector is provided only for planning sensitivity, not to claim clinical precision.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Does the calculator account for waking during the night?</summary>
+        <p>No. It models the initial fall-asleep delay and estimated sleep-cycle duration, but it does not subtract later awakenings or fragmented sleep.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Does it handle daylight-saving time or time zones?</summary>
+        <p>No. The calculator wraps clock minutes across midnight but does not use a calendar date, time zone, daylight-saving transition, or jet-lag model.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Why are the results always shown for 7, 6, 5, and 4 cycles?</summary>
+        <p>That is the current implementation's fixed recommendation set. The options are planning scenarios rather than measurements of how many sleep cycles you will actually complete.</p>
+      </details>
     </section>
 
     <!-- =========================================================
@@ -588,9 +699,10 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
   let mode = "bedtime";
 
   const ageRanges = {
-    teen:  {label:"Teen (14–17)", min:8, max:10, text:"General reference: teens often need about 8–10 hours of sleep per 24 hours."},
-    adult: {label:"Adult (18–64)", min:7, max:9, text:"General reference: many adults do best with about 7–9 hours of sleep per night."},
-    older: {label:"Older adult (65+)", min:7, max:8, text:"General reference: many older adults need about 7–8 hours of sleep per night."}
+    teen:    {label:"Teen (13–17)", min:8, max:10, text:"CDC reference: teens ages 13–17 are recommended to get 8–10 hours of sleep per 24 hours."},
+    adult:   {label:"Adult (18–60)", min:7, max:null, text:"CDC reference: adults ages 18–60 are recommended to get 7 or more hours of sleep per night."},
+    adult61: {label:"Adult (61–64)", min:7, max:9, text:"CDC reference: adults ages 61–64 are recommended to get 7–9 hours of sleep per night."},
+    older:   {label:"Older adult (65+)", min:7, max:8, text:"CDC reference: adults age 65 and older are recommended to get 7–8 hours of sleep per night."}
   };
 
   function parseTime(v){
@@ -629,9 +741,10 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 
   function recommendationBadge(hours){
     const r = ageRanges[ageGroup.value];
-    if(hours >= r.min && hours <= r.max) return "Within age guide";
-    if(hours > r.max) return "Longer option";
-    return "Shorter option";
+    if(hours < r.min) return "Shorter option";
+    if(r.max == null) return "Meets minimum guide";
+    if(hours <= r.max) return "Within age guide";
+    return "Longer option";
   }
 
   function calculate(){
