@@ -452,35 +452,37 @@ body.dark-mode .color-field input[type=color]{
   border-color:#475569!important;
 }
 
+
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid #dbe3ee;background:#fff;border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#0f172a;margin-bottom:5px}
+.method-card span{display:block;color:#475569;font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid #dbe3ee;background:#f8fafc;color:#0f172a;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.caution-note{border:1px solid #fde68a;background:#fffbeb;border-radius:14px;padding:16px;color:#92400e;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#78350f}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid #dbe3ee;background:#fff;border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#0f172a;margin-bottom:4px}
+.related-link span{display:block;color:#475569;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+.local-processing-note{font-size:.78rem;line-height:1.6;color:#64748b;margin-top:14px}
+body.dark-mode .method-card,body.dark-mode .related-link{background:#0f172a;border-color:#334155}
+body.dark-mode .method-card strong,body.dark-mode .related-link strong{color:#e2e8f0}
+body.dark-mode .method-card span,body.dark-mode .related-link span{color:#94a3b8}
+body.dark-mode .example-box{background:#0f172a;color:#e2e8f0;border-color:#334155}
+body.dark-mode .caution-note{background:rgba(120,53,15,.24);border-color:#92400e;color:#fde68a}
+body.dark-mode .caution-note strong{color:#fef3c7}
+body.dark-mode .local-processing-note{color:#94a3b8}
+@media(max-width:700px){.method-grid,.related-grid{grid-template-columns:1fr}}
+
 </style>
 
 <script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"WebApplication",
-  "name":"Utiliverse WiFi QR Code Generator",
-  "url":"https://utiliverse.app/WiFi_QR_Code_Generator/",
-  "applicationCategory":"UtilitiesApplication",
-  "operatingSystem":"Any",
-  "browserRequirements":"Requires a modern web browser with JavaScript.",
-  "description":"A free browser-based Wi-Fi QR code generator for WPA/WPA2/WPA3-style personal networks, WEP, open networks, and hidden SSIDs with PNG/SVG export and printable guest cards.",
-  "isAccessibleForFree":true,
-  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse WiFi QR Code Generator","url":"https://utiliverse.app/WiFi_QR_Code_Generator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript.","description":"Free browser-based Wi‑Fi QR code generator for WPA/WPA2/WPA3-style personal, WEP, open and hidden networks with escaped Wi‑Fi payloads, cryptographic password generation, QR styling, PNG/SVG export, copyable credentials and printable guest cards.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["WPA / WPA2 / WPA3 Personal Wi-Fi QR payload","WEP Wi-Fi QR payload","Open / no-password Wi-Fi QR payload","Hidden-network flag","SSID and password special-character escaping","18-character browser-cryptographic password generator","Show/hide password input","Show/hide readable password on guest card","L, M, Q and H QR error-correction levels","256, 512, 768 and 1024 pixel export sizes","Foreground and background color controls","Multiple QR dot styles","Multiple corner styles","Adjustable quiet-zone margin","PNG export","SVG export","Printable guest Wi-Fi card","Copy raw Wi-Fi QR string","Copy human-readable Wi-Fi details","Browser-local payload construction"]}
 </script>
 
 <script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"FAQPage",
-  "mainEntity":[
-    {"@type":"Question","name":"How does a WiFi QR code work?","acceptedAnswer":{"@type":"Answer","text":"A Wi-Fi QR code encodes the network name, security type, password, and optional hidden-network flag in a standard Wi-Fi QR string. Compatible phones can offer to join the network after scanning it."}},
-    {"@type":"Question","name":"Is my WiFi password uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No server-side lookup is required. The Wi-Fi string and QR code are created in the browser."}},
-    {"@type":"Question","name":"Does this work with WPA2 or WPA3?","acceptedAnswer":{"@type":"Answer","text":"For common personal Wi-Fi networks, the standard WPA QR format is used. Device behavior can vary, especially on WPA3-only networks, so test the code on the devices you expect guests to use."}},
-    {"@type":"Question","name":"Can I create a QR code for a hidden WiFi network?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enable Hidden network to include the hidden-network flag in the encoded Wi-Fi string."}},
-    {"@type":"Question","name":"Can I print a guest WiFi card?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool includes a print-friendly guest network card with an option to show or hide the password text."}}
-  ]
-}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does a WiFi QR code work?","acceptedAnswer":{"@type":"Answer","text":"A Wi-Fi QR code encodes the network name, security type, password, and optional hidden-network flag in a standard Wi-Fi QR string. Compatible phones can offer to join the network after scanning it."}},{"@type":"Question","name":"Is my WiFi password uploaded anywhere?","acceptedAnswer":{"@type":"Answer","text":"No server-side lookup is required. The Wi-Fi string and QR code are created in the browser."}},{"@type":"Question","name":"Does this work with WPA2 or WPA3?","acceptedAnswer":{"@type":"Answer","text":"For common personal Wi-Fi networks, the standard WPA QR format is used. Device behavior can vary, especially on WPA3-only networks, so test the code on the devices you expect guests to use."}},{"@type":"Question","name":"Can I create a QR code for a hidden WiFi network?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enable Hidden network to include the hidden-network flag in the encoded Wi-Fi string."}},{"@type":"Question","name":"Can I print a guest WiFi card?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool includes a print-friendly guest network card with an option to show or hide the password text."}},{"@type":"Question","name":"Does hiding the password text remove it from the QR code?","acceptedAnswer":{"@type":"Answer","text":"No. For password-protected networks the QR payload still contains the password; the setting only controls visible text on the guest card."}},{"@type":"Question","name":"How is the generated strong password created?","acceptedAnswer":{"@type":"Answer","text":"The tool uses crypto.getRandomValues() to create an 18-character password with uppercase, lowercase, digit and symbol coverage, then cryptographically shuffles the characters."}},{"@type":"Question","name":"Does generating a password change my router password automatically?","acceptedAnswer":{"@type":"Answer","text":"No. It only fills the form. You must configure the same password on the Wi-Fi network separately."}},{"@type":"Question","name":"What is the difference between PNG and SVG downloads?","acceptedAnswer":{"@type":"Answer","text":"PNG is raster output while SVG is vector markup; both encode the same Wi-Fi payload."}},{"@type":"Question","name":"Why can QR styling make scanning less reliable?","acceptedAnswer":{"@type":"Answer","text":"Low contrast, decorative styling, a very small quiet zone, dense payloads or small print size can make recognition harder."}}]}
 </script>
 </head>
 
@@ -748,6 +750,8 @@ body.dark-mode .color-field input[type=color]{
     </div>
   </div>
 
+  <p class="local-processing-note">Browser-based processing: Wi‑Fi payload construction, credential escaping, strong-password generation, QR styling, preview updates, copy actions, PNG/SVG export preparation, and print-card rendering are handled locally in this page. Your SSID and password are not sent to a Utiliverse processing server. The page itself loads the QR rendering library, interface resources, and advertising resources from external providers.</p>
+
   <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT -->
 
   <div class="info-wrap">
@@ -796,6 +800,107 @@ body.dark-mode .color-field input[type=color]{
       </ul>
     </section>
 
+
+    <section class="info-section">
+      <h2>QR Payload Methodology, Privacy, and Important Limits</h2>
+      <p>The generator builds a Wi‑Fi payload string in the browser, escapes characters that would otherwise conflict with the Wi‑Fi QR syntax, and passes the result to the qr-code-styling library for rendering. The QR itself contains the network credentials you enter, even when the readable password text is hidden on the guest card.</p>
+
+      <div class="method-grid">
+        <div class="method-card"><strong>Protected network payload</strong><span><code>WIFI:T:&lt;security&gt;;S:&lt;SSID&gt;;P:&lt;password&gt;;H:&lt;true/false&gt;;; </code></span></div>
+        <div class="method-card"><strong>Open network payload</strong><span><code>WIFI:T:nopass;S:&lt;SSID&gt;;H:&lt;true/false&gt;;; </code> with no password field.</span></div>
+        <div class="method-card"><strong>Escaping</strong><span>Backslashes, semicolons, commas, colons, and double quotes are escaped before the SSID or password is inserted into the payload.</span></div>
+        <div class="method-card"><strong>Rendering</strong><span>The page uses qr-code-styling with Byte mode, automatic QR type number, your selected error-correction level, colors, dot style, corner style, size, and margin.</span></div>
+      </div>
+
+      <h3>Worked example: WPA network</h3>
+      <code class="example-box">SSID:
+HomeGuest
+
+Password:
+BlueDoor!42
+
+Security:
+WPA / WPA2 / WPA3 Personal
+
+Hidden:
+No
+
+Encoded Wi‑Fi string:
+WIFI:T:WPA;S:HomeGuest;P:BlueDoor!42;H:false;;</code>
+
+      <h3>Worked example: special characters are escaped</h3>
+      <code class="example-box">SSID:
+Cafe:Guest
+
+Password:
+abc;123
+
+Encoded fields:
+S:Cafe\:Guest
+P:abc\;123
+
+Why:
+":" and ";" are reserved separators
+inside the Wi‑Fi QR payload syntax.</code>
+
+      <h3>The QR code always contains the credentials</h3>
+      <p>The Show password text on guest card checkbox controls only the visible text printed beside the QR code. For password-protected networks, the QR payload still contains the SSID and password so a compatible device can join. Anyone who can decode the QR can potentially recover those credentials.</p>
+
+      <h3>The page depends on an external QR rendering library</h3>
+      <p>Credential-to-payload logic runs locally, but the browser loads <code>qr-code-styling</code> from a CDN. If that library fails to load, the page shows a warning and cannot render or export the QR code until the library becomes available.</p>
+
+      <h3>WPA, WPA2, and WPA3 Personal share the same tool option</h3>
+      <p>The security selector uses the payload token <code>WPA</code> for the combined WPA / WPA2 / WPA3 Personal option. That matches the common Wi‑Fi QR convention used by many devices, but actual join behavior can vary by operating-system version, scanner, and WPA3-only network configuration. Always test the generated code on the devices that matter.</p>
+
+      <h3>WEP support is compatibility-only</h3>
+      <p>The page can encode <code>WEP</code> because some older networks still use that token, but the tool intentionally warns that WEP is obsolete and insecure. If you control the network, use a modern WPA2/WPA3 configuration instead of relying on WEP.</p>
+
+      <h3>Open networks contain no password field</h3>
+      <p>When Open / No Password is selected, the password field is hidden and the generated payload uses <code>T:nopass</code>. This does not make the network private; it simply reflects that no Wi‑Fi password is required.</p>
+
+      <h3>The hidden-network flag is a hint, not a guarantee</h3>
+      <p>Enabling Hidden network adds <code>H:true</code> to the payload. Whether a device automatically joins a non-broadcast network still depends on that device's QR implementation and network settings.</p>
+
+      <h3>The strong-password generator uses browser cryptography</h3>
+      <p>The built-in generator creates an 18-character password using <code>crypto.getRandomValues()</code>. It guarantees at least one uppercase letter, one lowercase letter, one digit, and one symbol from the tool's built-in character sets, then shuffles the generated characters using another cryptographic-random byte array.</p>
+
+      <h3>Password generation does not configure your router</h3>
+      <p>Generating a password only fills the page's password field. You must separately configure that same password on the Wi‑Fi network itself before the QR code will work.</p>
+
+      <h3>Error correction and styling affect scan robustness</h3>
+      <p>The QR renderer supports L, M, Q, and H error-correction levels. Higher levels add more redundancy but can make the QR denser. Decorative dots, unusual corner styles, low foreground/background contrast, or too little quiet-zone margin can reduce scan reliability even if the underlying payload is valid.</p>
+
+      <h3>Size changes export dimensions, not network content</h3>
+      <p>The 256, 512, 768, and 1024 options change the rendered QR dimensions. They do not alter the SSID, password, hidden flag, or security token.</p>
+
+      <h3>PNG and SVG are different output types</h3>
+      <p>PNG is a raster image and is convenient for messaging, documents, and general sharing. SVG is vector markup and usually scales more cleanly for signage or print. Both contain the same encoded Wi‑Fi payload.</p>
+
+      <h3>Copy Details exposes the password in plain text</h3>
+      <p>Copy String copies the raw Wi‑Fi payload, and Copy Details copies a human-readable summary that includes the password unless the network is open. Clipboard history, synced clipboards, password managers, remote-desktop tools, or other software can retain copied text depending on your environment.</p>
+
+      <div class="caution-note"><strong>Treat a Wi‑Fi QR code like a credential.</strong> Anyone who can scan, photograph, forward, or decode the QR can potentially join the network or recover the password. For visitors, a separate guest network is usually safer than sharing credentials for your primary private network.</div>
+
+      <h3>Common mistakes</h3>
+      <ul>
+        <li>Entering the wrong SSID capitalization or punctuation.</li>
+        <li>Generating a strong password here but forgetting to set the same password on the router.</li>
+        <li>Hiding the printed password and assuming the QR no longer contains it.</li>
+        <li>Using very low contrast or a tiny/zero margin and making the code harder to scan.</li>
+        <li>Assuming WPA3-only QR joining behaves identically on every phone.</li>
+        <li>Printing or sharing a QR for the primary home network when a guest network would be more appropriate.</li>
+      </ul>
+
+      <h3>Related Utiliverse Tools</h3>
+      <div class="related-grid">
+        <a class="related-link" href="../Random_String_Generator/"><strong>Random String Generator</strong><span>Create other random text strings when you need a credential or token outside this Wi‑Fi workflow.</span></a>
+        <a class="related-link" href="../MAC_Address_Lookup/"><strong>MAC Address Lookup</strong><span>Inspect vendor and address-bit information for devices connected to a network.</span></a>
+        <a class="related-link" href="../IP_Subnet_Calculator/"><strong>IP Subnet Calculator</strong><span>Plan IP address ranges and subnet sizes separately from Wi‑Fi credential sharing.</span></a>
+      </div>
+
+      <p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 3, 2026 · Wi‑Fi payload construction, escaping rules, WPA/WEP/open handling, hidden-network flag, cryptographic password generation, QR styling/export options, password-card masking, copy behavior, 100 ms render debounce, and theme behavior reviewed against the current implementation.</p>
+    </section>
+
     <section class="info-section">
       <h2>WiFi QR Code Generator FAQ</h2>
 
@@ -827,6 +932,30 @@ body.dark-mode .color-field input[type=color]{
       <details class="faq-item">
         <summary>Why does my Wi‑Fi QR code not connect?</summary>
         <p>Check the SSID spelling and capitalization, password, selected security type, and hidden-network setting. Some phones or unusual enterprise/WPA3 configurations may not support automatic joining from the common Wi‑Fi QR format.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Does hiding the password text remove it from the QR code?</summary>
+        <p>No. For password-protected networks the QR payload still contains the password. The checkbox only controls whether the password is shown as readable text on the guest card.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>How is the generated strong password created?</summary>
+        <p>The tool uses the browser's crypto.getRandomValues() API to create an 18-character password with at least one uppercase letter, one lowercase letter, one digit, and one symbol, then cryptographically shuffles the result.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Does generating a password change my router password automatically?</summary>
+        <p>No. The generated password only fills the form on this page. You must configure the same password on your router or access point yourself.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>What is the difference between PNG and SVG downloads?</summary>
+        <p>PNG is a raster image, while SVG is vector markup that scales more cleanly for large print. Both encode the same Wi‑Fi payload.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Why can QR styling make scanning less reliable?</summary>
+        <p>Low contrast, decorative dots or corners, a very small quiet zone, dense payloads, or small print size can make recognition harder. Test the finished code before distributing it.</p>
       </details>
     </section>
 
