@@ -216,34 +216,29 @@ body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
 }
 @media(max-width:390px){.header-right{gap:6px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid var(--border);background:var(--panel2);border-radius:14px;padding:15px}
+.method-card strong{display:block;color:var(--text);margin-bottom:5px}
+.method-card span{display:block;color:var(--muted);font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:var(--panel2);color:var(--text);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.caution-note{border:1px solid rgba(251,191,36,.45);background:rgba(251,191,36,.08);border-radius:14px;padding:16px;color:var(--muted);line-height:1.7;margin:18px 0}
+.caution-note strong{color:var(--text)}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid var(--border);background:var(--panel2);border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:var(--text);margin-bottom:4px}
+.related-link span{display:block;color:var(--muted);font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+.local-processing-note{font-size:.78rem;line-height:1.6;color:var(--muted);margin-top:14px}
+@media(max-width:700px){.method-grid,.related-grid{grid-template-columns:1fr}}
+
 </style>
 
 <script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"WebApplication",
-  "name":"Utiliverse HTTP Status Code Reference",
-  "url":"https://utiliverse.app/HTTP_Status_Code_Reference/",
-  "applicationCategory":"DeveloperApplication",
-  "operatingSystem":"Any",
-  "browserRequirements":"Requires a modern web browser with JavaScript enabled.",
-  "description":"A browser-based HTTP status code reference with searchable 1xx, 2xx, 3xx, 4xx and 5xx codes, descriptions, examples, class filters and standards notes.",
-  "isAccessibleForFree":true,
-  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse HTTP Status Code Reference","url":"https://utiliverse.app/HTTP_Status_Code_Reference/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based HTTP status code reference with 64 built-in 1xx–5xx entries, local substring search, class filters, editorial common-code filtering, card/table views, examples, registry-state notes, tags, related-keyword search, and copyable status lines.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["64 built-in HTTP status-code records","1xx informational filter","2xx success filter","3xx redirection filter","4xx client-error filter","5xx server-error filter","Case-insensitive substring search across code, name, summaries, examples, status labels and tags","Editorial common-code filter","Card view","Table view","Detail panel with meaning and example","Registry-state labels","Tags","Search Related action","Copy status line","Clipboard fallback","Browser-local filtering and rendering","IANA and RFC reference links"]}
 </script>
 <script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"FAQPage",
-  "mainEntity":[
-    {"@type":"Question","name":"What are HTTP status codes?","acceptedAnswer":{"@type":"Answer","text":"HTTP status codes are three-digit values returned in HTTP responses to indicate the outcome or current state of a request."}},
-    {"@type":"Question","name":"What do the HTTP status code classes mean?","acceptedAnswer":{"@type":"Answer","text":"1xx responses are informational, 2xx indicate success, 3xx indicate redirection, 4xx indicate client errors, and 5xx indicate server errors."}},
-    {"@type":"Question","name":"What is the difference between 401 and 403?","acceptedAnswer":{"@type":"Answer","text":"401 indicates that authentication is required or invalid, while 403 indicates that the server understands the request but refuses to authorize it."}},
-    {"@type":"Question","name":"What is the difference between 301 and 308?","acceptedAnswer":{"@type":"Answer","text":"Both are permanent redirects, but 308 explicitly preserves the request method and body when the redirect is followed."}},
-    {"@type":"Question","name":"What is HTTP 429?","acceptedAnswer":{"@type":"Answer","text":"429 Too Many Requests indicates that the client has exceeded a rate limit. The response may include Retry-After guidance."}}
-  ]
-}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are HTTP status codes?","acceptedAnswer":{"@type":"Answer","text":"HTTP status codes are three-digit values returned in HTTP responses to indicate the outcome or current state of a request."}},{"@type":"Question","name":"What do the HTTP status code classes mean?","acceptedAnswer":{"@type":"Answer","text":"1xx responses are informational, 2xx indicate success, 3xx indicate redirection, 4xx indicate client errors, and 5xx indicate server errors."}},{"@type":"Question","name":"What is the difference between 401 and 403?","acceptedAnswer":{"@type":"Answer","text":"401 indicates that authentication is required or invalid, while 403 indicates that the server understands the request but refuses to authorize it."}},{"@type":"Question","name":"What is the difference between 301 and 308?","acceptedAnswer":{"@type":"Answer","text":"Both are permanent redirects, but 308 explicitly preserves the request method and body when the redirect is followed."}},{"@type":"Question","name":"What is HTTP 429?","acceptedAnswer":{"@type":"Answer","text":"429 Too Many Requests indicates that the client has exceeded a rate limit. The response may include Retry-After guidance."}},{"@type":"Question","name":"Does this tool make a live HTTP request?","acceptedAnswer":{"@type":"Answer","text":"No. Search, filtering, detail selection and copying run locally against the built-in reference data."}},{"@type":"Question","name":"Is the common star an official IANA label?","acceptedAnswer":{"@type":"Answer","text":"No. It is an editorial convenience flag used by this page."}},{"@type":"Question","name":"Can a request receive more than one HTTP status response?","acceptedAnswer":{"@type":"Answer","text":"Yes. A request can receive one or more interim 1xx responses followed by one final response."}},{"@type":"Question","name":"Do HTTP reason phrases have to match the names shown here?","acceptedAnswer":{"@type":"Answer","text":"No. The numeric status code carries the semantics; reason phrases can be changed or omitted."}},{"@type":"Question","name":"Can this reference tell me which server generated an error?","acceptedAnswer":{"@type":"Answer","text":"No. A status can be generated by an origin, proxy, CDN, gateway, WAF, service mesh or another intermediary."}}]}
 </script>
 <style>
 .u2-related{--u2-bg:#fff;--u2-text:#0f172a;--u2-muted:#475569;--u2-border:#dbe3ee;--u2-link:#4338ca;background:var(--u2-bg);color:var(--u2-text);border:1px solid var(--u2-border);border-radius:18px;padding:24px;margin:32px auto;max-width:1120px;overflow-wrap:anywhere;font-family:Inter,system-ui,sans-serif}.u2-related h2{font-size:25px;line-height:1.3;margin:0 0 16px;color:var(--u2-text);font-weight:800}.u2-related h3{font-size:18px;margin:22px 0 8px;font-weight:750;color:var(--u2-text)}.u2-related p,.u2-related li{font-size:15px;line-height:1.8;color:var(--u2-muted);margin:0 0 12px}.u2-related ul{padding-left:22px;list-style:disc}.u2-related a{color:var(--u2-link);text-decoration:underline;text-underline-offset:3px}.u2-related a:focus-visible{outline:2px solid currentColor;outline-offset:4px}.u2-columns{display:grid;grid-template-columns:1fr 1fr;gap:24px}.u2-review{border-top:1px solid var(--u2-border);padding-top:15px;font-size:12px!important}.u2-related.u2-dark-default{--u2-bg:#0f172a;--u2-text:#f8fafc;--u2-muted:#cbd5e1;--u2-border:#334155;--u2-link:#a5b4fc}html.dark .u2-related,body.dark-mode .u2-related{--u2-bg:#0f172a;--u2-text:#f8fafc;--u2-muted:#cbd5e1;--u2-border:#334155;--u2-link:#a5b4fc}body.light-mode .u2-related{--u2-bg:#fff;--u2-text:#0f172a;--u2-muted:#475569;--u2-border:#dbe3ee;--u2-link:#4338ca}@media(max-width:620px){.u2-related{padding:18px}.u2-columns{grid-template-columns:1fr;gap:0}}
@@ -298,7 +293,7 @@ border, label, or reserved ad space is rendered before approved ad code is added
         <div class="eyebrow">Lookup & browse</div>
         <h2 id="toolHeading" class="section-title">Find an HTTP response code</h2>
       </div>
-      <div class="small">Registry status checked against IANA in September 2026.</div>
+      <div class="small">Registry status rechecked against IANA on October 3, 2026.</div>
     </div>
 
     <div class="search-row">
@@ -354,7 +349,7 @@ border, label, or reserved ad space is rendered before approved ad code is added
     <div class="note"><strong>Registry note:</strong> 104 Upload Resumption Supported is a temporary IANA registration associated with the resumable-upload draft and is currently listed as expiring November 13, 2026. Status 510 is retained but marked obsoleted; 306 and 418 are listed as unused/reserved in the current registry.</div>
   </section>
 
-  <p class="small" style="margin-top:14px">Browser-based reference: searching, filtering, view switching, and copying happen locally on this page. No lookup API is required.</p>
+  <p class="local-processing-note">Browser-based reference: searching, class filtering, common-code filtering, card/table switching, detail selection, related-keyword search, and clipboard preparation all happen locally against this page's built-in 64-code dataset. No live HTTP request is sent to the URL you are debugging and no lookup API is required. The page itself still loads advertising resources from external providers.</p>
 
   <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT -->
 
@@ -397,17 +392,120 @@ border, label, or reserved ad space is rendered before approved ad code is added
 
     <p><a class="source-link" href="https://www.iana.org/assignments/http-status-codes/" target="_blank" rel="noopener">IANA HTTP Status Code Registry</a> · <a class="source-link" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status" target="_blank" rel="noopener">MDN HTTP response status codes</a></p>
 
-    <h2>HTTP Status Code FAQ</h2>
+    
+    <h2>Reference Methodology, Search Behavior, and Important Limits</h2>
+    <p>This tool is a static browser-side reference built from a curated set of 64 HTTP status-code entries. It does not send a request to a website, API, proxy, or server. Every search and filter operation runs against the data embedded in this HTML file.</p>
+
+    <div class="method-grid">
+      <div class="method-card"><strong>Keyword search</strong><span>The search box performs one case-insensitive substring match across code number, name, summary, detail text, example text, registry-status label, class name, and tags.</span></div>
+      <div class="method-card"><strong>Class filter</strong><span>The 1xx–5xx buttons filter the dataset by the stored first-digit group; “All Codes” removes the class restriction.</span></div>
+      <div class="method-card"><strong>Common-only filter</strong><span>The checkbox uses this page's editorial <code>common</code> flag. It is a convenience label, not an IANA registry field or a usage-frequency measurement.</span></div>
+      <div class="method-card"><strong>Card and table views</strong><span>Both views render the same filtered dataset. Switching views changes presentation only, not the status-code data.</span></div>
+    </div>
+
+    <h3>Worked example: searching “redirect”</h3>
+    <code class="example-box">Search:
+redirect
+
+The tool checks:
+• code number
+• reason/name
+• summary
+• detail
+• example
+• registry-status label
+• response class
+• tags
+
+A code can match even if the word
+appears only in its tags or explanation.</code>
+
+    <h3>Worked example: class plus common-code filter</h3>
+    <code class="example-box">Filter:
+4xx Client Error
+
+Common codes only:
+On
+
+Result:
+Only entries in group 4 whose built-in
+common flag is true remain visible.
+
+This is an editorial subset,
+not an official IANA category.</code>
+
+    <h3>The first digit defines the response class</h3>
+    <p>RFC 9110 defines valid HTTP status codes as three-digit integers from 100 through 599. The first digit defines the class: 1xx informational, 2xx successful, 3xx redirection, 4xx client error, and 5xx server error. The last two digits do not create additional protocol classes.</p>
+
+    <h3>Unknown status codes are still interpreted by class</h3>
+    <p>HTTP is extensible. RFC 9110 says a client does not have to understand every registered code, but it does need to understand the class. For example, an unrecognized 471 response is treated like the 4xx class, broadly comparable to 400 for class-level handling. This page lists registered or historically relevant codes in its dataset rather than every vendor-specific value that software might emit.</p>
+
+    <h3>Reason phrases are descriptive, not protocol-critical</h3>
+    <p>The text names shown here—such as “Not Found” or “Bad Gateway”—are convenient labels. RFC 9110 notes that reason phrases can be replaced or omitted without changing the status code's protocol semantics. When debugging, rely on the numeric code, headers, request method, and response context rather than matching a phrase literally.</p>
+
+    <h3>1xx responses are interim, not final outcomes</h3>
+    <p>A single request can receive zero or more informational 1xx responses before one final response. The reference includes 1xx entries, but seeing one in a trace does not mean the request is complete. Continue inspecting the exchange for the final 2xx, 3xx, 4xx, or 5xx response.</p>
+
+    <h3>204 and 304 have special body semantics</h3>
+    <p>RFC 9110 specifies that 1xx responses, 204 No Content, and 304 Not Modified do not include message content. A client or middleware that expects a normal response body for these statuses can therefore misdiagnose correct behavior as a parsing problem.</p>
+
+    <h3>Search Related rewrites the search field</h3>
+    <p>The detail panel's Search Related button takes the first stored tag for the selected entry, places it into the search field, clears the class filter back to All Codes, rerenders the results, and focuses the search box. It does not perform an internet search.</p>
+
+    <h3>The “common” star is editorial</h3>
+    <p>This version marks 42 of 64 entries as commonly encountered. That label is useful for narrowing the page, but it should not be interpreted as a measured frequency across browsers, APIs, CDNs, reverse proxies, or servers.</p>
+
+    <h3>Registry-state labels are not all the same kind of status</h3>
+    <p>Entries can be labeled Standard, WebDAV, Deprecated, Obsoleted, Unused, Reserved, temporary, or another descriptive state. These labels summarize the underlying registry/specification context. They are not server health states and do not tell you whether a code is appropriate for your particular API.</p>
+
+    <h3>104 remains a temporary registration</h3>
+    <p>The IANA HTTP Status Code Registry currently lists <strong>104 Upload Resumption Supported</strong> as temporary, with its registration expiring November 13, 2026 unless extended or superseded. Treat temporary registrations as moving standards work and recheck IANA before designing long-lived protocol dependencies around them.</p>
+
+    <h3>418 is intentionally represented as unused</h3>
+    <p>The famous “I'm a Teapot” number is historically recognizable, but RFC 9110 reserves 418 as unused. This page keeps the historical association in tags and explanation while avoiding presenting it as a portable application protocol signal.</p>
+
+    <h3>This reference cannot identify the root cause of a live incident</h3>
+    <p>The same status code can be generated by an origin server, CDN, reverse proxy, load balancer, gateway, WAF, service mesh, authentication layer, or application framework. Use browser developer tools, HAR data, response headers, request IDs, proxy logs, and server logs to determine which component actually emitted the response.</p>
+
+    <div class="caution-note"><strong>A status code is context, not a complete diagnosis.</strong> 404 does not prove a resource never existed, 500 does not identify the failing line of code, 502 does not tell you which upstream failed, and 429 does not by itself tell you the applicable retry policy. Read the response headers and application documentation alongside the numeric code.</div>
+
+    <h3>Common mistakes</h3>
+    <ul>
+      <li>Using the reason phrase instead of the numeric status code as the source of truth.</li>
+      <li>Assuming every 4xx problem is caused by the end user rather than a client, proxy, or generated request.</li>
+      <li>Assuming a 5xx code proves the origin application itself generated the response.</li>
+      <li>Treating the Common-only star as an official IANA classification.</li>
+      <li>Using a temporary, obsolete, or unused code without checking the underlying specification.</li>
+    </ul>
+
+    <h3>Dataset snapshot</h3>
+    <p>This version contains 5 informational entries, 10 success entries, 9 redirection entries, 29 client-error entries, and 11 server-error entries, for 64 total records in the built-in reference.</p>
+
+    <h3>Related Utiliverse Tools</h3>
+    <div class="related-grid">
+      <a class="related-link" href="/HAR_File_Viewer/"><strong>HAR File Viewer</strong><span>Inspect captured HTTP requests, response codes, headers, timings, and redirect chains in context.</span></a>
+      <a class="related-link" href="/SSL_Certificate_Checker/"><strong>SSL Certificate Checker</strong><span>Check TLS certificate details when an HTTPS failure may occur before normal HTTP handling.</span></a>
+      <a class="related-link" href="/Port_Checker/"><strong>Port Checker</strong><span>Reference common TCP and UDP service ports separately from application-layer HTTP responses.</span></a>
+    </div>
+
+    <p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 3, 2026 · Built-in status-code dataset, substring search fields, class filters, editorial common flag, card/table rendering, related-tag search, clipboard fallback, IANA registry notes, and RFC 9110 class semantics reviewed against the current implementation.</p>
+
+<h2>HTTP Status Code FAQ</h2>
     <details class="faq"><summary>What does the first digit of an HTTP status code mean?</summary><p>It identifies the response class: 1xx informational, 2xx success, 3xx redirection, 4xx client error, or 5xx server error.</p></details>
     <details class="faq"><summary>What is the difference between 401 and 403?</summary><p>401 indicates that authentication is required or invalid. 403 means the server understood the request but refuses to authorize it.</p></details>
     <details class="faq"><summary>What is the difference between 301 and 308?</summary><p>Both indicate permanent redirection, but 308 explicitly preserves the original request method and body when the redirect is followed.</p></details>
     <details class="faq"><summary>What does 429 Too Many Requests mean?</summary><p>The client has exceeded a request-rate limit. The response may include Retry-After guidance for a later attempt.</p></details>
     <details class="faq"><summary>Is 418 I'm a Teapot a standard HTTP status code?</summary><p>The number is historically famous for the teapot joke, but the current core HTTP registry lists 418 as unused. It should not be treated as a portable application protocol signal.</p></details>
-    <details class="faq"><summary>What is HTTP 104?</summary><p>104 Upload Resumption Supported is a temporary IANA registration associated with the current resumable-upload draft. As of September 2026, the registry lists the temporary registration as expiring November 13, 2026 unless it is extended or superseded.</p></details>
+    <details class="faq"><summary>What is HTTP 104?</summary><p>104 Upload Resumption Supported is a temporary IANA registration associated with the current resumable-upload draft. As of October 3, 2026, the registry lists the temporary registration as expiring November 13, 2026 unless it is extended or superseded.</p></details>
+    <details class="faq"><summary>Does this tool make a live HTTP request?</summary><p>No. Search, filtering, detail selection, and copying all run locally against the built-in reference data.</p></details>
+    <details class="faq"><summary>Is the “common” star an official IANA label?</summary><p>No. It is an editorial convenience flag used by this page to highlight frequently encountered codes.</p></details>
+    <details class="faq"><summary>Can a request receive more than one HTTP status response?</summary><p>Yes. A request can receive one or more interim 1xx responses followed by one final response.</p></details>
+    <details class="faq"><summary>Do HTTP reason phrases have to match the names shown here?</summary><p>No. The numeric status code carries the semantics; reason phrases can be changed or omitted.</p></details>
+    <details class="faq"><summary>Can this reference tell me which server generated an error?</summary><p>No. The code may come from an origin, proxy, CDN, gateway, WAF, service mesh, or other intermediary. Use request/response evidence and logs to identify the source.</p></details>
   </section>
 </div>
 <!-- BATCH 2 RELATED CONTENT START -->
-<section class="u2-related u2-dark-default" aria-labelledby="u2-heading"><h2 id="u2-heading">Read a status in context</h2><p>Start with the exact response captured by your browser or client. Search the code, read its meaning, then compare the request method, response headers, and final URL. A redirect chain can end with a successful login page while the original operation still failed.</p><h3>Try a concrete comparison</h3><p>Compare 302 with 307 for a POST request, 401 with 403 for a protected resource, and 502 with 504 for an upstream failure. The guides below explain which evidence to collect next.</p><h3>Limits</h3><p>This is a reference, not a live check of a URL or proof of the cause of an incident. Use a captured request and server logs to determine which system generated the response.</p><div class="u2-columns"><div><h3>Related guides</h3><ul><li><a href="/Guides/HTTP_Redirects.html">301 vs 302 vs 307 vs 308: choosing an HTTP redirect</a></li><li><a href="/Guides/HTTP_401_vs_403.html">401 vs 403: authentication and access errors</a></li><li><a href="/Guides/HTTP_502_503_504.html">502 vs 503 vs 504: server and gateway errors</a></li></ul></div><div><h3>Sources</h3><ul><li><a href="https://www.rfc-editor.org/rfc/rfc9110.html">RFC 9110: HTTP semantics</a></li></ul><h3>Related tools</h3><ul><li><a href="/HAR_File_Viewer/">HAR File Viewer</a></li><li><a href="/SSL_Certificate_Checker/">SSL Certificate Checker</a></li></ul><p><a href="/Guides.html">Browse all guides</a></p></div></div><p class="u2-review">Explanatory content reviewed September 29, 2026. <a href="/Editorial_Methodology.html">Methodology</a> · <a href="/Contact_Info.html">Report a correction</a></p></section>
+<section class="u2-related u2-dark-default" aria-labelledby="u2-heading"><h2 id="u2-heading">Read a status in context</h2><p>Start with the exact response captured by your browser or client. Search the code, read its meaning, then compare the request method, response headers, and final URL. A redirect chain can end with a successful login page while the original operation still failed.</p><h3>Try a concrete comparison</h3><p>Compare 302 with 307 for a POST request, 401 with 403 for a protected resource, and 502 with 504 for an upstream failure. The guides below explain which evidence to collect next.</p><h3>Limits</h3><p>This is a reference, not a live check of a URL or proof of the cause of an incident. Use a captured request and server logs to determine which system generated the response.</p><div class="u2-columns"><div><h3>Related guides</h3><ul><li><a href="/Guides/HTTP_Redirects.html">301 vs 302 vs 307 vs 308: choosing an HTTP redirect</a></li><li><a href="/Guides/HTTP_401_vs_403.html">401 vs 403: authentication and access errors</a></li><li><a href="/Guides/HTTP_502_503_504.html">502 vs 503 vs 504: server and gateway errors</a></li></ul></div><div><h3>Sources</h3><ul><li><a href="https://www.rfc-editor.org/rfc/rfc9110.html">RFC 9110: HTTP semantics</a></li></ul><h3>Related tools</h3><ul><li><a href="/HAR_File_Viewer/">HAR File Viewer</a></li><li><a href="/SSL_Certificate_Checker/">SSL Certificate Checker</a></li></ul><p><a href="/Guides.html">Browse all guides</a></p></div></div><p class="u2-review">Explanatory content reviewed October 3, 2026. <a href="/Editorial_Methodology.html">Methodology</a> · <a href="/Contact_Info.html">Report a correction</a></p></section>
 <!-- BATCH 2 RELATED CONTENT END --></main>
 
 <!-- GOOGLE ADSENSE: PRE-FOOTER INSERTION POINT -->
