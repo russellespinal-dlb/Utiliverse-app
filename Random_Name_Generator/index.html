@@ -378,29 +378,37 @@ body.dark-mode .icon-btn{
   border-color:#334155!important;
 }
 
+
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid #dbe3ee;background:#fff;border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#0f172a;margin-bottom:5px}
+.method-card span{display:block;color:#475569;font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid #dbe3ee;background:#f8fafc;color:#0f172a;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.caution-note{border:1px solid #fde68a;background:#fffbeb;border-radius:14px;padding:16px;color:#92400e;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#78350f}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid #dbe3ee;background:#fff;border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#0f172a;margin-bottom:4px}
+.related-link span{display:block;color:#475569;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+.local-processing-note{font-size:.78rem;line-height:1.6;color:#64748b;margin-top:14px}
+body.dark-mode .method-card,body.dark-mode .related-link{background:#0f172a;border-color:#334155}
+body.dark-mode .method-card strong,body.dark-mode .related-link strong{color:#e2e8f0}
+body.dark-mode .method-card span,body.dark-mode .related-link span{color:#94a3b8}
+body.dark-mode .example-box{background:#0f172a;color:#e2e8f0;border-color:#334155}
+body.dark-mode .caution-note{background:rgba(120,53,15,.24);border-color:#92400e;color:#fde68a}
+body.dark-mode .caution-note strong{color:#fef3c7}
+body.dark-mode .local-processing-note{color:#94a3b8}
+@media(max-width:700px){.method-grid,.related-grid{grid-template-columns:1fr}}
+
 </style>
 
 <script type="application/ld+json">
-{
- "@context":"https://schema.org","@type":"WebApplication",
- "name":"Utiliverse Random Name Generator",
- "url":"https://utiliverse.app/Random_Name_Generator/",
- "applicationCategory":"UtilitiesApplication","operatingSystem":"Any",
- "browserRequirements":"Requires a modern browser with JavaScript and Web Crypto.",
- "description":"A free browser-based random name generator for first names, last names, and full names with filters for common usage, naming tradition, first letter, length, style, middle names, exclusions, favorites, and batch generation.",
- "isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Random Name Generator","url":"https://utiliverse.app/Random_Name_Generator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern browser with JavaScript and Web Crypto.","description":"Free browser-based random name generator with 247 built-in first-name records and 160 surname entries, Web Crypto selection, first/last/full-name modes, usage/tradition/letter/length/style filters, middle names, exclusions, duplicate avoidance, favorites and recent local history.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Random first-name generation","Random surname generation","Random full-name generation","Optional middle names","247 built-in first-name records","160 built-in surname entries","10 naming-tradition labels","7 first-name style labels","Feminine, masculine and unisex/broad-usage filters","A–Z first-letter filter","Short, medium and long first-name length filters","First-name style filter","Batch generation from 1 through 100","Comma-separated exclusions","Duplicate generated-name avoidance","Web Crypto rejection-sampling random selection","Browser-local favorites","Five-batch browser-local recent history","Copy individual names, full batch, or favorites","No external name API required"]}
 </script>
 
 <script type="application/ld+json">
-{
- "@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-  {"@type":"Question","name":"How does the Random Name Generator work?","acceptedAnswer":{"@type":"Answer","text":"The tool filters its built-in name collections based on your settings, then uses browser cryptographic randomness to choose names without relying on an external name API."}},
-  {"@type":"Question","name":"Can I generate full names?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose Full Name to combine a first name with an optional middle name and a surname from the selected naming tradition."}},
-  {"@type":"Question","name":"Can I generate several names at once?","acceptedAnswer":{"@type":"Answer","text":"Yes. You can generate between 1 and 100 names in one batch."}},
-  {"@type":"Question","name":"Can I save favorite generated names?","acceptedAnswer":{"@type":"Answer","text":"Yes. Favorites are saved locally in the current browser and can be copied as a shortlist."}},
-  {"@type":"Question","name":"Are the origin and gender labels absolute?","acceptedAnswer":{"@type":"Answer","text":"No. Name usage varies across cultures, regions, languages, families, and time. The labels in this tool are broad discovery filters rather than strict classifications."}}
- ]}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does the Random Name Generator work?","acceptedAnswer":{"@type":"Answer","text":"The tool filters its built-in name collections based on your settings, then uses browser cryptographic randomness to choose names without relying on an external name API."}},{"@type":"Question","name":"Can I generate full names?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose Full Name to combine a first name with an optional middle name and a surname from the selected naming tradition."}},{"@type":"Question","name":"Can I generate several names at once?","acceptedAnswer":{"@type":"Answer","text":"Yes. You can generate between 1 and 100 names in one batch."}},{"@type":"Question","name":"Can I save favorite generated names?","acceptedAnswer":{"@type":"Answer","text":"Yes. Favorites are saved locally in the current browser and can be copied as a shortlist."}},{"@type":"Question","name":"Are the origin and gender labels absolute?","acceptedAnswer":{"@type":"Answer","text":"No. Name usage varies across cultures, regions, languages, families, and time. The labels in this tool are broad discovery filters rather than strict classifications."}},{"@type":"Question","name":"How many names are built into this version?","acceptedAnswer":{"@type":"Answer","text":"This version contains 247 first-name records and 160 surname entries across 10 naming-tradition labels."}},{"@type":"Question","name":"Are names weighted by popularity?","acceptedAnswer":{"@type":"Answer","text":"No. Each entry in the active filtered pool is selected with equal probability; live birth statistics and popularity rankings are not used."}},{"@type":"Question","name":"What happens if I request more unique names than the filters can provide?","acceptedAnswer":{"@type":"Answer","text":"The generator retries duplicates up to a fixed attempt ceiling, then returns the unique results found and shows a warning if the requested quantity cannot be reached."}},{"@type":"Question","name":"Does the length filter also apply to surnames?","acceptedAnswer":{"@type":"Answer","text":"No. The length filter applies only to first names."}},{"@type":"Question","name":"Do favorites and recent generations sync across devices?","acceptedAnswer":{"@type":"Answer","text":"No. Both are stored locally in the current browser, and recent history keeps only the five latest batches."}}]}
 </script>
 </head>
 
@@ -550,7 +558,9 @@ body.dark-mode .icon-btn{
   </div>
  </div>
 
- <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT -->
+ <p class="local-processing-note">Browser-based generation: filtering, cryptographic random selection, first/last/full-name assembly, duplicate avoidance, exclusions, favorites, recent-history storage, copying, and theme handling are performed locally using the built-in collections of 247 first-name records and 160 surname entries. No external name API is required. Favorites and the last five generation batches are stored in this browser's localStorage. The page itself still loads interface and advertising resources from external providers.</p>
+
+<!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT -->
 
  <div class="info-wrap">
   <section class="info-section">
@@ -576,7 +586,110 @@ body.dark-mode .icon-btn{
    <p>The Feminine, Masculine, and Unisex / Broad Usage filters likewise reflect common naming usage in parts of the world rather than fixed rules about who can use a name.</p>
   </section>
 
+  
   <section class="info-section">
+   <h2>Generation Methodology, Randomness, and Important Limits</h2>
+   <p>The generator filters local name data according to the active settings and then chooses entries with the browser's Web Crypto API. It does not call an external name service, rank results by popularity, or infer demographic identity from the generated names.</p>
+
+   <div class="method-grid">
+    <div class="method-card"><strong>Random source</strong><span><code>crypto.getRandomValues()</code> supplies 32-bit values. Rejection sampling removes modulo bias before selecting an array index.</span></div>
+    <div class="method-card"><strong>First-name pool</strong><span>Filters can apply common usage, exact naming-tradition label, first letter, first-name length, style, and exclusions.</span></div>
+    <div class="method-card"><strong>Surname pool</strong><span>Surnames come from the selected tradition, or from all built-in surname lists when Any tradition is selected.</span></div>
+    <div class="method-card"><strong>Batch size</strong><span>The requested quantity must be a whole number from 1 through 100.</span></div>
+   </div>
+
+   <h3>Worked example: filtered first-name generation</h3>
+   <code class="example-box">Mode:
+First Name
+
+Filters:
+Common usage = Feminine
+Tradition = French
+Starts with = C
+Length = Medium
+Style = Classic
+
+The generator:
+1. Builds the matching local pool
+2. Draws one entry with Web Crypto
+3. Repeats until the requested batch is filled
+   or uniqueness attempts are exhausted</code>
+
+   <h3>Worked example: full name with a middle name</h3>
+   <code class="example-box">Mode:
+Full Name
+
+First-name pool:
+Filtered by your chosen usage/tradition/letter/length/style
+
+Surname pool:
+Selected naming tradition
+
+Middle name:
+Chosen from the same filtered first-name pool,
+excluding the already-selected first name
+
+Example structure:
+First Middle Surname</code>
+
+   <h3>The built-in data is finite and editorial</h3>
+   <p>This version contains 247 first-name records and 160 surname entries across 10 naming-tradition labels, with 7 first-name style labels. The collection is designed for practical generation and brainstorming, not exhaustive linguistic or cultural coverage.</p>
+
+   <h3>Tradition matching is exact</h3>
+   <p>The first-name filter compares the selected tradition to the stored origin label exactly. For example, <code>Irish / Scottish</code> is one combined label in this generator rather than two independently selectable origins. Surname lists use the same tradition labels.</p>
+
+   <h3>Length applies only to first names</h3>
+   <p>Short means 3–5 Unicode code points, Medium means 6–7, and Long means 8 or more. The code uses <code>[...name].length</code>, which counts Unicode code points rather than UTF-16 code units. Surname length is not filtered.</p>
+
+   <h3>Style applies only to first names</h3>
+   <p>Labels such as Classic, Modern, Vintage, Short, Romantic, Nature, and Strong are editorial discovery categories in this dataset. They are not standardized linguistic classifications, and they do not filter surnames.</p>
+
+   <h3>The exclusion box matches complete first names and surnames</h3>
+   <p>Comma-separated exclusions are normalized with <code>toLocaleLowerCase()</code>. A first name is removed only when the complete stored first name matches an excluded term, and the same is true for surnames. It does not perform substring filtering inside a longer name.</p>
+
+   <h3>Full-name generation combines pools independently</h3>
+   <p>For Full Name mode, the tool randomly picks a first name from the filtered first-name pool and a surname from the available surname pool. The generated pairing is synthetic; it should not be interpreted as a historically or culturally typical real-world name combination.</p>
+
+   <h3>Middle names come from the same filtered first-name pool</h3>
+   <p>When Include a middle name is enabled, the generator removes the chosen first name from the candidate list and then randomly selects another matching first name. If the filtered pool contains only one name, the result can contain no middle name even though the option is enabled.</p>
+
+   <h3>Duplicate avoidance is retry-based</h3>
+   <p>When Avoid duplicate generated names is enabled, the tool tracks complete generated strings case-insensitively and retries duplicates. The attempt ceiling is <code>max(500, requested count × 60)</code>. If the filtered space cannot supply enough distinct results before that ceiling, the page returns the unique names it found and shows a warning.</p>
+
+   <h3>Random selection is unbiased over the active array, not world name usage</h3>
+   <p>The <code>randomBelow()</code> helper uses rejection sampling so each array index has equal probability. Selection is therefore even across the filtered built-in entries, not weighted by population, birth statistics, country frequency, or current popularity.</p>
+
+   <h3>Favorites and recent history are browser-local</h3>
+   <p>Favorites are stored under <code>utiliverse-random-name-favorites-v1</code>. Recent generations are stored under <code>utiliverse-random-name-history-v1</code>. History keeps only the five most recent batches and stores up to the first 12 generated names from each batch. These lists do not sync between browsers or devices.</p>
+
+   <h3>History display is intentionally abbreviated</h3>
+   <p>The recent-history panel displays up to the first five stored names from each batch, followed by a “+N more” summary when additional names were saved. The stored history entry itself can contain up to 12 names.</p>
+
+   <h3>Generated names are not identity data</h3>
+   <p>The tool creates synthetic combinations from built-in lists. A generated full name may coincidentally match a real person. Do not assume a generated name corresponds to a real identity, and avoid using random names to fabricate records where real consent or verified identity is required.</p>
+
+   <div class="caution-note"><strong>Use the labels as discovery aids, not identity claims.</strong> Naming traditions, gender usage, spelling, and cultural associations vary by place, language, family, and time. Verify cultural or linguistic details separately when accuracy matters.</div>
+
+   <h3>Common mistakes</h3>
+   <ul>
+    <li>Assuming Web Crypto means the names are weighted by real-world popularity.</li>
+    <li>Expecting the length or style filters to affect surnames.</li>
+    <li>Assuming a generated first-name/surname pairing is culturally typical.</li>
+    <li>Requesting more unique names than the active filters can produce.</li>
+    <li>Expecting favorites or recent history to sync across devices.</li>
+   </ul>
+
+   <h3>Related Utiliverse Tools</h3>
+   <div class="related-grid">
+    <a class="related-link" href="../Baby_Name_Finder/"><strong>Baby Name Finder</strong><span>Browse a descriptive collection with meaning notes, origin filters, styles, and favorites.</span></a>
+    <a class="related-link" href="../Random_String_Generator/"><strong>Random String Generator</strong><span>Create arbitrary random strings when names are not the right type of synthetic data.</span></a>
+    <a class="related-link" href="../Random_Number_Generator/"><strong>Random Number Generator</strong><span>Generate random numeric values for drawings, testing, and simulations.</span></a>
+   </div>
+
+   <p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 3, 2026 · Built-in first/surname collections, exact tradition matching, first-name filters, Web Crypto rejection sampling, duplicate retry ceiling, middle-name logic, exclusions, favorites/history localStorage, copy fallback, and theme behavior reviewed against the current implementation.</p>
+  </section>
+
+<section class="info-section">
    <h2>Random Name Generator FAQ</h2>
    <details class="faq-item"><summary>Can I generate full names?</summary><p>Yes. Select Full Name to combine a random first name and surname. You can also enable an optional middle name.</p></details>
    <details class="faq-item"><summary>Can I generate multiple names at once?</summary><p>Yes. Enter any quantity from 1 to 100 and the tool will produce a batch of names.</p></details>
@@ -584,6 +697,11 @@ body.dark-mode .icon-btn{
    <details class="faq-item"><summary>Can I prevent repeats?</summary><p>Yes. Avoid duplicate generated names is enabled by default. The generator will retry duplicate results within the same batch when enough unique combinations are available.</p></details>
    <details class="faq-item"><summary>Can I save favorite names?</summary><p>Yes. Select the heart on any generated name. Favorites are saved locally in your browser and can be copied as a shortlist.</p></details>
    <details class="faq-item"><summary>Are the naming-tradition labels exact?</summary><p>No. Names can belong to more than one linguistic or cultural tradition, and usage changes over time. The filters are broad discovery categories rather than definitive identity labels.</p></details>
+    <details class="faq-item"><summary>How many names are built into this version?</summary><p>This version contains 247 first-name records and 160 surname entries across 10 naming-tradition labels.</p></details>
+    <details class="faq-item"><summary>Are names weighted by popularity?</summary><p>No. Each entry in the active filtered pool is selected with equal probability. The generator does not use live birth statistics or popularity rankings.</p></details>
+    <details class="faq-item"><summary>What happens if I request more unique names than the filters can provide?</summary><p>The generator retries duplicate full results up to a fixed attempt ceiling. If it cannot produce the requested number of distinct results, it returns the unique names it found and shows a warning.</p></details>
+    <details class="faq-item"><summary>Does the length filter also apply to surnames?</summary><p>No. First-Name Length applies only to the first-name pool. Surname length is not filtered.</p></details>
+    <details class="faq-item"><summary>Do favorites and recent generations sync across devices?</summary><p>No. Both are stored in localStorage in the current browser. Recent history keeps only the five latest batches.</p></details>
   </section>
 
   <!-- GOOGLE ADSENSE: BOTTOM / AFTER-CONTENT INSERTION POINT -->
