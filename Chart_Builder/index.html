@@ -228,51 +228,37 @@
       .theme-toggle{width:38px;height:38px}
       .preview-wrap{min-height:360px}
     }
-  </style>
+  
+.method-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
+.method-card{border:1px solid #dbe3ee;background:#fff;border-radius:14px;padding:15px}
+.method-card strong{display:block;color:#0f172a;margin-bottom:5px}
+.method-card span{display:block;color:#475569;font-size:13px;line-height:1.65}
+.example-box{display:block;margin:12px 0;padding:12px 14px;border-radius:12px;border:1px solid #dbe3ee;background:#f8fafc;color:#0f172a;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.caution-note{border:1px solid #fde68a;background:#fffbeb;border-radius:14px;padding:16px;color:#92400e;line-height:1.7;margin:18px 0}
+.caution-note strong{color:#78350f}
+.related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:14px}
+.related-link{display:block;border:1px solid #dbe3ee;background:#fff;border-radius:14px;padding:15px;text-decoration:none}
+.related-link strong{display:block;color:#0f172a;margin-bottom:4px}
+.related-link span{display:block;color:#475569;font-size:12px;line-height:1.55}
+.related-link:hover{border-color:#818cf8}
+.local-processing-note{font-size:.78rem;line-height:1.6;color:#64748b;margin-top:14px}
+body.dark-mode .method-card,body.dark-mode .related-link{background:#0f172a;border-color:#334155}
+body.dark-mode .method-card strong,body.dark-mode .related-link strong{color:#e2e8f0}
+body.dark-mode .method-card span,body.dark-mode .related-link span{color:#94a3b8}
+body.dark-mode .example-box{background:#0f172a;color:#e2e8f0;border-color:#334155}
+body.dark-mode .caution-note{background:rgba(120,53,15,.24);border-color:#92400e;color:#fde68a}
+body.dark-mode .caution-note strong{color:#fef3c7}
+body.dark-mode .local-processing-note{color:#94a3b8}
+@media(max-width:700px){.method-grid,.related-grid{grid-template-columns:1fr}}
+
+</style>
 
   <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"WebApplication",
-    "name":"Utiliverse Chart Builder",
-    "url":"https://utiliverse.app/Chart_Builder/",
-    "applicationCategory":"UtilitiesApplication",
-    "operatingSystem":"Any",
-    "browserRequirements":"Requires a modern web browser with JavaScript enabled.",
-    "description":"Free browser-based chart builder for creating bar, line, area, pie and scatter charts from CSV or pasted table data.",
-    "isAccessibleForFree":true,
-    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
-    "featureList":[
-      "Paste CSV or spreadsheet data",
-      "Automatic delimiter detection",
-      "Bar charts",
-      "Line charts",
-      "Area charts",
-      "Pie charts",
-      "Scatter plots",
-      "Custom chart titles and axis labels",
-      "Legend, grid and data-label toggles",
-      "Per-series color customization",
-      "PNG export",
-      "SVG export",
-      "Client-side chart generation"
-    ]
-  }
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Chart Builder","url":"https://utiliverse.app/Chart_Builder/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based chart builder for pasted CSV or spreadsheet data with delimiter detection, quoted-field parsing, multiple numeric formats, bar/line/area/pie/scatter charts, styling controls and PNG/SVG export through ApexCharts.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Paste CSV or spreadsheet data","Automatic delimiter detection from tabs, commas, semicolons and pipes","Quoted-field delimiter handling","Doubled-quote unescaping","Dot and decimal-comma number formats","Header-row toggle","Category-column toggle","Bar charts","Line charts","Area charts","Pie charts using the first suitable numeric series","Scatter plots using the first two fully numeric columns","Custom chart titles and axis labels","Legend, grid and data-label toggles","Straight, smooth and step line styles","Per-series or per-slice color customization","12-color palette reset","PNG export","SVG export","Browser-local parsing and chart generation"]}
   </script>
 
   <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {"@type":"Question","name":"What data can I paste into the chart builder?","acceptedAnswer":{"@type":"Answer","text":"You can paste comma-separated CSV, tab-separated spreadsheet data, semicolon-separated values, or pipe-delimited data."}},
-      {"@type":"Question","name":"Which chart types are supported?","acceptedAnswer":{"@type":"Answer","text":"The tool supports bar, line, area, pie and scatter charts."}},
-      {"@type":"Question","name":"Can I create a chart from Excel or Google Sheets data?","acceptedAnswer":{"@type":"Answer","text":"Yes. Copy a table range and paste it into the data box. Spreadsheet copies are normally tab-separated and can be detected automatically."}},
-      {"@type":"Question","name":"Can I export the chart?","acceptedAnswer":{"@type":"Answer","text":"Yes. You can export the current chart as PNG or SVG."}},
-      {"@type":"Question","name":"Does my data get uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Parsing and chart generation happen in your browser. The page loads its chart-rendering library from a CDN, but the pasted chart data is not submitted to Utiliverse."}},
-      {"@type":"Question","name":"How should scatter plot data be formatted?","acceptedAnswer":{"@type":"Answer","text":"Use two numeric columns representing X and Y values. A header row can be used to name the two dimensions."}}
-    ]
-  }
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What data can I paste into the chart builder?","acceptedAnswer":{"@type":"Answer","text":"You can paste comma-separated CSV, tab-separated spreadsheet data, semicolon-separated values, or pipe-delimited data."}},{"@type":"Question","name":"Which chart types are supported?","acceptedAnswer":{"@type":"Answer","text":"The tool supports bar, line, area, pie and scatter charts."}},{"@type":"Question","name":"Can I create a chart from Excel or Google Sheets data?","acceptedAnswer":{"@type":"Answer","text":"Yes. Copy a table range and paste it into the data box. Spreadsheet copies are normally tab-separated and can be detected automatically."}},{"@type":"Question","name":"Can I export the chart?","acceptedAnswer":{"@type":"Answer","text":"Yes. You can export the current chart as PNG or SVG."}},{"@type":"Question","name":"Does my data get uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Parsing and chart generation happen in your browser. The page loads its chart-rendering library from a CDN, but the pasted chart data is not submitted to Utiliverse."}},{"@type":"Question","name":"How should scatter plot data be formatted?","acceptedAnswer":{"@type":"Answer","text":"Use two numeric columns representing X and Y values. A header row can be used to name the two dimensions."}},{"@type":"Question","name":"Can the parser handle multiline quoted CSV fields?","acceptedAnswer":{"@type":"Answer","text":"No. The parser supports quoted delimiters and doubled quotes within a physical line, but input is split into lines before fields are parsed."}},{"@type":"Question","name":"What happens when a bar or line series contains a nonnumeric cell?","acceptedAnswer":{"@type":"Answer","text":"If the column has at least one numeric value it can still be plotted, while cells that fail numeric parsing become null and may appear as gaps or missing marks."}},{"@type":"Question","name":"Can a scatter plot use three or more numeric dimensions?","acceptedAnswer":{"@type":"Answer","text":"No. The current scatter implementation uses only the first two columns where every row parses as numeric."}},{"@type":"Question","name":"Why does my pie chart ignore extra numeric columns?","acceptedAnswer":{"@type":"Answer","text":"The current implementation renders one pie and uses only the first suitable numeric series after the optional category-label column."}},{"@type":"Question","name":"Does the chart builder sort or aggregate my data?","acceptedAnswer":{"@type":"Answer","text":"No. The builder visualizes the supplied values and does not automatically sort, group, aggregate, average, infer dates or perform statistical analysis."}}]}
   </script>
 </head>
 
@@ -494,6 +480,8 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
     </div>
   </div>
 
+  <p class="local-processing-note">Browser-based processing: pasted-table parsing, delimiter detection, numeric parsing, chart configuration, color changes, rendering, and export preparation are handled locally in your browser. Your dataset is not submitted to a Utiliverse processing server. The page itself loads ApexCharts, interface resources, and advertising resources from external providers.</p>
+
   <!-- =========================================================
        GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
        Paste approved Google AdSense code here after approval.
@@ -565,6 +553,101 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
         Choose PNG when you need a standard raster image for email, documents, social media, or quick insertion into a presentation. Choose SVG when you want a scalable vector file that can be enlarged without becoming blurry. SVG is particularly useful for print, slides, web design, and later editing in vector-graphics software.
       </p>
 
+
+      <h2 class="mt-8">Parsing Methodology, Chart Rules, and Important Limits</h2>
+      <p>The builder parses pasted text into rows and columns, converts numeric-looking cells with the selected number-format rule, transforms that table into the data structure expected by the selected chart type, and then renders it with ApexCharts. The parser is intentionally lightweight and optimized for ordinary CSV and spreadsheet paste workflows rather than every edge case in formal CSV standards.</p>
+
+      <div class="method-grid">
+        <div class="method-card"><strong>Delimiter auto-detection</strong><span>The tool inspects up to the first eight nonblank lines and compares tab, comma, semicolon, and pipe candidates using field count and consistency.</span></div>
+        <div class="method-card"><strong>Quoted values</strong><span>Double-quoted fields can contain the active delimiter, and doubled quotation marks inside a quoted field are unescaped to one quote.</span></div>
+        <div class="method-card"><strong>Row normalization</strong><span>Rows with fewer cells are padded with empty strings until every row has the same number of columns as the widest parsed row.</span></div>
+        <div class="method-card"><strong>Numeric conversion</strong><span>Cells are parsed according to the selected decimal mode after a limited set of currency and percent symbols is removed.</span></div>
+      </div>
+
+      <h3>Worked example: CSV with a quoted comma</h3>
+      <code class="example-box">Region,Revenue
+"New York, NY",12500
+Boston,9800
+
+With comma delimiter:
+"New York, NY" remains one field
+because the comma appears inside quotes.
+
+Result:
+Category = New York, NY
+Revenue = 12500</code>
+
+      <h3>Worked example: decimal-comma parsing</h3>
+      <code class="example-box">Input value:
+1.234,56
+
+Decimal mode:
+Decimal comma
+
+Processing:
+remove "." thousands separators → 1234,56
+replace "," decimal mark → 1234.56
+
+Parsed number:
+1234.56</code>
+
+      <h3>Auto-detection samples only the first eight nonblank lines</h3>
+      <p>The delimiter detector does not inspect the entire dataset. It scores each supported delimiter by average field count and variance across the first eight nonblank lines. Punctuation-heavy text can occasionally make the wrong delimiter look more consistent, so manual delimiter selection remains the reliable fallback.</p>
+
+      <h3>This is not a full RFC 4180 CSV parser</h3>
+      <p>The line parser supports quoted fields and doubled quotes within one physical line, but the input is split into lines before field parsing. A quoted field that itself contains a real line break is therefore not handled as one CSV record. Multiline quoted CSV should be normalized before pasting.</p>
+
+      <h3>Decimal-comma data can conflict with comma-delimited CSV</h3>
+      <p>When Decimal comma mode is selected, the number parser removes periods and converts a comma into the decimal point. If your data also uses commas as column separators, values such as <code>1.234,56</code> should be quoted or, preferably, supplied with a semicolon or tab delimiter to avoid ambiguity.</p>
+
+      <h3>Currency and percent cleanup is intentionally limited</h3>
+      <p>The numeric parser strips a small built-in set of symbols—<code>$ € £ ¥ ₹ ₩ %</code>—before calling JavaScript's Number conversion. Other currency codes, localized spacing, accounting parentheses, scientific notation conventions, or text annotations may need to be cleaned before pasting.</p>
+
+      <h3>Bar, line, and area charts allow partial numeric columns</h3>
+      <p>A column becomes a plotted series if at least one cell can be parsed as a number. Cells that fail numeric parsing in that series become <code>null</code>, which can create gaps or missing marks. The tool does not impute, interpolate, or replace those missing values.</p>
+
+      <h3>Scatter plots require two fully numeric columns</h3>
+      <p>Scatter mode scans columns from left to right and keeps only columns where every data row parses successfully as numeric. The first two qualifying numeric columns become X and Y. Additional numeric columns are ignored by the current scatter implementation.</p>
+
+      <h3>Pie charts use only one numeric series</h3>
+      <p>When category labels are enabled, the first column supplies slice labels and the parser searches from the second column onward for the first fully numeric column. That column becomes the pie values. Later numeric columns are ignored because this implementation renders one pie at a time.</p>
+
+      <h3>Chart styling does not change the underlying data</h3>
+      <p>Chart title, X/Y labels, legend, grid, data-label toggle, height, curve style, and colors affect presentation only. The line-style setting matters for line and area charts; it does not change bar, pie, or scatter data.</p>
+
+      <h3>Color controls map differently for pie charts</h3>
+      <p>For bar, line, area, and scatter charts, colors correspond to series. For pie charts, the same color array maps across slices because the pie's <code>seriesNames</code> are its labels. Reset Colors cycles through the built-in 12-color Utiliverse palette.</p>
+
+      <h3>Rendering is debounced by 120 milliseconds</h3>
+      <p>Most edits schedule a chart rebuild after a short delay rather than rendering on every keystroke immediately. This reduces unnecessary redraws while typing. Large datasets can still become slow because parsing, DOM updates, SVG/canvas rendering, labels, and export work all happen in the browser tab.</p>
+
+      <h3>Export uses ApexCharts' rendered output</h3>
+      <p>PNG and SVG downloads are generated through ApexCharts' <code>dataURI()</code> method. The filename is based on the chart title after reserved filename characters are replaced and spaces are converted to hyphens. PNG is raster output; SVG is vector markup and is better suited to scaling and later vector editing.</p>
+
+      <h3>The tool does not analyze or reinterpret your dataset</h3>
+      <p>It does not sort rows, aggregate categories, infer dates, calculate averages, test significance, compute correlations, normalize units, or verify that a chosen chart type is statistically or semantically appropriate. It visualizes the values you provide using the selected settings.</p>
+
+      <div class="caution-note"><strong>A technically valid chart can still be misleading.</strong> Category order, missing values, unequal intervals, axis choices, too many pie slices, inappropriate smoothing, or a poor chart type can distort interpretation. Review the source data and visual encoding before using an exported chart in a report or decision.</div>
+
+      <h3>Common mistakes</h3>
+      <ul>
+        <li>Using comma as both the field delimiter and the decimal mark without quoting or changing delimiters.</li>
+        <li>Assuming delimiter auto-detection will always understand punctuation-heavy text.</li>
+        <li>Expecting scatter mode to plot more than the first two fully numeric columns.</li>
+        <li>Expecting pie mode to use every numeric series in the table.</li>
+        <li>Treating blank or nonnumeric cells as zeros when this implementation actually renders them as missing/null values.</li>
+        <li>Using smooth lines on unordered categories and implying a continuous trend that the data does not support.</li>
+      </ul>
+
+      <h3>Related Utiliverse Tools</h3>
+      <div class="related-grid">
+        <a class="related-link" href="../JSON_to_CSV_Converter/"><strong>JSON to CSV Converter</strong><span>Convert structured JSON records to CSV before charting tabular data.</span></a>
+        <a class="related-link" href="../Percentage_Calculator/"><strong>Percentage Calculator</strong><span>Calculate percentages or changes before plotting the resulting values.</span></a>
+        <a class="related-link" href="../Text_Compare/"><strong>Text Compare</strong><span>Compare source text when checking data or label changes between versions.</span></a>
+      </div>
+
+      <p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 3, 2026 · Delimiter detection, quoted-field parsing, decimal modes, row padding, numeric-series selection, pie/scatter rules, color mapping, ApexCharts rendering, PNG/SVG export, debounce behavior, and theme handling reviewed against the current implementation.</p>
+
       <h2 class="mt-8">Practical Uses for the Chart Builder</h2>
 
       <h3>Business and financial reporting</h3>
@@ -634,6 +717,30 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
       <details class="faq-item">
         <summary>What data does a scatter plot need?</summary>
         <p>A scatter plot needs at least two numeric columns. The first supplies X coordinates and the second supplies Y coordinates.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can the parser handle multiline quoted CSV fields?</summary>
+        <p>No. Quoted delimiters and doubled quotes are supported within a physical line, but the current parser splits the input into lines before parsing fields, so quoted line breaks are not preserved as one record.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>What happens when a bar or line series contains a nonnumeric cell?</summary>
+        <p>If the column contains at least one numeric value, it can still become a series. Cells that do not parse as numbers are stored as null and can appear as gaps or missing marks.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Can a scatter plot use three or more numeric dimensions?</summary>
+        <p>No. The current scatter implementation finds fully numeric columns and uses only the first two as X and Y.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Why does my pie chart ignore extra numeric columns?</summary>
+        <p>The tool renders one pie at a time and uses only the first suitable numeric series after the optional category-label column.</p>
+      </details>
+
+      <details class="faq-item">
+        <summary>Does the chart builder sort or aggregate my data?</summary>
+        <p>No. It visualizes the rows and values you provide. It does not automatically sort, group, aggregate, average, infer dates, or perform statistical analysis.</p>
       </details>
     </section>
 
