@@ -144,13 +144,16 @@ body.light-mode .article a{color:#4f46e5}
     <div class="footer-right">
       <nav class="footer-links" aria-label="Footer navigation">
         <a href="https://utiliverse.app/">Home</a>
-        <a href="https://utiliverse.app/Privacy_Policy.html">Privacy Policy</a>
-        <a href="https://utiliverse.app/Contact_Info.html">Contact</a>
-        <a href="https://utiliverse.app/About.html">About</a>
+        <a href="/Guides.html">Guides</a>
+        <a href="/Updates.html">Updates</a>
+        <a href="/Editorial_Methodology.html">Editorial &amp; Methodology</a>
+        <a href="/About.html">About</a>
+        <a href="/Privacy_Policy.html">Privacy Policy</a>
+        <a href="/Terms_of_Service.html">Terms</a>
+        <a href="/Contact_Info.html">Contact</a>
       </nav>
-      
     </div>
   </div>
-<nav class="b4-nav b4-dark" aria-label="Resources and site information"><a href="/Guides.html">Guides</a><a href="/Updates.html">Updates</a><a href="/Editorial_Methodology.html">Editorial &amp; Methodology</a><a href="/About.html">About</a><a href="/Privacy_Policy.html">Privacy Policy</a><a href="/Terms_of_Service.html">Terms</a><a href="/Contact_Info.html">Contact</a></nav></footer>
+</footer>
 <script>(()=>{"use strict";const $=id=>document.getElementById(id);function applyTheme(theme){const light=theme==="light";const moon=$("moonIcon"),sun=$("sunIcon"),toggle=$("themeToggle"),metaTheme=document.querySelector('meta[name="theme-color"]');document.body.classList.toggle("light-mode",light);moon.classList.toggle("theme-hidden",!light);sun.classList.toggle("theme-hidden",light);const label=light?"Switch to dark mode":"Switch to light mode";toggle.setAttribute("aria-label",label);toggle.title=label;if(metaTheme)metaTheme.setAttribute("content",light?"#f8fafc":"#020617")}const savedTheme=localStorage.getItem("utiliverse-theme");const initialTheme=savedTheme==="light"||savedTheme==="dark"?savedTheme:(window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");applyTheme(initialTheme);$("themeToggle").addEventListener("click",()=>{const next=document.body.classList.contains("light-mode")?"dark":"light";localStorage.setItem("utiliverse-theme",next);applyTheme(next)})})();</script>
 </body></html>
