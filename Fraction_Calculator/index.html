@@ -5,17 +5,17 @@
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fraction Calculator & Decimal Converter | Utiliverse</title>
-    <meta name="description" content="Free online fraction calculator to add, subtract, multiply and divide fractions or mixed numbers. Simplify results and convert decimals to fractions or fractions to decimals instantly.">
+    <title>Fraction Calculator – Add, Subtract, Multiply, Divide & Simplify | Utiliverse</title>
+    <meta name="description" content="Free fraction calculator to add, subtract, multiply and divide fractions or mixed numbers, simplify answers, and convert fractions to decimals or decimals to fractions.">
     <meta name="robots" content="index,follow">
     <link rel="canonical" href="https://utiliverse.app/Fraction_Calculator/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Utiliverse">
-    <meta property="og:title" content="Fraction Calculator & Decimal Converter | Utiliverse">
+    <meta property="og:title" content="Fraction Calculator – Add, Subtract, Multiply, Divide & Simplify | Utiliverse">
     <meta property="og:description" content="Add, subtract, multiply and divide fractions or mixed numbers, then convert between fractions and decimals with this free browser-based calculator.">
     <meta property="og:url" content="https://utiliverse.app/Fraction_Calculator/">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Fraction Calculator & Decimal Converter | Utiliverse">
+    <meta name="twitter:title" content="Fraction Calculator – Add, Subtract, Multiply, Divide & Simplify | Utiliverse">
     <meta name="twitter:description" content="Calculate fractions and mixed numbers, simplify results, and convert between fractions and decimals.">
     
     <!-- Tailwind CSS -->
@@ -191,10 +191,29 @@ html.dark .caution-note strong{color:#fef3c7}
   .method-grid,.related-grid{grid-template-columns:1fr}
 }
 
+
+.fraction-ref-wrap{margin:18px 0;border:1px solid #cbd5e1;border-radius:15px;overflow:auto;background:#fff}
+.fraction-ref{width:100%;border-collapse:collapse;min-width:800px}
+.fraction-ref th,.fraction-ref td{padding:11px 13px;border-top:1px solid #e2e8f0;text-align:left;vertical-align:top}
+.fraction-ref thead th{border-top:0;background:#f8fafc;color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.07em}
+.fraction-ref td{color:#475569;font-size:13px}
+.fraction-ref td:first-child{font-weight:850;color:#1e293b}
+.intent-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0}
+.intent-card{border:1px solid #cbd5e1;background:#fff;border-radius:14px;padding:15px}
+.intent-card strong{display:block;color:#1e293b;margin-bottom:5px}
+.intent-card span{display:block;color:#64748b;font-size:13px;line-height:1.65}
+html.dark .fraction-ref-wrap,html.dark .intent-card{background:#0f172a;border-color:#334155}
+html.dark .fraction-ref th{background:#1e293b;color:#94a3b8;border-color:#334155}
+html.dark .fraction-ref td{color:#cbd5e1;border-color:#334155}
+html.dark .fraction-ref td:first-child{color:#e2e8f0}
+html.dark .intent-card strong{color:#e2e8f0}
+html.dark .intent-card span{color:#94a3b8}
+@media(max-width:800px){.intent-grid{grid-template-columns:1fr}}
+
 </style>
 
     <!-- SEO Structured Data -->
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Fraction Calculator","url":"https://utiliverse.app/Fraction_Calculator/","applicationCategory":"EducationalApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based fraction calculator for exact integer fraction arithmetic, mixed-number calculations, simplification, decimal-to-fraction conversion and fraction-to-decimal conversion, with documented finite-precision limits.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Add fractions","Subtract fractions","Multiply fractions","Divide fractions","Mixed number calculations","Greatest-common-divisor simplification","Simplified fraction results","Decimal to fraction conversion from finite typed digits","Fraction to decimal conversion","Decimal display rounded to at most 8 places","Division-by-zero validation","Negative value handling"]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Fraction Calculator","url":"https://utiliverse.app/Fraction_Calculator/","applicationCategory":"EducationalApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based fraction calculator to add, subtract, multiply and divide fractions or mixed numbers, simplify results, convert mixed and improper fractions, and convert between fractions and decimals.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Add fractions","Subtract fractions","Multiply fractions","Divide fractions","Mixed number calculations","Greatest-common-divisor simplification","Simplified fraction results","Decimal to fraction conversion from finite typed digits","Fraction to decimal conversion","Decimal display rounded to at most 8 places","Division-by-zero validation","Negative value handling","Unlike-denominator fraction addition","Unlike-denominator fraction subtraction","Mixed number to improper fraction conversion","Improper fraction to mixed number display","Fraction simplification reference","Proper and improper fraction guidance","Fraction math quick reference"]}</script>
 </head>
 <!--
 SEO TARGET CLUSTER
@@ -236,7 +255,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
                 <span class="title-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24"><circle cx="7" cy="7" r="2"/><circle cx="17" cy="17" r="2"/><path d="M6 18 18 6"/><path d="M4 12h16"/></svg>
                 </span>
-                <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">Fraction Calculator <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-brand-700 dark:from-brand-400 dark:to-brand-600">& Decimal Converter</span></h1>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">Fraction Calculator <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-brand-700 dark:from-brand-400 dark:to-brand-600">– Mixed Numbers & Decimals</span></h1>
             </div>
             <p class="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto">Use this free online fraction calculator to add, subtract, multiply or divide fractions and mixed numbers, simplify the result, and convert between fractions and decimals.</p>
         </div>
@@ -490,7 +509,53 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
                 <a class="related-link" href="../Unit_Currency_Converter/"><strong>Unit &amp; Currency Converter</strong><span>Convert measurements and latest-available currency rates.</span></a>
             </div>
 
-            <p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 1, 2026 · Fraction arithmetic, mixed-number handling, simplification, decimal conversion and display precision reviewed against the current implementation.</p>
+            <p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 2026 · Fraction arithmetic, mixed-number handling, simplification, decimal conversion and display precision reviewed against the current implementation.</p>
+
+
+            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-8 leading-tight">
+                Fraction Math Quick Reference
+            </h2>
+            <p class="lead text-xl text-slate-600 dark:text-slate-300 mb-8">
+                The calculator handles fraction arithmetic automatically, but these rules explain the operations behind the result and match the most common fraction-calculator tasks.
+            </p>
+
+            <div class="fraction-ref-wrap">
+              <table class="fraction-ref">
+                <thead><tr><th>Task</th><th>Rule</th><th>Example</th></tr></thead>
+                <tbody>
+                  <tr><td>Add fractions</td><td>Use a common denominator, add numerators, then simplify.</td><td>1/3 + 1/4 = 4/12 + 3/12 = 7/12</td></tr>
+                  <tr><td>Subtract fractions</td><td>Use a common denominator, subtract numerators, then simplify.</td><td>3/4 − 1/6 = 9/12 − 2/12 = 7/12</td></tr>
+                  <tr><td>Multiply fractions</td><td>Multiply numerators and denominators, then simplify.</td><td>2/3 × 3/5 = 6/15 = 2/5</td></tr>
+                  <tr><td>Divide fractions</td><td>Multiply by the reciprocal of the second fraction.</td><td>3/4 ÷ 2/5 = 3/4 × 5/2 = 15/8 = 1 7/8</td></tr>
+                  <tr><td>Simplify a fraction</td><td>Divide numerator and denominator by their greatest common divisor.</td><td>12/18 ÷ 6 = 2/3</td></tr>
+                  <tr><td>Mixed number → improper</td><td>Whole × denominator + numerator; keep the denominator.</td><td>2 1/3 = 7/3</td></tr>
+                  <tr><td>Improper → mixed number</td><td>Divide numerator by denominator; use the quotient and remainder.</td><td>11/4 = 2 3/4</td></tr>
+                  <tr><td>Fraction → decimal</td><td>Divide numerator by denominator.</td><td>5/8 = 0.625</td></tr>
+                  <tr><td>Decimal → fraction</td><td>Write the finite decimal over a power of 10, then reduce.</td><td>0.375 = 375/1000 = 3/8</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="intent-grid">
+              <div class="intent-card"><strong>Add fractions</strong><span>Supports proper, improper and mixed-number inputs, including unlike denominators.</span></div>
+              <div class="intent-card"><strong>Subtract fractions</strong><span>Uses exact integer fraction arithmetic and simplifies the final answer.</span></div>
+              <div class="intent-card"><strong>Multiply fractions</strong><span>Multiplies numerator by numerator and denominator by denominator before reduction.</span></div>
+              <div class="intent-card"><strong>Divide fractions</strong><span>Uses the reciprocal of the second fraction and blocks division by zero.</span></div>
+              <div class="intent-card"><strong>Mixed numbers</strong><span>Whole-number and fractional parts are converted internally to improper fractions for calculation.</span></div>
+              <div class="intent-card"><strong>Fraction ↔ decimal</strong><span>Convert finite typed decimals to simplified fractions or divide a fraction to get its decimal equivalent.</span></div>
+            </div>
+
+            <h3 class="text-2xl font-bold mt-12 mb-6 text-slate-800 dark:text-slate-100 border-b pb-2 border-slate-200 dark:border-slate-800">How to simplify fractions</h3>
+            <p>A fraction is simplified by dividing its numerator and denominator by their greatest common divisor. For example, 18/24 has a greatest common divisor of 6, so 18 ÷ 6 = 3 and 24 ÷ 6 = 4. The simplified result is 3/4. This calculator applies that reduction automatically after fraction arithmetic and decimal-to-fraction conversion.</p>
+
+            <h3 class="text-2xl font-bold mt-12 mb-6 text-slate-800 dark:text-slate-100 border-b pb-2 border-slate-200 dark:border-slate-800">Mixed number calculator</h3>
+            <p>Enter the whole-number part separately from the numerator and denominator. A mixed number such as 3 2/5 becomes 17/5 internally before addition, subtraction, multiplication or division. When the result is an improper fraction, the calculator can also show the equivalent mixed number.</p>
+
+            <h3 class="text-2xl font-bold mt-12 mb-6 text-slate-800 dark:text-slate-100 border-b pb-2 border-slate-200 dark:border-slate-800">Proper fractions, improper fractions, and whole-number results</h3>
+            <p>A proper fraction has a numerator smaller than its denominator, such as 3/5. An improper fraction has a numerator greater than or equal to its denominator, such as 9/4. If a simplified denominator becomes 1, the result is displayed as a whole number rather than as a fraction over 1.</p>
+
+            <h3 class="text-2xl font-bold mt-12 mb-6 text-slate-800 dark:text-slate-100 border-b pb-2 border-slate-200 dark:border-slate-800">Fractions with unlike denominators</h3>
+            <p>For addition and subtraction, fractions with different denominators must be represented using a common denominator. The calculator performs the equivalent cross-multiplication automatically, so you do not need to find the least common denominator manually before entering the values.</p>
 
             <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white mb-8 leading-tight">
                 How to Use the Fraction Calculator
@@ -833,19 +898,22 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 
         // --- 5. FAQ Data & Rendering (8 Questions) ---
         const faqs = [
-            { q: "How do I add fractions with different denominators?", a: "Find a common denominator, rewrite each fraction using that denominator, add the numerators, and simplify the result. For example, 1/3 + 1/4 becomes 4/12 + 3/12 = 7/12." },
-            { q: "How do I subtract fractions?", a: "Use a common denominator, subtract the numerators, keep the denominator, and then reduce the result to simplest form." },
-            { q: "How do I multiply fractions?", a: "Multiply the numerators together and multiply the denominators together, then simplify. For example, 2/3 × 3/5 = 6/15 = 2/5." },
-            { q: "How do I divide fractions?", a: "Multiply the first fraction by the reciprocal of the second fraction. For example, 3/4 ÷ 2/5 becomes 3/4 × 5/2 = 15/8 = 1 7/8." },
-            { q: "What is a mixed number?", a: "A mixed number combines a whole number and a proper fraction, such as 2 1/4. This calculator converts mixed numbers to improper fractions internally so they can be calculated accurately." },
-            { q: "How do I convert a decimal to a fraction?", a: "Write the decimal as an integer over a power of 10 based on the number of decimal places, then reduce the fraction. For example, 0.75 = 75/100 = 3/4." },
-            { q: "How do I convert a fraction to a decimal?", a: "Divide the numerator by the denominator. For example, 3/4 equals 0.75 and 5/8 equals 0.625." },
-            { q: "What does simplest form mean?", a: "A fraction is in simplest form when the numerator and denominator have no common factor greater than one. For example, 12/18 reduces to 2/3." },
-            { q: "Can this calculator convert repeating decimals exactly?", a: "The decimal-to-fraction tool converts the finite decimal digits you enter. Infinite repeating decimals such as 0.333... require special repeating-decimal logic and are not inferred automatically from a finite typed value." },
-            { q: "How many decimal places are shown for fraction results?", a: "Non-integer decimal equivalents are rounded for display to at most 8 decimal places. The simplified fraction remains the exact fraction result produced by the calculator's integer arithmetic." },
-            { q: "How are negative denominators handled?", a: "The calculator normalizes the sign so the denominator is positive and the sign is carried by the numerator in the final result." },
-            { q: "Can very large numbers lose precision?", a: "Yes. The tool uses JavaScript Number values, so extremely large integers or very long decimal inputs can exceed exact integer precision or show floating-point rounding effects." },
-            { q: "Why is dividing by a fraction with numerator zero blocked?", a: "Dividing by a fraction such as 0/5 is equivalent to dividing by zero, which is mathematically undefined." }
+            {"q":"How do I add fractions with different denominators?","a":"Find a common denominator, rewrite each fraction using that denominator, add the numerators, and simplify the result. For example, 1/3 + 1/4 becomes 4/12 + 3/12 = 7/12."},
+            {"q":"How do I subtract fractions?","a":"Use a common denominator, subtract the numerators, keep the denominator, and then reduce the result to simplest form."},
+            {"q":"How do I multiply fractions?","a":"Multiply the numerators together and multiply the denominators together, then simplify. For example, 2/3 × 3/5 = 6/15 = 2/5."},
+            {"q":"How do I divide fractions?","a":"Multiply the first fraction by the reciprocal of the second fraction. For example, 3/4 ÷ 2/5 becomes 3/4 × 5/2 = 15/8 = 1 7/8."},
+            {"q":"How do I simplify a fraction?","a":"Divide the numerator and denominator by their greatest common divisor. For example, 18/24 simplifies to 3/4 because both numbers divide evenly by 6."},
+            {"q":"What is a mixed number?","a":"A mixed number combines a whole number and a proper fraction, such as 2 1/4. This calculator converts mixed numbers to improper fractions internally so they can be calculated."},
+            {"q":"How do I convert a mixed number to an improper fraction?","a":"Multiply the whole number by the denominator, add the numerator, and place the result over the original denominator. For example, 2 1/3 becomes 7/3."},
+            {"q":"How do I convert an improper fraction to a mixed number?","a":"Divide the numerator by the denominator. The quotient becomes the whole number and the remainder becomes the new numerator. For example, 11/4 becomes 2 3/4."},
+            {"q":"How do I convert a decimal to a fraction?","a":"Write the decimal as an integer over a power of 10 based on the number of decimal places, then reduce the fraction. For example, 0.75 = 75/100 = 3/4."},
+            {"q":"How do I convert a fraction to a decimal?","a":"Divide the numerator by the denominator. For example, 3/4 equals 0.75 and 5/8 equals 0.625."},
+            {"q":"What does simplest form mean?","a":"A fraction is in simplest form when the numerator and denominator have no common factor greater than one. For example, 12/18 reduces to 2/3."},
+            {"q":"Can this calculator convert repeating decimals exactly?","a":"The decimal-to-fraction tool converts the finite decimal digits you enter. Infinite repeating decimals such as 0.333... are not inferred automatically from a finite typed value."},
+            {"q":"How many decimal places are shown for fraction results?","a":"Non-integer decimal equivalents are rounded for display to at most 8 decimal places. The simplified fraction remains the exact fraction result produced by the calculator's integer arithmetic."},
+            {"q":"How are negative denominators handled?","a":"The calculator normalizes the sign so the denominator is positive and the sign is carried by the numerator in the final result."},
+            {"q":"Why is a denominator of zero not allowed?","a":"A fraction with denominator zero is undefined, so the calculator rejects zero denominators and also blocks division by a fraction whose numerator is zero."},
+            {"q":"Can very large numbers lose precision?","a":"Yes. The tool uses JavaScript Number values, so extremely large integers or very long decimal inputs can exceed exact integer precision or show floating-point rounding effects."}
         ];
 
         const faqContainer = document.getElementById('faq-container');
