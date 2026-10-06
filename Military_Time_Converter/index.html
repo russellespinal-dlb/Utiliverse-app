@@ -5,18 +5,18 @@
      crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Military Time Converter – 24 Hour to AM/PM | Utiliverse</title>
-<meta name="description" content="Free military time converter. Convert 24-hour military time to 12-hour AM/PM time or regular time back to military time. Supports HHMM and HH:MM formats.">
+<title>Military Time Converter – 24-Hour Clock & Conversion Chart | Utiliverse</title>
+<meta name="description" content="Free military time converter with a 24-hour conversion chart. Convert military time to AM/PM and standard time to military time, including 1700, 1800, 1830, 2000, 2100, 12 AM, and 12 PM.">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
 <meta name="theme-color" content="#020617">
 <link rel="canonical" href="https://utiliverse.app/Military_Time_Converter/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Utiliverse">
-<meta property="og:title" content="Military Time Converter – 24 Hour to AM/PM | Utiliverse">
+<meta property="og:title" content="Military Time Converter – 24-Hour Clock & Conversion Chart | Utiliverse">
 <meta property="og:description" content="Convert military 24-hour time to regular AM/PM time, or convert 12-hour time back to military HHMM and HH:MM formats.">
 <meta property="og:url" content="https://utiliverse.app/Military_Time_Converter/">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Military Time Converter – 24 Hour to AM/PM | Utiliverse">
+<meta name="twitter:title" content="Military Time Converter – 24-Hour Clock & Conversion Chart | Utiliverse">
 <meta name="twitter:description" content="Free browser-based military time converter with midnight, noon, HHMM and HH:MM support.">
 
 
@@ -178,10 +178,18 @@ body.light-mode .caution-note{background:#fffbeb;border-color:#fde68a;color:#924
 body.light-mode .caution-note strong{color:#78350f}
 @media(max-width:700px){.title-icon{width:36px;height:36px}.method-grid,.related-grid{grid-template-columns:1fr}}
 
+
+.lookup-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:16px 0}
+.lookup-card{border:1px solid var(--border);background:var(--panel2);border-radius:14px;padding:14px}
+.lookup-card strong{display:block;color:#e2e8f0;font-size:15px;margin-bottom:5px}
+.lookup-card span{display:block;color:#94a3b8;font-size:13px;line-height:1.55}
+body.light-mode .lookup-card strong{color:#1e293b}
+body.light-mode .lookup-card span{color:#475569}
+@media(max-width:700px){.lookup-grid{grid-template-columns:1fr}}
 </style>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Military Time Converter","url":"https://utiliverse.app/Military_Time_Converter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based military time converter for converting 24-hour clock values to 12-hour AM/PM notation and back, with HHMM and HH:MM input, midnight/noon handling, minutes-after-midnight statistics, copy support, and documented date/time-zone limitations.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Military time to regular time","Regular time to military time","Compact numeric input with left-padding","HH:MM input","AM and PM conversion","Midnight and noon handling","Rejects invalid hours and minutes","Rejects 2400 as a clock input","Minutes-after-midnight calculation","24-hour reference table","Quick example times","Copyable result with fallback","Browser-local calculation","No time-zone or date conversion"]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is 1300 military time?","acceptedAnswer":{"@type":"Answer","text":"1300 is 1:00 PM. For afternoon military times above 1200, subtract 12 from the hour."}},{"@type":"Question","name":"What is 0000 in regular time?","acceptedAnswer":{"@type":"Answer","text":"0000 is 12:00 AM, or midnight."}},{"@type":"Question","name":"What is 1200 in regular time?","acceptedAnswer":{"@type":"Answer","text":"1200 is 12:00 PM, or noon."}},{"@type":"Question","name":"What is 8:30 PM in military time?","acceptedAnswer":{"@type":"Answer","text":"8:30 PM converts to 2030 military time, or 20:30 on a colon-separated 24-hour clock."}},{"@type":"Question","name":"Do I need to enter the colon?","acceptedAnswer":{"@type":"Answer","text":"No. Military → Regular mode accepts both four-digit forms such as 1730 and colon forms such as 17:30."}},{"@type":"Question","name":"Why does military time use leading zeros?","acceptedAnswer":{"@type":"Answer","text":"Leading zeros keep compact times at four digits and make morning hours less ambiguous. For example, 7:05 AM is written 0705."}},{"@type":"Question","name":"Is 2400 valid?","acceptedAnswer":{"@type":"Answer","text":"It is sometimes used to mark the end of a day in schedules, but standard clock notation uses 0000 for midnight. This converter accepts times from 0000 through 2359."}},{"@type":"Question","name":"Does this convert time zones too?","acceptedAnswer":{"@type":"Answer","text":"No. It changes only the display format between 24-hour and 12-hour notation."}},{"@type":"Question","name":"Can I enter 930 instead of 0930?","acceptedAnswer":{"@type":"Answer","text":"Yes. Compact numeric input is padded on the left, so 930 is interpreted as 0930 and converts to 9:30 AM."}},{"@type":"Question","name":"Can I enter seconds?","acceptedAnswer":{"@type":"Answer","text":"No. This converter works at minute precision and accepts hour/minute values only."}},{"@type":"Question","name":"Why does the converter reject 2400?","acceptedAnswer":{"@type":"Answer","text":"2400 can be used as an end-of-day scheduling notation, but this converter does not track dates. It accepts 0000 through 2359 as clock values so it does not silently erase a possible date-boundary distinction."}},{"@type":"Question","name":"Does military time by itself identify a unique moment?","acceptedAnswer":{"@type":"Answer","text":"No. A four-digit time such as 1800 does not include a date, time zone, UTC offset, or military zone letter. Keep that context when it matters."}},{"@type":"Question","name":"What does minutes after midnight mean?","acceptedAnswer":{"@type":"Answer","text":"It is the number of whole minutes since 00:00 on the same clock day. For example, 17:30 is 1,050 minutes after midnight."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is 2000 military time?","acceptedAnswer":{"@type":"Answer","text":"2000 military time is 8:00 PM."}},{"@type":"Question","name":"What is 2100 military time?","acceptedAnswer":{"@type":"Answer","text":"2100 military time is 9:00 PM."}},{"@type":"Question","name":"What is 1700 military time?","acceptedAnswer":{"@type":"Answer","text":"1700 military time is 5:00 PM."}},{"@type":"Question","name":"What is 1800 military time?","acceptedAnswer":{"@type":"Answer","text":"1800 military time is 6:00 PM."}},{"@type":"Question","name":"What is 1830 military time?","acceptedAnswer":{"@type":"Answer","text":"1830 military time is 6:30 PM."}},{"@type":"Question","name":"What is 4 PM in military time?","acceptedAnswer":{"@type":"Answer","text":"4:00 PM is 1600 military time, or 16:00 in colon-separated 24-hour notation."}},{"@type":"Question","name":"What is 2 PM in military time?","acceptedAnswer":{"@type":"Answer","text":"2:00 PM is 1400 military time, or 14:00 in colon-separated 24-hour notation."}},{"@type":"Question","name":"What is 10 PM in military time?","acceptedAnswer":{"@type":"Answer","text":"10:00 PM is 2200 military time, or 22:00 in colon-separated 24-hour notation."}},{"@type":"Question","name":"What is 12 PM in military time?","acceptedAnswer":{"@type":"Answer","text":"12:00 PM is 1200 military time, which is noon."}},{"@type":"Question","name":"What is 12 AM in military time?","acceptedAnswer":{"@type":"Answer","text":"12:00 AM is 0000 military time, which is midnight."}},{"@type":"Question","name":"Do I need to enter the colon?","acceptedAnswer":{"@type":"Answer","text":"No. Military → Regular mode accepts both four-digit forms such as 1730 and colon forms such as 17:30."}},{"@type":"Question","name":"Can I enter 930 instead of 0930?","acceptedAnswer":{"@type":"Answer","text":"Yes. Compact numeric input is padded on the left, so 930 is interpreted as 0930 and converts to 9:30 AM."}},{"@type":"Question","name":"Is 2400 valid?","acceptedAnswer":{"@type":"Answer","text":"2400 is sometimes used to mark the end of a day in schedules, but this converter accepts standard clock values from 0000 through 2359 and uses 0000 for midnight."}},{"@type":"Question","name":"Does this convert time zones too?","acceptedAnswer":{"@type":"Answer","text":"No. It changes only the display format between 24-hour and 12-hour notation."}}]}</script>
 </head>
 
 <body>
@@ -222,9 +230,9 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
       <span class="title-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/><path d="M7 3 5 5M17 3l2 2"/></svg>
       </span>
-      <h1>Military Time Converter – 24 Hour to AM/PM</h1>
+      <h1>Military Time Converter &amp; 24-Hour Clock Chart</h1>
     </div>
-    <p>Convert military 24-hour time to regular 12-hour AM/PM time—or convert regular time back to military time—in compact HHMM or colon-separated HH:MM format.</p>
+    <p>Convert military 24-hour time to regular 12-hour AM/PM time—or convert regular time back to military time—in compact HHMM or colon-separated HH:MM format. Use the conversion chart and common examples below for fast reference.</p>
     <div class="badges">
       <span class="badge">Military ⇄ Regular time</span>
       <span class="badge">HHMM & HH:MM support</span>
@@ -305,6 +313,50 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
     <div class="note"><strong>Military-time note:</strong> this tool uses the common numeric 24-hour clock convention from 0000 through 2359. “2400” is sometimes used operationally to mean the end of a day, but it is not accepted here as a standard clock time because 00:00 represents midnight at the start of the next day.</div>
   </section>
   <p class="local-processing-note">Browser-based calculation: time parsing, format conversion, statistics, and reference-table highlighting are handled locally by this tool and the time you enter is not submitted to a Utiliverse processing server. The page itself still loads interface and advertising resources from external providers.</p>
+
+  <section class="article" style="margin-top:40px">
+    <h2>Military Time Conversion Chart</h2>
+    <p>Use this quick-reference chart to convert common whole-hour times between standard AM/PM time and military time. The converter above also handles minutes, so values such as 1830 convert to 6:30 PM.</p>
+    <div class="table-wrap">
+      <table class="time-table">
+        <thead><tr><th>Standard</th><th>Military</th><th>24-hour</th><th>Standard</th><th>Military</th><th>24-hour</th></tr></thead>
+        <tbody>
+          <tr><td>12:00 AM</td><td>0000</td><td>00:00</td><td>12:00 PM</td><td>1200</td><td>12:00</td></tr>
+          <tr><td>1:00 AM</td><td>0100</td><td>01:00</td><td>1:00 PM</td><td>1300</td><td>13:00</td></tr>
+          <tr><td>2:00 AM</td><td>0200</td><td>02:00</td><td>2:00 PM</td><td>1400</td><td>14:00</td></tr>
+          <tr><td>3:00 AM</td><td>0300</td><td>03:00</td><td>3:00 PM</td><td>1500</td><td>15:00</td></tr>
+          <tr><td>4:00 AM</td><td>0400</td><td>04:00</td><td>4:00 PM</td><td>1600</td><td>16:00</td></tr>
+          <tr><td>5:00 AM</td><td>0500</td><td>05:00</td><td>5:00 PM</td><td>1700</td><td>17:00</td></tr>
+          <tr><td>6:00 AM</td><td>0600</td><td>06:00</td><td>6:00 PM</td><td>1800</td><td>18:00</td></tr>
+          <tr><td>7:00 AM</td><td>0700</td><td>07:00</td><td>7:00 PM</td><td>1900</td><td>19:00</td></tr>
+          <tr><td>8:00 AM</td><td>0800</td><td>08:00</td><td>8:00 PM</td><td>2000</td><td>20:00</td></tr>
+          <tr><td>9:00 AM</td><td>0900</td><td>09:00</td><td>9:00 PM</td><td>2100</td><td>21:00</td></tr>
+          <tr><td>10:00 AM</td><td>1000</td><td>10:00</td><td>10:00 PM</td><td>2200</td><td>22:00</td></tr>
+          <tr><td>11:00 AM</td><td>1100</td><td>11:00</td><td>11:00 PM</td><td>2300</td><td>23:00</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Common military time conversions</h3>
+    <div class="lookup-grid">
+      <div class="lookup-card"><strong>1700 military time</strong><span>1700 = 5:00 PM</span></div>
+      <div class="lookup-card"><strong>1800 military time</strong><span>1800 = 6:00 PM</span></div>
+      <div class="lookup-card"><strong>1830 military time</strong><span>1830 = 6:30 PM</span></div>
+      <div class="lookup-card"><strong>2000 military time</strong><span>2000 = 8:00 PM</span></div>
+      <div class="lookup-card"><strong>2100 military time</strong><span>2100 = 9:00 PM</span></div>
+      <div class="lookup-card"><strong>2200 military time</strong><span>2200 = 10:00 PM</span></div>
+    </div>
+
+    <h3>12 AM and 12 PM in military time</h3>
+    <p><strong>12:00 AM is 0000 military time</strong>, while <strong>12:00 PM is 1200 military time</strong>. Midnight and noon are the two cases most likely to cause confusion because the 12-hour clock resets at 12 while the 24-hour clock starts the new day at 00:00.</p>
+
+    <h3>How to convert PM time to military time</h3>
+    <p>For PM times from 1:00 PM through 11:59 PM, add 12 to the hour and keep the minutes unchanged. For example, 2:00 PM becomes 1400, 4:00 PM becomes 1600, 7:00 PM becomes 1900, and 10:00 PM becomes 2200. Noon is the exception: 12:00 PM stays 1200.</p>
+
+    <h3>How to convert AM time to military time</h3>
+    <p>For 1:00 AM through 11:59 AM, keep the hour and add a leading zero when needed. For example, 1:00 AM becomes 0100 and 7:05 AM becomes 0705. Midnight is the exception: 12:00 AM becomes 0000.</p>
+  </section>
+
 
   <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT
        Paste approved Google AdSense code here after approval.
@@ -405,19 +457,20 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
     <div class="callout"><strong>Important:</strong> this is a clock-format converter, not a time-zone converter. Converting 1800 to 6:00 PM does not change the location, date, UTC offset, daylight-saving status, or actual moment in time.</div>
 
     <h2>Frequently Asked Questions</h2>
-    <details class="faq"><summary>What is 1300 military time?</summary><p>1300 is 1:00 PM. For afternoon military times above 1200, subtract 12 from the hour.</p></details>
-    <details class="faq"><summary>What is 0000 in regular time?</summary><p>0000 is 12:00 AM, or midnight.</p></details>
-    <details class="faq"><summary>What is 1200 in regular time?</summary><p>1200 is 12:00 PM, or noon.</p></details>
-    <details class="faq"><summary>What is 8:30 PM in military time?</summary><p>8:30 PM converts to 2030 military time, or 20:30 on a colon-separated 24-hour clock.</p></details>
+    <details class="faq"><summary>What is 2000 military time?</summary><p>2000 military time is 8:00 PM.</p></details>
+    <details class="faq"><summary>What is 2100 military time?</summary><p>2100 military time is 9:00 PM.</p></details>
+    <details class="faq"><summary>What is 1700 military time?</summary><p>1700 military time is 5:00 PM.</p></details>
+    <details class="faq"><summary>What is 1800 military time?</summary><p>1800 military time is 6:00 PM.</p></details>
+    <details class="faq"><summary>What is 1830 military time?</summary><p>1830 military time is 6:30 PM.</p></details>
+    <details class="faq"><summary>What is 4 PM in military time?</summary><p>4:00 PM is 1600 military time, or 16:00 in colon-separated 24-hour notation.</p></details>
+    <details class="faq"><summary>What is 2 PM in military time?</summary><p>2:00 PM is 1400 military time, or 14:00 in colon-separated 24-hour notation.</p></details>
+    <details class="faq"><summary>What is 10 PM in military time?</summary><p>10:00 PM is 2200 military time, or 22:00 in colon-separated 24-hour notation.</p></details>
+    <details class="faq"><summary>What is 12 PM in military time?</summary><p>12:00 PM is 1200 military time, which is noon.</p></details>
+    <details class="faq"><summary>What is 12 AM in military time?</summary><p>12:00 AM is 0000 military time, which is midnight.</p></details>
     <details class="faq"><summary>Do I need to enter the colon?</summary><p>No. Military → Regular mode accepts both four-digit forms such as 1730 and colon forms such as 17:30.</p></details>
-    <details class="faq"><summary>Why does military time use leading zeros?</summary><p>Leading zeros keep compact times at four digits and make morning hours less ambiguous. For example, 7:05 AM is written 0705.</p></details>
-    <details class="faq"><summary>Is 2400 valid?</summary><p>It is sometimes used to mark the end of a day in schedules, but standard clock notation uses 0000 for midnight. This converter accepts times from 0000 through 2359.</p></details>
-    <details class="faq"><summary>Does this convert time zones too?</summary><p>No. It changes only the display format between 24-hour and 12-hour notation.</p></details>
     <details class="faq"><summary>Can I enter 930 instead of 0930?</summary><p>Yes. Compact numeric input is padded on the left, so 930 is interpreted as 0930 and converts to 9:30 AM.</p></details>
-    <details class="faq"><summary>Can I enter seconds?</summary><p>No. This converter works at minute precision and accepts hour/minute values only.</p></details>
-    <details class="faq"><summary>Why does the converter reject 2400?</summary><p>2400 can be used as an end-of-day scheduling notation, but this converter does not track dates. It accepts 0000 through 2359 as clock values so it does not silently erase a possible date-boundary distinction.</p></details>
-    <details class="faq"><summary>Does military time by itself identify a unique moment?</summary><p>No. A four-digit time such as 1800 does not include a date, time zone, UTC offset, or military zone letter. Keep that context when it matters.</p></details>
-    <details class="faq"><summary>What does “minutes after midnight” mean?</summary><p>It is the number of whole minutes since 00:00 on the same clock day. For example, 17:30 is 1,050 minutes after midnight.</p></details>
+    <details class="faq"><summary>Is 2400 valid?</summary><p>2400 is sometimes used to mark the end of a day in schedules, but this converter accepts standard clock values from 0000 through 2359 and uses 0000 for midnight.</p></details>
+    <details class="faq"><summary>Does this convert time zones too?</summary><p>No. It changes only the display format between 24-hour and 12-hour notation.</p></details>
   </section>
 </div>
 </main>
