@@ -5,17 +5,17 @@
      crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Email Header Analyzer – Check SPF, DKIM & DMARC | Utiliverse</title>
-    <meta name="description" content="Free online email header analyzer to parse raw email headers, trace delivery hops and delays, and read SPF, DKIM and DMARC authentication results instantly in your browser.">
+    <title>Email Message Header Analyzer – Trace Hops, SPF, DKIM & DMARC | Utiliverse</title>
+    <meta name="description" content="Free email message header analyzer to parse raw headers, trace Received hops and delays, inspect message metadata, and read recorded SPF, DKIM and DMARC results.">
     <meta name="robots" content="index,follow">
     <link rel="canonical" href="https://utiliverse.app/Email_Message_Header_Analyzer/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Utiliverse">
-    <meta property="og:title" content="Email Header Analyzer – Check SPF, DKIM & DMARC | Utiliverse">
+    <meta property="og:title" content="Email Message Header Analyzer – Trace Hops, SPF, DKIM & DMARC | Utiliverse">
     <meta property="og:description" content="Parse raw email headers, trace delivery hops and delays, and read SPF, DKIM and DMARC authentication results with this free browser-based analyzer.">
     <meta property="og:url" content="https://utiliverse.app/Email_Message_Header_Analyzer/">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Email Header Analyzer – Check SPF, DKIM & DMARC | Utiliverse">
+    <meta name="twitter:title" content="Email Message Header Analyzer – Trace Hops, SPF, DKIM & DMARC | Utiliverse">
     <meta name="twitter:description" content="Analyze raw email headers, delivery hops, delays and SPF/DKIM/DMARC results in your browser.">
     
     <!-- Tailwind CSS -->
@@ -179,10 +179,27 @@ html.dark .caution-note strong{color:#fef3c7}
   .method-grid,.related-grid{grid-template-columns:1fr}
 }
 
+
+.header-ref-wrap{margin:18px 0;border:1px solid #cbd5e1;border-radius:15px;overflow:auto;background:#fff}
+.header-ref{width:100%;border-collapse:collapse;min-width:780px}
+.header-ref th,.header-ref td{padding:11px 13px;border-top:1px solid #e2e8f0;text-align:left;vertical-align:top}
+.header-ref thead th{border-top:0;background:#f8fafc;color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.07em}
+.header-ref td{color:#475569;font-size:13px}
+.intent-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0}
+.intent-card{border:1px solid #cbd5e1;background:#fff;border-radius:14px;padding:15px}
+.intent-card strong{display:block;color:#1e293b;margin-bottom:5px}
+.intent-card span{display:block;color:#64748b;font-size:13px;line-height:1.6}
+html.dark .header-ref-wrap,html.dark .intent-card{background:#0f172a;border-color:#334155}
+html.dark .header-ref th{background:#1e293b;color:#94a3b8;border-color:#334155}
+html.dark .header-ref td{color:#cbd5e1;border-color:#334155}
+html.dark .intent-card strong{color:#e2e8f0}
+html.dark .intent-card span{color:#94a3b8}
+@media(max-width:800px){.intent-grid{grid-template-columns:1fr}}
+
 </style>
 
     <!-- WebApplication Structured Data -->
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Email Header Analyzer","url":"https://utiliverse.app/Email_Message_Header_Analyzer/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based email header analyzer that parses raw message headers, reconstructs Received hops and approximate delays, and displays recorded SPF, DKIM and DMARC verdicts without claiming independent authentication verification.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Raw email header parsing","RFC-style folded-line unfolding","Received hop reconstruction","Approximate per-hop delay analysis","Recorded SPF result parsing","Recorded DKIM result parsing","Recorded DMARC result parsing","Message metadata summary","All parsed headers view","Browser-based local header parsing","Authentication trust-boundary guidance"]}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Email Header Analyzer","url":"https://utiliverse.app/Email_Message_Header_Analyzer/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based email message header analyzer for raw header parsing, Received-hop tracing, delay analysis, message metadata, and recorded SPF, DKIM and DMARC results without claiming independent authentication verification.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Raw email header parsing","RFC-style folded-line unfolding","Received hop reconstruction","Approximate per-hop delay analysis","Recorded SPF result parsing","Recorded DKIM result parsing","Recorded DMARC result parsing","Message metadata summary","All parsed headers view","Browser-based local header parsing","Authentication trust-boundary guidance","Email message header analysis","Originating-IP context and limitations","Received hop and delay troubleshooting","Message-ID extraction","SPF DKIM DMARC result interpretation"]}</script>
 <style id="u2-styles">
 .u2-related{--u2-bg:#fff;--u2-text:#0f172a;--u2-muted:#475569;--u2-border:#dbe3ee;--u2-link:#4338ca;background:var(--u2-bg);color:var(--u2-text);border:1px solid var(--u2-border);border-radius:18px;padding:24px;margin:32px auto;max-width:1120px;overflow-wrap:anywhere;font-family:Inter,system-ui,sans-serif}.u2-related h2{font-size:25px;line-height:1.3;margin:0 0 16px;color:var(--u2-text);font-weight:800}.u2-related h3{font-size:18px;margin:22px 0 8px;font-weight:750;color:var(--u2-text)}.u2-related p,.u2-related li{font-size:15px;line-height:1.8;color:var(--u2-muted);margin:0 0 12px}.u2-related ul{padding-left:22px;list-style:disc}.u2-related a{color:var(--u2-link);text-decoration:underline;text-underline-offset:3px}.u2-related a:focus-visible{outline:2px solid currentColor;outline-offset:4px}.u2-columns{display:grid;grid-template-columns:1fr 1fr;gap:24px}.u2-review{border-top:1px solid var(--u2-border);padding-top:15px;font-size:12px!important}.u2-related.u2-dark-default{--u2-bg:#0f172a;--u2-text:#f8fafc;--u2-muted:#cbd5e1;--u2-border:#334155;--u2-link:#a5b4fc}html.dark .u2-related,body.dark-mode .u2-related{--u2-bg:#0f172a;--u2-text:#f8fafc;--u2-muted:#cbd5e1;--u2-border:#334155;--u2-link:#a5b4fc}body.light-mode .u2-related{--u2-bg:#fff;--u2-text:#0f172a;--u2-muted:#475569;--u2-border:#dbe3ee;--u2-link:#4338ca}@media(max-width:620px){.u2-related{padding:18px}.u2-columns{grid-template-columns:1fr;gap:0}}
 </style>
@@ -216,11 +233,11 @@ html.dark .caution-note strong{color:#fef3c7}
                     <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/><path d="M15 17h4M17 15v4"/></svg>
                 </span>
                 <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-                    Email Header <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-brand-700 dark:from-brand-400 dark:to-brand-600">Analyzer</span>
+                    Email Message Header <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-brand-700 dark:from-brand-400 dark:to-brand-600">Analyzer</span>
                 </h1>
             </div>
             <p class="text-base md:text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-                Paste raw email headers to trace delivery hops and delays, inspect message metadata, and read recorded SPF, DKIM and DMARC authentication results instantly in your browser.
+                Paste raw email message headers to trace Received hops and delays, inspect From, To, Subject and Message-ID fields, and read recorded SPF, DKIM and DMARC results in your browser.
             </p>
         </div>
 
@@ -387,6 +404,62 @@ html.dark .caution-note strong{color:#fef3c7}
                 The analyzer unfolds continued header lines, separates recognized <code>Header-Name: value</code> pairs, reconstructs detected <strong>Received</strong> entries, and reads authentication verdict strings already present in the message. It is a parser and visualization tool rather than an independent mail-security verifier.
             </p>
 
+
+            <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mb-6">
+                Email Message Header Fields &amp; Quick Reference
+            </h2>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                A raw email header contains routing, identity and authentication metadata added by the sender's software and by mail systems that handle the message. The analyzer organizes common fields so you can inspect delivery flow without manually sorting every line.
+            </p>
+
+            <div class="header-ref-wrap">
+              <table class="header-ref">
+                <thead><tr><th>Header / field</th><th>What it usually contains</th><th>How this analyzer uses it</th></tr></thead>
+                <tbody>
+                  <tr><td>Received</td><td>Mail-server relay details, timestamps, hostnames, IPs and protocol information.</td><td>Builds the hop table and estimates time between parsed timestamps.</td></tr>
+                  <tr><td>Authentication-Results</td><td>Recorded SPF, DKIM and DMARC verdicts from a receiving system.</td><td>Reads explicit pass/fail text; it does not independently re-verify authentication.</td></tr>
+                  <tr><td>Received-SPF</td><td>A recorded SPF evaluation from a receiving system.</td><td>Used as an SPF fallback when an explicit SPF result is not found in Authentication-Results.</td></tr>
+                  <tr><td>From / To</td><td>Visible sender and recipient fields.</td><td>Displays them in the summary for comparison with technical routing data.</td></tr>
+                  <tr><td>Subject</td><td>The message subject line.</td><td>Shows it in the summary when present.</td></tr>
+                  <tr><td>Message-ID</td><td>A message identifier commonly generated by the sending system.</td><td>Displays it for mail-flow troubleshooting and log correlation.</td></tr>
+                  <tr><td>Date</td><td>The message's stated creation date.</td><td>Displays the recorded value; hop timing comes from Received timestamps instead.</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mt-8 mb-4">
+                Raw email header analyzer
+            </h3>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                Paste the complete Internet-header block rather than only the visible From and Subject lines. Full headers provide the Received chain, authentication results, Message-ID and other technical fields needed for useful delivery and spoofing analysis.
+            </p>
+
+            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mt-8 mb-4">
+                Finding the originating IP address
+            </h3>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                An IP address found in an early Received header can be useful context, but it is not automatically the sender's personal or device IP. Webmail providers, outbound gateways, relays, privacy services and corporate mail infrastructure can hide or replace the original client address. Treat header IPs as routing evidence, not as definitive identity or location proof.
+            </p>
+
+            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mt-8 mb-4">
+                SPF, DKIM and DMARC header results
+            </h3>
+            <div class="intent-grid">
+              <div class="intent-card"><strong>SPF</strong><span>Shows whether the pasted header records an SPF pass or fail for the message path evaluated by the receiving system.</span></div>
+              <div class="intent-card"><strong>DKIM</strong><span>Shows whether the header records a DKIM pass or fail. The analyzer does not retrieve keys or re-run signature verification.</span></div>
+              <div class="intent-card"><strong>DMARC</strong><span>Shows whether the header records a DMARC pass or fail. The analyzer does not independently recompute domain alignment or policy.</span></div>
+              <div class="intent-card"><strong>Received hops</strong><span>Reconstructs the detected relay sequence from earliest parsed hop toward the receiving side.</span></div>
+              <div class="intent-card"><strong>Delay analysis</strong><span>Compares parsed Received timestamps; intervals may include queueing, scanning, retries and clock differences.</span></div>
+              <div class="intent-card"><strong>All headers</strong><span>Preserves a parsed view of every recognized header-name/value pair for manual review.</span></div>
+            </div>
+
+            <h3 class="text-xl font-bold text-slate-800 dark:text-slate-100 mt-8 mb-4">
+                Email header troubleshooting workflow
+            </h3>
+            <p class="text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+                For delayed mail, start with the Received-hop table and identify the largest timestamp gap. For sender-authentication questions, compare the visible From field with the recorded SPF, DKIM and DMARC results. For suspicious mail, retain the original message and use the analyzer as an organizing aid alongside mail-server logs, DNS checks and your normal security tooling.
+            </p>
+
             <div class="method-grid">
                 <div class="method-card"><strong>Header parsing</strong><span>Folded lines are unfolded first, then standard header-name/value pairs are collected from the pasted text.</span></div>
                 <div class="method-card"><strong>Hop reconstruction</strong><span>Detected Received lines are reversed so the earliest detected relay appears first, then timestamps are compared for approximate per-hop delay.</span></div>
@@ -465,7 +538,7 @@ Possible causes include queueing or processing, not only network transit.</code>
                 <a class="related-link" href="../IP_Address_Lookup/"><strong>IP Address Lookup</strong><span>Inspect approximate network, ASN and geolocation metadata for an IP found in a header.</span></a>
             </div>
 
-            <p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 1, 2026 · Header unfolding, hop reconstruction, delay calculation, authentication parsing and privacy wording reviewed against the current implementation.</p>
+            <p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 2026 · Header unfolding, hop reconstruction, delay calculation, authentication parsing and privacy wording reviewed against the current implementation.</p>
 
             <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white mb-6">
                 How to Analyze Email Headers, Delivery Hops, SPF, DKIM and DMARC
@@ -553,7 +626,7 @@ Possible causes include queueing or processing, not only network transit.</code>
 
     
 <!-- BATCH 2 RELATED CONTENT START -->
-<section class="u2-related" aria-labelledby="u2-heading"><h2 id="u2-heading">Turn a header report into a useful investigation</h2><p>Copy full headers from the original received message. Use the analyzer to organize the fields and delivery hops, then compare its output with the raw source. Start by choosing one question: delivery delay, identity mismatch, or a recorded authentication failure.</p><h3>Worked check: four minutes between hops</h3><p>If adjacent Received entries show 10:00:10 and 10:04:10 in the same timezone, the recorded interval is four minutes. That can include queueing and processing; it is not automatically network travel time. Verify clock and timezone differences before escalating to the mail operator.</p><h3>Know the trust boundary</h3><p>The analyzer parses recorded authentication results; it does not cryptographically verify DKIM or repeat the receiving server’s original SPF check. Trust results from your receiving infrastructure, not arbitrary text inserted in a message. A passing result also does not make an attachment safe.</p><p>For a DNS follow-up, take the signing domain and selector from the original message. Keep an unmodified original privately and redact personal information in any copy you share.</p><div class="u2-columns"><div><h3>Related guides</h3><ul><li><a href="/Guides/Read_Email_Headers.html">How to read an email header: hops, identity, and trust</a></li><li><a href="/Guides/SPF_DKIM_DMARC.html">SPF vs DKIM vs DMARC: records, signatures, and alignment</a></li></ul></div><div><h3>Related tools</h3><ul><li><a href="/Email_DNS_Checker/">Email DNS Checker</a></li></ul><p><a href="/Guides.html">Browse all guides</a></p></div></div><p class="u2-review">Explanatory content reviewed October 1, 2026. <a href="/Editorial_Methodology.html">Methodology</a> · <a href="/Contact_Info.html">Report a correction</a></p></section>
+<section class="u2-related" aria-labelledby="u2-heading"><h2 id="u2-heading">Turn a header report into a useful investigation</h2><p>Copy full headers from the original received message. Use the analyzer to organize the fields and delivery hops, then compare its output with the raw source. Start by choosing one question: delivery delay, identity mismatch, or a recorded authentication failure.</p><h3>Worked check: four minutes between hops</h3><p>If adjacent Received entries show 10:00:10 and 10:04:10 in the same timezone, the recorded interval is four minutes. That can include queueing and processing; it is not automatically network travel time. Verify clock and timezone differences before escalating to the mail operator.</p><h3>Know the trust boundary</h3><p>The analyzer parses recorded authentication results; it does not cryptographically verify DKIM or repeat the receiving server’s original SPF check. Trust results from your receiving infrastructure, not arbitrary text inserted in a message. A passing result also does not make an attachment safe.</p><p>For a DNS follow-up, take the signing domain and selector from the original message. Keep an unmodified original privately and redact personal information in any copy you share.</p><div class="u2-columns"><div><h3>Related guides</h3><ul><li><a href="/Guides/Read_Email_Headers.html">How to read an email header: hops, identity, and trust</a></li><li><a href="/Guides/SPF_DKIM_DMARC.html">SPF vs DKIM vs DMARC: records, signatures, and alignment</a></li></ul></div><div><h3>Related tools</h3><ul><li><a href="/Email_DNS_Checker/">Email DNS Checker</a></li></ul><p><a href="/Guides.html">Browse all guides</a></p></div></div><p class="u2-review">Explanatory content reviewed October 2026. <a href="/Editorial_Methodology.html">Methodology</a> · <a href="/Contact_Info.html">Report a correction</a></p></section>
 <!-- BATCH 2 RELATED CONTENT END -->
 </main>
 
@@ -820,17 +893,21 @@ Message-ID: <CABvW=1234567890_test@mail.gmail.com>`;
 
         // FAQ Injection & JSON-LD Generation
         const faqs = [
-            { q: "What is an email header analyzer?", a: "An email header analyzer parses the raw technical headers attached to a message and organizes details such as routing servers, timestamps, message metadata, delivery hops, and recorded email authentication results." },
-            { q: "How do I find raw email headers?", a: "Look in your email application's message options for a command such as Show original, View source, Message details, or Internet headers. Copy the complete header block and paste it into the analyzer." },
-            { q: "What does SPF mean in an email header?", a: "SPF stands for Sender Policy Framework. Receiving systems can use SPF to determine whether the sending server is authorized for the envelope-sender domain. This tool reads the SPF result already recorded in the message header." },
-            { q: "What is the difference between SPF, DKIM, and DMARC?", a: "SPF evaluates sending-server authorization, DKIM uses a cryptographic signature to support message integrity and domain identity, and DMARC evaluates alignment using SPF and/or DKIM for the visible From domain." },
-            { q: "How are email hop delays calculated?", a: "The analyzer reads timestamps from consecutive Received headers, places detected hops in chronological order, and calculates the approximate time difference between each hop." },
-            { q: "Does this tool independently verify DKIM signatures?", a: "No. It reads DKIM verdicts already present in Authentication-Results. Independent DKIM verification would require additional message content and DNS-based signature validation." },
-            { q: "Are my pasted email headers uploaded?", a: "The parsing logic in this page runs in your browser and does not post the pasted header text to a Utiliverse server. The page still loads external interface and advertising resources, and headers can contain sensitive metadata, so use appropriate care with private information." },
-            { q: "Does a DKIM PASS mean this tool verified the signature itself?", a: "No. The analyzer displays a DKIM pass verdict already recorded in the pasted Authentication-Results field. It does not retrieve the DKIM public key or cryptographically verify the message body and signature." },
-            { q: "Can an Authentication-Results line be forged?", a: "Header text outside your receiving system's trust boundary can be manipulated. Give the most weight to Authentication-Results added by receiving infrastructure you trust and keep the original received message for investigation." },
-            { q: "Why can an email hop show a long delay?", a: "The time between Received entries can include queueing, filtering, retries, malware scanning, policy processing, clock differences, and transport time. It should not be interpreted as pure network latency." },
-            { q: "What if a message contains multiple Authentication-Results headers?", a: "The current summary uses the first standard Authentication-Results field it finds, or the first ARC-Authentication-Results field if no standard field is present. Review the All Headers tab to inspect additional authentication fields." }
+            {"q":"What is an email message header analyzer?","a":"An email message header analyzer parses the raw technical headers attached to a message and organizes routing servers, timestamps, message metadata, delivery hops, and recorded authentication results."},
+            {"q":"How do I find raw email headers?","a":"Look in your email application's message options for a command such as Show original, View source, Message details, or Internet headers. Copy the complete header block and paste it into the analyzer."},
+            {"q":"What can an email header tell me?","a":"A raw header can contain From, To, Subject, Date, Message-ID, Received routing entries, mail-server hostnames and IP addresses, and recorded SPF, DKIM and DMARC results."},
+            {"q":"Can an email header reveal the sender's IP address?","a":"Sometimes a routing IP appears in a Received line, but it is not necessarily the sender's personal or device IP. Webmail services, gateways, relays and privacy systems can hide or replace the original client address."},
+            {"q":"What does SPF mean in an email header?","a":"SPF stands for Sender Policy Framework. Receiving systems can use SPF to evaluate whether the sending server is authorized for the envelope-sender domain. This tool reads the SPF result already recorded in the header."},
+            {"q":"What does DKIM mean in an email header?","a":"DKIM uses a cryptographic signature that receiving systems can verify against a public key published in DNS. This analyzer only displays the recorded DKIM result; it does not re-run cryptographic verification."},
+            {"q":"What does DMARC mean in an email header?","a":"DMARC evaluates alignment between the visible From domain and authenticated SPF and/or DKIM identities. This analyzer displays the recorded DMARC verdict when present."},
+            {"q":"What is the difference between SPF, DKIM, and DMARC?","a":"SPF evaluates sending-server authorization, DKIM uses a cryptographic signature for signed message content and domain identity, and DMARC evaluates alignment using SPF and/or DKIM for the visible From domain."},
+            {"q":"How are email hop delays calculated?","a":"The analyzer reads timestamps from consecutive Received headers, reverses the detected list into chronological order, and calculates the approximate interval between parsed timestamps."},
+            {"q":"Why can an email hop show a long delay?","a":"The interval between Received entries can include queueing, filtering, retries, malware scanning, policy processing, clock differences and transport time. It should not be interpreted as pure network latency."},
+            {"q":"Does this tool independently verify SPF, DKIM or DMARC?","a":"No. It reads verdicts already recorded in the pasted header. It does not repeat DNS-based SPF checks, retrieve DKIM public keys, verify message signatures, or independently recalculate DMARC alignment."},
+            {"q":"Can an Authentication-Results line be forged?","a":"Header text outside your receiving system's trust boundary can be manipulated. Give the most weight to Authentication-Results added by receiving infrastructure you trust and retain the original received message for investigation."},
+            {"q":"What if a message contains multiple Authentication-Results headers?","a":"The current summary uses the first standard Authentication-Results field it finds, or the first ARC-Authentication-Results field if no standard field is present. Review the All Headers tab to inspect additional authentication fields."},
+            {"q":"What is a Message-ID used for?","a":"A Message-ID is a message identifier commonly generated by the sending system. It can help correlate a message with mail-server logs and support delivery troubleshooting."},
+            {"q":"Are my pasted email headers uploaded?","a":"The parsing logic runs in your browser and does not post the pasted header text to a Utiliverse server. The page still loads external interface and advertising resources, and headers can contain sensitive metadata, so use appropriate care."}
         ];
 
         const faqContainer = document.getElementById('faq-container');
