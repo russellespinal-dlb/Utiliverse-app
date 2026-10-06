@@ -732,7 +732,7 @@ body.light-mode .example-box{background:#f8fafc;color:#1e293b;border-color:#dbe3
 
 <!-- SEO Structured Data -->
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Screen Color Tester","url":"https://utiliverse.app/Screen_Color_Tester/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based screen color tester for fullscreen visual inspection, HEX/RGB color viewing, timer-assisted screen checks and solid-color PNG generation, with clear display-rendering and diagnostic limitations.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Fullscreen solid-color display","Preset screen colors","Custom color spectrum and hue controls","Six-digit HEX color input","HEX and RGB color values","Visual display inspection aid","Fullscreen exit timer","Custom-size PNG color image export","Mobile fullscreen fallback","Visual dead/stuck pixel inspection aid","Display uniformity inspection aid","OLED/LCD behavior guidance","Local solid-color PNG generation","Display-rendering limitation disclosure"]}</script>
-<script type="application/ld+json" id="faqSchema">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What can I use a black screen for?","acceptedAnswer":{"@type":"Answer","text":"A black fullscreen display can be used for basic display inspection, dark-room viewing, presentations, photography or video work, ambient backgrounds, and other situations where a uniform dark surface is useful."}},{"@type":"Question","name":"Can I make the selected color fullscreen?","acceptedAnswer":{"@type":"Answer","text":"Yes. The tool uses the browser Fullscreen API where available and a viewport-filling fallback on browsers that do not provide normal element fullscreen."}},{"@type":"Question","name":"Can I download the selected color as an image?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter the desired width and height and select Download PNG. The solid-color image is generated in the browser."}},{"@type":"Question","name":"Can I enter my own HEX color?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter a six-digit HEX value such as #6366F1, or use the spectrum and hue controls to create a custom color."}},{"@type":"Question","name":"Can this tool help test a monitor or phone screen?","acceptedAnswer":{"@type":"Answer","text":"Yes. Uniform colors can make isolated pixels, uneven brightness, color tint, edge glow, banding, or other visible inconsistencies easier to notice. It is a visual inspection aid, not professional calibration or hardware diagnostics."}},{"@type":"Question","name":"What color sequence should I use for a quick visual screen check?","acceptedAnswer":{"@type":"Answer","text":"A practical sequence is black, white, red, green, and blue, followed by a neutral gray such as #808080. Different uniform fields can make different visible display irregularities easier to notice."}},{"@type":"Question","name":"Can this tool tell me whether a pixel is dead or stuck?","acceptedAnswer":{"@type":"Answer","text":"The tool can help reveal a pixel that behaves differently across several full-screen colors, but it cannot definitively diagnose the cause or replace manufacturer diagnostics."}},{"@type":"Question","name":"What does the screen timer do?","acceptedAnswer":{"@type":"Answer","text":"The timer counts down for the selected number of minutes and exits the fullscreen color view when the timer reaches zero."}},{"@type":"Question","name":"Are my selected colors uploaded to Utiliverse?","acceptedAnswer":{"@type":"Answer","text":"No. Color selection, fullscreen display, HEX/RGB conversion, and PNG generation are performed in your browser by this tool. The page does load interface libraries from public CDNs."}},{"@type":"Question","name":"Why can the same HEX color look different on two screens?","acceptedAnswer":{"@type":"Answer","text":"Displays can differ in brightness, contrast, panel technology, calibration, and color profiles, so the same digital color value can appear different across devices."}},{"@type":"Question","name":"Can this tool calibrate my monitor?","acceptedAnswer":{"@type":"Answer","text":"No. It displays requested digital colors for visual inspection but does not measure the panel, create an ICC profile or replace calibration hardware."}},{"@type":"Question","name":"Can a black screen test distinguish OLED from LCD?","acceptedAnswer":{"@type":"Answer","text":"Not reliably by itself. OLED and LCD technologies often behave differently on black, but the tool does not identify panel technology and visual observations can be affected by brightness, local dimming and display settings."}},{"@type":"Question","name":"Can leaving a test color onscreen cause image retention?","acceptedAnswer":{"@type":"Answer","text":"Long static bright images can contribute to temporary retention or wear on some displays. Use test screens only as long as needed and follow the display manufacturer's guidance."}},{"@type":"Question","name":"Why might fullscreen behave differently on iPhone or iPad?","acceptedAnswer":{"@type":"Answer","text":"Some mobile browsers do not provide the standard element Fullscreen API, so this tool uses a viewport-filling overlay fallback. Browser and operating-system UI can still differ by device."}},{"@type":"Question","name":"Is the timer perfectly precise?","acceptedAnswer":{"@type":"Answer","text":"No. It is a convenience timer. Background throttling, device sleep or browser power-saving behavior can affect timer execution."}}]}</script>
+<script type="application/ld+json" id="faqSchema">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Can this tool calibrate my monitor?","acceptedAnswer":{"@type":"Answer","text":"No. The tool displays requested digital colors for visual inspection, but it does not measure the panel, create an ICC profile, correct a display profile, or replace calibration hardware."}},{"@type":"Question","name":"Can this tool help identify dead or stuck pixels?","acceptedAnswer":{"@type":"Answer","text":"It can help reveal a pixel that behaves differently across several fullscreen colors, but it cannot definitively diagnose the cause. A point that stays dark, bright, or the wrong color across multiple fields may indicate an abnormal pixel, but manufacturer diagnostics may be needed for confirmation."}},{"@type":"Question","name":"What color sequence should I use for a quick visual screen check?","acceptedAnswer":{"@type":"Answer","text":"A practical sequence is black, white, red, green, and blue, followed by a neutral gray such as #808080. Different uniform fields can make different brightness, pixel, color-channel, tint, edge-glow, or uniformity issues easier to notice."}},{"@type":"Question","name":"Why can the same HEX color look different on two screens?","acceptedAnswer":{"@type":"Answer","text":"Displays can differ in brightness, contrast, panel technology, gamut, white point, gamma, HDR behavior, calibration, and color profiles. A HEX value defines a digital RGB value, not an identical physical light output on every device."}},{"@type":"Question","name":"Can leaving a bright test color onscreen cause image retention or burn-in?","acceptedAnswer":{"@type":"Answer","text":"Long static bright images can contribute to temporary image retention or long-term wear on some displays. Use test screens only as long as needed and follow the display manufacturer's guidance."}},{"@type":"Question","name":"Can I make any selected color fullscreen?","acceptedAnswer":{"@type":"Answer","text":"Yes. Select Fullscreen in the preview area. The tool uses the browser Fullscreen API where available and a viewport-filling fallback when standard element fullscreen is unavailable."}},{"@type":"Question","name":"Why can fullscreen behave differently on iPhone or iPad?","acceptedAnswer":{"@type":"Answer","text":"Some mobile browsers do not provide the standard element Fullscreen API for this type of content, so the tool uses a viewport-filling overlay fallback. Browser chrome and operating-system interface elements can still behave differently by device and browser."}},{"@type":"Question","name":"What does the screen timer do?","acceptedAnswer":{"@type":"Answer","text":"The timer counts down for the number of minutes you enter and exits the fullscreen color view when it reaches zero."}},{"@type":"Question","name":"Is the fullscreen timer perfectly precise?","acceptedAnswer":{"@type":"Answer","text":"No. It is a convenience timer. Background throttling, device sleep, browser power-saving behavior, or operating-system scheduling can affect exactly when timer code executes."}},{"@type":"Question","name":"Can I download the selected color as a PNG image?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter the desired width and height and select Download PNG. The tool generates a solid-color PNG locally in your browser using the selected digital color."}},{"@type":"Question","name":"Are my selected colors or generated images uploaded to Utiliverse?","acceptedAnswer":{"@type":"Answer","text":"No. Core color selection, HEX/RGB conversion, fullscreen display, timer behavior, and PNG generation are performed in your browser. The page itself still loads interface libraries and advertising resources from external providers."}},{"@type":"Question","name":"Can a black screen test reliably distinguish OLED from LCD?","acceptedAnswer":{"@type":"Answer","text":"No. OLED and LCD technologies often behave differently on black, but a black screen alone is not a reliable panel-identification method. Brightness, local dimming, display settings, ambient light, and other factors can affect what you see."}}]}</script>
 
 </head>
 
@@ -1325,14 +1325,6 @@ class="content-area"
 </section>
 
 
-<section class="mt-16 max-w-4xl">
-  <h2 class="text-3xl font-black mb-4">Screen Testing Limitations &amp; Common Questions</h2>
-  <div class="faq-item"><div class="faq-question">Can this tool calibrate my monitor?</div><div class="faq-answer">No. It displays digital colors for visual inspection but does not measure the panel, create an ICC profile, or replace calibration hardware.</div></div>
-  <div class="faq-item"><div class="faq-question">Can leaving a bright test color onscreen cause image retention?</div><div class="faq-answer">Long static bright images can contribute to temporary retention or wear on some displays. Use test screens only as long as needed and follow the display manufacturer's guidance.</div></div>
-  <div class="faq-item"><div class="faq-question">Why can fullscreen behave differently on iPhone or iPad?</div><div class="faq-answer">Some mobile browsers do not provide the standard element Fullscreen API, so the tool uses a viewport-filling overlay fallback. Browser and operating-system UI can still differ by device.</div></div>
-  <div class="faq-item"><div class="faq-question">Is the fullscreen timer perfectly precise?</div><div class="faq-answer">No. It is a convenience timer. Background throttling, device sleep, or browser power-saving behavior can affect timer execution.</div></div>
-</section>
-
 <!-- ========================= FAQ ========================= -->
 
 <section class="mt-20 max-w-4xl">
@@ -1344,8 +1336,12 @@ Frequently Asked Questions
 </p>
 
 <h2 class="text-3xl font-black mt-2">
-Questions about <span id="faqColorName">Black</span>
+Screen Color Tester FAQ
 </h2>
+
+<p class="text-slate-400 mt-3 max-w-2xl">
+Answers about fullscreen color testing, dead or stuck pixels, calibration limits, mobile behavior, timers, PNG export, privacy, and display differences.
+</p>
 
 </div>
 
@@ -1681,13 +1677,11 @@ function applyColor(hex,name="Custom") {
     document.getElementById("infoRgb").textContent =
         `${rgb.r}, ${rgb.g}, ${rgb.b}`;
 
-    document.getElementById("badgeDot").style.background =
-        hex;
-
-    document.getElementById("faqColorName").textContent =
-        name;
-
-    document
+    const badgeDot = document.getElementById("badgeDot");
+    if (badgeDot) {
+        badgeDot.style.background = hex;
+    }
+document
         .querySelectorAll(".color-tile")
         .forEach(tile => {
 
@@ -2613,73 +2607,9 @@ function updateFAQ(name) {
     const container =
         document.getElementById("faqContainer");
 
-    const currentHex =
-        document.getElementById("infoHex").textContent || "#000000";
+    if (!container) return;
 
-    const currentRgb =
-        hexToRgb(currentHex) || {r:0,g:0,b:0};
-
-    const colorLabel =
-        name === "Custom"
-            ? "custom color"
-            : name.toLowerCase();
-
-    const rgbText =
-        `${currentRgb.r}, ${currentRgb.g}, ${currentRgb.b}`;
-
-    const faqs = [
-
-        {
-            q:`What can I use a ${colorLabel} screen for?`,
-            a:`A ${colorLabel} fullscreen display can be used for basic display inspection, creative projects, presentations, photography experiments, ambient backgrounds, color demonstrations and other situations where a uniform color surface is useful.`
-        },
-
-        {
-            q:`Can I make the ${colorLabel} fullscreen?`,
-            a:`Yes. Select Fullscreen in the preview area. The tool uses the browser Fullscreen API where available and a viewport-filling fallback on browsers that do not provide normal element fullscreen. Tap, click or press Escape to exit.`
-        },
-
-        {
-            q:`Can I download the ${colorLabel} as an image?`,
-            a:`Yes. Choose the image width and height and select Download PNG. The solid-color image is generated locally in your browser.`
-        },
-
-        {
-            q:`What HEX and RGB values are currently selected?`,
-            a:`The selected color is ${currentHex.toUpperCase()}, corresponding to RGB ${rgbText}. You can change it with a preset, the spectrum and hue controls, or a six-digit HEX value.`
-        },
-
-        {
-            q:`Can I use this color screen to test my monitor or phone?`,
-            a:`Yes. A uniform color can make isolated pixels, uneven brightness, color tint, edge glow, banding or other visible inconsistencies easier to notice. Check several colors rather than relying on a single screen. This is a visual inspection aid, not a replacement for calibration hardware, manufacturer diagnostics or professional display testing.`
-        },
-
-        {
-            q:`What color sequence should I use for a quick visual screen check?`,
-            a:`A practical sequence is black, white, red, green and blue, followed by a neutral gray such as #808080 if you want another uniform reference. Black and white can help expose brightness and edge-lighting differences, while the primary RGB colors can make isolated pixel or color-channel inconsistencies easier to notice.`
-        },
-
-        {
-            q:`Can this tool tell me whether a pixel is dead or stuck?`,
-            a:`It can help you spot a pixel that behaves differently from surrounding pixels, but it cannot definitively diagnose the cause. A point that stays dark, bright or the wrong color across several full-screen fields may indicate an abnormal pixel, but confirmation can depend on panel technology and the device manufacturer's diagnostic guidance.`
-        },
-
-        {
-            q:`What does the screen timer do?`,
-            a:`The timer counts down for the number of minutes you enter. When it reaches zero, the tool exits the fullscreen color view.`
-        },
-
-        {
-            q:`Are my selected colors uploaded to Utiliverse?`,
-            a:`No. Color selection, HEX/RGB conversion, fullscreen display and PNG generation are performed in your browser by this tool. The page does load interface libraries from public CDNs.`
-        },
-
-        {
-            q:`Why can the same HEX color look different on another screen?`,
-            a:`Displays can differ in brightness, contrast, panel technology, calibration and color profiles, so the same digital HEX or RGB value can appear different across devices.`
-        }
-
-    ];
+    const faqs = [{"q": "Can this tool calibrate my monitor?", "a": "No. The tool displays requested digital colors for visual inspection, but it does not measure the panel, create an ICC profile, correct a display profile, or replace calibration hardware."}, {"q": "Can this tool help identify dead or stuck pixels?", "a": "It can help reveal a pixel that behaves differently across several fullscreen colors, but it cannot definitively diagnose the cause. A point that stays dark, bright, or the wrong color across multiple fields may indicate an abnormal pixel, but manufacturer diagnostics may be needed for confirmation."}, {"q": "What color sequence should I use for a quick visual screen check?", "a": "A practical sequence is black, white, red, green, and blue, followed by a neutral gray such as #808080. Different uniform fields can make different brightness, pixel, color-channel, tint, edge-glow, or uniformity issues easier to notice."}, {"q": "Why can the same HEX color look different on two screens?", "a": "Displays can differ in brightness, contrast, panel technology, gamut, white point, gamma, HDR behavior, calibration, and color profiles. A HEX value defines a digital RGB value, not an identical physical light output on every device."}, {"q": "Can leaving a bright test color onscreen cause image retention or burn-in?", "a": "Long static bright images can contribute to temporary image retention or long-term wear on some displays. Use test screens only as long as needed and follow the display manufacturer's guidance."}, {"q": "Can I make any selected color fullscreen?", "a": "Yes. Select Fullscreen in the preview area. The tool uses the browser Fullscreen API where available and a viewport-filling fallback when standard element fullscreen is unavailable."}, {"q": "Why can fullscreen behave differently on iPhone or iPad?", "a": "Some mobile browsers do not provide the standard element Fullscreen API for this type of content, so the tool uses a viewport-filling overlay fallback. Browser chrome and operating-system interface elements can still behave differently by device and browser."}, {"q": "What does the screen timer do?", "a": "The timer counts down for the number of minutes you enter and exits the fullscreen color view when it reaches zero."}, {"q": "Is the fullscreen timer perfectly precise?", "a": "No. It is a convenience timer. Background throttling, device sleep, browser power-saving behavior, or operating-system scheduling can affect exactly when timer code executes."}, {"q": "Can I download the selected color as a PNG image?", "a": "Yes. Enter the desired width and height and select Download PNG. The tool generates a solid-color PNG locally in your browser using the selected digital color."}, {"q": "Are my selected colors or generated images uploaded to Utiliverse?", "a": "No. Core color selection, HEX/RGB conversion, fullscreen display, timer behavior, and PNG generation are performed in your browser. The page itself still loads interface libraries and advertising resources from external providers."}, {"q": "Can a black screen test reliably distinguish OLED from LCD?", "a": "No. OLED and LCD technologies often behave differently on black, but a black screen alone is not a reliable panel-identification method. Brightness, local dimming, display settings, ambient light, and other factors can affect what you see."}];
 
     container.innerHTML = "";
 
@@ -2691,7 +2621,6 @@ function updateFAQ(name) {
         item.className = "faq-item";
 
         item.innerHTML = `
-
             <button
                 type="button"
                 class="faq-question w-full text-left"
@@ -2700,19 +2629,8 @@ function updateFAQ(name) {
                 aria-controls="faqAnswer${index}"
                 id="faqQuestion${index}"
             >
-
-                <span>
-                    ${faq.q}
-                </span>
-
-                <span
-                    id="faqIcon${index}"
-                    class="text-indigo-400 text-xl"
-                    aria-hidden="true"
-                >
-                    +
-                </span>
-
+                <span>${faq.q}</span>
+                <span id="faqIcon${index}" class="text-indigo-400 text-xl" aria-hidden="true">+</span>
             </button>
 
             <div
@@ -2723,7 +2641,6 @@ function updateFAQ(name) {
             >
                 ${faq.a}
             </div>
-
         `;
 
         container.appendChild(item);
@@ -2733,32 +2650,22 @@ function updateFAQ(name) {
     const schema =
         document.getElementById("faqSchema");
 
-    schema.textContent =
-        JSON.stringify({
-
-            "@context":"https://schema.org",
-
-            "@type":"FAQPage",
-
-            "mainEntity":
-
-                faqs.map(f => ({
-
-                    "@type":"Question",
-
-                    "name":f.q,
-
-                    "acceptedAnswer":{
-
-                        "@type":"Answer",
-
-                        "text":f.a
-
-                    }
-
-                }))
-
-        });
+    if (schema) {
+        schema.textContent =
+            JSON.stringify({
+                "@context":"https://schema.org",
+                "@type":"FAQPage",
+                "mainEntity":
+                    faqs.map(f => ({
+                        "@type":"Question",
+                        "name":f.q,
+                        "acceptedAnswer":{
+                            "@type":"Answer",
+                            "text":f.a
+                        }
+                    }))
+            });
+    }
 
 }
 
@@ -2774,13 +2681,17 @@ function toggleFAQ(index) {
             "faqIcon"+index
         );
 
+    if (!answer) return;
+
     answer.classList.toggle("hidden");
 
     const isOpen =
         !answer.classList.contains("hidden");
 
-    icon.textContent =
-        isOpen ? "−" : "+";
+    if (icon) {
+        icon.textContent =
+            isOpen ? "−" : "+";
+    }
 
     const question =
         document.getElementById("faqQuestion"+index);
