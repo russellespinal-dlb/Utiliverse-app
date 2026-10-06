@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Port Checker – TCP/UDP Port Lookup & Common Ports | Utiliverse</title>
-<meta name="description" content="Free port checker and TCP/UDP port lookup. Enter a port number or service name, identify common services, view port ranges, and filter a common ports reference table.">
+<title>UDP Port Checker & TCP Port Lookup – Common Ports | Utiliverse</title>
+<meta name="description" content="Free UDP and TCP port checker reference. Look up UDP or TCP port numbers, common services, protocol assignments and port ranges. This browser tool is a reference lookup, not a live remote-port scan.">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#020617">
 <link rel="canonical" href="https://utiliverse.app/Port_Checker/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Utiliverse">
-<meta property="og:title" content="Port Checker – TCP/UDP Port Lookup & Common Ports | Utiliverse">
-<meta property="og:description" content="Look up TCP and UDP ports, identify common services, and browse port ranges.">
+<meta property="og:title" content="UDP Port Checker & TCP Port Lookup – Common Ports | Utiliverse">
+<meta property="og:description" content="Look up UDP and TCP port numbers, identify common services and browse standard port ranges without pretending to perform a live remote-port scan.">
 <meta property="og:url" content="https://utiliverse.app/Port_Checker/">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Port Checker | Utiliverse">
+<meta name="twitter:title" content="UDP Port Checker & TCP Port Lookup | Utiliverse">
 <meta name="twitter:description" content="Look up TCP/UDP ports and common network services.">
 
 <script src="https://cdn.tailwindcss.com"></script>
@@ -78,16 +78,35 @@ body.dark-mode .caution-note strong{color:#fef3c7}
 body.dark-mode .local-processing-note{color:#94a3b8}
 @media(max-width:700px){.method-grid,.related-grid{grid-template-columns:1fr}}
 
+
+.port-ref-wrap{margin:18px 0;border:1px solid #dbe3ee;border-radius:15px;overflow:auto;background:#fff}
+.port-ref{width:100%;border-collapse:collapse;min-width:850px}
+.port-ref th,.port-ref td{padding:11px 13px;border-top:1px solid #e2e8f0;text-align:left;vertical-align:top}
+.port-ref thead th{border-top:0;background:#f8fafc;color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.07em}
+.port-ref td{color:#475569;font-size:13px}
+.port-ref td:first-child{font-weight:850;color:#0f172a}
+.intent-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0}
+.intent-card{border:1px solid #dbe3ee;background:#fff;border-radius:14px;padding:15px}
+.intent-card strong{display:block;color:#0f172a;margin-bottom:5px}
+.intent-card span{display:block;color:#475569;font-size:13px;line-height:1.65}
+body.dark-mode .port-ref-wrap,body.dark-mode .intent-card{background:#0f172a;border-color:#334155}
+body.dark-mode .port-ref th{background:#1e293b;color:#94a3b8;border-color:#334155}
+body.dark-mode .port-ref td{color:#cbd5e1;border-color:#334155}
+body.dark-mode .port-ref td:first-child{color:#e2e8f0}
+body.dark-mode .intent-card strong{color:#e2e8f0}
+body.dark-mode .intent-card span{color:#94a3b8}
+@media(max-width:800px){.intent-grid{grid-template-columns:1fr}}
+
 </style>
 
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Port Checker","url":"https://utiliverse.app/Port_Checker/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based TCP/UDP port reference lookup with bundled common-service matching, service-name search, protocol filtering, port-range classification and a filterable common-ports table. This tool performs no remote host scan.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Validate port numbers from 0 through 65535","TCP port lookup","UDP port lookup","Any-protocol lookup","Service-name and description search","Well-Known/System range classification","Registered/User range classification","Dynamic/Private range classification","Filterable bundled common-ports reference","Multiple-match service search","Local browser-based lookup","No remote host scanning or socket probing"]}
+{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Port Checker","url":"https://utiliverse.app/Port_Checker/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based UDP and TCP port checker reference for validating port numbers, looking up common service assignments, filtering by protocol, classifying standard port ranges, and searching a bundled common-ports table. It performs no remote host scan or live socket probe.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Validate port numbers from 0 through 65535","TCP port lookup","UDP port lookup","Any-protocol lookup","Service-name and description search","Well-Known/System range classification","Registered/User range classification","Dynamic/Private range classification","Filterable bundled common-ports reference","Multiple-match service search","Local browser-based lookup","No remote host scanning or socket probing","UDP port checker reference","Check UDP port number","UDP service-name lookup","TCP versus UDP guidance","Common UDP port examples","Explicit live-scan limitation"]}
 </script>
 <style id="b4-styles">
 /* Batch 4: scoped title, editorial and footer additions */
 .b4-heading{display:flex;align-items:center;gap:14px}.b4-heading .b4-icon{width:36px;height:36px;flex:none;color:#6366f1;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.b4-box,.b4-nav{--b4-text:#0f172a;--b4-muted:#475569;--b4-bg:#fff;--b4-border:#dbe3ee;--b4-link:#4338ca;color:var(--b4-text)}.b4-dark{--b4-text:#f8fafc;--b4-muted:#cbd5e1;--b4-bg:#0f172a;--b4-border:#334155;--b4-link:#a5b4fc}.b4-box{background:var(--b4-bg);border:1px solid var(--b4-border);border-radius:18px;padding:24px;margin:30px auto;max-width:1100px;overflow-wrap:anywhere}.b4-box h2{font-size:25px;font-weight:800;margin:0 0 16px;color:var(--b4-text)}.b4-box h3{font-size:18px;font-weight:750;margin:20px 0 8px;color:var(--b4-text)}.b4-box p,.b4-box li{font-size:15px;line-height:1.8;color:var(--b4-muted);margin:0 0 12px}.b4-box ul,.b4-box ol{padding-left:22px}.b4-box ul{list-style:disc}.b4-box a,.b4-nav a{color:var(--b4-link);text-decoration:underline;text-underline-offset:3px}.b4-box a:focus-visible,.b4-nav a:focus-visible{outline:2px solid currentColor;outline-offset:4px}.b4-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 20px;max-width:1152px;margin:0 auto;padding:20px 16px;font:600 13px/1.7 system-ui,sans-serif}.b4-review{font-size:12px!important;border-top:1px solid var(--b4-border);padding-top:16px}body.light-mode .b4-box,body.light-mode .b4-nav{--b4-text:#0f172a;--b4-muted:#475569;--b4-bg:#fff;--b4-border:#dbe3ee;--b4-link:#4338ca}body.dark-mode .b4-box,body.dark-mode .b4-nav,html.dark .b4-box,html.dark .b4-nav{--b4-text:#f8fafc;--b4-muted:#cbd5e1;--b4-bg:#0f172a;--b4-border:#334155;--b4-link:#a5b4fc}@media(max-width:620px){.b4-heading{align-items:flex-start}.b4-heading .b4-icon{width:30px;height:30px}.b4-box{padding:18px}}
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What port does HTTPS use?","acceptedAnswer":{"@type":"Answer","text":"HTTPS commonly uses TCP port 443."}},{"@type":"Question","name":"What port does SSH use?","acceptedAnswer":{"@type":"Answer","text":"SSH commonly uses TCP port 22."}},{"@type":"Question","name":"What port does DNS use?","acceptedAnswer":{"@type":"Answer","text":"DNS commonly uses port 53 under both UDP and TCP, depending on the type of DNS traffic."}},{"@type":"Question","name":"What is the highest valid port number?","acceptedAnswer":{"@type":"Answer","text":"Port numbers range from 0 through 65535."}},{"@type":"Question","name":"What are ephemeral ports?","acceptedAnswer":{"@type":"Answer","text":"They are temporary ports commonly selected by client systems for outbound connections, often from the dynamic/private range of 49152 through 65535."}},{"@type":"Question","name":"Can this tool tell whether a remote port is open?","acceptedAnswer":{"@type":"Answer","text":"No. This standalone browser tool performs local port/service reference lookup and does not scan remote hosts."}},{"@type":"Question","name":"Does a known port guarantee that service is running?","acceptedAnswer":{"@type":"Answer","text":"No. Port assignments describe conventional usage and do not prove which process is listening on a live endpoint."}},{"@type":"Question","name":"Is the built-in table the complete IANA port registry?","acceptedAnswer":{"@type":"Answer","text":"No. It is a curated list of commonly encountered services."}},{"@type":"Question","name":"Can the same port number be used by both TCP and UDP?","acceptedAnswer":{"@type":"Answer","text":"Yes. TCP and UDP are separate transport protocols and can both have entries for the same numeric port."}},{"@type":"Question","name":"What does No common service listed mean?","acceptedAnswer":{"@type":"Answer","text":"It means the valid port number is not present in this page's bundled common-services table."}},{"@type":"Question","name":"Why can a service-name search return several ports?","acceptedAnswer":{"@type":"Answer","text":"The search performs case-insensitive substring matching against bundled service names and descriptions."}},{"@type":"Question","name":"Does this tool tell me whether a firewall is blocking a port?","acceptedAnswer":{"@type":"Answer","text":"No. Without a live network probe, it cannot determine open, closed, filtered, routed or firewall-blocked states."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a UDP port checker?","acceptedAnswer":{"@type":"Answer","text":"On this page, a UDP port checker means a reference lookup for UDP port numbers and common service assignments. It does not send packets to a remote host or determine whether a live UDP port is open."}},{"@type":"Question","name":"How do I check a UDP port number?","acceptedAnswer":{"@type":"Answer","text":"Select UDP, enter a number from 0 through 65535, and run the lookup. The tool validates the number, shows its standard range, and displays a bundled common-service match when one is available."}},{"@type":"Question","name":"Can this tool check whether a UDP port is open?","acceptedAnswer":{"@type":"Answer","text":"No. This standalone browser page does not perform remote socket probes. A real UDP reachability test requires a network-capable backend, native application, or command-line utility."}},{"@type":"Question","name":"Why is UDP port checking different from TCP port checking?","acceptedAnswer":{"@type":"Answer","text":"TCP has a connection handshake that can provide clearer connection-state feedback. UDP is connectionless, so silence during a real probe can have several causes and does not by itself prove a port is closed."}},{"@type":"Question","name":"What port does DNS use?","acceptedAnswer":{"@type":"Answer","text":"DNS commonly uses port 53 under both UDP and TCP, depending on the type of DNS traffic."}},{"@type":"Question","name":"What port does NTP use?","acceptedAnswer":{"@type":"Answer","text":"NTP commonly uses UDP port 123."}},{"@type":"Question","name":"What port does WireGuard use by default?","acceptedAnswer":{"@type":"Answer","text":"WireGuard commonly uses UDP port 51820 by default, although administrators can configure a different port."}},{"@type":"Question","name":"What port does HTTPS use?","acceptedAnswer":{"@type":"Answer","text":"HTTPS commonly uses TCP port 443."}},{"@type":"Question","name":"What port does SSH use?","acceptedAnswer":{"@type":"Answer","text":"SSH commonly uses TCP port 22."}},{"@type":"Question","name":"What is the highest valid port number?","acceptedAnswer":{"@type":"Answer","text":"Port numbers range from 0 through 65535."}},{"@type":"Question","name":"What are ephemeral ports?","acceptedAnswer":{"@type":"Answer","text":"They are temporary ports commonly selected by client systems for outbound connections, often from the dynamic/private range of 49152 through 65535."}},{"@type":"Question","name":"Does a known port guarantee that service is running?","acceptedAnswer":{"@type":"Answer","text":"No. Port assignments describe conventional usage and do not prove which process is listening on a live endpoint."}},{"@type":"Question","name":"Is the built-in table the complete IANA port registry?","acceptedAnswer":{"@type":"Answer","text":"No. It is a curated list of commonly encountered services. Use the official IANA registry when you need the complete assignment reference."}},{"@type":"Question","name":"Can the same port number be used by both TCP and UDP?","acceptedAnswer":{"@type":"Answer","text":"Yes. TCP and UDP are separate transport protocols and can both have entries for the same numeric port."}},{"@type":"Question","name":"Does this tool tell me whether a firewall is blocking a port?","acceptedAnswer":{"@type":"Answer","text":"No. Without a live network probe, it cannot determine open, closed, filtered, routed, NAT-blocked, or firewall-blocked states."}}]}</script>
 </head>
 
 <!--
@@ -110,7 +129,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 </div></header>
 
 <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
-<div class="mb-6"><h1 class="text-3xl font-bold text-slate-900 flex items-center gap-3 b4-heading"><svg class="b4-icon" aria-hidden="true" viewbox="0 0 24 24"><rect height="14" rx="2" width="16" x="4" y="5"></rect><circle cx="8" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="16" cy="12" r="1.5"></circle><path d="M8 8h8"></path></svg><span>Port Checker</span></h1><p class="hero-copy mt-2 text-sm max-w-3xl">Look up TCP and UDP port numbers, identify common services, and understand where a port falls within the standard port ranges.</p></div>
+<div class="mb-6"><h1 class="text-3xl font-bold text-slate-900 flex items-center gap-3 b4-heading"><svg class="b4-icon" aria-hidden="true" viewbox="0 0 24 24"><rect height="14" rx="2" width="16" x="4" y="5"></rect><circle cx="8" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="16" cy="12" r="1.5"></circle><path d="M8 8h8"></path></svg><span>Port Checker – UDP &amp; TCP Port Lookup</span></h1><p class="hero-copy mt-2 text-sm max-w-3xl">Look up UDP and TCP port numbers, identify common services, filter by protocol, and understand standard port ranges. This page is a port-reference checker, not a live remote open-port scanner.</p></div>
 
 <!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT -->
 
@@ -184,6 +203,42 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 <p>Ports 1024 through 49151 are the registered or user range. Many applications and databases operate here, including MySQL on 3306, PostgreSQL on 5432, Redis on 6379, and numerous vendor-specific services.</p>
 <h3>Understand dynamic and private ports</h3>
 <p>Ports 49152 through 65535 are commonly used as dynamic or ephemeral ports. Client systems frequently choose temporary source ports from this high range when opening outbound connections.</p>
+
+
+<h2 class="mt-8">UDP &amp; TCP Port Lookup Quick Reference</h2>
+<p>The strongest use of this page is identifying what a UDP or TCP port number is commonly associated with. The protocol selector lets you narrow a lookup to UDP, TCP, or both. Because the page runs as normal browser JavaScript, it does not open raw sockets to remote hosts and therefore does not claim that a remote UDP or TCP port is open or closed.</p>
+
+<div class="port-ref-wrap">
+  <table class="port-ref">
+    <thead><tr><th>Task</th><th>What this tool does</th><th>Example / limitation</th></tr></thead>
+    <tbody>
+      <tr><td>UDP port checker reference</td><td>Select UDP and enter a port number or service name to search the bundled UDP service list.</td><td>53 / UDP → DNS; 123 / UDP → NTP; 51820 / UDP → WireGuard.</td></tr>
+      <tr><td>TCP port lookup</td><td>Select TCP to search common TCP service associations.</td><td>22 / TCP → SSH; 443 / TCP → HTTPS.</td></tr>
+      <tr><td>Check a UDP port number</td><td>Validates 0–65535, identifies the range, and shows a bundled service match when available.</td><td>A valid number with no match is still a valid UDP port number.</td></tr>
+      <tr><td>Search by service</td><td>Matches bundled service names and descriptions, then filters by the selected protocol.</td><td>Searching DNS with Any returns both TCP and UDP entries.</td></tr>
+      <tr><td>Check whether a port is open</td><td>Not performed by this standalone page.</td><td>Live reachability requires a network-capable backend, native socket tool, or command-line utility.</td></tr>
+      <tr><td>Check firewall status</td><td>Not performed.</td><td>A local reference lookup cannot distinguish open, closed, filtered, NAT-blocked, or routed states.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="intent-grid">
+  <div class="intent-card"><strong>UDP port checker</strong><span>Select UDP and look up common UDP service associations such as DNS, NTP, DHCP, SNMP, OpenVPN and WireGuard.</span></div>
+  <div class="intent-card"><strong>Check UDP port</strong><span>Enter a numeric port to validate its range and see whether the bundled reference contains a UDP match.</span></div>
+  <div class="intent-card"><strong>TCP port lookup</strong><span>Filter for TCP services such as SSH, HTTPS, SMTP, RDP, databases and other common application ports.</span></div>
+  <div class="intent-card"><strong>TCP vs UDP</strong><span>The same numeric port can have different conventional assignments under the two transport protocols.</span></div>
+  <div class="intent-card"><strong>Common port search</strong><span>Search by port, protocol, service name or description using the filterable bundled reference table.</span></div>
+  <div class="intent-card"><strong>Open-port limitation</strong><span>This tool does not scan a host and does not label a remote endpoint open, closed or filtered.</span></div>
+</div>
+
+<h3>How to check a UDP port number with this tool</h3>
+<p>Choose <strong>UDP</strong> from the Protocol menu, enter a port number from 0 through 65535, and select Look Up. The result shows the numerical range and any matching UDP service in the bundled reference. For example, UDP port 53 is commonly associated with DNS queries, UDP 123 with NTP, and UDP 51820 with WireGuard.</p>
+
+<h3>UDP port checker vs. live UDP reachability test</h3>
+<p>A UDP port reference lookup and a live UDP test are different tasks. This page answers “What is this UDP port commonly used for?” It does not send a UDP datagram to a remote server. UDP also has no TCP-style connection handshake, so a missing response in a real probe can mean many things: the service may be silent, a firewall may drop traffic, routing may fail, or the application may require a specific payload.</p>
+
+<h3>Check port UDP or TCP before troubleshooting</h3>
+<p>When diagnosing a network service, first confirm the expected port and protocol. A service configured for UDP will not be verified by looking only at its TCP assignment, and vice versa. After confirming the reference information here, test the actual endpoint using a network-capable tool on a system you administer.</p>
 
 <h2 class="mt-8">Lookup Methodology, Port Ranges, and Important Limits</h2>
 <p>This page performs a local reference lookup against its bundled list of common TCP and UDP services. It does not query a live IANA registry, scan a host, open a socket, test a firewall, or verify that any process is actually listening on a port.</p>
@@ -265,7 +320,7 @@ Service = DNS</code>
   <a class="related-link" href="../IP_Address_Lookup/"><strong>IP Address Lookup</strong><span>Inspect public IP information separately from port and service conventions.</span></a>
 </div>
 
-<p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 3, 2026 · Port validation, TCP/UDP filtering, service-name matching, range classification, bundled common-port behavior, table filtering, no-scan limitation, and theme behavior reviewed against the current implementation.</p>
+<p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 2026 · Port validation, TCP/UDP filtering, service-name matching, range classification, bundled common-port behavior, table filtering, no-scan limitation, and theme behavior reviewed against the current implementation.</p>
 <h2 class="mt-8">Practical Uses</h2>
 <h3>Firewall configuration</h3>
 <p>Before allowing or blocking a port, look up its common service to verify what type of application may be affected. A port number alone does not prove which program is actually listening, but the reference can help identify the conventional use.</p>
@@ -281,18 +336,21 @@ Service = DNS</code>
 
 <section class="info-section">
 <h2>Port Checker FAQ</h2>
+<details class="faq-item"><summary>What is a UDP port checker?</summary><p>On this page, a UDP port checker means a reference lookup for UDP port numbers and common service assignments. It does not send packets to a remote host or determine whether a live UDP port is open.</p></details>
+<details class="faq-item"><summary>How do I check a UDP port number?</summary><p>Select UDP, enter a number from 0 through 65535, and run the lookup. The tool validates the number, shows its standard range, and displays a bundled common-service match when one is available.</p></details>
+<details class="faq-item"><summary>Can this tool check whether a UDP port is open?</summary><p>No. This standalone browser page does not perform remote socket probes. A real UDP reachability test requires a network-capable backend, native application, or command-line utility.</p></details>
+<details class="faq-item"><summary>Why is UDP port checking different from TCP port checking?</summary><p>TCP has a connection handshake that can provide clearer connection-state feedback. UDP is connectionless, so silence during a real probe can have several causes and does not by itself prove a port is closed.</p></details>
+<details class="faq-item"><summary>What port does DNS use?</summary><p>DNS commonly uses port 53 under both UDP and TCP, depending on the type of DNS traffic.</p></details>
+<details class="faq-item"><summary>What port does NTP use?</summary><p>NTP commonly uses UDP port 123.</p></details>
+<details class="faq-item"><summary>What port does WireGuard use by default?</summary><p>WireGuard commonly uses UDP port 51820 by default, although administrators can configure a different port.</p></details>
 <details class="faq-item"><summary>What port does HTTPS use?</summary><p>HTTPS commonly uses TCP port 443.</p></details>
 <details class="faq-item"><summary>What port does SSH use?</summary><p>SSH commonly uses TCP port 22.</p></details>
-<details class="faq-item"><summary>What port does DNS use?</summary><p>DNS commonly uses port 53. UDP is common for standard queries, while TCP is also used for cases such as zone transfers and larger responses.</p></details>
 <details class="faq-item"><summary>What is the highest valid port number?</summary><p>Port numbers range from 0 through 65535.</p></details>
-<details class="faq-item"><summary>What are ephemeral ports?</summary><p>They are temporary ports commonly selected by client systems for outbound connections, typically from the dynamic/private range of 49152–65535.</p></details>
-<details class="faq-item"><summary>Can this tool tell whether a remote port is open?</summary><p>No. This standalone browser tool performs port and service lookup. A real remote port test requires a network-capable backend or native socket access.</p></details>
-<details class="faq-item"><summary>Does a known port guarantee that service is running?</summary><p>No. Port assignments describe conventional usage. An administrator can configure software on a nonstandard port, and any service may be absent even when a port number is commonly associated with it.</p></details>
-<details class="faq-item"><summary>Is the built-in table the complete IANA port registry?</summary><p>No. It is a curated list of commonly encountered services. Use the official IANA Service Name and Transport Protocol Port Number Registry when you need the complete assignment reference.</p></details>
-<details class="faq-item"><summary>Can the same port number be used by both TCP and UDP?</summary><p>Yes. TCP and UDP are separate transport protocols, and the same numeric port can have entries for both.</p></details>
-<details class="faq-item"><summary>What does “No common service listed” mean?</summary><p>It means the port number is valid but is not present in this page's bundled common-services table. It does not prove that the port is globally unassigned.</p></details>
-<details class="faq-item"><summary>Why can a service-name search return several ports?</summary><p>The search uses case-insensitive substring matching against service names and descriptions, so broad terms can match multiple bundled entries.</p></details>
-<details class="faq-item"><summary>Does this tool tell me whether a firewall is blocking a port?</summary><p>No. It does not perform a network probe, so it cannot distinguish open, closed, filtered, routed, or firewall-blocked states on a remote endpoint.</p></details>
+<details class="faq-item"><summary>What are ephemeral ports?</summary><p>They are temporary ports commonly selected by client systems for outbound connections, often from the dynamic/private range of 49152 through 65535.</p></details>
+<details class="faq-item"><summary>Does a known port guarantee that service is running?</summary><p>No. Port assignments describe conventional usage and do not prove which process is listening on a live endpoint.</p></details>
+<details class="faq-item"><summary>Is the built-in table the complete IANA port registry?</summary><p>No. It is a curated list of commonly encountered services. Use the official IANA registry when you need the complete assignment reference.</p></details>
+<details class="faq-item"><summary>Can the same port number be used by both TCP and UDP?</summary><p>Yes. TCP and UDP are separate transport protocols and can both have entries for the same numeric port.</p></details>
+<details class="faq-item"><summary>Does this tool tell me whether a firewall is blocking a port?</summary><p>No. Without a live network probe, it cannot determine open, closed, filtered, routed, NAT-blocked, or firewall-blocked states.</p></details>
 </section>
 
 <!-- GOOGLE ADSENSE: BOTTOM / AFTER-CONTENT INSERTION POINT -->
