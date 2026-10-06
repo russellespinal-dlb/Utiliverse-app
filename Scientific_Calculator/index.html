@@ -6,9 +6,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Scientific Calculator – Trig, Logs, Powers & Roots | Utiliverse</title>
+<title>Scientific Calculator – Scientific Math, Powers, Roots, Trig & Logs | Utiliverse</title>
 
-<meta name="description" content="Free online scientific calculator for arithmetic, DEG/RAD trigonometry, powers, roots, logarithms, factorials, percentages, memory and keyboard input.">
+<meta name="description" content="Free scientific calculator for scientific math and calculations including powers, squares, cubes, roots, DEG/RAD trigonometry, logarithms, factorials, percentages, memory and keyboard input.">
 
 <style>
 
@@ -955,6 +955,25 @@ body.light-mode .caution-note strong{color:#78350f}
   .method-grid,.related-grid{grid-template-columns:1fr}
 }
 
+
+.sci-ref-wrap{margin:18px 0;border:1px solid #334155;border-radius:15px;overflow:auto;background:rgba(15,23,42,.55)}
+.sci-ref{width:100%;border-collapse:collapse;min-width:850px}
+.sci-ref th,.sci-ref td{padding:11px 13px;border-top:1px solid #334155;text-align:left;vertical-align:top}
+.sci-ref thead th{border-top:0;color:#94a3b8;font-size:10px;text-transform:uppercase;letter-spacing:.07em}
+.sci-ref td{color:#cbd5e1;font-size:13px}
+.sci-ref td:first-child{font-weight:850;color:#f8fafc}
+.intent-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0}
+.intent-card{border:1px solid #334155;background:rgba(15,23,42,.55);border-radius:14px;padding:15px}
+.intent-card strong{display:block;color:#f8fafc;margin-bottom:5px}
+.intent-card span{display:block;color:#94a3b8;font-size:13px;line-height:1.65}
+body.light-mode .sci-ref-wrap,body.light-mode .intent-card{background:#fff;border-color:#dbe3ee}
+body.light-mode .sci-ref th{color:#64748b;border-color:#dbe3ee}
+body.light-mode .sci-ref td{color:#475569;border-color:#dbe3ee}
+body.light-mode .sci-ref td:first-child{color:#0f172a}
+body.light-mode .intent-card strong{color:#0f172a}
+body.light-mode .intent-card span{color:#475569}
+@media(max-width:800px){.intent-grid{grid-template-columns:1fr}}
+
 </style>
 
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
@@ -962,15 +981,15 @@ body.light-mode .caution-note strong{color:#78350f}
 <link rel="canonical" href="https://utiliverse.app/Scientific_Calculator/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Utiliverse">
-<meta property="og:title" content="Scientific Calculator – Trig, Logs, Powers & Roots | Utiliverse">
+<meta property="og:title" content="Scientific Calculator – Scientific Math, Powers, Roots, Trig & Logs | Utiliverse">
 <meta property="og:description" content="Calculate arithmetic, trigonometry, powers, roots, logarithms, factorials and more directly in your browser.">
 <meta property="og:url" content="https://utiliverse.app/Scientific_Calculator/">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Scientific Calculator – Trig, Logs, Powers & Roots | Utiliverse">
+<meta name="twitter:title" content="Scientific Calculator – Scientific Math, Powers, Roots, Trig & Logs | Utiliverse">
 <meta name="twitter:description" content="Free browser-based scientific calculator with DEG/RAD modes, memory, history and keyboard support.">
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Scientific Calculator","url":"https://utiliverse.app/Scientific_Calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based scientific calculator for arithmetic, DEG/RAD trigonometry, inverse trig, powers, roots, logarithms, factorials, literal percent calculations, memory, history and keyboard input, with documented precision and domain limits.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Basic arithmetic","Degrees and radians trigonometry","Inverse trigonometric functions","Powers and square or cube roots","Natural and base-10 logarithms","Factorials from 0 through 170","Literal percent calculations","Memory functions","ANS recall","Calculation history","Keyboard input","Restricted expression validation","Floating-point precision disclosure"]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is this scientific calculator used for?","acceptedAnswer":{"@type":"Answer","text":"It performs standard arithmetic plus trigonometric functions, inverse trig, powers, roots, logarithms, factorials, percentages, memory operations and expression calculations."}},{"@type":"Question","name":"What is the difference between DEG and RAD?","acceptedAnswer":{"@type":"Answer","text":"DEG interprets trigonometric inputs as degrees, while RAD interprets them as radians. Inverse trig results are also converted to degrees when DEG mode is selected."}},{"@type":"Question","name":"How does the xʸ button work?","acceptedAnswer":{"@type":"Answer","text":"The xʸ button inserts the exponent operator. Enter the base, select xʸ, enter the exponent and then calculate the expression."}},{"@type":"Question","name":"What is the difference between log and ln?","acceptedAnswer":{"@type":"Answer","text":"The log button calculates the base-10 logarithm, while ln calculates the natural logarithm using base e."}},{"@type":"Question","name":"What values can the factorial function use?","acceptedAnswer":{"@type":"Answer","text":"This calculator accepts whole-number factorial inputs from 0 through 170. Negative values, non-integers and values above 170 return an error."}},{"@type":"Question","name":"How does the percent button work?","acceptedAnswer":{"@type":"Answer","text":"The percent symbol is interpreted as division by 100 when an expression is evaluated. For example, 25% evaluates to 0.25 and 200 × 10% evaluates to 20."}},{"@type":"Question","name":"Can I use my keyboard?","acceptedAnswer":{"@type":"Answer","text":"Yes. Numbers, decimal points, parentheses, percent signs and common arithmetic operators are supported. Enter or equals calculates, Backspace deletes the last character and Escape clears the calculator."}},{"@type":"Question","name":"Does the calculator save my calculations to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Calculator operations and recent history are handled in the browser and are not submitted to a Utiliverse server by the calculator code."}},{"@type":"Question","name":"Why does 200 + 10% equal 200.1?","acceptedAnswer":{"@type":"Answer","text":"In this calculator, the percent sign is interpreted literally as division by 100. Therefore 10% becomes 0.10, and 200 + 10% means 200 + 0.10. To increase 200 by 10%, enter 200 + (200 × 10%)."}},{"@type":"Question","name":"Why can inverse sine or inverse cosine return an error?","acceptedAnswer":{"@type":"Answer","text":"For real-number results, inverse sine and inverse cosine accept inputs only from -1 through 1. Values outside that range do not have a real result in this calculator."}},{"@type":"Question","name":"Why can decimal results show tiny rounding differences?","acceptedAnswer":{"@type":"Answer","text":"The calculator uses JavaScript's standard double-precision floating-point numbers. Some decimal fractions cannot be represented exactly in binary, so very small rounding differences can occur."}},{"@type":"Question","name":"Does xʸ follow normal order of operations?","acceptedAnswer":{"@type":"Answer","text":"Yes. Exponents are evaluated before multiplication, division, addition and subtraction. Use parentheses when you want to make the intended order explicit."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Scientific Calculator","url":"https://utiliverse.app/Scientific_Calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based scientific calculator for scientific math and calculations including arithmetic, squares, cubes, arbitrary powers, square and cube roots, DEG/RAD trigonometry, inverse trig, logarithms, factorials, literal percentages, memory, history and keyboard input.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Basic arithmetic","Degrees and radians trigonometry","Inverse trigonometric functions","Powers and square or cube roots","Natural and base-10 logarithms","Factorials from 0 through 170","Literal percent calculations","Memory functions","ANS recall","Calculation history","Keyboard input","Restricted expression validation","Floating-point precision disclosure","Scientific math calculations","Square calculator","Cube calculator","Arbitrary exponent calculation","2.45 cubed example","Square root calculation","Cube root calculation","Scientific notation display for extreme magnitudes"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is this scientific calculator used for?","acceptedAnswer":{"@type":"Answer","text":"It performs standard arithmetic plus scientific math functions including trigonometry, inverse trig, powers, squares, cubes, roots, logarithms, factorials, percentages, memory operations and expression calculations."}},{"@type":"Question","name":"How do I calculate a square?","acceptedAnswer":{"@type":"Answer","text":"Enter the number and press x². For example, 2.45 squared is 6.0025."}},{"@type":"Question","name":"How do I calculate a cube?","acceptedAnswer":{"@type":"Answer","text":"Enter the number and press x³. For example, 2.45 cubed is 14.706125."}},{"@type":"Question","name":"How do I calculate a number raised to a power?","acceptedAnswer":{"@type":"Answer","text":"Enter the base, press xʸ, enter the exponent and press equals. For example, 2 ^ 8 evaluates to 256."}},{"@type":"Question","name":"How do I calculate a square root or cube root?","acceptedAnswer":{"@type":"Answer","text":"Enter the value and press √x for a square root or ∛x for a cube root. Negative square-root inputs return an error, while cube root can accept negative values."}},{"@type":"Question","name":"What is the difference between DEG and RAD?","acceptedAnswer":{"@type":"Answer","text":"DEG interprets trigonometric inputs as degrees, while RAD interprets them as radians. Inverse trig results are also converted to degrees when DEG mode is selected."}},{"@type":"Question","name":"What is the difference between log and ln?","acceptedAnswer":{"@type":"Answer","text":"The log button calculates the base-10 logarithm, while ln calculates the natural logarithm using base e."}},{"@type":"Question","name":"What values can the factorial function use?","acceptedAnswer":{"@type":"Answer","text":"This calculator accepts whole-number factorial inputs from 0 through 170. Negative values, non-integers and values above 170 return an error."}},{"@type":"Question","name":"How does the percent button work?","acceptedAnswer":{"@type":"Answer","text":"The percent symbol is interpreted as division by 100 when an expression is evaluated. For example, 25% evaluates to 0.25 and 200 × 10% evaluates to 20."}},{"@type":"Question","name":"Can I use my keyboard?","acceptedAnswer":{"@type":"Answer","text":"Yes. Numbers, decimal points, parentheses, percent signs and common arithmetic operators are supported. Enter calculates, Backspace deletes the last character and Escape clears the calculator."}},{"@type":"Question","name":"Does the calculator save my calculations to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Calculator operations, memory values and recent history are handled in the browser and are not submitted to a Utiliverse server by the calculator code."}},{"@type":"Question","name":"Why does 200 + 10% equal 200.1?","acceptedAnswer":{"@type":"Answer","text":"In this calculator, the percent sign is interpreted literally as division by 100. Therefore 10% becomes 0.10, and 200 + 10% means 200 + 0.10. To increase 200 by 10%, enter 200 + (200 × 10%)."}},{"@type":"Question","name":"Why can inverse sine or inverse cosine return an error?","acceptedAnswer":{"@type":"Answer","text":"For real-number results, inverse sine and inverse cosine accept inputs only from -1 through 1. Values outside that range do not have a real result in this calculator."}},{"@type":"Question","name":"Why can decimal results show tiny rounding differences?","acceptedAnswer":{"@type":"Answer","text":"The calculator uses JavaScript's standard double-precision floating-point numbers. Some decimal fractions cannot be represented exactly in binary, so very small rounding differences can occur."}},{"@type":"Question","name":"Does xʸ follow normal order of operations?","acceptedAnswer":{"@type":"Answer","text":"Yes. Exponents are evaluated before multiplication, division, addition and subtraction. Use parentheses when you want to make the intended order explicit."}}]}</script>
 </head>
 
 <body>
@@ -1019,10 +1038,10 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
         <span class="title-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M7 9h2M11 9h2M15 9h2M7 13h2M11 13h2M15 13h2M7 17h6M15 17h2"/></svg>
         </span>
-        <h1>Scientific Calculator</h1>
+        <h1>Scientific Calculator – Math, Powers, Roots, Trig &amp; Logs</h1>
     </div>
     <p class="subtitle">
-        Calculate arithmetic, trigonometry, powers, roots, logarithms, factorials and percentages with DEG/RAD modes, memory, history and keyboard support.
+        Perform scientific math and calculations including arithmetic, powers, squares, cubes, roots, trigonometry, logarithms, factorials and percentages with DEG/RAD modes, memory, history and keyboard support.
     </p>
 </section>
 
@@ -1176,6 +1195,50 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 
 <section class="content-card">
 
+
+<h2>Scientific Math &amp; Calculations Quick Reference</h2>
+<p>This calculator supports the scientific math operations most often used in school, engineering, programming, finance, and technical problem-solving. The reference below shows which control to use and how the current implementation behaves.</p>
+
+<div class="sci-ref-wrap">
+  <table class="sci-ref">
+    <thead><tr><th>Calculation</th><th>How to enter it</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td>Square a number</td><td>Enter the value and press x².</td><td>2.45² → 6.0025</td></tr>
+      <tr><td>Cube a number</td><td>Enter the value and press x³.</td><td>2.45³ → 14.706125</td></tr>
+      <tr><td>Raise x to a power</td><td>Enter the base, press xʸ, enter the exponent, then =.</td><td>2 ^ 8 → 256</td></tr>
+      <tr><td>Square root</td><td>Enter a non-negative value and press √x.</td><td>√81 → 9</td></tr>
+      <tr><td>Cube root</td><td>Enter a value and press ∛x.</td><td>∛125 → 5</td></tr>
+      <tr><td>Sine / cosine / tangent</td><td>Choose DEG or RAD, enter the numeric value, then press sin, cos or tan.</td><td>DEG: sin(30) → 0.5</td></tr>
+      <tr><td>Inverse trig</td><td>Enter the value and press sin⁻¹, cos⁻¹ or tan⁻¹.</td><td>DEG: sin⁻¹(0.5) → 30</td></tr>
+      <tr><td>Base-10 logarithm</td><td>Enter a positive value and press log.</td><td>log(1000) → 3</td></tr>
+      <tr><td>Natural logarithm</td><td>Enter a positive value and press ln.</td><td>ln(e) → 1</td></tr>
+      <tr><td>Factorial</td><td>Enter a whole number from 0 through 170 and press n!.</td><td>5! → 120</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="intent-grid">
+  <div class="intent-card"><strong>Scientific math</strong><span>Evaluate arithmetic together with powers, roots, logarithms, trigonometry, factorials, percentages and constants.</span></div>
+  <div class="intent-card"><strong>Scientific calculations</strong><span>Use DEG/RAD modes, parentheses, exponents and standard order of operations for numerical expressions.</span></div>
+  <div class="intent-card"><strong>Square &amp; cube calculator</strong><span>Use x² or x³ for immediate square and cube calculations such as 2.45 cubed.</span></div>
+  <div class="intent-card"><strong>Power &amp; exponent calculator</strong><span>Use xʸ for arbitrary numeric exponents, with normal precedence and optional parentheses.</span></div>
+  <div class="intent-card"><strong>Root calculator</strong><span>Use √x for real square roots and ∛x for cube roots, including negative cube-root inputs.</span></div>
+  <div class="intent-card"><strong>Trig &amp; logarithm calculator</strong><span>Switch between degrees and radians and use sin, cos, tan, inverse trig, log and ln.</span></div>
+</div>
+
+<h3>How to calculate 2.45 cubed</h3>
+<p>Enter <strong>2.45</strong> and press the <strong>x³</strong> button. The calculator multiplies the value by itself three times and returns <strong>14.706125</strong>. The cube function is applied directly to the current numeric display.</p>
+<code class="math-example">2.45³ → 14.706125</code>
+
+<h3>Squares, cubes, powers, and exponents</h3>
+<p>The x² and x³ buttons apply an immediate square or cube to the current numeric value. For a different exponent, use xʸ. For example, 3 ^ 4 evaluates to 81. Exponents follow normal order of operations, so use parentheses when the exponent itself contains an expression.</p>
+
+<h3>Square roots and cube roots</h3>
+<p>The square-root button returns a real result for non-negative inputs. A negative square-root input returns an error in this real-number calculator. Cube root can accept negative values because negative numbers have real cube roots.</p>
+
+<h3>Scientific calculations in degrees and radians</h3>
+<p>Trigonometric results depend on the selected angle mode. DEG treats the input as degrees, while RAD treats it as radians. This distinction matters for the same numeric input: sin(90°) equals 1, while sin(90 radians) does not.</p>
+
 <h2>How the Scientific Calculator Works</h2>
 
 <p>
@@ -1280,7 +1343,7 @@ MC clears memory, MR recalls memory, M+ adds the current numeric display to memo
     <a class="related-link" href="../Compound_Interest_Calculator/"><strong>Compound Interest Calculator</strong><span>Explore growth using rates, time and recurring contributions.</span></a>
 </div>
 
-<p style="margin-top:24px;font-size:12px;color:var(--muted)"><strong>Last reviewed:</strong> September 30, 2026 · Calculator behavior, examples and numerical limitations reviewed against the current implementation.</p>
+<p style="margin-top:24px;font-size:12px;color:var(--muted)"><strong>Last reviewed:</strong> October 2026 · Calculator behavior, examples and numerical limitations reviewed against the current implementation.</p>
 
 </section>
 
@@ -1291,29 +1354,21 @@ MC clears memory, MR recalls memory, M+ adds the current numeric display to memo
 
 <h2>Scientific Calculator FAQ</h2>
 
-<div class="faq-item"><div class="faq-question">1. What is this scientific calculator used for?</div><p>It performs standard arithmetic plus trigonometric functions, inverse trig, powers, roots, logarithms, factorials, percentages, memory operations and expression calculations.</p></div>
-
-<div class="faq-item"><div class="faq-question">2. What is the difference between DEG and RAD?</div><p>DEG interprets trigonometric inputs as degrees, while RAD interprets them as radians. Inverse trig results are also converted to degrees when DEG mode is selected.</p></div>
-
-<div class="faq-item"><div class="faq-question">3. How does the xʸ button work?</div><p>The xʸ button inserts the exponent operator. Enter the base number, select xʸ, enter the exponent and press equals. For example, 2 xʸ 3 evaluates to 8.</p></div>
-
-<div class="faq-item"><div class="faq-question">4. What is the difference between log and ln?</div><p>The log button calculates the base-10 logarithm. The ln button calculates the natural logarithm using the mathematical constant e as its base.</p></div>
-
-<div class="faq-item"><div class="faq-question">5. What values can I use with factorial?</div><p>This calculator accepts whole-number factorial inputs from 0 through 170. Negative values, non-integers and values above 170 return an error.</p></div>
-
-<div class="faq-item"><div class="faq-question">6. How does the percent button work?</div><p>The percent symbol is interpreted as division by 100 when an expression is evaluated. For example, 25% evaluates to 0.25 and 200 × 10% evaluates to 20.</p></div>
-
-<div class="faq-item"><div class="faq-question">7. Can I use my keyboard?</div><p>Yes. Numbers, decimal points, parentheses, percent signs and common arithmetic operators are supported. Press Enter or equals to calculate, Backspace to remove the last character and Escape to clear the calculator.</p></div>
-
-<div class="faq-item"><div class="faq-question">8. Does the calculator save my calculations to a server?</div><p>No. Calculator operations, memory values and recent history are handled in your browser and are not submitted to a Utiliverse server by the calculator code.</p></div>
-
-<div class="faq-item"><div class="faq-question">9. Why does 200 + 10% equal 200.1?</div><p>In this calculator, the percent sign is interpreted literally as division by 100. Therefore 10% becomes 0.10, and 200 + 10% means 200 + 0.10. To increase 200 by 10%, enter 200 + (200 × 10%).</p></div>
-
-<div class="faq-item"><div class="faq-question">10. Why can inverse sine or inverse cosine return an error?</div><p>For real-number results, sin⁻¹ and cos⁻¹ accept inputs only from −1 through 1. Values outside that range do not have a real inverse-trig result in this calculator.</p></div>
-
-<div class="faq-item"><div class="faq-question">11. Why can decimal results show tiny rounding differences?</div><p>The calculator uses JavaScript's standard double-precision floating-point numbers. Some decimal fractions cannot be represented exactly in binary, so very small rounding differences can occur.</p></div>
-
-<div class="faq-item"><div class="faq-question">12. Does xʸ follow normal order of operations?</div><p>Yes. Exponents are evaluated before multiplication, division, addition and subtraction. Use parentheses when you want to make the intended order explicit.</p></div>
+<div class="faq-item"><div class="faq-question">1. What is this scientific calculator used for?</div><p>It performs standard arithmetic plus scientific math functions including trigonometry, inverse trig, powers, squares, cubes, roots, logarithms, factorials, percentages, memory operations and expression calculations.</p></div>
+<div class="faq-item"><div class="faq-question">2. How do I calculate a square?</div><p>Enter the number and press x². For example, 2.45 squared is 6.0025.</p></div>
+<div class="faq-item"><div class="faq-question">3. How do I calculate a cube?</div><p>Enter the number and press x³. For example, 2.45 cubed is 14.706125.</p></div>
+<div class="faq-item"><div class="faq-question">4. How do I calculate a number raised to a power?</div><p>Enter the base, press xʸ, enter the exponent and press equals. For example, 2 ^ 8 evaluates to 256.</p></div>
+<div class="faq-item"><div class="faq-question">5. How do I calculate a square root or cube root?</div><p>Enter the value and press √x for a square root or ∛x for a cube root. Negative square-root inputs return an error, while cube root can accept negative values.</p></div>
+<div class="faq-item"><div class="faq-question">6. What is the difference between DEG and RAD?</div><p>DEG interprets trigonometric inputs as degrees, while RAD interprets them as radians. Inverse trig results are also converted to degrees when DEG mode is selected.</p></div>
+<div class="faq-item"><div class="faq-question">7. What is the difference between log and ln?</div><p>The log button calculates the base-10 logarithm, while ln calculates the natural logarithm using base e.</p></div>
+<div class="faq-item"><div class="faq-question">8. What values can the factorial function use?</div><p>This calculator accepts whole-number factorial inputs from 0 through 170. Negative values, non-integers and values above 170 return an error.</p></div>
+<div class="faq-item"><div class="faq-question">9. How does the percent button work?</div><p>The percent symbol is interpreted as division by 100 when an expression is evaluated. For example, 25% evaluates to 0.25 and 200 × 10% evaluates to 20.</p></div>
+<div class="faq-item"><div class="faq-question">10. Can I use my keyboard?</div><p>Yes. Numbers, decimal points, parentheses, percent signs and common arithmetic operators are supported. Enter calculates, Backspace deletes the last character and Escape clears the calculator.</p></div>
+<div class="faq-item"><div class="faq-question">11. Does the calculator save my calculations to a server?</div><p>No. Calculator operations, memory values and recent history are handled in the browser and are not submitted to a Utiliverse server by the calculator code.</p></div>
+<div class="faq-item"><div class="faq-question">12. Why does 200 + 10% equal 200.1?</div><p>In this calculator, the percent sign is interpreted literally as division by 100. Therefore 10% becomes 0.10, and 200 + 10% means 200 + 0.10. To increase 200 by 10%, enter 200 + (200 × 10%).</p></div>
+<div class="faq-item"><div class="faq-question">13. Why can inverse sine or inverse cosine return an error?</div><p>For real-number results, inverse sine and inverse cosine accept inputs only from -1 through 1. Values outside that range do not have a real result in this calculator.</p></div>
+<div class="faq-item"><div class="faq-question">14. Why can decimal results show tiny rounding differences?</div><p>The calculator uses JavaScript's standard double-precision floating-point numbers. Some decimal fractions cannot be represented exactly in binary, so very small rounding differences can occur.</p></div>
+<div class="faq-item"><div class="faq-question">15. Does xʸ follow normal order of operations?</div><p>Yes. Exponents are evaluated before multiplication, division, addition and subtraction. Use parentheses when you want to make the intended order explicit.</p></div>
 
 </section>
 
