@@ -3,20 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UDP Port Checker & TCP Port Lookup – Common Ports | Utiliverse</title>
-<meta name="description" content="Free UDP and TCP port checker reference. Look up UDP or TCP port numbers, common services, protocol assignments and port ranges. This browser tool is a reference lookup, not a live remote-port scan.">
+<title>UDP Port Checker Reference &amp; TCP Port Lookup | Utiliverse</title>
+<meta name="description" content="Look up TCP and UDP port numbers, services and port ranges. Includes clear guidance for testing UDP connectivity on a host you manage; no live scanning.">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#020617">
 <link rel="canonical" href="https://utiliverse.app/Port_Checker/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Utiliverse">
-<meta property="og:title" content="UDP Port Checker & TCP Port Lookup – Common Ports | Utiliverse">
-<meta property="og:description" content="Look up UDP and TCP port numbers, identify common services and browse standard port ranges without pretending to perform a live remote-port scan.">
+<meta property="og:title" content="UDP Port Checker Reference &amp; TCP Port Lookup | Utiliverse">
+<meta property="og:description" content="Look up common TCP and UDP services, validate port numbers and learn why a lookup is not a live connectivity test.">
 <meta property="og:url" content="https://utiliverse.app/Port_Checker/">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="UDP Port Checker & TCP Port Lookup | Utiliverse">
+<meta name="twitter:title" content="UDP Port Checker Reference &amp; TCP Port Lookup | Utiliverse">
 <meta name="twitter:description" content="Look up TCP/UDP ports and common network services.">
 
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1786245123035497" crossorigin="anonymous"></script>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -97,6 +98,25 @@ body.dark-mode .intent-card strong{color:#e2e8f0}
 body.dark-mode .intent-card span{color:#94a3b8}
 @media(max-width:800px){.intent-grid{grid-template-columns:1fr}}
 
+
+/* Query-focused functional enhancements */
+.port-shortcuts{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+.port-shortcut{border:1px solid #cbd5e1;background:#f8fafc;color:#334155;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:750;cursor:pointer}
+.port-shortcut:hover,.port-shortcut:focus-visible{border-color:#6366f1;color:#4338ca;outline-offset:2px}
+.port-interpret{margin-top:12px;color:#475569;font-size:13px;line-height:1.65}
+.port-detail{margin-top:12px;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden}
+.port-detail-head{padding:10px 12px;background:#f8fafc;font-size:12px;font-weight:800;color:#334155}
+.port-detail-row{display:grid;grid-template-columns:100px 70px minmax(0,1fr);gap:8px;border-top:1px solid #e2e8f0;padding:9px 12px;font-size:12px;line-height:1.5;color:#475569}
+.port-detail-row strong{color:#0f172a;overflow-wrap:anywhere}
+.port-example{display:block;margin:12px 0;padding:12px 14px;border:1px solid #dbe3ee;border-radius:12px;background:#f8fafc;color:#0f172a;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow:auto}
+body.dark-mode .port-shortcut{background:#0f172a;border-color:#475569;color:#cbd5e1}
+body.dark-mode .port-interpret{color:#cbd5e1}
+body.dark-mode .port-detail{border-color:#334155}
+body.dark-mode .port-detail-head{background:#0f172a;color:#e2e8f0}
+body.dark-mode .port-detail-row{border-color:#334155;color:#cbd5e1}
+body.dark-mode .port-detail-row strong{color:#f8fafc}
+body.dark-mode .port-example{background:#0f172a;border-color:#334155;color:#e2e8f0}
+@media(max-width:550px){.port-detail-row{grid-template-columns:60px 50px minmax(0,1fr);padding:8px;font-size:11px}}
 </style>
 
 <script type="application/ld+json">
@@ -106,7 +126,7 @@ body.dark-mode .intent-card span{color:#94a3b8}
 /* Batch 4: scoped title, editorial and footer additions */
 .b4-heading{display:flex;align-items:center;gap:14px}.b4-heading .b4-icon{width:36px;height:36px;flex:none;color:#6366f1;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.b4-box,.b4-nav{--b4-text:#0f172a;--b4-muted:#475569;--b4-bg:#fff;--b4-border:#dbe3ee;--b4-link:#4338ca;color:var(--b4-text)}.b4-dark{--b4-text:#f8fafc;--b4-muted:#cbd5e1;--b4-bg:#0f172a;--b4-border:#334155;--b4-link:#a5b4fc}.b4-box{background:var(--b4-bg);border:1px solid var(--b4-border);border-radius:18px;padding:24px;margin:30px auto;max-width:1100px;overflow-wrap:anywhere}.b4-box h2{font-size:25px;font-weight:800;margin:0 0 16px;color:var(--b4-text)}.b4-box h3{font-size:18px;font-weight:750;margin:20px 0 8px;color:var(--b4-text)}.b4-box p,.b4-box li{font-size:15px;line-height:1.8;color:var(--b4-muted);margin:0 0 12px}.b4-box ul,.b4-box ol{padding-left:22px}.b4-box ul{list-style:disc}.b4-box a,.b4-nav a{color:var(--b4-link);text-decoration:underline;text-underline-offset:3px}.b4-box a:focus-visible,.b4-nav a:focus-visible{outline:2px solid currentColor;outline-offset:4px}.b4-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 20px;max-width:1152px;margin:0 auto;padding:20px 16px;font:600 13px/1.7 system-ui,sans-serif}.b4-review{font-size:12px!important;border-top:1px solid var(--b4-border);padding-top:16px}body.light-mode .b4-box,body.light-mode .b4-nav{--b4-text:#0f172a;--b4-muted:#475569;--b4-bg:#fff;--b4-border:#dbe3ee;--b4-link:#4338ca}body.dark-mode .b4-box,body.dark-mode .b4-nav,html.dark .b4-box,html.dark .b4-nav{--b4-text:#f8fafc;--b4-muted:#cbd5e1;--b4-bg:#0f172a;--b4-border:#334155;--b4-link:#a5b4fc}@media(max-width:620px){.b4-heading{align-items:flex-start}.b4-heading .b4-icon{width:30px;height:30px}.b4-box{padding:18px}}
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a UDP port checker?","acceptedAnswer":{"@type":"Answer","text":"On this page, a UDP port checker means a reference lookup for UDP port numbers and common service assignments. It does not send packets to a remote host or determine whether a live UDP port is open."}},{"@type":"Question","name":"How do I check a UDP port number?","acceptedAnswer":{"@type":"Answer","text":"Select UDP, enter a number from 0 through 65535, and run the lookup. The tool validates the number, shows its standard range, and displays a bundled common-service match when one is available."}},{"@type":"Question","name":"Can this tool check whether a UDP port is open?","acceptedAnswer":{"@type":"Answer","text":"No. This standalone browser page does not perform remote socket probes. A real UDP reachability test requires a network-capable backend, native application, or command-line utility."}},{"@type":"Question","name":"Why is UDP port checking different from TCP port checking?","acceptedAnswer":{"@type":"Answer","text":"TCP has a connection handshake that can provide clearer connection-state feedback. UDP is connectionless, so silence during a real probe can have several causes and does not by itself prove a port is closed."}},{"@type":"Question","name":"What port does DNS use?","acceptedAnswer":{"@type":"Answer","text":"DNS commonly uses port 53 under both UDP and TCP, depending on the type of DNS traffic."}},{"@type":"Question","name":"What port does NTP use?","acceptedAnswer":{"@type":"Answer","text":"NTP commonly uses UDP port 123."}},{"@type":"Question","name":"What port does WireGuard use by default?","acceptedAnswer":{"@type":"Answer","text":"WireGuard commonly uses UDP port 51820 by default, although administrators can configure a different port."}},{"@type":"Question","name":"What port does HTTPS use?","acceptedAnswer":{"@type":"Answer","text":"HTTPS commonly uses TCP port 443."}},{"@type":"Question","name":"What port does SSH use?","acceptedAnswer":{"@type":"Answer","text":"SSH commonly uses TCP port 22."}},{"@type":"Question","name":"What is the highest valid port number?","acceptedAnswer":{"@type":"Answer","text":"Port numbers range from 0 through 65535."}},{"@type":"Question","name":"What are ephemeral ports?","acceptedAnswer":{"@type":"Answer","text":"They are temporary ports commonly selected by client systems for outbound connections, often from the dynamic/private range of 49152 through 65535."}},{"@type":"Question","name":"Does a known port guarantee that service is running?","acceptedAnswer":{"@type":"Answer","text":"No. Port assignments describe conventional usage and do not prove which process is listening on a live endpoint."}},{"@type":"Question","name":"Is the built-in table the complete IANA port registry?","acceptedAnswer":{"@type":"Answer","text":"No. It is a curated list of commonly encountered services. Use the official IANA registry when you need the complete assignment reference."}},{"@type":"Question","name":"Can the same port number be used by both TCP and UDP?","acceptedAnswer":{"@type":"Answer","text":"Yes. TCP and UDP are separate transport protocols and can both have entries for the same numeric port."}},{"@type":"Question","name":"Does this tool tell me whether a firewall is blocking a port?","acceptedAnswer":{"@type":"Answer","text":"No. Without a live network probe, it cannot determine open, closed, filtered, routed, NAT-blocked, or firewall-blocked states."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a UDP port checker?","acceptedAnswer":{"@type":"Answer","text":"On this page, a UDP port checker means a reference lookup for UDP port numbers and common service assignments. It does not send packets to a remote host or determine whether a live UDP port is open."}},{"@type":"Question","name":"How do I check a UDP port number?","acceptedAnswer":{"@type":"Answer","text":"Select UDP, enter a number from 0 through 65535, and run the lookup. The tool validates the number, shows its standard range, and displays a bundled common-service match when one is available."}},{"@type":"Question","name":"Can this tool check whether a UDP port is open?","acceptedAnswer":{"@type":"Answer","text":"No. This standalone browser page does not perform remote socket probes. A real UDP reachability test requires a network-capable backend, native application, or command-line utility."}},{"@type":"Question","name":"Why is UDP port checking different from TCP port checking?","acceptedAnswer":{"@type":"Answer","text":"TCP has a connection handshake that can provide clearer connection-state feedback. UDP is connectionless, so silence during a real probe can have several causes and does not by itself prove a port is closed."}},{"@type":"Question","name":"What port does DNS use?","acceptedAnswer":{"@type":"Answer","text":"DNS commonly uses port 53 under both UDP and TCP, depending on the type of DNS traffic."}},{"@type":"Question","name":"What port does NTP use?","acceptedAnswer":{"@type":"Answer","text":"NTP commonly uses UDP port 123."}},{"@type":"Question","name":"What port does WireGuard use by default?","acceptedAnswer":{"@type":"Answer","text":"WireGuard commonly uses UDP port 51820 by default, although administrators can configure a different port."}},{"@type":"Question","name":"What port does HTTPS use?","acceptedAnswer":{"@type":"Answer","text":"HTTPS commonly uses TCP port 443."}},{"@type":"Question","name":"What port does SSH use?","acceptedAnswer":{"@type":"Answer","text":"SSH commonly uses TCP port 22."}},{"@type":"Question","name":"What is the highest valid port number?","acceptedAnswer":{"@type":"Answer","text":"Port numbers range from 0 through 65535."}},{"@type":"Question","name":"What are ephemeral ports?","acceptedAnswer":{"@type":"Answer","text":"They are temporary ports commonly selected by client systems for outbound connections, often from the dynamic/private range of 49152 through 65535."}},{"@type":"Question","name":"Does a known port guarantee that service is running?","acceptedAnswer":{"@type":"Answer","text":"No. Port assignments describe conventional usage and do not prove which process is listening on a live endpoint."}},{"@type":"Question","name":"Is the built-in table the complete IANA port registry?","acceptedAnswer":{"@type":"Answer","text":"No. It is a curated list of commonly encountered services. Use the official IANA registry when you need the complete assignment reference."}},{"@type":"Question","name":"Can the same port number be used by both TCP and UDP?","acceptedAnswer":{"@type":"Answer","text":"Yes. TCP and UDP are separate transport protocols and can both have entries for the same numeric port."}},{"@type":"Question","name":"Does this tool tell me whether a firewall is blocking a port?","acceptedAnswer":{"@type":"Answer","text":"No. Without a live network probe, it cannot determine open, closed, filtered, routed, NAT-blocked, or firewall-blocked states."}},{"@type":"Question","name":"How do I run a real UDP port test?","acceptedAnswer":{"@type":"Answer","text":"Use a network-capable tool such as Nmap on a host you administer or have permission to test. For example nmap -sU -p 123 192.0.2.10, replacing the documentation address with your authorized target. An open|filtered result does not confirm the port is open."}},{"@type":"Question","name":"Is port 64660 a valid port number?","acceptedAnswer":{"@type":"Answer","text":"Yes. Port 64660 is within the range 0 through 65535 and belongs to the dynamic/private range 49152 through 65535. The lookup does not indicate whether an application is listening on it."}}]}</script>
 </head>
 
 <!--
@@ -129,7 +149,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 </div></header>
 
 <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
-<div class="mb-6"><h1 class="text-3xl font-bold text-slate-900 flex items-center gap-3 b4-heading"><svg class="b4-icon" aria-hidden="true" viewbox="0 0 24 24"><rect height="14" rx="2" width="16" x="4" y="5"></rect><circle cx="8" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="16" cy="12" r="1.5"></circle><path d="M8 8h8"></path></svg><span>Port Checker – UDP &amp; TCP Port Lookup</span></h1><p class="hero-copy mt-2 text-sm max-w-3xl">Look up UDP and TCP port numbers, identify common services, filter by protocol, and understand standard port ranges. This page is a port-reference checker, not a live remote open-port scanner.</p></div>
+<div class="mb-6"><h1 class="text-3xl font-bold text-slate-900 flex items-center gap-3 b4-heading"><svg class="b4-icon" aria-hidden="true" viewbox="0 0 24 24"><rect height="14" rx="2" width="16" x="4" y="5"></rect><circle cx="8" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="16" cy="12" r="1.5"></circle><path d="M8 8h8"></path></svg><span>Port Checker – UDP &amp; TCP Port Lookup</span></h1><p class="hero-copy mt-2 text-sm max-w-3xl">Identify the conventional service for a TCP or UDP port, validate a port number, and learn how to investigate connectivity. This is an offline port-reference lookup—not a live open/closed scanner.</p></div>
 
 <!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT -->
 
@@ -143,6 +163,13 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 <div><label class="label" for="protocol">Protocol</label><select id="protocol" class="field"><option value="any" selected>Any</option><option value="tcp">TCP</option><option value="udp">UDP</option></select></div>
 </div>
 <button id="lookupBtn" class="btn-primary w-full mt-4" type="button"><i data-lucide="search" class="w-4 h-4"></i>Look Up</button>
+<div class="port-shortcuts" aria-label="Example port lookups">
+  <button class="port-shortcut" type="button" data-port="53" data-proto="udp">UDP 53 · DNS</button>
+  <button class="port-shortcut" type="button" data-port="123" data-proto="udp">UDP 123 · NTP</button>
+  <button class="port-shortcut" type="button" data-port="51820" data-proto="udp">UDP 51820 · WireGuard</button>
+  <button class="port-shortcut" type="button" data-port="443" data-proto="tcp">TCP 443 · HTTPS</button>
+  <button class="port-shortcut" type="button" data-port="64660" data-proto="any">Port 64660 · Validate</button>
+</div>
 <div class="lookup-note mt-4"><strong>Port lookup vs. live reachability:</strong> this page identifies port numbers and common services. Web browsers do not expose arbitrary raw TCP/UDP socket access to normal page JavaScript, so this standalone tool does not pretend to determine whether a remote host's port is actually open.</div>
 </div></section>
 
@@ -156,6 +183,8 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 <div class="result-box"><div class="result-label">Range</div><div id="outRange" class="result-value">Well-Known / System</div></div>
 </div>
 <div class="result-box mt-3"><div class="result-label">Description</div><div id="outDescription" class="result-value text-base">HTTP over TLS/SSL</div></div>
+<p id="lookupInterpretation" class="port-interpret" role="status" aria-live="polite"></p>
+<div id="matchDetails" class="port-detail" hidden><div id="matchDetailsHead" class="port-detail-head"></div><div id="matchDetailsRows"></div></div>
 </div></section>
 
 <section class="tool-card overflow-hidden">
@@ -237,6 +266,20 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 <h3>UDP port checker vs. live UDP reachability test</h3>
 <p>A UDP port reference lookup and a live UDP test are different tasks. This page answers “What is this UDP port commonly used for?” It does not send a UDP datagram to a remote server. UDP also has no TCP-style connection handshake, so a missing response in a real probe can mean many things: the service may be silent, a firewall may drop traffic, routing may fail, or the application may require a specific payload.</p>
 
+<h3>How to test a UDP port on a system you manage</h3>
+<p>This page does not send network packets, but it can help you choose the correct port and protocol before a real connectivity test. On a machine you administer (or have permission to test), a network-capable command-line tool can probe a target. Replace the documentation-only address below with your own authorized host:</p>
+<code class="port-example"># Linux/macOS with Nmap installed — UDP port 123
+nmap -sU -p 123 192.0.2.10
+
+# TCP port 443 with Nmap
+nmap -sT -p 443 192.0.2.10
+
+# Windows PowerShell — TCP only (not a UDP test)
+Test-NetConnection -ComputerName 192.0.2.10 -Port 443</code>
+<p>For UDP, <code>open|filtered</code> does <strong>not</strong> mean the port is confirmed open: a missing UDP reply could indicate an open but silent service or packet filtering. Nmap's <a href="https://nmap.org/book/scan-methods-udp-scan.html" target="_blank" rel="noopener noreferrer">UDP scan documentation</a> explains why the result can be ambiguous. Always check the listening process and firewall rules on the system you control, and use a protocol-specific application test where possible.</p>
+<h3>Example: is port 64660 valid?</h3>
+<p>Yes. Port <strong>64660</strong> is within the 0–65535 numeric range and belongs to the <strong>49152–65535 dynamic/private range</strong>. The bundled list may have no common-service entry for it. That is not evidence that it is closed, unassigned to a local application, or safe to expose. Port 0 is also within the 16-bit numeric range but is reserved for special purposes rather than ordinary destination-service use.</p>
+
 <h3>Check port UDP or TCP before troubleshooting</h3>
 <p>When diagnosing a network service, first confirm the expected port and protocol. A service configured for UDP will not be verified by looking only at its TCP assignment, and vice versa. After confirming the reference information here, test the actual endpoint using a network-capable tool on a system you administer.</p>
 
@@ -291,7 +334,7 @@ Service = DNS</code>
 <p>Text queries are checked against both the bundled service name and description using case-insensitive substring matching. A broad term can therefore return several matches, and the result combines unique ports, protocols, service names, and descriptions from all matches.</p>
 
 <h3>Multiple service matches can span more than one port</h3>
-<p>For text searches, the displayed Port field can contain a comma-separated set of matching ports. The displayed range is based on the first matching entry's port, so a broad text search that happens to match services in different numerical ranges should be interpreted with care.</p>
+<p>For text searches, the displayed Port field can contain a comma-separated set of matching ports. If multiple matches cover different standard ranges, the result now says “Multiple ranges” and lists the individual port/protocol/service matches.</p>
 
 <h3>Unknown text is not the same as an unassigned port</h3>
 <p>A “No match” result for a service-name query only means the bundled table did not find the text. It does not determine whether IANA has an assignment for that service or whether a product commonly uses that port in practice.</p>
@@ -320,7 +363,7 @@ Service = DNS</code>
   <a class="related-link" href="../IP_Address_Lookup/"><strong>IP Address Lookup</strong><span>Inspect public IP information separately from port and service conventions.</span></a>
 </div>
 
-<p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 2026 · Port validation, TCP/UDP filtering, service-name matching, range classification, bundled common-port behavior, table filtering, no-scan limitation, and theme behavior reviewed against the current implementation.</p>
+<p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> November 6, 2026 · Port validation, TCP/UDP filtering, service-name matching, range classification, bundled common-port behavior, table filtering, no-scan limitation, and theme behavior reviewed against the current implementation.</p>
 <h2 class="mt-8">Practical Uses</h2>
 <h3>Firewall configuration</h3>
 <p>Before allowing or blocking a port, look up its common service to verify what type of application may be affected. A port number alone does not prove which program is actually listening, but the reference can help identify the conventional use.</p>
@@ -329,7 +372,7 @@ Service = DNS</code>
 <h3>Learning common networking ports</h3>
 <p>The filterable reference table is useful for students, IT staff, developers, and administrators learning commonly encountered TCP and UDP services.</p>
 <h3>Security reviews</h3>
-<p>Open ports represent network entry points, so unnecessary services should generally be disabled or restricted. The reference site recommends closing ports that are not needed, using firewalls, auditing open ports, and keeping exposed services patched.</p>
+<p>Open ports represent network entry points, so unnecessary services should generally be disabled or restricted. On systems you administer, minimize unnecessary exposed services, apply appropriate firewall rules, and keep listening services patched.</p>
 <h3>Why this browser tool does not scan hosts</h3>
 <p>A normal web page cannot create arbitrary raw TCP or UDP socket connections to any host and port. Browsers intentionally restrict that capability. A true reachability scan requires a server-side probe, command-line tool, native application, browser extension with special permissions, or another network-capable service. This Utiliverse page therefore performs a reliable local port/service lookup rather than displaying invented open/closed results.</p>
 </section>
@@ -339,6 +382,8 @@ Service = DNS</code>
 <details class="faq-item"><summary>What is a UDP port checker?</summary><p>On this page, a UDP port checker means a reference lookup for UDP port numbers and common service assignments. It does not send packets to a remote host or determine whether a live UDP port is open.</p></details>
 <details class="faq-item"><summary>How do I check a UDP port number?</summary><p>Select UDP, enter a number from 0 through 65535, and run the lookup. The tool validates the number, shows its standard range, and displays a bundled common-service match when one is available.</p></details>
 <details class="faq-item"><summary>Can this tool check whether a UDP port is open?</summary><p>No. This standalone browser page does not perform remote socket probes. A real UDP reachability test requires a network-capable backend, native application, or command-line utility.</p></details>
+<details class="faq-item"><summary>How do I run a real UDP port test?</summary><p>On a system you administer or have permission to test, a tool such as Nmap can send UDP probes (for example <code>nmap -sU -p 123 192.0.2.10</code>, with your authorized host substituted). An <code>open|filtered</code> result does not confirm that the port is open; verify the actual service and firewall too.</p></details>
+<details class="faq-item"><summary>Is port 64660 a valid port number?</summary><p>Yes. It is within the 0–65535 numeric range and falls in the dynamic/private range of 49152–65535. That classification is not a live-service or firewall-status result.</p></details>
 <details class="faq-item"><summary>Why is UDP port checking different from TCP port checking?</summary><p>TCP has a connection handshake that can provide clearer connection-state feedback. UDP is connectionless, so silence during a real probe can have several causes and does not by itself prove a port is closed.</p></details>
 <details class="faq-item"><summary>What port does DNS use?</summary><p>DNS commonly uses port 53 under both UDP and TCP, depending on the type of DNS traffic.</p></details>
 <details class="faq-item"><summary>What port does NTP use?</summary><p>NTP commonly uses UDP port 123.</p></details>
@@ -355,7 +400,7 @@ Service = DNS</code>
 
 <!-- GOOGLE ADSENSE: BOTTOM / AFTER-CONTENT INSERTION POINT -->
 </div>
-<section class="b4-box" aria-labelledby="b4-review-heading"><h2 id="b4-review-heading">Use a port lookup as a reference, not a connectivity result</h2><p>Looking up 443 identifies a common HTTPS association. It does not show that a machine is listening, that its certificate is valid, or that a firewall allows access. Specify TCP or UDP when investigating a real endpoint.</p><h3>A useful troubleshooting sequence</h3><p>Record the application, hostname, transport and port. Check the configured listener on a system you administer, then routing and firewall policy, then the application response. A timeout or absent UDP reply can have several causes.</p><p>This tool uses a bundled common-port table and performs no host scan. An unknown result can mean the reference does not include the service; consult the IANA registry for assignment details. Dynamic/private ports are not inherently safe or unsafe.</p><h3>Related guides</h3><ul><li><a href="/Guides/TCP_UDP_Ports.html">TCP and UDP ports: lookup versus reachability</a></li><li><a href="/Guides/DNS_and_Network_Troubleshooting.html">DNS, TLS, or HTTP? Troubleshoot the right layer</a></li></ul><h3>Related tools</h3><ul><li><a href="/HTTP_Status_Code_Reference/">HTTP Status Code Reference</a></li><li><a href="/SSL_Certificate_Checker/">SSL Certificate Checker</a></li></ul><h3>Sources</h3><ul><li><a href="https://www.iana.org/assignments/service-names-port-numbers/">IANA service names and port numbers</a></li></ul><p class="b4-review">Explanatory content reviewed October 3, 2026. <a href="/Editorial_Methodology.html">Methodology</a> · <a href="/Contact_Info.html">Corrections</a>.</p></section>
+<section class="b4-box" aria-labelledby="b4-review-heading"><h2 id="b4-review-heading">Use a port lookup as a reference, not a connectivity result</h2><p>Looking up 443 identifies a common HTTPS association. It does not show that a machine is listening, that its certificate is valid, or that a firewall allows access. Specify TCP or UDP when investigating a real endpoint.</p><h3>A useful troubleshooting sequence</h3><p>Record the application, hostname, transport and port. Check the configured listener on a system you administer, then routing and firewall policy, then the application response. A timeout or absent UDP reply can have several causes.</p><p>This tool uses a bundled common-port table and performs no host scan. An unknown result can mean the reference does not include the service; consult the IANA registry for assignment details. Dynamic/private ports are not inherently safe or unsafe.</p><h3>Related guides</h3><ul><li><a href="/Guides/TCP_UDP_Ports.html">TCP and UDP ports: lookup versus reachability</a></li><li><a href="/Guides/DNS_and_Network_Troubleshooting.html">DNS, TLS, or HTTP? Troubleshoot the right layer</a></li></ul><h3>Related tools</h3><ul><li><a href="/HTTP_Status_Code_Reference/">HTTP Status Code Reference</a></li><li><a href="/SSL_Certificate_Checker/">SSL Certificate Checker</a></li></ul><h3>Sources</h3><ul><li><a href="https://www.iana.org/assignments/service-names-port-numbers/">IANA service names and port numbers</a></li><li><a href="https://nmap.org/book/scan-methods-udp-scan.html">Nmap: interpreting UDP scan results</a></li></ul><p class="b4-review">Lookup behavior and troubleshooting guidance reviewed November 6, 2026. <a href="/Editorial_Methodology.html">Methodology</a> · <a href="/Contact_Info.html">Corrections</a>.</p></section>
 </main>
 
 <footer class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-6 pt-2"><div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-500"><div>© 2026 Utiliverse. All rights reserved.</div><div class="font-semibold text-right">100% Free and Browser Based</div></div><nav class="b4-nav" aria-label="Resources and site information"><a href="/Guides.html">Guides</a><a href="/Updates.html">Updates</a><a href="/Editorial_Methodology.html">Editorial &amp; Methodology</a><a href="/About.html">About</a><a href="/Privacy_Policy.html">Privacy Policy</a><a href="/Terms_of_Service.html">Terms</a><a href="/Contact_Info.html">Contact</a></nav></footer>
@@ -383,54 +428,96 @@ function renderTable(list=PORTS){
  $("tableCount").textContent=`${list.length} entr${list.length===1?"y":"ies"}`;
 }
 
+function clearRange(){document.querySelectorAll(".range-card").forEach(c=>c.classList.remove("active"));}
+function showMatches(matches){
+ const panel=$("matchDetails"),rows=$("matchDetailsRows");
+ rows.replaceChildren();
+ panel.hidden=matches.length<=1;
+ if(matches.length<=1)return;
+ $("matchDetailsHead").textContent=`${matches.length} matching port / protocol entries — select an entry in the reference table to look it up individually`;
+ matches.slice(0,20).forEach(x=>{
+   const line=document.createElement("div");line.className="port-detail-row";
+   const port=document.createElement("strong");port.textContent=String(x.port);
+   const protocol=document.createElement("span");protocol.textContent=x.protocol.toUpperCase();
+   const service=document.createElement("span");service.textContent=x.service;
+   line.append(port,protocol,service);rows.appendChild(line);
+ });
+ if(matches.length>20){const extra=document.createElement("div");extra.className="port-detail-row";extra.textContent=`Plus ${matches.length-20} other matches; use the table filter to narrow the list.`;rows.appendChild(extra);}
+}
 function lookup(){
  const q=$("query").value.trim().toLowerCase();
  const proto=$("protocol").value;
  let matches=[];
-
- if(/^\d+$/.test(q)){
+ clearRange();
+ $("matchDetails").hidden=true;
+ const note=$("lookupInterpretation");
+ if(!q){
+  $("outPort").textContent="—";$("outProtocol").textContent="—";$("outService").textContent="Enter a port or service";
+  $("outDescription").textContent="Try 53, 443, 64660, DNS, or WireGuard.";
+  $("outRange").textContent="—";$("knownBadge").textContent="Enter a query";
+  note.textContent="Lookups use the bundled list only; no remote port is contacted.";return;
+ }
+ const numeric=/^[-+]?\d+(?:\.\d+)?$/.test(q)||/^\d/.test(q);
+ if(numeric && !/^\d+$/.test(q)){
+  $("outPort").textContent="Invalid";$("outProtocol").textContent="—";$("outService").textContent="—";
+  $("outDescription").textContent="Enter a whole-number port from 0 through 65535.";
+  $("outRange").textContent="—";$("knownBadge").textContent="Invalid port";
+  note.textContent="Ports are integers, not decimals or signed values.";return;
+ }
+ const byPort=/^\d+$/.test(q);
+ if(byPort){
    const port=Number(q);
-   if(port<0||port>65535){
-     $("outPort").textContent="Invalid";$("outProtocol").textContent="—";$("outService").textContent="—";$("outDescription").textContent="Port must be between 0 and 65535.";$("outRange").textContent="—";$("knownBadge").textContent="Invalid port";return;
+   if(!Number.isSafeInteger(port)||port>65535){
+     $("outPort").textContent="Invalid";$("outProtocol").textContent="—";$("outService").textContent="—";
+     $("outDescription").textContent="Port must be a whole number from 0 through 65535.";
+     $("outRange").textContent="—";$("knownBadge").textContent="Invalid port";
+     note.textContent="The highest valid 16-bit port number is 65535.";return;
    }
    matches=PORTS.filter(x=>x.port===port&&(proto==="any"||x.protocol===proto));
    const r=rangeFor(port);
-   document.querySelectorAll(".range-card").forEach(c=>c.classList.remove("active"));$(r.id).classList.add("active");
-   $("outPort").textContent=port;
+   $(r.id).classList.add("active");
+   $("outPort").textContent=String(port);
    $("outRange").textContent=r.name;
+   note.textContent=port===0
+    ? "Port 0 is within the numeric range but is reserved for special use; it is not an ordinary destination service port. This lookup makes no network connection."
+    : `Port ${port} is in the ${r.name} range. ${matches.length?"A conventional service match is listed below.":"No matching service appears in this curated list."} This is not a live open/closed check.`;
  }else{
    matches=PORTS.filter(x=>(x.service.toLowerCase().includes(q)||x.description.toLowerCase().includes(q))&&(proto==="any"||x.protocol===proto));
    if(matches.length){
-     const r=rangeFor(matches[0].port);
-     document.querySelectorAll(".range-card").forEach(c=>c.classList.remove("active"));$(r.id).classList.add("active");
-     $("outPort").textContent=matches.map(x=>x.port).filter((v,i,a)=>a.indexOf(v)===i).join(", ");
-     $("outRange").textContent=r.name;
+     const ranges=[...new Set(matches.map(x=>rangeFor(x.port).name))];
+     if(ranges.length===1){$(rangeFor(matches[0].port).id).classList.add("active");}
+     $("outPort").textContent=[...new Set(matches.map(x=>x.port))].join(", ");
+     $("outRange").textContent=ranges.length===1?ranges[0]:"Multiple ranges";
+     note.textContent=`${matches.length} entry${matches.length===1?"":"ies"} found in the curated reference. ${ranges.length>1?"Matches span multiple port ranges. ":""}These are service associations, not live host results.`;
    }else{
-     document.querySelectorAll(".range-card").forEach(c=>c.classList.remove("active"));
      $("outPort").textContent="—";$("outRange").textContent="—";
+     note.textContent="No match in this curated list does not mean a service or IANA assignment does not exist.";
    }
  }
-
+ showMatches(matches);
  if(matches.length){
    $("outProtocol").textContent=[...new Set(matches.map(x=>x.protocol.toUpperCase()))].join(", ");
    $("outService").textContent=[...new Set(matches.map(x=>x.service))].join(", ");
    $("outDescription").textContent=[...new Set(matches.map(x=>x.description))].join(" • ");
-   $("knownBadge").textContent=matches.length>1?`${matches.length} matches`:"Known port";
+   $("knownBadge").textContent=matches.length>1?`${matches.length} matches`:"Reference match";
+ }else if(byPort){
+   $("outProtocol").textContent=proto==="any"?"TCP / UDP":proto.toUpperCase();
+   $("outService").textContent="No common service listed";
+   $("outDescription").textContent="Port is in range, but no service matching this protocol appears in the built-in common-ports list.";
+   $("knownBadge").textContent="Valid range";
  }else{
-   if(/^\d+$/.test(q)){
-     $("outProtocol").textContent=proto==="any"?"TCP / UDP":proto.toUpperCase();
-     $("outService").textContent="No common service listed";
-     $("outDescription").textContent="This port is valid, but it is not in the built-in common-services reference.";
-     $("knownBadge").textContent="Valid port";
-   }else{
-     $("outProtocol").textContent="—";$("outService").textContent="No match";$("outDescription").textContent="Try another port number or service name.";$("knownBadge").textContent="No match";
-   }
+   $("outProtocol").textContent="—";$("outService").textContent="No match";
+   $("outDescription").textContent="Try another port number or service name.";
+   $("knownBadge").textContent="No match";
  }
 }
 
 $("lookupBtn").onclick=lookup;
 $("query").addEventListener("keydown",e=>{if(e.key==="Enter")lookup()});
 $("protocol").onchange=lookup;
+document.querySelectorAll(".port-shortcut").forEach(b=>b.addEventListener("click",()=>{
+ $("query").value=b.dataset.port;$("protocol").value=b.dataset.proto;lookup();
+}));
 $("resetBtn").onclick=()=>{$("query").value="443";$("protocol").value="any";$("filter").value="";renderTable();lookup()};
 $("filter").oninput=()=>{
  const q=$("filter").value.trim().toLowerCase();
