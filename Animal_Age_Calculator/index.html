@@ -203,13 +203,22 @@ body.light-mode .local-processing-note{color:#64748b}
 body.light-mode .method-card strong,body.light-mode .related-link strong{color:#1e293b}
 body.light-mode .method-card span,body.light-mode .related-link span{color:#475569}
 body.light-mode .example-box{background:#f8fafc;color:#1e293b}
+.calc-breakdown{margin-top:14px;padding:12px 14px;border:1px solid var(--border);background:rgba(15,23,42,.38);border-radius:12px}
+.calc-breakdown strong{display:block;font-size:12px;color:#c7d2fe;margin-bottom:5px}
+.calc-breakdown p{margin:0;color:#cbd5e1;font-size:13px;line-height:1.65}
+body.light-mode .calc-breakdown{background:#fff}
+body.light-mode .calc-breakdown strong{color:#4338ca}
+body.light-mode .calc-breakdown p{color:#475569}
+.evidence-links{display:flex;gap:9px 18px;flex-wrap:wrap;margin:10px 0 19px}
+.evidence-links a{font-size:13px;color:#a5b4fc;text-decoration:underline;text-underline-offset:3px}
+body.light-mode .evidence-links a{color:#4338ca}
 body.light-mode .caution-note{background:#fffbeb;border-color:#fde68a;color:#92400e}
 body.light-mode .caution-note strong{color:#78350f}
 @media(max-width:700px){.title-icon{width:36px;height:36px}.method-grid,.related-grid{grid-template-columns:1fr}}
 
 </style>
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Animal Age Converter","url":"https://utiliverse.app/Animal_Age_Calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based animal age calculator for dogs, cats, rabbits and horses using documented piecewise educational age curves, dog-size adjustments, reverse conversion, month input, broad life-stage labels and comparison tables.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Dog age to human-equivalent years","Cat age to human-equivalent years","Rabbit age to human-equivalent years","Horse age to human-equivalent years","Human age to animal age reverse conversion","Dog size adjustment after age two","Years or months input","Fractional-year interpolation","Broad species-specific life-stage estimate","Species age comparison table","Copyable result with clipboard fallback","Browser-local calculation","Veterinary-use limitation guidance"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Animal Age Converter","url":"https://utiliverse.app/Animal_Age_Calculator/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based animal age calculator for dogs, cats, rabbits and horses using documented piecewise educational age curves, dog-size adjustments, reverse conversion, month input, broad life-stage labels and comparison tables.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Dog age to human-equivalent years","Cat age to human-equivalent years","Rabbit age to human-equivalent years","Horse age to human-equivalent years","Human age to animal age reverse conversion","Dog size adjustment after age two","Years or months input","Fractional-year interpolation","Broad species-specific life-stage estimate","Species age comparison table","Copyable result with clipboard fallback","Browser-local calculation","Veterinary-use limitation guidance","On-screen calculation breakdown","Referenced veterinary life-stage guidance"]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is animal age in human years scientifically exact?","acceptedAnswer":{"@type":"Answer","text":"No. It is an educational approximation. Species, breed, body size, genetics, nutrition, disease, and individual development all affect how an animal ages."}},{"@type":"Question","name":"Why doesn't the dog converter multiply by seven?","acceptedAnswer":{"@type":"Answer","text":"Dogs mature much faster during their first two years, and larger dogs generally age faster later in life. The converter therefore uses a nonlinear early-life model and size-dependent later years."}},{"@type":"Question","name":"How are cat years calculated?","acceptedAnswer":{"@type":"Answer","text":"The first cat year is estimated at about 15 human-equivalent years, the second at about 24, and later cat years add roughly four each."}},{"@type":"Question","name":"Why does dog size change the answer?","acceptedAnswer":{"@type":"Answer","text":"Small dogs generally have longer lifespans than giant dogs, so the model uses a slower later-life conversion rate for smaller dogs and a faster one for larger dogs."}},{"@type":"Question","name":"Can I convert from human age back to animal age?","acceptedAnswer":{"@type":"Answer","text":"Yes. Human → Animal mode reverses the same age model used for the selected species and dog size."}},{"@type":"Question","name":"Can I use months instead of years?","acceptedAnswer":{"@type":"Answer","text":"Yes. Select Months as the input unit. The tool converts months to fractional years before calculating the equivalent age."}},{"@type":"Question","name":"Does “senior” mean my pet has a medical problem?","acceptedAnswer":{"@type":"Answer","text":"No. The life-stage label is a broad educational category. A veterinarian can assess the actual health and age-related needs of an individual animal."}},{"@type":"Question","name":"Does Utiliverse store the age I enter?","acceptedAnswer":{"@type":"Answer","text":"No. The calculation is performed locally in your browser and does not require a server request."}},{"@type":"Question","name":"Does dog size affect the first two dog years?","acceptedAnswer":{"@type":"Answer","text":"No. In this calculator, every dog size uses the same first-year and second-year milestones. The size adjustment changes only the rate applied after age two."}},{"@type":"Question","name":"How does the calculator handle a six-month-old animal?","acceptedAnswer":{"@type":"Answer","text":"Months are divided by 12 before conversion, so six months becomes 0.5 years and is evaluated within the first segment of the selected species curve."}},{"@type":"Question","name":"Are the life-stage labels based on the human-equivalent result?","acceptedAnswer":{"@type":"Answer","text":"No. Life stages use separate species-specific age thresholds, with additional size-based thresholds for dogs."}},{"@type":"Question","name":"Can this calculator estimate remaining lifespan?","acceptedAnswer":{"@type":"Answer","text":"No. The model converts chronological age into an educational human-equivalent comparison. It does not predict lifespan, disease risk, or future health."}},{"@type":"Question","name":"Why can reverse conversion differ slightly after I swap directions?","acceptedAnswer":{"@type":"Answer","text":"The reverse formula is the mathematical inverse of the same model, but displayed values are rounded. Small differences can therefore appear after a value has been formatted and reused."}}]}</script>
 </head>
 
@@ -317,6 +326,10 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
       <div id="resultValue" class="result-value">—</div>
       <div id="resultSub" class="result-sub">Enter an age to see the estimate.</div>
       <div id="stagePill" class="stage-pill">Life stage: —</div>
+      <div class="calc-breakdown">
+        <strong>How this estimate was calculated</strong>
+        <p id="calculationDetails">Select an animal and age to see the formula steps used for this estimate.</p>
+      </div>
     </div>
 
     <div class="stats">
@@ -373,8 +386,10 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 
     <p>Domestic rabbit lifespan varies with breed, size, housing, diet, reproductive status, and veterinary care. Small rabbits can follow a different longevity pattern from giant breeds, so the rabbit conversion should be viewed as a general companion-rabbit estimate rather than a breed-specific formula.</p>
 
-    <h3>Horse age conversion</h3>
+    <h3 id="horse-age-guide">Horse age in human years: conversion and examples</h3>
     <p>Horses mature on a different schedule. The converter uses milestone points of approximately 6.5 human-equivalent years at age one, 13 at age two, 18 at age three, and 20.5 at age four. After age four, it adds about 2.5 human-equivalent years for each additional horse year. The smaller multiplier later in life reflects the fact that horses can live for several decades.</p>
+
+    <p>For a 10-year-old horse, the displayed model calculates <code>20.5 + (10 − 4) × 2.5 = 35.5</code> human-equivalent years. At 20 horse years, the same formula gives <code>60.5</code>. These are transparent outputs of this particular illustration—not validated medical equivalents. Other charts can use different milestones.</p>
 
     <p>As with every animal in the tool, the horse estimate is not meant to determine fitness, workload, or medical status. A horse's practical age depends on development, breed, musculoskeletal condition, training history, dental health, and many other factors that a simple age-equivalence model cannot represent.</p>
 
@@ -421,12 +436,20 @@ Estimated result: 45 human-equivalent years</code>
     <p>In the implementation, small, medium, large, and giant dogs share the same first-year and second-year milestones. The size choice affects only the rate applied after age two. It is therefore a broad adult-size adjustment, not a breed-specific lifespan model.</p>
 
     <h3>Life-stage labels use separate threshold rules</h3>
-    <p>The displayed life stage is not calculated from the human-equivalent number. It uses separate age thresholds for each species, and for dogs those thresholds also vary by selected size. These labels are broad categories intended to make the result easier to read.</p>
+    <p>The displayed life stage is not calculated from the human-equivalent number. Cat labels follow the broad 2021 AAHA/AAFP age groups: kitten under one year, young adult from one through six, mature adult from seven through ten, and senior above ten. Dog, rabbit, and horse labels remain simplified guideposts; in particular, real canine senior stages depend on breed, size and expected lifespan rather than one fixed birthday.</p>
 
     <h3>The comparison table is generated from whole animal years</h3>
     <p>The table runs from age 1 to a preset species-specific maximum: 16 for dogs, 18 for cats, 12 for rabbits, and 30 for horses. It highlights the nearest whole-year row when your calculated animal age is within half a year of that row.</p>
 
     <div class="caution-note"><strong>This is an educational comparison model, not a veterinary age assessment.</strong> The formulas do not predict remaining lifespan, disease risk, fitness, maturity for breeding, medication needs, or the appropriate timing of preventive care. Use the animal's real chronological age and veterinarian guidance for health decisions.</div>
+
+    <h3>Veterinary references and what they do (and do not) support</h3>
+    <p>For dogs and cats, veterinary organizations describe broad life stages and emphasize individual differences. They do not validate this page's exact numeric output for every animal. In particular, the rabbit and horse human-year coefficients are <strong>illustrative conventions</strong>, not a clinical scale, and the dog-size rates here are simplified rather than breed-specific. The linked references are background on aging and life stages—not endorsements or source tables for every formula on this page.</p>
+    <div class="evidence-links">
+      <a href="https://www.aaha.org/resources/life-stage-canine-2019/canine-life-stage-definitions/" target="_blank" rel="noopener noreferrer">AAHA: canine life stages</a>
+      <a href="https://catvets.com/resource/aaha-aafp-feline-life-stage-guidelines/" target="_blank" rel="noopener noreferrer">AAHA/AAFP: feline life stages</a>
+      <a href="https://healthtopics.vetmed.ucdavis.edu/health-topics/canine/calculating-your-dogs-age" target="_blank" rel="noopener noreferrer">UC Davis: why dog-years vary</a>
+    </div>
 
     <h3>Precision and display behavior</h3>
     <p>The tool uses JavaScript Number arithmetic. Ages under one year are displayed in months; older ages are shown with one or two decimal places depending on magnitude. The underlying calculation may contain more precision than the formatted result you see.</p>
@@ -438,7 +461,7 @@ Estimated result: 45 human-equivalent years</code>
       <a class="related-link" href="../Time_Unit_Converter/"><strong>Time Unit Converter</strong><span>Convert months, years, days, hours, and other duration units.</span></a>
     </div>
 
-    <p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 2, 2026 · Species curves, dog-size rates, reverse conversion, month handling, life-stage thresholds, table generation, formatting, and browser-side calculation reviewed against the current implementation.</p>
+    <p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> November 5, 2026 · Formula transparency, horse-age examples, cat life-stage labels, calculation validation, and veterinary-reference distinctions reviewed.</p>
 
     <h2>Practical Use Cases</h2>
     <h3>Understanding life stages</h3>
@@ -594,9 +617,8 @@ Estimated result: 45 human-equivalent years</code>
     }
     if (species === "cat") {
       if (animalAge < 1) return "Kitten / juvenile";
-      if (animalAge < 3) return "Young adult";
-      if (animalAge < 7) return "Adult";
-      if (animalAge < 11) return "Mature adult";
+      if (animalAge < 7) return "Young adult";
+      if (animalAge <= 10) return "Mature adult";
       return "Senior";
     }
     if (species === "rabbit") {
@@ -659,6 +681,36 @@ Estimated result: 45 human-equivalent years</code>
     $("ageTable").innerHTML = rows.join("");
   }
 
+  function calculationDetail(species, animalAge, humanAge) {
+    // These are explanations of the existing educational model, not clinical age assessments.
+    const fmt = value => Number(value.toFixed(2)).toLocaleString("en-US");
+    const total = `Estimated human equivalent: ${fmt(humanAge)} years.`;
+    if (species === "dog") {
+      if (animalAge <= 1) return `First-year dog model: ${fmt(animalAge)} × 15 = ${fmt(humanAge)}. ${total}`;
+      if (animalAge <= 2) return `First dog year: 15; second-year portion: (${fmt(animalAge)} − 1) × 9. ${total}`;
+      const rate = DOG_RATES[dogSize];
+      return `First two dog years: 24; after year two: (${fmt(animalAge)} − 2) × ${rate} for a ${dogSize} dog. ${total}`;
+    }
+    if (species === "cat") {
+      if (animalAge <= 1) return `First-year cat model: ${fmt(animalAge)} × 15. ${total}`;
+      if (animalAge <= 2) return `First cat year: 15; second-year portion: (${fmt(animalAge)} − 1) × 9. ${total}`;
+      return `First two cat years: 24; after year two: (${fmt(animalAge)} − 2) × 4. ${total}`;
+    }
+    if (species === "rabbit") {
+      if (animalAge <= 1) return `First-year rabbit model: ${fmt(animalAge)} × 21. ${total}`;
+      if (animalAge <= 2) return `First rabbit year: 21; second-year portion: (${fmt(animalAge)} − 1) × 6. ${total}`;
+      return `First two rabbit years: 27; after year two: (${fmt(animalAge)} − 2) × 6. ${total}`;
+    }
+    if (species === "horse") {
+      if (animalAge <= 1) return `First-year horse model: ${fmt(animalAge)} × 6.5. ${total}`;
+      if (animalAge <= 2) return `First horse year: 6.5; second-year portion: (${fmt(animalAge)} − 1) × 6.5. ${total}`;
+      if (animalAge <= 3) return `First two horse years: 13; third-year portion: (${fmt(animalAge)} − 2) × 5. ${total}`;
+      if (animalAge <= 4) return `First three horse years: 18; fourth-year portion: (${fmt(animalAge)} − 3) × 2.5. ${total}`;
+      return `First four horse years: 20.5; after year four: (${fmt(animalAge)} − 4) × 2.5. ${total}`;
+    }
+    return total;
+  }
+
   function update() {
     const species = $("species").value;
     const unit = $("ageUnit").value;
@@ -675,6 +727,7 @@ Estimated result: 45 human-equivalent years</code>
       $("modelStat").textContent = modelName(species);
       $("stageStat").textContent = "—";
       $("stagePill").textContent = "Life stage: —";
+      $("calculationDetails").textContent = "Enter a valid age to view the model steps.";
       $("ageTable").innerHTML = "";
       return;
     }
@@ -702,6 +755,7 @@ Estimated result: 45 human-equivalent years</code>
     $("humanAgeStat").textContent = formatAge(humanAge);
     $("modelStat").textContent = modelName(species);
     $("stageStat").textContent = stage;
+    $("calculationDetails").textContent = calculationDetail(species, animalAge, humanAge);
 
     updateTable(species, animalAge);
   }
