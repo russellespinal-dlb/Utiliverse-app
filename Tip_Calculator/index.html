@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1786245123035497" crossorigin="anonymous"></script>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Tip Calculator – Gratuity, Tax, Total & Split Bill | Utiliverse</title>
 <meta name="description" content="Free tip and gratuity calculator with tax, service charge, tip before or after tax, total bill, split bill, and per-person amounts. Calculate common or custom tip percentages instantly.">
@@ -55,8 +56,21 @@ body{background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.10),transparen
 .dark-mode .intent-card span{color:#94a3b8}
 @media(max-width:800px){.intent-grid{grid-template-columns:1fr}}
 
+
+/* Practical split controls and transparent receipt math */
+.people-input{width:100%;min-width:0;text-align:center;font-size:17px;font-weight:850;appearance:textfield;-moz-appearance:textfield}
+.people-input::-webkit-inner-spin-button,.people-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.payment-check{margin-top:16px;padding:14px 16px;border-radius:13px;border:1px solid #dbe3ee;background:#f8fafc;color:#475569;font-size:13px;line-height:1.65}
+.payment-check strong{display:block;font-size:14px;color:#0f172a;margin-bottom:5px}
+.payment-check .payment-line{display:block;margin:3px 0}
+.payment-check .payment-caution{margin-top:8px;color:#92400e;font-weight:700}
+.dark-mode .payment-check{border-color:#475569;background:#0f172a;color:#cbd5e1}
+.dark-mode .payment-check strong{color:#f8fafc}
+.dark-mode .payment-check .payment-caution{color:#fde68a}
+.copy-status{font-size:12px;color:#64748b;margin-top:6px;min-height:18px}
+.dark-mode .copy-status{color:#94a3b8}
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Tip Calculator","url":"https://utiliverse.app/Tip_Calculator/","applicationCategory":"FinanceApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Quick tip buttons","Custom tip percentage","Tax percentage","Service charge percentage","Tip before tax","Tip after tax","Even bill splitting from 1 to 100 people","Round final total up","Round each person's share up","Tip per person","Effective add-on percentage","Currency display selector","Copyable results with clipboard fallback","Browser-local calculations","Gratuity calculator","Tax gratuity calculation","Total with tip and tax","Tip before tax calculation","Tip after tax calculation","Split bill per person","Tip per person calculation"],"description":"Free browser-based tip and gratuity calculator for tax, service charges, tip-before-tax or tip-after-tax, total bill, even bill splitting, per-person amounts, custom percentages, and rounding."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Tip Calculator","url":"https://utiliverse.app/Tip_Calculator/","applicationCategory":"FinanceApplication","operatingSystem":"Any","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Quick tip buttons","Custom tip percentage","Tax percentage","Service charge percentage","Tip before tax","Tip after tax","Even bill splitting from 1 to 100 people","Round final total up","Round each person's share up","Tip per person","Effective add-on percentage","Currency display selector","Copyable results with clipboard fallback","Browser-local calculations","Gratuity calculator","Tax gratuity calculation","Total with tip and tax","Tip before tax calculation","Tip after tax calculation","Split bill per person","Tip per person calculation","Direct entry of number of people","Live payment check for split rounding differences","Receipt-style two-decimal tip and tax amounts"],"description":"Free browser-based tip and gratuity calculator for tax, service charges, tip-before-tax or tip-after-tax, total bill, even bill splitting, per-person amounts, custom percentages, and rounding."}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I calculate a 20% tip?","acceptedAnswer":{"@type":"Answer","text":"Multiply the bill by 0.20. For example, 20% of $50 is $10."}},{"@type":"Question","name":"What is a gratuity calculator?","acceptedAnswer":{"@type":"Answer","text":"A gratuity calculator applies a selected percentage to a bill or service amount to estimate the tip and final total."}},{"@type":"Question","name":"How do I calculate tip with tax?","acceptedAnswer":{"@type":"Answer","text":"Enter the bill and tax percentage. Leave Tip After Tax off to tip on the original bill, or turn it on to calculate gratuity from bill plus tax."}},{"@type":"Question","name":"Should I tip before tax or after tax?","acceptedAnswer":{"@type":"Answer","text":"Practices vary. This tool supports both methods so you can match the approach you prefer or the method relevant to your receipt."}},{"@type":"Question","name":"Does Tip After Tax include the service charge in the tip base?","acceptedAnswer":{"@type":"Answer","text":"No. In this calculator, Tip After Tax uses bill plus tax only. The service charge is calculated separately and added to the final total."}},{"@type":"Question","name":"Can I calculate the total with tip and tax?","acceptedAnswer":{"@type":"Answer","text":"Yes. The Total Bill result combines the original bill, tax, service charge and gratuity, then applies optional final-total rounding."}},{"@type":"Question","name":"Can I split the bill?","acceptedAnswer":{"@type":"Answer","text":"Yes. Increase the number of people to divide the final total evenly and see both the total and tip amount per person."}},{"@type":"Question","name":"What if a service charge is already included?","acceptedAnswer":{"@type":"Answer","text":"Enter the service charge separately. The calculator does not automatically treat it as gratuity or subtract it from the selected tip, so check the receipt before adding extra tip."}},{"@type":"Question","name":"Can I calculate a zero-percent tip?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter 0 in the custom-tip field."}},{"@type":"Question","name":"Why can rounded per-person totals be higher?","acceptedAnswer":{"@type":"Answer","text":"Each person's share can be rounded upward independently, so the combined rounded payments can exceed the exact total."}},{"@type":"Question","name":"What happens if I enable both rounding options?","acceptedAnswer":{"@type":"Answer","text":"The full bill is rounded up first, then divided. If per-person rounding is also enabled, each person's amount is rounded up again."}},{"@type":"Question","name":"Why can the Effective Add-On be higher than the entered percentages?","acceptedAnswer":{"@type":"Answer","text":"When Tip After Tax is enabled, the tip is calculated on bill plus tax while the Effective Add-On is measured against the original bill amount."}},{"@type":"Question","name":"Does the currency selector convert exchange rates?","acceptedAnswer":{"@type":"Answer","text":"No. It changes the displayed currency symbol only and does not perform foreign-exchange conversion."}},{"@type":"Question","name":"Does Utiliverse upload my bill amount?","acceptedAnswer":{"@type":"Answer","text":"No. Bill, tax, service-charge, tip, split, and rounding calculations are performed locally in the browser by this tool."}},{"@type":"Question","name":"Can I split between more than 100 people?","acceptedAnswer":{"@type":"Answer","text":"No. The tool limits the split to between 1 and 100 people."}}]}</script>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col font-sans">
@@ -66,17 +80,17 @@ body{background:radial-gradient(circle at 10% 0%,rgba(99,102,241,.10),transparen
 <!-- GOOGLE ADSENSE: TOP / ABOVE-TOOL INSERTION POINT. Paste approved code here. Invisible by design. -->
 <div class="grid grid-cols-1 xl:grid-cols-[1.05fr_.95fr] gap-6">
 <div class="space-y-6"><section class="tool-card overflow-hidden"><div class="section-head"><h2><i data-lucide="receipt-text" class="w-5 h-5 text-indigo-600"></i>Bill Details</h2><button id="resetBtn" class="btn-secondary" type="button"><i data-lucide="rotate-ccw" class="w-4 h-4"></i>Reset</button></div><div class="p-5 sm:p-6">
-<div class="grid grid-cols-1 sm:grid-cols-[1fr_180px] gap-4"><div><label class="label" for="billAmount">Bill amount</label><div class="input-prefix"><span id="billPrefix">$</span><input id="billAmount" class="field" type="number" min="0" step="0.01" value="100.00"></div></div><div><label class="label" for="currency">Currency</label><select id="currency" class="field"><option value="$" selected>Dollar ($)</option><option value="€">Euro (€)</option><option value="£">Pound (£)</option><option value="¥">Yen / Yuan (¥)</option><option value="₹">Rupee (₹)</option><option value="₩">Won (₩)</option><option value="R$">Real (R$)</option><option value="₱">Peso (₱)</option></select></div></div>
+<div class="grid grid-cols-1 sm:grid-cols-[1fr_180px] gap-4"><div><label class="label" for="billAmount">Bill amount</label><div class="input-prefix"><span id="billPrefix">$</span><input id="billAmount" class="field" type="number" inputmode="decimal" min="0" step="0.01" value="100.00"></div></div><div><label class="label" for="currency">Currency</label><select id="currency" class="field"><option value="$" selected>Dollar ($)</option><option value="€">Euro (€)</option><option value="£">Pound (£)</option><option value="¥">Yen / Yuan (¥)</option><option value="₹">Rupee (₹)</option><option value="₩">Won (₩)</option><option value="R$">Real (R$)</option><option value="₱">Peso (₱)</option></select></div></div>
 <div class="mt-5"><label class="label">Tip percentage</label><div class="tip-grid"><button class="tip-chip" data-tip="10">10%</button><button class="tip-chip" data-tip="15">15%</button><button class="tip-chip" data-tip="18">18%</button><button class="tip-chip active" data-tip="20">20%</button><button class="tip-chip" data-tip="22">22%</button><button class="tip-chip" data-tip="25">25%</button></div></div>
-<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-5"><div><label class="label">Custom tip %</label><input id="customTip" class="field" type="number" min="0" step="0.1" value="20"></div><div><label class="label">Tax %</label><input id="taxPercent" class="field" type="number" min="0" step="0.1" value="0"></div><div><label class="label">Service charge %</label><input id="serviceCharge" class="field" type="number" min="0" step="0.1" value="0"></div></div>
-<div class="mt-5"><label class="label">Split bill between</label><div class="split-control max-w-xs"><button id="minusPerson" class="split-btn">−</button><div id="peopleDisplay" class="field text-center font-extrabold">1 person</div><button id="plusPerson" class="split-btn">+</button></div></div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-5"><div><label class="label" for="customTip">Custom tip %</label><input id="customTip" class="field" type="number" inputmode="decimal" min="0" step="0.1" value="20"></div><div><label class="label" for="taxPercent">Tax %</label><input id="taxPercent" class="field" type="number" inputmode="decimal" min="0" step="0.1" value="0"></div><div><label class="label" for="serviceCharge">Service charge %</label><input id="serviceCharge" class="field" type="number" inputmode="decimal" min="0" step="0.1" value="0"></div></div>
+<div class="mt-5"><label class="label" for="peopleInput">Split bill between (1–100 people)</label><div class="split-control max-w-xs"><button id="minusPerson" class="split-btn" type="button" aria-label="Remove one person">−</button><input id="peopleInput" class="field people-input" type="number" inputmode="numeric" min="1" max="100" step="1" value="1" aria-label="Number of people splitting the bill"><button id="plusPerson" class="split-btn" type="button" aria-label="Add one person">+</button></div></div>
 </div></section>
 <section class="tool-card overflow-hidden"><div class="section-head"><h2><i data-lucide="settings-2" class="w-5 h-5 text-indigo-600"></i>Calculation Options</h2></div><div class="p-5 sm:p-6"><div class="toggle-row"><div class="toggle-copy"><strong>Tip after tax</strong><span>Calculate tip from bill + tax.</span></div><label class="switch"><input id="tipAfterTax" type="checkbox"><span class="slider"></span></label></div><div class="toggle-row"><div class="toggle-copy"><strong>Round total up</strong><span>Round final total to the next whole unit.</span></div><label class="switch"><input id="roundTotal" type="checkbox"><span class="slider"></span></label></div><div class="toggle-row"><div class="toggle-copy"><strong>Round each person's share up</strong><span>Useful for simple cash splits.</span></div><label class="switch"><input id="roundPerPerson" type="checkbox"><span class="slider"></span></label></div><p class="note mt-4">Service charge is shown separately from any additional tip. Check your receipt before adding extra gratuity.</p></div></section></div>
-<div><section class="tool-card overflow-hidden"><div class="section-head"><h2><i data-lucide="calculator" class="w-5 h-5 text-indigo-600"></i>Results</h2><button id="copyBtn" class="btn-secondary"><i data-lucide="copy" class="w-4 h-4"></i>Copy</button></div><div class="p-5 sm:p-6"><div class="hero-result"><div class="hero-result-label">Total Bill</div><div id="totalBill" class="hero-result-value">$120.00</div><div class="hero-result-sub">Including tip, tax, and service charge</div></div><div class="summary-grid mt-4"><div class="summary-box"><div class="summary-label">Tip Amount</div><div id="tipAmount" class="summary-value">$20.00</div><div id="tipAmountSub" class="summary-sub">20% gratuity</div></div><div class="summary-box"><div class="summary-label">Tax</div><div id="taxAmount" class="summary-value">$0.00</div><div id="taxSub" class="summary-sub">0% tax</div></div><div class="summary-box"><div class="summary-label">Service Charge</div><div id="serviceAmount" class="summary-value">$0.00</div><div id="serviceSub" class="summary-sub">0% service charge</div></div><div class="summary-box"><div class="summary-label">Per Person</div><div id="perPerson" class="summary-value">$120.00</div><div id="perPersonSub" class="summary-sub">1 person</div></div><div class="summary-box"><div class="summary-label">Tip Per Person</div><div id="tipPerPerson" class="summary-value">$20.00</div><div class="summary-sub">Gratuity portion</div></div><div class="summary-box"><div class="summary-label">Effective Add-On</div><div id="effectivePercent" class="summary-value">20.0%</div><div class="summary-sub">Tip + tax + service</div></div></div></div></section></div></div>
+<div><section class="tool-card overflow-hidden"><div class="section-head"><h2><i data-lucide="calculator" class="w-5 h-5 text-indigo-600"></i>Results</h2><button id="copyBtn" class="btn-secondary" type="button" aria-label="Copy receipt calculation summary"><i data-lucide="copy" class="w-4 h-4"></i>Copy</button></div><div class="p-5 sm:p-6"><div class="hero-result"><div class="hero-result-label">Total Bill</div><div id="totalBill" class="hero-result-value">$120.00</div><div class="hero-result-sub">Including tip, tax, and service charge</div></div><div class="summary-grid mt-4"><div class="summary-box"><div class="summary-label">Tip Amount</div><div id="tipAmount" class="summary-value">$20.00</div><div id="tipAmountSub" class="summary-sub">20% gratuity</div></div><div class="summary-box"><div class="summary-label">Tax</div><div id="taxAmount" class="summary-value">$0.00</div><div id="taxSub" class="summary-sub">0% tax</div></div><div class="summary-box"><div class="summary-label">Service Charge</div><div id="serviceAmount" class="summary-value">$0.00</div><div id="serviceSub" class="summary-sub">0% service charge</div></div><div class="summary-box"><div class="summary-label">Per Person</div><div id="perPerson" class="summary-value">$120.00</div><div id="perPersonSub" class="summary-sub">1 person</div></div><div class="summary-box"><div class="summary-label">Tip Per Person</div><div id="tipPerPerson" class="summary-value">$20.00</div><div class="summary-sub">Gratuity portion</div></div><div class="summary-box"><div class="summary-label">Effective Add-On</div><div id="effectivePercent" class="summary-value">20.0%</div><div class="summary-sub">Tip + tax + service</div></div></div><div id="paymentCheck" class="payment-check" aria-live="polite"><strong>Payment check</strong><span>Split and rounding summary will appear here.</span></div><div id="copyStatus" class="copy-status" role="status" aria-live="polite"></div></div></section></div></div>
 <p class="local-processing-note">Browser-based calculation: bill, tip, tax, service-charge, split, rounding, copy, and display calculations are performed locally by this tool. The values you enter are not submitted to a Utiliverse processing server. The page itself still loads interface and advertising resources from external providers.</p>
 <!-- GOOGLE ADSENSE: MID-PAGE / AFTER-TOOL INSERTION POINT. Paste approved code here. -->
 <div class="info-wrap"><section class="info-section"><h2>Free Online Tip Calculator</h2><p>The Utiliverse Tip Calculator provides a fast way to calculate gratuity, tax, service charges, final bill total, and the amount each person should pay when a check is shared. Enter the bill amount, choose a common tip percentage or type a custom percentage, and the results update instantly. You can also add sales tax, account for an existing service charge, choose whether gratuity is based on the pre-tax or post-tax amount, and split the finished total between multiple people.</p><p>All calculations happen locally in your browser. No account is required and the bill amount is not sent to a Utiliverse server. The tool works well for restaurants, delivery orders, taxis, salons, hotel services, tours, and other situations where you want to estimate a percentage-based gratuity or divide a payment quickly.</p></section>
-<section class="info-section"><h2>How to Use the Tip Calculator</h2><h3>Enter the bill amount</h3><p>Start with the amount you want to use as the base of the calculation. In a restaurant this is often the food-and-drink subtotal before gratuity. If the receipt already includes tax and you do not want to separate it, enter the displayed amount and leave the tax field at zero. Decimal values are supported, so an amount such as 87.43 can be entered exactly.</p><h3>Select the currency symbol</h3><p>Choose the symbol that matches the bill. This setting changes how results are displayed and does not perform exchange-rate conversion. Percentage mathematics is the same in every currency, so travelers can simply choose the local symbol and calculate the gratuity in that currency.</p><h3>Choose a common or custom tip</h3><p>Quick buttons are provided for 10%, 15%, 18%, 20%, 22%, and 25%. Selecting one updates the custom-tip field instantly. You can also type any non-negative percentage, including decimal values. Setting the custom value to zero removes additional gratuity entirely, which can be useful when a service charge is already included.</p><h3>Add tax when needed</h3><p>The tax field is optional. Enter the percentage if the bill field contains a pre-tax subtotal and you want a complete estimate. Tax is calculated from the original bill amount. If the amount you entered already includes tax, leave the tax field at zero so the same tax is not counted twice.</p><h3>Account for a service charge</h3><p>Some restaurants, hotels, event venues, and large-party checks include a service charge automatically. Enter that percentage separately so it appears in the breakdown. A service charge and an optional tip are not always the same thing, so read the receipt carefully before deciding whether to add more gratuity.</p><h3>Tip before or after tax</h3><p>By default, the tool calculates tip from the original bill amount. Enable Tip After Tax if you prefer to calculate gratuity from the subtotal plus tax. The option makes the calculation transparent and lets you match your preferred method rather than assuming one approach.</p><h3>Split the bill</h3><p>Use the plus and minus controls to set the number of people sharing the payment. The calculator divides the final total evenly and also shows the tip portion per person. For example, a $120 total split among four people becomes $30 each. If people owe different amounts, a dedicated bill splitter is more appropriate.</p><h3>Round for convenience</h3><p>Round Total Up moves the complete bill to the next whole currency unit. Round Each Person's Share Up separately rounds the per-person amount. These options can make cash payments simpler, although rounding each person's share upward can cause the combined payments to exceed the exact bill slightly.</p>
+<section class="info-section"><h2>How to Use the Tip Calculator</h2><h3>Enter the bill amount</h3><p>Start with the amount you want to use as the base of the calculation. In a restaurant this is often the food-and-drink subtotal before gratuity. If the receipt already includes tax and you do not want to separate it, enter the displayed amount and leave the tax field at zero. Decimal values are supported, so an amount such as 87.43 can be entered exactly.</p><h3>Select the currency symbol</h3><p>Choose the symbol that matches the bill. This setting changes how results are displayed and does not perform exchange-rate conversion. Percentage mathematics is the same in every currency, so travelers can simply choose the local symbol and calculate the gratuity in that currency.</p><h3>Choose a common or custom tip</h3><p>Quick buttons are provided for 10%, 15%, 18%, 20%, 22%, and 25%. Selecting one updates the custom-tip field instantly. You can also type any non-negative percentage, including decimal values. Setting the custom value to zero removes additional gratuity entirely, which can be useful when a service charge is already included.</p><h3>Add tax when needed</h3><p>The tax field is optional. Enter the percentage if the bill field contains a pre-tax subtotal and you want a complete estimate. Tax is calculated from the original bill amount. If the amount you entered already includes tax, leave the tax field at zero so the same tax is not counted twice.</p><h3>Account for a service charge</h3><p>Some restaurants, hotels, event venues, and large-party checks include a service charge automatically. Enter that percentage separately so it appears in the breakdown. A service charge and an optional tip are not always the same thing, so read the receipt carefully before deciding whether to add more gratuity.</p><h3>Tip before or after tax</h3><p>By default, the tool calculates tip from the original bill amount. Enable Tip After Tax if you prefer to calculate gratuity from the subtotal plus tax. The option makes the calculation transparent and lets you match your preferred method rather than assuming one approach.</p><h3>Split the bill</h3><p>Type the number of people directly or use the plus and minus controls. The calculator divides the final total evenly and also shows the tip portion per person. For example, a $120 total split among four people becomes $30 each. If people owe different amounts, a dedicated bill splitter is more appropriate.</p><h3>Round for convenience</h3><p>Round Total Up moves the complete bill to the next whole currency unit. Round Each Person's Share Up separately rounds the per-person amount to the next whole currency unit. The live Payment Check shows the pre-rounding total, the rounded total, and what the group would collect if everyone pays the displayed share. Even without those options, showing each share to two decimal places can leave a one-cent difference; the last person can adjust their contribution to match the actual total.</p>
 
 <h2 class="mt-8">Tip &amp; Gratuity Quick Reference</h2>
 <p>The calculator above supports common restaurant and service-charge scenarios without hiding how the math works. The table below summarizes the main options and how they affect the result.</p>
@@ -155,7 +169,7 @@ With a 5% service charge:
 <p>Round Total Up applies <code>Math.ceil()</code> to the complete bill after tip, tax, and service charge are added. Round Each Person's Share Up applies <code>Math.ceil()</code> after dividing the total by the number of people. If both options are enabled, the bill is rounded first and the already-rounded total is then divided and each share can be rounded again.</p>
 
 <h3>Rounded per-person amounts can exceed the rounded total</h3>
-<p>The tool does not redistribute rounding differences across people. For example, a $100 total split three ways is about $33.33 each, but rounding every share up produces $34 per person, or $102 combined. This is intentional for convenience-oriented cash splitting.</p>
+<p>The tool does not redistribute rounding differences across people. For example, a $100 total split three ways is about $33.33 each, but whole-unit rounding every share up produces $34 per person, or $102 combined. The Payment Check makes the $2 surplus visible. If you want everyone to pay an exact fair share in cents, leave per-person whole-unit rounding off and adjust one person’s share by any remaining cent.</p>
 
 <h3>The effective add-on percentage uses the original bill as its denominator</h3>
 <p>The Effective Add-On figure is calculated as <code>(tax + service charge + tip) ÷ bill × 100</code>. If Tip After Tax is enabled, the effective add-on can be higher than simply adding the entered percentage fields because the tip base includes tax.</p>
@@ -163,8 +177,8 @@ With a 5% service charge:
 <h3>Currency selection changes display only</h3>
 <p>Choosing Dollar, Euro, Pound, Yen/Yuan, Rupee, Won, Real, or Peso changes the symbol shown before amounts. It does not perform exchange-rate conversion, currency-specific minor-unit rules, or locale-specific formatting.</p>
 
-<h3>Negative and invalid numeric inputs are normalized to zero</h3>
-<p>The implementation accepts only finite non-negative numeric values for bill, tip, tax, and service charge. Negative or invalid entries are treated as zero rather than producing a negative total.</p>
+<h3>Input limits and receipt precision</h3>
+<p>The implementation accepts non-negative numeric values for bill, tip, tax, and service charge. Negative or invalid entries are treated as zero. It rounds each calculated tax, service-charge and tip amount to two decimal places, then adds those amounts to the bill. This models common two-decimal receipts; currencies with different minor units, unusual tax rules or cash-rounding requirements may produce different real-world totals.</p>
 
 <h3>Service charge and tip are treated as separate percentage add-ons</h3>
 <p>The calculator does not automatically subtract an existing service charge from the selected tip or decide whether a service charge counts as gratuity. Those practices vary by business and jurisdiction, so the receipt should determine whether additional tipping is appropriate.</p>
@@ -190,12 +204,166 @@ With a 5% service charge:
   <a class="related-link" href="../Unit_Currency_Converter/"><strong>Unit & Currency Converter</strong><span>Use a conversion tool when you actually need to convert between currencies rather than only change the displayed symbol.</span></a>
 </div>
 
-<p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> October 2026 · Tip-before/after-tax logic, tax and service-charge math, total and per-person rounding, people limits, effective-add-on calculation, currency display behavior, copy fallback, and theme handling reviewed against the current implementation.</p>
+<p style="margin-top:24px;font-size:12px;color:#64748b"><strong>Last reviewed:</strong> November 5, 2026 · Tip-before/after-tax logic, two-decimal receipt arithmetic, service-charge math, direct split count, rounding differences, copy fallback, and theme handling reviewed against the current implementation.</p>
 <h2 class="mt-8">Practical Uses</h2><h3>Restaurant dining</h3><p>Enter the meal subtotal, select a tip percentage, include tax if necessary, and review the gratuity and total. Groups splitting evenly can increase the number of people for an instant per-person amount.</p><h3>Food delivery and takeout</h3><p>Delivery orders may contain delivery fees, service fees, taxes, and an optional driver tip. Use the amount that best matches the portion you want to tip on, and use the service-charge field when you want an existing percentage-based fee shown separately.</p><h3>Travel and hospitality</h3><p>Tipping customs vary widely. Travelers can use the calculator for taxis, tours, hotel services, restaurant meals, or other percentage-based gratuities, while checking local customs and whether a service charge is already included.</p><h3>Salons and personal services</h3><p>Haircuts, nail services, spa appointments, and similar services are often tipped by percentage where gratuities are customary. Enter the service amount and desired percentage to see both gratuity and final payment quickly.</p><h3>Large parties and automatic gratuity</h3><p>If an automatic gratuity or service charge is already on the check, enter it in the service-charge field. You can set additional tip to zero or choose another percentage if you intentionally want to add more.</p><h3>Checking mental math</h3><p>Estimating 10% and doubling it is a convenient way to approximate a 20% tip. The calculator is more useful when the bill contains cents, the percentage is unusual, tax or service charges need to be separated, or several people want an exact split.</p></section>
 <section class="info-section"><h2>Tip Calculator FAQ</h2><details class="faq-item"><summary>How do I calculate a 20% tip?</summary><p>Multiply the bill by 0.20. For example, 20% of $50 is $10.</p></details><details class="faq-item"><summary>What is a gratuity calculator?</summary><p>A gratuity calculator applies a selected percentage to a bill or service amount to estimate the tip and final total.</p></details><details class="faq-item"><summary>How do I calculate tip with tax?</summary><p>Enter the bill and tax percentage. Leave Tip After Tax off to tip on the original bill, or turn it on to calculate gratuity from bill plus tax.</p></details><details class="faq-item"><summary>Should I tip before tax or after tax?</summary><p>Practices vary. This tool supports both methods so you can match the approach you prefer or the method relevant to your receipt.</p></details><details class="faq-item"><summary>Does Tip After Tax include the service charge in the tip base?</summary><p>No. In this calculator, Tip After Tax uses bill plus tax only. The service charge is calculated separately and added to the final total.</p></details><details class="faq-item"><summary>Can I calculate the total with tip and tax?</summary><p>Yes. The Total Bill result combines the original bill, tax, service charge and gratuity, then applies optional final-total rounding.</p></details><details class="faq-item"><summary>Can I split the bill?</summary><p>Yes. Increase the number of people to divide the final total evenly and see both the total and tip amount per person.</p></details><details class="faq-item"><summary>What if a service charge is already included?</summary><p>Enter the service charge separately. The calculator does not automatically treat it as gratuity or subtract it from the selected tip, so check the receipt before adding extra tip.</p></details><details class="faq-item"><summary>Can I calculate a zero-percent tip?</summary><p>Yes. Enter 0 in the custom-tip field.</p></details><details class="faq-item"><summary>Why can rounded per-person totals be higher?</summary><p>Each person's share can be rounded upward independently, so the combined rounded payments can exceed the exact total.</p></details><details class="faq-item"><summary>What happens if I enable both rounding options?</summary><p>The full bill is rounded up first, then divided. If per-person rounding is also enabled, each person's amount is rounded up again.</p></details><details class="faq-item"><summary>Why can the Effective Add-On be higher than the entered percentages?</summary><p>When Tip After Tax is enabled, the tip is calculated on bill plus tax while the Effective Add-On is measured against the original bill amount.</p></details><details class="faq-item"><summary>Does the currency selector convert exchange rates?</summary><p>No. It changes the displayed currency symbol only and does not perform foreign-exchange conversion.</p></details><details class="faq-item"><summary>Does Utiliverse upload my bill amount?</summary><p>No. Bill, tax, service-charge, tip, split, and rounding calculations are performed locally in the browser by this tool.</p></details><details class="faq-item"><summary>Can I split between more than 100 people?</summary><p>No. The tool limits the split to between 1 and 100 people.</p></details></section>
 <!-- GOOGLE ADSENSE: BOTTOM / AFTER-CONTENT INSERTION POINT. Paste approved code here. -->
 </div></main>
 <footer class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-6 pt-2"><div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-500"><div>© 2026 Utiliverse. All rights reserved.</div><div class="font-semibold text-right">100% Free and Browser Based</div></div></footer>
 <script>
-(()=>{const $=id=>document.getElementById(id);let people=1;const num=v=>{const x=Number(v);return Number.isFinite(x)&&x>=0?x:0};const sym=()=>$("currency").value||"$";const money=v=>`${sym()}${Number(v||0).toFixed(2)}`;function calc(){const bill=num($("billAmount").value),tipPct=num($("customTip").value),taxPct=num($("taxPercent").value),svcPct=num($("serviceCharge").value);const tax=bill*taxPct/100,svc=bill*svcPct/100,tipBase=$("tipAfterTax").checked?bill+tax:bill,tip=tipBase*tipPct/100;let total=bill+tax+svc+tip;if($("roundTotal").checked)total=Math.ceil(total);let pp=total/people;if($("roundPerPerson").checked)pp=Math.ceil(pp);$("billPrefix").textContent=sym();$("totalBill").textContent=money(total);$("tipAmount").textContent=money(tip);$("taxAmount").textContent=money(tax);$("serviceAmount").textContent=money(svc);$("perPerson").textContent=money(pp);$("tipPerPerson").textContent=money(tip/people);$("effectivePercent").textContent=(bill?((tax+svc+tip)/bill*100):0).toFixed(1)+"%";$("tipAmountSub").textContent=`${tipPct}% gratuity${$("tipAfterTax").checked?" after tax":""}`;$("taxSub").textContent=`${taxPct}% tax`;$("serviceSub").textContent=`${svcPct}% service charge`;$("perPersonSub").textContent=`${people} ${people===1?"person":"people"}`;$("peopleDisplay").textContent=`${people} ${people===1?"person":"people"}`;document.querySelectorAll(".tip-chip").forEach(b=>b.classList.toggle("active",Math.abs(Number(b.dataset.tip)-tipPct)<.0001))}document.querySelectorAll(".tip-chip").forEach(b=>b.onclick=()=>{$("customTip").value=b.dataset.tip;calc()});$("minusPerson").onclick=()=>{people=Math.max(1,people-1);calc()};$("plusPerson").onclick=()=>{people=Math.min(100,people+1);calc()};["billAmount","currency","customTip","taxPercent","serviceCharge","tipAfterTax","roundTotal","roundPerPerson"].forEach(id=>$(id).addEventListener("input",calc));$("resetBtn").onclick=()=>{$("billAmount").value="100.00";$("currency").value="$";$("customTip").value="20";$("taxPercent").value="0";$("serviceCharge").value="0";$("tipAfterTax").checked=false;$("roundTotal").checked=false;$("roundPerPerson").checked=false;people=1;calc()};$("copyBtn").onclick=async()=>{const t=`Utiliverse Tip Calculator\nBill: ${sym()}${num($("billAmount").value).toFixed(2)}\nTip: ${$("tipAmount").textContent}\nTax: ${$("taxAmount").textContent}\nService: ${$("serviceAmount").textContent}\nTotal: ${$("totalBill").textContent}\nPer person: ${$("perPerson").textContent}`;try{await navigator.clipboard.writeText(t)}catch{const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();document.execCommand("copy");a.remove()}};const toggle=$("themeToggle"),moon=$("moonIcon"),sun=$("sunIcon");function theme(m){const d=m==="dark";document.body.classList.toggle("dark-mode",d);moon.classList.toggle("hidden",d);sun.classList.toggle("hidden",!d);localStorage.setItem("utiliverse-theme",d?"dark":"light");lucide.createIcons()}theme(localStorage.getItem("utiliverse-theme")||(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));toggle.onclick=()=>theme(document.body.classList.contains("dark-mode")?"light":"dark");calc();lucide.createIcons()})();
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  let people = 1;
+  const numberOrZero = value => {
+    const n = Number(value);
+    return Number.isFinite(n) && n >= 0 ? n : 0;
+  };
+  const roundMoney = value => Math.round((value + Number.EPSILON) * 100) / 100;
+  const symbol = () => $('currency').value || '$';
+  const money = value => `${symbol()}${roundMoney(value).toFixed(2)}`;
+
+  function calculate() {
+    const bill = roundMoney(numberOrZero($('billAmount').value));
+    const tipPct = numberOrZero($('customTip').value);
+    const taxPct = numberOrZero($('taxPercent').value);
+    const servicePct = numberOrZero($('serviceCharge').value);
+    const tax = roundMoney(bill * taxPct / 100);
+    const service = roundMoney(bill * servicePct / 100);
+    const tipBase = $('tipAfterTax').checked ? roundMoney(bill + tax) : bill;
+    const tip = roundMoney(tipBase * tipPct / 100);
+    const unroundedTotal = roundMoney(bill + tax + service + tip);
+    const total = $('roundTotal').checked ? Math.ceil(unroundedTotal) : unroundedTotal;
+    const splitBeforeRounding = total / people;
+    const perPerson = $('roundPerPerson').checked ? Math.ceil(splitBeforeRounding) : roundMoney(splitBeforeRounding);
+    const collected = roundMoney(perPerson * people);
+    const difference = roundMoney(collected - total);
+    const roundingAdded = roundMoney(total - unroundedTotal);
+
+    $('billPrefix').textContent = symbol();
+    $('totalBill').textContent = money(total);
+    $('tipAmount').textContent = money(tip);
+    $('taxAmount').textContent = money(tax);
+    $('serviceAmount').textContent = money(service);
+    $('perPerson').textContent = money(perPerson);
+    $('tipPerPerson').textContent = money(roundMoney(tip / people));
+    $('effectivePercent').textContent = (bill ? ((tax + service + tip) / bill * 100) : 0).toFixed(1) + '%';
+    $('tipAmountSub').textContent = `${tipPct}% gratuity${$('tipAfterTax').checked ? ' after tax' : ''}`;
+    $('taxSub').textContent = `${taxPct}% tax`;
+    $('serviceSub').textContent = `${servicePct}% service charge`;
+    $('perPersonSub').textContent = `${people} ${people === 1 ? 'person' : 'people'}`;
+    document.querySelectorAll('.tip-chip').forEach(btn => {
+      const active = Math.abs(Number(btn.dataset.tip) - tipPct) < .0001;
+      btn.classList.toggle('active', active);
+      btn.setAttribute('aria-pressed', String(active));
+    });
+
+    const box = $('paymentCheck');
+    box.replaceChildren();
+    const title = document.createElement('strong');
+    title.textContent = 'Payment check';
+    box.appendChild(title);
+    function line(content, cssClass = 'payment-line') {
+      const span = document.createElement('span');
+      span.className = cssClass;
+      span.textContent = content;
+      box.appendChild(span);
+    }
+    line(`Tip basis: ${money(tipBase)} (${ $('tipAfterTax').checked ? 'bill + tax' : 'original bill, before tax' }).`);
+    if ($('roundTotal').checked) line(`Before rounding: ${money(unroundedTotal)} · added by total rounding: ${money(roundingAdded)}.`);
+    line(`${people} × displayed share of ${money(perPerson)} = ${money(collected)} collected.`);
+    if (Math.abs(difference) >= .005) {
+      const value = Math.abs(difference);
+      line(`${difference > 0 ? 'Above' : 'Below'} the total by ${money(value)}. ${difference > 0 ? 'The extra amount would need to be handled by the group.' : 'Adjust one person’s share to cover the remaining amount.'}`, 'payment-caution');
+    } else {
+      line('The displayed shares add up to the total.');
+    }
+  }
+
+  function setPeople(next) {
+    people = Math.min(100, Math.max(1, Math.round(next)));
+    $('peopleInput').value = String(people);
+    calculate();
+  }
+
+  document.querySelectorAll('.tip-chip').forEach(btn => {
+    btn.type = 'button';
+    btn.onclick = () => { $('customTip').value = btn.dataset.tip; calculate(); };
+  });
+  $('minusPerson').onclick = () => setPeople(people - 1);
+  $('plusPerson').onclick = () => setPeople(people + 1);
+  $('peopleInput').addEventListener('input', () => {
+    const value = Number($('peopleInput').value);
+    if (Number.isInteger(value) && value >= 1 && value <= 100) {
+      people = value;
+      calculate();
+    }
+  });
+  $('peopleInput').addEventListener('change', () => {
+    const value = Number($('peopleInput').value);
+    setPeople(Number.isFinite(value) ? value : people);
+  });
+  ['billAmount', 'currency', 'customTip', 'taxPercent', 'serviceCharge', 'tipAfterTax', 'roundTotal', 'roundPerPerson']
+    .forEach(id => $(id).addEventListener('input', calculate));
+
+  $('resetBtn').onclick = () => {
+    $('billAmount').value = '100.00';
+    $('currency').value = '$';
+    $('customTip').value = '20';
+    $('taxPercent').value = '0';
+    $('serviceCharge').value = '0';
+    $('tipAfterTax').checked = false;
+    $('roundTotal').checked = false;
+    $('roundPerPerson').checked = false;
+    setPeople(1);
+    $('copyStatus').textContent = '';
+  };
+
+  $('copyBtn').onclick = async () => {
+    const lines = [
+      'Utiliverse Tip Calculator',
+      `Bill: ${money(numberOrZero($('billAmount').value))}`,
+      `Tip: ${$('tipAmount').textContent}`,
+      `Tax: ${$('taxAmount').textContent}`,
+      `Service: ${$('serviceAmount').textContent}`,
+      `Total: ${$('totalBill').textContent}`,
+      `People: ${people}`,
+      `Per person: ${$('perPerson').textContent}`,
+      `Combined displayed shares: ${money(Number($('perPerson').textContent.replace(/[^\d.-]/g, '')) * people)}`
+    ];
+    const text = lines.join('\n');
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        const ok = document.execCommand('copy');
+        textarea.remove();
+        if (!ok) throw new Error('Clipboard unavailable');
+      }
+      $('copyStatus').textContent = 'Receipt summary copied.';
+    } catch {
+      $('copyStatus').textContent = 'Copy unavailable in this browser.';
+    }
+  };
+
+  const toggle = $('themeToggle');
+  const moon = $('moonIcon');
+  const sun = $('sunIcon');
+  function theme(mode) {
+    const dark = mode === 'dark';
+    document.body.classList.toggle('dark-mode', dark);
+    moon.classList.toggle('hidden', dark);
+    sun.classList.toggle('hidden', !dark);
+    toggle.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+    localStorage.setItem('utiliverse-theme', dark ? 'dark' : 'light');
+    if (window.lucide && lucide.createIcons) lucide.createIcons();
+  }
+  theme(localStorage.getItem('utiliverse-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
+  toggle.onclick = () => theme(document.body.classList.contains('dark-mode') ? 'light' : 'dark');
+  calculate();
+})();
 </script></body></html>
