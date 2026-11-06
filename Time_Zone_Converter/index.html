@@ -5,11 +5,16 @@
      crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Time Zone Converter | Utiliverse</title>
-<meta name="description" content="Compare multiple world time zones at a glance with DST-aware IANA time zone conversion, meeting overlap highlighting, and 12/24-hour formats.">
+<title>Time Zone Converter &amp; Time Difference Calculator | Utiliverse</title>
+<meta name="description" content="Convert a date and time between world time zones, see the time difference, and compare up to eight locations. DST-aware meeting planner with calendar export.">
 <meta name="robots" content="index,follow">
 <meta name="theme-color" content="#020617">
 <link rel="canonical" href="https://utiliverse.app/Time_Zone_Converter/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Utiliverse">
+<meta property="og:title" content="Time Zone Converter &amp; Time Difference Calculator | Utiliverse">
+<meta property="og:description" content="Convert an exact date and local time into another time zone, check the current date-specific offset difference, and compare meeting times across up to eight zones.">
+<meta property="og:url" content="https://utiliverse.app/Time_Zone_Converter/">
 <style>
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 :root{--bg:#020617;--panel:rgba(30,41,59,.72);--panel2:rgba(15,23,42,.74);--border:#334155;--border2:#475569;--text:#f8fafc;--muted:#94a3b8;--indigo:#6366f1;--indigo2:#4f46e5;--green:#34d399}
@@ -19,7 +24,7 @@ header{position:sticky;top:0;z-index:50;background:rgba(2,6,23,.82);backdrop-fil
 .header-inner{min-height:65px;display:flex;align-items:center;justify-content:space-between;gap:14px}
 .back{display:flex;gap:8px;align-items:center;text-decoration:none;color:#cbd5e1;font-size:14px;font-weight:700}.back:hover{color:#fff}
 .header-right{display:flex;align-items:center;gap:12px}.free{font-size:13px;font-weight:600;color:#64748b;white-space:nowrap}
-.theme{border:0;background:transparent;color:#94a3b8;padding:5px 6px;cursor:pointer;border-radius:7px}.theme:hover{color:#fff}.theme svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.theme{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid var(--border);background:var(--panel2);color:#94a3b8;cursor:pointer;border-radius:12px;padding:0;flex:none}.theme:hover{color:#fff;background:#1e293b;border-color:#475569}.theme:focus-visible{outline:2px solid var(--indigo);outline-offset:2px}.theme svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 main{padding:48px 0 72px}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:#818cf8;font-weight:800}
 h1{font-size:clamp(38px,5vw,58px);line-height:1.04;margin:10px 0 14px;font-weight:900;letter-spacing:-.035em}.hero p{max-width:820px;color:var(--muted);font-size:18px;line-height:1.72;margin:0}
 .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.badge{border:1px solid var(--border);background:rgba(15,23,42,.66);border-radius:999px;padding:7px 10px;color:#cbd5e1;font-size:12px;font-weight:700}
@@ -41,7 +46,7 @@ h1{font-size:clamp(38px,5vw,58px);line-height:1.04;margin:10px 0 14px;font-weigh
 .faq{border-bottom:1px solid var(--border)}.faq summary{list-style:none;cursor:pointer;padding:16px 0;font-weight:800;display:flex;justify-content:space-between;gap:15px}.faq summary::-webkit-details-marker{display:none}.faq summary:after{content:"+";color:#818cf8;font-size:20px}.faq[open] summary:after{content:"−"}
 footer{border-top:1px solid #1e293b;background:#020617}.footer{min-height:82px;display:flex;align-items:center;justify-content:space-between;gap:14px;color:#64748b;font-size:13px}
 body.light-mode{--panel:rgba(255,255,255,.90);--panel2:rgba(248,250,252,.96);--border:#dbe3ee;--border2:#cbd5e1;--text:#0f172a;--muted:#475569;background:#f8fafc;color:#0f172a}
-body.light-mode header{background:rgba(255,255,255,.93);border-bottom-color:#e2e8f0}body.light-mode .back{color:#334155}body.light-mode .back:hover{color:#0f172a}body.light-mode .theme{color:#334155}body.light-mode .theme:hover{color:#0f172a;background:#f1f5f9}body.light-mode .input,body.light-mode .select{background:#fff;color:#0f172a}body.light-mode .btn:not(.primary){background:#f1f5f9;color:#334155}body.light-mode .seg button,body.light-mode .chip{background:#fff;color:#64748b}body.light-mode .zone{background:#f1f5f9}body.light-mode .zone-top,body.light-mode .hm{color:#0f172a}body.light-mode .hour{background:#fff}body.light-mode .hour.work{background:rgba(16,185,129,.06)}body.light-mode .hour.sel{background:#eef2ff}body.light-mode .overlap th,body.light-mode .overlap td{background:#f8fafc}body.light-mode .share-text{color:#334155}body.light-mode .article h2{color:#0f172a}body.light-mode .article h3{color:#1e293b}body.light-mode .article p{color:#475569}body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
+body.light-mode header{background:rgba(255,255,255,.93);border-bottom-color:#e2e8f0}body.light-mode .back{color:#334155}body.light-mode .back:hover{color:#0f172a}body.light-mode .theme{color:#475569;background:#fff;border-color:#cbd5e1}body.light-mode .theme:hover{color:#0f172a;background:#f1f5f9;border-color:#94a3b8}body.light-mode .input,body.light-mode .select{background:#fff;color:#0f172a}body.light-mode .btn:not(.primary){background:#f1f5f9;color:#334155}body.light-mode .seg button,body.light-mode .chip{background:#fff;color:#64748b}body.light-mode .zone{background:#f1f5f9}body.light-mode .zone-top,body.light-mode .hm{color:#0f172a}body.light-mode .hour{background:#fff}body.light-mode .hour.work{background:rgba(16,185,129,.06)}body.light-mode .hour.sel{background:#eef2ff}body.light-mode .overlap th,body.light-mode .overlap td{background:#f8fafc}body.light-mode .share-text{color:#334155}body.light-mode .article h2{color:#0f172a}body.light-mode .article h3{color:#1e293b}body.light-mode .article p{color:#475569}body.light-mode footer{background:#f8fafc;border-top-color:#e2e8f0}
 @media(max-width:900px){.controls{grid-template-columns:1fr 1fr}.summary{grid-template-columns:1fr 1fr}}@media(max-width:640px){main{padding-top:34px}.free{font-size:10.5px;max-width:130px;white-space:normal;text-align:right}.controls{grid-template-columns:1fr}.summary{grid-template-columns:1fr 1fr}.add{min-width:100%;width:100%}.footer{flex-direction:column;justify-content:center;text-align:center;padding:18px 0}}
 
 .title-row{display:flex;align-items:center;gap:14px}
@@ -73,6 +78,21 @@ body.light-mode .source-links a{color:#4f46e5}
   .title-icon{width:38px;height:38px}
   .method-grid,.related-grid{grid-template-columns:1fr}
 }
+/* First-answer conversion: clear source, destination, and date-specific difference. */
+.direct-convert{margin-top:16px;border:1px solid rgba(129,140,248,.40);border-radius:17px;background:linear-gradient(135deg,rgba(99,102,241,.13),rgba(124,58,237,.06));padding:18px}
+.direct-header{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+.direct-header h3{font-size:18px;margin:0;color:var(--text);font-weight:850}
+.direct-header p{font-size:12px;color:var(--muted);margin:4px 0 0;line-height:1.6}
+.direct-body{display:grid;grid-template-columns:minmax(180px,1fr) minmax(0,1.2fr);gap:14px;align-items:end;margin-top:13px}
+.direct-result{border:1px solid var(--border);border-radius:13px;padding:14px;background:var(--panel2);min-width:0}
+.direct-result small{display:block;text-transform:uppercase;letter-spacing:.06em;font-size:10px;color:var(--muted);font-weight:800}
+.direct-result strong{font-size:clamp(24px,4vw,34px);line-height:1.25;display:block;color:var(--text);margin:5px 0}
+.direct-result span{font-size:12px;color:var(--muted);line-height:1.6;display:block}
+.direct-difference{font-size:13px;color:#c7d2fe;margin:12px 0 0;line-height:1.65}
+.direct-note{font-size:11px;color:var(--muted);line-height:1.6;margin:9px 0 0}
+body.light-mode .direct-difference{color:#4338ca}
+@media(max-width:700px){.direct-body{grid-template-columns:1fr}}
+
 
 </style>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Time Zone Converter","url":"https://utiliverse.app/Time_Zone_Converter/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern browser with JavaScript Intl time-zone support.","description":"Free browser-based multi-zone time converter with DST-aware local-time resolution, ambiguity detection, working-hour overlap comparison and ICS export.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["IANA-style named time-zone conversion","DST-aware conversion","Ambiguous repeated-time detection","Nonexistent skipped-time detection","12-hour and 24-hour formats","Up to eight comparison zones","Working-hour overlap visualization","Copyable meeting-time summary","One-hour ICS export","Browser-reported local time zone detection"]}</script><script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Does this converter automatically account for daylight saving time?","acceptedAnswer":{"@type":"Answer","text":"Yes, when the selected IANA time zone and date are supported by the browser. The tool relies on the browser's installed time-zone rules."}},{"@type":"Question","name":"Why can the same local clock time occur twice?","acceptedAnswer":{"@type":"Answer","text":"When clocks move backward, a repeated interval can map to two different UTC instants. The converter exposes Earlier and Later choices when both are valid."}},{"@type":"Question","name":"What happens if I choose a time that did not exist because clocks jumped forward?","acceptedAnswer":{"@type":"Answer","text":"The converter reports that the local time does not exist in the selected zone rather than silently applying an arbitrary offset."}},{"@type":"Question","name":"Are half-hour and 45-minute time zones supported?","acceptedAnswer":{"@type":"Answer","text":"Yes, when the browser supports the selected named time zone."}},{"@type":"Question","name":"How does the tool know my local time zone?","acceptedAnswer":{"@type":"Answer","text":"The initial source zone comes from Intl.DateTimeFormat().resolvedOptions().timeZone. The tool does not request GPS or precise-location permission."}},{"@type":"Question","name":"Can this tool guarantee newly announced government time-zone changes?","acceptedAnswer":{"@type":"Answer","text":"No. Accuracy depends on the time-zone data installed in the browser and operating system, so recently announced changes may require software updates."}},{"@type":"Question","name":"Is the 9-to-5 overlap score a guarantee that a meeting time is convenient?","acceptedAnswer":{"@type":"Answer","text":"No. It is a planning heuristic that counts how many displayed zones fall between 9:00 AM and 4:59 PM local time."}},{"@type":"Question","name":"Does the ICS file preserve each participant's named time zone?","acceptedAnswer":{"@type":"Answer","text":"The generated file stores the selected meeting as UTC start and end timestamps. Calendar applications normally display that instant in the user's own local zone after import."}}]}</script></head>
@@ -85,14 +105,14 @@ body.light-mode .source-links a{color:#4f46e5}
   <span class="title-icon" aria-hidden="true">
     <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/><path d="M12 7v5l3 2"/></svg>
   </span>
-  <h1>Time Zone Converter</h1>
+  <h1>Time Zone Converter &amp; Time Difference Calculator</h1>
 </div>
-<p>Compare one or many world time zones at a glance, choose an exact local date and time, and find practical overlap for calls, travel, markets, and remote work without manually calculating daylight-saving changes.</p>
-<div class="badges"><span class="badge">DST-aware conversion</span><span class="badge">IANA time zone identifiers</span><span class="badge">400+ zones when supported by your browser</span></div>
+<p>Convert a date and time from one world time zone to another and see the exact offset difference for that date. Compare up to eight zones to plan calls, travel, and international meetings with daylight-saving changes handled by your browser.</p>
+<div class="badges"><span class="badge">From → To conversion</span><span class="badge">Date-specific time difference</span><span class="badge">DST-aware multi-zone planner</span></div>
 </section>
 
 <section class="glass converter">
-<div class="head"><div><div class="eyebrow">Convert a local time</div><h2 class="title">Choose the source time and compare zones</h2></div><div class="small">Uses your browser's current Intl / IANA-compatible time-zone data.</div></div>
+<div class="head"><div><div class="eyebrow">Convert between time zones</div><h2 class="title">Enter a date, time, and source zone</h2></div><div class="small">Uses your browser's Intl / IANA-compatible time-zone data.</div></div>
 <div class="controls">
 <div class="field"><label for="sourceZone">Source time zone</label><input id="sourceZone" class="input" list="zoneOptions" autocomplete="off"></div>
 <div class="field"><label for="sourceDate">Date</label><input id="sourceDate" class="input" type="date" min="1900-01-01" max="2100-12-31"></div>
@@ -101,6 +121,15 @@ body.light-mode .source-links a{color:#4f46e5}
 </div>
 <div class="actions"><button id="nowBtn" class="btn" type="button">Use Now</button><button id="prevDayBtn" class="btn" type="button">−1 Day</button><button id="nextDayBtn" class="btn" type="button">+1 Day</button><div class="seg"><button id="format12" class="active" type="button">12-hour</button><button id="format24" type="button">24-hour</button></div><select id="ambiguitySelect" class="select" style="display:none;max-width:230px"><option value="earlier">Earlier occurrence</option><option value="later">Later occurrence</option></select></div>
 <div id="message" class="msg" role="status"></div>
+<div class="direct-convert" aria-labelledby="directHeading">
+  <div class="direct-header"><div><h3 id="directHeading">Convert to another time zone</h3><p>Select the destination to see its local date, time, and offset difference.</p></div><span class="badge">Same instant · different local clocks</span></div>
+  <div class="direct-body">
+    <div class="field"><label for="targetZone">To time zone</label><input id="targetZone" class="input" list="zoneOptions" autocomplete="off" placeholder="Europe/London" aria-describedby="targetHelp"><p id="targetHelp" class="direct-note">Enter a named zone such as Europe/London or Asia/Tokyo. Choose from your browser's suggestions.</p></div>
+    <div id="targetResult" class="direct-result" role="status" aria-live="polite"><small>Converted local time</small><strong id="targetClock">—</strong><span id="targetDate">Choose a valid destination zone</span></div>
+  </div>
+  <p id="targetDifference" class="direct-difference" aria-live="polite">Select a time and destination to calculate the difference.</p>
+  <p class="direct-note">The difference is based on the date selected above; it can change during daylight-saving transitions. Your conversion stays on this page.</p>
+</div>
 
 <div class="compare"><div><div class="eyebrow">Compare many zones</div><div class="small" style="margin-top:5px">Add up to 8 total zones. The first row follows the source zone.</div></div><div class="add"><input id="addZoneInput" class="input" list="zoneOptions" placeholder="e.g. Europe/London"><button id="addZoneBtn" class="btn" type="button">Add Zone</button></div></div>
 <div id="quickZones" class="quick"></div><datalist id="zoneOptions"></datalist>
@@ -112,6 +141,9 @@ body.light-mode .source-links a{color:#4f46e5}
 </section>
 
 <section class="article">
+<h2>How to convert between two time zones</h2>
+<p>Choose the starting time zone, date, and local clock time, then enter a destination time zone in the <strong>Convert to another time zone</strong> box. The result shows the destination's local date and clock time plus how far ahead or behind it is in UTC offset on that exact date. This matters when a meeting crosses midnight or when the two regions switch daylight saving on different dates.</p>
+<p>Use the larger comparison timeline when you need several locations at once. A time-zone conversion changes the local clock reading for the same moment; it is different from <a href="/Military_Time_Converter/">converting 12-hour to 24-hour clock notation</a> or <a href="/Time_Unit_Converter/">converting a duration between hours and minutes</a>.</p>
 <h2>About the Utiliverse Time Zone Converter</h2>
 <p>The Utiliverse Time Zone Converter is designed for situations where a simple UTC offset is not enough. Real civil time depends on a named time zone, a date, and the rules that apply in that location on that date. Governments can change UTC offsets and daylight-saving policies, sometimes with limited notice. Instead of hard-coding assumptions such as “New York is always five hours behind London,” this tool uses named IANA-style zones such as <code>America/New_York</code>, <code>Europe/London</code>, and <code>Asia/Tokyo</code> together with the time-zone data available in your browser.</p>
 <p>That distinction matters because offsets change through the year. New York normally switches between UTC−5 and UTC−4, while London normally switches between UTC+0 and UTC+1, and their transition dates are not identical in every part of the year. Other places use half-hour or 45-minute offsets, while some regions do not observe daylight saving at all. The converter asks the browser to format each instant in the requested zone rather than relying on a fixed offset table, which allows ordinary DST and non-whole-hour differences to be handled automatically.</p>
@@ -187,12 +219,12 @@ The page does not ship its own independent IANA database. For recently changed g
 
 <h3>Related Utiliverse Tools</h3>
 <div class="related-grid">
-  <a class="related-link" href="../Days_Between_Dates/"><strong>Days Between Dates</strong><span>Calculate calendar-day differences between two dates.</span></a>
-  <a class="related-link" href="../Unit_Currency_Converter/"><strong>Unit &amp; Currency Converter</strong><span>Convert common measurements and latest-available currency rates.</span></a>
-  <a class="related-link" href="../Unix_Timestamp_Converter/"><strong>Unix Timestamp Converter</strong><span>Convert Unix timestamps to human-readable date and time values.</span></a>
+  <a class="related-link" href="/Military_Time_Converter/"><strong>Military Time Converter</strong><span>Switch between 12-hour AM/PM and 24-hour notation without changing the time zone.</span></a>
+  <a class="related-link" href="/Time_Unit_Converter/"><strong>Time Unit Converter</strong><span>Convert durations after determining the actual times in each location.</span></a>
+  <a class="related-link" href="/Unix_Timestamp_Converter/"><strong>Unix Timestamp Converter</strong><span>Interpret Unix timestamps as dates and local clock readings.</span></a>
 </div>
 
-<p style="margin-top:24px;font-size:12px;color:var(--muted)"><strong>Last reviewed:</strong> October 1, 2026 · DST handling, timeline behavior, ICS export and browser-data limitations reviewed against the current implementation.</p>
+<p style="margin-top:24px;font-size:12px;color:var(--muted)"><strong>Last reviewed:</strong> November 5, 2026 · Source-to-destination time conversion, DST handling, timeline behavior, ICS export, and browser-data limitations checked against the current implementation.</p>
 
 <h2>Frequently Asked Questions</h2>
 <details class="faq"><summary>Does this converter automatically account for daylight saving time?</summary><p>Yes, when the selected IANA time zone and date are supported by the browser. The conversion asks the browser's time-zone engine for the local civil time and offset that apply to that instant instead of applying one fixed offset year-round.</p></details>
@@ -228,6 +260,7 @@ function validZone(z){try{new Intl.DateTimeFormat("en-US",{timeZone:z}).format(n
 let zones=[];try{if(Intl.supportedValuesOf)zones=Intl.supportedValuesOf("timeZone")}catch{}
 if(!zones.length)zones=fallback.slice();if(!zones.includes("UTC"))zones.unshift("UTC");zones=[...new Set(zones.filter(validZone))].sort();
 const detected=validZone(Intl.DateTimeFormat().resolvedOptions().timeZone)?Intl.DateTimeFormat().resolvedOptions().timeZone:"UTC";
+const defaultTarget=validZone("Europe/London")&&detected!=="Europe/London"?"Europe/London":(validZone("America/New_York")?"America/New_York":"UTC");
 zones.forEach(z=>{const o=document.createElement("option");o.value=z;$("zoneOptions").appendChild(o)});
 function friendly(z){if(z==="UTC")return"UTC";const p=z.split("/"),c=p.pop().replaceAll("_"," ");return c+" — "+p.join(" / ").replaceAll("_"," ")}
 function parts(ts,z){const f=new Intl.DateTimeFormat("en-CA",{timeZone:z,year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit",hourCycle:"h23"}),m={};f.formatToParts(new Date(ts)).forEach(p=>{if(p.type!=="literal")m[p.type]=p.value});return{year:+m.year,month:+m.month,day:+m.day,hour:+m.hour,minute:+m.minute,second:+m.second}}
@@ -236,11 +269,27 @@ function same(a,b){return a.year===b.year&&a.month===b.month&&a.day===b.day&&a.h
 function resolve(t,z){const w=Date.UTC(t.year,t.month-1,t.day,t.hour,t.minute),offs=new Set();for(let h=-42;h<=42;h+=6)offs.add(offset(w+h*3600000,z));const c=[];offs.forEach(o=>{const x=w-o*60000;if(same(parts(x,z),t))c.push(x)});return[...new Set(c)].sort((a,b)=>a-b)}
 function parse(){const z=$("sourceZone").value.trim(),d=$("sourceDate").value,t=$("sourceTime").value;if(!validZone(z))throw Error("Choose a valid supported time zone.");if(!d||!t)throw Error("Choose both a date and local time.");const[y,m,day]=d.split("-").map(Number),[h,min]=t.split(":").map(Number);return{z,t:{year:y,month:m,day,hour:h,minute:min}}}
 let instant=Date.now(),compare=[],format24=false,amb=[],best=null;
+function clearTarget(message){$("targetClock").textContent="—";$("targetDate").textContent=message;$("targetDifference").textContent="Choose a valid source time and destination to see the difference."}
+function diffLabel(minutes){
+ if(minutes===0)return"Both zones have the same UTC offset on this date.";
+ const ahead=minutes>0,abs=Math.abs(minutes),hours=Math.floor(abs/60),mins=abs%60;
+ const qty=[hours?`${hours} hour${hours===1?"":"s"}`:"",mins?`${mins} minute${mins===1?"":"s"}`:""].filter(Boolean).join(" and ");
+ return `The destination is ${qty} ${ahead?"ahead of":"behind"} the source zone on this date.`;
+}
+function renderTarget(){
+ const z=$("targetZone").value.trim();
+ if(!validZone(z)){clearTarget("Choose a supported time zone (for example Europe/London).");return}
+ $("targetClock").textContent=clock(instant,z);
+ $("targetDate").textContent=`${new Intl.DateTimeFormat("en-US",{timeZone:z,weekday:"long",month:"short",day:"numeric",year:"numeric"}).format(new Date(instant))} · ${friendly(z)} · ${abbr(instant,z)} (${offLabel(instant,z)})`;
+ const source=$("sourceZone").value.trim();
+ const delta=offset(instant,z)-offset(instant,validZone(source)?source:detected);
+ $("targetDifference").textContent=diffLabel(delta);
+}
 function msg(type="",text=""){const e=$("message");e.className="msg"+(type?" "+type:"");e.textContent=text}
 function dateInput(ts,z){const p=parts(ts,z);return`${p.year}-${String(p.month).padStart(2,"0")}-${String(p.day).padStart(2,"0")}`}
 function timeInput(ts,z){const p=parts(ts,z);return`${String(p.hour).padStart(2,"0")}:${String(p.minute).padStart(2,"0")}`}
 function sync(){const z=validZone($("sourceZone").value.trim())?$("sourceZone").value.trim():detected;$("sourceZone").value=z;$("sourceDate").value=dateInput(instant,z);$("sourceTime").value=timeInput(instant,z);compare[0]=z}
-function convert(){try{msg();const r=parse(),c=resolve(r.t,r.z);amb=c;if(!c.length){$("ambiguitySelect").style.display="none";msg("error","That local clock time does not exist in this zone, usually because of a daylight-saving or civil-time transition.");return}$("ambiguitySelect").style.display=c.length>1?"block":"none";instant=c.length>1&&$("ambiguitySelect").value==="later"?c[c.length-1]:c[0];if(c.length>1)msg("warn","This local time occurs more than once. Choose the earlier or later occurrence.");compare[0]=r.z;normalize();render()}catch(e){msg("error",e.message)}}
+function convert(){try{msg();const r=parse(),c=resolve(r.t,r.z);amb=c;if(!c.length){$("ambiguitySelect").style.display="none";msg("error","That local clock time does not exist in this zone, usually because of a daylight-saving or civil-time transition.");clearTarget("The source date/time does not exist in this zone.");return}$("ambiguitySelect").style.display=c.length>1?"block":"none";instant=c.length>1&&$("ambiguitySelect").value==="later"?c[c.length-1]:c[0];if(c.length>1)msg("warn","This local time occurs more than once. Choose the earlier or later occurrence.");compare[0]=r.z;normalize();render()}catch(e){msg("error",e.message);clearTarget("Enter a valid source zone, date and time.")}}
 function clock(ts,z){return new Intl.DateTimeFormat("en-US",{timeZone:z,hour:"numeric",minute:"2-digit",hour12:!format24}).format(new Date(ts))}
 function shortDate(ts,z){return new Intl.DateTimeFormat("en-US",{timeZone:z,weekday:"short",month:"short",day:"numeric"}).format(new Date(ts))}
 function abbr(ts,z){const p=new Intl.DateTimeFormat("en-US",{timeZone:z,hour:"numeric",timeZoneName:"short"}).formatToParts(new Date(ts)).find(x=>x.type==="timeZoneName");return p?p.value:""}
@@ -254,14 +303,21 @@ function renderTimeline(){const start=instant-6*3600000,ts=Array.from({length:13
 compare.forEach((z,zi)=>{h+=`<tr><th class="zone"><div class="zone-top">${friendly(z)}</div><div class="zone-sub">${z} · ${abbr(instant,z)} · ${offLabel(instant,z)}</div><div class="zone-tools">${zi?`<button class="zt" data-a="up" data-i="${zi}">↑ Up</button><button class="zt" data-a="down" data-i="${zi}">↓ Down</button><button class="zt" data-a="remove" data-i="${zi}">× Remove</button>`:'<span class="small">Source zone</span>'}</div></th>`;ts.forEach((x,i)=>{const p=parts(x,z),work=p.hour>=9&&p.hour<17;h+=`<td class="hour ${work?"work":""} ${i===6?"sel":""} ${i===bi?"best":""}" data-ts="${x}"><div class="hm">${clock(x,z)}</div><div class="hd">${new Intl.DateTimeFormat("en-US",{timeZone:z,month:"short",day:"numeric"}).format(new Date(x))}</div><div class="hday">${new Intl.DateTimeFormat("en-US",{timeZone:z,weekday:"short"}).format(new Date(x))}</div></td>`});h+="</tr>"});h+="</tbody>";$("timeline").innerHTML=h;
 document.querySelectorAll(".hour").forEach(c=>c.onclick=()=>{instant=+c.dataset.ts;sync();msg();render()});document.querySelectorAll(".zt").forEach(b=>b.onclick=()=>{const i=+b.dataset.i,a=b.dataset.a;if(a==="remove")compare.splice(i,1);else{const j=i+(a==="up"?-1:1);if(j>0&&j<compare.length)[compare[i],compare[j]]=[compare[j],compare[i]]}render()})}
 function renderShare(){const lines=compare.map(z=>`${friendly(z)}: ${new Intl.DateTimeFormat("en-US",{timeZone:z,weekday:"short",year:"numeric",month:"short",day:"numeric",hour:"numeric",minute:"2-digit",hour12:!format24,timeZoneName:"short"}).format(new Date(instant))} (${offLabel(instant,z)})`);$("shareText").textContent=lines.join("\n");$("instantUtc").textContent="UTC instant: "+new Date(instant).toISOString().replace(".000","")}
-function render(){normalize();renderSummary();renderTimeline();renderShare()}
-$("convertBtn").onclick=convert;$("nowBtn").onclick=()=>{instant=Math.floor(Date.now()/60000)*60000;sync();msg();render()};$("prevDayBtn").onclick=()=>{instant-=86400000;sync();convert()};$("nextDayBtn").onclick=()=>{instant+=86400000;sync();convert()};$("sourceZone").onchange=convert;$("sourceDate").onchange=convert;$("sourceTime").onchange=convert;$("ambiguitySelect").onchange=()=>{if(amb.length>1){instant=$("ambiguitySelect").value==="later"?amb[amb.length-1]:amb[0];render()}};
+function render(){normalize();renderSummary();renderTimeline();renderShare();renderTarget()}
+function shiftCalendarDay(delta){
+ const [year,month,day]=$("sourceDate").value.split("-").map(Number);
+ if(!year||!month||!day)return;
+ const d=new Date(Date.UTC(year,month-1,day+delta));
+ $("sourceDate").value=d.toISOString().slice(0,10);
+ convert();
+}
+$("convertBtn").onclick=convert;$("nowBtn").onclick=()=>{instant=Math.floor(Date.now()/60000)*60000;sync();msg();render()};$("prevDayBtn").onclick=()=>shiftCalendarDay(-1);$("nextDayBtn").onclick=()=>shiftCalendarDay(1);$("sourceZone").onchange=convert;$("sourceDate").onchange=convert;$("sourceTime").onchange=convert;$("ambiguitySelect").onchange=()=>{if(amb.length>1){instant=$("ambiguitySelect").value==="later"?amb[amb.length-1]:amb[0];render()}};
 $("format12").onclick=()=>{format24=false;$("format12").classList.add("active");$("format24").classList.remove("active");render()};$("format24").onclick=()=>{format24=true;$("format24").classList.add("active");$("format12").classList.remove("active");render()};
-$("addZoneBtn").onclick=()=>add($("addZoneInput").value);$("addZoneInput").onkeydown=e=>{if(e.key==="Enter")add(e.target.value)};$("bestBtn").onclick=()=>{instant=best;sync();msg("info","Moved to the strongest typical work-hour overlap in the visible window.");render()};
+$("targetZone").addEventListener("change",renderTarget);$("targetZone").addEventListener("input",renderTarget);$("addZoneBtn").onclick=()=>add($("addZoneInput").value);$("addZoneInput").onkeydown=e=>{if(e.key==="Enter")add(e.target.value)};$("bestBtn").onclick=()=>{instant=best;sync();msg("info","Moved to the strongest typical work-hour overlap in the visible window.");render()};
 $("copyBtn").onclick=async()=>{try{await navigator.clipboard.writeText($("shareText").textContent);$("copyStatus").textContent="Copied";setTimeout(()=>$("copyStatus").textContent="",1500)}catch{$("copyStatus").textContent="Copy unavailable"}};
 function stamp(t){return new Date(t).toISOString().replace(/[-:]/g,"").replace(/\.\d{3}Z$/,"Z")}
 $("icsBtn").onclick=()=>{const ics=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Utiliverse//Time Zone Converter//EN","BEGIN:VEVENT",`UID:utiliverse-${instant}@utiliverse.app`,`DTSTAMP:${stamp(Date.now())}`,`DTSTART:${stamp(instant)}`,`DTEND:${stamp(instant+3600000)}`,"SUMMARY:International Meeting","END:VEVENT","END:VCALENDAR"].join("\r\n"),blob=new Blob([ics],{type:"text/calendar"}),u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download="utiliverse-time-zone-meeting.ics";a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)};
-init();renderQuick();instant=Math.floor(Date.now()/60000)*60000;sync();render();
+init();renderQuick();instant=Math.floor(Date.now()/60000)*60000;sync();$("targetZone").value=defaultTarget;render();
 })();
 </script>
 </body></html>
