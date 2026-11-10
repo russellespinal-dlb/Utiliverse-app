@@ -144,6 +144,7 @@ body.light-mode .update strong{color:#334155}
 .update-status{font-size:12px;color:var(--muted);font-weight:750}
 .month-block[hidden]{display:none!important}
 .month-block{scroll-margin-top:90px}
+#november-tool-revisions{scroll-margin-top:100px}
 body.light-mode .month-select{background:#fff;color:#0f172a;border-color:#cbd5e1}
 @media(max-width:620px){
   .update-controls,.update-control-group{align-items:stretch}
@@ -153,6 +154,10 @@ body.light-mode .month-select{background:#fff;color:#0f172a;border-color:#cbd5e1
   .month-select{width:100%}
   .update-control-group .btn{justify-content:center}
 }
+
+.update p a,.month-intro a{color:#a5b4fc;font-weight:750;text-underline-offset:3px}
+.update p a:hover,.month-intro a:hover{text-decoration-thickness:2px}
+body.light-mode .update p a,body.light-mode .month-intro a{color:#4338ca}
 
 </style>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebPage", "name": "Utiliverse Updates", "url": "https://utiliverse.app/Updates.html", "description": "See monthly Utiliverse updates covering new tools, major revisions, source maintenance, browser compatibility improvements, editorial work, and site-wide quality upgrades.", "isPartOf": {"@type": "WebSite", "name": "Utiliverse", "url": "https://utiliverse.app/"}}</script>
@@ -164,6 +169,7 @@ body.light-mode .month-select{background:#fff;color:#0f172a;border-color:#cbd5e1
   <div class="container header-inner">
     <a class="back-link" href="https://utiliverse.app/"><span aria-hidden="true">←</span><span>Back to Utiliverse</span></a>
     <nav class="resource-nav" aria-label="Resource navigation">
+      <a href="./Tools.html">All Tools</a>
       <a href="./Guides.html">Guides</a>
       <a href="./Updates.html">Updates</a>
       <a href="./Editorial_Methodology.html">Editorial &amp; Methodology</a>
@@ -198,19 +204,48 @@ body.light-mode .month-select{background:#fff;color:#0f172a;border-color:#cbd5e1
     <div class="filter-field">
       <label class="filter-label" for="monthFilter">Filter by month</label>
       <select id="monthFilter" class="month-select">
+        <option value="2026-11">November 2026</option>
         <option value="2026-10">October 2026</option>
         <option value="2026-09">September 2026</option>
       </select>
     </div>
     <button id="jumpLatest" class="btn" type="button">Jump to Latest</button>
   </div>
-  <div id="updateStatus" class="update-status" aria-live="polite">Showing latest updates: October 2026</div>
+  <div id="updateStatus" class="update-status" aria-live="polite">Showing latest updates: November 2026</div>
 </section>
 
 
 <section class="glass section" id="updatesLog">
+  <div class="month-block" id="month-2026-11" data-month="2026-11" data-label="November 2026">
+    <div class="kicker">Latest release</div>
+    <h2>November 2026</h2>
+    <p class="month-intro">November's work makes Utiliverse easier to explore and improves the practical utility of several frequently searched tools. The homepage now helps visitors choose a useful starting point, while the complete searchable directory has its own page. Calculator and reference refinements focus on clearer inputs, more informative results, and honest limits.</p>
+
+    <div class="month-summary">
+      <div class="card"><div class="kicker">Site navigation</div><h3>More focused homepage</h3><p>Four problem-solving pathways, featured tools, visible guides, and a compact Recently Added section make it easier to find a useful starting point.</p><a href="./">Visit homepage →</a></div>
+      <div class="card"><div class="kicker">Tool discovery</div><h3>Dedicated All Tools directory</h3><p>The complete 62-tool catalog now has a searchable, category-filtered page, with consistent light and dark themes.</p><a href="./Tools.html">Browse all tools →</a></div>
+      <div class="card"><div class="kicker">Tool experience</div><h3>Six practical refinements</h3><p>Volume, Time Zone, Animal Age, Tip, Time Unit, and Port Checker received focused usability and explanatory improvements.</p><a href="#november-tool-revisions">Review refinements →</a></div>
+    </div>
+
+    <div class="update"><div class="update-date">November 9, 2026 · Website navigation</div><h3>Homepage redesigned around practical starting points</h3><p>Reorganized the homepage into Networking &amp; Website Diagnostics, Time &amp; Date, Money &amp; Planning, and Developers &amp; Data. Visitors can explore relevant tools and original guides without scrolling through the entire directory. A compact <strong>Recently Added</strong> area and a small group of featured tools remain on the homepage. The established Utiliverse type, card styling, color system, and light/dark preference were retained. <a href="./">Explore the homepage</a>.</p></div>
+
+    <div class="update"><div class="update-date">November 9, 2026 · Tool directory</div><h3>All 62 tools moved into a dedicated searchable directory</h3><p>Introduced <a href="./Tools.html"><strong>All Tools</strong></a> as a separate page for the complete tool catalog, with search, category filters, and links to individual utilities. Homepage search now leads into this directory, preserving the visitor's search phrase. The new directory was added to the XML sitemap while existing individual tool URLs remained unchanged.</p></div>
+
+    <div class="month-divider"></div>
+    <h3 id="november-tool-revisions">Tool refinements completed during November</h3>
+    <p class="month-intro">The following updates describe targeted refinements made to individual tools during the November improvement batch. They are grouped by use case rather than assigned an unverified day-by-day release date.</p>
+
+    <div class="update"><div class="update-date">Calculators &amp; time conversion</div><h3>Volume Calculator and Time Zone Converter</h3><p>The <a href="./Volume_Calculator/"><strong>Volume Calculator</strong></a> gained a more direct cube calculation path, clearer shape dimensions, and improved unit handling. The <a href="./Time_Zone_Converter/"><strong>Time Zone Converter</strong></a> now emphasizes a direct source-to-destination date and time result, while retaining multi-zone comparisons and export capabilities. Supporting explanations clarify what results mean, including time-zone and daylight-saving considerations.</p></div>
+
+    <div class="update"><div class="update-date">Everyday planning &amp; animal ages</div><h3>Animal Age Calculator and Tip Calculator</h3><p>The <a href="./Animal_Age_Calculator/"><strong>Animal Age Calculator</strong></a> received clearer species-specific model explanations, horse-age examples, and guidance on the limitations of illustrative age comparisons. The <a href="./Tip_Calculator/"><strong>Tip Calculator</strong></a> improved bill-splitting controls and rounding transparency, including a payment check to help identify when rounded individual shares exceed or fall short of the intended total.</p></div>
+
+    <div class="update"><div class="update-date">Duration conversion &amp; networking</div><h3>Time Unit Converter and Port Checker</h3><p>The <a href="./Time_Unit_Converter/"><strong>Time Unit Converter</strong></a> gained a human-readable duration breakdown, practical presets, and expanded milliseconds/seconds reference examples. The <a href="./Port_Checker/"><strong>Port Checker</strong></a> added common-port shortcuts, better input validation, and clearer results for searches spanning multiple ports or ranges. It remains a <strong>TCP/UDP service-reference lookup, not a live open-port scanner</strong>; new guidance explains how genuine connectivity testing differs.</p></div>
+
+    <div class="callout"><strong>What stayed the same:</strong> Existing individual tool URLs were preserved. The new directory improves navigation without replacing those pages, and each utility continues to explain its own assumptions, supported functionality, and limitations.</div>
+  </div>
+
   <div class="month-block" id="month-2026-10" data-month="2026-10" data-label="October 2026">
-    <div class="kicker">Current development release</div>
+    <div class="kicker">Previous release</div>
     <h2>October 2026</h2>
     <p class="month-intro">October is focused on a site-wide quality pass: deeper tool explanations, clearer assumptions and limits, stronger trust signals, more consistent source/review notes, and implementation-aware guidance across calculators, developer references, networking utilities, random generators, image tools, and family-focused utilities.</p>
 
@@ -255,7 +290,7 @@ body.light-mode .month-select{background:#fff;color:#0f172a;border-color:#cbd5e1
 
   <div class="month-block" id="month-2026-09" data-month="2026-09" data-label="September 2026">
     <div class="month-divider"></div>
-    <div class="kicker">Previous release</div>
+    <div class="kicker">Earlier release</div>
     <h2>September 2026</h2>
     <p class="month-intro">September established the editorial and maintenance foundation that the October quality pass builds on. The month combined new guide content, stronger calculator explanations, networking review, new utility launches, and a return to a more consistent shared Utiliverse interface.</p>
 
@@ -291,7 +326,7 @@ body.light-mode .month-select{background:#fff;color:#0f172a;border-color:#cbd5e1
   <h2>Corrections and revisions</h2>
   <p>If a formula, explanation, source interpretation, or technical behavior is found to be materially incorrect, Utiliverse should correct the page and record a meaningful correction here when the change could affect how users interpret a result.</p>
   <p>Questions or correction suggestions can be sent through the <a href="./Contact_Info.html">Contact</a> page. The broader review approach is documented in <a href="./Editorial_Methodology.html">Editorial &amp; Tool Methodology</a>.</p>
-  <div class="review-box"><span>Last reviewed: October 2026</span><span>Entries are intended to describe meaningful public-facing changes.</span></div>
+  <div class="review-box"><span>Last reviewed: November 2026</span><span>Entries are intended to describe meaningful public-facing changes.</span></div>
 </section>
 </div></main>
 
@@ -301,6 +336,7 @@ body.light-mode .month-select{background:#fff;color:#0f172a;border-color:#cbd5e1
   <div class="container footer-inner">
     <div>© 2026 Utiliverse. All rights reserved.</div>
     <nav class="footer-links" aria-label="Footer">
+      <a href="./Tools.html">All Tools</a>
       <a href="./Guides.html">Guides</a>
       <a href="./Updates.html">Updates</a>
       <a href="./Editorial_Methodology.html">Editorial &amp; Methodology</a>
