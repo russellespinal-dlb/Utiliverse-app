@@ -205,8 +205,8 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
           <div>
             <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">Remaining loan term (reference)</label>
             <div class="grid grid-cols-2 gap-2">
-              <input id="years" type="number" class="input font-mono" value="25" min="0" step="1" placeholder="Years">
-              <input id="months" type="number" class="input font-mono" value="0" min="0" max="11" step="1" placeholder="Months">
+              <input id="years" aria-label="Remaining loan term in years (reference only)" type="number" class="input font-mono" value="25" min="0" step="1" placeholder="Years">
+              <input id="months" aria-label="Remaining loan term in months (reference only)" type="number" class="input font-mono" value="0" min="0" max="11" step="1" placeholder="Months">
             </div>
           </div>
         </div>
@@ -221,7 +221,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
           <div>
             <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-2" for="extraMonthly">Extra each month ($)</label>
             <input id="extraMonthly" type="number" class="input font-mono mb-3" value="300" min="0" step="10">
-            <input id="extraMonthlyRange" type="range" min="0" max="3000" step="10" value="300" class="w-full accent-indigo-500">
+            <input id="extraMonthlyRange" aria-label="Extra principal paid each month" type="range" min="0" max="3000" step="10" value="300" class="w-full accent-indigo-500">
           </div>
           <div>
             <label class="block text-xs font-bold text-slate-400 uppercase tracking-wide mb-2" for="extraAnnual">Extra each year ($)</label>
@@ -242,6 +242,9 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
         </div>
       </div>
 
+      <!-- Model-status messages are shown instead of misleading payoff figures when a plan does not amortize. -->
+      <p id="mortgageValidation" role="alert" aria-live="polite" hidden class="glass p-5 rounded-xl mb-8 text-amber-300 border border-amber-500/40"></p>
+      <div id="mortgageResults">
       <!-- Results Grid -->
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <div class="glass p-4 rounded-xl">
@@ -355,6 +358,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
           </table>
         </div>
       </div>
+      </div><!-- /mortgageResults -->
 
     </div>
 
@@ -619,25 +623,47 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 
       if(balance <= 0.01) break;
     }
-    return { months: month, totalInterest: totalInterest, totalPayments: totalPayments, rows: rows };
+    return { months: month, totalInterest: totalInterest, totalPayments: totalPayments, rows: rows,
+      paidOff: balance <= 0.01, remainingBalance: balance };
   }
 
   /* ---------------------------------------------
      MAIN CALCULATION
   --------------------------------------------- */
   function calculate(){
-    const balance = parseFloat(balanceEl.value) || 0;
-    const annualRate = parseFloat(rateEl.value) || 0;
-    const monthlyPayment = parseFloat(paymentEl.value) || 0;
-    const extraMonthly = parseFloat(extraMonthlyEl.value) || 0;
-    const extraAnnual = parseFloat(extraAnnualEl.value) || 0;
-    const oneTime = parseFloat(oneTimeEl.value) || 0;
-
-    if(balance <= 0) return;
+    const status = $('mortgageValidation');
+    const results = $('mortgageResults');
+    function showIssue(message){
+      status.textContent = message;
+      status.hidden = false;
+      results.hidden = true;
+    }
+    const inputElements = [balanceEl, rateEl, paymentEl, extraMonthlyEl, extraAnnualEl, oneTimeEl];
+    if(inputElements.some(el => el.value.trim() === '' || !Number.isFinite(Number(el.value)) || Number(el.value) < 0)){
+      showIssue('Enter valid, nonnegative numbers for all mortgage and extra-payment fields.');
+      return;
+    }
+    const [balance, annualRate, monthlyPayment, extraMonthly, extraAnnual, oneTime] = inputElements.map(el => Number(el.value));
+    if(balance <= 0 || monthlyPayment <= 0){
+      showIssue('Enter a mortgage balance and regular monthly principal-and-interest payment greater than zero.');
+      return;
+    }
+    const firstMonthInterest = balance * annualRate / 1200;
+    if(!Number.isFinite(firstMonthInterest) || monthlyPayment <= firstMonthInterest){
+      showIssue(`Your regular ${moneyPrecise(monthlyPayment)} monthly payment does not exceed first-month interest of ${moneyPrecise(firstMonthInterest)}. This loan does not amortize under the current plan, so payoff and interest-savings figures are unavailable. Enter a larger regular payment.`);
+      return;
+    }
 
     const original = createSchedule(balance, annualRate, monthlyPayment, 0, 0, 0, false);
-    let acceleratedPayment = monthlyPayment + extraMonthly;
-    let accelerated = createSchedule(balance, annualRate, monthlyPayment, extraMonthly, extraAnnual, oneTime, paymentMode === 'biweekly');
+    const acceleratedPayment = monthlyPayment + extraMonthly;
+    const accelerated = createSchedule(balance, annualRate, monthlyPayment, extraMonthly, extraAnnual, oneTime, paymentMode === 'biweekly');
+    if(!original.paidOff || !accelerated.paidOff){
+      showIssue('At least one payment plan does not fully pay off the balance within the 100-year simulation limit. Increase the regular payment to make the comparison meaningful. No payoff or savings estimates are shown.');
+      return;
+    }
+    status.hidden = true;
+    status.textContent = '';
+    results.hidden = false;
 
     const interestSaved = Math.max(0, original.totalInterest - accelerated.totalInterest);
     const monthsSaved = Math.max(0, original.months - accelerated.months);
