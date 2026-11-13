@@ -575,7 +575,8 @@ async function measurePing(server, samples = 5) {
   const pings = [];
   for (let i = 0; i < samples; i++) {
     const start = performance.now();
-    await fetch(`${server.pingUrl}&nocache=${crypto.randomUUID()}`, { cache: 'no-store', mode: 'cors' });
+    const response = await fetch(`${server.pingUrl}&nocache=${crypto.randomUUID()}`, { cache: 'no-store', mode: 'cors' });
+    if (!response.ok) throw new Error(`Latency endpoint returned HTTP ${response.status}`);
     pings.push(performance.now() - start);
   }
   pings.sort((a, b) => a - b);
@@ -588,6 +589,7 @@ async function measurePing(server, samples = 5) {
 async function measureDownload(server, bytes = 100000000) {
   const start = performance.now();
   const response = await fetch(`${server.downUrl}${bytes}&nocache=${crypto.randomUUID()}`, { cache: 'no-store', mode: 'cors' });
+  if (!response.ok || !response.body) throw new Error(`Download endpoint unavailable (HTTP ${response.status})`);
   const reader = response.body.getReader();
   let receivedBytes = 0;
 
@@ -603,6 +605,7 @@ async function measureDownload(server, bytes = 100000000) {
     }
   }
 
+  if (receivedBytes === 0) throw new Error('Download endpoint returned no data.');
   const duration = (performance.now() - start) / 1000;
   return (receivedBytes * 8) / duration / 1e6;
 }
@@ -619,12 +622,13 @@ async function measureUpload(server, bytes = 25000000) {
 
   const start = performance.now();
   
-  await fetch(`${server.upUrl}?nocache=${crypto.randomUUID()}`, {
+  const response = await fetch(`${server.upUrl}?nocache=${crypto.randomUUID()}`, {
     method: 'POST',
     body: payload,
     cache: 'no-store',
     mode: 'cors'
   });
+  if (!response.ok) throw new Error(`Upload endpoint returned HTTP ${response.status}`);
 
   const duration = (performance.now() - start) / 1000;
   return (bytes * 8) / duration / 1e6;
@@ -679,7 +683,10 @@ async function startTest() {
     console.error(err);
     updateProgress(100, 'Test Failed');
     el('quality').textContent = 'Error';
-    setStatus('Could not finish test. Please try another server or check connection.', 'bad');
+    for (const id of ['down', 'up', 'ping', 'jitter']) el(id).textContent = '—';
+    el('lastTest').textContent = 'Failed';
+    el('testDuration').textContent = fmt((performance.now() - globalStart) / 1000, 1) + 's';
+    setStatus('Speed test incomplete. The test endpoint may be unavailable, blocked, or limited by your connection. No reliable result was recorded.', 'bad');
   } finally {
     finishTest();
   }
