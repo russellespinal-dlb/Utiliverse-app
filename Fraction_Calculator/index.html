@@ -292,18 +292,18 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
                     <div class="flex items-center gap-4 bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-brand-300 dark:hover:border-brand-700 transition-colors w-full md:w-auto justify-center">
                         <div class="flex flex-col items-center">
                             <label class="text-[10px] font-bold text-slate-400 dark:text-slate-500 mb-2 uppercase tracking-widest">Whole</label>
-                            <input type="number" id="w1" class="fraction-input text-2xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl p-3 focus:ring-2 focus:ring-brand-500 focus:outline-none transition-shadow" placeholder="0">
+                            <input type="number" aria-label="First fraction, whole-number part" id="w1" class="fraction-input text-2xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl p-3 focus:ring-2 focus:ring-brand-500 focus:outline-none transition-shadow" placeholder="0">
                         </div>
                         <div class="flex flex-col gap-3">
-                            <input type="number" id="n1" class="fraction-input text-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl p-2 focus:ring-2 focus:ring-brand-500 focus:outline-none transition-shadow" placeholder="Num" required>
+                            <input type="number" aria-label="First fraction, numerator" id="n1" class="fraction-input text-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl p-2 focus:ring-2 focus:ring-brand-500 focus:outline-none transition-shadow" placeholder="Num" required>
                             <hr class="border-slate-400 dark:border-slate-500 border-t-2 rounded-full">
-                            <input type="number" id="d1" class="fraction-input text-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl p-2 focus:ring-2 focus:ring-brand-500 focus:outline-none transition-shadow" placeholder="Den" value="1" required>
+                            <input type="number" aria-label="First fraction, denominator" id="d1" class="fraction-input text-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl p-2 focus:ring-2 focus:ring-brand-500 focus:outline-none transition-shadow" placeholder="Den" value="1" required>
                         </div>
                     </div>
 
                     <!-- Operator -->
                     <div class="flex flex-col items-center z-10 relative group">
-                        <select id="operator" class="text-3xl font-bold text-brand-700 dark:text-brand-400 bg-brand-50 dark:bg-brand-900/30 border-2 border-brand-200 dark:border-brand-800 rounded-2xl px-6 py-4 cursor-pointer focus:outline-none focus:ring-4 focus:ring-brand-500/30 appearance-none text-center hover:scale-105 transition-all shadow-sm">
+                        <select aria-label="Fraction arithmetic operation" id="operator" class="text-3xl font-bold text-brand-700 dark:text-brand-400 bg-brand-50 dark:bg-brand-900/30 border-2 border-brand-200 dark:border-brand-800 rounded-2xl px-6 py-4 cursor-pointer focus:outline-none focus:ring-4 focus:ring-brand-500/30 appearance-none text-center hover:scale-105 transition-all shadow-sm">
                             <option value="+">+</option>
                             <option value="-">-</option>
                             <option value="*">×</option>
@@ -316,12 +316,12 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
                     <div class="flex items-center gap-4 bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-brand-300 dark:hover:border-brand-700 transition-colors w-full md:w-auto justify-center">
                         <div class="flex flex-col items-center">
                             <label class="text-[10px] font-bold text-slate-400 dark:text-slate-500 mb-2 uppercase tracking-widest">Whole</label>
-                            <input type="number" id="w2" class="fraction-input text-2xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl p-3 focus:ring-2 focus:ring-brand-500 focus:outline-none transition-shadow" placeholder="0">
+                            <input type="number" aria-label="Second fraction, whole-number part" id="w2" class="fraction-input text-2xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl p-3 focus:ring-2 focus:ring-brand-500 focus:outline-none transition-shadow" placeholder="0">
                         </div>
                         <div class="flex flex-col gap-3">
-                            <input type="number" id="n2" class="fraction-input text-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl p-2 focus:ring-2 focus:ring-brand-500 focus:outline-none transition-shadow" placeholder="Num" required>
+                            <input type="number" aria-label="Second fraction, numerator" id="n2" class="fraction-input text-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl p-2 focus:ring-2 focus:ring-brand-500 focus:outline-none transition-shadow" placeholder="Num" required>
                             <hr class="border-slate-400 dark:border-slate-500 border-t-2 rounded-full">
-                            <input type="number" id="d2" class="fraction-input text-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl p-2 focus:ring-2 focus:ring-brand-500 focus:outline-none transition-shadow" placeholder="Den" value="1" required>
+                            <input type="number" aria-label="Second fraction, denominator" id="d2" class="fraction-input text-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl p-2 focus:ring-2 focus:ring-brand-500 focus:outline-none transition-shadow" placeholder="Den" value="1" required>
                         </div>
                     </div>
                 </form>
@@ -340,7 +340,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
                 <form id="formD2F" class="flex flex-col items-center justify-center gap-6" onsubmit="event.preventDefault(); calcD2F();">
                     <div class="text-center w-full">
                         <label class="block text-sm font-bold text-slate-500 dark:text-slate-400 mb-3 uppercase tracking-wider">Enter Decimal Number</label>
-                        <input type="number" step="any" id="decInput" class="decimal-input text-3xl bg-slate-50 dark:bg-slate-800/50 border-2 border-slate-200 dark:border-slate-700 rounded-2xl p-4 focus:ring-4 focus:ring-brand-500/20 focus:border-brand-500 focus:outline-none transition-all shadow-inner placeholder-slate-300 dark:placeholder-slate-600" placeholder="e.g. 3.125" required>
+                        <input type="number" step="any" aria-label="Decimal value to convert to a fraction" id="decInput" class="decimal-input text-3xl bg-slate-50 dark:bg-slate-800/50 border-2 border-slate-200 dark:border-slate-700 rounded-2xl p-4 focus:ring-4 focus:ring-brand-500/20 focus:border-brand-500 focus:outline-none transition-all shadow-inner placeholder-slate-300 dark:placeholder-slate-600" placeholder="e.g. 3.125" required>
                     </div>
                 </form>
                 <div class="mt-10 flex justify-center gap-4">
@@ -362,12 +362,12 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
                     <div class="flex items-center gap-4 bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-brand-300 dark:hover:border-brand-700 transition-colors justify-center">
                         <div class="flex flex-col items-center">
                             <label class="text-[10px] font-bold text-slate-400 dark:text-slate-500 mb-2 uppercase tracking-widest">Whole</label>
-                            <input type="number" id="w3" class="fraction-input text-2xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl p-3 focus:ring-2 focus:ring-brand-500 focus:outline-none transition-shadow" placeholder="0">
+                            <input type="number" aria-label="Fraction to convert to decimal, whole-number part" id="w3" class="fraction-input text-2xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl p-3 focus:ring-2 focus:ring-brand-500 focus:outline-none transition-shadow" placeholder="0">
                         </div>
                         <div class="flex flex-col gap-3">
-                            <input type="number" id="n3" class="fraction-input text-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl p-2 focus:ring-2 focus:ring-brand-500 focus:outline-none transition-shadow" placeholder="Num" required>
+                            <input type="number" aria-label="Fraction to convert to decimal, numerator" id="n3" class="fraction-input text-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl p-2 focus:ring-2 focus:ring-brand-500 focus:outline-none transition-shadow" placeholder="Num" required>
                             <hr class="border-slate-400 dark:border-slate-500 border-t-2 rounded-full">
-                            <input type="number" id="d3" class="fraction-input text-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl p-2 focus:ring-2 focus:ring-brand-500 focus:outline-none transition-shadow" placeholder="Den" value="1" required>
+                            <input type="number" aria-label="Fraction to convert to decimal, denominator" id="d3" class="fraction-input text-xl bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl p-2 focus:ring-2 focus:ring-brand-500 focus:outline-none transition-shadow" placeholder="Den" value="1" required>
                         </div>
                     </div>
                 </form>
