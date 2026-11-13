@@ -164,9 +164,9 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
   <div class="glass p-6 rounded-2xl flex flex-col gap-4">
     <h3 class="font-bold text-lg">What is X% of Y?</h3>
     <div class="flex items-center gap-2">
-      <input type="number" id="v1_x" class="input p-2 rounded-lg w-full" placeholder="X">
+      <input type="number" aria-label="Percentage to calculate" id="v1_x" class="input p-2 rounded-lg w-full" placeholder="X">
       <span>% of</span>
-      <input type="number" id="v1_y" class="input p-2 rounded-lg w-full" placeholder="Y">
+      <input type="number" aria-label="Number to take a percentage of" id="v1_y" class="input p-2 rounded-lg w-full" placeholder="Y">
     </div>
     <button class="btn primary" onclick="calc1()">Calculate</button>
     <div class="mt-2 text-xl font-bold text-indigo-400" id="res1">--</div>
@@ -175,9 +175,9 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
   <div class="glass p-6 rounded-2xl flex flex-col gap-4">
     <h3 class="font-bold text-lg">X is what % of Y?</h3>
     <div class="flex items-center gap-2">
-      <input type="number" id="v2_x" class="input p-2 rounded-lg w-full" placeholder="X">
+      <input type="number" aria-label="Part value" id="v2_x" class="input p-2 rounded-lg w-full" placeholder="X">
       <span>is % of</span>
-      <input type="number" id="v2_y" class="input p-2 rounded-lg w-full" placeholder="Y">
+      <input type="number" aria-label="Total value" id="v2_y" class="input p-2 rounded-lg w-full" placeholder="Y">
     </div>
     <button class="btn primary" onclick="calc2()">Calculate</button>
     <div class="mt-2 text-xl font-bold text-indigo-400" id="res2">--</div>
@@ -186,9 +186,9 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
   <div class="glass p-6 rounded-2xl flex flex-col gap-4">
     <h3 class="font-bold text-lg">% Change from X to Y</h3>
     <div class="flex items-center gap-2">
-      <input type="number" id="v3_x" class="input p-2 rounded-lg w-full" placeholder="X">
+      <input type="number" aria-label="Starting value" id="v3_x" class="input p-2 rounded-lg w-full" placeholder="X">
       <span>to</span>
-      <input type="number" id="v3_y" class="input p-2 rounded-lg w-full" placeholder="Y">
+      <input type="number" aria-label="Ending value" id="v3_y" class="input p-2 rounded-lg w-full" placeholder="Y">
     </div>
     <button class="btn primary" onclick="calc3()">Calculate</button>
     <div class="mt-2 text-xl font-bold text-indigo-400" id="res3">--</div>
