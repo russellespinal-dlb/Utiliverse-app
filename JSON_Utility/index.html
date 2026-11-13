@@ -205,7 +205,7 @@ They render no visible placeholder box and reserve no layout space before approv
             </div>
             
             <div class="flex items-center gap-2 text-sm">
-                <span id="statusIndicator" class="flex items-center gap-1 text-gray-500 font-medium">
+                <span id="statusIndicator" role="status" aria-live="polite" class="flex items-center gap-1 text-gray-500 font-medium">
                     <i data-lucide="info" class="w-4 h-4"></i> Ready
                 </span>
             </div>
@@ -217,7 +217,7 @@ They render no visible placeholder box and reserve no layout space before approv
             <div class="flex flex-col rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950 overflow-hidden shadow-sm">
                 <div class="flex items-center justify-between px-4 py-2 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
                     <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Input</span>
-                    <button onclick="pasteFromClipboard()" class="text-xs font-medium text-brand-600 dark:text-brand-400 hover:underline">Paste</button>
+                    <div class="flex items-center gap-3"><button type="button" onclick="loadSampleJSON()" class="text-xs font-medium text-brand-600 dark:text-brand-400 hover:underline">Try sample</button><button type="button" onclick="pasteFromClipboard()" class="text-xs font-medium text-brand-600 dark:text-brand-400 hover:underline">Paste</button></div>
                 </div>
                 <textarea aria-label="JSON text to format, validate or minify" id="jsonInput" placeholder="Paste your raw JSON here..." class="flex-1 w-full p-4 resize-none focus:outline-none focus:ring-2 focus:ring-brand-500/50 bg-transparent code-scroll font-mono text-sm leading-relaxed" spellcheck="false"></textarea>
             </div>
@@ -445,13 +445,48 @@ They render no visible placeholder box and reserve no layout space before approv
             });
         }
 
+        // Keep the output and clipboard state in sync with the current input.
+        function resetOutput() {
+            rawJSON = '';
+            outputArea.textContent = '';
+            popoutOutput.textContent = '';
+        }
+
+        function showParseError(error) {
+            resetOutput();
+            const message = 'Invalid JSON: ' + error.message;
+            for (const target of [outputArea, popoutOutput]) {
+                const span = document.createElement('span');
+                span.className = 'text-red-500 font-medium';
+                span.textContent = message;
+                target.replaceChildren(span);
+            }
+            setStatus(message, 'text-red-500', 'x-circle');
+        }
+
+        function loadSampleJSON() {
+            inputArea.value = JSON.stringify({
+                project: 'Utiliverse',
+                status: 'active',
+                tasks: [{name: 'Validate JSON', complete: true}, {name: 'Review data', complete: false}],
+                version: 3,
+                notes: null
+            });
+            formatJSON();
+            inputArea.focus();
+        }
+
+        inputArea.addEventListener('input', () => {
+            resetOutput();
+            setStatus('Input changed — format or minify to update the result', 'text-gray-500', 'info');
+        });
+
         // Format Logic
         function formatJSON() {
             const input = inputArea.value.trim();
             if (!input) {
-                setStatus('Warning: Input is empty', 'text-yellow-500', 'alert-triangle');
-                outputArea.innerHTML = '';
-                popoutOutput.innerHTML = '';
+                resetOutput();
+                setStatus('Enter JSON or try the sample to begin', 'text-yellow-500', 'alert-triangle');
                 return;
             }
 
@@ -468,16 +503,18 @@ They render no visible placeholder box and reserve no layout space before approv
                 
                 setStatus('Valid JSON Formatted Successfully', 'text-green-500', 'check-circle');
             } catch (e) {
-                setStatus('Error: ' + e.message, 'text-red-500', 'x-circle');
-                outputArea.innerHTML = `<span class="text-red-500 font-medium">Invalid JSON: ${e.message}</span>`;
-                popoutOutput.innerHTML = `<span class="text-red-500 font-medium">Invalid JSON: ${e.message}</span>`;
+                showParseError(e);
             }
         }
 
         // Minify Logic
         function minifyJSON() {
             const input = inputArea.value.trim();
-            if (!input) return;
+            if (!input) {
+                resetOutput();
+                setStatus('Enter JSON or try the sample to begin', 'text-yellow-500', 'alert-triangle');
+                return;
+            }
 
             try {
                 const parsed = JSON.parse(input);
@@ -490,16 +527,14 @@ They render no visible placeholder box and reserve no layout space before approv
                 
                 setStatus('JSON Minified Successfully', 'text-green-500', 'check-circle');
             } catch (e) {
-                setStatus('Error: ' + e.message, 'text-red-500', 'x-circle');
+                showParseError(e);
             }
         }
 
         // Utility Functions
         function clearJSON() {
             inputArea.value = '';
-            outputArea.innerHTML = '';
-            popoutOutput.innerHTML = '';
-            rawJSON = '';
+            resetOutput();
             setStatus('Cleared', 'text-gray-500', 'info');
         }
 
@@ -519,17 +554,18 @@ They render no visible placeholder box and reserve no layout space before approv
                 return;
             }
             navigator.clipboard.writeText(rawJSON).then(() => {
-                const originalStatus = statusIndicator.innerHTML;
                 setStatus('Copied to clipboard!', 'text-brand-500', 'check');
-                setTimeout(() => {
-                    statusIndicator.innerHTML = originalStatus;
-                }, 2000);
+            }).catch(() => {
+                setStatus('Clipboard access denied. Select and copy the output manually.', 'text-yellow-500', 'alert-triangle');
             });
         }
 
         function setStatus(msg, colorClass, iconName) {
             statusIndicator.className = `flex items-center gap-1 font-medium text-sm transition-colors ${colorClass}`;
-            statusIndicator.innerHTML = `<i data-lucide="${iconName}" class="w-4 h-4"></i> ${msg}`;
+            const icon = document.createElement('i');
+            icon.setAttribute('data-lucide', iconName);
+            icon.className = 'w-4 h-4';
+            statusIndicator.replaceChildren(icon, document.createTextNode(' ' + msg));
             lucide.createIcons(); // Refresh icons
         }
 
@@ -646,9 +682,8 @@ They render no visible placeholder box and reserve no layout space before approv
         scriptTag.text = JSON.stringify(faqSchema);
         document.head.appendChild(scriptTag);
 
-        // Auto-format if dummy data is put in for visual test on load
-        inputArea.value = '{"example":"Paste your data here to get started","features":["Format","Minify","Popout Viewer"],"secure":true}';
-        formatJSON();
+        // Start with an empty editor; a realistic example is available on demand.
+        setStatus('Ready — paste JSON or choose Try sample', 'text-gray-500', 'info');
 
     </script>
 </body>
