@@ -219,7 +219,7 @@ They render no visible placeholder box and reserve no layout space before approv
                     <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Input</span>
                     <button onclick="pasteFromClipboard()" class="text-xs font-medium text-brand-600 dark:text-brand-400 hover:underline">Paste</button>
                 </div>
-                <textarea id="jsonInput" placeholder="Paste your raw JSON here..." class="flex-1 w-full p-4 resize-none focus:outline-none focus:ring-2 focus:ring-brand-500/50 bg-transparent code-scroll font-mono text-sm leading-relaxed" spellcheck="false"></textarea>
+                <textarea aria-label="JSON text to format, validate or minify" id="jsonInput" placeholder="Paste your raw JSON here..." class="flex-1 w-full p-4 resize-none focus:outline-none focus:ring-2 focus:ring-brand-500/50 bg-transparent code-scroll font-mono text-sm leading-relaxed" spellcheck="false"></textarea>
             </div>
 
             <!-- Output Area -->
