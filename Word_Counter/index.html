@@ -141,7 +141,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
     <div class="glass rounded-xl p-4"><span class="muted text-xs uppercase font-bold">Sentences</span><div id="c_sent" aria-live="polite" class="text-3xl font-black mt-1 text-indigo-400">0</div></div>
   </div>
   
-  <textarea id="text_input" rows="12" class="input w-full rounded-2xl p-4 text-lg resize-y" placeholder="Type or paste your text here to begin analyzing..."></textarea>
+  <textarea aria-label="Text to count words and characters" id="text_input" rows="12" class="input w-full rounded-2xl p-4 text-lg resize-y" placeholder="Type or paste your text here to begin analyzing..."></textarea>
   <button class="btn mt-4" onclick="document.getElementById('text_input').value=''; analyzeText();">Clear Text</button>
 </section>
 <p class="local-processing-note mt-4">Browser-based analysis: the text you enter is counted locally by this tool and is not submitted to a Utiliverse text-analysis server. The page itself still loads interface and advertising resources from external providers.</p>
