@@ -200,7 +200,15 @@ They create no visible boxes or reserved layout space.
   </div>
   <div class="result rounded-2xl p-4 mt-4">
     <div class="flex justify-between gap-3"><span class="text-xs uppercase tracking-widest text-indigo-300 font-bold">File hash</span><button class="btn text-xs" onclick="copyFileHash()">Copy</button></div>
-    <div id="fileHash" class="font-mono break-all text-sm mt-3">—</div>
+    <div id="fileHash" role="status" aria-live="polite" class="font-mono break-all text-sm mt-3">—</div>
+  </div>
+  <div class="mt-5">
+    <label for="expectedFileHash" class="text-sm font-semibold">Compare with a published checksum (optional)</label>
+    <p class="file-meta">Paste the expected Hex or Base64 digest using the algorithm and encoding selected above. Generate the file hash first, then compare.</p>
+    <input id="expectedFileHash" type="text" class="input w-full rounded-xl px-4 py-3 mt-2 font-mono text-sm" placeholder="Paste the checksum from a trusted source" autocomplete="off" spellcheck="false">
+    <button type="button" class="btn mt-3" onclick="verifyFileHash()">Compare Checksums</button>
+    <div id="fileVerifyResult" role="status" aria-live="polite" class="file-meta mt-3">No comparison performed.</div>
+    <p class="file-meta">A matching hash confirms agreement with the supplied checksum, not that the checksum's source is trustworthy. Very large files may require substantial device memory.</p>
   </div>
 </div><p class="muted text-xs mt-4 flex items-start gap-2"><i data-lucide="shield-check" class="w-4 h-4 mt-0.5 flex-shrink-0 text-indigo-400"></i><span>Local browser processing: the text you enter is hashed in your browser and is not submitted to a Utiliverse server.</span></p></section><!-- GOOGLE ADSENSE: MID-PAGE / AFTER-GENERATOR PLACEMENT
      Paste your approved AdSense code here. Invisible insertion point only.
@@ -284,6 +292,23 @@ They create no visible boxes or reserved layout space.
 </section><!-- GOOGLE ADSENSE: PRE-FOOTER PLACEMENT
      Paste your approved AdSense code here. Invisible insertion point only.
 --></main><script>
+let lastTextHash = '';
+let lastFileHash = '';
+
+function clearHashResults() {
+  lastTextHash = '';
+  lastFileHash = '';
+  document.getElementById('hash').textContent = '—';
+  document.getElementById('fileHash').textContent = '—';
+  document.getElementById('fileVerifyResult').textContent = 'Hash settings changed. Recalculate before comparing.';
+}
+
+function invalidateFileResult() {
+  lastFileHash = '';
+  document.getElementById('fileHash').textContent = '—';
+  document.getElementById('fileVerifyResult').textContent = 'Choose Generate File Hash before comparing.';
+}
+
 function encodeDigest(bytes, encoding){
   if(encoding === 'hex'){
     return [...bytes].map(x=>x.toString(16).padStart(2,'0')).join('');
@@ -305,21 +330,24 @@ async function generateHash(){
     const encoding=document.getElementById('enc').value;
     const bytes=new TextEncoder().encode(text);
     const digest=await digestBytes(bytes);
-    document.getElementById('hash').textContent=encodeDigest(digest, encoding);
+    lastTextHash = encodeDigest(digest, encoding);
+    document.getElementById('hash').textContent = lastTextHash;
   }catch(err){
+    lastTextHash = '';
     document.getElementById('hash').textContent='Hash generation failed: '+err.message;
   }
 }
 
 function copyHash(){
-  const value=document.getElementById('hash').textContent;
-  if(value && value!=='—') navigator.clipboard.writeText(value);
+  if(lastTextHash) navigator.clipboard.writeText(lastTextHash).catch(() => {});
 }
 
 async function generateFileHash(){
   const input=document.getElementById('fileInput');
   const file=input.files && input.files[0];
   const out=document.getElementById('fileHash');
+  lastFileHash = '';
+  document.getElementById('fileVerifyResult').textContent = 'Waiting for the file hash.';
   if(!file){
     out.textContent='Choose a file first.';
     return;
@@ -329,20 +357,48 @@ async function generateFileHash(){
     const bytes=new Uint8Array(await file.arrayBuffer());
     const digest=await digestBytes(bytes);
     const encoding=document.getElementById('enc').value;
-    out.textContent=encodeDigest(digest, encoding);
+    lastFileHash = encodeDigest(digest, encoding);
+    out.textContent = lastFileHash;
+    document.getElementById('fileVerifyResult').textContent = 'File hash ready. Paste an expected checksum to compare.';
   }catch(err){
+    lastFileHash = '';
     out.textContent='File hash failed: '+err.message;
   }
 }
 
 function copyFileHash(){
-  const value=document.getElementById('fileHash').textContent;
-  if(value && value!=='—' && !value.endsWith('first.')) navigator.clipboard.writeText(value);
+  if(lastFileHash) navigator.clipboard.writeText(lastFileHash).catch(() => {});
+}
+
+function verifyFileHash(){
+  const result = document.getElementById('fileVerifyResult');
+  const expected = document.getElementById('expectedFileHash').value.trim();
+  if(!lastFileHash){
+    result.textContent = 'Generate the file hash before comparing.';
+    return;
+  }
+  if(!expected){
+    result.textContent = 'Paste the expected checksum before comparing.';
+    return;
+  }
+  const encoding = document.getElementById('enc').value;
+  const normalized = encoding === 'hex' ? expected.toLowerCase() : expected;
+  const actual = encoding === 'hex' ? lastFileHash.toLowerCase() : lastFileHash;
+  if(expected.length !== actual.length || (encoding === 'hex' && !/^[0-9a-f]+$/i.test(expected))){
+    result.textContent = `Invalid ${encoding === 'hex' ? 'Hex' : 'Base64'} checksum for the selected hash algorithm. Check the value and settings.`;
+    return;
+  }
+  if(normalized === actual){
+    result.textContent = 'MATCH — the file hash agrees with the supplied checksum.';
+  }else{
+    result.textContent = 'MISMATCH — the file hash differs from the supplied checksum. Verify the file and source.';
+  }
 }
 
 function clearFileHash(){
   document.getElementById('fileInput').value='';
-  document.getElementById('fileHash').textContent='—';
+  document.getElementById('expectedFileHash').value='';
+  invalidateFileResult();
 }
 
 function updateAlgorithmNotice(){
@@ -356,7 +412,19 @@ function updateAlgorithmNotice(){
     notice.textContent='';
   }
 }
-document.addEventListener('DOMContentLoaded', updateAlgorithmNotice);
+document.addEventListener('DOMContentLoaded', () => {
+  updateAlgorithmNotice();
+  document.getElementById('algo').addEventListener('change', clearHashResults);
+  document.getElementById('enc').addEventListener('change', clearHashResults);
+  document.getElementById('fileInput').addEventListener('change', invalidateFileResult);
+  document.getElementById('text').addEventListener('input', () => {
+    lastTextHash = '';
+    document.getElementById('hash').textContent = '—';
+  });
+  document.getElementById('expectedFileHash').addEventListener('input', () => {
+    document.getElementById('fileVerifyResult').textContent = 'Checksum changed. Compare again to refresh the result.';
+  });
+});
 </script><footer class="border-t border-slate-800 bg-slate-950"><div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 flex flex-col sm:flex-row justify-between gap-3 text-sm text-slate-500"><span>© 2026 Utiliverse. All rights reserved.</span><span>100% Free and Browser Based</span></div></footer><script>lucide.createIcons();
 (function(){
   const toggle = document.getElementById("theme-toggle");
