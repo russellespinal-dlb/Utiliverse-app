@@ -69,6 +69,12 @@
 .dark-mode .local-processing-note{color:#94a3b8}
 @media(max-width:700px){.method-grid,.related-grid{grid-template-columns:1fr}}
 
+
+/* Batch 08: helpful validation on mobile and desktop */
+.calc-warning{margin-bottom:14px;border:1px solid #f59e0b;background:#fffbeb;color:#92400e;border-radius:12px;padding:12px 14px;line-height:1.55;font-size:.875rem}
+.dark-mode .calc-warning{background:#422006;border-color:#b45309;color:#fde68a}
+[aria-invalid="true"]{outline:2px solid #d97706;outline-offset:1px}
+.person-row .field{min-width:0}
 </style>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse Bill Splitter Calculator","url":"https://utiliverse.app/Bill_Splitter/","applicationCategory":"FinanceApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled.","description":"Free browser-based bill splitter for subtotal-based tip and tax, even or weighted shares, cent-consistent allocation, amount-paid tracking, who-owes-whom settlement calculations, custom currency labels and local browser persistence.","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"featureList":["Split bills evenly","Split bills by custom proportional shares","Subtotal-based tip percentage","Subtotal-based tax percentage","Quick-tip buttons","Custom currency display label","Track amount paid per person","Largest-remainder cent allocation","Who-owes-whom settlement calculation","Payment-total mismatch warnings","Zero-share handling","LocalStorage persistence","Reset saved bill data","Copyable bill summary with clipboard fallback","Browser-local calculations"]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I split a restaurant bill evenly?","acceptedAnswer":{"@type":"Answer","text":"Add every person and leave each person at one share. The calculator divides the grand total evenly across the group."}},{"@type":"Question","name":"Can I split the bill unevenly?","acceptedAnswer":{"@type":"Answer","text":"Yes. Give each person a different number of shares. Two shares costs twice as much as one share, while 0.5 shares costs half as much."}},{"@type":"Question","name":"Does the calculator include tip and tax?","acceptedAnswer":{"@type":"Answer","text":"Yes. Tip and tax are calculated independently from the subtotal and then included in the grand total before the total is distributed by shares."}},{"@type":"Question","name":"How does the Who Owes Whom calculation work?","acceptedAnswer":{"@type":"Answer","text":"The calculator compares each person's rounded fair share with the amount they actually paid, then matches people who underpaid with people who overpaid."}},{"@type":"Question","name":"Can multiple people pay part of the bill?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter the actual payment made by each person. The settlement calculation uses all payment amounts when determining transfers."}},{"@type":"Question","name":"Can I use a currency other than dollars?","acceptedAnswer":{"@type":"Answer","text":"Yes. Change the currency symbol or short label. This changes display only and does not perform foreign-exchange conversion."}},{"@type":"Question","name":"Does Utiliverse upload my bill information?","acceptedAnswer":{"@type":"Answer","text":"No. Calculations run locally in your browser and the saved group is stored in browser localStorage by this tool."}},{"@type":"Question","name":"Why might my receipt differ by a cent?","acceptedAnswer":{"@type":"Answer","text":"Restaurants may round tax, gratuity, discounts or line items differently. The calculator rounds the grand total to cents and uses largest-remainder allocation so participant totals stay aligned."}},{"@type":"Question","name":"Does changing the currency symbol convert the amounts?","acceptedAnswer":{"@type":"Answer","text":"No. The currency field is display-only and does not perform foreign-exchange conversion."}},{"@type":"Question","name":"What happens if all shares are zero?","acceptedAnswer":{"@type":"Answer","text":"The calculator cannot allocate the bill and asks for at least one positive share. An individual participant with zero shares owes zero."}},{"@type":"Question","name":"Why does the settlement warn that payments do not match the grand total?","acceptedAnswer":{"@type":"Answer","text":"If entered payments are lower or higher than the calculated bill, the group is not fully reconciled yet even if participant-to-participant transfers are shown."}},{"@type":"Question","name":"How are leftover cents distributed?","acceptedAnswer":{"@type":"Answer","text":"The calculator uses a largest-remainder approach: raw proportional cent amounts are floored and leftover cents are assigned to the largest fractional remainders."}},{"@type":"Question","name":"Does Reset clear saved bill data?","acceptedAnswer":{"@type":"Answer","text":"Yes. Reset removes the tool's localStorage entry and restores the default example values."}}]}</script>
@@ -84,7 +90,7 @@
 <section class="tool-card overflow-hidden"><div class="section-head"><h2><i data-lucide="users" class="w-5 h-5 text-indigo-600"></i>People & Shares</h2><div class="flex gap-2 flex-wrap"><button id="evenSplitBtn" type="button" class="btn-secondary"><i data-lucide="equal" class="w-4 h-4"></i>Set All to 1 Share</button><button id="addPersonBtn" type="button" class="btn-primary"><i data-lucide="user-plus" class="w-4 h-4"></i>Add Person</button></div></div><div class="p-5 sm:p-6"><div class="grid grid-cols-[1.2fr_110px_145px_48px] gap-2 px-1 pb-2 text-xs font-extrabold text-slate-500 uppercase tracking-wide hidden sm:grid"><div>Name</div><div>Shares</div><div>Amount Paid</div><div></div></div><div id="peopleList"></div><p class="note mt-3">Leave everyone at 1 share for an even split. Use values like 2, 1.5 or 0.5 for an uneven split. Enter how much each person actually paid to generate settlement instructions.</p></div></section>
 </div>
 <div class="space-y-6">
-<section class="tool-card overflow-hidden"><div class="section-head"><h2><i data-lucide="calculator" class="w-5 h-5 text-indigo-600"></i>Bill Summary</h2><button id="copySummaryBtn" type="button" class="btn-secondary"><i data-lucide="copy" class="w-4 h-4"></i>Copy</button></div><div class="p-5 sm:p-6"><div class="summary-grid"><div class="summary-box"><div class="summary-label">Subtotal</div><div id="summarySubtotal" class="summary-value">$0.00</div></div><div class="summary-box"><div class="summary-label">Tip</div><div id="summaryTip" class="summary-value">$0.00</div></div><div class="summary-box"><div class="summary-label">Tax</div><div id="summaryTax" class="summary-value">$0.00</div></div><div class="summary-box"><div class="summary-label">Grand Total</div><div id="summaryGrand" class="summary-value">$0.00</div></div></div></div></section>
+<section class="tool-card overflow-hidden"><div class="section-head"><h2><i data-lucide="calculator" class="w-5 h-5 text-indigo-600"></i>Bill Summary</h2><button id="copySummaryBtn" type="button" class="btn-secondary"><i data-lucide="copy" class="w-4 h-4"></i>Copy</button></div><div class="p-5 sm:p-6"><div id="calcWarning" class="calc-warning" role="alert" hidden></div><div class="summary-grid"><div class="summary-box"><div class="summary-label">Subtotal</div><div id="summarySubtotal" class="summary-value">$0.00</div></div><div class="summary-box"><div class="summary-label">Tip</div><div id="summaryTip" class="summary-value">$0.00</div></div><div class="summary-box"><div class="summary-label">Tax</div><div id="summaryTax" class="summary-value">$0.00</div></div><div class="summary-box"><div class="summary-label">Grand Total</div><div id="summaryGrand" class="summary-value">$0.00</div></div></div></div></section>
 <section class="tool-card overflow-hidden"><div class="section-head"><h2><i data-lucide="wallet-cards" class="w-5 h-5 text-indigo-600"></i>Each Person Pays</h2></div><div id="perPersonResults" class="p-5 sm:p-6"></div></section>
 <section class="tool-card overflow-hidden"><div class="section-head"><h2><i data-lucide="hand-coins" class="w-5 h-5 text-indigo-600"></i>Who Owes Whom</h2></div><div class="p-5 sm:p-6"><div id="settlementResults"></div><p class="note mt-3">Settlement amounts are based on each person's fair share compared with how much they actually paid.</p></div></section>
 </div></div>
@@ -194,7 +200,171 @@ Casey pays Alex $31.75</code>
 </div></main>
 <footer class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-6 pt-2"><div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-500"><div>© 2026 Utiliverse. All rights reserved.</div><div class="font-semibold text-right">100% Free and Browser Based</div></div></footer>
 <script>
-(()=>{const K='utiliverse-bill-splitter-v1',$=id=>document.getElementById(id),subtotal=$('subtotal'),tipPercent=$('tipPercent'),taxPercent=$('taxPercent'),currency=$('currency'),peopleList=$('peopleList'),perPersonResults=$('perPersonResults'),settlementResults=$('settlementResults'),subtotalPrefix=$('subtotalPrefix');let people=[];const n=(v,f=0)=>Number.isFinite(Number(v))?Number(v):f;const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');function np(name){return{id:crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random()),name:name||`Person ${people.length+1}`,shares:1,paid:0}}function money(v){return`${currency.value.trim()||'$'}${Math.abs(v).toFixed(2)}`}function save(){localStorage.setItem(K,JSON.stringify({subtotal:subtotal.value,tipPercent:tipPercent.value,taxPercent:taxPercent.value,currency:currency.value,people}))}function load(){try{const s=JSON.parse(localStorage.getItem(K));subtotal.value=s.subtotal??'100.00';tipPercent.value=s.tipPercent??'20';taxPercent.value=s.taxPercent??'7';currency.value=s.currency??'$';if(!Array.isArray(s.people)||!s.people.length)throw 0;people=s.people.map(p=>({id:p.id||String(Date.now()+Math.random()),name:String(p.name||'Person'),shares:Math.max(0,n(p.shares,1)),paid:Math.max(0,n(p.paid,0))}))}catch{people=[np('Person 1'),np('Person 2')]}}function renderPeople(){peopleList.innerHTML='';people.forEach((p,i)=>{const row=document.createElement('div');row.className='person-row';row.innerHTML=`<div class="person-name-field"><label class="label sm:hidden">Name</label><input class="field nm" type="text" maxlength="40" value="${esc(p.name)}"></div><div><label class="label sm:hidden">Shares</label><input class="field sh" type="number" min="0" step="0.25" value="${p.shares}" inputmode="decimal"></div><div><label class="label sm:hidden">Amount Paid</label><input class="field pd" type="number" min="0" step="0.01" value="${p.paid}" inputmode="decimal"></div><div class="remove-cell"><button class="btn-danger rm" type="button" title="Remove person"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div>`;row.querySelector('.nm').oninput=e=>{p.name=e.target.value.trim()||`Person ${i+1}`;calc()};row.querySelector('.sh').oninput=e=>{p.shares=Math.max(0,n(e.target.value));calc()};row.querySelector('.pd').oninput=e=>{p.paid=Math.max(0,n(e.target.value));calc()};row.querySelector('.rm').onclick=()=>{if(people.length>1){people=people.filter(x=>x.id!==p.id);renderPeople();calc()}};peopleList.appendChild(row)});lucide.createIcons()}function distribute(total,w){const cents=Math.round(total*100),wt=w.reduce((a,b)=>a+b,0);if(wt<=0)return w.map(()=>0);const raw=w.map(x=>cents*x/wt),f=raw.map(Math.floor);let r=cents-f.reduce((a,b)=>a+b,0);const ord=raw.map((v,i)=>({i,fr:v-Math.floor(v)})).sort((a,b)=>b.fr-a.fr);for(let k=0;k<r;k++)f[ord[k%ord.length].i]++;return f.map(x=>x/100)}function settle(owed){const b=people.map((p,i)=>({name:p.name,balance:Math.round((n(p.paid)-owed[i])*100)/100})),c=b.filter(x=>x.balance>.004).map(x=>({...x})).sort((a,b)=>b.balance-a.balance),d=b.filter(x=>x.balance<-.004).map(x=>({...x,balance:-x.balance})).sort((a,b)=>b.balance-a.balance),t=[];let i=0,j=0;while(i<d.length&&j<c.length){const a=Math.round(Math.min(d[i].balance,c[j].balance)*100)/100;if(a>0)t.push({from:d[i].name,to:c[j].name,amount:a});d[i].balance=Math.round((d[i].balance-a)*100)/100;c[j].balance=Math.round((c[j].balance-a)*100)/100;if(d[i].balance<=.004)i++;if(c[j].balance<=.004)j++}return t}function calc(){const sub=Math.max(0,n(subtotal.value)),tip=sub*Math.max(0,n(tipPercent.value))/100,tax=sub*Math.max(0,n(taxPercent.value))/100,grand=sub+tip+tax,w=people.map(p=>Math.max(0,n(p.shares))),wt=w.reduce((a,b)=>a+b,0);$('summarySubtotal').textContent=money(sub);$('summaryTip').textContent=money(tip);$('summaryTax').textContent=money(tax);$('summaryGrand').textContent=money(grand);subtotalPrefix.textContent=currency.value.trim()||'$';document.querySelectorAll('.tip-chip').forEach(b=>b.classList.toggle('active',Math.abs(n(b.dataset.tip)-n(tipPercent.value))<.0001));if(wt<=0){perPersonResults.innerHTML='<div class="empty-box">Add at least one positive share to calculate the split.</div>';settlementResults.innerHTML='<div class="empty-box">Settlement instructions will appear after a valid split is calculated.</div>';save();return}const owed=distribute(grand,w);perPersonResults.innerHTML='';people.forEach((p,i)=>{const r=document.createElement('div');r.className='person-result';r.innerHTML=`<div><div class="person-name">${esc(p.name)}</div><div class="person-meta">${w[i].toFixed(2).replace(/\.00$/,'')} share${w[i]===1?'':'s'} · ${(w[i]/wt*100).toFixed(1)}%</div></div><div class="person-amount">${money(owed[i])}</div>`;perPersonResults.appendChild(r)});const tr=settle(owed),paid=people.reduce((s,p)=>s+Math.max(0,n(p.paid)),0);settlementResults.innerHTML='';if(paid<.005)settlementResults.innerHTML='<div class="empty-box">Enter one or more amounts paid to calculate who owes whom.</div>';else{const diff=Math.round((paid-grand)*100)/100;if(Math.abs(diff)>.01){const w=document.createElement('div');w.className='empty-box mb-3';w.innerHTML=paid<grand?`Entered payments total <strong>${money(paid)}</strong>, which is ${money(grand-paid)} less than the calculated bill total.`:`Entered payments total <strong>${money(paid)}</strong>, which is ${money(paid-grand)} more than the calculated bill total.`;settlementResults.appendChild(w)}if(!tr.length&&Math.abs(diff)<=.01){const z=document.createElement('div');z.className='settle-item';z.innerHTML='<i data-lucide="circle-check" class="w-5 h-5 flex-none mt-0.5"></i><div>Everyone is settled. No transfers are needed.</div>';settlementResults.appendChild(z)}else tr.forEach(x=>{const z=document.createElement('div');z.className='settle-item';z.innerHTML=`<i data-lucide="arrow-right-left" class="w-5 h-5 flex-none mt-0.5"></i><div><strong>${esc(x.from)}</strong> pays <strong>${esc(x.to)}</strong> <strong>${money(x.amount)}</strong></div>`;settlementResults.appendChild(z)})}save();lucide.createIcons()}$('addPersonBtn').onclick=()=>{people.push(np());renderPeople();calc()};$('evenSplitBtn').onclick=()=>{people.forEach(p=>p.shares=1);renderPeople();calc()};$('resetAllBtn').onclick=()=>{localStorage.removeItem(K);subtotal.value='100.00';tipPercent.value='20';taxPercent.value='7';currency.value='$';people=[np('Person 1'),np('Person 2')];renderPeople();calc()};[subtotal,tipPercent,taxPercent,currency].forEach(e=>e.oninput=calc);document.querySelectorAll('.tip-chip').forEach(b=>b.onclick=()=>{tipPercent.value=b.dataset.tip;calc()});$('copySummaryBtn').onclick=async()=>{const text=document.body.innerText.includes('Bill Splitter')?`Utiliverse Bill Splitter\nGrand Total: ${$('summaryGrand').textContent}\n\n${perPersonResults.innerText}\n\n${settlementResults.innerText}`:'';try{await navigator.clipboard.writeText(text)}catch{const t=document.createElement('textarea');t.value=text;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove()}const b=$('copySummaryBtn'),o=b.innerHTML;b.innerHTML='<i data-lucide="check" class="w-4 h-4"></i>Copied';lucide.createIcons();setTimeout(()=>{b.innerHTML=o;lucide.createIcons()},1400)};const tt=$('themeToggle'),mi=$('moonIcon'),si=$('sunIcon');function theme(m){const d=m==='dark';document.body.classList.toggle('dark-mode',d);mi.classList.toggle('hidden',d);si.classList.toggle('hidden',!d);localStorage.setItem('utiliverse-theme',d?'dark':'light');lucide.createIcons()}theme(localStorage.getItem('utiliverse-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));tt.onclick=()=>theme(document.body.classList.contains('dark-mode')?'light':'dark');load();renderPeople();calc();lucide.createIcons()})();
+(()=>{
+'use strict';
+const K='utiliverse-bill-splitter-v1';
+const $=id=>document.getElementById(id);
+const subtotal=$('subtotal'),tipPercent=$('tipPercent'),taxPercent=$('taxPercent'),currency=$('currency');
+const peopleList=$('peopleList'),perPersonResults=$('perPersonResults'),settlementResults=$('settlementResults');
+const subtotalPrefix=$('subtotalPrefix');
+const MAX_PEOPLE=100,MAX_SUBTOTAL=1e8,MAX_PERCENT=1000,MAX_SHARE=1000,MAX_PAID=1e9;
+let people=[];
+const n=(v,f=0)=>Number.isFinite(Number(v))?Number(v):f;
+const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');
+const id=()=>crypto.randomUUID?crypto.randomUUID():String(Date.now()+Math.random());
+const money=v=>`${currency.value.trim()||'$'}${Math.abs(v).toFixed(2)}`;
+const moneyHtml=v=>esc(money(v)); // Used for markup; currency symbol is user-entered text.
+function np(name){return{id:id(),name:name||`Person ${people.length+1}`,shares:1,paid:0}}
+function save(){
+  try{localStorage.setItem(K,JSON.stringify({subtotal:subtotal.value,tipPercent:tipPercent.value,taxPercent:taxPercent.value,currency:currency.value,people}))}catch{}
+}
+function load(){
+  try{
+    const s=JSON.parse(localStorage.getItem(K));
+    subtotal.value=s.subtotal??'100.00';tipPercent.value=s.tipPercent??'20';taxPercent.value=s.taxPercent??'7';currency.value=s.currency??'$';
+    if(!Array.isArray(s.people)||!s.people.length)throw 0;
+    people=s.people.slice(0,MAX_PEOPLE).map(p=>({id:p.id||id(),name:String(p.name||'Person').slice(0,40),shares:Math.max(0,n(p.shares,1)),paid:Math.max(0,n(p.paid,0))}));
+  }catch{people=[np('Person 1'),np('Person 2')]}
+}
+function renderPeople(){
+  peopleList.innerHTML='';
+  people.forEach((p,i)=>{
+    const row=document.createElement('div');row.className='person-row';
+    row.innerHTML=`<div class="person-name-field"><label class="label sm:hidden">Name</label><input aria-label="Name of person ${i+1}" class="field nm" type="text" maxlength="40" value="${esc(p.name)}"></div><div><label class="label sm:hidden">Shares</label><input aria-label="Shares for person ${i+1}" class="field sh" type="number" min="0" step="0.25" value="${p.shares}" inputmode="decimal"></div><div><label class="label sm:hidden">Amount Paid</label><input aria-label="Amount paid by person ${i+1}" class="field pd" type="number" min="0" step="0.01" value="${p.paid}" inputmode="decimal"></div><div class="remove-cell"><button aria-label="Remove person ${i+1}" class="btn-danger rm" type="button" title="Remove person"><i data-lucide="trash-2" class="w-4 h-4"></i></button></div>`;
+    row.querySelector('.nm').oninput=e=>{p.name=e.target.value.trim()||`Person ${i+1}`;calc()};
+    row.querySelector('.sh').oninput=e=>{p.shares=n(e.target.value);calc()};
+    row.querySelector('.pd').oninput=e=>{p.paid=n(e.target.value);calc()};
+    row.querySelector('.rm').onclick=()=>{if(people.length>1){people=people.filter(x=>x.id!==p.id);renderPeople();calc()}};
+    peopleList.appendChild(row);
+  });
+  $('addPersonBtn').disabled=people.length>=MAX_PEOPLE;
+  if(window.lucide?.createIcons)lucide.createIcons();
+}
+function distribute(total,w){
+  const cents=Math.round(total*100),wt=w.reduce((a,b)=>a+b,0);
+  if(wt<=0)return w.map(()=>0);
+  const raw=w.map(x=>cents*x/wt),f=raw.map(Math.floor);
+  let r=cents-f.reduce((a,b)=>a+b,0);
+  const ord=raw.map((v,i)=>({i,fr:v-Math.floor(v)})).sort((a,b)=>b.fr-a.fr);
+  for(let k=0;k<r;k++)f[ord[k%ord.length].i]++;
+  return f.map(x=>x/100);
+}
+function settle(owed){
+  const b=people.map((p,i)=>({name:p.name,balance:Math.round((p.paid-owed[i])*100)/100}));
+  const c=b.filter(x=>x.balance>.004).map(x=>({...x})).sort((a,b)=>b.balance-a.balance);
+  const d=b.filter(x=>x.balance<-.004).map(x=>({...x,balance:-x.balance})).sort((a,b)=>b.balance-a.balance);
+  const t=[];let i=0,j=0;
+  while(i<d.length&&j<c.length){
+    const a=Math.round(Math.min(d[i].balance,c[j].balance)*100)/100;
+    if(a>0)t.push({from:d[i].name,to:c[j].name,amount:a});
+    d[i].balance=Math.round((d[i].balance-a)*100)/100;
+    c[j].balance=Math.round((c[j].balance-a)*100)/100;
+    if(d[i].balance<=.004)i++;
+    if(c[j].balance<=.004)j++;
+  }
+  return t;
+}
+function readField(el, max, label, errors){
+  const raw=el.value.trim(),val=Number(raw);
+  const ok=raw!==''&&!el.validity.badInput&&Number.isFinite(val)&&val>=0&&val<=max;
+  el.setAttribute('aria-invalid',String(!ok));
+  if(!ok)errors.push(`${label} must be a finite value between 0 and ${max.toLocaleString('en-US')}.`);
+  return ok?val:0;
+}
+function fail(message){
+  $('calcWarning').textContent=message;$('calcWarning').hidden=false;$('copySummaryBtn').disabled=true;
+  ['summarySubtotal','summaryTip','summaryTax','summaryGrand'].forEach(id=>$(id).textContent='—');
+  perPersonResults.textContent='Correct the entries to calculate each person’s share.';
+  settlementResults.textContent='Settlement instructions will appear after a valid split is calculated.';
+}
+function calc(){
+  const errors=[];
+  const sub=readField(subtotal,MAX_SUBTOTAL,'Subtotal',errors);
+  const tipRate=readField(tipPercent,MAX_PERCENT,'Tip percentage',errors);
+  const taxRate=readField(taxPercent,MAX_PERCENT,'Tax percentage',errors);
+  const shFields=[...peopleList.querySelectorAll('.sh')];
+  const pdFields=[...peopleList.querySelectorAll('.pd')];
+  const weights=shFields.map((el,i)=>readField(el,MAX_SHARE,`Shares for person ${i+1}`,errors));
+  const paidValues=pdFields.map((el,i)=>readField(el,MAX_PAID,`Amount paid by person ${i+1}`,errors));
+  if(errors.length)return fail(errors[0]);
+  const tip=sub*tipRate/100,tax=sub*taxRate/100,grand=sub+tip+tax;
+  const wt=weights.reduce((a,b)=>a+b,0);
+  if(!Number.isFinite(grand)||!Number.isSafeInteger(Math.round(grand*100)))
+    return fail('The bill total is outside the safe cent-precision range.');
+  if(wt<=0)return fail('Assign at least one person a positive share.');
+  // Keep model and on-screen person inputs aligned after validation.
+  people.forEach((p,i)=>{p.shares=weights[i];p.paid=paidValues[i]});
+  const owed=distribute(grand,weights);
+  $('calcWarning').hidden=true;
+  $('copySummaryBtn').disabled=false;
+  subtotalPrefix.textContent=currency.value.trim()||'$';
+  $('summarySubtotal').textContent=money(sub);
+  $('summaryTip').textContent=money(tip);
+  $('summaryTax').textContent=money(tax);
+  $('summaryGrand').textContent=money(grand);
+  document.querySelectorAll('.tip-chip').forEach(b=>b.classList.toggle('active',Math.abs(n(b.dataset.tip)-tipRate)<.0001));
+  perPersonResults.innerHTML='';
+  people.forEach((p,i)=>{
+    const row=document.createElement('div');row.className='person-result';
+    row.innerHTML=`<div><div class="person-name">${esc(p.name)}</div><div class="person-meta">${weights[i].toFixed(2).replace(/\.00$/,'')} share${weights[i]===1?'':'s'} · ${(weights[i]/wt*100).toFixed(1)}%</div></div><div class="person-amount">${moneyHtml(owed[i])}</div>`;
+    perPersonResults.appendChild(row);
+  });
+  const transfers=settle(owed),paid=paidValues.reduce((a,b)=>a+b,0);
+  settlementResults.innerHTML='';
+  if(paid<.005){
+    settlementResults.innerHTML='<div class="empty-box">Enter one or more amounts paid to calculate who owes whom.</div>';
+  }else{
+    const diff=Math.round((paid-grand)*100)/100;
+    if(Math.abs(diff)>.01){
+      const msg=document.createElement('div');msg.className='empty-box mb-3';
+      msg.innerHTML=paid<grand?`Entered payments total <strong>${moneyHtml(paid)}</strong>, which is ${moneyHtml(grand-paid)} less than the calculated bill total.`:`Entered payments total <strong>${moneyHtml(paid)}</strong>, which is ${moneyHtml(paid-grand)} more than the calculated bill total.`;
+      settlementResults.appendChild(msg);
+    }
+    if(!transfers.length&&Math.abs(diff)<=.01){
+      const row=document.createElement('div');row.className='settle-item';
+      row.innerHTML='<i data-lucide="circle-check" class="w-5 h-5 flex-none mt-0.5"></i><div>Everyone is settled. No transfers are needed.</div>';
+      settlementResults.appendChild(row);
+    }else transfers.forEach(x=>{
+      const row=document.createElement('div');row.className='settle-item';
+      row.innerHTML=`<i data-lucide="arrow-right-left" class="w-5 h-5 flex-none mt-0.5"></i><div><strong>${esc(x.from)}</strong> pays <strong>${esc(x.to)}</strong> <strong>${moneyHtml(x.amount)}</strong></div>`;
+      settlementResults.appendChild(row);
+    });
+  }
+  save();
+  if(window.lucide?.createIcons)lucide.createIcons();
+}
+$('addPersonBtn').onclick=()=>{if(people.length<MAX_PEOPLE){people.push(np());renderPeople();calc()}};
+$('evenSplitBtn').onclick=()=>{people.forEach(p=>p.shares=1);renderPeople();calc()};
+$('resetAllBtn').onclick=()=>{
+  try{localStorage.removeItem(K)}catch{}
+  subtotal.value='100.00';tipPercent.value='20';taxPercent.value='7';currency.value='$';
+  people=[np('Person 1'),np('Person 2')];renderPeople();calc();
+};
+[subtotal,tipPercent,taxPercent,currency].forEach(el=>el.oninput=calc);
+document.querySelectorAll('.tip-chip').forEach(b=>b.onclick=()=>{tipPercent.value=b.dataset.tip;calc()});
+$('copySummaryBtn').onclick=async()=>{
+  if($('copySummaryBtn').disabled)return;
+  const text=`Utiliverse Bill Splitter\nGrand Total: ${$('summaryGrand').textContent}\n\n${perPersonResults.innerText}\n\n${settlementResults.innerText}`;
+  let copied=false;
+  try{await navigator.clipboard.writeText(text);copied=true}catch{
+    const t=document.createElement('textarea');t.value=text;document.body.appendChild(t);t.select();
+    copied=document.execCommand('copy');t.remove();
+  }
+  const b=$('copySummaryBtn'),old=b.innerHTML;
+  b.textContent=copied?'Copied':'Copy unavailable';
+  setTimeout(()=>{b.innerHTML=old;if(window.lucide?.createIcons)lucide.createIcons()},1400);
+};
+const tt=$('themeToggle'),mi=$('moonIcon'),si=$('sunIcon');
+function theme(m){
+  const dark=m==='dark';document.body.classList.toggle('dark-mode',dark);
+  mi.classList.toggle('hidden',dark);si.classList.toggle('hidden',!dark);
+  localStorage.setItem('utiliverse-theme',dark?'dark':'light');
+  if(window.lucide?.createIcons)lucide.createIcons();
+}
+theme(localStorage.getItem('utiliverse-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+tt.onclick=()=>theme(document.body.classList.contains('dark-mode')?'light':'dark');
+load();renderPeople();calc();
+})();
 </script>
 </body>
 </html>
