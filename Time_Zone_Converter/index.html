@@ -78,6 +78,9 @@ body.light-mode .source-links a{color:#4f46e5}
   .title-icon{width:38px;height:38px}
   .method-grid,.related-grid{grid-template-columns:1fr}
 }
+.preset-strip{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin:12px 0 4px}
+.preset-strip .chip{min-height:38px;white-space:normal;text-align:left}
+button:disabled{opacity:.48;cursor:not-allowed}
 /* First-answer conversion: clear source, destination, and date-specific difference. */
 .direct-convert{margin-top:16px;border:1px solid rgba(129,140,248,.40);border-radius:17px;background:linear-gradient(135deg,rgba(99,102,241,.13),rgba(124,58,237,.06));padding:18px}
 .direct-header{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
@@ -120,6 +123,11 @@ body.light-mode .direct-difference{color:#4338ca}
 <button id="convertBtn" class="btn primary" type="button">Convert Time</button>
 </div>
 <div class="actions"><button id="nowBtn" class="btn" type="button">Use Now</button><button id="prevDayBtn" class="btn" type="button">−1 Day</button><button id="nextDayBtn" class="btn" type="button">+1 Day</button><div class="seg"><button id="format12" class="active" type="button">12-hour</button><button id="format24" type="button">24-hour</button></div><select id="ambiguitySelect" class="select" style="display:none;max-width:230px"><option value="earlier">Earlier occurrence</option><option value="later">Later occurrence</option></select></div>
+<div class="preset-strip" aria-label="Try date-specific time zone examples">
+  <span class="small">Try an example:</span>
+  <button class="chip" data-zone-example="ny-london" type="button">New York → London · March DST gap</button>
+  <button class="chip" data-zone-example="tokyo-la" type="button">Tokyo → Los Angeles · previous day</button>
+</div>
 <div id="message" class="msg" role="status"></div>
 <div class="direct-convert" aria-labelledby="directHeading">
   <div class="direct-header"><div><h3 id="directHeading">Convert to another time zone</h3><p>Select the destination to see its local date, time, and offset difference.</p></div><span class="badge">Same instant · different local clocks</span></div>
@@ -142,6 +150,7 @@ body.light-mode .direct-difference{color:#4338ca}
 
 <section class="article">
 <h2>How to convert between two time zones</h2>
+<p>The example buttons populate both zones and a fixed historical date so you can verify results. For example, New York at 9:00 AM on March 15, 2026 corresponds to London at 1:00 PM because the two regions switch daylight saving on different dates. Tokyo at 9:00 AM on January 15, 2026 corresponds to Los Angeles at 4:00 PM on January 14. Check the displayed date as well as the clock.</p>
 <p>Choose the starting time zone, date, and local clock time, then enter a destination time zone in the <strong>Convert to another time zone</strong> box. The result shows the destination's local date and clock time plus how far ahead or behind it is in UTC offset on that exact date. This matters when a meeting crosses midnight or when the two regions switch daylight saving on different dates.</p>
 <p>Use the larger comparison timeline when you need several locations at once. A time-zone conversion changes the local clock reading for the same moment; it is different from <a href="/Military_Time_Converter/">converting 12-hour to 24-hour clock notation</a> or <a href="/Time_Unit_Converter/">converting a duration between hours and minutes</a>.</p>
 <h2>About the Utiliverse Time Zone Converter</h2>
@@ -268,7 +277,15 @@ function offset(ts,z){ts=Math.floor(ts/60000)*60000;const p=parts(ts,z);return M
 function same(a,b){return a.year===b.year&&a.month===b.month&&a.day===b.day&&a.hour===b.hour&&a.minute===b.minute}
 function resolve(t,z){const w=Date.UTC(t.year,t.month-1,t.day,t.hour,t.minute),offs=new Set();for(let h=-42;h<=42;h+=6)offs.add(offset(w+h*3600000,z));const c=[];offs.forEach(o=>{const x=w-o*60000;if(same(parts(x,z),t))c.push(x)});return[...new Set(c)].sort((a,b)=>a-b)}
 function parse(){const z=$("sourceZone").value.trim(),d=$("sourceDate").value,t=$("sourceTime").value;if(!validZone(z))throw Error("Choose a valid supported time zone.");if(!d||!t)throw Error("Choose both a date and local time.");const[y,m,day]=d.split("-").map(Number),[h,min]=t.split(":").map(Number);return{z,t:{year:y,month:m,day,hour:h,minute:min}}}
-let instant=Date.now(),compare=[],format24=false,amb=[],best=null;
+let instant=Date.now(),compare=[],format24=false,amb=[],best=null,sourceValid=true;
+function invalidateConversion(){
+  sourceValid=false;
+  $("summaryGrid").replaceChildren();
+  $("timeline").replaceChildren();
+  $("shareText").textContent="No valid meeting time to copy. Correct the source input and convert again.";
+  $("instantUtc").textContent="";
+  ["bestBtn","copyBtn","icsBtn"].forEach(id=>$(id).disabled=true);
+}
 function clearTarget(message){$("targetClock").textContent="—";$("targetDate").textContent=message;$("targetDifference").textContent="Choose a valid source time and destination to see the difference."}
 function diffLabel(minutes){
  if(minutes===0)return"Both zones have the same UTC offset on this date.";
@@ -277,6 +294,7 @@ function diffLabel(minutes){
  return `The destination is ${qty} ${ahead?"ahead of":"behind"} the source zone on this date.`;
 }
 function renderTarget(){
+ if(!sourceValid){clearTarget("First enter a valid source date and time.");return}
  const z=$("targetZone").value.trim();
  if(!validZone(z)){clearTarget("Choose a supported time zone (for example Europe/London).");return}
  $("targetClock").textContent=clock(instant,z);
@@ -289,7 +307,7 @@ function msg(type="",text=""){const e=$("message");e.className="msg"+(type?" "+t
 function dateInput(ts,z){const p=parts(ts,z);return`${p.year}-${String(p.month).padStart(2,"0")}-${String(p.day).padStart(2,"0")}`}
 function timeInput(ts,z){const p=parts(ts,z);return`${String(p.hour).padStart(2,"0")}:${String(p.minute).padStart(2,"0")}`}
 function sync(){const z=validZone($("sourceZone").value.trim())?$("sourceZone").value.trim():detected;$("sourceZone").value=z;$("sourceDate").value=dateInput(instant,z);$("sourceTime").value=timeInput(instant,z);compare[0]=z}
-function convert(){try{msg();const r=parse(),c=resolve(r.t,r.z);amb=c;if(!c.length){$("ambiguitySelect").style.display="none";msg("error","That local clock time does not exist in this zone, usually because of a daylight-saving or civil-time transition.");clearTarget("The source date/time does not exist in this zone.");return}$("ambiguitySelect").style.display=c.length>1?"block":"none";instant=c.length>1&&$("ambiguitySelect").value==="later"?c[c.length-1]:c[0];if(c.length>1)msg("warn","This local time occurs more than once. Choose the earlier or later occurrence.");compare[0]=r.z;normalize();render()}catch(e){msg("error",e.message);clearTarget("Enter a valid source zone, date and time.")}}
+function convert(){try{msg();const r=parse(),c=resolve(r.t,r.z);amb=c;if(!c.length){$("ambiguitySelect").style.display="none";msg("error","That local clock time does not exist in this zone, usually because of a daylight-saving or civil-time transition.");invalidateConversion();clearTarget("The source date/time does not exist in this zone.");return}$("ambiguitySelect").style.display=c.length>1?"block":"none";instant=c.length>1&&$("ambiguitySelect").value==="later"?c[c.length-1]:c[0];if(c.length>1)msg("warn","This local time occurs more than once. Choose the earlier or later occurrence.");compare[0]=r.z;sourceValid=true;normalize();render()}catch(e){amb=[];$("ambiguitySelect").style.display="none";msg("error",e.message);invalidateConversion();clearTarget("Enter a valid source zone, date and time.")}}
 function clock(ts,z){return new Intl.DateTimeFormat("en-US",{timeZone:z,hour:"numeric",minute:"2-digit",hour12:!format24}).format(new Date(ts))}
 function shortDate(ts,z){return new Intl.DateTimeFormat("en-US",{timeZone:z,weekday:"short",month:"short",day:"numeric"}).format(new Date(ts))}
 function abbr(ts,z){const p=new Intl.DateTimeFormat("en-US",{timeZone:z,hour:"numeric",timeZoneName:"short"}).formatToParts(new Date(ts)).find(x=>x.type==="timeZoneName");return p?p.value:""}
@@ -303,7 +321,7 @@ function renderTimeline(){const start=instant-6*3600000,ts=Array.from({length:13
 compare.forEach((z,zi)=>{h+=`<tr><th class="zone"><div class="zone-top">${friendly(z)}</div><div class="zone-sub">${z} · ${abbr(instant,z)} · ${offLabel(instant,z)}</div><div class="zone-tools">${zi?`<button class="zt" data-a="up" data-i="${zi}">↑ Up</button><button class="zt" data-a="down" data-i="${zi}">↓ Down</button><button class="zt" data-a="remove" data-i="${zi}">× Remove</button>`:'<span class="small">Source zone</span>'}</div></th>`;ts.forEach((x,i)=>{const p=parts(x,z),work=p.hour>=9&&p.hour<17;h+=`<td class="hour ${work?"work":""} ${i===6?"sel":""} ${i===bi?"best":""}" data-ts="${x}"><div class="hm">${clock(x,z)}</div><div class="hd">${new Intl.DateTimeFormat("en-US",{timeZone:z,month:"short",day:"numeric"}).format(new Date(x))}</div><div class="hday">${new Intl.DateTimeFormat("en-US",{timeZone:z,weekday:"short"}).format(new Date(x))}</div></td>`});h+="</tr>"});h+="</tbody>";$("timeline").innerHTML=h;
 document.querySelectorAll(".hour").forEach(c=>c.onclick=()=>{instant=+c.dataset.ts;sync();msg();render()});document.querySelectorAll(".zt").forEach(b=>b.onclick=()=>{const i=+b.dataset.i,a=b.dataset.a;if(a==="remove")compare.splice(i,1);else{const j=i+(a==="up"?-1:1);if(j>0&&j<compare.length)[compare[i],compare[j]]=[compare[j],compare[i]]}render()})}
 function renderShare(){const lines=compare.map(z=>`${friendly(z)}: ${new Intl.DateTimeFormat("en-US",{timeZone:z,weekday:"short",year:"numeric",month:"short",day:"numeric",hour:"numeric",minute:"2-digit",hour12:!format24,timeZoneName:"short"}).format(new Date(instant))} (${offLabel(instant,z)})`);$("shareText").textContent=lines.join("\n");$("instantUtc").textContent="UTC instant: "+new Date(instant).toISOString().replace(".000","")}
-function render(){normalize();renderSummary();renderTimeline();renderShare();renderTarget()}
+function render(){if(!sourceValid)return;["bestBtn","copyBtn","icsBtn"].forEach(id=>$(id).disabled=false);normalize();renderSummary();renderTimeline();renderShare();renderTarget()}
 function shiftCalendarDay(delta){
  const [year,month,day]=$("sourceDate").value.split("-").map(Number);
  if(!year||!month||!day)return;
@@ -311,7 +329,23 @@ function shiftCalendarDay(delta){
  $("sourceDate").value=d.toISOString().slice(0,10);
  convert();
 }
-$("convertBtn").onclick=convert;$("nowBtn").onclick=()=>{instant=Math.floor(Date.now()/60000)*60000;sync();msg();render()};$("prevDayBtn").onclick=()=>shiftCalendarDay(-1);$("nextDayBtn").onclick=()=>shiftCalendarDay(1);$("sourceZone").onchange=convert;$("sourceDate").onchange=convert;$("sourceTime").onchange=convert;$("ambiguitySelect").onchange=()=>{if(amb.length>1){instant=$("ambiguitySelect").value==="later"?amb[amb.length-1]:amb[0];render()}};
+const ZONE_EXAMPLES = {
+  "ny-london": {source:"America/New_York",date:"2026-03-15",time:"09:00",target:"Europe/London"},
+  "tokyo-la": {source:"Asia/Tokyo",date:"2026-01-15",time:"09:00",target:"America/Los_Angeles"}
+};
+document.querySelectorAll("[data-zone-example]").forEach(button=>{
+  button.addEventListener("click",()=>{
+    const sample=ZONE_EXAMPLES[button.dataset.zoneExample];
+    if(!sample||!validZone(sample.source)||!validZone(sample.target)){
+      msg("error","An example time zone is not supported by this browser.");return
+    }
+    $("sourceZone").value=sample.source;$("sourceDate").value=sample.date;
+    $("sourceTime").value=sample.time;$("targetZone").value=sample.target;
+    $("ambiguitySelect").value="earlier";
+    convert();
+  });
+});
+$("convertBtn").onclick=convert;$("nowBtn").onclick=()=>{instant=Math.floor(Date.now()/60000)*60000;sync();sourceValid=true;msg();render()};$("prevDayBtn").onclick=()=>shiftCalendarDay(-1);$("nextDayBtn").onclick=()=>shiftCalendarDay(1);$("sourceZone").onchange=convert;$("sourceDate").onchange=convert;$("sourceTime").onchange=convert;$("ambiguitySelect").onchange=()=>{if(amb.length>1){instant=$("ambiguitySelect").value==="later"?amb[amb.length-1]:amb[0];render()}};
 $("format12").onclick=()=>{format24=false;$("format12").classList.add("active");$("format24").classList.remove("active");render()};$("format24").onclick=()=>{format24=true;$("format24").classList.add("active");$("format12").classList.remove("active");render()};
 $("targetZone").addEventListener("change",renderTarget);$("targetZone").addEventListener("input",renderTarget);$("addZoneBtn").onclick=()=>add($("addZoneInput").value);$("addZoneInput").onkeydown=e=>{if(e.key==="Enter")add(e.target.value)};$("bestBtn").onclick=()=>{instant=best;sync();msg("info","Moved to the strongest typical work-hour overlap in the visible window.");render()};
 $("copyBtn").onclick=async()=>{try{await navigator.clipboard.writeText($("shareText").textContent);$("copyStatus").textContent="Copied";setTimeout(()=>$("copyStatus").textContent="",1500)}catch{$("copyStatus").textContent="Copy unavailable"}};
