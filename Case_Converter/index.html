@@ -552,7 +552,7 @@ customer-order-42</code>
 const descriptions = {
     upper:"UPPERCASE converts cased letters to uppercase while preserving punctuation, spaces and line breaks.",
     lower:"lowercase converts cased letters to lowercase while preserving punctuation, spaces and line breaks.",
-    title:"Title Case capitalizes major words and keeps a practical set of common English small words lowercase in the middle.",
+    title:"Title Case capitalizes major words, including the first and last word of each sentence or line. Common English small words stay lowercase in the middle.",
     sentence:"Sentence case lowercases text first, then capitalizes likely sentence and line starts.",
     capitalized:"Capitalized Case uppercases the first cased letter of every detected word and lowercases the rest.",
     alternating:"aLtErNaTiNg case alternates lowercase and uppercase across detected letters while preserving other characters.",
@@ -636,14 +636,22 @@ const descriptions = {
 
   function titleCase(text) {
     const smallWords = new Set(["a","an","the","and","or","but","nor","as","at","by","for","in","of","on","per","to","via","vs","with"]);
-    const matches = [...text.matchAll(/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu)];
+    const wordPattern = /[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu;
+    const matches = [...text.matchAll(wordPattern)];
     if (!matches.length) return text;
+    const boundary = /[.!?:;\n]/u;
     let index = 0;
     return transformWordsPreserving(text, word => {
-      const lower = word.toLowerCase();
-      const isEdge = index === 0 || index === matches.length - 1;
+      const current = matches[index];
+      const previous = matches[index - 1];
+      const next = matches[index + 1];
+      const before = previous ? text.slice(previous.index + previous[0].length, current.index) : "";
+      const after = next ? text.slice(current.index + current[0].length, next.index) : "";
+      const firstInSegment = !previous || boundary.test(before);
+      const lastInSegment = !next || boundary.test(after);
       index++;
-      return !isEdge && smallWords.has(lower) ? lower : capWord(word);
+      const lower = word.toLowerCase();
+      return !firstInSegment && !lastInSegment && smallWords.has(lower) ? lower : capWord(word);
     });
   }
 
@@ -782,8 +790,8 @@ const descriptions = {
 
   $("sampleBtn").addEventListener("click", () => {
     input.value = `the quick brown fox jumps over the lazy dog.
-UTILIVERSE MAKES BROWSER-BASED TOOLS SIMPLE.
-customer order notification preference`;
+the rise of ai: the next chapter
+UTILIVERSE MAKES BROWSER-BASED TOOLS SIMPLE.`;
     update();
     input.focus();
   });
