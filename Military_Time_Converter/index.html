@@ -90,6 +90,7 @@ h1{font-size:clamp(38px,5vw,58px);line-height:1.04;margin:10px 0 14px;font-weigh
 .tag{display:inline-flex;margin-top:10px;border:1px solid rgba(52,211,153,.28);background:rgba(52,211,153,.08);color:#a7f3d0;border-radius:999px;padding:6px 9px;font-size:11px;font-weight:850}
 
 .quick{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
+.quick-explanation{margin-top:14px;color:var(--muted);font-size:12px;font-weight:750}
 .chip{border:1px solid var(--border);background:#0f172a;color:#94a3b8;border-radius:999px;padding:7px 10px;font-size:11px;font-weight:800;cursor:pointer}
 .chip:hover{border-color:#6366f1;color:#c7d2fe}
 
@@ -288,6 +289,14 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
       <button class="chip example-military" data-value="1430" type="button">1430</button>
       <button class="chip example-military" data-value="1730" type="button">1730</button>
       <button class="chip example-military" data-value="2359" type="button">2359</button>
+    </div>
+
+    <div class="quick-explanation">Try converting regular time to military time:</div>
+    <div class="quick" aria-label="Regular-time conversion examples">
+      <button class="chip example-regular" data-time="2:00" data-period="PM" type="button">2:00 PM → 1400</button>
+      <button class="chip example-regular" data-time="8:15" data-period="PM" type="button">8:15 PM → 2015</button>
+      <button class="chip example-regular" data-time="12:00" data-period="AM" type="button">12:00 AM → 0000</button>
+      <button class="chip example-regular" data-time="12:00" data-period="PM" type="button">12:00 PM → 1200</button>
     </div>
 
     <div class="stats">
@@ -713,6 +722,15 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
     btn.addEventListener("click",() => {
       setMode("militaryToRegular");
       $("timeInput").value = btn.dataset.value;
+      update();
+    });
+  });
+
+  document.querySelectorAll(".example-regular").forEach(btn => {
+    btn.addEventListener("click", () => {
+      setMode("regularToMilitary");
+      $("timeInput").value = btn.dataset.time;
+      $("periodSelect").value = btn.dataset.period;
       update();
     });
   });
