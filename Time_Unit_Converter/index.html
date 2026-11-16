@@ -307,6 +307,9 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
           <button class="chip preset" data-value="1" data-unit="week" data-to-unit="millisecond" type="button">1 week → ms</button>
           <button class="chip preset" data-value="300000" data-unit="millisecond" data-to-unit="minute" type="button">300,000 ms → min</button>
           <button class="chip preset" data-value="29000" data-unit="second" data-to-unit="hour" type="button">29,000 sec → hr</button>
+          <button class="chip preset" data-value="90" data-unit="minute" data-to-unit="hour" type="button">90 min → hr</button>
+          <button class="chip preset" data-value="2.5" data-unit="hour" data-to-unit="minute" type="button">2.5 hr → min</button>
+          <button class="chip preset" data-value="3" data-unit="week" data-to-unit="day" type="button">3 weeks → days</button>
       </div>
 
       <div class="right-tools">
@@ -320,6 +323,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
           </select>
         </div>
         <button id="copyBtn" class="btn" type="button">Copy Result</button>
+        <button id="shareBtn" class="btn" type="button" aria-label="Copy a link to this conversion">Copy Share Link</button>
         <button id="resetBtn" class="btn" type="button">Reset</button>
       </div>
     </div>
@@ -333,6 +337,7 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
       </table>
     </div>
 
+    <div class="note"><strong>Tip:</strong> Use the example buttons for common conversions, or select any units and choose <strong>Copy Share Link</strong> to share a link that opens with your chosen value and units. Extremely large or small results are flagged instead of presented as misleading zeroes or infinities.</div>
     <div class="note"><strong>Conversion basis:</strong> 1 minute = 60 seconds, 1 hour = 60 minutes, 1 day = 24 hours, and 1 week = 7 days. For longer calendar-named durations, this converter uses the average Gregorian year of <strong>365.2425 days</strong>; one average month is one-twelfth of that year, one decade is 10 years, and one century is 100 years.</div>
   </section>
   <p class="local-processing-note">Browser-based calculation: time-unit conversions and formatting are performed locally by this tool and the values you enter are not submitted to a Utiliverse processing server. The page itself still loads interface and advertising resources from external providers.</p>
@@ -618,7 +623,15 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
 
   function convert(value, fromKey, toKey) {
     const from = unitMap[fromKey], to = unitMap[toKey];
-    return value * from.seconds / to.seconds;
+    // Ratio-first avoids an overflowing intermediate seconds value when the
+    // final conversion is still representable (e.g. huge years -> centuries).
+    return value * (from.seconds / to.seconds);
+  }
+
+  function resultRangeIssue(sourceValue, convertedValue) {
+    if (!Number.isFinite(convertedValue)) return "Result exceeds the browser's numeric range. Try a smaller duration or a larger destination unit.";
+    if (sourceValue !== 0 && convertedValue === 0) return "Result is too small for browser number precision. Choose a smaller destination unit.";
+    return "";
   }
 
   function formatNumber(value) {
@@ -688,21 +701,23 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
     }
 
     const result = convert(value, fromKey, toKey);
-    const formatted = formatNumber(result);
+    const issue = resultRangeIssue(value, result);
+    const formatted = issue ? "" : formatNumber(result);
 
     $("resultInput").value = formatted;
-    $("resultValue").textContent = `${formatted} ${to.symbol}`;
-    $("resultEquation").textContent = Number.isFinite(result)
-      ? `${formatNumber(value)} ${pluralLabel(from,value)} = ${formatted} ${pluralLabel(to,result)}`
-      : "Result exceeds the finite numeric range supported by this browser calculation.";
+    $("resultValue").textContent = issue ? "—" : `${formatted} ${to.symbol}`;
+    $("resultEquation").textContent = issue || `${formatNumber(value)} ${pluralLabel(from,value)} = ${formatted} ${pluralLabel(to,result)}`;
     $("durationBreakdown").textContent = readableDuration(value * from.seconds);
 
     $("conversionTable").innerHTML = UNITS.map(u => {
       const converted = convert(value, fromKey, u.key);
+      const tableValue = resultRangeIssue(value, converted)
+        ? (Number.isFinite(converted) ? "Below range" : "Out of range")
+        : formatNumber(converted);
       return `<tr class="${u.key===toKey?"active-row":""}">
         <td>${u.label} (${u.symbol})</td>
         <td>${u.definition}</td>
-        <td class="value">${formatNumber(converted)}</td>
+        <td class="value">${tableValue}</td>
       </tr>`;
     }).join("");
   }
@@ -769,8 +784,9 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
     const to = unitMap[$("toUnit").value];
     const result = convert(value, from.key, to.key);
 
-    if (!Number.isFinite(result)) {
-      $("status").textContent = "Result is outside the finite numeric range.";
+    const issue = resultRangeIssue(value, result);
+    if (issue) {
+      $("status").textContent = issue;
       return;
     }
 
@@ -780,6 +796,48 @@ No visible placeholder box or reserved ad space is rendered before ad code is in
       await copyText(text);
       $("status").textContent = "Result copied.";
       setTimeout(() => $("status").textContent = "", 1500);
+    } catch {
+      $("status").textContent = "Copy unavailable.";
+    }
+  });
+
+  // Links encode only the three conversion inputs (never user tracking parameters).
+  // Ignore malformed or non-finite values to avoid injecting misleading state.
+  const params = new URLSearchParams(window.location.search);
+  const linkedValue = params.get("value");
+  const linkedFrom = params.get("from");
+  const linkedTo = params.get("to");
+  if (linkedValue !== null && linkedValue.length <= 40 &&
+      /^[+-]?(?:\d+\.?\d*|\.\d+)(?:e[+-]?\d+)?$/i.test(linkedValue) &&
+      Number.isFinite(Number(linkedValue)) &&
+      Object.prototype.hasOwnProperty.call(unitMap, linkedFrom) &&
+      Object.prototype.hasOwnProperty.call(unitMap, linkedTo)) {
+    $("valueInput").value = linkedValue;
+    $("fromUnit").value = linkedFrom;
+    $("toUnit").value = linkedTo;
+  }
+
+  $("shareBtn").addEventListener("click", async () => {
+    const raw = $("valueInput").value;
+    const value = Number(raw);
+    if (!raw.trim() || !Number.isFinite(value)) {
+      $("status").textContent = "Enter a valid value first.";
+      return;
+    }
+    const fromKey = $("fromUnit").value;
+    const toKey = $("toUnit").value;
+    const issue = resultRangeIssue(value, convert(value, fromKey, toKey));
+    if (issue) {
+      $("status").textContent = issue;
+      return;
+    }
+    const url = new URL("https://utiliverse.app/Time_Unit_Converter/");
+    url.searchParams.set("value", raw);
+    url.searchParams.set("from", fromKey);
+    url.searchParams.set("to", toKey);
+    try {
+      await copyText(url.toString());
+      $("status").textContent = "Share link copied.";
     } catch {
       $("status").textContent = "Copy unavailable.";
     }
