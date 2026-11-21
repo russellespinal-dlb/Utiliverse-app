@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://utiliverse.app/</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-11-20</lastmod>
   </url>
   <url>
     <loc>https://utiliverse.app/Mortgage_Payoff_Calculator/</loc>
@@ -292,6 +292,7 @@
   </url>
   <url>
   <loc>https://utiliverse.app/Tools.html</loc>
+    <lastmod>2026-11-20</lastmod>
   </url>
   <url>
     <loc>https://utiliverse.app/Password_Strength_Analyzer/</loc>
@@ -299,5 +300,9 @@
   <url>
     <loc>https://utiliverse.app/Case_Converter/</loc>
     <lastmod>2026-11-15</lastmod>
+  </url>
+  <url>
+    <loc>https://utiliverse.app/PowerShell_Academy/</loc>
+    <lastmod>2026-11-20</lastmod>
   </url>
 </urlset>
