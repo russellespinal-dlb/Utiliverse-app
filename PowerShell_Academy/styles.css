@@ -13,3 +13,27 @@ label{display:block;font-size:.81rem;font-weight:790;margin-bottom:6px;color:var
 @media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-terminal{max-width:640px}.app-layout{grid-template-columns:1fr}.side-panel{grid-template-columns:repeat(2,minmax(0,1fr))}.side-panel .side-card:last-child{grid-column:span 2}.editorial-grid{grid-template-columns:1fr}}
 @media(max-width:640px){.container{width:min(100% - 24px,1190px)}.site-header{height:62px}.header-inner{gap:9px}.brand{font-size:1.03rem}.brand-mark{height:31px;width:31px}.site-nav{gap:8px}.site-nav a{font-size:.69rem}.site-nav a:last-child{display:none}.free-label{display:none}.theme-toggle{height:34px;width:34px}.hero{padding:34px 0 39px}.hero h1{font-size:clamp(2.25rem,10vw,3.5rem)}.lede{font-size:1rem}.term-body{padding:15px;font-size:.72rem}.safety-banner{margin-top:-13px}.panel{padding:18px 15px}.tab-bar{padding:8px;gap:3px}.tab{padding:9px 10px;font-size:.72rem}.section-head{flex-direction:column}.progress-block{text-align:left;width:100%}.field-row,.lab-grid,.builder-grid,.lesson-grid,.side-panel{grid-template-columns:1fr}.side-panel .side-card:last-child{grid-column:auto}.lesson-detail{padding:16px}.result-head{align-items:flex-start;flex-direction:column}.footer-inner{flex-direction:column;text-align:center}.footer-inner>div{justify-content:center}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+
+/* Version 1.1: discoverable beginner commands and accessible educational FAQ */
+.quick-start{border:1px solid var(--border);background:var(--surface);border-radius:22px;box-shadow:0 1px 2px rgba(0,0,0,.025);padding:26px;margin-bottom:22px}
+.quick-start h2{margin:8px 0 10px}
+.quick-intro,.faq-intro{color:var(--muted);font-size:.88rem;line-height:1.75;max-width:850px}
+.quick-intro{margin:0 0 20px}
+.faq-intro{margin:-6px 0 16px}
+.quick-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.quick-card{background:var(--surface2);border:1px solid var(--border);border-radius:15px;padding:17px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.quick-command-name{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.quick-command-name code{color:var(--accent);font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.82rem;font-weight:800}
+.quick-command-name span{color:var(--muted);font-size:.59rem;font-weight:760;letter-spacing:.035em}
+.quick-card h3{font-size:.95rem;margin:0}
+.quick-card p{color:var(--muted);font-size:.79rem;line-height:1.65;margin:0;flex:1}
+.quick-card .code-block{font-size:.7rem;line-height:1.55;padding:11px}
+.quick-card button{width:100%;text-align:center;font-size:.73rem;padding:9px 10px}
+.faq details p code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;color:var(--accent);font-size:.96em}
+.faq details strong{color:var(--ink)}
+.faq details .code-block{margin:13px 0 4px;font-size:.76rem;color:#e2e8f0}
+.faq details summary{list-style-position:outside;padding:2px 4px}
+.faq details summary:focus-visible{outline:2px solid var(--focus);outline-offset:5px;border-radius:4px}
+@media(max-width:900px){.quick-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.quick-start{padding:20px 16px}.quick-grid{grid-template-columns:1fr}.quick-card{padding:16px}}

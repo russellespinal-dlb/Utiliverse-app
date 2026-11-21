@@ -106,6 +106,20 @@
     if(copy)copyText(c.example,copy);else{$('clinicEditor').value=c.example;switchTab('clinic');$('clinicStatus').textContent='Example loaded locally. Select Review script for educational findings.';}
   });renderCommands();
 
+  // Quick Start links open the matching command in the existing reference panel.
+  // No code is executed; the curated reference is filtered locally.
+  document.querySelectorAll('[data-quick-command]').forEach(button => {
+    button.addEventListener('click', () => {
+      const command = button.dataset.quickCommand;
+      if (!PS_COMMANDS.some(item => item.name === command)) return;
+      $('commandGroup').value = 'all';
+      $('commandSearch').value = command;
+      renderCommands();
+      switchTab('reference');
+      $('commandSearch').focus({preventScroll:true});
+    });
+  });
+
   $('exerciseSelect').innerHTML=PS_EXERCISES.map(e=>`<option value="${escapeHtml(e.id)}">${escapeHtml(e.title)} · ${escapeHtml(e.difficulty)}</option>`).join('');
   function selectExercise(){
     const x=PS_EXERCISES.find(e=>e.id===$('exerciseSelect').value); if(!x)return;

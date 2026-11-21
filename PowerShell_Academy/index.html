@@ -93,7 +93,96 @@
         </aside>
       </div>
       <section class="editorial" aria-labelledby="whatYouLearn"><div class="eyebrow">HOW TO USE THE ACADEMY</div><h2 id="whatYouLearn">Learn the concept. Check the reference. Practice safely.</h2><div class="editorial-grid"><article><h3>1. Learn the object pipeline</h3><p>Start with core commands, objects, filtering, and functions. The shortest exercises build confidence before you work with complex administration tasks.</p></article><article><h3>2. Verify with Microsoft Learn</h3><p>Use curated reference links to confirm command syntax, module-specific parameters, supported versions, and authentication requirements before running commands elsewhere.</p></article><article><h3>3. Practice with limits you can trust</h3><p>The practice lab evaluates only supported read-only exercise shapes against fictional data. Script Clinic highlights selected patterns without pretending to execute or fully parse your code.</p></article></div></section>
-      <section class="faq"><h2>Frequently asked questions</h2><details><summary>Does this site run PowerShell commands?</summary><p>No. It recognizes a limited set of practice exercise patterns and displays simulated results. Real PowerShell execution requires installing PowerShell on your own trusted machine or using a properly managed environment.</p></details><details><summary>Can I connect to my Microsoft 365 tenant?</summary><p>No. The site has no Microsoft sign-in, backend, or Graph API access. Exchange, Teams, and Graph labs use fictional records, and generated commands are examples to verify before real use.</p></details><details><summary>Can Script Clinic confirm that my script is safe?</summary><p>No. It provides limited, educational pattern-based warnings and cannot guarantee correctness or safety. Use Microsoft PSScriptAnalyzer, manual review, least-privilege access, and an isolated test environment for real scripts.</p></details></section>
+      <section class="quick-start" aria-labelledby="quickStartHeading">
+  <div class="eyebrow">POWERSHELL QUICK START</div>
+  <h2 id="quickStartHeading">Five commands worth learning first</h2>
+  <p class="quick-intro">Start with these everyday, read-only examples. Select a command to open its reference, see the explanation, and find the official Microsoft documentation. What is available depends on your installed PowerShell version and operating system.</p>
+  <div class="quick-grid">
+    <article class="quick-card">
+      <div class="quick-command-name"><code>Get-Help</code><span>READ-ONLY EXAMPLE</span></div>
+      <h3>Find built-in help</h3>
+      <p>Read parameter details and worked examples for a command.</p>
+      <pre class="code-block"><code>Get-Help Get-Process -Examples</code></pre>
+      <button class="outline" type="button" data-quick-command="Get-Help">Explore Get-Help in Command Explorer →</button>
+    </article>
+<article class="quick-card">
+      <div class="quick-command-name"><code>Get-Command</code><span>READ-ONLY EXAMPLE</span></div>
+      <h3>Discover commands</h3>
+      <p>Search commands available in your installed modules and session.</p>
+      <pre class="code-block"><code>Get-Command -Name Get-Service</code></pre>
+      <button class="outline" type="button" data-quick-command="Get-Command">Explore Get-Command in Command Explorer →</button>
+    </article>
+<article class="quick-card">
+      <div class="quick-command-name"><code>Get-Process</code><span>READ-ONLY EXAMPLE</span></div>
+      <h3>Explore running processes</h3>
+      <p>See process objects, then select properties you want to inspect.</p>
+      <pre class="code-block"><code>Get-Process | Select-Object -First 3 Name, CPU</code></pre>
+      <button class="outline" type="button" data-quick-command="Get-Process">Explore Get-Process in Command Explorer →</button>
+    </article>
+<article class="quick-card">
+      <div class="quick-command-name"><code>Get-Service</code><span>READ-ONLY EXAMPLE</span></div>
+      <h3>Check service status</h3>
+      <p>Examine services on a supported host, commonly Windows.</p>
+      <pre class="code-block"><code>Get-Service | Select-Object -First 3 Name, Status</code></pre>
+      <button class="outline" type="button" data-quick-command="Get-Service">Explore Get-Service in Command Explorer →</button>
+    </article>
+<article class="quick-card">
+      <div class="quick-command-name"><code>Get-Member</code><span>READ-ONLY EXAMPLE</span></div>
+      <h3>Understand object properties</h3>
+      <p>Find the members and methods available on pipeline objects.</p>
+      <pre class="code-block"><code>Get-Process | Get-Member</code></pre>
+      <button class="outline" type="button" data-quick-command="Get-Member">Explore Get-Member in Command Explorer →</button>
+    </article>
+  </div>
+</section>
+      <section class="faq" aria-labelledby="powershellFaqHeading">
+  <div class="eyebrow">POWERSHELL ESSENTIALS</div>
+  <h2 id="powershellFaqHeading">Frequently asked questions</h2>
+  <p class="faq-intro">Answers to common PowerShell questions, from foundational concepts to Microsoft 365 administration.</p>
+
+  <details>
+    <summary>What is PowerShell, and what is it used for?</summary>
+    <p>PowerShell is a command-line shell, scripting language, and automation platform built on .NET. It helps you inspect systems, process files and data, manage services, automate repetitive work, and administer cloud technologies through modules and APIs. You can enter a single command interactively or combine many steps in a reusable script.</p>
+  </details>
+  <details>
+    <summary>What is the difference between PowerShell and Command Prompt (CMD)?</summary>
+    <p>Command Prompt is a traditional Windows command interpreter that usually works with text streams. PowerShell also runs commands, but its cmdlets generally return structured objects with properties and methods. That makes filtering, sorting, and combining results particularly useful. Both have legitimate uses, and PowerShell can also launch many external command-line tools.</p>
+  </details>
+  <details>
+    <summary>Is PowerShell difficult to learn for beginners?</summary>
+    <p>You can start with a few read-only commands and build up gradually. Learn <code>Get-Command</code> to discover commands, <code>Get-Help</code> for syntax and examples, and <code>Get-Process</code> to inspect results. The Academy's beginner lessons introduce those ideas before moving into objects, pipelines, functions, and automation.</p>
+  </details>
+  <details>
+    <summary>What is the difference between Windows PowerShell 5.1 and PowerShell 7?</summary>
+    <p>Windows PowerShell 5.1 is the older Windows-specific edition built on the .NET Framework. PowerShell 7 is the modern cross-platform edition built on current .NET and can run on Windows, macOS, and Linux. They can coexist on Windows, but some commands, modules, and behaviors differ. Check <a href="https://learn.microsoft.com/powershell/scripting/whats-new/differences-from-windows-powershell" target="_blank" rel="noopener noreferrer">Microsoft's compatibility guidance</a> before moving an existing script.</p>
+  </details>
+  <details>
+    <summary>What are PowerShell cmdlets, functions, and scripts?</summary>
+    <p>A <strong>cmdlet</strong> is a specialized PowerShell command, commonly named with a Verb-Noun pattern such as <code>Get-Service</code>. A <strong>function</strong> is reusable logic you define in PowerShell. A <strong>script</strong> is usually a <code>.ps1</code> file containing commands and functions that work together. Modules can package and distribute cmdlets, functions, and other resources.</p>
+  </details>
+  <details>
+    <summary>What is the PowerShell pipeline, and why is it useful?</summary>
+    <p>The pipe symbol (<code>|</code>) sends output from one command to the next. PowerShell cmdlets commonly pass objects rather than merely passing text, so later commands can work directly with properties such as <code>Name</code> or <code>CPU</code>. For example, this pipeline sorts local processes by CPU time and shows the first three:</p>
+    <pre class="code-block"><code>Get-Process | Sort-Object CPU -Descending |
+  Select-Object -First 3 Name, CPU</code></pre>
+  </details>
+  <details>
+    <summary>How can PowerShell automate Microsoft 365 administration?</summary>
+    <p>Microsoft provides PowerShell modules for services such as Microsoft Graph, Exchange Online, and Teams. Administrators use them to query users and groups, inspect mailboxes, review Teams settings, and automate approved tasks. Real administration requires the applicable module, sign-in, appropriate permissions, and an understanding of each command's impact. Start with read-only examples and official documentation.</p>
+  </details>
+  <details>
+    <summary>What are PowerShell modules, and how do I install them?</summary>
+    <p>A module is a package that makes commands, functions, and related functionality available to PowerShell. Use <code>Get-Module -ListAvailable</code> to inspect installed modules and <code>Find-Module</code> to discover packages in configured repositories. Depending on your tooling, installation may use <code>Install-Module</code> or <code>Install-PSResource</code>. Review a package's publisher, source, compatibility, and installation instructions before installing it. See <a href="https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_modules" target="_blank" rel="noopener noreferrer">Microsoft's module guide</a>.</p>
+  </details>
+  <details>
+    <summary>Can I practice PowerShell commands using this Academy?</summary>
+    <p>Yes. Work through lessons, explore the curated command library, and use the Command Builder to prepare examples. The Practice Lab provides guided simulations with fictional data for its supported exercises; it does not run real PowerShell or connect to your computer or Microsoft 365 tenant. That distinction lets you study the command structure before trying it in a properly controlled environment.</p>
+  </details>
+  <details>
+    <summary>How can I check whether a PowerShell script is safe before running it?</summary>
+    <p>Read the script and understand what each command changes, verify the target paths and tenant, review required permissions, and avoid embedded credentials. Where a cmdlet supports it, <code>-WhatIf</code> can help preview certain changes, but it is not a guarantee that a complete script is safe. Use a separate test environment and code review; Microsoft's <a href="https://learn.microsoft.com/powershell/utility-modules/psscriptanalyzer/overview" target="_blank" rel="noopener noreferrer">PSScriptAnalyzer</a> can help with supported static checks. The Academy's Script Clinic supplies limited educational warnings, not a safety certification.</p>
+  </details>
+</section>
     </div>
   </main>
   <footer><div class="container footer-inner"><p><strong>Utiliverse</strong> · Free browser-based utilities and practical explanations</p><div><a href="../Tools.html">All Tools</a><a href="../Guides.html">Guides</a><a href="../Updates.html">Updates</a><a href="../Contact_Info.html">Contact</a></div></div></footer>
