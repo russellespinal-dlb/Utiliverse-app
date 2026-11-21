@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PowerShell Academy &amp; Practice Lab | Free Lessons, Cmdlet Reference | Utiliverse</title>
+  <meta name="description" content="Learn PowerShell from beginner to Microsoft 365 administrator. Explore cmdlets, build commands, review common scripting risks, and practice with clearly simulated data in your browser.">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <meta name="theme-color" content="#f8fafc">
+  <link rel="canonical" href="https://utiliverse.app/PowerShell_Academy/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Utiliverse">
+  <meta property="og:title" content="PowerShell Academy & Practice Lab | Utiliverse">
+  <meta property="og:description" content="Learn PowerShell, look up Microsoft commands, practice supported exercises with synthetic data, and review scripts without running them.">
+  <meta property="og:url" content="https://utiliverse.app/PowerShell_Academy/">
+  <meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Utiliverse PowerShell Academy & Practice Lab","url":"https://utiliverse.app/PowerShell_Academy/","applicationCategory":"EducationalApplication","operatingSystem":"Any modern browser","description":"PowerShell lessons, official command-reference links, a script-preparation utility, and guided simulated practice. No real PowerShell code is executed.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script src="./content.js" defer></script>
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html" aria-label="Utiliverse home"><span class="brand-mark" aria-hidden="true">U</span><span>Utiliverse</span></a>
+      <nav class="site-nav" aria-label="Website navigation"><a href="../Tools.html">All Tools</a><a href="../Guides.html">Guides</a><a href="../Updates.html">Updates</a></nav>
+      <div class="header-actions"><span class="free-label">Free · Browser-based</span><button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle color theme">☾</button></div>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">DEVELOPER TOOLS / LEARNING</div>
+          <h1>PowerShell <span>Academy &amp; Lab</span></h1>
+          <p class="lede">Go from your first cmdlet to Microsoft 365 administration. Learn concepts, explore official command references, prepare scripts, and practice with clearly labeled sample data—all from one place.</p>
+          <div class="pills"><span>Beginner → Expert</span><span>Microsoft Graph · Exchange · Teams</span><span>No account needed</span></div>
+          <div class="hero-buttons"><button class="primary" type="button" data-switch="learn">Start learning <span aria-hidden="true">→</span></button><button class="outline" type="button" data-switch="lab">Try the practice lab</button></div>
+        </div>
+        <div class="hero-terminal" aria-label="Example PowerShell pipeline">
+          <div class="term-title"><span class="dots"><i></i><i></i><i></i></span><span>PowerShell · Example</span></div>
+          <div class="term-body"><p><span class="prompt">PS&gt;</span> <span class="term-command">Get-Process</span> <span class="term-faint">|</span></p><p class="indent"><span class="term-command">Sort-Object</span> CPU -Descending <span class="term-faint">|</span></p><p class="indent"><span class="term-command">Select-Object</span> -First 3 Name, CPU</p><div class="term-rule"></div><p class="term-faint">Name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CPU</p><p>-------------------</p><p>Code &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;84.2</p><p>Browser &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;51.7</p><p>Terminal &nbsp;&nbsp;&nbsp;&nbsp;14.5</p><p class="term-caption">Illustrative sample output, not your computer</p></div>
+        </div>
+      </div>
+    </section>
+    <div class="container">
+      <section class="safety-banner" aria-label="Important practice lab limitation"><span class="safety-icon" aria-hidden="true">ⓘ</span><div><strong>Safe by design: no scripts execute here.</strong><p>Practice produces simulated output only for supported exercises. The Script Clinic performs limited browser-side pattern checks—not full PowerShell syntax validation. No Microsoft account is connected and no typed scripts are sent to a Utiliverse server.</p></div></section>
+      <div class="app-layout">
+        <section class="workspace" aria-label="PowerShell Academy workspace">
+          <div class="tab-bar" role="tablist" aria-label="Tool sections">
+            <button class="tab active" id="tab-learn" role="tab" aria-controls="panel-learn" aria-selected="true" data-tab="learn" type="button">Learn</button>
+            <button class="tab" id="tab-reference" role="tab" aria-controls="panel-reference" aria-selected="false" data-tab="reference" type="button">Command Explorer</button>
+            <button class="tab" id="tab-lab" role="tab" aria-controls="panel-lab" aria-selected="false" data-tab="lab" type="button">Practice Lab</button>
+            <button class="tab" id="tab-builder" role="tab" aria-controls="panel-builder" aria-selected="false" data-tab="builder" type="button">Command Builder</button>
+            <button class="tab" id="tab-clinic" role="tab" aria-controls="panel-clinic" aria-selected="false" data-tab="clinic" type="button">Script Clinic</button>
+          </div>
+          <section id="panel-learn" class="panel" role="tabpanel" aria-labelledby="tab-learn">
+            <div class="section-head"><div><div class="eyebrow">GUIDED LEARNING</div><h2>Choose your learning level</h2><p>Short lessons with realistic examples and linked practice exercises.</p></div><div class="progress-block"><strong id="progressValue">0 / 12</strong><small>Lessons completed on this device</small><div class="progress-bar"><span id="progressFill"></span></div></div></div>
+            <div class="field-row"><div><label for="levelFilter">Experience level</label><select id="levelFilter"><option value="all">All levels</option><option>Beginner</option><option>Intermediate</option><option>Advanced</option><option>Microsoft 365</option></select></div><div><label for="lessonSearch">Search lessons</label><input id="lessonSearch" type="search" placeholder="Try: pipeline, Exchange, CSV" autocomplete="off"></div></div>
+            <div id="lessonList" class="lesson-grid" aria-live="polite"></div>
+            <article id="lessonDetail" class="lesson-detail" hidden tabindex="-1" aria-live="polite"></article>
+            <p class="privacy-note">Progress is stored only in this browser. You can clear it anytime. Lessons do not require a login.</p><button class="text-button" type="button" id="resetProgress">Clear my lesson progress</button>
+          </section>
+          <section id="panel-reference" class="panel" role="tabpanel" aria-labelledby="tab-reference" hidden>
+            <div class="section-head"><div><div class="eyebrow">MICROSOFT COMMAND REFERENCE</div><h2>Find the right cmdlet</h2><p>Curated commands, examples, and direct links to Microsoft Learn. This is a starter reference, not a complete catalog of all Microsoft modules.</p></div><span class="count-chip" id="commandCount">26 commands</span></div>
+            <div class="field-row"><div><label for="commandSearch">Find a command or topic</label><input id="commandSearch" type="search" placeholder="Get-MgUser, mailboxes, Teams..." autocomplete="off"></div><div><label for="commandGroup">Technology</label><select id="commandGroup"><option value="all">All technologies</option><option>PowerShell</option><option>Windows</option><option>Microsoft Graph</option><option>Exchange Online</option><option>Microsoft Teams</option><option>Azure</option></select></div></div>
+            <div id="commandList" class="command-list" aria-live="polite"></div>
+            <p class="privacy-note">Cmdlets, parameters, and prerequisites can change across module versions. Always confirm details in the linked official documentation and on your installed PowerShell host.</p>
+          </section>
+          <section id="panel-lab" class="panel" role="tabpanel" aria-labelledby="tab-lab" hidden>
+            <div class="section-head"><div><div class="eyebrow">GUIDED SIMULATION</div><h2>Practice without affecting a real system</h2><p>Choose a supported exercise. The lab recognizes specific read-only command patterns and generates output from fictional datasets.</p></div><span class="tag safe">Simulation only</span></div>
+            <div class="lab-grid"><div class="lab-controls"><label for="exerciseSelect">Practice scenario</label><select id="exerciseSelect"></select><div class="exercise-card"><h3 id="exerciseTitle"></h3><p id="exerciseGoal"></p><p><strong>Hint:</strong> <span id="exerciseHint"></span></p></div><button class="outline full" id="loadStarter" type="button">Restore exercise example</button></div>
+            <div><label for="labEditor">Editable PowerShell example</label><textarea id="labEditor" class="code-editor" spellcheck="false" rows="9" autocapitalize="off" autocomplete="off" autocorrect="off"></textarea><div class="button-row"><button id="runSimulation" class="primary" type="button">Check &amp; simulate</button><button id="labToClinic" class="outline" type="button">Review in Script Clinic</button><button id="copyLab" class="outline" type="button">Copy code</button></div><div id="labStatus" class="status" role="status" aria-live="polite">Only explicitly supported exercise patterns can be simulated; arbitrary code is not executed.</div></div></div>
+            <div class="result-card"><div class="result-head"><strong>Simulated output</strong><span>Fictional sample data · not actual PowerShell output</span></div><div id="labOutput" class="result-body" tabindex="0" aria-live="polite"><p>Select a scenario and choose “Check &amp; simulate.”</p></div></div>
+          </section>
+          <section id="panel-builder" class="panel" role="tabpanel" aria-labelledby="tab-builder" hidden>
+            <div class="section-head"><div><div class="eyebrow">GENERATE &amp; LEARN</div><h2>Build a command step by step</h2><p>Pick a common read-only action, supply an example value, and see an editable PowerShell command with prerequisites.</p></div></div>
+            <div class="builder-grid"><div><label for="builderSelect">What do you want to do?</label><select id="builderSelect"></select><label for="builderInput" id="builderLabel">Parameter value</label><input id="builderInput" maxlength="180" spellcheck="false" autocomplete="off"><p id="builderHelp" class="muted"></p><button id="generateCommand" class="primary full" type="button">Generate example</button></div><div><label for="builderOutput">Generated PowerShell</label><textarea id="builderOutput" class="code-editor" rows="6" readonly spellcheck="false"></textarea><div class="button-row"><button id="copyBuilder" class="outline" type="button">Copy command</button><button id="builderToClinic" class="outline" type="button">Review in Script Clinic</button></div><p id="builderMessage" class="status" role="status" aria-live="polite">Generated examples are not executed. Replace sample values before use.</p></div></div>
+          </section>
+          <section id="panel-clinic" class="panel" role="tabpanel" aria-labelledby="tab-clinic" hidden>
+            <div class="section-head"><div><div class="eyebrow">SCRIPT PREPARATION</div><h2>Review before you run</h2><p>Get educational warnings about high-risk commands, secrets, tenant access, and common patterns. This is not PSScriptAnalyzer, an AST parser, or a guarantee of safety.</p></div></div>
+            <label for="clinicEditor">PowerShell script to review locally</label><textarea id="clinicEditor" class="code-editor" rows="13" maxlength="30000" spellcheck="false" placeholder="# Paste a script for basic pattern checks. No code is uploaded, saved, or executed." autocorrect="off" autocapitalize="off"></textarea>
+            <div class="button-row"><button id="analyzeScript" class="primary" type="button">Review script</button><button id="loadClinicSample" class="outline" type="button">Load example</button><button id="clearClinic" class="outline" type="button">Clear</button><button id="downloadScript" class="outline" type="button">Download .ps1</button></div>
+            <div id="clinicStatus" class="status" role="status" aria-live="polite">Script text remains in this browser tab. Do not paste secrets or credentials.</div><div id="clinicResults" class="clinic-results" aria-live="polite"></div>
+            <div class="info-box"><strong>For actual validation</strong><p>On a trusted PowerShell installation, consider Microsoft's <a href="https://learn.microsoft.com/powershell/utility-modules/psscriptanalyzer/overview" target="_blank" rel="noopener noreferrer">PSScriptAnalyzer</a>. Testing changes also requires an appropriate disposable environment and permissions. This website cannot validate full PowerShell grammar or real tenant behavior.</p></div>
+          </section>
+        </section>
+        <aside class="side-panel" aria-label="Quick learning reference">
+          <div class="side-card"><span class="eyebrow">QUICK REFERENCE</span><h2>PowerShell essentials</h2><dl><dt>Discover a command</dt><dd><code>Get-Command</code></dd><dt>Find examples</dt><dd><code>Get-Help -Examples</code></dd><dt>Filter objects</dt><dd><code>Where-Object</code></dd><dt>Choose fields</dt><dd><code>Select-Object</code></dd><dt>Inspect object structure</dt><dd><code>Get-Member</code></dd></dl><button type="button" class="text-button" data-switch="reference">Explore commands →</button></div>
+          <div class="side-card"><span class="eyebrow">MICROSOFT 365</span><h2>Remember prerequisites</h2><p>Cloud cmdlets need the correct module, authenticated session, tenant permissions, and sometimes licenses or role assignments. The simulator never signs in.</p><a href="https://learn.microsoft.com/powershell/microsoftgraph/overview" target="_blank" rel="noopener noreferrer">Microsoft Graph overview ↗</a><a href="https://learn.microsoft.com/powershell/exchange/" target="_blank" rel="noopener noreferrer">Exchange Online PowerShell ↗</a><a href="https://learn.microsoft.com/powershell/module/microsoftteams/" target="_blank" rel="noopener noreferrer">Teams PowerShell module ↗</a></div>
+          <div class="side-card"><span class="eyebrow">PRIVACY</span><h2>Designed for local use</h2><p>Lesson progress and theme preference are stored in your browser only, if supported. Script editors are not automatically saved. Leaving for Microsoft Learn opens a third-party website.</p><a href="../Editorial_Methodology.html">Editorial and tool methodology ↗</a></div>
+        </aside>
+      </div>
+      <section class="editorial" aria-labelledby="whatYouLearn"><div class="eyebrow">HOW TO USE THE ACADEMY</div><h2 id="whatYouLearn">Learn the concept. Check the reference. Practice safely.</h2><div class="editorial-grid"><article><h3>1. Learn the object pipeline</h3><p>Start with core commands, objects, filtering, and functions. The shortest exercises build confidence before you work with complex administration tasks.</p></article><article><h3>2. Verify with Microsoft Learn</h3><p>Use curated reference links to confirm command syntax, module-specific parameters, supported versions, and authentication requirements before running commands elsewhere.</p></article><article><h3>3. Practice with limits you can trust</h3><p>The practice lab evaluates only supported read-only exercise shapes against fictional data. Script Clinic highlights selected patterns without pretending to execute or fully parse your code.</p></article></div></section>
+      <section class="faq"><h2>Frequently asked questions</h2><details><summary>Does this site run PowerShell commands?</summary><p>No. It recognizes a limited set of practice exercise patterns and displays simulated results. Real PowerShell execution requires installing PowerShell on your own trusted machine or using a properly managed environment.</p></details><details><summary>Can I connect to my Microsoft 365 tenant?</summary><p>No. The site has no Microsoft sign-in, backend, or Graph API access. Exchange, Teams, and Graph labs use fictional records, and generated commands are examples to verify before real use.</p></details><details><summary>Can Script Clinic confirm that my script is safe?</summary><p>No. It provides limited, educational pattern-based warnings and cannot guarantee correctness or safety. Use Microsoft PSScriptAnalyzer, manual review, least-privilege access, and an isolated test environment for real scripts.</p></details></section>
+    </div>
+  </main>
+  <footer><div class="container footer-inner"><p><strong>Utiliverse</strong> · Free browser-based utilities and practical explanations</p><div><a href="../Tools.html">All Tools</a><a href="../Guides.html">Guides</a><a href="../Updates.html">Updates</a><a href="../Contact_Info.html">Contact</a></div></div></footer>
+</body>
+</html>
